@@ -1,44 +1,56 @@
 import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import thunkMiddleware from 'redux-thunk'
-
-const exampleInitialState = {
-  lastUpdate: 0,
-  light: false,
-  count: 0
-}
-
-export const actionTypes = {
-  ADD: 'ADD',
-  TICK: 'TICK'
-}
+import createSagaMiddleware from 'redux-saga'
+import dataSaga from './saga'
 
 // REDUCERS
-export const reducer = (state = exampleInitialState, action) => {
+import { FETCHING_DATA, FETCHING_DATA_SUCCESS, FETCHING_DATA_FAILURE } from './constants'
+const initialState = {
+  data: [],
+  dataFetched: false,
+  isFetching: false,
+  error: false
+}
+
+export default function dataReducer (state = initialState, action) {
   switch (action.type) {
-    case actionTypes.TICK:
-      return Object.assign({}, state, { lastUpdate: action.ts, light: !!action.light })
-    case actionTypes.ADD:
-      return Object.assign({}, state, {
-        count: state.count + 1
-      })
-    default: return state
+    case FETCHING_DATA:
+      return {
+        ...state,
+        data: [],
+        isFetching: true
+      }
+    case FETCHING_DATA_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        data: action.payload
+      }
+    case FETCHING_DATA_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: true
+      }
+    default:
+      return state
   }
 }
 
+
 // ACTIONS
-export const serverRenderClock = (isServer) => dispatch => {
-  return dispatch({ type: actionTypes.TICK, light: !isServer, ts: Date.now() })
+import getPeople from './api'
+
+export function fetchData() {
+  return {
+    type: FETCHING_DATA,
+  }
 }
 
-export const startClock = () => dispatch => {
-  return setInterval(() => dispatch({ type: actionTypes.TICK, light: true, ts: Date.now() }), 1000)
-}
+const sagaMiddleware = createSagaMiddleware();
 
-export const addCount = () => dispatch => {
-  return dispatch({ type: actionTypes.ADD })
-}
-
-export const initStore = (initialState = exampleInitialState) => {
-  return createStore(reducer, initialState, composeWithDevTools(applyMiddleware(thunkMiddleware)))
+export const initStore = (initialState = initialState) => {
+  const store = createStore(dataReducer, initialState, composeWithDevTools(applyMiddleware(sagaMiddleware)))
+  sagaMiddleware.run(dataSaga)
+  return store;
 }
