@@ -1,6 +1,7 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
-import { initStore, fetchData } from '../store'
+import { initStore } from '../store'
+import { fetchData } from '../reducers/content'
 import withRedux from 'next-redux-wrapper'
 import Page from '../components/Page'
 
