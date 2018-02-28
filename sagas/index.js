@@ -1,10 +1,8 @@
-import { takeEvery } from 'redux-saga/effects'
+import { takeEvery, all } from "redux-saga/effects";
 
-import {types as contentType} from '../reducers/content'
-import * as contentSaga from '../sagas/content'
+import { types as contentType } from "../reducers/content";
+import * as contentSaga from "../sagas/content";
 
-export default function* rootSaga(){
-  yield[
-    takeEvery(contentType.FETCHING_DATA, contentSaga.fetchData),
-  ]
+export default function* rootSaga() {
+  yield all([takeEvery(contentType.FETCHING_DATA, contentSaga.fetchData)]);
 }

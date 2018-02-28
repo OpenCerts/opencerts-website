@@ -1,7 +1,7 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from "redux";
 
-import content, * as contentDuck from './content'
+import content from "./content";
 
 export default combineReducers({
   content
-})
+});
