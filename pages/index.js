@@ -1,35 +1,16 @@
-import React from 'react'
-import { bindActionCreators } from 'redux'
 import { initStore } from '../store'
-import { fetchData } from '../reducers/content'
 import withRedux from 'next-redux-wrapper'
-import Page from '../components/Page'
+import PageTitle from '../components/PageTitle'
+import PeopleTableContainer from '../components/PeopleTableContainer'
 
-class Counter extends React.Component {
-  static getInitialProps ({ store, isServer }) {
-    return { isServer }
-  }
-
-  componentDidMount () {
-    //this.timer = this.props.startClock()
-    this.props.fetchData();
-  }
-
-  componentWillUnmount () {
-    //clearInterval(this.timer)
-  }
-
-  render () {
-    return (
-      <Page title='Index Page' linkTo='/other' />
-    )
-  }
+const IndexPage = ({ text }) => {
+  return (
+    <div>
+      <PageTitle text='Hello World'/>
+      <PeopleTableContainer/>
+    </div>
+  )
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchData: () => dispatch(fetchData()),
-  }
-}
 
-export default withRedux(initStore, null, mapDispatchToProps)(Counter)
+export default withRedux(initStore)(IndexPage)

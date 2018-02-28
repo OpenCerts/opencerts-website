@@ -44,3 +44,7 @@ export function fetchData() {
     type: types.FETCHING_DATA,
   }
 }
+
+// Selectors
+export function getPeople(store){ return store.content.data };
+
