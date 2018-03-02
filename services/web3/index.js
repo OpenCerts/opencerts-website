@@ -3,6 +3,8 @@ import getWeb3 from "./getWeb3";
 import getAccounts from "./getAccounts";
 import getContract from "./getContract";
 
+// TODO Use a singleton
+
 export default function Web3Wrapper(WrappedComponent, contractDefinition) {
   return class Web3Container extends React.Component {
     constructor(props) {

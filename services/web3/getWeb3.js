@@ -11,7 +11,6 @@ const resolveWeb3 = resolve => {
     const provider = new Web3.providers.HttpProvider(localProvider);
     web3 = new Web3(provider);
   }
-
   resolve(web3);
 };
 
