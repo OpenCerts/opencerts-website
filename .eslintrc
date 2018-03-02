@@ -8,11 +8,11 @@
     "mocha": true
   },
   "parserOptions": {
-      "ecmaVersion": 7,
-      "sourceType": "module",
-      "ecmaFeatures": {
-          "jsx": true,
-      }
+    "ecmaVersion": 2017,
+    "sourceType": "module",
+    "ecmaFeatures": {
+        "jsx": true,
+    }
   },
   "plugins": [
     "react",
@@ -26,7 +26,8 @@
     "contract": false,
     "assert": false,
     "expect": true,
-    "web3": false
+    "window": true,
+    "document": true
   },
   "rules": {
     "no-unused-vars": [
