@@ -57,7 +57,7 @@ export function* verifyCertificateHash({ payload }) {
 export function* verifyCertificateIssued({ payload }) {
   try {
     const { certificate, certificateStore } = payload;
-    const merkleRoot = _.get(certificate, "signature.merkleRoot", null);
+    const merkleRoot = `0x${_.get(certificate, "signature.merkleRoot", null)}`;
 
     // Checks if certificate has been issued
     const isIssued = yield certificateStore.contract.isCertificateIssued.call(
@@ -83,11 +83,11 @@ export function* verifyCertificateNotRevoked({ payload }) {
     const proof = _.get(certificate, "signature.proof", null);
 
     // Checks if certificate and path towards merkle root has been revoked
-    const combinedHashes = [targetHash];
+    const combinedHashes = [`0x${targetHash}`];
 
     proof.reduce((accumulator, currentValue) => {
       const combined = combinedHash(accumulator, currentValue).toString("hex");
-      combinedHashes.push(combined);
+      combinedHashes.push(`0x${combined}`);
       return combined;
     }, targetHash);
 
