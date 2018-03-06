@@ -1,9 +1,7 @@
 import { combineReducers } from "redux";
 
-import content from "./content";
-import ethereum from "./ethereum";
+import certificate from "./certificate";
 
 export default combineReducers({
-  content,
-  ethereum
+  certificate
 });
