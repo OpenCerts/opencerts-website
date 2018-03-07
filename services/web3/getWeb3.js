@@ -11,6 +11,18 @@ const resolveWeb3 = resolve => {
     const provider = new Web3.providers.HttpProvider(localProvider);
     web3 = new Web3(provider);
   }
+
+  const params = new window.URL(window.location).searchParams;
+  if (params.get("web3") === "mock") {
+    console.log("Using mock web3"); // eslint-disable-line
+    web3 = {
+      eth: {
+        currentProvider: {},
+        getAccounts: () => []
+      }
+    };
+  }
+
   resolve(web3);
 };
 
