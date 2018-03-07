@@ -1,0 +1,118 @@
+{
+  "id": "urn:uuid:0b5cd8c8-a436-4864-9067-6f161c666852",
+  "type": "Assertion",
+  "issuedOn": "2018-02-19T09:12:20.058Z",
+  "@context": [
+    "https://openbadgespec.org/v2/context.json",
+    "https://govtechsg.github.io/certificate-schema/schema/1.0/context.json"
+  ],
+  "badge": {
+    "name": "Bachelor of Computer Engineering",
+    "criteria":
+      "The programme will be a broad computing science programme whose main themes are security, connectivity, mobility, and usability. It gives you the opportunity to study a broad range of core computing science topics including Cyber Security, Mobile Human Computer Interaction, Multimedia Systems & Applications.",
+    "issuer": {
+      "id": "urn:uuid:b5844e20-1947-43cd-876b-8d26d0ee44d0",
+      "name": "Nanyang Technology University",
+      "url": "https://jeffery.net",
+      "email": "Brenna59@yahoo.com"
+    },
+    "type": "BadgeClass",
+    "evidencePrivacyFilter": {
+      "type": "SaltedProof",
+      "saltLength": "10"
+    },
+    "evidence": {
+      "transcript": [
+        {
+          "name": "hddrs5pvo9:irsyimhb0h4q4jc",
+          "grade": "ftml7z1o39:xi",
+          "courseCredit": "e74ch8mz48:hjy",
+          "courseCode": "af1sk0n6d9:irzxz"
+        },
+        {
+          "name": "799qb24yn7:5neklq3tzr67znh",
+          "grade": "rttz34y7so:vl",
+          "courseCredit": "er64w9siir:k3i",
+          "courseCode": "m9lky3zy2k:plfbb"
+        },
+        {
+          "name": "f919uvlnzz:yxno7zrty373u4a",
+          "grade": "g3p5vqdfjf:j2",
+          "courseCredit": "ei3q9ukds3:2c4",
+          "courseCode": "unpeujyunz:p9lwf"
+        },
+        {
+          "name": "erd3euvclz:xfq4cbvjxbprfp7",
+          "grade": "iwl63n2kk1:zp",
+          "courseCredit": "orcoou2a07:t5o",
+          "courseCode": "ee9nehwsiy:c90gj"
+        },
+        {
+          "name": "jwnz4pl0ir:aq5kuw848jc06zk",
+          "grade": "5jtkhq15uq:kb",
+          "courseCredit": "5s8xpzbsjq:yat",
+          "courseCode": "nn31djhtsa:i1swz"
+        },
+        {
+          "name": "lnww3cccoa:jvmnmyo8j795myz",
+          "grade": "rcsk9amegg:u2",
+          "courseCredit": "idfa7pphzo:51v",
+          "courseCode": "jjnhof8mmq:7lmo5"
+        },
+        {
+          "name": "hvt2jtj7vb:jhqj7phgf7nkpgq",
+          "grade": "h9pl658vat:57",
+          "courseCredit": "02a5le6pee:fp6",
+          "courseCode": "5v5di3swg3:4mqx1"
+        }
+      ]
+    },
+    "privateEvidence": [
+      "3d007b4422c8c14d21d284265701361da8fab8be005066a680da1648c5c15ff8",
+      "f748eb859fa196787e673b22158c5147aff1c1ad8dbb301add4d671d0385e506",
+      "e25d82969001dce54a555f1eb1e3572521bb41fbb8b8db2904fc8e0780b4e1fa",
+      "94bad039097156660b716601cca261af37a4abeed23863b79e05466a0be20a5f",
+      "325cd355eb2ad95b2c6772122c76e034959b1f18141b6d3c69a7fda3da28ce52",
+      "11c1366741a5b00ef43e967a478ae465093dca8f014f3b137bbbf8f0ae2b4bc8",
+      "e1c0e60c8e517266940c78b79c9524ed3bf3972dde1aeaefcbfde4f52426879a",
+      "827acb719efd356f5593eca7ffbeb99029a11611c5e0e733dc653cbaff19e10b",
+      "7a636e9624f5fc93dc9b2a20f2d59b9828aad4e7fd07db8022b52af467e59d0b"
+    ]
+  },
+  "verification": {
+    "type": "ETHStoreProof",
+    "contractAddress": "0x345ca3e014aaf5dca488057592ee47305d9b3e10"
+  },
+  "profile": [
+    {
+      "type": "did",
+      "identity": "did:damien:3a26e688-df14-42b2-9833-15808b9a20ce",
+      "hashed": false
+    },
+    {
+      "type": "url",
+      "identity": "https://adam.info",
+      "hashed": false
+    },
+    {
+      "type": "telephone",
+      "identity": "1-044-378-7423 x291",
+      "hashed": false
+    }
+  ],
+  "signature": {
+    "type": "SHA3MerkleProof",
+    "targetHash":
+      "c740103842d95ca5cb6a6fc2d33d998fc89033f5a059d144f9e54dc6c07e758a",
+    "proof": [
+      "beacae538c084f62000bb408ef2a5396d7ce393f23c6c1522e6e75b70f2621c4",
+      "aa424f04721d84ae6bacee8b209bffaff17de495dc2300d4caa463202a25d644",
+      "33da6399809d34ba34917a3874f77dca1f7216826d8abf8beaafdcc475b44dbb",
+      "97148203d1738fbefb4c5eed2f9088c212c9e5327cfadd5b74f588865034c9ce",
+      "1655f2f896bcac737c810e5012a7118654d9dfbcf6dddbeb35f9ef3f6bab4b57",
+      "d3dbd524119c3f2759ccab12b2b95c2cc04087bdc0a15ec55dbdc06ab70bedb0"
+    ],
+    "merkleRoot":
+      "64fda71b939cb33d4e437f832b64f24b772e192f60b7ecd60af2ab9173a03aef"
+  }
+}

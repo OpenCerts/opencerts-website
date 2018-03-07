@@ -1,1 +1,3 @@
-[![Deploy to now](https://deploy.now.sh/static/button.svg)](https://deploy.now.sh/?repo=https://github.com/yehjxraymond/next-react-redux-saga-boilerplate)
+# certificate-web-ui
+
+Example web-based verifier for `certificate-application` and `certificate-contract`.

@@ -10,7 +10,7 @@ const onFileDrop = (acceptedFiles, handleCertificateChange) => {
       handleCertificateChange(json);
     } catch (e) {
       // TODO add in error handling
-      console.log(e);
+      console.log(e); // eslint-disable-line
     }
   };
   if (acceptedFiles && acceptedFiles.length && acceptedFiles.length > 0)
@@ -25,17 +25,17 @@ const renderDropzoneContent = ({
 }) => {
   if (isDragActive && !isDragReject) {
     return (
-      <div>
+      <div className="grow h-100 pa6">
         <div className="pa3">
           <i className="fas fa-check-circle fa-10x black-40" />
         </div>
-        <div className="f4 black-40 fw6">Drop certificate here...</div>
+        <div className="f4 black-40 fw6">Drop a certificate here&hellip;</div>
       </div>
     );
   }
   if (isDragActive && isDragReject) {
     return (
-      <div>
+      <div className="grow h-100 pa6">
         <div className="pa3">
           <i className="fas fa-times-circle fa-10x black-40" />
         </div>
@@ -44,11 +44,11 @@ const renderDropzoneContent = ({
     );
   }
   return (
-    <div>
+    <div className="grow h-100 pa6">
       <div className="pa3">
         <i className="fas fa-download fa-10x black-40" />
       </div>
-      <div className="f4 black-40 fw6">Drop certificate here...</div>
+      <div className="f4 black-40 fw6">Drop a certificate here&hellip;</div>
     </div>
   );
 };
@@ -60,9 +60,9 @@ const CertificateDropzone = ({ handleCertificateChange }) => (
       onDrop={acceptedFiles =>
         onFileDrop(acceptedFiles, handleCertificateChange)
       }
-      className="w-100 tc pt6 pb6 br3"
-      acceptClassName="w-100 bg-green tc pt6 pb6 br3"
-      rejectClassName="w-100 bg-red tc pt6 pb6 br3"
+      className="w-100 tc br3 ba b--dashed bw3 b--mid-gray noselect pointer"
+      acceptClassName="w-100 bg-green tc br3"
+      rejectClassName="w-100 bg-red tc br3"
     >
       {renderDropzoneContent}
     </Dropzone>

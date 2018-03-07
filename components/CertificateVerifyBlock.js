@@ -1,87 +1,50 @@
+import React from "react";
 import PropTypes from "prop-types";
 
-const HASH_VERIFIED_MSG = "Certificate hash is valid";
-const ISSUED_VERIFIED_MSG = "Certificate is issued on ethereum network";
-const NOT_REVOKED_VERIFIED_MSG = "Certificate has not been revoked";
+const SEVERITY = {
+  ERROR: "ERROR",
+  WARN: "WARN",
+  INFO: "INFO"
+};
 
-const renderErrorBlock = ({
-  verifyTriggered,
-  isHashVerified,
-  isIssued,
-  isNotRevoked,
-  hashError,
-  storeError,
-  revokedError
-}) => {
-  if (!verifyTriggered) return null;
+const InfoBlock = props => {
+  const colors = {
+    [SEVERITY.ERROR]: "bg-red white ma0 pa2",
+    [SEVERITY.WARN]: "bg-orange white ma0 pa2",
+    [SEVERITY.INFO]: "bg-green white ma0 pa2"
+  };
 
-  const content = [];
+  const icons = {
+    [SEVERITY.WARN]: "⚠️",
+    [SEVERITY.ERROR]: "🚨",
+    [SEVERITY.OK]: "✓"
+  };
 
-  if (!isHashVerified && hashError) content.push(hashError);
-  if (!isIssued && storeError) content.push(storeError);
-  if (!isNotRevoked && revokedError) content.push(revokedError);
+  const toRender = props.values.filter(
+    c => c.result && c.result.severity === props.severity
+  );
 
-  if (content.length === 0) return null;
-
-  const renderedContent = content.map((c, i) => <div key={i}>{c}</div>);
+  if (toRender.length === 0) {
+    return null;
+  }
 
   return (
-    <div className="bg-red pa3 white">
-      <div className="f3">Errors:</div>
-      <div className="f5 pa2">{renderedContent}</div>
-    </div>
+    <ul className={colors[props.severity]} style={{ listStyleType: "none" }}>
+      {toRender.map((val, i) => (
+        <li key={i}>{`${icons[props.severity]} ${val.result.message}`}</li>
+      ))}
+    </ul>
   );
 };
 
-const renderWarningBlock = ({ verifyTriggered }) => {
-  if (!verifyTriggered) return null;
-
-  const content = [];
-
-  content.push(
-    "Issuer identity cannot be identified, please manually verify contract store address."
-  );
-
-  if (content.length === 0) return null;
-
-  const renderedContent = content.map((c, i) => <div key={i}>{c}</div>);
-
-  return (
-    <div className="bg-orange pa3 white">
-      <div className="f3">Warnings:</div>
-      <div className="f5 pa2">{renderedContent}</div>
-    </div>
-  );
-};
-
-const renderPassBlock = ({
-  verifyTriggered,
-  isHashVerified,
-  isIssued,
-  isNotRevoked
-}) => {
-  if (!verifyTriggered) return null;
-
-  const content = [];
-
-  if (isHashVerified) content.push(HASH_VERIFIED_MSG);
-  if (isIssued) content.push(ISSUED_VERIFIED_MSG);
-  if (isNotRevoked) content.push(NOT_REVOKED_VERIFIED_MSG);
-
-  if (content.length === 0) return null;
-
-  const renderedContent = content.map((c, i) => <div key={i}>{c}</div>);
-
-  return (
-    <div className="bg-green pa3 white">
-      <div className="f3">Checks Passed:</div>
-      <div className="f5 pa2">{renderedContent}</div>
-    </div>
-  );
+InfoBlock.propTypes = {
+  severity: PropTypes.string,
+  values: PropTypes.arrayOf(PropTypes.object)
 };
 
 const renderButton = ({
   handleCertificateVerify,
+  handleShowChecks,
   verifyTriggered,
   verifying,
   isHashVerified,
@@ -93,27 +56,27 @@ const renderButton = ({
   let verifyEnabled = true;
 
   if (verifying) {
-    text = "Verifying...";
+    text = "Verifying…";
     color = "bg-orange";
     verifyEnabled = false;
   }
 
   if (verifyTriggered && isHashVerified && isIssued && isNotRevoked) {
-    text = "Certificate is verified";
-    color = "bg-green";
+    text = "Valid ▼";
+    color = "bg-green pointer";
     verifyEnabled = false;
   }
 
   if (verifyTriggered && !(isHashVerified && isIssued && isNotRevoked)) {
-    text = "Certificate is invalid";
+    text = "Invalid";
     color = "bg-red";
     verifyEnabled = false;
   }
 
   return (
     <div
-      onClick={verifyEnabled ? handleCertificateVerify : null}
-      className={`w5 tc white pa3 w-100 bb ${color} ${
+      onClick={verifyEnabled ? handleCertificateVerify : handleShowChecks}
+      className={`w5 tc white pa2 w-100 bb ${color} ${
         verifyEnabled ? "pointer" : null
       }`}
     >
@@ -122,52 +85,86 @@ const renderButton = ({
   );
 };
 
-const CertificateVerifyBlock = props => (
-  <div>
-    {renderButton(props)}
-    {renderErrorBlock(props)}
-    {renderWarningBlock(props)}
-    {renderPassBlock(props)}
-  </div>
-);
+class CertificateVerifyBlock extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.certificateStore != null) {
+      this.props.handleCertificateVerify();
+    }
+  }
+
+  render() {
+    const checks = [
+      {
+        name: "KNOWN_ISSUER",
+        check: () =>
+          this.props.verifyTriggered
+            ? { severity: SEVERITY.WARN, message: "Unknown issuer" }
+            : { severity: SEVERITY.OK, message: "Known issuer" }
+      },
+      {
+        name: "HASH_VALID",
+        check: () =>
+          this.props.isHashVerified
+            ? { severity: SEVERITY.OK, message: "Valid hash" }
+            : { severity: SEVERITY.ERROR, message: this.props.hashError }
+      },
+      {
+        name: "CERTIFICATE_ISSUED",
+        check: () =>
+          this.props.isIssued
+            ? { severity: SEVERITY.OK, message: "Issued on Ethereum network" }
+            : { severity: SEVERITY.ERROR, message: "Not issued" }
+      },
+      {
+        name: "CERTIFICATE_NOT_REVOKED",
+        check: () =>
+          this.props.isNotRevoked && !this.props.revokedError
+            ? { severity: SEVERITY.OK, message: "Not revoked" }
+            : { severity: SEVERITY.ERROR, message: this.props.revokedError }
+      },
+      {
+        name: "STORE_OK",
+        check: () =>
+          this.props.storeError
+            ? { severity: SEVERITY.ERROR, message: this.props.storeError }
+            : { severity: SEVERITY.OK, message: "Certificate store OK" }
+      }
+    ];
+
+    const checked = checks.map(c => ({ ...c, result: c.check() }));
+    const hasError = checked.find(
+      c => c.result && c.result.severity === SEVERITY.ERROR
+    );
+    const hasWarning = checked.find(
+      c => c.result && c.result.severity === SEVERITY.WARN
+    );
+
+    return (
+      <div>
+        {renderButton({
+          ...this.props,
+          handleShowState: () => {
+            this.setState({ showInfo: !this.state.showInfo });
+          }
+        })}
+        <InfoBlock severity={SEVERITY.ERROR} values={checked} />
+        <InfoBlock severity={SEVERITY.WARN} values={checked} />
+        {this.state.showInfo || hasError || hasWarning ? (
+          <InfoBlock severity={SEVERITY.INFO} values={checked} />
+        ) : null}
+      </div>
+    );
+  }
+}
 
 CertificateVerifyBlock.propTypes = {
-  handleCertificateVerify: PropTypes.func,
-  verifyTriggered: PropTypes.bool,
-  verifying: PropTypes.bool,
-  isHashVerified: PropTypes.bool,
-  isIssued: PropTypes.bool,
-  isNotRevoked: PropTypes.bool,
-  hashError: PropTypes.string,
-  storeError: PropTypes.string,
-  revokedError: PropTypes.string
-};
-
-renderErrorBlock.propTypes = {
-  handleCertificateVerify: PropTypes.func,
-  verifyTriggered: PropTypes.bool,
-  verifying: PropTypes.bool,
-  isHashVerified: PropTypes.bool,
-  isIssued: PropTypes.bool,
-  isNotRevoked: PropTypes.bool,
-  hashError: PropTypes.string,
-  storeError: PropTypes.string,
-  revokedError: PropTypes.string
-};
-
-renderWarningBlock.propTypes = {
-  handleCertificateVerify: PropTypes.func,
-  verifyTriggered: PropTypes.bool,
-  verifying: PropTypes.bool,
-  isHashVerified: PropTypes.bool,
-  isIssued: PropTypes.bool,
-  isNotRevoked: PropTypes.bool,
-  hashError: PropTypes.string,
-  storeError: PropTypes.string,
-  revokedError: PropTypes.string
-};
-
-renderPassBlock.propTypes = {
+  certificateStore: PropTypes.object,
   handleCertificateVerify: PropTypes.func,
   verifyTriggered: PropTypes.bool,
   verifying: PropTypes.bool,
@@ -181,6 +178,7 @@ renderPassBlock.propTypes = {
 
 renderButton.propTypes = {
   handleCertificateVerify: PropTypes.func,
+  handleShowChecks: PropTypes.func,
   verifyTriggered: PropTypes.bool,
   verifying: PropTypes.bool,
   isHashVerified: PropTypes.bool,

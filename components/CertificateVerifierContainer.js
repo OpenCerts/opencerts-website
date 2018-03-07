@@ -46,18 +46,32 @@ class CertificateVerifierContainer extends Component {
 
   renderCertificateDropzone() {
     return (
-      <CertificateDropzone
-        handleCertificateChange={this.handleCertificateChange}
-      />
+      <div>
+        <h1>Certificate viewer and verifier</h1>
+        <CertificateDropzone
+          handleCertificateChange={this.handleCertificateChange}
+        />
+      </div>
     );
   }
 
-  renderCertificateViewer() {
-    return <CertificateViewer certificate={this.props.certificate} />;
+  renderCertificateViewer(verify) {
+    return (
+      <div>
+        <a href="#" onClick={() => this.handleCertificateChange(null)}>
+          ← Upload another
+        </a>
+        <CertificateViewer
+          certificate={this.props.certificate}
+          verify={verify}
+        />
+      </div>
+    );
   }
 
   renderVerifyButton() {
     const {
+      certificateStore,
       verifyTriggered,
       verifying,
       isHashVerified,
@@ -70,6 +84,7 @@ class CertificateVerifierContainer extends Component {
 
     return (
       <CertificateVerifyBlock
+        certificateStore={certificateStore}
         handleCertificateVerify={this.handleCertificateVerify}
         verifyTriggered={verifyTriggered}
         verifying={verifying}
@@ -84,18 +99,13 @@ class CertificateVerifierContainer extends Component {
   }
 
   render() {
-    const content = this.props.certificate
-      ? this.renderCertificateViewer()
-      : this.renderCertificateDropzone();
-
     const verify = this.props.certificate ? this.renderVerifyButton() : null;
 
-    return (
-      <div>
-        {content}
-        {verify}
-      </div>
-    );
+    const content = this.props.certificate
+      ? this.renderCertificateViewer(verify)
+      : this.renderCertificateDropzone();
+
+    return <div>{content}</div>;
   }
 }
 

@@ -1,67 +1,32 @@
 import PropTypes from "prop-types";
 
-const iconText = (icon, text, key) => (
-  <div key={key} className="fl w-third pa2 h4">
-    <div className="fl w-third pa2 v-mid tc">
-      <i className={icon} />
-    </div>
-    <div className="fl w-two-thirds pa2" style={{ overflowWrap: "break-word" }}>
-      {text}
-    </div>
+const Profile = props => (
+  <div>
+    {props.title ? <h3>{props.title}</h3> : null}
+    <table className="w-100">
+      <tbody>
+        {props.identities.map((p, i) => (
+          <tr key={i}>
+            <td className="w-20" style={{ verticalAlign: "top" }}>
+              {p.type}
+            </td>
+            <td style={{ wordBreak: "break-all" }}>{p.identity}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   </div>
 );
 
-const renderProfiles = profiles => {
-  const profileBox = (p, i) => {
-    // TODO add support for hashed values
-    const { type, identity } = p;
-
-    let icon = "fas fa-id-badge fa-2x";
-
-    if (type === "email") icon = "far fa-envelope fa-2x";
-    if (type === "did") icon = "fas fa-id-card fa-2x";
-    if (type === "url") icon = "fas fa-globe fa-2x";
-    if (type === "telephone") icon = "fas fa-phone fa-2x";
-
-    return iconText(icon, identity, i);
-  };
-  const profileBoxes = profiles.length
-    ? profiles.map((p, i) => profileBox(p, i))
-    : profileBox(profiles, null);
-
-  return (
-    <div>
-      <h2>Issued To</h2>
-      {profileBoxes}
-      <div className="cb" />
-    </div>
-  );
+Profile.propTypes = {
+  title: PropTypes.string,
+  identities: PropTypes.arrayOf(PropTypes.object)
 };
 
-const renderIssuer = issuer => {
-  const { name, url, email } = issuer;
-
-  const nameComponent = name ? iconText("fas fa-id-card fa-2x", name) : null;
-  const urlComponent = url ? iconText("fas fa-globe fa-2x", url) : null;
-  const emailComponent = email
-    ? iconText("far fa-envelope fa-2x", email)
-    : null;
-
-  return (
-    <div>
-      <h2>Issued By</h2>
-      {nameComponent}
-      {urlComponent}
-      {emailComponent}
-      <div className="cb" />
-    </div>
-  );
-};
-
-const renderHeader = (name, criteria) => (
+const renderHeader = (name, issuer) => (
   <div className="pb3">
-    <h1>{name}</h1>
-    <div>{criteria}</div>
+    <h2>{issuer.name}</h2>
+    <h2>{name}</h2>
   </div>
 );
 
@@ -74,53 +39,94 @@ const renderTranscript = (evidencePrivacyFilter, evidence) => {
   if (!transcript) return null;
 
   const removeFilterCurry = filterLength => word =>
-    word ? word.substring(filterLength + 1) : "==REDACTED==";
+    word ? word.substring(filterLength + 1) : "[REDACTED]";
   const removeFilter = removeFilterCurry(Number(saltLength));
 
   const subjectComponents = transcript.map((subject, i) => (
-    <div key={i} className="fl w-third pa2 h4">
-      <div className="f4 lh-copy underline">{removeFilter(subject.name)}</div>
-      {subject.courseCode && (
-        <div>Course Code: {removeFilter(subject.courseCode)}</div>
+    <tr key={i}>
+      {subject.courseCode ? (
+        <td>{removeFilter(subject.courseCode)}</td>
+      ) : (
+        <td />
       )}
-      {subject.courseCredit && (
-        <div>Course Credit: {removeFilter(subject.courseCredit)}</div>
+
+      <td>{removeFilter(subject.name)}</td>
+
+      {subject.grade ? <td>{removeFilter(subject.grade)}</td> : <td />}
+
+      {subject.courseCredit ? (
+        <td>{removeFilter(subject.courseCredit)}</td>
+      ) : (
+        <td />
       )}
-      {subject.grade && <div>Grade: {removeFilter(subject.grade)}</div>}
-    </div>
+    </tr>
   ));
 
   return (
     <div>
-      <h2>Transcript</h2>
-      {subjectComponents}
+      <table className="fl tl w-100" cellSpacing={0}>
+        <thead>
+          <tr>
+            <th style={{ width: "14%" }}>Course</th>
+            <th className="w-70" />
+            <th className="w-10">Grade</th>
+            <th className="w-10">Credit</th>
+          </tr>
+        </thead>
+
+        <tbody>{subjectComponents}</tbody>
+      </table>
+
       <div className="cb" />
     </div>
   );
 };
 
-const CertificateViewer = ({ certificate }) => {
+const CertificateViewer = ({ certificate, verify }) => {
   const {
     badge: { name, criteria, issuer, evidence, evidencePrivacyFilter },
-    profile
+    profile,
+    issuedOn
   } = certificate;
 
   return (
     <div>
-      {renderHeader(name, criteria)}
-      <hr />
+      <div className="w-100 cf">
+        <div className="fl w-70">
+          {renderHeader(name, issuer)}
 
+          <div className="mb3">
+            <Profile title="Issued to" identities={profile} />
+
+            <Profile
+              title="Issued by"
+              identities={["name", "url", "email"].map(type => ({
+                type,
+                identity: issuer[type]
+              }))}
+            />
+
+            <div>
+              <h3>Issued at</h3>
+              <div>{issuedOn}</div>
+            </div>
+          </div>
+        </div>
+        <div className="fl w-30">{verify || <div>Verify</div>}</div>
+      </div>
+
+      <h3>Transcript</h3>
       {renderTranscript(evidencePrivacyFilter, evidence)}
 
-      {renderProfiles(profile)}
-
-      {renderIssuer(issuer)}
+      <h3>Details</h3>
+      {criteria}
     </div>
   );
 };
 
 CertificateViewer.propTypes = {
-  certificate: PropTypes.object
+  certificate: PropTypes.object,
+  verify: PropTypes.object
 };
 
 export default CertificateViewer;
