@@ -17,7 +17,7 @@ const InfoBlock = props => {
   const icons = {
     [SEVERITY.WARN]: "⚠️",
     [SEVERITY.ERROR]: "🚨",
-    [SEVERITY.OK]: "✓"
+    [SEVERITY.INFO]: "✓"
   };
 
   const toRender = props.values.filter(
@@ -93,7 +93,10 @@ class CertificateVerifyBlock extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.certificateStore != null) {
+    if (
+      this.props.certificateStore !== nextProps.certificateStore &&
+      nextProps.certificateStore != null
+    ) {
       this.props.handleCertificateVerify();
     }
   }
@@ -105,27 +108,27 @@ class CertificateVerifyBlock extends React.Component {
         check: () =>
           this.props.verifyTriggered
             ? { severity: SEVERITY.WARN, message: "Unknown issuer" }
-            : { severity: SEVERITY.OK, message: "Known issuer" }
+            : { severity: SEVERITY.INFO, message: "Known issuer" }
       },
       {
         name: "HASH_VALID",
         check: () =>
           this.props.isHashVerified
-            ? { severity: SEVERITY.OK, message: "Valid hash" }
+            ? { severity: SEVERITY.INFO, message: "Valid hash" }
             : { severity: SEVERITY.ERROR, message: this.props.hashError }
       },
       {
         name: "CERTIFICATE_ISSUED",
         check: () =>
           this.props.isIssued
-            ? { severity: SEVERITY.OK, message: "Issued on Ethereum network" }
+            ? { severity: SEVERITY.INFO, message: "Issued on Ethereum network" }
             : { severity: SEVERITY.ERROR, message: "Not issued" }
       },
       {
         name: "CERTIFICATE_NOT_REVOKED",
         check: () =>
           this.props.isNotRevoked && !this.props.revokedError
-            ? { severity: SEVERITY.OK, message: "Not revoked" }
+            ? { severity: SEVERITY.INFO, message: "Not revoked" }
             : { severity: SEVERITY.ERROR, message: this.props.revokedError }
       },
       {
@@ -133,7 +136,7 @@ class CertificateVerifyBlock extends React.Component {
         check: () =>
           this.props.storeError
             ? { severity: SEVERITY.ERROR, message: this.props.storeError }
-            : { severity: SEVERITY.OK, message: "Certificate store OK" }
+            : { severity: SEVERITY.INFO, message: "Certificate store OK" }
       }
     ];
 
@@ -149,7 +152,7 @@ class CertificateVerifyBlock extends React.Component {
       <div>
         {renderButton({
           ...this.props,
-          handleShowState: () => {
+          handleShowChecks: () => {
             this.setState({ showInfo: !this.state.showInfo });
           }
         })}
