@@ -1,4 +1,5 @@
-const defaultUrl = "https://govtechsg.github.io/certificate-web-ui/exampleIssuers.json";
+const defaultUrl =
+  "https://govtechsg.github.io/certificate-web-ui/exampleIssuers.json";
 
 export default function fetchIssuers(url = defaultUrl) {
   return window

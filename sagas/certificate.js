@@ -16,7 +16,7 @@ export function* loadCertificateContract({ payload }) {
   );
 
   try {
-    const {abi} = CertificateStoreDefinition;
+    const { abi } = CertificateStoreDefinition;
     const web3 = yield getWeb3();
     const contract = new web3.eth.Contract(abi, contractStoreAddress);
     // Hack to allow React Dev Tools to print contract object
@@ -57,7 +57,9 @@ export function* verifyCertificateIssued({ payload }) {
     const merkleRoot = `0x${_.get(certificate, "signature.merkleRoot", null)}`;
 
     // Checks if certificate has been issued
-    const isIssued = yield certificateStore.contract.methods.isCertificateIssued(merkleRoot).call();
+    const isIssued = yield certificateStore.contract.methods
+      .isCertificateIssued(merkleRoot)
+      .call();
     if (!isIssued) throw new Error("Certificate has not been issued");
 
     yield put({
@@ -88,7 +90,9 @@ export function* verifyCertificateNotRevoked({ payload }) {
 
     for (let i = 0; i < combinedHashes.length; i += 1) {
       const hash = combinedHashes[i];
-      const isRevoked = yield certificateStore.contract.methods.isRevoked(hash).call();
+      const isRevoked = yield certificateStore.contract.methods
+        .isRevoked(hash)
+        .call();
       if (isRevoked)
         throw new Error(`Certificate has been revoked, revoked hash: ${hash}`);
     }

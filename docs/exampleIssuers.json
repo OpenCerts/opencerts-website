@@ -1,6 +1,8 @@
 {
   "issuers": {
     "0x345ca3e014aaf5dca488057592ee47305d9b3e10":
-      "urn:uuid:b5844e20-1947-43cd-876b-8d26d0ee44d0"
+      "urn:uuid:b5844e20-1947-43cd-876b-8d26d0ee44d0",
+    "0x0965C457CFde71227Dc3578b8114918ae6F5984e":
+      "whatever"
   }
 }
