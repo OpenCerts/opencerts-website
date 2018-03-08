@@ -5,6 +5,7 @@ import { types } from "../reducers/certificate";
 import getWeb3 from "../services/web3/getWeb3";
 import getContract from "../services/web3/getContract";
 import CertificateStoreDefinition from "../services/contracts/CertificateStore.json";
+import fetchIssuers from "../services/issuers";
 import { combinedHash } from "../utils";
 
 const networkID = "5777";
@@ -25,7 +26,6 @@ export function* loadCertificateContract({ payload }) {
     // Hack to allow React Dev Tools to print contract object
     contract.toJSON = () =>
       `Contract Functions: ${Object.keys(contract).join("(), ")}()`;
-
     yield put({
       type: types.LOADING_STORE_SUCCESS,
       payload: { contract }
@@ -108,15 +108,69 @@ export function* verifyCertificateNotRevoked({ payload }) {
   }
 }
 
+export function* verifyCertificateIssuer({ payload }) {
+  try {
+    const { certificate, certificateStore, issuers } = payload;
+    const certificateIssuer = _.get(certificate, "badge.issuer", null);
+
+    if (certificateIssuer == null || certificateIssuer.id == null) {
+      throw new Error("Certificate has no issuer");
+    }
+
+    const address = _.get(certificateStore, "contract.address", null);
+    const valid = issuers[address] != null;
+
+    if (valid) {
+      yield put({
+        type: types.VERIFYING_CERTIFICATE_ISSUER_SUCCESS
+      });
+    } else {
+      yield put({
+        type: types.VERIFYING_CERTIFICATE_ISSUER_FAILURE
+      });
+    }
+  } catch (e) {
+    yield put({
+      type: types.VERIFYING_CERTIFICATE_ISSUER_FAILURE,
+      payload: e.message
+    });
+  }
+}
+
 export function* verifyCertificate({ payload }) {
   yield all([
     call(verifyCertificateHash, { payload }),
     call(verifyCertificateIssued, { payload }),
-    call(verifyCertificateNotRevoked, { payload })
+    call(verifyCertificateNotRevoked, { payload }),
+    call(verifyCertificateIssuer, { payload })
   ]);
   yield put({
     type: types.VERIFYING_CERTIFICATE_COMPLETE
   });
+}
+
+export function* loadIssuerList() {
+  try {
+    yield put({
+      type: types.LOADING_ISSUER_LIST
+    });
+
+    const issuers = yield fetchIssuers();
+
+    yield put({
+      type: types.UPDATE_ISSUERS,
+      payload: issuers
+    });
+
+    yield put({
+      type: types.LOADING_ISSUER_LIST_SUCCESS
+    });
+  } catch (e) {
+    yield put({
+      type: types.LOADING_ISSUER_LIST_FAILURE,
+      payload: e.message
+    });
+  }
 }
 
 export default loadCertificateContract;

@@ -5,18 +5,20 @@ export const initialState = {
   store: null,
   storeError: null,
 
+  issuers: {},
+
   verifying: false,
   verifyTriggered: false,
 
   certificateHash: false,
   certificateIssued: false,
   certificateNotRevoked: false,
-  // certificateIssuer: false,
+  certificateIssuer: false,
 
   certificateHashError: null,
   certificateIssuedError: null,
-  certificateNotRevokedError: null
-  // certificateIssuerError: null,
+  certificateNotRevokedError: null,
+  certificateIssuerError: null
 };
 
 // Actions
@@ -37,11 +39,14 @@ export const types = {
   VERIFYING_CERTIFICATE_REVOCATION_SUCCESS:
     "VERIFYING_CERTIFICATE_REVOCATION_SUCCESS",
   VERIFYING_CERTIFICATE_REVOCATION_FAILURE:
-    "VERIFYING_CERTIFICATE_REVOCATION_FAILURE"
-  /*
+    "VERIFYING_CERTIFICATE_REVOCATION_FAILURE",
+
+  LOADING_ISSUER_LIST: "LOADING_ISSUER_LIST",
+  LOADING_ISSUER_LIST_SUCCESS: "LOADING_ISSUER_LIST_SUCCESS",
+  LOADING_ISSUER_LIST_FAILURE: "LOADING_ISSUER_LIST_FAILURE",
+  UPDATE_ISSUERS: "UPDATE_ISSUERS",
   VERIFYING_CERTIFICATE_ISSUER_SUCCESS: "VERIFYING_CERTIFICATE_ISSUER_SUCCESS",
-  VERIFYING_CERTIFICATE_ISSUER_FAILURE: "VERIFYING_CERTIFICATE_ISSUER_FAILURE",
-  */
+  VERIFYING_CERTIFICATE_ISSUER_FAILURE: "VERIFYING_CERTIFICATE_ISSUER_FAILURE"
 };
 
 // Reducers
@@ -51,6 +56,11 @@ export default function reducer(state = initialState, action) {
       return {
         ...initialState,
         raw: action.payload
+      };
+    case types.UPDATE_ISSUERS:
+      return {
+        ...state,
+        issuers: action.payload
       };
     case types.LOADING_STORE_SUCCESS:
       return {
@@ -118,6 +128,16 @@ export default function reducer(state = initialState, action) {
         certificateNotRevoked: false,
         certificateNotRevokedError: action.payload
       };
+    case types.VERIFYING_CERTIFICATE_ISSUER_FAILURE:
+      return {
+        ...state,
+        certificateIssuer: false
+      };
+    case types.VERIFYING_CERTIFICATE_ISSUER_SUCCESS:
+      return {
+        ...state,
+        certificateIssuer: true
+      };
     default:
       return state;
   }
@@ -130,9 +150,17 @@ export function updateCertificate(payload) {
     payload
   };
 }
+
 export function verifyCertificate(payload) {
   return {
     type: types.VERIFYING_CERTIFICATE,
+    payload
+  };
+}
+
+export function updateIssuers(payload) {
+  return {
+    type: types.UPDATE_ISSUERS,
     payload
   };
 }
@@ -184,4 +212,12 @@ export function getIssuedError(store) {
 
 export function getNotRevokedError(store) {
   return store.certificate.certificateNotRevokedError;
+}
+
+export function getIssuers(store) {
+  return store.certificate.issuers;
+}
+
+export function getIsIssuerVerified(store) {
+  return store.certificate.certificateIssuer;
 }

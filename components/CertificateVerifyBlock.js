@@ -106,9 +106,9 @@ class CertificateVerifyBlock extends React.Component {
       {
         name: "KNOWN_ISSUER",
         check: () =>
-          this.props.verifyTriggered
-            ? { severity: SEVERITY.WARN, message: "Unknown issuer" }
-            : { severity: SEVERITY.INFO, message: "Known issuer" }
+          this.props.isIssuerVerified
+            ? { severity: SEVERITY.INFO, message: "Known issuer" }
+            : { severity: SEVERITY.WARN, message: "Unknown issuer" }
       },
       {
         name: "HASH_VALID",
@@ -172,6 +172,7 @@ CertificateVerifyBlock.propTypes = {
   verifyTriggered: PropTypes.bool,
   verifying: PropTypes.bool,
   isHashVerified: PropTypes.bool,
+  isIssuerVerified: PropTypes.bool,
   isIssued: PropTypes.bool,
   isNotRevoked: PropTypes.bool,
   hashError: PropTypes.string,
@@ -179,17 +180,6 @@ CertificateVerifyBlock.propTypes = {
   revokedError: PropTypes.string
 };
 
-renderButton.propTypes = {
-  handleCertificateVerify: PropTypes.func,
-  handleShowChecks: PropTypes.func,
-  verifyTriggered: PropTypes.bool,
-  verifying: PropTypes.bool,
-  isHashVerified: PropTypes.bool,
-  isIssued: PropTypes.bool,
-  isNotRevoked: PropTypes.bool,
-  hashError: PropTypes.string,
-  storeError: PropTypes.string,
-  revokedError: PropTypes.string
-};
+renderButton.propTypes = CertificateVerifyBlock.propTypes;
 
 export default CertificateVerifyBlock;
