@@ -44,7 +44,7 @@ export const types = {
   LOADING_ISSUER_LIST: "LOADING_ISSUER_LIST",
   LOADING_ISSUER_LIST_SUCCESS: "LOADING_ISSUER_LIST_SUCCESS",
   LOADING_ISSUER_LIST_FAILURE: "LOADING_ISSUER_LIST_FAILURE",
-  UPDATE_ISSUERS: "UPDATE_ISSUERS",
+
   VERIFYING_CERTIFICATE_ISSUER_SUCCESS: "VERIFYING_CERTIFICATE_ISSUER_SUCCESS",
   VERIFYING_CERTIFICATE_ISSUER_FAILURE: "VERIFYING_CERTIFICATE_ISSUER_FAILURE"
 };
@@ -57,7 +57,7 @@ export default function reducer(state = initialState, action) {
         ...initialState,
         raw: action.payload
       };
-    case types.UPDATE_ISSUERS:
+    case types.LOADING_ISSUER_LIST_SUCCESS:
       return {
         ...state,
         issuers: action.payload
@@ -160,7 +160,7 @@ export function verifyCertificate(payload) {
 
 export function updateIssuers(payload) {
   return {
-    type: types.UPDATE_ISSUERS,
+    type: types.LOADING_STORE_SUCCESS,
     payload
   };
 }

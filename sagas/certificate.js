@@ -158,12 +158,8 @@ export function* loadIssuerList() {
     const issuers = yield fetchIssuers();
 
     yield put({
-      type: types.UPDATE_ISSUERS,
+      type: types.LOADING_ISSUER_LIST_SUCCESS,
       payload: issuers
-    });
-
-    yield put({
-      type: types.LOADING_ISSUER_LIST_SUCCESS
     });
   } catch (e) {
     yield put({

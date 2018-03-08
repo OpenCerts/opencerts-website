@@ -76,7 +76,7 @@ const renderButton = ({
   return (
     <div
       onClick={verifyEnabled ? handleCertificateVerify : handleShowChecks}
-      className={`w5 tc white pa2 w-100 bb ${color} ${
+      className={`w5 tc white pa2 w-100 bb noselect ${color} ${
         verifyEnabled ? "pointer" : null
       }`}
     >
