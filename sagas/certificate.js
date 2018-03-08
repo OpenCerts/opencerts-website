@@ -8,8 +8,6 @@ import CertificateStoreDefinition from "../services/contracts/CertificateStore.j
 import fetchIssuers from "../services/issuers";
 import { combinedHash } from "../utils";
 
-const networkID = "5777";
-
 export function* loadCertificateContract({ payload }) {
   const contractStoreAddress = _.get(
     payload,
@@ -17,12 +15,10 @@ export function* loadCertificateContract({ payload }) {
     null
   );
 
-  const contractDefinition = CertificateStoreDefinition;
-  contractDefinition.networks[networkID].address = contractStoreAddress;
-
   try {
+    const {abi} = CertificateStoreDefinition;
     const web3 = yield getWeb3();
-    const contract = yield getContract(web3, contractDefinition);
+    const contract = new web3.eth.Contract(abi, contractStoreAddress);
     // Hack to allow React Dev Tools to print contract object
     contract.toJSON = () =>
       `Contract Functions: ${Object.keys(contract).join("(), ")}()`;
@@ -31,6 +27,7 @@ export function* loadCertificateContract({ payload }) {
       payload: { contract }
     });
   } catch (e) {
+    console.log(e);
     yield put({
       type: types.LOADING_STORE_FAILURE,
       payload: e
@@ -60,9 +57,7 @@ export function* verifyCertificateIssued({ payload }) {
     const merkleRoot = `0x${_.get(certificate, "signature.merkleRoot", null)}`;
 
     // Checks if certificate has been issued
-    const isIssued = yield certificateStore.contract.isCertificateIssued.call(
-      merkleRoot
-    );
+    const isIssued = yield certificateStore.contract.methods.isCertificateIssued(merkleRoot).call();
     if (!isIssued) throw new Error("Certificate has not been issued");
 
     yield put({
@@ -93,7 +88,7 @@ export function* verifyCertificateNotRevoked({ payload }) {
 
     for (let i = 0; i < combinedHashes.length; i += 1) {
       const hash = combinedHashes[i];
-      const isRevoked = yield certificateStore.contract.isRevoked.call(hash);
+      const isRevoked = yield certificateStore.contract.methods.isRevoked(hash).call();
       if (isRevoked)
         throw new Error(`Certificate has been revoked, revoked hash: ${hash}`);
     }
