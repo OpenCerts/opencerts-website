@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import {
   updateCertificate,
   verifyCertificate,
+  updateIssuers,
   getCertificate,
   getCertificateStore,
   getCertificateRoot,
@@ -12,6 +13,8 @@ import {
   getVerifying,
   getHashVerified,
   getIssued,
+  getIssuers,
+  getIsIssuerVerified,
   getNotRevoked,
   getHashError,
   getIssuedError,
@@ -36,11 +39,12 @@ class CertificateVerifierContainer extends Component {
   }
 
   handleCertificateVerify() {
-    const { certificate, certificateStore } = this.props;
+    const { certificate, certificateStore, issuers } = this.props;
 
     this.props.verifyCertificate({
       certificate,
-      certificateStore
+      certificateStore,
+      issuers
     });
   }
 
@@ -75,6 +79,7 @@ class CertificateVerifierContainer extends Component {
       verifyTriggered,
       verifying,
       isHashVerified,
+      isIssuerVerified,
       isIssued,
       isNotRevoked,
       hashError,
@@ -89,6 +94,7 @@ class CertificateVerifierContainer extends Component {
         verifyTriggered={verifyTriggered}
         verifying={verifying}
         isHashVerified={isHashVerified}
+        isIssuerVerified={isIssuerVerified}
         isIssued={isIssued}
         isNotRevoked={isNotRevoked}
         hashError={hashError}
@@ -119,6 +125,8 @@ const mapStateToProps = store => ({
   isHashVerified: getHashVerified(store),
   isIssued: getIssued(store),
   isNotRevoked: getNotRevoked(store),
+  issuers: getIssuers(store),
+  isIssuerVerified: getIsIssuerVerified(store),
   hashError: getHashError(store),
   storeError: getIssuedError(store),
   revokedError: getNotRevokedError(store)
@@ -126,7 +134,8 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
   updateCertificate: payload => dispatch(updateCertificate(payload)),
-  verifyCertificate: payload => dispatch(verifyCertificate(payload))
+  verifyCertificate: payload => dispatch(verifyCertificate(payload)),
+  updateIssuers: payload => dispatch(updateIssuers(payload))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(
@@ -135,11 +144,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 CertificateVerifierContainer.propTypes = {
   updateCertificate: PropTypes.func,
+  updateIssuers: PropTypes.func,
   certificate: PropTypes.object,
   certificateStore: PropTypes.object,
   verifyCertificate: PropTypes.func,
   verifyTriggered: PropTypes.bool,
   verifying: PropTypes.bool,
+  issuers: PropTypes.object,
+  isIssuerVerified: PropTypes.bool,
   isHashVerified: PropTypes.bool,
   isIssued: PropTypes.bool,
   isNotRevoked: PropTypes.bool,
