@@ -5,7 +5,7 @@ const Profile = props => (
     {props.title ? <h3>{props.title}</h3> : null}
     <table className="w-100">
       <tbody>
-        {props.identities.map((p, i) => (
+        {props.identities.filter(p => p.identity != null).map((p, i) => (
           <tr key={i}>
             <td className="w-20" style={{ verticalAlign: "top" }}>
               {p.type}
@@ -92,7 +92,7 @@ const CertificateViewer = ({ certificate, verify }) => {
   return (
     <div>
       <div className="w-100 cf">
-        <div className="fl w-70">
+        <div className="fl w-70 pr3">
           {renderHeader(name, issuer)}
 
           <div className="mb3">
