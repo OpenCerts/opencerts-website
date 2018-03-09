@@ -23,7 +23,7 @@ export function* loadAdminAddress() {
   } catch (e) {
     yield put({
       type: types.LOADING_ADMIN_ADDRESS_FAILURE,
-      payload: e
+      payload: e.message
     });
   }
 }
@@ -59,7 +59,7 @@ export function* deployStore({ payload }) {
   } catch (e) {
     yield put({
       type: types.DEPLOYING_STORE_FAILURE,
-      payload: e
+      payload: e.message
     });
   }
 }
@@ -92,7 +92,44 @@ export function* issueCertificate({ payload }) {
   } catch (e) {
     yield put({
       type: types.ISSUING_CERTIFICATE_FAILURE,
-      payload: e
+      payload: e.message
+    });
+  }
+}
+
+export function* revokeCertificate({ payload }) {
+  try {
+    const { fromAddress, storeAddress, certificateHash, reason } = payload;
+    const web3 = yield getWeb3();
+
+    const { abi } = CertificateStoreDefinition;
+    const contract = new web3.eth.Contract(abi, storeAddress, {
+      from: fromAddress
+    });
+
+    const gasPrice = yield web3.eth.getGasPrice();
+    const issueMsg = contract.methods.revokeCertificate(
+      certificateHash,
+      reason
+    );
+
+    const tx = yield issueMsg.send({
+      from: fromAddress,
+      gas: DEFAULT_GAS,
+      gasPrice
+    });
+
+    const txHash = tx.blockHash;
+
+    yield put({
+      type: types.REVOKING_CERTIFICATE_SUCCESS,
+      payload: txHash
+    });
+  } catch (e) {
+    console.log(e);
+    yield put({
+      type: types.REVOKING_CERTIFICATE_FAILURE,
+      payload: e.message
     });
   }
 }

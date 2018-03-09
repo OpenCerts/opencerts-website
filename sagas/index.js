@@ -22,6 +22,7 @@ export default function* rootSaga() {
     ),
     takeEvery(adminType.LOADING_ADMIN_ADDRESS, adminSaga.loadAdminAddress),
     takeEvery(adminType.DEPLOYING_STORE, adminSaga.deployStore),
-    takeEvery(adminType.ISSUING_CERTIFICATE, adminSaga.issueCertificate)
+    takeEvery(adminType.ISSUING_CERTIFICATE, adminSaga.issueCertificate),
+    takeEvery(adminType.REVOKING_CERTIFICATE, adminSaga.revokeCertificate)
   ]);
 }

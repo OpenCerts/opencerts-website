@@ -5,14 +5,16 @@ const Profile = props => (
     {props.title ? <h3>{props.title}</h3> : null}
     <table className="w-100">
       <tbody>
-        {props.identities.filter(p => p.identity != null).map((p, i) => (
-          <tr key={i}>
-            <td className="w-20" style={{ verticalAlign: "top" }}>
-              {p.type}
-            </td>
-            <td style={{ wordBreak: "break-all" }}>{p.identity}</td>
-          </tr>
-        ))}
+        {props.identities && props.identities.filter
+          ? props.identities.filter(p => p.identity != null).map((p, i) => (
+              <tr key={i}>
+                <td className="w-20" style={{ verticalAlign: "top" }}>
+                  {p.type}
+                </td>
+                <td style={{ wordBreak: "break-all" }}>{p.identity}</td>
+              </tr>
+            ))
+          : null}
       </tbody>
     </table>
   </div>

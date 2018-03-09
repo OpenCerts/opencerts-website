@@ -8,10 +8,13 @@ import {
   getStoreAddress,
   updateStoreAddress,
   issueCertificate,
-  getIssuedTx
+  getIssuedTx,
+  getRevokedTx,
+  revokeCertificate
 } from "../reducers/admin";
 import StoreDeployBlock from "./StoreDeployBlock";
 import StoreIssueBlock from "./StoreIssueBlock";
+import StoreRevokeBlock from "./StoreRevokeBlock";
 
 class AdminContainer extends Component {
   constructor(props) {
@@ -21,6 +24,7 @@ class AdminContainer extends Component {
     this.storeAddressOnChange = this.storeAddressOnChange.bind(this);
     this.storeAddressUpdate = this.storeAddressUpdate.bind(this);
     this.handleCertificateIssue = this.handleCertificateIssue.bind(this);
+    this.handleCertificateRevoke = this.handleCertificateRevoke.bind(this);
 
     this.state = {
       updatedStoreAddress: ""
@@ -47,12 +51,16 @@ class AdminContainer extends Component {
     this.props.issueCertificate(payload);
   }
 
+  handleCertificateRevoke(payload) {
+    this.props.revokeCertificate(payload);
+  }
+
   refreshCurrentAddress() {
     this.props.loadAdminAddress();
   }
 
   render() {
-    const { adminAddress, storeAddress, issuedTx } = this.props;
+    const { adminAddress, storeAddress, issuedTx, revokedTx } = this.props;
     return (
       <div>
         <h1>Certificate Store Administrator</h1>
@@ -89,6 +97,12 @@ class AdminContainer extends Component {
           storeAddress={storeAddress}
           handleCertificateIssue={this.handleCertificateIssue}
         />
+        <StoreRevokeBlock
+          revokedTx={revokedTx}
+          adminAddress={adminAddress}
+          storeAddress={storeAddress}
+          handleCertificateRevoke={this.handleCertificateRevoke}
+        />
       </div>
     );
   }
@@ -97,13 +111,15 @@ class AdminContainer extends Component {
 const mapStateToProps = store => ({
   adminAddress: getAdminAddress(store),
   storeAddress: getStoreAddress(store),
-  issuedTx: getIssuedTx(store)
+  issuedTx: getIssuedTx(store),
+  revokedTx: getRevokedTx(store)
 });
 
 const mapDispatchToProps = dispatch => ({
   loadAdminAddress: payload => dispatch(loadAdminAddress(payload)),
   deployStore: payload => dispatch(deployStore(payload)),
   issueCertificate: payload => dispatch(issueCertificate(payload)),
+  revokeCertificate: payload => dispatch(revokeCertificate(payload)),
   updateStoreAddress: payload => dispatch(updateStoreAddress(payload))
 });
 
@@ -116,5 +132,7 @@ AdminContainer.propTypes = {
   updateStoreAddress: PropTypes.func,
   adminAddress: PropTypes.string,
   storeAddress: PropTypes.string,
-  issuedTx: PropTypes.string
+  issuedTx: PropTypes.string,
+  revokedTx: PropTypes.string,
+  revokeCertificate: PropTypes.func
 };

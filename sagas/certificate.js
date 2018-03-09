@@ -3,7 +3,6 @@ import { put, all, call } from "redux-saga/effects";
 import { Certificate } from "@govtechsg/open-certificate";
 import { types } from "../reducers/certificate";
 import getWeb3 from "../services/web3/getWeb3";
-import getContract from "../services/web3/getContract";
 import CertificateStoreDefinition from "../services/contracts/CertificateStore.json";
 import fetchIssuers from "../services/issuers";
 import { combinedHash } from "../utils";
