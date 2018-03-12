@@ -32,7 +32,24 @@ const renderHeader = (name, issuer) => (
   </div>
 );
 
-const renderTranscript = (evidencePrivacyFilter, evidence) => {
+const filterValueButton = (path, editable, handleFilter) => {
+  if (!editable) return null;
+  return (
+    <div
+      onClick={() => handleFilter(path)}
+      className="dib dim pointer black-30"
+    >
+      <i className="fas fa-times-circle" />
+    </div>
+  );
+};
+
+const renderTranscript = (
+  evidencePrivacyFilter,
+  evidence,
+  editable,
+  handleFilter
+) => {
   if (!evidence || !evidencePrivacyFilter) return null;
 
   const { saltLength } = evidencePrivacyFilter;
@@ -41,23 +58,51 @@ const renderTranscript = (evidencePrivacyFilter, evidence) => {
   if (!transcript) return null;
 
   const removeFilterCurry = filterLength => word =>
-    word ? word.substring(filterLength + 1) : "[REDACTED]";
+    word ? word.substring(filterLength + 1) : "";
   const removeFilter = removeFilterCurry(Number(saltLength));
 
   const subjectComponents = transcript.map((subject, i) => (
     <tr key={i}>
       {subject.courseCode ? (
-        <td>{removeFilter(subject.courseCode)}</td>
+        <td>
+          {removeFilter(subject.courseCode)}{" "}
+          {filterValueButton(
+            `transcript.${i}.courseCode`,
+            editable,
+            handleFilter
+          )}
+        </td>
       ) : (
         <td />
       )}
 
-      <td>{removeFilter(subject.name)}</td>
+      {subject.name ? (
+        <td>
+          {removeFilter(subject.name)}{" "}
+          {filterValueButton(`transcript.${i}.name`, editable, handleFilter)}
+        </td>
+      ) : (
+        <td />
+      )}
 
-      {subject.grade ? <td>{removeFilter(subject.grade)}</td> : <td />}
+      {subject.grade ? (
+        <td>
+          {removeFilter(subject.grade)}{" "}
+          {filterValueButton(`transcript.${i}.grade`, editable, handleFilter)}
+        </td>
+      ) : (
+        <td />
+      )}
 
       {subject.courseCredit ? (
-        <td>{removeFilter(subject.courseCredit)}</td>
+        <td>
+          {removeFilter(subject.courseCredit)}{" "}
+          {filterValueButton(
+            `transcript.${i}.courseCredit`,
+            editable,
+            handleFilter
+          )}
+        </td>
       ) : (
         <td />
       )}
@@ -84,7 +129,13 @@ const renderTranscript = (evidencePrivacyFilter, evidence) => {
   );
 };
 
-const CertificateViewer = ({ certificate, verify }) => {
+const CertificateViewer = ({
+  certificate,
+  verify,
+  editable,
+  toggleEditable,
+  handleFilter
+}) => {
   const {
     badge: { name, criteria, issuer, evidence, evidencePrivacyFilter },
     profile,
@@ -118,17 +169,43 @@ const CertificateViewer = ({ certificate, verify }) => {
       </div>
 
       <h3>Transcript</h3>
-      {renderTranscript(evidencePrivacyFilter, evidence)}
+      {renderTranscript(
+        evidencePrivacyFilter,
+        evidence,
+        editable,
+        handleFilter
+      )}
 
       <h3>Details</h3>
       {criteria}
+
+      <div className="mt4 fr">
+        <a
+          className="f6 link dim ba bw1 ph3 pv2 mb2 dib black ml2 pointer"
+          onClick={toggleEditable}
+        >
+          TogglePrivacy Filter
+        </a>
+        <a
+          className="f6 link dim ba bw1 ph3 pv2 mb2 dib black ml2"
+          href={`data:application/text,${encodeURI(
+            JSON.stringify(certificate, null, 2)
+          )}`}
+          download="Certificate.json"
+        >
+          Download Certificate
+        </a>
+      </div>
     </div>
   );
 };
 
 CertificateViewer.propTypes = {
   certificate: PropTypes.object,
-  verify: PropTypes.object
+  verify: PropTypes.object,
+  editable: PropTypes.bool,
+  toggleEditable: PropTypes.func,
+  handleFilter: PropTypes.func
 };
 
 export default CertificateViewer;

@@ -126,7 +126,6 @@ export function* revokeCertificate({ payload }) {
       payload: txHash
     });
   } catch (e) {
-    console.log(e);
     yield put({
       type: types.REVOKING_CERTIFICATE_FAILURE,
       payload: e.message

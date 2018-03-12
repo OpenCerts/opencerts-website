@@ -9,6 +9,10 @@ import * as adminSaga from "../sagas/admin";
 export default function* rootSaga() {
   yield all([
     takeEvery(
+      certificateType.UPDATE_FILTERED_CERTIFICATE,
+      certificateSaga.verifyCertificateHash
+    ),
+    takeEvery(
       certificateType.UPDATE_CERTIFICATE,
       certificateSaga.loadCertificateContract
     ),

@@ -58,9 +58,7 @@ class StoreRevokeBlock extends Component {
             <option value="0">Others</option>
           </select>
         </div>
-        {this.props.revokedTx ? (
-          <div>Revoked: {this.props.revokedTx}</div>
-        ) : null}
+        {revokedTx ? <div>Revoked: {revokedTx}</div> : null}
         <button onClick={this.onRevokeClick}>Revoke!</button>
       </div>
     );
