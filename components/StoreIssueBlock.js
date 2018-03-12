@@ -27,10 +27,6 @@ class StoreIssueBlock extends Component {
     });
   }
 
-  refreshCurrentAddress() {
-    this.props.loadAdminAddress();
-  }
-
   render() {
     return (
       <div>
@@ -56,6 +52,5 @@ StoreIssueBlock.propTypes = {
   issuedTx: PropTypes.string,
   storeAddress: PropTypes.string,
   adminAddress: PropTypes.string,
-  loadAdminAddress: PropTypes.func,
   handleCertificateIssue: PropTypes.func
 };

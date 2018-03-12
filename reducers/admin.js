@@ -7,7 +7,11 @@ export const initialState = {
 
   issuedTx: "",
   issuingCertificate: false,
-  issuingError: null
+  issuingError: null,
+
+  revokedTx: "",
+  revokingCertificate: false,
+  revokingError: null
 };
 
 // Actions
@@ -24,7 +28,11 @@ export const types = {
 
   ISSUING_CERTIFICATE: "ISSUING_CERTIFICATE",
   ISSUING_CERTIFICATE_SUCCESS: "ISSUING_CERTIFICATE_SUCCESS",
-  ISSUING_CERTIFICATE_FAILURE: "ISSUING_CERTIFICATE_FAILURE"
+  ISSUING_CERTIFICATE_FAILURE: "ISSUING_CERTIFICATE_FAILURE",
+
+  REVOKING_CERTIFICATE: "REVOKING_CERTIFICATE",
+  REVOKING_CERTIFICATE_SUCCESS: "REVOKING_CERTIFICATE_SUCCESS",
+  REVOKING_CERTIFICATE_FAILURE: "REVOKING_CERTIFICATE_FAILURE"
 };
 
 // Reducers
@@ -82,6 +90,25 @@ export default function reducer(state = initialState, action) {
         issuingError: action.payload,
         issuedTx: ""
       };
+    case types.REVOKING_CERTIFICATE:
+      return {
+        ...state,
+        revokingCertificate: true
+      };
+    case types.REVOKING_CERTIFICATE_SUCCESS:
+      return {
+        ...state,
+        revokingCertificate: false,
+        revokedTx: action.payload,
+        revokingError: null
+      };
+    case types.REVOKING_CERTIFICATE_FAILURE:
+      return {
+        ...state,
+        revokingCertificate: false,
+        revokingError: action.payload,
+        revokedTx: ""
+      };
     default:
       return state;
   }
@@ -115,6 +142,13 @@ export function issueCertificate(payload) {
   };
 }
 
+export function revokeCertificate(payload) {
+  return {
+    type: types.REVOKING_CERTIFICATE,
+    payload
+  };
+}
+
 // Selectors
 export function getAdminAddress(store) {
   return store.admin.adminAddress;
@@ -126,4 +160,8 @@ export function getStoreAddress(store) {
 
 export function getIssuedTx(store) {
   return store.admin.issuedTx;
+}
+
+export function getRevokedTx(store) {
+  return store.admin.revokedTx;
 }
