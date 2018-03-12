@@ -42,44 +42,42 @@ InfoBlock.propTypes = {
   values: PropTypes.arrayOf(PropTypes.object)
 };
 
-const renderButton = ({
-  handleCertificateVerify,
-  handleShowChecks,
-  verifyTriggered,
-  verifying,
-  isHashVerified,
-  isIssued,
-  isNotRevoked
+const renderBlockHeader = ({
+  certificateHashVerifying,
+  certificateIssuedVerifying,
+  certificateNotRevokedVerifying,
+  certificateIssuerVerifying,
+  issuerError,
+  hashError,
+  certificateIssuedError,
+  revokedError
 }) => {
-  let text = "Verify";
-  let color = "bg-black";
-  let verifyEnabled = true;
+  let text = "";
+  let color = "";
+
+  const verifying =
+    certificateHashVerifying ||
+    certificateIssuedVerifying ||
+    certificateNotRevokedVerifying ||
+    certificateIssuerVerifying;
+
+  const hasError = hashError || certificateIssuedError || revokedError;
+
+  const hasWarning = issuerError;
 
   if (verifying) {
     text = "Verifying…";
     color = "bg-orange";
-    verifyEnabled = false;
-  }
-
-  if (verifyTriggered && isHashVerified && isIssued && isNotRevoked) {
-    text = "Valid ▼";
-    color = "bg-green pointer";
-    verifyEnabled = false;
-  }
-
-  if (verifyTriggered && !(isHashVerified && isIssued && isNotRevoked)) {
-    text = "Invalid";
-    color = "bg-red";
-    verifyEnabled = false;
+  } else if (!verifying && !hasError && !hasWarning) {
+    text = "Verified";
+    color = "bg-green";
+  } else if (!verifying && !hasError) {
+    text = "Verified (with warnings)";
+    color = "bg-orange";
   }
 
   return (
-    <div
-      onClick={verifyEnabled ? handleCertificateVerify : handleShowChecks}
-      className={`w5 tc white pa2 w-100 bb noselect ${color} ${
-        verifyEnabled ? "pointer" : null
-      }`}
-    >
+    <div className={`w5 tc white pa2 w-100 bb noselect ${color}`}>
       <div className="f3">{text}</div>
     </div>
   );
@@ -102,55 +100,87 @@ class CertificateVerifyBlock extends React.Component {
   }
 
   render() {
+    const {
+      certificateHashVerifying,
+      certificateIssuedVerifying,
+      certificateNotRevokedVerifying,
+      certificateIssuerVerifying,
+
+      isHashVerified,
+      isIssued,
+      isNotRevoked,
+      issuerIdentity,
+      isIssuerVerified,
+
+      issuerError,
+      revokedError,
+      certificateIssuedError,
+      hashError
+    } = this.props;
+
     const checks = [
       {
         name: "KNOWN_ISSUER",
-        check: () =>
-          this.props.isIssuerVerified
-            ? { severity: SEVERITY.INFO, message: "Known issuer" }
-            : { severity: SEVERITY.WARN, message: "Unknown issuer" }
+        check: () => {
+          if (certificateIssuerVerifying)
+            return {
+              severity: SEVERITY.WARN,
+              message: "Verifying issuer's identity..."
+            };
+          return isIssuerVerified
+            ? {
+                severity: SEVERITY.INFO,
+                message: `Issuer identity confirmed: ${issuerIdentity}`
+              }
+            : { severity: SEVERITY.WARN, message: issuerError };
+        }
       },
       {
         name: "HASH_VALID",
-        check: () =>
-          this.props.isHashVerified
-            ? { severity: SEVERITY.INFO, message: "Valid hash" }
-            : { severity: SEVERITY.ERROR, message: this.props.hashError }
+        check: () => {
+          if (certificateHashVerifying)
+            return {
+              severity: SEVERITY.WARN,
+              message: "Verifying certificate hash..."
+            };
+          return isHashVerified
+            ? { severity: SEVERITY.INFO, message: "Valid certificate hash" }
+            : { severity: SEVERITY.ERROR, message: hashError };
+        }
       },
       {
         name: "CERTIFICATE_ISSUED",
-        check: () =>
-          this.props.isIssued
+        check: () => {
+          if (certificateIssuedVerifying)
+            return {
+              severity: SEVERITY.WARN,
+              message: "Verifying certificate issue status..."
+            };
+          return isIssued
             ? { severity: SEVERITY.INFO, message: "Issued on Ethereum network" }
-            : { severity: SEVERITY.ERROR, message: "Not issued" }
+            : { severity: SEVERITY.ERROR, message: certificateIssuedError };
+        }
       },
       {
         name: "CERTIFICATE_NOT_REVOKED",
-        check: () =>
-          this.props.isNotRevoked && !this.props.revokedError
-            ? { severity: SEVERITY.INFO, message: "Not revoked" }
-            : { severity: SEVERITY.ERROR, message: this.props.revokedError }
-      },
-      {
-        name: "STORE_OK",
-        check: () =>
-          this.props.storeError
-            ? { severity: SEVERITY.ERROR, message: this.props.storeError }
-            : { severity: SEVERITY.INFO, message: "Certificate store OK" }
+        check: () => {
+          if (certificateNotRevokedVerifying)
+            return {
+              severity: SEVERITY.WARN,
+              message: "Verifying certificate revoke status..."
+            };
+          return isNotRevoked
+            ? { severity: SEVERITY.INFO, message: "Certificate is not revoked" }
+            : { severity: SEVERITY.ERROR, message: revokedError };
+        }
       }
     ];
 
     const checked = checks.map(c => ({ ...c, result: c.check() }));
-    const hasError = checked.find(
-      c => c.result && c.result.severity === SEVERITY.ERROR
-    );
-    const hasWarning = checked.find(
-      c => c.result && c.result.severity === SEVERITY.WARN
-    );
 
     return (
       <div>
-        {renderButton({
+        {renderBlockHeader({
           ...this.props,
           handleShowChecks: () => {
             this.setState({ showInfo: !this.state.showInfo });
@@ -158,9 +188,7 @@ class CertificateVerifyBlock extends React.Component {
         })}
         <InfoBlock severity={SEVERITY.ERROR} values={checked} />
         <InfoBlock severity={SEVERITY.WARN} values={checked} />
-        {this.state.showInfo || hasError || hasWarning ? (
-          <InfoBlock severity={SEVERITY.INFO} values={checked} />
-        ) : null}
+        <InfoBlock severity={SEVERITY.INFO} values={checked} />
       </div>
     );
   }
@@ -177,9 +205,16 @@ CertificateVerifyBlock.propTypes = {
   isNotRevoked: PropTypes.bool,
   hashError: PropTypes.string,
   storeError: PropTypes.string,
-  revokedError: PropTypes.string
+  revokedError: PropTypes.string,
+  issuerError: PropTypes.string,
+  certificateHashVerifying: PropTypes.bool,
+  certificateIssuedVerifying: PropTypes.bool,
+  certificateNotRevokedVerifying: PropTypes.bool,
+  certificateIssuerVerifying: PropTypes.bool,
+  certificateIssuedError: PropTypes.string,
+  issuerIdentity: PropTypes.string
 };
 
-renderButton.propTypes = CertificateVerifyBlock.propTypes;
+renderBlockHeader.propTypes = CertificateVerifyBlock.propTypes;
 
 export default CertificateVerifyBlock;
