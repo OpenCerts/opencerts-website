@@ -5,7 +5,6 @@ import { Certificate } from "@govtechsg/open-certificate";
 import {
   updateCertificate,
   verifyCertificate,
-  updateIssuers,
   getCertificate,
   getCertificateStore,
   getCertificateRoot,
@@ -14,13 +13,18 @@ import {
   getVerifying,
   getHashVerified,
   getIssued,
-  getIssuers,
   getIsIssuerVerified,
   getNotRevoked,
   getHashError,
   getIssuedError,
   getNotRevokedError,
-  updateFilteredCertificate
+  getIssuerError,
+  updateFilteredCertificate,
+  getCertificateHashVerifying,
+  getCertificateIssuedVerifying,
+  getCertificateNotRevokedVerifying,
+  getCertificateIssuerVerifying,
+  getIssuerIdentity
 } from "../reducers/certificate";
 import CertificateDropzone from "./CertificateDropzone";
 import CertificateViewer from "./CertificateViewer";
@@ -107,7 +111,13 @@ class CertificateVerifierContainer extends Component {
       isNotRevoked,
       hashError,
       storeError,
-      revokedError
+      revokedError,
+      issuerError,
+      certificateHashVerifying,
+      certificateIssuedVerifying,
+      certificateNotRevokedVerifying,
+      certificateIssuerVerifying,
+      issuerIdentity
     } = this.props;
 
     return (
@@ -123,6 +133,12 @@ class CertificateVerifierContainer extends Component {
         hashError={hashError}
         storeError={storeError}
         revokedError={revokedError}
+        issuerError={issuerError}
+        issuerIdentity={issuerIdentity}
+        certificateHashVerifying={certificateHashVerifying}
+        certificateIssuedVerifying={certificateIssuedVerifying}
+        certificateNotRevokedVerifying={certificateNotRevokedVerifying}
+        certificateIssuerVerifying={certificateIssuerVerifying}
       />
     );
   }
@@ -148,17 +164,21 @@ const mapStateToProps = store => ({
   isHashVerified: getHashVerified(store),
   isIssued: getIssued(store),
   isNotRevoked: getNotRevoked(store),
-  issuers: getIssuers(store),
   isIssuerVerified: getIsIssuerVerified(store),
   hashError: getHashError(store),
   storeError: getIssuedError(store),
-  revokedError: getNotRevokedError(store)
+  revokedError: getNotRevokedError(store),
+  issuerError: getIssuerError(store),
+  issuerIdentity: getIssuerIdentity(store),
+  certificateHashVerifying: getCertificateHashVerifying(store),
+  certificateIssuedVerifying: getCertificateIssuedVerifying(store),
+  certificateNotRevokedVerifying: getCertificateNotRevokedVerifying(store),
+  certificateIssuerVerifying: getCertificateIssuerVerifying(store)
 });
 
 const mapDispatchToProps = dispatch => ({
   updateCertificate: payload => dispatch(updateCertificate(payload)),
   verifyCertificate: payload => dispatch(verifyCertificate(payload)),
-  updateIssuers: payload => dispatch(updateIssuers(payload)),
   updateFilteredCertificate: payload =>
     dispatch(updateFilteredCertificate(payload))
 });
@@ -170,7 +190,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 CertificateVerifierContainer.propTypes = {
   updateFilteredCertificate: PropTypes.func,
   updateCertificate: PropTypes.func,
-  updateIssuers: PropTypes.func,
   certificate: PropTypes.object,
   certificateStore: PropTypes.object,
   verifyCertificate: PropTypes.func,
@@ -183,5 +202,11 @@ CertificateVerifierContainer.propTypes = {
   isNotRevoked: PropTypes.bool,
   hashError: PropTypes.string,
   storeError: PropTypes.string,
-  revokedError: PropTypes.string
+  revokedError: PropTypes.string,
+  issuerError: PropTypes.string,
+  certificateHashVerifying: PropTypes.bool,
+  certificateIssuedVerifying: PropTypes.bool,
+  certificateNotRevokedVerifying: PropTypes.bool,
+  certificateIssuerVerifying: PropTypes.bool,
+  issuerIdentity: PropTypes.string
 };

@@ -107,25 +107,20 @@ export function* verifyCertificateNotRevoked({ payload }) {
 
 export function* verifyCertificateIssuer({ payload }) {
   try {
-    const { certificate, certificateStore, issuers } = payload;
-    const certificateIssuer = _.get(certificate, "badge.issuer", null);
+    const issuers = yield fetchIssuers();
+    const { certificate } = payload;
 
-    if (certificateIssuer == null || certificateIssuer.id == null) {
-      throw new Error("Certificate has no issuer");
-    }
+    const address = _.get(certificate, "verification.contractAddress", null);
+    if (!address) throw new Error("Certificate store address cannot be found");
 
-    const address = _.get(certificateStore, "contract.address", null);
-    const valid = issuers[address] != null;
+    const issuerIdentity = issuers[address.toUpperCase()];
+    if (!issuerIdentity)
+      throw new Error(`Issuer identity cannot be verified: ${address}`);
 
-    if (valid) {
-      yield put({
-        type: types.VERIFYING_CERTIFICATE_ISSUER_SUCCESS
-      });
-    } else {
-      yield put({
-        type: types.VERIFYING_CERTIFICATE_ISSUER_FAILURE
-      });
-    }
+    yield put({
+      type: types.VERIFYING_CERTIFICATE_ISSUER_SUCCESS,
+      payload: issuerIdentity
+    });
   } catch (e) {
     yield put({
       type: types.VERIFYING_CERTIFICATE_ISSUER_FAILURE,
@@ -144,26 +139,6 @@ export function* verifyCertificate({ payload }) {
   yield put({
     type: types.VERIFYING_CERTIFICATE_COMPLETE
   });
-}
-
-export function* loadIssuerList() {
-  try {
-    yield put({
-      type: types.LOADING_ISSUER_LIST
-    });
-
-    const issuers = yield fetchIssuers();
-
-    yield put({
-      type: types.LOADING_ISSUER_LIST_SUCCESS,
-      payload: issuers
-    });
-  } catch (e) {
-    yield put({
-      type: types.LOADING_ISSUER_LIST_FAILURE,
-      payload: e.message
-    });
-  }
 }
 
 export default loadCertificateContract;
