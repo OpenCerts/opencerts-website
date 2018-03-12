@@ -24,6 +24,8 @@ export const initialState = {
 // Actions
 export const types = {
   UPDATE_CERTIFICATE: "UPDATE_CERTIFICATE",
+  UPDATE_FILTERED_CERTIFICATE: "UPDATE_FILTERED_CERTIFICATE",
+
   LOADING_STORE_SUCCESS: "LOADING_STORE_SUCCESS",
   LOADING_STORE_FAILURE: "LOADING_STORE_FAILURE",
 
@@ -56,6 +58,11 @@ export default function reducer(state = initialState, action) {
       return {
         ...initialState,
         raw: action.payload
+      };
+    case types.UPDATE_FILTERED_CERTIFICATE:
+      return {
+        ...state,
+        raw: action.payload.certificate
       };
     case types.LOADING_ISSUER_LIST_SUCCESS:
       return {
@@ -161,6 +168,13 @@ export function verifyCertificate(payload) {
 export function updateIssuers(payload) {
   return {
     type: types.LOADING_STORE_SUCCESS,
+    payload
+  };
+}
+
+export function updateFilteredCertificate(payload) {
+  return {
+    type: types.UPDATE_FILTERED_CERTIFICATE,
     payload
   };
 }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Certificate } from "@govtechsg/open-certificate";
 import {
   updateCertificate,
   verifyCertificate,
@@ -18,7 +19,8 @@ import {
   getNotRevoked,
   getHashError,
   getIssuedError,
-  getNotRevokedError
+  getNotRevokedError,
+  updateFilteredCertificate
 } from "../reducers/certificate";
 import CertificateDropzone from "./CertificateDropzone";
 import CertificateViewer from "./CertificateViewer";
@@ -28,10 +30,28 @@ class CertificateVerifierContainer extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      editable: false
+    };
+
     this.handleCertificateChange = this.handleCertificateChange.bind(this);
     this.renderCertificateViewer = this.renderCertificateViewer.bind(this);
     this.renderCertificateDropzone = this.renderCertificateDropzone.bind(this);
     this.handleCertificateVerify = this.handleCertificateVerify.bind(this);
+    this.handleToggleEditable = this.handleToggleEditable.bind(this);
+    this.handleFilter = this.handleFilter.bind(this);
+  }
+
+  handleToggleEditable() {
+    this.setState({
+      editable: !this.state.editable
+    });
+  }
+
+  handleFilter(path) {
+    const currentCertificate = new Certificate(this.props.certificate);
+    const { certificate } = currentCertificate.privacyFilter(path);
+    this.props.updateFilteredCertificate({ certificate });
   }
 
   handleCertificateChange(certificate) {
@@ -68,6 +88,9 @@ class CertificateVerifierContainer extends Component {
         <CertificateViewer
           certificate={this.props.certificate}
           verify={verify}
+          editable={this.state.editable}
+          handleFilter={this.handleFilter}
+          toggleEditable={this.handleToggleEditable}
         />
       </div>
     );
@@ -135,7 +158,9 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => ({
   updateCertificate: payload => dispatch(updateCertificate(payload)),
   verifyCertificate: payload => dispatch(verifyCertificate(payload)),
-  updateIssuers: payload => dispatch(updateIssuers(payload))
+  updateIssuers: payload => dispatch(updateIssuers(payload)),
+  updateFilteredCertificate: payload =>
+    dispatch(updateFilteredCertificate(payload))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(
@@ -143,6 +168,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 );
 
 CertificateVerifierContainer.propTypes = {
+  updateFilteredCertificate: PropTypes.func,
   updateCertificate: PropTypes.func,
   updateIssuers: PropTypes.func,
   certificate: PropTypes.object,

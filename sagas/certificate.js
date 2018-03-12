@@ -26,7 +26,6 @@ export function* loadCertificateContract({ payload }) {
       payload: { contract }
     });
   } catch (e) {
-    console.log(e);
     yield put({
       type: types.LOADING_STORE_FAILURE,
       payload: e
