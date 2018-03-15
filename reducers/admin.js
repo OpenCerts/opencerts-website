@@ -16,6 +16,7 @@ export const initialState = {
 
 // Actions
 export const types = {
+  NETWORK_RESET: "NETWORK_RESET", // For network change
   UPDATE_STORE_ADDRESS: "UPDATE_STORE_ADDRESS",
 
   LOADING_ADMIN_ADDRESS: "LOADING_ADMIN_ADDRESS",
@@ -38,6 +39,10 @@ export const types = {
 // Reducers
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case types.NETWORK_RESET:
+      return {
+        ...initialState
+      };
     case types.LOADING_ADMIN_ADDRESS_FAILURE:
       return {
         ...state,
