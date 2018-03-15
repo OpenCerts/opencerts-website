@@ -1,5 +1,7 @@
 import { takeEvery, all } from "redux-saga/effects";
 
+import { types as applicationType } from "../reducers/application";
+
 import { types as certificateType } from "../reducers/certificate";
 import * as certificateSaga from "../sagas/certificate";
 
@@ -23,6 +25,8 @@ export default function* rootSaga() {
     takeEvery(adminType.LOADING_ADMIN_ADDRESS, adminSaga.loadAdminAddress),
     takeEvery(adminType.DEPLOYING_STORE, adminSaga.deployStore),
     takeEvery(adminType.ISSUING_CERTIFICATE, adminSaga.issueCertificate),
-    takeEvery(adminType.REVOKING_CERTIFICATE, adminSaga.revokeCertificate)
+    takeEvery(adminType.REVOKING_CERTIFICATE, adminSaga.revokeCertificate),
+    takeEvery(applicationType.UPDATE_WEB3, adminSaga.networkReset),
+    takeEvery(applicationType.UPDATE_WEB3, certificateSaga.networkReset)
   ]);
 }

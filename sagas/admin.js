@@ -1,5 +1,6 @@
-import { put } from "redux-saga/effects";
+import { put, select } from "redux-saga/effects";
 import { types } from "../reducers/admin";
+import { getNetwork } from "../reducers/application";
 
 import getWeb3 from "../services/web3/getWeb3";
 import getAccounts from "../services/web3/getAccounts";
@@ -8,9 +9,15 @@ import CertificateStoreDefinition from "../services/contracts/CertificateStore.j
 // TODO do a better estimate
 const DEFAULT_GAS = 1000000;
 
+function* getSelectedWeb3() {
+  const network = yield select(getNetwork);
+  const web3 = yield getWeb3(network);
+  return web3;
+}
+
 export function* loadAdminAddress() {
   try {
-    const web3 = yield getWeb3();
+    const web3 = yield getSelectedWeb3();
     const accounts = yield getAccounts(web3);
 
     if (!accounts || !accounts.length || accounts.length === 0)
@@ -31,7 +38,7 @@ export function* loadAdminAddress() {
 export function* deployStore({ payload }) {
   try {
     const { fromAddress, url, name } = payload;
-    const web3 = yield getWeb3();
+    const web3 = yield getSelectedWeb3();
 
     const { abi, bytecode } = CertificateStoreDefinition;
 
@@ -67,7 +74,7 @@ export function* deployStore({ payload }) {
 export function* issueCertificate({ payload }) {
   try {
     const { fromAddress, storeAddress, certificateHash } = payload;
-    const web3 = yield getWeb3();
+    const web3 = yield getSelectedWeb3();
 
     const { abi } = CertificateStoreDefinition;
     const contract = new web3.eth.Contract(abi, storeAddress, {
@@ -100,7 +107,7 @@ export function* issueCertificate({ payload }) {
 export function* revokeCertificate({ payload }) {
   try {
     const { fromAddress, storeAddress, certificateHash, reason } = payload;
-    const web3 = yield getWeb3();
+    const web3 = yield getSelectedWeb3();
 
     const { abi } = CertificateStoreDefinition;
     const contract = new web3.eth.Contract(abi, storeAddress, {
@@ -131,6 +138,12 @@ export function* revokeCertificate({ payload }) {
       payload: e.message
     });
   }
+}
+
+export function* networkReset() {
+  yield put({
+    type: types.NETWORK_RESET
+  });
 }
 
 export default loadAdminAddress;

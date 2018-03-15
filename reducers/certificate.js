@@ -28,6 +28,8 @@ export const initialState = {
 
 // Actions
 export const types = {
+  NETWORK_RESET: "NETWORK_RESET", // For network change
+
   UPDATE_CERTIFICATE: "UPDATE_CERTIFICATE",
   UPDATE_FILTERED_CERTIFICATE: "UPDATE_FILTERED_CERTIFICATE",
 
@@ -55,6 +57,10 @@ export const types = {
 // Reducers
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case types.NETWORK_RESET:
+      return {
+        ...initialState
+      };
     case types.UPDATE_CERTIFICATE:
       return {
         ...initialState,
