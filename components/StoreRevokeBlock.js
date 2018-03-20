@@ -7,24 +7,16 @@ class StoreRevokeBlock extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      certificateHash: "",
-      reason: "1"
+      certificateHash: ""
     };
 
     this.onHashChange = this.onHashChange.bind(this);
     this.onRevokeClick = this.onRevokeClick.bind(this);
-    this.onReasonChange = this.onReasonChange.bind(this);
   }
 
   onHashChange(event) {
     this.setState({
       certificateHash: event.target.value
-    });
-  }
-
-  onReasonChange(event) {
-    this.setState({
-      reason: event.target.value
     });
   }
 
@@ -37,7 +29,6 @@ class StoreRevokeBlock extends Component {
       handleCertificateRevoke({
         storeAddress,
         fromAddress: adminAddress,
-        reason: Number(this.state.reason),
         certificateHash: this.state.certificateHash
       });
     }
@@ -56,15 +47,6 @@ class StoreRevokeBlock extends Component {
             value={this.state.certificateHash}
             placeholder="0x…"
           />
-        </div>
-        <div className="mt2">
-          Reason<br />
-          <select value={this.state.reason} onChange={this.onReasonChange}>
-            <option value="1">Issued in error</option>
-            <option value="2">Change in content</option>
-            <option value="3">Malpractice</option>
-            <option value="0">Others</option>
-          </select>
         </div>
         <button className="mt4 danger" onClick={this.onRevokeClick}>
           <i className="fas fa-exclamation-triangle" /> Revoke

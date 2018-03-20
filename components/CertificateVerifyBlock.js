@@ -15,9 +15,9 @@ const InfoBlock = props => {
   };
 
   const icons = {
-    [SEVERITY.WARN]: "⚠️",
-    [SEVERITY.ERROR]: "🚨",
-    [SEVERITY.INFO]: "✓"
+    [SEVERITY.WARN]: <i className="fas fa-question-circle" />,
+    [SEVERITY.ERROR]: <i className="fas fa-exclamation-triangle" />,
+    [SEVERITY.INFO]: <i className="fas fa-check-circle" />
   };
 
   const toRender = props.values.filter(
@@ -31,7 +31,10 @@ const InfoBlock = props => {
   return (
     <ul className={colors[props.severity]} style={{ listStyleType: "none" }}>
       {toRender.map((val, i) => (
-        <li key={i}>{`${icons[props.severity]} ${val.result.message}`}</li>
+        <li key={i} className="flex">
+          <div className="mr2">{icons[props.severity]}</div>
+          <div>{val.result.message || val.result.default}</div>
+        </li>
       ))}
     </ul>
   );
@@ -44,29 +47,38 @@ InfoBlock.propTypes = {
 
 const renderBlockHeader = ({
   certificateHashVerifying,
+  certificateStore,
   certificateIssuedVerifying,
   certificateNotRevokedVerifying,
   certificateIssuerVerifying,
   issuerError,
   hashError,
   certificateIssuedError,
-  revokedError
+  revokedError,
+  storeError
 }) => {
   let text = "";
   let color = "";
 
   const verifying =
-    certificateHashVerifying ||
-    certificateIssuedVerifying ||
-    certificateNotRevokedVerifying ||
-    certificateIssuerVerifying;
+    certificateStore &&
+    (certificateHashVerifying ||
+      certificateIssuedVerifying ||
+      certificateNotRevokedVerifying ||
+      certificateIssuerVerifying);
 
-  const hasError = hashError || certificateIssuedError || revokedError;
+  const hasError =
+    hashError || certificateIssuedError || revokedError || storeError;
 
   const hasWarning = issuerError;
 
+  const unableToVerify = !certificateStore;
+
   if (verifying) {
     text = "Verifying…";
+    color = "bg-orange";
+  } else if (unableToVerify) {
+    text = "No network connection";
     color = "bg-orange";
   } else if (!verifying && !hasError && !hasWarning) {
     text = "Verified";
@@ -117,7 +129,8 @@ class CertificateVerifyBlock extends React.Component {
 
       issuerError,
       revokedError,
-      certificateIssuedError,
+      // certificateIssuedError, // Naming issue? storeError used instead
+      storeError,
       hashError
     } = this.props;
 
@@ -133,9 +146,18 @@ class CertificateVerifyBlock extends React.Component {
           return isIssuerVerified
             ? {
                 severity: SEVERITY.INFO,
-                message: `Issuer identity confirmed: ${issuerIdentity}`
+                message: (
+                  <div>
+                    <div>Known issuer</div>
+                    <div>{issuerIdentity}</div>
+                  </div>
+                )
               }
-            : { severity: SEVERITY.WARN, message: issuerError };
+            : {
+                severity: SEVERITY.WARN,
+                message: issuerError,
+                default: "Could not check for known issuer"
+              };
         }
       },
       {
@@ -148,7 +170,11 @@ class CertificateVerifyBlock extends React.Component {
             };
           return isHashVerified
             ? { severity: SEVERITY.INFO, message: "Valid certificate hash" }
-            : { severity: SEVERITY.ERROR, message: hashError };
+            : {
+                severity: SEVERITY.ERROR,
+                message: hashError,
+                default: "Invalid certificate hash"
+              };
         }
       },
       {
@@ -161,7 +187,11 @@ class CertificateVerifyBlock extends React.Component {
             };
           return isIssued
             ? { severity: SEVERITY.INFO, message: "Issued on Ethereum network" }
-            : { severity: SEVERITY.ERROR, message: certificateIssuedError };
+            : {
+                severity: SEVERITY.ERROR,
+                message: storeError,
+                default: "Unknown issuance"
+              };
         }
       },
       {
@@ -173,8 +203,12 @@ class CertificateVerifyBlock extends React.Component {
               message: "Verifying certificate revoke status…"
             };
           return isNotRevoked
-            ? { severity: SEVERITY.INFO, message: "Certificate is not revoked" }
-            : { severity: SEVERITY.ERROR, message: revokedError };
+            ? { severity: SEVERITY.INFO, message: "Not revoked" }
+            : {
+                severity: SEVERITY.ERROR,
+                message: revokedError,
+                default: "Unknown revocation"
+              };
         }
       }
     ];

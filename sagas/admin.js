@@ -37,7 +37,7 @@ export function* loadAdminAddress() {
 
 export function* deployStore({ payload }) {
   try {
-    const { fromAddress, url, name } = payload;
+    const { fromAddress, name } = payload;
     const web3 = yield getSelectedWeb3();
 
     const { abi, bytecode } = CertificateStoreDefinition;
@@ -46,7 +46,7 @@ export function* deployStore({ payload }) {
     const deployment = proxyContract.deploy({
       from: fromAddress,
       data: bytecode,
-      arguments: [url, name]
+      arguments: [name]
     });
     const gasPrice = yield web3.eth.getGasPrice();
 
@@ -106,7 +106,7 @@ export function* issueCertificate({ payload }) {
 
 export function* revokeCertificate({ payload }) {
   try {
-    const { fromAddress, storeAddress, certificateHash, reason } = payload;
+    const { fromAddress, storeAddress, certificateHash } = payload;
     const web3 = yield getSelectedWeb3();
 
     const { abi } = CertificateStoreDefinition;
@@ -115,10 +115,7 @@ export function* revokeCertificate({ payload }) {
     });
 
     const gasPrice = yield web3.eth.getGasPrice();
-    const issueMsg = contract.methods.revokeCertificate(
-      certificateHash,
-      reason
-    );
+    const issueMsg = contract.methods.revokeCertificate(certificateHash);
 
     const tx = yield issueMsg.send({
       from: fromAddress,

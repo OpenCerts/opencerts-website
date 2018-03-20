@@ -5,12 +5,10 @@ class StoreDeployBlock extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      issuerName: "",
-      issuerUrl: ""
+      issuerName: ""
     };
 
     this.onNameChange = this.onNameChange.bind(this);
-    this.onUrlChange = this.onUrlChange.bind(this);
     this.onDeployClick = this.onDeployClick.bind(this);
   }
 
@@ -20,18 +18,11 @@ class StoreDeployBlock extends Component {
     });
   }
 
-  onUrlChange(event) {
-    this.setState({
-      issuerUrl: event.target.value
-    });
-  }
-
   onDeployClick() {
     const { adminAddress, handleStoreDeploy } = this.props;
     handleStoreDeploy({
       fromAddress: adminAddress,
-      name: this.state.issuerName,
-      url: this.state.issuerUrl
+      name: this.state.issuerName
     });
   }
 
@@ -49,16 +40,6 @@ class StoreDeployBlock extends Component {
               type="text"
               onChange={this.onNameChange}
               value={this.state.issuerName}
-              size={50}
-              required
-            />
-          </div>
-          <div className="mt2">
-            Issuer URL<br />
-            <input
-              type="text"
-              onChange={this.onUrlChange}
-              value={this.state.issuerUrl}
               size={50}
               required
             />

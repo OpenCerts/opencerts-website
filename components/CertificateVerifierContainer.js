@@ -101,44 +101,10 @@ class CertificateVerifierContainer extends Component {
   }
 
   renderVerifyButton() {
-    const {
-      certificateStore,
-      verifyTriggered,
-      verifying,
-      isHashVerified,
-      isIssuerVerified,
-      isIssued,
-      isNotRevoked,
-      hashError,
-      storeError,
-      revokedError,
-      issuerError,
-      certificateHashVerifying,
-      certificateIssuedVerifying,
-      certificateNotRevokedVerifying,
-      certificateIssuerVerifying,
-      issuerIdentity
-    } = this.props;
-
     return (
       <CertificateVerifyBlock
-        certificateStore={certificateStore}
+        {...this.props}
         handleCertificateVerify={this.handleCertificateVerify}
-        verifyTriggered={verifyTriggered}
-        verifying={verifying}
-        isHashVerified={isHashVerified}
-        isIssuerVerified={isIssuerVerified}
-        isIssued={isIssued}
-        isNotRevoked={isNotRevoked}
-        hashError={hashError}
-        storeError={storeError}
-        revokedError={revokedError}
-        issuerError={issuerError}
-        issuerIdentity={issuerIdentity}
-        certificateHashVerifying={certificateHashVerifying}
-        certificateIssuedVerifying={certificateIssuedVerifying}
-        certificateNotRevokedVerifying={certificateNotRevokedVerifying}
-        certificateIssuerVerifying={certificateIssuerVerifying}
       />
     );
   }
