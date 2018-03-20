@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next build && next start"
   },
-  "dependencies": {
+    "deploy:master": "rm -rf out && yarn build:static && gh-pages --dist out"
     "@govtechsg/open-certificate": "^1.0.1",
     "eslint-plugin-react": "^7.7.0",
     "ethereumjs-util": "^5.1.5",
@@ -43,5 +43,4 @@
     "eslint-plugin-prettier": "^2.6.0",
     "prettier": "^1.10.2",
     "webpack": "^4.0.1"
-  }
 }
