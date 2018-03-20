@@ -35,7 +35,7 @@ class StoreRevokeBlock extends Component {
   }
 
   render() {
-    const { revokedTx } = this.props;
+    const { revokedTx, networkId } = this.props;
     return (
       <div>
         <div>
@@ -57,7 +57,7 @@ class StoreRevokeBlock extends Component {
             <p>Revoked certificates.</p>
             <div>
               Transaction ID
-              <HashColor hashee={revokedTx} />
+              <HashColor hashee={revokedTx} networkId={networkId} isTx />
             </div>
           </div>
         ) : null}
@@ -72,5 +72,6 @@ StoreRevokeBlock.propTypes = {
   revokedTx: PropTypes.string,
   storeAddress: PropTypes.string,
   adminAddress: PropTypes.string,
-  handleCertificateRevoke: PropTypes.func
+  handleCertificateRevoke: PropTypes.func,
+  networkId: PropTypes.networkId
 };

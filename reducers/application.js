@@ -2,12 +2,17 @@ import { types as Web3Types } from "../services/web3/getWeb3";
 
 export const initialState = {
   network: Web3Types.INJECTED,
+  networkId: null,
+  networkIdVerbose: "",
   customRpc: ""
 };
 
 // Actions
 export const types = {
-  UPDATE_WEB3: "UPDATE_WEB3"
+  UPDATE_WEB3: "UPDATE_WEB3",
+  UPDATE_NETWORK_ID: "UPDATE_NETWORK_ID",
+  UPDATE_NETWORK_ID_SUCCESS: "UPDATE_NETWORK_ID_SUCCESS",
+  UPDATE_NETWORK_ID_FAILURE: "UPDATE_NETWORK_ID_FAILURE"
 };
 
 // Reducers
@@ -18,6 +23,24 @@ export default function reducer(state = initialState, action) {
         ...state,
         network: action.payload.network,
         customRpc: action.payload.customRpc
+      };
+    case types.UPDATE_NETWORK_ID:
+      return {
+        ...state,
+        networkId: null,
+        networkIdVerbose: ""
+      };
+    case types.UPDATE_NETWORK_ID_SUCCESS:
+      return {
+        ...state,
+        networkId: action.payload.networkId,
+        networkIdVerbose: action.payload.networkIdVerbose
+      };
+    case types.UPDATE_NETWORK_ID_FAILURE:
+      return {
+        ...state,
+        networkId: null,
+        networkIdVerbose: ""
       };
     default:
       return state;
@@ -32,6 +55,12 @@ export function updateWeb3(payload) {
   };
 }
 
+export function updateNetworkId() {
+  return {
+    type: types.UPDATE_NETWORK_ID
+  };
+}
+
 // Selectors
 export function getNetwork(store) {
   return store.application.network;
@@ -39,4 +68,8 @@ export function getNetwork(store) {
 
 export function getCustomRpc(store) {
   return store.application.customRpc;
+}
+
+export function getNetworkId(store) {
+  return store.application.networkId;
 }

@@ -30,7 +30,9 @@ export default class HashColor extends React.Component {
 
     return (
       <div
-        className={["__hashcolor", this.props.copy ? "copy" : ""].join(" ")}
+        className={["__hashcolor", this.props.clickable ? "copy" : ""].join(
+          " "
+        )}
         style={{
           color: this.props.color
             ? HashColor.color(this.props.hashee)
@@ -38,16 +40,20 @@ export default class HashColor extends React.Component {
           wordBreak: "break-all"
         }}
         onClick={
-          this.props.copy
+          this.props.clickable
             ? () => {
-                HashColor.copyToClipboard(this.props.hashee);
+                HashColor.viewOnEtherscan(
+                  this.props.hashee,
+                  this.props.networkId,
+                  this.props.isTx
+                );
                 if (this.props.children) {
                   this.children.focus();
                 }
               }
             : null
         }
-        title={this.props.copy ? "Click to copy" : ""}
+        title={this.props.clickable ? "Click to copy" : ""}
       >
         {this.props.children
           ? this.props.children
@@ -86,6 +92,32 @@ export default class HashColor extends React.Component {
     textField.remove();
   }
 
+  static viewOnEtherscan(hash, networkId, isTx) {
+    let url;
+    switch (networkId) {
+      case 4:
+        url = isTx
+          ? `https://rinkeby.etherscan.io/tx/${hash}`
+          : `https://rinkeby.etherscan.io/address/${hash}`;
+        break;
+      case 3:
+        url = isTx
+          ? `https://ropsten.etherscan.io/tx/${hash}`
+          : `https://ropsten.etherscan.io/address/${hash}`;
+        break;
+      case 42:
+        url = isTx
+          ? `https://kovan.etherscan.io/tx/${hash}`
+          : `https://kovan.etherscan.io/address/${hash}`;
+        break;
+      default:
+        HashColor.copyToClipboard(hash);
+        return;
+    }
+    const win = window.open(url, "_blank");
+    win.focus();
+  }
+
   static color(addr) {
     return `hsl(${Math.abs(HashColor.toHashCode(addr) % 360)}, 90%, 35%)`;
   }
@@ -102,15 +134,18 @@ export default class HashColor extends React.Component {
 }
 
 HashColor.propTypes = {
-  copy: PropTypes.bool,
+  isTx: PropTypes.bool,
+  networkId: PropTypes.number,
+  clickable: PropTypes.bool,
   color: PropTypes.bool,
   children: PropTypes.element,
   hashee: PropTypes.string,
-  lines: PropTypes.number
+  lines: PropTypes.number,
+  hashType: PropTypes.string
 };
 
 HashColor.defaultProps = {
-  copy: true,
+  clickable: true,
   color: true,
   lines: 1
 };

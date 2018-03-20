@@ -14,6 +14,7 @@ import {
   getRevokedTx,
   revokeCertificate
 } from "../reducers/admin";
+import { getNetworkId } from "../reducers/application";
 import StoreDeployBlock from "./StoreDeployBlock";
 import StoreIssueBlock from "./StoreIssueBlock";
 import StoreRevokeBlock from "./StoreRevokeBlock";
@@ -45,7 +46,6 @@ class AdminContainer extends Component {
     this.refreshCurrentAddress = this.refreshCurrentAddress.bind(this);
     this.handleStoreDeploy = this.handleStoreDeploy.bind(this);
     this.storeAddressOnChange = this.storeAddressOnChange.bind(this);
-    this.storeAddressUpdate = this.storeAddressUpdate.bind(this);
     this.handleCertificateIssue = this.handleCertificateIssue.bind(this);
     this.handleCertificateRevoke = this.handleCertificateRevoke.bind(this);
 
@@ -59,10 +59,8 @@ class AdminContainer extends Component {
   }
 
   storeAddressOnChange(event) {
-    this.setState({ localStoreAddress: event.target.value });
-  }
-
-  storeAddressUpdate(address = this.state.localStoreAddress) {
+    const address = event.target.value;
+    this.setState({ localStoreAddress: address });
     if (web3.utils.isAddress(address)) {
       this.props.updateStoreAddress(address);
     }
@@ -85,7 +83,13 @@ class AdminContainer extends Component {
   }
 
   render() {
-    const { adminAddress, storeAddress, issuedTx, revokedTx } = this.props;
+    const {
+      adminAddress,
+      storeAddress,
+      issuedTx,
+      revokedTx,
+      networkId
+    } = this.props;
 
     return (
       <div>
@@ -125,7 +129,7 @@ class AdminContainer extends Component {
             </h3>
 
             <div className="pa2">
-              <HashColor hashee={adminAddress} />
+              <HashColor hashee={adminAddress} networkId={networkId} />
             </div>
           </div>
 
@@ -133,12 +137,8 @@ class AdminContainer extends Component {
             <h3>Store address</h3>
             <HashColorInput
               type="address"
-              hashee={storeAddress}
               value={this.state.localStoreAddress}
-              onChange={e => {
-                this.storeAddressOnChange(e);
-                this.storeAddressUpdate(e.target.value);
-              }}
+              onChange={this.storeAddressOnChange}
               placeholder="Enter existing (0x…), or deploy new instance"
             />
           </div>
@@ -169,6 +169,7 @@ class AdminContainer extends Component {
             <TabPanel>
               {storeAddress ? (
                 <StoreIssueBlock
+                  networkId={networkId}
                   issuedTx={issuedTx}
                   adminAddress={adminAddress}
                   storeAddress={storeAddress}
@@ -182,6 +183,7 @@ class AdminContainer extends Component {
             <TabPanel>
               {storeAddress ? (
                 <StoreRevokeBlock
+                  networkId={networkId}
                   revokedTx={revokedTx}
                   adminAddress={adminAddress}
                   storeAddress={storeAddress}
@@ -202,7 +204,8 @@ const mapStateToProps = store => ({
   adminAddress: getAdminAddress(store),
   storeAddress: getStoreAddress(store),
   issuedTx: getIssuedTx(store),
-  revokedTx: getRevokedTx(store)
+  revokedTx: getRevokedTx(store),
+  networkId: getNetworkId(store)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -224,5 +227,6 @@ AdminContainer.propTypes = {
   storeAddress: PropTypes.string,
   issuedTx: PropTypes.string,
   revokedTx: PropTypes.string,
-  revokeCertificate: PropTypes.func
+  revokeCertificate: PropTypes.func,
+  networkId: PropTypes.number
 };
