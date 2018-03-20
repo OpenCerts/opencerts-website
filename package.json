@@ -8,8 +8,8 @@
     "build": "next build",
     "build:static": "next build && next export",
     "start": "next build && next start",
-    "deploy": "rm -rf out && yarn build:static && touch out/.nojekyll && gh-pages --dotfiles --dist out",
-    "deploy:prebuilt": "touch out/.nojekyll && gh-pages --dotfiles --dist out"
+    "deploy": "rm -rf out && yarn build:static && yarn deploy:prebuilt",
+    "deploy:prebuilt": "touch out/.nojekyll && cp docs/exampleIssuers.json out/exampleIssuers.json && gh-pages --dotfiles --dist out"
   },
   "dependencies": {
     "@govtechsg/open-certificate": "^1.0.1",
