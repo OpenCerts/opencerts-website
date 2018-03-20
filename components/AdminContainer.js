@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import web3 from "web3";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import {
   loadAdminAddress,
   getAdminAddress,
@@ -15,6 +17,27 @@ import {
 import StoreDeployBlock from "./StoreDeployBlock";
 import StoreIssueBlock from "./StoreIssueBlock";
 import StoreRevokeBlock from "./StoreRevokeBlock";
+import HashColor from "./HashColor";
+import HashColorInput from "./HashColorInput";
+
+const tabStyle = (
+  <style jsx>
+    {`
+      .tab {
+        cursor: pointer;
+      }
+
+      .tab:hover {
+        background-color: gold;
+      }
+
+      .tab[aria-selected="true"] {
+        color: white;
+        background-color: black;
+      }
+    `}
+  </style>
+);
 
 class AdminContainer extends Component {
   constructor(props) {
@@ -27,7 +50,7 @@ class AdminContainer extends Component {
     this.handleCertificateRevoke = this.handleCertificateRevoke.bind(this);
 
     this.state = {
-      updatedStoreAddress: ""
+      localStoreAddress: ""
     };
   }
 
@@ -36,11 +59,13 @@ class AdminContainer extends Component {
   }
 
   storeAddressOnChange(event) {
-    this.setState({ updatedStoreAddress: event.target.value });
+    this.setState({ localStoreAddress: event.target.value });
   }
 
-  storeAddressUpdate() {
-    this.props.updateStoreAddress(this.state.updatedStoreAddress);
+  storeAddressUpdate(address = this.state.localStoreAddress) {
+    if (web3.utils.isAddress(address)) {
+      this.props.updateStoreAddress(address);
+    }
   }
 
   handleStoreDeploy(payload) {
@@ -61,48 +86,113 @@ class AdminContainer extends Component {
 
   render() {
     const { adminAddress, storeAddress, issuedTx, revokedTx } = this.props;
+
     return (
       <div>
-        <h1>Certificate Store Administrator</h1>
-        <h2>Settings</h2>
-        <div>
-          <div className="dib" onClick={this.refreshCurrentAddress}>
-            <i className="fas fa-sync-alt" />
+        <h1>Admin</h1>
+        <div className="flex bb pb3">
+          <div className="w-50">
+            <h3>
+              Current account{" "}
+              <div
+                style={{ cursor: "pointer" }}
+                className="dib click-to-refresh"
+                onClick={this.refreshCurrentAddress}
+                title="Try to grab current account"
+                tabIndex={1}
+              >
+                <i className="fas fa-sync-alt" />
+                <style jsx>{`
+                  .click-to-refresh {
+                    transform: rotateZ(0deg);
+                    transition: transform 1.5s ease-in;
+                  }
+
+                  .click-to-refresh:hover {
+                    color: #e7040f;
+                  }
+
+                  .click-to-refresh:active {
+                    transform: rotateZ(-360deg);
+                    transition: transform 0s;
+                  }
+
+                  .click-to-refresh:focus {
+                    outline: none;
+                  }
+                `}</style>
+              </div>
+            </h3>
+
+            <div className="pa2">
+              <HashColor hashee={adminAddress} />
+            </div>
           </div>
-          Admin Address:
-          {adminAddress}
+
+          <div className="w-50">
+            <h3>Store address</h3>
+            <HashColorInput
+              type="address"
+              hashee={storeAddress}
+              value={this.state.localStoreAddress}
+              onChange={e => {
+                this.storeAddressOnChange(e);
+                this.storeAddressUpdate(e.target.value);
+              }}
+              placeholder="Enter existing (0x…), or deploy new instance"
+            />
+          </div>
         </div>
-        <div>
-          Store Address:
-          {storeAddress}
-        </div>
-        <div>
-          Set Store Address Manually:
-          <input
-            value={this.updatedStoreAddress}
-            className="w-100"
-            onChange={this.storeAddressOnChange}
-          />
-          <button onClick={this.storeAddressUpdate}>
-            Change Store Address
-          </button>
-        </div>
-        <StoreDeployBlock
-          adminAddress={adminAddress}
-          handleStoreDeploy={this.handleStoreDeploy}
-        />
-        <StoreIssueBlock
-          issuedTx={issuedTx}
-          adminAddress={adminAddress}
-          storeAddress={storeAddress}
-          handleCertificateIssue={this.handleCertificateIssue}
-        />
-        <StoreRevokeBlock
-          revokedTx={revokedTx}
-          adminAddress={adminAddress}
-          storeAddress={storeAddress}
-          handleCertificateRevoke={this.handleCertificateRevoke}
-        />
+
+        <Tabs className="flex flex-row w-100">
+          <TabList className="flex flex-column w-30 list pa0">
+            <Tab className="tab pl3">
+              <h3>Deploy new instance</h3>
+              {tabStyle}
+            </Tab>
+            <Tab className="tab pl3">
+              <h3>Issue certificate batch</h3>
+            </Tab>
+            <Tab className="tab pl3">
+              <h3>Revoke certificate</h3>
+            </Tab>
+          </TabList>
+
+          <div className="w-70 pa4 pl5">
+            <TabPanel>
+              <StoreDeployBlock
+                adminAddress={adminAddress}
+                handleStoreDeploy={this.handleStoreDeploy}
+              />
+            </TabPanel>
+
+            <TabPanel>
+              {storeAddress ? (
+                <StoreIssueBlock
+                  issuedTx={issuedTx}
+                  adminAddress={adminAddress}
+                  storeAddress={storeAddress}
+                  handleCertificateIssue={this.handleCertificateIssue}
+                />
+              ) : (
+                <div className="red">Enter a store address first.</div>
+              )}
+            </TabPanel>
+
+            <TabPanel>
+              {storeAddress ? (
+                <StoreRevokeBlock
+                  revokedTx={revokedTx}
+                  adminAddress={adminAddress}
+                  storeAddress={storeAddress}
+                  handleCertificateRevoke={this.handleCertificateRevoke}
+                />
+              ) : (
+                <div className="red">Enter a store address first.</div>
+              )}
+            </TabPanel>
+          </div>
+        </Tabs>
       </div>
     );
   }

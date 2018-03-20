@@ -41,25 +41,30 @@ class StoreDeployBlock extends Component {
 
   render() {
     return (
-      <div>
-        <h2>Deploy</h2>
-        <div>
-          Issuer Name: <br />
-          <input
-            type="text"
-            onChange={this.onNameChange}
-            value={this.state.issuerName}
-          />
+      <div className="w-100">
+        <div className="mb4">
+          <div>
+            Issuer Name<br />
+            <input
+              type="text"
+              onChange={this.onNameChange}
+              value={this.state.issuerName}
+              size={50}
+              required
+            />
+          </div>
+          <div className="mt2">
+            Issuer URL<br />
+            <input
+              type="text"
+              onChange={this.onUrlChange}
+              value={this.state.issuerUrl}
+              size={50}
+              required
+            />
+          </div>
         </div>
-        <div>
-          Issuer URL: <br />
-          <input
-            type="text"
-            onChange={this.onUrlChange}
-            value={this.state.issuerUrl}
-          />
-        </div>
-        <button onClick={this.onDeployClick}>Deploy!</button>
+        <button onClick={this.onDeployClick}>Deploy</button>
       </div>
     );
   }

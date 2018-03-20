@@ -74,6 +74,9 @@ const renderBlockHeader = ({
   } else if (!verifying && !hasError) {
     text = "Verified (with warnings)";
     color = "bg-orange";
+  } else {
+    text = "Bad certificate";
+    color = "bg-red";
   }
 
   return (
@@ -125,7 +128,7 @@ class CertificateVerifyBlock extends React.Component {
           if (certificateIssuerVerifying)
             return {
               severity: SEVERITY.WARN,
-              message: "Verifying issuer's identity..."
+              message: "Verifying issuer's identity…"
             };
           return isIssuerVerified
             ? {
@@ -141,7 +144,7 @@ class CertificateVerifyBlock extends React.Component {
           if (certificateHashVerifying)
             return {
               severity: SEVERITY.WARN,
-              message: "Verifying certificate hash..."
+              message: "Verifying certificate hash…"
             };
           return isHashVerified
             ? { severity: SEVERITY.INFO, message: "Valid certificate hash" }
@@ -154,7 +157,7 @@ class CertificateVerifyBlock extends React.Component {
           if (certificateIssuedVerifying)
             return {
               severity: SEVERITY.WARN,
-              message: "Verifying certificate issue status..."
+              message: "Verifying certificate issue status…"
             };
           return isIssued
             ? { severity: SEVERITY.INFO, message: "Issued on Ethereum network" }
@@ -167,7 +170,7 @@ class CertificateVerifyBlock extends React.Component {
           if (certificateNotRevokedVerifying)
             return {
               severity: SEVERITY.WARN,
-              message: "Verifying certificate revoke status..."
+              message: "Verifying certificate revoke status…"
             };
           return isNotRevoked
             ? { severity: SEVERITY.INFO, message: "Certificate is not revoked" }

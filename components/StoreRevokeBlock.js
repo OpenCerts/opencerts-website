@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import HashColor from "./HashColor";
+import HashColorInput from "./HashColorInput";
 
 class StoreRevokeBlock extends Component {
   constructor(props) {
@@ -28,29 +30,35 @@ class StoreRevokeBlock extends Component {
 
   onRevokeClick() {
     const { adminAddress, storeAddress, handleCertificateRevoke } = this.props;
-    handleCertificateRevoke({
-      storeAddress,
-      fromAddress: adminAddress,
-      reason: Number(this.state.reason),
-      certificateHash: this.state.certificateHash
-    });
+
+    const yes = window.confirm("Are you sure you want to revoke this hash?"); // eslint-disable-line
+
+    if (yes) {
+      handleCertificateRevoke({
+        storeAddress,
+        fromAddress: adminAddress,
+        reason: Number(this.state.reason),
+        certificateHash: this.state.certificateHash
+      });
+    }
   }
 
   render() {
     const { revokedTx } = this.props;
     return (
       <div>
-        <h2>Revoke Certificate</h2>
         <div>
-          Certificate Hash: <br />
-          <input
-            type="text"
+          Certificate hash to revoke
+          <HashColorInput
+            type="hash"
+            hashee={this.state.certificateHash}
             onChange={this.onHashChange}
             value={this.state.certificateHash}
+            placeholder="0x…"
           />
         </div>
-        <div>
-          Reason: <br />
+        <div className="mt2">
+          Reason<br />
           <select value={this.state.reason} onChange={this.onReasonChange}>
             <option value="1">Issued in error</option>
             <option value="2">Change in content</option>
@@ -58,8 +66,19 @@ class StoreRevokeBlock extends Component {
             <option value="0">Others</option>
           </select>
         </div>
-        {revokedTx ? <div>Revoked: {revokedTx}</div> : null}
-        <button onClick={this.onRevokeClick}>Revoke!</button>
+        <button className="mt4 danger" onClick={this.onRevokeClick}>
+          <i className="fas fa-exclamation-triangle" /> Revoke
+        </button>
+
+        {revokedTx ? (
+          <div className="mt5">
+            <p>Revoked certificates.</p>
+            <div>
+              Transaction ID
+              <HashColor hashee={revokedTx} />
+            </div>
+          </div>
+        ) : null}
       </div>
     );
   }

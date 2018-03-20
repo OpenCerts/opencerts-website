@@ -37,7 +37,7 @@ const filterValueButton = (path, editable, handleFilter) => {
   return (
     <div
       onClick={() => handleFilter(path)}
-      className="dib dim pointer black-30"
+      className="dib hover-red pointer black-30"
     >
       <i className="fas fa-times-circle" />
     </div>
@@ -144,6 +144,22 @@ const CertificateViewer = ({
 
   return (
     <div>
+      <div
+        className="bg-purple white tc pa3"
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          display: editable ? "block" : "none"
+        }}
+      >
+        <i className="fas fa-user-secret" />
+        &nbsp;Privacy filtering enabled
+        <a className="white pointer hover fr dim" onClick={toggleEditable}>
+          <i className="fas fa-times" />
+        </a>
+      </div>
       <div className="w-100 cf">
         <div className="fl w-70 pr3">
           {renderHeader(name, issuer)}
@@ -165,7 +181,7 @@ const CertificateViewer = ({
             </div>
           </div>
         </div>
-        <div className="fl w-30">{verify || <div>Verify</div>}</div>
+        <div className="fl w-30 mt1">{verify || <div>Verify</div>}</div>
       </div>
 
       <h3>Transcript</h3>
@@ -177,23 +193,27 @@ const CertificateViewer = ({
       )}
 
       <h3>Details</h3>
-      {criteria}
+      <p>{criteria}</p>
 
       <div className="mt4 fr">
         <a
-          className="f6 link dim ba bw1 ph3 pv2 mb2 dib black ml2 pointer"
+          className={`button hover-bg-light-purple ${
+            editable ? "white bg-purple" : ""
+          }`}
           onClick={toggleEditable}
         >
-          TogglePrivacy Filter
+          <i className="fas fa-user-secret" />
+          &nbsp;{editable ? "Stop" : "Start"} privacy filtering
         </a>
         <a
-          className="f6 link dim ba bw1 ph3 pv2 mb2 dib black ml2"
+          className="button ml3"
           href={`data:application/text,${encodeURI(
             JSON.stringify(certificate, null, 2)
           )}`}
           download="Certificate.json"
         >
-          Download Certificate
+          <i className="fas fa-download" />
+          &nbsp;Download certificate
         </a>
       </div>
     </div>

@@ -23,6 +23,7 @@ class AdminContainer extends Component {
     return (
       <div className="fr ba">
         <select
+          className="pa2"
           value={this.props.network}
           onChange={this.handleNetworkChange}
           style={{

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import HashColor from "./HashColor";
+import HashColorInput from "./HashColorInput";
 
 class StoreIssueBlock extends Component {
   constructor(props) {
@@ -30,17 +32,28 @@ class StoreIssueBlock extends Component {
   render() {
     return (
       <div>
-        <h2>Issue Certificate</h2>
         <div>
-          Certificate Hash: <br />
-          <input
-            type="text"
+          Issue certificates with the Merkle root hash
+          <HashColorInput
+            type="hash"
+            hashee={this.state.certificateHash}
             onChange={this.onHashChange}
             value={this.state.certificateHash}
+            placeholder="0x…"
           />
         </div>
-        {this.props.issuedTx ? <div>Issued: {this.props.issuedTx}</div> : null}
-        <button onClick={this.onIssueClick}>Issue!</button>
+        <button className="mt4" onClick={this.onIssueClick}>
+          Issue
+        </button>
+
+        {this.props.issuedTx ? (
+          <div className="mt5">
+            <p>Batch has been issued.</p>
+            <div>
+              Transaction ID <HashColor hashee={this.props.issuedTx} />
+            </div>
+          </div>
+        ) : null}
       </div>
     );
   }

@@ -7,7 +7,7 @@ import NetworkSelectorContainer from "../components/NetworkSelectorContainer";
 const VerifierPage = props => (
   <div className="min-vh-100 pv5">
     <Meta />
-    <div className="mw9 mw8-ns center bg-white pa3 ph5-ns br3 pv5">
+    <div className="mw9 mw8-ns center bg-white pa4 ph5-ns br3 pv5">
       <NetworkSelectorContainer />
       <AdminContainer {...props} />
     </div>
