@@ -12,7 +12,7 @@ yarn
 
 If your browser has injected web3 (ie. through Metamask), the application will connect to the injected web3 and will be on the network that provider is connected to. Otherwise, the application will attempt to connect to the local ethereum node at port `9545`.
 
-Setup 1: 
+Setup 1:
 
 - Install Metamask
 - Run Ganache CLI/UI
@@ -26,6 +26,7 @@ Setup 2:
 
 ```bash
 yarn dev
+yarn lint
 ```
 
 ## Running in production mode
@@ -42,3 +43,14 @@ TBC
 # certificate-web-ui
 
 Example web-based verifier for `certificate-application` and `certificate-contract`.
+
+## Deploying to GitHub pages
+
+[https://govtechsg.github.io/certificate-web-ui/](https://govtechsg.github.io/certificate-web-ui/)
+
+```
+NODE_ENV=production yarn deploy
+
+NODE_ENV=production yarn build:static
+yarn deploy:prebuilt
+```
