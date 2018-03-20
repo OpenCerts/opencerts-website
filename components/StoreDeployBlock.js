@@ -35,10 +35,6 @@ class StoreDeployBlock extends Component {
     });
   }
 
-  refreshCurrentAddress() {
-    this.props.loadAdminAddress();
-  }
-
   render() {
     return (
       <div className="w-100">

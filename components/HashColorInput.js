@@ -14,10 +14,10 @@ const VALIDATIONS = {
 
 const HashColorInput = props => {
   const { size, maxLength, validityFn } = VALIDATIONS[props.type]; // eslint-disable-line
-  const isValid = validityFn(props.hashee);
+  const isValid = validityFn(props.value);
 
   return (
-    <HashColor hashee={props.hashee} copy={false} color={isValid}>
+    <HashColor hashee={props.value} clickable={false} color={isValid}>
       <input
         type="text"
         onChange={props.onChange}
@@ -39,7 +39,6 @@ const HashColorInput = props => {
 
 HashColorInput.propTypes = {
   type: PropTypes.string,
-  hashee: PropTypes.string,
   value: PropTypes.any,
   onChange: PropTypes.func,
   placeholder: PropTypes.string

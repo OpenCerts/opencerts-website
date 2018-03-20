@@ -50,7 +50,12 @@ class StoreIssueBlock extends Component {
           <div className="mt5">
             <p>Batch has been issued.</p>
             <div>
-              Transaction ID <HashColor hashee={this.props.issuedTx} />
+              Transaction ID{" "}
+              <HashColor
+                hashee={this.props.issuedTx}
+                networkId={this.props.networkId}
+                isTx
+              />
             </div>
           </div>
         ) : null}
@@ -65,5 +70,6 @@ StoreIssueBlock.propTypes = {
   issuedTx: PropTypes.string,
   storeAddress: PropTypes.string,
   adminAddress: PropTypes.string,
-  handleCertificateIssue: PropTypes.func
+  handleCertificateIssue: PropTypes.func,
+  networkId: PropTypes.number
 };
