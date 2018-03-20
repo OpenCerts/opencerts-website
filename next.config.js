@@ -7,5 +7,5 @@ module.exports = {
       "/admin": { page: "/admin" }
     };
   },
-  assetPrefix: isProd ? "." : ""
+  assetPrefix: isProd ? "/certificate-web-ui" : ""
 };
