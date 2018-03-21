@@ -1,24 +1,30 @@
 import PropTypes from "prop-types";
 
-const Profile = props => (
-  <div>
-    {props.title ? <h3>{props.title}</h3> : null}
-    <table className="w-100">
-      <tbody>
-        {props.identities && props.identities.filter
-          ? props.identities.filter(p => p.identity != null).map((p, i) => (
-              <tr key={i}>
-                <td className="w-20" style={{ verticalAlign: "top" }}>
-                  {p.type}
-                </td>
-                <td style={{ wordBreak: "break-all" }}>{p.identity}</td>
-              </tr>
-            ))
-          : null}
-      </tbody>
-    </table>
-  </div>
-);
+const Profile = props => {
+  const { title, identities } = props;
+  let identitiesToRender = identities;
+
+  if (!identities) return null;
+  if (!identities.length) identitiesToRender = [identities];
+
+  return (
+    <div>
+      {title ? <h3>{title}</h3> : null}
+      <table className="w-100">
+        <tbody>
+          {identitiesToRender.filter(p => p.identity != null).map((p, i) => (
+            <tr key={i}>
+              <td className="w-20" style={{ verticalAlign: "top" }}>
+                {p.type}
+              </td>
+              <td style={{ wordBreak: "break-all" }}>{p.identity}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
 Profile.propTypes = {
   title: PropTypes.string,
