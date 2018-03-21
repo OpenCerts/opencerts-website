@@ -1,16 +1,26 @@
 # Certificate Web UI
 
-## Setup
+[![Build Status](https://travis-ci.org/GovTechSG/certificate-web-ui.svg?branch=master)](https://travis-ci.org/GovTechSG/certificate-web-ui)
 
-### Installing dependencies
+See also:
+
+* [certificate-schema](https://github.com/GovTechSG/certificate-schema)
+* [certificate-contract](https://github.com/GovTechSG/certificate-contract)
+* [certificate-cli](https://github.com/GovTechSG/certificate-cli)
+
+## Development
 
 ```bash
 yarn
+yarn dev
+yarn lint
+
+yarn start # runs a production server
 ```
 
 ### Setting up web3
 
-If your browser has injected web3 (ie. through Metamask), the application will connect to the injected web3 and will be on the network that provider is connected to. Otherwise, the application will attempt to connect to the local ethereum node at port `9545`.
+If your browser has injected web3 (ie. through Metamask), the application will connect to the injected web3 and will be on the network that provider is connected to. Otherwise, the application will attempt to connect to the local Ethereum node at port `9545`.
 
 Setup 1:
 
@@ -21,36 +31,3 @@ Setup 1:
 Setup 2:
 
 - Run Ganache CLI/UI on port `9545`
-
-## Running in development mode
-
-```bash
-yarn dev
-yarn lint
-```
-
-## Running in production mode
-
-```bash
-yarn start
-```
-
-## Test
-
-```bash
-TBC
-```
-# certificate-web-ui
-
-Example web-based verifier for `certificate-application` and `certificate-contract`.
-
-## Deploying to GitHub pages
-
-[https://govtechsg.github.io/certificate-web-ui/](https://govtechsg.github.io/certificate-web-ui/)
-
-```
-NODE_ENV=production yarn deploy
-
-NODE_ENV=production yarn build:static
-yarn deploy:prebuilt
-```
