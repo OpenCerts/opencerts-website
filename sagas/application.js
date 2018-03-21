@@ -1,16 +1,21 @@
-import { put, select } from "redux-saga/effects";
-import { getNetwork, types } from "../reducers/application";
-import getWeb3 from "../services/web3/getWeb3";
+import { put, select, take } from "redux-saga/effects";
+import { getNetwork, getNetworkPending, types } from "../reducers/application";
+import { setNewWeb3, getCurrentWeb3 } from "../services/web3/getWeb3";
 
-function* getSelectedWeb3() {
+export function* getSelectedWeb3(getNew = false) {
+  const networkPending = yield select(getNetworkPending);
+  if (networkPending && !getNew) {
+    // block if there's a network update pending
+    yield take(types.UPDATE_NETWORK_ID_SUCCESS);
+  }
   const network = yield select(getNetwork);
-  const web3 = yield getWeb3(network);
+  const web3 = yield getNew ? setNewWeb3(network) : getCurrentWeb3(); // update web3 only if requested specifically
   return web3;
 }
 
 export function* updateNetworkId() {
   try {
-    const web3 = yield getSelectedWeb3();
+    const web3 = yield getSelectedWeb3(true);
     const networkId = yield web3.eth.net.getId();
 
     let networkIdVerbose;
@@ -34,7 +39,6 @@ export function* updateNetworkId() {
       default:
         networkIdVerbose = `Custom Network: ${networkId}`;
     }
-
     yield put({
       type: types.UPDATE_NETWORK_ID_SUCCESS,
       payload: {

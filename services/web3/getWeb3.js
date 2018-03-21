@@ -12,6 +12,9 @@ export const types = {
   MOCK: "MOCK"
 };
 
+let web3Instance;
+let web3InstanceType;
+
 async function loadWeb3Ledger(mainnet = true) {
   let { web3 } = window;
   const networkId = mainnet ? 1 : 3;
@@ -67,34 +70,41 @@ async function loadWeb3Mock() {
 
 async function resolveWeb3(resolve, reject, t = types.INJECTED, config) {
   try {
-    let web3 = null;
     switch (t) {
       case types.INJECTED:
-        web3 = await loadWeb3Injected();
+        web3Instance = await loadWeb3Injected();
         break;
       case types.LEDGER_MAIN:
-        web3 = await loadWeb3Ledger(true);
+        web3Instance = await loadWeb3Ledger(true);
         break;
       case types.LEDGER_ROPSTEN:
-        web3 = await loadWeb3Ledger(false);
+        web3Instance = await loadWeb3Ledger(false);
         break;
       case types.CUSTOM:
-        web3 = await loadWeb3CustomRpc(config);
+        web3Instance = await loadWeb3CustomRpc(config);
         break;
       case types.MOCK:
-        web3 = await loadWeb3Mock();
+        web3Instance = await loadWeb3Mock();
         break;
       default:
-        web3 = await loadWeb3Injected();
+        web3Instance = await loadWeb3Injected();
     }
-    resolve(web3);
+    web3InstanceType = t;
+    resolve(web3Instance);
   } catch (e) {
     reject(e);
   }
 }
 
-export default (t, config) =>
-  new Promise((resolve, reject) => {
+export function setNewWeb3(t, config) {
+  if (
+    web3InstanceType === types.LEDGER_MAIN ||
+    web3InstanceType === types.LEDGER_ROPSTEN
+  ) {
+    // we need to kill the engine if the previous web3 instance has a ledger subprovider
+    web3Instance.currentProvider.stop();
+  }
+  return new Promise((resolve, reject) => {
     // Wait for loading completion to avoid race conditions with web3 injection timing.
     window.addEventListener(`load`, () => {
       resolveWeb3(resolve, reject, t, config);
@@ -104,3 +114,13 @@ export default (t, config) =>
       resolveWeb3(resolve, reject, t, config);
     }
   });
+}
+
+export function getCurrentWeb3(t, config) {
+  if (web3Instance) {
+    return new Promise(resolve => {
+      resolve(web3Instance);
+    });
+  }
+  return setNewWeb3(t, config);
+}

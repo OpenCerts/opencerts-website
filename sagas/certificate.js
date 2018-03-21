@@ -1,18 +1,12 @@
 import _ from "lodash";
-import { put, all, call, select } from "redux-saga/effects";
+import { put, all, call } from "redux-saga/effects";
 import { Certificate } from "@govtechsg/open-certificate";
 import { types } from "../reducers/certificate";
-import { getNetwork } from "../reducers/application";
-import getWeb3 from "../services/web3/getWeb3";
 import CertificateStoreDefinition from "../services/contracts/CertificateStore.json";
 import fetchIssuers from "../services/issuers";
 import { combinedHash } from "../utils";
 
-function* getSelectedWeb3() {
-  const network = yield select(getNetwork);
-  const web3 = yield getWeb3(network);
-  return web3;
-}
+import { getSelectedWeb3 } from "./application";
 
 export function* loadCertificateContract({ payload }) {
   const contractStoreAddress = _.get(

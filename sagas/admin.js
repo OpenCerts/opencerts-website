@@ -1,19 +1,13 @@
-import { put, select } from "redux-saga/effects";
+import { put } from "redux-saga/effects";
 import { types } from "../reducers/admin";
-import { getNetwork } from "../reducers/application";
 
-import getWeb3 from "../services/web3/getWeb3";
 import getAccounts from "../services/web3/getAccounts";
 import CertificateStoreDefinition from "../services/contracts/CertificateStore.json";
 
+import { getSelectedWeb3 } from "./application";
+
 // TODO do a better estimate
 const DEFAULT_GAS = 1000000;
-
-function* getSelectedWeb3() {
-  const network = yield select(getNetwork);
-  const web3 = yield getWeb3(network);
-  return web3;
-}
 
 export function* loadAdminAddress() {
   try {

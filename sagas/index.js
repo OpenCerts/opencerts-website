@@ -24,7 +24,15 @@ export default function* rootSaga() {
       certificateSaga.verifyCertificate
     ),
     takeEvery(adminType.LOADING_ADMIN_ADDRESS, adminSaga.loadAdminAddress),
-    takeEvery(adminType.LOADING_ADMIN_ADDRESS, applicationSaga.updateNetworkId),
+    takeEvery(applicationType.UPDATE_WEB3, applicationSaga.updateNetworkId),
+    takeEvery(
+      applicationType.UPDATE_NETWORK_ID,
+      applicationSaga.updateNetworkId
+    ),
+    takeEvery(
+      applicationType.UPDATE_NETWORK_ID_SUCCESS,
+      adminSaga.loadAdminAddress
+    ),
     takeEvery(adminType.DEPLOYING_STORE, adminSaga.deployStore),
     takeEvery(adminType.ISSUING_CERTIFICATE, adminSaga.issueCertificate),
     takeEvery(adminType.REVOKING_CERTIFICATE, adminSaga.revokeCertificate),

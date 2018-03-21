@@ -4,7 +4,8 @@ export const initialState = {
   network: Web3Types.INJECTED,
   networkId: null,
   networkIdVerbose: "",
-  customRpc: ""
+  customRpc: "",
+  networkUpdatePending: true
 };
 
 // Actions
@@ -28,19 +29,22 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         networkId: null,
-        networkIdVerbose: ""
+        networkIdVerbose: "",
+        networkUpdatePending: true
       };
     case types.UPDATE_NETWORK_ID_SUCCESS:
       return {
         ...state,
         networkId: action.payload.networkId,
-        networkIdVerbose: action.payload.networkIdVerbose
+        networkIdVerbose: action.payload.networkIdVerbose,
+        networkUpdatePending: false
       };
     case types.UPDATE_NETWORK_ID_FAILURE:
       return {
         ...state,
         networkId: null,
-        networkIdVerbose: ""
+        networkIdVerbose: "",
+        networkUpdatePending: false
       };
     default:
       return state;
@@ -64,6 +68,10 @@ export function updateNetworkId() {
 // Selectors
 export function getNetwork(store) {
   return store.application.network;
+}
+
+export function getNetworkPending(store) {
+  return store.application.networkUpdatePending;
 }
 
 export function getCustomRpc(store) {

@@ -14,7 +14,7 @@ import {
   getRevokedTx,
   revokeCertificate
 } from "../reducers/admin";
-import { getNetworkId } from "../reducers/application";
+import { updateNetworkId, getNetworkId } from "../reducers/application";
 import StoreDeployBlock from "./StoreDeployBlock";
 import StoreIssueBlock from "./StoreIssueBlock";
 import StoreRevokeBlock from "./StoreRevokeBlock";
@@ -55,6 +55,7 @@ class AdminContainer extends Component {
   }
 
   componentWillMount() {
+    this.props.updateNetworkId();
     this.props.loadAdminAddress();
   }
 
@@ -210,6 +211,7 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
   loadAdminAddress: payload => dispatch(loadAdminAddress(payload)),
+  updateNetworkId: () => dispatch(updateNetworkId()),
   deployStore: payload => dispatch(deployStore(payload)),
   issueCertificate: payload => dispatch(issueCertificate(payload)),
   revokeCertificate: payload => dispatch(revokeCertificate(payload)),
@@ -219,6 +221,7 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(AdminContainer);
 
 AdminContainer.propTypes = {
+  updateNetworkId: PropTypes.func,
   loadAdminAddress: PropTypes.func,
   deployStore: PropTypes.func,
   issueCertificate: PropTypes.func,
