@@ -29,6 +29,7 @@ import {
 import CertificateDropzone from "./CertificateDropzone";
 import CertificateViewer from "./CertificateViewer";
 import CertificateVerifyBlock from "./CertificateVerifyBlock";
+import { updateNetworkId } from "../reducers/application";
 
 class CertificateVerifierContainer extends Component {
   constructor(props) {
@@ -44,6 +45,10 @@ class CertificateVerifierContainer extends Component {
     this.handleCertificateVerify = this.handleCertificateVerify.bind(this);
     this.handleToggleEditable = this.handleToggleEditable.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.updateNetworkId();
   }
 
   handleToggleEditable() {
@@ -72,6 +77,8 @@ class CertificateVerifierContainer extends Component {
     });
   }
 
+
+  
   renderCertificateDropzone() {
     return (
       <div>
@@ -143,6 +150,7 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  updateNetworkId: () => dispatch(updateNetworkId()),
   updateCertificate: payload => dispatch(updateCertificate(payload)),
   verifyCertificate: payload => dispatch(verifyCertificate(payload)),
   updateFilteredCertificate: payload =>
@@ -154,6 +162,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 );
 
 CertificateVerifierContainer.propTypes = {
+  updateNetworkId: PropTypes.func,
   updateFilteredCertificate: PropTypes.func,
   updateCertificate: PropTypes.func,
   certificate: PropTypes.object,
