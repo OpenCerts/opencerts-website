@@ -138,7 +138,7 @@ const CertificateViewer = ({
 }) => {
   const {
     badge: { name, criteria, issuer, evidence, evidencePrivacyFilter },
-    profile,
+    recipient,
     issuedOn
   } = certificate;
 
@@ -165,7 +165,7 @@ const CertificateViewer = ({
           {renderHeader(name, issuer)}
 
           <div className="mb3">
-            <Profile title="Issued to" identities={profile} />
+            <Profile title="Issued to" identities={recipient} />
 
             <Profile
               title="Issued by"
