@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@govtechsg/open-certificate@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@govtechsg/open-certificate/-/open-certificate-1.0.1.tgz#a3b62e55b46359d1fb96229dcb249937dc24462a"
+"@govtechsg/open-certificate@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@govtechsg/open-certificate/-/open-certificate-1.0.4.tgz#b3ff5586cd686646ff0ba8df1ec05df87ae6099f"
   dependencies:
     ethereumjs-util "^5.1.2"
     faker "^4.1.0"

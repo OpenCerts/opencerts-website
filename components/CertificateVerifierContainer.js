@@ -77,8 +77,6 @@ class CertificateVerifierContainer extends Component {
     });
   }
 
-
-  
   renderCertificateDropzone() {
     return (
       <div>

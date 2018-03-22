@@ -12,7 +12,7 @@
     "deploy:prebuilt": "touch out/.nojekyll && cp docs/exampleIssuers.json out/exampleIssuers.json && gh-pages --dotfiles --dist out"
   },
   "dependencies": {
-    "@govtechsg/open-certificate": "^1.0.1",
+    "@govtechsg/open-certificate": "^1.0.4",
     "eslint-plugin-react": "^7.7.0",
     "ethereumjs-util": "^5.1.5",
     "ledger-wallet-provider": "^2.0.1-beta.2",

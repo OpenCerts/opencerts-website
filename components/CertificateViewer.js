@@ -1,4 +1,6 @@
+import { Certificate } from "@govtechsg/open-certificate";
 import PropTypes from "prop-types";
+import ValidatedInput from "./ValidatedInput";
 
 const Profile = props => {
   const { title, identities } = props;
@@ -17,7 +19,18 @@ const Profile = props => {
               <td className="w-20" style={{ verticalAlign: "top" }}>
                 {p.type}
               </td>
-              <td style={{ wordBreak: "break-all" }}>{p.identity}</td>
+              <td style={{ wordBreak: "break-all" }}>
+                {p.hashed ? (
+                  <ValidatedInput
+                    placeholder="Enter value to verify"
+                    validatorFn={testValue =>
+                      Certificate.identityCheck(p, testValue)
+                    }
+                  />
+                ) : (
+                  p.identity
+                )}
+              </td>
             </tr>
           ))}
         </tbody>
