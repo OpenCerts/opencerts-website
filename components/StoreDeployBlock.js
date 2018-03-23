@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import HashColor from "./HashColor";
 
 class StoreDeployBlock extends Component {
   constructor(props) {
@@ -41,7 +42,27 @@ class StoreDeployBlock extends Component {
             />
           </div>
         </div>
-        <button onClick={this.onDeployClick}>Deploy</button>
+
+        <button disabled={this.props.deploying} onClick={this.onDeployClick}>
+          {this.props.deploying ? "Deploying…" : "Deploy"}
+        </button>
+
+        {this.props.deployedTx ? (
+          <div className="mt5">
+            <div>
+              🎉 New store deployed at
+              <HashColor hashee={this.props.storeAddress} type="address" />
+            </div>
+            <div className="mt2">
+              Transaction ID
+              <HashColor
+                hashee={this.props.deployedTx}
+                isTx
+                networkId={this.props.networkId}
+              />
+            </div>
+          </div>
+        ) : null}
       </div>
     );
   }
@@ -51,6 +72,10 @@ export default StoreDeployBlock;
 
 StoreDeployBlock.propTypes = {
   adminAddress: PropTypes.string,
+  storeAddress: PropTypes.string,
+  deploying: PropTypes.bool,
+  deployedTx: PropTypes.string,
+  networkId: PropTypes.string,
   loadAdminAddress: PropTypes.func,
   handleStoreDeploy: PropTypes.func
 };

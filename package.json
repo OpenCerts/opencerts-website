@@ -9,7 +9,8 @@
     "build:static": "next build && next export",
     "start": "next build && next start",
     "deploy": "rm -rf out && yarn build:static && yarn deploy:prebuilt",
-    "deploy:prebuilt": "touch out/.nojekyll && cp docs/exampleIssuers.json out/exampleIssuers.json && gh-pages --dotfiles --dist out"
+    "deploy:prebuilt":
+      "touch out/.nojekyll && cp docs/exampleIssuers.json out/exampleIssuers.json && gh-pages --dotfiles --dist out"
   },
   "dependencies": {
     "@govtechsg/open-certificate": "^1.0.4",
@@ -30,7 +31,7 @@
     "redux-saga": "^0.16.0",
     "redux-thunk": "^2.1.0",
     "truffle-contract": "^3.0.4",
-    "web3": "^1.0.0-beta.30",
+    "web3": "^1.0.0-beta.33",
     "web3-provider-engine": "^13.6.5",
     "web3-provider-ledger": "^1.0.6"
   },

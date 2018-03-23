@@ -67,6 +67,12 @@ const Meta = () => (
         color: white;
       }
 
+      .button:disabled,
+      button:disabled {
+        opacity: 0.7;
+        pointer-events: none;
+      }
+
       .button.danger,
       button.danger {
         color: #e7040f;

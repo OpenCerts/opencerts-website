@@ -1,5 +1,9 @@
-import { put } from "redux-saga/effects";
+import { put, take, select } from "redux-saga/effects";
 import { types } from "../reducers/admin";
+import {
+  types as applicationTypes,
+  getTransactionReceipt
+} from "../reducers/application";
 
 import getAccounts from "../services/web3/getAccounts";
 import CertificateStoreDefinition from "../services/contracts/CertificateStore.json";
@@ -29,6 +33,25 @@ export function* loadAdminAddress() {
   }
 }
 
+function sendTxWrapper(txObject, gasPrice, fromAddress) {
+  return new Promise((resolve, reject) => {
+    txObject.send(
+      {
+        from: fromAddress,
+        gas: DEFAULT_GAS,
+        gasPrice
+      },
+      (err, res) => {
+        // callback passed into eth.contract.send() to get the txhash
+        if (err) {
+          reject(err);
+        }
+        resolve(res);
+      }
+    );
+  });
+}
+
 export function* deployStore({ payload }) {
   try {
     const { fromAddress, name } = payload;
@@ -42,20 +65,28 @@ export function* deployStore({ payload }) {
       data: bytecode,
       arguments: [name]
     });
-    const gasPrice = yield web3.eth.getGasPrice();
+    const gasPrice = (yield web3.eth.getGasPrice()) * 5;
 
-    const tx = yield deployment.send({
-      from: fromAddress,
-      gas: DEFAULT_GAS,
-      gasPrice
+    const txHash = yield sendTxWrapper(deployment, gasPrice, fromAddress);
+
+    yield put({
+      type: types.DEPLOYING_STORE_TX_SUBMITTED,
+      payload: txHash
     });
 
-    // eslint-disable-next-line no-underscore-dangle
-    const deployedStoreAddress = tx._address;
+    let txReceipt;
+
+    while (!txReceipt) {
+      yield take(applicationTypes.TRANSACTION_MINED);
+      txReceipt = yield select(getTransactionReceipt, txHash); // this returns undefined if the transaction mined doesn't match the txHash we're waiting for
+    }
 
     yield put({
       type: types.DEPLOYING_STORE_SUCCESS,
-      payload: deployedStoreAddress
+      payload: {
+        contractAddress: txReceipt.contractAddress,
+        txHash: txReceipt.transactionHash
+      }
     });
   } catch (e) {
     yield put({

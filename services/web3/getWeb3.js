@@ -106,12 +106,15 @@ export function setNewWeb3(t, config) {
   }
   return new Promise((resolve, reject) => {
     // Wait for loading completion to avoid race conditions with web3 injection timing.
-    window.addEventListener(`load`, () => {
-      resolveWeb3(resolve, reject, t, config);
-    });
-    // If document has loaded already, try to get Web3 immediately.
-    if (document.readyState === `complete`) {
-      resolveWeb3(resolve, reject, t, config);
+    // Server-side rendering fails when trying to access window
+    if (typeof window !== "undefined") {
+      window.addEventListener(`load`, () => {
+        resolveWeb3(resolve, reject, t, config);
+      });
+      // If document has loaded already, try to get Web3 immediately.
+      if (document.readyState === `complete`) {
+        resolveWeb3(resolve, reject, t, config);
+      }
     }
   });
 }

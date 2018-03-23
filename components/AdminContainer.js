@@ -12,7 +12,11 @@ import {
   issueCertificate,
   getIssuedTx,
   getRevokedTx,
-  revokeCertificate
+  revokeCertificate,
+  getrevokingCertificate,
+  getDeploying,
+  getIssuingCertificate,
+  getDeployedTx
 } from "../reducers/admin";
 import { updateNetworkId, getNetworkId } from "../reducers/application";
 import StoreDeployBlock from "./StoreDeployBlock";
@@ -59,6 +63,12 @@ class AdminContainer extends Component {
     this.props.loadAdminAddress();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.storeAddress !== this.state.localStoreAddress) {
+      this.setState({ localStoreAddress: nextProps.storeAddress });
+    }
+  }
+
   storeAddressOnChange(event) {
     const address = event.target.value;
     this.setState({ localStoreAddress: address });
@@ -87,9 +97,13 @@ class AdminContainer extends Component {
     const {
       adminAddress,
       storeAddress,
+      issuingCertificate,
       issuedTx,
+      revokingCertificate,
       revokedTx,
-      networkId
+      networkId,
+      deploying,
+      deployedTx
     } = this.props;
 
     return (
@@ -163,7 +177,11 @@ class AdminContainer extends Component {
             <TabPanel>
               <StoreDeployBlock
                 adminAddress={adminAddress}
+                storeAddress={storeAddress}
                 handleStoreDeploy={this.handleStoreDeploy}
+                deploying={deploying}
+                networkId={networkId}
+                deployedTx={deployedTx}
               />
             </TabPanel>
 
@@ -175,6 +193,7 @@ class AdminContainer extends Component {
                   adminAddress={adminAddress}
                   storeAddress={storeAddress}
                   handleCertificateIssue={this.handleCertificateIssue}
+                  issuingCertificate={issuingCertificate}
                 />
               ) : (
                 <div className="red">Enter a store address first.</div>
@@ -185,6 +204,7 @@ class AdminContainer extends Component {
               {storeAddress ? (
                 <StoreRevokeBlock
                   networkId={networkId}
+                  revokingCertificate={revokingCertificate}
                   revokedTx={revokedTx}
                   adminAddress={adminAddress}
                   storeAddress={storeAddress}
@@ -205,8 +225,12 @@ const mapStateToProps = store => ({
   adminAddress: getAdminAddress(store),
   storeAddress: getStoreAddress(store),
   issuedTx: getIssuedTx(store),
+  revokingCertificate: getrevokingCertificate(store),
   revokedTx: getRevokedTx(store),
-  networkId: getNetworkId(store)
+  networkId: getNetworkId(store),
+  deploying: getDeploying(store),
+  deployedTx: getDeployedTx(store),
+  issuingCertificate: getIssuingCertificate(store)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -221,6 +245,8 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(AdminContainer);
 
 AdminContainer.propTypes = {
+  deploying: PropTypes.bool,
+  deployedTx: PropTypes.string,
   updateNetworkId: PropTypes.func,
   loadAdminAddress: PropTypes.func,
   deployStore: PropTypes.func,
@@ -228,7 +254,9 @@ AdminContainer.propTypes = {
   updateStoreAddress: PropTypes.func,
   adminAddress: PropTypes.string,
   storeAddress: PropTypes.string,
+  issuingCertificate: PropTypes.bool,
   issuedTx: PropTypes.string,
+  revokingCertificate: PropTypes.bool,
   revokedTx: PropTypes.string,
   revokeCertificate: PropTypes.func,
   networkId: PropTypes.number

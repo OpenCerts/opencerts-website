@@ -33,10 +33,23 @@ export default function* rootSaga() {
       applicationType.UPDATE_NETWORK_ID_SUCCESS,
       adminSaga.loadAdminAddress
     ),
+    takeEvery(
+      adminType.DEPLOYING_STORE_TX_SUBMITTED,
+      applicationSaga.addTxHashToPolling
+    ),
     takeEvery(adminType.DEPLOYING_STORE, adminSaga.deployStore),
     takeEvery(adminType.ISSUING_CERTIFICATE, adminSaga.issueCertificate),
     takeEvery(adminType.REVOKING_CERTIFICATE, adminSaga.revokeCertificate),
     takeEvery(applicationType.UPDATE_WEB3, adminSaga.networkReset),
-    takeEvery(applicationType.UPDATE_WEB3, certificateSaga.networkReset)
+    takeEvery(applicationType.UPDATE_WEB3, certificateSaga.networkReset),
+    takeEvery(
+      applicationType.NEW_BLOCK,
+      applicationSaga.checkNewBlockForTxPollList
+    ),
+    takeEvery(
+      applicationType.TRANSACTION_MINED,
+      applicationSaga.removeTxHashFromPolling
+    )
+    // takeEvery(applicationType.UPDATE_NETWORK_ID_SUCCESS, applicationSaga.startLedgerProviderPolling)
   ]);
 }

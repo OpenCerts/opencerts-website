@@ -43,12 +43,12 @@ class StoreIssueBlock extends Component {
           />
         </div>
         <button className="mt4" onClick={this.onIssueClick}>
-          Issue
+          {this.props.issuingCertificate ? "Issuing…" : "Issue"}
         </button>
 
-        {this.props.issuedTx ? (
+        {this.props.issuedTx && !this.props.issuingCertificate ? (
           <div className="mt5">
-            <p>Batch has been issued.</p>
+            <p>🎉 Batch has been issued.</p>
             <div>
               Transaction ID{" "}
               <HashColor
@@ -67,6 +67,7 @@ class StoreIssueBlock extends Component {
 export default StoreIssueBlock;
 
 StoreIssueBlock.propTypes = {
+  issuingCertificate: PropTypes.bool,
   issuedTx: PropTypes.string,
   storeAddress: PropTypes.string,
   adminAddress: PropTypes.string,

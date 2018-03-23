@@ -49,12 +49,13 @@ class StoreRevokeBlock extends Component {
           />
         </div>
         <button className="mt4 danger" onClick={this.onRevokeClick}>
-          <i className="fas fa-exclamation-triangle" /> Revoke
+          <i className="fas fa-exclamation-triangle" />&nbsp;
+          {this.props.revokingCertificate ? "Revoking…" : "Revoke"}
         </button>
 
         {revokedTx ? (
           <div className="mt5">
-            <p>Revoked certificates.</p>
+            <p>Revoked certificate batch.</p>
             <div>
               Transaction ID
               <HashColor hashee={revokedTx} networkId={networkId} isTx />
@@ -69,9 +70,10 @@ class StoreRevokeBlock extends Component {
 export default StoreRevokeBlock;
 
 StoreRevokeBlock.propTypes = {
+  revokingCertificate: PropTypes.bool,
   revokedTx: PropTypes.string,
   storeAddress: PropTypes.string,
   adminAddress: PropTypes.string,
   handleCertificateRevoke: PropTypes.func,
-  networkId: PropTypes.networkId
+  networkId: PropTypes.number
 };
