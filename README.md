@@ -15,7 +15,7 @@ yarn
 yarn dev
 yarn lint
 
-yarn start # runs a production server
+yarn start # serves the ui
 ```
 
 ### Setting up web3
