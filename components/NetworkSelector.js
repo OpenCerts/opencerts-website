@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { types as networkTypes } from "../services/web3/getWeb3";
 import { updateWeb3, getNetwork, getCustomRpc } from "../reducers/application";
 
-class AdminContainer extends Component {
+class NetworkSelector extends Component {
   constructor(props) {
     super(props);
 
@@ -18,7 +18,7 @@ class AdminContainer extends Component {
   }
 
   render() {
-    const { INJECTED, LEDGER_MAIN, LEDGER_ROPSTEN } = networkTypes;
+    const { LEDGER_MAIN, LEDGER_ROPSTEN } = networkTypes;
 
     return (
       <div className="fr ba">
@@ -32,9 +32,8 @@ class AdminContainer extends Component {
             borderRadius: 0
           }}
         >
-          <option value={INJECTED}>Metamask</option>
-          <option value={LEDGER_MAIN}>Ledger Nano (Mainnet)</option>
-          <option value={LEDGER_ROPSTEN}>Ledger Nano (Ropsten)</option>
+          <option value={LEDGER_MAIN}>Mainnet</option>
+          <option value={LEDGER_ROPSTEN}>Testnet (Ropsten)</option>
         </select>
       </div>
     );
@@ -50,9 +49,9 @@ const mapDispatchToProps = dispatch => ({
   updateWeb3: payload => dispatch(updateWeb3(payload))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(NetworkSelector);
 
-AdminContainer.propTypes = {
+NetworkSelector.propTypes = {
   network: PropTypes.string,
   customRpc: PropTypes.string,
   updateWeb3: PropTypes.func

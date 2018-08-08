@@ -1,8 +1,8 @@
 import { omit } from "lodash";
-import { types as Web3Types } from "../services/web3/getWeb3";
+import config from "../config";
 
 export const initialState = {
-  network: Web3Types.INJECTED,
+  network: config.DEFAULT_NETWORK,
   networkId: null,
   networkIdVerbose: "",
   customRpc: "",

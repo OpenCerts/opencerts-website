@@ -10,11 +10,11 @@ const renderCertificate = certificate => {
     "default"
   );
   const template = certificateIndex[renderingTemplateName];
+  // dangerouslySetInnerHTML is okay because Handlebar mitigates script injection
   return <div dangerouslySetInnerHTML={{ __html: template(certificate) }} />;
 };
 
 const CertificateViewer = ({ certificate, verify }) => {
-  // dangerouslySetInnerHTML is okay because Handlebar mitigates script injection
   const certObject = certificateData(certificate);
   const renderedCertificate = renderCertificate(certObject);
   return (
