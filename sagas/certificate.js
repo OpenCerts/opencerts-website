@@ -1,6 +1,6 @@
 import _ from "lodash";
 import { put, all, call } from "redux-saga/effects";
-import { Certificate } from "@govtechsg/open-certificate";
+import { certificateData, verifySignature } from "@govtechsg/open-certificate";
 import { types } from "../reducers/certificate";
 import CertificateStoreDefinition from "../services/contracts/CertificateStore.json";
 import fetchIssuers from "../services/issuers";
@@ -9,13 +9,9 @@ import { combinedHash } from "../utils";
 import { getSelectedWeb3 } from "./application";
 
 export function* loadCertificateContract({ payload }) {
-  const contractStoreAddress = _.get(
-    payload,
-    "verification.contractAddress",
-    null
-  );
-
   try {
+    const data = certificateData(payload);
+    const contractStoreAddress = _.get(data, "issuer.certificateStore", null);
     const { abi } = CertificateStoreDefinition;
     const web3 = yield getSelectedWeb3();
     const contract = new web3.eth.Contract(abi, contractStoreAddress);
@@ -35,17 +31,15 @@ export function* loadCertificateContract({ payload }) {
 }
 
 export function* verifyCertificateHash({ payload }) {
-  try {
-    const { certificate } = payload;
-    new Certificate(certificate).verify();
-
+  const { certificate } = payload;
+  const verified = verifySignature(certificate);
+  if (verified) {
     yield put({
       type: types.VERIFYING_CERTIFICATE_HASH_SUCCESS
     });
-  } catch (e) {
+  } else {
     yield put({
-      type: types.VERIFYING_CERTIFICATE_HASH_FAILURE,
-      payload: e.message
+      type: types.VERIFYING_CERTIFICATE_HASH_FAILURE
     });
   }
 }
@@ -53,7 +47,7 @@ export function* verifyCertificateHash({ payload }) {
 export function* verifyCertificateIssued({ payload }) {
   try {
     const { certificate, certificateStore } = payload;
-    const merkleRoot = `0x${_.get(certificate, "signature.merkleRoot", null)}`;
+    const merkleRoot = `0x${_.get(certificate, "signature.merkleRoot", "")}`;
 
     // Checks if certificate has been issued
     const isIssued = yield certificateStore.contract.methods

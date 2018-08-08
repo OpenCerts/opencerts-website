@@ -13,7 +13,7 @@
       "touch out/.nojekyll && cp docs/exampleIssuers.json out/exampleIssuers.json && gh-pages --dotfiles --dist out"
   },
   "dependencies": {
-    "@govtechsg/open-certificate": "^1.1.0",
+    "@govtechsg/open-certificate": "^1.1.17",
     "eslint-plugin-react": "^7.7.0",
     "ethereumjs-util": "^5.1.5",
     "handlebars": "^4.0.11",
