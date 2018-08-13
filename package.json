@@ -46,8 +46,8 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-mocha": "^4.11.0",
     "eslint-plugin-prettier": "^2.6.0",
-    "handlebars-loader": "^1.7.0",
     "gh-pages": "^1.1.0",
+    "handlebars-loader": "^1.7.0",
     "prettier": "^1.10.2",
     "webpack": "^4.0.1"
   }
