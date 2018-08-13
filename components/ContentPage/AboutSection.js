@@ -1,5 +1,5 @@
 const TabsColumn = () => (
-  <div className="col-3">
+  <div className="col-3 no-padding mt-3">
     <div
       className="nav flex-column nav-pills"
       id="v-pills-tab"
@@ -44,10 +44,10 @@ const TabsColumn = () => (
 );
 
 const TabContent = () => (
-  <div className="col-9">
+  <div className="col-9 no-padding bg-white rounded">
     <div className="tab-content" id="v-pills-tabContent">
       <div
-        className="tab-pane fade show active"
+        className="tab-pane fade show active m-3"
         id="v-pills-home"
         role="tabpanel"
         aria-labelledby="v-pills-home-tab"
@@ -61,7 +61,7 @@ const TabContent = () => (
         mollit anim id est laborum.
       </div>
       <div
-        className="tab-pane fade"
+        className="tab-pane fade m-3"
         id="v-pills-profile"
         role="tabpanel"
         aria-labelledby="v-pills-profile-tab"
@@ -79,7 +79,7 @@ const TabContent = () => (
         vel pretium.
       </div>
       <div
-        className="tab-pane fade"
+        className="tab-pane fade m-3"
         id="v-pills-messages"
         role="tabpanel"
         aria-labelledby="v-pills-messages-tab"
@@ -98,16 +98,16 @@ const TabContent = () => (
 );
 
 const TabbedSection = () => (
-  <div className="row">
+  <div className="row" id="how-it-works-section">
     <TabsColumn />
     <TabContent />
   </div>
 );
 
-const SectionTitle = () => <div className="h2">How It Works</div>;
+const SectionTitle = () => <div className="h2 mb-3">How It Works</div>;
 
 const AboutSection = () => (
-  <div className="row">
+  <div className="row my-3 p-4 bg-light">
     <div className="container-fluid">
       <SectionTitle />
       <TabbedSection />

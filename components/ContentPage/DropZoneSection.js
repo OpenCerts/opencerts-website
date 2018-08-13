@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import CertificateDropzone from "../CertificateDropzone";
 
 const DropZoneSection = ({ handleCertificateChange }) => (
-  <div className="row my-3">
+  <div className="row my-3 p-4">
     <div className="col">
       <div className="h1 mb-3">OpenCerts</div>
       <div className="mb-3">

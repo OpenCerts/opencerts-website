@@ -53,6 +53,23 @@ const Meta = () => (
       .bg-red {
         background: #ff6565;
       }
+
+      .no-padding {
+        padding: 0 !important;
+      }
+
+      #how-it-works-section .nav-link {
+        color: black;
+        background-color: transparent;
+      }
+
+      #how-it-works-section .nav-link.active {
+        color: black;
+        background-color: white;
+        border-radus: 0;
+        border-bottom-left-radius: 0.25rem;
+        border-top-left-radius: 0.25rem;
+      }
     `}</style>
   </div>
 );

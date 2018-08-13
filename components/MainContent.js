@@ -4,7 +4,7 @@ import DropZoneSection from "./ContentPage/DropZoneSection";
 import PartnerSection from "./ContentPage/PartnersSection";
 
 const MainContent = ({ handleCertificateChange }) => (
-  <div className="container">
+  <div className="container-fluid">
     <DropZoneSection handleCertificateChange={handleCertificateChange} />
     <AboutSection />
     <PartnerSection />
