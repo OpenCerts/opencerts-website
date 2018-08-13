@@ -26,12 +26,11 @@ import {
   getCertificateIssuerVerifying,
   getIssuerIdentity
 } from "../reducers/certificate";
-import CertificateDropzone from "./CertificateDropzone";
 import CertificateViewer from "./CertificateViewer";
-import CertificateVerifyBlock from "./CertificateVerifyBlock";
+import MainContent from "./MainContent";
 import { updateNetworkId } from "../reducers/application";
 
-class CertificateVerifierContainer extends Component {
+class MainPageContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -39,9 +38,8 @@ class CertificateVerifierContainer extends Component {
       editable: false
     };
 
+    this.renderMainContent = this.renderMainContent.bind(this);
     this.handleCertificateChange = this.handleCertificateChange.bind(this);
-    this.renderCertificateViewer = this.renderCertificateViewer.bind(this);
-    this.renderCertificateDropzone = this.renderCertificateDropzone.bind(this);
     this.handleCertificateVerify = this.handleCertificateVerify.bind(this);
     this.handleToggleEditable = this.handleToggleEditable.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
@@ -77,14 +75,9 @@ class CertificateVerifierContainer extends Component {
     });
   }
 
-  renderCertificateDropzone() {
+  renderMainContent() {
     return (
-      <div>
-        <h1>Certificate viewer and verifier</h1>
-        <CertificateDropzone
-          handleCertificateChange={this.handleCertificateChange}
-        />
-      </div>
+      <MainContent handleCertificateChange={this.handleCertificateChange} />
     );
   }
 
@@ -105,21 +98,10 @@ class CertificateVerifierContainer extends Component {
     );
   }
 
-  renderVerifyBlock() {
-    return (
-      <CertificateVerifyBlock
-        {...this.props}
-        handleCertificateVerify={this.handleCertificateVerify}
-      />
-    );
-  }
-
   render() {
-    const verify = this.props.certificate ? this.renderVerifyBlock() : null;
-
     const content = this.props.certificate
-      ? this.renderCertificateViewer(verify)
-      : this.renderCertificateDropzone();
+      ? this.renderCertificateViewer()
+      : this.renderMainContent();
 
     return <div>{content}</div>;
   }
@@ -155,11 +137,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateFilteredCertificate(payload))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  CertificateVerifierContainer
-);
+export default connect(mapStateToProps, mapDispatchToProps)(MainPageContainer);
 
-CertificateVerifierContainer.propTypes = {
+MainPageContainer.propTypes = {
   updateNetworkId: PropTypes.func,
   updateFilteredCertificate: PropTypes.func,
   updateCertificate: PropTypes.func,

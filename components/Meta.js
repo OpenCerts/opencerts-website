@@ -14,7 +14,24 @@ const Meta = () => (
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" />
     <link
       rel="stylesheet"
-      href="https://unpkg.com/tachyons@4.9.1/css/tachyons.min.css"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossOrigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossOrigin="anonymous"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossOrigin="anonymous"
+    />
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossOrigin="anonymous"
     />
     <style jsx global>{`
       :root {
@@ -26,68 +43,15 @@ const Meta = () => (
         background: white;
         font-family: arial, sans-serif;
         line-height: 1.5;
+        margin: 0px;
       }
 
-      .noselect {
-        user-select: none;
-        -webkit-user-select: none;
-        -ms-user-select: none;
-      }
-
-      a:visited {
-        color: inherit;
-      }
-
-      input[type="text"] {
-        font-family: var(--font-monospace) !important;
-        font-size: var(--font-monospace-size);
-        border: solid 1px black;
-        padding: 0.5rem; // tachyons pa2
-      }
-
-      .button,
-      button {
+      .pointer {
         cursor: pointer;
-        background: transparent;
-        border: solid 2px black;
-        padding: 1rem; // tachyons pa3
-        user-select: none;
-        text-decoration: none;
-        color: inherit;
       }
 
-      .button:hover,
-      button:hover {
-        background-color: gold;
-      }
-
-      .button:active,
-      button:active {
-        background-color: black;
-        color: white;
-      }
-
-      .button:disabled,
-      button:disabled {
-        opacity: 0.7;
-        pointer-events: none;
-      }
-
-      .button.danger,
-      button.danger {
-        color: #e7040f;
-        border-color: #e7040f;
-      }
-
-      .button.danger:hover,
-      button.danger:hover {
-        color: white;
-        background-color: #e7040f;
-      }
-
-      .__hashcolor > input {
-        font-family: inherit;
-        color: inherit;
+      .bg-red {
+        background: #ff6565;
       }
     `}</style>
   </div>

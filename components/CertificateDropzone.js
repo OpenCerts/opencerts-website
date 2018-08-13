@@ -25,48 +25,48 @@ const renderDropzoneContent = ({
 }) => {
   if (isDragActive && !isDragReject) {
     return (
-      <div className="grow h-100 pa6">
-        <div className="pa3">
-          <i className="fas fa-check-circle fa-10x black-40" />
+      <div className="text-center bg-light h-100 d-flex flex-column justify-content-center">
+        <div className="text-muted mb-3">
+          Drop a OpenCerts file here to verify
         </div>
-        <div className="f4 black-40 fw6">Drop a certificate here&hellip;</div>
+        <div>
+          <i className="fas fa-download fa-10x text-muted" />
+        </div>
       </div>
     );
   }
   if (isDragActive && isDragReject) {
     return (
-      <div className="grow h-100 pa6">
-        <div className="pa3">
-          <i className="fas fa-times-circle fa-10x black-40" />
+      <div className="text-center bg-red h-100 d-flex flex-column justify-content-center">
+        <div className="text-muted mb-3">File format is incorrect</div>
+        <div>
+          <i className="fas fa-times-circle fa-10x text-muted" />
         </div>
-        <div className="f4 black-40 fw6">File format is incorrect</div>
       </div>
     );
   }
   return (
-    <div className="grow h-100 pa6">
-      <div className="pa3">
-        <i className="fas fa-download fa-10x black-40" />
+    <div className="text-center bg-light h-100 d-flex flex-column justify-content-center">
+      <div className="text-muted mb-3">
+        Drop a OpenCerts file here to verify
       </div>
-      <div className="f4 black-40 fw6">Drop a certificate here&hellip;</div>
+      <div>
+        <i className="fas fa-download fa-10x text-muted" />
+      </div>
     </div>
   );
 };
 
 const CertificateDropzone = ({ handleCertificateChange }) => (
-  <div>
-    <Dropzone
-      accept="application/json"
-      onDrop={acceptedFiles =>
-        onFileDrop(acceptedFiles, handleCertificateChange)
-      }
-      className="w-100 tc br3 ba b--dashed bw3 b--mid-gray noselect pointer"
-      acceptClassName="w-100 bg-green tc br3"
-      rejectClassName="w-100 bg-red tc br3"
-    >
-      {renderDropzoneContent}
-    </Dropzone>
-  </div>
+  <Dropzone
+    accept="application/json"
+    onDrop={acceptedFiles => onFileDrop(acceptedFiles, handleCertificateChange)}
+    className="pointer h-100"
+    acceptClassName=""
+    rejectClassName="w-100 bg-warning tc br3"
+  >
+    {renderDropzoneContent}
+  </Dropzone>
 );
 
 CertificateDropzone.propTypes = {
