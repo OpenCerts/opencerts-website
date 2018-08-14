@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { get } from "lodash";
 import { certificateData } from "@govtechsg/open-certificate";
 import certificateIndex from "../certificateTemplates";
+import CertificateVerifyBlock from "./CertificateVerifyBlock";
 
 const renderCertificate = certificate => {
   const renderingTemplateName = get(
@@ -14,23 +15,24 @@ const renderCertificate = certificate => {
   return <div dangerouslySetInnerHTML={{ __html: template(certificate) }} />;
 };
 
-const CertificateViewer = ({ certificate, verify }) => {
+const renderVerifyBlock = props => <CertificateVerifyBlock {...props} />;
+
+const CertificateViewer = props => {
+  const { certificate } = props;
   const certObject = certificateData(certificate);
   const renderedCertificate = renderCertificate(certObject);
+  const renderedVerifyBlock = renderVerifyBlock(props);
+
   return (
     <div>
-      {verify}
+      {renderedVerifyBlock}
       {renderedCertificate}
     </div>
   );
 };
 
 CertificateViewer.propTypes = {
-  certificate: PropTypes.object,
-  verify: PropTypes.object,
-  editable: PropTypes.bool,
-  toggleEditable: PropTypes.func,
-  handleFilter: PropTypes.func
+  certificate: PropTypes.object
 };
 
 export default CertificateViewer;

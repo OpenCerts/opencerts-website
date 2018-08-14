@@ -7,7 +7,6 @@ export const initialState = {
 
   issuerIdentity: null,
 
-  verifying: false,
   verifyTriggered: false,
 
   certificateHash: false,
@@ -187,6 +186,60 @@ export function updateFilteredCertificate(payload) {
 }
 
 // Selectors
+export function getIssuerIdentityStatus(store) {
+  const {
+    issuerIdentity,
+    certificateIssuerVerifying,
+    certificateIssuerError,
+    certificateIssuer
+  } = store.certificate;
+  return {
+    identity: issuerIdentity,
+    verified: certificateIssuer,
+    verifying: certificateIssuerVerifying,
+    error: certificateIssuerError
+  };
+}
+
+export function getHashStatus(store) {
+  const {
+    certificateHash,
+    certificateHashError,
+    certificateHashVerifying
+  } = store.certificate;
+  return {
+    verified: certificateHash,
+    verifying: certificateHashVerifying,
+    error: certificateHashError
+  };
+}
+
+export function getIssuedStatus(store) {
+  const {
+    certificateIssued,
+    certificateIssuedError,
+    certificateIssuedVerifying
+  } = store.certificate;
+  return {
+    verified: certificateIssued,
+    verifying: certificateIssuedVerifying,
+    error: certificateIssuedError
+  };
+}
+
+export function getNotRevokedStatus(store) {
+  const {
+    certificateNotRevoked,
+    certificateNotRevokedError,
+    certificateNotRevokedVerifying
+  } = store.certificate;
+  return {
+    verified: certificateNotRevoked,
+    verifying: certificateNotRevokedVerifying,
+    error: certificateNotRevokedError
+  };
+}
+
 export function getCertificate(store) {
   return store.certificate.raw;
 }
@@ -195,70 +248,21 @@ export function getCertificateStore(store) {
   return store.certificate.store;
 }
 
-export function getCertificateRoot(store) {
-  return _.get(store.certificate.raw, "signature.merkleRoot", null);
-}
-
-export function getContractStoreAddress(store) {
-  return _.get(store.certificate.raw, "verification.contractAddress", null);
-}
-
 export function getVerifyTriggered(store) {
   return store.certificate.verifyTriggered;
 }
 
 export function getVerifying(store) {
-  return store.certificate.verifying;
-}
-
-export function getHashVerified(store) {
-  return store.certificate.certificateHash;
-}
-
-export function getIssued(store) {
-  return store.certificate.certificateIssued;
-}
-
-export function getNotRevoked(store) {
-  return store.certificate.certificateNotRevoked;
-}
-
-export function getHashError(store) {
-  return store.certificate.certificateHashError;
-}
-
-export function getIssuedError(store) {
-  return store.certificate.certificateIssuedError;
-}
-
-export function getNotRevokedError(store) {
-  return store.certificate.certificateNotRevokedError;
-}
-
-export function getIssuerError(store) {
-  return store.certificate.certificateIssuerError;
-}
-
-export function getIsIssuerVerified(store) {
-  return store.certificate.certificateIssuer;
-}
-
-export function getCertificateHashVerifying(store) {
-  return store.certificate.certificateHashVerifying;
-}
-
-export function getCertificateIssuedVerifying(store) {
-  return store.certificate.certificateIssuedVerifying;
-}
-
-export function getCertificateNotRevokedVerifying(store) {
-  return store.certificate.certificateNotRevokedVerifying;
-}
-
-export function getCertificateIssuerVerifying(store) {
-  return store.certificate.certificateIssuerVerifying;
-}
-
-export function getIssuerIdentity(store) {
-  return store.certificate.issuerIdentity;
+  const {
+    certificateIssuerVerifying,
+    certificateHashVerifying,
+    certificateIssuedVerifying,
+    certificateNotRevokedVerifying
+  } = store.certificate;
+  return (
+    certificateIssuerVerifying ||
+    certificateHashVerifying ||
+    certificateIssuedVerifying ||
+    certificateNotRevokedVerifying
+  );
 }

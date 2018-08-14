@@ -28,6 +28,7 @@ export function* getSelectedWeb3(getNew = false) {
 }
 
 export function* startNetworkPolling() {
+  /*
   let init = true;
   while (true) {
     const web3 = yield getCurrentWeb3();
@@ -66,7 +67,7 @@ export function* startNetworkPolling() {
       }
     }
     yield call(delay, POLLING_INTERVAL);
-  }
+  } */
 }
 
 export function* updateNetworkId() {

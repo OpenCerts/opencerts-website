@@ -46,31 +46,27 @@ InfoBlock.propTypes = {
 };
 
 const renderBlockHeader = ({
-  certificateHashVerifying,
-  certificateStore,
-  certificateIssuedVerifying,
-  certificateNotRevokedVerifying,
-  certificateIssuerVerifying,
-  issuerError,
-  hashError,
-  certificateIssuedError,
-  revokedError,
-  storeError
+  hashStatus,
+  issuedStatus,
+  notRevokedStatus,
+  issuerIdentityStatus,
+
+  certificateStore
 }) => {
   let text = "";
   let color = "";
 
   const verifying =
     certificateStore &&
-    (certificateHashVerifying ||
-      certificateIssuedVerifying ||
-      certificateNotRevokedVerifying ||
-      certificateIssuerVerifying);
+    (hashStatus.verifying ||
+      issuedStatus.verifying ||
+      notRevokedStatus.verifying ||
+      issuerIdentityStatus.verifying);
 
   const hasError =
-    hashError || certificateIssuedError || revokedError || storeError;
+    hashStatus.error || issuedStatus.error || notRevokedStatus.error;
 
-  const hasWarning = issuerError;
+  const hasWarning = issuerIdentityStatus.error;
 
   const unableToVerify = !certificateStore;
 
@@ -107,6 +103,8 @@ class CertificateVerifyBlock extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (
+      // TODO: Should be using deep compare to provent verified status for 2 cerst with same store.
+      // Or use saga to trigger verify instead.
       this.props.certificateStore !== nextProps.certificateStore &&
       nextProps.certificateStore != null
     ) {
@@ -116,46 +114,34 @@ class CertificateVerifyBlock extends React.Component {
 
   render() {
     const {
-      certificateHashVerifying,
-      certificateIssuedVerifying,
-      certificateNotRevokedVerifying,
-      certificateIssuerVerifying,
-
-      isHashVerified,
-      isIssued,
-      isNotRevoked,
-      issuerIdentity,
-      isIssuerVerified,
-
-      issuerError,
-      revokedError,
-      // certificateIssuedError, // Naming issue? storeError used instead
-      storeError,
-      hashError
+      hashStatus,
+      issuedStatus,
+      notRevokedStatus,
+      issuerIdentityStatus
     } = this.props;
 
     const checks = [
       {
         name: "KNOWN_ISSUER",
         check: () => {
-          if (certificateIssuerVerifying)
+          if (issuerIdentityStatus.verifying)
             return {
               severity: SEVERITY.WARN,
               message: "Verifying issuer's identity…"
             };
-          return isIssuerVerified
+          return issuerIdentityStatus.verified
             ? {
                 severity: SEVERITY.INFO,
                 message: (
                   <div>
                     <div>Known issuer</div>
-                    <div>{issuerIdentity}</div>
+                    <div>{issuerIdentityStatus.issuerIdentity}</div>
                   </div>
                 )
               }
             : {
                 severity: SEVERITY.WARN,
-                message: issuerError,
+                message: issuerIdentityStatus.error,
                 default: "Could not check for known issuer"
               };
         }
@@ -163,16 +149,16 @@ class CertificateVerifyBlock extends React.Component {
       {
         name: "HASH_VALID",
         check: () => {
-          if (certificateHashVerifying)
+          if (hashStatus.verifying)
             return {
               severity: SEVERITY.WARN,
               message: "Verifying certificate hash…"
             };
-          return isHashVerified
+          return hashStatus.verified
             ? { severity: SEVERITY.INFO, message: "Valid certificate hash" }
             : {
                 severity: SEVERITY.ERROR,
-                message: hashError,
+                message: hashStatus.error,
                 default: "Invalid certificate hash"
               };
         }
@@ -180,16 +166,16 @@ class CertificateVerifyBlock extends React.Component {
       {
         name: "CERTIFICATE_ISSUED",
         check: () => {
-          if (certificateIssuedVerifying)
+          if (issuedStatus.verifying)
             return {
               severity: SEVERITY.WARN,
               message: "Verifying certificate issue status…"
             };
-          return isIssued
+          return issuedStatus.verified
             ? { severity: SEVERITY.INFO, message: "Issued on Ethereum network" }
             : {
                 severity: SEVERITY.ERROR,
-                message: storeError,
+                message: issuedStatus.error,
                 default: "Unknown issuance"
               };
         }
@@ -197,16 +183,16 @@ class CertificateVerifyBlock extends React.Component {
       {
         name: "CERTIFICATE_NOT_REVOKED",
         check: () => {
-          if (certificateNotRevokedVerifying)
+          if (notRevokedStatus.verifying)
             return {
               severity: SEVERITY.WARN,
               message: "Verifying certificate revoke status…"
             };
-          return isNotRevoked
+          return notRevokedStatus.verified
             ? { severity: SEVERITY.INFO, message: "Not revoked" }
             : {
                 severity: SEVERITY.ERROR,
-                message: revokedError,
+                message: notRevokedStatus.error,
                 default: "Unknown revocation"
               };
         }
@@ -236,20 +222,11 @@ CertificateVerifyBlock.propTypes = {
   handleCertificateVerify: PropTypes.func,
   verifyTriggered: PropTypes.bool,
   verifying: PropTypes.bool,
-  isHashVerified: PropTypes.bool,
-  isIssuerVerified: PropTypes.bool,
-  isIssued: PropTypes.bool,
-  isNotRevoked: PropTypes.bool,
-  hashError: PropTypes.string,
-  storeError: PropTypes.string,
-  revokedError: PropTypes.string,
-  issuerError: PropTypes.string,
-  certificateHashVerifying: PropTypes.bool,
-  certificateIssuedVerifying: PropTypes.bool,
-  certificateNotRevokedVerifying: PropTypes.bool,
-  certificateIssuerVerifying: PropTypes.bool,
-  certificateIssuedError: PropTypes.string,
-  issuerIdentity: PropTypes.string
+
+  hashStatus: PropTypes.object,
+  issuedStatus: PropTypes.object,
+  notRevokedStatus: PropTypes.object,
+  issuerIdentityStatus: PropTypes.object
 };
 
 renderBlockHeader.propTypes = CertificateVerifyBlock.propTypes;
