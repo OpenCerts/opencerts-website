@@ -6,8 +6,6 @@ export const initialState = {
 
   issuerIdentity: null,
 
-  verifyTriggered: false,
-
   certificateHash: false,
   certificateIssued: false,
   certificateNotRevoked: false,
@@ -29,7 +27,6 @@ export const types = {
   NETWORK_RESET: "NETWORK_RESET", // For network change
 
   UPDATE_CERTIFICATE: "UPDATE_CERTIFICATE",
-  UPDATE_FILTERED_CERTIFICATE: "UPDATE_FILTERED_CERTIFICATE",
 
   LOADING_STORE_SUCCESS: "LOADING_STORE_SUCCESS",
   LOADING_STORE_FAILURE: "LOADING_STORE_FAILURE",
@@ -65,11 +62,6 @@ export default function reducer(state = initialState, action) {
         store: null,
         storeError: null,
         storeLoading: true
-      };
-    case types.UPDATE_FILTERED_CERTIFICATE:
-      return {
-        ...state,
-        raw: action.payload.certificate
       };
     case types.LOADING_STORE_SUCCESS:
       return {
@@ -249,10 +241,6 @@ export function getCertificate(store) {
 
 export function getCertificateStore(store) {
   return store.certificate.store;
-}
-
-export function getVerifyTriggered(store) {
-  return store.certificate.verifyTriggered;
 }
 
 export function getVerifying(store) {

@@ -6,7 +6,6 @@ import {
   verifyCertificate,
   getCertificate,
   getCertificateStore,
-  getVerifyTriggered,
   getVerifying,
   getIssuerIdentityStatus,
   getHashStatus,
@@ -77,7 +76,6 @@ const mapStateToProps = store => ({
   certificateStore: getCertificateStore(store),
 
   // Verification statuses used in verifier block
-  verifyTriggered: getVerifyTriggered(store),
   verifying: getVerifying(store),
   issuerIdentityStatus: getIssuerIdentityStatus(store),
   hashStatus: getHashStatus(store),
@@ -99,6 +97,5 @@ MainPageContainer.propTypes = {
   certificate: PropTypes.object,
   certificateStore: PropTypes.object,
   verifyCertificate: PropTypes.func,
-  verifyTriggered: PropTypes.bool,
   verifying: PropTypes.bool
 };
