@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { certificateData } from "@govtechsg/open-certificate";
 import {
   updateCertificate,
   verifyCertificate,
@@ -51,7 +52,8 @@ class MainPageContainer extends Component {
   renderCertificateViewer() {
     return (
       <CertificateViewer
-        certificate={this.props.certificate}
+        document={this.props.document}
+        certificate={certificateData(this.props.document)}
         certificateStore={this.props.certificateStore}
         verifying={this.props.verifying}
         hashStatus={this.props.hashStatus}
@@ -65,7 +67,7 @@ class MainPageContainer extends Component {
   }
 
   render() {
-    const content = this.props.certificate
+    const content = this.props.document
       ? this.renderCertificateViewer()
       : this.renderMainContent();
 
@@ -74,7 +76,7 @@ class MainPageContainer extends Component {
 }
 
 const mapStateToProps = store => ({
-  certificate: getCertificate(store),
+  document: getCertificate(store),
   certificateStore: getCertificateStore(store),
 
   // Verification statuses used in verifier block
@@ -96,6 +98,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(MainPageContainer);
 MainPageContainer.propTypes = {
   updateNetworkId: PropTypes.func,
   updateCertificate: PropTypes.func,
+  document: PropTypes.object,
   certificate: PropTypes.object,
   certificateStore: PropTypes.object,
   verifyCertificate: PropTypes.func,

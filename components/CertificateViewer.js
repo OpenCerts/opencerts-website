@@ -1,15 +1,10 @@
 import PropTypes from "prop-types";
 import { get } from "lodash";
-import { certificateData } from "@govtechsg/open-certificate";
 import certificateIndex from "../certificateTemplates";
 import CertificateVerifyBlock from "./CertificateVerifyBlock";
 
 const renderCertificate = certificate => {
-  const renderingTemplateName = get(
-    certificateData(certificate),
-    "template",
-    "default"
-  );
+  const renderingTemplateName = get(certificate, "template", "default");
   const template = certificateIndex[renderingTemplateName];
   // dangerouslySetInnerHTML is okay because Handlebar mitigates script injection
   return <div dangerouslySetInnerHTML={{ __html: template(certificate) }} />;
@@ -28,6 +23,40 @@ const renderVerifyBlock = props => (
   />
 );
 
+const renderIdentitiesBlock = certificate => {
+  const issuerName = get(certificate, "issuer.name");
+  const recipientName = get(certificate, "recipient.name");
+  return issuerName || recipientName ? (
+    <div className="mt-2">
+      {issuerName ? (
+        <div className="text-muted">Issued by {issuerName}</div>
+      ) : null}
+      {recipientName ? (
+        <div className="text-muted">Issued to {recipientName}</div>
+      ) : null}
+    </div>
+  ) : null;
+};
+
+const renderHeaderBlock = props => {
+  const renderedIdentitiesBlock = renderIdentitiesBlock(props.certificate);
+  const renderedVerifyBlock = renderVerifyBlock(props);
+  return (
+    <div className="container-fluid bg-light">
+      <div className="row p-3">
+        <div>
+          {renderedVerifyBlock}
+          {renderedIdentitiesBlock}
+        </div>
+
+        <div className="ml-auto">
+          <i className="fas fa-print fa-2x text-dark" />
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const renderCertificateChange = handleCertificateChange => (
   <a href="#" onClick={() => handleCertificateChange(null)}>
     ← Upload another
@@ -36,17 +65,16 @@ const renderCertificateChange = handleCertificateChange => (
 
 const CertificateViewer = props => {
   const { certificate } = props;
-  const certObject = certificateData(certificate);
 
-  const renderedCertificate = renderCertificate(certObject);
-  const renderedVerifyBlock = renderVerifyBlock(props);
+  const renderedHeaderBlock = renderHeaderBlock(props);
+  const renderedCertificate = renderCertificate(certificate);
   const renderedCertificateChange = renderCertificateChange(
     props.handleCertificateChange
   );
 
   return (
     <div>
-      {renderedVerifyBlock}
+      {renderedHeaderBlock}
       {renderedCertificate}
       {renderedCertificateChange}
     </div>
@@ -67,5 +95,6 @@ CertificateViewer.propTypes = {
 };
 
 renderVerifyBlock.propTypes = CertificateViewer.propTypes;
+renderHeaderBlock.propTypes = CertificateViewer.propTypes;
 
 export default CertificateViewer;
