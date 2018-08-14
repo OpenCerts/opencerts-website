@@ -4,6 +4,7 @@ export const initialState = {
   raw: null,
   store: null,
   storeError: null,
+  storeLoading: false,
 
   issuerIdentity: null,
 
@@ -63,7 +64,10 @@ export default function reducer(state = initialState, action) {
     case types.UPDATE_CERTIFICATE:
       return {
         ...initialState,
-        raw: action.payload
+        raw: action.payload,
+        store: null,
+        storeError: null,
+        storeLoading: true
       };
     case types.UPDATE_FILTERED_CERTIFICATE:
       return {
@@ -74,12 +78,14 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         store: action.payload,
-        storeError: null
+        storeError: null,
+        storeLoading: false
       };
     case types.LOADING_STORE_FAILURE:
       return {
         ...state,
-        storeError: action.payload
+        storeError: action.payload,
+        storeLoading: false
       };
     case types.VERIFYING_CERTIFICATE:
       return {
@@ -254,12 +260,15 @@ export function getVerifyTriggered(store) {
 
 export function getVerifying(store) {
   const {
+    storeLoading,
     certificateIssuerVerifying,
     certificateHashVerifying,
     certificateIssuedVerifying,
     certificateNotRevokedVerifying
   } = store.certificate;
   return (
+    store.application.networkUpdatePending ||
+    storeLoading ||
     certificateIssuerVerifying ||
     certificateHashVerifying ||
     certificateIssuedVerifying ||

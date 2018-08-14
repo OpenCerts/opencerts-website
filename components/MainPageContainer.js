@@ -35,12 +35,11 @@ class MainPageContainer extends Component {
   }
 
   handleCertificateVerify() {
-    const { certificate, certificateStore, issuers } = this.props;
+    const { certificate, certificateStore } = this.props;
 
     this.props.verifyCertificate({
       certificate,
-      certificateStore,
-      issuers
+      certificateStore
     });
   }
 
