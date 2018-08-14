@@ -14,10 +14,6 @@ export default function* rootSaga() {
     ),
     takeEvery(
       certificateType.UPDATE_CERTIFICATE,
-      certificateSaga.loadCertificateContract
-    ),
-    takeEvery(
-      certificateType.VERIFYING_CERTIFICATE,
       certificateSaga.verifyCertificate
     ),
     takeEvery(

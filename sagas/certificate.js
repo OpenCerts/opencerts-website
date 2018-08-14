@@ -22,16 +22,17 @@ export function* loadCertificateContract({ payload }) {
       type: types.LOADING_STORE_SUCCESS,
       payload: { contract }
     });
+    return contract;
   } catch (e) {
     yield put({
       type: types.LOADING_STORE_FAILURE,
       payload: e
     });
+    return null;
   }
 }
 
-export function* verifyCertificateHash({ payload }) {
-  const { certificate } = payload;
+export function* verifyCertificateHash({ certificate }) {
   const verified = verifySignature(certificate);
   if (verified) {
     yield put({
@@ -44,13 +45,12 @@ export function* verifyCertificateHash({ payload }) {
   }
 }
 
-export function* verifyCertificateIssued({ payload }) {
+export function* verifyCertificateIssued({ certificate, certificateStore }) {
   try {
-    const { certificate, certificateStore } = payload;
     const merkleRoot = `0x${_.get(certificate, "signature.merkleRoot", "")}`;
 
     // Checks if certificate has been issued
-    const isIssued = yield certificateStore.contract.methods
+    const isIssued = yield certificateStore.methods
       .isCertificateIssued(merkleRoot)
       .call();
     if (!isIssued) throw new Error("Certificate has not been issued");
@@ -66,9 +66,11 @@ export function* verifyCertificateIssued({ payload }) {
   }
 }
 
-export function* verifyCertificateNotRevoked({ payload }) {
+export function* verifyCertificateNotRevoked({
+  certificate,
+  certificateStore
+}) {
   try {
-    const { certificate, certificateStore } = payload;
     const targetHash = _.get(certificate, "signature.targetHash", null);
     const proof = _.get(certificate, "signature.proof", null);
 
@@ -83,9 +85,7 @@ export function* verifyCertificateNotRevoked({ payload }) {
 
     for (let i = 0; i < combinedHashes.length; i += 1) {
       const hash = combinedHashes[i];
-      const isRevoked = yield certificateStore.contract.methods
-        .isRevoked(hash)
-        .call();
+      const isRevoked = yield certificateStore.methods.isRevoked(hash).call();
       if (isRevoked)
         throw new Error(`Certificate has been revoked, revoked hash: ${hash}`);
     }
@@ -100,10 +100,9 @@ export function* verifyCertificateNotRevoked({ payload }) {
   }
 }
 
-export function* verifyCertificateIssuer({ payload }) {
+export function* verifyCertificateIssuer({ certificate }) {
   try {
     const issuers = yield fetchIssuers();
-    const { certificate } = payload;
 
     const address = _.get(certificate, "verification.contractAddress", null);
     if (!address) throw new Error("Certificate store address cannot be found");
@@ -125,15 +124,17 @@ export function* verifyCertificateIssuer({ payload }) {
 }
 
 export function* verifyCertificate({ payload }) {
-  yield all([
-    call(verifyCertificateHash, { payload }),
-    call(verifyCertificateIssued, { payload }),
-    call(verifyCertificateNotRevoked, { payload }),
-    call(verifyCertificateIssuer, { payload })
-  ]);
   yield put({
-    type: types.VERIFYING_CERTIFICATE_COMPLETE
+    type: types.VERIFYING_CERTIFICATE
   });
+  const certificateStore = yield call(loadCertificateContract, { payload });
+  const args = { certificateStore, certificate: payload };
+  yield all([
+    call(verifyCertificateHash, args),
+    call(verifyCertificateIssued, args),
+    call(verifyCertificateNotRevoked, args),
+    call(verifyCertificateIssuer, args)
+  ]);
 }
 
 export function* networkReset() {

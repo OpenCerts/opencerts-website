@@ -95,23 +95,6 @@ const renderBlockHeader = ({
 };
 
 class CertificateVerifyBlock extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (
-      // TODO: Should be using deep compare to provent verified status for 2 cerst with same store.
-      // Or use saga to trigger verify instead.
-      this.props.certificateStore !== nextProps.certificateStore &&
-      nextProps.certificateStore != null
-    ) {
-      this.props.handleCertificateVerify();
-    }
-  }
-
   render() {
     const {
       hashStatus,
@@ -204,10 +187,7 @@ class CertificateVerifyBlock extends React.Component {
     return (
       <div>
         {renderBlockHeader({
-          ...this.props,
-          handleShowChecks: () => {
-            this.setState({ showInfo: !this.state.showInfo });
-          }
+          ...this.props
         })}
         <InfoBlock severity={SEVERITY.ERROR} values={checked} />
         <InfoBlock severity={SEVERITY.WARN} values={checked} />
