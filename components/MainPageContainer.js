@@ -50,15 +50,17 @@ class MainPageContainer extends Component {
 
   renderCertificateViewer() {
     return (
-      <div>
-        <a href="#" onClick={() => this.handleCertificateChange(null)}>
-          ← Upload another
-        </a>
-        <CertificateViewer
-          {...this.props}
-          handleCertificateVerify={this.handleCertificateVerify}
-        />
-      </div>
+      <CertificateViewer
+        certificate={this.props.certificate}
+        certificateStore={this.props.certificateStore}
+        verifying={this.props.verifying}
+        hashStatus={this.props.hashStatus}
+        issuedStatus={this.props.issuedStatus}
+        notRevokedStatus={this.props.notRevokedStatus}
+        issuerIdentityStatus={this.props.issuerIdentityStatus}
+        handleCertificateChange={this.handleCertificateChange}
+        handleCertificateVerify={this.handleCertificateVerify}
+      />
     );
   }
 
@@ -97,5 +99,9 @@ MainPageContainer.propTypes = {
   certificate: PropTypes.object,
   certificateStore: PropTypes.object,
   verifyCertificate: PropTypes.func,
-  verifying: PropTypes.bool
+  verifying: PropTypes.bool,
+  hashStatus: PropTypes.object,
+  issuedStatus: PropTypes.object,
+  notRevokedStatus: PropTypes.object,
+  issuerIdentityStatus: PropTypes.object
 };
