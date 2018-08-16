@@ -51,6 +51,42 @@ const Meta = () => (
         margin: 0px;
       }
 
+      li.nav-item a.slanted-tab {
+        background-color: transparent;
+        border-color: transparent;
+        z-index: 1;
+        position: relative;
+        display: inline-block;
+        padding: 1.5em 1.5em 1em;
+        color: inherit;
+        text-decoration: none;
+        margin: 0 -7px;
+      }
+
+      li.nav-item a.slanted-tab::before {
+        content: ""; /* To generate the box */
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0.5em;
+        left: 0;
+        z-index: -1;
+        border-bottom: none;
+        border-radius: 10px 10px 0 0;
+        background: #ddd;
+        box-shadow: 0 2px hsla(0, 0%, 100%, 0.5) inset;
+        transform: perspective(5px) rotateX(2deg);
+        transform-origin: bottom;
+      }
+
+      li.nav-item a.slanted-tab.active::before {
+        background: #aaa;
+      }
+
+      li.nav-item a.slanted-tab.active {
+        z-index: 2;
+      }
+
       .fill {
         min-height: 100%;
         min-height: 100vh;

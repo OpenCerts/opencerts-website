@@ -65,7 +65,7 @@ const CertificateViewer = props => {
   );
 
   return (
-    <div className="bg-light p-3">
+    <div className="bg-light p-3 fill">
       {renderedHeaderBlock}
       <MultiCertificateRenderer certificate={certificate} />
       {renderedCertificateChange}

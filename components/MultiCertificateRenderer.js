@@ -3,27 +3,26 @@ import certificateIndex from "../certificateTemplates";
 
 const getCertificateTemplates = () => [
   {
-    id: "certificate",
-    template: certificateIndex["default-cert"],
+    id: "default-cert",
     label: "Certificate"
   },
   {
-    id: "template",
-    template: certificateIndex.default,
+    id: "default",
     label: "Transcript"
   }
 ];
 
-const renderCertificate = (certificate, template) => (
+const renderCertificate = (certificate, templateId) => {
   // dangerouslySetInnerHTML is okay because Handlebar mitigates script injection
-  <div dangerouslySetInnerHTML={{ __html: template(certificate) }} />
-);
+  const template = certificateIndex[templateId];
+  return <div dangerouslySetInnerHTML={{ __html: template(certificate) }} />;
+};
 
 const renderTabList = (templates = []) => {
   const tabs = templates.map((t, i) => (
     <li className={`nav-item${i === 0 ? " ml-auto" : ""}`} key={i}>
       <a
-        className={`nav-link${i === 0 ? " active" : ""}`}
+        className={`slanted-tab ${i === 0 ? " active" : ""}`}
         data-toggle="tab"
         aria-controls={`${t.id}`}
         href={`#${t.id}`}
@@ -50,7 +49,7 @@ const renderTabContent = (certificate, templates = []) => {
       role="tabpanel"
       aria-labelledby={`${t.id}-tab`}
     >
-      {renderCertificate(certificate, t.template)}
+      {renderCertificate(certificate, t.id)}
     </div>
   ));
   return (
