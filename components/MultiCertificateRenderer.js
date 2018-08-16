@@ -1,22 +1,16 @@
 import PropTypes from "prop-types";
-import certificateIndex from "../certificateTemplates";
+import { get } from "lodash";
+import templateRegistry from "../certificateTemplates";
 
-const getCertificateTemplates = () => [
-  {
-    id: "default-cert",
-    label: "Certificate"
-  },
-  {
-    id: "default",
-    label: "Transcript"
-  }
-];
-
-const renderCertificate = (certificate, templateId) => {
-  // dangerouslySetInnerHTML is okay because Handlebar mitigates script injection
-  const template = certificateIndex[templateId];
-  return <div dangerouslySetInnerHTML={{ __html: template(certificate) }} />;
+const getCertificateTemplates = certificate => {
+  const templateSet = get(certificate, "data.$template", "default");
+  return templateRegistry[templateSet];
 };
+
+const renderCertificate = (certificate, template) => (
+  // dangerouslySetInnerHTML is okay because Handlebar mitigates script injection
+  <div dangerouslySetInnerHTML={{ __html: template(certificate) }} />
+);
 
 const renderTabList = (templates = []) => {
   const tabs = templates.map((t, i) => (
@@ -49,7 +43,7 @@ const renderTabContent = (certificate, templates = []) => {
       role="tabpanel"
       aria-labelledby={`${t.id}-tab`}
     >
-      {renderCertificate(certificate, t.id)}
+      {renderCertificate(certificate, t.template)}
     </div>
   ));
   return (
