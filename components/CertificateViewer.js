@@ -1,14 +1,7 @@
 import PropTypes from "prop-types";
 import { get } from "lodash";
-import certificateIndex from "../certificateTemplates";
 import CertificateVerifyBlock from "./CertificateVerifyBlock";
-
-const renderCertificate = certificate => {
-  const renderingTemplateName = get(certificate, "template", "default");
-  const template = certificateIndex[renderingTemplateName];
-  // dangerouslySetInnerHTML is okay because Handlebar mitigates script injection
-  return <div dangerouslySetInnerHTML={{ __html: template(certificate) }} />;
-};
+import MultiCertificateRenderer from "./MultiCertificateRenderer";
 
 const renderVerifyBlock = props => (
   <CertificateVerifyBlock
@@ -42,8 +35,8 @@ const renderHeaderBlock = props => {
   const renderedIdentitiesBlock = renderIdentitiesBlock(props.certificate);
   const renderedVerifyBlock = renderVerifyBlock(props);
   return (
-    <div className="container-fluid bg-light">
-      <div className="row p-3">
+    <div className="container-fluid">
+      <div className="row">
         <div>
           {renderedVerifyBlock}
           {renderedIdentitiesBlock}
@@ -67,15 +60,14 @@ const CertificateViewer = props => {
   const { certificate } = props;
 
   const renderedHeaderBlock = renderHeaderBlock(props);
-  const renderedCertificate = renderCertificate(certificate);
   const renderedCertificateChange = renderCertificateChange(
     props.handleCertificateChange
   );
 
   return (
-    <div>
+    <div className="bg-light p-3">
       {renderedHeaderBlock}
-      {renderedCertificate}
+      <MultiCertificateRenderer certificate={certificate} />
       {renderedCertificateChange}
     </div>
   );

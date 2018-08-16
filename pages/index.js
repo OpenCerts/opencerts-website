@@ -7,7 +7,7 @@ import FooterBar from "../components/FooterBar";
 import MainPageContainer from "../components/MainPageContainer";
 
 const VerifierPage = props => (
-  <div className="fill">
+  <div>
     <Meta />
     <NavigationBar />
     <MainPageContainer {...props} />

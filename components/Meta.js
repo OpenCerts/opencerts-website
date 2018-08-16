@@ -51,6 +51,11 @@ const Meta = () => (
         margin: 0px;
       }
 
+      .fill {
+        min-height: 100%;
+        min-height: 100vh;
+      }
+
       .pointer {
         cursor: pointer;
       }
