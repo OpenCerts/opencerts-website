@@ -3,7 +3,7 @@ import { get } from "lodash";
 import templateRegistry from "../certificateTemplates";
 
 const getCertificateTemplates = certificate => {
-  const templateSet = get(certificate, "data.$template", "default");
+  const templateSet = get(certificate, "data.$template", "np-sample");
   return templateRegistry[templateSet];
 };
 

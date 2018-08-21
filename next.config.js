@@ -11,7 +11,10 @@ module.exports = {
   webpack: config => {
     config.module.rules.push({
       test: /\.handlebars$/,
-      loader: "handlebars-loader"
+      loader: "handlebars-loader",
+      options: {
+        helperDirs: `${__dirname}/helpers`
+      }
     });
     return config;
   }
