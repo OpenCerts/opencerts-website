@@ -8,21 +8,24 @@ import { combinedHash } from "../utils";
 
 import { getSelectedWeb3 } from "./application";
 
-export function* loadCertificateContract({ payload }) {
+export function* loadCertificateContracts({ payload }) {
   try {
     const data = certificateData(payload);
-    const contractStoreAddress = _.get(data, "issuer.certificateStore", null);
+    const contractStoreAddresses = _.get(data, "issuers", []).map(
+      issuer => issuer.certificateStore
+    );
+
     const { abi } = CertificateStoreDefinition;
     const web3 = yield getSelectedWeb3();
-    const contract = new web3.eth.Contract(abi, contractStoreAddress);
-    // Hack to allow React Dev Tools to print contract object
-    contract.toJSON = () =>
-      `Contract Functions: ${Object.keys(contract).join("(), ")}()`;
+
+    const contracts = contractStoreAddresses.map(
+      address => new web3.eth.Contract(abi, address)
+    );
+
     yield put({
-      type: types.LOADING_STORE_SUCCESS,
-      payload: { contract }
+      type: types.LOADING_STORE_SUCCESS
     });
-    return contract;
+    return contracts;
   } catch (e) {
     yield put({
       type: types.LOADING_STORE_FAILURE,
@@ -45,14 +48,15 @@ export function* verifyCertificateHash({ certificate }) {
   }
 }
 
-export function* verifyCertificateIssued({ certificate, certificateStore }) {
+export function* verifyCertificateIssued({ certificate, certificateStores }) {
   try {
     const merkleRoot = `0x${_.get(certificate, "signature.merkleRoot", "")}`;
 
-    // Checks if certificate has been issued
-    const isIssued = yield certificateStore.methods
-      .isCertificateIssued(merkleRoot)
-      .call();
+    // Checks if certificate has been issued on ALL store
+    const issuedStatuses = yield certificateStores.map(store =>
+      store.methods.isCertificateIssued(merkleRoot).call()
+    );
+    const isIssued = issuedStatuses.reduce((prev, curr) => prev && curr, true);
     if (!isIssued) throw new Error("Certificate has not been issued");
 
     yield put({
@@ -68,7 +72,7 @@ export function* verifyCertificateIssued({ certificate, certificateStore }) {
 
 export function* verifyCertificateNotRevoked({
   certificate,
-  certificateStore
+  certificateStores
 }) {
   try {
     const targetHash = _.get(certificate, "signature.targetHash", null);
@@ -85,10 +89,19 @@ export function* verifyCertificateNotRevoked({
 
     for (let i = 0; i < combinedHashes.length; i += 1) {
       const hash = combinedHashes[i];
-      const isRevoked = yield certificateStore.methods.isRevoked(hash).call();
+
+      // Check if certificate is revoked on ALL store
+      const revokedStatus = yield certificateStores.map(store =>
+        store.methods.isRevoked(hash).call()
+      );
+      const isRevoked = revokedStatus.reduce(
+        (prev, curr) => prev || curr,
+        false
+      );
       if (isRevoked)
         throw new Error(`Certificate has been revoked, revoked hash: ${hash}`);
     }
+
     yield put({
       type: types.VERIFYING_CERTIFICATE_REVOCATION_SUCCESS
     });
@@ -102,18 +115,23 @@ export function* verifyCertificateNotRevoked({
 
 export function* verifyCertificateIssuer({ certificate }) {
   try {
-    const issuers = yield fetchIssuers();
+    const registeredIssuers = yield fetchIssuers();
 
-    const address = _.get(certificate, "verification.contractAddress", null);
-    if (!address) throw new Error("Certificate store address cannot be found");
+    const data = certificateData(certificate);
+    const contractStoreAddresses = _.get(data, "issuers", []).map(
+      issuer => issuer.certificateStore
+    );
 
-    const issuerIdentity = issuers[address.toUpperCase()];
-    if (!issuerIdentity)
-      throw new Error(`Issuer identity cannot be verified: ${address}`);
+    const issuerIdentities = contractStoreAddresses.map(store => {
+      const identity = registeredIssuers[store.toUpperCase()];
+      if (!identity)
+        throw new Error(`Issuer identity cannot be verified: ${store}`);
+      return identity;
+    });
 
     yield put({
       type: types.VERIFYING_CERTIFICATE_ISSUER_SUCCESS,
-      payload: issuerIdentity
+      payload: issuerIdentities
     });
   } catch (e) {
     yield put({
@@ -127,8 +145,8 @@ export function* verifyCertificate({ payload }) {
   yield put({
     type: types.VERIFYING_CERTIFICATE
   });
-  const certificateStore = yield call(loadCertificateContract, { payload });
-  const args = { certificateStore, certificate: payload };
+  const certificateStores = yield call(loadCertificateContracts, { payload });
+  const args = { certificateStores, certificate: payload };
   yield all([
     call(verifyCertificateHash, args),
     call(verifyCertificateIssued, args),
@@ -143,4 +161,4 @@ export function* networkReset() {
   });
 }
 
-export default loadCertificateContract;
+export default loadCertificateContracts;

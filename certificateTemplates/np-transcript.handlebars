@@ -126,7 +126,17 @@
       <div>* DISTINCTION GRADE IS AWARDED TO THE TOP 5% COHORT</div>
     </div>
   </div>
-  <div class="row">
-    {{eachSemester transcript}}
-  </div>
+  <div class="row mt-4">
+    <table>
+      {{#each transcript}}
+        <tr>
+          <td>{{courseCode}}</td>
+          <td>{{name}}</td>
+          <td>{{courseCredit}}</td>
+          <td>{{grade}}</td>
+          <td>2018-09-09</td>
+        </tr>
+      {{/each}}
+    </div>
+  </table>
 </div>

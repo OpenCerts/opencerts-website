@@ -4,7 +4,7 @@ export const initialState = {
   storeError: null,
   storeLoading: false,
 
-  issuerIdentity: null,
+  issuerIdentities: null,
 
   certificateHash: false,
   certificateIssued: false,
@@ -79,7 +79,7 @@ export default function reducer(state = initialState, action) {
     case types.VERIFYING_CERTIFICATE:
       return {
         ...state,
-        issuerIdentity: null,
+        issuerIdentities: null,
 
         certificateHash: false,
         certificateIssued: false,
@@ -148,7 +148,7 @@ export default function reducer(state = initialState, action) {
     case types.VERIFYING_CERTIFICATE_ISSUER_SUCCESS:
       return {
         ...state,
-        issuerIdentity: action.payload,
+        issuerIdentities: action.payload,
         certificateIssuer: true,
         certificateIssuerVerifying: false,
         certificateIssuerError: null
@@ -183,13 +183,13 @@ export function updateFilteredCertificate(payload) {
 // Selectors
 export function getIssuerIdentityStatus(store) {
   const {
-    issuerIdentity,
+    issuerIdentities,
     certificateIssuerVerifying,
     certificateIssuerError,
     certificateIssuer
   } = store.certificate;
   return {
-    identity: issuerIdentity,
+    identities: issuerIdentities,
     verified: certificateIssuer,
     verifying: certificateIssuerVerifying,
     error: certificateIssuerError
