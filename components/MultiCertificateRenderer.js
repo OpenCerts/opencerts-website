@@ -1,16 +1,11 @@
 import PropTypes from "prop-types";
 import { get } from "lodash";
-import templateRegistry from "../certificateTemplates";
+import templateRegistry from "./Templates";
 
 const getCertificateTemplates = certificate => {
-  const templateSet = get(certificate, "data.$template", "np-sample");
+  const templateSet = get(certificate, "$template", "default");
   return templateRegistry[templateSet];
 };
-
-const renderCertificate = (certificate, template) => (
-  // dangerouslySetInnerHTML is okay because Handlebar mitigates script injection
-  <div dangerouslySetInnerHTML={{ __html: template(certificate) }} />
-);
 
 const renderTabList = (templates = []) => {
   const tabs = templates.map((t, i) => (
@@ -43,7 +38,7 @@ const renderTabContent = (certificate, templates = []) => {
       role="tabpanel"
       aria-labelledby={`${t.id}-tab`}
     >
-      {renderCertificate(certificate, t.template)}
+      {t.template(certificate)}
     </div>
   ));
   return (

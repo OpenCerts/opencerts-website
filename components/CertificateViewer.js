@@ -17,7 +17,8 @@ const renderVerifyBlock = props => (
 );
 
 const renderIdentitiesBlock = certificate => {
-  const issuerName = get(certificate, "issuer.name");
+  const issuers = get(certificate, "issuers", []);
+  const issuerName = issuers.map(i => i.name).join(", ");
   const recipientName = get(certificate, "recipient.name");
   return issuerName || recipientName ? (
     <div className="mt-2">
