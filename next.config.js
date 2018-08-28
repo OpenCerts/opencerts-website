@@ -10,8 +10,7 @@ module.exports = withCSS({
   },
   exportPathMap: function exportMap() {
     return {
-      "/": { page: "/" },
-      "/admin": { page: "/admin" }
+      "/": { page: "/" }
     };
   },
   assetPrefix: isProd ? "/certificate-web-ui" : ""
