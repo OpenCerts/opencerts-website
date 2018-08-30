@@ -51,6 +51,10 @@ const Meta = () => (
         margin: 0px;
       }
 
+      .bg-brand-dark {
+        background-color: #324353;
+      }
+
       li.nav-item a.slanted-tab {
         background-color: transparent;
         border-color: transparent;
