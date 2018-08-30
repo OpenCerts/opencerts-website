@@ -4,7 +4,7 @@ const Template = certificate => {
   const certificateName = get(certificate, "name");
   const certificateId = get(certificate, "id");
   const issuedOn = get(certificate, "issuedOn");
-  const expiredOn = get(certificate, "expiredOn");
+  const expiresOn = get(certificate, "expiresOn");
   const admissionDate = get(certificate, "admissionDate");
   const graduationDate = get(certificate, "graduationDate ");
 
@@ -39,7 +39,7 @@ const Template = certificate => {
           {certificateId && `Serial: ${certificateId}`}
         </div>
         <div className="w-100">{issuedOn && `Issued On: ${issuedOn}`}</div>
-        <div className="w-100">{expiredOn && `Expire On: ${expiredOn}`}</div>
+        <div className="w-100">{expiresOn && `Expires On: ${expiresOn}`}</div>
         <div className="w-100">
           {admissionDate && `Admission Date: ${admissionDate}`}
         </div>

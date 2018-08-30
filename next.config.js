@@ -13,5 +13,5 @@ module.exports = withCSS({
       "/": { page: "/" }
     };
   },
-  assetPrefix: isProd ? "/certificate-web-ui" : ""
+  assetPrefix: isProd ? "/opencerts-website" : ""
 });

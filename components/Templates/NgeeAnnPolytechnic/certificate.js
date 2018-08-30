@@ -38,7 +38,7 @@ const Template = certificate => (
       </div>
       <div className="row d-flex justify-content-center">
         <p style={printTextStyle}>
-          having successfully completed the course of study was award the
+          having successfully completed the course of study was awarded the
         </p>
       </div>
       <div className="row d-flex justify-content-center">

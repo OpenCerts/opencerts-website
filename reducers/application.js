@@ -55,8 +55,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         networkId: action.payload.networkId,
         networkIdVerbose: action.payload.networkIdVerbose,
-        networkUpdatePending: false,
-        networkPollingTask: action.payload.providerPollingTask
+        networkUpdatePending: false
       };
     case types.UPDATE_NETWORK_ID_FAILURE:
       return {

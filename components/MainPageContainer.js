@@ -14,7 +14,7 @@ import {
   getNotRevokedStatus
 } from "../reducers/certificate";
 import CertificateViewer from "./CertificateViewer";
-import MainContent from "./MainContent";
+import MainContent from "./MainPageContent";
 import { updateNetworkId } from "../reducers/application";
 
 class MainPageContainer extends Component {
@@ -26,7 +26,7 @@ class MainPageContainer extends Component {
     this.handleCertificateVerify = this.handleCertificateVerify.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.updateNetworkId();
   }
 
@@ -93,7 +93,10 @@ const mapDispatchToProps = dispatch => ({
   verifyCertificate: payload => dispatch(verifyCertificate(payload))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainPageContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MainPageContainer);
 
 MainPageContainer.propTypes = {
   updateNetworkId: PropTypes.func,

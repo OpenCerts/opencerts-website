@@ -49,7 +49,10 @@ const mapDispatchToProps = dispatch => ({
   updateWeb3: payload => dispatch(updateWeb3(payload))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(NetworkSelector);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NetworkSelector);
 
 NetworkSelector.propTypes = {
   network: PropTypes.string,

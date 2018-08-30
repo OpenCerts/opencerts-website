@@ -14,9 +14,9 @@
     validator "^10.5.0"
     verbal-expressions "^0.3.0"
 
-"@govtechsg/open-certificate@^1.1.17":
-  version "1.1.24"
-  resolved "https://registry.yarnpkg.com/@govtechsg/open-certificate/-/open-certificate-1.1.24.tgz#cae3be34ca36b8f583aede53cbd6d76de9f0d6ca"
+"@govtechsg/open-certificate@^1.1.27":
+  version "1.1.27"
+  resolved "https://registry.yarnpkg.com/@govtechsg/open-certificate/-/open-certificate-1.1.27.tgz#1aabfe5869db8744dc5256c0f82a0ea6e31d1f3a"
   dependencies:
     "@govtechsg/open-attestation" "^1.1.18"
     flat "^4.1.0"
