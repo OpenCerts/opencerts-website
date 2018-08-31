@@ -53,8 +53,10 @@ export function* verifyCertificateIssued({ certificate, certificateStores }) {
     const merkleRoot = `0x${_.get(certificate, "signature.merkleRoot", "")}`;
 
     // Checks if certificate has been issued on ALL store
-    const issuedStatuses = yield certificateStores.map(store =>
-      store.methods.isCertificateIssued(merkleRoot).call()
+    const issuedStatuses = yield all(
+      certificateStores.map(store =>
+        store.methods.isCertificateIssued(merkleRoot).call()
+      )
     );
     const isIssued = issuedStatuses.reduce((prev, curr) => prev && curr, true);
     if (!isIssued) throw new Error("Certificate has not been issued");
@@ -91,8 +93,8 @@ export function* verifyCertificateNotRevoked({
       const hash = combinedHashes[i];
 
       // Check if certificate is revoked on ALL store
-      const revokedStatus = yield certificateStores.map(store =>
-        store.methods.isRevoked(hash).call()
+      const revokedStatus = yield all(
+        certificateStores.map(store => store.methods.isRevoked(hash).call())
       );
       const isRevoked = revokedStatus.reduce(
         (prev, curr) => prev || curr,
