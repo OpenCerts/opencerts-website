@@ -4,7 +4,7 @@ import CertificateDropzone from "../CertificateDropzone";
 const DropZoneSection = ({ handleCertificateChange }) => (
   <div
     className="row p-4 bg-brand-dark text-white"
-    style={{ boxShadow: "inset 0 0 50px 0 rgb(102, 120, 138, 0.2)" }}
+    style={{ boxShadow: "inset 0 0 50px 0 rgba(102, 120, 138, 0.2)" }}
   >
     <div className="col">
       <div className="mb-3 py-4">
