@@ -55,6 +55,18 @@ const Meta = () => (
         background-color: #324353;
       }
 
+      .text-red {
+        color: #ff5268;
+      }
+
+      .text-orange {
+        color: #ffbd52;
+      }
+
+      .text-brand-dark {
+        color: #324353;
+      }
+
       li.nav-item a.slanted-tab {
         background-color: transparent;
         border-color: transparent;

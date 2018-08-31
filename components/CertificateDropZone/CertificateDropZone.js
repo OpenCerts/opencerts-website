@@ -30,7 +30,15 @@ const renderDropzoneContent = props => {
       !notRevokedStatus.verified ||
       !issuerIdentityStatus.verified)
   ) {
-    return <UnverifiedView handleRenderOverwrite={handleRenderOverwrite} />;
+    return (
+      <UnverifiedView
+        handleRenderOverwrite={handleRenderOverwrite}
+        hashStatus={hashStatus}
+        issuedStatus={issuedStatus}
+        notRevokedStatus={notRevokedStatus}
+        issuerIdentityStatus={issuerIdentityStatus}
+      />
+    );
   }
   return <DefaultView />;
 };
@@ -71,7 +79,7 @@ const CertificateDropzone = ({
     onDrop={acceptedFiles => onFileDrop(acceptedFiles, handleCertificateChange)}
     className="pointer h-100"
     acceptClassName=""
-    rejectClassName="w-100 bg-warning tc br3"
+    rejectClassName=""
   >
     {renderDropzoneContentCurry({
       handleCertificateChange,
