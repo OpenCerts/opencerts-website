@@ -9,7 +9,8 @@ import {
   getIssuerIdentityStatus,
   getHashStatus,
   getIssuedStatus,
-  getNotRevokedStatus
+  getNotRevokedStatus,
+  getVerificationStatus
 } from "../../reducers/certificate";
 import CertificateDropZone from "./CertificateDropZone";
 
@@ -40,6 +41,7 @@ class CertificateDropZoneContainer extends Component {
         hashStatus={this.props.hashStatus}
         issuedStatus={this.props.issuedStatus}
         notRevokedStatus={this.props.notRevokedStatus}
+        verificationStatus={this.props.verificationStatus}
       />
     );
   }
@@ -53,7 +55,8 @@ const mapStateToProps = store => ({
   issuerIdentityStatus: getIssuerIdentityStatus(store),
   hashStatus: getHashStatus(store),
   issuedStatus: getIssuedStatus(store),
-  notRevokedStatus: getNotRevokedStatus(store)
+  notRevokedStatus: getNotRevokedStatus(store),
+  verificationStatus: getVerificationStatus(store)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -75,5 +78,6 @@ CertificateDropZoneContainer.propTypes = {
   issuerIdentityStatus: PropTypes.object,
   hashStatus: PropTypes.object,
   issuedStatus: PropTypes.object,
-  notRevokedStatus: PropTypes.object
+  notRevokedStatus: PropTypes.object,
+  verificationStatus: PropTypes.array
 };

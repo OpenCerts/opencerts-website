@@ -15,13 +15,14 @@ const renderDropzoneContent = props => {
     hashStatus,
     issuedStatus,
     notRevokedStatus,
-    document
+    document,
+    verificationStatus
   } = props;
   if (isDragReject) {
     return <FileFormatErrorView />;
   }
   if (verifying) {
-    return <VerifyingView />;
+    return <VerifyingView verificationStatus={verificationStatus} />;
   }
   if (
     document &&
@@ -72,7 +73,8 @@ const CertificateDropzone = ({
   hashStatus,
   issuedStatus,
   notRevokedStatus,
-  document
+  document,
+  verificationStatus
 }) => (
   <Dropzone
     accept="application/json"
@@ -89,7 +91,8 @@ const CertificateDropzone = ({
       hashStatus,
       issuedStatus,
       notRevokedStatus,
-      document
+      document,
+      verificationStatus
     })}
   </Dropzone>
 );
@@ -103,7 +106,8 @@ CertificateDropzone.propTypes = {
   issuerIdentityStatus: PropTypes.object,
   hashStatus: PropTypes.object,
   issuedStatus: PropTypes.object,
-  notRevokedStatus: PropTypes.object
+  notRevokedStatus: PropTypes.object,
+  verificationStatus: PropTypes.array
 };
 
 renderDropzoneContent.propTypes = {
@@ -114,7 +118,8 @@ renderDropzoneContent.propTypes = {
   issuerIdentityStatus: PropTypes.object,
   hashStatus: PropTypes.object,
   issuedStatus: PropTypes.object,
-  notRevokedStatus: PropTypes.object
+  notRevokedStatus: PropTypes.object,
+  verificationStatus: PropTypes.array
 };
 
 export default CertificateDropzone;
