@@ -5,8 +5,6 @@ import MultiCertificateRenderer from "./MultiCertificateRenderer";
 
 const renderVerifyBlock = props => (
   <CertificateVerifyBlock
-    certificateStore={props.certificateStore}
-    handleCertificateVerify={props.handleCertificateVerify}
     verifyTriggered={props.verifyTriggered}
     verifying={props.verifying}
     hashStatus={props.hashStatus}
@@ -75,10 +73,8 @@ const CertificateViewer = props => {
 };
 
 CertificateViewer.propTypes = {
-  handleCertificateVerify: PropTypes.func,
   handleCertificateChange: PropTypes.func,
   certificate: PropTypes.object,
-  certificateStore: PropTypes.object,
   verifying: PropTypes.bool,
 
   hashStatus: PropTypes.object,

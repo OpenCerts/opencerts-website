@@ -10,13 +10,11 @@ const LOG_LEVEL = {
 
 const statusSummary = ({
   verifying,
-  certificateStore,
   hashStatus,
   issuedStatus,
   notRevokedStatus,
   issuerIdentityStatus
 }) => {
-  if (!certificateStore && verifying) return LOG_LEVEL.CONNECTING;
   if (verifying) return LOG_LEVEL.VERIFYING;
   if (
     !verifying &&
@@ -120,8 +118,6 @@ const CertificateVerifyBlock = props => {
 };
 
 CertificateVerifyBlock.propTypes = {
-  certificateStore: PropTypes.object,
-  handleCertificateVerify: PropTypes.func,
   verifyTriggered: PropTypes.bool,
   verifying: PropTypes.bool,
 
