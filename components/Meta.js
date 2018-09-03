@@ -59,8 +59,12 @@ const Meta = () => (
         color: #ff5268;
       }
 
+      .text-blue {
+        color: #099de3;
+      }
+
       .text-orange {
-        color: #ffbd52;
+        color: #ffb152;
       }
 
       .text-brand-dark {
