@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
+import Link from "next/link";
 
 const View = ({
-  handleRenderOverwrite,
   issuerIdentityStatus,
   hashStatus,
   issuedStatus,
@@ -55,10 +55,9 @@ const View = ({
           e.preventDefault();
           e.stopPropagation();
           e.nativeEvent.stopImmediatePropagation();
-          handleRenderOverwrite();
         }}
       >
-        Continue Viewing Certificate
+        <Link href="/viewer">Continue Viewing Certificate</Link>
       </div>
     </div>
   );

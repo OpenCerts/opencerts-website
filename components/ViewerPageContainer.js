@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import Router from "next/router";
+import { certificateData } from "@govtechsg/open-certificate";
 import {
   updateCertificate,
   getCertificate,
@@ -9,12 +11,11 @@ import {
   getHashStatus,
   getIssuedStatus,
   getNotRevokedStatus,
-  getVerificationStatus
-} from "../../reducers/certificate";
-import { updateNetworkId } from "../../reducers/application";
-import CertificateDropZone from "./CertificateDropZone";
+  getVerified
+} from "../reducers/certificate";
+import CertificateViewer from "./CertificateViewer";
 
-class CertificateDropZoneContainer extends Component {
+class MainPageContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -22,7 +23,10 @@ class CertificateDropZoneContainer extends Component {
   }
 
   componentDidMount() {
-    this.props.updateNetworkId();
+    const { document } = this.props;
+    if (!document) {
+      Router.replace("/");
+    }
   }
 
   handleCertificateChange(certificate) {
@@ -30,16 +34,17 @@ class CertificateDropZoneContainer extends Component {
   }
 
   render() {
+    if (!this.props.document) return null;
     return (
-      <CertificateDropZone
+      <CertificateViewer
         document={this.props.document}
-        handleCertificateChange={this.handleCertificateChange}
+        certificate={certificateData(this.props.document)}
         verifying={this.props.verifying}
-        issuerIdentityStatus={this.props.issuerIdentityStatus}
         hashStatus={this.props.hashStatus}
         issuedStatus={this.props.issuedStatus}
         notRevokedStatus={this.props.notRevokedStatus}
-        verificationStatus={this.props.verificationStatus}
+        issuerIdentityStatus={this.props.issuerIdentityStatus}
+        handleCertificateChange={this.handleCertificateChange}
       />
     );
   }
@@ -54,28 +59,27 @@ const mapStateToProps = store => ({
   hashStatus: getHashStatus(store),
   issuedStatus: getIssuedStatus(store),
   notRevokedStatus: getNotRevokedStatus(store),
-  verificationStatus: getVerificationStatus(store)
+
+  verified: getVerified(store)
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateNetworkId: () => dispatch(updateNetworkId()),
   updateCertificate: payload => dispatch(updateCertificate(payload))
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CertificateDropZoneContainer);
+)(MainPageContainer);
 
-CertificateDropZoneContainer.propTypes = {
-  updateNetworkId: PropTypes.func,
-  document: PropTypes.object,
-  handleCertificateChange: PropTypes.func,
+MainPageContainer.propTypes = {
   updateCertificate: PropTypes.func,
+  document: PropTypes.object,
+  certificate: PropTypes.object,
   verifying: PropTypes.bool,
-  issuerIdentityStatus: PropTypes.object,
   hashStatus: PropTypes.object,
   issuedStatus: PropTypes.object,
   notRevokedStatus: PropTypes.object,
-  verificationStatus: PropTypes.array
+  issuerIdentityStatus: PropTypes.object,
+  verified: PropTypes.bool
 };

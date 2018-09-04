@@ -1,5 +1,4 @@
-const defaultUrl =
-  "https://govtechsg.github.io/opencerts-website/exampleIssuers.json";
+const defaultUrl = "https://opencerts.io/exampleIssuers.json";
 
 export default function fetchIssuers(url = defaultUrl) {
   return window
