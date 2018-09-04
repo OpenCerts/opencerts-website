@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { types as networkTypes } from "../services/web3/getWeb3";
-import { updateWeb3, getNetwork, getCustomRpc } from "../reducers/application";
+import { types as networkTypes } from "../../services/web3/getWeb3";
+import {
+  updateWeb3,
+  getNetwork,
+  getCustomRpc
+} from "../../reducers/application";
 
 class NetworkSelector extends Component {
   constructor(props) {

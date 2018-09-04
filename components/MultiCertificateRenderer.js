@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { get } from "lodash";
-import templateRegistry from "./Templates";
+import templateRegistry from "./CertificateTemplates";
 
 const getCertificateTemplates = certificate => {
   const templateSet = get(certificate, "$template", "default");
