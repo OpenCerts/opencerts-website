@@ -1,4 +1,4 @@
-import NetworkSelector from "../components/NetworkSelector";
+import NetworkSelector from "./NetworkSelector";
 
 const NavigationBar = () => (
   <div className="bg-dark d-flex p-1 m-0">

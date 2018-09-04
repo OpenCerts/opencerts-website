@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import Router from "next/router";
 import { connect } from "react-redux";
 import {
   updateCertificate,
@@ -23,6 +24,7 @@ class CertificateDropZoneContainer extends Component {
 
   componentDidMount() {
     this.props.updateNetworkId();
+    Router.prefetch("/viewer");
   }
 
   handleCertificateChange(certificate) {

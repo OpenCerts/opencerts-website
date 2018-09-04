@@ -152,8 +152,6 @@ export function* verifyCertificateIssuer({ certificate }) {
 }
 
 export function* verifyCertificate({ payload }) {
-  // Adding prefetch to allow faster load
-  Router.prefetch("/viewer");
   yield put({
     type: types.VERIFYING_CERTIFICATE
   });

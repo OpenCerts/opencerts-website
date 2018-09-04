@@ -1,6 +1,6 @@
-import AboutSection from "./ContentPage/AboutSection";
-import DropZoneSection from "./ContentPage/DropZoneSection";
-import PartnerSection from "./ContentPage/PartnersSection";
+import AboutSection from "./HomePageContent/AboutSection";
+import DropZoneSection from "./HomePageContent/DropZoneSection";
+import PartnerSection from "./HomePageContent/PartnersSection";
 
 const MainPageContainer = () => (
   <div
