@@ -1,7 +1,5 @@
 const withCSS = require("@zeit/next-css");
 
-const isProd = process.env.NODE_ENV === "production";
-
 module.exports = withCSS({
   cssModules: true,
   cssLoaderOptions: {
@@ -12,6 +10,5 @@ module.exports = withCSS({
     return {
       "/": { page: "/" }
     };
-  },
-  assetPrefix: isProd ? "/opencerts-website" : ""
+  }
 });

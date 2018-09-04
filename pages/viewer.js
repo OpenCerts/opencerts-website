@@ -4,13 +4,13 @@ import Meta from "../components/Meta";
 // import CertificateVerifierContainer from "../components/CertificateVerifierContainer";
 import NavigationBar from "../components/NavigationBar";
 import FooterBar from "../components/FooterBar";
-import MainPageContainer from "../components/MainPageContainer";
+import ViewerPageContainer from "../components/ViewerPageContainer";
 
-const VerifierPage = () => (
+const VerifierPage = props => (
   <div>
     <Meta />
     <NavigationBar />
-    <MainPageContainer />
+    <ViewerPageContainer {...props} />
     <FooterBar />
   </div>
 );

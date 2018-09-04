@@ -1,6 +1,7 @@
 import _ from "lodash";
 import { put, all, call } from "redux-saga/effects";
 import { certificateData, verifySignature } from "@govtechsg/open-certificate";
+import Router from "next/router";
 import { types } from "../reducers/certificate";
 import CertificateStoreDefinition from "../services/contracts/CertificateStore.json";
 import fetchIssuers from "../services/issuers";
@@ -41,11 +42,12 @@ export function* verifyCertificateHash({ certificate }) {
     yield put({
       type: types.VERIFYING_CERTIFICATE_HASH_SUCCESS
     });
-  } else {
-    yield put({
-      type: types.VERIFYING_CERTIFICATE_HASH_FAILURE
-    });
+    return true;
   }
+  yield put({
+    type: types.VERIFYING_CERTIFICATE_HASH_FAILURE
+  });
+  return false;
 }
 
 export function* verifyCertificateIssued({ certificate, certificateStores }) {
@@ -64,11 +66,13 @@ export function* verifyCertificateIssued({ certificate, certificateStores }) {
     yield put({
       type: types.VERIFYING_CERTIFICATE_ISSUED_SUCCESS
     });
+    return true;
   } catch (e) {
     yield put({
       type: types.VERIFYING_CERTIFICATE_ISSUED_FAILURE,
       payload: e.message
     });
+    return false;
   }
 }
 
@@ -107,11 +111,13 @@ export function* verifyCertificateNotRevoked({
     yield put({
       type: types.VERIFYING_CERTIFICATE_REVOCATION_SUCCESS
     });
+    return true;
   } catch (e) {
     yield put({
       type: types.VERIFYING_CERTIFICATE_REVOCATION_FAILURE,
       payload: e.message
     });
+    return false;
   }
 }
 
@@ -135,26 +141,34 @@ export function* verifyCertificateIssuer({ certificate }) {
       type: types.VERIFYING_CERTIFICATE_ISSUER_SUCCESS,
       payload: issuerIdentities
     });
+    return true;
   } catch (e) {
     yield put({
       type: types.VERIFYING_CERTIFICATE_ISSUER_FAILURE,
       payload: e.message
     });
+    return false;
   }
 }
 
 export function* verifyCertificate({ payload }) {
+  // Adding prefetch to allow faster load
+  Router.prefetch("/viewer");
   yield put({
     type: types.VERIFYING_CERTIFICATE
   });
   const certificateStores = yield call(loadCertificateContracts, { payload });
   const args = { certificateStores, certificate: payload };
-  yield all([
+  const verificationStatuses = yield all([
     call(verifyCertificateHash, args),
     call(verifyCertificateIssued, args),
     call(verifyCertificateNotRevoked, args),
     call(verifyCertificateIssuer, args)
   ]);
+  const verified = verificationStatuses.reduce((prev, curr) => prev && curr);
+  if (verified) {
+    Router.push("/viewer");
+  }
 }
 
 export function* networkReset() {

@@ -1,7 +1,7 @@
 // Ref: https://getbootstrap.com/docs/4.1/examples/navbars/
 const NavigationBar = () => (
   <nav className="navbar navbar-expand-md navbar-dark bg-brand-dark">
-    <a className="navbar-brand" href="#">
+    <a className="navbar-brand" href="/">
       OpenCerts
     </a>
     <button

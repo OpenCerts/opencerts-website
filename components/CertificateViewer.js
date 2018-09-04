@@ -50,7 +50,7 @@ const renderHeaderBlock = props => {
 };
 
 const renderCertificateChange = handleCertificateChange => (
-  <a href="#" onClick={() => handleCertificateChange(null)}>
+  <a href="/" onClick={() => handleCertificateChange(null)}>
     ← Upload another
   </a>
 );
