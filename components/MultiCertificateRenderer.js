@@ -4,7 +4,9 @@ import templateRegistry from "./CertificateTemplates";
 
 const getCertificateTemplates = certificate => {
   const templateSet = get(certificate, "$template", "default");
-  return templateRegistry[templateSet];
+  return templateRegistry[templateSet]
+    ? templateRegistry[templateSet]
+    : templateRegistry.default;
 };
 
 const renderTabList = (templates = []) => {
