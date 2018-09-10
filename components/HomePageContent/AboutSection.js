@@ -1,15 +1,46 @@
-const SectionTitle = () => <div className="h2 mb-3">How It Works</div>;
+const SectionTitle = () => <div className="h2 mb-3">Guide</div>;
 
 const tabs = [
   {
-    title: "Viewing A Certificate",
-    content: <p>This is how you view</p>,
-    id: "view-tab",
+    title: "How it works",
+    content:<div>
+              <p>The .json certificate provided to you has a unique signature anchored onto the Ethereum blockchain. This site helps you to validate the authenticity and provenance of the document by checking whether:</p>
+              <p>
+                <ol>
+                  <li>The contents of the certificate matches the signature attached to it</li>
+                  <li>The issuer indicated in the certificate is a recognised issuer</li>
+                  <li>The signature attached to the certificate has been issued by the issuer</li>
+                  <li>The issuer has revoked the certificate</li>
+                  <li>The expiry date on the certificate has passed</li> 
+                </ol>
+              </p>
+            </div>,              
     control: "view"
   },
   {
-    title: "Verification Process",
-    content: <p>This is how you verify</p>,
+    title: "Verification Processes",
+    content:<p>
+              <p>
+                <b>The certificate may have been tampered with</b><br></br>
+                The contents of this .json file has been altered and does not match it's signature. Please obtain a new copy from your educational institute.
+              </p>
+              <p>  
+                <b>his certificate was issued by an unascertained institution</b><br></br>
+                The issuer indicated in the certificate is not on our list of educational credentials issuer. If you would like us to add this issuer to our list, please contact us at addme@opencerts.io
+              </p>   
+              <p>
+                <b>The certificate was not issued by the indicated issuer</b><br></br>
+                There is no proof on the Ethereum Blockchain that this certificate was issued, if this is a mistake please contact your educational institute to rectify this.
+              </p>
+              <p>
+                <b>This certificate has been revoked by the issuer</b><br></br>
+                The issuer has explicitly revoked this certificate, if this is a mistake please contact your educational institute to rectify this.
+                </p> 
+              <p>
+                <b>This certificate has an expiry date and has lapsed</b><br></br>
+                This certificate has an expiry date and has lapsed. Please contact your educational institute to be reissued with a new certificate.
+              </p> 
+            </p>,
     id: "verify-tab",
     control: "verify"
   }

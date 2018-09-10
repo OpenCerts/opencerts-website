@@ -4,18 +4,15 @@ import CertificateDropzone from "../CertificateDropZone";
 const DropZoneSection = ({ handleCertificateChange }) => (
   <div
     className="row p-4 bg-brand-dark text-white"
-    style={{ boxShadow: "inset 0 0 50px 0 rgba(102, 120, 138, 0.2)" }}
+    // style={{ boxShadow: "inset 0 0 50px 0 rgba(102, 120, 138, 0.2)" }}
   >
     <div className="col">
       <div className="mb-3 py-4">
         <p>
-          OpenCerts allows you to view and verify the authenticity of
-          certificates.
+        This OpenCerts site allows you to view and verify the authenticity of certificates.
         </p>
         <p>
-          Each certificate has an unique signature, anchored onto the Ethereum
-          blockchain which can be used to verify the authenticity and provenance
-          of the document.
+        If you have received a certificate, dropping it into the box on the right will allow you to check its contents and verify its authenticity.
         </p>
       </div>
       <div>
