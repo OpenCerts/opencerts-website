@@ -1,4 +1,5 @@
 import Head from "next/head";
+import "../../../styles.scss";
 
 const Meta = () => (
   <div>
@@ -52,7 +53,7 @@ const Meta = () => (
       }
 
       a {
-        color: #0099CC !important;
+        color: #0099cc !important;
       }
 
       .btn {
@@ -97,7 +98,7 @@ const Meta = () => (
 
       ul.navbar-nav > li.nav-item > a.nav-link {
         font-family: Montserrat;
-        color: #E5E5E5 !important;
+        color: #e5e5e5 !important;
         padding: 0 1.5rem !important;
       }
 
@@ -108,7 +109,6 @@ const Meta = () => (
       ul.navbar-nav > li.nav-item > a.nav-link.active {
         font-family: Montserrat;
         color: #fff !important;
-        
       }
 
       li.nav-item a.slanted-tab::before {

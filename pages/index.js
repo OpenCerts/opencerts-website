@@ -1,9 +1,9 @@
 import withRedux from "next-redux-wrapper";
-import initStore from "../store";
-import Meta from "../components/Layout/Meta";
-import NavigationBar from "../components/Layout/NavigationBar";
-import FooterBar from "../components/Layout/FooterBar";
-import MainPageContainer from "../components/MainPageContainer";
+import initStore from "../src/store";
+import Meta from "../src/components/Layout/Meta";
+import NavigationBar from "../src/components/Layout/NavigationBar";
+import FooterBar from "../src/components/Layout/FooterBar";
+import MainPageContainer from "../src/components/MainPageContainer";
 
 const VerifierPage = () => (
   <div>

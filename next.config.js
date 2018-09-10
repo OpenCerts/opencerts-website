@@ -1,14 +1,11 @@
-const withCSS = require("@zeit/next-css");
+const withSass = require("@zeit/next-sass");
 
-module.exports = withCSS({
-  cssModules: true,
-  cssLoaderOptions: {
-    importLoaders: 1,
-    localIdentName: "[local]___[hash:base64:5]"
-  },
+module.exports = withSass({
   exportPathMap: function exportMap() {
     return {
-      "/": { page: "/" }
+      "/": { page: "/" },
+      "/registry": { page: "/registry" },
+      "/viewer": { page: "/viewer" }
     };
   }
 });
