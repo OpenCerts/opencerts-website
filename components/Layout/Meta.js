@@ -7,7 +7,7 @@ const Meta = () => (
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta charSet="utf-8" />
       <link
-        href="https://fonts.googleapis.com/css?family=Roboto+Mono"
+        href="https://fonts.googleapis.com/css?family=Montserrat|Source+Sans+Pro"
         rel="stylesheet"
       />
     </Head>
@@ -40,15 +40,23 @@ const Meta = () => (
     />
     <style jsx global>{`
       :root {
-        --font-monospace: "Roboto Mono", monospace;
+        --font-monospace: "Montserrat", monospace;
         --font-monospace-size: 0.8rem !important;
       }
 
       body {
         background: white;
-        font-family: arial, sans-serif;
+        font-family: source sans pro, sans-serif;
         line-height: 1.5;
         margin: 0px;
+      }
+
+      a {
+        color: #0099CC !important;
+      }
+
+      .btn {
+        font-family: source sans pro;
       }
 
       .bg-brand-dark {
@@ -85,6 +93,22 @@ const Meta = () => (
         color: inherit;
         text-decoration: none;
         margin: 0 -7px;
+      }
+
+      ul.navbar-nav > li.nav-item > a.nav-link {
+        font-family: Montserrat;
+        color: #E5E5E5 !important;
+        padding: 0 1.5rem !important;
+      }
+
+      ul.navbar-nav > li.nav-item > a.nav-link::hover {
+        color: #fff !important;
+      }
+
+      ul.navbar-nav > li.nav-item > a.nav-link.active {
+        font-family: Montserrat;
+        color: #fff !important;
+        
       }
 
       li.nav-item a.slanted-tab::before {

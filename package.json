@@ -9,8 +9,9 @@
     "build:static": "next build && next export",
     "start": "next build && next start",
     "cname": "echo 'opencerts.io' > out/CNAME", 
+    "copy-static-files":"cp docs/exampleIssuers.json out/exampleIssuers.json",
     "deploy": "rm -rf out && yarn build:static && yarn deploy:prebuilt",
-    "deploy:prebuilt": "touch out/.nojekyll && yarn cname && cp docs/exampleIssuers.json out/exampleIssuers.json && gh-pages --dotfiles --dist out"
+    "deploy:prebuilt": "touch out/.nojekyll && yarn cname && yarn copy-static-files && gh-pages --dotfiles --dist out"
   },
   "dependencies": {
     "@govtechsg/open-certificate": "^1.1.27",
