@@ -37,7 +37,7 @@ const renderNavItem = active => {
 const NavigationBar = ({ active }) => (
   <nav className="navbar navbar-expand-md navbar-dark bg-brand-dark">
     <a className="navbar-brand" href="/">
-      OpenCerts 
+      <img src="/static/images/opencertslogo.svg" alt="OpenCerts" />
     </a>
     <button
       className="navbar-toggler"
