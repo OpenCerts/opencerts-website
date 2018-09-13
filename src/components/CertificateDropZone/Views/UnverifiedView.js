@@ -45,20 +45,24 @@ const View = ({
         <p className="mb-0">- The issuer&#39;s identity cannot be verified</p>
       ) : null}
 
-      <div
-        className="mt-2"
-        style={{
-          textDecoration: "underline",
-          fontSize: "0.8rem"
-        }}
-        onClick={e => {
-          e.preventDefault();
-          e.stopPropagation();
-          e.nativeEvent.stopImmediatePropagation();
-        }}
-      >
-        <Link href="/viewer">Continue Viewing Certificate</Link>
-      </div>
+      {isWarning ? (
+        <div
+          className="mt-2"
+          style={{
+            textDecoration: "underline",
+            fontSize: "0.8rem"
+          }}
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            e.nativeEvent.stopImmediatePropagation();
+          }}
+        >
+          <Link href="/viewer">Continue Viewing Certificate</Link>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
