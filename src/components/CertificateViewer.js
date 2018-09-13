@@ -2,6 +2,15 @@ import PropTypes from "prop-types";
 import { get } from "lodash";
 import CertificateVerifyBlock from "./CertificateVerifyBlock";
 import MultiCertificateRenderer from "./MultiCertificateRenderer";
+import templateRegistry from "./CertificateTemplates";
+import InvalidCertificateNotice from "./InvalidCertificateNotice";
+
+const getCertificateTemplates = certificate => {
+  const templateSet = get(certificate, "$template", "default");
+  return templateRegistry[templateSet]
+    ? templateRegistry[templateSet]
+    : templateRegistry.default;
+};
 
 const renderVerifyBlock = props => (
   <CertificateVerifyBlock
@@ -55,18 +64,45 @@ const renderCertificateChange = handleCertificateChange => (
   </a>
 );
 
+const storeCanRenderTemplate = ({ addresses, certificate }) => {
+  if (!addresses || addresses === []) {
+    return true;
+  }
+  const issuers = get(certificate, "issuers", []);
+  const validStoreAddressForTemplate = addresses.map(a => a.toLowerCase());
+  return issuers.reduce((prev, curr) => {
+    const storeAddress = get(curr, "certificateStore", "").toLowerCase();
+    const foundInWhitelist = validStoreAddressForTemplate.includes(
+      storeAddress
+    );
+    return prev && foundInWhitelist;
+  }, true);
+};
+
 const CertificateViewer = props => {
   const { certificate } = props;
+
+  const { templates, addresses } = getCertificateTemplates(certificate);
+  const allowedToRender = storeCanRenderTemplate({ addresses, certificate });
 
   const renderedHeaderBlock = renderHeaderBlock(props);
   const renderedCertificateChange = renderCertificateChange(
     props.handleCertificateChange
   );
 
+  const validCertificateContent = (
+    <div>
+      {renderedHeaderBlock}
+      <MultiCertificateRenderer
+        certificate={certificate}
+        templates={templates}
+      />
+    </div>
+  );
+
   return (
     <div className="bg-light p-3 fill">
-      {renderedHeaderBlock}
-      <MultiCertificateRenderer certificate={certificate} />
+      {allowedToRender ? validCertificateContent : <InvalidCertificateNotice />}
       {renderedCertificateChange}
     </div>
   );

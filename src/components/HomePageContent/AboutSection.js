@@ -10,23 +10,20 @@ const tabs = [
           onto the Ethereum blockchain. This site helps you to validate the
           authenticity and provenance of the document by checking whether:
         </p>
-        <p>
-          <ol>
-            <li>
-              The contents of the certificate matches the signature attached to
-              it
-            </li>
-            <li>
-              The issuer indicated in the certificate is a recognised issuer
-            </li>
-            <li>
-              The signature attached to the certificate has been issued by the
-              issuer
-            </li>
-            <li>The issuer has revoked the certificate</li>
-            <li>The expiry date on the certificate has passed</li>
-          </ol>
-        </p>
+        <ol>
+          <li>
+            The contents of the certificate matches the signature attached to it
+          </li>
+          <li>
+            The issuer indicated in the certificate is a recognised issuer
+          </li>
+          <li>
+            The signature attached to the certificate has been issued by the
+            issuer
+          </li>
+          <li>The issuer has revoked the certificate</li>
+          <li>The expiry date on the certificate has passed</li>
+        </ol>
       </div>
     ),
     control: "view"
@@ -34,12 +31,12 @@ const tabs = [
   {
     title: "Verification Processes",
     content: (
-      <p>
+      <div>
         <p>
           <b>The certificate may have been tampered with</b>
           <br />
           The contents of this .json file has been altered and does not match
-          it's signature. Please obtain a new copy from your educational
+          it&apos;s signature. Please obtain a new copy from your educational
           institute.
         </p>
         <p>
@@ -68,7 +65,7 @@ const tabs = [
           This certificate has an expiry date and has lapsed. Please contact
           your educational institute to be reissued with a new certificate.
         </p>
-      </p>
+      </div>
     ),
     id: "verify-tab",
     control: "verify"

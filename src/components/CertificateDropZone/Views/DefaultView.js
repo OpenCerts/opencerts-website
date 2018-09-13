@@ -8,7 +8,7 @@ const View = () => (
     </div>
     <div
       className="text-brand-dark"
-      style={{ fontSize: "1.2rem", fontWeight: 500, fontFamily: "Montserrat",}}
+      style={{ fontSize: "1.2rem", fontWeight: 500, fontFamily: "Montserrat" }}
     >
       Have a OpenCert file?
     </div>
