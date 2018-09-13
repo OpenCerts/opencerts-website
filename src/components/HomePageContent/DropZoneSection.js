@@ -9,10 +9,13 @@ const DropZoneSection = ({ handleCertificateChange }) => (
     <div className="col">
       <div className="mb-3 py-4">
         <p>
-        This OpenCerts site allows you to view and verify the authenticity of certificates.
+          This OpenCerts site allows you to view and verify the authenticity of
+          certificates.
         </p>
         <p>
-        If you have received a certificate, dropping it into the box on the right will allow you to check its contents and verify its authenticity.
+          If you have received a certificate, dropping it into the box on the
+          right will allow you to check its contents and verify its
+          authenticity.
         </p>
       </div>
       <div>

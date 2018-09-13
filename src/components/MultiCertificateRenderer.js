@@ -1,13 +1,4 @@
 import PropTypes from "prop-types";
-import { get } from "lodash";
-import templateRegistry from "./CertificateTemplates";
-
-const getCertificateTemplates = certificate => {
-  const templateSet = get(certificate, "$template", "default");
-  return templateRegistry[templateSet]
-    ? templateRegistry[templateSet]
-    : templateRegistry.default;
-};
 
 const renderTabList = (templates = []) => {
   const tabs = templates.map((t, i) => (
@@ -50,11 +41,9 @@ const renderTabContent = (certificate, templates = []) => {
   );
 };
 
-const MultiCertificateRenderer = ({ certificate }) => {
-  const templates = getCertificateTemplates(certificate);
+const MultiCertificateRenderer = ({ certificate, templates }) => {
   const renderedTabs = renderTabList(templates);
   const renderedContent = renderTabContent(certificate, templates);
-
   return (
     <div>
       {renderedTabs}
@@ -66,5 +55,6 @@ const MultiCertificateRenderer = ({ certificate }) => {
 export default MultiCertificateRenderer;
 
 MultiCertificateRenderer.propTypes = {
-  certificate: PropTypes.object
+  certificate: PropTypes.object,
+  templates: PropTypes.array
 };

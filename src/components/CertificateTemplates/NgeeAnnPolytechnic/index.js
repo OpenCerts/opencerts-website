@@ -1,7 +1,7 @@
 import NPCert from "./certificate";
 import NPTranscript from "./transcript";
 
-const entry = [
+const templates = [
   {
     id: "certificate",
     label: "Certificate",
@@ -14,4 +14,6 @@ const entry = [
   }
 ];
 
-export default entry;
+const addresses = ["0x1C4B83f39DA76d39B3ABbb1AfFf5cB4e629edBF4"];
+
+export default { templates, addresses };

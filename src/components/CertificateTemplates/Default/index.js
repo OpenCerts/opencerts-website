@@ -1,6 +1,6 @@
 import DefaultCert from "./certificate";
 
-const entry = [
+const templates = [
   {
     id: "certificate",
     label: "Certificate",
@@ -8,4 +8,4 @@ const entry = [
   }
 ];
 
-export default entry;
+export default { templates };
