@@ -26,7 +26,9 @@ const View = ({
         className={`${isWarning ? "text-orange" : "text-red"} m-3`}
         style={{ fontSize: "1.5rem" }}
       >
-        Invalid Certificate
+        {isWarning
+          ? "Certificate from unregistered body"
+          : "Invalid Certificate"}
       </div>
 
       {!hashStatus.verified ? (
