@@ -21,7 +21,10 @@ export const initialState = {
   certificateNotRevokedError: null,
   certificateIssuerError: null,
 
-  verificationStatus: []
+  verificationStatus: [],
+
+  emailSending: false,
+  emailError: null
 };
 
 // Actions
@@ -47,7 +50,11 @@ export const types = {
     "VERIFYING_CERTIFICATE_REVOCATION_FAILURE",
 
   VERIFYING_CERTIFICATE_ISSUER_SUCCESS: "VERIFYING_CERTIFICATE_ISSUER_SUCCESS",
-  VERIFYING_CERTIFICATE_ISSUER_FAILURE: "VERIFYING_CERTIFICATE_ISSUER_FAILURE"
+  VERIFYING_CERTIFICATE_ISSUER_FAILURE: "VERIFYING_CERTIFICATE_ISSUER_FAILURE",
+
+  SENDING_CERTIFICATE: "SENDING_CERTIFICATE",
+  SENDING_CERTIFICATE_SUCCESS: "SENDING_CERTIFICATE_SUCCESS",
+  SENDING_CERTIFICATE_FAILURE: "SENDING_CERTIFICATE_FAILURE"
 };
 
 // Reducers
@@ -221,6 +228,24 @@ export default function reducer(state = initialState, action) {
           }
         ]
       };
+    case types.SENDING_CERTIFICATE:
+      return {
+        ...state,
+        emailSending: true,
+        emailError: null
+      };
+    case types.SENDING_CERTIFICATE_SUCCESS:
+      return {
+        ...state,
+        emailSending: false,
+        emailError: null
+      };
+    case types.SENDING_CERTIFICATE_FAILURE:
+      return {
+        ...state,
+        emailSending: false,
+        emailError: action.payload
+      };
     default:
       return state;
   }
@@ -244,6 +269,13 @@ export function verifyCertificate(payload) {
 export function updateFilteredCertificate(payload) {
   return {
     type: types.UPDATE_FILTERED_CERTIFICATE,
+    payload
+  };
+}
+
+export function sendCertificate(payload) {
+  return {
+    type: types.SENDING_CERTIFICATE,
     payload
   };
 }

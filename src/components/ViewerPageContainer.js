@@ -5,6 +5,7 @@ import Router from "next/router";
 import { certificateData } from "@govtechsg/open-certificate";
 import {
   updateCertificate,
+  sendCertificate,
   getCertificate,
   getVerifying,
   getIssuerIdentityStatus,
@@ -19,7 +20,13 @@ class MainPageContainer extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      emailAddress: ""
+    };
+
     this.handleCertificateChange = this.handleCertificateChange.bind(this);
+    this.handleEmailChange = this.handleEmailChange.bind(this);
+    this.handleSendCertificate = this.handleSendCertificate.bind(this);
   }
 
   componentDidMount() {
@@ -29,8 +36,16 @@ class MainPageContainer extends Component {
     }
   }
 
+  handleEmailChange(emailAddress) {
+    this.setState({ emailAddress });
+  }
+
   handleCertificateChange(certificate) {
     this.props.updateCertificate(certificate);
+  }
+
+  handleSendCertificate() {
+    this.props.sendCertificate({ to: this.state.emailAddress });
   }
 
   render() {
@@ -45,6 +60,11 @@ class MainPageContainer extends Component {
         notRevokedStatus={this.props.notRevokedStatus}
         issuerIdentityStatus={this.props.issuerIdentityStatus}
         handleCertificateChange={this.handleCertificateChange}
+        showSharing={this.state.showSharing}
+        emailAddress={this.state.emailAddress}
+        handleSendCertificate={this.handleSendCertificate}
+        handleEmailChange={this.handleEmailChange}
+        handleSharingToggle={this.handleSharingToggle}
       />
     );
   }
@@ -64,7 +84,8 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateCertificate: payload => dispatch(updateCertificate(payload))
+  updateCertificate: payload => dispatch(updateCertificate(payload)),
+  sendCertificate: payload => dispatch(sendCertificate(payload))
 });
 
 export default connect(
@@ -74,6 +95,7 @@ export default connect(
 
 MainPageContainer.propTypes = {
   updateCertificate: PropTypes.func,
+  sendCertificate: PropTypes.func,
   document: PropTypes.object,
   certificate: PropTypes.object,
   verifying: PropTypes.bool,

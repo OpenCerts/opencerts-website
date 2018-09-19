@@ -1,10 +1,11 @@
 import _ from "lodash";
-import { put, all, call } from "redux-saga/effects";
+import { put, all, call, select } from "redux-saga/effects";
 import { certificateData, verifySignature } from "@govtechsg/open-certificate";
 import Router from "next/router";
-import { types } from "../reducers/certificate";
+import { types, getCertificate } from "../reducers/certificate";
 import CertificateStoreDefinition from "../services/contracts/CertificateStore.json";
 import fetchIssuers from "../services/issuers";
+import sendEmail from "../services/email";
 import { combinedHash } from "../utils";
 
 import { getSelectedWeb3 } from "./application";
@@ -166,6 +167,27 @@ export function* verifyCertificate({ payload }) {
   const verified = verificationStatuses.reduce((prev, curr) => prev && curr);
   if (verified) {
     Router.push("/viewer");
+  }
+}
+
+export function* sendCertificate({ payload }) {
+  try {
+    const certificate = yield select(getCertificate);
+    const { to } = payload;
+
+    yield sendEmail({
+      certificate,
+      to
+    });
+
+    yield put({
+      type: types.SENDING_CERTIFICATE_SUCCESS
+    });
+  } catch (e) {
+    yield put({
+      type: types.SENDING_CERTIFICATE_FAILURE,
+      payload: e
+    });
   }
 }
 
