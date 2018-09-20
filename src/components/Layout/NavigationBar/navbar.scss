@@ -1,0 +1,30 @@
+@import '../../../styles/variables.scss';
+
+.innerbar {
+  max-width: 1280px;
+  display: flex; 
+  justify-content: flex-start;
+  margin: 0 auto;
+}
+
+.nav-item {
+  font-family: "Montserrat", sans-serif;
+  
+  &:hover {
+      .nav-link {
+          color: $brand-blue !important;
+      }
+  }
+
+  a {
+      font-family: "Montserrat";
+      color: $grey-blue !important;
+      padding: 0 1.5rem !important;
+  }
+  
+  &.active {
+      .nav-link {
+          color: #fff !important;
+      }
+  }
+}

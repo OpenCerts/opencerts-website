@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import css from "./navbar.scss";
 
 const navItems = [
   {
@@ -25,7 +26,10 @@ const navItems = [
 
 const renderNavItem = active => {
   const items = navItems.map((n, i) => (
-    <li className={`nav-item ${n.id === active ? "active" : ""}`} key={i}>
+    <li
+      className={`${css["nav-item"]} ${n.id === active ? "active" : ""}`}
+      key={i}
+    >
       <a className="nav-link" href={n.path}>
         {n.label}
       </a>
