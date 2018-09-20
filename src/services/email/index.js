@@ -1,7 +1,7 @@
 const emailApiUrl =
   "https://92cdczopwg.execute-api.ap-southeast-1.amazonaws.com/dev";
 
-export default function sendEmail({ certificate, to }) {
+export default function sendEmail({ certificate, email, captcha }) {
   return window
     .fetch(emailApiUrl, {
       method: "POST",
@@ -11,7 +11,8 @@ export default function sendEmail({ certificate, to }) {
       },
       body: JSON.stringify({
         data: JSON.stringify(certificate),
-        to
+        to: email,
+        captcha
       })
     })
     .then(res => res.json())

@@ -45,8 +45,8 @@ class MainPageContainer extends Component {
     this.props.updateCertificate(certificate);
   }
 
-  handleSendCertificate() {
-    this.props.sendCertificate({ to: this.state.emailAddress });
+  handleSendCertificate({ email, captcha }) {
+    this.props.sendCertificate({ email, captcha });
   }
 
   render() {

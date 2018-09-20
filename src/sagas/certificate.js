@@ -173,11 +173,12 @@ export function* verifyCertificate({ payload }) {
 export function* sendCertificate({ payload }) {
   try {
     const certificate = yield select(getCertificate);
-    const { to } = payload;
+    const { email, captcha } = payload;
 
     yield sendEmail({
       certificate,
-      to
+      email,
+      captcha
     });
 
     yield put({
