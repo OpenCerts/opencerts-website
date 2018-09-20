@@ -36,23 +36,25 @@ const renderNavItem = active => {
 
 const NavigationBar = ({ active }) => (
   <nav className="navbar navbar-expand-md navbar-dark bg-brand-dark">
-    <a className="navbar-brand" href="/">
-      <img src="/static/images/opencertslogo.svg" alt="OpenCerts" />
-    </a>
-    <button
-      className="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#top-nav"
-      aria-controls="top-nav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span className="navbar-toggler-icon" />
-    </button>
+    <div className="innerbar">
+      <a className="navbar-brand" href="/">
+        <img src="/static/images/opencertslogo.svg" alt="OpenCerts" />
+      </a>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#top-nav"
+        aria-controls="top-nav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon" />
+      </button>
 
-    <div className="collapse navbar-collapse" id="top-nav">
-      {renderNavItem(active)}
+      <div className="collapse navbar-collapse" id="top-nav">
+        {renderNavItem(active)}
+      </div>
     </div>
   </nav>
 );

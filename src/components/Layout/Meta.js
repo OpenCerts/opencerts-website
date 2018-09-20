@@ -11,6 +11,13 @@ const Meta = () => (
         href="https://fonts.googleapis.com/css?family=Montserrat|Source+Sans+Pro"
         rel="stylesheet"
       />
+     
+      <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossOrigin="anonymous"
+      />
     </Head>
     <link
       rel="stylesheet"
@@ -18,12 +25,7 @@ const Meta = () => (
       integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
       crossOrigin="anonymous"
     />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-      crossOrigin="anonymous"
-    />
+    
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -34,11 +36,7 @@ const Meta = () => (
       integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
       crossOrigin="anonymous"
     />
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-      crossOrigin="anonymous"
-    />
+    
     <style jsx global>{`
       :root {
         --font-monospace: "Montserrat", monospace;
@@ -47,15 +45,12 @@ const Meta = () => (
 
       body {
         background: white;
-        font-family: source sans pro, sans-serif;
+        font-family: 'Source Sans Pro', sans-serif;
         line-height: 1.5;
         margin: 0px;
       }
 
-      a {
-        color: #0099cc !important;
-      }
-
+      
       .btn {
         font-family: source sans pro;
       }
@@ -96,11 +91,7 @@ const Meta = () => (
         margin: 0 -7px;
       }
 
-      ul.navbar-nav > li.nav-item > a.nav-link {
-        font-family: Montserrat;
-        color: #e5e5e5 !important;
-        padding: 0 1.5rem !important;
-      }
+      
 
       ul.navbar-nav > li.nav-item > a.nav-link::hover {
         color: #fff !important;
