@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Router from "next/router";
 import { certificateData } from "@govtechsg/open-certificate";
+import './main.scss'
+
 import {
   updateCertificate,
   sendCertificate,

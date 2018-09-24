@@ -1,30 +1,38 @@
 @import '../../../styles/variables.scss';
 
 .innerbar {
-  max-width: 1280px;
-  display: flex; 
-  justify-content: flex-start;
-  margin: 0 auto;
+    max-width: 1280px;
+    display: flex; 
+    justify-content: flex-start;
+    margin: 0 auto;
+}
+
+.navbar {
+    display: block; 
+    justify-content: flex-start;
+    margin: 0 auto;
+    background-color: $brand-dark;
+    padding: 1rem 2rem;
 }
 
 .nav-item {
-  font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat", sans-serif;
   
-  &:hover {
-      .nav-link {
-          color: $brand-blue !important;
-      }
-  }
+    &:hover {
+        .nav-link {
+            color: $brand-blue;
+        }
+    }
 
-  a {
-      font-family: "Montserrat";
-      color: $grey-blue !important;
-      padding: 0 1.5rem !important;
-  }
+    a {
+        font-family: "Montserrat";
+        color: $grey-blue;
+        padding: 0 1.5rem !important;
+    }
   
-  &.active {
-      .nav-link {
-          color: #fff !important;
-      }
-  }
+    &.active {
+        .nav-link {
+            color: #fff;
+        }
+    }
 }
