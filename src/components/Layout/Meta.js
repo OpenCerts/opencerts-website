@@ -4,7 +4,11 @@ import "../../../styles.scss";
 const Meta = () => (
   <div>
     <Head>
-      <title>certificate-web-ui</title>
+      <title>OpenCerts</title>
+      <link rel="icon" type="image/png" href="/static/images/favicon/favicon-32x32.png" sizes="32x32" />
+      <link rel="icon" type="image/png" href="/static/images/favicon/favicon-16x16.png" sizes="16x16" />
+
+
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta charSet="utf-8" />
       <link
