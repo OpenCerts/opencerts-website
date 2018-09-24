@@ -1,4 +1,4 @@
-const SectionTitle = () => <div className="h2 mb-3">Guide</div>;
+const SectionTitle = () => <div className="mb-3"><h2>How it works</h2></div>;
 
 const tabs = [
   {

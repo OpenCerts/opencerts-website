@@ -42,17 +42,27 @@ const Meta = () => (
         --font-monospace: "Montserrat", monospace;
         --font-monospace-size: 0.8rem !important;
       }
-
-      body {
+      
+      .btn {
+        font-family: source sans pro;
+      }
+      .body {
+        font-family: "source sans pro";
         background: white;
         font-family: 'Source Sans Pro', sans-serif;
         line-height: 1.5;
         margin: 0px;
       }
-
       
-      .btn {
-        font-family: source sans pro;
+      .main {
+          max-width: 1280px;
+          display: flex; 
+          justify-content: flex-start;
+          margin: 0 auto;
+      }
+      
+      h1, h2, h3, h4, h5, h6 {
+        font-family: "Montserrat";
       }
 
       .bg-brand-dark {
