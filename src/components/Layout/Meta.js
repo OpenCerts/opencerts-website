@@ -99,8 +99,30 @@ const Meta = () => (
         background-color: #fcf9f6 !important;
       }
 
+      .exact-print {
+        -webkit-print-color-adjust: exact;
+      }
+
+      .print-only {
+        display: none;
+      }
+
+      .screen-only {
+        display: block;
+      }
+
+      @media print {
+        .print-only {
+          display: block;
+        }
+        .screen-only {
+          display: none;
+        }
+      }
+
       .bg-brand-dark {
         background-color: #324353;
+        -webkit-print-color-adjust: exact;
       }
 
       .text-red {
@@ -162,6 +184,7 @@ const Meta = () => (
 
       li.nav-item a.slanted-tab.active::before {
         background: #aaa;
+        -webkit-print-color-adjust: exact;
       }
 
       li.nav-item a.slanted-tab.active {
