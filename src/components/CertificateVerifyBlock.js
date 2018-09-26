@@ -108,7 +108,10 @@ const CertificateVerifyBlock = props => {
   const renderedIcon = renderIcon(status);
   const renderedText = renderText(status);
   return (
-    <div style={{ width: 300, backgroundColor: "#EEE" }} className="p-2">
+    <div
+      style={{ width: 300, backgroundColor: "#EEE" }}
+      className="p-2 screen-only"
+    >
       <div className="row">
         {renderedIcon}
         {renderedText}
