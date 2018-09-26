@@ -51,7 +51,10 @@ const renderHeaderBlock = props => {
         </div>
 
         <div className="ml-auto">
-          <i className="fas fa-print fa-2x text-dark" />
+          <i
+            className="fas fa-print fa-2x text-dark pointer"
+            onClick={() => window.print()}
+          />
         </div>
       </div>
     </div>
