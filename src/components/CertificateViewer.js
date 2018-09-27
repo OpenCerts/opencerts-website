@@ -34,8 +34,6 @@ const renderVerifyBlock = props => (
   />
 );
 
-
-
 const renderIdentitiesBlock = certificate => {
   const issuers = get(certificate, "issuers", []);
   const issuerName = issuers.map(i => i.name).join(", ");

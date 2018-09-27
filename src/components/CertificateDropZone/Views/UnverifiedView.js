@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
-import css from './viewerstyles.scss';
+import css from "./viewerstyles.scss";
 
 const View = ({
   issuerIdentityStatus,
@@ -13,13 +13,15 @@ const View = ({
   return (
     <div
       // className="text-center h-100 d-flex flex-column justify-content-center p-4 text-brand-dark"
-      className={`${css["viewer-container"]} ${isWarning ? css["warning"] : css["invalid"]}`}
+      className={`${css["viewer-container"]} ${
+        isWarning ? css.warning : css.invalid
+      }`}
       style={{
         backgroundColor: isWarning ? "#fbf6e9" : "#fbeae9",
         borderRadius: 10
       }}
     >
-      <span className={css['message-container']}>
+      <span className={css["message-container"]}>
         {isWarning ? (
           <img src="/static/images/dropzone/warning.svg" />
         ) : (
@@ -49,22 +51,23 @@ const View = ({
         ) : null}
 
         {!issuerIdentityStatus.verified ? (
-          <p className={css.messages}>The issuer&#39;s identity cannot be verified</p>
+          <p className={css.messages}>
+            The issuer&#39;s identity cannot be verified
+          </p>
         ) : null}
       </div>
 
-      <button className={css['unverified-btn']}>
+      <button className={css["unverified-btn"]}>
         <span>
-          <Link ref='/faq'>What should I do?</Link>
+          <Link href="/faq">What should I do?</Link>
         </span>
       </button>
 
-      <div className={css['secondary-links']}>
+      <div className={css["secondary-links"]}>
         <span>
-          <Link ref=" ">Try another</Link>
+          <Link href=" ">Try another</Link>
         </span>
         {isWarning ? (
-        
           <span
             onClick={e => {
               e.preventDefault();

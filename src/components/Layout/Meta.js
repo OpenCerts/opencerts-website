@@ -5,9 +5,18 @@ const Meta = () => (
   <div>
     <Head>
       <title>OpenCerts</title>
-      <link rel="icon" type="image/png" href="/static/images/favicon/favicon-32x32.png" sizes="32x32" />
-      <link rel="icon" type="image/png" href="/static/images/favicon/favicon-16x16.png" sizes="16x16" />
-
+      <link
+        rel="icon"
+        type="image/png"
+        href="/static/images/favicon/favicon-32x32.png"
+        sizes="32x32"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        href="/static/images/favicon/favicon-16x16.png"
+        sizes="16x16"
+      />
 
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta charSet="utf-8" />
@@ -15,7 +24,7 @@ const Meta = () => (
         href="https://fonts.googleapis.com/css?family=Montserrat|Source+Sans+Pro"
         rel="stylesheet"
       />
-     
+
       <link
         rel="stylesheet"
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -29,7 +38,7 @@ const Meta = () => (
       integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
       crossOrigin="anonymous"
     />
-    
+
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -45,39 +54,44 @@ const Meta = () => (
       integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
       crossOrigin="anonymous"
     />
-    
+
     <style jsx global>{`
       :root {
         font: "Source Sans Pro", sans-serif;
         --font-monospace: "Source Sans Pro", sans-serif;
         --font-monospace-size: 0.8rem !important;
       }
-      
+
       .btn {
         font-family: source sans pro;
       }
       body {
         background: white;
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: "Source Sans Pro", sans-serif;
         line-height: 1.5;
         margin: 0px;
       }
-      
+
       .navbar-toggler {
         position: absolute;
         right: 30px;
       }
-    
+
       .main {
         max-width: 1280px;
-        display: flex; 
+        display: flex;
         justify-content: flex-start;
         margin: 0 auto;
         width: 100%;
         padding: 2rem;
       }
-      
-      h1, h2, h3, h4, h5, h6 {
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
         font-family: "Montserrat";
       }
 
@@ -116,8 +130,6 @@ const Meta = () => (
         text-decoration: none;
         margin: 0 -7px;
       }
-
-      
 
       ul.navbar-nav > li.nav-item > a.nav-link::hover {
         color: #fff !important;
