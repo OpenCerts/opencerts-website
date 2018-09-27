@@ -1,5 +1,10 @@
-const SectionTitle = () => <div className="mb-3"><h2>How it works</h2></div>;
-import css from './aboutsection.scss';
+import css from "./aboutsection.scss";
+
+const SectionTitle = () => (
+  <div className="mb-3">
+    <h2>How it works</h2>
+  </div>
+);
 
 const tabs = [
   {

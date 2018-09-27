@@ -1,12 +1,12 @@
-import css from './viewerstyles.scss'
+import css from "./viewerstyles.scss";
 
 const View = () => (
   <div
     // className="text-center bg-light h-100 d-flex flex-column justify-content-center p-4"
-    className={`${css["viewer-container"]} ${css["default"]}`}
+    className={`${css["viewer-container"]} ${css.default}`}
     style={{ borderRadius: 10 }}
   >
-    <div className={css['image-container']}>
+    <div className={css["image-container"]}>
       <i>
         <img src="/static/images/dropzone/dropzone_illustration.svg" />
       </i>

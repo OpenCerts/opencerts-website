@@ -1,15 +1,18 @@
-import css from './partnerspage.scss'
+import css from "./partnerspage.scss";
 
-const TitleSection = () => <div><h2>Partners</h2></div>;
-
+const TitleSection = () => (
+  <div>
+    <h2>Partners</h2>
+  </div>
+);
 
 const CarouselSection = () => {
   // const images = Array(8).fill("http://via.placeholder.com/150x80");
 
   const images = [
-    "/static/images/logo-govtech.png", 
-    "/static/images/NP_logo.svg", 
-    "/static/images/TP_logo.svg", 
+    "/static/images/logo-govtech.png",
+    "/static/images/NP_logo.svg",
+    "/static/images/TP_logo.svg",
     "/static/images/NYP_logo.svg",
     "/static/images/RP_logo.svg",
     "/static/images/SP_logo.svg",
@@ -17,7 +20,7 @@ const CarouselSection = () => {
     "/static/images/ITE_logo.png",
     "/static/images/NTU_logo.png",
     "/static/images/SIM_logo.png"
-  ]
+  ];
   const items = images.map((item, i) => (
     <img src={item} key={i} className={css.partnerlogos} />
   ));
