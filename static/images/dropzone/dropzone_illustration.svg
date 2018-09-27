@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="111px" height="110px" viewBox="0 0 111 110" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>json illustration </title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M3,0 L108,-8.8817842e-16 C109.656854,-1.19253761e-15 111,1.34314575 111,3 L111,81 C111,82.6568542 109.656854,84 108,84 L3,84 C1.34314575,84 2.02906125e-16,82.6568542 0,81 L0,3 C-2.02906125e-16,1.34314575 1.34314575,3.04359188e-16 3,0 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="111" height="84" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Landing-page--Copy-8" transform="translate(-627.000000, -145.000000)">
+            <g id="json-illustration-" transform="translate(627.000000, 145.000000)">
+                <use id="Rectangle-14" stroke="#0099CC" mask="url(#mask-2)" stroke-width="2" fill="#FFFFFF" fill-rule="nonzero" stroke-dasharray="5" xlink:href="#path-1"></use>
+                <g id="Group-2" transform="translate(24.000000, 19.000000)">
+                    <path d="M7.12328767,3.10465116 L60.2665147,3.10465116 C61.3003215,3.10465116 62.2939798,3.50490923 63.0391356,4.22149776 L76,16.6854766 L76,85 C76,87.209139 74.209139,89 72,89 L7.12328767,89 C4.91414867,89 3.12328767,87.209139 3.12328767,85 L3.12328767,7.10465116 C3.12328767,4.89551216 4.91414867,3.10465116 7.12328767,3.10465116 Z" id="Rectangle-Copy" fill="#EEF2F4" fill-rule="nonzero"></path>
+                    <path d="M71.8767123,18.789898 L63.2995543,10.2573265 C63.2695785,10.2277841 63.2695785,10.2277841 63.2390554,10.1988076 L53.4580792,1 L4,1 C2.34314575,1 1,2.34314575 1,4 L1,81.8953488 C1,83.5522031 2.34314575,84.8953488 4,84.8953488 L68.8767123,84.8953488 C70.5335666,84.8953488 71.8767123,83.5522031 71.8767123,81.8953488 L71.8767123,18.789898 Z" id="Rectangle" stroke="#C1C9D1" stroke-width="2" fill="#FFFFFF" fill-rule="nonzero"></path>
+                    <rect id="Rectangle-5" fill="#C1C9D1" fill-rule="nonzero" opacity="0.5" x="22.9041096" y="17.5930233" width="34.3561644" height="3.10465116" rx="1.5"></rect>
+                    <rect id="Rectangle-5-Copy" fill="#C1C9D1" fill-rule="nonzero" opacity="0.5" x="22.9041096" y="28.9767442" width="34.3561644" height="3.10465116" rx="1.5"></rect>
+                    <rect id="Rectangle-5-Copy-3" fill="#C1C9D1" fill-rule="nonzero" opacity="0.5" x="22.9041096" y="40.3604651" width="34.3561644" height="3.10465116" rx="1.5"></rect>
+                    <rect id="Rectangle-5-Copy-2" fill="#C1C9D1" fill-rule="nonzero" opacity="0.5" x="22.9041096" y="51.744186" width="34.3561644" height="3.10465116" rx="1.5"></rect>
+                    <text id=".-opencert" font-family="AvenirNextCondensed-Medium, Avenir Next Condensed" font-size="14" font-style="condensed" font-weight="400" fill="#5D5D5D">
+                        <tspan x="10" y="73">. opencert</tspan>
+                    </text>
+                    <ellipse id="Oval" fill="#C1C9D1" fill-rule="nonzero" cx="14.5753425" cy="19.6627907" rx="1.04109589" ry="1.03488372"></ellipse>
+                    <ellipse id="Oval-Copy" fill="#C1C9D1" fill-rule="nonzero" cx="14.5753425" cy="31.0465116" rx="1.04109589" ry="1.03488372"></ellipse>
+                    <ellipse id="Oval-Copy-2" fill="#C1C9D1" fill-rule="nonzero" cx="14.5753425" cy="42.4302326" rx="1.04109589" ry="1.03488372"></ellipse>
+                    <ellipse id="Oval-Copy-3" fill="#C1C9D1" fill-rule="nonzero" cx="14.5753425" cy="53.8139535" rx="1.04109589" ry="1.03488372"></ellipse>
+                </g>
+                <g id="Group-4" transform="translate(96.000000, 96.500000) rotate(-45.000000) translate(-96.000000, -96.500000) translate(84.000000, 81.000000)">
+                    <path d="M0.798600881,23.3909388 L8.48118967,23.3909388 L8.48118967,30.9215711 L15.5555455,30.9215711 L15.5555455,23.3909388 L23.2358898,23.3909388 L12.9002882,4.04574367 C12.6400334,3.55862364 12.0341665,3.37471298 11.5470465,3.63496771 C11.3725149,3.72821507 11.2295716,3.87114655 11.1363097,4.04567032 L0.798600881,23.3909388 Z" id="Fill-1-Copy" fill="#EEF2F4"></path>
+                    <path d="M0,20.4954319 L7.68258879,20.4954319 L7.68258879,28.0260642 L14.7569446,28.0260642 L14.7569446,20.4954319 L22.437289,20.4954319 L12.1016873,1.15023683 C11.8414326,0.663116801 11.2355656,0.479206143 10.7484456,0.739460875 C10.5739141,0.832708236 10.4309707,0.975639708 10.3377088,1.15016348 L0,20.4954319 Z" id="Fill-1" fill="#FFFFFF"></path>
+                    <path d="M10.3401633,1.61524956 L0.803714348,19.1497694 C0.539845386,19.6349411 0.719246734,20.2421586 1.20441847,20.5060275 C1.35104093,20.5857707 1.51529099,20.6275464 1.68219549,20.6275464 L7.68182038,20.6275464 L7.68182038,27.0260642 C7.68182038,27.578349 8.12953563,28.0260642 8.68182038,28.0260642 L13.7554686,28.0260642 C14.3077533,28.0260642 14.7554686,27.578349 14.7554686,27.0260642 L14.7554686,20.6275464 L20.7550935,20.6275464 C21.3073782,20.6275464 21.7550935,20.1798311 21.7550935,19.6275464 C21.7550935,19.4606419 21.7133178,19.2963918 21.6335746,19.1497694 L12.0971256,1.61524956 C11.8332567,1.13007782 11.2260392,0.950676473 10.7408675,1.21454543 C10.5714566,1.30668244 10.4323003,1.44583869 10.3401633,1.61524956 Z" id="Stroke-2" stroke="#6F6F6F"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

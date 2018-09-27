@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import CertificateDropzone from "../CertificateDropZone";
-import css from '../main.scss';
 
 const DropZoneSection = ({ handleCertificateChange }) => (
   <div

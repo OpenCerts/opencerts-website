@@ -34,6 +34,8 @@ const renderVerifyBlock = props => (
   />
 );
 
+
+
 const renderIdentitiesBlock = certificate => {
   const issuers = get(certificate, "issuers", []);
   const issuerName = issuers.map(i => i.name).join(", ");
@@ -116,8 +118,8 @@ const CertificateViewer = props => {
 
   return (
     <div className="bg-light p-3 fill">
-      {allowedToRender ? validCertificateContent : <InvalidCertificateNotice />}
       {renderedCertificateChange}
+      {allowedToRender ? validCertificateContent : <InvalidCertificateNotice />}
     </div>
   );
 };
