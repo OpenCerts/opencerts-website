@@ -79,7 +79,7 @@ const CertificateDropzone = ({
   <Dropzone
     accept="application/json"
     onDrop={acceptedFiles => onFileDrop(acceptedFiles, handleCertificateChange)}
-    className="pointer h-100"
+    className="h-100"
     acceptClassName=""
     rejectClassName=""
   >

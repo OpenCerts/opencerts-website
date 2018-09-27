@@ -1,10 +1,15 @@
+import css from './viewerstyles.scss'
+
 const View = () => (
   <div
-    className="text-center bg-light h-100 d-flex flex-column justify-content-center p-4"
+    // className="text-center bg-light h-100 d-flex flex-column justify-content-center p-4"
+    className={`${css["viewer-container"]} ${css["default"]}`}
     style={{ borderRadius: 10 }}
   >
-    <div className="p-3">
-      <i className="fas fa-download fa-8x text-muted" />
+    <div className={css['image-container']}>
+      <i>
+        <img src="/static/images/dropzone/dropzone_illustration.svg" />
+      </i>
     </div>
     <div
       className="text-brand-dark"
@@ -26,7 +31,7 @@ const View = () => (
     <div className="text-muted row">
       <div className="col-4" />
       <div className="col-4">
-        <button type="button" className="btn btn-warning btn-block">
+        <button type="button" className={css.btn}>
           Select File
         </button>
       </div>

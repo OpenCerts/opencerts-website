@@ -1,0 +1,16 @@
+body {
+    font-family: "Source Sans Pro", sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}
+
+button {
+    &:hover {
+        filter: brightness(110%);
+    }
+}
+
+.navbar-right {
+    position: absolute;
+    right: 30px;
+}

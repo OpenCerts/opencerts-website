@@ -40,18 +40,23 @@ const Meta = () => (
       integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
       crossOrigin="anonymous"
     />
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossOrigin="anonymous"
+    />
     
     <style jsx global>{`
       :root {
-        --font-monospace: "Montserrat", monospace;
+        font: "Source Sans Pro", sans-serif;
+        --font-monospace: "Source Sans Pro", sans-serif;
         --font-monospace-size: 0.8rem !important;
       }
       
       .btn {
         font-family: source sans pro;
       }
-      .body {
-        font-family: "source sans pro";
+      body {
         background: white;
         font-family: 'Source Sans Pro', sans-serif;
         line-height: 1.5;
