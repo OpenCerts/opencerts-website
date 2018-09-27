@@ -63,11 +63,18 @@ const Meta = () => (
         margin: 0px;
       }
       
+      .navbar-toggler {
+        position: absolute;
+        right: 30px;
+      }
+    
       .main {
-          max-width: 1280px;
-          display: flex; 
-          justify-content: flex-start;
-          margin: 0 auto;
+        max-width: 1280px;
+        display: flex; 
+        justify-content: flex-start;
+        margin: 0 auto;
+        width: 100%;
+        padding: 2rem;
       }
       
       h1, h2, h3, h4, h5, h6 {
