@@ -15,6 +15,12 @@
         box-shadow: 0 0 0px 10px $faint-blue;
     }
 
+    &.accept {
+        background-color: $faint-green;
+        border: 2px dashed $brand-blue;
+        box-shadow: 0 0 0px 10px $faint-green;
+    }
+
     &.warning {
         background-color: $warning-background;
         border: 2px dashed $warning-color;
@@ -24,7 +30,6 @@
         .unverified-btn {
             background-color: $warning-color;
         }
-
     }
     
     &.invalid {

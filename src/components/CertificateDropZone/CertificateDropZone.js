@@ -2,13 +2,13 @@ import Dropzone from "react-dropzone";
 import PropTypes from "prop-types";
 
 import DefaultView from "./Views/DefaultView";
-import FileFormatErrorView from "./Views/FileFormatErrorView";
 import VerifyingView from "./Views/VerifyingView";
 import UnverifiedView from "./Views/UnverifiedView";
 
 const renderDropzoneContent = props => {
   const {
     handleRenderOverwrite,
+    isDragAccept,
     isDragReject,
     verifying,
     issuerIdentityStatus,
@@ -19,7 +19,10 @@ const renderDropzoneContent = props => {
     verificationStatus
   } = props;
   if (isDragReject) {
-    return <FileFormatErrorView />;
+    return <DefaultView hover={true} accept={false} />;
+  }
+  if (isDragAccept) {
+    return <DefaultView hover={true} accept={true} />;
   }
   if (verifying) {
     return <VerifyingView verificationStatus={verificationStatus} />;
@@ -41,7 +44,7 @@ const renderDropzoneContent = props => {
       />
     );
   }
-  return <DefaultView />;
+  return <DefaultView hover={false} />;
 };
 
 // Injects additional props on top of isDragReject, isDragActive, acceptedFiles & rejectedFiles
@@ -114,6 +117,7 @@ renderDropzoneContent.propTypes = {
   handleRenderOverwrite: PropTypes.func,
   document: PropTypes.object,
   verifying: PropTypes.bool,
+  isDragAccept: PropTypes.bool,
   isDragReject: PropTypes.bool,
   issuerIdentityStatus: PropTypes.object,
   hashStatus: PropTypes.object,

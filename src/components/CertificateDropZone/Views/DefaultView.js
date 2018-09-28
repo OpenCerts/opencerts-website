@@ -1,9 +1,12 @@
+import PropTypes from "prop-types";
 import css from "./viewerstyles.scss";
 
-const View = () => (
+const View = ({ hover, accept }) => (
   <div
-    // className="text-center bg-light h-100 d-flex flex-column justify-content-center p-4"
-    className={`${css["viewer-container"]} ${css.default}`}
+    className={`${css["viewer-container"]} ${
+      // eslint-disable-next-line no-nested-ternary
+      hover ? (accept ? css.accept : css.invalid) : css.default
+    }`}
     style={{ borderRadius: 10 }}
   >
     <div className={css["image-container"]}>
@@ -40,3 +43,8 @@ const View = () => (
 );
 
 export default View;
+
+View.propTypes = {
+  hover: PropTypes.bool,
+  accept: PropTypes.bool
+};
