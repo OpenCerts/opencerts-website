@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
+import css from "./viewerstyles.scss";
 
 const View = ({
   issuerIdentityStatus,
@@ -11,60 +12,75 @@ const View = ({
     hashStatus.verified && issuedStatus.verified && notRevokedStatus.verified;
   return (
     <div
-      className="text-center h-100 d-flex flex-column justify-content-center p-4 text-brand-dark"
+      // className="text-center h-100 d-flex flex-column justify-content-center p-4 text-brand-dark"
+      className={`${css["viewer-container"]} ${
+        isWarning ? css.warning : css.invalid
+      }`}
       style={{
         backgroundColor: isWarning ? "#fbf6e9" : "#fbeae9",
         borderRadius: 10
       }}
     >
-      {isWarning ? (
-        <i className="fas fa-exclamation-triangle fa-3x text-orange" />
-      ) : (
-        <i className="fas fa-times-circle fa-3x text-red" />
-      )}
-      <div
-        className={`${isWarning ? "text-orange" : "text-red"} m-3`}
-        style={{ fontSize: "1.5rem" }}
-      >
-        {isWarning
-          ? "Certificate from unregistered body"
-          : "Invalid Certificate"}
+      <span className={css["message-container"]}>
+        {isWarning ? (
+          <img src="/static/images/dropzone/warning.svg" />
+        ) : (
+          <img src="/static/images/dropzone/invalid.svg" />
+        )}
+        <span
+          className={`${isWarning ? "warning" : "invalid"} m-3`}
+          style={{ fontSize: "1.5rem" }}
+        >
+          {isWarning
+            ? "Certificate from unregistered body"
+            : "This certificate is not valid"}
+        </span>
+      </span>
+
+      <div className={css.verifications}>
+        {!hashStatus.verified ? (
+          <p className={css.messages}>The certificate has been tampered with</p>
+        ) : null}
+
+        {!issuedStatus.verified ? (
+          <p className={css.messages}>The certificate has not been issued</p>
+        ) : null}
+
+        {!notRevokedStatus.verified ? (
+          <p className={css.messages}>The certificate has been revoked</p>
+        ) : null}
+
+        {!issuerIdentityStatus.verified ? (
+          <p className={css.messages}>
+            The issuer&#39;s identity cannot be verified
+          </p>
+        ) : null}
       </div>
 
-      {!hashStatus.verified ? (
-        <p className="mb-0">- The certificate has been tampered with</p>
-      ) : null}
+      <button className={css["unverified-btn"]}>
+        <span>
+          <Link href="/faq">What should I do?</Link>
+        </span>
+      </button>
 
-      {!issuedStatus.verified ? (
-        <p className="mb-0">- The certificate has not been issued</p>
-      ) : null}
-
-      {!notRevokedStatus.verified ? (
-        <p className="mb-0">- The certificate has been revoked</p>
-      ) : null}
-
-      {!issuerIdentityStatus.verified ? (
-        <p className="mb-0">- The issuer&#39;s identity cannot be verified</p>
-      ) : null}
-
-      {isWarning ? (
-        <div
-          className="mt-2"
-          style={{
-            textDecoration: "underline",
-            fontSize: "0.8rem"
-          }}
-          onClick={e => {
-            e.preventDefault();
-            e.stopPropagation();
-            e.nativeEvent.stopImmediatePropagation();
-          }}
-        >
-          <Link href="/viewer">Continue Viewing Certificate</Link>
-        </div>
-      ) : (
-        ""
-      )}
+      <div className={css["secondary-links"]}>
+        <span>
+          <Link href=" ">Try another</Link>
+        </span>
+        {isWarning ? (
+          <span
+            onClick={e => {
+              e.preventDefault();
+              e.stopPropagation();
+              e.nativeEvent.stopImmediatePropagation();
+            }}
+          >
+            <Link href="/viewer"> View certificate anyway</Link>
+          </span>
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 };

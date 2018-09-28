@@ -1,0 +1,112 @@
+@import '../../../styles/variables.scss';
+
+.viewer-container {
+    text-align: center !important;
+    padding: 1.5rem;
+    height: 100%;
+    justify-content: center !important;
+    flex-direction: column !important;
+    display: flex !important;
+    border-radius: 10px;
+
+    &.default {
+        background-color: $faint-blue;
+        border: 2px dashed $brand-blue;
+        box-shadow: 0 0 0px 10px $faint-blue;
+    }
+
+    &.accept {
+        background-color: $faint-green;
+        border: 2px dashed $brand-blue;
+        box-shadow: 0 0 0px 10px $faint-green;
+    }
+
+    &.warning {
+        background-color: $warning-background;
+        border: 2px dashed $warning-color;
+        box-shadow: 0 0 0px 10px $warning-background;
+        color: $warning-color;
+
+        .unverified-btn {
+            background-color: $warning-color;
+        }
+    }
+    
+    &.invalid {
+        background-color: $invalid-background;
+        border: 2px dashed $invalid-color;
+        box-shadow: 0 0 0px 10px $invalid-background;
+        color: $invalid-color;
+        
+        .unverified-btn {
+            background-color: $invalid-color;
+        }
+
+    }
+
+}
+
+.image-container {
+    margin-bottom: 1rem;
+    img {
+        height: 110px;
+    }
+}
+
+
+.message-container {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #000;
+
+    span {
+        vertical-align: middle;
+    }
+}
+
+.verifications {
+    margin-bottom: 1rem;
+
+    .messages {
+        font-size: 18px;
+        font-weight: 600;
+    }
+}
+
+.btn {
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.375rem 2rem;
+    background-color: $brand-blue;
+    border: none;
+    border-radius: 6px;
+    min-width: 120px;
+    color: #fff;
+    margin: auto;
+    
+}
+
+.unverified-btn {
+    @extend .btn;
+    cursor: pointer;
+}
+
+.secondary-links {
+    width: 50%;
+    display: flex;
+    margin: 2rem auto 0 auto;
+
+    span {
+        margin: auto;
+        a {
+            font-size: 14px;
+            color: #787878 !important;
+            text-decoration: underline !important;
+        
+            &:hover {
+                color: #324353 !important;
+            }
+        }
+    }
+}

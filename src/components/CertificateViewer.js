@@ -102,8 +102,8 @@ const CertificateViewer = props => {
 
   return (
     <div className="bg-light p-3 fill">
-      {allowedToRender ? validCertificateContent : <InvalidCertificateNotice />}
       {renderedCertificateChange}
+      {allowedToRender ? validCertificateContent : <InvalidCertificateNotice />}
     </div>
   );
 };

@@ -1,4 +1,10 @@
-const SectionTitle = () => <div className="h2 mb-3">Guide</div>;
+import css from "./aboutsection.scss";
+
+const SectionTitle = () => (
+  <div className="mb-3">
+    <h2>How it works</h2>
+  </div>
+);
 
 const tabs = [
   {
@@ -120,7 +126,7 @@ const renderTabContent = () => {
 
 const AboutSection = () => (
   <div className="row p-4 bg-light" id="how-it-works">
-    <div className="container-fluid">
+    <div className={css.main}>
       <SectionTitle />
       {renderTabTitle()}
       {renderTabContent()}

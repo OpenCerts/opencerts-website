@@ -1,10 +1,18 @@
-const View = () => (
+import PropTypes from "prop-types";
+import css from "./viewerstyles.scss";
+
+const View = ({ hover, accept }) => (
   <div
-    className="text-center bg-light h-100 d-flex flex-column justify-content-center p-4"
+    className={`${css["viewer-container"]} ${
+      // eslint-disable-next-line no-nested-ternary
+      hover ? (accept ? css.accept : css.invalid) : css.default
+    }`}
     style={{ borderRadius: 10 }}
   >
-    <div className="p-3">
-      <i className="fas fa-download fa-8x text-muted" />
+    <div className={css["image-container"]}>
+      <i>
+        <img src="/static/images/dropzone/dropzone_illustration.svg" />
+      </i>
     </div>
     <div
       className="text-brand-dark"
@@ -26,7 +34,7 @@ const View = () => (
     <div className="text-muted row">
       <div className="col-4" />
       <div className="col-4">
-        <button type="button" className="btn btn-warning btn-block">
+        <button type="button" className={`pointer ${css.btn}`}>
           Select File
         </button>
       </div>
@@ -35,3 +43,8 @@ const View = () => (
 );
 
 export default View;
+
+View.propTypes = {
+  hover: PropTypes.bool,
+  accept: PropTypes.bool
+};
