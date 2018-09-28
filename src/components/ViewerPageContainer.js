@@ -22,11 +22,11 @@ class MainPageContainer extends Component {
     super(props);
 
     this.state = {
-      emailAddress: ""
+      showSharing: false
     };
 
     this.handleCertificateChange = this.handleCertificateChange.bind(this);
-    this.handleEmailChange = this.handleEmailChange.bind(this);
+    this.handleSharingToggle = this.handleSharingToggle.bind(this);
     this.handleSendCertificate = this.handleSendCertificate.bind(this);
   }
 
@@ -37,8 +37,8 @@ class MainPageContainer extends Component {
     }
   }
 
-  handleEmailChange(emailAddress) {
-    this.setState({ emailAddress });
+  handleSharingToggle() {
+    this.setState({ showSharing: !this.state.showSharing });
   }
 
   handleCertificateChange(certificate) {
@@ -64,7 +64,6 @@ class MainPageContainer extends Component {
         showSharing={this.state.showSharing}
         emailAddress={this.state.emailAddress}
         handleSendCertificate={this.handleSendCertificate}
-        handleEmailChange={this.handleEmailChange}
         handleSharingToggle={this.handleSharingToggle}
       />
     );

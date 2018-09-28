@@ -4,7 +4,8 @@ import CertificateVerifyBlock from "./CertificateVerifyBlock";
 import MultiCertificateRenderer from "./MultiCertificateRenderer";
 import templateRegistry from "./CertificateTemplates";
 import InvalidCertificateNotice from "./InvalidCertificateNotice";
-import CertificateSharingForm from "./CertificateSharingForm";
+import CertificateSharingForm from "./CertificateSharing/CertificateSharingForm";
+import Modal from "./CertificateSharing/SharingModal";
 
 const getCertificateTemplates = certificate => {
   const templateSet = get(certificate, "$template", "default");
@@ -14,13 +15,7 @@ const getCertificateTemplates = certificate => {
 };
 
 const renderSharingBlock = props => (
-  <CertificateSharingForm
-    showSharing={props.showSharing}
-    emailAddress={props.emailAddress}
-    handleSendCertificate={props.handleSendCertificate}
-    handleEmailChange={props.handleEmailChange}
-    handleSharingToggle={props.handleSharingToggle}
-  />
+  <CertificateSharingForm handleSendCertificate={props.handleSendCertificate} />
 );
 
 const renderVerifyBlock = props => (
@@ -63,6 +58,9 @@ const renderHeaderBlock = props => {
 
         <div className="ml-auto">
           <i className="fas fa-print fa-2x text-dark" />
+        </div>
+        <div className="ml-2" onClick={() => props.handleSharingToggle()}>
+          <i className="fas fa-share fa-2x text-dark" />
         </div>
       </div>
     </div>
@@ -111,6 +109,10 @@ const CertificateViewer = props => {
         certificate={certificate}
         templates={templates}
       />
+      <Modal
+        show={props.showSharing}
+        handleSharingToggle={props.handleSharingToggle}
+      />
     </div>
   );
 
@@ -130,7 +132,9 @@ CertificateViewer.propTypes = {
   hashStatus: PropTypes.object,
   issuedStatus: PropTypes.object,
   notRevokedStatus: PropTypes.object,
-  issuerIdentityStatus: PropTypes.object
+  issuerIdentityStatus: PropTypes.object,
+  showSharing: PropTypes.bool,
+  handleSharingToggle: PropTypes.func
 };
 
 renderVerifyBlock.propTypes = CertificateViewer.propTypes;
