@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack:///./styles.scss?00b2"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,cAAc,EAAE","file":"static/style.css","sourcesContent":[".main {\n  max-width: 1200px;\n  display: flex; }\n\n\n\n// WEBPACK FOOTER //\n// ./styles.scss"],"sourceRoot":""}
