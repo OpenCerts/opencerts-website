@@ -34,7 +34,7 @@ const View = ({ hover, accept }) => (
     <div className="text-muted row">
       <div className="col-4" />
       <div className="col-4">
-        <button type="button" className={css.btn}>
+        <button type="button" className={`pointer ${css.btn}`}>
           Select File
         </button>
       </div>
