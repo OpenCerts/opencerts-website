@@ -1,3 +1,10 @@
+export const states = {
+  INITIAL: "INITIAL",
+  PENDING: "PENDING",
+  SUCCESS: "SUCCESS",
+  FAILURE: "FAILURE"
+};
+
 export const initialState = {
   raw: null,
   store: null,
@@ -23,7 +30,7 @@ export const initialState = {
 
   verificationStatus: [],
 
-  emailSending: false,
+  emailState: states.INITIAL,
   emailError: null
 };
 
@@ -54,7 +61,8 @@ export const types = {
 
   SENDING_CERTIFICATE: "SENDING_CERTIFICATE",
   SENDING_CERTIFICATE_SUCCESS: "SENDING_CERTIFICATE_SUCCESS",
-  SENDING_CERTIFICATE_FAILURE: "SENDING_CERTIFICATE_FAILURE"
+  SENDING_CERTIFICATE_FAILURE: "SENDING_CERTIFICATE_FAILURE",
+  SENDING_CERTIFICATE_RESET: "SENDING_CERTIFICATE_RESET"
 };
 
 // Reducers
@@ -231,19 +239,25 @@ export default function reducer(state = initialState, action) {
     case types.SENDING_CERTIFICATE:
       return {
         ...state,
-        emailSending: true,
+        emailState: states.PENDING,
+        emailError: null
+      };
+    case types.SENDING_CERTIFICATE_RESET:
+      return {
+        ...state,
+        emailState: states.INITIAL,
         emailError: null
       };
     case types.SENDING_CERTIFICATE_SUCCESS:
       return {
         ...state,
-        emailSending: false,
+        emailState: states.SUCCESS,
         emailError: null
       };
     case types.SENDING_CERTIFICATE_FAILURE:
       return {
         ...state,
-        emailSending: false,
+        emailState: states.FAILURE,
         emailError: action.payload
       };
     default:
@@ -277,6 +291,12 @@ export function sendCertificate(payload) {
   return {
     type: types.SENDING_CERTIFICATE,
     payload
+  };
+}
+
+export function sendCertificateReset() {
+  return {
+    type: types.SENDING_CERTIFICATE_RESET
   };
 }
 
@@ -365,4 +385,8 @@ export function getVerified(store) {
 
 export function getVerificationStatus(store) {
   return store.certificate.verificationStatus;
+}
+
+export function getEmailSendingState(store) {
+  return store.certificate.emailState;
 }

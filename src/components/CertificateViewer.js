@@ -4,7 +4,8 @@ import CertificateVerifyBlock from "./CertificateVerifyBlock";
 import MultiCertificateRenderer from "./MultiCertificateRenderer";
 import templateRegistry from "./CertificateTemplates";
 import InvalidCertificateNotice from "./InvalidCertificateNotice";
-import SharingModal from "./CertificateSharing/SharingModal";
+import Modal from "./Modal";
+import CertificateSharingForm from "./CertificateSharing/CertificateSharingForm";
 
 const getCertificateTemplates = certificate => {
   const templateSet = get(certificate, "$template", "default");
@@ -101,11 +102,13 @@ const CertificateViewer = props => {
         certificate={certificate}
         templates={templates}
       />
-      <SharingModal
-        show={props.showSharing}
-        handleSharingToggle={props.handleSharingToggle}
-        handleSendCertificate={props.handleSendCertificate}
-      />
+      <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
+        <CertificateSharingForm
+          emailSendingState={props.emailSendingState}
+          handleSendCertificate={props.handleSendCertificate}
+          handleSharingToggle={props.handleSharingToggle}
+        />
+      </Modal>
     </div>
   );
 
@@ -127,7 +130,9 @@ CertificateViewer.propTypes = {
   notRevokedStatus: PropTypes.object,
   issuerIdentityStatus: PropTypes.object,
   showSharing: PropTypes.bool,
-  handleSharingToggle: PropTypes.func
+  emailSendingState: PropTypes.string,
+  handleSharingToggle: PropTypes.func,
+  handleSendCertificate: PropTypes.func
 };
 
 renderVerifyBlock.propTypes = CertificateViewer.propTypes;

@@ -15,6 +15,5 @@ export default function sendEmail({ certificate, email, captcha }) {
         captcha
       })
     })
-    .then(res => res.json())
-    .catch(console.error); // eslint-disable-line
+    .then(res => res.status === 200);
 }

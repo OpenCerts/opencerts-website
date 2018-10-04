@@ -175,15 +175,21 @@ export function* sendCertificate({ payload }) {
     const certificate = yield select(getCertificate);
     const { email, captcha } = payload;
 
-    yield sendEmail({
+    const success = yield sendEmail({
       certificate,
       email,
       captcha
     });
 
-    yield put({
-      type: types.SENDING_CERTIFICATE_SUCCESS
-    });
+    if (success) {
+      yield put({
+        type: types.SENDING_CERTIFICATE_SUCCESS
+      });
+    } else {
+      yield put({
+        type: types.SENDING_CERTIFICATE_FAILURE
+      });
+    }
   } catch (e) {
     yield put({
       type: types.SENDING_CERTIFICATE_FAILURE,

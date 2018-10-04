@@ -7,13 +7,15 @@ import { certificateData } from "@govtechsg/open-certificate";
 import {
   updateCertificate,
   sendCertificate,
+  sendCertificateReset,
   getCertificate,
   getVerifying,
   getIssuerIdentityStatus,
   getHashStatus,
   getIssuedStatus,
   getNotRevokedStatus,
-  getVerified
+  getVerified,
+  getEmailSendingState
 } from "../reducers/certificate";
 import CertificateViewer from "./CertificateViewer";
 
@@ -38,6 +40,7 @@ class MainPageContainer extends Component {
   }
 
   handleSharingToggle() {
+    this.props.sendCertificateReset();
     this.setState({ showSharing: !this.state.showSharing });
   }
 
@@ -65,6 +68,7 @@ class MainPageContainer extends Component {
         emailAddress={this.state.emailAddress}
         handleSendCertificate={this.handleSendCertificate}
         handleSharingToggle={this.handleSharingToggle}
+        emailSendingState={this.props.emailSendingState}
       />
     );
   }
@@ -74,6 +78,7 @@ const mapStateToProps = store => ({
   document: getCertificate(store),
 
   // Verification statuses used in verifier block
+  emailSendingState: getEmailSendingState(store),
   verifying: getVerifying(store),
   issuerIdentityStatus: getIssuerIdentityStatus(store),
   hashStatus: getHashStatus(store),
@@ -85,7 +90,8 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
   updateCertificate: payload => dispatch(updateCertificate(payload)),
-  sendCertificate: payload => dispatch(sendCertificate(payload))
+  sendCertificate: payload => dispatch(sendCertificate(payload)),
+  sendCertificateReset: () => dispatch(sendCertificateReset())
 });
 
 export default connect(
@@ -103,5 +109,7 @@ MainPageContainer.propTypes = {
   issuedStatus: PropTypes.object,
   notRevokedStatus: PropTypes.object,
   issuerIdentityStatus: PropTypes.object,
-  verified: PropTypes.bool
+  verified: PropTypes.bool,
+  emailSendingState: PropTypes.string,
+  sendCertificateReset: PropTypes.func
 };
