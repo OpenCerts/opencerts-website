@@ -4,8 +4,7 @@ import CertificateVerifyBlock from "./CertificateVerifyBlock";
 import MultiCertificateRenderer from "./MultiCertificateRenderer";
 import templateRegistry from "./CertificateTemplates";
 import InvalidCertificateNotice from "./InvalidCertificateNotice";
-import CertificateSharingForm from "./CertificateSharing/CertificateSharingForm";
-import Modal from "./CertificateSharing/SharingModal";
+import SharingModal from "./CertificateSharing/SharingModal";
 
 const getCertificateTemplates = certificate => {
   const templateSet = get(certificate, "$template", "default");
@@ -13,10 +12,6 @@ const getCertificateTemplates = certificate => {
     ? templateRegistry[templateSet]
     : templateRegistry.default;
 };
-
-const renderSharingBlock = props => (
-  <CertificateSharingForm handleSendCertificate={props.handleSendCertificate} />
-);
 
 const renderVerifyBlock = props => (
   <CertificateVerifyBlock
@@ -99,19 +94,17 @@ const CertificateViewer = props => {
     props.handleCertificateChange
   );
 
-  const renderedSharingBlock = renderSharingBlock(props);
-
   const validCertificateContent = (
     <div>
       {renderedHeaderBlock}
-      {renderedSharingBlock}
       <MultiCertificateRenderer
         certificate={certificate}
         templates={templates}
       />
-      <Modal
+      <SharingModal
         show={props.showSharing}
         handleSharingToggle={props.handleSharingToggle}
+        handleSendCertificate={props.handleSendCertificate}
       />
     </div>
   );
@@ -139,6 +132,5 @@ CertificateViewer.propTypes = {
 
 renderVerifyBlock.propTypes = CertificateViewer.propTypes;
 renderHeaderBlock.propTypes = CertificateViewer.propTypes;
-renderSharingBlock.propTypes = CertificateViewer.propTypes;
 
 export default CertificateViewer;

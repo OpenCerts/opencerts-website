@@ -37,12 +37,12 @@ class CertificateSharingForm extends Component {
   render() {
     return (
       <div>
-        <ReCAPTCHA sitekey={CLIENT_KEY} onChange={this.handleCaptchaChange} />
         <input
           value={this.state.emailAddress}
           onChange={this.handleEmailChange}
         />
         <button onClick={this.handleSend}>Send</button>
+        <ReCAPTCHA sitekey={CLIENT_KEY} onChange={this.handleCaptchaChange} />
       </div>
     );
   }
