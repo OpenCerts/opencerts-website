@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import DetailedCertificateVerifyBlock from "./DetailedCertificateVerifyBlock";
 import { LOG_LEVEL } from "./constants";
+import css from "./certificateVerifyBlock.scss";
 
 const statusSummary = ({
   verifying,
@@ -34,36 +35,18 @@ const renderIcon = status => {
   switch (status) {
     case LOG_LEVEL.CONNECTING:
     case LOG_LEVEL.VERIFYING:
-      icon = (
-        <i
-          id="verify-spinner"
-          className="fa fa-spinner fa-spin fa-2x text-muted"
-        />
-      );
+      icon = <i id="verify-spinner" className="fa fa-spinner fa-spin fa-2x" />;
       break;
     case LOG_LEVEL.VALID:
-      icon = (
-        <i
-          id="verify-valid"
-          className="fas fa-check-circle fa-2x text-success"
-        />
-      );
+      icon = <i id="verify-valid" className="fas fa-check-circle fa-2x" />;
       break;
     case LOG_LEVEL.WARNING:
       icon = (
-        <i
-          id="verify-warning"
-          className="fas fa-exclamation-triangle fa-2x text-warning"
-        />
+        <i id="verify-warning" className="fas fa-exclamation-triangle fa-2x" />
       );
       break;
     default:
-      icon = (
-        <i
-          id="verify-invalid"
-          className="fas fa-times-circle fa-2x text-danger"
-        />
-      );
+      icon = <i id="verify-invalid" className="fas fa-times-circle fa-2x" />;
   }
   return (
     <div className="col-3 d-flex justify-content-center align-items-center">
@@ -101,10 +84,21 @@ const SimpleVerifyBlock = props => {
   const status = statusSummary(props);
   const renderedIcon = renderIcon(status);
   const renderedText = renderText(status);
+  let stateStyle;
+  switch (status) {
+    case LOG_LEVEL.VALID:
+      stateStyle = "valid";
+      break;
+    case LOG_LEVEL.WARNING:
+      stateStyle = "warning";
+      break;
+    case LOG_LEVEL.INVALID:
+    default:
+      stateStyle = "invalid";
+  }
   return (
     <div
-      style={{ minWidth: 300, backgroundColor: "#EEE" }}
-      className="p-2 pointer"
+      className={`p-2 pointer ${css["simple-verify-block"]} ${css[stateStyle]}`}
       onClick={props.toggleDetailedView}
     >
       <div className="row">
