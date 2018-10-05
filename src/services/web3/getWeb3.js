@@ -12,6 +12,7 @@ export const types = {
 };
 
 let web3Instance;
+let web3InstanceType;
 
 async function loadWeb3InfuraWebsocket(mainnet = true) {
   const rpcUrl = mainnet
@@ -77,6 +78,7 @@ async function resolveWeb3(resolve, reject, t = types.INJECTED, config) {
       default:
         web3Instance = await loadWeb3InfuraWebsocket();
     }
+    web3InstanceType = t;
     resolve(web3Instance);
   } catch (e) {
     reject(e);
@@ -84,6 +86,13 @@ async function resolveWeb3(resolve, reject, t = types.INJECTED, config) {
 }
 
 export function setNewWeb3(t, config) {
+  if (
+    web3InstanceType === types.INFURA_MAINNET ||
+    web3InstanceType === types.INFURA_ROPSTEN
+  ) {
+    // we need to kill the engine if the previous web3 instance has a ledger subprovider
+    web3Instance.currentProvider.stop();
+  }
   return new Promise((resolve, reject) => {
     // Wait for loading completion to avoid race conditions with web3 injection timing.
     // Server-side rendering fails when trying to access window
