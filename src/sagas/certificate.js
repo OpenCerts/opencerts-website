@@ -224,7 +224,7 @@ export function* verifyCertificateIssuer({ certificate }) {
 
     trace("combinedIssuerIdentities", combinedIssuerIdentities);
     yield put(verifyingCertificateIssuerSuccess(combinedIssuerIdentities));
-    return true;
+    return combinedIssuerIdentities;
   } catch (e) {
     error(e);
     yield put(verifyingCertificateIssuerFailure(e.message));

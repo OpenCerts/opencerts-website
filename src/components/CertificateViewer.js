@@ -23,6 +23,8 @@ const renderVerifyBlock = props => (
     issuedStatus={props.issuedStatus}
     notRevokedStatus={props.notRevokedStatus}
     issuerIdentityStatus={props.issuerIdentityStatus}
+    toggleDetailedView={props.toggleDetailedView}
+    detailedVerifyVisible={props.detailedVerifyVisible}
   />
 );
 
@@ -130,6 +132,8 @@ const CertificateViewer = props => {
 
 CertificateViewer.propTypes = {
   handleCertificateChange: PropTypes.func,
+  toggleDetailedView: PropTypes.func,
+  detailedVerifyVisible: PropTypes.bool,
   certificate: PropTypes.object,
   verifying: PropTypes.bool,
 

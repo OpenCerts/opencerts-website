@@ -24,9 +24,10 @@ class MainPageContainer extends Component {
     super(props);
 
     this.state = {
-      showSharing: false
+      showSharing: false,
+      detailedVerifyVisible: false
     };
-
+    this.toggleDetailedView = this.toggleDetailedView.bind(this);
     this.handleCertificateChange = this.handleCertificateChange.bind(this);
     this.handleSharingToggle = this.handleSharingToggle.bind(this);
     this.handleSendCertificate = this.handleSendCertificate.bind(this);
@@ -42,6 +43,12 @@ class MainPageContainer extends Component {
   handleSharingToggle() {
     this.props.sendCertificateReset();
     this.setState({ showSharing: !this.state.showSharing });
+  }
+
+  toggleDetailedView() {
+    this.setState({
+      detailedVerifyVisible: !this.state.detailedVerifyVisible
+    });
   }
 
   handleCertificateChange(certificate) {
@@ -69,6 +76,8 @@ class MainPageContainer extends Component {
         handleSendCertificate={this.handleSendCertificate}
         handleSharingToggle={this.handleSharingToggle}
         emailSendingState={this.props.emailSendingState}
+        toggleDetailedView={this.toggleDetailedView}
+        detailedVerifyVisible={this.state.detailedVerifyVisible}
       />
     );
   }

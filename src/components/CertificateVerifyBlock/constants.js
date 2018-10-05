@@ -1,0 +1,9 @@
+export const LOG_LEVEL = {
+  CONNECTING: "CONNECTING",
+  VERIFYING: "VERIFYING",
+  VALID: "VALID",
+  INVALID: "INVALID",
+  WARNING: "WARNING"
+};
+
+export default { LOG_LEVEL };
