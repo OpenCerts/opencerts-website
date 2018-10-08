@@ -1,10 +1,10 @@
 import { takeEvery, all } from "redux-saga/effects";
 
 import { types as applicationType } from "../reducers/application";
-import * as applicationSaga from "../sagas/application";
+import * as applicationSaga from "./application";
 
 import { types as certificateType } from "../reducers/certificate";
-import * as certificateSaga from "../sagas/certificate";
+import * as certificateSaga from "./certificate";
 
 export default function* rootSaga() {
   yield all([

@@ -22,7 +22,7 @@ class NetworkSelector extends Component {
   }
 
   render() {
-    const { LEDGER_MAIN, LEDGER_ROPSTEN } = networkTypes;
+    const { INFURA_MAINNET, INFURA_ROPSTEN } = networkTypes;
 
     return (
       <div className="fr ba">
@@ -36,8 +36,8 @@ class NetworkSelector extends Component {
             borderRadius: 0
           }}
         >
-          <option value={LEDGER_MAIN}>Mainnet</option>
-          <option value={LEDGER_ROPSTEN}>Testnet (Ropsten)</option>
+          <option value={INFURA_MAINNET}>Mainnet</option>
+          <option value={INFURA_ROPSTEN}>Testnet (Ropsten)</option>
         </select>
       </div>
     );

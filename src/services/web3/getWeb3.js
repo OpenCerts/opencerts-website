@@ -1,13 +1,12 @@
 import Web3 from "web3";
-import ProviderEngine from "web3-provider-engine";
-import FetchSubprovider from "web3-provider-engine/subproviders/fetch";
-import HookedWalletSubprovider from "web3-provider-engine/subproviders/hooked-wallet";
-import LedgerWallet from "ledger-wallet-provider/lib/LedgerWallet";
+
+const ProviderEngine = require("web3-provider-engine");
+const WebsocketSubProvider = require("web3-provider-engine/subproviders/websocket.js");
 
 export const types = {
+  INFURA_MAINNET: "INFURA_MAINNET",
+  INFURA_ROPSTEN: "INFURA_ROPSTEN",
   INJECTED: "INJECTED",
-  LEDGER_MAIN: "LEDGER_MAIN",
-  LEDGER_ROPSTEN: "LEDGER_ROPSTEN",
   CUSTOM: "CUSTOM",
   MOCK: "MOCK"
 };
@@ -15,25 +14,15 @@ export const types = {
 let web3Instance;
 let web3InstanceType;
 
-async function loadWeb3Ledger(mainnet = true) {
-  let { web3 } = window;
-  const networkId = mainnet ? 1 : 3;
+async function loadWeb3InfuraWebsocket(mainnet = true) {
   const rpcUrl = mainnet
-    ? "https://mainnet.infura.io/GcUmThrFdoO47u9xsEXq"
-    : "https://ropsten.infura.io/GcUmThrFdoO47u9xsEXq";
-  const defaultDerivativePath = "44'/60'/0'/0";
+    ? "wss://mainnet.infura.io/ws/GcUmThrFdoO47u9xsEXq"
+    : "wss://ropsten.infura.io/ws/GcUmThrFdoO47u9xsEXq";
 
   const engine = new ProviderEngine();
-  web3 = new Web3(engine);
-
-  const fetchProvider = new FetchSubprovider({ rpcUrl });
-
-  const ledger = new LedgerWallet(() => networkId, defaultDerivativePath);
-  await ledger.init();
-
-  engine.addProvider(new HookedWalletSubprovider(ledger));
+  const web3 = new Web3(engine);
+  const fetchProvider = new WebsocketSubProvider({ rpcUrl });
   engine.addProvider(fetchProvider);
-
   engine.start();
 
   return web3;
@@ -71,14 +60,14 @@ async function loadWeb3Mock() {
 async function resolveWeb3(resolve, reject, t = types.INJECTED, config) {
   try {
     switch (t) {
+      case types.INFURA_ROPSTEN:
+        web3Instance = await loadWeb3InfuraWebsocket(false);
+        break;
+      case types.INFURA_MAINNET:
+        web3Instance = await loadWeb3InfuraWebsocket();
+        break;
       case types.INJECTED:
         web3Instance = await loadWeb3Injected();
-        break;
-      case types.LEDGER_MAIN:
-        web3Instance = await loadWeb3Ledger(true);
-        break;
-      case types.LEDGER_ROPSTEN:
-        web3Instance = await loadWeb3Ledger(false);
         break;
       case types.CUSTOM:
         web3Instance = await loadWeb3CustomRpc(config);
@@ -87,7 +76,7 @@ async function resolveWeb3(resolve, reject, t = types.INJECTED, config) {
         web3Instance = await loadWeb3Mock();
         break;
       default:
-        web3Instance = await loadWeb3Injected();
+        web3Instance = await loadWeb3InfuraWebsocket();
     }
     web3InstanceType = t;
     resolve(web3Instance);
@@ -98,8 +87,8 @@ async function resolveWeb3(resolve, reject, t = types.INJECTED, config) {
 
 export function setNewWeb3(t, config) {
   if (
-    web3InstanceType === types.LEDGER_MAIN ||
-    web3InstanceType === types.LEDGER_ROPSTEN
+    web3InstanceType === types.INFURA_MAINNET ||
+    web3InstanceType === types.INFURA_ROPSTEN
   ) {
     // we need to kill the engine if the previous web3 instance has a ledger subprovider
     web3Instance.currentProvider.stop();
