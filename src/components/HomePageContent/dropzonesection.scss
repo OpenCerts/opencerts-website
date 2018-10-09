@@ -1,0 +1,22 @@
+@import '../../styles/variables.scss';
+
+h3 {
+    color: #fff;
+}
+
+.description {
+    padding: 3rem 7rem 3rem 0;
+    p {
+        padding: 1.5rem 0;
+        font-size: 1.1rem;
+        color: $low-translucency-white;
+    }
+}
+
+h5 {
+    font-weight: 700;
+    padding-bottom: 1rem;
+}
+
+
+

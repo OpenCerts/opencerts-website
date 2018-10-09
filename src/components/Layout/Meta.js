@@ -95,6 +95,10 @@ const Meta = () => (
         font-family: "Montserrat";
       }
 
+      .bg-light {
+        background-color: #fcf9f6 !important;
+      }
+
       .bg-brand-dark {
         background-color: #324353;
       }

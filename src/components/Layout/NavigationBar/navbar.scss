@@ -17,22 +17,11 @@
 
 .nav-item {
     font-family: "Montserrat", sans-serif;
-  
-    &:hover {
-        .nav-link {
-            color: $brand-blue;
-        }
-    }
 
     a {
         font-family: "Montserrat";
         color: $grey-blue;
-        padding: 0 1.5rem !important;
-    }
-  
-    &.active {
-        .nav-link {
-            color: #fff;
-        }
+        font-size: 1.15rem;
+        padding: 0 0 0 3.5rem !important;
     }
 }

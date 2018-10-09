@@ -1,0 +1,25 @@
+@import '../../styles/variables.scss';
+
+.footer {
+    max-width: 1280px;
+    margin: 2rem auto;
+
+    a {
+        font-family: "Montserrat", sans-serif;
+        color: $grey-blue;
+
+        &:hover {
+            color: $brand-blue;
+        }
+    }
+
+    div {
+        margin-bottom: 0.5rem;
+        text-align: right;
+        margin-right: 2rem;
+    }
+
+    .networkselector {
+        display: none;
+    }
+}

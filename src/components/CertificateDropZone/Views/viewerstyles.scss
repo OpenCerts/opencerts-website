@@ -65,11 +65,12 @@
 }
 
 .verifications {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 
     .messages {
         font-size: 18px;
         font-weight: 600;
+        margin-bottom: 0;
     }
 }
 
@@ -83,19 +84,22 @@
     border-radius: 6px;
     min-width: 120px;
     color: #fff;
-    margin: auto;
+    margin: 0 auto;
     
 }
 
 .unverified-btn {
     @extend .btn;
     cursor: pointer;
+    a {
+        color: #fff;
+    }
 }
 
 .secondary-links {
     width: 50%;
     display: flex;
-    margin: 2rem auto 0 auto;
+    margin: 1rem auto 0 auto;
 
     span {
         margin: auto;

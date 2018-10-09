@@ -8,19 +8,9 @@ const navItems = [
     path: "/"
   },
   {
-    id: "registry",
-    label: "Registry",
-    path: "/registry"
-  },
-  {
     id: "faq",
     label: "FAQ",
     path: "/faq"
-  },
-  {
-    id: "github",
-    label: "Github",
-    path: "https://github.com/GovTechSG/open-certificate"
   }
 ];
 

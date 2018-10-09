@@ -32,18 +32,20 @@ const View = ({
           style={{ fontSize: "1.5rem" }}
         >
           {isWarning
-            ? "Certificate from unregistered body"
+            ? "Certificate from unregistered institution"
             : "This certificate is not valid"}
         </span>
       </span>
 
       <div className={css.verifications}>
         {!hashStatus.verified ? (
-          <p className={css.messages}>The certificate has been tampered with</p>
+          <p className={css.messages}>
+            The certificate&#39;s contents are inaccurate
+          </p>
         ) : null}
 
         {!issuedStatus.verified ? (
-          <p className={css.messages}>The certificate has not been issued</p>
+          <p className={css.messages}>The certificate records are not found</p>
         ) : null}
 
         {!notRevokedStatus.verified ? (
@@ -51,9 +53,15 @@ const View = ({
         ) : null}
 
         {!issuerIdentityStatus.verified ? (
-          <p className={css.messages}>
-            The issuer&#39;s identity cannot be verified
-          </p>
+          <div>
+            <p className={css.messages}>
+              Certificate from unregistered institution
+            </p>
+            <p>
+              We are unable to verify the certificate as this institution has
+              not registered with OpenCerts
+            </p>
+          </div>
         ) : null}
       </div>
 
