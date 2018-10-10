@@ -56,9 +56,7 @@ export function* verifyCertificateIssued({ certificate, certificateStores }) {
 
     // Checks if certificate has been issued on ALL store
     const issuedStatuses = yield all(
-      certificateStores.map(store =>
-        store.methods.isCertificateIssued(merkleRoot).call()
-      )
+      certificateStores.map(store => store.methods.isIssued(merkleRoot).call())
     );
     const isIssued = issuedStatuses.reduce((prev, curr) => prev && curr, true);
     if (!isIssued) throw new Error("Certificate has not been issued");
