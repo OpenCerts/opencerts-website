@@ -1,7 +1,9 @@
 {
-  "name": "with-redux",
-  "version": "1.0.1",
+  "name": "opencerts-website",
+  "version": "1.0.2",
   "scripts": {
+    "test": "NODE_ENV=test jest",
+    "test:watch": "NODE_ENV=test jest --watch",
     "dev": "next",
     "lint": "eslint . --ext .js --max-warnings 0",
     "lint:fix": "eslint . --ext .js --fix",
@@ -37,6 +39,12 @@
   },
   "license": "ISC",
   "devDependencies": {
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
     "eslint": "^5.6.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^3.1.0",
@@ -46,6 +54,7 @@
     "eslint-plugin-mocha": "^5.2.0",
     "eslint-plugin-prettier": "^3.0.0",
     "gh-pages": "^2.0.1",
+    "jest": "^23.6.0",
     "prettier": "^1.14.3"
   }
 }
