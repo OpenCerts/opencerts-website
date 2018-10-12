@@ -68,6 +68,7 @@ const storeCanRenderTemplate = ({ addresses, certificate }) => {
   if (!addresses || addresses === []) {
     return true;
   }
+  console.log(addresses);
   const issuers = get(certificate, "issuers", []);
   const validStoreAddressForTemplate = addresses.map(a => a.toLowerCase());
   return issuers.reduce((prev, curr) => {

@@ -1,4 +1,4 @@
-import _ from "lodash";
+import { some, get } from "lodash";
 import { put, all, call } from "redux-saga/effects";
 import { certificateData, verifySignature } from "@govtechsg/open-certificate";
 import Router from "next/router";
@@ -6,18 +6,27 @@ import { types } from "../reducers/certificate";
 import CertificateStoreDefinition from "../services/contracts/CertificateStore.json";
 import fetchIssuers from "../services/issuers";
 import { combinedHash } from "../utils";
+import { ensResolveAddress } from "../services/ens";
 
 import { getSelectedWeb3 } from "./application";
 
 export function* loadCertificateContracts({ payload }) {
   try {
     const data = certificateData(payload);
-    const contractStoreAddresses = _.get(data, "issuers", []).map(
+    console.log(data);
+    const unresolvedContractStoreAddresses = get(data, "issuers", []).map(
       issuer => issuer.certificateStore
     );
+    // resolve ens here
+    const web3 = yield getSelectedWeb3();
+    const contractStoreAddresses = yield all(
+      unresolvedContractStoreAddresses.map(unresolvedAddress =>
+        call(ensResolveAddress, unresolvedAddress)
+      )
+    );
+    console.log("contract store addresses", contractStoreAddresses);
 
     const { abi } = CertificateStoreDefinition;
-    const web3 = yield getSelectedWeb3();
 
     const contracts = contractStoreAddresses.map(
       address => new web3.eth.Contract(abi, address)
@@ -52,7 +61,7 @@ export function* verifyCertificateHash({ certificate }) {
 
 export function* verifyCertificateIssued({ certificate, certificateStores }) {
   try {
-    const merkleRoot = `0x${_.get(certificate, "signature.merkleRoot", "")}`;
+    const merkleRoot = `0x${get(certificate, "signature.merkleRoot", "")}`;
 
     // Checks if certificate has been issued on ALL store
     const issuedStatuses = yield all(
@@ -81,8 +90,8 @@ export function* verifyCertificateNotRevoked({
   certificateStores
 }) {
   try {
-    const targetHash = _.get(certificate, "signature.targetHash", null);
-    const proof = _.get(certificate, "signature.proof", null);
+    const targetHash = get(certificate, "signature.targetHash", null);
+    const proof = get(certificate, "signature.proof", null);
 
     // Checks if certificate and path towards merkle root has been revoked
     const combinedHashes = [`0x${targetHash}`];
@@ -121,17 +130,32 @@ export function* verifyCertificateNotRevoked({
   }
 }
 
+function isApprovedENSDomain(issuerAddress) {
+  const approvedENSDomains = [/(opencerts.eth)$/, /(opencerts2.test)$/];
+  return some(
+    approvedENSDomains.map(domainMask => domainMask.test(issuerAddress))
+  );
+}
+
 export function* verifyCertificateIssuer({ certificate }) {
   try {
     const registeredIssuers = yield fetchIssuers();
 
     const data = certificateData(certificate);
-    const contractStoreAddresses = _.get(data, "issuers", []).map(
+    const contractStoreAddresses = get(data, "issuers", []).map(
       issuer => issuer.certificateStore
+    );
+
+    console.log(
+      `verifying contract store addresses: ${contractStoreAddresses}`
     );
 
     const issuerIdentities = contractStoreAddresses.map(store => {
       const identity = registeredIssuers[store.toUpperCase()];
+
+      if (isApprovedENSDomain(store)) {
+        return "TODO: fetch text from ENS";
+      }
       if (!identity)
         throw new Error(`Issuer identity cannot be verified: ${store}`);
       return identity;
