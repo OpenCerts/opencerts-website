@@ -1,30 +1,36 @@
-import { some, get } from "lodash";
+import { some, get, partition, compact, filter, isEmpty } from "lodash";
 import { put, all, call } from "redux-saga/effects";
 import { certificateData, verifySignature } from "@govtechsg/open-certificate";
+import { isValidAddress as isEthereumAddress } from "ethereumjs-utils";
 import Router from "next/router";
-import { types } from "../reducers/certificate";
+import { getLogger } from "../utils/logger";
+import {
+  types,
+  verifyingCertificateIssuerSuccess
+} from "../reducers/certificate";
 import CertificateStoreDefinition from "../services/contracts/CertificateStore.json";
 import fetchIssuers from "../services/issuers";
 import { combinedHash } from "../utils";
-import { ensResolveAddress } from "../services/ens";
+import { ensResolveAddress, getText } from "../services/ens";
 
 import { getSelectedWeb3 } from "./application";
+
+const { trace, error } = getLogger("saga:certificate");
 
 export function* loadCertificateContracts({ payload }) {
   try {
     const data = certificateData(payload);
-    console.log(data);
+    trace(`Loading certificate: ${data}`);
     const unresolvedContractStoreAddresses = get(data, "issuers", []).map(
       issuer => issuer.certificateStore
     );
-    // resolve ens here
     const web3 = yield getSelectedWeb3();
     const contractStoreAddresses = yield all(
       unresolvedContractStoreAddresses.map(unresolvedAddress =>
         call(ensResolveAddress, unresolvedAddress)
       )
     );
-    console.log("contract store addresses", contractStoreAddresses);
+    trace(`Resolved certificate's store addresses, ${contractStoreAddresses}`);
 
     const { abi } = CertificateStoreDefinition;
 
@@ -131,42 +137,96 @@ export function* verifyCertificateNotRevoked({
 }
 
 function isApprovedENSDomain(issuerAddress) {
-  const approvedENSDomains = [/(opencerts.eth)$/, /(opencerts2.test)$/];
+  trace(`Checking if ${issuerAddress} is opencerts TLD`);
+  const approvedENSDomains = [/(opencerts.eth)$/];
   return some(
-    approvedENSDomains.map(domainMask => domainMask.test(issuerAddress))
+    approvedENSDomains.map(domainMask =>
+      domainMask.test(issuerAddress.toLowerCase())
+    )
   );
+}
+
+export function* lookupEthereumAddresses(ethereumAddressIssuers) {
+  const registeredIssuers = yield fetchIssuers();
+
+  return ethereumAddressIssuers.map(store => {
+    const identity = registeredIssuers[store.toUpperCase()];
+
+    if (!identity) {
+      throw new Error(`Issuer identity cannot be verified: ${store}`);
+    }
+
+    return identity;
+  });
+}
+
+export function* resolveEnsNamesToText(ensNames) {
+  trace("resolving ", ensNames);
+  if (some(ensNames.map(ensName => !isApprovedENSDomain(ensName)))) {
+    const invalidEns = filter(ensNames, !isApprovedENSDomain);
+
+    const invalidEnsError = new Error(
+      `Issuer identity cannot be verified: ${invalidEns}`
+    );
+    error(invalidEnsError);
+    throw invalidEnsError;
+  }
+
+  const getTextResults = yield all(
+    ensNames.map(ensName => call(getText, ensName, "issuerName"))
+  );
+  trace(`Got texts records for ${ensNames}`, getTextResults);
+  trace(getTextResults);
+  return getTextResults;
 }
 
 export function* verifyCertificateIssuer({ certificate }) {
   try {
-    const registeredIssuers = yield fetchIssuers();
-
     const data = certificateData(certificate);
     const contractStoreAddresses = get(data, "issuers", []).map(
       issuer => issuer.certificateStore
     );
-
-    console.log(
-      `verifying contract store addresses: ${contractStoreAddresses}`
+    trace(
+      `Attempting to verify certificate issuers: ${contractStoreAddresses}`
     );
 
-    const issuerIdentities = contractStoreAddresses.map(store => {
-      const identity = registeredIssuers[store.toUpperCase()];
+    const [ethereumAddressIssuers, unresolvedEnsNames] = partition(
+      contractStoreAddresses,
+      isEthereumAddress
+    );
 
-      if (isApprovedENSDomain(store)) {
-        return "TODO: fetch text from ENS";
-      }
-      if (!identity)
-        throw new Error(`Issuer identity cannot be verified: ${store}`);
-      return identity;
-    });
+    let resolvedEnsTexts = [];
+    let issuerIdentitiesFromRegistry = [];
 
-    yield put({
-      type: types.VERIFYING_CERTIFICATE_ISSUER_SUCCESS,
-      payload: issuerIdentities
-    });
+    trace("ethereumAddressIssuers", ethereumAddressIssuers);
+    trace("unresolvedEnsNames", unresolvedEnsNames);
+    if (!isEmpty(compact(unresolvedEnsNames))) {
+      resolvedEnsTexts = yield call(resolveEnsNamesToText, unresolvedEnsNames);
+      trace(`Resolved ens name ${unresolvedEnsNames} to ${resolvedEnsTexts}`);
+    }
+    if (!isEmpty(compact(ethereumAddressIssuers))) {
+      issuerIdentitiesFromRegistry = yield call(
+        lookupEthereumAddresses,
+        ethereumAddressIssuers
+      );
+      trace(
+        `Resolved ethereum address ${ethereumAddressIssuers} to ${issuerIdentitiesFromRegistry}`
+      );
+    }
+
+    const combinedIssuerIdentities = compact(
+      issuerIdentitiesFromRegistry.concat(resolvedEnsTexts)
+    );
+
+    if (combinedIssuerIdentities.length === 0) {
+      throw new Error(`Issuer identity missing in certificate`);
+    }
+
+    trace("combinedIssuerIdentities", combinedIssuerIdentities);
+    yield put(verifyingCertificateIssuerSuccess(combinedIssuerIdentities));
     return true;
   } catch (e) {
+    error(e);
     yield put({
       type: types.VERIFYING_CERTIFICATE_ISSUER_FAILURE,
       payload: e.message

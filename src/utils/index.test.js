@@ -9,8 +9,7 @@ describe("combinedHash", () => {
 });
 
 describe("isEthereumAddress", () => {
-  
-    test("should return true on a valid ethereum address", () => {
+  test("should return true on a valid ethereum address", () => {
     expect(
       isEthereumAddress("0x314159265dd8dbb310642f98f50c066173c1259b")
     ).toBe(true);

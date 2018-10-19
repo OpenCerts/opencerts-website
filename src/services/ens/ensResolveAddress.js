@@ -1,14 +1,16 @@
-import debug from "debug";
 import { getAddr } from "./ens";
 import { isEthereumAddress } from "../../utils";
+import { getLogger } from "../../utils/logger";
 
-const log = debug("ens");
+const { trace } = getLogger("services:ensResolveAddress");
 
 export const ensResolveAddress = async domain => {
-  log(`Received request to resolve: ${domain}`);
+  trace(`Received request to resolve: ${domain}`);
   if (isEthereumAddress(domain)) {
-    log(`${domain} is an ethereum address, no resolution needed.`);
+    trace(`${domain} is an ethereum address, no resolution needed.`);
     return domain;
   }
-  return await getAddr(domain);
+  return getAddr(domain);
 };
+
+export default ensResolveAddress;
