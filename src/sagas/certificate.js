@@ -1,23 +1,38 @@
-import _ from "lodash";
+import { some, get, partition, compact, filter, isEmpty } from "lodash";
 import { put, all, call } from "redux-saga/effects";
 import { certificateData, verifySignature } from "@govtechsg/open-certificate";
+import { isValidAddress as isEthereumAddress } from "ethereumjs-utils";
 import Router from "next/router";
-import { types } from "../reducers/certificate";
+import { getLogger } from "../utils/logger";
+import {
+  types,
+  verifyingCertificateIssuerSuccess
+} from "../reducers/certificate";
 import CertificateStoreDefinition from "../services/contracts/CertificateStore.json";
 import fetchIssuers from "../services/issuers";
 import { combinedHash } from "../utils";
+import { ensResolveAddress, getText } from "../services/ens";
 
 import { getSelectedWeb3 } from "./application";
+
+const { trace, error } = getLogger("saga:certificate");
 
 export function* loadCertificateContracts({ payload }) {
   try {
     const data = certificateData(payload);
-    const contractStoreAddresses = _.get(data, "issuers", []).map(
+    trace(`Loading certificate: ${data}`);
+    const unresolvedContractStoreAddresses = get(data, "issuers", []).map(
       issuer => issuer.certificateStore
     );
+    const web3 = yield getSelectedWeb3();
+    const contractStoreAddresses = yield all(
+      unresolvedContractStoreAddresses.map(unresolvedAddress =>
+        call(ensResolveAddress, unresolvedAddress)
+      )
+    );
+    trace(`Resolved certificate's store addresses, ${contractStoreAddresses}`);
 
     const { abi } = CertificateStoreDefinition;
-    const web3 = yield getSelectedWeb3();
 
     const contracts = contractStoreAddresses.map(
       address => new web3.eth.Contract(abi, address)
@@ -52,7 +67,7 @@ export function* verifyCertificateHash({ certificate }) {
 
 export function* verifyCertificateIssued({ certificate, certificateStores }) {
   try {
-    const merkleRoot = `0x${_.get(certificate, "signature.merkleRoot", "")}`;
+    const merkleRoot = `0x${get(certificate, "signature.merkleRoot", "")}`;
 
     // Checks if certificate has been issued on ALL store
     const issuedStatuses = yield all(
@@ -81,8 +96,8 @@ export function* verifyCertificateNotRevoked({
   certificateStores
 }) {
   try {
-    const targetHash = _.get(certificate, "signature.targetHash", null);
-    const proof = _.get(certificate, "signature.proof", null);
+    const targetHash = get(certificate, "signature.targetHash", null);
+    const proof = get(certificate, "signature.proof", null);
 
     // Checks if certificate and path towards merkle root has been revoked
     const combinedHashes = [`0x${targetHash}`];
@@ -121,28 +136,97 @@ export function* verifyCertificateNotRevoked({
   }
 }
 
+function isApprovedENSDomain(issuerAddress) {
+  trace(`Checking if ${issuerAddress} is opencerts TLD`);
+  const approvedENSDomains = [/(opencerts.eth)$/];
+  return some(
+    approvedENSDomains.map(domainMask =>
+      domainMask.test(issuerAddress.toLowerCase())
+    )
+  );
+}
+
+export function* lookupEthereumAddresses(ethereumAddressIssuers) {
+  const registeredIssuers = yield fetchIssuers();
+
+  return ethereumAddressIssuers.map(store => {
+    const identity = registeredIssuers[store.toUpperCase()];
+
+    if (!identity) {
+      throw new Error(`Issuer identity cannot be verified: ${store}`);
+    }
+
+    return identity;
+  });
+}
+
+export function* resolveEnsNamesToText(ensNames) {
+  trace("resolving ", ensNames);
+  if (some(ensNames.map(ensName => !isApprovedENSDomain(ensName)))) {
+    const invalidEns = filter(ensNames, !isApprovedENSDomain);
+
+    const invalidEnsError = new Error(
+      `Issuer identity cannot be verified: ${invalidEns}`
+    );
+    error(invalidEnsError);
+    throw invalidEnsError;
+  }
+
+  const getTextResults = yield all(
+    ensNames.map(ensName => call(getText, ensName, "issuerName"))
+  );
+  trace(`Got texts records for ${ensNames}`, getTextResults);
+  trace(getTextResults);
+  return getTextResults;
+}
+
 export function* verifyCertificateIssuer({ certificate }) {
   try {
-    const registeredIssuers = yield fetchIssuers();
-
     const data = certificateData(certificate);
-    const contractStoreAddresses = _.get(data, "issuers", []).map(
+    const contractStoreAddresses = get(data, "issuers", []).map(
       issuer => issuer.certificateStore
     );
+    trace(
+      `Attempting to verify certificate issuers: ${contractStoreAddresses}`
+    );
 
-    const issuerIdentities = contractStoreAddresses.map(store => {
-      const identity = registeredIssuers[store.toUpperCase()];
-      if (!identity)
-        throw new Error(`Issuer identity cannot be verified: ${store}`);
-      return identity;
-    });
+    const [ethereumAddressIssuers, unresolvedEnsNames] = partition(
+      contractStoreAddresses,
+      isEthereumAddress
+    );
 
-    yield put({
-      type: types.VERIFYING_CERTIFICATE_ISSUER_SUCCESS,
-      payload: issuerIdentities
-    });
+    let resolvedEnsTexts = [];
+    let issuerIdentitiesFromRegistry = [];
+
+    trace("ethereumAddressIssuers", ethereumAddressIssuers);
+    trace("unresolvedEnsNames", unresolvedEnsNames);
+    if (!isEmpty(compact(unresolvedEnsNames))) {
+      resolvedEnsTexts = yield call(resolveEnsNamesToText, unresolvedEnsNames);
+      trace(`Resolved ens name ${unresolvedEnsNames} to ${resolvedEnsTexts}`);
+    }
+    if (!isEmpty(compact(ethereumAddressIssuers))) {
+      issuerIdentitiesFromRegistry = yield call(
+        lookupEthereumAddresses,
+        ethereumAddressIssuers
+      );
+      trace(
+        `Resolved ethereum address ${ethereumAddressIssuers} to ${issuerIdentitiesFromRegistry}`
+      );
+    }
+
+    const combinedIssuerIdentities = compact(
+      issuerIdentitiesFromRegistry.concat(resolvedEnsTexts)
+    );
+
+    if (combinedIssuerIdentities.length === 0) {
+      throw new Error(`Issuer identity missing in certificate`);
+    }
+
+    trace("combinedIssuerIdentities", combinedIssuerIdentities);
+    yield put(verifyingCertificateIssuerSuccess(combinedIssuerIdentities));
     return true;
   } catch (e) {
+    error(e);
     yield put({
       type: types.VERIFYING_CERTIFICATE_ISSUER_FAILURE,
       payload: e.message

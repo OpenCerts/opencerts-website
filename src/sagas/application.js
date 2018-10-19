@@ -1,6 +1,6 @@
 import { put, select, take } from "redux-saga/effects";
 import { getNetwork, getNetworkPending, types } from "../reducers/application";
-import { setNewWeb3, getCurrentWeb3 } from "../services/web3/getWeb3";
+import { setNewWeb3, getWeb3 } from "../services/web3";
 
 export function* getSelectedWeb3(getNew = false) {
   const networkPending = yield select(getNetworkPending);
@@ -9,7 +9,7 @@ export function* getSelectedWeb3(getNew = false) {
     yield take(types.UPDATE_NETWORK_ID_SUCCESS);
   }
   const network = yield select(getNetwork);
-  const web3 = yield getNew ? setNewWeb3(network) : getCurrentWeb3(); // update web3 only if requested specifically
+  const web3 = yield getNew ? setNewWeb3(network) : getWeb3(); // update web3 only if requested specifically
   return web3;
 }
 

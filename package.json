@@ -18,8 +18,11 @@
   "dependencies": {
     "@govtechsg/open-certificate": "^1.1.34",
     "@zeit/next-sass": "^1.0.1",
+    "debug": "^4.1.0",
     "eslint-plugin-react": "^7.7.0",
+    "ethereum-ens": "^0.7.4",
     "ethereumjs-util": "^5.1.5",
+    "ethereumjs-utils": "^5.2.0",
     "lodash": "^4.17.11",
     "next": "^7.0.1",
     "next-redux-wrapper": "^2.0.0",
@@ -34,8 +37,7 @@
     "redux-saga": "^0.16.0",
     "truffle-contract": "^3.0.4",
     "web3": "^1.0.0-beta.36",
-    "//": "web3-provider-engine using my own fork until websocket fix is merged",
-    "web3-provider-engine": "rjchow/provider-engine"
+    "web3-provider-engine": "14.0.6"
   },
   "license": "ISC",
   "devDependencies": {

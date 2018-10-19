@@ -20,3 +20,8 @@ export function combinedHash(first, second) {
 }
 
 export default combinedHash;
+
+const ethereumAddressMatcher = /^0x[a-fA-F0-9]{40}$/;
+export function isEthereumAddress(address) {
+  return ethereumAddressMatcher.test(address);
+}

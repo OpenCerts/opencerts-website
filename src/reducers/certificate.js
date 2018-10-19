@@ -248,6 +248,13 @@ export function updateFilteredCertificate(payload) {
   };
 }
 
+export function verifyingCertificateIssuerSuccess(payload) {
+  return {
+    type: types.VERIFYING_CERTIFICATE_ISSUER_SUCCESS,
+    payload
+  };
+}
+
 // Selectors
 export function getIssuerIdentityStatus(store) {
   const {
