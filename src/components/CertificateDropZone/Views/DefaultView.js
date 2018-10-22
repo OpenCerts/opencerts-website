@@ -16,11 +16,11 @@ const View = ({ hover, accept }) => (
     </div>
     <div
       className="text-brand-dark"
-      style={{ fontSize: "1.2rem", fontWeight: 500, fontFamily: "Montserrat" }}
+      style={{ fontSize: "1.2rem", fontWeight: 500 }}
     >
-      Have a OpenCert file?
+      Drag and drop your .opencert file
     </div>
-    <div className="text-muted">Drop the .json file here to view</div>
+    <div className="text-muted">to view its contents</div>
     <div className="text-muted row">
       <div className="col-2" />
       <div className="col-3">

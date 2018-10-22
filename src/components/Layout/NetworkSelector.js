@@ -25,7 +25,7 @@ class NetworkSelector extends Component {
     const { INFURA_MAINNET, INFURA_ROPSTEN } = networkTypes;
 
     return (
-      <div className="fr ba">
+      <div>
         <select
           className="pa2"
           value={this.props.network}
