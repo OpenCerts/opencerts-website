@@ -8,7 +8,7 @@ const NavigationBar = () => (
         <a href="/faq">FAQ</a>
       </div>
       <div>
-        <a href="https://github.com/GovTechSG/open-certificate">Github</a>
+        <a href="https://github.com/OpenCerts/open-certificate">Github</a>
       </div>
       <div>
         <a href="/registry">Registry</a>
