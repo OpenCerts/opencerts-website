@@ -1,5 +1,8 @@
 [
     {
+        "category": "General"
+    },
+    {
         "question": "What is OpenCerts?",
         "answer": "OpenCerts is the umbrella trademark under which we have released a few key components: \n 1. An open source schema for publishing educational credentials \n2. A set of tools for generating cryptographic protections for educational credentials \n3. the online website for verifying the authenticity of OpenCerts files."
     },
@@ -28,6 +31,9 @@
         "answer": "In every properly issued OpenCerts certificate file, there is a hash-based message authentication code which cryptographically certifies that the content of the certificate has not been altered. If you would like to know more about the technical nitty-gritty of how this works, check out our technical documentation at https://github.com/GovTechSG/opencerts-documentation"
     },
     {
+        "category": "Verifications"
+    },
+    {
         "question": "What does it mean by Unascertained Issuer?",
         "answer": "OpenCerts has to maintain a list of identified issuing institutes in order to detect fraudulent issuing institutes masquerading as legitimate ones. At this point in time, it is not unlikely that a legitimate issuing institute is not on our list of recognised institutions. If you are sure that your certificate is from a legitimate issuer, please get in touch with us at <addme@opencerts.io>."
     },
@@ -42,6 +48,9 @@
     {
         "question": "Is this safe to use? Can't anyone just copy my certificate file and pass off as me?",
         "answer": "Yes, the certificate file can trivially be duplicated. However, the recipient's name in the certificate cannot be altered without failing our verification process. Thus it is extremely important that the person doing the verification ensures that the recipient indicated in the certificate is actually the entity presenting the certificate. For more advanced institutions, there is the possiblity of using Distributed IDs to associate the certificate recipient's public key for further autnentication using public/private key signing in the future."
+    },
+    {
+        "category": "Institutes"
     },
     {
         "question": "How can I add my institute to the list of recognised issuers?",

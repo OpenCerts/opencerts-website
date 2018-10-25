@@ -7,19 +7,37 @@ const FaqHeader = () => (
   </div>
 );
 
-const renderContent = () => {
-  const items = content.map((n, i) => (
+// const renderContent = () => {
+//   const items = content.map((n, i) => (
+//     <div className={styles["content-container"]} key={i}>
+//       <a className={styles.question}>
+//         <h5>{n.question}</h5>
+//       </a>
+//       <div>
+//         <div className={styles.answer}>{n.answer}</div>
+//       </div>
+//     </div>
+//   ));
+//   return <div>{items}</div>;
+// };
+
+const renderContent = () =>
+  content.map((n, i) => (
     <div className={styles["content-container"]} key={i}>
-      <a className={styles.question}>
-        <h5>{n.question}</h5>
-      </a>
-      <div>
-        <div className={styles.answer}>{n.answer}</div>
-      </div>
+      {n.category ? (
+        <h4>{n.category}</h4>
+      ) : (
+        <div>
+          <a className={styles.question}>
+            <h5>{n.question}</h5>
+          </a>
+          <div>
+            <div className={styles.answer}>{n.answer}</div>
+          </div>
+        </div>
+      )}
     </div>
   ));
-  return <div>{items}</div>;
-};
 
 const FaqContent = () => (
   <div className={styles.main}>
