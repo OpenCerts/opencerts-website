@@ -4,6 +4,7 @@ import CertificateVerifyBlock from "./CertificateVerifyBlock";
 import MultiCertificateRenderer from "./MultiCertificateRenderer";
 import templateRegistry from "./CertificateTemplates";
 import InvalidCertificateNotice from "./InvalidCertificateNotice";
+import styles from "./certificateviewer.scss";
 
 const getCertificateTemplates = certificate => {
   const templateSet = get(certificate, "$template", "default");
@@ -95,7 +96,12 @@ const CertificateViewer = props => {
 
   const validCertificateContent = (
     <div>
-      {renderedHeaderBlock}
+      <div id={styles["header-ui"]}>
+        <div className={styles["header-container"]}>
+          {renderedCertificateChange}
+          {renderedHeaderBlock}
+        </div>
+      </div>
       <MultiCertificateRenderer
         certificate={certificate}
         templates={templates}
@@ -104,8 +110,7 @@ const CertificateViewer = props => {
   );
 
   return (
-    <div className="bg-light p-3 fill">
-      {renderedCertificateChange}
+    <div>
       {allowedToRender ? validCertificateContent : <InvalidCertificateNotice />}
     </div>
   );

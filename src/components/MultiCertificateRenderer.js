@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import styles from "./certificateviewer.scss";
 
 const renderTabList = (templates = []) => {
   const tabs = templates.map((t, i) => (
@@ -16,7 +17,7 @@ const renderTabList = (templates = []) => {
     </li>
   ));
   return (
-    <ul className="nav nav-tabs bg-light" role="tablist">
+    <ul className="nav nav-tabs" role="tablist">
       {tabs}
     </ul>
   );
@@ -42,7 +43,13 @@ const renderTabContent = (certificate, templates = []) => {
 };
 
 const MultiCertificateRenderer = ({ certificate, templates }) => {
-  const renderedTabs = renderTabList(templates);
+  const renderedTabs = (
+    <div id={styles["header-ui"]}>
+      <div className={styles["header-container"]}>
+        {renderTabList(templates)}
+      </div>
+    </div>
+  );
   const renderedContent = renderTabContent(certificate, templates);
   return (
     <div>
