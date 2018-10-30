@@ -38,7 +38,7 @@ const HowItWorks = () => (
 
 const AboutSection = () => (
   <div>
-    <div className="row p-4 bg-white" id="how-it-works">
+    <div className="row p-4 bg-white" id="benefits">
       <div className={css.main}>
         <BenefitsSection />
       </div>
