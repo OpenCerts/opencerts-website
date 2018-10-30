@@ -6,7 +6,8 @@ module.exports = withSass({
     return {
       "/": { page: "/" },
       "/registry": { page: "/registry" },
-      "/viewer": { page: "/viewer" }
+      "/viewer": { page: "/viewer" },
+      "/faq": { page: "/faq" }
     };
   }
 });
