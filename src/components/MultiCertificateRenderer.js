@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import styles from "./certificateviewer.scss";
+import styles from "./certificateViewer.scss";
 
 const renderTabList = (templates = []) => {
   const tabs = templates.map((t, i) => (

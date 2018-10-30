@@ -4,7 +4,7 @@ import CertificateVerifyBlock from "./CertificateVerifyBlock";
 import MultiCertificateRenderer from "./MultiCertificateRenderer";
 import templateRegistry from "./CertificateTemplates";
 import InvalidCertificateNotice from "./InvalidCertificateNotice";
-import styles from "./certificateviewer.scss";
+import styles from "./certificateViewer.scss";
 
 const getCertificateTemplates = certificate => {
   const templateSet = get(certificate, "$template", "default");
