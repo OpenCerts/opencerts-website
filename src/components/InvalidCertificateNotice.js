@@ -1,5 +1,14 @@
+const renderCertificateChange = handleCertificateChange => (
+  <a href="/" onClick={() => handleCertificateChange(null)}>
+    ← Upload another
+  </a>
+);
+
 const InvalidCertificateNotice = () => (
-  <div className="row my-3 p-4">INVALID CERTIFICATE!</div>
+  <div>
+    {renderCertificateChange()}
+    <div className="row my-3 p-4">INVALID CERTIFICATE!</div>
+  </div>
 );
 
 export default InvalidCertificateNotice;

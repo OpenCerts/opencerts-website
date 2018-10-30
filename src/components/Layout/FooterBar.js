@@ -2,7 +2,7 @@ import NetworkSelector from "./NetworkSelector";
 import css from "./footer.scss";
 
 const NavigationBar = () => (
-  <div className="bg-dark p-1 m-0">
+  <div className="bg-brand-dark p-1 m-0" id={css["footer-print"]}>
     <div className={css.footer}>
       <div>
         <a href="/faq">FAQ</a>

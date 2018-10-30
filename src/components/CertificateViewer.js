@@ -4,6 +4,7 @@ import CertificateVerifyBlock from "./CertificateVerifyBlock";
 import MultiCertificateRenderer from "./MultiCertificateRenderer";
 import templateRegistry from "./CertificateTemplates";
 import InvalidCertificateNotice from "./InvalidCertificateNotice";
+import styles from "./certificateViewer.scss";
 
 const getCertificateTemplates = certificate => {
   const templateSet = get(certificate, "$template", "default");
@@ -51,7 +52,10 @@ const renderHeaderBlock = props => {
         </div>
 
         <div className="ml-auto">
-          <i className="fas fa-print fa-2x text-dark" />
+          <i
+            className="fas fa-print fa-2x text-dark pointer"
+            onClick={() => window.print()}
+          />
         </div>
       </div>
     </div>
@@ -92,7 +96,12 @@ const CertificateViewer = props => {
 
   const validCertificateContent = (
     <div>
-      {renderedHeaderBlock}
+      <div id={styles["header-ui"]}>
+        <div className={styles["header-container"]}>
+          {renderedCertificateChange}
+          {renderedHeaderBlock}
+        </div>
+      </div>
       <MultiCertificateRenderer
         certificate={certificate}
         templates={templates}
@@ -101,8 +110,7 @@ const CertificateViewer = props => {
   );
 
   return (
-    <div className="bg-light p-3 fill">
-      {renderedCertificateChange}
+    <div>
       {allowedToRender ? validCertificateContent : <InvalidCertificateNotice />}
     </div>
   );
