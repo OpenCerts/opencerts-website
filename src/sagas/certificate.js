@@ -1,17 +1,19 @@
 import { some, get, partition, compact, filter, isEmpty } from "lodash";
-import { put, all, call } from "redux-saga/effects";
+import { put, all, call, select } from "redux-saga/effects";
 import { certificateData, verifySignature } from "@govtechsg/open-certificate";
 import { isValidAddress as isEthereumAddress } from "ethereumjs-utils";
 import Router from "next/router";
 import { getLogger } from "../utils/logger";
 import {
   types,
-  verifyingCertificateIssuerSuccess
+  verifyingCertificateIssuerSuccess,
+  getCertificate
 } from "../reducers/certificate";
 import DocumentStoreDefinition from "../services/contracts/DocumentStore.json";
 import fetchIssuers from "../services/issuers";
 import { combinedHash } from "../utils";
 import { ensResolveAddress, getText } from "../services/ens";
+import sendEmail from "../services/email";
 
 import { getSelectedWeb3 } from "./application";
 
@@ -248,6 +250,34 @@ export function* verifyCertificate({ payload }) {
   const verified = verificationStatuses.reduce((prev, curr) => prev && curr);
   if (verified) {
     Router.push("/viewer");
+  }
+}
+
+export function* sendCertificate({ payload }) {
+  try {
+    const certificate = yield select(getCertificate);
+    const { email, captcha } = payload;
+
+    const success = yield sendEmail({
+      certificate,
+      email,
+      captcha
+    });
+
+    if (success) {
+      yield put({
+        type: types.SENDING_CERTIFICATE_SUCCESS
+      });
+    } else {
+      yield put({
+        type: types.SENDING_CERTIFICATE_FAILURE
+      });
+    }
+  } catch (e) {
+    yield put({
+      type: types.SENDING_CERTIFICATE_FAILURE,
+      payload: e
+    });
   }
 }
 

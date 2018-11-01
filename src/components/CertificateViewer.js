@@ -5,6 +5,8 @@ import MultiCertificateRenderer from "./MultiCertificateRenderer";
 import templateRegistry from "./CertificateTemplates";
 import InvalidCertificateNotice from "./InvalidCertificateNotice";
 import styles from "./certificateViewer.scss";
+import Modal from "./Modal";
+import CertificateSharingForm from "./CertificateSharing/CertificateSharingForm";
 
 const getCertificateTemplates = certificate => {
   const templateSet = get(certificate, "$template", "default");
@@ -57,6 +59,9 @@ const renderHeaderBlock = props => {
             onClick={() => window.print()}
           />
         </div>
+        <div className="ml-2" onClick={() => props.handleSharingToggle()}>
+          <i className="fas fa-share fa-2x text-dark" />
+        </div>
       </div>
     </div>
   );
@@ -106,6 +111,13 @@ const CertificateViewer = props => {
         certificate={certificate}
         templates={templates}
       />
+      <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
+        <CertificateSharingForm
+          emailSendingState={props.emailSendingState}
+          handleSendCertificate={props.handleSendCertificate}
+          handleSharingToggle={props.handleSharingToggle}
+        />
+      </Modal>
     </div>
   );
 
@@ -124,7 +136,11 @@ CertificateViewer.propTypes = {
   hashStatus: PropTypes.object,
   issuedStatus: PropTypes.object,
   notRevokedStatus: PropTypes.object,
-  issuerIdentityStatus: PropTypes.object
+  issuerIdentityStatus: PropTypes.object,
+  showSharing: PropTypes.bool,
+  emailSendingState: PropTypes.string,
+  handleSharingToggle: PropTypes.func,
+  handleSendCertificate: PropTypes.func
 };
 
 renderVerifyBlock.propTypes = CertificateViewer.propTypes;

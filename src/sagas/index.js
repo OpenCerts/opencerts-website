@@ -13,6 +13,10 @@ export default function* rootSaga() {
       certificateSaga.verifyCertificate
     ),
     takeEvery(
+      certificateType.SENDING_CERTIFICATE,
+      certificateSaga.sendCertificate
+    ),
+    takeEvery(
       applicationType.UPDATE_NETWORK_ID,
       applicationSaga.updateNetworkId
     ),
