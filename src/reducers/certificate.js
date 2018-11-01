@@ -294,6 +294,13 @@ export function verifyingCertificateIssuerSuccess(payload) {
   };
 }
 
+export function verifyingCertificateIssuerFailure(payload) {
+  return {
+    type: types.VERIFYING_CERTIFICATE_ISSUER_FAILURE,
+    payload
+  };
+}
+
 export function sendCertificate(payload) {
   return {
     type: types.SENDING_CERTIFICATE,

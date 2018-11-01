@@ -4,12 +4,27 @@ import {
   resolveEnsNamesToText,
   lookupEthereumAddresses
 } from "./certificate";
-import { verifyingCertificateIssuerSuccess } from "../reducers/certificate";
+import {
+  verifyingCertificateIssuerSuccess,
+  verifyingCertificateIssuerFailure
+} from "../reducers/certificate";
 import MakeCertUtil from "./makeCertUtil";
 
 function whenThereIsOneEthereumAddressIssuer() {
   const ethereumAddresses = ["0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4F"];
   const testCert = new MakeCertUtil().addIssuer(ethereumAddresses[0]).finish();
+  return { testCert, ethereumAddresses };
+}
+
+function whenThereAreMultipleEthereumAddressIssuers() {
+  const ethereumAddresses = [
+    "0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4F",
+    "0x0096Ca31c87771a2Ed212D4b2E689e712Bd938F9"
+  ];
+  const testCert = new MakeCertUtil()
+    .addIssuer(ethereumAddresses[0])
+    .addIssuer(ethereumAddresses[1])
+    .finish();
   return { testCert, ethereumAddresses };
 }
 
@@ -139,6 +154,70 @@ describe("sagas/certificate", () => {
           )
         )
       );
+      const isSagaFinished = issuerSaga.next().done;
+
+      expect(isSagaFinished).toBe(true);
+    });
+
+    it("should throw if there are no issuer identity", () => {
+      const {
+        testCert,
+        ethereumAddresses
+      } = whenThereAreMultipleEthereumAddressIssuers();
+      const resolverReturnValue = [];
+      const errorMsg = "Issuer identity missing in certificate";
+      const issuerSaga = verifyCertificateIssuer({ certificate: testCert });
+
+      expect(issuerSaga.next().value).toEqual(
+        call(lookupEthereumAddresses, ethereumAddresses)
+      );
+
+      const resolvedPut = issuerSaga.next(resolverReturnValue).value;
+      // const resolvedPut = issuerSaga.throw(new Error(errorMsg)).value;
+
+      expect(resolvedPut).toEqual(
+        put(verifyingCertificateIssuerFailure(errorMsg))
+      );
+      const isSagaFinished = issuerSaga.next().done;
+
+      expect(isSagaFinished).toBe(true);
+    });
+
+    it("should put verifyingCertificateIssuerSuccess on success", () => {
+      const {
+        testCert,
+        ethereumAddresses
+      } = whenThereAreMultipleEthereumAddressIssuers();
+      const resolverReturnValue = ["test store", "test store 2"];
+      const issuerSaga = verifyCertificateIssuer({ certificate: testCert });
+
+      expect(issuerSaga.next().value).toEqual(
+        call(lookupEthereumAddresses, ethereumAddresses)
+      );
+      const resolvedPut = issuerSaga.next(resolverReturnValue).value;
+
+      expect(resolvedPut).toEqual(
+        put(verifyingCertificateIssuerSuccess(resolverReturnValue))
+      );
+      const isSagaFinished = issuerSaga.next().done;
+
+      expect(isSagaFinished).toBe(true);
+    });
+
+    it("should put verifyingCertificateIssuerFailure on failure", () => {
+      const {
+        testCert,
+        ethereumAddresses
+      } = whenThereAreMultipleEthereumAddressIssuers();
+      const msg = "bam!";
+      const issuerSaga = verifyCertificateIssuer({ certificate: testCert });
+
+      expect(issuerSaga.next().value).toEqual(
+        call(lookupEthereumAddresses, ethereumAddresses)
+      );
+      const resolvedPut = issuerSaga.throw(new Error(msg)).value;
+
+      expect(resolvedPut).toEqual(put(verifyingCertificateIssuerFailure(msg)));
       const isSagaFinished = issuerSaga.next().done;
 
       expect(isSagaFinished).toBe(true);

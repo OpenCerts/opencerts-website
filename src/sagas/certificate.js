@@ -7,6 +7,7 @@ import { getLogger } from "../utils/logger";
 import {
   types,
   verifyingCertificateIssuerSuccess,
+  verifyingCertificateIssuerFailure,
   getCertificate
 } from "../reducers/certificate";
 import DocumentStoreDefinition from "../services/contracts/DocumentStore.json";
@@ -227,10 +228,7 @@ export function* verifyCertificateIssuer({ certificate }) {
     return true;
   } catch (e) {
     error(e);
-    yield put({
-      type: types.VERIFYING_CERTIFICATE_ISSUER_FAILURE,
-      payload: e.message
-    });
+    yield put(verifyingCertificateIssuerFailure(e.message));
     return false;
   }
 }

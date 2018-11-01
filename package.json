@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "scripts": {
     "test": "NODE_ENV=test jest",
-    "test:watch": "NODE_ENV=test jest --watch",
+    "test:watch": "NODE_ENV=test DEBUG=true jest --watch",
     "dev": "next",
     "lint": "eslint . --ext .js --max-warnings 0",
     "lint:fix": "eslint . --ext .js --fix",
