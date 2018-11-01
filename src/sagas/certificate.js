@@ -8,7 +8,7 @@ import {
   types,
   verifyingCertificateIssuerSuccess
 } from "../reducers/certificate";
-import CertificateStoreDefinition from "../services/contracts/CertificateStore.json";
+import DocumentStoreDefinition from "../services/contracts/DocumentStore.json";
 import fetchIssuers from "../services/issuers";
 import { combinedHash } from "../utils";
 import { ensResolveAddress, getText } from "../services/ens";
@@ -32,7 +32,7 @@ export function* loadCertificateContracts({ payload }) {
     );
     trace(`Resolved certificate's store addresses, ${contractStoreAddresses}`);
 
-    const { abi } = CertificateStoreDefinition;
+    const { abi } = DocumentStoreDefinition;
 
     const contracts = contractStoreAddresses.map(
       address => new web3.eth.Contract(abi, address)
@@ -71,9 +71,7 @@ export function* verifyCertificateIssued({ certificate, certificateStores }) {
 
     // Checks if certificate has been issued on ALL store
     const issuedStatuses = yield all(
-      certificateStores.map(store =>
-        store.methods.isCertificateIssued(merkleRoot).call()
-      )
+      certificateStores.map(store => store.methods.isIssued(merkleRoot).call())
     );
     const isIssued = issuedStatuses.reduce((prev, curr) => prev && curr, true);
     if (!isIssued) throw new Error("Certificate has not been issued");
