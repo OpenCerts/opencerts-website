@@ -1,4 +1,6 @@
-const emailApiUrl =
+import "whatwg-fetch";
+
+export const emailApiUrl =
   "https://92cdczopwg.execute-api.ap-southeast-1.amazonaws.com/dev";
 
 export default function sendEmail({ certificate, email, captcha }) {

@@ -40,7 +40,8 @@
     "sinon": "^7.1.1",
     "truffle-contract": "^3.0.4",
     "web3": "^1.0.0-beta.36",
-    "web3-provider-engine": "14.0.6"
+    "web3-provider-engine": "14.0.6",
+    "whatwg-fetch": "^3.0.0"
   },
   "license": "ISC",
   "devDependencies": {
