@@ -1,14 +1,18 @@
-import { put, call } from "redux-saga/effects";
+import { put, call, select } from "redux-saga/effects";
+import sinon from "sinon";
 import {
   verifyCertificateIssuer,
   resolveEnsNamesToText,
-  lookupEthereumAddresses
+  lookupEthereumAddresses,
+  sendCertificate
 } from "./certificate";
 import {
+  getCertificate,
   verifyingCertificateIssuerSuccess,
   verifyingCertificateIssuerFailure
 } from "../reducers/certificate";
 import MakeCertUtil from "./makeCertUtil";
+import * as sendEmail from "../services/email";
 
 function whenThereIsOneEthereumAddressIssuer() {
   const ethereumAddresses = ["0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4F"];
@@ -67,6 +71,83 @@ function whenThereAreEnsNamesAndEthereumAddresses() {
 }
 
 describe("sagas/certificate", () => {
+  describe("sendCertificate", () => {
+    let emailStub;
+    beforeEach(() => {
+      emailStub = sinon.stub(sendEmail, "default");
+    });
+    afterEach(() => {
+      emailStub.restore();
+    });
+    it("should put SENDING_CERTIFICATE_SUCCESS on success", () => {
+      const { testCert } = whenThereIsOneEthereumAddressIssuer();
+      const email = "admin@opencerts.io";
+      const captcha = "ABCD";
+      const saga = sendCertificate({ payload: { email, captcha } });
+
+      expect(saga.next().value).toEqual(select(getCertificate));
+      expect(saga.next(testCert).value).toEqual(
+        emailStub({
+          certificate: testCert,
+          email,
+          captcha
+        })
+      );
+      expect(saga.next(true).value).toEqual(
+        put({
+          type: "SENDING_CERTIFICATE_SUCCESS"
+        })
+      );
+      expect(saga.next().done).toBe(true);
+    });
+
+    it("should put SENDING_CERTIFICATE_SUCCESS on failure", () => {
+      const { testCert } = whenThereIsOneEthereumAddressIssuer();
+      const email = "admin@opencerts.io";
+      const captcha = "ABCD";
+      const saga = sendCertificate({ payload: { email, captcha } });
+
+      expect(saga.next().value).toEqual(select(getCertificate));
+      expect(saga.next(testCert).value).toEqual(
+        emailStub({
+          certificate: testCert,
+          email,
+          captcha
+        })
+      );
+      expect(saga.next(false).value).toEqual(
+        put({
+          type: "SENDING_CERTIFICATE_FAILURE",
+          payload: "Fail to send certificate"
+        })
+      );
+      expect(saga.next().done).toBe(true);
+    });
+
+    it("should put SENDING_CERTIFICATE_SUCCESS on error", () => {
+      const { testCert } = whenThereIsOneEthereumAddressIssuer();
+      const email = "admin@opencerts.io";
+      const captcha = "ABCD";
+      const errorMsg = "Some unknown error has occured";
+      const saga = sendCertificate({ payload: { email, captcha } });
+
+      expect(saga.next().value).toEqual(select(getCertificate));
+      expect(saga.next(testCert).value).toEqual(
+        emailStub({
+          certificate: testCert,
+          email,
+          captcha
+        })
+      );
+      expect(saga.throw(new Error(errorMsg)).value).toEqual(
+        put({
+          type: "SENDING_CERTIFICATE_FAILURE",
+          payload: errorMsg
+        })
+      );
+      expect(saga.next().done).toBe(true);
+    });
+  });
   describe("verifyCertificateIssuer", () => {
     it("should resolve singular issuer ens name", () => {
       const { testCert, ensNames } = whenThereIsOnlyOneEnsName();
