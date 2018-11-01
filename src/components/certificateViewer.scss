@@ -1,0 +1,18 @@
+@import '../styles/variables.scss';
+
+
+@media print {
+    #header-ui {
+        display: none;
+    }
+}
+
+#header-ui {
+    box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
+    background-color: $header-ui-bg;
+}
+
+.header-container {
+    max-width: 1280px;
+    margin: auto;
+}
