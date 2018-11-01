@@ -1,4 +1,4 @@
-import "whatwg-fetch";
+import "isomorphic-fetch";
 
 export const emailApiUrl =
   "https://92cdczopwg.execute-api.ap-southeast-1.amazonaws.com/dev";
