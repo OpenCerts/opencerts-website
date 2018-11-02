@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/CertificateViewer.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/components</a> CertificateViewer.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/52</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/18</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/13</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/46</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import PropTypes from "prop-types";</span>
+<span class="cstat-no" title="statement not covered" >import { get } from "lodash";</span>
+<span class="cstat-no" title="statement not covered" >import CertificateVerifyBlock from "./CertificateVerifyBlock";</span>
+<span class="cstat-no" title="statement not covered" >import MultiCertificateRenderer from "./MultiCertificateRenderer";</span>
+<span class="cstat-no" title="statement not covered" >import templateRegistry from "./CertificateTemplates";</span>
+<span class="cstat-no" title="statement not covered" >import InvalidCertificateNotice from "./InvalidCertificateNotice";</span>
+<span class="cstat-no" title="statement not covered" >import styles from "./certificateViewer.scss";</span>
+<span class="cstat-no" title="statement not covered" >import Modal from "./Modal";</span>
+<span class="cstat-no" title="statement not covered" >import CertificateSharingForm from "./CertificateSharing/CertificateSharingForm";</span>
+&nbsp;
+const <span class="fstat-no" title="function not covered" >getCertificateTemplates = <span class="cstat-no" title="statement not covered" >c</span>ertificate =&gt; {</span>
+  const templateSet = <span class="cstat-no" title="statement not covered" >get(certificate, "$template", "default");</span>
+<span class="cstat-no" title="statement not covered" >  return templateRegistry[templateSet]</span>
+    ? templateRegistry[templateSet]
+    : templateRegistry.default;
+};
+&nbsp;
+const <span class="fstat-no" title="function not covered" >renderVerifyBlock = <span class="cstat-no" title="statement not covered" >p</span>rops<span class="cstat-no" title="statement not covered" > =&gt; (</span></span>
+  &lt;CertificateVerifyBlock
+    verifyTriggered={props.verifyTriggered}
+    verifying={props.verifying}
+    hashStatus={props.hashStatus}
+    issuedStatus={props.issuedStatus}
+    notRevokedStatus={props.notRevokedStatus}
+    issuerIdentityStatus={props.issuerIdentityStatus}
+  /&gt;
+);
+&nbsp;
+const <span class="fstat-no" title="function not covered" >renderIdentitiesBlock = <span class="cstat-no" title="statement not covered" >c</span>ertificate =&gt; {</span>
+  const issuers = <span class="cstat-no" title="statement not covered" >get(certificate, "issuers", []);</span>
+  const issuerName = <span class="cstat-no" title="statement not covered" >issuers.map(<span class="fstat-no" title="function not covered" >i<span class="cstat-no" title="statement not covered" > =&gt; i.name).join(", ");</span></span></span>
+  const recipientName = <span class="cstat-no" title="statement not covered" >get(certificate, "recipient.name");</span>
+<span class="cstat-no" title="statement not covered" >  return issuerName || recipientName ? (</span>
+    &lt;div className="mt-2"&gt;
+      {issuerName ? (
+        &lt;div className="text-muted"&gt;Issued by {issuerName}&lt;/div&gt;
+      ) : null}
+      {recipientName ? (
+        &lt;div className="text-muted"&gt;Issued to {recipientName}&lt;/div&gt;
+      ) : null}
+    &lt;/div&gt;
+  ) : null;
+};
+&nbsp;
+const <span class="fstat-no" title="function not covered" >renderHeaderBlock = <span class="cstat-no" title="statement not covered" >p</span>rops =&gt; {</span>
+  const renderedIdentitiesBlock = <span class="cstat-no" title="statement not covered" >renderIdentitiesBlock(props.certificate);</span>
+  const renderedVerifyBlock = <span class="cstat-no" title="statement not covered" >renderVerifyBlock(props);</span>
+<span class="cstat-no" title="statement not covered" >  return (</span>
+    &lt;div className="container-fluid"&gt;
+      &lt;div className="row"&gt;
+        &lt;div&gt;
+          {renderedVerifyBlock}
+          {renderedIdentitiesBlock}
+        &lt;/div&gt;
+&nbsp;
+        &lt;div className="ml-auto"&gt;
+          &lt;i
+            className="fas fa-print fa-2x text-dark pointer"
+            onClick={<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; window.print()}</span></span>
+          /&gt;
+        &lt;/div&gt;
+        &lt;div className="ml-2" onClick={<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; props.handleSharingToggle()}&gt;</span></span>
+          &lt;i className="fas fa-share fa-2x text-dark" /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+};
+&nbsp;
+const <span class="fstat-no" title="function not covered" >renderCertificateChange = <span class="cstat-no" title="statement not covered" >h</span>andleCertificateChange<span class="cstat-no" title="statement not covered" > =&gt; (</span></span>
+  &lt;a href="/" onClick={<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; handleCertificateChange(null)}&gt;</span></span>
+    ← Upload another
+  &lt;/a&gt;
+);
+&nbsp;
+const <span class="fstat-no" title="function not covered" >storeCanRenderTemplate = <span class="cstat-no" title="statement not covered" >(</span>{ addresses, certificate }) =&gt; <span class="cstat-no" title="statement not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >  if (!addresses || addresses === []) {</span>
+<span class="cstat-no" title="statement not covered" >    return true;</span>
+  }
+  const issuers = <span class="cstat-no" title="statement not covered" >get(certificate, "issuers", []);</span>
+  const validStoreAddressForTemplate = <span class="cstat-no" title="statement not covered" >addresses.map(<span class="fstat-no" title="function not covered" >a<span class="cstat-no" title="statement not covered" > =&gt; a.toLowerCase());</span></span></span>
+<span class="cstat-no" title="statement not covered" >  return issuers.reduce(<span class="fstat-no" title="function not covered" >(</span>prev, curr) =&gt; {</span>
+    const storeAddress = <span class="cstat-no" title="statement not covered" >get(curr, "certificateStore", "").toLowerCase();</span>
+    const foundInWhitelist = <span class="cstat-no" title="statement not covered" >validStoreAddressForTemplate.includes(</span>
+      storeAddress
+    );
+<span class="cstat-no" title="statement not covered" >    return prev &amp;&amp; foundInWhitelist;</span>
+  }, true);
+};
+&nbsp;
+const <span class="fstat-no" title="function not covered" >CertificateViewer = <span class="cstat-no" title="statement not covered" >p</span>rops =&gt; <span class="cstat-no" title="statement not covered" >{</span></span>
+  const { certificate } = <span class="cstat-no" title="statement not covered" >props;</span>
+&nbsp;
+  const { templates, addresses } = <span class="cstat-no" title="statement not covered" >getCertificateTemplates(certificate);</span>
+  const allowedToRender = <span class="cstat-no" title="statement not covered" >storeCanRenderTemplate({ addresses, certificate });</span>
+&nbsp;
+  const renderedHeaderBlock = <span class="cstat-no" title="statement not covered" >renderHeaderBlock(props);</span>
+  const renderedCertificateChange = <span class="cstat-no" title="statement not covered" >renderCertificateChange(</span>
+    props.handleCertificateChange
+  );
+&nbsp;
+  const validCertificateContent = (
+<span class="cstat-no" title="statement not covered" >    &lt;div&gt;</span>
+      &lt;div id={styles["header-ui"]}&gt;
+        &lt;div className={styles["header-container"]}&gt;
+          {renderedCertificateChange}
+          {renderedHeaderBlock}
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;MultiCertificateRenderer
+        certificate={certificate}
+        templates={templates}
+      /&gt;
+      &lt;Modal show={props.showSharing} toggle={props.handleSharingToggle}&gt;
+        &lt;CertificateSharingForm
+          emailSendingState={props.emailSendingState}
+          handleSendCertificate={props.handleSendCertificate}
+          handleSharingToggle={props.handleSharingToggle}
+        /&gt;
+      &lt;/Modal&gt;
+    &lt;/div&gt;
+  );
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return (</span>
+    &lt;div&gt;
+      {allowedToRender ? validCertificateContent : &lt;InvalidCertificateNotice /&gt;}
+    &lt;/div&gt;
+  );
+};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >CertificateViewer.propTypes = {</span>
+  handleCertificateChange: PropTypes.func,
+  certificate: PropTypes.object,
+  verifying: PropTypes.bool,
+&nbsp;
+  hashStatus: PropTypes.object,
+  issuedStatus: PropTypes.object,
+  notRevokedStatus: PropTypes.object,
+  issuerIdentityStatus: PropTypes.object,
+  showSharing: PropTypes.bool,
+  emailSendingState: PropTypes.string,
+  handleSharingToggle: PropTypes.func,
+  handleSendCertificate: PropTypes.func
+};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >renderVerifyBlock.propTypes = CertificateViewer.propTypes;</span>
+<span class="cstat-no" title="statement not covered" >renderHeaderBlock.propTypes = CertificateViewer.propTypes;</span>
+&nbsp;
+export default CertificateViewer;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Nov 02 2018 14:43:56 GMT+0800 (Singapore Standard Time)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

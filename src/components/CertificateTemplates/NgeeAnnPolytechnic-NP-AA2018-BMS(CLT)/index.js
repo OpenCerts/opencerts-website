@@ -15,8 +15,8 @@ const templates = [
 ];
 
 const addresses = [
-  "0x1C4B83f39DA76d39B3ABbb1AfFf5cB4e629edBF4",
-  "0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4F"
+  "0xa5d801265D29A6F1015a641BfC0e39Ee3dA2AC76",
+  "0xD939B3934fB024517296e0b9091E72F222F81c1E"
 ];
 
 export default { templates, addresses };

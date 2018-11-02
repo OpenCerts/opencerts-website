@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/sagas/application.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/sagas</a> application.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/24</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/13</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/24</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { put, select, take } from "redux-saga/effects";
+import { getNetwork, getNetworkPending, types } from "../reducers/application";
+import { setNewWeb3, getWeb3 } from "../services/web3";
+&nbsp;
+export function* <span class="fstat-no" title="function not covered" >getSelectedWeb3(</span>getNew = <span class="branch-0 cbranch-no" title="branch not covered" >false)</span> {
+  const networkPending = <span class="cstat-no" title="statement not covered" >yield select(getNetworkPending);</span>
+<span class="cstat-no" title="statement not covered" >  if (networkPending &amp;&amp; !getNew) {</span>
+    // block if there's a network update pending
+<span class="cstat-no" title="statement not covered" >    yield take(types.UPDATE_NETWORK_ID_SUCCESS);</span>
+  }
+  const network = <span class="cstat-no" title="statement not covered" >yield select(getNetwork);</span>
+  const web3 = <span class="cstat-no" title="statement not covered" >yield getNew ? setNewWeb3(network) : getWeb3();</span> // update web3 only if requested specifically
+<span class="cstat-no" title="statement not covered" >  return web3;</span>
+}
+&nbsp;
+export function* <span class="fstat-no" title="function not covered" >updateNetworkId(</span>) {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    const web3 = <span class="cstat-no" title="statement not covered" >yield getSelectedWeb3(true);</span>
+    const networkId = <span class="cstat-no" title="statement not covered" >yield web3.eth.net.getId();</span>
+&nbsp;
+    let networkIdVerbose;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    switch (networkId) {</span>
+      case 1:
+<span class="cstat-no" title="statement not covered" >        networkIdVerbose = "Main";</span>
+<span class="cstat-no" title="statement not covered" >        break;</span>
+      case 2:
+<span class="cstat-no" title="statement not covered" >        networkIdVerbose = "Morden";</span>
+<span class="cstat-no" title="statement not covered" >        break;</span>
+      case 3:
+<span class="cstat-no" title="statement not covered" >        networkIdVerbose = "Ropsten";</span>
+<span class="cstat-no" title="statement not covered" >        break;</span>
+      case 4:
+<span class="cstat-no" title="statement not covered" >        networkIdVerbose = "Rinkeby";</span>
+<span class="cstat-no" title="statement not covered" >        break;</span>
+      case 42:
+<span class="cstat-no" title="statement not covered" >        networkIdVerbose = "Kovan";</span>
+<span class="cstat-no" title="statement not covered" >        break;</span>
+      default:
+<span class="cstat-no" title="statement not covered" >        networkIdVerbose = `Custom Network: ${networkId}`;</span>
+    }
+<span class="cstat-no" title="statement not covered" >    yield put({</span>
+      type: types.UPDATE_NETWORK_ID_SUCCESS,
+      payload: {
+        networkId,
+        networkIdVerbose
+      }
+    });
+  } catch (e) {
+<span class="cstat-no" title="statement not covered" >    console.error(e); </span>// eslint-disable-line
+<span class="cstat-no" title="statement not covered" >    yield put({</span>
+      type: types.UPDATE_NETWORK_ID_FAILURE,
+      payload: e
+    });
+  }
+}
+&nbsp;
+export default updateNetworkId;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Nov 02 2018 14:43:56 GMT+0800 (Singapore Standard Time)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>
