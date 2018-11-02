@@ -5,19 +5,9 @@ const fullWidthStyle = {
   height: "auto"
 };
 
-const fullWidthTableStyle = {
-  width: "100%",
-  height: "auto",
-  textAlign: "right"
-};
-
 const thWidth60Left = {
   width: "60%",
   textAlign: "left"
-};
-
-const thWidth20 = {
-  width: "20%"
 };
 
 const formatDate = dateString => {
@@ -45,7 +35,7 @@ const formatDate = dateString => {
 const formatNRIC = nricFin => {
   if (!nricFin) return null;
   const arrayNric = nricFin.split(":");
-  return arrayNric.length == 3 ? arrayNric[2] : null;
+  return arrayNric.length === 3 ? arrayNric[2] : null;
 };
 
 const renderSemester = (semester, semesterId) => {
@@ -231,17 +221,6 @@ const renderGradingSystem = () => (
   </div>
 );
 
-const renderTranscript = certificate => {
-  // Group all modules by courses
-  const transcript = get(certificate, "transcript");
-  const groupedCourses = groupBy(transcript, "programDescription");
-  const renderedCourses = Object.keys(groupedCourses).map(course =>
-    renderCourse(certificate, groupedCourses[course], course)
-  );
-
-  return <div>{renderedCourses}</div>;
-};
-
 const renderCourse = (certificate, course, courseId) => {
   // Get student info and course description
   const graduateCourse = get(certificate, "description");
@@ -268,7 +247,8 @@ const renderCourse = (certificate, course, courseId) => {
   const courseNote = get(courseSummary, "note");
 
   // only display the summary of non-diploma courses.
-  const courseNoteDisplay = currentCourse != graduateCourse ? courseNote : null;
+  const courseNoteDisplay =
+    currentCourse !== graduateCourse ? courseNote : null;
 
   return (
     <div key={courseId}>
@@ -336,6 +316,17 @@ const renderCourse = (certificate, course, courseId) => {
   );
 };
 
+const renderTranscript = certificate => {
+  // Group all modules by courses
+  const transcript = get(certificate, "transcript");
+  const groupedCourses = groupBy(transcript, "programDescription");
+  const renderedCourses = Object.keys(groupedCourses).map(course =>
+    renderCourse(certificate, groupedCourses[course], course)
+  );
+
+  return <div>{renderedCourses}</div>;
+};
+
 const renderNpfa = certificate => {
   const npfa = get(certificate, "additionalData.npfa", undefined);
   return npfa ? (
@@ -359,6 +350,16 @@ const renderGPA = certificate => {
   ) : null;
 };
 
+const renderCourseNote = (gradCourse, course, courseId) => {
+  const courseNotes = course.map((c, i) => <p key={i}>{c.note}</p>);
+
+  return gradCourse === courseId ? (
+    <div className="row" key={courseId}>
+      {courseNotes}
+    </div>
+  ) : null;
+};
+
 const renderFinalStatement = certificate => {
   const graduateCourse = get(certificate, "description");
   const transcriptSummaries = get(
@@ -375,17 +376,7 @@ const renderFinalStatement = certificate => {
   return <div>{renderedCourseNotes}</div>;
 };
 
-const renderCourseNote = (gradCourse, course, courseId) => {
-  const courseNotes = course.map((c, i) => <p key={i}>{c.note}</p>);
-
-  return gradCourse == courseId ? (
-    <div className="row" key={courseId}>
-      {courseNotes}
-    </div>
-  ) : null;
-};
-
-const renderSignature = certificate => (
+const renderSignature = () => (
   <div
     className="row d-flex justify-content-center align-items-end"
     style={{ marginTop: "8rem", marginBottom: "2rem" }}
