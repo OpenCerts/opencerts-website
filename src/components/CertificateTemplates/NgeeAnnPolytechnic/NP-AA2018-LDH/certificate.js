@@ -3,18 +3,12 @@ import {
   IMG_SIG_TANG_KIN_FEI,
   IMG_SIG_TI_BOON_WEE,
   IMG_SIG_KENNETH_ER,
-  CertificateJoint
+  Certificate
 } from "../common";
 
-const Template = CertificateJoint({
+const Template = Certificate({
   logo: IMG_NATIONAL_PARKS,
   signatories: [
-    {
-      signature: IMG_SIG_TANG_KIN_FEI,
-      name: "Tang Kin Fei",
-      position: "Council Chairman",
-      organisation: "Ngee Ann Polytechnic"
-    },
     {
       signature: IMG_SIG_TI_BOON_WEE,
       name: "Ti Boon Wee",
@@ -26,6 +20,12 @@ const Template = CertificateJoint({
       name: "Kenneth Er",
       position: "Chief Executive Officer",
       organisation: "National Parks Board"
+    },
+    {
+      signature: IMG_SIG_TANG_KIN_FEI,
+      name: "Tang Kin Fei",
+      position: "Council Chairman",
+      organisation: "Ngee Ann Polytechnic"
     }
   ]
 });

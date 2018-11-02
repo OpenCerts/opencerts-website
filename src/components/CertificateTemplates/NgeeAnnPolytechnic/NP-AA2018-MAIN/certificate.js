@@ -1,10 +1,10 @@
 import {
   IMG_SIG_TANG_KIN_FEI,
   IMG_SIG_TI_BOON_WEE,
-  CertificateMain
+  Certificate
 } from "../common";
 
-const Template = CertificateMain({
+const Template = Certificate({
   signatories: [
     {
       signature: IMG_SIG_TANG_KIN_FEI,

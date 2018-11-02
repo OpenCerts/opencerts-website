@@ -1,5 +1,3 @@
-export * from "./styles";
-export * from "./functions";
 export * from "./images";
 export * from "./template";
 
