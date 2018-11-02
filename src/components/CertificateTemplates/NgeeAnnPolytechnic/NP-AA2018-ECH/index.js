@@ -1,6 +1,6 @@
 import { approvedAddresses } from "../common";
 import NPCert from "./certificate";
-import NPTranscript from "./transcript";
+import NPTranscript from "../common/transcript";
 
 const templates = [
   {
