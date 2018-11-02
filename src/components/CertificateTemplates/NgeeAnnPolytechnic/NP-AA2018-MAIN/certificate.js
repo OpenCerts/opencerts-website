@@ -5,7 +5,8 @@ import {
   nameTextStyle,
   titleTextStyle,
   formatCertName,
-  formatCertID
+  formatCertID,
+  formatDate
 } from "../common";
 
 const Template = certificate => (

@@ -7,14 +7,11 @@ import {
   formatCertID,
   formatDate,
   IMG_LOGO_NP,
-  IMG_LOGO_SEED,
-  IMG_SIG_TANG_KIN_FEI,
-  IMG_CERTIFICATE_SEAL,
-  IMG_SIG_TI_BOON_WEE,
-  IMG_SIG_CHAN_TEE_SENG
-} from "../common";
+  IMG_CERTIFICATE_SEAL
+} from ".";
 
-const Template = certificate => (
+// eslint-disable-next-line react/display-name
+export const CertificateJoint = ({ logo, signatories }) => certificate => (
   <div>
     <div
       className="container"
@@ -30,7 +27,7 @@ const Template = certificate => (
           <img style={fullWidthStyle} src={IMG_LOGO_NP} />
         </div>
         <div className="col-5">
-          <img style={fullWidthStyle} src={IMG_LOGO_SEED} />
+          <img style={fullWidthStyle} src={logo} />
         </div>
         <div className="col-1" />
       </div>
@@ -61,12 +58,12 @@ const Template = certificate => (
         <div className="col-6" />
         <div className="col-4">
           <div className="px-4">
-            <img style={fullWidthStyle} src={IMG_SIG_TANG_KIN_FEI} />
+            <img style={fullWidthStyle} src={signatories[0].signature} />
             <hr />
           </div>
-          <div className="text-center">Tang Kin Fei</div>
-          <div className="text-center">Council Chairman</div>
-          <div className="text-center">Ngee Ann Polytechnic</div>
+          <div className="text-center">{signatories[0].name}</div>
+          <div className="text-center">{signatories[0].position}</div>
+          <div className="text-center">{signatories[0].organisation}</div>
         </div>
         <div className="col-2" />
       </div>
@@ -80,25 +77,22 @@ const Template = certificate => (
 
         <div className="col-4">
           <div className="px-4">
-            <img style={fullWidthStyle} src={IMG_SIG_TI_BOON_WEE} />
+            <img style={fullWidthStyle} src={signatories[0].signature} />
             <hr />
           </div>
-          <div className="text-center">Ti Boon Wee</div>
-          <div className="text-center">Principal</div>
-          <div className="text-center">Ngee Ann Polytechnic</div>
+          <div className="text-center">{signatories[1].name}</div>
+          <div className="text-center">{signatories[1].position}</div>
+          <div className="text-center">{signatories[1].organisation}</div>
         </div>
 
         <div className="col-4">
           <div className="px-4">
-            <img style={fullWidthStyle} src={IMG_SIG_CHAN_TEE_SENG} />
+            <img style={fullWidthStyle} src={signatories[2].signature} />
             <hr />
           </div>
-          <div className="text-center">Chan Tee Seng</div>
-          <div className="text-center">Chief Executive Officer</div>
-          <div className="text-center">
-            NTUC First Campus Co-operative Ltd & Director, SEED Institute Pte
-            Ltd
-          </div>
+          <div className="text-center">{signatories[2].name}</div>
+          <div className="text-center">{signatories[2].position}</div>
+          <div className="text-center">{signatories[2].organisation}</div>
         </div>
       </div>
       <div>
@@ -116,4 +110,4 @@ const Template = certificate => (
   </div>
 );
 
-export default Template;
+export const lol = 2;
