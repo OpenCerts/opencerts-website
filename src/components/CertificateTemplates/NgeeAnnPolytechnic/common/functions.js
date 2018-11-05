@@ -29,10 +29,9 @@ export const formatNRIC = nricFin => {
 export const formatDatePrefix = dateString => {
   if (!dateString) return null;
   const date = new Date(dateString);
-
-  const day = date.getDay();
+  const day = date.getDate();
   let daySup = "";
-  switch (day % 10 === 1) {
+  switch (day % 10) {
     case 1:
       daySup = "st";
       break;
