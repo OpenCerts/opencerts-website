@@ -1,11 +1,9 @@
 import "isomorphic-fetch";
-
-export const emailApiUrl =
-  "https://92cdczopwg.execute-api.ap-southeast-1.amazonaws.com/dev";
+import { EMAIL_API_URL } from "../../config";
 
 export default function sendEmail({ certificate, email, captcha }) {
   return window
-    .fetch(emailApiUrl, {
+    .fetch(EMAIL_API_URL, {
       method: "POST",
       headers: {
         Accept: "application/json",
