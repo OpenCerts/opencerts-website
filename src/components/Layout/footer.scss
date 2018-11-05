@@ -2,7 +2,6 @@
 
 .footer {
     max-width: 1280px;
-    margin: 2rem auto;
 
     a {
         font-family: "Montserrat", sans-serif;
@@ -14,14 +13,14 @@
     }
 
     div {
-        margin-bottom: 0.5rem;
-        text-align: right;
-        margin-right: 2rem;
+        text-align: left;
+        margin-left: 2rem;
     }
+}
 
-    .networkselector {
-        display: none;
-    }
+.networkselector {
+    float: right;
+    margin-right: 2rem;
 }
 
 @media print{

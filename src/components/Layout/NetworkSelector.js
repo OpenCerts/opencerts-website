@@ -7,6 +7,7 @@ import {
   getNetwork,
   getCustomRpc
 } from "../../reducers/application";
+import css from "./networkSelector.scss";
 
 class NetworkSelector extends Component {
   constructor(props) {
@@ -25,21 +26,14 @@ class NetworkSelector extends Component {
     const { INFURA_MAINNET, INFURA_ROPSTEN } = networkTypes;
 
     return (
-      <div>
-        <select
-          className="pa2"
-          value={this.props.network}
-          onChange={this.handleNetworkChange}
-          style={{
-            backgroundColor: "white",
-            borderWidth: 0,
-            borderRadius: 0
-          }}
-        >
-          <option value={INFURA_MAINNET}>Mainnet</option>
-          <option value={INFURA_ROPSTEN}>Testnet (Ropsten)</option>
-        </select>
-      </div>
+      <select
+        value={this.props.network}
+        onChange={this.handleNetworkChange}
+        className={css.selector}
+      >
+        <option value={INFURA_MAINNET}>Mainnet</option>
+        <option value={INFURA_ROPSTEN}>Testnet (Ropsten)</option>
+      </select>
     );
   }
 }
