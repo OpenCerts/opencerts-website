@@ -75,7 +75,6 @@ export function* verifyCertificateIssued({ certificate, certificateStores }) {
     );
     const isIssued = issuedStatuses.reduce((prev, curr) => prev && curr, true);
     if (!isIssued) throw new Error("Certificate has not been issued");
-
     yield put({
       type: types.VERIFYING_CERTIFICATE_ISSUED_SUCCESS
     });
