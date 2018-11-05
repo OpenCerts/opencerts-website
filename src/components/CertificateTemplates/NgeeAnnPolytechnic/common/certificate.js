@@ -1,4 +1,10 @@
 import { IMG_LOGO_NP, IMG_CERTIFICATE_SEAL } from "./images";
+import {
+  formatDate,
+  formatDatePrefix,
+  formatCertName,
+  formatCertID
+} from "./functions";
 
 const fullWidthStyle = {
   width: "100%",
@@ -28,78 +34,8 @@ const titleTextStyle = {
   textAlign: "center"
 };
 
-export const formatDate = dateString => {
-  if (!dateString) return null;
-  const date = new Date(dateString);
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-  ];
-
-  const day = date.getDay();
-  let daySup = "";
-  switch (day % 10 === 1) {
-    case 1:
-      daySup = "st";
-      break;
-    case 2:
-      daySup = "nd";
-      break;
-    case 3:
-      daySup = "rd";
-      break;
-    default:
-      daySup = "th";
-  }
-
-  const month = date.getMonth();
-  const year = date.getUTCFullYear();
-
-  return (
-    <p>
-      Dated this {day}
-      <sup>{daySup}</sup> day of {months[month]} {year}
-    </p>
-  );
-};
-
-export const formatCertName = (certName, meritFlag) => {
-  let certDipDisplay = "";
-  if (meritFlag === "Y") {
-    certDipDisplay = "Diploma with Merit";
-  } else {
-    certDipDisplay = "Diploma";
-  }
-
-  return (
-    <p>
-      {certDipDisplay}
-      <br />
-      in
-      <br />
-      {certName}
-    </p>
-  );
-};
-
-export const formatCertID = certId => {
-  if (!certId) return null;
-  const arrayCertId = certId.split(":");
-  return arrayCertId.length > 0 ? arrayCertId[0] : null;
-};
-
 // eslint-disable-next-line react/display-name
-export const Certificate = ({ logo, signatories }) => certificate => (
+export default ({ logo, signatories }) => certificate => (
   <div>
     <div
       className="container"
@@ -209,7 +145,12 @@ export const Certificate = ({ logo, signatories }) => certificate => (
         </div>
       </div>
       <div>
-        <div>{formatDate(certificate.issuedOn)}</div>
+        <div>
+          <p>
+            {formatDatePrefix(certificate.issuedOn)}{" "}
+            {formatDate(certificate.issuedOn)}
+          </p>
+        </div>
       </div>
     </div>
     <div className="container">

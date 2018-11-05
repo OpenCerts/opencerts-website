@@ -1,5 +1,6 @@
 import { get, groupBy, find } from "lodash";
 import { IMG_LOGO_NP_HORIZONTAL, IMG_SIG_NANCY } from "./images";
+import { formatDate, formatNRIC } from "./functions";
 
 const fullWidthStyle = {
   width: "100%",
@@ -9,34 +10,6 @@ const fullWidthStyle = {
 const thWidth60Left = {
   width: "60%",
   textAlign: "left"
-};
-
-const formatDate = dateString => {
-  if (!dateString) return null;
-  const date = new Date(dateString);
-  const months = [
-    "JAN",
-    "FEB",
-    "MAR",
-    "APR",
-    "MAY",
-    "JUN",
-    "JUL",
-    "AUG",
-    "SEP",
-    "OCT",
-    "NOV",
-    "DEC"
-  ];
-  const month = date.getMonth();
-  const year = date.getUTCFullYear();
-  return `${months[month]} ${year}`;
-};
-
-const formatNRIC = nricFin => {
-  if (!nricFin) return null;
-  const arrayNric = nricFin.split(":");
-  return arrayNric.length === 3 ? arrayNric[2] : null;
 };
 
 const renderSemester = (semester, semesterId) => {
