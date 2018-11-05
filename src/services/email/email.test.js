@@ -1,5 +1,6 @@
 import sinon from "sinon";
 import * as sendEmail from "./index";
+import { EMAIL_API_URL } from "../../config";
 
 describe("sagas/certificate", () => {
   const email = "admin@opencerts.io";
@@ -12,7 +13,7 @@ describe("sagas/certificate", () => {
     await sendEmail.default({ certificate, captcha, email });
 
     expect(
-      fetchStub.calledWith(sendEmail.emailApiUrl, {
+      fetchStub.calledWith(EMAIL_API_URL, {
         method: "POST",
         headers: {
           Accept: "application/json",

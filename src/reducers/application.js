@@ -1,8 +1,8 @@
 import { omit } from "lodash";
-import config from "../config";
+import { DEFAULT_NETWORK } from "../config";
 
 export const initialState = {
-  network: config.DEFAULT_NETWORK,
+  network: DEFAULT_NETWORK,
   networkId: null,
   networkIdVerbose: "",
   customRpc: "",

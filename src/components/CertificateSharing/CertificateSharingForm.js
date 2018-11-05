@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReCAPTCHA from "react-google-recaptcha";
-import config from "../../config";
+import { CAPTCHA_CLIENT_KEY } from "../../config";
 import css from "./sharing.scss";
 import { states } from "../../reducers/certificate";
 
@@ -61,7 +61,7 @@ class CertificateSharingForm extends Component {
             </div>
             <div className="row d-flex justify-content-center m-3">
               <ReCAPTCHA
-                sitekey={config.CAPTCHA_CLIENT_KEY}
+                sitekey={CAPTCHA_CLIENT_KEY}
                 onChange={this.handleCaptchaChange}
               />
             </div>
