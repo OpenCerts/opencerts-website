@@ -6213,7 +6213,6 @@ var _window = window,
     props = _window$__NEXT_DATA__.props,
     err = _window$__NEXT_DATA__.err,
     page = _window$__NEXT_DATA__.page,
-    pathname = _window$__NEXT_DATA__.pathname,
     query = _window$__NEXT_DATA__.query,
     buildId = _window$__NEXT_DATA__.buildId,
     assetPrefix = _window$__NEXT_DATA__.assetPrefix,
@@ -6301,7 +6300,7 @@ _regenerator.default.mark(function _callee() {
             break;
           }
 
-          throw new Error("The default export is not a React Component in page: \"".concat(pathname, "\""));
+          throw new Error("The default export is not a React Component in page: \"".concat(page, "\""));
 
         case 15:
           _context.next = 20;
@@ -6318,7 +6317,7 @@ _regenerator.default.mark(function _callee() {
           return _loadable.default.preloadReady(dynamicIds || []);
 
         case 22:
-          exports.router = router = (0, _router2.createRouter)(pathname, query, asPath, {
+          exports.router = router = (0, _router2.createRouter)(page, query, asPath, {
             initialProps: props,
             pageLoader: pageLoader,
             App: App,
@@ -6452,7 +6451,7 @@ function _renderError() {
               router: router,
               ctx: {
                 err: err,
-                pathname: pathname,
+                pathname: page,
                 query: query,
                 asPath: asPath
               }
@@ -6501,7 +6500,7 @@ function _doRender() {
   _doRender = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
   _regenerator.default.mark(function _callee5(_ref6) {
-    var App, Component, props, err, _ref6$emitter, emitterProp, _router, _pathname, _query, _asPath, appProps, onError;
+    var App, Component, props, err, _ref6$emitter, emitterProp, _router, pathname, _query, _asPath, appProps, onError;
 
     return _regenerator.default.wrap(function _callee5$(_context5) {
       while (1) {
@@ -6514,14 +6513,14 @@ function _doRender() {
               break;
             }
 
-            _router = router, _pathname = _router.pathname, _query = _router.query, _asPath = _router.asPath;
+            _router = router, pathname = _router.pathname, _query = _router.query, _asPath = _router.asPath;
             _context5.next = 5;
             return (0, _utils.loadGetInitialProps)(App, {
               Component: Component,
               router: router,
               ctx: {
                 err: err,
-                pathname: _pathname,
+                pathname: pathname,
                 query: _query,
                 asPath: _asPath
               }
@@ -9123,23 +9122,23 @@ function getURL() {
 
 /***/ "./node_modules/object-assign/index.js":
 /*!***************************************************************************************************!*\
-  !*** delegated ./node_modules/object-assign/index.js from dll-reference dll_5d62d38be3592dca3a42 ***!
+  !*** delegated ./node_modules/object-assign/index.js from dll-reference dll_10edf27d814a728d21af ***!
   \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_5d62d38be3592dca3a42 */ "dll-reference dll_5d62d38be3592dca3a42"))("./node_modules/object-assign/index.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_10edf27d814a728d21af */ "dll-reference dll_10edf27d814a728d21af"))("./node_modules/object-assign/index.js");
 
 /***/ }),
 
 /***/ "./node_modules/prop-types/checkPropTypes.js":
 /*!*********************************************************************************************************!*\
-  !*** delegated ./node_modules/prop-types/checkPropTypes.js from dll-reference dll_5d62d38be3592dca3a42 ***!
+  !*** delegated ./node_modules/prop-types/checkPropTypes.js from dll-reference dll_10edf27d814a728d21af ***!
   \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_5d62d38be3592dca3a42 */ "dll-reference dll_5d62d38be3592dca3a42"))("./node_modules/prop-types/checkPropTypes.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_10edf27d814a728d21af */ "dll-reference dll_10edf27d814a728d21af"))("./node_modules/prop-types/checkPropTypes.js");
 
 /***/ }),
 
@@ -9747,12 +9746,12 @@ if (true) {
 
 /***/ "./node_modules/prop-types/lib/ReactPropTypesSecret.js":
 /*!*******************************************************************************************************************!*\
-  !*** delegated ./node_modules/prop-types/lib/ReactPropTypesSecret.js from dll-reference dll_5d62d38be3592dca3a42 ***!
+  !*** delegated ./node_modules/prop-types/lib/ReactPropTypesSecret.js from dll-reference dll_10edf27d814a728d21af ***!
   \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_5d62d38be3592dca3a42 */ "dll-reference dll_5d62d38be3592dca3a42"))("./node_modules/prop-types/lib/ReactPropTypesSecret.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_10edf27d814a728d21af */ "dll-reference dll_10edf27d814a728d21af"))("./node_modules/prop-types/lib/ReactPropTypesSecret.js");
 
 /***/ }),
 
@@ -10498,12 +10497,12 @@ exports.encode = exports.stringify = __webpack_require__(/*! ./encode */ "./node
 
 /***/ "./node_modules/react-dom/index.js":
 /*!***********************************************************************************************!*\
-  !*** delegated ./node_modules/react-dom/index.js from dll-reference dll_5d62d38be3592dca3a42 ***!
+  !*** delegated ./node_modules/react-dom/index.js from dll-reference dll_10edf27d814a728d21af ***!
   \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_5d62d38be3592dca3a42 */ "dll-reference dll_5d62d38be3592dca3a42"))("./node_modules/react-dom/index.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_10edf27d814a728d21af */ "dll-reference dll_10edf27d814a728d21af"))("./node_modules/react-dom/index.js");
 
 /***/ }),
 
@@ -16248,12 +16247,12 @@ module.exports = "!function(e){function t(n){if(u[n])return u[n].exports;var r=u
 
 /***/ "./node_modules/react/index.js":
 /*!*******************************************************************************************!*\
-  !*** delegated ./node_modules/react/index.js from dll-reference dll_5d62d38be3592dca3a42 ***!
+  !*** delegated ./node_modules/react/index.js from dll-reference dll_10edf27d814a728d21af ***!
   \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_5d62d38be3592dca3a42 */ "dll-reference dll_5d62d38be3592dca3a42"))("./node_modules/react/index.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_10edf27d814a728d21af */ "dll-reference dll_10edf27d814a728d21af"))("./node_modules/react/index.js");
 
 /***/ }),
 
@@ -17972,14 +17971,14 @@ module.exports = __webpack_require__(/*! /Users/raymondyeh/Desktop/DLT/website/n
 
 /***/ }),
 
-/***/ "dll-reference dll_5d62d38be3592dca3a42":
+/***/ "dll-reference dll_10edf27d814a728d21af":
 /*!*******************************************!*\
-  !*** external "dll_5d62d38be3592dca3a42" ***!
+  !*** external "dll_10edf27d814a728d21af" ***!
   \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = dll_5d62d38be3592dca3a42;
+module.exports = dll_10edf27d814a728d21af;
 
 /***/ })
 
