@@ -1,17 +1,20 @@
 import { some, get, partition, compact, filter, isEmpty } from "lodash";
-import { put, all, call } from "redux-saga/effects";
+import { put, all, call, select } from "redux-saga/effects";
 import { certificateData, verifySignature } from "@govtechsg/open-certificate";
 import { isValidAddress as isEthereumAddress } from "ethereumjs-utils";
 import Router from "next/router";
 import { getLogger } from "../utils/logger";
 import {
   types,
-  verifyingCertificateIssuerSuccess
+  verifyingCertificateIssuerSuccess,
+  verifyingCertificateIssuerFailure,
+  getCertificate
 } from "../reducers/certificate";
 import DocumentStoreDefinition from "../services/contracts/DocumentStore.json";
 import fetchIssuers from "../services/issuers";
 import { combinedHash } from "../utils";
 import { ensResolveAddress, getText } from "../services/ens";
+import sendEmail from "../services/email";
 
 import { getSelectedWeb3 } from "./application";
 
@@ -224,10 +227,7 @@ export function* verifyCertificateIssuer({ certificate }) {
     return true;
   } catch (e) {
     error(e);
-    yield put({
-      type: types.VERIFYING_CERTIFICATE_ISSUER_FAILURE,
-      payload: e.message
-    });
+    yield put(verifyingCertificateIssuerFailure(e.message));
     return false;
   }
 }
@@ -247,6 +247,31 @@ export function* verifyCertificate({ payload }) {
   const verified = verificationStatuses.reduce((prev, curr) => prev && curr);
   if (verified) {
     Router.push("/viewer");
+  }
+}
+
+export function* sendCertificate({ payload }) {
+  try {
+    const certificate = yield select(getCertificate);
+    const { email, captcha } = payload;
+    const success = yield sendEmail({
+      certificate,
+      email,
+      captcha
+    });
+
+    if (!success) {
+      throw new Error("Fail to send certificate");
+    }
+
+    yield put({
+      type: types.SENDING_CERTIFICATE_SUCCESS
+    });
+  } catch (e) {
+    yield put({
+      type: types.SENDING_CERTIFICATE_FAILURE,
+      payload: e.message
+    });
   }
 }
 

@@ -1,3 +1,10 @@
+export const states = {
+  INITIAL: "INITIAL",
+  PENDING: "PENDING",
+  SUCCESS: "SUCCESS",
+  FAILURE: "FAILURE"
+};
+
 export const initialState = {
   raw: null,
   store: null,
@@ -21,7 +28,10 @@ export const initialState = {
   certificateNotRevokedError: null,
   certificateIssuerError: null,
 
-  verificationStatus: []
+  verificationStatus: [],
+
+  emailState: states.INITIAL,
+  emailError: null
 };
 
 // Actions
@@ -47,7 +57,12 @@ export const types = {
     "VERIFYING_CERTIFICATE_REVOCATION_FAILURE",
 
   VERIFYING_CERTIFICATE_ISSUER_SUCCESS: "VERIFYING_CERTIFICATE_ISSUER_SUCCESS",
-  VERIFYING_CERTIFICATE_ISSUER_FAILURE: "VERIFYING_CERTIFICATE_ISSUER_FAILURE"
+  VERIFYING_CERTIFICATE_ISSUER_FAILURE: "VERIFYING_CERTIFICATE_ISSUER_FAILURE",
+
+  SENDING_CERTIFICATE: "SENDING_CERTIFICATE",
+  SENDING_CERTIFICATE_SUCCESS: "SENDING_CERTIFICATE_SUCCESS",
+  SENDING_CERTIFICATE_FAILURE: "SENDING_CERTIFICATE_FAILURE",
+  SENDING_CERTIFICATE_RESET: "SENDING_CERTIFICATE_RESET"
 };
 
 // Reducers
@@ -221,6 +236,30 @@ export default function reducer(state = initialState, action) {
           }
         ]
       };
+    case types.SENDING_CERTIFICATE:
+      return {
+        ...state,
+        emailState: states.PENDING,
+        emailError: null
+      };
+    case types.SENDING_CERTIFICATE_RESET:
+      return {
+        ...state,
+        emailState: states.INITIAL,
+        emailError: null
+      };
+    case types.SENDING_CERTIFICATE_SUCCESS:
+      return {
+        ...state,
+        emailState: states.SUCCESS,
+        emailError: null
+      };
+    case types.SENDING_CERTIFICATE_FAILURE:
+      return {
+        ...state,
+        emailState: states.FAILURE,
+        emailError: action.payload
+      };
     default:
       return state;
   }
@@ -252,6 +291,26 @@ export function verifyingCertificateIssuerSuccess(payload) {
   return {
     type: types.VERIFYING_CERTIFICATE_ISSUER_SUCCESS,
     payload
+  };
+}
+
+export function verifyingCertificateIssuerFailure(payload) {
+  return {
+    type: types.VERIFYING_CERTIFICATE_ISSUER_FAILURE,
+    payload
+  };
+}
+
+export function sendCertificate(payload) {
+  return {
+    type: types.SENDING_CERTIFICATE,
+    payload
+  };
+}
+
+export function sendCertificateReset() {
+  return {
+    type: types.SENDING_CERTIFICATE_RESET
   };
 }
 
@@ -340,4 +399,8 @@ export function getVerified(store) {
 
 export function getVerificationStatus(store) {
   return store.certificate.verificationStatus;
+}
+
+export function getEmailSendingState(store) {
+  return store.certificate.emailState;
 }
