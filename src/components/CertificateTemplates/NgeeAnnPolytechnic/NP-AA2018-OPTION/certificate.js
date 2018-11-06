@@ -42,28 +42,11 @@ export const formatDate = dateString => {
   ];
 
   const day = date.getDay();
-  let daySup = "";
-  switch (day % 10 === 1) {
-    case 1:
-      daySup = "st";
-      break;
-    case 2:
-      daySup = "nd";
-      break;
-    case 3:
-      daySup = "rd";
-      break;
-    default:
-      daySup = "th";
-  }
-
   const month = date.getMonth();
   const year = date.getUTCFullYear();
 
   return (
-    <p>
-      Dated this {day}
-      <sup>{daySup}</sup> day of {months[month]} {year}
+    <p> {day} {months[month]} {year}
     </p>
   );
 };
