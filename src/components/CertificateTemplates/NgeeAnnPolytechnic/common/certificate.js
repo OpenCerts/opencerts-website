@@ -35,7 +35,7 @@ const titleTextStyle = {
 };
 
 // eslint-disable-next-line react/display-name
-export default ({ logo, signatories }) => certificate => (
+export default ({ logo }) => certificate => (
   <div>
     <div
       className="container"
@@ -96,54 +96,83 @@ export default ({ logo, signatories }) => certificate => (
           {formatCertName(certificate.name, certificate.additionalData.merit)}
         </div>
       </div>
-      {signatories && signatories[2] ? (
+      {certificate.additionalData.certSignatories && certificate.additionalData.certSignatories[2] ? (
+       <div> 
+			<div
+			  className="row d-flex justify-content-center align-items-end"
+			  style={{ marginTop: "8rem", marginBottom: "1rem" }}
+			>
+			  <div className="col-6" />
+			  <div className="col-4">
+				<div className="px-4">
+				  <img style={fullWidthStyle} src={certificate.additionalData.certSignatories[0].signature} />
+				  <hr />
+				</div>
+				<div className="text-center">{certificate.additionalData.certSignatories[0].name}</div>
+				<div className="text-center">{certificate.additionalData.certSignatories[0].position}</div>
+				<div className="text-center">{certificate.additionalData.certSignatories[0].organisation}</div>
+			  </div>
+			  <div className="col-2" />
+			</div>
+			 <div
+			  className="row d-flex justify-content-center align-items-end"
+			  style={{ marginTop: "1rem", marginBottom: "1rem" }}
+			>
+			<div className="col-4">
+			  <img style={fullWidthStyle} src={IMG_CERTIFICATE_SEAL} />
+			</div>
+
+			<div className="col-4">
+			  <div className="px-4">
+				<img style={fullWidthStyle} src={certificate.additionalData.certSignatories[1].signature} />
+				<hr />
+			  </div>
+			  <div className="text-center">{certificate.additionalData.certSignatories[1].name}</div>
+			  <div className="text-center">{certificate.additionalData.certSignatories[1].position}</div>
+			  <div className="text-center">{certificate.additionalData.certSignatories[1].organisation}</div>
+			</div>
+
+			<div className="col-4">
+			  <div className="px-4">
+				<img style={fullWidthStyle} src={certificate.additionalData.certSignatories[2].signature} />
+				<hr />
+			  </div>
+			  <div className="text-center">{certificate.additionalData.certSignatories[2].name}</div>
+			  <div className="text-center">{certificate.additionalData.certSignatories[2].position}</div>
+			  <div className="text-center">{certificate.additionalData.certSignatories[2].organisation}</div>
+			</div>
+		  </div>
+	  </div>
+      ) : (
         <div
           className="row d-flex justify-content-center align-items-end"
           style={{ marginTop: "8rem", marginBottom: "1rem" }}
         >
-          <div className="col-6" />
-          <div className="col-4">
-            <div className="px-4">
-              <img style={fullWidthStyle} src={signatories[2].signature} />
-              <hr />
-            </div>
-            <div className="text-center">{signatories[2].name}</div>
-            <div className="text-center">{signatories[2].position}</div>
-            <div className="text-center">{signatories[2].organisation}</div>
-          </div>
-          <div className="col-2" />
-        </div>
-      ) : (
-        ""
-      )}
-      <div
-        className="row d-flex justify-content-center align-items-end"
-        style={{ marginTop: logo ? "8rem" : "1rem", marginBottom: "2rem" }}
-      >
         <div className="col-4">
           <img style={fullWidthStyle} src={IMG_CERTIFICATE_SEAL} />
         </div>
 
         <div className="col-4">
           <div className="px-4">
-            <img style={fullWidthStyle} src={signatories[0].signature} />
+            <img style={fullWidthStyle} src={certificate.additionalData.certSignatories[0].signature} />
             <hr />
           </div>
-          <div className="text-center">{signatories[0].name}</div>
-          <div className="text-center">{signatories[0].position}</div>
-          <div className="text-center">{signatories[0].organisation}</div>
+          <div className="text-center">{certificate.additionalData.certSignatories[0].name}</div>
+          <div className="text-center">{certificate.additionalData.certSignatories[0].position}</div>
+          <div className="text-center">{certificate.additionalData.certSignatories[0].organisation}</div>
         </div>
 
         <div className="col-4">
           <div className="px-4">
-            <img style={fullWidthStyle} src={signatories[1].signature} />
+            <img style={fullWidthStyle} src={certificate.additionalData.certSignatories[1].signature} />
             <hr />
           </div>
-          <div className="text-center">{signatories[1].name}</div>
-          <div className="text-center">{signatories[1].position}</div>
-          <div className="text-center">{signatories[1].organisation}</div>
+          <div className="text-center">{certificate.additionalData.certSignatories[1].name}</div>
+          <div className="text-center">{certificate.additionalData.certSignatories[1].position}</div>
+          <div className="text-center">{certificate.additionalData.certSignatories[1].organisation}</div>
         </div>
       </div>
+      )}
       <div>
         <div>
           <p>

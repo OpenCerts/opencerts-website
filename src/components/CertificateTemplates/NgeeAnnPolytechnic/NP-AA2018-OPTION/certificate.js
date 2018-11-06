@@ -1,4 +1,4 @@
-import { IMG_LOGO_NP, IMG_SIG_MAH_BEE_WENG } from "../common";
+import { IMG_LOGO_NP } from "../common";
 
 const fullWidthStyle = {
   width: "100%",
@@ -116,7 +116,7 @@ const Template = certificate => (
         <p style={nameTextStyle}>{certificate.recipient.name}</p>
       </div>
       <div className="row d-flex justify-content-center">
-        <p style={printTextStyle}>has fulfilled an option in</p>
+        <p style={printTextStyle}>has fulfilled {certificate.additionalData.optionType} in</p>
       </div>
       <div className="row d-flex justify-content-center">
         <p style={printTextStyle}>
@@ -150,11 +150,11 @@ const Template = certificate => (
         </div>
         <div className="col-5">
           <div className="px-5">
-            <img style={fullWidthStyle} src={IMG_SIG_MAH_BEE_WENG} />
+            <img style={fullWidthStyle} src={certificate.additionalData.certSignatories[0].signature} />
             <hr />
           </div>
-          <div className="text-center">Mah Wee Beng</div>
-          <div className="text-center">Registrar</div>
+          <div className="text-center">{certificate.additionalData.certSignatories[0].name}</div>
+          <div className="text-center">{certificate.additionalData.certSignatories[0].position}</div>
         </div>
         <div className="col-1" />
       </div>
