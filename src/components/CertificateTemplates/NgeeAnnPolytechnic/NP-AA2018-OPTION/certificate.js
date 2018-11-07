@@ -46,7 +46,9 @@ export const formatDate = dateString => {
   const year = date.getUTCFullYear();
 
   return (
-    <p> {day} {months[month]} {year}
+    <p>
+      {" "}
+      {day} {months[month]} {year}
     </p>
   );
 };
@@ -99,7 +101,9 @@ const Template = certificate => (
         <p style={nameTextStyle}>{certificate.recipient.name}</p>
       </div>
       <div className="row d-flex justify-content-center">
-        <p style={printTextStyle}>has fulfilled {certificate.additionalData.optionType} in</p>
+        <p style={printTextStyle}>
+          has fulfilled {certificate.additionalData.optionType} in
+        </p>
       </div>
       <div className="row d-flex justify-content-center">
         <p style={printTextStyle}>
@@ -133,11 +137,18 @@ const Template = certificate => (
         </div>
         <div className="col-5">
           <div className="px-5">
-            <img style={fullWidthStyle} src={certificate.additionalData.certSignatories[0].signature} />
+            <img
+              style={fullWidthStyle}
+              src={certificate.additionalData.certSignatories[0].signature}
+            />
             <hr />
           </div>
-          <div className="text-center">{certificate.additionalData.certSignatories[0].name}</div>
-          <div className="text-center">{certificate.additionalData.certSignatories[0].position}</div>
+          <div className="text-center">
+            {certificate.additionalData.certSignatories[0].name}
+          </div>
+          <div className="text-center">
+            {certificate.additionalData.certSignatories[0].position}
+          </div>
         </div>
         <div className="col-1" />
       </div>

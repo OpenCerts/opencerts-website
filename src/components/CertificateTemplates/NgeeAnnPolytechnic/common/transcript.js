@@ -356,10 +356,15 @@ const renderSignature = certificate => (
 
     <div className="col-4">
       <div className="px-4">
-        <img style={fullWidthStyle} src={certificate.additionalData.transcriptSignatories[0].signature} />
+        <img
+          style={fullWidthStyle}
+          src={certificate.additionalData.transcriptSignatories[0].signature}
+        />
         <hr />
       </div>
-      <div className="text-center">{certificate.additionalData.transcriptSignatories[0].position}</div>
+      <div className="text-center">
+        {certificate.additionalData.transcriptSignatories[0].position}
+      </div>
     </div>
 
     <div className="col-2" />
