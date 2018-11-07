@@ -1,0 +1,23 @@
+@import '../../styles/variables.scss';
+
+.detailed-certificate-block {
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  min-width: 300px;
+  position: absolute;
+  left: 300px;
+  z-index: 1;
+}
+
+.valid-border-color {
+  border-color: $success-color;
+}
+
+.warning-border-color {
+  border-color: $warning-color;
+}
+
+.invalid-border-color {
+  border-color: $invalid-color;
+}

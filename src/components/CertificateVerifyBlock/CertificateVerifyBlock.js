@@ -1,12 +1,7 @@
 import PropTypes from "prop-types";
-
-const LOG_LEVEL = {
-  CONNECTING: "CONNECTING",
-  VERIFYING: "VERIFYING",
-  VALID: "VALID",
-  INVALID: "INVALID",
-  WARNING: "WARNING"
-};
+import DetailedCertificateVerifyBlock from "./DetailedCertificateVerifyBlock";
+import { LOG_LEVEL } from "./constants";
+import css from "./certificateVerifyBlock.scss";
 
 const statusSummary = ({
   verifying,
@@ -40,36 +35,18 @@ const renderIcon = status => {
   switch (status) {
     case LOG_LEVEL.CONNECTING:
     case LOG_LEVEL.VERIFYING:
-      icon = (
-        <i
-          id="verify-spinner"
-          className="fa fa-spinner fa-spin fa-2x text-muted"
-        />
-      );
+      icon = <i id="verify-spinner" className="fa fa-spinner fa-spin fa-2x" />;
       break;
     case LOG_LEVEL.VALID:
-      icon = (
-        <i
-          id="verify-valid"
-          className="fas fa-check-circle fa-2x text-success"
-        />
-      );
+      icon = <i id="verify-valid" className="fas fa-check-circle fa-2x" />;
       break;
     case LOG_LEVEL.WARNING:
       icon = (
-        <i
-          id="verify-warning"
-          className="fas fa-exclamation-triangle fa-2x text-warning"
-        />
+        <i id="verify-warning" className="fas fa-exclamation-triangle fa-2x" />
       );
       break;
     default:
-      icon = (
-        <i
-          id="verify-invalid"
-          className="fas fa-times-circle fa-2x text-danger"
-        />
-      );
+      icon = <i id="verify-invalid" className="fas fa-times-circle fa-2x" />;
   }
   return (
     <div className="col-3 d-flex justify-content-center align-items-center">
@@ -91,7 +68,7 @@ const renderText = status => {
       text = "Certificate Verified";
       break;
     case LOG_LEVEL.WARNING:
-      text = "Verified with Warnings";
+      text = "Unidentified Issuer";
       break;
     default:
       text = "Invalid Certificate";
@@ -103,19 +80,51 @@ const renderText = status => {
   );
 };
 
-const CertificateVerifyBlock = props => {
+const SimpleVerifyBlock = props => {
   const status = statusSummary(props);
   const renderedIcon = renderIcon(status);
   const renderedText = renderText(status);
+  let stateStyle;
+  switch (status) {
+    case LOG_LEVEL.VALID:
+      stateStyle = "valid";
+      break;
+    case LOG_LEVEL.WARNING:
+      stateStyle = "warning";
+      break;
+    case LOG_LEVEL.INVALID:
+    default:
+      stateStyle = "invalid";
+  }
   return (
     <div
-      style={{ width: 300, backgroundColor: "#EEE" }}
-      className="p-2 screen-only"
+      className={`p-2 pointer ${css["simple-verify-block"]} ${css[stateStyle]}`}
+      onClick={props.toggleDetailedView}
     >
       <div className="row">
         {renderedIcon}
         {renderedText}
       </div>
+    </div>
+  );
+};
+
+const CertificateVerifyBlock = props => {
+  const status = statusSummary(props);
+  return (
+    <div className="d-flex align-items-start">
+      <SimpleVerifyBlock {...props} />
+      {props.detailedVerifyVisible ? (
+        <DetailedCertificateVerifyBlock
+          statusSummary={status}
+          hashStatus={props.hashStatus}
+          issuedStatus={props.issuedStatus}
+          notRevokedStatus={props.notRevokedStatus}
+          issuerIdentityStatus={props.issuerIdentityStatus}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 };
@@ -127,7 +136,11 @@ CertificateVerifyBlock.propTypes = {
   hashStatus: PropTypes.object,
   issuedStatus: PropTypes.object,
   notRevokedStatus: PropTypes.object,
-  issuerIdentityStatus: PropTypes.object
+  issuerIdentityStatus: PropTypes.object,
+  toggleDetailedView: PropTypes.func,
+  detailedVerifyVisible: PropTypes.bool
 };
+
+SimpleVerifyBlock.propTypes = CertificateVerifyBlock.propTypes;
 
 export default CertificateVerifyBlock;

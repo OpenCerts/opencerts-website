@@ -1,0 +1,19 @@
+@import '../../styles/variables.scss';
+
+.simple-verify-block {
+  min-width: 300px;
+  border-radius: 5px;
+  color: white;
+}
+
+.valid {
+  background-color: $success-color;
+}
+
+.warning {
+  background-color: $warning-color;
+}
+
+.invalid {
+  background-color: $invalid-color;
+}
