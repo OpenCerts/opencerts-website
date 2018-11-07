@@ -1,6 +1,6 @@
 import { get, groupBy, find } from "lodash";
-import { IMG_LOGO_NP_HORIZONTAL, IMG_SIG_NANCY } from "./images";
-import { formatDate, formatNRIC } from "./functions";
+import { IMG_LOGO_NP_HORIZONTAL } from "./images";
+import { formatDate } from "./functions";
 
 const fullWidthStyle = {
   width: "100%",
@@ -196,7 +196,7 @@ const renderCourse = (certificate, course, courseId) => {
   // Get student info and course description
   const graduateCourse = get(certificate, "description");
   const recipientName = get(certificate, "recipient.name");
-  const recipientDid = get(certificate, "recipient.did");
+  const recipientNric = get(certificate, "recipient.nric");
   const studentId = get(certificate, "additionalData.studentId");
   const admissionDate = get(certificate, "admissionDate");
   const graduationDate = get(certificate, "graduationDate");
@@ -244,7 +244,7 @@ const renderCourse = (certificate, course, courseId) => {
             <div className="col-3">NRIC/FIN</div>
             <div className="col-9">
               :&nbsp;&nbsp;
-              {formatNRIC(recipientDid)}
+              {recipientNric}
             </div>
           </div>
           <div className="row">
@@ -347,7 +347,7 @@ const renderFinalStatement = certificate => {
   return <div>{renderedCourseNotes}</div>;
 };
 
-const renderSignature = () => (
+const renderSignature = certificate => (
   <div
     className="row d-flex justify-content-center align-items-end"
     style={{ marginTop: "8rem", marginBottom: "2rem" }}
@@ -356,10 +356,15 @@ const renderSignature = () => (
 
     <div className="col-4">
       <div className="px-4">
-        <img style={fullWidthStyle} src={IMG_SIG_NANCY} />
+        <img
+          style={fullWidthStyle}
+          src={certificate.additionalData.transcriptSignatories[0].signature}
+        />
         <hr />
       </div>
-      <div className="text-center">DIRECTOR, ACADEMIC AFFAIRS</div>
+      <div className="text-center">
+        {certificate.additionalData.transcriptSignatories[0].position}
+      </div>
     </div>
 
     <div className="col-2" />
