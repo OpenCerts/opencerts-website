@@ -1,4 +1,4 @@
-const defaultUrl = "https://opencerts.io/exampleIssuers.json";
+const defaultUrl = "/static/registry.json";
 
 export default function fetchIssuers(url = defaultUrl) {
   return window

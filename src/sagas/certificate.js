@@ -1,4 +1,12 @@
-import { some, get, partition, compact, filter, isEmpty } from "lodash";
+import {
+  some,
+  get,
+  partition,
+  compact,
+  filter,
+  isEmpty,
+  mapKeys
+} from "lodash";
 import { put, all, call, select } from "redux-saga/effects";
 import { certificateData, verifySignature } from "@govtechsg/open-certificate";
 import { isValidAddress as isEthereumAddress } from "ethereumjs-utils";
@@ -148,9 +156,12 @@ function isApprovedENSDomain(issuerAddress) {
 
 export function* lookupEthereumAddresses(ethereumAddressIssuers) {
   const registeredIssuers = yield fetchIssuers();
+  const issuersNormalised = mapKeys(registeredIssuers, (_, k) =>
+    k.toUpperCase()
+  );
 
   return ethereumAddressIssuers.map(store => {
-    const identity = registeredIssuers[store.toUpperCase()];
+    const identity = issuersNormalised[store.toUpperCase()];
 
     if (!identity) {
       throw new Error(`Issuer identity cannot be verified: ${store}`);
