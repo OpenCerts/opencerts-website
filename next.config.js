@@ -10,5 +10,9 @@ module.exports = withSass({
       "/viewer": { page: "/viewer" },
       "/faq": { page: "/faq" }
     };
+  },
+  // Variables passed to both server and client
+  publicRuntimeConfig: {
+    network: process.env.NET
   }
 });
