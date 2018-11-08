@@ -12,6 +12,6 @@ module.exports = withSass({
   },
   // Variables passed to both server and client
   publicRuntimeConfig: {
-    env: process.env.ENV
+    network: process.env.NET
   }
 });
