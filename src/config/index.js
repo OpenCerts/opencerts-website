@@ -3,7 +3,7 @@ import { types as Web3Types } from "../services/web3/getWeb3";
 import { getLogger } from "../utils/logger";
 
 const { trace } = getLogger("config");
-const { publicRuntimeConfig = {} } = getConfig();
+const { publicRuntimeConfig } = getConfig();
 
 export const DEFAULT_NETWORK =
   publicRuntimeConfig.network === "mainnet"
