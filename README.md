@@ -18,6 +18,10 @@ yarn lint
 yarn start # serves the ui
 ```
 
+### Environmental Variables
+
+`NET` is used for setting the default network, setting it to `mainnet` uses the public Ethereum network. If it is not set it defaults to Ropsten testnet
+
 ### Setting up web3
 
 If your browser has injected web3 (ie. through Metamask), the application will connect to the injected web3 and will be on the network that provider is connected to. Otherwise, the application will attempt to connect to the local Ethereum node at port `9545`.
@@ -31,3 +35,9 @@ Setup 1:
 Setup 2:
 
 - Run Ganache CLI/UI on port `9545`
+
+
+### Troubleshooting
+
+To enable debug logs in the browser, set `localStorage.debug="*"`
+
