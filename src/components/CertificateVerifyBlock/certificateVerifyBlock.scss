@@ -1,5 +1,15 @@
 @import '../../styles/variables.scss';
 
+.verifyBlockPadding {
+  margin-top: 0.5rem;
+  margin-bottom: 4rem;
+}
+
+.verifyBlocksContainer {
+  position: absolute;
+  z-index: 1;
+}
+
 .simple-verify-block {
   min-width: 300px;
   border-radius: 5px;
