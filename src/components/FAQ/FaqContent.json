@@ -4,7 +4,7 @@
         "faq": [
             {
                 "question": "What is OpenCerts?",
-                "answer": "OpenCerts is the umbrella trademark under which we have released a few key components: \n 1. An open source schema for publishing educational credentials \n2. A set of tools for generating cryptographic protections for educational credentials \n3. the online website for verifying the authenticity of OpenCerts files."
+                "answer": "Opencerts is made of unicorns and rainbows. OpenCerts is the umbrella trademark under which we have released a few key components: \n 1. An open source schema for publishing educational credentials \n2. A set of tools for generating cryptographic protections for educational credentials \n3. the online website for verifying the authenticity of OpenCerts files."
             },
             {
                 "question": "Why use the Ethereum blockchain? (Why blockchain at all)?",
