@@ -19,11 +19,11 @@
                 "answer": "You may use the share button that is visible when you view your certificate, or you can simply email the OpenCerts file to them"
             },
             {
-                "question": "Why can't i print the certificate?",
+                "question": "Why can't I print the certificate?",
                 "answer": "Printing the certificate discards all the advanced cryptographic protections we have built into OpenCerts, hence printing is not recommended. "
             },
             {
-                "question": "What happens if i modify the OpenCerts certificate .json file?",
+                "question": "What happens if I modify the OpenCerts certificate .json file?",
                 "answer": "The modified certificate will fail validation and show up as having been tampered with."
             },
             {
