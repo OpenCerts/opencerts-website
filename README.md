@@ -1,40 +1,43 @@
 # Certificate Web UI
 
-[![Build Status](https://travis-ci.org/GovTechSG/certificate-web-ui.svg?branch=master)](https://travis-ci.org/GovTechSG/certificate-web-ui)
+[![Build Status](https://travis-ci.org/OpenCerts/opencerts-website.svg?branch=master)](https://travis-ci.org/OpenCerts/opencerts-website)
 
 See also:
 
-* [certificate-schema](https://github.com/GovTechSG/certificate-schema)
-* [certificate-contract](https://github.com/GovTechSG/certificate-contract)
-* [certificate-cli](https://github.com/GovTechSG/certificate-cli)
+* [opencerts-documentation](https://github.com/OpenCerts/opencerts-documentation)
+* [open-certificate](https://github.com/OpenCerts/open-certificate)
+* [certificate-contract](https://github.com/OpenCerts/certificate-store-contract)
+* [certificate-cli](https://github.com/OpenCerts/certificate-cli)
+
 
 ## Development
+
+We develop primarily on a OS X / Linux environment so please lodge an issue if you are using Windows and find that you cannot successfully set up a local instance of this software.
+
+
+### OS X / Linux
+```bash
+yarn
+yarn dev
+```
+
+### Windows
+
+For Windows you need to set up the toolchain for node-gyp before installing this repository, follow the instructions in https://github.com/nodejs/node-gyp#on-windows.
 
 ```bash
 yarn
 yarn dev
-yarn lint
-
-yarn start # serves the ui
 ```
 
 ### Environmental Variables
 
 `NET` is used for setting the default network, setting it to `mainnet` uses the public Ethereum network. If it is not set it defaults to Ropsten testnet
 
-### Setting up web3
-
-If your browser has injected web3 (ie. through Metamask), the application will connect to the injected web3 and will be on the network that provider is connected to. Otherwise, the application will attempt to connect to the local Ethereum node at port `9545`.
-
-Setup 1:
-
-- Install Metamask
-- Run Ganache CLI/UI
-- Connect Metamask to Ganache
-
-Setup 2:
-
-- Run Ganache CLI/UI on port `9545`
+E.g:
+```bash
+NET=mainnet yarn dev
+```
 
 
 ### Troubleshooting
