@@ -80,7 +80,6 @@ const CertificateDropzone = ({
   verificationStatus
 }) => (
   <Dropzone
-    accept="application/json"
     onDrop={acceptedFiles => onFileDrop(acceptedFiles, handleCertificateChange)}
     className="h-100"
     acceptClassName=""
