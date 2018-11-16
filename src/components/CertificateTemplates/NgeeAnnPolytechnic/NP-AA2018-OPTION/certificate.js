@@ -130,10 +130,17 @@ const Template = certificate => (
         <div className="col-1" />
         <div className="col-5">
           <div className="px-5">
-            <div>{formatDate(certificate.issuedOn)}</div>
+            <div className="text-center">
+				{formatDate(certificate.issuedOn)}
+				<hr />
+			</div>
           </div>
-          <br />
-          <br />
+		  <div className="text-center">
+            Date
+          </div>
+          <div className="text-center">
+            &nbsp;
+          </div>
         </div>
         <div className="col-5">
           <div className="px-5">
