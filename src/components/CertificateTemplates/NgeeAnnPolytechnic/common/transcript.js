@@ -12,7 +12,7 @@ const thWidth60Left = {
   textAlign: "left"
 };
 
-const renderSemester = (semester, semesterId) => {
+export const renderSemester = (semester, semesterId) => {
   const subjectRows = semester.map((s, i) => (
     <tr key={i}>
       <td style={thWidth60Left}>{s.name}</td>
@@ -51,7 +51,7 @@ const renderSemester = (semester, semesterId) => {
   );
 };
 
-const renderHeader = certificate => {
+export const renderHeader = certificate => {
   const serial = get(certificate, "additionalData.transcriptId");
   return (
     <div className="row">
@@ -69,7 +69,7 @@ const renderHeader = certificate => {
   );
 };
 
-const renderGradingSystem = () => (
+export const renderGradingSystem = () => (
   <div className="row">
     <div className="col-6" />
     <div className="col-6 border" style={{ fontSize: "0.6rem" }}>
@@ -192,7 +192,7 @@ const renderGradingSystem = () => (
   </div>
 );
 
-const renderCourse = (certificate, course, courseId) => {
+export const renderCourse = (certificate, course, courseId) => {
   // Get student info and course description
   const graduateCourse = get(certificate, "description");
   const recipientName = get(certificate, "recipient.name");
@@ -287,7 +287,7 @@ const renderCourse = (certificate, course, courseId) => {
   );
 };
 
-const renderTranscript = certificate => {
+export const renderTranscript = certificate => {
   // Group all modules by courses
   const transcript = get(certificate, "transcript");
   const groupedCourses = groupBy(transcript, "programDescription");
@@ -298,7 +298,7 @@ const renderTranscript = certificate => {
   return <div>{renderedCourses}</div>;
 };
 
-const renderNpfa = certificate => {
+export const renderNpfa = certificate => {
   const npfa = get(certificate, "additionalData.npfa", undefined);
   return npfa ? (
     <div className="row">
@@ -309,7 +309,7 @@ const renderNpfa = certificate => {
   ) : null;
 };
 
-const renderGPA = certificate => {
+export const renderGPA = certificate => {
   const GPA = get(certificate, "cumulativeScore", undefined);
   return GPA ? (
     <div className="row">
@@ -321,7 +321,7 @@ const renderGPA = certificate => {
   ) : null;
 };
 
-const renderCourseNote = (gradCourse, course, courseId) => {
+export const renderCourseNote = (gradCourse, course, courseId) => {
   const courseNotes = course.map((c, i) => <p key={i}>{c.note}</p>);
 
   return gradCourse === courseId ? (
@@ -331,7 +331,7 @@ const renderCourseNote = (gradCourse, course, courseId) => {
   ) : null;
 };
 
-const renderFinalStatement = certificate => {
+export const renderFinalStatement = certificate => {
   const graduateCourse = get(certificate, "description");
   const transcriptSummaries = get(
     certificate,
@@ -347,7 +347,7 @@ const renderFinalStatement = certificate => {
   return <div>{renderedCourseNotes}</div>;
 };
 
-const renderSignature = certificate => (
+export const renderSignature = certificate => (
   <div
     className="row d-flex justify-content-center align-items-end"
     style={{ marginTop: "8rem", marginBottom: "2rem" }}
