@@ -2,17 +2,17 @@ import { get, groupBy, find } from "lodash";
 import { IMG_LOGO_NP_HORIZONTAL } from "./images";
 import { formatDate } from "./functions";
 
-const fullWidthStyle = {
+export const fullWidthStyle = {
   width: "100%",
   height: "auto"
 };
 
-const thWidth60Left = {
+export const thWidth60Left = {
   width: "60%",
   textAlign: "left"
 };
 
-export const renderSemester = (semester, semesterId) => {
+export const renderSemester = (semester, semesterId, { hideCredit } = {}) => {
   const subjectRows = semester.map((s, i) => (
     <tr key={i}>
       <td style={thWidth60Left}>{s.name}</td>
@@ -41,7 +41,7 @@ export const renderSemester = (semester, semesterId) => {
         <tbody>
           <tr>
             <th>MODULE</th>
-            <th>CREDIT UNIT</th>
+            {hideCredit ? null : <th>CREDIT UNIT</th>}
             <th>GRADE</th>
           </tr>
           {subjectRows}
@@ -192,7 +192,7 @@ export const renderGradingSystem = () => (
   </div>
 );
 
-export const renderCourse = (certificate, course, courseId) => {
+export const renderCourse = (certificate, course, courseId, opts) => {
   // Get student info and course description
   const graduateCourse = get(certificate, "description");
   const recipientName = get(certificate, "recipient.name");
@@ -205,7 +205,7 @@ export const renderCourse = (certificate, course, courseId) => {
   // Group all modules by semesters
   const groupedSubjects = groupBy(course, "semester");
   const renderedSemesters = Object.keys(groupedSubjects).map(semester =>
-    renderSemester(groupedSubjects[semester], semester)
+    renderSemester(groupedSubjects[semester], semester, opts)
   );
 
   // Get Course Note
@@ -287,12 +287,12 @@ export const renderCourse = (certificate, course, courseId) => {
   );
 };
 
-export const renderTranscript = certificate => {
+export const renderTranscript = (certificate, opts) => {
   // Group all modules by courses
   const transcript = get(certificate, "transcript");
   const groupedCourses = groupBy(transcript, "programDescription");
   const renderedCourses = Object.keys(groupedCourses).map(course =>
-    renderCourse(certificate, groupedCourses[course], course)
+    renderCourse(certificate, groupedCourses[course], course, opts)
   );
 
   return <div>{renderedCourses}</div>;
