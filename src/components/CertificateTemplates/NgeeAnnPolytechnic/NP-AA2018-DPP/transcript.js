@@ -2,6 +2,7 @@ import { get, groupBy } from "lodash";
 import {
   renderHeader,
   renderSignature,
+  renderFinalStatement,
   fullWidthStyle,
   thWidth60Left
 } from "../common/transcript";
@@ -154,11 +155,6 @@ const renderTranscript = certificate => {
   );
 
   return <div className="row">{renderedExamDates}</div>;
-};
-
-const renderFinalStatement = certificate => {
-  const courseNote = get(certificate.additionalData.TranscriptSummary[0].note);
-  return <div className="row">{courseNote}</div>;
 };
 
 const renderStudentInfo = certificate => (
