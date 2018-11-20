@@ -9,7 +9,7 @@ import {
 } from "lodash";
 import { put, all, call, select } from "redux-saga/effects";
 import { certificateData, verifySignature } from "@govtechsg/open-certificate";
-import { isValidAddress as isEthereumAddress } from "ethereumjs-utils";
+import { isValidAddress as isEthereumAddress } from "ethereumjs-util";
 import Router from "next/router";
 import { getLogger } from "../utils/logger";
 import {
