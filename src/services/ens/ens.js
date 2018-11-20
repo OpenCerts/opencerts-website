@@ -1,4 +1,4 @@
-import { stripHexPrefix, bufferToHex, keccak256 } from "ethereumjs-utils";
+import { stripHexPrefix, bufferToHex, keccak256 } from "ethereumjs-util";
 import { reduceRight } from "lodash";
 import ensContractABI from "./contracts/ensContract.json";
 import resolverABI from "./contracts/resolverContract.json";
