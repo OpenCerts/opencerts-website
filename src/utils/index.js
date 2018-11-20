@@ -1,4 +1,4 @@
-const { sha3 } = require("ethereumjs-util");
+const { keccak256 } = require("ethereumjs-util");
 
 function bufSortJoin(...args) {
   return Buffer.concat([...args].sort(Buffer.compare));
@@ -16,7 +16,7 @@ export function combinedHash(first, second) {
   if (!first) {
     return toBuf(second);
   }
-  return sha3(bufSortJoin(toBuf(first), toBuf(second)));
+  return keccak256(bufSortJoin(toBuf(first), toBuf(second)));
 }
 
 export default combinedHash;
