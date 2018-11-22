@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import css from "./viewerstyles.scss";
+import css from "./viewerStyles.scss";
 
 const View = ({ hover, accept }) => (
   <div
@@ -32,8 +32,7 @@ const View = ({ hover, accept }) => (
       </div>
     </div>
     <div className="text-muted row">
-      <div className="col-4" />
-      <div className="col-4">
+      <div className="mx-auto">
         <button type="button" className={`pointer ${css.btn}`}>
           Select File
         </button>

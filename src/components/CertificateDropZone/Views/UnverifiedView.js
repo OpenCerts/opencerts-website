@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
-import css from "./viewerstyles.scss";
+import css from "./viewerStyles.scss";
 
 const View = ({
   issuerIdentityStatus,
