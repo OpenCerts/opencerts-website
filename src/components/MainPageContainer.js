@@ -5,8 +5,8 @@ import PartnerSection from "./HomePageContent/PartnersSection";
 const MainPageContainer = () => (
   <div className="container-fluid">
     <DropZoneSection />
-    <AboutSection />
     <PartnerSection />
+    <AboutSection />
   </div>
 );
 

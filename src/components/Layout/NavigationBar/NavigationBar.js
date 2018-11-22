@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import css from "./navbar.scss";
+import css from "./navBar.scss";
 
 const navItems = [
   {

@@ -1,16 +1,16 @@
 import PropTypes from "prop-types";
 import CertificateDropzone from "../CertificateDropZone";
-import css from "./dropzonesection.scss";
+import css from "./dropZoneSection.scss";
 
 const DropZoneSection = ({ handleCertificateChange }) => (
   <div
-    className="row p-4 bg-brand-dark text-white"
+    className="row p-5 bg-brand-dark text-white"
     // style={{ boxShadow: "inset 0 0 50px 0 rgba(102, 120, 138, 0.2)" }}
   >
-    <div className="main">
-      <div className="col-md-5">
+    <div className={css.main}>
+      <div className="col-lg-5 col-md-12">
         <div className={css.description}>
-          <h3>An easy way to check and verify your certificates</h3>
+          <h2>An easy way to check and verify your certificates</h2>
           <p>
             Whether you&#39;re a student or an employer, OpenCerts lets you
             verify the certificates you have of anyone from any institution. All
@@ -18,7 +18,7 @@ const DropZoneSection = ({ handleCertificateChange }) => (
           </p>
         </div>
       </div>
-      <div className="col-md-7">
+      <div className="col-lg-7 col-md-12 col-sm-12">
         <CertificateDropzone
           handleCertificateChange={handleCertificateChange}
         />

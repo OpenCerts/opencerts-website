@@ -1,36 +1,59 @@
-import css from "./partnerspage.scss";
-
-const TitleSection = () => (
-  <div>
-    <h2>Partners</h2>
-  </div>
-);
+import css from "./partnersPage.scss";
 
 const CarouselSection = () => {
-  // const images = Array(8).fill("http://via.placeholder.com/150x80");
-
   const images = [
-    "/static/images/logo-govtech.png",
-    "/static/images/NP_logo.svg",
-    "/static/images/TP_logo.svg",
-    "/static/images/NYP_logo.svg",
-    "/static/images/RP_logo.svg",
-    "/static/images/SP_logo.svg",
-    "/static/images/CSC_logo.png",
-    "/static/images/ITE_logo.png",
-    "/static/images/NTU_logo.png",
-    "/static/images/SIM_logo.png"
+    {
+      key: "govtech",
+      value: "/static/images/logo-govtech.png"
+    },
+    {
+      key: "NP",
+      value: "/static/images/NP_logo.svg"
+    },
+    {
+      key: "TP",
+      value: "/static/images/TP_logo.svg"
+    },
+    {
+      key: "NYP",
+      value: "/static/images/NYP_logo.svg"
+    },
+    {
+      key: "RP",
+      value: "/static/images/RP_logo.svg"
+    },
+    {
+      key: "SP",
+      value: "/static/images/SP_logo.svg"
+    },
+    {
+      key: "CSC",
+      value: "/static/images/CSC_logo.png"
+    },
+    {
+      key: "ITE",
+      value: "/static/images/ITE_logo.png"
+    },
+    {
+      key: "NTU",
+      value: "/static/images/NTU_logo.png"
+    },
+    {
+      key: "SIM",
+      value: "/static/images/SIM_logo.png"
+    }
   ];
   const items = images.map((item, i) => (
-    <img src={item} key={i} className={css.partnerlogos} />
+    <div className={css["logo-container"]} key={i}>
+      <img className="mx-auto" src={item.value} id={css[item.key]} />
+    </div>
   ));
   return <div className="d-flex flex-wrap">{items}</div>;
 };
 
 const PartnerSection = () => (
-  <div className="row my-3 p-4">
+  <div className="row" id={css.partners}>
     <div className={css.main}>
-      <TitleSection />
       <CarouselSection />
     </div>
   </div>

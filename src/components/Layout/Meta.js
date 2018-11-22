@@ -101,7 +101,7 @@ const Meta = () => (
       }
 
       .bg-light {
-        background-color: #fcf9f6 !important;
+        background-color: #f7fafc !important;
       }
 
       .exact-print {
