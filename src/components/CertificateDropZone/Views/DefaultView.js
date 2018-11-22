@@ -16,9 +16,9 @@ const View = ({ hover, accept }) => (
     </div>
     <div
       className="text-brand-dark"
-      style={{ fontSize: "1.2rem", fontWeight: 500 }}
+      style={{ fontSize: "1.375rem", fontWeight: 500 }}
     >
-      Drag and drop your .opencert file
+      Drag and drop your opencert file
     </div>
     <div className="text-muted">to view its contents</div>
     <div className="text-muted row">
