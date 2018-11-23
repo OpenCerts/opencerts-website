@@ -1,0 +1,58 @@
+.partnerlogos {
+    margin: 1rem;
+    max-height: 2.5rem;
+    padding-right: 1rem;
+}
+
+.main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+#partners {
+    background-color: #f7fafc;
+}
+
+
+.logo-container {
+    max-width: 200px;
+    margin: auto;
+    height: 100%;
+    padding: 1rem;
+
+    img {
+        width: 100%;
+        display: block;
+        margin: auto;
+    }
+
+    #CSC {
+        padding: 0 2rem;
+    }
+
+    #SIM {
+        width: 50%;
+    }
+
+    #govtech {
+        width: 90%;
+    }
+
+    #NP {
+        width: 85%;
+    }
+
+    #NYP {
+        width: 80%;
+    }
+    
+    #SP, #NTU {
+        width: 75%;
+    }
+
+    #TP, #RP {
+        width: 70%;
+    }
+    
+}
