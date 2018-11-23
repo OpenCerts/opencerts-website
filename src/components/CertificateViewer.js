@@ -1,12 +1,16 @@
 import PropTypes from "prop-types";
+import dynamic from "next/dynamic";
 import { get } from "lodash";
 import CertificateVerifyBlock from "./CertificateVerifyBlock";
-import MultiCertificateRenderer from "./MultiCertificateRenderer";
+import { MultiCertificateRendererContainer } from "./MultiCertificateRenderer";
 import templateRegistry from "./CertificateTemplates";
 import InvalidCertificateNotice from "./InvalidCertificateNotice";
 import styles from "./certificateViewer.scss";
 import Modal from "./Modal";
-import CertificateSharingForm from "./CertificateSharing/CertificateSharingForm";
+
+const CertificateSharingForm = dynamic(
+  import("./CertificateSharing/CertificateSharingForm")
+);
 
 const getCertificateTemplates = certificate => {
   const templateSet = get(certificate, "$template", "default");
@@ -109,7 +113,7 @@ const CertificateViewer = props => {
           {renderedHeaderBlock}
         </div>
       </div>
-      <MultiCertificateRenderer
+      <MultiCertificateRendererContainer
         certificate={certificate}
         templates={templates}
       />
