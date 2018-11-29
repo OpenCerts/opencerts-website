@@ -1,128 +1,59 @@
-const Template = certificate => {
-  console.log(certificate);
-  return (
+import { format } from "date-fns";
+
+const Template = certificate => (
+  <div
+    className="p-2"
+    style={{
+      backgroundImage: "url('static/images/background.PNG')",
+      backgroundPosition: "center",
+      backgroundSize: "cover",
+      border: "10px solid #787878"
+    }}
+  >
     <div
+      className="p-2"
       style={{
-        backgroundImage: "url('static/images/background.PNG')",
-        backgroundSize: "cover",
-        padding: "20px",
-        textAlign: "center",
-        border: "10px solid #787878"
+        border: "5px solid #787878"
       }}
     >
-      <div
-        style={{
-          position: "relative",
-          padding: "20px",
-          textAlign: "center",
-          margin: "auto",
-          border: "5px solid #787878"
-        }}
-      >
+      <div className="m-3 m-lg-5 text-center d-flex justify-content-center">
         <img src="static/images/opencertslogo.svg" />
-        <br />
-        <br />
-        <span
-          style={{
-            fontSize: "20px",
-            marginTop: "30px"
-          }}
-        >
-          <i>This is to certify that</i>
-        </span>
-        <br />
-        <br />
-        <span
-          style={{
-            fontSize: "35px"
-          }}
-        >
-          <b>{JSON.parse(JSON.stringify(certificate.recipient.name))}</b>
-        </span>
-        <br />
-        <br />
-        <span
-          style={{
-            fontSize: "20px"
-          }}
-        >
-          <i>has successfully completed the</i>
-        </span>
-        <br />
-        <br />
-        <span
-          style={{
-            fontSize: "35px"
-          }}
-        >
-          Certified OpenCerts Associate
-        </span>
-        <br />
-        <span
-          style={{
-            fontSize: "15px"
-          }}
-        >
-          <i>certification through training administered by</i>
-        </span>
-        <br />
-
-        <div className="container">
-          <div className="row">
-            <div className="col-sm">
-              <img src="static/images/logo-govtech.png" />
-            </div>
-            <div
-              className="col-sm"
-              style={{
-                marginTop: "60px"
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "18px",
-                  float: "left"
-                }}
-              >
-                ____________
-              </span>
-              <br />
-              <span
-                style={{
-                  fontSize: "18px",
-                  float: "left"
-                }}
-              >
-                {certificate.additionalData.signatory}
-              </span>
-              <br />
-              <span
-                style={{
-                  fontSie: "18px",
-                  float: "left"
-                }}
-              >
-                {certificate.additionalData.signatoryPosition}
-              </span>
-            </div>
-          </div>
+      </div>
+      <div className="h5 mb-4 mb-lg-5 d-flex justify-content-center">
+        <i>This is to certify that</i>
+      </div>
+      <div className="h3 mb-4 mb-lg-5 d-flex justify-content-center">
+        <b>{certificate.recipient.name}</b>
+      </div>
+      <div className="h5 mb-4 mb-lg-5 d-flex justify-content-center">
+        <i>has successfully completed the</i>
+      </div>
+      <div className="h1 mb-4 mb-lg-5 d-flex justify-content-center">
+        Certified OpenCerts Associate
+      </div>
+      <div className="h5 mb-4 mb-lg-5 d-flex justify-content-center">
+        <i>certification through training administered by</i>
+      </div>
+      <div className="d-flex justify-content-between m-3 p-2">
+        <div className="col-6">
+          <img className="w-100" src="static/images/logo-govtech.png" />
         </div>
+        <div className="col-2" />
+        <div className="col-4 text-center">
+          <div>{certificate.additionalData.signature}</div>
+          <hr className="m-1" />
+          <div>
+            <b>{certificate.additionalData.signatory}</b>
+          </div>
+          <div>{certificate.additionalData.signatoryPostion}</div>
+        </div>
+      </div>
 
-        <br />
-        <span
-          style={{
-            fontSize: "25px",
-            position: "relative",
-            float: "right",
-            bottom: "20px",
-            left: "14px"
-          }}
-        >
-          Dated {certificate.issuedOn}
-        </span>
+      <div className="d-flex flex-row-reverse">
+        Dated {format(certificate.issuedOn, "DD/MM/YYYY")}
       </div>
     </div>
-  );
-};
+  </div>
+);
 
 export default Template;
