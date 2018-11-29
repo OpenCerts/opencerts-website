@@ -1,10 +1,11 @@
 import { format } from "date-fns";
+import backgroundImg from "./resources";
 
 const Template = certificate => (
   <div
     className="p-2"
     style={{
-      backgroundImage: "url('static/images/background.PNG')",
+      backgroundImage: `url('${backgroundImg}')`,
       backgroundPosition: "center",
       backgroundSize: "cover",
       border: "10px solid #787878"
