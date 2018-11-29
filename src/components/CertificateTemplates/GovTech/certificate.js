@@ -18,7 +18,7 @@ const Template = certificate => (
       }}
     >
       <div className="m-3 m-lg-5 text-center d-flex justify-content-center">
-        <img src="static/images/opencertslogo.svg" />
+        <img src="/static/images/opencertslogo.svg" />
       </div>
       <div className="h5 mb-4 mb-lg-5 d-flex justify-content-center">
         <i>This is to certify that</i>
@@ -37,7 +37,7 @@ const Template = certificate => (
       </div>
       <div className="d-flex justify-content-between m-3 p-2">
         <div className="col-6">
-          <img className="w-100" src="static/images/logo-govtech.png" />
+          <img className="w-100" src="/static/images/logo-govtech.png" />
         </div>
         <div className="col-2" />
         <div className="col-4 text-center">
