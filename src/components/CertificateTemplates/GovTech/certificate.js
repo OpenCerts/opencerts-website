@@ -51,7 +51,7 @@ const Template = certificate => (
           <div>
             <b>{certificate.additionalData.signatory}</b>
           </div>
-          <div>{certificate.additionalData.signatoryPostion}</div>
+          <div>{certificate.additionalData.signatoryPosition}</div>
         </div>
       </div>
 
