@@ -17,8 +17,12 @@ const Template = certificate => (
         border: "5px solid #787878"
       }}
     >
-      <div className="m-3 m-lg-5 text-center d-flex justify-content-center">
-        <img src="/static/images/opencertslogo.svg" />
+      <div className="my-5 m-lg-5 text-center">
+        <img
+          src="/static/images/opencertslogo.svg"
+          className="w-100"
+          style={{ maxWidth: 600 }}
+        />
       </div>
       <div className="h5 mb-4 mb-lg-5 d-flex justify-content-center">
         <i>This is to certify that</i>
@@ -35,13 +39,14 @@ const Template = certificate => (
       <div className="h5 mb-4 mb-lg-5 d-flex justify-content-center">
         <i>certification through training administered by</i>
       </div>
-      <div className="d-flex justify-content-between m-3 p-2">
-        <div className="col-6">
+      <div className="d-flex justify-content-between m-3 p-2 mb-5">
+        <div className="col-1" />
+        <div className="col-5 my-5">
           <img className="w-100" src="/static/images/logo-govtech.png" />
         </div>
         <div className="col-2" />
         <div className="col-4 text-center">
-          <div>{certificate.additionalData.signature}</div>
+          <img className="w-100" src={certificate.additionalData.signature} />
           <hr className="m-1" />
           <div>
             <b>{certificate.additionalData.signatory}</b>
@@ -50,7 +55,7 @@ const Template = certificate => (
         </div>
       </div>
 
-      <div className="d-flex flex-row-reverse">
+      <div className="d-flex flex-row-reverse my-5">
         Dated {format(certificate.issuedOn, "DD/MM/YYYY")}
       </div>
     </div>
