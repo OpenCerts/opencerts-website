@@ -1,6 +1,6 @@
 import { get } from "lodash";
 
-const Template = certificate => {
+const Template = ({ certificate }) => {
   const certificateName = get(certificate, "name");
   const certificateId = get(certificate, "id");
   const issuedOn = get(certificate, "issuedOn");

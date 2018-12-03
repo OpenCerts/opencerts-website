@@ -6,7 +6,7 @@ import styles from "./certificateViewer.scss";
 const renderTemplateToTab = (template, certificate) =>
   Object.assign(template, { content: template.template(certificate) });
 
-export const MultiCertificateRenderer = tabs => (
+export const MultiCertificateRenderer = ({tabs}) => (
   <div>
     <Tabs selectedTabClassName={styles.active}>
       <div id={styles["header-ui"]}>
