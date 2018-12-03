@@ -163,7 +163,7 @@ const renderStudentInfo = certificate => (
     <div className="row">
       <div className="col">
         <div className="row">
-          <div className="col-3">Name</div>
+          <div style={{fontFamily: 'Black Han Sans'}} className="col-3">Name</div>
           <div className="col-9">
             :&nbsp;&nbsp;
             {get(certificate, "recipient.name")}
@@ -219,8 +219,9 @@ const renderStudentInfo = certificate => (
   </div>
 );
 
-const Template = certificate => (
+const Template = ({ certificate }) => (
   <div className="container" style={{ fontSize: "0.9rem" }}>
+    <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans" rel="stylesheet"></link>
     {renderHeader(certificate)}
     {renderDPPGradingSystem()}
     {renderStudentInfo(certificate)}

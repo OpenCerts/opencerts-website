@@ -79,7 +79,7 @@ const renderSignatures = certificate => (
 );
 
 // eslint-disable-next-line react/display-name
-const Template = certificate => (
+const Template = ({ certificate }) => (
   <div>
     <div
       className="container"

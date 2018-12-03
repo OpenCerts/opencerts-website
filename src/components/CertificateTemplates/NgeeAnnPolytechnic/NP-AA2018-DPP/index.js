@@ -1,3 +1,4 @@
+import { MultiCertificateRenderer } from "../../../MultiCertificateRenderer";
 import { approvedAddresses } from "../common";
 import NPCert from "./certificate";
 import NPTranscript from "./transcript";
@@ -15,6 +16,28 @@ const templates = [
   }
 ];
 
+
+const makeTabs = certificate => {
+  return [
+    {
+      id: "certificate",
+      label: "Certificate",
+      content: NPCert({ certificate })
+    },
+    {
+      id: "transcript",
+      label: "Transcript",
+      content: NPTranscript({ certificate })
+    }
+  ]
+}
+
 const addresses = approvedAddresses;
 
-export default { templates, addresses };
+// export default { templates, addresses };
+
+export default ({ certificate }) => {
+  const renderedCertificate = makeTabs(certificate)
+  console.log(renderedCertificate)
+  return <MultiCertificateRenderer tabs={renderedCertificate} />;
+}

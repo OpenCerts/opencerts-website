@@ -9,6 +9,8 @@ import styles from "./certificateViewer.scss";
 import Modal from "./Modal";
 import images from "./ViewerPageImages";
 
+import { TemplateLoader } from "./CertificateTemplates";
+
 const CertificateSharingForm = dynamic(
   import("./CertificateSharing/CertificateSharingForm")
 );
@@ -83,12 +85,14 @@ const CertificateViewer = props => {
       <div id={styles["top-header-ui"]}>
         <div className={styles["header-container"]}>{renderedHeaderBlock}</div>
       </div>
-      <div>
-        <MultiCertificateRendererContainer
-          certificate={certificate}
-          templates={templates}
-        />
-      </div>
+      <TemplateLoader
+        templateName={get(certificate, "$template", "default")}
+        certificate={certificate}
+      />
+      {/* <MultiCertificateRendererContainer
+        certificate={certificate}
+        templates={templates}
+      /> */}
       <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
         <CertificateSharingForm
           emailSendingState={props.emailSendingState}
