@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@govtechsg/open-certificate": "^1.1.34",
+    "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-sass": "^1.0.1",
     "date-fns": "^1.29.0",
     "debug": "^4.1.0",

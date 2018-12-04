@@ -1,4 +1,5 @@
 const withSass = require("@zeit/next-sass");
+const withBundleAnalyzer = require("@zeit/next-bundle-analyzer")
 
 module.exports = (phase, defaultConfig) => {
   console.log("config", defaultConfig);
