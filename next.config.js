@@ -1,26 +1,15 @@
 const withSass = require("@zeit/next-sass");
-const withBundleAnalyzer = require("@zeit/next-bundle-analyzer")
+const withBundleAnalyzer = require("@zeit/next-bundle-analyzer");
 
-module.exports = (phase, defaultConfig) => {
-  console.log("config", defaultConfig);
-  return withSass({
-    // webpack: function(config, { isServer }) {
-    //   console.log(
-    //     "webpack",
-    //     isServer,
-    //     config.optimization.splitChunks.cacheGroups
-    //   );
-    //   if (!isServer) {
-    //     config.optimization.splitChunks.cacheGroups.templates = {
-    //       name: "templates",
-    //       test: /src\/components\/CertificateTemplates/,
-          
-    //       chunks: "all",
-    //       enforce: true
-    //     };
-    //   }
-    //   return config;
-    // },
+module.exports = withBundleAnalyzer(
+  withSass({
+    analyzeBrowser: ["browser"].includes(process.env.BUNDLE_ANALYZE),
+    bundleAnalyzerConfig: {
+      browser: {
+        analyzerMode: "static",
+        reportFilename: "../bundles/client.html"
+      }
+    },
     cssModules: true,
     exportPathMap: function exportMap() {
       return {
@@ -35,5 +24,5 @@ module.exports = (phase, defaultConfig) => {
     publicRuntimeConfig: {
       network: process.env.NET
     }
-  });
-};
+  })
+);
