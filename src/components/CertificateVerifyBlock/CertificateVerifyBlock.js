@@ -74,15 +74,7 @@ const renderText = status => {
     default:
       text = "Invalid Certificate";
   }
-<<<<<<< Updated upstream
   return <div className={css["verification-text"]}>{text}</div>;
-=======
-  return (
-    <div className={css['verification-text']}>
-      {text}
-    </div>
-  );
->>>>>>> Stashed changes
 };
 
 const SimpleVerifyBlock = props => {

@@ -57,17 +57,11 @@ li.tab {
 }
 
 .view-another {
-<<<<<<< Updated upstream
     @include btn($btn-outline);
     background-color: #fff;
     margin: auto;
     margin-right: 0;
     text-decoration: none !important;
-=======
-    @include ghost-btn($btn-outline);
-    margin: auto;
-    margin-right: 0;
->>>>>>> Stashed changes
 }
 
 

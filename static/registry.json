@@ -1,10 +1,7 @@
 {
   "issuers": {
-<<<<<<< Updated upstream
     "0x007d40224f6562461633ccfbaffd359ebb2fc9ba":
       "Government Technology Agency of Singapore (GovTech)",
-=======
->>>>>>> Stashed changes
     "0xc36484efa1544c32ffed2e80a1ea9f0dfc517495": 
       "Govtech test",
     "0xa5d801265D29A6F1015a641BfC0e39Ee3dA2AC76":

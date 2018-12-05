@@ -79,22 +79,9 @@
 }
 
 .btn {
-<<<<<<< Updated upstream
     @include btn($brand-blue);
     background-color: #fff;
     margin: 0 auto;
-=======
-    @include ghost-btn($brand-blue);
-    margin: 0 auto;
-}
-
-.unverified-btn {
-    @extend .btn;
-    cursor: pointer;
-    a {
-        color: #fff;
-    }
->>>>>>> Stashed changes
 }
 
 .secondary-links {

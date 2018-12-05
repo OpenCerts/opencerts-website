@@ -12,7 +12,6 @@ const View = ({
     hashStatus.verified && issuedStatus.verified && notRevokedStatus.verified;
   return (
     <div
-      // className="text-center h-100 d-flex flex-column justify-content-center p-4 text-brand-dark"
       className={`${css["viewer-container"]} ${
         isWarning ? css.warning : css.invalid
       }`}
@@ -71,13 +70,9 @@ const View = ({
 
       <div className={css["secondary-links"]}>
         <span>
-<<<<<<< Updated upstream
           <Link href=" ">
             <a className={css["text-link"]}>Try another</a>
           </Link>
-=======
-          <Link href=" "><a className="text-link">Try another</a></Link>
->>>>>>> Stashed changes
         </span>
         {isWarning ? (
           <span
@@ -87,13 +82,9 @@ const View = ({
               e.nativeEvent.stopImmediatePropagation();
             }}
           >
-<<<<<<< Updated upstream
             <Link href="/viewer">
               <a className={css["text-link"]}>View certificate anyway</a>
             </Link>
-=======
-            <Link href="/viewer"><a className="text-link">View certificate anyway</a></Link>
->>>>>>> Stashed changes
           </span>
         ) : (
           ""
