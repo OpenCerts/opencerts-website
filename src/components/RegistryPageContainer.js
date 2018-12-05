@@ -19,7 +19,7 @@ const renderMembers = () =>
   members.map((m, i) => (
     <div key={i} className="col-6 mb-3">
       <h4>{m.name}</h4>
-      {m.address ? <div>Certificate Store: {m.address}</div> : ""}
+      {m.address ? <div>Certificate Store: <a href="https://etherscan.io/address/{m.address}">{m.address}</a></div> : ""}
       {m.website ? (
         <div>
           Website:{" "}
@@ -30,8 +30,8 @@ const renderMembers = () =>
       ) : (
         ""
       )}
-      {m.email ? <div>Email: {m.email}</div> : ""}
-      {m.phone ? <div>Phone: {m.phone}</div> : ""}
+      {m.email ? <div>Email: <a href="mailto:{m.email}">{m.email}</a></div> : ""}
+      {m.phone ? <div>Phone: <a href="tel:{m.phone}">{m.phone}</a></div> : ""}
     </div>
   ));
 
