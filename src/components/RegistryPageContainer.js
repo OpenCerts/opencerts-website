@@ -30,7 +30,7 @@ const renderMembers = () =>
       ) : (
         ""
       )}
-      {m.email ? <div>Email: <a href={"mailto: + m.email}>{m.email}</a></div> : ""}
+      {m.email ? <div>Email: <a href={"mailto:" + m.email}>{m.email}</a></div> : ""}
       {m.phone ? <div>Phone: <a href={"tel:" + m.phone}>{m.phone}</a></div> : ""}
     </div>
   ));
