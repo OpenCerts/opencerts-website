@@ -101,7 +101,7 @@ const Meta = () => (
       }
 
       .bg-light {
-        background-color: #fcf9f6 !important;
+        background-color: #f7fafc !important;
       }
 
       .exact-print {
@@ -150,7 +150,7 @@ const Meta = () => (
         color: #324353;
       }
 
-      li.nav-item a.slanted-tab {
+      li.slanted-tab {
         background-color: transparent;
         border-color: transparent;
         z-index: 1;
@@ -171,7 +171,7 @@ const Meta = () => (
         color: #fff !important;
       }
 
-      li.nav-item a.slanted-tab::before {
+      li.slanted-tab::before {
         content: ""; /* To generate the box */
         position: absolute;
         top: 0;
@@ -187,12 +187,12 @@ const Meta = () => (
         transform-origin: bottom;
       }
 
-      li.nav-item a.slanted-tab.active::before {
+      li.slanted-tab.active::before {
         background: #aaa;
         -webkit-print-color-adjust: exact;
       }
 
-      li.nav-item a.slanted-tab.active {
+      li.slanted-tab.active {
         z-index: 2;
       }
 

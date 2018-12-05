@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import css from "./viewerstyles.scss";
+import css from "./viewerStyles.scss";
 
 const View = ({ hover, accept }) => (
   <div
@@ -16,9 +16,9 @@ const View = ({ hover, accept }) => (
     </div>
     <div
       className="text-brand-dark"
-      style={{ fontSize: "1.2rem", fontWeight: 500 }}
+      style={{ fontSize: "1.375rem", fontWeight: 500 }}
     >
-      Drag and drop your .opencert file
+      Drag and drop your opencert file
     </div>
     <div className="text-muted">to view its contents</div>
     <div className="text-muted row">
@@ -32,8 +32,7 @@ const View = ({ hover, accept }) => (
       </div>
     </div>
     <div className="text-muted row">
-      <div className="col-4" />
-      <div className="col-4">
+      <div className="mx-auto">
         <button type="button" className={`pointer ${css.btn}`}>
           Select File
         </button>

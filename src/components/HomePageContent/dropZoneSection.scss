@@ -1,0 +1,43 @@
+@import '../../styles/variables.scss';
+
+h3 {
+    color: #fff;
+}
+
+.main {
+    max-width: 1280px;
+    display: flex;
+    margin: auto;
+}
+
+.description {
+    padding: 3rem 4rem 3rem 0;
+    p {
+        padding: 1.5rem 0;
+        font-size: 1.1rem;
+        color: $low-translucency-white;
+    }
+}
+
+h5 {
+    font-weight: 700;
+    padding-bottom: 1rem;
+}
+
+@media (max-width: 992px) {
+    .main {
+        display: block;
+    }
+    .description {
+        padding: 3rem 5rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .description {
+        padding: 2rem 0;
+    }
+}
+
+

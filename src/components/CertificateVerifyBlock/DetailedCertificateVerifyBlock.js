@@ -5,7 +5,7 @@ import { LOG_LEVEL } from "./constants";
 const CHECKS = {
   HASH: {
     id: "hashStatus",
-    success: "Certificate is not tampered with",
+    success: "Certificate has not been tampered with",
     failure: "Certificate has been tampered"
   },
   ISSUED: {
@@ -15,13 +15,13 @@ const CHECKS = {
   },
   ISSUER_IDENTITY: {
     id: "issuerIdentityStatus",
-    success: "Issuer is identified",
+    success: "Issuer has been identified",
     failure: "Issuer cannot be identified"
   },
   NOT_REVOKED: {
     id: "notRevokedStatus",
-    success: "Issuer is not revoked",
-    failure: "Issuer has been revoked"
+    success: "Certificate has not been revoked",
+    failure: "Certificate has been revoked"
   }
 };
 

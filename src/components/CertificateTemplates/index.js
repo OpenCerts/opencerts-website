@@ -6,6 +6,8 @@ import NPAA2018ECH from "./NgeeAnnPolytechnic/NP-AA2018-ECH";
 import NPAA2018LDH from "./NgeeAnnPolytechnic/NP-AA2018-LDH";
 import NPAA2018PHARM from "./NgeeAnnPolytechnic/NP-AA2018-PHARM";
 import SITCerts from "./SITCerts";
+import NPAA2018DPP from "./NgeeAnnPolytechnic/NP-AA2018-DPP";
+import GOVTECHOPENCERTS from "./GovTech";
 
 const templates = {
   default: DefaultCert,
@@ -15,6 +17,8 @@ const templates = {
   "NP-AA2018-ECH": NPAA2018ECH,
   "NP-AA2018-LDH": NPAA2018LDH,
   "NP-AA2018-PHARM": NPAA2018PHARM,
+  "NP-AA2018-DPP": NPAA2018DPP,
+  "SG-GOVTECH-OPENCERTS": GOVTECHOPENCERTS,
   "SITCerts": SITCerts
 };
 
