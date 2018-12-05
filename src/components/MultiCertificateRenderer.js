@@ -8,18 +8,22 @@ const renderTemplateToTab = (template, certificate) =>
 
 export const MultiCertificateRenderer = tabs => (
   <div>
-    <Tabs selectedTabClassName="active">
+    <Tabs selectedTabClassName={styles.active}>
       <div id={styles["header-ui"]}>
         <div className={styles["header-container"]}>
-          <TabList className="nav nav-tabs justify-content-end">
+          <TabList className="nav nav-tabs">
             {tabs.map(tab => (
-              <Tab key={tab.id} className="nav-item slanted-tab">
+              <Tab key={tab.id} className={styles.tab}>
                 {tab.label}
               </Tab>
             ))}
+            <button className={styles["view-another"]} href="/">
+              View another
+            </button>
           </TabList>
         </div>
       </div>
+
       <div className="tab-content bg-white p-3 mt-3 rounded" id="myTabContent">
         {tabs.map(tab => (
           <TabPanel key={tab.id}>{tab.content}</TabPanel>
@@ -32,7 +36,6 @@ export const MultiCertificateRenderer = tabs => (
 export class MultiCertificateRendererContainer extends Component {
   render() {
     const { certificate, templates } = this.props;
-
     const tabs = templates.map(template =>
       renderTemplateToTab(template, certificate)
     );

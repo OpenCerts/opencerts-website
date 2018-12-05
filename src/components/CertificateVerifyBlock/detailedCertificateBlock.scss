@@ -4,9 +4,9 @@
   border-radius: 5px;
   border-width: 1px;
   border-style: solid;
-  min-width: 300px;
-  left: 300px;
-  z-index: 1;
+  min-width: 340px;
+  z-index: 100;
+  box-shadow: 2px 2px 4px 0 $grey-blue;
 }
 
 .valid-border-color {

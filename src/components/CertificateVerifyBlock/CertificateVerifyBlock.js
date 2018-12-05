@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import DetailedCertificateVerifyBlock from "./DetailedCertificateVerifyBlock";
 import { LOG_LEVEL } from "./constants";
 import css from "./certificateVerifyBlock.scss";
+import icons from "../ViewerPageImages";
 
 const statusSummary = ({
   verifying,
@@ -38,7 +39,7 @@ const renderIcon = status => {
       icon = <i id="verify-spinner" className="fa fa-spinner fa-spin fa-2x" />;
       break;
     case LOG_LEVEL.VALID:
-      icon = <i id="verify-valid" className="fas fa-check-circle fa-2x" />;
+      icon = icons.checkCircle();
       break;
     case LOG_LEVEL.WARNING:
       icon = (
@@ -68,22 +69,19 @@ const renderText = status => {
       text = "Certificate Verified";
       break;
     case LOG_LEVEL.WARNING:
-      text = "Unidentified Issuer";
+      text = "Unknown Institution";
       break;
     default:
       text = "Invalid Certificate";
   }
-  return (
-    <div className="col-9 d-flex align-content-center align-items-center">
-      {text}
-    </div>
-  );
+  return <div className={css["verification-text"]}>{text}</div>;
 };
 
 const SimpleVerifyBlock = props => {
   const status = statusSummary(props);
   const renderedIcon = renderIcon(status);
   const renderedText = renderText(status);
+
   let stateStyle;
   switch (status) {
     case LOG_LEVEL.VALID:

@@ -71,7 +71,9 @@ const View = ({
 
       <div className={css["secondary-links"]}>
         <span>
-          <Link href=" ">Try another</Link>
+          <Link href=" ">
+            <a className="text-link">Try another</a>
+          </Link>
         </span>
         {isWarning ? (
           <span
@@ -81,7 +83,9 @@ const View = ({
               e.nativeEvent.stopImmediatePropagation();
             }}
           >
-            <Link href="/viewer"> View certificate anyway</Link>
+            <Link href="/viewer">
+              <a className="text-link">View certificate anyway</a>
+            </Link>
           </span>
         ) : (
           ""
