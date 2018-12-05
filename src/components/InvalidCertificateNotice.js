@@ -1,6 +1,6 @@
 const renderCertificateChange = handleCertificateChange => (
   <a href="/" onClick={() => handleCertificateChange(null)}>
-    ← Upload another
+    ← View another
   </a>
 );
 
