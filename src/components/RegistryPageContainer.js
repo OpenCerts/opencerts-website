@@ -4,14 +4,14 @@ const members = [
     address: "0x007d40224f6562461633ccfbaffd359ebb2fc9ba",
     website: "https://www.tech.gov.sg",
     email: "info@tech.gov.sg",
-    phone: "6211 2100"
+    phone: "+65 6211 2100"
   },
   {
     name: "Ngee Ann Polytechnic",
     address: "0xa5d801265D29A6F1015a641BfC0e39Ee3dA2AC76",
     website: "https://www.np.edu.sg",
     email: "asknp@np.edu.sg",
-    phone: "6466 6555"
+    phone: "+65 6466 6555"
   }
 ];
 
