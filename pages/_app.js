@@ -5,6 +5,7 @@ import withGA from "next-ga";
 import React from "react";
 import { Provider } from "react-redux";
 import initStore from "../src/store";
+import { GA_ID } from "../src/config";
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -29,5 +30,5 @@ class MyApp extends App {
   }
 }
 
-const appWrappedWithGA = withGA("UA-130492260-1", Router)(MyApp);
+const appWrappedWithGA = withGA(GA_ID, Router)(MyApp);
 export default withRedux(initStore)(appWrappedWithGA);
