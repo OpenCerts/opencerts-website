@@ -12,7 +12,7 @@ const PrintWatermark = () => (
       opacity: 0.6,
       fontSize: "2em",
       zIndex: 1000,
-      overflow: "hidden",
+      overflow: "hidden"
     }}
   >
     {STATEMENT}
