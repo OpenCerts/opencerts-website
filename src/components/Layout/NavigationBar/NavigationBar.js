@@ -17,12 +17,10 @@ const navItems = [
 const renderNavItem = active => {
   const items = navItems.map((n, i) => (
     <li
-      className={`${css["nav-item"]} ${n.id === active ? "active" : ""}`}
+      className={`${css["nav-item"]} ${n.id === active ? css.active : ""}`}
       key={i}
     >
-      <a className="nav-link" href={n.path}>
-        {n.label}
-      </a>
+      <a href={n.path}>{n.label}</a>
     </li>
   ));
   return <ul className="navbar-nav ml-auto">{items}</ul>;
@@ -37,7 +35,7 @@ const NavigationBar = ({ active }) => (
         <img src="/static/images/opencertslogo.svg" alt="OpenCerts" />
       </a>
       <button
-        className="navbar-toggler"
+        className={css["navbar-toggler"]}
         type="button"
         data-toggle="collapse"
         data-target="#top-nav"
@@ -45,7 +43,7 @@ const NavigationBar = ({ active }) => (
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span className="navbar-toggler-icon" />
+        <span className={`${css["toggler-icon"]} ${"navbar-toggler-icon"}`} />
       </button>
 
       <div className="collapse navbar-collapse" id="top-nav">

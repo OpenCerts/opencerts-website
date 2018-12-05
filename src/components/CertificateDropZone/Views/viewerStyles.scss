@@ -86,12 +86,17 @@
     color: #fff;
     margin: 0 auto;
     
+    &:hover {
+        filter: brightness(110%);
+    }
 }
 
 .unverified-btn {
     @extend .btn;
     cursor: pointer;
-    a {
+    color: #fff;
+    &:hover {
+        text-decoration: none;
         color: #fff;
     }
 }
