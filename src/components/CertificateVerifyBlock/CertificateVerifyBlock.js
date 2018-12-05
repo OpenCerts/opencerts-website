@@ -74,7 +74,15 @@ const renderText = status => {
     default:
       text = "Invalid Certificate";
   }
+<<<<<<< Updated upstream
   return <div className={css["verification-text"]}>{text}</div>;
+=======
+  return (
+    <div className={css['verification-text']}>
+      {text}
+    </div>
+  );
+>>>>>>> Stashed changes
 };
 
 const SimpleVerifyBlock = props => {
@@ -96,7 +104,9 @@ const SimpleVerifyBlock = props => {
   }
   return (
     <div
-      className={`p-2 pointer ${css["simple-verify-block"]} ${css[stateStyle]} ${props.detailedVerifyVisible ? css.active : ""}`}
+      className={`p-2 pointer ${css["simple-verify-block"]} ${
+        css[stateStyle]
+      } ${props.detailedVerifyVisible ? css.active : ""}`}
       onClick={props.toggleDetailedView}
     >
       <div className="row">

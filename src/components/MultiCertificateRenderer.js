@@ -17,8 +17,8 @@ export const MultiCertificateRenderer = tabs => (
                 {tab.label}
               </Tab>
             ))}
-            <a href="/" className={styles["view-another"]}>
-                View another
+            <a href=" " className={styles["view-another"]}>
+              View another
             </a>
           </TabList>
         </div>

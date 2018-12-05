@@ -12,6 +12,7 @@
   height: 100%;
   box-shadow: 2px 2px 4px 0 $grey-blue;
   div {
+<<<<<<< Updated upstream
     padding: 2px 0;
     height: 100%;
     margin: auto 0;
@@ -44,6 +45,10 @@
 .arrow {
   height:100%;
   margin: auto;
+=======
+    margin: 2px 0;
+  }
+>>>>>>> Stashed changes
 }
 
 .valid {
@@ -55,7 +60,11 @@
 }
 
 .invalid {
+<<<<<<< Updated upstream
   @include block-color($invalid-color);
+=======
+  background-color: $invalid-color;
+>>>>>>> Stashed changes
 }
 
 .verification-text {

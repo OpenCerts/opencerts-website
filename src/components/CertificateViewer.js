@@ -33,15 +33,34 @@ const renderVerifyBlock = props => (
   />
 );
 
+<<<<<<< Updated upstream
+const renderHeaderBlock = props => {
+=======
+// const renderIdentitiesBlock = certificate => {
+//   const issuers = get(certificate, "issuers", []);
+//   const issuerName = issuers.map(i => i.name).join(", ");
+//   const recipientName = get(certificate, "recipient.name");
+//   return issuerName || recipientName ? (
+//     <div className="mt-2">
+//       {issuerName ? (
+//         <div className="text-muted">Issued by {issuerName}</div>
+//       ) : null}
+//       {recipientName ? (
+//         <div className="text-muted">Issued to {recipientName}</div>
+//       ) : null}
+//     </div>
+//   ) : null;
+// };
 
 const renderHeaderBlock = props => {
+  // const renderedIdentitiesBlock = renderIdentitiesBlock(props.certificate);
+>>>>>>> Stashed changes
   const renderedVerifyBlock = renderVerifyBlock(props);
   return (
     <div className="container-fluid">
       <div className="row">
-        <div>
-          {renderedVerifyBlock}
-        </div>
+<<<<<<< Updated upstream
+        <div>{renderedVerifyBlock}</div>
 
         <div className="ml-auto">
           <button
@@ -50,10 +69,32 @@ const renderHeaderBlock = props => {
           >
             {images.print()}
           </button>
+=======
+        <div>
+          {renderedVerifyBlock}
+          {/* {renderedIdentitiesBlock} */}
+        </div>
+
+        <div className="ml-auto">
+          <button
+            className={styles['print-btn']}
+            onClick={() => window.print()}>
+            {images.print()}
+          </button>
+        </div>
+        <div>
+          
+>>>>>>> Stashed changes
         </div>
         <div />
         <div className="ml-2" onClick={() => props.handleSharingToggle()}>
+<<<<<<< Updated upstream
           <button className={styles["send-btn"]}>{images.send()}</button>
+=======
+          <button className={styles['send-btn']}>
+          {images.send()}
+          </button>
+>>>>>>> Stashed changes
         </div>
       </div>
     </div>
@@ -84,6 +125,7 @@ const CertificateViewer = props => {
   const validCertificateContent = (
     <div>
       <div id={styles["top-header-ui"]}>
+<<<<<<< Updated upstream
         <div className={styles["header-container"]}>{renderedHeaderBlock}</div>
       </div>
       <div>
@@ -92,6 +134,18 @@ const CertificateViewer = props => {
           templates={templates}
         />
       </div>
+=======
+        <div className={styles["header-container"]}>
+          {renderedHeaderBlock}
+        </div>
+      </div>
+      <div>
+        <MultiCertificateRendererContainer
+          certificate={certificate}
+          templates={templates}
+        />
+      </div>
+>>>>>>> Stashed changes
       <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
         <CertificateSharingForm
           emailSendingState={props.emailSendingState}

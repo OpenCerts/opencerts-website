@@ -15,12 +15,21 @@ $warning-background: #FFF9E8;
 $invalid-color: #E46767;
 $invalid-background: #FBEBE7;
 
+<<<<<<< Updated upstream
 $btn-outline: $brand-dark;
+$round-btn-outline: $brand-dark;
+
+@mixin btn($color, $hover-bg: $color, $text: $color, $bg:$color, $hover-outline: $hover-bg) {
+  border: 1px solid $color;
+  color: $text;
+=======
+$btn-outline: $brand-blue;
 $round-btn-outline: $brand-dark;
 
 @mixin ghost-btn($color, $hover-bg: $color, $bg:#fff) {
   border: 1px solid $color;
   color: $color;
+>>>>>>> Stashed changes
   background-color: $bg;
   padding: 7px 23px;
   border-radius: 7px;
@@ -31,9 +40,17 @@ $round-btn-outline: $brand-dark;
   cursor: pointer;
 
   &:hover {
+<<<<<<< Updated upstream
+    border: 1px solid $hover-bg;
+    background-color: $hover-bg;
+    box-shadow: 2px 2px 6px 0 #a7afb7;
+    text-decoration: none !important;
+    color: #fff;
+=======
     background-color: $hover-bg;
     box-shadow: 2px 2px 6px 0 #a7afb7;
     color: $bg;
+>>>>>>> Stashed changes
   }
 }
 

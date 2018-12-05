@@ -28,10 +28,10 @@
         color: $warning-color;
 
         .unverified-btn {
-            background-color: $warning-color;
+            @include btn($warning-color, lighten($warning-color, 5%), #fff);
         }
     }
-    
+
     &.invalid {
         background-color: $invalid-background;
         border: 2px dashed $invalid-color;
@@ -39,11 +39,15 @@
         color: $invalid-color;
         
         .unverified-btn {
-            background-color: $invalid-color;
+            @include btn($invalid-color, lighten($invalid-color, 5%), #fff);
         }
 
     }
 
+}
+
+.unverified-btn {
+    margin: auto;
 }
 
 .image-container {
@@ -75,22 +79,22 @@
 }
 
 .btn {
+<<<<<<< Updated upstream
+    @include btn($brand-blue);
+    background-color: #fff;
+    margin: 0 auto;
+=======
     @include ghost-btn($brand-blue);
     margin: 0 auto;
-    
-    &:hover {
-        filter: brightness(110%);
-    }
 }
 
 .unverified-btn {
     @extend .btn;
     cursor: pointer;
-    color: #fff;
-    &:hover {
-        text-decoration: none;
+    a {
         color: #fff;
     }
+>>>>>>> Stashed changes
 }
 
 .secondary-links {
@@ -103,5 +107,13 @@
         a {
             font-size: 14px;
         }
+    }
+}
+
+.text-link {
+    color: #787878 !important;
+    text-decoration: underline !important;
+    &:hover {
+        color: #324353 !important;
     }
 }

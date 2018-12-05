@@ -71,9 +71,13 @@ const View = ({
 
       <div className={css["secondary-links"]}>
         <span>
+<<<<<<< Updated upstream
           <Link href=" ">
-            <a className="text-link">Try another</a>
+            <a className={css["text-link"]}>Try another</a>
           </Link>
+=======
+          <Link href=" "><a className="text-link">Try another</a></Link>
+>>>>>>> Stashed changes
         </span>
         {isWarning ? (
           <span
@@ -83,9 +87,13 @@ const View = ({
               e.nativeEvent.stopImmediatePropagation();
             }}
           >
+<<<<<<< Updated upstream
             <Link href="/viewer">
-              <a className="text-link">View certificate anyway</a>
+              <a className={css["text-link"]}>View certificate anyway</a>
             </Link>
+=======
+            <Link href="/viewer"><a className="text-link">View certificate anyway</a></Link>
+>>>>>>> Stashed changes
           </span>
         ) : (
           ""
