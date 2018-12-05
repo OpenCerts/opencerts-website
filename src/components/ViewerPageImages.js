@@ -174,7 +174,7 @@ const viewerImages = {
         <polyline
           points="0.74 0.68 6.74 7.13 0.74 13.68"
           fill="none"
-          stroke="#09a63b"
+          stroke="#fff"
           strokeWidth="2"
         />
       </svg>

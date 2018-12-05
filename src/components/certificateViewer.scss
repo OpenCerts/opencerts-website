@@ -60,6 +60,7 @@ li.tab {
     @include ghost-btn($btn-outline);
     margin: auto;
     margin-right: 0;
+    text-decoration: none !important;
 }
 
 

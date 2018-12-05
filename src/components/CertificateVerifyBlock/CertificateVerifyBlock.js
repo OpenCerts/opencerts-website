@@ -96,12 +96,13 @@ const SimpleVerifyBlock = props => {
   }
   return (
     <div
-      className={`p-2 pointer ${css["simple-verify-block"]} ${css[stateStyle]}`}
+      className={`p-2 pointer ${css["simple-verify-block"]} ${css[stateStyle]} ${props.detailedVerifyVisible ? css.active : ""}`}
       onClick={props.toggleDetailedView}
     >
       <div className="row">
         {renderedIcon}
         {renderedText}
+        <span className={css.arrow}>{icons.arrow()}</span>
       </div>
     </div>
   );

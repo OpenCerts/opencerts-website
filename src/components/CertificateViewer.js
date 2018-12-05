@@ -33,31 +33,14 @@ const renderVerifyBlock = props => (
   />
 );
 
-// const renderIdentitiesBlock = certificate => {
-//   const issuers = get(certificate, "issuers", []);
-//   const issuerName = issuers.map(i => i.name).join(", ");
-//   const recipientName = get(certificate, "recipient.name");
-//   return issuerName || recipientName ? (
-//     <div className="mt-2">
-//       {issuerName ? (
-//         <div className="text-muted">Issued by {issuerName}</div>
-//       ) : null}
-//       {recipientName ? (
-//         <div className="text-muted">Issued to {recipientName}</div>
-//       ) : null}
-//     </div>
-//   ) : null;
-// };
 
 const renderHeaderBlock = props => {
-  // const renderedIdentitiesBlock = renderIdentitiesBlock(props.certificate);
   const renderedVerifyBlock = renderVerifyBlock(props);
   return (
     <div className="container-fluid">
       <div className="row">
         <div>
           {renderedVerifyBlock}
-          {/* {renderedIdentitiesBlock} */}
         </div>
 
         <div className="ml-auto">

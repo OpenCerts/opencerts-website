@@ -12,7 +12,9 @@
   height: 100%;
   box-shadow: 2px 2px 4px 0 $grey-blue;
   div {
-    margin: 2px 0;
+    padding: 2px 0;
+    height: 100%;
+    margin: auto 0;
   }
   
 }
@@ -24,18 +26,26 @@
     box-shadow: 2px 2px 6px 0 #a7afb7;
   }
 
-//Add active class on verification block click 
-  // &:active {
-  //   color: $color;
-  //   background-color: #fff;
-  //   #circle {
-  //     fill: $color
-  //   }
-  //   #check {
-  //     fill: #fff;
-  //   }
-  // }
+  &.active {
+    color: $color;
+    background-color: #fff;
+    #circle {
+      fill: $color
+    }
+    #check {
+      fill: #fff;
+    }
+    svg > polyline {
+      stroke: $color;
+    }
+  }
 }
+
+.arrow {
+  height:100%;
+  margin: auto;
+}
+
 .valid {
   @include block-color($success-color);
 }
