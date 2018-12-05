@@ -24,6 +24,7 @@
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.11",
     "next": "^7.0.1",
+    "next-ga": "^2.3.4",
     "next-redux-wrapper": "^2.0.0",
     "node-sass": "^4.9.3",
     "prop-types": "^15.6.1",

@@ -1,31 +1,17 @@
 const members = [
   {
-    name: "Issuer A",
-    address: "0x9999999999999999999999999999999",
-    website: "https://tech.gov.sg",
-    email: "issuer@opencerts.io",
-    phone: "+65 6666 6666"
+    name: "Government Technology Agency of Singapore (GovTech)",
+    address: "0x007d40224f6562461633ccfbaffd359ebb2fc9ba",
+    website: "https://www.tech.gov.sg",
+    email: "info@tech.gov.sg",
+    phone: "+65 6211 2100"
   },
   {
-    name: "Issuer B",
-    address: "0x9999999999999999999999999999999",
-    website: "https://tech.gov.sg",
-    email: "issuer@opencerts.io",
-    phone: "+65 6666 6666"
-  },
-  {
-    name: "Issuer C",
-    address: "0x9999999999999999999999999999999",
-    website: "https://tech.gov.sg",
-    email: "issuer@opencerts.io",
-    phone: "+65 6666 6666"
-  },
-  {
-    name: "Issuer D",
-    address: "0x9999999999999999999999999999999",
-    website: "https://tech.gov.sg",
-    email: "issuer@opencerts.io",
-    phone: "+65 6666 6666"
+    name: "Ngee Ann Polytechnic",
+    address: "0xa5d801265D29A6F1015a641BfC0e39Ee3dA2AC76",
+    website: "https://www.np.edu.sg",
+    email: "asknp@np.edu.sg",
+    phone: "+65 6466 6555"
   }
 ];
 
@@ -33,7 +19,14 @@ const renderMembers = () =>
   members.map((m, i) => (
     <div key={i} className="col-6 mb-3">
       <h4>{m.name}</h4>
-      {m.address ? <div>Certificate Store: {m.address}</div> : ""}
+      {m.address ? (
+        <div>
+          Certificate Store:{" "}
+          <a href={`https://etherscan.io/address/${m.address}`}>{m.address}</a>
+        </div>
+      ) : (
+        ""
+      )}
       {m.website ? (
         <div>
           Website:{" "}
@@ -44,8 +37,20 @@ const renderMembers = () =>
       ) : (
         ""
       )}
-      {m.email ? <div>Email: {m.email}</div> : ""}
-      {m.phone ? <div>Phone: {m.phone}</div> : ""}
+      {m.email ? (
+        <div>
+          Email: <a href={`mailto:${m.email}`}>{m.email}</a>
+        </div>
+      ) : (
+        ""
+      )}
+      {m.phone ? (
+        <div>
+          Phone: <a href={`tel:${m.phone}`}>{m.phone}</a>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   ));
 
