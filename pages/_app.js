@@ -1,5 +1,7 @@
 import withRedux from "next-redux-wrapper";
 import App, { Container } from "next/app";
+import Router from "next/router";
+import withGA from "next-ga";
 import React from "react";
 import { Provider } from "react-redux";
 import initStore from "../src/store";
@@ -27,4 +29,5 @@ class MyApp extends App {
   }
 }
 
-export default withRedux(initStore)(MyApp);
+const appWrappedWithGA = withGA("UA-130492260-1", Router)(MyApp);
+export default withRedux(initStore)(appWrappedWithGA);
