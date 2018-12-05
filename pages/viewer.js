@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import Meta from "../src/components/Layout/Meta";
+import Head from "next/head";
 import NavigationBar from "../src/components/Layout/NavigationBar";
 import FooterBar from "../src/components/Layout/FooterBar";
 import ViewerPageContainer from "../src/components/ViewerPageContainer";
@@ -7,7 +7,9 @@ import PrintWatermark from "../src/components/PrintWatermark";
 
 const VerifierPage = () => (
   <div>
-    <Meta />
+    <Head>
+      <title>OpenCerts - Certificate Viewer</title>
+    </Head>
     <PrintWatermark />
     <NavigationBar />
     <ViewerPageContainer />
