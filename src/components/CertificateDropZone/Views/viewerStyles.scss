@@ -77,13 +77,10 @@
 .btn {
     @include ghost-btn($brand-blue);
     margin: 0 auto;
-<<<<<<< HEAD
     
     &:hover {
         filter: brightness(110%);
     }
-=======
->>>>>>> Update viewer page styling
 }
 
 .unverified-btn {
