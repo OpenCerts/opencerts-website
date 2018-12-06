@@ -10,7 +10,9 @@ import {
   renderFooter
 } from "../common/certificate";
 
-export const renderAwardText = certificate => (
+export const renderAwardText = certificate => {
+  console.log("gg", certificate)
+  return (
   <div>
     <div
       className="row d-flex justify-content-center"
@@ -36,6 +38,7 @@ export const renderAwardText = certificate => (
     </div>
   </div>
 );
+  }
 
 const renderSignatures = certificate => (
   <div

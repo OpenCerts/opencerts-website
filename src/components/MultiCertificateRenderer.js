@@ -3,12 +3,18 @@ import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import { Component } from "react";
 import styles from "./certificateViewer.scss";
 
-const renderTemplateToTab = (template, certificate) =>
-  Object.assign(template, { content: template.template(certificate) });
+export const renderTemplateToTab = (template, certificate) =>
+  Object.assign(template, { content: template.template({ certificate }) });
 
 export const MultiCertificateRenderer = ({tabs}) => (
   <div>
     <Tabs selectedTabClassName={styles.active}>
+export const MultiCertificateRenderer = ({ tabs, whitelist }) => 
+{
+  console.log("whitelist", whitelist)
+ return (
+    <div>
+    <Tabs selectedTabClassName="active">
       <div id={styles["header-ui"]}>
         <div className={styles["header-container"]}>
           <TabList className="nav nav-tabs">
@@ -27,11 +33,12 @@ export const MultiCertificateRenderer = ({tabs}) => (
       <div className="tab-content bg-white p-3 mt-3 rounded" id="myTabContent">
         {tabs.map(tab => (
           <TabPanel key={tab.id}>{tab.content}</TabPanel>
-        ))}
+          ))}
       </div>
     </Tabs>
   </div>
 );
+}
 
 export class MultiCertificateRendererContainer extends Component {
   render() {

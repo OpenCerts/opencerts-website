@@ -12,7 +12,10 @@ const NPAA2018DPP = dynamic(import("./NgeeAnnPolytechnic/NP-AA2018-DPP"));
 // import NPAA2018DPP from "./NgeeAnnPolytechnic/NP-AA2018-DPP";
 import GOVTECHOPENCERTS from "./GovTech";
 
+import InvalidCertificateNotice from './InvalidCertificateNotice'
+
 import React from 'react';
+import { all } from "any-promise";
 
 const templates = {
   default: DefaultCert,
@@ -32,10 +35,31 @@ export default templates;
 
 export class TemplateLoader extends React.Component {
   render() {
+    // if address in whitelist then render valid
     const { templateName, certificate } = this.props;
-    console.log("n2", templateName, certificate)
-    const TemplateName = templates[templateName] || templates["default"];
-    console.log("nn", TemplateName)
+    // const allowedToRender = storeCanRenderTemplate({ addresses, certificate });
+    // console.log(template, certificate)
+    // console.log(addressesxx)
+    const TemplateName = templates[templateName] || templates.default;
+    console.log(TemplateName)
+    if (false) {
+      return <InvalidCertificateNotice />;
+    }
     return <TemplateName certificate={certificate} />;
   }
 }
+
+// const storeCanRenderTemplate = ({ addresses, certificate }) => {
+//   if (!addresses || addresses === []) {
+//     return true;
+//   }
+//   const issuers = get(certificate, "issuers", []);
+//   const validStoreAddressForTemplate = addresses.map(a => a.toLowerCase());
+//   return issuers.reduce((prev, curr) => {
+//     const storeAddress = get(curr, "certificateStore", "").toLowerCase();
+//     const foundInWhitelist = validStoreAddressForTemplate.includes(
+//       storeAddress
+//     );
+//     return prev && foundInWhitelist;
+//   }, true);
+// };

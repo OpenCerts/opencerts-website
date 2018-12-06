@@ -4,7 +4,7 @@ import { get } from "lodash";
 import CertificateVerifyBlock from "./CertificateVerifyBlock";
 import { MultiCertificateRendererContainer } from "./MultiCertificateRenderer";
 import templateRegistry from "./CertificateTemplates";
-import InvalidCertificateNotice from "./InvalidCertificateNotice";
+// import InvalidCertificateNotice from "./InvalidCertificateNotice";
 import styles from "./certificateViewer.scss";
 import Modal from "./Modal";
 import images from "./ViewerPageImages";
@@ -59,25 +59,16 @@ const renderHeaderBlock = props => {
   );
 };
 
-const storeCanRenderTemplate = ({ addresses, certificate }) => {
-  if (!addresses || addresses === []) {
-    return true;
-  }
-  const issuers = get(certificate, "issuers", []);
-  const validStoreAddressForTemplate = addresses.map(a => a.toLowerCase());
-  return issuers.reduce((prev, curr) => {
-    const storeAddress = get(curr, "certificateStore", "").toLowerCase();
-    const foundInWhitelist = validStoreAddressForTemplate.includes(
-      storeAddress
-    );
-    return prev && foundInWhitelist;
-  }, true);
-};
+const renderCertificateChange = handleCertificateChange => (
+  <a href="/" onClick={() => handleCertificateChange(null)}>
+    ← Upload another
+  </a>
+);
 
 const CertificateViewer = props => {
   const { certificate } = props;
   const { templates, addresses } = getCertificateTemplates(certificate);
-  const allowedToRender = storeCanRenderTemplate({ addresses, certificate });
+
   const renderedHeaderBlock = renderHeaderBlock(props);
 
   const validCertificateContent = (
@@ -103,11 +94,7 @@ const CertificateViewer = props => {
     </div>
   );
 
-  return (
-    <div>
-      {allowedToRender ? validCertificateContent : <InvalidCertificateNotice />}
-    </div>
-  );
+  return <div>{validCertificateContent} </div>;
 };
 
 CertificateViewer.propTypes = {

@@ -1,4 +1,7 @@
-import { MultiCertificateRenderer } from "../../../MultiCertificateRenderer";
+import {
+  MultiCertificateRenderer,
+  renderTemplateToTab
+} from "../../../MultiCertificateRenderer";
 import { approvedAddresses } from "../common";
 import NPCert from "./certificate";
 import NPTranscript from "./transcript";
@@ -16,28 +19,20 @@ const templates = [
   }
 ];
 
-
-const makeTabs = certificate => {
-  return [
-    {
-      id: "certificate",
-      label: "Certificate",
-      content: NPCert({ certificate })
-    },
-    {
-      id: "transcript",
-      label: "Transcript",
-      content: NPTranscript({ certificate })
-    }
-  ]
-}
-
-const addresses = approvedAddresses;
+// export const addressesxx = approvedAddresses;
 
 // export default { templates, addresses };
 
 export default ({ certificate }) => {
-  const renderedCertificate = makeTabs(certificate)
-  console.log(renderedCertificate)
-  return <MultiCertificateRenderer tabs={renderedCertificate} />;
-}
+  const renderedCertificate = templates.map(template =>
+    renderTemplateToTab(template, certificate)
+  );
+  // TODO: refactor multicertificate render to take a whitelist of addresses instead of exporting it
+
+  return (
+    <MultiCertificateRenderer
+      tabs={renderedCertificate}
+      whitelist={approvedAddresses}
+    />
+  );
+};
