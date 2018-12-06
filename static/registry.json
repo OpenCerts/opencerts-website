@@ -2,6 +2,8 @@
   "issuers": {
     "0x007d40224f6562461633ccfbaffd359ebb2fc9ba":
       "Government Technology Agency of Singapore (GovTech)",
+    "0xc36484efa1544c32ffed2e80a1ea9f0dfc517495": 
+      "Govtech test",
     "0xa5d801265D29A6F1015a641BfC0e39Ee3dA2AC76":
       "Ngee Ann Polytechnic",
     "0x866Fb78aC3c87019aBff9FB566acfF66F75Cfa46":

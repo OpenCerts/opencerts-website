@@ -30,5 +30,62 @@
         color: $grey-blue;
         font-size: 1.15rem;
         padding: 0 0 0 3.5rem !important;
+        font-weight: 500;
+
+        &:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+    }
+    &.active {
+        a {
+            color: #fff;
+            pointer-events: none;
+        }
+    }
+}
+
+.navbar-toggler {
+    display: none;
+}
+
+
+
+@media (max-width: 767px) {
+    .innerbar {
+        display: block;
+    }
+
+    .nav-item {
+        display: block;
+        padding: .5rem 0;
+        text-align: right;
+
+        a {
+            padding: 0 !important;
+            
+        }
+    }
+    .navbar-toggler {
+        display: inline-block;
+        position: absolute;
+        right: 30px;
+        padding: 0.25rem 0;
+        line-height: 1;
+        // color: rgba(255,255,255,.5);
+        
+        background-color: transparent;
+        border: transparent;
+
+        &:hover {
+            text-decoration: none;
+            filter: brightness(110%);
+        }
+    }
+    
+    .toggler-icon {
+        height: 2em;
+        width: 2em;
+        color: $brand-blue;
     }
 }

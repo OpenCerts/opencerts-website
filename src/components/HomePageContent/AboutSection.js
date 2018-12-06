@@ -18,7 +18,7 @@ const BenefitsSection = () => (
         <div className={css.benefits}>
           {images.genuine()}
           <div className={css["benefit-text"]}>
-            <h4 className={css["benefit-header"]}>Ensure</h4>
+            <h4 className={css["benefit-header"]}>Check</h4>
             <p>Make sure it has not been tampered with</p>
           </div>
         </div>
@@ -28,7 +28,7 @@ const BenefitsSection = () => (
           {images.institution()}
           <div className={css["benefit-text"]}>
             <h4 className={css["benefit-header"]}>Verify</h4>
-            <p>Check if it has been issued by the right institution</p>
+            <p>Find out if it is from a recognised institution</p>
           </div>
         </div>
       </div>
@@ -41,7 +41,7 @@ const HowItWorks = () => {
     {
       key: "onetwo",
       text:
-        "When an OpenCerts certificate is created, a unique digital signature, or unique identifier, is tagged to it. Under this, the information from the certificate is stored on the blockchain."
+        "When an OpenCerts certificate is created, a unique digital code is tagged to it. This code, together with the information from the certificate, is stored on the blockchain."
     },
     // {
     //   key: "one",
@@ -54,12 +54,12 @@ const HowItWorks = () => {
     {
       key: "three",
       text:
-        "When you open the .opencert file on this site, its contents will be compared with what was stored in the blockchain."
+        "When you open the .opencert file on this site, its contents will be compared with what was stored on the blockchain."
     },
     {
       key: "four",
       text:
-        "If the information is accurate and true, you will be able to view the certificate."
+        "We'll check if the contents match and if the certificate comes from a recognised insitution.\n\nThis way, you'll know if the certificate is valid when you try to view it."
     }
   ];
 

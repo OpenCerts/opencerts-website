@@ -150,17 +150,26 @@ const Meta = () => (
         color: #324353;
       }
 
-      li.slanted-tab {
-        background-color: transparent;
-        border-color: transparent;
-        z-index: 1;
-        position: relative;
-        display: inline-block;
-        padding: 1.5em 1.5em 1em;
-        color: inherit;
-        text-decoration: none;
-        margin: 0 -7px;
+      .text-link {
+        color: #787878;
+        text-decoration: underline;
       }
+
+      .text-link:hover {
+        color: #324353;
+      }
+
+      // li.slanted-tab {
+      //   background-color: transparent;
+      //   border-color: transparent;
+      //   z-index: 1;
+      //   position: relative;
+      //   display: inline-block;
+      //   padding: 1.5em 1.5em 1em;
+      //   color: inherit;
+      //   text-decoration: none;
+      //   margin: 0 -7px;
+      // }
 
       ul.navbar-nav > li.nav-item > a.nav-link::hover {
         color: #fff !important;

@@ -12,7 +12,6 @@ const View = ({
     hashStatus.verified && issuedStatus.verified && notRevokedStatus.verified;
   return (
     <div
-      // className="text-center h-100 d-flex flex-column justify-content-center p-4 text-brand-dark"
       className={`${css["viewer-container"]} ${
         isWarning ? css.warning : css.invalid
       }`}
@@ -65,15 +64,15 @@ const View = ({
         ) : null}
       </div>
 
-      <button className={css["unverified-btn"]}>
-        <span>
-          <Link href="/faq">What should I do?</Link>
-        </span>
-      </button>
+      <a href="/faq" className={css["unverified-btn"]}>
+        What should I do?
+      </a>
 
       <div className={css["secondary-links"]}>
         <span>
-          <Link href=" ">Try another</Link>
+          <Link href=" ">
+            <a className={css["text-link"]}>Try another</a>
+          </Link>
         </span>
         {isWarning ? (
           <span
@@ -83,7 +82,9 @@ const View = ({
               e.nativeEvent.stopImmediatePropagation();
             }}
           >
-            <Link href="/viewer"> View certificate anyway</Link>
+            <Link href="/viewer">
+              <a className={css["text-link"]}>View certificate anyway</a>
+            </Link>
           </span>
         ) : (
           ""

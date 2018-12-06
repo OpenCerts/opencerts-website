@@ -28,10 +28,10 @@
         color: $warning-color;
 
         .unverified-btn {
-            background-color: $warning-color;
+            @include btn($warning-color, lighten($warning-color, 5%), #fff);
         }
     }
-    
+
     &.invalid {
         background-color: $invalid-background;
         border: 2px dashed $invalid-color;
@@ -39,11 +39,15 @@
         color: $invalid-color;
         
         .unverified-btn {
-            background-color: $invalid-color;
+            @include btn($invalid-color, lighten($invalid-color, 5%), #fff);
         }
 
     }
 
+}
+
+.unverified-btn {
+    margin: auto;
 }
 
 .image-container {
@@ -75,25 +79,9 @@
 }
 
 .btn {
-    font-weight: 400;
-    text-align: center;
-    vertical-align: middle;
-    padding: 0.375rem 2rem;
-    background-color: $brand-blue;
-    border: none;
-    border-radius: 6px;
-    min-width: 120px;
-    color: #fff;
+    @include btn($brand-blue);
+    background-color: #fff;
     margin: 0 auto;
-    
-}
-
-.unverified-btn {
-    @extend .btn;
-    cursor: pointer;
-    a {
-        color: #fff;
-    }
 }
 
 .secondary-links {
@@ -105,12 +93,14 @@
         margin: auto;
         a {
             font-size: 14px;
-            color: #787878 !important;
-            text-decoration: underline !important;
-        
-            &:hover {
-                color: #324353 !important;
-            }
         }
+    }
+}
+
+.text-link {
+    color: #787878 !important;
+    text-decoration: underline !important;
+    &:hover {
+        color: #324353 !important;
     }
 }
