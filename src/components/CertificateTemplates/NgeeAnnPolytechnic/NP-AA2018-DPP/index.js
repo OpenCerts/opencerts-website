@@ -19,18 +19,13 @@ const templates = [
   }
 ];
 
-// export const addressesxx = approvedAddresses;
-
-// export default { templates, addresses };
-
 export default ({ certificate }) => {
   const renderedCertificate = templates.map(template =>
     renderTemplateToTab(template, certificate)
   );
-  // TODO: refactor multicertificate render to take a whitelist of addresses instead of exporting it
-
   return (
     <MultiCertificateRenderer
+      certificate={certificate}
       tabs={renderedCertificate}
       whitelist={approvedAddresses}
     />
