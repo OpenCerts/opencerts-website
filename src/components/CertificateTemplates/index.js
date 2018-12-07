@@ -19,7 +19,7 @@ const templates = {
   "NP-AA2018-PHARM": NPAA2018PHARM,
   "NP-AA2018-DPP": NPAA2018DPP,
   "SG-GOVTECH-OPENCERTS": GOVTECHOPENCERTS,
-  "SITCerts": SITCerts
+  SITCerts
 };
 
 export default templates;
