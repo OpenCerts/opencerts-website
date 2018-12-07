@@ -24,7 +24,6 @@ const makeTabs = certificate => {
 };
 
 export default ({ certificate }) => {
-  const renderedCertificate = makeTabs(certificate)
-  console.log(renderedCertificate)
+  const renderedCertificate = makeTabs(certificate);
   return <MultiCertificateRenderer tabs={renderedCertificate} />;
 };

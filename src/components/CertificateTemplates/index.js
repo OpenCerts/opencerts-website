@@ -33,31 +33,9 @@ export default templates;
 
 export class TemplateLoader extends React.Component {
   render() {
-    // if address in whitelist then render valid
     const { templateName, certificate } = this.props;
-    // const allowedToRender = storeCanRenderTemplate({ addresses, certificate });
-    // console.log(template, certificate)
-    // console.log(addressesxx)
     const TemplateName = templates[templateName] || templates.default;
-    console.log(TemplateName)
-    if (false) {
-      return <InvalidCertificateNotice />;
-    }
     return <TemplateName certificate={certificate} />;
   }
 }
 
-// const storeCanRenderTemplate = ({ addresses, certificate }) => {
-//   if (!addresses || addresses === []) {
-//     return true;
-//   }
-//   const issuers = get(certificate, "issuers", []);
-//   const validStoreAddressForTemplate = addresses.map(a => a.toLowerCase());
-//   return issuers.reduce((prev, curr) => {
-//     const storeAddress = get(curr, "certificateStore", "").toLowerCase();
-//     const foundInWhitelist = validStoreAddressForTemplate.includes(
-//       storeAddress
-//     );
-//     return prev && foundInWhitelist;
-//   }, true);
-// };
