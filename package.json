@@ -14,6 +14,10 @@
     "deploy:gh-pages": "yarn deploy:prebuilt && touch out/.nojekyll && yarn cname && gh-pages --dotfiles --dist out",
     "deploy": "rm -rf out && yarn build:static"
   },
+  "husky": {
+    "pre-commit": "npm run lint:fix",
+    "pre-push": "npm run lint && npm run test"
+  },
   "dependencies": {
     "@govtechsg/open-certificate": "^1.1.34",
     "@zeit/next-sass": "^1.0.1",
@@ -60,6 +64,7 @@
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.7.0",
     "gh-pages": "^2.0.1",
+    "husky": "^1.2.0",
     "jest": "^23.6.0",
     "prettier": "^1.14.3",
     "proxyquire": "^2.1.0",
