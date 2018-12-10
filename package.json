@@ -15,8 +15,10 @@
     "deploy": "rm -rf out && yarn build:static"
   },
   "husky": {
-    "pre-commit": "npm run lint:fix",
-    "pre-push": "npm run lint && npm run test"
+    "hooks": {
+      "pre-commit": "npm run lint:fix",
+      "pre-push": "npm run lint && npm run test"
+    }
   },
   "dependencies": {
     "@govtechsg/open-certificate": "^1.1.34",
