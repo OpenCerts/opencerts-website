@@ -14,10 +14,11 @@ This document is a work in progress but here are some basic checks. As this is a
 ### Certificate Template 
 - [] Responsive Design
 - [] No fixed-size raster images as part of certificate layout
+- [] No images of persons' signatures inside of code repository
 
 ### Pre-merge checks
 
-- [] Tip of your branch is at parity with latest OpenCerts master
+- [] Ensure that your code has been [rebased](https://www.digitalocean.com/community/tutorials/how-to-rebase-and-update-a-pull-request) on top of latest OpenCerts master
 - [] Linter issues resolved (Run `yarn lint:fix` to see issues)
 - [] `yarn test` passes
-- [] Travis Build passes
+- [] [Travis Build passes](https://docs.travis-ci.com/user/for-beginners/)
