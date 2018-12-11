@@ -64,10 +64,10 @@ export function* loadCertificateContracts({ payload }) {
 
 export function* verifyCertificateHash({ certificate }) {
   const verified = verifySignature(certificate);
-  if (verified) {
-    yield put({
-      type: types.VERIFYING_CERTIFICATE_HASH_SUCCESS
-    });
+ if (verified) {
+   yield put({
+     type: types.VERIFYING_CERTIFICATE_HASH_SUCCESS
+   });
     return true;
   }
   yield put({
