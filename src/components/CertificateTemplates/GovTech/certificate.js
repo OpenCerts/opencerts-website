@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import backgroundImg from "./resources";
 
-const Template = certificate => (
+const Template = ({ certificate }) => (
   <div
     className="p-2"
     style={{

@@ -11,34 +11,34 @@ import {
 } from "../common/certificate";
 
 export const renderAwardText = certificate => {
-  console.log("gg", certificate)
+  console.log("gg", certificate);
   return (
-  <div>
-    <div
-      className="row d-flex justify-content-center"
-      style={{ marginTop: "3rem" }}
-    >
-      <p style={printTextStyle}>This is to certify that</p>
+    <div>
+      <div
+        className="row d-flex justify-content-center"
+        style={{ marginTop: "3rem" }}
+      >
+        <p style={printTextStyle}>This is to certify that</p>
+      </div>
+      <div className="row d-flex justify-content-center">
+        <p style={nameTextStyle}>{certificate.recipient.name}</p>
+      </div>
+      <div className="row d-flex justify-content-center">
+        <p style={printTextStyle}>was awarded the</p>
+      </div>
+      <div className="row d-flex justify-content-center">
+        <p style={titleTextStyle}>
+          {" "}
+          Diploma Plus Certificate
+          <br />
+          in
+          <br />
+          {certificate.name}
+        </p>
+      </div>
     </div>
-    <div className="row d-flex justify-content-center">
-      <p style={nameTextStyle}>{certificate.recipient.name}</p>
-    </div>
-    <div className="row d-flex justify-content-center">
-      <p style={printTextStyle}>was awarded the</p>
-    </div>
-    <div className="row d-flex justify-content-center">
-      <p style={titleTextStyle}>
-        {" "}
-        Diploma Plus Certificate
-        <br />
-        in
-        <br />
-        {certificate.name}
-      </p>
-    </div>
-  </div>
-);
-  }
+  );
+};
 
 const renderSignatures = certificate => (
   <div

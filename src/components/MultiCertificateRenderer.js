@@ -8,8 +8,14 @@ import InvalidCertificateNotice from "./CertificateTemplates/InvalidCertificateN
 export const renderTemplateToTab = (template, certificate) =>
   Object.assign(template, { content: template.template({ certificate }) });
 
-export const MultiCertificateRenderer = ({ certificate, tabs, whitelist }) => {
-  console.log("whitelist", whitelist);
+export const MultiCertificateRenderer = ({
+  certificate,
+  whitelist,
+  templates
+}) => {
+  const tabs = templates.map(template =>
+    renderTemplateToTab(template, certificate)
+  );
   const allowedToRender = storeCanRenderTemplate({ whitelist, certificate });
   const validCertificateContent = (
     <div>
@@ -47,12 +53,10 @@ export const MultiCertificateRenderer = ({ certificate, tabs, whitelist }) => {
 };
 
 const storeCanRenderTemplate = ({ whitelist, certificate }) => {
-  console.log("whitelist2", whitelist)
   if (!whitelist || whitelist === []) {
     return true;
   }
   const issuers = get(certificate, "issuers", []);
-  console.log("issuers", issuers)
   const validStoreAddressForTemplate = whitelist.map(a => a.toLowerCase());
   return issuers.reduce((prev, curr) => {
     const storeAddress = get(curr, "certificateStore", "").toLowerCase();
@@ -80,9 +84,7 @@ MultiCertificateRendererContainer.propTypes = {
 };
 
 MultiCertificateRenderer.propTypes = {
-  tabs: {
-    id: PropTypes.string, // internal ID for the tabs
-    label: PropTypes.string, // Label that shows up on the Tab List
-    content: PropTypes.string // Rendered Certificate
-  }
+  whitelist: PropTypes.array,
+  templates: PropTypes.array.isRequired,
+  certificate: PropTypes.object.isRequired
 };
