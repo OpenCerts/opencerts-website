@@ -1,4 +1,4 @@
-import dynamic from "next/dynamic"
+import dynamic from "next/dynamic";
 const DefaultCert = dynamic(import("./Default"));
 // import DefaultCert from "./Default";
 // import NPAA2018MAIN from "./NgeeAnnPolytechnic/NP-AA2018-MAIN";
@@ -11,12 +11,12 @@ const NPAA2018DPP = dynamic(import("./NgeeAnnPolytechnic/NP-AA2018-DPP"));
 // import NPAA2018DPP from "./NgeeAnnPolytechnic/NP-AA2018-DPP";
 import GOVTECHOPENCERTS from "./GovTech";
 
-import InvalidCertificateNotice from './InvalidCertificateNotice'
+import InvalidCertificateNotice from "./InvalidCertificateNotice";
 
-import React from 'react';
+import React from "react";
 import { all } from "any-promise";
 
-const templates = {
+export const templates = {
   default: DefaultCert,
   // "NP-AA2018-MAIN": NPAA2018MAIN,
   // "NP-AA2018-OPTION": NPAA2018OPTION,
@@ -28,9 +28,6 @@ const templates = {
   "SG-GOVTECH-OPENCERTS": GOVTECHOPENCERTS
 };
 
-export default templates;
-
-
 export class TemplateLoader extends React.Component {
   render() {
     const { templateName, certificate } = this.props;
@@ -38,4 +35,3 @@ export class TemplateLoader extends React.Component {
     return <TemplateName certificate={certificate} />;
   }
 }
-

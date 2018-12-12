@@ -250,7 +250,7 @@ export const renderFooter = certificate => (
 );
 
 // eslint-disable-next-line react/display-name
-export default ({ logo }) => certificate => (
+export default ({ logo }) => ({ certificate }) => (
   <div>
     <div
       className="container"

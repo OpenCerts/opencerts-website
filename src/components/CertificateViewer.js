@@ -2,9 +2,6 @@ import PropTypes from "prop-types";
 import dynamic from "next/dynamic";
 import { get } from "lodash";
 import CertificateVerifyBlock from "./CertificateVerifyBlock";
-import { MultiCertificateRendererContainer } from "./MultiCertificateRenderer";
-import templateRegistry from "./CertificateTemplates";
-// import InvalidCertificateNotice from "./InvalidCertificateNotice";
 import styles from "./certificateViewer.scss";
 import Modal from "./Modal";
 import images from "./ViewerPageImages";
@@ -14,13 +11,6 @@ import { TemplateLoader } from "./CertificateTemplates";
 const CertificateSharingForm = dynamic(
   import("./CertificateSharing/CertificateSharingForm")
 );
-
-const getCertificateTemplates = certificate => {
-  const templateSet = get(certificate, "$template", "default");
-  return templateRegistry[templateSet]
-    ? templateRegistry[templateSet]
-    : templateRegistry.default;
-};
 
 const renderVerifyBlock = props => (
   <CertificateVerifyBlock
@@ -67,7 +57,6 @@ const renderCertificateChange = handleCertificateChange => (
 
 const CertificateViewer = props => {
   const { certificate } = props;
-  const { templates, addresses } = getCertificateTemplates(certificate);
 
   const renderedHeaderBlock = renderHeaderBlock(props);
 
@@ -80,10 +69,6 @@ const CertificateViewer = props => {
         templateName={get(certificate, "$template", "default")}
         certificate={certificate}
       />
-      {/* <MultiCertificateRendererContainer
-        certificate={certificate}
-        templates={templates}
-      /> */}
       <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
         <CertificateSharingForm
           emailSendingState={props.emailSendingState}

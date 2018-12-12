@@ -11,7 +11,6 @@ import {
 } from "../common/certificate";
 
 export const renderAwardText = certificate => {
-  console.log("gg", certificate);
   return (
     <div>
       <div
