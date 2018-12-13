@@ -5,6 +5,9 @@ import { get } from "lodash";
 import styles from "./certificateViewer.scss";
 import InvalidCertificateNotice from "./CertificateTemplates/InvalidCertificateNotice";
 
+import { getLogger } from "../utils/logger";
+const { trace } = getLogger("components:MultiCertificateRenderer");
+
 export const renderTemplateToTab = (template, certificate) =>
   Object.assign(template, { content: template.template({ certificate }) });
 
@@ -46,6 +49,7 @@ export const MultiCertificateRenderer = ({
       </Tabs>
     </div>
   );
+  trace(`%o`, {certificate, whitelist, templates})
   if (allowedToRender) {
     return validCertificateContent;
   }

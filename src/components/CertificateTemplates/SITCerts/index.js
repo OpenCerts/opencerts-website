@@ -1,10 +1,12 @@
-import SITCert from "./certificate";
+import PropTypes from "prop-types";
+import Certificate from "./certificate";
+import { MultiCertificateRenderer } from "../../MultiCertificateRenderer";
 
 const templates = [
   {
     id: "certificate",
     label: "Certificate",
-    template: SITCert
+    template: Certificate
   }
 ];
 
@@ -13,4 +15,18 @@ const addresses = [
   "0x897E224a6a8b72535D67940B3B8CE53f9B596800"
 ];
 
-export default { templates, addresses };
+const SITCert = ({ certificate }) => (
+  <MultiCertificateRenderer
+    certificate={certificate}
+    templates={templates}
+    whitelist={addresses}
+  />
+);
+
+SITCert.displayName = "SITCert";
+
+SITCert.propTypes = {
+  certificate: PropTypes.object.isRequired
+};
+
+export default SITCert;

@@ -16,7 +16,7 @@ const GovTech = ({ certificate }) => (
 
 GovTech.displayName = "GovTech";
 
-GovTech.PropTypes = {
+GovTech.propTypes = {
   certificate: PropTypes.object.isRequired
 };
 
