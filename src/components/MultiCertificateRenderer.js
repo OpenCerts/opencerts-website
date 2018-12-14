@@ -6,6 +6,7 @@ import styles from "./certificateViewer.scss";
 import InvalidCertificateNotice from "./CertificateTemplates/InvalidCertificateNotice";
 
 import { getLogger } from "../utils/logger";
+
 const { trace } = getLogger("components:MultiCertificateRenderer");
 
 export const renderTemplateToTab = (template, certificate) =>
@@ -16,9 +17,10 @@ export const MultiCertificateRenderer = ({
   whitelist,
   templates
 }) => {
-  const tabs = templates.map(template =>
-    renderTemplateToTab(template, certificate)
-  );
+  const tabs = templates.map(template => {
+    trace(`%o`, template);
+    return renderTemplateToTab(template, certificate)
+  });
   const allowedToRender = storeCanRenderTemplate({ whitelist, certificate });
   const validCertificateContent = (
     <div>
@@ -49,7 +51,7 @@ export const MultiCertificateRenderer = ({
       </Tabs>
     </div>
   );
-  trace(`%o`, {certificate, whitelist, templates})
+  trace(`%o`, { certificate, whitelist, templates });
   if (allowedToRender) {
     return validCertificateContent;
   }
@@ -69,22 +71,6 @@ const storeCanRenderTemplate = ({ whitelist, certificate }) => {
     );
     return prev && foundInWhitelist;
   }, true);
-};
-
-export class MultiCertificateRendererContainer extends Component {
-  render() {
-    const { certificate, templates } = this.props;
-    const tabs = templates.map(template =>
-      renderTemplateToTab(template, certificate)
-    );
-
-    return MultiCertificateRenderer(tabs);
-  }
-}
-
-MultiCertificateRendererContainer.propTypes = {
-  certificate: PropTypes.object,
-  templates: PropTypes.array
 };
 
 MultiCertificateRenderer.propTypes = {
