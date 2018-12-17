@@ -128,7 +128,7 @@ const renderSignatures = certificate => (
   </div>
 );
 
-const Template = certificate => (
+const Template = ({ certificate }) => (
   <div>
     <div
       className="container"
