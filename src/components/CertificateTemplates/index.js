@@ -1,7 +1,12 @@
 import dynamic from "next/dynamic";
+import React from "react";
+import { getLogger } from "../../utils/logger";
+
+const { trace } = getLogger("components:TemplateLoader");
+
 const SITCerts = dynamic(import("./SITCerts"));
 const DefaultCert = dynamic(import("./Default"));
-// import NPAA2018MAIN from "./NgeeAnnPolytechnic/NP-AA2018-MAIN";
+const NPAA2018MAIN = dynamic(import("./NgeeAnnPolytechnic/NP-AA2018-MAIN"));
 // import NPAA2018OPTION from "./NgeeAnnPolytechnic/NP-AA2018-OPTION";
 const NPAA2018BMSCLT = dynamic(
   import("./NgeeAnnPolytechnic/NP-AA2018-BMS(CLT)")
@@ -13,16 +18,9 @@ const NPAA2018DPP = dynamic(import("./NgeeAnnPolytechnic/NP-AA2018-DPP"));
 // import NPAA2018DPP from "./NgeeAnnPolytechnic/NP-AA2018-DPP";
 const GOVTECHOPENCERTS = dynamic(import("./GovTech"));
 
-import InvalidCertificateNotice from "./InvalidCertificateNotice";
-
-import { getLogger } from "../../utils/logger";
-const { trace } = getLogger("components:TemplateLoader");
-
-import React from "react";
-
 export const templates = {
   default: DefaultCert,
-  // "NP-AA2018-MAIN": NPAA2018MAIN,
+  "NP-AA2018-MAIN": NPAA2018MAIN,
   // "NP-AA2018-OPTION": NPAA2018OPTION,
   "NP-AA2018-BMS(CLT)": NPAA2018BMSCLT,
   "NP-AA2018-ECH": NPAA2018ECH,
