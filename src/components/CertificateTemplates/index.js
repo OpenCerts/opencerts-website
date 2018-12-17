@@ -13,7 +13,7 @@ const NPAA2018BMSCLT = dynamic(
 );
 const NPAA2018ECH = dynamic(import("./NgeeAnnPolytechnic/NP-AA2018-ECH"));
 const NPAA2018LDH = dynamic(import("./NgeeAnnPolytechnic/NP-AA2018-LDH"));
-// import NPAA2018PHARM from "./NgeeAnnPolytechnic/NP-AA2018-PHARM";
+const NPAA2018PHARM = dynamic(import("./NgeeAnnPolytechnic/NP-AA2018-PHARM"));
 const NPAA2018DPP = dynamic(import("./NgeeAnnPolytechnic/NP-AA2018-DPP"));
 const GOVTECHOPENCERTS = dynamic(import("./GovTech"));
 
@@ -24,7 +24,7 @@ export const templates = {
   "NP-AA2018-BMS(CLT)": NPAA2018BMSCLT,
   "NP-AA2018-ECH": NPAA2018ECH,
   "NP-AA2018-LDH": NPAA2018LDH,
-  // "NP-AA2018-PHARM": NPAA2018PHARM,
+  "NP-AA2018-PHARM": NPAA2018PHARM,
   "NP-AA2018-DPP": NPAA2018DPP,
   "SG-GOVTECH-OPENCERTS": GOVTECHOPENCERTS,
   SITCerts
