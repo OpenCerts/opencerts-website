@@ -371,7 +371,7 @@ export const renderSignature = certificate => (
   </div>
 );
 
-const Template = certificate => (
+const Template = ({ certificate }) => (
   <div className="container" style={{ fontSize: "0.9rem" }}>
     {renderHeader(certificate)}
     {renderGradingSystem()}
