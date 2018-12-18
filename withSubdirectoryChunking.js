@@ -39,6 +39,7 @@ const withSubdirectoryChunking = (nextConfig = {}, directoryPath) =>
       }
 
       if (config.optimization.splitChunks) {
+        /* eslint-disable no-param-reassign */
         config.optimization.splitChunks.cacheGroups = Object.assign(
           {},
           config.optimization.splitChunks.cacheGroups,

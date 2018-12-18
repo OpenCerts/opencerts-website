@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { get } from "lodash";
 import {
   fullWidthStyle,
@@ -10,34 +11,32 @@ import {
   renderFooter
 } from "../common/certificate";
 
-export const renderAwardText = certificate => {
-  return (
-    <div>
-      <div
-        className="row d-flex justify-content-center"
-        style={{ marginTop: "3rem" }}
-      >
-        <p style={printTextStyle}>This is to certify that</p>
-      </div>
-      <div className="row d-flex justify-content-center">
-        <p style={nameTextStyle}>{certificate.recipient.name}</p>
-      </div>
-      <div className="row d-flex justify-content-center">
-        <p style={printTextStyle}>was awarded the</p>
-      </div>
-      <div className="row d-flex justify-content-center">
-        <p style={titleTextStyle}>
-          {" "}
-          Diploma Plus Certificate
-          <br />
-          in
-          <br />
-          {certificate.name}
-        </p>
-      </div>
+export const renderAwardText = certificate => (
+  <div>
+    <div
+      className="row d-flex justify-content-center"
+      style={{ marginTop: "3rem" }}
+    >
+      <p style={printTextStyle}>This is to certify that</p>
     </div>
-  );
-};
+    <div className="row d-flex justify-content-center">
+      <p style={nameTextStyle}>{certificate.recipient.name}</p>
+    </div>
+    <div className="row d-flex justify-content-center">
+      <p style={printTextStyle}>was awarded the</p>
+    </div>
+    <div className="row d-flex justify-content-center">
+      <p style={titleTextStyle}>
+        {" "}
+        Diploma Plus Certificate
+        <br />
+        in
+        <br />
+        {certificate.name}
+      </p>
+    </div>
+  </div>
+);
 
 const renderSignatures = certificate => (
   <div
@@ -97,4 +96,7 @@ const Template = ({ certificate }) => (
   </div>
 );
 
+Template.propTypes = {
+  certificate: PropTypes.object.isRequired
+};
 export default Template;

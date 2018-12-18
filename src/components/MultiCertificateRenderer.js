@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
-import { Component } from "react";
 import { get } from "lodash";
 import styles from "./certificateViewer.scss";
 import InvalidCertificateNotice from "./CertificateTemplates/InvalidCertificateNotice";
@@ -12,6 +11,21 @@ const { trace } = getLogger("components:MultiCertificateRenderer");
 export const renderTemplateToTab = (template, certificate) =>
   Object.assign(template, { content: template.template({ certificate }) });
 
+const storeCanRenderTemplate = ({ whitelist, certificate }) => {
+  if (!whitelist || whitelist === []) {
+    return true;
+  }
+  const issuers = get(certificate, "issuers", []);
+  const validStoreAddressForTemplate = whitelist.map(a => a.toLowerCase());
+  return issuers.reduce((prev, curr) => {
+    const storeAddress = get(curr, "certificateStore", "").toLowerCase();
+    const foundInWhitelist = validStoreAddressForTemplate.includes(
+      storeAddress
+    );
+    return prev && foundInWhitelist;
+  }, true);
+};
+
 export const MultiCertificateRenderer = ({
   certificate,
   whitelist,
@@ -19,7 +33,7 @@ export const MultiCertificateRenderer = ({
 }) => {
   const tabs = templates.map(template => {
     trace(`%o`, template);
-    return renderTemplateToTab(template, certificate)
+    return renderTemplateToTab(template, certificate);
   });
   const allowedToRender = storeCanRenderTemplate({ whitelist, certificate });
   const validCertificateContent = (
@@ -56,21 +70,6 @@ export const MultiCertificateRenderer = ({
     return validCertificateContent;
   }
   return <InvalidCertificateNotice />;
-};
-
-const storeCanRenderTemplate = ({ whitelist, certificate }) => {
-  if (!whitelist || whitelist === []) {
-    return true;
-  }
-  const issuers = get(certificate, "issuers", []);
-  const validStoreAddressForTemplate = whitelist.map(a => a.toLowerCase());
-  return issuers.reduce((prev, curr) => {
-    const storeAddress = get(curr, "certificateStore", "").toLowerCase();
-    const foundInWhitelist = validStoreAddressForTemplate.includes(
-      storeAddress
-    );
-    return prev && foundInWhitelist;
-  }, true);
 };
 
 MultiCertificateRenderer.propTypes = {

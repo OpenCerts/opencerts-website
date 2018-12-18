@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import dynamic from "next/dynamic";
 import React from "react";
 import { getLogger } from "../../utils/logger";
@@ -31,6 +32,11 @@ export const templates = {
 };
 
 export class TemplateLoader extends React.Component {
+  static propTypes = {
+    templateName: PropTypes.string.isRequired,
+    certificate: PropTypes.object.isRequired
+  };
+
   render() {
     const { templateName, certificate } = this.props;
     const TemplateName = templates[templateName] || templates.default;

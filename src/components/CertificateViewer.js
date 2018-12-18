@@ -49,12 +49,6 @@ const renderHeaderBlock = props => {
   );
 };
 
-const renderCertificateChange = handleCertificateChange => (
-  <a href="/" onClick={() => handleCertificateChange(null)}>
-    ← Upload another
-  </a>
-);
-
 const CertificateViewer = props => {
   const { certificate } = props;
 

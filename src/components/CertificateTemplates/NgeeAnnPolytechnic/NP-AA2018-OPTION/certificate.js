@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import {
   renderLogoNP,
   renderFooter,
@@ -142,4 +143,7 @@ const Template = ({ certificate }) => (
   </div>
 );
 
+Template.propTypes = {
+  certificate: PropTypes.object.isRequired
+};
 export default Template;

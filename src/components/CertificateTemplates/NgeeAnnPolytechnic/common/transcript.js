@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { get, groupBy, find } from "lodash";
 import { IMG_LOGO_NP_HORIZONTAL } from "./images";
 import { formatDate } from "./functions";
@@ -384,4 +385,7 @@ const Template = ({ certificate }) => (
   </div>
 );
 
+Template.propTypes = {
+  certificate: PropTypes.object.isRequired
+};
 export default Template;

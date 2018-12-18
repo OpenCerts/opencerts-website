@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { format } from "date-fns";
 import backgroundImg from "./resources";
 
@@ -62,4 +63,7 @@ const Template = ({ certificate }) => (
   </div>
 );
 
+Template.propTypes = {
+  certificate: PropTypes.object.isRequired
+};
 export default Template;
