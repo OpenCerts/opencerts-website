@@ -9,7 +9,7 @@ import { getLogger } from "../utils/logger";
 const { trace } = getLogger("components:MultiCertificateRenderer");
 
 export const renderTemplateToTab = (template, certificate) =>
-  Object.assign(template, { content: template.template({ certificate }) });
+  Object.assign({}, template, { content: template.template({ certificate }) });
 
 const storeCanRenderTemplate = ({ whitelist, certificate }) => {
   if (!whitelist || whitelist === []) {
