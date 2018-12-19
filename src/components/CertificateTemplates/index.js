@@ -1,9 +1,4 @@
-import PropTypes from "prop-types";
 import dynamic from "next/dynamic";
-import React from "react";
-import { getLogger } from "../../utils/logger";
-
-const { trace } = getLogger("components:TemplateLoader");
 
 const SITCerts = dynamic(import("./SITCerts"));
 const DefaultCert = dynamic(import("./Default"));
@@ -18,7 +13,7 @@ const NPAA2018PHARM = dynamic(import("./NgeeAnnPolytechnic/NP-AA2018-PHARM"));
 const NPAA2018DPP = dynamic(import("./NgeeAnnPolytechnic/NP-AA2018-DPP"));
 const GOVTECHOPENCERTS = dynamic(import("./GovTech"));
 
-export const templates = {
+const templates = {
   default: DefaultCert,
   "NP-AA2018-MAIN": NPAA2018MAIN,
   "NP-AA2018-OPTION": NPAA2018OPTION,
@@ -31,17 +26,4 @@ export const templates = {
   SITCerts
 };
 
-export class TemplateLoader extends React.Component {
-  static propTypes = {
-    templateName: PropTypes.string.isRequired,
-    certificate: PropTypes.object.isRequired
-  };
-
-  render() {
-    const { templateName, certificate } = this.props;
-    const TemplateName = templates[templateName] || templates.default;
-    trace(`Loaded template: ${templateName}`);
-    trace(`Rendering cert: %o`, certificate);
-    return <TemplateName certificate={certificate} />;
-  }
-}
+export default templates;
