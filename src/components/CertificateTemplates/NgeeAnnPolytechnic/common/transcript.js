@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { get, groupBy, find } from "lodash";
 import { IMG_LOGO_NP_HORIZONTAL } from "./images";
 import { formatDate } from "./functions";
@@ -371,7 +372,7 @@ export const renderSignature = certificate => (
   </div>
 );
 
-const Template = certificate => (
+const Template = ({ certificate }) => (
   <div className="container" style={{ fontSize: "0.9rem" }}>
     {renderHeader(certificate)}
     {renderGradingSystem()}
@@ -384,4 +385,7 @@ const Template = certificate => (
   </div>
 );
 
+Template.propTypes = {
+  certificate: PropTypes.object.isRequired
+};
 export default Template;

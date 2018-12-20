@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { get } from "lodash";
 import {
   fullWidthStyle,
@@ -79,7 +80,7 @@ const renderSignatures = certificate => (
 );
 
 // eslint-disable-next-line react/display-name
-const Template = certificate => (
+const Template = ({ certificate }) => (
   <div>
     <div
       className="container"
@@ -95,4 +96,7 @@ const Template = certificate => (
   </div>
 );
 
+Template.propTypes = {
+  certificate: PropTypes.object.isRequired
+};
 export default Template;

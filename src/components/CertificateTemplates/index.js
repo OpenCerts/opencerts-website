@@ -1,13 +1,17 @@
-import DefaultCert from "./Default";
-import NPAA2018MAIN from "./NgeeAnnPolytechnic/NP-AA2018-MAIN";
-import NPAA2018OPTION from "./NgeeAnnPolytechnic/NP-AA2018-OPTION";
-import NPAA2018BMSCLT from "./NgeeAnnPolytechnic/NP-AA2018-BMS(CLT)";
-import NPAA2018ECH from "./NgeeAnnPolytechnic/NP-AA2018-ECH";
-import NPAA2018LDH from "./NgeeAnnPolytechnic/NP-AA2018-LDH";
-import NPAA2018PHARM from "./NgeeAnnPolytechnic/NP-AA2018-PHARM";
-import SITCerts from "./SITCerts";
-import NPAA2018DPP from "./NgeeAnnPolytechnic/NP-AA2018-DPP";
-import GOVTECHOPENCERTS from "./GovTech";
+import dynamic from "next/dynamic";
+
+const SITCerts = dynamic(import("./SITCerts"));
+const DefaultCert = dynamic(import("./Default"));
+const NPAA2018MAIN = dynamic(import("./NgeeAnnPolytechnic/NP-AA2018-MAIN"));
+const NPAA2018OPTION = dynamic(import("./NgeeAnnPolytechnic/NP-AA2018-OPTION"));
+const NPAA2018BMSCLT = dynamic(
+  import("./NgeeAnnPolytechnic/NP-AA2018-BMS(CLT)")
+);
+const NPAA2018ECH = dynamic(import("./NgeeAnnPolytechnic/NP-AA2018-ECH"));
+const NPAA2018LDH = dynamic(import("./NgeeAnnPolytechnic/NP-AA2018-LDH"));
+const NPAA2018PHARM = dynamic(import("./NgeeAnnPolytechnic/NP-AA2018-PHARM"));
+const NPAA2018DPP = dynamic(import("./NgeeAnnPolytechnic/NP-AA2018-DPP"));
+const GOVTECHOPENCERTS = dynamic(import("./GovTech"));
 
 const templates = {
   default: DefaultCert,

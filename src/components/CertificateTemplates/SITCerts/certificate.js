@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import {
   SIT_CERT_BORDER,
   SIT_CERT_BG,
@@ -86,7 +87,7 @@ const depPresidentStyle = {
   height: "82px"
 };
 
-const Template = certificate => (
+const Template = ({ certificate }) => (
   <div className="container" style={borderImgStyle}>
     <div style={bgImgStyle}>
       <div
@@ -175,3 +176,6 @@ const Template = certificate => (
 );
 
 export default Template;
+Template.propTypes = {
+  certificate: PropTypes.object.isRequired
+};
