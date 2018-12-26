@@ -41,16 +41,8 @@ const HowItWorks = () => {
     {
       key: "onetwo",
       text:
-        "When an OpenCerts certificate is created, a unique digital code is tagged to it. This code, together with the information from the certificate, is stored on the blockchain."
+        "When an OpenCerts certificate is created, a unique digital code is tagged to it. This code, together with condensed information from the certificate, is stored on the blockchain."
     },
-    // {
-    //   key: "one",
-    //   text: "When an OpenCerts certificate is created, a unique digital signature, or unique identifier, is tagged to it."
-    // },
-    // {
-    //   key: "two",
-    //   text: "Under the same digital signature, the information from the certificate is stored on the blockchain."
-    // },
     {
       key: "three",
       text:
