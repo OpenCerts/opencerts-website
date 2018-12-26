@@ -48,8 +48,8 @@ class CertificateSharingForm extends Component {
               <h4>Send your certificate</h4>
             </div>
             <div className="row text-center">
-              This sends an email with your .opencerts attached, and
-              instructions on how to view it.
+              This sends an email with your .opencert attached, and instructions
+              on how to view it.
             </div>
             <div className="row my-4 d-flex justify-content-center">
               <input

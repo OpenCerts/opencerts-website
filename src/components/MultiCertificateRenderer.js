@@ -1,55 +1,79 @@
 import PropTypes from "prop-types";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
-import { Component } from "react";
+import { get } from "lodash";
 import styles from "./certificateViewer.scss";
+import InvalidCertificateNotice from "./CertificateTemplates/InvalidCertificateNotice";
 
-const renderTemplateToTab = (template, certificate) =>
-  Object.assign(template, { content: template.template(certificate) });
+import { getLogger } from "../utils/logger";
 
-export const MultiCertificateRenderer = tabs => (
-  <div>
-    <Tabs selectedTabClassName="active">
-      <div id={styles["header-ui"]}>
-        <div className={styles["header-container"]}>
-          <TabList className="nav nav-tabs justify-content-end">
-            {tabs.map(tab => (
-              <Tab key={tab.id} className="nav-item slanted-tab">
-                {tab.label}
-              </Tab>
-            ))}
-          </TabList>
-        </div>
-      </div>
-      <div className="tab-content bg-white p-3 mt-3 rounded" id="myTabContent">
-        {tabs.map(tab => (
-          <TabPanel key={tab.id}>{tab.content}</TabPanel>
-        ))}
-      </div>
-    </Tabs>
-  </div>
-);
+const { trace } = getLogger("components:MultiCertificateRenderer");
 
-export class MultiCertificateRendererContainer extends Component {
-  render() {
-    const { certificate, templates } = this.props;
+export const renderTemplateToTab = (template, certificate) =>
+  Object.assign({}, template, { content: template.template({ certificate }) });
 
-    const tabs = templates.map(template =>
-      renderTemplateToTab(template, certificate)
-    );
-
-    return MultiCertificateRenderer(tabs);
+const storeCanRenderTemplate = ({ whitelist, certificate }) => {
+  if (!whitelist || whitelist === []) {
+    return true;
   }
-}
+  const issuers = get(certificate, "issuers", []);
+  const validStoreAddressForTemplate = whitelist.map(a => a.toLowerCase());
+  return issuers.reduce((prev, curr) => {
+    const storeAddress = get(curr, "certificateStore", "").toLowerCase();
+    const foundInWhitelist = validStoreAddressForTemplate.includes(
+      storeAddress
+    );
+    return prev && foundInWhitelist;
+  }, true);
+};
 
-MultiCertificateRendererContainer.propTypes = {
-  certificate: PropTypes.object,
-  templates: PropTypes.array
+export const MultiCertificateRenderer = ({
+  certificate,
+  whitelist,
+  templates
+}) => {
+  const tabs = templates.map(template => {
+    trace(`%o`, template);
+    return renderTemplateToTab(template, certificate);
+  });
+  const allowedToRender = storeCanRenderTemplate({ whitelist, certificate });
+  const validCertificateContent = (
+    <div>
+      <Tabs selectedTabClassName={styles.active}>
+        <div id={styles["header-ui"]}>
+          <div className={styles["header-container"]}>
+            <TabList className="nav nav-tabs">
+              {tabs.map(tab => (
+                <Tab key={tab.id} className={styles.tab}>
+                  {tab.label}
+                </Tab>
+              ))}
+              <a href=" " className={styles["view-another"]}>
+                View another
+              </a>
+            </TabList>
+          </div>
+        </div>
+
+        <div
+          className="tab-content bg-white p-3 mt-3 rounded"
+          id="myTabContent"
+        >
+          {tabs.map(tab => (
+            <TabPanel key={tab.id}>{tab.content}</TabPanel>
+          ))}
+        </div>
+      </Tabs>
+    </div>
+  );
+  trace(`%o`, { certificate, whitelist, templates });
+  if (allowedToRender) {
+    return validCertificateContent;
+  }
+  return <InvalidCertificateNotice />;
 };
 
 MultiCertificateRenderer.propTypes = {
-  tabs: {
-    id: PropTypes.string, // internal ID for the tabs
-    label: PropTypes.string, // Label that shows up on the Tab List
-    content: PropTypes.string // Rendered Certificate
-  }
+  whitelist: PropTypes.array,
+  templates: PropTypes.array.isRequired,
+  certificate: PropTypes.object.isRequired
 };

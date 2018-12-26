@@ -249,8 +249,9 @@ export const renderFooter = certificate => (
   </div>
 );
 
-// eslint-disable-next-line react/display-name
-export default ({ logo }) => certificate => (
+/* eslint-disable */
+// Disabled eslint as there's no way to add proptypes to an anonymous function like this
+export default ({ logo }) => ({ certificate }) => (
   <div>
     <div
       className="container"

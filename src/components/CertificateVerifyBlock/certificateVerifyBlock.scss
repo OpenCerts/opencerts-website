@@ -1,10 +1,5 @@
 @import '../../styles/variables.scss';
 
-.verifyBlockPadding {
-  margin-top: 0.5rem;
-  margin-bottom: 4rem;
-}
-
 .verifyBlocksContainer {
   position: absolute;
   z-index: 1;
@@ -14,16 +9,55 @@
   min-width: 300px;
   border-radius: 5px;
   color: white;
+  height: 100%;
+  box-shadow: 2px 2px 4px 0 $grey-blue;
+  div {
+    padding: 2px 0;
+    height: 100%;
+    margin: auto 0;
+  }
+  
+}
+@mixin block-color($color) {
+  background-color: $color;
+  border: 1px solid $color;
+
+  &:hover {
+    box-shadow: 2px 2px 6px 0 #a7afb7;
+  }
+
+  &.active {
+    color: $color;
+    background-color: #fff;
+    #circle {
+      fill: $color
+    }
+    #check {
+      fill: #fff;
+    }
+    svg > polyline {
+      stroke: $color;
+    }
+  }
+}
+
+.arrow {
+  height:100%;
+  margin: auto;
 }
 
 .valid {
-  background-color: $success-color;
+  @include block-color($success-color);
 }
 
 .warning {
-  background-color: $warning-color;
+  @include block-color($warning-color);
 }
 
 .invalid {
-  background-color: $invalid-color;
+  @include block-color($invalid-color);
+}
+
+.verification-text {
+  font-size: 1.25rem;
 }

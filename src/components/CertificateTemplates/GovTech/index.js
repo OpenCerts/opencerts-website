@@ -1,21 +1,23 @@
 import PropTypes from "prop-types";
+import Certificate from "./certificate";
 import { MultiCertificateRenderer } from "../../MultiCertificateRenderer";
-import DefaultCert from "./certificate";
 
 const templates = [
   {
     id: "certificate",
     label: "Certificate",
-    template: DefaultCert
+    template: Certificate
   }
 ];
 
-const DefaultTemplate = ({ certificate }) => (
+const GovTech = ({ certificate }) => (
   <MultiCertificateRenderer certificate={certificate} templates={templates} />
 );
 
-DefaultTemplate.displayName = "Default Template";
-DefaultTemplate.propTypes = {
+GovTech.displayName = "GovTech";
+
+GovTech.propTypes = {
   certificate: PropTypes.object.isRequired
 };
-export default DefaultTemplate;
+
+export default GovTech;
