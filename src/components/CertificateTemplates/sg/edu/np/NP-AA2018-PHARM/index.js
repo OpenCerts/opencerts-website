@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { approvedAddresses } from "../common";
-import { MultiCertificateRenderer } from "../../../MultiCertificateRenderer";
+import { MultiCertificateRenderer } from "../../../../MultiCertificateRenderer";
 import NPCert from "./certificate";
 import NPTranscript from "../common/transcript";
 

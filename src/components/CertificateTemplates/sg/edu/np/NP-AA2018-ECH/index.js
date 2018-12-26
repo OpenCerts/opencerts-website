@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
-import { MultiCertificateRenderer } from "../../../MultiCertificateRenderer";
+import { MultiCertificateRenderer } from "../../../../MultiCertificateRenderer";
 import { approvedAddresses } from "../common";
 import NPCert from "./certificate";
-import NPTranscript from "./transcript";
+import NPTranscript from "../common/transcript";
 
 const templates = [
   {
@@ -17,7 +17,7 @@ const templates = [
   }
 ];
 
-const NPAA2018DPP = ({ certificate }) => (
+const NPAA2018ECH = ({ certificate }) => (
   <MultiCertificateRenderer
     certificate={certificate}
     templates={templates}
@@ -25,9 +25,9 @@ const NPAA2018DPP = ({ certificate }) => (
   />
 );
 
-NPAA2018DPP.displayName = "NP-AA2018-DPP Template";
-NPAA2018DPP.propTypes = {
+NPAA2018ECH.displayName = "NP-AA2018-ECH";
+NPAA2018ECH.propTypes = {
   certificate: PropTypes.object.isRequired
 };
 
-export default NPAA2018DPP;
+export default NPAA2018ECH;

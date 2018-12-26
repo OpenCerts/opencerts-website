@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { approvedAddresses } from "../common";
 import NPCert from "./certificate";
-import { MultiCertificateRenderer } from "../../../MultiCertificateRenderer";
+import { MultiCertificateRenderer } from "../../../../MultiCertificateRenderer";
 
 const templates = [
   {
@@ -11,7 +11,7 @@ const templates = [
   }
 ];
 
-const NPAA2018BMSCLT = ({ certificate }) => (
+const NPAA2018OPTION = ({ certificate }) => (
   <MultiCertificateRenderer
     certificate={certificate}
     templates={templates}
@@ -19,9 +19,9 @@ const NPAA2018BMSCLT = ({ certificate }) => (
   />
 );
 
-NPAA2018BMSCLT.displayName = "NP-AA2018-BMS(CLT) Template";
-NPAA2018BMSCLT.propTypes = {
+NPAA2018OPTION.displayName = "NP-AA2018-OPTION Template";
+NPAA2018OPTION.propTypes = {
   certificate: PropTypes.object.isRequired
 };
 
-export default NPAA2018BMSCLT;
+export default NPAA2018OPTION;

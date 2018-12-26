@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { MultiCertificateRenderer } from "../../MultiCertificateRenderer";
+import { MultiCertificateRenderer } from "../MultiCertificateRenderer";
 import DefaultCert from "./certificate";
 
 const templates = [
