@@ -26,7 +26,7 @@ const Template = ({ certificate }) => (
         />
       </div>
       <div className="h5 mb-4 mb-lg-5 d-flex justify-content-center">
-        <i>This is to 2019 certify that</i>
+        <i>This is to certify that</i>
       </div>
       <div className="h3 mb-4 mb-lg-5 d-flex justify-content-center">
         <b>{certificate.recipient.name}</b>
