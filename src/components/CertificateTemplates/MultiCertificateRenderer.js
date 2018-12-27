@@ -1,16 +1,30 @@
 import PropTypes from "prop-types";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import { get } from "lodash";
-import styles from "./certificateViewer.scss";
-import InvalidCertificateNotice from "./CertificateTemplates/InvalidCertificateNotice";
+import styles from "../certificateViewer.scss";
+import InvalidCertificateNotice from "./InvalidCertificateNotice";
 
-import { getLogger } from "../utils/logger";
+import { getLogger } from "../../utils/logger";
 
 const { trace } = getLogger("components:MultiCertificateRenderer");
 
+/**
+ * Renders the template view using the provided template function and certificate.
+ * Adds this rendered content under the .content key and returns it.
+ * @param {*} template
+ * @param {*} certificate
+ */
 export const renderTemplateToTab = (template, certificate) =>
   Object.assign({}, template, { content: template.template({ certificate }) });
 
+/**
+ * Retrieves the contract store address from the provided certificate
+ * and tries to find it in the provided whitelist of allowed addresses
+ *
+ * @returns true if contract store address is present in whitelist, or if whitelist is empty
+ * @param {*} whitelist
+ * @param {*} certificate
+ */
 const storeCanRenderTemplate = ({ whitelist, certificate }) => {
   if (!whitelist || whitelist === []) {
     return true;
@@ -26,6 +40,12 @@ const storeCanRenderTemplate = ({ whitelist, certificate }) => {
   }, true);
 };
 
+/**
+ * This React component renders a certificate's data, given an array of template views.
+ * @param {*} certificate Certificate Data
+ * @param {*} whitelist A list of contract store addresses which are allowed to use this template
+ * @param {*} templates An array of template views to render using `renderTemplateToTab()`
+ */
 export const MultiCertificateRenderer = ({
   certificate,
   whitelist,
