@@ -1,4 +1,6 @@
-import SITCerts from "./singaporetech";
-import NPCerts from "./np";
+import mapDir from "../../mapDir";
 
-export default Object.assign({}, SITCerts, NPCerts);
+import singaporetech from "./singaporetech";
+import np from "./np";
+
+export default mapDir("edu", { ...singaporetech, ...np });

@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import mapDir from "../../../mapDir";
 
 const NPAA2018MAIN = dynamic(
   import("./NP-AA2018-MAIN" /* webpackChunkName: "NgeeAnnTemplates" */)
@@ -22,13 +23,14 @@ const NPAA2018DPP = dynamic(
   import("./NP-AA2018-DPP" /* webpackChunkName: "NgeeAnnTemplates" */)
 );
 
-export default {
-  // Legacy Mappings
-  "NP-AA2018-MAIN": NPAA2018MAIN,
-  "NP-AA2018-OPTION": NPAA2018OPTION,
-  "NP-AA2018-BMS(CLT)": NPAA2018BMSCLT,
-  "NP-AA2018-ECH": NPAA2018ECH,
-  "NP-AA2018-LDH": NPAA2018LDH,
-  "NP-AA2018-PHARM": NPAA2018PHARM,
-  "NP-AA2018-DPP": NPAA2018DPP
+const templates = {
+  "2018-main": NPAA2018MAIN,
+  "2018-option": NPAA2018OPTION,
+  "2018-bms-clt": NPAA2018BMSCLT,
+  "2018-ech": NPAA2018ECH,
+  "2018-ldh": NPAA2018LDH,
+  "2018-pharm": NPAA2018PHARM,
+  "2018-dpp": NPAA2018DPP
 };
+
+export default mapDir("np", templates);

@@ -1,10 +1,12 @@
 import dynamic from "next/dynamic";
+import mapDir from "../../../mapDir";
 
 const SITCert2018 = dynamic(
-  import("./2018" /* webpackChunkName: "SITTemplates" */)
+  import("./2018-certificate" /* webpackChunkName: "SITTemplates" */)
 );
 
-export default {
-  "sg/edu/singaporetech/2018": SITCert2018,
-  SITCerts: SITCert2018
+const templates = {
+  "2018-certificate": SITCert2018
 };
+
+export default mapDir("singaporetech", templates);

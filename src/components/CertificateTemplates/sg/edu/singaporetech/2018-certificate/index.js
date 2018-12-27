@@ -23,8 +23,6 @@ const SITCert = ({ certificate }) => (
   />
 );
 
-SITCert.displayName = "SITCert";
-
 SITCert.propTypes = {
   certificate: PropTypes.object.isRequired
 };
