@@ -1,6 +1,6 @@
 import mapDir from "../../mapDir";
 
-import SITCerts from "./singaporetech";
-import NPCerts from "./np";
+import singaporetech from "./singaporetech";
+import np from "./np";
 
-export default mapDir("edu", { ...SITCerts, ...NPCerts });
+export default mapDir("edu", { ...singaporetech, ...np });
