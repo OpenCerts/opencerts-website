@@ -1,6 +1,6 @@
-import mapDir from "../../mapDir";
+import addDirToTemplatePath from "../../addDirToTemplatePath";
 
 import singaporetech from "./singaporetech";
 import np from "./np";
 
-export default mapDir("edu", { ...singaporetech, ...np });
+export default addDirToTemplatePath("edu", { ...singaporetech, ...np });

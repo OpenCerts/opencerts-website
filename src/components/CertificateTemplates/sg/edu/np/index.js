@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import mapDir from "../../../mapDir";
+import addDirToTemplatePath from "../../../addDirToTemplatePath";
 
 const NPAA2018MAIN = dynamic(
   import("./NP-AA2018-MAIN" /* webpackChunkName: "NgeeAnnTemplates" */)
@@ -33,4 +33,4 @@ const templates = {
   "2018-dpp": NPAA2018DPP
 };
 
-export default mapDir("np", templates);
+export default addDirToTemplatePath("np", templates);
