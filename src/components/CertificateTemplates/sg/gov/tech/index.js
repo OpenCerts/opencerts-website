@@ -8,7 +8,6 @@ const OpenCertsAssociate2019 = dynamic(
 );
 
 export default {
-  "SG-GOVTECH-OPENCERTS": OpenCertsAssociate2018,
-  "sg/gov/tech/2018-OpenCertsAssociate": OpenCertsAssociate2018,
-  "sg/gov/tech/2019-OpenCertsAssociate": OpenCertsAssociate2019
+  "2018-OpenCertsAssociate": OpenCertsAssociate2018,
+  "2019-OpenCertsAssociate": OpenCertsAssociate2019
 };

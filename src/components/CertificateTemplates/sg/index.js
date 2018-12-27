@@ -1,4 +1,5 @@
+import mapDir from "../mapDir";
 import gov from "./gov";
 import edu from "./edu";
 
-export default Object.assign({}, gov, edu);
+export default mapDir("sg", { ...gov, ...edu });
