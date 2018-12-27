@@ -33,7 +33,7 @@ const OpenCertsAssociate2018 = dynamic(
 // SIT
 
 const SITCert2018 = dynamic(
-  import("./sg/edu/singaporetech/2018" /* webpackChunkName: "SITTemplates" */)
+  import("./sg/edu/singaporetech/2018-certificate" /* webpackChunkName: "SITTemplates" */)
 );
 
 export default {

@@ -11,4 +11,6 @@ const templates = {
   // Insert new country TLDs above this line
 };
 
+console.log(templates);
+
 export default templates;
