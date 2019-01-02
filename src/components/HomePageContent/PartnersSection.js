@@ -4,11 +4,15 @@ const CarouselSection = () => {
   const images = [
     {
       key: "govtech",
-      value: "/static/images/logo-govtech.png"
+      value: "/static/images/GOVTECH_logo.png"
     },
     {
       key: "NP",
       value: "/static/images/NP_logo.svg"
+    },
+    {
+      key: "SIT",
+      value: "/static/images/SIT_logo.png"
     },
     {
       key: "TP",
