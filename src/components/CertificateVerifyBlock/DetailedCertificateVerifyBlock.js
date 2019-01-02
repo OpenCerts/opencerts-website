@@ -6,7 +6,7 @@ const CHECKS = {
   HASH: {
     id: "hashStatus",
     success: "Certificate has not been tampered with",
-    failure: "Certificate has been tampered"
+    failure: "Certificate has been tampered with"
   },
   ISSUED: {
     id: "issuedStatus",
