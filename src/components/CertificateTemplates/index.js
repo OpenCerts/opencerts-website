@@ -1,25 +1,14 @@
-import DefaultCert from "./Default";
-import NPAA2018MAIN from "./NgeeAnnPolytechnic/NP-AA2018-MAIN";
-import NPAA2018OPTION from "./NgeeAnnPolytechnic/NP-AA2018-OPTION";
-import NPAA2018BMSCLT from "./NgeeAnnPolytechnic/NP-AA2018-BMS(CLT)";
-import NPAA2018ECH from "./NgeeAnnPolytechnic/NP-AA2018-ECH";
-import NPAA2018LDH from "./NgeeAnnPolytechnic/NP-AA2018-LDH";
-import NPAA2018PHARM from "./NgeeAnnPolytechnic/NP-AA2018-PHARM";
-import SITCerts from "./SITCerts";
-import NPAA2018DPP from "./NgeeAnnPolytechnic/NP-AA2018-DPP";
-import GOVTECHOPENCERTS from "./GovTech";
+import dynamic from "next/dynamic";
+import legacy from "./legacy";
+import sg from "./sg";
+
+const DefaultCert = dynamic(import("./Default"));
 
 const templates = {
   default: DefaultCert,
-  "NP-AA2018-MAIN": NPAA2018MAIN,
-  "NP-AA2018-OPTION": NPAA2018OPTION,
-  "NP-AA2018-BMS(CLT)": NPAA2018BMSCLT,
-  "NP-AA2018-ECH": NPAA2018ECH,
-  "NP-AA2018-LDH": NPAA2018LDH,
-  "NP-AA2018-PHARM": NPAA2018PHARM,
-  "NP-AA2018-DPP": NPAA2018DPP,
-  "SG-GOVTECH-OPENCERTS": GOVTECHOPENCERTS,
-  SITCerts
+  ...legacy,
+  ...sg
+  // Insert new country TLDs above this line
 };
 
 export default templates;
