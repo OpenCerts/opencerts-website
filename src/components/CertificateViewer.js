@@ -2,23 +2,18 @@ import PropTypes from "prop-types";
 import dynamic from "next/dynamic";
 import { get } from "lodash";
 import CertificateVerifyBlock from "./CertificateVerifyBlock";
-import { MultiCertificateRendererContainer } from "./MultiCertificateRenderer";
-import templateRegistry from "./CertificateTemplates";
-import InvalidCertificateNotice from "./InvalidCertificateNotice";
 import styles from "./certificateViewer.scss";
 import Modal from "./Modal";
 import images from "./ViewerPageImages";
 
+import { getLogger } from "../utils/logger";
+import templates from "./CertificateTemplates";
+
+const { trace } = getLogger("components:CertificateViewer");
+
 const CertificateSharingForm = dynamic(
   import("./CertificateSharing/CertificateSharingForm")
 );
-
-const getCertificateTemplates = certificate => {
-  const templateSet = get(certificate, "$template", "default");
-  return templateRegistry[templateSet]
-    ? templateRegistry[templateSet]
-    : templateRegistry.default;
-};
 
 const renderVerifyBlock = props => (
   <CertificateVerifyBlock
@@ -57,38 +52,23 @@ const renderHeaderBlock = props => {
   );
 };
 
-const storeCanRenderTemplate = ({ addresses, certificate }) => {
-  if (!addresses || addresses === []) {
-    return true;
-  }
-  const issuers = get(certificate, "issuers", []);
-  const validStoreAddressForTemplate = addresses.map(a => a.toLowerCase());
-  return issuers.reduce((prev, curr) => {
-    const storeAddress = get(curr, "certificateStore", "").toLowerCase();
-    const foundInWhitelist = validStoreAddressForTemplate.includes(
-      storeAddress
-    );
-    return prev && foundInWhitelist;
-  }, true);
-};
-
 const CertificateViewer = props => {
   const { certificate } = props;
-  const { templates, addresses } = getCertificateTemplates(certificate);
-  const allowedToRender = storeCanRenderTemplate({ addresses, certificate });
+
   const renderedHeaderBlock = renderHeaderBlock(props);
+  const selectedTemplateName = get(certificate, "$template", "default");
+  const SelectedTemplate = templates[selectedTemplateName] || templates.default;
+
+  trace(`Templates Mapping: %o`, templates);
+  trace(`Selected template: ${selectedTemplateName}`);
+  trace(`Certificate content: %o`, certificate);
 
   const validCertificateContent = (
     <div>
       <div id={styles["top-header-ui"]}>
         <div className={styles["header-container"]}>{renderedHeaderBlock}</div>
       </div>
-      <div>
-        <MultiCertificateRendererContainer
-          certificate={certificate}
-          templates={templates}
-        />
-      </div>
+      <SelectedTemplate certificate={certificate} />
       <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
         <CertificateSharingForm
           emailSendingState={props.emailSendingState}
@@ -99,11 +79,7 @@ const CertificateViewer = props => {
     </div>
   );
 
-  return (
-    <div>
-      {allowedToRender ? validCertificateContent : <InvalidCertificateNotice />}
-    </div>
-  );
+  return <div>{validCertificateContent} </div>;
 };
 
 CertificateViewer.propTypes = {

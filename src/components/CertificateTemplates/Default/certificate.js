@@ -1,6 +1,7 @@
 import { get } from "lodash";
+import PropTypes from "prop-types";
 
-const Template = certificate => {
+const Template = ({ certificate }) => {
   const certificateName = get(certificate, "name");
   const certificateId = get(certificate, "id");
   const issuedOn = get(certificate, "issuedOn");
@@ -82,6 +83,10 @@ const Template = certificate => {
       )}
     </div>
   );
+};
+
+Template.propTypes = {
+  certificate: PropTypes.object.isRequired
 };
 
 export default Template;

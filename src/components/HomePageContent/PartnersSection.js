@@ -3,10 +3,6 @@ import css from "./partnersPage.scss";
 const CarouselSection = () => {
   const images = [
     {
-      key: "govtech",
-      value: "/static/images/logo-govtech.png"
-    },
-    {
       key: "NP",
       value: "/static/images/NP_logo.svg"
     },
@@ -27,12 +23,8 @@ const CarouselSection = () => {
       value: "/static/images/SP_logo.svg"
     },
     {
-      key: "CSC",
-      value: "/static/images/CSC_logo.png"
-    },
-    {
-      key: "ITE",
-      value: "/static/images/ITE_logo.png"
+      key: "NUS",
+      value: "/static/images/NUS_logo.png"
     },
     {
       key: "NTU",
@@ -41,6 +33,34 @@ const CarouselSection = () => {
     {
       key: "SIM",
       value: "/static/images/SIM_logo.png"
+    },
+    {
+      key: "SUTD",
+      value: "/static/images/SUTD_logo.png"
+    },
+    {
+      key: "SUSS",
+      value: "/static/images/SUSS_logo.png"
+    },
+    {
+      key: "SIT",
+      value: "/static/images/SIT_logo.png"
+    },
+    {
+      key: "SEAB",
+      value: "/static/images/SEAB_logo.png"
+    },
+    {
+      key: "ITE",
+      value: "/static/images/ITE_logo.png"
+    },
+    {
+      key: "CSC",
+      value: "/static/images/CSC_logo.png"
+    },
+    {
+      key: "govtech",
+      value: "/static/images/GOVTECH_logo.png"
     }
   ];
   const items = images.map((item, i) => (
