@@ -29,13 +29,6 @@ const NPAA2018DPP = dynamic(
 const OpenCertsAssociate2018 = dynamic(
   import("./sg/gov/tech/2018-OpenCertsAssociate" /* webpackChunkName: "GovTechTemplates" */)
 );
-
-// SIT
-
-const SITCert2018 = dynamic(
-  import("./sg/edu/singaporetech/2018-certificate" /* webpackChunkName: "SITTemplates" */)
-);
-
 export default {
   "NP-AA2018-MAIN": NPAA2018MAIN,
   "NP-AA2018-OPTION": NPAA2018OPTION,
@@ -45,5 +38,4 @@ export default {
   "NP-AA2018-PHARM": NPAA2018PHARM,
   "NP-AA2018-DPP": NPAA2018DPP,
   "SG-GOVTECH-OPENCERTS": OpenCertsAssociate2018,
-  SITCerts: SITCert2018
 };
