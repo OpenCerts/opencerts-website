@@ -126,7 +126,7 @@ const Template = ({ certificate }) => (
         <p style={garamondItalic18Pt}>
           {certificate.additionalData.degreeName3}
           <br />
-          on {certificate.additionalData.confDate}
+          {certificate.additionalData.confDate}
         </p>
       </div>
       {certificate.additionalData.degreeName2.length === 0 && (
