@@ -64,9 +64,9 @@ const View = ({
         ) : null}
       </div>
 
-      <a href="/faq" className={css["unverified-btn"]}>
-        What should I do?
-      </a>
+      <Link href="/faq">
+        <div className={css["unverified-btn"]}>What should I do?</div>
+      </Link>
 
       <div className={css["secondary-links"]}>
         <span>
