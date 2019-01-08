@@ -11,6 +11,7 @@ const renderDropzoneContent = props => {
     isDragAccept,
     isDragReject,
     verifying,
+    fileError,
     issuerIdentityStatus,
     hashStatus,
     issuedStatus,
@@ -18,7 +19,10 @@ const renderDropzoneContent = props => {
     document,
     verificationStatus
   } = props;
-  if (isDragReject) {
+  // isDragReject is checking for mimetype (but we skipped it)
+  // fileError is when the file is not in JSON format and threw when deserilising
+  // valid JSON files will be handled by handleCertificateChange()
+  if (isDragReject || fileError) {
     return <DefaultView hover={true} accept={false} />;
   }
   if (isDragAccept) {
@@ -44,24 +48,29 @@ const renderDropzoneContent = props => {
       />
     );
   }
-  return <DefaultView hover={false} />;
+  return <DefaultView hover={false} accept={true} />;
 };
 
 // Injects additional props on top of isDragReject, isDragActive, acceptedFiles & rejectedFiles
 const renderDropzoneContentCurry = additionalProps => props =>
   renderDropzoneContent({ ...props, ...additionalProps });
 
-const onFileDrop = (acceptedFiles, handleCertificateChange) => {
+const onFileDrop = (
+  acceptedFiles,
+  handleCertificateChange,
+  handleFileError
+) => {
   // eslint-disable-next-line no-undef
   const reader = new FileReader();
+  if (reader.error) {
+    handleFileError(reader.error);
+  }
   reader.onload = () => {
     try {
       const json = JSON.parse(reader.result);
       handleCertificateChange(json);
     } catch (e) {
-      // TODO add in error handling
-      // eslint-disable-next-line
-        console.log(e);
+      handleFileError(e);
     }
   };
   if (acceptedFiles && acceptedFiles.length && acceptedFiles.length > 0)
@@ -70,7 +79,9 @@ const onFileDrop = (acceptedFiles, handleCertificateChange) => {
 
 const CertificateDropzone = ({
   handleCertificateChange,
+  handleFileError,
   handleRenderOverwrite,
+  fileError,
   verifying,
   issuerIdentityStatus,
   hashStatus,
@@ -80,14 +91,15 @@ const CertificateDropzone = ({
   verificationStatus
 }) => (
   <Dropzone
-    onDrop={acceptedFiles => onFileDrop(acceptedFiles, handleCertificateChange)}
+    onDrop={acceptedFiles =>
+      onFileDrop(acceptedFiles, handleCertificateChange, handleFileError)
+    }
     className="h-100"
-    acceptClassName=""
-    rejectClassName=""
   >
     {renderDropzoneContentCurry({
       handleCertificateChange,
       handleRenderOverwrite,
+      fileError,
       verifying,
       issuerIdentityStatus,
       hashStatus,
@@ -102,8 +114,10 @@ const CertificateDropzone = ({
 CertificateDropzone.propTypes = {
   document: PropTypes.object,
   handleCertificateChange: PropTypes.func,
+  handleFileError: PropTypes.func,
   handleRenderOverwrite: PropTypes.func,
   updateCertificate: PropTypes.func,
+  fileError: PropTypes.bool,
   verifying: PropTypes.bool,
   issuerIdentityStatus: PropTypes.object,
   hashStatus: PropTypes.object,
@@ -115,6 +129,7 @@ CertificateDropzone.propTypes = {
 renderDropzoneContent.propTypes = {
   handleRenderOverwrite: PropTypes.func,
   document: PropTypes.object,
+  fileError: PropTypes.bool,
   verifying: PropTypes.bool,
   isDragAccept: PropTypes.bool,
   isDragReject: PropTypes.bool,
