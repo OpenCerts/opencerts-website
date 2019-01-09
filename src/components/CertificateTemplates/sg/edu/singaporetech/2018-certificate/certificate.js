@@ -134,7 +134,7 @@ const Template = ({ certificate }) => (
           <span style={timesNewRoman18PtRed}>&nbsp;</span>
         </div>
       )}
-      <div className="row" style={{ marginTop: "1rem" }}>
+      <div className="row" style={{ marginTop: "1rem", marginBottom: "-2rem" }}>
         <div className="col-md-4 text-left">
           <br />
           <img src={SIT_CERT_SEAL} style={sealImgStyle} />
