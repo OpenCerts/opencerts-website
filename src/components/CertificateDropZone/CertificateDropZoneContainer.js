@@ -19,7 +19,11 @@ class CertificateDropZoneContainer extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      fileError: false
+    };
     this.handleCertificateChange = this.handleCertificateChange.bind(this);
+    this.handleFileError = this.handleFileError.bind(this);
   }
 
   componentDidMount() {
@@ -28,14 +32,21 @@ class CertificateDropZoneContainer extends Component {
   }
 
   handleCertificateChange(certificate) {
+    this.setState({ fileError: false });
     this.props.updateCertificate(certificate);
+  }
+
+  handleFileError() {
+    this.setState({ fileError: true });
   }
 
   render() {
     return (
       <CertificateDropZone
         document={this.props.document}
+        fileError={this.state.fileError}
         handleCertificateChange={this.handleCertificateChange}
+        handleFileError={this.handleFileError}
         verifying={this.props.verifying}
         issuerIdentityStatus={this.props.issuerIdentityStatus}
         hashStatus={this.props.hashStatus}
