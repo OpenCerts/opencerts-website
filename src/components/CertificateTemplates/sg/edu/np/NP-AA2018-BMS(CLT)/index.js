@@ -13,7 +13,7 @@ const templates = [
   {
     id: "transcript",
     label: "Transcript",
-    template: NPTranscript"
+    template: "NPTranscript"
   }
 ];
 
