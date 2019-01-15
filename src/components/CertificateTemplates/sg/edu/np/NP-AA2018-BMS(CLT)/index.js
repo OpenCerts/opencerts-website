@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { approvedAddresses } from "../common";
 import NPCert from "./certificate";
-import NPTranscript from "../common/transcript"
+import NPTranscript from "../common/transcript";
 import { MultiCertificateRenderer } from "../../../../MultiCertificateRenderer";
 
 const templates = [
@@ -13,7 +13,7 @@ const templates = [
   {
     id: "transcript",
     label: "Transcript",
-    template: "NPTranscript"
+    template: NPTranscript
   }
 ];
 
