@@ -100,7 +100,7 @@ const Template = ({ certificate }) => (
         className="row d-flex justify-content-center"
         style={{ marginTop: "2rem" }}
       >
-        <p style={garamondItalic18Pt}>This is to certify that</p>
+        <span style={garamondItalic18Pt}>This is to certify that</span>
       </div>
       <div className="row d-flex justify-content-center">
         <span style={timesNewRoman18Pt}>{certificate.recipient.name}</span>
