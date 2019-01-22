@@ -10,6 +10,7 @@
     "build": "next build",
     "build:static": "next build && next export",
     "start": "next build && next start",
+    "start:watch": "nodemon --exec \"yarn start\"",
     "cname": "echo 'opencerts.io' > out/CNAME",
     "deploy:gh-pages": "yarn deploy:prebuilt && touch out/.nojekyll && yarn cname && gh-pages --dotfiles --dist out",
     "deploy": "rm -rf out && yarn build:static",
@@ -75,6 +76,7 @@
     "husky": "^1.2.0",
     "jest": "^23.6.0",
     "lint-staged": "^8.1.0",
+    "nodemon": "^1.18.9",
     "prettier": "^1.15.3",
     "proxyquire": "^2.1.0",
     "sinon": "^7.1.1"
