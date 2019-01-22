@@ -13,7 +13,7 @@ export const validateEvent = ({ category, action, value }) => {
 export const stringifyEvent = ({ category, action, label, value }) =>
   `Category*: ${category}, Action*: ${action}, Label: ${label}, Value: ${value}`;
 
-export const event = (window, evt) => {
+export const analyticsEvent = (window, evt) => {
   try {
     validateEvent(evt);
   } catch (e) {
@@ -29,4 +29,4 @@ export const event = (window, evt) => {
   }
 };
 
-export default event;
+export default analyticsEvent;

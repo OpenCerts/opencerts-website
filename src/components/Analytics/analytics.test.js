@@ -1,5 +1,5 @@
 import { stub } from "sinon";
-import { event, stringifyEvent, validateEvent } from "./index";
+import { analyticsEvent, stringifyEvent, validateEvent } from "./index";
 
 const evt = {
   category: "TEST_CATEGORY",
@@ -59,13 +59,13 @@ describe("validateEvent", () => {
 
 describe("event", () => {
   it("does not fail if ga is not present", () => {
-    event(undefined, evt);
-    event({}, evt);
+    analyticsEvent(undefined, evt);
+    analyticsEvent({}, evt);
   });
 
   it("sends and log ga event if window.ga is present", () => {
     const win = { ga: stub() };
-    event(win, evt);
+    analyticsEvent(win, evt);
     expect(win.ga.args[0]).toEqual([
       "send",
       "event",
@@ -79,6 +79,6 @@ describe("event", () => {
   it("does not fail if there is an error", () => {
     const win = { ga: stub() };
     const errEvt = { ...evt, value: "STRING" };
-    event(win, errEvt);
+    analyticsEvent(win, errEvt);
   });
 });

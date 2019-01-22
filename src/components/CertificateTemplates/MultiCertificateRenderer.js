@@ -4,7 +4,7 @@ import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import { get } from "lodash";
 import styles from "../certificateViewer.scss";
 import InvalidCertificateNotice from "./InvalidCertificateNotice";
-import { event } from "../Analytics";
+import { analyticsEvent } from "../Analytics";
 
 import { getLogger } from "../../utils/logger";
 
@@ -51,7 +51,7 @@ const storeCanRenderTemplate = ({ whitelist, certificate }) => {
 export class MultiCertificateRenderer extends Component {
   componentDidMount() {
     const { certificate } = this.props;
-    event(window, {
+    analyticsEvent(window, {
       category: "CERTIFICATE_VIEWED",
       action: get(certificate, "issuers[0].certificateStore"),
       label: get(certificate, "id")
