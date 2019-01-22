@@ -1,5 +1,4 @@
 import { stub } from "sinon";
-import * as logger from "../../utils/logger";
 import { event, stringifyEvent, validateEvent } from "./index";
 
 const evt = {
@@ -59,33 +58,14 @@ describe("validateEvent", () => {
 });
 
 describe("event", () => {
-  let stubbedLogger;
-  let trace;
-
-  beforeEach(() => {
-    trace = stub();
-    stubbedLogger = stub(logger, "getLogger");
-    stubbedLogger.returns({
-      trace,
-      error: trace
-    });
-  });
-
-  afterEach(() => {
-    logger.getLogger.restore();
-  });
-
-  it("logs event only if window.ga is not present", () => {
+  it("does not fail if ga is not present", () => {
     event(undefined, evt);
-    const expectedString = stringifyEvent(evt);
-    expect(trace.args[0][0]).toEqual(expectedString);
-    expect(stubbedLogger.args[0][0]).toEqual("components:Analytics(Inactive):");
+    event({}, evt);
   });
 
   it("sends and log ga event if window.ga is present", () => {
     const win = { ga: stub() };
     event(win, evt);
-    const expectedString = stringifyEvent(evt);
     expect(win.ga.args[0]).toEqual([
       "send",
       "event",
@@ -94,15 +74,11 @@ describe("event", () => {
       "TEST_LABEL",
       2
     ]);
-    expect(trace.args[0][0]).toEqual(expectedString);
-    expect(stubbedLogger.args[0][0]).toEqual("components:Analytics:");
   });
 
-  it("logs error", () => {
+  it("does not fail if there is an error", () => {
     const win = { ga: stub() };
     const errEvt = { ...evt, value: "STRING" };
     event(win, errEvt);
-    expect(stubbedLogger.args[0][0]).toEqual("components:Analytics:");
-    expect(win.ga.called).toBe(false);
   });
 });
