@@ -17,8 +17,8 @@ We develop primarily on a OS X / Linux environment so please lodge an issue if y
 
 ### OS X / Linux
 ```bash
-yarn
-yarn dev
+npm install
+npm run dev
 ```
 
 ### Windows
@@ -26,8 +26,8 @@ yarn dev
 For Windows you need to set up the toolchain for node-gyp before installing this repository, follow the instructions in https://github.com/nodejs/node-gyp#on-windows.
 
 ```bash
-yarn
-yarn dev
+npm install
+npm run dev
 ```
 
 ### Environmental Variables
@@ -36,11 +36,10 @@ yarn dev
 
 E.g:
 ```bash
-NET=mainnet yarn dev
+NET=mainnet npm run dev
 ```
 
 
 ### Troubleshooting
 
 To enable debug logs in the browser, set `localStorage.debug="*"`
-
