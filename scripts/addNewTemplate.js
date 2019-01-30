@@ -1,3 +1,4 @@
+import { stripIndent } from "common-tags";
 // const exportedTemplates = require("../src/components/CertificateTemplates/tlds")
 //   .default;
 
@@ -63,60 +64,69 @@ ${subDirectoryExports}
 `;
 }
 
-function makeImportString(subDir, templatesChunkName) {
-  return `dynamic(import("./${subDir}" /* webpackChunkName: "${templatesChunkName}Templates" */))`;
+function makeDynamicImportFragment(subDir, templatesChunkName) {
+  return `dynamic(import("./${subDir}" /* webpackChunkName: "${templatesChunkName}-Templates" */))`;
 }
 export function generateSubDirectoryDynamicImports(
   subDirs,
   templatesChunkName
 ) {
-  return subDirs.map(subDir => makeImportString(subDir, templatesChunkName));
+  return subDirs.map(subDir =>
+    makeDynamicImportFragment(subDir, templatesChunkName)
+  );
 }
 
 // TODO: make this an interactive user input function
 export function getTemplateTagToDirMapping() {
   return {
-    "2018-Example-Certificate": "./2018-Example-Certificate",
-    "2019-Example-Certificate": "./2019-Example-Certificate"
+    "2018-Example-Certificate": "2018-Example-Certificate",
+    "2019-Example-Certificate": "2019-Example-Certificate"
   };
 }
 
 export function generateOrganisationIndexExports() {
   function generateExportString(templateTag, subDir, organisationDir) {
-    return `"${templateTag}: ${makeImportString(subDir, organisationDir)}"`;
+    return `  "${templateTag}": ${makeDynamicImportFragment(
+      subDir,
+      organisationDir
+    )}"`;
   }
 
+  function generateExportsObject(subDirs) {
+    let arr = [];
+    for (let templateTag of Object.keys(subDirs)) {
+      arr.push(
+        generateExportString(templateTag, subDirs[templateTag], organisationDir)
+      );
+    }
+    return arr;
+  }
 
-  let subDirs = getTemplateTagToDirMapping()
-  return `
+  let subDirs = getTemplateTagToDirMapping();
+  let organisationDir = "tech";
+  return stripIndent`
 export default {
-    //TODO: shit i need user input for the template name!!
-    ${mapValues(subDirs)}
+${generateExportsObject(subDirs).join("\n")}
 };`;
 }
 
-export function generateIntermediateIndexTemplate({
-  levels,
-  subDirs,
-  currDir
-}) {
-  const subDirectoryImports = subDirs.map(makeSubdirectoryImport).join("\n");
-  const subDirectoryExports = makeSubdirectoryExports(subDirs);
-  return `
-import addDirToTemplatePath from "${levels}/addDirToTemplatePath";
-    
-${subDirectoryImports}
-    
-export default addDirToTemplatePath("${currDir}", { ${subDirectoryExports} });
-`;
-}
-
 function makeSubdirectoryImport(subDir) {
-  return `import ${subDir} from "./${subDir}"`;
+  return `import ${subDir} from "./${subDir}";`;
 }
 
 function makeSubdirectoryExports(subDirs) {
   return subDirs.map(subDir => `...${subDir}`).join(", ");
+}
+
+export function generateIntermediateIndexTemplate({ subDirs, currDir }) {
+  const subDirectoryImports = subDirs.map(makeSubdirectoryImport).join("\n");
+  const subDirectoryExports = makeSubdirectoryExports(subDirs);
+  return stripIndent`
+import { addDirToTemplatePath } from "template-utils/addDirToTemplatePath";
+
+${subDirectoryImports}
+
+export default addDirToTemplatePath("${currDir}", { ${subDirectoryExports} });`;
 }
 
 export function generateIndexForChildPath(childPath) {

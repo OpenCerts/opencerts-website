@@ -1,9 +1,12 @@
+import { stripIndent } from "common-tags";
+import { inspect } from 'util';
 import {
   reverseDnsNotation,
   generatePartialChildPaths,
   getSubDirs,
   generateIntermediateIndexTemplate,
-  getDirsToMake
+  generateOrganisationIndexExports,
+  getDirsToMake,
 } from "./addNewTemplate";
 
 const EXAMPLE_DIR = "./src/components/CertificateTemplates/tlds/com";
@@ -51,12 +54,24 @@ describe("getDirsToMake", () => {
 
 describe("intermediateIndexTemplate", () => {
   test("should work", () => {
-    console.log(
+    expect(
       generateIntermediateIndexTemplate({
-        levels: "../",
-        subDirs: [ 'np', 'singaporetech' ],
+        subDirs: ["singaporetech", "np"],
         currDir: "edu"
       })
-    );
+    ).toBe(stripIndent`
+        import { addDirToTemplatePath } from "template-utils/addDirToTemplatePath";
+
+        import singaporetech from "./singaporetech";
+        import np from "./np";
+
+        export default addDirToTemplatePath("edu", { ...singaporetech, ...np });
+    `);
   });
 });
+
+describe("generateOrganisationIndexExports", () => {
+  test("should work", () => {
+    console.log(generateOrganisationIndexExports())
+  })
+})
