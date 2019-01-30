@@ -1,7 +1,17 @@
 import { get } from "lodash";
 import PropTypes from "prop-types";
 
-const Template = ({ certificate }) => {
+const ObfuscatableValue = ({ field, value, handleObfuscation }) =>
+  value ? (
+    <div
+      onClick={() => handleObfuscation(field)}
+      style={{ display: "inline-block" }}
+    >
+      {value} <i className="fas fa-times" />
+    </div>
+  ) : null;
+
+const Template = ({ certificate, handleObfuscation }) => {
   const certificateName = get(certificate, "name");
   const certificateId = get(certificate, "id");
   const issuedOn = get(certificate, "issuedOn");
@@ -21,12 +31,37 @@ const Template = ({ certificate }) => {
   const issuerDid = get(certificate, "issuers.0.did");
 
   const transcriptData = get(certificate, "transcript", []);
+
   const transcriptSection = transcriptData.map((t, i) => (
     <tr key={i}>
-      <td>{t.courseCode}</td>
-      <td>{t.name}</td>
-      <td>{t.grade}</td>
-      <td>{t.courseCredit}</td>
+      <td>
+        <ObfuscatableValue
+          field={`transcript[i].courseCode`}
+          value={t.courseCode}
+          handleObfuscation={handleObfuscation}
+        />
+      </td>
+      <td>
+        <ObfuscatableValue
+          field={`transcript[${i}].name`}
+          value={t.name}
+          handleObfuscation={handleObfuscation}
+        />
+      </td>
+      <td>
+        <ObfuscatableValue
+          field={`transcript[${i}].grade`}
+          value={t.grade}
+          handleObfuscation={handleObfuscation}
+        />
+      </td>
+      <td>
+        <ObfuscatableValue
+          field={`transcript[${i}].courseCredit`}
+          value={t.courseCredit}
+          handleObfuscation={handleObfuscation}
+        />
+      </td>
     </tr>
   ));
 
@@ -85,8 +120,15 @@ const Template = ({ certificate }) => {
   );
 };
 
+ObfuscatableValue.propTypes = {
+  field: PropTypes.string,
+  value: PropTypes.string,
+  handleObfuscation: PropTypes.func
+};
+
 Template.propTypes = {
-  certificate: PropTypes.object.isRequired
+  certificate: PropTypes.object.isRequired,
+  handleObfuscation: PropTypes.func
 };
 
 export default Template;
