@@ -20,10 +20,17 @@ export const renderTemplateToTab = ({
   template,
   certificate,
   handleObfuscation
-}) =>
-  Object.assign({}, template, {
-    content: template.template({ certificate, handleObfuscation })
+}) => {
+  const Template = template.template;
+  return Object.assign({}, template, {
+    content: (
+      <Template
+        certificate={certificate}
+        handleObfuscation={handleObfuscation}
+      />
+    )
   });
+};
 
 /**
  * Retrieves the contract store address from the provided certificate

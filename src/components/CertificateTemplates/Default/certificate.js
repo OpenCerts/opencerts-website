@@ -1,129 +1,154 @@
+import React, { Component } from "react";
 import { get } from "lodash";
 import PropTypes from "prop-types";
 
-const ObfuscatableValue = ({ field, value, handleObfuscation }) =>
+const ObfuscatableValue = ({ field, value, handleObfuscation, editable }) =>
   value ? (
     <div
       onClick={() => handleObfuscation(field)}
       style={{ display: "inline-block" }}
     >
-      {value} <i className="fas fa-times" />
+      {value} {editable && <i className="fas fa-times" />}
     </div>
   ) : null;
 
-const Template = ({ certificate, handleObfuscation }) => {
-  const certificateName = get(certificate, "name");
-  const certificateId = get(certificate, "id");
-  const issuedOn = get(certificate, "issuedOn");
-  const expiresOn = get(certificate, "expiresOn");
-  const admissionDate = get(certificate, "admissionDate");
-  const graduationDate = get(certificate, "graduationDate ");
+class Template extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { editable: false };
+  }
 
-  const recipientName = get(certificate, "recipient.name");
-  const recipientDid = get(certificate, "recipient.did");
-  const recipientEmail = get(certificate, "recipient.email");
-  const recipientPhone = get(certificate, "recipient.phone");
+  render() {
+    const { editable } = this.state;
+    const { certificate, handleObfuscation } = this.props;
+    const certificateName = get(certificate, "name");
+    const certificateId = get(certificate, "id");
+    const issuedOn = get(certificate, "issuedOn");
+    const expiresOn = get(certificate, "expiresOn");
+    const admissionDate = get(certificate, "admissionDate");
+    const graduationDate = get(certificate, "graduationDate ");
 
-  const issuerName = get(certificate, "issuers.0.name");
-  const issuerAddress = get(certificate, "issuers.0.certificateStore");
-  const issuerUrl = get(certificate, "issuers.0.url");
-  const issuerEmail = get(certificate, "issuers.0.email");
-  const issuerDid = get(certificate, "issuers.0.did");
+    const recipientName = get(certificate, "recipient.name");
+    const recipientDid = get(certificate, "recipient.did");
+    const recipientEmail = get(certificate, "recipient.email");
+    const recipientPhone = get(certificate, "recipient.phone");
 
-  const transcriptData = get(certificate, "transcript", []);
+    const issuerName = get(certificate, "issuers.0.name");
+    const issuerAddress = get(certificate, "issuers.0.certificateStore");
+    const issuerUrl = get(certificate, "issuers.0.url");
+    const issuerEmail = get(certificate, "issuers.0.email");
+    const issuerDid = get(certificate, "issuers.0.did");
 
-  const transcriptSection = transcriptData.map((t, i) => (
-    <tr key={i}>
-      <td>
-        <ObfuscatableValue
-          field={`transcript[i].courseCode`}
-          value={t.courseCode}
-          handleObfuscation={handleObfuscation}
-        />
-      </td>
-      <td>
-        <ObfuscatableValue
-          field={`transcript[${i}].name`}
-          value={t.name}
-          handleObfuscation={handleObfuscation}
-        />
-      </td>
-      <td>
-        <ObfuscatableValue
-          field={`transcript[${i}].grade`}
-          value={t.grade}
-          handleObfuscation={handleObfuscation}
-        />
-      </td>
-      <td>
-        <ObfuscatableValue
-          field={`transcript[${i}].courseCredit`}
-          value={t.courseCredit}
-          handleObfuscation={handleObfuscation}
-        />
-      </td>
-    </tr>
-  ));
+    const transcriptData = get(certificate, "transcript", []);
 
-  return (
-    <div className="container">
-      <div className="row">
-        <h1>{certificateName}</h1>
-      </div>
-      <div className="row mb-4">
-        <div className="w-100">
-          {certificateId && `Serial: ${certificateId}`}
+    const transcriptSection = transcriptData.map((t, i) => (
+      <tr key={i}>
+        <td>
+          <ObfuscatableValue
+            editable={editable}
+            field={`transcript[i].courseCode`}
+            value={t.courseCode}
+            handleObfuscation={handleObfuscation}
+          />
+        </td>
+        <td>
+          <ObfuscatableValue
+            editable={editable}
+            field={`transcript[${i}].name`}
+            value={t.name}
+            handleObfuscation={handleObfuscation}
+          />
+        </td>
+        <td>
+          <ObfuscatableValue
+            editable={editable}
+            field={`transcript[${i}].grade`}
+            value={t.grade}
+            handleObfuscation={handleObfuscation}
+          />
+        </td>
+        <td>
+          <ObfuscatableValue
+            editable={editable}
+            field={`transcript[${i}].courseCredit`}
+            value={t.courseCredit}
+            handleObfuscation={handleObfuscation}
+          />
+        </td>
+      </tr>
+    ));
+
+    return (
+      <div className="container">
+        <div className="row screen-only" style={{ backgroundColor: "orange" }}>
+          <div>Privacy Controls are enabled on this certificate:</div>
+          <div
+            onClick={() => {
+              this.setState({ editable: !this.state.editable });
+            }}
+          >
+            <i className="far fa-edit" />
+          </div>
         </div>
-        <div className="w-100">{issuedOn && `Issued On: ${issuedOn}`}</div>
-        <div className="w-100">{expiresOn && `Expires On: ${expiresOn}`}</div>
-        <div className="w-100">
-          {admissionDate && `Admission Date: ${admissionDate}`}
+        <div className="row">
+          <h1>{certificateName}</h1>
         </div>
-        <div className="w-100">
-          {graduationDate && `Graduation Date: ${graduationDate}`}
-        </div>
-      </div>
-      <div className="row mb-4">
-        <div className="col p-0">
-          <h3>Recipient Info</h3>
-          {recipientDid && <div>DID: {recipientDid}</div>}
-          {recipientName && <div>Name: {recipientName}</div>}
-          {recipientEmail && <div>Email: {recipientEmail}</div>}
-          {recipientPhone && <div>Phone: {recipientPhone}</div>}
-        </div>
-        <div className="col p-0">
-          <h3>Issuer Info</h3>
-          {issuerAddress && <div>Certificate Store: {issuerAddress}</div>}
-          {issuerDid && <div>DID: {issuerDid}</div>}
-          {issuerName && <div>Name: {issuerName}</div>}
-          {issuerUrl && <div>Url: {issuerUrl}</div>}
-          {issuerEmail && <div>Email: {issuerEmail}</div>}
-        </div>
-      </div>
-      {transcriptData !== [] && (
         <div className="row mb-4">
-          <h3>Transcript</h3>
-          <table className="w-100">
-            <tbody>
-              <tr>
-                <th>Course Code</th>
-                <th>Name</th>
-                <th>Grade</th>
-                <th>Course Credit</th>
-              </tr>
-              {transcriptSection}
-            </tbody>
-          </table>
+          <div className="w-100">
+            {certificateId && `Serial: ${certificateId}`}
+          </div>
+          <div className="w-100">{issuedOn && `Issued On: ${issuedOn}`}</div>
+          <div className="w-100">{expiresOn && `Expires On: ${expiresOn}`}</div>
+          <div className="w-100">
+            {admissionDate && `Admission Date: ${admissionDate}`}
+          </div>
+          <div className="w-100">
+            {graduationDate && `Graduation Date: ${graduationDate}`}
+          </div>
         </div>
-      )}
-    </div>
-  );
-};
+        <div className="row mb-4">
+          <div className="col p-0">
+            <h3>Recipient Info</h3>
+            {recipientDid && <div>DID: {recipientDid}</div>}
+            {recipientName && <div>Name: {recipientName}</div>}
+            {recipientEmail && <div>Email: {recipientEmail}</div>}
+            {recipientPhone && <div>Phone: {recipientPhone}</div>}
+          </div>
+          <div className="col p-0">
+            <h3>Issuer Info</h3>
+            {issuerAddress && <div>Certificate Store: {issuerAddress}</div>}
+            {issuerDid && <div>DID: {issuerDid}</div>}
+            {issuerName && <div>Name: {issuerName}</div>}
+            {issuerUrl && <div>Url: {issuerUrl}</div>}
+            {issuerEmail && <div>Email: {issuerEmail}</div>}
+          </div>
+        </div>
+        {transcriptData !== [] && (
+          <div className="row mb-4">
+            <h3>Transcript</h3>
+            <table className="w-100">
+              <tbody>
+                <tr>
+                  <th>Course Code</th>
+                  <th>Name</th>
+                  <th>Grade</th>
+                  <th>Course Credit</th>
+                </tr>
+                {transcriptSection}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    );
+  }
+}
 
 ObfuscatableValue.propTypes = {
   field: PropTypes.string,
   value: PropTypes.string,
-  handleObfuscation: PropTypes.func
+  handleObfuscation: PropTypes.func,
+  editable: PropTypes.bool
 };
 
 Template.propTypes = {
