@@ -1,10 +1,11 @@
 {
   "parser": "babel-eslint",
-  "extends": [
-    "plugin:react/recommended",
-    "airbnb-base",
-    "prettier"
-  ],
+  "settings": {
+    "import/resolver": {
+      "babel-module": {}
+    }
+  },
+  "extends": ["plugin:react/recommended", "airbnb-base", "prettier"],
   "env": {
     "mocha": true
   },
@@ -12,16 +13,10 @@
     "ecmaVersion": 2018,
     "sourceType": "module",
     "ecmaFeatures": {
-        "jsx": true
+      "jsx": true
     }
   },
-  "plugins": [
-    "react",
-    "prettier",
-    "chai-friendly",
-    "chai-expect",
-    "mocha"
-  ],
+  "plugins": ["react", "prettier", "chai-friendly", "chai-expect", "mocha"],
   "globals": {
     "artifacts": false,
     "contract": false,
@@ -37,10 +32,7 @@
         "argsIgnorePattern": "^_"
       }
     ],
-    "func-names": [
-      "error",
-      "as-needed"
-    ],
+    "func-names": ["error", "as-needed"],
     "react/react-in-jsx-scope": "off",
     "prettier/prettier": "error",
     "no-unused-expressions": "off",
