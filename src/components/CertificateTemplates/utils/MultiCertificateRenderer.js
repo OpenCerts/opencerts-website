@@ -16,8 +16,14 @@ const { trace } = getLogger("components:MultiCertificateRenderer");
  * @param {*} template
  * @param {*} certificate
  */
-export const renderTemplateToTab = (template, certificate) =>
-  Object.assign({}, template, { content: template.template({ certificate }) });
+export const renderTemplateToTab = ({
+  template,
+  certificate,
+  handleObfuscation
+}) =>
+  Object.assign({}, template, {
+    content: template.template({ certificate, handleObfuscation })
+  });
 
 /**
  * Retrieves the contract store address from the provided certificate
@@ -59,10 +65,10 @@ export class MultiCertificateRenderer extends Component {
   }
 
   render() {
-    const { certificate, whitelist, templates } = this.props;
+    const { certificate, whitelist, templates, handleObfuscation } = this.props;
     const tabs = templates.map(template => {
       trace(`%o`, template);
-      return renderTemplateToTab(template, certificate);
+      return renderTemplateToTab({ template, certificate, handleObfuscation });
     });
     const allowedToRender = storeCanRenderTemplate({ whitelist, certificate });
     const validCertificateContent = (
@@ -105,5 +111,6 @@ export class MultiCertificateRenderer extends Component {
 MultiCertificateRenderer.propTypes = {
   whitelist: PropTypes.array,
   templates: PropTypes.array.isRequired,
-  certificate: PropTypes.object.isRequired
+  certificate: PropTypes.object.isRequired,
+  handleObfuscation: PropTypes.func
 };

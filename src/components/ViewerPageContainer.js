@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Router from "next/router";
-import { certificateData } from "@govtechsg/open-certificate";
+import { certificateData, obfuscateFields } from "@govtechsg/open-certificate";
 
 import {
   updateCertificate,
@@ -15,7 +15,8 @@ import {
   getIssuedStatus,
   getNotRevokedStatus,
   getVerified,
-  getEmailSendingState
+  getEmailSendingState,
+  updateObfuscatedCertificate
 } from "../reducers/certificate";
 import CertificateViewer from "./CertificateViewer";
 
@@ -31,6 +32,7 @@ class MainPageContainer extends Component {
     this.handleCertificateChange = this.handleCertificateChange.bind(this);
     this.handleSharingToggle = this.handleSharingToggle.bind(this);
     this.handleSendCertificate = this.handleSendCertificate.bind(this);
+    this.handleObfuscation = this.handleObfuscation.bind(this);
   }
 
   componentDidMount() {
@@ -49,6 +51,11 @@ class MainPageContainer extends Component {
     this.setState({
       detailedVerifyVisible: !this.state.detailedVerifyVisible
     });
+  }
+
+  handleObfuscation(field) {
+    const updatedDocument = obfuscateFields(this.props.document, field);
+    this.props.updateObfuscatedCertificate(updatedDocument);
   }
 
   handleCertificateChange(certificate) {
@@ -78,6 +85,7 @@ class MainPageContainer extends Component {
         emailSendingState={this.props.emailSendingState}
         toggleDetailedView={this.toggleDetailedView}
         detailedVerifyVisible={this.state.detailedVerifyVisible}
+        handleObfuscation={this.handleObfuscation}
       />
     );
   }
@@ -100,7 +108,9 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => ({
   updateCertificate: payload => dispatch(updateCertificate(payload)),
   sendCertificate: payload => dispatch(sendCertificate(payload)),
-  sendCertificateReset: () => dispatch(sendCertificateReset())
+  sendCertificateReset: () => dispatch(sendCertificateReset()),
+  updateObfuscatedCertificate: updatedDoc =>
+    dispatch(updateObfuscatedCertificate(updatedDoc))
 });
 
 export default connect(
@@ -120,5 +130,6 @@ MainPageContainer.propTypes = {
   verified: PropTypes.bool,
   emailSendingState: PropTypes.string,
   sendCertificate: PropTypes.func,
-  sendCertificateReset: PropTypes.func
+  sendCertificateReset: PropTypes.func,
+  updateObfuscatedCertificate: PropTypes.func
 };
