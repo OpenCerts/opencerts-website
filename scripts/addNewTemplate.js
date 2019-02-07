@@ -19,7 +19,7 @@ export function reverseDnsNotation(domain) {
 
 export function generatePartialChildPaths(dirPath) {
   const childPaths = [];
-  const pathArray = dirPath.split(path.sep);
+  const pathArray = path.join(dirPath).split(path.sep);
   for (let i = pathArray.length; i > 0; i -= 1) {
     const fragment = path.join(...pathArray.slice(0, i));
     childPaths.push(fragment);

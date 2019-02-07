@@ -1,4 +1,5 @@
 import { stripIndent } from "common-tags";
+import path from "path";
 import {
   reverseDnsNotation,
   generatePartialChildPaths,
@@ -12,21 +13,21 @@ const EXAMPLE_DIR = "./src/components/CertificateTemplates/example";
 
 describe("reverseDnsNotation", () => {
   test("should work correctly", () => {
-    expect(reverseDnsNotation("nus.edu.sg")).toBe("sg/edu/nus");
-    expect(reverseDnsNotation("google.com")).toBe("com/google");
+    expect(reverseDnsNotation("nus.edu.sg")).toBe(`sg${path.sep}edu${path.sep}nus`);
+    expect(reverseDnsNotation("google.com")).toBe(`com${path.sep}google`);
   });
 });
 
 describe("generatePartialChildPaths", () => {
   test("should work correctly", () => {
     expect(generatePartialChildPaths("sg/edu/nus")).toEqual([
-      "sg",
-      "sg/edu",
-      "sg/edu/nus"
+      `sg`,
+      `sg${path.sep}edu`,
+      `sg${path.sep}edu${path.sep}nus`
     ]);
     expect(generatePartialChildPaths("com/google")).toEqual([
       "com",
-      "com/google"
+      `com${path.sep}google`
     ]);
   });
 });
@@ -40,12 +41,12 @@ describe("getSubDirs", () => {
 describe("getDirsToMake", () => {
   test("should work", () => {
     expect(getDirsToMake("blockchain-institute.edu.dev")).toEqual([
-      "dev",
-      "dev/edu",
-      "dev/edu/blockchain-institute"
+      `dev`,
+      `dev${path.sep}edu`,
+      `dev${path.sep}edu${path.sep}blockchain-institute`
     ]);
     expect(getDirsToMake("tech.gov.sg")).toEqual([]);
-    expect(getDirsToMake("nonexistent.gov.sg")).toEqual(["sg/gov/nonexistent"]);
+    expect(getDirsToMake("nonexistent.gov.sg")).toEqual([`sg${path.sep}gov${path.sep}nonexistent`]);
   });
 });
 
