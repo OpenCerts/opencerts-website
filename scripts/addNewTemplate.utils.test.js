@@ -1,15 +1,14 @@
 import { stripIndent } from "common-tags";
-import { inspect } from 'util';
 import {
   reverseDnsNotation,
   generatePartialChildPaths,
   getSubDirs,
   generateIntermediateIndexTemplate,
   generateOrganisationIndexExports,
-  getDirsToMake,
+  getDirsToMake
 } from "./addNewTemplate";
 
-const EXAMPLE_DIR = "./src/components/CertificateTemplates/tlds/com";
+const EXAMPLE_DIR = "./src/components/CertificateTemplates/example";
 
 describe("reverseDnsNotation", () => {
   test("should work correctly", () => {
@@ -21,13 +20,11 @@ describe("reverseDnsNotation", () => {
 describe("generatePartialChildPaths", () => {
   test("should work correctly", () => {
     expect(generatePartialChildPaths("sg/edu/nus")).toEqual([
-      "",
       "sg",
       "sg/edu",
       "sg/edu/nus"
     ]);
     expect(generatePartialChildPaths("com/google")).toEqual([
-      "",
       "com",
       "com/google"
     ]);
@@ -36,7 +33,7 @@ describe("generatePartialChildPaths", () => {
 
 describe("getSubDirs", () => {
   test("should return 'example' when used on example dir", () => {
-    expect(getSubDirs(EXAMPLE_DIR)).toEqual(["example"]);
+    expect(getSubDirs(EXAMPLE_DIR)).toEqual(["2019-Feb-ExampleTemplate"]);
   });
 });
 
@@ -72,6 +69,18 @@ describe("intermediateIndexTemplate", () => {
 
 describe("generateOrganisationIndexExports", () => {
   test("should work", () => {
-    console.log(generateOrganisationIndexExports())
-  })
-})
+    expect(
+      generateOrganisationIndexExports({
+        templateTagMapping: { foo: "bar", qux: "baz" },
+        organisationDir: "example"
+      })
+    ).toBe(stripIndent`
+      import dynamic from "next/dynamic";
+
+      export default {
+        "foo": dynamic(import("./bar" /* webpackChunkName: "example-Templates" */))
+        "qux": dynamic(import("./baz" /* webpackChunkName: "example-Templates" */))
+      };
+      `);
+  });
+});

@@ -1,52 +1,51 @@
-import { stripIndent } from "common-tags";
-// const exportedTemplates = require("../src/components/CertificateTemplates/tlds")
-//   .default;
+/* eslint-disable no-console */ // because this is a cli module
 
-// const existingTemplateTags = Object.keys(exportedTemplates);
+const { stripIndent } = require("common-tags");
 
-const { mapValues, reverse, join } = require("lodash");
-const fs = require("fs");
+const inquirer = require("inquirer");
+const { reverse } = require("lodash");
+const fs = require("fs-extra");
+const path = require("path");
 
-const TLDS_PATH = "./src/components/CertificateTemplates/tlds/";
-
-// prompt for institutes domain name
-// check if folder structure exists for institute's domain name
-//      tokenise and recurse down the domain name
+const TLDS_PATH = path.resolve("./src/components/CertificateTemplates/tlds/");
+const EXAMPLE_TEMPLATE_PATH = path.resolve(
+  TLDS_PATH,
+  "../example/2019-Feb-ExampleTemplate"
+);
 
 export function reverseDnsNotation(domain) {
-  return join(reverse(domain.split(".")), "/");
+  return path.join(...reverse(domain.split(".")));
 }
 
-export function generatePartialChildPaths(path) {
+export function generatePartialChildPaths(dirPath) {
   const childPaths = [];
-  const pathArray = path.split("/");
+  const pathArray = dirPath.split(path.sep);
   for (let i = pathArray.length; i > 0; i -= 1) {
-    const fragment = pathArray.slice(0, i).join("/");
+    const fragment = path.join(...pathArray.slice(0, i));
     childPaths.push(fragment);
   }
-  childPaths.push(""); // insert empty element as the base path (no subfolder) is part of the results
   return reverse(childPaths);
 }
 
-export function getSubDirs(path) {
-  const dirListing = fs.readdirSync(path, {
+export function getSubDirs(dirPath) {
+  const dirListing = fs.readdirSync(dirPath, {
     withFileTypes: true
   });
   return dirListing.filter(item => item.isDirectory()).map(dir => dir.name);
 }
 
-function folderNotExists(path) {
+function folderNotExists(dirPath) {
   try {
-    getSubDirs(`${TLDS_PATH + path}`);
+    getSubDirs(path.join(TLDS_PATH, dirPath));
     return undefined;
   } catch (error) {
-    return path;
+    return dirPath;
   }
 }
 
-export function getDirsToMake(instituteDomain) {
+export function getDirsToMake(organisationDomain) {
   const childPaths = generatePartialChildPaths(
-    reverseDnsNotation(instituteDomain)
+    reverseDnsNotation(organisationDomain)
   );
   return childPaths.map(folderNotExists).filter(Boolean); // removes the undefineds
 }
@@ -76,38 +75,30 @@ export function generateSubDirectoryDynamicImports(
   );
 }
 
-// TODO: make this an interactive user input function
-export function getTemplateTagToDirMapping() {
-  return {
-    "2018-Example-Certificate": "2018-Example-Certificate",
-    "2019-Example-Certificate": "2019-Example-Certificate"
-  };
-}
-
-export function generateOrganisationIndexExports() {
-  function generateExportString(templateTag, subDir, organisationDir) {
-    return `  "${templateTag}": ${makeDynamicImportFragment(
+export function generateOrganisationIndexExports({
+  templateTagMapping: templateNameMapping,
+  organisationDir
+}) {
+  function generateExportString(templateName, subDir) {
+    return `  "${templateName}": ${makeDynamicImportFragment(
       subDir,
       organisationDir
-    )}"`;
+    )}`;
   }
 
   function generateExportsObject(subDirs) {
-    let arr = [];
-    for (let templateTag of Object.keys(subDirs)) {
-      arr.push(
-        generateExportString(templateTag, subDirs[templateTag], organisationDir)
-      );
-    }
-    return arr;
+    return Object.keys(subDirs).map(templateName =>
+      generateExportString(templateName, subDirs[templateName])
+    );
   }
 
-  let subDirs = getTemplateTagToDirMapping();
-  let organisationDir = "tech";
   return stripIndent`
+import dynamic from "next/dynamic";
+
 export default {
-${generateExportsObject(subDirs).join("\n")}
-};`;
+${generateExportsObject(templateNameMapping).join("\n")}
+};
+`;
 }
 
 function makeSubdirectoryImport(subDir) {
@@ -126,19 +117,112 @@ import { addDirToTemplatePath } from "template-utils/addDirToTemplatePath";
 
 ${subDirectoryImports}
 
-export default addDirToTemplatePath("${currDir}", { ${subDirectoryExports} });`;
+export default addDirToTemplatePath("${currDir}", { ${subDirectoryExports} });
+`;
 }
 
-export function generateIndexForChildPath(childPath) {
-  // read the subfolders and make list
-  // figure out chunking standard naming convention
-  // update tlds index
+export function generateTldsIndex() {
+  const subDirs = getSubDirs(TLDS_PATH);
+  const subDirectoryImports = subDirs.map(makeSubdirectoryImport).join("\n");
+  const subDirectoryExports = makeSubdirectoryExports(subDirs);
+  return stripIndent`
+${subDirectoryImports}
+
+export default { ${subDirectoryExports} };`;
 }
 
-// write function to autogenerate index for every folder
+export function addNewTemplate({ templateName, organisationDomain }) {
+  const dirsToMake = getDirsToMake(organisationDomain);
+  const organisationPath = path.join(
+    TLDS_PATH,
+    reverseDnsNotation(organisationDomain)
+  );
+  if (dirsToMake.length === 0) {
+    throw new Error(
+      "Current version of addNewTemplate does not support adding templates to existing folder"
+    );
+  }
 
-// console.log(existingTemplateTags)
+  fs.mkdirSync(organisationPath);
+  fs.copySync(EXAMPLE_TEMPLATE_PATH, path.join(organisationPath, templateName));
 
-process.on("unhandledRejection", () => {
-  // swallow the parsing errors that result from JSX that we don't really care about
-});
+  const templateDestinationFolder = path.join(
+    reverseDnsNotation(organisationDomain),
+    templateName
+  );
+
+  const organisationDir = organisationPath.split(path.sep).slice(-1);
+  const organisationIndex = generateOrganisationIndexExports({
+    templateTagMapping: { [templateName]: templateName },
+    organisationDir
+  });
+
+  fs.writeFileSync(path.join(organisationPath, "index.js"), organisationIndex);
+
+  fs.writeFileSync(path.join(TLDS_PATH, "index.js"), generateTldsIndex());
+
+  const childPaths = generatePartialChildPaths(templateDestinationFolder);
+
+  const intermediateDirs = childPaths.slice(0, -2);
+
+  intermediateDirs.map(dir => {
+    const fullPath = path.resolve(TLDS_PATH, dir);
+    const dirName = dir.split(path.sep).slice(-1)[0];
+    const index = generateIntermediateIndexTemplate({
+      subDirs: getSubDirs(fullPath),
+      currDir: dirName
+    });
+    return fs.writeFileSync(path.join(fullPath, "index.js"), index);
+  });
+
+  return true;
+}
+
+export const cli = () => {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "organisationDomain",
+        message: "Organisation Domain Name? e.g: moe.edu.sg"
+      },
+      {
+        type: "input",
+        name: "templateName",
+        message:
+          "Template Name? (this is the value that will be in your certificate file) e.g: 2019-Feb-GovTech-Opencerts-Associate"
+      }
+    ])
+    .then(answers => {
+      const templatePath = path.join(
+        TLDS_PATH,
+        reverseDnsNotation(answers.organisationDomain),
+        answers.templateName
+      );
+      inquirer
+        .prompt([
+          {
+            type: "confirm",
+            name: "confirm",
+            message: `Organisation Domain Name: ${
+              answers.organisationDomain
+            }, Template Name: ${
+              answers.templateName
+            } \n Folder will be created at ${templatePath}`
+          }
+        ])
+        .then(confirmation => {
+          if (confirmation.confirm) {
+            try {
+              addNewTemplate({ ...answers });
+            } catch (error) {
+              console.error(error);
+            }
+          } else {
+            console.log("Operation cancelled");
+          }
+        });
+    });
+};
+
+export default addNewTemplate;
