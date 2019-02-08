@@ -2,8 +2,8 @@
   "name": "opencerts-website",
   "version": "2.0.0",
   "scripts": {
-    "test": "cross-env NODE_ENV=test jest",
-    "test:watch": "cross-env NODE_ENV=test DEBUG=true jest --watchAll",
+    "test": "jest",
+    "test:watch": "jest --watchAll",
     "dev": "next",
     "lint": "eslint . --ext .js --max-warnings 0",
     "lint:fix": "eslint . --ext .js --fix",
@@ -13,7 +13,7 @@
     "start:watch": "nodemon --exec \"npm run start\"",
     "cname": "echo 'opencerts.io' > out/CNAME",
     "deploy": "rm -rf out && npm run build:static",
-    "analyze": "cross-env BUNDLE_ANALYZE=browser npm run start",
+    "analyze": "BUNDLE_ANALYZE=browser npm run start",
     "dev-cli": "node -r esm ./scripts/cli.js"
   },
   "dependencies": {
@@ -21,7 +21,6 @@
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-sass": "^1.0.1",
     "common-tags": "^1.8.0",
-    "cross-env": "^5.2.0",
     "date-fns": "^1.29.0",
     "debug": "^4.1.0",
     "ethereumjs-util": "^6.0.0",
