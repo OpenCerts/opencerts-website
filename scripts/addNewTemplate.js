@@ -143,7 +143,7 @@ export function addNewTemplate({ templateName, organisationDomain }) {
     );
   }
 
-  fs.mkdirSync(organisationPath);
+  fs.mkdirSync(organisationPath, { recursive: true });
   fs.copySync(EXAMPLE_TEMPLATE_PATH, path.join(organisationPath, templateName));
 
   const templateDestinationFolder = path.join(
