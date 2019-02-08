@@ -14,12 +14,12 @@ See also:
 
 We develop primarily on a OS X / Linux environment so please lodge an issue if you are using Windows and find that you cannot successfully set up a local instance of this software.
 
-### CLI Interface
+### Developer CLI
 
 There is a rudimentary interface for adding a new template for organisations that are doing it for the first time. (support for adding templates to existing organisations will come in a later release)
 
 ```bash
-npm run templates-cli
+npm run dev-cli
 ```
 
 
