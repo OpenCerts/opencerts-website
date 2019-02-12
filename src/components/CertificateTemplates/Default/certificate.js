@@ -1,49 +1,8 @@
 import React, { Component } from "react";
 import { get } from "lodash";
 import PropTypes from "prop-types";
-
-const PrivacyFilterBanner = ({ toggleEditable }) => (
-  <div className="screen-only">
-    <div
-      className="row"
-      style={{
-        backgroundColor: "whitesmoke",
-        padding: 20,
-        marginBottom: 20
-      }}
-    >
-      <div style={{ display: "inline-block" }}>
-        <div className="h4">OpenCerts Privacy Filter Enabled</div>
-        <div>
-          Edit this certificate by removing sensitive information by clicking on
-          the edit button. Downloaded certificate remains valid!
-        </div>
-      </div>
-      <div
-        className="ml-auto h5 pointer"
-        style={{ display: "inline-block" }}
-        onClick={toggleEditable}
-      >
-        <i className="far fa-edit" />
-      </div>
-    </div>
-  </div>
-);
-
-PrivacyFilterBanner.propTypes = {
-  toggleEditable: PropTypes.func
-};
-
-const ObfuscatableValue = ({ field, value, handleObfuscation, editable }) =>
-  value ? (
-    <div
-      onClick={() => handleObfuscation(field)}
-      style={{ display: "inline-block" }}
-    >
-      {value}{" "}
-      {editable && <i className="fas fa-times" style={{ color: "#ff9090" }} />}
-    </div>
-  ) : null;
+import SimplePrivacyFilterBanner from "template-commons/Privacy/SimplePrivacyFilterBanner";
+import ObfuscatableValue from "template-commons/Privacy/ObfuscatableValue";
 
 class Template extends Component {
   constructor(props) {
@@ -113,7 +72,7 @@ class Template extends Component {
 
     return (
       <div className="container">
-        <PrivacyFilterBanner
+        <SimplePrivacyFilterBanner
           toggleEditable={() => this.setState({ editable: !editable })}
         />
         <div className="row">
@@ -169,14 +128,6 @@ class Template extends Component {
     );
   }
 }
-
-ObfuscatableValue.propTypes = {
-  field: PropTypes.string,
-  value: PropTypes.string,
-  handleObfuscation: PropTypes.func,
-  editable: PropTypes.bool
-};
-
 Template.propTypes = {
   certificate: PropTypes.object.isRequired,
   handleObfuscation: PropTypes.func
