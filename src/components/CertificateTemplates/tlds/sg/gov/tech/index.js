@@ -1,9 +1,9 @@
-import dynamic from "next/dynamic";
+import dynamic from "template-utils/dynamic";
 
-const OpenCertsAssociate2018 = dynamic(
+const OpenCertsAssociate2018 = dynamic(() =>
   import("./2018-OpenCertsAssociate" /* webpackChunkName: "GovTechTemplates" */)
 );
-const OpenCertsAssociate2019 = dynamic(
+const OpenCertsAssociate2019 = dynamic(() =>
   import("./2019-OpenCertsAssociate" /* webpackChunkName: "GovTechTemplates" */)
 );
 
