@@ -16,7 +16,8 @@
       {
         "root": ["./"],
         "alias": {
-          "template-utils": "./src/components/CertificateTemplates/utils"
+          "template-utils": "./src/components/CertificateTemplates/utils",
+          "template-commons": "./src/components/TemplateCommon"
         }
       }
     ]

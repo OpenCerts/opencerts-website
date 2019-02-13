@@ -7,6 +7,7 @@ export const states = {
 
 export const initialState = {
   raw: null,
+  rawModified: null,
   store: null,
   storeError: null,
   storeLoading: false,
@@ -62,7 +63,10 @@ export const types = {
   SENDING_CERTIFICATE: "SENDING_CERTIFICATE",
   SENDING_CERTIFICATE_SUCCESS: "SENDING_CERTIFICATE_SUCCESS",
   SENDING_CERTIFICATE_FAILURE: "SENDING_CERTIFICATE_FAILURE",
-  SENDING_CERTIFICATE_RESET: "SENDING_CERTIFICATE_RESET"
+  SENDING_CERTIFICATE_RESET: "SENDING_CERTIFICATE_RESET",
+
+  CERTIFICATE_OBFUSCATE_RESET: "CERTIFICATE_OBFUSCATE_RESET",
+  CERTIFICATE_OBFUSCATE_UPDATE: "CERTIFICATE_OBFUSCATE_UPDATE"
 };
 
 // Reducers
@@ -76,6 +80,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...initialState,
         raw: action.payload,
+        rawModified: action.payload,
         store: null,
         storeError: null,
         storeLoading: true
@@ -260,6 +265,16 @@ export default function reducer(state = initialState, action) {
         emailState: states.FAILURE,
         emailError: action.payload
       };
+    case types.CERTIFICATE_OBFUSCATE_RESET:
+      return {
+        ...initialState,
+        rawModified: state.raw
+      };
+    case types.CERTIFICATE_OBFUSCATE_UPDATE:
+      return {
+        ...state,
+        rawModified: action.payload
+      };
     default:
       return state;
   }
@@ -311,6 +326,19 @@ export function sendCertificate(payload) {
 export function sendCertificateReset() {
   return {
     type: types.SENDING_CERTIFICATE_RESET
+  };
+}
+
+export function resetCertificateObfuscation() {
+  return {
+    type: types.CERTIFICATE_OBFUSCATE_RESET
+  };
+}
+
+export function updateObfuscatedCertificate(payload) {
+  return {
+    type: types.CERTIFICATE_OBFUSCATE_UPDATE,
+    payload
   };
 }
 
@@ -370,7 +398,7 @@ export function getNotRevokedStatus(store) {
 }
 
 export function getCertificate(store) {
-  return store.certificate.raw;
+  return store.certificate.rawModified;
 }
 
 export function getVerifying(store) {

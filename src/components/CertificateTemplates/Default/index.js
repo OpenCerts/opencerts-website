@@ -10,12 +10,17 @@ const templates = [
   }
 ];
 
-const DefaultTemplate = ({ certificate }) => (
-  <MultiCertificateRenderer certificate={certificate} templates={templates} />
+const DefaultTemplate = ({ certificate, handleObfuscation }) => (
+  <MultiCertificateRenderer
+    certificate={certificate}
+    templates={templates}
+    handleObfuscation={handleObfuscation}
+  />
 );
 
 DefaultTemplate.displayName = "Default Template";
 DefaultTemplate.propTypes = {
-  certificate: PropTypes.object.isRequired
+  certificate: PropTypes.object.isRequired,
+  handleObfuscation: PropTypes.func
 };
 export default DefaultTemplate;
