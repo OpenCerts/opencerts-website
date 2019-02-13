@@ -8,7 +8,7 @@ const CarouselSection = () => {
     },
     {
       key: "NYP",
-      value: "/static/images/NYP_logo.svg"
+      value: "/static/images/NYP_logo.png"
     },
     {
       key: "RP",
@@ -21,6 +21,10 @@ const CarouselSection = () => {
     {
       key: "TP",
       value: "/static/images/TP_logo.svg"
+    },
+    {
+      key: "SEAB",
+      value: "/static/images/SEAB_logo.png"
     },
     {
       key: "ITE",
@@ -53,10 +57,6 @@ const CarouselSection = () => {
     {
       key: "SUTD",
       value: "/static/images/SUTD_logo.png"
-    },
-    {
-      key: "SEAB",
-      value: "/static/images/SEAB_logo.png"
     },
     {
       key: "CSC",
