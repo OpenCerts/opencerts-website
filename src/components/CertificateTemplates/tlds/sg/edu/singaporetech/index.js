@@ -1,7 +1,7 @@
-import dynamic from "next/dynamic";
+import dynamic from "template-utils/dynamic";
 import { addDirToTemplatePath } from "template-utils/addDirToTemplatePath";
 
-const SITCert2018 = dynamic(
+const SITCert2018 = dynamic(() =>
   import("./2018-certificate" /* webpackChunkName: "SITTemplates" */)
 );
 

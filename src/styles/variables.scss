@@ -18,6 +18,8 @@ $invalid-background: #FBEBE7;
 $btn-outline: $brand-dark;
 $round-btn-outline: $brand-dark;
 
+$max-width: 1280px;
+
 @mixin btn($color, $hover-bg: $color, $text: $color, $bg:$color, $hover-outline: $hover-bg) {
   border: 1px solid $color;
   color: $text;

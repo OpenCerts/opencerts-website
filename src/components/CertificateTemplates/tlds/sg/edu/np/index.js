@@ -1,25 +1,25 @@
-import dynamic from "next/dynamic";
+import dynamic from "template-utils/dynamic";
 import { addDirToTemplatePath } from "template-utils/addDirToTemplatePath";
 
-const NPAA2018MAIN = dynamic(
+const NPAA2018MAIN = dynamic(() =>
   import("./NP-AA2018-MAIN" /* webpackChunkName: "NgeeAnnTemplates" */)
 );
-const NPAA2018OPTION = dynamic(
+const NPAA2018OPTION = dynamic(() =>
   import("./NP-AA2018-OPTION" /* webpackChunkName: "NgeeAnnTemplates" */)
 );
-const NPAA2018BMSCLT = dynamic(
+const NPAA2018BMSCLT = dynamic(() =>
   import("./NP-AA2018-BMS(CLT)" /* webpackChunkName: "NgeeAnnTemplates" */)
 );
-const NPAA2018ECH = dynamic(
+const NPAA2018ECH = dynamic(() =>
   import("./NP-AA2018-ECH" /* webpackChunkName: "NgeeAnnTemplates" */)
 );
-const NPAA2018LDH = dynamic(
+const NPAA2018LDH = dynamic(() =>
   import("./NP-AA2018-LDH" /* webpackChunkName: "NgeeAnnTemplates" */)
 );
-const NPAA2018PHARM = dynamic(
+const NPAA2018PHARM = dynamic(() =>
   import("./NP-AA2018-PHARM" /* webpackChunkName: "NgeeAnnTemplates" */)
 );
-const NPAA2018DPP = dynamic(
+const NPAA2018DPP = dynamic(() =>
   import("./NP-AA2018-DPP" /* webpackChunkName: "NgeeAnnTemplates" */)
 );
 
