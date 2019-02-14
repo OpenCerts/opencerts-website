@@ -1,13 +1,41 @@
-const renderCertificateChange = handleCertificateChange => (
-  <a href="/" onClick={() => handleCertificateChange(null)}>
-    ← View another
-  </a>
+import styles from "../certificateViewer.scss";
+import style from "./loadingView.scss";
+
+const renderHeader = () => (
+  <div id={styles["header-ui"]}>
+    <div className={styles["header-container"]}>
+      <div className="nav nav-tabs py-3">
+        <a href="/" className={styles["view-another"]}>
+          View another
+        </a>
+      </div>
+    </div>
+  </div>
+);
+
+const renderContent = () => (
+  <div className={`container-fluid`}>
+    <div className={`${style.container}`}>
+      <div
+        className={`d-flex flex-column justify-content-center ${
+          style["inner-container"]
+        }`}
+      >
+        <div className="d-flex flex-column justify-content-center align-items-center text-red">
+          <div>
+            <i className="fas fa-times-circle fa-5x" />
+          </div>
+          <div className="m-4 h3">No Permission To Render Template</div>
+        </div>
+      </div>
+    </div>
+  </div>
 );
 
 const InvalidCertificateNotice = () => (
   <div>
-    {renderCertificateChange()}
-    <div className="row my-3 p-4">INVALID CERTIFICATE!</div>
+    {renderHeader()}
+    {renderContent()}
   </div>
 );
 
