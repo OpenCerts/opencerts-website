@@ -1,11 +1,10 @@
-import styles from "../certificateViewer.scss";
-import style from "./loadingView.scss";
+import style from "./invalidCertificateNotice.scss";
 
 const renderHeader = () => (
-  <div id={styles["header-ui"]}>
-    <div className={styles["header-container"]}>
+  <div id={style["header-ui"]}>
+    <div className={style["header-container"]}>
       <div className="nav nav-tabs py-3">
-        <a href="/" className={styles["view-another"]}>
+        <a href="/" className={style["view-another"]}>
           View another
         </a>
       </div>
