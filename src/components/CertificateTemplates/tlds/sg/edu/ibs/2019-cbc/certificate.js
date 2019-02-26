@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { IBS_LOGO, IBS_SIGN} from "./images";
+import { IBS_LOGO, IBS_SIGN } from "./images";
 
 const garamondItalic18Pt = {
   fontFamily: "Garamond",
