@@ -144,9 +144,7 @@ const Template = ({ certificate }) => (
           </div>
           <div className="row">
             <div className="col-md-12 text-center">
-              <span style={helvetica12Pt}>
-                President
-              </span>
+              <span style={helvetica12Pt}>President</span>
             </div>
           </div>
         </div>
