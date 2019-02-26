@@ -50,21 +50,6 @@ const helvetica12Pt = {
   color: "black"
 };
 
-const bgImgStyle = {
-  backgroundRepeat: "repeat",
-  backgroundImage: `url(${})`,
-  backgroundSize: "100px 100px"
-};
-
-const borderImgStyle = {
-  border: "90px solid transparent",
-  borderImage: `url(${})`,
-  borderImageSlice: "35%",
-  borderImageRepeat: "repeat",
-  paddingRight: "0px",
-  paddingLeft: "0px"
-};
-
 const logoImgStyle = {
   width: "268px",
   height: "130px"
@@ -86,8 +71,8 @@ const depPresidentStyle = {
 };
 
 const Template = ({ certificate }) => (
-  <div className="container" style={borderImgStyle}>
-    <div style={bgImgStyle}>
+  <div className="container">
+    <div>
       <div
         className="row d-flex justify-content-center"
         style={{ marginTop: "-2rem" }}
