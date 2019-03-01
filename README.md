@@ -51,3 +51,16 @@ NET=mainnet npm run dev
 ### Troubleshooting
 
 To enable debug logs in the browser, set `localStorage.debug="*"`
+
+###### Module build failed
+
+If you see module build failure message like:
+```
+Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):
+ModuleBuildError: Module build failed (from ./node_modules/sass-loader/lib/loader.js):
+Error: ENOENT: no such file or directory, scandir 'D:\opencerts-website\node_modules\node-sass\vendor'
+at Object.readdirSync (fs.js:783:3)
+```
+
+Try running `npm rebuild`
+
