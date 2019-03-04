@@ -90,16 +90,12 @@ const Template = ({ certificate }) => (
           </div>
           <div className="row">
             <div className="col-md-12 text-center">
-              <span style={helvetica12Pt}>
-              {certificate.additionalData.presidentSign.designation}
-              </span>
+              <span style={helvetica12Pt}>President</span>
             </div>
           </div>
           <div className="row">
             <div className="col-md-12 text-center">
-              <span style={helvetica12Pt}>
-              {certificate.additionalData.presidentSign.name}
-              </span>
+              <span style={helvetica12Pt}>Alvin Chua</span>
             </div>
           </div>
         </div>
