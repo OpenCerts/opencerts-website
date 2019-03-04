@@ -8,8 +8,6 @@ const garamondItalic18Pt = {
   textAlign: "center",
   color: "black"
 };
-
-
 const timesNewRoman18Pt = {
   fontFamily: "Times New Roman",
   fontSize: "24px",
@@ -17,8 +15,6 @@ const timesNewRoman18Pt = {
   textAlign: "center",
   color: "black"
 };
-
-
 const helvetica12Pt = {
   fontFamily: "Helvetica",
   fontSize: "16px",
@@ -35,13 +31,10 @@ const sealImgStyle = {
   width: "180px",
   height: "180px"
 };
-
 const presidentStyle = {
   width: "192px",
   height: "62px"
 };
-
-
 const Template = ({ certificate }) => (
   <div className="container">
     <div>
