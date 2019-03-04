@@ -48,7 +48,7 @@ const CarouselSection = () => {
     },
     {
       key: "SMU",
-      value: "/static/images/SMU_logo.png"
+      value: "/static/images/SMU_logo.svg"
     },
     {
       key: "SUSS",
