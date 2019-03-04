@@ -9,20 +9,6 @@ const garamondItalic18Pt = {
   color: "black"
 };
 
-const arial18PtRed = {
-  fontFamily: "Arial",
-  fontSize: "24px",
-  textAlign: "center",
-  color: "red"
-};
-
-const arial18PtRedBold = {
-  fontFamily: "Arial",
-  fontSize: "24px",
-  fontWeight: "bold",
-  textAlign: "center",
-  color: "red"
-};
 
 const timesNewRoman18Pt = {
   fontFamily: "Times New Roman",
@@ -32,13 +18,6 @@ const timesNewRoman18Pt = {
   color: "black"
 };
 
-const timesNewRoman18PtRed = {
-  fontFamily: "Times New Roman",
-  fontSize: "24px",
-  fontWeight: "bold",
-  textAlign: "center",
-  color: "red"
-};
 
 const helvetica12Pt = {
   fontFamily: "Helvetica",
@@ -62,10 +41,6 @@ const presidentStyle = {
   height: "62px"
 };
 
-const depPresidentStyle = {
-  width: "174px",
-  height: "82px"
-};
 
 const Template = ({ certificate }) => (
   <div className="container">
@@ -115,12 +90,16 @@ const Template = ({ certificate }) => (
           </div>
           <div className="row">
             <div className="col-md-12 text-center">
-              <span style={helvetica12Pt}>{certificate.additionalData.presidentSign.designation}</span>
+              <span style={helvetica12Pt}>
+              {certificate.additionalData.presidentSign.designation}
+              </span>
             </div>
           </div>
           <div className="row">
             <div className="col-md-12 text-center">
-              <span style={helvetica12Pt}>{certificate.additionalData.presidentSign.name}</span>
+              <span style={helvetica12Pt}>
+              {certificate.additionalData.presidentSign.name}
+              </span>
             </div>
           </div>
         </div>
