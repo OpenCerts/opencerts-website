@@ -59,6 +59,10 @@ const CarouselSection = () => {
       value: "/static/images/CSC_logo.png"
     },
     {
+      key: "IBS",
+      value: "/static/images/IBS_logo.png"
+    },
+    {
       key: "govtech",
       value: "/static/images/GOVTECH_logo.png"
     }

@@ -87,33 +87,17 @@ const Template = ({ certificate }) => (
       </div>
       <div className="row d-flex justify-content-center">
         <span style={garamondItalic18Pt}>
-          having fulfilled the requirements of the University was conferred the
-          degree of
+          having fulfilled the requirements of the Certified Blockchain Consultant
         </span>
       </div>
       <div className="row d-flex justify-content-center">&nbsp;</div>
       <div className="row d-flex justify-content-center">
-        <span style={arial18PtRedBold}>
-          {certificate.additionalData.degreeName1}
-        </span>
-      </div>
-      <div className="row d-flex justify-content-center">
-        <span style={arial18PtRed}>
-          {certificate.additionalData.degreeName2}
-        </span>
-      </div>
-      <div className="row d-flex justify-content-center">
         <p style={garamondItalic18Pt}>
-          {certificate.additionalData.degreeName3}
+          {certificate.additionalData.certificate}
           <br />
-          {certificate.additionalData.confDate}
+          {certificate.additionalData.issueDate}
         </p>
       </div>
-      {certificate.additionalData.degreeName2.length === 0 && (
-        <div className="row d-flex justify-content-center">
-          <span style={timesNewRoman18PtRed}>&nbsp;</span>
-        </div>
-      )}
       <div className="row" style={{ marginTop: "1rem", marginBottom: "-2rem" }}>
         <div className="col-md-4 text-left">
           <br />
@@ -124,27 +108,18 @@ const Template = ({ certificate }) => (
           <div className="row">
             <div className="col-md-12 text-center">
               <img
-                src={certificate.additionalData.sitPresidentSign}
+                src={certificate.additionalData.presidentSign.signature}
                 style={presidentStyle}
               />
             </div>
           </div>
           <div className="row">
             <div className="col-md-12 text-center">
-              <span style={helvetica12Pt}>President</span>
+              <span style={helvetica12Pt}>{certificate.additionalData.presidentSign.name}</span>
             </div>
-          </div>
           <div className="row">
             <div className="col-md-12 text-center">
-              <img
-                src={certificate.additionalData.sitDepPresidentSign}
-                style={depPresidentStyle}
-              />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-12 text-center">
-              <span style={helvetica12Pt}>President</span>
+              <span style={helvetica12Pt}>{certificate.additionalData.presidentSign.designation}</span>
             </div>
           </div>
         </div>
