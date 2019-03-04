@@ -54,9 +54,7 @@ const Template = ({ certificate }) => (
         <span style={timesNewRoman18Pt}>{certificate.recipient.name}</span>
       </div>
       <div className="row d-flex justify-content-center">
-        <span style={garamondItalic18Pt}>
-          having fulfilled the requirements of the Certified Blockchain Consultant
-        </span>
+        <span style={garamondItalic18Pt}>having fulfilled the requirements of the Certified Blockchain Consultant</span>
       </div>
       <div className="row d-flex justify-content-center">&nbsp;</div>
       <div className="row d-flex justify-content-center">
