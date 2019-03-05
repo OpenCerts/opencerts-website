@@ -11,7 +11,7 @@ class MainPageContainer extends Component {
     super(props);
 
     this.handleCertificateChange = this.handleCertificateChange.bind(this);
-    this.handleChange = this.handleTextFieldChange.bind(this);
+    this.handleTextFieldChange = this.handleTextFieldChange.bind(this);
   }
 
   handleTextFieldChange(e) {
