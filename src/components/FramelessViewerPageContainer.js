@@ -3,20 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { certificateData, obfuscateFields } from "@govtechsg/open-certificate";
 
-import {
-  updateCertificate,
-  sendCertificate,
-  sendCertificateReset,
-  getCertificate,
-  getVerifying,
-  getIssuerIdentityStatus,
-  getHashStatus,
-  getIssuedStatus,
-  getNotRevokedStatus,
-  getVerified,
-  getEmailSendingState,
-  updateObfuscatedCertificate
-} from "../reducers/certificate";
+import { updateCertificate, getCertificate } from "../reducers/certificate";
 import FramelessCertificateViewer from "./FramelessCertificateViewer";
 
 class MainPageContainer extends Component {
@@ -24,19 +11,11 @@ class MainPageContainer extends Component {
     super(props);
 
     this.handleCertificateChange = this.handleCertificateChange.bind(this);
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChange = this.handleTextFieldChange.bind(this);
   }
 
-  componentDidMount() {
-    // const { document } = this.props;
-    // if (!document) {
-    //   Router.replace("/");
-    // }
-  }
-
-
-  handleChange(e) {
-    this.props.updateCertificate(JSON.parse(e.target.value))
+  handleTextFieldChange(e) {
+    this.props.updateCertificate(JSON.parse(e.target.value));
   }
 
   handleObfuscation(field) {
@@ -49,11 +28,16 @@ class MainPageContainer extends Component {
   }
 
   render() {
-    if (!this.props.document) { return (
-      <>
-            <input id="certificateContentsString" onChange={this.handleChange} />
-      </>
-    ) };
+    if (!this.props.document) {
+      return (
+        <>
+          <input
+            id="certificateContentsString"
+            onChange={this.handleTextFieldChange}
+          />
+        </>
+      );
+    }
     return (
       <FramelessCertificateViewer
         document={this.props.document}
@@ -68,7 +52,7 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateCertificate: payload => dispatch(updateCertificate(payload)),
+  updateCertificate: payload => dispatch(updateCertificate(payload))
 });
 
 export default connect(
