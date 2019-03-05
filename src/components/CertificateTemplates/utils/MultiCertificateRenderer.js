@@ -83,13 +83,17 @@ export class MultiCertificateRenderer extends Component {
         <Tabs selectedTabClassName={styles.active}>
           <div id={styles["header-ui"]}>
             <div className={styles["header-container"]}>
-              <TabList className="nav nav-tabs">
+              <TabList id="template-tabs-list" className="nav nav-tabs">
                 {tabs.map(tab => (
                   <Tab key={tab.id} className={styles.tab}>
                     {tab.label}
                   </Tab>
                 ))}
-                <a href=" " className={styles["view-another"]}>
+                <a
+                  id="btn-view-another"
+                  href=" "
+                  className={styles["view-another"]}
+                >
                   View another
                 </a>
               </TabList>
@@ -98,7 +102,7 @@ export class MultiCertificateRenderer extends Component {
 
           <div
             className="tab-content bg-white p-3 mt-3 rounded"
-            id="myTabContent"
+            id="rendered-certificate"
           >
             {tabs.map(tab => (
               <TabPanel key={tab.id}>{tab.content}</TabPanel>

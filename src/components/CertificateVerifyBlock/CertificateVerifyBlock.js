@@ -114,7 +114,10 @@ const CertificateVerifyBlock = props => {
   const status = statusSummary(props);
   return (
     <div className={css.verifyBlockPadding}>
-      <div className={`d-flex align-items-start ${css.verifyBlocksContainer}`}>
+      <div
+        id="certificate-verify-block"
+        className={`d-flex align-items-start ${css.verifyBlocksContainer}`}
+      >
         <SimpleVerifyBlock {...props} />
         {props.detailedVerifyVisible ? (
           <DetailedCertificateVerifyBlock

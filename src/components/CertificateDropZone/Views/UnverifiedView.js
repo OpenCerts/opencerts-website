@@ -83,7 +83,9 @@ const View = ({
             }}
           >
             <Link href="/viewer">
-              <a className={css["text-link"]}>View certificate anyway</a>
+              <a id="certificate-view-anyway" className={css["text-link"]}>
+                View certificate anyway
+              </a>
             </Link>
           </span>
         ) : (
