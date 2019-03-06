@@ -47,7 +47,7 @@
     "redux-devtools-extension": "^2.13.7",
     "redux-saga": "^0.16.0",
     "truffle-contract": "^4.0.8",
-    "web3": "1.0.0-beta.37",
+    "web3": "1.0.0-beta.36",
     "web3-provider-engine": "14.0.6"
   },
   "license": "ISC",
