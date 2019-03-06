@@ -9,5 +9,17 @@
     "test": {
       "presets": [["next/babel", { "preset-env": { "modules": "commonjs" } }]]
     }
-  }
+  },
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["./"],
+        "alias": {
+          "template-utils": "./src/components/CertificateTemplates/utils",
+          "template-commons": "./src/components/TemplateCommon"
+        }
+      }
+    ]
+  ]
 }

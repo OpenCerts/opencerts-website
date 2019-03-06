@@ -1,38 +1,31 @@
 {
   "name": "opencerts-website",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "scripts": {
-    "test": "NODE_ENV=test jest",
-    "test:watch": "NODE_ENV=test DEBUG=true jest --watchAll",
+    "test": "jest",
+    "test:watch": "jest --watchAll",
     "dev": "next",
     "lint": "eslint . --ext .js --max-warnings 0",
     "lint:fix": "eslint . --ext .js --fix",
     "build": "next build",
     "build:static": "next build && next export",
     "start": "next build && next start",
+    "start:watch": "nodemon --exec \"npm run start\"",
     "cname": "echo 'opencerts.io' > out/CNAME",
-    "deploy:gh-pages": "yarn deploy:prebuilt && touch out/.nojekyll && yarn cname && gh-pages --dotfiles --dist out",
-    "deploy": "rm -rf out && yarn build:static",
-    "analyze": "BUNDLE_ANALYZE=browser yarn start"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "git add"
-    ]
+    "deploy": "rm -rf out && npm run build:static",
+    "analyze": "BUNDLE_ANALYZE=browser npm run start",
+    "dev-cli": "node -r esm ./scripts/cli.js"
   },
   "dependencies": {
     "@govtechsg/open-certificate": "^1.1.34",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-sass": "^1.0.1",
+    "common-tags": "^1.8.0",
     "date-fns": "^1.29.0",
     "debug": "^4.1.0",
     "ethereumjs-util": "^6.0.0",
+    "fs-extra": "^7.0.1",
+    "inquirer": "^6.2.2",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.11",
     "next": "^7.0.1",
@@ -50,7 +43,7 @@
     "redux-devtools-extension": "^2.13.7",
     "redux-saga": "^0.16.0",
     "truffle-contract": "^3.0.4",
-    "web3": "^1.0.0-beta.36",
+    "web3": "1.0.0-beta.37",
     "web3-provider-engine": "14.0.6"
   },
   "license": "ISC",
@@ -58,6 +51,7 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
+    "babel-plugin-module-resolver": "^3.1.3",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "enzyme": "^3.7.0",
@@ -65,16 +59,17 @@
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^3.3.0",
+    "eslint-import-resolver-babel-module": "^5.0.1",
     "eslint-plugin-chai-expect": "^2.0.1",
     "eslint-plugin-chai-friendly": "^0.4.1",
-    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-mocha": "^5.2.0",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.7.0",
+    "esm": "^3.1.1",
     "gh-pages": "^2.0.1",
-    "husky": "^1.2.0",
     "jest": "^23.6.0",
-    "lint-staged": "^8.1.0",
+    "nodemon": "^1.18.9",
     "prettier": "^1.15.3",
     "proxyquire": "^2.1.0",
     "sinon": "^7.1.1"
