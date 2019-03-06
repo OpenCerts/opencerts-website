@@ -16,8 +16,9 @@
     "analyze": "BUNDLE_ANALYZE=browser npm run start",
     "dev-cli": "node -r esm ./scripts/cli.js",
     "serve-static": "node node_modules/http-server/bin/http-server out -s -p 3000",
+    "integration": "node node_modules/testcafe/bin/testcafe.js chrome integration/**.js",
     "integration:headless": "node node_modules/testcafe/bin/testcafe.js chrome:headless integration/**.js --app \"npm run serve-static\"",
-    "integration:watch": "nodemon --exec \"npm run test:integration\" --watch integration --watch src"
+    "integration:watch": "nodemon --exec \"npm run integration\" --watch integration --watch src"
   },
   "dependencies": {
     "@govtechsg/open-certificate": "^1.1.34",
@@ -45,7 +46,7 @@
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.7",
     "redux-saga": "^0.16.0",
-    "truffle-contract": "^3.0.4",
+    "truffle-contract": "^4.0.8",
     "web3": "1.0.0-beta.37",
     "web3-provider-engine": "14.0.6"
   },
