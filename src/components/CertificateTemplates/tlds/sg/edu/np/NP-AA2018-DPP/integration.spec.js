@@ -4,7 +4,7 @@ import { Selector } from "testcafe";
 // eslint-disable-next-line
 fixture("Ngee Ann Polytechnic").page`http://localhost:3000`;
 
-const Certificate = "./NP_Certs_FT_BMS.opencert";
+const Certificate = "./NP_Certs_DPP.opencert";
 
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
@@ -15,7 +15,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("BMS certificate is rendered correctly", async t => {
+test("DPP certificate is rendered correctly", async t => {
   // Uploads certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
@@ -25,13 +25,11 @@ test("BMS certificate is rendered correctly", async t => {
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
-    "Student Name BMS Cert",
-    "Diploma with Merit",
-    "Biomedical Science",
+    "Student Name DPP Cert",
+    "Diploma Plus Certificate",
+    "French",
     "Principal",
-    "Council Chairman",
-    "Chief Executive Officer",
-    "National University Hospital"
+    "Council Chairman"
   ]);
 
   // Navigate to Transcript tab
@@ -41,11 +39,11 @@ test("BMS certificate is rendered correctly", async t => {
   // Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
     "TRANSCRIPT OF ACADEMIC RECORD",
-    "Student Name BMS Cert",
-    "MOLECULAR BIOTECHNOLOGY",
+    "Student Name DPP Cert",
+    "CERTIFICATE IN FRENCH",
+    "MINDWORKS",
     "S1234888A",
-    "DRAWING & PERSPECTIVE",
-    "National Physical Fitness Award",
-    "Professional Preparation Programme"
+    "The student has completed the Diploma Plus Certificate in French.",
+    "Director, Academic Affairs"
   ]);
 });
