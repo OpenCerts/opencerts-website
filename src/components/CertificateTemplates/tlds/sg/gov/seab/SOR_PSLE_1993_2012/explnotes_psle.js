@@ -97,8 +97,8 @@ export const renderExplonataryNotes = () => (
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <b>Distinction, Merit or Pass </b>
           <br />
-          Subjects that are not graded will be reflected as "Ungraded".
-        </div>
+          Subjects that are not graded will be reflected as {`"Ungraded"`}.
+        </div>/
       </div>
       <div className="row">
         <div className="col-md-12">&nbsp;</div>
@@ -122,7 +122,7 @@ export const renderExplonataryNotes = () => (
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <b>Distinction, Merit or Pass</b>
           <br />
-          Subjects that are not graded will be reflected as "Ungraded".
+          Subjects that are not graded will be reflected as {`"Ungraded"`}.
         </div>
       </div>
       <div className="row">
@@ -141,7 +141,7 @@ export const renderExplonataryNotes = () => (
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <b>1, 2, 3 or 4</b> (1 is the highest and 4 the lowest).
           <br />
-          Subjects that are not graded will be reflected as "Ungraded".
+          Subjects that are not graded will be reflected as {`"Ungraded"`}.
         </div>
       </div>
       <div className="row">

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { SOR_TRANSCRIPT_FONT_SIZE_12, SOR_TRANSCRIPT_FONT_SIZE_11 } from ".";
 
 export const RENDER_SOR_HEADER = ({ certificate }) => (
@@ -148,3 +149,19 @@ export const RENDER_SOR_INFO_PSLE = ({ certificate }) => (
     </div>
   </div>
 );
+
+RENDER_SOR_HEADER.propTypes = {
+  certificate: PropTypes.object.isRequired
+};
+
+RENDER_SOR_FOOTER.propTypes = {
+  certificate: PropTypes.object.isRequired
+};
+
+RENDER_SOR_INFO.propTypes = {
+  certificate: PropTypes.object.isRequired
+};
+
+RENDER_SOR_INFO_PSLE.propTypes = {
+  certificate: PropTypes.object.isRequired
+};

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { get } from "lodash";
 import { TOP_IMG } from "../common/images";
 import {
@@ -19,23 +20,20 @@ export const renderTranscript = ({ certificate }) => {
   const transcript = get(certificate, "transcript");
 
   const transcriptDetailsGCEA3 = transcript.map(trn => (
-    <div className="row" style={SOR_TRANSCRIPT_FONT_SIZE_11}>
+    <div className="row" style={SOR_TRANSCRIPT_FONT_SIZE_11} key={trn.id}>
       <div className="col-md-12">
         <div className="row">
           <div className="col-md-4">
             {trn.name}
-            {trn.pExaminingAgency !== "" ? (
+            {trn.pExaminingAgency !== "" &&
               trn.pExaminingAgency !== trn.examiningAuthority ? (
                 <span>
                   <br />
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{trn.pExaminingAgency}
                 </span>
-              ) : (
+                ) : (
                 <span />
-              )
-            ) : (
-              <span />
-            )}
+				)}
           </div>
           <div className="col-md-2">{trn.level}</div>
           <div className="col-md-2">{trn.grade}</div>
@@ -183,5 +181,9 @@ const Template = certificate => (
     </div>
   </div>
 );
+
+renderTranscript.propTypes = {
+  certificate: PropTypes.object.isRequired
+};
 
 export default Template;
