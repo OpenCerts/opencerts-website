@@ -17,8 +17,8 @@
     "dev-cli": "node -r esm ./scripts/cli.js",
     "serve-static": "node node_modules/http-server/bin/http-server out -s -p 3000",
     "integration": "node node_modules/testcafe/bin/testcafe.js chrome src/**/*.spec.js",
-    "integration:headless": "node node_modules/testcafe/bin/testcafe.js chrome:headless integration/**.js --app \"npm run serve-static\"",
-    "integration:watch": "nodemon --exec \"npm run integration\" --watch integration --watch src"
+    "integration:headless": "node node_modules/testcafe/bin/testcafe.js chrome:headless src/**/*.spec.js --app \"npm run serve-static\"",
+    "integration:watch": "nodemon --exec \"npm run integration\" --watch src"
   },
   "dependencies": {
     "@govtechsg/open-certificate": "^1.1.34",
