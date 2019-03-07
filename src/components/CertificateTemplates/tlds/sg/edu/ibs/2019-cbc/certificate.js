@@ -1,6 +1,18 @@
 import PropTypes from "prop-types";
 import { IBS_LOGO, IBS_SIGN } from "./images";
 
+const title = {
+  fontSize: "28px",
+  fontWeight: "bold",
+  textAlign: "center",
+  color: "black"
+};
+const titlebig = {
+  fontSize: "30px",
+  fontWeight: "bold",
+  textAlign: "center",
+  color: "black"
+};
 const garamondItalic18Pt = {
   fontFamily: "Garamond",
   fontSize: "24px",
@@ -25,13 +37,13 @@ const helvetica12Pt = {
 };
 
 const logoImgStyle = {
-  width: "268px",
-  height: "130px"
+  width: "50%",
+  height: "50%"
 };
 
 const sealImgStyle = {
-  width: "180px",
-  height: "180px"
+  width: "120px",
+  height: "120px"
 };
 
 const presidentStyle = {
@@ -44,59 +56,82 @@ const Template = ({ certificate }) => (
     <div>
       <div
         className="row d-flex justify-content-center"
-        style={{ marginTop: "-2rem" }}
+        style={{ marginTop: "3rem" }}
       >
         <img src={IBS_LOGO} style={logoImgStyle} />
       </div>
       <div
         className="row d-flex justify-content-center"
-        style={{ marginTop: "2rem" }}
+        style={{ marginTop: "1rem" }}
       >
-        <span style={garamondItalic18Pt}>This is to certify that</span>
+        <span style={title}>PROFESSIONAL CERTIFICATE OF</span>
+      </div>
+      <div
+        className="row d-flex justify-content-center"
+        style={{ marginTop: "1rem" }}
+      >
+        <span style={titlebig}>{certificate.additionalData.certificate}</span>
+      </div>
+      <div
+        className="row d-flex justify-content-center"
+        style={{ marginTop: "1rem" }}
+      >
+        <span style={titlebig}>区块链顾问认证书</span>
+      </div>
+      <div
+        className="row d-flex justify-content-center"
+        style={{ marginTop: "1rem" }}
+      >
+        <span style={garamondItalic18Pt}>is awarded to 颁于</span>
       </div>
       <div className="row d-flex justify-content-center">
         <span style={timesNewRoman18Pt}>{certificate.recipient.name}</span>
       </div>
-      <div className="row d-flex justify-content-center">
+      <div
+        className="row d-flex justify-content-center"
+        style={{ marginTop: "2rem" }}
+      >
         <span style={garamondItalic18Pt}>
-          having fulfilled the requirements of the Certified Blockchain
-          Consultant
+          for successfully completed all courses and received passing grades
         </span>
       </div>
-      <div className="row d-flex justify-content-center">&nbsp;</div>
-      <div className="row d-flex justify-content-center">
-        <p style={garamondItalic18Pt}>
-          {certificate.additionalData.certificate}
-          <br />
-          {certificate.additionalData.issueDate}
-        </p>
+      <div
+        className="row d-flex justify-content-center"
+        style={{ marginTop: "2rem" }}
+      >
+        <span style={garamondItalic18Pt}>
+          offered by Institute of Blockchain&reg; (区块链学院)
+        </span>
       </div>
-      <div className="row" style={{ marginTop: "1rem", marginBottom: "-2rem" }}>
-        <div className="col-md-4 text-left">
-          <br />
-          <img src={IBS_SIGN} style={sealImgStyle} />
-        </div>
-        <div className="col-md-4">&nbsp;</div>
-        <div className="col-md-4">
-          <div className="row">
-            <div className="col-md-12 text-center">
-              <img
-                src={certificate.additionalData.presidentSign.signature}
-                style={presidentStyle}
-              />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-12 text-center">
-              <span style={helvetica12Pt}>President</span>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-12 text-center">
-              <span style={helvetica12Pt}>Alvin Chua</span>
-            </div>
-          </div>
-        </div>
+      <div
+        className="row d-flex justify-content-center"
+        style={{ marginTop: "1rem" }}
+      >
+        <span style={garamondItalic18Pt}>on 9 Jun 2018 (2018年6月9日)</span>
+      </div>
+      <div className="row d-flex justify-content-center">&nbsp;</div>
+      <div
+        className="row d-flex justify-content-center"
+        style={{ marginTop: "3rem" }}
+      >
+        <img
+          src={certificate.additionalData.presidentSign.signature}
+          style={presidentStyle}
+        />
+      </div>
+      <div
+        className="row d-flex justify-content-center"
+        style={{ marginTop: "1rem" }}
+      >
+        <span style={helvetica12Pt}>Mr Alvin Chua 蔡德伟 先生</span>
+      </div>
+      <div
+        className="row d-flex justify-content-center"
+        style={{ marginTop: "1rem" }}
+      >
+        <span style={helvetica12Pt}>
+          President, Institute of Blockchain&reg; 区块链学院院长
+        </span>
       </div>
     </div>
   </div>

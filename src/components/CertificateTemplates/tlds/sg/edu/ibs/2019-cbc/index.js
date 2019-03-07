@@ -10,7 +10,7 @@ const templates = [
   }
 ];
 
-const addresses = ["0x8F09411B92dbC3e37a46461D0DB1D614d820E669"];
+const addresses = ["0x391d72C22f40e37F91B65f36A2C6735D9B1fDAAD"];
 
 const CBCCert = ({ certificate }) => (
   <MultiCertificateRenderer
