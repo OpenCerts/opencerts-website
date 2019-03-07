@@ -4,7 +4,7 @@ import { Selector } from "testcafe";
 // eslint-disable-next-line
 fixture("Default Certificate Template").page`http://localhost:3000`;
 
-const Certificate = "./DEFAULT_CERTIFICATE.json";
+const Certificate = "./DEFAULT_CERTIFICATE.opencert";
 
 const ButtonViewCertificateAnyway = Selector("#certificate-view-anyway");
 const CertificateVerifyBlock = Selector("#certificate-verify-block");
