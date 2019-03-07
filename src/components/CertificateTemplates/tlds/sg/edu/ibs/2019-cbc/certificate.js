@@ -65,7 +65,9 @@ const Template = ({ certificate }) => (
         className="row d-flex justify-content-center"
         style={{ marginTop: "1rem" }}
       >
-        <span style={titlebig}>{certificate.additionalData.certificate}</span>
+        <span style={titlebig}>
+          {certificate.additionalData.certificate}&trade;
+        </span>
       </div>
       <div
         className="row d-flex justify-content-center"
