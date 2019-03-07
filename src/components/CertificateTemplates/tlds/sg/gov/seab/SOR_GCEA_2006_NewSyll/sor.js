@@ -26,14 +26,14 @@ export const renderTranscript = ({ certificate }) => {
           <div className="col-md-4">
             {trn.name}
             {trn.pExaminingAgency !== "" &&
-              trn.pExaminingAgency !== trn.examiningAuthority ? (
-                <span>
-                  <br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{trn.pExaminingAgency}
-                </span>
-                ) : (
-                <span />
-				)}
+            trn.pExaminingAgency !== trn.examiningAuthority ? (
+              <span>
+                <br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{trn.pExaminingAgency}
+              </span>
+            ) : (
+              <span />
+            )}
           </div>
           <div className="col-md-2">{trn.level}</div>
           <div className="col-md-2">{trn.grade}</div>

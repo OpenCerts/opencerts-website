@@ -28,14 +28,14 @@ export const renderTranscript = ({ certificate }) => {
           <div className="col-md-3">
             {trn.name}
             {trn.pExaminingAgency !== "" &&
-              trn.pExaminingAgency !== trn.examiningAuthority ? (
-                <span>
-                  <br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{trn.pExaminingAgency}
-                </span>
-              ) : (
-                <span />
-              )}
+            trn.pExaminingAgency !== trn.examiningAuthority ? (
+              <span>
+                <br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{trn.pExaminingAgency}
+              </span>
+            ) : (
+              <span />
+            )}
           </div>
           <div className="col-md-3" style={SOR_CENTER_ALIGN}>
             <div className="row">

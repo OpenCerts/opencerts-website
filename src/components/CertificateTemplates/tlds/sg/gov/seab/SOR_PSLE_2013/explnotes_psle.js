@@ -98,7 +98,8 @@ export const renderExplonataryNotes = () => (
           <b>Distinction, Merit or Pass </b>
           <br />
           Subjects that are not graded will be reflected as {`"Ungraded"`}.
-        </div>/
+        </div>
+        /
       </div>
       <div className="row">
         <div className="col-md-12">&nbsp;</div>
