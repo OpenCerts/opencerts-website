@@ -1,5 +1,5 @@
-import { get, groupBy } from "lodash";
-import { SOR_IMG, TOP_IMG } from "../common";
+import { get } from "lodash";
+import { TOP_IMG } from "../common/images";
 import {
   RENDER_SOR_INFO_PSLE,
   SOR_BOLD_TEXT,
@@ -14,9 +14,6 @@ import {
 } from "../common";
 
 export const renderTranscript = ({ certificate }) => {
-  // Get exam level
-  const examLevel = get(certificate, "additionalData.examLevel", undefined);
-
   // Get transcript info
   const transcript = get(certificate, "transcript");
 

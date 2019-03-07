@@ -1,30 +1,24 @@
-import { SOR_IMG } from "./images";
-
 export const SOR_BORDER_GCEO = {
   border: "1px solid black",
   padding: "10px",
-  background: "#c5f4b7", // background: "#008578",
+  background: "#c5f4b7",
   backgroundClip: "content-box",
-  // backgroundImage: `url(${SOR_IMG})`,
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center"
 };
 export const SOR_BORDER_GCEN = {
   border: "1px solid black",
   padding: "10px",
-  background: "#ebfce5", // background: "#00558C",
-  background: "#d0e5c5", // background: "#00558C",
+  background: "#ebfce5",
   backgroundClip: "content-box",
-  // backgroundImage: `url(${SOR_IMG})`,
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center"
 };
 export const SOR_BORDER_GCEA = {
   border: "1px solid black",
   padding: "10px",
-  background: "#fff3bf", // background: "#703F2A",
+  background: "#fff3bf",
   backgroundClip: "content-box",
-  // backgroundImage: `url(${SOR_IMG})`,
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center"
 };
@@ -33,7 +27,6 @@ export const SOR_BORDER_PSLE = {
   padding: "10px",
   background: "#f9fca4",
   backgroundClip: "content-box",
-  // backgroundImage: `url(${SOR_IMG})`,
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center"
 };

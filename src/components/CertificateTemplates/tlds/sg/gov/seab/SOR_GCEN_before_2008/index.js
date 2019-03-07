@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
+import { MultiCertificateRenderer } from "template-utils/MultiCertificateRenderer";
+import { approvedAddresses } from "../common";
 import SEABSOR from "./sor";
 import SEABEXPLANATORYNOTES from "./explnotes_n";
-import { approvedAddresses } from "../common";
-import { MultiCertificateRenderer } from "template-utils/MultiCertificateRenderer";
 
 const templates = [
   {

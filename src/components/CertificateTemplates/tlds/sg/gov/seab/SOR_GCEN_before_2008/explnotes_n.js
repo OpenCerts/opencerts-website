@@ -1,4 +1,3 @@
-import { get, groupBy } from "lodash";
 import {
   EXPLANATORY_FONT_SIZE_13,
   EXPLANATORY_TITLE,
@@ -9,7 +8,7 @@ import {
   EXPLANATORY_CONTENT
 } from "../common";
 
-export const renderExplonataryNotes = ({ certificate }) => (
+export const renderExplonataryNotes = () => (
   <div className="row">
     <div className="col-md-12">
       <div className="row">

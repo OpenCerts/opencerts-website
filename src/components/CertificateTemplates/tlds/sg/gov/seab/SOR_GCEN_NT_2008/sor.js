@@ -1,5 +1,5 @@
-import { get, groupBy } from "lodash";
-import { SOR_IMG, TOP_IMG } from "../common";
+import { get } from "lodash";
+import { TOP_IMG } from "../common/images";
 import {
   SOR_BORDER_GCEN,
   SOR_TOP_LOGO,
@@ -17,9 +17,6 @@ import {
 } from "../common";
 
 export const renderTranscript = ({ certificate }) => {
-  // Get exam level
-  const examLevel = get(certificate, "additionalData.examLevel", undefined);
-
   // Get transcript info
   const transcript = get(certificate, "transcript");
 
@@ -29,8 +26,8 @@ export const renderTranscript = ({ certificate }) => {
         <div className="row">
           <div className="col-md-4">
             {trn.name}
-            {trn.pExaminingAgency != "" ? (
-              trn.pExaminingAgency != trn.examiningAuthority ? (
+            {trn.pExaminingAgency !== "" ? (
+              trn.pExaminingAgency !== trn.examiningAuthority ? (
                 <span>
                   <br />
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{trn.pExaminingAgency}
@@ -53,7 +50,7 @@ export const renderTranscript = ({ certificate }) => {
           <div className="col-md-1">{trn.examiningAuthority}</div>
         </div>
       </div>
-      {trn.subTranscript != "" ? (
+      {trn.subTranscript !== "" ? (
         <div className="col-md-12">
           <div className="row">
             <div className="col-md-4">
