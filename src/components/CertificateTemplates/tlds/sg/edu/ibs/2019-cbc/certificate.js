@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { IBS_LOGO, IBS_SIGN } from "./images";
+import { IBS_LOGO } from "./images";
 
 const title = {
   fontSize: "28px",
@@ -39,11 +39,6 @@ const helvetica12Pt = {
 const logoImgStyle = {
   width: "50%",
   height: "50%"
-};
-
-const sealImgStyle = {
-  width: "120px",
-  height: "120px"
 };
 
 const presidentStyle = {
