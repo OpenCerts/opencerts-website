@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import { get } from "lodash";
-import { TOP_IMG } from "../common/images";
 import {
   SOR_BORDER_GCEA,
   SOR_TOP_LOGO,
@@ -116,7 +115,7 @@ const Template = certificate => (
           <div className="row">
             <div className="col-md-1">
               <img
-                src={TOP_IMG}
+                src='/static/images/SEAB_logo.png'
                 className="img-responsive"
                 style={SOR_TOP_LOGO}
               />

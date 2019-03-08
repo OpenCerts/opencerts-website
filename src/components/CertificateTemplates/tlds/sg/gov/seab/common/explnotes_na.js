@@ -96,7 +96,7 @@ export const renderExplonataryNotes = () => (
         <div className="col-md-11" valign="top" style={EXPLANATORY_CONTENT}>
           This document is issued on condition of your strict compliance with
           the Examination Instructions and Regulations. You must comply with any
-          direction by the Singapore Examinations and AssessmentBoard (SEAB) to
+          direction by the Singapore Examinations and Assessment Board (SEAB) to
           return this document to SEAB.
         </div>
       </div>

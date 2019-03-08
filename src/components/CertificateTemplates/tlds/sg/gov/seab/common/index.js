@@ -1,6 +1,5 @@
-export * from "./images";
 export * from "./style";
-export * from "./template.js";
+export * from "./template";
 
 // Store Address - Issuer Name
 export const approvedAddresses = [
