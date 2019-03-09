@@ -135,7 +135,7 @@ const Template = certificate => (
             <div className="col-md-1">&nbsp;</div>
             <div className="col-md-1">
               <img
-                src='/static/images/SEAB_logo.png'
+                src="/static/images/SEAB_logo.png"
                 className="img-responsive"
                 style={SOR_TOP_LOGO}
               />
