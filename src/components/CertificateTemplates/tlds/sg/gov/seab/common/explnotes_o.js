@@ -4,7 +4,7 @@ import {
   EXPLANATORY_PAGE_SIZE,
   EXPLANATORY_TABLE_WIDTH70_CENTER,
   EXPLANATORY_FONT_SIZE_13
-} from "../common";
+} from ".";
 
 export const renderExplonataryNotes = () => (
   <div className="row">

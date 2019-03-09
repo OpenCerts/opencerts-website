@@ -6,7 +6,7 @@ import {
   EXPLANATORY_TABLE_WIDTH70_CENTER_SOLID_TR,
   EXPLANATORY_TABLE_WIDTH70_CENTER_SOLID_TD,
   EXPLANATORY_CONTENT
-} from "../common";
+} from ".";
 
 export const renderExplonataryNotes = () => (
   <div className="row">

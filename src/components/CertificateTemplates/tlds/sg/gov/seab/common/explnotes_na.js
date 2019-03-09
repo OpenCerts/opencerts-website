@@ -3,7 +3,7 @@ import {
   EXPLANATORY_TITLE,
   EXPLANATORY_PAGE_SIZE,
   EXPLANATORY_CONTENT
-} from "../common";
+} from ".";
 
 export const renderExplonataryNotes = () => (
   <div className="row">
