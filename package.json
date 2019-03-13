@@ -15,9 +15,9 @@
     "deploy": "rm -rf out && npm run build:static",
     "analyze": "BUNDLE_ANALYZE=browser npm run start",
     "dev-cli": "node -r esm ./scripts/cli.js",
-    "serve-static": "node node_modules/http-server/bin/http-server out -s -p 3000",
-    "integration": "node node_modules/testcafe/bin/testcafe.js chrome src/**/*.spec.js",
-    "integration:headless": "node node_modules/testcafe/bin/testcafe.js chrome:headless src/**/*.spec.js --app \"npm run serve-static\"",
+    "serve-static": "http-server out -s -p 3000",
+    "integration": "testcafe chrome src/**/*.spec.js",
+    "integration:headless": "npm run build:static && testcafe chrome:headless src/**/*.spec.js --app \"npm run serve-static\"",
     "integration:watch": "nodemon --exec \"npm run integration\" --watch src"
   },
   "dependencies": {
@@ -69,6 +69,7 @@
     "eslint-plugin-mocha": "^5.2.0",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.7.0",
+    "eslint-plugin-testcafe": "^0.2.1",
     "esm": "^3.1.1",
     "gh-pages": "^2.0.1",
     "http-server": "^0.11.1",

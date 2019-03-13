@@ -1,7 +1,5 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { Selector } from "testcafe";
 
-// eslint-disable-next-line
 fixture("Ngee Ann Polytechnic").page`http://localhost:3000`;
 
 const Certificate = "./NP_Certs_FT_ECH.opencert";

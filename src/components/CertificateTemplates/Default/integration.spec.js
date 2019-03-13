@@ -1,7 +1,5 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { Selector } from "testcafe";
 
-// eslint-disable-next-line
 fixture("Default Certificate Template").page`http://localhost:3000`;
 
 const Certificate = "./DEFAULT_CERTIFICATE.opencert";
