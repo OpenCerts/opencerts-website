@@ -37,6 +37,7 @@ const renderHeaderBlock = props => {
 
         <div className="ml-auto">
           <button
+            id="btn-print"
             className={styles["print-btn"]}
             onClick={() => window.print()}
           >
@@ -45,7 +46,9 @@ const renderHeaderBlock = props => {
         </div>
         <div />
         <div className="ml-2" onClick={() => props.handleSharingToggle()}>
-          <button className={styles["send-btn"]}>{images.send()}</button>
+          <button id="btn-email" className={styles["send-btn"]}>
+            {images.send()}
+          </button>
         </div>
         <div className="ml-2">
           <a
@@ -53,7 +56,7 @@ const renderHeaderBlock = props => {
             target="_black"
             href={`data:text/plain;,${JSON.stringify(props.document, null, 2)}`}
           >
-            <button className={styles["send-btn"]}>
+            <button id="btn-download" className={styles["send-btn"]}>
               <i
                 className="fas fa-file-download"
                 style={{ fontSize: "1.5rem", color: "#343a40" }}

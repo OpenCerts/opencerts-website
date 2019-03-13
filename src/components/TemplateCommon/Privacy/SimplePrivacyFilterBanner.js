@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const SimplePrivacyFilterBanner = ({ toggleEditable }) => (
-  <div className="screen-only">
+  <div id="banner-privacy-filter" className="screen-only">
     <div
       className="row"
       style={{
