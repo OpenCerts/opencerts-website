@@ -5,7 +5,11 @@ import {
   verifyCertificateIssuer,
   resolveEnsNamesToText,
   lookupEthereumAddresses,
-  sendCertificate
+  sendCertificate,
+  analyticsIssuerFail,
+  analyticsHashFail,
+  analyticsIssuedFail,
+  analyticsRevocationFail
 } from "./certificate";
 import {
   getCertificate,
@@ -317,6 +321,86 @@ describe("sagas/certificate", () => {
       const isSagaFinished = issuerSaga.next().done;
 
       expect(isSagaFinished).toBe(true);
+    });
+  });
+
+  describe("analytics*", () => {
+    beforeEach(() => {
+      global.window.ga = sinon.stub();
+    });
+
+    afterEach(() => {
+      global.window.ga = undefined;
+    });
+
+    it("analyticsIssuerFail reports to GA with errorType = 0", () => {
+      const {
+        testCert,
+        ethereumAddresses
+      } = whenThereIsOneEthereumAddressIssuer();
+      analyticsIssuerFail({ certificate: certificateData(testCert) }).next();
+
+      expect(global.window.ga.args[0]).toEqual([
+        "send",
+        "event",
+        "CERTIFICATE_ERROR",
+        ethereumAddresses[0],
+        "certificate-id",
+        0
+      ]);
+    });
+
+    it("analyticsHashFail reports to GA with errorType = 1", () => {
+      const {
+        testCert,
+        ethereumAddresses
+      } = whenThereIsOneEthereumAddressIssuer();
+      analyticsHashFail({ certificate: certificateData(testCert) }).next();
+
+      expect(global.window.ga.args[0]).toEqual([
+        "send",
+        "event",
+        "CERTIFICATE_ERROR",
+        ethereumAddresses[0],
+        "certificate-id",
+        1
+      ]);
+    });
+
+    it("analyticsIssuedFail reports to GA with errorType = 2", () => {
+      const {
+        testCert,
+        ethereumAddresses
+      } = whenThereIsOneEthereumAddressIssuer();
+      analyticsIssuedFail({ certificate: certificateData(testCert) }).next();
+
+      expect(global.window.ga.args[0]).toEqual([
+        "send",
+        "event",
+        "CERTIFICATE_ERROR",
+        ethereumAddresses[0],
+        "certificate-id",
+        2
+      ]);
+    });
+
+    it("analyticsRevocationFail reports to GA with errorType = 3", () => {
+      const {
+        testCert,
+        ethereumAddresses
+      } = whenThereIsOneEthereumAddressIssuer();
+      analyticsRevocationFail({
+        certificate: certificateData(testCert)
+      }).next();
+
+      expect(global.window.ga.args[0]).toEqual([
+        "send",
+        "event",
+        "CERTIFICATE_ERROR",
+        ethereumAddresses[0],
+        "certificate-id",
+        3
+      ]);
     });
   });
 });

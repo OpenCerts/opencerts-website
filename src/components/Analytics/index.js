@@ -1,6 +1,6 @@
 import { getLogger } from "../../utils/logger";
 
-const { trace, error } = getLogger("components:Analytics:");
+const { trace } = getLogger("components:Analytics:");
 const { trace: traceDev } = getLogger("components:Analytics(Inactive):");
 
 export const validateEvent = ({ category, action, value }) => {
@@ -14,19 +14,14 @@ export const stringifyEvent = ({ category, action, label, value }) =>
   `Category*: ${category}, Action*: ${action}, Label: ${label}, Value: ${value}`;
 
 export const analyticsEvent = (window, evt) => {
-  try {
-    validateEvent(evt);
-  } catch (e) {
-    error(e);
-    return;
-  }
+  validateEvent(evt);
   if (typeof window !== "undefined" && typeof window.ga !== "undefined") {
     const { category, action, label, value } = evt;
-    window.ga("send", "event", category, action, label, value);
     trace(stringifyEvent(evt));
-  } else {
-    traceDev(stringifyEvent(evt));
+    return window.ga("send", "event", category, action, label, value);
   }
+  traceDev(stringifyEvent(evt));
+  return null;
 };
 
 export default analyticsEvent;

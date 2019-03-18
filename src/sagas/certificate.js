@@ -36,6 +36,13 @@ import { getSelectedWeb3 } from "./application";
 
 const { trace, error } = getLogger("saga:certificate");
 
+const ANALYTICS_VERIFICATION_ERROR_CODE = {
+  ISSUER_IDENTITY: 0,
+  CERTIFICATE_HASH: 1,
+  UNISSUED_CERTIFICATE: 2,
+  REVOKED_CERTIFICATE: 3
+};
+
 export function* loadCertificateContracts({ payload }) {
   try {
     const data = certificateData(payload);
@@ -307,8 +314,52 @@ export function* networkReset() {
   });
 }
 
+export function* analyticsIssuerFail({ certificate }) {
+  yield analyticsEvent(window, {
+    category: "CERTIFICATE_ERROR",
+    action: get(certificate, "issuers[0].certificateStore"),
+    label: get(certificate, "id"),
+    value: ANALYTICS_VERIFICATION_ERROR_CODE.ISSUER_IDENTITY
+  });
+}
+
+export function* analyticsHashFail({ certificate }) {
+  yield analyticsEvent(window, {
+    category: "CERTIFICATE_ERROR",
+    action: get(certificate, "issuers[0].certificateStore"),
+    label: get(certificate, "id"),
+    value: ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_HASH
+  });
+}
+
+export function* analyticsIssuedFail({ certificate }) {
+  yield analyticsEvent(window, {
+    category: "CERTIFICATE_ERROR",
+    action: get(certificate, "issuers[0].certificateStore"),
+    label: get(certificate, "id"),
+    value: ANALYTICS_VERIFICATION_ERROR_CODE.UNISSUED_CERTIFICATE
+  });
+}
+
+export function* analyticsRevocationFail({ certificate }) {
+  yield analyticsEvent(window, {
+    category: "CERTIFICATE_ERROR",
+    action: get(certificate, "issuers[0].certificateStore"),
+    label: get(certificate, "id"),
+    value: ANALYTICS_VERIFICATION_ERROR_CODE.REVOKED_CERTIFICATE
+  });
+}
+
 export default [
   takeEvery(types.UPDATE_CERTIFICATE, verifyCertificate),
   takeEvery(types.SENDING_CERTIFICATE, sendCertificate),
-  takeEvery(applicationTypes.UPDATE_WEB3, networkReset)
+  takeEvery(applicationTypes.UPDATE_WEB3, networkReset),
+
+  takeEvery(types.VERIFYING_CERTIFICATE_ISSUER_FAILURE, analyticsIssuerFail),
+  takeEvery(
+    types.VERIFYING_CERTIFICATE_REVOCATION_FAILURE,
+    analyticsRevocationFail
+  ),
+  takeEvery(types.VERIFYING_CERTIFICATE_ISSUED_FAILURE, analyticsIssuedFail),
+  takeEvery(types.VERIFYING_CERTIFICATE_HASH_FAILURE, analyticsHashFail)
 ];
