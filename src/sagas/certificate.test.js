@@ -1,5 +1,6 @@
 import { put, call, select } from "redux-saga/effects";
 import sinon from "sinon";
+import { certificateData } from "@govtechsg/open-certificate";
 import {
   verifyCertificateIssuer,
   resolveEnsNamesToText,
@@ -247,6 +248,7 @@ describe("sagas/certificate", () => {
       } = whenThereAreMultipleEthereumAddressIssuers();
       const resolverReturnValue = [];
       const errorMsg = "Issuer identity missing in certificate";
+      const certData = certificateData(testCert);
       const issuerSaga = verifyCertificateIssuer({ certificate: testCert });
 
       expect(issuerSaga.next().value).toEqual(
@@ -257,7 +259,12 @@ describe("sagas/certificate", () => {
       // const resolvedPut = issuerSaga.throw(new Error(errorMsg)).value;
 
       expect(resolvedPut).toEqual(
-        put(verifyingCertificateIssuerFailure(errorMsg))
+        put(
+          verifyingCertificateIssuerFailure({
+            error: errorMsg,
+            certificate: certData
+          })
+        )
       );
       const isSagaFinished = issuerSaga.next().done;
 
@@ -292,13 +299,21 @@ describe("sagas/certificate", () => {
       } = whenThereAreMultipleEthereumAddressIssuers();
       const msg = "bam!";
       const issuerSaga = verifyCertificateIssuer({ certificate: testCert });
+      const certData = certificateData(testCert);
 
       expect(issuerSaga.next().value).toEqual(
         call(lookupEthereumAddresses, ethereumAddresses)
       );
       const resolvedPut = issuerSaga.throw(new Error(msg)).value;
 
-      expect(resolvedPut).toEqual(put(verifyingCertificateIssuerFailure(msg)));
+      expect(resolvedPut).toEqual(
+        put(
+          verifyingCertificateIssuerFailure({
+            error: msg,
+            certificate: certData
+          })
+        )
+      );
       const isSagaFinished = issuerSaga.next().done;
 
       expect(isSagaFinished).toBe(true);

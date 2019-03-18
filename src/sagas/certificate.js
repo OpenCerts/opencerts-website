@@ -16,6 +16,12 @@ import {
   types,
   verifyingCertificateIssuerSuccess,
   verifyingCertificateIssuerFailure,
+  verifyingCertificateRevocationSuccess,
+  verifyingCertificateRevocationFailure,
+  verifyingCertificateIssuedSuccess,
+  verifyingCertificateIssuedFailure,
+  verifyingCertificateHashSuccess,
+  verifyingCertificateHashFailure,
   getCertificate
 } from "../reducers/certificate";
 import DocumentStoreDefinition from "../services/contracts/DocumentStore.json";
@@ -23,6 +29,7 @@ import fetchIssuers from "../services/issuers";
 import { combinedHash } from "../utils";
 import { ensResolveAddress, getText } from "../services/ens";
 import sendEmail from "../services/email";
+import { analyticsEvent } from "../components/Analytics";
 
 import { getSelectedWeb3 } from "./application";
 
@@ -65,14 +72,16 @@ export function* loadCertificateContracts({ payload }) {
 export function* verifyCertificateHash({ certificate }) {
   const verified = verifySignature(certificate);
   if (verified) {
-    yield put({
-      type: types.VERIFYING_CERTIFICATE_HASH_SUCCESS
-    });
+    yield put(verifyingCertificateHashSuccess());
     return true;
   }
-  yield put({
-    type: types.VERIFYING_CERTIFICATE_HASH_FAILURE
-  });
+  yield put(
+    verifyingCertificateHashFailure({
+      type: types.VERIFYING_CERTIFICATE_HASH_FAILURE,
+      error: "Certificate data does not match target hash",
+      certificate: certificateData(certificate)
+    })
+  );
   return false;
 }
 
@@ -86,15 +95,15 @@ export function* verifyCertificateIssued({ certificate, certificateStores }) {
     );
     const isIssued = issuedStatuses.reduce((prev, curr) => prev && curr, true);
     if (!isIssued) throw new Error("Certificate has not been issued");
-    yield put({
-      type: types.VERIFYING_CERTIFICATE_ISSUED_SUCCESS
-    });
+    yield put(verifyingCertificateIssuedSuccess());
     return true;
   } catch (e) {
-    yield put({
-      type: types.VERIFYING_CERTIFICATE_ISSUED_FAILURE,
-      payload: e.message
-    });
+    yield put(
+      verifyingCertificateIssuedFailure({
+        certificate: certificateData(certificate),
+        error: e.message
+      })
+    );
     return false;
   }
 }
@@ -131,15 +140,15 @@ export function* verifyCertificateNotRevoked({
         throw new Error(`Certificate has been revoked, revoked hash: ${hash}`);
     }
 
-    yield put({
-      type: types.VERIFYING_CERTIFICATE_REVOCATION_SUCCESS
-    });
+    yield put(verifyingCertificateRevocationSuccess());
     return true;
   } catch (e) {
-    yield put({
-      type: types.VERIFYING_CERTIFICATE_REVOCATION_FAILURE,
-      payload: e.message
-    });
+    yield put(
+      verifyingCertificateRevocationFailure({
+        certificate: certificateData(certificate),
+        error: e.message
+      })
+    );
     return false;
   }
 }
@@ -238,7 +247,12 @@ export function* verifyCertificateIssuer({ certificate }) {
     return combinedIssuerIdentities;
   } catch (e) {
     error(e);
-    yield put(verifyingCertificateIssuerFailure(e.message));
+    yield put(
+      verifyingCertificateIssuerFailure({
+        error: e.message,
+        certificate: certificateData(certificate)
+      })
+    );
     return false;
   }
 }
