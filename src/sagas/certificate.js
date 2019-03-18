@@ -7,7 +7,7 @@ import {
   isEmpty,
   mapKeys
 } from "lodash";
-import { put, all, call, select } from "redux-saga/effects";
+import { put, all, call, select, takeEvery } from "redux-saga/effects";
 import { certificateData, verifySignature } from "@govtechsg/open-certificate";
 import { isValidAddress as isEthereumAddress } from "ethereumjs-util";
 import Router from "next/router";
@@ -24,6 +24,7 @@ import {
   verifyingCertificateHashFailure,
   getCertificate
 } from "../reducers/certificate";
+import { types as applicationTypes } from "../reducers/application";
 import DocumentStoreDefinition from "../services/contracts/DocumentStore.json";
 import fetchIssuers from "../services/issuers";
 import { combinedHash } from "../utils";
@@ -306,4 +307,8 @@ export function* networkReset() {
   });
 }
 
-export default loadCertificateContracts;
+export default [
+  takeEvery(types.UPDATE_CERTIFICATE, verifyCertificate),
+  takeEvery(types.SENDING_CERTIFICATE, sendCertificate),
+  takeEvery(applicationTypes.UPDATE_WEB3, networkReset)
+];

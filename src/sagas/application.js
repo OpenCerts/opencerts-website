@@ -1,4 +1,4 @@
-import { put, select, take } from "redux-saga/effects";
+import { put, select, take, takeEvery } from "redux-saga/effects";
 import { getNetwork, getNetworkPending, types } from "../reducers/application";
 import { setNewWeb3, getWeb3 } from "../services/web3";
 
@@ -55,4 +55,7 @@ export function* updateNetworkId() {
   }
 }
 
-export default updateNetworkId;
+export default [
+  takeEvery(types.UPDATE_NETWORK_ID, updateNetworkId),
+  takeEvery(types.UPDATE_WEB3, updateNetworkId)
+];

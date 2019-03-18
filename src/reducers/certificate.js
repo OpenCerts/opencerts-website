@@ -345,7 +345,6 @@ export function verifyingCertificateIssuedFailure({ error, certificate }) {
   };
 }
 
-
 export function verifyingCertificateHashSuccess() {
   return {
     type: types.VERIFYING_CERTIFICATE_HASH_SUCCESS
