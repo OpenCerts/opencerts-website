@@ -11,7 +11,8 @@ import {
   analyticsIssuedFail,
   analyticsRevocationFail,
   verifyCertificateNotRevoked,
-  getIntermediateHashes
+  getIntermediateHashes,
+  verifyCertificateHash
 } from "./certificate";
 import {
   getCertificate,
@@ -20,6 +21,7 @@ import {
 } from "../reducers/certificate";
 import MakeCertUtil from "./makeCertUtil";
 import * as sendEmail from "../services/email";
+import * as openCerts from "@govtechsg/open-certificate";
 
 const targetHash =
   "f7432b3219b2aa4122e289f44901830fa32f224ee9dfce28565677f1d279b2c7";
@@ -32,11 +34,14 @@ const intermediateHash =
 const rootHash =
   "fcfce0e79adc002c1fd78a2a02c768c0fdc00e5b96f1da8ef80bed02876e18d1";
 
-//verifyCertificateHash
-//verifyCertificateIssued
+// verifyCertificateIssued
 
-describe("verifyCertificateHash", () => {
-  it("works", () => {
-    console.log("hi");
-  })
+function whenThereIsOneEthereumAddressIssuer() {
+  const ethereumAddresses = ["0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4F"];
+  const testCert = new MakeCertUtil().addIssuer(ethereumAddresses[0]).finish();
+  return { testCert, ethereumAddresses };
+}
+
+describe("a", () => {
+  it("works", () => {});
 });

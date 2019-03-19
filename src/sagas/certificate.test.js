@@ -4,6 +4,7 @@ import { certificateData } from "@govtechsg/open-certificate";
 import {
   verifyCertificateNotRevoked,
   verifyCertificateIssuer,
+  verifyCertificateHash,
   resolveEnsNamesToText,
   lookupEthereumAddresses,
   sendCertificate,
@@ -20,6 +21,7 @@ import {
 } from "../reducers/certificate";
 import MakeCertUtil from "./makeCertUtil";
 import * as sendEmail from "../services/email";
+import * as openCertsApi from "@govtechsg/open-certificate";
 
 const targetHash =
   "f7432b3219b2aa4122e289f44901830fa32f224ee9dfce28565677f1d279b2c7";
@@ -549,6 +551,42 @@ describe("sagas/certificate", () => {
       const generatorEnd = generator.next();
       expect(generatorEnd.value).toBe(false);
       expect(generatorEnd.done).toBe(true);
+    });
+  });
+
+  describe("verifyCertificateHash", () => {
+    beforeEach(() => {
+      sinon.stub(openCertsApi, "verifySignature");
+    });
+    afterEach(() => {
+      openCertsApi.verifySignature.restore();
+    });
+    it("returns true when verification is successful", () => {
+      openCertsApi.verifySignature.returns(true);
+      const { testCert } = whenThereIsOneEthereumAddressIssuer();
+      const generator = verifyCertificateHash({ certificate: testCert });
+      expect(generator.next().value).toEqual(
+        put({
+          type: "VERIFYING_CERTIFICATE_HASH_SUCCESS"
+        })
+      );
+      const res = generator.next();
+      expect(res.value).toBe(true);
+      expect(res.done).toBe(true);
+    });
+
+    it("returns false and puts verifyingCertificateHashFailure when verification fails", () => {
+      openCertsApi.verifySignature.returns(false);
+      const { testCert } = whenThereIsOneEthereumAddressIssuer();
+      const generator = verifyCertificateHash({ certificate: testCert });
+      expect(generator.next().value).toEqual(
+        put({
+          type: "VERIFYING_CERTIFICATE_HASH_FAILURE",
+          certificate: certificateData(testCert),
+          error: "Certificate data does not match target hash"
+        })
+      );
+      expect(generator.next().done).toBe(true);
     });
   });
 });

@@ -85,7 +85,6 @@ export function* verifyCertificateHash({ certificate }) {
   }
   yield put(
     verifyingCertificateHashFailure({
-      type: types.VERIFYING_CERTIFICATE_HASH_FAILURE,
       error: "Certificate data does not match target hash",
       certificate: certificateData(certificate)
     })
