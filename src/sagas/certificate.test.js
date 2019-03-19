@@ -1,6 +1,6 @@
 import { put, call, select } from "redux-saga/effects";
 import sinon from "sinon";
-import { certificateData } from "@govtechsg/open-certificate";
+import * as openCertsApi from "@govtechsg/open-certificate";
 import {
   verifyCertificateNotRevoked,
   verifyCertificateIssuer,
@@ -22,7 +22,8 @@ import {
 } from "../reducers/certificate";
 import MakeCertUtil from "./makeCertUtil";
 import * as sendEmail from "../services/email";
-import * as openCertsApi from "@govtechsg/open-certificate";
+
+const { certificateData } = openCertsApi;
 
 const targetHash =
   "f7432b3219b2aa4122e289f44901830fa32f224ee9dfce28565677f1d279b2c7";
@@ -36,17 +37,17 @@ const rootHash =
   "fcfce0e79adc002c1fd78a2a02c768c0fdc00e5b96f1da8ef80bed02876e18d1";
 
 const mockStore = () => {
-  const call = sinon.stub();
+  const stubbedFn = sinon.stub();
   return {
     methods: {
       isRevoked: h => ({
-        call: () => call(h)
+        call: () => stubbedFn(h)
       }),
       isIssued: h => ({
-        call: () => call(h)
+        call: () => stubbedFn(h)
       })
     },
-    stub: call
+    stub: stubbedFn
   };
 };
 
@@ -602,20 +603,20 @@ describe("sagas/certificate", () => {
         certificate,
         certificateStores
       });
-  
+
       generator.next();
-  
+
       expect(generator.next([true, true]).value).toEqual(
         put({
           type: "VERIFYING_CERTIFICATE_ISSUED_SUCCESS"
         })
       );
-  
+
       const res = generator.next();
       expect(res.value).toBe(true);
       expect(res.done).toBe(true);
     });
-  
+
     it("returns false and puts success action when certificate is not issued on any stores", () => {
       const certificateStores = [mockStore(), mockStore()];
       const { testCert: certificate } = whenThereIsOneEthereumAddressIssuer();
@@ -623,9 +624,9 @@ describe("sagas/certificate", () => {
         certificate,
         certificateStores
       });
-  
+
       generator.next();
-  
+
       expect(generator.next([true, false]).value).toEqual(
         put({
           type: "VERIFYING_CERTIFICATE_ISSUED_FAILURE",
@@ -633,7 +634,7 @@ describe("sagas/certificate", () => {
           error: "Certificate has not been issued"
         })
       );
-  
+
       const res = generator.next();
       expect(res.value).toBe(false);
       expect(res.done).toBe(true);
