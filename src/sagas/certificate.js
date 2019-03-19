@@ -142,13 +142,11 @@ export function* verifyCertificateNotRevoked({
 
     for (let i = 0; i < intermediateHashes.length; i += 1) {
       const hash = intermediateHashes[i];
-      console.log("HERE", hash);
 
       // Check if certificate is revoked on ALL store
       const revokedStatus = yield all(
         certificateStores.map(store => store.methods.isRevoked(hash).call())
       );
-      console.log("HERE2", revokedStatus);
       const isRevoked = revokedStatus.reduce(
         (prev, curr) => prev || curr,
         false
@@ -160,7 +158,6 @@ export function* verifyCertificateNotRevoked({
     yield put(verifyingCertificateRevocationSuccess());
     return true;
   } catch (e) {
-    console.log(e);
     yield put(
       verifyingCertificateRevocationFailure({
         certificate: certificateData(certificate),
