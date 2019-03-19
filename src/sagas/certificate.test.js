@@ -20,36 +20,18 @@ import {
   verifyingCertificateIssuerSuccess,
   verifyingCertificateIssuerFailure
 } from "../reducers/certificate";
-import MakeCertUtil from "./makeCertUtil";
+import {
+  MakeCertUtil,
+  mockStore,
+  targetHash,
+  proof0,
+  proof1,
+  intermediateHash,
+  rootHash
+} from "./testutils";
 import * as sendEmail from "../services/email";
 
 const { certificateData } = openCertsApi;
-
-const targetHash =
-  "f7432b3219b2aa4122e289f44901830fa32f224ee9dfce28565677f1d279b2c7";
-const proof0 =
-  "2bb9dd186994f38084ee68e06be848b9d43077c307684c300d81df343c7858cf";
-const proof1 =
-  "ed8bdba60a24af04bcdcd88b939251f3843e03839164fdd2dd502aaeef3bfb99";
-const intermediateHash =
-  "fe0958c4b90e768cecb50cea207f3af034580703e9ed74ef460c1a31dd1b4d6c";
-const rootHash =
-  "fcfce0e79adc002c1fd78a2a02c768c0fdc00e5b96f1da8ef80bed02876e18d1";
-
-const mockStore = () => {
-  const stubbedFn = sinon.stub();
-  return {
-    methods: {
-      isRevoked: h => ({
-        call: () => stubbedFn(h)
-      }),
-      isIssued: h => ({
-        call: () => stubbedFn(h)
-      })
-    },
-    stub: stubbedFn
-  };
-};
 
 function whenThereIsOneEthereumAddressIssuer() {
   const ethereumAddresses = ["0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4F"];
@@ -365,7 +347,7 @@ describe("sagas/certificate", () => {
       global.window.ga = undefined;
     });
 
-    it("analyticsIssuerFail reports to GA with errorType = 0", () => {
+    it("analyticsIssuerFail should report to GA with errorType = 0", () => {
       const {
         testCert,
         ethereumAddresses
@@ -382,7 +364,7 @@ describe("sagas/certificate", () => {
       ]);
     });
 
-    it("analyticsHashFail reports to GA with errorType = 1", () => {
+    it("analyticsHashFail should report to GA with errorType = 1", () => {
       const {
         testCert,
         ethereumAddresses
@@ -399,7 +381,7 @@ describe("sagas/certificate", () => {
       ]);
     });
 
-    it("analyticsIssuedFail reports to GA with errorType = 2", () => {
+    it("analyticsIssuedFail should report to GA with errorType = 2", () => {
       const {
         testCert,
         ethereumAddresses
@@ -416,7 +398,7 @@ describe("sagas/certificate", () => {
       ]);
     });
 
-    it("analyticsRevocationFail reports to GA with errorType = 3", () => {
+    it("analyticsRevocationFail should report to GA with errorType = 3", () => {
       const {
         testCert,
         ethereumAddresses
@@ -437,10 +419,10 @@ describe("sagas/certificate", () => {
   });
 
   describe("getIntermediateHashes", () => {
-    it("returns targetHash only if there is no proof", () => {
+    it("should return targetHash only if there is no proof", () => {
       expect(getIntermediateHashes(targetHash)).toEqual([`0x${targetHash}`]);
     });
-    it("returns all intermediate (and final) hash", () => {
+    it("should return all intermediate (and final) hash", () => {
       const intermediateHashes = getIntermediateHashes(targetHash, [
         proof0,
         proof1
@@ -452,18 +434,9 @@ describe("sagas/certificate", () => {
   });
 
   describe("verifyCertificateNotRevoked", () => {
-    it("passes if all the store returns false for all hashes", () => {
+    it("should return true and put success action if all the store returns false for all hashes", () => {
       const certificateStores = [mockStore(), mockStore(), mockStore()];
-      const certificate = {
-        signature: {
-          targetHash:
-            "f7432b3219b2aa4122e289f44901830fa32f224ee9dfce28565677f1d279b2c7",
-          proof: [
-            "2bb9dd186994f38084ee68e06be848b9d43077c307684c300d81df343c7858cf",
-            "ed8bdba60a24af04bcdcd88b939251f3843e03839164fdd2dd502aaeef3bfb99"
-          ]
-        }
-      };
+      const { testCert: certificate } = whenThereIsOneEthereumAddressIssuer();
 
       const generator = verifyCertificateNotRevoked({
         certificate,
@@ -500,22 +473,9 @@ describe("sagas/certificate", () => {
       expect(generatorEnd.done).toBe(true);
     });
 
-    it("fails if any of the store returns true for the check", () => {
+    it("should return false and put failure action if any of the store returns true for the check", () => {
       const certificateStores = [mockStore(), mockStore(), mockStore()];
-      const certificate = {
-        data: {
-          id: "71f10d54-d483-489b-b06f-fa2bed75ce16:string:certificate-id",
-          foo: "bar"
-        },
-        signature: {
-          targetHash:
-            "f7432b3219b2aa4122e289f44901830fa32f224ee9dfce28565677f1d279b2c7",
-          proof: [
-            "2bb9dd186994f38084ee68e06be848b9d43077c307684c300d81df343c7858cf",
-            "ed8bdba60a24af04bcdcd88b939251f3843e03839164fdd2dd502aaeef3bfb99"
-          ]
-        }
-      };
+      const { testCert: certificate } = whenThereIsOneEthereumAddressIssuer();
 
       const generator = verifyCertificateNotRevoked({
         certificate,
@@ -544,10 +504,7 @@ describe("sagas/certificate", () => {
       expect(doneWithVerification.value).toEqual(
         put({
           type: "VERIFYING_CERTIFICATE_REVOCATION_FAILURE",
-          certificate: {
-            id: "certificate-id",
-            foo: "bar"
-          },
+          certificate: certificateData(certificate),
           error:
             "Certificate has been revoked, revoked hash: 0xfcfce0e79adc002c1fd78a2a02c768c0fdc00e5b96f1da8ef80bed02876e18d1"
         })
@@ -566,7 +523,7 @@ describe("sagas/certificate", () => {
     afterEach(() => {
       openCertsApi.verifySignature.restore();
     });
-    it("returns true when verification is successful", () => {
+    it("should return true when verification is successful", () => {
       openCertsApi.verifySignature.returns(true);
       const { testCert } = whenThereIsOneEthereumAddressIssuer();
       const generator = verifyCertificateHash({ certificate: testCert });
@@ -580,7 +537,7 @@ describe("sagas/certificate", () => {
       expect(res.done).toBe(true);
     });
 
-    it("returns false and puts verifyingCertificateHashFailure when verification fails", () => {
+    it("should return false and puts verifyingCertificateHashFailure when verification fails", () => {
       openCertsApi.verifySignature.returns(false);
       const { testCert } = whenThereIsOneEthereumAddressIssuer();
       const generator = verifyCertificateHash({ certificate: testCert });
@@ -596,7 +553,7 @@ describe("sagas/certificate", () => {
   });
 
   describe("verifyCertificateIssued", () => {
-    it("returns true and puts success action when certificate is issued on all stores", () => {
+    it("should return true and puts success action when certificate is issued on all stores", () => {
       const certificateStores = [mockStore(), mockStore()];
       const { testCert: certificate } = whenThereIsOneEthereumAddressIssuer();
       const generator = verifyCertificateIssued({
@@ -617,7 +574,7 @@ describe("sagas/certificate", () => {
       expect(res.done).toBe(true);
     });
 
-    it("returns false and puts success action when certificate is not issued on any stores", () => {
+    it("should return false and puts success action when certificate is not issued on any stores", () => {
       const certificateStores = [mockStore(), mockStore()];
       const { testCert: certificate } = whenThereIsOneEthereumAddressIssuer();
       const generator = verifyCertificateIssued({
