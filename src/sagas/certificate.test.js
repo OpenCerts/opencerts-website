@@ -589,7 +589,6 @@ describe("sagas/certificate", () => {
       expect(generator.next([true, false]).value).toEqual(
         put(
           verifyingCertificateIssuedFailure({
-            type: "VERIFYING_CERTIFICATE_ISSUED_FAILURE",
             certificate: certificateData(certificate),
             error: "Certificate has not been issued"
           })
