@@ -18,7 +18,13 @@ import {
 import {
   getCertificate,
   verifyingCertificateIssuerSuccess,
-  verifyingCertificateIssuerFailure
+  verifyingCertificateIssuerFailure,
+  verifyingCertificateRevocationSuccess,
+  verifyingCertificateRevocationFailure,
+  verifyingCertificateIssuedSuccess,
+  verifyingCertificateIssuedFailure,
+  verifyingCertificateHashSuccess,
+  verifyingCertificateHashFailure
 } from "../reducers/certificate";
 import {
   MakeCertUtil,
@@ -463,9 +469,7 @@ describe("sagas/certificate", () => {
       expect(certificateStores[2].stub.args).toEqual(hashCheckSequence);
 
       expect(doneWithVerification.value).toEqual(
-        put({
-          type: "VERIFYING_CERTIFICATE_REVOCATION_SUCCESS"
-        })
+        put(verifyingCertificateRevocationSuccess())
       );
 
       const generatorEnd = generator.next();
@@ -502,12 +506,13 @@ describe("sagas/certificate", () => {
       expect(certificateStores[2].stub.args).toEqual(hashCheckSequence);
 
       expect(doneWithVerification.value).toEqual(
-        put({
-          type: "VERIFYING_CERTIFICATE_REVOCATION_FAILURE",
-          certificate: certificateData(certificate),
-          error:
-            "Certificate has been revoked, revoked hash: 0xfcfce0e79adc002c1fd78a2a02c768c0fdc00e5b96f1da8ef80bed02876e18d1"
-        })
+        put(
+          verifyingCertificateRevocationFailure({
+            certificate: certificateData(certificate),
+            error:
+              "Certificate has been revoked, revoked hash: 0xfcfce0e79adc002c1fd78a2a02c768c0fdc00e5b96f1da8ef80bed02876e18d1"
+          })
+        )
       );
 
       const generatorEnd = generator.next();
@@ -528,9 +533,7 @@ describe("sagas/certificate", () => {
       const { testCert } = whenThereIsOneEthereumAddressIssuer();
       const generator = verifyCertificateHash({ certificate: testCert });
       expect(generator.next().value).toEqual(
-        put({
-          type: "VERIFYING_CERTIFICATE_HASH_SUCCESS"
-        })
+        put(verifyingCertificateHashSuccess())
       );
       const res = generator.next();
       expect(res.value).toBe(true);
@@ -542,11 +545,12 @@ describe("sagas/certificate", () => {
       const { testCert } = whenThereIsOneEthereumAddressIssuer();
       const generator = verifyCertificateHash({ certificate: testCert });
       expect(generator.next().value).toEqual(
-        put({
-          type: "VERIFYING_CERTIFICATE_HASH_FAILURE",
-          certificate: certificateData(testCert),
-          error: "Certificate data does not match target hash"
-        })
+        put(
+          verifyingCertificateHashFailure({
+            certificate: certificateData(testCert),
+            error: "Certificate data does not match target hash"
+          })
+        )
       );
       expect(generator.next().done).toBe(true);
     });
@@ -564,9 +568,7 @@ describe("sagas/certificate", () => {
       generator.next();
 
       expect(generator.next([true, true]).value).toEqual(
-        put({
-          type: "VERIFYING_CERTIFICATE_ISSUED_SUCCESS"
-        })
+        put(verifyingCertificateIssuedSuccess())
       );
 
       const res = generator.next();
@@ -585,11 +587,13 @@ describe("sagas/certificate", () => {
       generator.next();
 
       expect(generator.next([true, false]).value).toEqual(
-        put({
-          type: "VERIFYING_CERTIFICATE_ISSUED_FAILURE",
-          certificate: certificateData(certificate),
-          error: "Certificate has not been issued"
-        })
+        put(
+          verifyingCertificateIssuedFailure({
+            type: "VERIFYING_CERTIFICATE_ISSUED_FAILURE",
+            certificate: certificateData(certificate),
+            error: "Certificate has not been issued"
+          })
+        )
       );
 
       const res = generator.next();
