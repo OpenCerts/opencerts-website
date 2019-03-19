@@ -49,7 +49,7 @@ export const IMAGES = [
   },
   {
     key: "SMU",
-    value: "/static/images/SMU_logo.svg"
+    value: "/static/images/SMU_logo.png"
   },
   {
     key: "SUSS",
