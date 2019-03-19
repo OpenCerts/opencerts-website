@@ -60,7 +60,7 @@ javascript:((function unhideCertStringField() { document.querySelector('#certifi
 
 If you are embedding this page in your application, do note that no verification of the authenticity of the certificate is conducted, it will even render certificates with nonsensical signature fields. You are expected to do your own verification and communicate the results to the user at your own discretion.
 
-For more information on how to use this in an embedded capacity, you may refer to (this example)[https://github.com/OpenCerts/rn-opencerts]
+For more information on how to use this in an embedded capacity, you may refer to [this example](https://github.com/OpenCerts/rn-opencerts)
 
 ### Troubleshooting
 
