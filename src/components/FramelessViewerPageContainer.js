@@ -1,12 +1,22 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { certificateData, obfuscateFields } from "@govtechsg/open-certificate";
+import {
+  certificateData,
+  obfuscateFields,
+  validateSchema,
+  verifySignature
+} from "@govtechsg/open-certificate";
 
+import styles from "./certificateViewer.scss";
 import { updateCertificate, getCertificate } from "../reducers/certificate";
 import FramelessCertificateViewer from "./FramelessCertificateViewer";
 
-class MainPageContainer extends Component {
+import { getLogger } from "../utils/logger";
+
+const { trace } = getLogger("components:FramelessViewerPageContainer");
+
+class FramelessViewerContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -15,7 +25,13 @@ class MainPageContainer extends Component {
   }
 
   handleTextFieldChange(e) {
-    this.props.updateCertificate(JSON.parse(e.target.value));
+    const fieldContents = JSON.parse(e.target.value);
+    trace(fieldContents);
+    const validated = validateSchema(fieldContents);
+    trace(`Certificate schema validation: ${validated}`);
+    const verified = verifySignature(fieldContents);
+    trace(`Certificate verification: ${verified}`);
+    this.props.updateCertificate(fieldContents);
   }
 
   handleObfuscation(field) {
@@ -33,16 +49,19 @@ class MainPageContainer extends Component {
         <>
           <input
             id="certificateContentsString"
+            type="hidden"
             onChange={this.handleTextFieldChange}
           />
         </>
       );
     }
     return (
-      <FramelessCertificateViewer
-        document={this.props.document}
-        certificate={certificateData(this.props.document)}
-      />
+      <div id={styles["frameless-container"]}>
+        <FramelessCertificateViewer
+          document={this.props.document}
+          certificate={certificateData(this.props.document)}
+        />
+      </div>
     );
   }
 }
@@ -58,20 +77,11 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(MainPageContainer);
+)(FramelessViewerContainer);
 
-MainPageContainer.propTypes = {
+FramelessViewerContainer.propTypes = {
   updateCertificate: PropTypes.func,
   document: PropTypes.object,
   certificate: PropTypes.object,
-  verifying: PropTypes.bool,
-  hashStatus: PropTypes.object,
-  issuedStatus: PropTypes.object,
-  notRevokedStatus: PropTypes.object,
-  issuerIdentityStatus: PropTypes.object,
-  verified: PropTypes.bool,
-  emailSendingState: PropTypes.string,
-  sendCertificate: PropTypes.func,
-  sendCertificateReset: PropTypes.func,
   updateObfuscatedCertificate: PropTypes.func
 };

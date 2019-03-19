@@ -31,20 +31,8 @@ const FramelessCertificateViewer = props => {
 FramelessCertificateViewer.propTypes = {
   handleCertificateChange: PropTypes.func,
   handleObfuscation: PropTypes.func,
-  toggleDetailedView: PropTypes.func,
-  detailedVerifyVisible: PropTypes.bool,
   document: PropTypes.object,
-  certificate: PropTypes.object,
-  verifying: PropTypes.bool,
-
-  hashStatus: PropTypes.object,
-  issuedStatus: PropTypes.object,
-  notRevokedStatus: PropTypes.object,
-  issuerIdentityStatus: PropTypes.object,
-  showSharing: PropTypes.bool,
-  emailSendingState: PropTypes.string,
-  handleSharingToggle: PropTypes.func,
-  handleSendCertificate: PropTypes.func
+  certificate: PropTypes.object
 };
 
 export default FramelessCertificateViewer;
