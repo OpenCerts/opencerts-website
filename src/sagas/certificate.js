@@ -116,6 +116,19 @@ export function* verifyCertificateIssued({ certificate, certificateStores }) {
   }
 }
 
+export const getIntermediateHashes = (targetHash, proof = []) => {
+  // Returns hash of all intermediate hashes from targetHash to merkleRoot
+  const intermediateHashes = [`0x${targetHash}`];
+
+  proof.reduce((accumulator, currentValue) => {
+    const combined = combinedHash(accumulator, currentValue).toString("hex");
+    intermediateHashes.push(`0x${combined}`);
+    return combined;
+  }, targetHash);
+
+  return intermediateHashes;
+};
+
 export function* verifyCertificateNotRevoked({
   certificate,
   certificateStores
@@ -125,21 +138,17 @@ export function* verifyCertificateNotRevoked({
     const proof = get(certificate, "signature.proof", null);
 
     // Checks if certificate and path towards merkle root has been revoked
-    const combinedHashes = [`0x${targetHash}`];
+    const intermediateHashes = getIntermediateHashes(targetHash, proof);
 
-    proof.reduce((accumulator, currentValue) => {
-      const combined = combinedHash(accumulator, currentValue).toString("hex");
-      combinedHashes.push(`0x${combined}`);
-      return combined;
-    }, targetHash);
-
-    for (let i = 0; i < combinedHashes.length; i += 1) {
-      const hash = combinedHashes[i];
+    for (let i = 0; i < intermediateHashes.length; i += 1) {
+      const hash = intermediateHashes[i];
+      console.log("HERE", hash);
 
       // Check if certificate is revoked on ALL store
       const revokedStatus = yield all(
         certificateStores.map(store => store.methods.isRevoked(hash).call())
       );
+      console.log("HERE2", revokedStatus);
       const isRevoked = revokedStatus.reduce(
         (prev, curr) => prev || curr,
         false
@@ -151,6 +160,7 @@ export function* verifyCertificateNotRevoked({
     yield put(verifyingCertificateRevocationSuccess());
     return true;
   } catch (e) {
+    console.log(e);
     yield put(
       verifyingCertificateRevocationFailure({
         certificate: certificateData(certificate),
