@@ -5,6 +5,7 @@ import {
   verifyCertificateNotRevoked,
   verifyCertificateIssuer,
   verifyCertificateHash,
+  verifyCertificateIssued,
   resolveEnsNamesToText,
   lookupEthereumAddresses,
   sendCertificate,
@@ -33,6 +34,21 @@ const intermediateHash =
   "fe0958c4b90e768cecb50cea207f3af034580703e9ed74ef460c1a31dd1b4d6c";
 const rootHash =
   "fcfce0e79adc002c1fd78a2a02c768c0fdc00e5b96f1da8ef80bed02876e18d1";
+
+const mockStore = () => {
+  const call = sinon.stub();
+  return {
+    methods: {
+      isRevoked: h => ({
+        call: () => call(h)
+      }),
+      isIssued: h => ({
+        call: () => call(h)
+      })
+    },
+    stub: call
+  };
+};
 
 function whenThereIsOneEthereumAddressIssuer() {
   const ethereumAddresses = ["0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4F"];
@@ -434,18 +450,6 @@ describe("sagas/certificate", () => {
     });
   });
 
-  const mockStore = () => {
-    const call = sinon.stub();
-    return {
-      methods: {
-        isRevoked: h => ({
-          call: () => call(h)
-        })
-      },
-      stub: call
-    };
-  };
-
   describe("verifyCertificateNotRevoked", () => {
     it("passes if all the store returns false for all hashes", () => {
       const certificateStores = [mockStore(), mockStore(), mockStore()];
@@ -587,6 +591,52 @@ describe("sagas/certificate", () => {
         })
       );
       expect(generator.next().done).toBe(true);
+    });
+  });
+
+  describe("verifyCertificateIssued", () => {
+    it("returns true and puts success action when certificate is issued on all stores", () => {
+      const certificateStores = [mockStore(), mockStore()];
+      const { testCert: certificate } = whenThereIsOneEthereumAddressIssuer();
+      const generator = verifyCertificateIssued({
+        certificate,
+        certificateStores
+      });
+  
+      generator.next();
+  
+      expect(generator.next([true, true]).value).toEqual(
+        put({
+          type: "VERIFYING_CERTIFICATE_ISSUED_SUCCESS"
+        })
+      );
+  
+      const res = generator.next();
+      expect(res.value).toBe(true);
+      expect(res.done).toBe(true);
+    });
+  
+    it("returns false and puts success action when certificate is not issued on any stores", () => {
+      const certificateStores = [mockStore(), mockStore()];
+      const { testCert: certificate } = whenThereIsOneEthereumAddressIssuer();
+      const generator = verifyCertificateIssued({
+        certificate,
+        certificateStores
+      });
+  
+      generator.next();
+  
+      expect(generator.next([true, false]).value).toEqual(
+        put({
+          type: "VERIFYING_CERTIFICATE_ISSUED_FAILURE",
+          certificate: certificateData(certificate),
+          error: "Certificate has not been issued"
+        })
+      );
+  
+      const res = generator.next();
+      expect(res.value).toBe(false);
+      expect(res.done).toBe(true);
     });
   });
 });
