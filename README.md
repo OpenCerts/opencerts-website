@@ -47,6 +47,11 @@ E.g:
 NET=mainnet npm run dev
 ```
 
+### Frameless Viewer
+
+For embedded certificate rendering, we have provided a frameless view located at `/frameless_viewer`
+
+More information at [opencerts-documentation](http://docs.opencerts.io/embedded_viewer.html)
 
 ### Troubleshooting
 
