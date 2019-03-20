@@ -17,14 +17,10 @@ const FramelessCertificateViewer = props => {
   trace(`Certificate content: %o`, certificate);
 
   return (
-    <>
-      <div>
-        <SelectedTemplate
-          certificate={certificate}
-          handleObfuscation={handleObfuscation}
-        />
-      </div>
-    </>
+    <SelectedTemplate
+      certificate={certificate}
+      handleObfuscation={handleObfuscation}
+    />
   );
 };
 

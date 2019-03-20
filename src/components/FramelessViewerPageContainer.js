@@ -28,7 +28,11 @@ class FramelessViewerContainer extends Component {
     const fieldContents = JSON.parse(e.target.value);
     trace(fieldContents);
     const validated = validateSchema(fieldContents);
-    trace(`Certificate schema validation: ${validated}`);
+    if (!validated) {
+      throw new Error(
+        "Certificate string does not conform to OpenCerts schema"
+      );
+    }
     const verified = verifySignature(fieldContents);
     trace(`Certificate verification: ${verified}`);
     this.props.updateCertificate(fieldContents);
@@ -46,22 +50,19 @@ class FramelessViewerContainer extends Component {
   render() {
     if (!this.props.document) {
       return (
-        <>
-          <input
-            id="certificateContentsString"
-            type="hidden"
-            onChange={this.handleTextFieldChange}
-          />
-        </>
+        <input
+          id="certificateContentsString"
+          type="hidden"
+          onChange={this.handleTextFieldChange}
+        />
       );
     }
     return (
-      <div id={styles["frameless-container"]}>
-        <FramelessCertificateViewer
-          document={this.props.document}
-          certificate={certificateData(this.props.document)}
-        />
-      </div>
+      <FramelessCertificateViewer
+        id={styles["frameless-container"]}
+        document={this.props.document}
+        certificate={certificateData(this.props.document)}
+      />
     );
   }
 }
