@@ -8,6 +8,7 @@ import UnverifiedView from "./Views/UnverifiedView";
 const renderDropzoneContent = props => {
   const {
     handleRenderOverwrite,
+    resetData,
     isDragAccept,
     isDragReject,
     verifying,
@@ -41,6 +42,7 @@ const renderDropzoneContent = props => {
     return (
       <UnverifiedView
         handleRenderOverwrite={handleRenderOverwrite}
+        resetData={() => resetData()}
         hashStatus={hashStatus}
         issuedStatus={issuedStatus}
         notRevokedStatus={notRevokedStatus}
@@ -79,6 +81,7 @@ const onFileDrop = (
 
 const CertificateDropzone = ({
   handleCertificateChange,
+  resetData,
   handleFileError,
   handleRenderOverwrite,
   fileError,
@@ -99,6 +102,7 @@ const CertificateDropzone = ({
   >
     {renderDropzoneContentCurry({
       handleCertificateChange,
+      resetData,
       handleRenderOverwrite,
       fileError,
       verifying,
@@ -129,6 +133,7 @@ CertificateDropzone.propTypes = {
 
 renderDropzoneContent.propTypes = {
   handleRenderOverwrite: PropTypes.func,
+  resetData: PropTypes.func,
   document: PropTypes.object,
   fileError: PropTypes.bool,
   verifying: PropTypes.bool,

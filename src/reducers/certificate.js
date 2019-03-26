@@ -281,6 +281,12 @@ export default function reducer(state = initialState, action) {
 }
 
 // Action Creators
+export function resetCertificateState() {
+  return {
+    type: types.NETWORK_RESET
+  };
+}
+
 export function updateCertificate(payload) {
   return {
     type: types.UPDATE_CERTIFICATE,

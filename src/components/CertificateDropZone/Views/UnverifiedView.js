@@ -3,6 +3,7 @@ import Link from "next/link";
 import css from "./viewerStyles.scss";
 
 const View = ({
+  resetData,
   issuerIdentityStatus,
   hashStatus,
   issuedStatus,
@@ -71,7 +72,10 @@ const View = ({
       <div className={css["secondary-links"]}>
         <span>
           <Link href=" ">
-            <a className={css["text-link"]}>Try another</a>
+            <a onClick={e => {
+              e.preventDefault();
+              resetData();
+            }} className={css["text-link"]}>Try another</a>
           </Link>
         </span>
         {isWarning ? (
@@ -98,6 +102,7 @@ const View = ({
 
 View.propTypes = {
   handleRenderOverwrite: PropTypes.func,
+  resetData: PropTypes.func,
   document: PropTypes.object,
 
   issuerIdentityStatus: PropTypes.object,
