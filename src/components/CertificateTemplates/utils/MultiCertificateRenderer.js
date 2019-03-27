@@ -5,6 +5,7 @@ import { get } from "lodash";
 import styles from "../../certificateViewer.scss";
 import InvalidCertificateNotice from "../InvalidCertificateNotice";
 import { analyticsEvent } from "../../Analytics";
+import Drawer from "../../Ui/Drawer";
 
 import { getLogger } from "../../../utils/logger";
 
@@ -62,6 +63,13 @@ const storeCanRenderTemplate = ({ whitelist, certificate }) => {
  * @param {*} templates An array of template views to render using `renderTemplateToTab()`
  */
 export class MultiCertificateRenderer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      mbContentIdx: 0
+    };
+  }
+
   componentDidMount() {
     const { certificate } = this.props;
     analyticsEvent(window, {
@@ -71,45 +79,60 @@ export class MultiCertificateRenderer extends Component {
     });
   }
 
+  setMobileContent(index) {
+    this.setState({ mbContentIdx: index });
+  }
+
   render() {
     const { certificate, whitelist, templates, handleObfuscation } = this.props;
+    const { mbContentIdx } = this.state;
     const tabs = templates.map(template => {
       trace(`%o`, template);
       return renderTemplateToTab({ template, certificate, handleObfuscation });
     });
     const allowedToRender = storeCanRenderTemplate({ whitelist, certificate });
     const validCertificateContent = (
-      <div>
-        <Tabs selectedTabClassName={styles.active}>
-          <div id={styles["header-ui"]}>
-            <div className={styles["header-container"]}>
-              <TabList id="template-tabs-list" className="nav nav-tabs">
-                {tabs.map(tab => (
-                  <Tab key={tab.id} className={styles.tab}>
-                    {tab.label}
-                  </Tab>
-                ))}
-                <a
-                  id="btn-view-another"
-                  href=" "
-                  className={styles["view-another"]}
-                >
-                  View another
-                </a>
-              </TabList>
+      <>
+        <div className="d-none d-lg-block d-xl-block">
+          <Tabs selectedTabClassName={styles.active}>
+            <div id={styles["header-ui"]}>
+              <div className={styles["header-container"]}>
+                <TabList id="template-tabs-list" className="nav nav-tabs">
+                  {tabs.map(tab => (
+                    <Tab key={tab.id} className={styles.tab}>
+                      {tab.label}
+                    </Tab>
+                  ))}
+                  <a
+                    id="btn-view-another"
+                    href=" "
+                    className={styles["view-another"]}
+                  >
+                    View another
+                  </a>
+                </TabList>
+              </div>
             </div>
-          </div>
-
-          <div
-            className="tab-content bg-white p-3 mt-3 rounded"
-            id="rendered-certificate"
+            <div
+              className="tab-content bg-white p-3 mt-3 rounded"
+              id="rendered-certificate"
+            >
+              {tabs.map(tab => (
+                <TabPanel key={tab.id}>{tab.content}</TabPanel>
+              ))}
+            </div>
+          </Tabs>
+        </div>
+        <div className="d-lg-none d-xl-none">
+          <Drawer
+            tabs={tabs}
+            activeIdx={mbContentIdx}
+            toggle={idx => this.setMobileContent(idx)}
           >
-            {tabs.map(tab => (
-              <TabPanel key={tab.id}>{tab.content}</TabPanel>
-            ))}
-          </div>
-        </Tabs>
-      </div>
+            {tabs[mbContentIdx].content}
+          </Drawer>
+        </div>
+      </>
     );
     trace(`%o`, { certificate, whitelist, templates });
     if (allowedToRender) {
