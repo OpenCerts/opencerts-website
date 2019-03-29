@@ -1,23 +1,16 @@
 import Web3 from "web3";
+import { NETWORK_TYPES, INFURA_PROJECT_ID } from "../../config";
 
 const ProviderEngine = require("web3-provider-engine");
 const WebsocketSubProvider = require("web3-provider-engine/subproviders/websocket.js");
-
-export const types = {
-  INFURA_MAINNET: "INFURA_MAINNET",
-  INFURA_ROPSTEN: "INFURA_ROPSTEN",
-  INJECTED: "INJECTED",
-  CUSTOM: "CUSTOM",
-  MOCK: "MOCK"
-};
 
 let web3Instance;
 let web3InstanceType;
 
 async function loadWeb3InfuraWebsocket(mainnet = true) {
   const rpcUrl = mainnet
-    ? "wss://mainnet.infura.io/ws/GcUmThrFdoO47u9xsEXq"
-    : "wss://ropsten.infura.io/ws/GcUmThrFdoO47u9xsEXq";
+    ? `wss://mainnet.infura.io/ws/v3/${INFURA_PROJECT_ID}`
+    : `wss://ropsten.infura.io/ws/v3/${INFURA_PROJECT_ID}`;
 
   const engine = new ProviderEngine();
   const web3 = new Web3(engine);
@@ -57,22 +50,27 @@ async function loadWeb3Mock() {
   };
 }
 
-async function resolveWeb3(resolve, reject, t = types.INJECTED, config) {
+async function resolveWeb3(
+  resolve,
+  reject,
+  t = NETWORK_TYPES.INJECTED,
+  config
+) {
   try {
     switch (t) {
-      case types.INFURA_ROPSTEN:
+      case NETWORK_TYPES.INFURA_ROPSTEN:
         web3Instance = await loadWeb3InfuraWebsocket(false);
         break;
-      case types.INFURA_MAINNET:
+      case NETWORK_TYPES.INFURA_MAINNET:
         web3Instance = await loadWeb3InfuraWebsocket();
         break;
-      case types.INJECTED:
+      case NETWORK_TYPES.INJECTED:
         web3Instance = await loadWeb3Injected();
         break;
-      case types.CUSTOM:
+      case NETWORK_TYPES.CUSTOM:
         web3Instance = await loadWeb3CustomRpc(config);
         break;
-      case types.MOCK:
+      case NETWORK_TYPES.MOCK:
         web3Instance = await loadWeb3Mock();
         break;
       default:
@@ -87,8 +85,8 @@ async function resolveWeb3(resolve, reject, t = types.INJECTED, config) {
 
 export function setNewWeb3(t, config) {
   if (
-    web3InstanceType === types.INFURA_MAINNET ||
-    web3InstanceType === types.INFURA_ROPSTEN
+    web3InstanceType === NETWORK_TYPES.INFURA_MAINNET ||
+    web3InstanceType === NETWORK_TYPES.INFURA_ROPSTEN
   ) {
     // we need to kill the engine if the previous web3 instance has a ledger subprovider
     web3Instance.currentProvider.stop();

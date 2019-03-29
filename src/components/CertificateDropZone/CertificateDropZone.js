@@ -91,6 +91,7 @@ const CertificateDropzone = ({
   verificationStatus
 }) => (
   <Dropzone
+    id="certificate-dropzone"
     onDrop={acceptedFiles =>
       onFileDrop(acceptedFiles, handleCertificateChange, handleFileError)
     }

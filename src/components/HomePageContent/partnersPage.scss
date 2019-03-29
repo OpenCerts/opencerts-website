@@ -1,58 +1,66 @@
 .partnerlogos {
-    margin: 1rem;
-    max-height: 2.5rem;
-    padding-right: 1rem;
+  margin: 1rem;
+  max-height: 2.5rem;
+  padding-right: 1rem;
 }
 
 .main {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
 #partners {
-    background-color: #f7fafc;
+  background-color: #f7fafc;
 }
 
-
 .logo-container {
-    max-width: 205px;
+  max-width: 205px;
+  margin: auto;
+  height: 100%;
+  padding: 1rem 1.2rem;
+
+  img {
+    width: 100%;
+    display: block;
     margin: auto;
-    height: 100%;
-    padding: 1rem 1.2rem;
+  }
 
-    img {
-        width: 100%;
-        display: block;
-        margin: auto;
-    }
+  #CSC {
+    padding: 0 2rem;
+  }
 
-    #CSC {
-        padding: 0 2rem;
-    }
+  #NIEC {
+    padding: 0 1.7rem;
+  }
 
-    #SIM {
-        width: 50%;
-    }
+  #SIM {
+    width: 50%;
+  }
 
-    #govtech {
-        width: 90%;
-    }
+  #govtech {
+    width: 90%;
+  }
 
-    #NP {
-        width: 85%;
-    }
+  #NP {
+    width: 85%;
+  }
 
-    #NYP, #SUSS, #SUTD{
-        width: 80%;
-    }
-    
-    #SP, #NTU, #NUS {
-        width: 75%;
-    }
+  #NYP,
+  #SUSS,
+  #SUTD,
+  #SEAB {
+    width: 80%;
+  }
 
-    #TP, #RP {
-        width: 70%;
-    }
-    
+  #SP,
+  #NTU,
+  #NUS {
+    width: 75%;
+  }
+
+  #TP,
+  #RP {
+    width: 70%;
+  }
 }
