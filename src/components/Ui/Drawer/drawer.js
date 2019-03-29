@@ -6,8 +6,15 @@ export default class Drawer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: false
+      visible: false,
+      showAbsHeader: false
     };
+  }
+
+  componentDidMount() {
+    if (window.location.pathname === "/frameless-viewer") {
+      this.setState({ showAbsHeader: true });
+    }
   }
 
   toggleDrawer() {
@@ -38,7 +45,7 @@ export default class Drawer extends Component {
 
   render() {
     const { tabs, children } = this.props;
-    const { visible } = this.state;
+    const { visible, showAbsHeader } = this.state;
 
     return (
       <>
@@ -57,12 +64,14 @@ export default class Drawer extends Component {
             {this.createTabs(tabs)}
           </div>
         ) : null}
-
         <div
-          className={`container ${css.togglebtn}`}
-          onClick={() => this.toggleDrawer()}
+          className={`${css.gray} ${
+            showAbsHeader ? "" : css["mb-sidenav"]
+          } container-fluid`}
         >
-          &#9776;
+          <div className={css.togglebtn} onClick={() => this.toggleDrawer()}>
+            &#9776;
+          </div>
         </div>
 
         <div id="main">{children}</div>

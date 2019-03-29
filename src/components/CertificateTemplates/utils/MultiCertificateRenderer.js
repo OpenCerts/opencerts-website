@@ -5,7 +5,7 @@ import { get } from "lodash";
 import styles from "../../certificateViewer.scss";
 import InvalidCertificateNotice from "../InvalidCertificateNotice";
 import { analyticsEvent } from "../../Analytics";
-import Drawer from "../../Ui/Drawer";
+import Drawer from "../../UI/Drawer";
 
 import { getLogger } from "../../../utils/logger";
 
