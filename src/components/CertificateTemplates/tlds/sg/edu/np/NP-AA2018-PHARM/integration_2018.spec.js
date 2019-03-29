@@ -28,11 +28,11 @@ test("PHARM 2018 certificate is rendered correctly", async t => {
     "Pharmacy Science",
     "Principal",
     "Council Chairman",
- 	"Ngee Ann Polytechnic",
-	"Chief Executive Officer",
+    "Ngee Ann Polytechnic",
+    "Chief Executive Officer",
     "National University Hospital",
-	"MAY 2018",
-	"PHARM180005"
+    "MAY 2018",
+    "PHARM180005"
   ]);
 
   // Navigate to Transcript tab
@@ -41,21 +41,21 @@ test("PHARM 2018 certificate is rendered correctly", async t => {
 
   // Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
-	"TRANSCRIPT OF ACADEMIC RECORD",
-	"PASS WITH MERIT",
-	"0000005",
+    "TRANSCRIPT OF ACADEMIC RECORD",
+    "PASS WITH MERIT",
+    "0000005",
     "Student Name PHARM Cert 2018",
     "S1234567A",
-	"APRIL 2014", 
-	"MOLECULAR BIOTECHNOLOGY",
-	"MINDWORKS",
-	"PHARMACY SCIENCE",
+    "APRIL 2014",
+    "MOLECULAR BIOTECHNOLOGY",
+    "MINDWORKS",
+    "PHARMACY SCIENCE",
     "WORLD ISSUES: A SINGAPORE PERSPECTIVE",
-	"allowed a transfer",
+    "allowed a transfer",
     "National Physical Fitness Award",
-	"Graduating GPA: 3.7835",
- 	"Professional Preparation Programme",
-	"The student has completed the full-time course in Diploma in Pharmacy Science",
-	"DIRECTOR, ACADEMIC AFFAIRS"
+    "Graduating GPA: 3.7835",
+    "Professional Preparation Programme",
+    "The student has completed the full-time course in Diploma in Pharmacy Science",
+    "DIRECTOR, ACADEMIC AFFAIRS"
   ]);
 });

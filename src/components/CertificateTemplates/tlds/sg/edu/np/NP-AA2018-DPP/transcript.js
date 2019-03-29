@@ -164,9 +164,7 @@ const renderStudentInfo = certificate => (
     <div className="row">
       <div className="col">
         <div className="row">
-          <div className="col-3">
-            Name
-          </div>
+          <div className="col-3">Name</div>
           <div className="col-9">
             :&nbsp;&nbsp;
             {get(certificate, "recipient.name")}

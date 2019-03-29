@@ -28,10 +28,10 @@ test("ECH 2018 certificate is rendered correctly", async t => {
     "Early Childhood Education",
     "Principal",
     "Council Chairman",
-	"Ngee Ann Polytechnic",
+    "Ngee Ann Polytechnic",
     "NTUC First Campus Co-operative Ltd & Director, SEED Institute Pte Ltd",
-	"MAY 2018",
-	"ECH180003"
+    "MAY 2018",
+    "ECH180003"
   ]);
 
   // Navigate to Transcript tab
@@ -40,19 +40,19 @@ test("ECH 2018 certificate is rendered correctly", async t => {
 
   // Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
-	"TRANSCRIPT OF ACADEMIC RECORD",
-	"PASS WITH MERIT",
-	"0000003",
+    "TRANSCRIPT OF ACADEMIC RECORD",
+    "PASS WITH MERIT",
+    "0000003",
     "Student Name ECH Cert 2018",
     "S1234567A",
-	"APRIL 2014", 
-	"EARLY CHILDHOOD EDUCATION",
-	"MINDWORKS",
+    "APRIL 2014",
+    "EARLY CHILDHOOD EDUCATION",
+    "MINDWORKS",
     "WORLD ISSUES: A SINGAPORE PERSPECTIVE",
     "National Physical Fitness Award",
-	"Graduating GPA: 3.7835",
- 	"Professional Preparation Programme",
-	"The student has completed the full-time course in Diploma in Early Childhood Education",
-	"DIRECTOR, ACADEMIC AFFAIRS"
+    "Graduating GPA: 3.7835",
+    "Professional Preparation Programme",
+    "The student has completed the full-time course in Diploma in Early Childhood Education",
+    "DIRECTOR, ACADEMIC AFFAIRS"
   ]);
 });

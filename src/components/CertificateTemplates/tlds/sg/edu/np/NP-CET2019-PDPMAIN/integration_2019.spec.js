@@ -28,8 +28,8 @@ test("PDP-MAIN 2019 certificate is rendered correctly", async t => {
     "Early Childhood Teaching",
     "Principal",
     "Council Chairman",
-	"MAY 2019",
-	"DCECT19M3001"
+    "MAY 2019",
+    "DCECT19M3001"
   ]);
 
   // Navigate to Transcript tab
@@ -38,19 +38,19 @@ test("PDP-MAIN 2019 certificate is rendered correctly", async t => {
 
   // Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
-	"TRANSCRIPT OF ACADEMIC RECORD",
-	"SUCCESSFULLY COMPLETED",
-	"0003001",
+    "TRANSCRIPT OF ACADEMIC RECORD",
+    "SUCCESSFULLY COMPLETED",
+    "0003001",
     "Student Name PDP Main 2019",
     "S1234567A",
-	"APRIL 2015", 
-	"SPECIALIST DIPLOMA IN PALLIATIVE CARE NURSING",
-	"HEALTHCARE CAREER & PROFESSIONAL",
-	"DIPLOMA (CONVERSION) IN EARLY CHILDHOOD TEACHING",
+    "APRIL 2015",
+    "SPECIALIST DIPLOMA IN PALLIATIVE CARE NURSING",
+    "HEALTHCARE CAREER & PROFESSIONAL",
+    "DIPLOMA (CONVERSION) IN EARLY CHILDHOOD TEACHING",
     "PREPARATION (NURSING)",
-	"allowed a transfer",
-	"Graduating GPA: 2.8276",
-	"The student has completed the course in DIPLOMA (CONVERSION) IN EARLY CHILDHOOD TEACHING",
-	"DIRECTOR, CET ACADEMY"
+    "allowed a transfer",
+    "Graduating GPA: 2.8276",
+    "The student has completed the course in DIPLOMA (CONVERSION) IN EARLY CHILDHOOD TEACHING",
+    "DIRECTOR, CET ACADEMY"
   ]);
 });

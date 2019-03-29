@@ -23,13 +23,13 @@ test("OPTION 2018 certificate is rendered correctly", async t => {
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "Student Name Option Cert",
- 	"an option in",
-	"Business Studies",
+    "an option in",
+    "Business Studies",
     "as part of the course of study in the",
     "Diploma",
     "Biomedical Science",
-	"3 May 2018",
+    "3 May 2018",
     "Registrar",
-	"0006"
+    "0006"
   ]);
 });

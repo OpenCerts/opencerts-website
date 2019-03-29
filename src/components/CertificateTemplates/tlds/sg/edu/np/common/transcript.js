@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { get, groupBy, find } from "lodash";
 import { IMG_LOGO_NP_HORIZONTAL } from "./images";
 import { formatDate, formatDateFullMonth, isCETDiploma } from "./functions";
@@ -57,15 +56,21 @@ export const renderHeaderNPPartner = (logo, left, certificate) => {
   return (
     <div className="row">
       <div className="col-6">
-		<div  className="row d-flex justify-content-center align-items-center">
-		  <div className="col-6">
-			<img style={fullWidthStyle} src={left? logo: IMG_LOGO_NP_HORIZONTAL} />
-		  </div>
-		  <div className="col-6">
-			<img style={fullWidthStyle} src={left? IMG_LOGO_NP_HORIZONTAL: logo} />
-		  </div>
-		 </div>
-	  </div>
+        <div className="row d-flex justify-content-center align-items-center">
+          <div className="col-6">
+            <img
+              style={fullWidthStyle}
+              src={left ? logo : IMG_LOGO_NP_HORIZONTAL}
+            />
+          </div>
+          <div className="col-6">
+            <img
+              style={fullWidthStyle}
+              src={left ? IMG_LOGO_NP_HORIZONTAL : logo}
+            />
+          </div>
+        </div>
+      </div>
       <div className="col-2" />
       <div className="col-4">
         <div style={{ color: "navy", fontWeight: 500 }}>
@@ -94,7 +99,6 @@ export const renderHeaderNP = certificate => {
     </div>
   );
 };
-
 
 export const renderFTGradingSystem = () => (
   <div className="row">
@@ -329,7 +333,7 @@ export const renderCETGradingSystem = () => (
                 <td>TRF</td>
                 <td>CREDIT TRANSFER</td>
               </tr>
-			  <tr>
+              <tr>
                 <td>SC</td>
                 <td>SUCCESSFULLY COMPLETED</td>
               </tr>
@@ -514,11 +518,11 @@ export const renderTwoSignature = certificate => (
       <div className="text-center">
         {certificate.additionalData.transcriptSignatories[0].position}
       </div>
-	   <div className="text-center">
+      <div className="text-center">
         {certificate.additionalData.transcriptSignatories[0].organisation}
       </div>
     </div>
-	<div className="col-5">
+    <div className="col-5">
       <div className="px-5">
         <img
           style={fullWidthStyle}
@@ -529,14 +533,13 @@ export const renderTwoSignature = certificate => (
       <div className="text-center">
         {certificate.additionalData.transcriptSignatories[1].position}
       </div>
-	   <div className="text-center">
+      <div className="text-center">
         {certificate.additionalData.transcriptSignatories[1].organisation}
       </div>
     </div>
     <div className="col-1" />
   </div>
 );
-
 
 export const renderSignature = certificate => (
   <div

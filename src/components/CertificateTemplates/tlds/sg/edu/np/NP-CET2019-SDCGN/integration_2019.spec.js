@@ -28,11 +28,11 @@ test("PDP-SDCGN 2019 certificate is rendered correctly", async t => {
     "Community Gerontology Nursing",
     "Principal",
     "Council Chairman",
-	"Ngee Ann Polytechnic",
-	"Chief Executive Officer",
+    "Ngee Ann Polytechnic",
+    "Chief Executive Officer",
     "Tsao Foundation",
-	"MAY 2019",
-	"SDCGN19M3002"
+    "MAY 2019",
+    "SDCGN19M3002"
   ]);
 
   // Navigate to Transcript tab
@@ -41,17 +41,17 @@ test("PDP-SDCGN 2019 certificate is rendered correctly", async t => {
 
   // Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
-	"TRANSCRIPT OF ACADEMIC RECORD",
-	"SUCCESSFULLY COMPLETED",
-	"0003002",
+    "TRANSCRIPT OF ACADEMIC RECORD",
+    "SUCCESSFULLY COMPLETED",
+    "0003002",
     "Student Name PDP SDCGN 2019",
     "S1234567A",
-	"APRIL 2015", 
-	"SPECIALIST DIPLOMA IN COMMUNITY GERONTOLOGY NURSING",
-	"ANATOMY & PHYSIOLOGY 1",
+    "APRIL 2015",
+    "SPECIALIST DIPLOMA IN COMMUNITY GERONTOLOGY NURSING",
+    "ANATOMY & PHYSIOLOGY 1",
     "PREPARATION (NURSING)",
-	"Graduating GPA: 2.8276",
-	"The student has completed the course in SPECIALIST DIPLOMA IN COMMUNITY GERONTOLOGY NURSING",
-	"DIRECTOR, CET ACADEMY"
+    "Graduating GPA: 2.8276",
+    "The student has completed the course in SPECIALIST DIPLOMA IN COMMUNITY GERONTOLOGY NURSING",
+    "DIRECTOR, CET ACADEMY"
   ]);
 });

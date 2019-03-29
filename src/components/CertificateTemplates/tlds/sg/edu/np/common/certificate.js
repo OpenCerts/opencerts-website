@@ -97,7 +97,7 @@ export const renderFourSignatures = certificate => (
           {get(certificate, "additionalData.certSignatories[0].organisation")}
         </div>
       </div>
-	  <div className="col-4">
+      <div className="col-4">
         <div className="px-4">
           <img
             style={fullWidthStyle}
@@ -327,7 +327,11 @@ export const renderAwardText = certificate => (
     </div>
     <div className="row d-flex justify-content-center">
       <div style={titleTextStyle}>
-        {formatCertName(certificate.id, certificate.name, certificate.additionalData.merit)}
+        {formatCertName(
+          certificate.id,
+          certificate.name,
+          certificate.additionalData.merit
+        )}
       </div>
     </div>
   </div>

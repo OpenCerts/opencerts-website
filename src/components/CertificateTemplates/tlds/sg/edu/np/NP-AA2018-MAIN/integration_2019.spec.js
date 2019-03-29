@@ -28,8 +28,8 @@ test("FT-MAIN 2019 certificate is rendered correctly", async t => {
     "Animation & 3D Arts",
     "Principal",
     "Council Chairman",
-	"MAY 2019",
-	"A3DA19M0001"
+    "MAY 2019",
+    "A3DA19M0001"
   ]);
 
   // Navigate to Transcript tab
@@ -38,20 +38,20 @@ test("FT-MAIN 2019 certificate is rendered correctly", async t => {
 
   // Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
-	"TRANSCRIPT OF ACADEMIC RECORD",
-	"PASS WITH MERIT",
-	"0000001",
+    "TRANSCRIPT OF ACADEMIC RECORD",
+    "PASS WITH MERIT",
+    "0000001",
     "Student Name MAIN Cert 2019",
     "S1234567A",
-	"APRIL 2014", 
-	"MOLECULAR BIOTECHNOLOGY",
-	"MINDWORKS",
-	"ANIMATION & 3D ARTS",
+    "APRIL 2014",
+    "MOLECULAR BIOTECHNOLOGY",
+    "MINDWORKS",
+    "ANIMATION & 3D ARTS",
     "WORLD ISSUES: A SINGAPORE PERSPECTIVE",
-	"allowed a transfer",
-	"Graduating GPA: 3.7835",
- 	"Professional Preparation Programme",
-	"The student has completed the full-time course in Diploma in Biomedical Science",
-	"DIRECTOR, ACADEMIC AFFAIRS"
+    "allowed a transfer",
+    "Graduating GPA: 3.7835",
+    "Professional Preparation Programme",
+    "The student has completed the full-time course in Diploma in Biomedical Science",
+    "DIRECTOR, ACADEMIC AFFAIRS"
   ]);
 });

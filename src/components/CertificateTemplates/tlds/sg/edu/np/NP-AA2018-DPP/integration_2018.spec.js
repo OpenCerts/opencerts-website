@@ -28,8 +28,8 @@ test("DPP 2018 certificate is rendered correctly", async t => {
     "French",
     "Principal",
     "Council Chairman",
-	"MAY 2018",
-	"CIF181001"
+    "MAY 2018",
+    "CIF181001"
   ]);
 
   // Navigate to Transcript tab
@@ -40,10 +40,10 @@ test("DPP 2018 certificate is rendered correctly", async t => {
   await validateTextContent(t, RenderedCertificate, [
     "TRANSCRIPT OF ACADEMIC RECORD",
     "Student Name DPP Cert 2018",
-    "S1234567A", 
-	"CERTIFICATE IN FRENCH",
+    "S1234567A",
+    "CERTIFICATE IN FRENCH",
     "MINDWORKS",
-	"DRAWING & PERSPECTIVE",
+    "DRAWING & PERSPECTIVE",
     "The student has completed the Diploma Plus Certificate in French.",
     "DIRECTOR, ACADEMIC AFFAIRS"
   ]);

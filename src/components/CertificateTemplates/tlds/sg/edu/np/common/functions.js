@@ -24,18 +24,18 @@ export const formatDateFullMonth = dateString => {
   if (!dateString) return null;
   const date = new Date(dateString);
   const months = [
-  "JANUARY", 
-  "FEBRUARY", 
-  "MARCH",
-  "APRIL", 
-  "MAY", 
-  "JUNE", 
-  "JULY",
-  "AUGUST", 
-  "SEPTEMBER", 
-  "OCTOBER",
-  "NOVEMBER",
-  "DECEMBER"
+    "JANUARY",
+    "FEBRUARY",
+    "MARCH",
+    "APRIL",
+    "MAY",
+    "JUNE",
+    "JULY",
+    "AUGUST",
+    "SEPTEMBER",
+    "OCTOBER",
+    "NOVEMBER",
+    "DECEMBER"
   ];
   const month = date.getMonth();
   const year = date.getUTCFullYear();
@@ -75,23 +75,39 @@ export const formatDatePrefix = dateString => {
   );
 };
 
+const getCertType = certId => {
+  let certType = "";
+
+  const arrayCertId = certId.split(":");
+  if (arrayCertId.length > 1) certType = arrayCertId[1];
+
+  return certType;
+};
+
+const splitStringTo2 = (string, delimiter) => {
+  const parts = string.split(delimiter);
+  if (parts.length > 1)
+    return [parts[0], parts.splice(1, parts.length).join(delimiter)];
+  return ["", parts[0]];
+};
 export const formatCertName = (certId, certName, meritFlag) => {
   let [certPrefix, certDescr] = ["", ""];
-  
+
   const certType = getCertType(certId);
-  
-   switch(certType) {
-	  case "FT":
-		  [certPrefix, certDescr] = ["Diploma", certName];
-		  break;
-	  case "PTD": 
-	  case "PDP":
-		  [certPrefix, certDescr] =  splitStringTo2(certName, " in ");
-		  break;
+
+  switch (certType) {
+    case "FT":
+      [certPrefix, certDescr] = ["Diploma", certName];
+      break;
+    case "PTD":
+    case "PDP":
+      [certPrefix, certDescr] = splitStringTo2(certName, " in ");
+      break;
+    default:
   }
 
   if (certType === "FT" || certType === "PTD") {
-	  certPrefix = (meritFlag==="Y") ? certPrefix + " with Merit" : certPrefix;
+    certPrefix = meritFlag === "Y" ? `${certPrefix} with Merit` : certPrefix;
   }
 
   return (
@@ -100,15 +116,13 @@ export const formatCertName = (certId, certName, meritFlag) => {
       <br />
       in
       <br />
-      {
-		//split cert description with "(" and keep the separator.
-		certDescr.length>30 ? (certDescr.split(/(?=\()/g).map(i => <p> {i} </p>)) : certDescr
-	  }
+      {// split cert description with "(" and keep the separator.
+      certDescr.length > 30
+        ? certDescr.split(/(?=\()/g).map(i => <p key={i}> {i} </p>)
+        : certDescr}
     </p>
   );
 };
-
-
 
 export const formatCertID = certId => {
   if (!certId) return null;
@@ -118,25 +132,10 @@ export const formatCertID = certId => {
 
 export const isCETDiploma = certId => {
   if (!certId) return false;
-  
+
   let isCertDipFlag = false;
-  let certType = getCertType(certId);
-  if (certType === "PTD" || certType==="PDP") isCertDipFlag = true;
-	  
+  const certType = getCertType(certId);
+  if (certType === "PTD" || certType === "PDP") isCertDipFlag = true;
+
   return isCertDipFlag;
-};
-
-const getCertType = certId => {
-  let certType = "";
-  
-  const arrayCertId = certId.split(":");
-  if (arrayCertId.length > 1) certType = arrayCertId[1];
-  
-  return certType;
-};
-
-const splitStringTo2 = (string, delimiter) => {
-   var parts=string.split(delimiter);
-   if (parts.length > 1)	return [parts[0], parts.splice(1,parts.length).join(delimiter)];
-   else return ["", parts[0]];
 };

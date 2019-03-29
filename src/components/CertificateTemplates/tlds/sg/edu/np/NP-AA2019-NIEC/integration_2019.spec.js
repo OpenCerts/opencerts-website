@@ -28,11 +28,11 @@ test("NIEC 2019 certificate is rendered correctly", async t => {
     "Early Childhood Development & Education",
     "Principal",
     "Council Chairman",
-	"Ngee Ann Polytechnic",
-	"Director",
+    "Ngee Ann Polytechnic",
+    "Director",
     "National Institute of Early Childhood Development",
-	"MAY 2019",
-	"ECH190003"
+    "MAY 2019",
+    "ECH190003"
   ]);
 
   // Navigate to Transcript tab
@@ -41,21 +41,21 @@ test("NIEC 2019 certificate is rendered correctly", async t => {
 
   // Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
-	"TRANSCRIPT OF ACADEMIC RECORD",
-	"PASS WITH MERIT",
-	"0000003",
+    "TRANSCRIPT OF ACADEMIC RECORD",
+    "PASS WITH MERIT",
+    "0000003",
     "Student Name ECH Cert 2019",
     "S1234567A",
-	"APRIL 2014", 
-	"EARLY CHILDHOOD EDUCATION",
-	"MINDWORKS",
+    "APRIL 2014",
+    "EARLY CHILDHOOD EDUCATION",
+    "MINDWORKS",
     "WORLD ISSUES: A SINGAPORE PERSPECTIVE",
-	"Graduating GPA: 3.7835",
- 	"Professional Preparation Programme",
-	"The student has completed the full-time course in Diploma in Early Childhood Development & Education",
-	"REGISTRAR",
-	"NATIONAL INSTITUTE OF EARLY CHILDHOOD DEVELOPMENT",
-	"DIRECTOR, ACADEMIC AFFAIRS",
-	"NGEE ANN POLYTECHNIC"
+    "Graduating GPA: 3.7835",
+    "Professional Preparation Programme",
+    "The student has completed the full-time course in Diploma in Early Childhood Development & Education",
+    "REGISTRAR",
+    "NATIONAL INSTITUTE OF EARLY CHILDHOOD DEVELOPMENT",
+    "DIRECTOR, ACADEMIC AFFAIRS",
+    "NGEE ANN POLYTECHNIC"
   ]);
 });

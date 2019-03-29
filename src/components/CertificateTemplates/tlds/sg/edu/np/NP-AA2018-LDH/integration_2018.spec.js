@@ -28,11 +28,11 @@ test("LDH 2018 certificate is rendered correctly", async t => {
     "Landscape Design & Hort",
     "Principal",
     "Council Chairman",
- 	"Ngee Ann Polytechnic",
-	"Chief Executive Officer",
+    "Ngee Ann Polytechnic",
+    "Chief Executive Officer",
     "National Parks Board",
-	"MAY 2018",
-	"LDH180004"
+    "MAY 2018",
+    "LDH180004"
   ]);
 
   // Navigate to Transcript tab
@@ -41,21 +41,21 @@ test("LDH 2018 certificate is rendered correctly", async t => {
 
   // Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
-	"TRANSCRIPT OF ACADEMIC RECORD",
-	"PASS WITH MERIT",
-	"0000004",
+    "TRANSCRIPT OF ACADEMIC RECORD",
+    "PASS WITH MERIT",
+    "0000004",
     "Student Name LDH Cert 2018",
     "S1234567A",
-	"APRIL 2014", 
-	"MOLECULAR BIOTECHNOLOGY",
-	"MINDWORKS",
-	"LANDSCAPE DESIGN & HORT",
+    "APRIL 2014",
+    "MOLECULAR BIOTECHNOLOGY",
+    "MINDWORKS",
+    "LANDSCAPE DESIGN & HORT",
     "WORLD ISSUES: A SINGAPORE PERSPECTIVE",
-	"allowed a transfer",
+    "allowed a transfer",
     "National Physical Fitness Award",
-	"Graduating GPA: 3.7835",
- 	"Professional Preparation Programme",
-	"The student has completed the full-time course in Diploma in Landscape Design & Hort",
-	"DIRECTOR, ACADEMIC AFFAIRS"
+    "Graduating GPA: 3.7835",
+    "Professional Preparation Programme",
+    "The student has completed the full-time course in Diploma in Landscape Design & Hort",
+    "DIRECTOR, ACADEMIC AFFAIRS"
   ]);
 });

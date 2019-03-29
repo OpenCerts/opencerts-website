@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import {
   renderLogoNP,
   renderLogoNPPartner,
@@ -96,50 +95,48 @@ const renderAwardText = certificate => (
 );
 
 const renderTwoSignatures = certificate => (
-	<div>
-	  <div
-		className="row d-flex justify-content-center align-items-end"
-		style={{ marginTop: "8rem", marginBottom: "2rem" }}
-	  >
-		<div className="col-1" />
-		<div className="col-5">
-		  <div className="px-5">
-			<img
-			  style={fullWidthStyle}
-			  src={certificate.additionalData.certSignatories[0].signature}
-			/>
-			<hr />
-		  </div>
-		  <div className="text-center">
-			{certificate.additionalData.certSignatories[0].name}
-		  </div>
-		  <div className="text-center">
-			{certificate.additionalData.certSignatories[0].position}
-		  </div>
-		</div>
-		<div className="col-5">
-		  <div className="px-5">
-			<img
-			  style={fullWidthStyle}
-			  src={certificate.additionalData.certSignatories[1].signature}
-			/>
-			<hr />
-		  </div>
-		  <div className="text-center">
-			{certificate.additionalData.certSignatories[1].name}
-		  </div>
-		  <div className="text-center">
-			{certificate.additionalData.certSignatories[1].position}
-		  </div>
-		</div>
-		<div className="col-1" />
-	  </div>
-	  <div>
-		<p>
-		   {formatDate(certificate.issuedOn)}
-		</p>
-	  </div>
-	</div>
+  <div>
+    <div
+      className="row d-flex justify-content-center align-items-end"
+      style={{ marginTop: "8rem", marginBottom: "2rem" }}
+    >
+      <div className="col-1" />
+      <div className="col-5">
+        <div className="px-5">
+          <img
+            style={fullWidthStyle}
+            src={certificate.additionalData.certSignatories[0].signature}
+          />
+          <hr />
+        </div>
+        <div className="text-center">
+          {certificate.additionalData.certSignatories[0].name}
+        </div>
+        <div className="text-center">
+          {certificate.additionalData.certSignatories[0].position}
+        </div>
+      </div>
+      <div className="col-5">
+        <div className="px-5">
+          <img
+            style={fullWidthStyle}
+            src={certificate.additionalData.certSignatories[1].signature}
+          />
+          <hr />
+        </div>
+        <div className="text-center">
+          {certificate.additionalData.certSignatories[1].name}
+        </div>
+        <div className="text-center">
+          {certificate.additionalData.certSignatories[1].position}
+        </div>
+      </div>
+      <div className="col-1" />
+    </div>
+    <div>
+      <p>{formatDate(certificate.issuedOn)}</p>
+    </div>
+  </div>
 );
 
 const renderSignatures = certificate => (

@@ -28,11 +28,11 @@ test("BMS 2019 certificate is rendered correctly", async t => {
     "Biomedical Science",
     "Principal",
     "Council Chairman",
-	"Ngee Ann Polytechnic",
+    "Ngee Ann Polytechnic",
     "Chief Executive Officer",
     "National University Hospital",
-	"MAY 2019",
-	"BMS190002"
+    "MAY 2019",
+    "BMS190002"
   ]);
 
   // Navigate to Transcript tab
@@ -42,19 +42,19 @@ test("BMS 2019 certificate is rendered correctly", async t => {
   // Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
     "TRANSCRIPT OF ACADEMIC RECORD",
-	"PASS WITH MERIT",
-	"0000002",
+    "PASS WITH MERIT",
+    "0000002",
     "Student Name BMS Cert 2019",
     "S1234567A",
-	"APRIL 2014", 
-	"MOLECULAR BIOTECHNOLOGY",
-	"MINDWORKS",
-	"BIOMEDICAL SCIENCE",
+    "APRIL 2014",
+    "MOLECULAR BIOTECHNOLOGY",
+    "MINDWORKS",
+    "BIOMEDICAL SCIENCE",
     "WORLD ISSUES: A SINGAPORE PERSPECTIVE",
-	"allowed a transfer",
-	"Graduating GPA: 3.7835",
- 	"Professional Preparation Programme",
-	"The student has completed the full-time course in Diploma in Biomedical Science",
-	"DIRECTOR, ACADEMIC AFFAIRS"
+    "allowed a transfer",
+    "Graduating GPA: 3.7835",
+    "Professional Preparation Programme",
+    "The student has completed the full-time course in Diploma in Biomedical Science",
+    "DIRECTOR, ACADEMIC AFFAIRS"
   ]);
 });

@@ -28,13 +28,13 @@ test("PDP-SGPCN 2019 certificate is rendered correctly", async t => {
     "Palliative Care Nursing",
     "Principal",
     "Council Chairman",
-	"Ngee Ann Polytechnic",
-	"Director",
+    "Ngee Ann Polytechnic",
+    "Director",
     "National Cancer Centre Singapore",
-	"Medical Director",
-	"Dover Park Hospice",
-	"MAY 2019",
-	"SDPCN193003"
+    "Medical Director",
+    "Dover Park Hospice",
+    "MAY 2019",
+    "SDPCN193003"
   ]);
 
   // Navigate to Transcript tab
@@ -43,17 +43,17 @@ test("PDP-SGPCN 2019 certificate is rendered correctly", async t => {
 
   // Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
-	"TRANSCRIPT OF ACADEMIC RECORD",
-	"SUCCESSFULLY COMPLETED",
-	"0003003",
+    "TRANSCRIPT OF ACADEMIC RECORD",
+    "SUCCESSFULLY COMPLETED",
+    "0003003",
     "Student Name PDP SDPCN 2019",
     "S1234567A",
-	"APRIL 2015", 
-	"SPECIALIST DIPLOMA IN PALLIATIVE CARE NURSING",
-	"ANATOMY & PHYSIOLOGY 1",
+    "APRIL 2015",
+    "SPECIALIST DIPLOMA IN PALLIATIVE CARE NURSING",
+    "ANATOMY & PHYSIOLOGY 1",
     "PREPARATION (NURSING)",
-	"Graduating GPA: 2.8276",
-	"The student has completed the course in SPECIALIST DIPLOMA IN PALLIATIVE CARE NURSING",
-	"DIRECTOR, CET ACADEMY"
+    "Graduating GPA: 2.8276",
+    "The student has completed the course in SPECIALIST DIPLOMA IN PALLIATIVE CARE NURSING",
+    "DIRECTOR, CET ACADEMY"
   ]);
 });

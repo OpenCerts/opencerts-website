@@ -1,7 +1,7 @@
-import {IMG_LOGO_TSAO, Certificate } from "../common";
+import { IMG_LOGO_TSAO, Certificate } from "../common";
 
 const Template = Certificate({
-	  logo: IMG_LOGO_TSAO
+  logo: IMG_LOGO_TSAO
 });
 
 export default Template;

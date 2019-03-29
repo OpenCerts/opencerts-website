@@ -28,8 +28,8 @@ test("PTD-MAIN 2019 certificate is rendered correctly", async t => {
     "Early Childhood Care & Education",
     "Principal",
     "Council Chairman",
-	"MAY 2019",
-	"DCET119M2001"
+    "MAY 2019",
+    "DCET119M2001"
   ]);
 
   // Navigate to Transcript tab
@@ -38,19 +38,19 @@ test("PTD-MAIN 2019 certificate is rendered correctly", async t => {
 
   // Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
-	"TRANSCRIPT OF ACADEMIC RECORD",
-	"SUCCESSFULLY COMPLETED",
-	"00002001",
+    "TRANSCRIPT OF ACADEMIC RECORD",
+    "SUCCESSFULLY COMPLETED",
+    "00002001",
     "Student Name PTD Main 2019",
     "S1234567A",
-	"APRIL 2015", 
-	"DIPLOMA IN COMMUNITY GERONTOLOGY NURSING",
-	"ANATOMY & PHYSIOLOGY 1",
-	"DIPLOMA IN EARLY CHILDHOOD CARE & EDUCATION (TEACHING)",
+    "APRIL 2015",
+    "DIPLOMA IN COMMUNITY GERONTOLOGY NURSING",
+    "ANATOMY & PHYSIOLOGY 1",
+    "DIPLOMA IN EARLY CHILDHOOD CARE & EDUCATION (TEACHING)",
     "PREPARATION (NURSING)",
-	"allowed a transfer",
-	"Graduating GPA: 2.8276",
-	"The student has completed the course in DIPLOMA IN EARLY CHILDHOOD CARE & EDUCATION (TEACHING)",
-	"DIRECTOR, CET ACADEMY"
+    "allowed a transfer",
+    "Graduating GPA: 2.8276",
+    "The student has completed the course in DIPLOMA IN EARLY CHILDHOOD CARE & EDUCATION (TEACHING)",
+    "DIRECTOR, CET ACADEMY"
   ]);
 });

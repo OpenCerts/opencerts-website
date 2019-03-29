@@ -54,6 +54,6 @@ const templates = {
   "NP-CET2019-SDCGN": NPCET2019SDCGN,
   "NP-AA2019-NIEC": NPAA2019NIEC,
   "NP-AA2019-OPT-NIEC": NPAA2019OPTNIEC
-  };
+};
 
 export default addDirToTemplatePath("np", templates);

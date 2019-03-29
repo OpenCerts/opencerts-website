@@ -23,14 +23,14 @@ test("OPTION-NIEC 2019 certificate is rendered correctly", async t => {
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "Student Name Option Cert NIEC 2019",
- 	"an option in",
-	"Business Studies",
+    "an option in",
+    "Business Studies",
     "as part of the course of study in the",
     "Diploma",
     "Early Childhood Development & Education",
-	"Registrar, NIEC",
-	"Registrar, NP",
-	"4 May 2019",
-	"ECH190006"
+    "Registrar, NIEC",
+    "Registrar, NP",
+    "4 May 2019",
+    "ECH190006"
   ]);
 });
