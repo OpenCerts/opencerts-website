@@ -17,7 +17,7 @@ const templates = [
   }
 ];
 
-const NPAA2018PHARM = ({ certificate }) => (
+const NPAA2019NIEC = ({ certificate }) => (
   <MultiCertificateRenderer
     certificate={certificate}
     templates={templates}
@@ -25,9 +25,9 @@ const NPAA2018PHARM = ({ certificate }) => (
   />
 );
 
-NPAA2018PHARM.displayName = "NP-AA2018-PHARM Template";
-NPAA2018PHARM.propTypes = {
+NPAA2019NIEC.displayName = "NP-AA2019-NIEC Template";
+NPAA2019NIEC.propTypes = {
   certificate: PropTypes.object.isRequired
 };
 
-export default NPAA2018PHARM;
+export default NPAA2019NIEC;

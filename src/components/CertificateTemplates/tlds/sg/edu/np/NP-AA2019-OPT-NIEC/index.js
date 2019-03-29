@@ -2,22 +2,16 @@ import PropTypes from "prop-types";
 import { MultiCertificateRenderer } from "template-utils/MultiCertificateRenderer";
 import { approvedAddresses } from "../common";
 import NPCert from "./certificate";
-import NPTranscript from "./transcript";
 
 const templates = [
   {
     id: "certificate",
     label: "Certificate",
     template: NPCert
-  },
-  {
-    id: "transcript",
-    label: "Transcript",
-    template: NPTranscript
   }
 ];
 
-const NPAA2018PHARM = ({ certificate }) => (
+const NPAA2019OPTNIEC = ({ certificate }) => (
   <MultiCertificateRenderer
     certificate={certificate}
     templates={templates}
@@ -25,9 +19,9 @@ const NPAA2018PHARM = ({ certificate }) => (
   />
 );
 
-NPAA2018PHARM.displayName = "NP-AA2018-PHARM Template";
-NPAA2018PHARM.propTypes = {
+NPAA2019OPTNIEC.displayName = "NP-AA2019-OPT-NIEC Template";
+NPAA2019OPTNIEC.propTypes = {
   certificate: PropTypes.object.isRequired
 };
 
-export default NPAA2018PHARM;
+export default NPAA2019OPTNIEC;

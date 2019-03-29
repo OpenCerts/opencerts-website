@@ -2,7 +2,7 @@ import { Selector } from "testcafe";
 
 fixture("Ngee Ann Polytechnic").page`http://localhost:3000`;
 
-const Certificate = "./NP_Certs_FT_PHARM.opencert";
+const Certificate = "./NP_Certs_PDP_SDCGN_2019.opencert";
 
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
@@ -13,7 +13,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("PHARM certificate is rendered correctly", async t => {
+test("PDP-SDCGN 2019 certificate is rendered correctly", async t => {
   // Uploads certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
@@ -23,13 +23,16 @@ test("PHARM certificate is rendered correctly", async t => {
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
-    "Student Name PHARM Cert",
-    "Diploma with Merit",
-    "Pharmacy Science",
+    "Student Name PDP SDCGN 2019",
+    "Specialist Diploma",
+    "Community Gerontology Nursing",
     "Principal",
     "Council Chairman",
-    "Chief Executive Officer",
-    "National University Hospital"
+	"Ngee Ann Polytechnic",
+	"Chief Executive Officer",
+    "Tsao Foundation",
+	"MAY 2019",
+	"SDCGN19M3002"
   ]);
 
   // Navigate to Transcript tab
@@ -38,13 +41,17 @@ test("PHARM certificate is rendered correctly", async t => {
 
   // Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
-    "TRANSCRIPT OF ACADEMIC RECORD",
-    "Student Name PHARM Cert",
-    "PHARMACY SCIENCE",
-    "S1234888A",
-    "Graduating GPA: 3.3435 (Graduating GPA is computed based on passed modules and has a maximum value of 4)",
-    "The student has completed the full-time course in Diploma in Pharmacy Science.",
-    "Professional Preparation Programme",
-    "Director, Academic Affairs"
+	"TRANSCRIPT OF ACADEMIC RECORD",
+	"SUCCESSFULLY COMPLETED",
+	"0003002",
+    "Student Name PDP SDCGN 2019",
+    "S1234567A",
+	"APRIL 2015", 
+	"SPECIALIST DIPLOMA IN COMMUNITY GERONTOLOGY NURSING",
+	"ANATOMY & PHYSIOLOGY 1",
+    "PREPARATION (NURSING)",
+	"Graduating GPA: 2.8276",
+	"The student has completed the course in SPECIALIST DIPLOMA IN COMMUNITY GERONTOLOGY NURSING",
+	"DIRECTOR, CET ACADEMY"
   ]);
 });

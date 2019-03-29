@@ -2,7 +2,7 @@ import { Selector } from "testcafe";
 
 fixture("Ngee Ann Polytechnic").page`http://localhost:3000`;
 
-const Certificate = "./NP_Certs_FT_MAIN.opencert";
+const Certificate = "./NP_Certs_FT_MAIN_2018.opencert";
 
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
@@ -13,7 +13,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("MAIN certificate is rendered correctly", async t => {
+test("FT-MAIN 2018 certificate is rendered correctly", async t => {
   // Uploads certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
@@ -23,11 +23,13 @@ test("MAIN certificate is rendered correctly", async t => {
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
-    "Student Name MAIN Cert",
+    "Student Name MAIN Cert 2018",
     "Diploma with Merit",
     "Animation & 3D Arts",
     "Principal",
-    "Council Chairman"
+    "Council Chairman",
+	"MAY 2018",
+	"A3DA180001"
   ]);
 
   // Navigate to Transcript tab
@@ -36,13 +38,22 @@ test("MAIN certificate is rendered correctly", async t => {
 
   // Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
-    "TRANSCRIPT OF ACADEMIC RECORD",
-    "Student Name MAIN Cert",
-    "3D FORM & SPACE",
-    "S1234888A",
-    "Graduating GPA: 3.5635 (Graduating GPA is computed based on passed modules and has a maximum value of 4)",
-    "The student has completed the full-time course in Diploma in Biomedical Science.",
-    "Professional Preparation Programme",
-    "Director, Academic Affairs"
+	"TRANSCRIPT OF ACADEMIC RECORD",
+	"PASS WITH MERIT",
+	"0000001",
+    "Student Name MAIN Cert 2018",
+    "S1234567A",
+	"APRIL 2014", 
+	"MOLECULAR BIOTECHNOLOGY",
+	"MINDWORKS",
+	"ANIMATION & 3D ARTS",
+    "WORLD ISSUES: A SINGAPORE PERSPECTIVE",
+    "National Physical Fitness Award",
+	"allowed a transfer",
+    "National Physical Fitness Award",
+	"Graduating GPA: 3.7835",
+ 	"Professional Preparation Programme",
+	"The student has completed the full-time course in Diploma in Biomedical Science",
+	"DIRECTOR, ACADEMIC AFFAIRS"
   ]);
 });

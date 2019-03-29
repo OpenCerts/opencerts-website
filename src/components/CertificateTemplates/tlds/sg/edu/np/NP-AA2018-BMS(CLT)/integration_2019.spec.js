@@ -2,7 +2,7 @@ import { Selector } from "testcafe";
 
 fixture("Ngee Ann Polytechnic").page`http://localhost:3000`;
 
-const Certificate = "./NP_Certs_FT_BMS.opencert";
+const Certificate = "./NP_Certs_FT_BMS_2019.opencert";
 
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
@@ -13,7 +13,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("BMS certificate is rendered correctly", async t => {
+test("BMS 2019 certificate is rendered correctly", async t => {
   // Uploads certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
@@ -23,13 +23,16 @@ test("BMS certificate is rendered correctly", async t => {
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
-    "Student Name BMS Cert",
-    "Diploma with Merit",
+    "Student Name BMS Cert 2019",
+    "Diploma",
     "Biomedical Science",
     "Principal",
     "Council Chairman",
+	"Ngee Ann Polytechnic",
     "Chief Executive Officer",
-    "National University Hospital"
+    "National University Hospital",
+	"MAY 2019",
+	"BMS190002"
   ]);
 
   // Navigate to Transcript tab
@@ -39,11 +42,19 @@ test("BMS certificate is rendered correctly", async t => {
   // Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
     "TRANSCRIPT OF ACADEMIC RECORD",
-    "Student Name BMS Cert",
-    "MOLECULAR BIOTECHNOLOGY",
-    "S1234888A",
-    "DRAWING & PERSPECTIVE",
-    "National Physical Fitness Award",
-    "Professional Preparation Programme"
+	"PASS WITH MERIT",
+	"0000002",
+    "Student Name BMS Cert 2019",
+    "S1234567A",
+	"APRIL 2014", 
+	"MOLECULAR BIOTECHNOLOGY",
+	"MINDWORKS",
+	"BIOMEDICAL SCIENCE",
+    "WORLD ISSUES: A SINGAPORE PERSPECTIVE",
+	"allowed a transfer",
+	"Graduating GPA: 3.7835",
+ 	"Professional Preparation Programme",
+	"The student has completed the full-time course in Diploma in Biomedical Science",
+	"DIRECTOR, ACADEMIC AFFAIRS"
   ]);
 });

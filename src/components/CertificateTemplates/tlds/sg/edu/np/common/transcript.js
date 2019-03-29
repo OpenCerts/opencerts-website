@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { get, groupBy, find } from "lodash";
 import { IMG_LOGO_NP_HORIZONTAL } from "./images";
-import { formatDate } from "./functions";
+import { formatDate, formatDateFullMonth, isCETDiploma } from "./functions";
 
 export const fullWidthStyle = {
   width: "100%",
@@ -52,7 +52,32 @@ export const renderSemester = (semester, semesterId, { hideCredit } = {}) => {
   );
 };
 
-export const renderHeader = certificate => {
+export const renderHeaderNPPartner = (logo, left, certificate) => {
+  const serial = get(certificate, "additionalData.transcriptId");
+  return (
+    <div className="row">
+      <div className="col-6">
+		<div  className="row d-flex justify-content-center align-items-center">
+		  <div className="col-6">
+			<img style={fullWidthStyle} src={left? logo: IMG_LOGO_NP_HORIZONTAL} />
+		  </div>
+		  <div className="col-6">
+			<img style={fullWidthStyle} src={left? IMG_LOGO_NP_HORIZONTAL: logo} />
+		  </div>
+		 </div>
+	  </div>
+      <div className="col-2" />
+      <div className="col-4">
+        <div style={{ color: "navy", fontWeight: 500 }}>
+          TRANSCRIPT OF ACADEMIC RECORD
+        </div>
+        <div className="mt-3">SERIAL No. : {serial}</div>
+      </div>
+    </div>
+  );
+};
+
+export const renderHeaderNP = certificate => {
   const serial = get(certificate, "additionalData.transcriptId");
   return (
     <div className="row">
@@ -70,7 +95,8 @@ export const renderHeader = certificate => {
   );
 };
 
-export const renderGradingSystem = () => (
+
+export const renderFTGradingSystem = () => (
   <div className="row">
     <div className="col-6" />
     <div className="col-6 border" style={{ fontSize: "0.6rem" }}>
@@ -193,6 +219,129 @@ export const renderGradingSystem = () => (
   </div>
 );
 
+export const renderCETGradingSystem = () => (
+  <div className="row">
+    <div className="col-6" />
+    <div className="col-6 border" style={{ fontSize: "0.6rem" }}>
+      <div className="text-center">
+        <u>GRADING SYSTEM</u>
+      </div>
+      <div className="text-center" style={{ fontSize: "0.5rem" }}>
+        (EFFECTIVE FOR JULY 2001 INTAKE)
+      </div>
+      <div className="row">
+        <div className="col">
+          <table>
+            <tbody>
+              <tr>
+                <th>GRADE</th>
+                <th>GRADE POINT</th>
+                <th>MARKS</th>
+                <th>DESCRIPTION</th>
+              </tr>
+              <tr>
+                <td>AD*</td>
+                <td>4.0</td>
+                <td>80 - 100%</td>
+                <td>DISTINCTION</td>
+              </tr>
+              <tr>
+                <td>A+</td>
+                <td>4.0</td>
+                <td>85 - 100%</td>
+                <td>EXCELLENT</td>
+              </tr>
+              <tr>
+                <td>A</td>
+                <td>4.0</td>
+                <td>80 - 84%</td>
+                <td>EXCELLENT</td>
+              </tr>
+              <tr>
+                <td>B+</td>
+                <td>3.5</td>
+                <td>75 - 79%</td>
+                <td>VERY GOOD</td>
+              </tr>
+              <tr>
+                <td>B</td>
+                <td>3.0</td>
+                <td>70 - 74%</td>
+                <td>VERY GOOD</td>
+              </tr>
+              <tr>
+                <td>C+</td>
+                <td>2.5</td>
+                <td>65 - 69%</td>
+                <td>GOOD</td>
+              </tr>
+              <tr>
+                <td>C</td>
+                <td>2.0</td>
+                <td>60 - 64%</td>
+                <td>GOOD</td>
+              </tr>
+              <tr>
+                <td>D+</td>
+                <td>1.5</td>
+                <td>55 - 59%</td>
+                <td>PASS</td>
+              </tr>
+              <tr>
+                <td>D</td>
+                <td>1.0</td>
+                <td>50 - 54%</td>
+                <td>PASS</td>
+              </tr>
+              <tr>
+                <td>F</td>
+                <td>0</td>
+                <td>0 - 49%</td>
+                <td>FAIL</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div className="col">
+          <table>
+            <tbody>
+              <tr>
+                <th>GRADE</th>
+                <th>DESCRIPTION</th>
+              </tr>
+              <tr>
+                <td>PX</td>
+                <td>PASS IN MODULES GRADED PASS OR FAIL ONLY</td>
+              </tr>
+              <tr>
+                <td>ABS</td>
+                <td>ABSENT</td>
+              </tr>
+              <tr>
+                <td>DB</td>
+                <td>DEBARRED</td>
+              </tr>
+              <tr>
+                <td>EX</td>
+                <td>CREDIT EXEMPTION</td>
+              </tr>
+              <tr>
+                <td>TRF</td>
+                <td>CREDIT TRANSFER</td>
+              </tr>
+			  <tr>
+                <td>SC</td>
+                <td>SUCCESSFULLY COMPLETED</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>* DISTINCTION GRADE IS AWARDED TO THE TOP 5% COHORT</div>
+    </div>
+  </div>
+);
+
 export const renderCourse = (certificate, course, courseId, opts) => {
   // Get student info and course description
   const graduateCourse = get(certificate, "description");
@@ -267,14 +416,14 @@ export const renderCourse = (certificate, course, courseId, opts) => {
             <div className="col-5">DATE OF ADMISSION</div>
             <div className="col-6">
               :&nbsp;&nbsp;
-              {formatDate(admissionDate)}
+              {formatDateFullMonth(admissionDate)}
             </div>
           </div>
           <div className="row">
             <div className="col-5">DATE OF GRADUATION</div>
             <div className="col-6">
               :&nbsp;&nbsp;
-              {formatDate(graduationDate)}
+              {formatDateFullMonth(graduationDate)}
             </div>
           </div>
         </div>
@@ -348,6 +497,47 @@ export const renderFinalStatement = certificate => {
   return <div>{renderedCourseNotes}</div>;
 };
 
+export const renderTwoSignature = certificate => (
+  <div
+    className="row d-flex justify-content-center align-items-end"
+    style={{ marginTop: "8rem", marginBottom: "2rem" }}
+  >
+    <div className="col-1" />
+    <div className="col-5">
+      <div className="px-5">
+        <img
+          style={fullWidthStyle}
+          src={certificate.additionalData.transcriptSignatories[0].signature}
+        />
+        <hr />
+      </div>
+      <div className="text-center">
+        {certificate.additionalData.transcriptSignatories[0].position}
+      </div>
+	   <div className="text-center">
+        {certificate.additionalData.transcriptSignatories[0].organisation}
+      </div>
+    </div>
+	<div className="col-5">
+      <div className="px-5">
+        <img
+          style={fullWidthStyle}
+          src={certificate.additionalData.transcriptSignatories[1].signature}
+        />
+        <hr />
+      </div>
+      <div className="text-center">
+        {certificate.additionalData.transcriptSignatories[1].position}
+      </div>
+	   <div className="text-center">
+        {certificate.additionalData.transcriptSignatories[1].organisation}
+      </div>
+    </div>
+    <div className="col-1" />
+  </div>
+);
+
+
 export const renderSignature = certificate => (
   <div
     className="row d-flex justify-content-center align-items-end"
@@ -372,20 +562,19 @@ export const renderSignature = certificate => (
   </div>
 );
 
-const Template = ({ certificate }) => (
+/* eslint-disable */
+// Disabled eslint as there's no way to add proptypes to an anonymous function like this
+export default ({ logo, left }) => ({ certificate }) => (
   <div className="container" style={{ fontSize: "0.9rem" }}>
-    {renderHeader(certificate)}
-    {renderGradingSystem()}
+    {logo ? renderHeaderNPPartner(logo, left, certificate) : renderHeaderNP(certificate)}
+	{isCETDiploma(certificate.id)?renderCETGradingSystem():renderFTGradingSystem()}
     {renderTranscript(certificate)}
     {renderNpfa(certificate)}
     {renderGPA(certificate)}
     {renderFinalStatement(certificate)}
-    {renderSignature(certificate)}
-    <hr />
+    {certificate.additionalData.transcriptSignatories &&
+      certificate.additionalData.transcriptSignatories[1]
+        ? renderTwoSignature(certificate) :  renderSignature(certificate) 
+	}
   </div>
 );
-
-Template.propTypes = {
-  certificate: PropTypes.object.isRequired
-};
-export default Template;

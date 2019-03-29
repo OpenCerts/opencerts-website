@@ -2,7 +2,7 @@ import { Selector } from "testcafe";
 
 fixture("Ngee Ann Polytechnic").page`http://localhost:3000`;
 
-const Certificate = "./NP_Certs_DPP.opencert";
+const Certificate = "./NP_Certs_DPP_2018.opencert";
 
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
@@ -13,7 +13,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("DPP certificate is rendered correctly", async t => {
+test("DPP 2018 certificate is rendered correctly", async t => {
   // Uploads certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
@@ -23,11 +23,13 @@ test("DPP certificate is rendered correctly", async t => {
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
-    "Student Name DPP Cert",
+    "Student Name DPP Cert 2018",
     "Diploma Plus Certificate",
     "French",
     "Principal",
-    "Council Chairman"
+    "Council Chairman",
+	"MAY 2018",
+	"CIF181001"
   ]);
 
   // Navigate to Transcript tab
@@ -37,11 +39,12 @@ test("DPP certificate is rendered correctly", async t => {
   // Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
     "TRANSCRIPT OF ACADEMIC RECORD",
-    "Student Name DPP Cert",
-    "CERTIFICATE IN FRENCH",
+    "Student Name DPP Cert 2018",
+    "S1234567A", 
+	"CERTIFICATE IN FRENCH",
     "MINDWORKS",
-    "S1234888A",
+	"DRAWING & PERSPECTIVE",
     "The student has completed the Diploma Plus Certificate in French.",
-    "Director, Academic Affairs"
+    "DIRECTOR, ACADEMIC AFFAIRS"
   ]);
 });
