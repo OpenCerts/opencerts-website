@@ -6,6 +6,9 @@ addons:
     sources:
       - google-chrome
 
+before_install:   
+  - export TZ=Asia/Singapore
+
 cache: npm install
 script:
   - npm run lint
