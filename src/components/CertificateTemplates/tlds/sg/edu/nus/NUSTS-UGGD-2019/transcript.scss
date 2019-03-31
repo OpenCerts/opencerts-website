@@ -1,0 +1,173 @@
+/* 
+ * 1em = 12pt = 16px = 0.3515mm
+ */
+
+$debug: false;
+
+.nus-transcript {
+    @if ($debug) {
+        table td {
+            border: 1px solid blue; 
+        }
+
+        div {
+            border: 1px solid blue; 
+        }
+    }
+    
+    font-family: Arial; 
+    font-size: initial; 
+    font-weight: initial;
+    line-height: initial;
+    
+    td {
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+    
+    hr {
+        width: 100%;
+        border: 1px solid;
+        margin-top: 8pt;
+        margin-bottom: 8pt;
+    }
+
+    .no-padding {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    
+    .header-unoff {
+        font-size: 18pt; 
+        text-align: center; 
+        padding: 40px;
+    }
+    
+    .header-pers-info { 
+        font-size: 8pt; 
+        height: 0.23cm; 
+        text-align: left;
+    }
+    
+    .header-pers-info-key {
+        text-align: center;
+        font-weight: bold;
+    }
+    
+    .full-width {
+        width: 13.12cm;
+    }
+    
+    .prog-key {
+        text-align: left;
+        font-weight: bold;
+    }
+    
+    .prog-row {
+        height: 0.3cm;
+    }
+    
+    .prog-col0 {
+        width: 3.6cm;
+        height: 0.3cm;
+    }
+    
+    .prog-col1 {
+        width: 9.31cm;
+        display: block;
+        position: relative;
+        left: 3.7cm;
+        top : -0.3cm;
+    }
+    
+    .ts-col0 {
+        width: 2cm;
+    }
+    
+    .ts-col1 {
+        width: 7.2cm;
+    }
+    
+    .ts-col2 {
+        width: 2.01cm;
+    }
+    
+    .ts-col3 {
+        width: 1.91cm;
+    }
+    
+    .ts-header {
+        font-size: 8pt;
+        font-weight: bold;
+        text-decoration: underline; 
+    }
+    
+    .ts-title {
+        font-size: 8pt;
+    }
+    
+    .ts-highlight {
+        font-weight: bold;
+    }
+    
+    .ts-text {
+        font-size: 7pt;
+    }
+    
+    .ts-modcode,
+    .ts-termrem {
+        padding-left: 5pt;
+    }
+    
+    .ts-grade {
+        padding-left: 10pt;
+    }
+    
+    .ts-credits {
+        text-align: right;
+    }
+    
+    .ts-credits::after {
+        content: '             ';
+        white-space: pre;
+    }
+    
+    .awd-col0 {
+        display: table-cell;
+        width: 0.51cm;
+    }
+    
+    .awd-col1 {
+        display: table-cell;
+        width: 4.13cm;
+    }
+    
+    .awd-col2 {
+        display: table-cell;
+        width: 8.94cm;
+    }
+    
+    .footer-text {
+        font-size: 7pt;
+        text-align: right;
+    }
+    
+    .a4-landscape { 
+        background: white; 
+        height: 21cm; 
+        width: 29.7cm; 
+        display: block; 
+        margin: 0 auto; 
+        padding: 0px 30px;
+        margin-bottom: 0.5cm; 
+        box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5); 
+        overflow-y: hidden; 
+        box-sizing: border-box; 
+    }
+
+    .ts-background { 
+        background-size: 24.04cm 17cm; /* width height */
+        background-repeat: no-repeat;
+        background-position: center top; /* horizontal vertical */
+    }
+}
