@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-import { isoDateToLocal, isoDateToLocalLong, sassClassNames } from "../common";
-import { NUS_LOGO } from "../common";
+import { isoDateToLocalLong, sassClassNames, NUS_LOGO } from "../common";
 import { SIG_CHAIRBOT, SIG_PRESIDENT } from "./signatures";
 import scss from "./degree.scss";
 
@@ -16,40 +14,31 @@ class Degree extends Component {
   }
 
   // render an empty div with specified height
-  renderVoid(height) {
-    const html = (
-      <div
-        style={{
-          display: "block",
-          width: "100%",
-          height,
-          border: "0px solid"
-        }}
-      />
-    );
-    return html;
-  }
+  renderVoid = height => (
+    <div
+      style={{
+        display: "block",
+        width: "100%",
+        height,
+        border: "0px solid"
+      }}
+    />
+  );
 
   // render cert title
-  renderTitle() {
-    const html = (
-      <div className={cls("cert-header")}>
-        NATIONAL UNIVERSITY
-        <br />
-        OF SINGPAORE
-      </div>
-    );
-    return html;
-  }
+  renderTitle = () => (
+    <div className={cls("cert-header")}>
+      NATIONAL UNIVERSITY
+      <br />
+      OF SINGPAORE
+    </div>
+  );
 
   // render logo
-  renderLogo() {
-    const html = <img src={NUS_LOGO} className={cls("cert-logo")} />;
-    return html;
-  }
+  renderLogo = () => <img src={NUS_LOGO} className={cls("cert-logo")} />;
 
   // render degree and honours
-  renderDegree(degreeData) {
+  renderDegree = degreeData => {
     const html = [];
     html.push(
       <div className={cls("cert-degree")}>
@@ -68,7 +57,7 @@ class Degree extends Component {
       );
     }
     return html;
-  }
+  };
 
   // render content
   renderContent() {
@@ -167,44 +156,41 @@ class Degree extends Component {
   }
 
   // render signatures
-  renderSigs() {
-    const html = (
-      <table width="100%">
-        <tbody>
-          <tr>
-            <td align="center">
-              {" "}
-              {/* signature 1 */}
-              <div className={cls("cert-sig")}>
-                <img
-                  src={SIG_CHAIRBOT}
-                  style={{ width: "5.31cm", height: "1.15cm" }}
-                />
-                <br />
-                Chair, Board of Trustees
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td align="center">
-              {" "}
-              {/* signature 2 */}
-              <div className={cls("cert-sig")}>
-                <br />
-                <img
-                  src={SIG_PRESIDENT}
-                  style={{ width: "2.5cm", height: "1.48cm" }}
-                />
-                <br />
-                President
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    );
-    return html;
-  }
+  renderSigs = () => (
+    <table width="100%">
+      <tbody>
+        <tr>
+          <td align="center">
+            {" "}
+            {/* signature 1 */}
+            <div className={cls("cert-sig")}>
+              <img
+                src={SIG_CHAIRBOT}
+                style={{ width: "5.31cm", height: "1.15cm" }}
+              />
+              <br />
+              Chair, Board of Trustees
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            {" "}
+            {/* signature 2 */}
+            <div className={cls("cert-sig")}>
+              <br />
+              <img
+                src={SIG_PRESIDENT}
+                style={{ width: "2.5cm", height: "1.48cm" }}
+              />
+              <br />
+              President
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  );
 
   // main render
   render() {
@@ -230,8 +216,11 @@ class Degree extends Component {
   }
 }
 
-const Template = ({ certificate }) => <Degree dataSource={certificate} />;
+Degree.propTypes = {
+  dataSource: PropTypes.object.isRequired
+};
 
+const Template = ({ certificate }) => <Degree dataSource={certificate} />;
 export default Template;
 Template.propTypes = {
   certificate: PropTypes.object.isRequired

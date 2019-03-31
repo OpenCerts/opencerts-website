@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import addDirToTemplatePath from "../../../../utils/addDirToTemplatePath";
+import { addDirToTemplatePath } from "../../../../utils/addDirToTemplatePath";
 
 const NUSK12019 = dynamic(import("./NUS-K1-2019"));
 

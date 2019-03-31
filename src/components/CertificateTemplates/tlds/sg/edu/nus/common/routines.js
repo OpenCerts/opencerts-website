@@ -17,12 +17,12 @@ export const isoDateToLocalLong = isoDate => {
     "October",
     "November",
     "December"
-  ][parseInt(isoDate.slice(5, 7)) - 1];
+  ][parseInt(isoDate.slice(5, 7), 10) - 1];
   return `${day} ${month} ${year}`;
 };
 
 export const isBrowser = browser => {
-  const userAgent = navigator.userAgent;
+  const { userAgent } = window.navigator;
   return userAgent.toUpperCase().indexOf(browser.toUpperCase()) >= 0;
 };
 
@@ -56,4 +56,5 @@ export const sassClassNames = (names, styles) => {
         .join(" ");
   if (typeof names === "object" && names instanceof Array)
     return names.map(name => styles[name]).join(" ");
+  return "";
 };
