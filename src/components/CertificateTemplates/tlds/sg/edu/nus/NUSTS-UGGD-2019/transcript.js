@@ -19,7 +19,8 @@ let dataFeeder;
 // array storing page content bottom of each page
 const contentBottom = [];
 // global state
-const onPrintRow = function(action) {
+const onPrintRow = function(nextCol, action) {
+  // nextCol defaults to false
   switch (action.type) {
     case "NO_CHANGE":
       return false;
@@ -1246,8 +1247,8 @@ class TranscriptPage extends Component {
 }
 
 TranscriptPage.propTypes = {
-  rowsPerCol: PropTypes.int.isRequired,
-  pageIdx: PropTypes.int.isRequired
+  rowsPerCol: PropTypes.number.isRequired,
+  pageIdx: PropTypes.number.isRequired
 };
 
 // transcript root class
@@ -1416,8 +1417,8 @@ class Transcript extends Component {
 }
 
 Transcript.propTypes = {
-  maxPages: PropTypes.int,
-  maxRows: PropTypes.int
+  maxPages: PropTypes.number,
+  maxRows: PropTypes.number
 };
 
 // transcript data row
