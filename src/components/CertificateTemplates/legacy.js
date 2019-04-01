@@ -34,6 +34,14 @@ const FQ001 = dynamic(
   import("./tlds/sg/ssgwsg/qual/FQ-001" /* webpackChunkName: "SSGTemplates" */)
 );
 
+const trans = dynamic(
+  import("./tlds/sg/ssgwsg/transcript/trans" /* webpackChunkName: "SSGTemplates" */)
+);
+
+const SFSOA001 = dynamic(
+  import("./tlds/sg/ssgwsg/soa/SF-SOA-001" /* webpackChunkName: "SSGTemplates" */)
+);
+
 export default {
   "NP-AA2018-MAIN": NPAA2018MAIN,
   "NP-AA2018-OPTION": NPAA2018OPTION,
@@ -43,5 +51,7 @@ export default {
   "NP-AA2018-PHARM": NPAA2018PHARM,
   "NP-AA2018-DPP": NPAA2018DPP,
   "SG-GOVTECH-OPENCERTS": OpenCertsAssociate2018,
-  "FQ-001": FQ001
+  "FQ-001": FQ001,
+  "Trans": trans,
+  "SF-SOA-001": SFSOA001
 };
