@@ -75,10 +75,7 @@ export const footerLogoStyle = {
   height: "auto"
 };
 export const renderLogoNP = () => (
-  <div
-    className="row d-flex"
-    style={{ marginTop: "3rem" }}
-  >
+  <div className="row d-flex" style={{ marginTop: "3rem" }}>
     <div className="col-5">
       <img style={fullWidthStyle} src={IMG_LOGO_FQ001} />
     </div>
@@ -94,15 +91,16 @@ export const renderSignature = certificate => (
       <img style={sealWidthStyle} src={IMG_SEAL_FQ001} />
     </div>
 
-    <div className="col-7" style={{paddingLeft: "25px"}}>
+    <div className="col-7" style={{ paddingLeft: "25px" }}>
       <div className="px-4">
         <img
           style={signatureWidthStyle}
           src={get(certificate, "additionalData.certSignatories[0].signature")}
         />
       </div>
-      <div  style={designationTextStyle}>
-        {get(certificate, "additionalData.certSignatories[0].name")}, {get(certificate, "additionalData.certSignatories[0].position")}
+      <div style={designationTextStyle}>
+        {get(certificate, "additionalData.certSignatories[0].name")},{" "}
+        {get(certificate, "additionalData.certSignatories[0].position")}
       </div>
       <div style={designationTextStyle}>
         {get(certificate, "additionalData.certSignatories[0].organisation")}
@@ -111,18 +109,23 @@ export const renderSignature = certificate => (
         {get(certificate, "additionalData.description")}
       </div>
       <div style={footerTextStyle}>
-        <a href={get(certificate, "additionalData.link")}>{get(certificate, "additionalData.link")}</a><br/>
+        <a href={get(certificate, "additionalData.link")}>
+          {get(certificate, "additionalData.link")}
+        </a>
+        <br />
         {get(certificate, "additionalData.about")}
       </div>
     </div>
     <div className="col-3">
-      <div style={{marginBottom: "70px"}}>
+      <div style={{ marginBottom: "70px" }}>
         <p style={printTextStyle}>
-        Cert No:  {get(certificate, "additionalData.qual_serial_num")}
+          Cert No: {get(certificate, "additionalData.qual_serial_num")}
         </p>
       </div>
       <img style={footerLogoStyle} src={IMG_SSGLOGO_FQ001} />
-      <div style={certCodeStyle}>{get(certificate, "additionalData.cert_code")}</div>
+      <div style={certCodeStyle}>
+        {get(certificate, "additionalData.cert_code")}
+      </div>
     </div>
   </div>
 );
@@ -130,35 +133,28 @@ export const renderSignature = certificate => (
 export const renderAwardText = certificate => (
   <div>
     <div className="row d-flex" style={{ marginTop: "2rem" }}>
-    <p style={nameTextStyle}>{certificate.name}</p>
+      <p style={nameTextStyle}>{certificate.name}</p>
     </div>
-    <div
-      className="row d-flex" style={{ marginTop: "3rem" }}  >
+    <div className="row d-flex" style={{ marginTop: "3rem" }}>
       <p style={awardTextStyle}>{certificate.additionalData.award_text}</p>
     </div>
     <div className="row d-flex" style={{ marginTop: "1rem" }}>
       <p style={nameTextStyle}>{certificate.recipient.name}</p>
     </div>
     <div className="row d-flex">
-      <p style={printTextStyle}>
-      ID No:  {certificate.recipient.id}
-      </p>
+      <p style={printTextStyle}>ID No: {certificate.recipient.id}</p>
     </div>
     <div className="row d-flex" style={{ marginTop: "1rem" }}>
-      <p style={awardTextStyle}>
-      {certificate.additionalData.successful_text}
-      </p>
+      <p style={awardTextStyle}>{certificate.additionalData.successful_text}</p>
     </div>
     <div className="row d-flex" style={{ marginTop: "3rem" }}>
-      <p style={printTextStyle}>
-      at {certificate.issuers[0].name}
-      </p>
+      <p style={printTextStyle}>at {certificate.issuers[0].name}</p>
     </div>
   </div>
 );
 
 export const renderIssuingDate = certificate => (
-  <div class="row d-flex" style={{ marginTop: "1rem" }}>
+  <div className="row d-flex" style={{ marginTop: "1rem" }}>
     <p>
       {formatDatePrefix(certificate.issuedOn)}{" "}
       {formatDate(certificate.issuedOn)}

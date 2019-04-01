@@ -3,4 +3,4 @@ import qual from "./qual";
 import transcript from "./transcript";
 import soa from "./soa";
 
-export default addDirToTemplatePath("SSG", { ...qual,...transcript,...soa });
+export default addDirToTemplatePath("SSG", { ...qual, ...transcript, ...soa });

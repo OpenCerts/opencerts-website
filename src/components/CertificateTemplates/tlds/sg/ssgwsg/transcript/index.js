@@ -5,5 +5,5 @@ const Trans = dynamic(() =>
 );
 
 export default {
-  "Trans": Trans
+  Trans
 };

@@ -27,7 +27,6 @@ export const printTextStyle = {
   fontWize: "1.2rem",
   color: "#555",
   textAlign: "center"
-
 };
 
 export const qualTextStyle = {
@@ -76,23 +75,19 @@ export const certCodeStyle = {
   transform: "rotate(-90deg)"
 };
 
-const renderTranscriptItems = certificate => {
-  return certificate.transcript.map((item, key) =>
-        <tr>
-          <td>{item.cs_full_code}</td>
-          <td>{item.name}</td>
-          <td>{item.result_desc}</td>
-          <td>{item.assmt_date}</td>
-          <td>{item.assessment_org_name}</td>
-        </tr>
-  )
-};
+const renderTranscriptItems = certificate =>
+  certificate.transcript.map((item, key) => (
+    <tr>
+      <td>{item.cs_full_code}</td>
+      <td>{item.name}</td>
+      <td>{item.result_desc}</td>
+      <td>{item.assmt_date}</td>
+      <td>{item.assessment_org_name}</td>
+    </tr>
+  ));
 
 export const renderLogoNP = () => (
-  <div
-    className="row d-flex"
-    style={{ marginTop: "3rem" }}
-  >
+  <div className="row d-flex" style={{ marginTop: "3rem" }}>
     <div className="col-5">
       <img style={fullWidthStyle} src={IMG_LOGO_FQ001} />
     </div>
@@ -102,25 +97,28 @@ export const renderLogoNP = () => (
 export const renderSignature = certificate => (
   <div
     className="row d-flex justify-content-center align-items-end"
-    style={{ marginTop: "8rem", marginBottom: "1rem" }}>
-
+    style={{ marginTop: "8rem", marginBottom: "1rem" }}
+  >
     <div className="col-7">
-      <div  style={designationTextStyle}>
+      <div style={designationTextStyle}>
         {get(certificate, "additionalData.certSignatories[0].position")}
       </div>
       <div style={designationTextStyle}>
         {get(certificate, "additionalData.certSignatories[0].organisation")}
       </div>
       <div style={footerTextStyle}>
-        Transcript guide printed on reverse<br/>
-        For verification of this certificate, please visit https://e-cert.ssg.gov.sg
+        Transcript guide printed on reverse
+        <br />
+        For verification of this certificate, please visit
+        https://e-cert.ssg.gov.sg
       </div>
     </div>
-    <div className="col-2">
-    </div>
+    <div className="col-2" />
     <div className="col-3">
       <img style={fullWidthStyle} src={IMG_SSGLOGO_FQ001} />
-      <div style={certCodeStyle}>{get(certificate, "additionalData.cert_code")}</div>
+      <div style={certCodeStyle}>
+        {get(certificate, "additionalData.cert_code")}
+      </div>
     </div>
   </div>
 );
@@ -128,27 +126,25 @@ export const renderSignature = certificate => (
 export const renderAwardText = certificate => (
   <div>
     <div className="row d-flex" style={{ marginTop: "2rem" }}>
-    <p style={headerTextStyle}>{certificate.name}</p>
+      <p style={headerTextStyle}>{certificate.name}</p>
     </div>
     <div className="row d-flex" style={{ marginTop: "1rem" }}>
       <p style={printTextStyle}>Name: {certificate.recipient.name}</p>
     </div>
     <div className="row d-flex">
-      <p style={printTextStyle}>ID No.:  {certificate.recipient.id}</p>
+      <p style={printTextStyle}>ID No.: {certificate.recipient.id}</p>
+    </div>
+    <div className="row d-flex" style={{ marginTop: "1rem" }}>
+      <p style={printTextStyle}>Qualification:</p>
+    </div>
+    <div className="row d-flex">
+      <p style={qualTextStyle}>{certificate.name}</p>
     </div>
     <div className="row d-flex" style={{ marginTop: "1rem" }}>
       <p style={printTextStyle}>
-        Qualification:
-      </p>
-      </div>
-      <div className="row d-flex">
-      <p style={qualTextStyle}>
-      {certificate.name}
-      </p>
-    </div>
-    <div className="row d-flex" style={{ marginTop: "1rem" }}>
-      <p style={printTextStyle}>
-      CONFERMENT: CONFERRED THE {certificate.name} on {formatDatePrefix(certificate.issuedOn)}{" "}{formatDate(certificate.issuedOn)}
+        CONFERMENT: CONFERRED THE {certificate.name} on{" "}
+        {formatDatePrefix(certificate.issuedOn)}{" "}
+        {formatDate(certificate.issuedOn)}
       </p>
     </div>
   </div>
@@ -158,7 +154,7 @@ export const renderTranscript = certificate => (
   <div>
     <div className="row d-flex" style={{ marginTop: "1rem" }}>
       <p style={printTextStyle}>Remarks:</p>
-    </div>  
+    </div>
     <div className="row d-flex">
       <table>
         <tr>
@@ -184,7 +180,6 @@ export const renderFooter = certificate => (
     </div>
   </div>
 );
-
 
 /* eslint-disable */
 // Disabled eslint as there's no way to add proptypes to an anonymous function like this
