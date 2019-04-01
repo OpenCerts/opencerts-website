@@ -1,11 +1,6 @@
 import { get } from "lodash";
 import { IMG_LOGO_FQ001, IMG_SEAL_FQ001, IMG_SSGLOGO_FQ001 } from "./images";
-import {
-  formatDate,
-  formatDatePrefix,
-  formatCertName,
-  formatCertID
-} from "./functions";
+import { formatDate, formatDatePrefix, formatCertID } from "./functions";
 
 export const fullWidthStyle = {
   width: "100%",

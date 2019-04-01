@@ -1,11 +1,6 @@
 import { get } from "lodash";
-import { IMG_LOGO_FQ001, IMG_SEAL_FQ001, IMG_SSGLOGO_FQ001 } from "./images";
-import {
-  formatDate,
-  formatDatePrefix,
-  formatCertName,
-  formatCertID
-} from "./functions";
+import { IMG_LOGO_FQ001, IMG_SSGLOGO_FQ001 } from "./images";
+import { formatDate, formatDatePrefix, formatCertID } from "./functions";
 
 export const fullWidthStyle = {
   width: "100%",
@@ -76,8 +71,8 @@ export const certCodeStyle = {
 };
 
 const renderTranscriptItems = certificate =>
-  certificate.transcript.map((item, key) => (
-    <tr>
+  certificate.transcript.map(item => (
+    <tr key={item.cs_full_code}>
       <td>{item.cs_full_code}</td>
       <td>{item.name}</td>
       <td>{item.result_desc}</td>
