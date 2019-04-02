@@ -9,7 +9,7 @@ import scss from "./transcript.scss";
 const MAX_PAGES = 10;
 const MAX_ROWS_PER_COL = 40;
 // height of transcript page content
-const CONTENT_HEIGHT = 572;
+const CONTENT_HEIGHT = 567;
 
 // global variables
 // JSON data source
@@ -34,30 +34,6 @@ const gState = createStore(onPrintRow);
 
 // construct class names
 const cls = names => sassClassNames(names, scss);
-
-// get table row by id
-const rowEl = (page, col, row) => {
-  const id = `row-${page}-${col}-${row}`;
-  return document.getElementById(id);
-};
-
-// get canvas by id
-const canvasEl = page => {
-  const id = `canvas-${page}`;
-  return document.getElementById(id);
-};
-
-// get page by id
-const pageEl = page => {
-  const id = `page-${page}`;
-  return document.getElementById(id);
-};
-
-// get footer by id
-const footerEl = page => {
-  const id = `footer-${page}`;
-  return document.getElementById(id);
-};
 
 // render a blank table with column width information
 const setColWidth = () => {
@@ -100,20 +76,36 @@ class TranscriptDataFeeder {
     this.termDataRange = { start: -1, end: -1 };
   }
 
+  // append a row
   pushRow(type, data) {
     this.dataType.push(type);
-    if (type.startsWith("ts-term") && this.termDataRange.start < 0)
-      this.termDataRange.start = this.length;
-    if (
-      this.termDataRange.end < 0 &&
-      this.termDataRange.start >= 0 &&
-      !type.startsWith("ts-term")
-    )
-      this.termDataRange.end = this.length - 1;
     this.dataArray.push(data);
     this.length += 1;
   }
 
+  // set term data range
+  resetTermRange() {
+    this.termDataRange = { start: -1, end: -1 };
+    this.dataType.some((type, i) => {
+      if (type.startsWith("ts-term")) {
+        this.termDataRange.start = i;
+        return true;
+      }
+      return false;
+    });
+    if (this.termDataRange.start >= 0) {
+      for (let i = this.termDataRange.start; i < this.length; i += 1) {
+        if (!this.dataType[i].startsWith("ts-term")) {
+          this.termDataRange.end = i;
+          break;
+        }
+      }
+    }
+    if (this.termDataRange.start >= 0 && this.termDataRange.end < 0)
+      this.termDataRange.end = this.length;
+  }
+
+  // append a row or an array of rows
   push(type, data) {
     if (typeof data === "object" && data instanceof Array)
       data.forEach(x => {
@@ -122,11 +114,13 @@ class TranscriptDataFeeder {
     else this.pushRow(type, data);
   }
 
+  // getter of row data
   data(i) {
     if (i < this.length) return this.dataArray[i];
     return null;
   }
 
+  // getter of data type
   type(i) {
     if (i < this.length) return this.dataType[i];
     return null;
@@ -1039,16 +1033,11 @@ class TranscriptAward {
 
   // main render
   render() {
-    if (!this.awardData) return "";
-    this.renderAwardHeader();
-    dataFeeder.push(
-      "ts-awd-data",
-      <td colSpan="4">
-        <table width="100%">
-          <tbody>{this.renderAwardDetails()}</tbody>
-        </table>
-      </td>
-    );
+    if (this.awardData) {
+      this.renderAwardHeader();
+      this.renderAwardDetails();
+    }
+    // to pass lint
     return "";
   }
 
@@ -1266,21 +1255,46 @@ class Transcript extends Component {
     this.col = 0;
     this.row = 0;
     this.firstHeaderPrinted = false;
+    this.redundant = [];
   }
+
+  // get table row by id
+  rowEl = (page, col, row) =>
+    document.getElementById(`row-${page}-${col}-${row}`);
+
+  // get canvas by id
+  canvasEl = page => document.getElementById(`canvas-${page}`);
+
+  // get page by id
+  pageEl = page => document.getElementById(`page-${page}`);
+
+  // get footer by id
+  footerEl = page => document.getElementById(`footer-${page}`);
+
+  // keep redundant lines
+  keepRedundant = (page, col, row) => {
+    this.redundant.push({ page, col, row });
+  };
 
   // clean up after rendering
   cleanup() {
     // clean up pages
-    for (let i = this.maxPages - 1; i > this.page; i -= 1) pageEl(i).remove();
+    for (let i = this.maxPages - 1; i > this.page; i -= 1)
+      this.pageEl(i).remove();
     for (let i = this.page; i >= 0; i -= 1) {
-      pageEl(i).removeAttribute("id");
-      canvasEl(i).removeAttribute("id");
+      this.pageEl(i).removeAttribute("id");
+      this.canvasEl(i).removeAttribute("id");
     }
+    // delete redundant lines
+    this.redundant.forEach(x => {
+      const node = this.rowEl(x.page, x.col, x.row);
+      if (node) node.remove();
+    });
     // clean up rows
     for (let i = 0; i <= this.page; i += 1) {
       for (let j = 0; j < 2; j += 1)
         for (let k = this.maxRows; k >= 0; k -= 1) {
-          const node = rowEl(i, j, k);
+          const node = this.rowEl(i, j, k);
           if (node)
             if (!node.filled) node.remove();
             else {
@@ -1305,6 +1319,13 @@ class Transcript extends Component {
       }
       if (gState.getState()) {
         // state is {nextCol: true}, change column (and page when necessary)
+        if (dataFeeder.type(this.dataIdx - 1) === "ts-term-year") {
+          // check for orphan acad year line
+          this.dataIdx -= 1; // need to re-render acad year line
+          this.keepRedundant(this.page, this.col, this.row - 1);
+        }
+        // current row to be removed later as it will rendered in next column
+        this.keepRedundant(this.page, this.col, this.row);
         if (this.col === 0) {
           this.col = 1;
           this.row = 0;
@@ -1322,8 +1343,9 @@ class Transcript extends Component {
           this.col = 0;
           this.row = 0;
         }
-        node = rowEl(this.page, this.col, this.row);
+        node = this.rowEl(this.page, this.col, this.row);
         if (this.dataIdx > dataFeeder.termDataRange.end) {
+          // term data complete
           dataRow = (
             <TranscriptDataRow
               data={dataFeeder.data(this.dataIdx)}
@@ -1331,6 +1353,7 @@ class Transcript extends Component {
             />
           );
         } else {
+          // term data ongoing
           dataRow = (
             <TranscriptDataRow
               data={renderTranscriptTermHeader()}
@@ -1349,7 +1372,7 @@ class Transcript extends Component {
           gState.dispatch({ type: "CHANGE_COLUMN" });
           return;
         }
-        node = rowEl(this.page, this.col, this.row);
+        node = this.rowEl(this.page, this.col, this.row);
         if (
           this.dataIdx === dataFeeder.termDataRange.start &&
           !this.firstHeaderPrinted
@@ -1376,11 +1399,11 @@ class Transcript extends Component {
     });
     // record content bottom for each page
     for (let i = 0; i < this.maxPages; i += 1) {
-      const rect = canvasEl(i).getBoundingClientRect();
+      const rect = this.canvasEl(i).getBoundingClientRect();
       contentBottom.push(rect.top + rect.height + window.scrollY);
     }
     // print first row
-    node = rowEl(0, 0, 0);
+    node = this.rowEl(0, 0, 0);
     dataRow = <TranscriptDataRow data={dataFeeder.data(0)} parent={node} />;
     ReactDOM.render(dataRow, node);
   }
@@ -1389,7 +1412,7 @@ class Transcript extends Component {
   renderFooters() {
     const totalPages = this.page + 1;
     for (let i = 0; i < totalPages; i += 1) {
-      const footer = footerEl(i);
+      const footer = this.footerEl(i);
       if (footer) ReactDOM.render(`PAGE ${i + 1} OF ${totalPages}`, footer);
     }
   }
@@ -1423,39 +1446,24 @@ Transcript.propTypes = {
 
 // transcript data row
 class TranscriptDataRow extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { hide: false };
-    this.parent = this.props.parent;
-  }
-
   componentDidMount() {
-    const rect = this.parent.getBoundingClientRect();
+    const rect = this.props.parent.getBoundingClientRect();
     const watermark = rect.top + rect.height + window.scrollY;
-    const pageIdx = parseInt(this.parent.id.split("-")[1], 10);
+    const pageIdx = parseInt(this.props.parent.id.split("-")[1], 10);
     const cap = contentBottom[pageIdx];
-    if (watermark > cap) {
-      gState.dispatch({ type: "CHANGE_COLUMN" });
-      this.setState({ hide: true });
-    } else {
-      gState.dispatch({ type: "NO_CHANGE" });
-    }
+    if (watermark > cap) gState.dispatch({ type: "CHANGE_COLUMN" });
+    else gState.dispatch({ type: "NO_CHANGE" });
   }
 
   render() {
-    if (this.state.hide) {
-      // remove the row, to be re-rendered in the next column
-      this.parent.filled = false;
-      return "";
-    }
-    this.parent.filled = true;
+    this.props.parent.filled = true;
     return this.props.data;
   }
 }
 
 TranscriptDataRow.propTypes = {
-  data: PropTypes.object,
-  parent: PropTypes.object
+  data: PropTypes.object, // <td/>[<td/>*]
+  parent: PropTypes.object // <tr/>
 };
 
 // ========================================
@@ -1467,6 +1475,7 @@ const Template = ({ certificate }) => {
   dataFeeder = new TranscriptDataFeeder();
   new TranscriptProgram().render();
   new TranscriptData().render();
+  dataFeeder.resetTermRange();
   // render data
   return <Transcript maxPages="8" maxRows="50" />;
 };

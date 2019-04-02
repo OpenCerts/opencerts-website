@@ -30,7 +30,7 @@ class Degree extends Component {
     <div className={cls("cert-header")}>
       NATIONAL UNIVERSITY
       <br />
-      OF SINGPAORE
+      OF SINGAPORE
     </div>
   );
 
