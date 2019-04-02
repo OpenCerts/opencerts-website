@@ -52,6 +52,6 @@ export default {
   "NP-AA2018-DPP": NPAA2018DPP,
   "SG-GOVTECH-OPENCERTS": OpenCertsAssociate2018,
   "FQ-001": FQ001,
-  "Trans": trans,
+  Trans: trans,
   "SF-SOA-001": SFSOA001
 };
