@@ -72,10 +72,15 @@ const View = ({
       <div className={css["secondary-links"]}>
         <span>
           <Link href=" ">
-            <a onClick={e => {
-              e.preventDefault();
-              resetData();
-            }} className={css["text-link"]}>Try another</a>
+            <a
+              onClick={e => {
+                e.preventDefault();
+                resetData();
+              }}
+              className={css["text-link"]}
+            >
+              Try another
+            </a>
           </Link>
         </span>
         {isWarning ? (

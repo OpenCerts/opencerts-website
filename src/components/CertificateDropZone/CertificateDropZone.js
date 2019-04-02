@@ -118,6 +118,7 @@ const CertificateDropzone = ({
 
 CertificateDropzone.propTypes = {
   document: PropTypes.object,
+  resetData: PropTypes.func,
   handleCertificateChange: PropTypes.func,
   handleFileError: PropTypes.func,
   handleRenderOverwrite: PropTypes.func,
