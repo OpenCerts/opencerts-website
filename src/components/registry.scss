@@ -1,0 +1,29 @@
+@import "../styles/variables.scss";
+
+.r-section { 
+    font-weight: 100;
+    padding: 1rem 5rem !important; 
+}
+
+.logo {
+    height: 50px;
+    width: 200px;
+}
+
+.partner-block {
+    padding: 10px;
+    background: #EFF2F2;
+    height: 100%;
+    border-radius: 10px;
+}
+
+@media only screen and (max-width: 550px) {
+    .r-section { 
+        font-weight: 100;
+        padding: 1rem 1.1rem !important; 
+    }
+    .m-pd-0 {
+        padding: 0px !important;
+    }
+}
+
