@@ -118,15 +118,14 @@ export class MultiCertificateRenderer extends Component {
                   View another
                 </a>
               </TabList>
-
-              <div className="d-lg-none d-xl-none">
-                <Drawer
-                  tabs={tabs}
-                  activeIdx={selectedTabIndex}
-                  toggle={idx => this.setTabIndex(idx)}
-                />
-              </div>
             </div>
+          </div>
+          <div className="d-lg-none d-xl-none">
+            <Drawer
+              tabs={tabs}
+              activeIdx={selectedTabIndex}
+              toggle={idx => this.setTabIndex(idx)}
+            />
           </div>
           <div
             className="tab-content bg-white p-3 mt-3 rounded"
