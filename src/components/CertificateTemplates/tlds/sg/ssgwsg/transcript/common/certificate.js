@@ -20,8 +20,7 @@ export const signatureWidthStyle = {
 export const printTextStyle = {
   fontWeight: "bold",
   fontWize: "1.2rem",
-  color: "#555",
-  textAlign: "center"
+  color: "#555"
 };
 
 export const qualTextStyle = {
@@ -53,14 +52,16 @@ export const titleTextStyle = {
 };
 
 export const designationTextStyle = {
-  fontSize: "14px",
-  fontWeight: "bold"
+  fontSize: "14px"
 };
 
 export const footerTextStyle = {
-  fontSize: "12px",
-  color: "rgb(51,0,144)",
+  fontSize: "14px",
   marginTop: "15px"
+};
+
+export const footerLinkStyle = {
+  fontSize: "12px"
 };
 
 export const certCodeStyle = {
@@ -102,10 +103,10 @@ export const renderSignature = certificate => (
         {get(certificate, "additionalData.certSignatories[0].organisation")}
       </div>
       <div style={footerTextStyle}>
-        Transcript guide printed on reverse
-        <br />
-        For verification of this certificate, please visit
-        https://e-cert.ssg.gov.sg
+        {get(certificate, "additionalData.certLink.desc")}
+      </div>  
+      <div style={footerLinkStyle}>  
+        {get(certificate, "additionalData.certLink.link")}
       </div>
     </div>
     <div className="col-2" />
@@ -176,6 +177,58 @@ export const renderFooter = certificate => (
   </div>
 );
 
+export const renderQualificationText = certificate => (
+  <div>
+    <div className="row d-flex" style={{ marginTop: "3rem" }}>
+      <p style={printTextStyle}>{get(certificate, "additionalData.qualificationStatement")}</p>
+    </div>
+    <div className="row d-flex" style={{ marginTop: "1rem" }}>
+      <p style={printTextStyle}>{get(certificate, "additionalData.qualificationSystemDesc.name")}</p>
+    </div>
+    <div className="row d-flex">
+      <p>{get(certificate, "additionalData.qualificationSystemDesc.desc")}</p>
+      <ul>
+        {certificate.additionalData.qualificationSystemDesc.descPoints.map(item => (
+          <li>{item.point}</li>
+        ))}
+      </ul>
+    </div>
+    <div className="row d-flex">
+      <p>{get(certificate, "additionalData.trainingProgramDesc1")}</p>
+      <p>{get(certificate, "additionalData.trainingProgramDesc2")}</p>
+    </div>
+    <div className="row d-flex" style={{ marginTop: "1rem" }}>
+      <p style={printTextStyle}>{get(certificate, "additionalData.qualificationPath.name")}</p>
+    </div>
+    <div className="row d-flex">
+      <p>{get(certificate, "additionalData.qualificationPath.desc")}</p>
+      <ul>
+        {certificate.additionalData.qualificationPath.pathPoints.map(item => (
+          <li>{item.point}</li>
+        ))}
+      </ul>
+    </div>
+    <div className="row d-flex" style={{ marginTop: "1rem" }}>
+      <p style={printTextStyle}>{get(certificate, "additionalData.gradesDesc.name")}</p>
+    </div>
+    <div className="row d-flex">
+      <p>{get(certificate, "additionalData.qualificationPath.desc")}</p>
+      <table>
+        {certificate.additionalData.gradesDesc.points.map((item,index) => (
+          <tr>
+          <td>{index+1}.</td><td>{item.name}</td><td>{item.desc}</td>
+          </tr>
+        ))}
+      </table>
+    </div>
+    <div className="row d-flex" style={{ marginTop: "1rem" }}>
+      <p style={printTextStyle}>{get(certificate, "additionalData.webInfo.name")}</p>
+    </div>
+    <div className="row d-flex">
+      <p>{get(certificate, "additionalData.webInfo.link")}</p>
+    </div>
+  </div>
+);
 /* eslint-disable */
 // Disabled eslint as there's no way to add proptypes to an anonymous function like this
 export default ({ logo }) => ({ certificate }) => (
@@ -190,6 +243,7 @@ export default ({ logo }) => ({ certificate }) => (
       {certificate.additionalData.certSignatories
         ? renderSignature(certificate)
         : ""}
+      {renderQualificationText(certificate)}  
     </div>
   </div>
 );
