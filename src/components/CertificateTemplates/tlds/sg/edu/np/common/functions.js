@@ -27,7 +27,7 @@ export const formatNRIC = nricFin => {
 export const formatDatePrefix = dateString => {
   if (!dateString) return null;
   const date = new Date(dateString);
-  const day = parseInt(tz(date, TIMEZONE).format("DD"));
+  const day = Number(tz(date, TIMEZONE).format("DD"));
   let daySup = "";
   switch (day % 10) {
     case 1:
