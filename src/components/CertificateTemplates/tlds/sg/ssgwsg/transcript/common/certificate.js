@@ -95,7 +95,7 @@ export const renderSignature = certificate => (
     className="row d-flex justify-content-center align-items-end"
     style={{ marginTop: "8rem", marginBottom: "1rem" }}
   >
-    <div className="col-7">
+    <div className="col-lg-7 col-xs-12">
       <div style={designationTextStyle}>
         {get(certificate, "additionalData.certSignatories[0].position")}
       </div>
@@ -109,8 +109,8 @@ export const renderSignature = certificate => (
         {get(certificate, "additionalData.certLink.link")}
       </div>
     </div>
-    <div className="col-2" />
-    <div className="col-3">
+    <div className="col-lg-2 col-xs-12" />
+    <div className="col-lg-3 col-xs-12">
       <img style={fullWidthStyle} src={IMG_SSGLOGO_FQ001} />
       <div style={certCodeStyle}>
         {get(certificate, "additionalData.cert_code")}
@@ -151,7 +151,7 @@ export const renderTranscript = certificate => (
     <div className="row d-flex" style={{ marginTop: "1rem" }}>
       <p style={printTextStyle}>Remarks:</p>
     </div>
-    <div className="row d-flex">
+    <div className="row d-flex" style={{overflowX: "auto"}}>
       <table>
         <tr>
           <th>Competency Unit Code</th>
@@ -211,7 +211,7 @@ export const renderQualificationText = certificate => (
     <div className="row d-flex" style={{ marginTop: "1rem" }}>
       <p style={printTextStyle}>{get(certificate, "additionalData.gradesDesc.name")}</p>
     </div>
-    <div className="row d-flex">
+    <div className="row d-flex" style={{overflowX: "auto"}}>
       <p>{get(certificate, "additionalData.qualificationPath.desc")}</p>
       <table>
         {certificate.additionalData.gradesDesc.points.map((item,index) => (
@@ -235,7 +235,7 @@ export default ({ logo }) => ({ certificate }) => (
   <div>
     <div
       className="container"
-      style={{ border: 5, borderColor: "#AAA", borderStyle: "solid",paddingLeft:"100px",paddingRight:"100px", fontFamily:"Arial" }}
+      style={{ border: 5, borderColor: "#AAA", borderStyle: "solid",paddingLeft:"40px",paddingRight:"40px", fontFamily:"Arial" }}
     >
       {renderLogoNP()}
       {renderAwardText(certificate)}
