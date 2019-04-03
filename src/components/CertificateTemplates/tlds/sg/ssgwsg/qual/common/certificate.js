@@ -8,12 +8,12 @@ export const fullWidthStyle = {
 };
 
 export const sealWidthStyle = {
-  width: "20%",
+  width: "100%",
   height: "auto"
 };
 
 export const signatureWidthStyle = {
-  width: "50%",
+  width: "100%",
   height: "auto"
 };
 
@@ -82,10 +82,10 @@ export const footerLogoStyle = {
 };
 export const renderLogoWSQ = () => (
   <div className="row d-flex" style={{ marginTop: "3rem" }}>
-    <div className="col-6">
+    <div className="col-lg-6 col-12">
       <img style={fullWidthStyle} src={IMG_LOGO_FQ001} />
     </div>
-    <div className="col-6" />
+    <div className="col-lg-6" />
   </div>
 );
 
@@ -94,12 +94,12 @@ export const renderSignature = certificate => (
     className="row d-flex justify-content-center align-items-end"
     style={{ marginTop: "8rem", marginBottom: "1rem" }}
   >
-    <div className="col-lg-2 col-xs-12">
+    <div className="col-lg-2 col-6">
       <img style={sealWidthStyle} src={IMG_SEAL_FQ001} />
     </div>
 
-    <div className="col-lg-7 col-xs-12" style={{ paddingLeft: "25px" }}>
-      <div className="px-4">
+    <div className="col-lg-7" style={{ paddingLeft: "25px" }}>
+      <div className="col-lg-2 col-6">
         <img
           style={signatureWidthStyle}
           src={get(certificate, "additionalData.certSignatories[0].signature")}
@@ -139,29 +139,29 @@ export const renderSignature = certificate => (
 
 export const renderAwardText = certificate => (
   <div>
-    <div className="row d-flex" style={{ marginTop: "2rem" }}>
+    <div className="d-flex" style={{ marginTop: "2rem" }}>
       <p style={nameTextStyle}>{certificate.name}</p>
     </div>
-    <div className="row d-flex" style={{ marginTop: "3rem" }}>
+    <div className="d-flex" style={{ marginTop: "3rem" }}>
       <p style={awardTextStyle}>{certificate.additionalData.award_text}</p>
     </div>
-    <div className="row d-flex" style={{ marginTop: "1rem" }}>
+    <div className="d-flex" style={{ marginTop: "1rem" }}>
       <p style={recipientTextStyle}>{certificate.recipient.name}</p>
     </div>
-    <div className="row d-flex">
+    <div className="d-flex">
       <p style={printTextStyle}>ID No: {certificate.recipient.id}</p>
     </div>
-    <div className="row d-flex" style={{ marginTop: "1rem" }}>
+    <div className="d-flex" style={{ marginTop: "1rem" }}>
       <p style={awardTextStyle}>{certificate.additionalData.successful_text}</p>
     </div>
-    <div className="row d-flex" style={{ marginTop: "3rem" }}>
+    <div className="d-flex" style={{ marginTop: "3rem" }}>
       <p style={issuersTextStyle}>at {certificate.issuers[0].name}</p>
     </div>
   </div>
 );
 
 export const renderIssuingDate = certificate => (
-  <div className="row d-flex" style={{ marginTop: "1rem" }}>
+  <div className="d-flex" style={{ marginTop: "1rem" }}>
     <p>
       {formatDatePrefix(certificate.issuedOn)}{" "}
       {formatDate(certificate.issuedOn)}

@@ -7,16 +7,6 @@ export const fullWidthStyle = {
   height: "auto"
 };
 
-export const sealWidthStyle = {
-  width: "160px",
-  height: "auto"
-};
-
-export const signatureWidthStyle = {
-  width: "100px",
-  height: "auto"
-};
-
 export const printTextStyle = {
   fontWeight: "bold",
   fontWize: "1.2rem",
@@ -84,7 +74,7 @@ const renderTranscriptItems = certificate =>
 
 export const renderLogoNP = () => (
   <div className="row d-flex" style={{ marginTop: "3rem" }}>
-    <div className="col-5">
+    <div className="col-lg-6 col-12">
       <img style={fullWidthStyle} src={IMG_LOGO_FQ001} />
     </div>
   </div>
