@@ -7,6 +7,7 @@ const members = [
     website: "https://www.tech.gov.sg",
     email: "info@tech.gov.sg",
     phone: "+65 6211 2100",
+    key: "govtech",
     logo: "/static/images/GOVTECH_logo.png"
   },
   {
@@ -15,6 +16,7 @@ const members = [
     website: "https://www.np.edu.sg",
     email: "asknp@np.edu.sg",
     phone: "+65 6466 6555",
+    key: "np",
     logo: "/static/images/NP_logo.svg"
   }
 ];
@@ -23,7 +25,7 @@ const renderMembers = () =>
   members.map((m, i) => (
     <div key={i} className={`col-lg-6 col-md-12 mb-3 ${css["m-pd-0"]}`}>
       <div className={css["partner-block"]}>
-        <img className={`${css.logo}`} src={m.logo} />
+        <img className={`${css.logo}`} src={m.logo} id={css[m.key]} />
         <h4 className={css["partner-name"]}>{m.name}</h4>
         {m.address ? (
           <div>
@@ -64,26 +66,34 @@ const renderMembers = () =>
   ));
 
 const RegistryPage = () => (
-  <div className="container-fluid">
-    <div className={`row bg-brand-dark text-white ${css["r-section"]}`}>
-      <h1 className="col-12">Registry</h1>
-    </div>
-    <div className={`row bg-brand-dark text-white ${css["r-section"]}`}>
-      <div className="col-lg-6 col-md-12 my-3">
-        <p>
-          The registry is a list of recognised issuers with their certificate
-          store addresses. Certificates from these issuers can be recognised and
-          verified by our viewer.
-        </p>
-        <p>
-          Certificates with unverified issuer means that the certificate store
-          address is not registered. This could mean that the issuer has not
-          registered with OpenCerts or the cert
-        </p>
+  <>
+    <div className="container-fluid" style={{ backgroundColor: "#324353" }}>
+      <div className={`conatiner bg-brand-dark text-white ${css["r-section"]}`}>
+        <h1 className={`col-12 ${css["m-pd-0"]} ${css["section-width"]}`}>
+          Registry
+        </h1>
+      </div>
+      <div className={`conatiner bg-brand-dark text-white ${css["r-section"]}`}>
+        <div className={css["section-width"]}>
+          <div className={`col-lg-6 col-md-12 my-3 ${css["m-pd-0"]}`}>
+            <p>
+              The registry is a list of recognised issuers with their
+              certificate store addresses. Certificates from these issuers can
+              be recognised and verified by our viewer.
+            </p>
+            <p>
+              Certificates with unverified issuer means that the certificate
+              store address is not registered. This could mean that the issuer
+              has not registered with OpenCerts or the cert
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-    <div className={`row ${css["r-section"]}`}>{renderMembers()}</div>
-  </div>
+    <div className={`row ${css["r-section"]} ${css["section-width"]}`}>
+      {renderMembers()}
+    </div>
+  </>
 );
 
 export default RegistryPage;

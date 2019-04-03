@@ -2,12 +2,11 @@
 
 .r-section { 
     font-weight: 100;
-    padding: 1rem 5rem !important; 
+    padding: 1rem 0rem !important; 
 }
 
 .logo {
-    height: 50px;
-    width: 200px;
+    width: 45%;
 }
 
 .partner-block {
@@ -15,6 +14,15 @@
     background: #EFF2F2;
     height: 100%;
     border-radius: 10px;
+}
+
+#np {
+    width: 38%;
+}
+
+.section-width {
+    margin: auto !important;
+    max-width: 1280px !important;
 }
 
 @media only screen and (max-width: 550px) {
