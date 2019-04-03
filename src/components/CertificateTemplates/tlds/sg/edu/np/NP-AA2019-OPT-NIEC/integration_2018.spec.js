@@ -30,7 +30,7 @@ test("OPTION-NIEC 2019 certificate is rendered correctly", async t => {
     "Early Childhood Development & Education",
     "Registrar, NIEC",
     "Registrar, NP",
-    "4 May 2019",
+    "30 May 2019",
     "ECH190006"
   ]);
 });
