@@ -1,45 +1,21 @@
+import { tz } from "moment-timezone";
+
+export const TIMEZONE = "Asia/Singapore";
+
 export const formatDate = dateString => {
   if (!dateString) return null;
   const date = new Date(dateString);
-  const months = [
-    "JAN",
-    "FEB",
-    "MAR",
-    "APR",
-    "MAY",
-    "JUN",
-    "JUL",
-    "AUG",
-    "SEP",
-    "OCT",
-    "NOV",
-    "DEC"
-  ];
-  const month = date.getMonth();
-  const year = date.getUTCFullYear();
-  return `${months[month]} ${year}`;
+  return tz(date, TIMEZONE)
+    .format("MMM YYYY")
+    .toUpperCase();
 };
 
 export const formatDateFullMonth = dateString => {
   if (!dateString) return null;
   const date = new Date(dateString);
-  const months = [
-    "JANUARY",
-    "FEBRUARY",
-    "MARCH",
-    "APRIL",
-    "MAY",
-    "JUNE",
-    "JULY",
-    "AUGUST",
-    "SEPTEMBER",
-    "OCTOBER",
-    "NOVEMBER",
-    "DECEMBER"
-  ];
-  const month = date.getMonth();
-  const year = date.getUTCFullYear();
-  return `${months[month]} ${year}`;
+  return tz(date, TIMEZONE)
+    .format("MMMM YYYY")
+    .toUpperCase();
 };
 
 export const formatNRIC = nricFin => {
@@ -51,7 +27,7 @@ export const formatNRIC = nricFin => {
 export const formatDatePrefix = dateString => {
   if (!dateString) return null;
   const date = new Date(dateString);
-  const day = date.getDate();
+  const day = Number(tz(date, TIMEZONE).format("DD"));
   let daySup = "";
   switch (day % 10) {
     case 1:

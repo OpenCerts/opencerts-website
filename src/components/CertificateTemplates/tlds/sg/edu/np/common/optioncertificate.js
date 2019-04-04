@@ -1,3 +1,5 @@
+import { tz } from "moment-timezone";
+import { TIMEZONE } from "./functions";
 import {
   renderLogoNP,
   renderLogoNPPartner,
@@ -11,31 +13,7 @@ import {
 export const formatDate = dateString => {
   if (!dateString) return null;
   const date = new Date(dateString);
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-  ];
-
-  const day = date.getDay();
-  const month = date.getMonth();
-  const year = date.getUTCFullYear();
-
-  return (
-    <p>
-      {" "}
-      {day} {months[month]} {year}
-    </p>
-  );
+  return <p>{tz(date, TIMEZONE).format("DD MMM YYYY")}</p>;
 };
 
 export const formatCertName = (certName, meritFlag) => {
@@ -184,10 +162,10 @@ export default ({ logo, left }) => ({ certificate }) => (
     >
       {logo ? renderLogoNPPartner(logo, left) : renderLogoNP()}
       {renderAwardText(certificate)}
-	  {certificate.additionalData.certSignatories &&
+      {certificate.additionalData.certSignatories &&
       certificate.additionalData.certSignatories[1]
-        ? renderTwoSignatures(certificate) : renderSignatures(certificate)
-	  }
+        ? renderTwoSignatures(certificate)
+        : renderSignatures(certificate)}
     </div>
     {renderFooter(certificate)}
   </div>

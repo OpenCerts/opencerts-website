@@ -28,7 +28,7 @@ test("OPTION 2018 certificate is rendered correctly", async t => {
     "as part of the course of study in the",
     "Diploma",
     "Biomedical Science",
-    "3 May 2018",
+    "30 May 2018",
     "Registrar",
     "0006"
   ]);
