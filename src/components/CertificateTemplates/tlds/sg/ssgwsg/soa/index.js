@@ -1,9 +1,9 @@
 import dynamic from "template-utils/dynamic";
 
-const SFSOA001 = dynamic(() =>
-  import("./SF-SOA-001" /* webpackChunkName: "SSGTemplates" */)
+const SOA001 = dynamic(() =>
+  import("./SOA-001" /* webpackChunkName: "SSGTemplates" */)
 );
 
 export default {
-  "SF-SOA-001": SFSOA001
+  "SOA-001": SOA001
 };

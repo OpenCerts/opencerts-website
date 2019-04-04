@@ -38,8 +38,8 @@ const trans = dynamic(
   import("./tlds/sg/ssgwsg/transcript/trans" /* webpackChunkName: "SSGTemplates" */)
 );
 
-const SFSOA001 = dynamic(
-  import("./tlds/sg/ssgwsg/soa/SF-SOA-001" /* webpackChunkName: "SSGTemplates" */)
+const SOA001 = dynamic(
+  import("./tlds/sg/ssgwsg/soa/SOA-001" /* webpackChunkName: "SSGTemplates" */)
 );
 
 export default {
@@ -52,6 +52,6 @@ export default {
   "NP-AA2018-DPP": NPAA2018DPP,
   "SG-GOVTECH-OPENCERTS": OpenCertsAssociate2018,
   "FQ-001": FQ001,
-  Trans: trans,
-  "SF-SOA-001": SFSOA001
+  "Trans": trans,
+  "SOA-001": SOA001
 };

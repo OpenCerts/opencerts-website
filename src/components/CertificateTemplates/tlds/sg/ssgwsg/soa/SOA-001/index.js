@@ -11,7 +11,7 @@ const templates = [
   }
 ];
 
-const SFSOA001 = ({ certificate }) => (
+const SOA001 = ({ certificate }) => (
   <MultiCertificateRenderer
     certificate={certificate}
     templates={templates}
@@ -19,9 +19,9 @@ const SFSOA001 = ({ certificate }) => (
   />
 );
 
-SFSOA001.displayName = "SFSOA001 Template";
-SFSOA001.propTypes = {
+SOA001.displayName = "SOA001 Template";
+SOA001.propTypes = {
   certificate: PropTypes.object.isRequired
 };
 
-export default SFSOA001;
+export default SOA001;

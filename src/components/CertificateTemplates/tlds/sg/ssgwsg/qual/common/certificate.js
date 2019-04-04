@@ -1,6 +1,6 @@
 import { get } from "lodash";
 import { IMG_LOGO_FQ001, IMG_SEAL_FQ001, IMG_SSGLOGO_FQ001 } from "./images";
-import { formatDate, formatDatePrefix, formatCertID } from "./functions";
+import { formatDate, formatCertID } from "../../utils/functions";
 
 export const fullWidthStyle = {
   width: "100%",
@@ -13,19 +13,16 @@ export const sealWidthStyle = {
 };
 
 export const signatureWidthStyle = {
-  width: "100%",
+  width: "80%",
   height: "auto"
 };
 
 export const printTextStyle = {
-  fontWeight: "500!important",
-  color: "#555",
-  textAlign: "center"
+  fontWeight: "500!important"
 };
 
 export const issuersTextStyle = {
   fontWeight: "500!important",
-  color: "#555",
   textAlign: "center",
   fontSize: "24px"
 };
@@ -38,13 +35,13 @@ export const awardTextStyle = {
 };
 
 export const singaporeTextStyle = {
-  color: "#555",
   fontSize: "3rem"
 };
 
 export const nameTextStyle = {
   fontSize: "3rem",
-  textAlign: "center"
+  textAlign: "center",
+  fontWeight: "bold"
 };
 
 export const recipientTextStyle = {
@@ -77,7 +74,7 @@ export const certCodeStyle = {
 };
 
 export const footerLogoStyle = {
-  width: "80%",
+  width: "75%",
   height: "auto"
 };
 export const renderLogoWSQ = () => (
@@ -91,15 +88,15 @@ export const renderLogoWSQ = () => (
 
 export const renderSignature = certificate => (
   <div
-    className="row d-flex justify-content-center align-items-end"
+    className="row d-flex justify-content-center"
     style={{ marginTop: "8rem", marginBottom: "1rem" }}
   >
     <div className="col-lg-2 col-6">
       <img style={sealWidthStyle} src={IMG_SEAL_FQ001} />
     </div>
 
-    <div className="col-lg-7" style={{ paddingLeft: "25px" }}>
-      <div className="col-lg-2 col-6">
+    <div className="col-lg-7">
+      <div className="col-lg-3 col-12">
         <img
           style={signatureWidthStyle}
           src={get(certificate, "additionalData.certSignatories[0].signature")}
@@ -124,9 +121,9 @@ export const renderSignature = certificate => (
       </div>
     </div>
     <div className="col-lg-3 col-xs-12">
-      <div style={{ marginBottom: "70px" }}>
+      <div style={{ marginBottom: "70px",marginTop: "60px" }}>
         <p style={printTextStyle}>
-          Cert No: {get(certificate, "additionalData.qual_serial_num")}
+          Cert No: {get(certificate, "additionalData.serial_num")}
         </p>
       </div>
       <img style={footerLogoStyle} src={IMG_SSGLOGO_FQ001} />
@@ -162,8 +159,7 @@ export const renderAwardText = certificate => (
 
 export const renderIssuingDate = certificate => (
   <div className="d-flex" style={{ marginTop: "1rem" }}>
-    <p>
-      {formatDatePrefix(certificate.issuedOn)}{" "}
+    <p style={issuersTextStyle}>
       {formatDate(certificate.issuedOn)}
     </p>
   </div>
@@ -186,7 +182,7 @@ export default ({ logo }) => ({ certificate }) => (
   <div>
     <div
       className="container"
-      style={{ border: 5, borderColor: "#AAA", borderStyle: "solid",paddingLeft:"40px",paddingRight:"40px", width:"100%", fontFamily:"Arial" }}
+      style={{ border: 5, borderColor: "#AAA", borderStyle: "solid",paddingLeft:"40px",paddingRight:"40px",paddingBottom:"100px", width:"100%", fontFamily:"Arial" }}
     >
       {renderLogoWSQ()}
       {renderAwardText(certificate)}

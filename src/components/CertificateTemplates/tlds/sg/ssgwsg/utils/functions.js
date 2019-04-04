@@ -15,9 +15,10 @@ export const formatDate = dateString => {
     "NOV",
     "DEC"
   ];
+  const day = date.getDay();
   const month = date.getMonth();
   const year = date.getUTCFullYear();
-  return `${months[month]} ${year}`;
+  return `${day} ${months[month]} ${year}`;
 };
 
 export const formatNRIC = nricFin => {
@@ -26,32 +27,6 @@ export const formatNRIC = nricFin => {
   return arrayNric.length === 3 ? arrayNric[2] : null;
 };
 
-export const formatDatePrefix = dateString => {
-  if (!dateString) return null;
-  const date = new Date(dateString);
-  const day = date.getDate();
-  let daySup = "";
-  switch (day % 10) {
-    case 1:
-      daySup = "st";
-      break;
-    case 2:
-      daySup = "nd";
-      break;
-    case 3:
-      daySup = "rd";
-      break;
-    default:
-      daySup = "th";
-  }
-
-  return (
-    <span>
-      Dated this {day}
-      <sup>{daySup}</sup> day of
-    </span>
-  );
-};
 
 export const formatCertName = (certName, meritFlag) => {
   let certDipDisplay = "";

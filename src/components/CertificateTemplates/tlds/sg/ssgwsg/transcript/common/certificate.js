@@ -1,6 +1,6 @@
 import { get } from "lodash";
 import { IMG_LOGO_FQ001, IMG_SSGLOGO_FQ001 } from "./images";
-import { formatDate, formatDatePrefix, formatCertID } from "./functions";
+import { formatDate, formatCertID } from "../../utils/functions";
 
 export const fullWidthStyle = {
   width: "100%",
@@ -129,7 +129,6 @@ export const renderAwardText = certificate => (
     <div className="row d-flex" style={{ marginTop: "1rem" }}>
       <p style={printTextStyle}>
         CONFERMENT: CONFERRED THE {certificate.name} on{" "}
-        {formatDatePrefix(certificate.issuedOn)}{" "}
         {formatDate(certificate.issuedOn)}
       </p>
     </div>
