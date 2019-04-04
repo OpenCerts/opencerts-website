@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { isoDateToLocalLong, sassClassNames, NUS_LOGO } from "../common";
-import { SIG_CHAIRBOT, SIG_PRESIDENT } from "./signatures";
+import {
+  isoDateToLocalLong,
+  sassClassNames,
+  renderImage,
+  NUS_LOGO
+} from "../common";
 import scss from "./degree.scss";
 
 // construct class names
@@ -156,41 +160,44 @@ class Degree extends Component {
   }
 
   // render signatures
-  renderSigs = () => (
-    <table width="100%">
-      <tbody>
-        <tr>
-          <td align="center">
-            {" "}
-            {/* signature 1 */}
-            <div className={cls("cert-sig")}>
-              <img
-                src={SIG_CHAIRBOT}
-                style={{ width: "5.31cm", height: "1.15cm" }}
-              />
-              <br />
-              Chair, Board of Trustees
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td align="center">
-            {" "}
-            {/* signature 2 */}
-            <div className={cls("cert-sig")}>
-              <br />
-              <img
-                src={SIG_PRESIDENT}
-                style={{ width: "2.5cm", height: "1.48cm" }}
-              />
-              <br />
-              President
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  );
+  renderSigs = () => {
+    let sig1;
+    let sig2;
+    if (this.dataSource.additionalData.images) {
+      sig1 = renderImage(this.dataSource.additionalData.images.TRUSTEES);
+      sig2 = renderImage(this.dataSource.additionalData.images.PRESIDENT);
+    }
+    const html = (
+      <table width="100%">
+        <tbody>
+          <tr>
+            <td align="center">
+              {" "}
+              {/* signature 1 */}
+              <div className={cls("cert-sig")}>
+                {sig1}
+                <br />
+                Chair, Board of Trustees
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              {" "}
+              {/* signature 2 */}
+              <div className={cls("cert-sig")}>
+                <br />
+                {sig2}
+                <br />
+                President
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    );
+    return html;
+  };
 
   // main render
   render() {
