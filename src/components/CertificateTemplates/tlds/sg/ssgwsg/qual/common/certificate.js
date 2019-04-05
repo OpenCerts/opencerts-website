@@ -46,7 +46,8 @@ export const nameTextStyle = {
 
 export const recipientTextStyle = {
   fontSize: "1.8rem",
-  textAlign: "center"
+  textAlign: "center",
+  marginBottom: "0px"
 };
 
 export const titleTextStyle = {
