@@ -53,6 +53,10 @@ For embedded certificate rendering, we have provided a frameless view located at
 
 More information at [opencerts-documentation](http://docs.opencerts.io/embedded_viewer.html)
 
+For embedded certificate rendering, we have provided a frameless view located at `/frameless-viewer`
+
+More information at [opencerts-documentation](http://docs.opencerts.io/embedded_viewer.html)
+
 ### Troubleshooting
 
 To enable debug logs in the browser, set `localStorage.debug="*"`
