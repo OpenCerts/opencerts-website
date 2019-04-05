@@ -23,7 +23,10 @@ const members = [
 
 const renderMembers = () =>
   members.map((m, i) => (
-    <div key={i} className={`col-lg-6 col-md-12 ${css["m-pd-0"]}`}>
+    <div
+      key={i}
+      className={`col-lg-6 col-md-12 ${css["mb-3"]} ${css["m-pd-0"]}`}
+    >
       <div className={css["partner-block"]}>
         <img className={`${css.logo}`} src={m.logo} id={css[m.key]} />
         <h4 className={css["partner-name"]}>{m.name}</h4>
