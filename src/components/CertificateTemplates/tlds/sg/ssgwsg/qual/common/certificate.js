@@ -121,7 +121,7 @@ export const renderSignature = certificate => (
       </div>
     </div>
     <div className="col-lg-3 col-xs-12">
-      <div style={{ marginBottom: "70px",marginTop: "60px" }}>
+      <div style={{ marginBottom: "70px", marginTop: "60px" }}>
         <p style={printTextStyle}>
           Cert No: {get(certificate, "additionalData.serial_num")}
         </p>
@@ -159,9 +159,7 @@ export const renderAwardText = certificate => (
 
 export const renderIssuingDate = certificate => (
   <div className="d-flex" style={{ marginTop: "1rem" }}>
-    <p style={issuersTextStyle}>
-      {formatDate(certificate.issuedOn)}
-    </p>
+    <p style={issuersTextStyle}>{formatDate(certificate.issuedOn)}</p>
   </div>
 );
 

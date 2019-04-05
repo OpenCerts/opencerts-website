@@ -94,8 +94,8 @@ export const renderSignature = certificate => (
       </div>
       <div style={footerTextStyle}>
         {get(certificate, "additionalData.certLink.desc")}
-      </div>  
-      <div style={footerLinkStyle}>  
+      </div>
+      <div style={footerLinkStyle}>
         {get(certificate, "additionalData.certLink.link")}
       </div>
     </div>
@@ -140,7 +140,7 @@ export const renderTranscript = certificate => (
     <div className="row d-flex" style={{ marginTop: "1rem" }}>
       <p style={printTextStyle}>Remarks:</p>
     </div>
-    <div className="row d-flex" style={{overflowX: "auto"}}>
+    <div className="row d-flex" style={{ overflowX: "auto" }}>
       <table>
         <tr>
           <th>Competency Unit Code</th>
@@ -169,17 +169,23 @@ export const renderFooter = certificate => (
 export const renderQualificationText = certificate => (
   <div>
     <div className="row d-flex" style={{ marginTop: "3rem" }}>
-      <p style={printTextStyle}>{get(certificate, "additionalData.qualificationStatement")}</p>
+      <p style={printTextStyle}>
+        {get(certificate, "additionalData.qualificationStatement")}
+      </p>
     </div>
     <div className="row d-flex" style={{ marginTop: "1rem" }}>
-      <p style={printTextStyle}>{get(certificate, "additionalData.qualificationSystemDesc.name")}</p>
+      <p style={printTextStyle}>
+        {get(certificate, "additionalData.qualificationSystemDesc.name")}
+      </p>
     </div>
     <div className="row d-flex">
       <p>{get(certificate, "additionalData.qualificationSystemDesc.desc")}</p>
       <ul>
-        {certificate.additionalData.qualificationSystemDesc.descPoints.map(item => (
-          <li>{item.point}</li>
-        ))}
+        {certificate.additionalData.qualificationSystemDesc.descPoints.map(
+          item => (
+            <li>{item.point}</li>
+          )
+        )}
       </ul>
     </div>
     <div className="row d-flex">
@@ -187,7 +193,9 @@ export const renderQualificationText = certificate => (
       <p>{get(certificate, "additionalData.trainingProgramDesc2")}</p>
     </div>
     <div className="row d-flex" style={{ marginTop: "1rem" }}>
-      <p style={printTextStyle}>{get(certificate, "additionalData.qualificationPath.name")}</p>
+      <p style={printTextStyle}>
+        {get(certificate, "additionalData.qualificationPath.name")}
+      </p>
     </div>
     <div className="row d-flex">
       <p>{get(certificate, "additionalData.qualificationPath.desc")}</p>
@@ -198,20 +206,26 @@ export const renderQualificationText = certificate => (
       </ul>
     </div>
     <div className="row d-flex" style={{ marginTop: "1rem" }}>
-      <p style={printTextStyle}>{get(certificate, "additionalData.gradesDesc.name")}</p>
+      <p style={printTextStyle}>
+        {get(certificate, "additionalData.gradesDesc.name")}
+      </p>
     </div>
-    <div className="row d-flex" style={{overflowX: "auto"}}>
+    <div className="row d-flex" style={{ overflowX: "auto" }}>
       <p>{get(certificate, "additionalData.qualificationPath.desc")}</p>
       <table>
-        {certificate.additionalData.gradesDesc.points.map((item,index) => (
+        {certificate.additionalData.gradesDesc.points.map((item, index) => (
           <tr>
-          <td>{index+1}.</td><td>{item.name}</td><td>{item.desc}</td>
+            <td>{index + 1}.</td>
+            <td>{item.name}</td>
+            <td>{item.desc}</td>
           </tr>
         ))}
       </table>
     </div>
     <div className="row d-flex" style={{ marginTop: "1rem" }}>
-      <p style={printTextStyle}>{get(certificate, "additionalData.webInfo.name")}</p>
+      <p style={printTextStyle}>
+        {get(certificate, "additionalData.webInfo.name")}
+      </p>
     </div>
     <div className="row d-flex">
       <p>{get(certificate, "additionalData.webInfo.link")}</p>

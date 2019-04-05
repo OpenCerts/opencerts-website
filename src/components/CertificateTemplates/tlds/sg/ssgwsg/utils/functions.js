@@ -27,7 +27,6 @@ export const formatNRIC = nricFin => {
   return arrayNric.length === 3 ? arrayNric[2] : null;
 };
 
-
 export const formatCertName = (certName, meritFlag) => {
   let certDipDisplay = "";
   if (meritFlag === "Y") {

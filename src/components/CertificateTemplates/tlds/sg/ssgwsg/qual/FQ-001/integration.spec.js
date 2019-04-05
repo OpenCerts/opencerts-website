@@ -30,5 +30,4 @@ test("FQ001 certificate is rendered correctly", async t => {
     "at SSG_ACN_DEV",
     "1 NOV 2018"
   ]);
-
 });
