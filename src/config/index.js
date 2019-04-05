@@ -24,8 +24,7 @@ export const GA_ID =
     ? GA_PRODUCTION_ID
     : GA_DEVELOPMENT_ID;
 export const CAPTCHA_CLIENT_KEY = "6LfiL3EUAAAAAHrfLvl2KhRAcXpanNXDqu6M0CCS";
-export const EMAIL_API_URL =
-  "https://fns.opencerts.io/production/email";
+export const EMAIL_API_URL = "https://fns.opencerts.io/production/email";
 export const INFURA_PROJECT_ID = "1f1ff2b3fca04f8d99f67d465c59e4ef";
 
 trace(`DEFAULT_NETWORK: ${DEFAULT_NETWORK}`);
