@@ -12,7 +12,7 @@ export default class Drawer extends Component {
   }
 
   componentDidMount() {
-    if (window.location.pathname === "/frameless-viewer") {
+    if (window.location.pathname.includes("frameless-viewer")) {
       this.setState({ showAbsHeader: true });
     }
   }
