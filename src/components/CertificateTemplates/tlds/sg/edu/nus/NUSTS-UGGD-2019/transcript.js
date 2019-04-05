@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
 import { createStore } from "redux";
 import PropTypes from "prop-types";
-import { isoDateToLocal, sassClassNames, NUS_TS_BACKIMG } from "../common";
+import { isoDateToLocal, sassClassNames, NUS_TS_BACKIMG, NUS_TS_LEGEND } from "../common";
 import scss from "./transcript.scss";
 
 // constants
@@ -34,6 +34,23 @@ const gState = createStore(onPrintRow);
 
 // construct class names
 const cls = names => sassClassNames(names, scss);
+
+// render legend page
+const renderTranscriptLegendPage = (legend, ratio) => {
+  const r = (ratio)?ratio:1;
+  const style = {
+      width: 29.7 * r + 'cm',
+      height: 21 * r + 'cm',
+  };
+  const html = ( 
+    <div className={cls("nus-transcript")}>
+      <div className={cls("a4-landscape")}>
+        <img src={NUS_TS_LEGEND} style={style} />
+      </div>
+    </div>
+  );
+  return html;
+};
 
 // render a blank table with column width information
 const setColWidth = () => {
@@ -1255,7 +1272,7 @@ class Transcript extends Component {
     this.col = 0;
     this.row = 0;
     this.firstHeaderPrinted = false;
-    this.redundant = [];
+    this.redundant= [];
   }
 
   // get table row by id
@@ -1273,8 +1290,8 @@ class Transcript extends Component {
 
   // keep redundant lines
   keepRedundant = (page, col, row) => {
-    this.redundant.push({ page, col, row });
-  };
+    this.redundant.push({page, col, row});
+  }
 
   // clean up after rendering
   cleanup() {
@@ -1287,8 +1304,8 @@ class Transcript extends Component {
     }
     // delete redundant lines
     this.redundant.forEach(x => {
-      const node = this.rowEl(x.page, x.col, x.row);
-      if (node) node.remove();
+        let node = this.rowEl(x.page, x.col, x.row);
+        if (node) node.remove();
     });
     // clean up rows
     for (let i = 0; i <= this.page; i += 1) {
@@ -1319,10 +1336,10 @@ class Transcript extends Component {
       }
       if (gState.getState()) {
         // state is {nextCol: true}, change column (and page when necessary)
-        if (dataFeeder.type(this.dataIdx - 1) === "ts-term-year") {
+        if (dataFeeder.type(this.dataIdx-1) === 'ts-term-year') {
           // check for orphan acad year line
           this.dataIdx -= 1; // need to re-render acad year line
-          this.keepRedundant(this.page, this.col, this.row - 1);
+          this.keepRedundant(this.page, this.col, this.row-1);
         }
         // current row to be removed later as it will rendered in next column
         this.keepRedundant(this.page, this.col, this.row);
@@ -1435,6 +1452,7 @@ class Transcript extends Component {
       );
       html.push(<p />);
     }
+    html.push(renderTranscriptLegendPage(NUS_TS_LEGEND, 0.95));
     return html;
   }
 }
@@ -1451,8 +1469,10 @@ class TranscriptDataRow extends Component {
     const watermark = rect.top + rect.height + window.scrollY;
     const pageIdx = parseInt(this.props.parent.id.split("-")[1], 10);
     const cap = contentBottom[pageIdx];
-    if (watermark > cap) gState.dispatch({ type: "CHANGE_COLUMN" });
-    else gState.dispatch({ type: "NO_CHANGE" });
+    if (watermark > cap) 
+      gState.dispatch({ type: "CHANGE_COLUMN" });
+    else 
+      gState.dispatch({ type: "NO_CHANGE" });
   }
 
   render() {
@@ -1462,8 +1482,8 @@ class TranscriptDataRow extends Component {
 }
 
 TranscriptDataRow.propTypes = {
-  data: PropTypes.object, // <td/>[<td/>*]
-  parent: PropTypes.object // <tr/>
+  data: PropTypes.object,   // <td/>[<td/>*]
+  parent: PropTypes.object  // <tr/>
 };
 
 // ========================================
