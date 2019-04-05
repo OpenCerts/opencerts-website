@@ -1290,6 +1290,9 @@ class Transcript extends Component {
   // get page by id
   pageEl = page => document.getElementById(`page-${page}`);
 
+  // get <p> by id
+  paraEl = page => document.getElementById(`para-${page}`);
+
   // get footer by id
   footerEl = page => document.getElementById(`footer-${page}`);
 
@@ -1301,10 +1304,13 @@ class Transcript extends Component {
   // clean up after rendering
   cleanup() {
     // clean up pages
-    for (let i = this.maxPages - 1; i > this.page; i -= 1)
+    for (let i = this.maxPages - 1; i > this.page; i -= 1) {
       this.pageEl(i).remove();
+      this.paraEl(i).remove();
+    }
     for (let i = this.page; i >= 0; i -= 1) {
       this.pageEl(i).removeAttribute("id");
+      this.paraEl(i).removeAttribute("id");
       this.canvasEl(i).removeAttribute("id");
     }
     // delete redundant lines
@@ -1455,7 +1461,7 @@ class Transcript extends Component {
           {this.renderPage(i)}
         </div>
       );
-      html.push(<p />);
+      html.push(<p id={`para-${i}`} />);
     }
     html.push(renderTranscriptLegendPage(NUS_TS_LEGEND, 0.95));
     return html;
