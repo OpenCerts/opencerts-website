@@ -27,7 +27,7 @@ test("PET certificate is rendered correctly", async t => {
 	"Diploma in Biotechnology",
 	"WITH MERIT",
 	"PRINCIPAL OF THE POLYTECHIC",
-	"CHAIRMAN OF THE BOARD"	
+	"CHAIRMAN OF THE BOARD"
   ]);
 
   // Navigate to Transcript tab
@@ -36,10 +36,10 @@ test("PET certificate is rendered correctly", async t => {
 
   // Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
-    "TRANSCRIPT OF ACADEMIC RECORD",
+    "TRANSCRIPT OF ACADEMIC",
 	"Vincent Goh",
+	"S0002434A",
 	"Diploma in Biotechnology with Merit",
-	"Registrar",
-	"Academic Year 2003 to 2010"
+	"Registrar" 
   ]);
 });
