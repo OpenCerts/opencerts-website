@@ -187,6 +187,7 @@ export const renderCopyright = certificate => (
       style={{ marginTop: "15rem", marginBottom: "15rem" }}
     >
       <p style={copyrightStyle}>
+        {get(certificate, "additionalData.copyright")}
         Copyright @ 2016 All Rights Reserved SkillsFuture Singapore Agency
       </p>
     </div>
@@ -211,8 +212,8 @@ export const renderQualificationText = certificate => (
     <div className="d-flex">
       <ul>
         {certificate.additionalData.qualificationSystemDesc.descPoints.map(
-          item => (
-            <li>{item.point}</li>
+          (item, index) => (
+            <li key={index}>{item.point}</li>
           )
         )}
       </ul>
@@ -233,9 +234,11 @@ export const renderQualificationText = certificate => (
     </div>
     <div className="d-flex">
       <ul>
-        {certificate.additionalData.qualificationPath.pathPoints.map(item => (
-          <li>{item.point}</li>
-        ))}
+        {certificate.additionalData.qualificationPath.pathPoints.map(
+          (item, index) => (
+            <li key={index}>{item.point}</li>
+          )
+        )}
       </ul>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
@@ -249,7 +252,7 @@ export const renderQualificationText = certificate => (
     <div className="d-flex" style={{ overflowX: "auto" }}>
       <table cellPadding="10">
         {certificate.additionalData.gradesDesc.points.map((item, index) => (
-          <tr>
+          <tr key={index}>
             <td>{index + 1}.</td>
             <td>{item.name}</td>
             <td>{item.desc}</td>
