@@ -1,3 +1,13 @@
+export const approvedAddresses = [
+  "0xa5d801265D29A6F1015a641BfC0e39Ee3dA2AC76",
+  "0xD939B3934fB024517296e0b9091E72F222F81c1E",
+  "0xBd5B320ff892B5afc400b5FF2A0CC9a56e89562b",
+  "0xc36484efa1544c32ffed2e80a1ea9f0dfc517495",
+  "0x866Fb78aC3c87019aBff9FB566acfF66F75Cfa46",
+  "0x86c677591A72a3BE92f01E9dF4e9Ab37C05c41B9",
+  "0xEF9c4D81C5934448E74C6Ea4e26bfD6FCC5fa830"
+];
+
 export const formatDate = dateString => {
   if (!dateString) return null;
   const date = new Date(dateString);
@@ -15,42 +25,16 @@ export const formatDate = dateString => {
     "NOV",
     "DEC"
   ];
+  const day = date.getDay();
   const month = date.getMonth();
   const year = date.getUTCFullYear();
-  return `${months[month]} ${year}`;
+  return `${day} ${months[month]} ${year}`;
 };
 
 export const formatNRIC = nricFin => {
   if (!nricFin) return null;
   const arrayNric = nricFin.split(":");
   return arrayNric.length === 3 ? arrayNric[2] : null;
-};
-
-export const formatDatePrefix = dateString => {
-  if (!dateString) return null;
-  const date = new Date(dateString);
-  const day = date.getDate();
-  let daySup = "";
-  switch (day % 10) {
-    case 1:
-      daySup = "st";
-      break;
-    case 2:
-      daySup = "nd";
-      break;
-    case 3:
-      daySup = "rd";
-      break;
-    default:
-      daySup = "th";
-  }
-
-  return (
-    <span>
-      Dated this {day}
-      <sup>{daySup}</sup> day of
-    </span>
-  );
 };
 
 export const formatCertName = (certName, meritFlag) => {
