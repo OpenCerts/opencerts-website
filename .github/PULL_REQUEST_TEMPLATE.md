@@ -25,6 +25,7 @@ This document is a work in progress but here are some basic checks. As these are
 - [ ] Certificate Store Addresses have been updated
   - [ ] Template Whitelist
   - [ ] Registry
+- [ ] Template should not be using resources(images etc.) on the website outside of their own folder (e.g institute logo shouldn't be used from /static because there's no guarantee it will not change)
 
 ### Pre-merge checks
 
