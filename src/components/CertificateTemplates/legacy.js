@@ -35,7 +35,7 @@ const FQ001 = dynamic(
 );
 
 const trans = dynamic(
-  import("./tlds/sg/ssgwsg/transcript/trans" /* webpackChunkName: "SSGTemplates" */)
+  import("./tlds/sg/ssgwsg/transcript/Trans" /* webpackChunkName: "SSGTemplates" */)
 );
 
 const SOA001 = dynamic(
