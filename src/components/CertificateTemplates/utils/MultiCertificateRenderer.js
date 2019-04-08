@@ -5,6 +5,7 @@ import { get } from "lodash";
 import styles from "../../certificateViewer.scss";
 import InvalidCertificateNotice from "../InvalidCertificateNotice";
 import { analyticsEvent } from "../../Analytics";
+import Drawer from "../../UI/Drawer";
 
 import { getLogger } from "../../../utils/logger";
 
@@ -62,6 +63,14 @@ const storeCanRenderTemplate = ({ whitelist, certificate }) => {
  * @param {*} templates An array of template views to render using `renderTemplateToTab()`
  */
 export class MultiCertificateRenderer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedTabIndex: 0
+    };
+    this.setTabIndex = this.setTabIndex.bind(this);
+  }
+
   componentDidMount() {
     const { certificate } = this.props;
     analyticsEvent(window, {
@@ -71,19 +80,31 @@ export class MultiCertificateRenderer extends Component {
     });
   }
 
+  setTabIndex(index) {
+    this.setState({ selectedTabIndex: index });
+  }
+
   render() {
     const { certificate, whitelist, templates, handleObfuscation } = this.props;
+    const { selectedTabIndex } = this.state;
     const tabs = templates.map(template => {
       trace(`%o`, template);
       return renderTemplateToTab({ template, certificate, handleObfuscation });
     });
     const allowedToRender = storeCanRenderTemplate({ whitelist, certificate });
     const validCertificateContent = (
-      <div>
-        <Tabs selectedTabClassName={styles.active}>
+      <>
+        <Tabs
+          onSelect={this.setTabIndex}
+          selectedIndex={this.state.selectedTabIndex}
+          selectedTabClassName={styles.active}
+        >
           <div id={styles["header-ui"]}>
             <div className={styles["header-container"]}>
-              <TabList id="template-tabs-list" className="nav nav-tabs">
+              <TabList
+                id="template-tabs-list"
+                className="nav nav-tabs d-none d-lg-block d-xl-block"
+              >
                 {tabs.map(tab => (
                   <Tab key={tab.id} className={styles.tab}>
                     {tab.label}
@@ -99,7 +120,13 @@ export class MultiCertificateRenderer extends Component {
               </TabList>
             </div>
           </div>
-
+          <div className="d-lg-none d-xl-none">
+            <Drawer
+              tabs={tabs}
+              activeIdx={selectedTabIndex}
+              toggle={idx => this.setTabIndex(idx)}
+            />
+          </div>
           <div
             className="tab-content bg-white p-3 mt-3 rounded"
             id="rendered-certificate"
@@ -109,7 +136,7 @@ export class MultiCertificateRenderer extends Component {
             ))}
           </div>
         </Tabs>
-      </div>
+      </>
     );
     trace(`%o`, { certificate, whitelist, templates });
     if (allowedToRender) {
