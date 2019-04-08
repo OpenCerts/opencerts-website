@@ -22,6 +22,9 @@ This document is a work in progress but here are some basic checks. As these are
 - [ ] Webpack chunking code is correct
   - [ ] Has chunking code
   - [ ] Same chunking code as the other certificates belonging to that institute
+- [ ] Certificate Store Addresses have been updated
+  - [ ] Template Whitelist
+  - [ ] Registry
 
 ### Pre-merge checks
 
