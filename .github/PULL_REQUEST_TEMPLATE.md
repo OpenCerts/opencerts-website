@@ -9,7 +9,7 @@ assignees: ''
 ---
 
 # Pull Request Guidelines for Adding Certificate Templates
-This document is a work in progress but here are some basic checks. As this is only basic guidelines, meeting the below doesn't indicate there are will be no issues with your pull request.
+This document is a work in progress but here are some basic checks. As these are only basic guidelines, meeting the below doesn't indicate there will be no issues with your pull request.
 
 ### Certificate Template 
 - [ ] Sample certificate file included for each template
