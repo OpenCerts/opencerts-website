@@ -1,6 +1,6 @@
 import { get } from "lodash";
-import { IMG_LOGO_FQ001, IMG_SEAL_FQ001, IMG_SSGLOGO_FQ001 } from "./images";
-import { formatDate, formatCertID } from "../../utils/functions";
+import { IMG_LOGO_FQ001, IMG_SEAL_FQ001, IMG_SSGLOGO_FQ001 } from "../common";
+import { formatDate, formatCertID } from "../common/functions";
 
 export const fullWidthStyle = {
   width: "100%",
@@ -41,7 +41,8 @@ export const singaporeTextStyle = {
 export const nameTextStyle = {
   fontSize: "3rem",
   textAlign: "center",
-  fontWeight: "bold"
+  fontWeight: "bold",
+  wordBreak: "break-word"
 };
 
 export const recipientTextStyle = {

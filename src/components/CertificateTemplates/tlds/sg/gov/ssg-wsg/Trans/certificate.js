@@ -1,6 +1,6 @@
 import { get } from "lodash";
-import { IMG_LOGO_FQ001, IMG_SSGLOGO_FQ001 } from "./images";
-import { formatDate, formatCertID } from "../../utils/functions";
+import { IMG_LOGO_FQ001, IMG_SSGLOGO_FQ001 } from "../common";
+import { formatDate, formatCertID } from "../common/functions";
 
 export const fullWidthStyle = {
   width: "100%",
@@ -34,7 +34,8 @@ export const headerTextStyle = {
   fontSize: "3rem",
   textAlign: "center",
   color: "rgb(197, 41, 155)",
-  fontWeight: "bold"
+  fontWeight: "bold",
+  wordBreak: "break-word"
 };
 
 export const titleTextStyle = {

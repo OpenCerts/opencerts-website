@@ -7,11 +7,11 @@ const templates = [
   {
     id: "certificate",
     label: "Certificate",
-    template: SSGCert
+    template: SSGCert({})
   }
 ];
 
-const FQ001 = ({ certificate }) => (
+const SOA001 = ({ certificate }) => (
   <MultiCertificateRenderer
     certificate={certificate}
     templates={templates}
@@ -19,9 +19,9 @@ const FQ001 = ({ certificate }) => (
   />
 );
 
-FQ001.displayName = "FQ001 Template";
-FQ001.propTypes = {
+SOA001.displayName = "SOA001 Template";
+SOA001.propTypes = {
   certificate: PropTypes.object.isRequired
 };
 
-export default FQ001;
+export default SOA001;
