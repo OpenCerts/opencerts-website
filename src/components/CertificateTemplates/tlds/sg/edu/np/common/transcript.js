@@ -51,68 +51,7 @@ export const renderSemester = (semester, semesterId, { hideCredit } = {}) => {
   );
 };
 
-export const renderExamDate = (groupItems, itemId, opts) => {
-  //display semester studies if it is not blank
-  const sem = get(groupItems, "[0].semester");
-  let semDisplay = "";
-  if (sem > 0) {
-    semDisplay = `SEMESTER OF STUDY  :  ${sem.toString()}`;
-  }
-  const date = get(groupItems, "[0].examinationDate");
-
-  //group module by Modular Certificate
-  const groupedModules = groupBy(groupItems, "modularCertDescription");
-  const renderedModuleGroups = Object.keys(groupedModules).map(mcItem =>
-    renderModuleCert(groupedModules[mcItem], mcItem, opts)
-  );
-  return (
-    <div className="col-6 my-4" key={itemId}>
-      <div className="row m-0 mb-2">
-        <div style={{ fontWeight: 700 }}>
-          DATE OF EXAM&nbsp;:&nbsp;
-          {formatDate(date)}
-        </div>
-        <div className="ml-auto" style={{ fontWeight: 700 }}>
-          {semDisplay}
-        </div>
-      </div>
-      <div>{renderedModuleGroups}</div>
-    </div>
-  );
-};
-
-export const renderModuleCert = (mcItems, mcItemId, { hideCredit } = {}) => {
-  const subjectRows = mcItems.map((m, i) => (
-    <tr key={i}>
-      <td style={thWidth60Left}>{m.name}</td>
-      <td>{m.courseCredit}</td>
-      <td>{m.grade}</td>
-    </tr>
-  ));
-  const modularCertDescription = get(mcItems, "[0].modularCertDescription");
-  return (
-    <div key={mcItemId}>
-      <div className="row ml-auto">
-        <div style={{ fontWeight: 700 }}>
-          {modularCertDescription}
-        </div>
-      </div>
-      <table style={fullWidthStyle}>
-        <tbody>
-          <tr>
-          <th>MODULE</th>
-          {hideCredit ? null : <th>CREDIT UNIT</th>}
-          <th>GRADE</th>
-          </tr>
-          {subjectRows}
-        </tbody>
-      </table>
-      <div className="row my-auto">&nbsp;</div>
-      </div>
-    );
-  };
-
-  export const renderHeaderNPPartner = (logo, left, certificate) => {
+export const renderHeaderNPPartner = (logo, left, certificate) => {
   const serial = get(certificate, "additionalData.transcriptId");
   return (
     <div className="row">
@@ -416,15 +355,11 @@ export const renderCourse = (certificate, course, courseId, opts) => {
   const admissionDate = get(certificate, "admissionDate");
   const graduationDate = get(certificate, "graduationDate");
   const currentCourse = get(course, "[0].programDescription");
-  //check if the transcript contains CET Modular Certification Description
-  const modularCert = get(course, "[0].modularCertDescription");
 
-  // For CET transcript, group modules by examinationDate and modular certification; for other transcript, group all modules by semesters
-  const groupedSubjects = modularCert ? groupBy(course, "examinationDate") : groupBy(course, "semester");
-  const renderedGroups = Object.keys(groupedSubjects).map(item =>
-    modularCert
-    ? renderExamDate(groupedSubjects[item], item, opts)
-    : renderSemester(groupedSubjects[item], item, opts)
+  // Group all modules by semesters
+  const groupedSubjects = groupBy(course, "semester");
+  const renderedSemesters = Object.keys(groupedSubjects).map(semester =>
+    renderSemester(groupedSubjects[semester], semester, opts)
   );
 
   // Get Course Note
@@ -498,9 +433,9 @@ export const renderCourse = (certificate, course, courseId, opts) => {
         </div>
       </div>
       <hr />
-      <div className="row">{renderedGroups}</div>
+      <div className="row">{renderedSemesters}</div>
       <br />
-      <div className="row mx-auto">{courseNoteDisplay}</div>
+      <div className="row">{courseNoteDisplay}</div>
       <br />
     </div>
   );
@@ -520,7 +455,7 @@ export const renderTranscript = (certificate, opts) => {
 export const renderNpfa = certificate => {
   const npfa = get(certificate, "additionalData.npfa", undefined);
   return npfa ? (
-    <div className="row mx-auto">
+    <div className="row">
       National Physical Fitness Award: {npfa}
       <br />
       <br />
@@ -531,7 +466,7 @@ export const renderNpfa = certificate => {
 export const renderGPA = certificate => {
   const GPA = get(certificate, "cumulativeScore", undefined);
   return GPA ? (
-    <div className="row mx-auto">
+    <div className="row">
       Graduating GPA: {GPA} (Graduating GPA is computed based on passed modules
       and has a maximum value of 4)
       <br />
@@ -544,7 +479,7 @@ export const renderCourseNote = (gradCourse, course, courseId) => {
   const courseNotes = course.map((c, i) => <p key={i}>{c.note}</p>);
 
   return gradCourse === courseId ? (
-    <div className="row mx-auto" key={courseId}>
+    <div className="row" key={courseId}>
       {courseNotes}
     </div>
   ) : null;
@@ -642,7 +577,7 @@ export default ({ logo, left }) => ({ certificate }) => (
     {renderFinalStatement(certificate)}
     {certificate.additionalData.transcriptSignatories &&
       certificate.additionalData.transcriptSignatories[1]
-        ? renderTwoSignature(certificate) :  renderSignature(certificate)
+        ? renderTwoSignature(certificate) :  renderSignature(certificate) 
 	}
   </div>
 );
