@@ -41,7 +41,8 @@ export const singaporeTextStyle = {
 export const nameTextStyle = {
   fontSize: "3rem",
   textAlign: "center",
-  fontWeight: "bold"
+  fontWeight: "bold",
+  wordBreak: "break-word"
 };
 
 export const recipientTextStyle = {

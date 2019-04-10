@@ -34,7 +34,8 @@ export const headerTextStyle = {
   fontSize: "3rem",
   textAlign: "center",
   color: "rgb(197, 41, 155)",
-  fontWeight: "bold"
+  fontWeight: "bold",
+  wordBreak: "break-word"
 };
 
 export const titleTextStyle = {

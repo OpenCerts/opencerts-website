@@ -46,10 +46,11 @@ export const singaporeTextStyle = {
 };
 
 export const nameTextStyle = {
-  fontSize: "3rem",
+  fontSize: "2.5rem",
   textAlign: "center",
   fontWeight: "bold",
-  color: "rgb(197,41,155)"
+  color: "rgb(197,41,155)",
+  wordBreak: "break-word"
 };
 
 export const recipientTextStyle = {
@@ -146,7 +147,7 @@ export const renderSignature = certificate => (
 export const renderAwardText = certificate => (
   <div>
     <div className="d-flex" style={{ marginTop: "2rem" }}>
-      <p style={nameTextStyle}>{certificate.name}</p>
+      <p style={nameTextStyle}>{get(certificate, "additionalData.statement_text")}</p>
     </div>
     <div className="d-flex" style={{ marginTop: "3rem" }}>
       <p style={awardTextStyle}>{certificate.additionalData.award_text}</p>
