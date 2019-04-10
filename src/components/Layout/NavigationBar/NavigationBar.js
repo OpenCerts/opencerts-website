@@ -35,7 +35,7 @@ const NavigationBar = ({ active }) => (
         <img src="/static/images/opencertslogo.svg" alt="OpenCerts" />
       </a>
       <button
-        className={css["navbar-toggler"]}
+        className={`${css["navbar-toggler"]} d-none`}
         type="button"
         data-toggle="collapse"
         data-target="#top-nav"
