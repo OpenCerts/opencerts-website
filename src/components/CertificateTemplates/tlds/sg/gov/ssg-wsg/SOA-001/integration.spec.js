@@ -22,7 +22,7 @@ test("SOA001 certificate is rendered correctly", async t => {
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
-    "Industry and Generic Skills SOA",
+    "STATEMENT OF ATTAINMENT",
     "is awarded to",
     "A",
     "ID No: S0000000A",
