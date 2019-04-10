@@ -1,6 +1,6 @@
 import { get } from "lodash";
-import { IMG_LOGO_FQ001, IMG_SEAL_FQ001, IMG_SSGLOGO_FQ001 } from "./images";
-import { formatDate, formatCertID } from "../../utils/functions";
+import { IMG_LOGO_FQ001, IMG_SEAL_FQ001, IMG_SSGLOGO_FQ001 } from "../common";
+import { formatDate, formatCertID } from "../common/functions";
 
 export const fullWidthStyle = {
   width: "100%",
@@ -27,6 +27,13 @@ export const issuersTextStyle = {
   fontSize: "24px"
 };
 
+export const transcriptTextStyle = {
+  fontWeight: "500!important",
+  textAlign: "center",
+  fontSize: "24px",
+  marginBottom: "0px"
+};
+
 export const awardTextStyle = {
   fontSize: "22px",
   color: "rgb(197,41,155)",
@@ -41,7 +48,8 @@ export const singaporeTextStyle = {
 export const nameTextStyle = {
   fontSize: "3rem",
   textAlign: "center",
-  fontWeight: "bold"
+  fontWeight: "bold",
+  color: "rgb(197,41,155)"
 };
 
 export const recipientTextStyle = {
@@ -149,9 +157,16 @@ export const renderAwardText = certificate => (
     <div className="d-flex">
       <p style={printTextStyle}>ID No: {certificate.recipient.id}</p>
     </div>
-    <div className="d-flex" style={{ marginTop: "1rem" }}>
+    <div className="d-flex" style={{ marginTop: "1rem", marginBottom: "3rem" }}>
       <p style={awardTextStyle}>{certificate.additionalData.successful_text}</p>
     </div>
+    {certificate.transcript.map(item => (
+      <div className="d-flex" key={item.courseCode}>
+        <p style={transcriptTextStyle}>
+          {item.courseCode} {item.name}
+        </p>
+      </div>
+    ))}
     <div className="d-flex" style={{ marginTop: "3rem" }}>
       <p style={issuersTextStyle}>at {certificate.issuers[0].name}</p>
     </div>

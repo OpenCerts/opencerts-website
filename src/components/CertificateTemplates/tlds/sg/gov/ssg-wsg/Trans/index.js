@@ -7,7 +7,7 @@ const templates = [
   {
     id: "certificate",
     label: "Certificate",
-    template: SSGCert
+    template: SSGCert({})
   }
 ];
 
