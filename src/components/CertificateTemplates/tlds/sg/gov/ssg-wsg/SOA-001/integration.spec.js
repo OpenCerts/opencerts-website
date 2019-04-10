@@ -1,8 +1,8 @@
 import { Selector } from "testcafe";
 
-fixture("SSG_ACN_DEV").page`http://localhost:3000`;
+fixture("Ropsten : Skillsfuture Singapore").page`http://localhost:3000`;
 
-const Certificate = "./S0000000A_180000000226558.OPENCERT";
+const Certificate = "./SOA-001_S0000000A_180000000226558.OPENCERT";
 
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
@@ -27,7 +27,7 @@ test("SOA001 certificate is rendered correctly", async t => {
     "A",
     "ID No: S0000000A",
     "for successful attainment of the following industry approved competencies",
-    "at SSG_ACN_DEV",
-    "5 NOV 2018"
+    "at SINGAPORE NATIONAL EMPLOYERS FEDERATION",
+    "6 DEC 2018"
   ]);
 });

@@ -171,7 +171,9 @@ export const renderAwardText = certificate => (
       </div>
     ))}
     <div className="d-flex" style={{ marginTop: "3rem" }}>
-      <p style={issuersTextStyle}>at {certificate.issuers[0].name}</p>
+      <p style={issuersTextStyle}>
+        at {certificate.additionalData.assessment_org_name}
+      </p>
     </div>
   </div>
 );

@@ -154,7 +154,9 @@ export const renderAwardText = certificate => (
       <p style={awardTextStyle}>{certificate.additionalData.successful_text}</p>
     </div>
     <div className="d-flex" style={{ marginTop: "3rem" }}>
-      <p style={issuersTextStyle}>at {certificate.issuers[0].name}</p>
+      <p style={issuersTextStyle}>
+        at {certificate.additionalData.assessment_org_name}
+      </p>
     </div>
   </div>
 );
