@@ -12,7 +12,8 @@ assignees: ''
 This document is a work in progress but here are some basic checks. As these are only basic guidelines, meeting the below doesn't indicate there will be no issues with your pull request.
 
 ### Certificate Template 
-- [ ] Sample certificate file included for each template
+- [ ] Integration test for each template that checks that the correct rendering is done given a sample certificate
+- [ ] Sample certificate file included for each template, located alongside the integration test for each template
 - [ ] Sample certificates must obviously be a sample certificate
   - [ ] Obviously fictitious name
   - [ ] Obviously sample signatory images
