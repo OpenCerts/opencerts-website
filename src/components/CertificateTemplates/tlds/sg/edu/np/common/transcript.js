@@ -51,36 +51,6 @@ export const renderSemester = (semester, semesterId, { hideCredit } = {}) => {
   );
 };
 
-export const renderExamDate = (groupItems, itemId, opts) => {
-  //display semester studies if it is not blank
-  const sem = get(groupItems, "[0].semester");
-  let semDisplay = "";
-  if (sem > 0) {
-    semDisplay = `SEMESTER OF STUDY  :  ${sem.toString()}`;
-  }
-  const date = get(groupItems, "[0].examinationDate");
-
-  //group module by Modular Certificate
-  const groupedModules = groupBy(groupItems, "modularCertDescription");
-  const renderedModuleGroups = Object.keys(groupedModules).map(mcItem =>
-    renderModuleCert(groupedModules[mcItem], mcItem, opts)
-  );
-  return (
-    <div className="col-6 my-4" key={itemId}>
-      <div className="row m-0 mb-2">
-        <div style={{ fontWeight: 700 }}>
-          DATE OF EXAM&nbsp;:&nbsp;
-          {formatDate(date)}
-        </div>
-        <div className="ml-auto" style={{ fontWeight: 700 }}>
-          {semDisplay}
-        </div>
-      </div>
-      <div>{renderedModuleGroups}</div>
-    </div>
-  );
-};
-
 export const renderModuleCert = (mcItems, mcItemId, { hideCredit } = {}) => {
   const subjectRows = mcItems.map((m, i) => (
     <tr key={i}>
@@ -108,11 +78,41 @@ export const renderModuleCert = (mcItems, mcItemId, { hideCredit } = {}) => {
         </tbody>
       </table>
       <div className="row my-auto">&nbsp;</div>
-      </div>
-    );
-  };
+    </div>
+  );
+};
 
-  export const renderHeaderNPPartner = (logo, left, certificate) => {
+export const renderExamDate = (groupItems, itemId, opts) => {
+  // display semester studies if it is not blank
+  const sem = get(groupItems, "[0].semester");
+  let semDisplay = "";
+  if (sem > 0) {
+    semDisplay = `SEMESTER OF STUDY  :  ${sem.toString()}`;
+  }
+  const date = get(groupItems, "[0].examinationDate");
+
+  // group module by Modular Certificate
+  const groupedModules = groupBy(groupItems, "modularCertDescription");
+  const renderedModuleGroups = Object.keys(groupedModules).map(mcItem =>
+    renderModuleCert(groupedModules[mcItem], mcItem, opts)
+  );
+  return (
+    <div className="col-6 my-4" key={itemId}>
+      <div className="row m-0 mb-2">
+        <div style={{ fontWeight: 700 }}>
+          DATE OF EXAM&nbsp;:&nbsp;
+          {formatDate(date)}
+        </div>
+        <div className="ml-auto" style={{ fontWeight: 700 }}>
+          {semDisplay}
+        </div>
+      </div>
+      <div>{renderedModuleGroups}</div>
+    </div>
+  );
+};
+
+export const renderHeaderNPPartner = (logo, left, certificate) => {
   const serial = get(certificate, "additionalData.transcriptId");
   return (
     <div className="row">
@@ -416,7 +416,7 @@ export const renderCourse = (certificate, course, courseId, opts) => {
   const admissionDate = get(certificate, "admissionDate");
   const graduationDate = get(certificate, "graduationDate");
   const currentCourse = get(course, "[0].programDescription");
-  //check if the transcript contains CET Modular Certification Description
+  // check if the transcript contains CET Modular Certification Description
   const modularCert = get(course, "[0].modularCertDescription");
 
   // For CET transcript, group modules by examinationDate and modular certification; for other transcript, group all modules by semesters
