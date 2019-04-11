@@ -1,0 +1,425 @@
+{
+  "schema": "opencerts/v1.4",
+  "data": {
+    "id": "014ff08c-e59c-4895-8a97-80a6a7191530:string:DEMO_ID_TS_UGGD_1",
+    "$template": "9466e386-b62f-467d-a520-1be082fc2752:string:sg/edu/nus/NUSTS-UGGD-2019",
+    "issuedOn": "07ca8f9a-b932-42f2-8800-bb04d19a59c8:string:2019-03-31T09:47:39+08:00",
+    "name": "c8aa4d15-6f01-42e5-90f3-e42a3f2e8b1c:string:Undergraduate Official Transcript",
+    "issuers": [
+      {
+        "name": "67a3087b-73f3-4e14-96ef-9234acacd451:string:National University of Singapore",
+        "did": "07c836e9-61cb-4a15-8821-5583b659f7f8:string:DID:SG-UEN:200604346E",
+        "url": "27754777-5b18-4a91-81b3-de2ec40bf388:string:https://www.nus.edu.sg",
+        "email": "1b020aad-d6cd-4c01-b588-b290eb4ba755:string:registrar@nus.edu.sg",
+        "certificateStore": "2271d730-64fc-4531-9fa9-d3214b613122:string:0xfEbB273495F5C2c4783E23424Fe9773691b57fcB"
+      }
+    ],
+    "recipient": {
+      "name": "e614a9a4-b821-4b41-abdd-895d111e1920:string:NNNNNNNNN NNNNNNNNN NNNNN",
+      "studentId": "3b05329d-d715-4a64-9a71-314d89e8533e:string:A0000414H",
+      "dateOfBirth": "161936c5-e4c9-4eba-8f46-8c9f39bcce8d:string:0001-01-05"
+    },
+    "transcript": [
+      {
+        "name": "7d2f5b80-3efe-4df9-aa16-247945387147:string:0510",
+        "term": "97ba2543-4fae-4e00-93e8-00d243675eed:string:2005/2006 Semester 1",
+        "formOfStudy": "a5081237-701f-451a-9d80-474ec89042c9:string:ENRL",
+        "fosPrintArea": "aa5640fc-f2f5-4693-a58e-05a9953e02e2:string:ND",
+        "creditTransfer": [
+          {
+            "sourceType": "777520a4-f878-4e5b-a102-b155dda70639:string:E",
+            "creditsNoGPA": "758c726e-e1bd-4165-b18d-5dc2b1955879:number:32",
+            "creditsGPA": "c5e417c0-6c8a-4747-95f6-079dab673835:number:0",
+            "orgId": "5c0188d6-b69a-46eb-a1ba-07345624891c:string:Singapore Polytechnic",
+            "orgName": "52a2fb39-73ac-45e8-9e64-338558dd06f8:string:Singapore Polytechnic",
+            "details": [
+              {
+                "moduleCode": "ba54d4ef-3d6f-4e07-9834-1eea24934e0c:string:APC",
+                "moduleName": "326138a4-c2c0-487c-8dac-ab6218cef169:string: ",
+                "grade": "b18e1ff8-03fc-48d3-be1c-348f7e3dda40:string:EXE",
+                "credits": "1227b337-3dde-470e-b0e8-deed2f000d6a:number:8",
+                "status": "882bb4fd-4c90-48a3-961e-8e820efba153:string:P",
+                "includeInGPA": "b4f394a5-3b7a-419d-93e9-ef055ac0f407:boolean:false"
+              },
+              {
+                "moduleCode": "abe10e62-22aa-43e1-92ff-0ce9d960d7e4:string:APC",
+                "moduleName": "3bd0e252-f4d3-4d13-a330-4c7ce2a7fcb4:string: ",
+                "grade": "ca1f7f6e-cad9-4a01-a634-ce1a4c2e1dab:string:EXE",
+                "credits": "b18fa8b4-a20e-421f-be70-0c500edbded2:number:8",
+                "status": "d0a1c016-56bc-40ec-bbb5-e616853f0034:string:P",
+                "includeInGPA": "7a086a83-3cb8-4e82-a775-c106719bec40:boolean:false"
+              },
+              {
+                "moduleCode": "918effec-d471-4cdb-a7cf-8ef7b6cdc2c3:string:APC",
+                "moduleName": "7ad75fcd-e64f-4393-92ee-7e59da4bdb38:string: ",
+                "grade": "a569e596-c59e-4c01-80f0-52ad4c789b8a:string:EXE",
+                "credits": "0d1ac49f-50ad-4f02-a916-a29272acb3a5:number:4",
+                "status": "0084f876-0866-41b5-aa02-47b33b8ba47c:string:P",
+                "includeInGPA": "dc7e0bc5-93b7-44d2-a377-ca43e7b4bb21:boolean:false"
+              },
+              {
+                "moduleCode": "742ef86b-0446-4a5a-9d4e-6a8203943810:string:APC",
+                "moduleName": "acf7093e-0c1f-49dc-8161-117fd64311a7:string: ",
+                "grade": "4fe21b33-1cef-411b-91ff-303895036282:string:EXE",
+                "credits": "2b1918c1-2b43-426f-b10a-3a03f458ce0c:number:4",
+                "status": "3e9ea65b-6bd9-4031-b6c6-6ceab8a26fde:string:P",
+                "includeInGPA": "3eb082eb-b281-4b66-a6e2-82f13b1255df:boolean:false"
+              },
+              {
+                "moduleCode": "d1208a06-ef5a-4cc6-bb3e-48e9b04f5628:string:APC",
+                "moduleName": "69e15f77-6f45-4101-88e8-689c3c51efba:string: ",
+                "grade": "af181a50-f62e-4cdc-a93a-f9670d392631:string:EXE",
+                "credits": "1bfb0958-687d-49de-bda5-0367acac1198:number:4",
+                "status": "44a08fda-efdf-4496-9e2c-267154d04877:string:P",
+                "includeInGPA": "bad4a1df-3e43-4786-8425-9fcd2326bf55:boolean:false"
+              },
+              {
+                "moduleCode": "5728817b-332c-4d27-a6e5-26745b6b2d99:string:APC",
+                "moduleName": "21d071d2-f1b2-4e13-916a-78da2ea0b3de:string: ",
+                "grade": "399c2372-fef7-4ba2-81e1-f1b94cd0db4b:string:EXE",
+                "credits": "70c06948-ad64-476b-96c8-5365229890d8:number:4",
+                "status": "2aa21d43-5d72-483b-8ff9-66012802e978:string:P",
+                "includeInGPA": "f0e3ba9b-62b2-4e6c-82fa-1f001438dddc:boolean:false"
+              }
+            ]
+          }
+        ],
+        "modules": [
+          {
+            "moduleCode": "3c4d9cde-c653-4ade-bda0-81274549384b:string:AR1222",
+            "moduleName": "2e995d3a-e063-4093-aa96-a7d850ee0277:string:HISTORY & THEORY OF MODERN ARCHITECTURE",
+            "grade": "2cd6a2bc-2920-42d0-87f6-d05d75719641:string:B",
+            "credits": "50f70dfb-ca83-4a0b-aefc-462a8abd83d4:number:4",
+            "gradingBasis": "44c96dcc-d883-494f-8646-9c9e317736e1:string:GRD",
+            "includeInGPA": "53bb4fce-7e27-48f2-92a5-bbbba63182de:boolean:true"
+          },
+          {
+            "moduleCode": "8fbb9de7-1a11-43e8-92d8-9b6161cafe88:string:AR2101",
+            "moduleName": "1ef4bf68-588c-478a-9f4e-8936c316aa19:string:DESIGN 3",
+            "grade": "d673be07-9a67-41ad-ad1b-730cf278d4cf:string:A-",
+            "credits": "68f3b7e1-cddd-4332-befb-5b69ff343f60:number:8",
+            "gradingBasis": "6d38cd56-1fb7-45fd-aa49-032b34086d06:string:GRD",
+            "includeInGPA": "aab24735-a85b-44b5-823a-e1a2433e2939:boolean:true"
+          },
+          {
+            "moduleCode": "fd0703a0-5503-4105-b9c1-b0aa515f2178:string:AR2722",
+            "moduleName": "8c746257-c340-4c51-b837-4ddeb5eba853:string:DESIGN AND THE ENVIRONMENT",
+            "grade": "8125161d-e7ab-4a0d-98df-57dda556debb:string:B-",
+            "credits": "ffa1643e-3729-4d69-9bfd-38b7e926b173:number:4",
+            "gradingBasis": "80f0a3bb-71ef-4750-a570-ba9895d6b830:string:GRD",
+            "includeInGPA": "df6472f6-42d3-41f6-9998-e6dc8f4ab8e5:boolean:true"
+          },
+          {
+            "moduleCode": "d8a4da63-9fee-4587-b3cf-2965a13f5179:string:BU2482",
+            "moduleName": "00d24e93-981c-4f3e-bd7e-5269098ae1b6:string:BUILDING MATERIALS",
+            "grade": "d8136e0d-3890-4cba-a29e-91b1d5a76e16:string:B",
+            "credits": "0dd04bf7-66d3-4066-b531-6ea3c5b92638:number:4",
+            "gradingBasis": "a9005d22-a105-45d4-b899-1124336bd31d:string:GRD",
+            "includeInGPA": "a2db26e7-9cea-4f1b-8367-a929167638bb:boolean:true"
+          },
+          {
+            "moduleCode": "e50dc35a-496c-4151-8f32-7b6571b3794a:string:ES1000",
+            "moduleName": "38d8e3d0-42b5-46d5-9d31-4cca064d454f:string:BASIC ENGLISH",
+            "grade": "86b9eaeb-45b4-4b29-8d14-61cedea4020c:string:C+",
+            "credits": "f676feba-761e-415d-8095-3af97c6cb121:number:0",
+            "gradingBasis": "9eff5101-594d-4b8b-bd7e-7622ef0fd53b:string:NCP",
+            "includeInGPA": "2b75f80d-a162-4b6c-a098-e01f348585f8:boolean:false"
+          }
+        ],
+        "summary": [
+          {
+            "programName": "33b99ed6-0930-4301-9823-ad00e05bdf61:string:Bachelor of Arts (Architecture)",
+            "includeInGPA": "c97057e8-b9c5-4295-a9f8-eb469a75692a:boolean:true",
+            "GPAName": "e5148ba0-060b-4e9f-8928-d42bd1ec72f1:string:Cumulative Average Point",
+            "GPA": "fe89c1d1-3bb1-4d07-bf2d-58c464f33551:number:3.8"
+          }
+        ]
+      },
+      {
+        "name": "d6b0b011-f3ae-4a0b-b3c6-6e90062b378b:string:0520",
+        "term": "01c134f4-a4e1-4aa3-9c44-6c052161d747:string:2005/2006 Semester 2",
+        "formOfStudy": "d4193524-e724-48eb-b7bd-cac070e138b9:string:ENRL",
+        "fosPrintArea": "4f1a940a-d147-4ff6-a1aa-575002c60405:string:ND",
+        "modules": [
+          {
+            "moduleCode": "285ebb39-c603-44e8-a69e-2403b1954325:string:AR1000",
+            "moduleName": "4cc95d80-f8a7-4955-aa38-4063e51548d4:string:ENGLISH FOR ACADEMIC PURPOSES (ARCHITECTURE)",
+            "grade": "b96500f6-a598-470c-a9c4-067fac391e7a:string:C+",
+            "credits": "a3fb8f29-6fec-4d33-8afc-b6e9c36ceb39:number:0",
+            "gradingBasis": "9668ab81-af6b-42bb-ad42-c27a9d1cbe52:string:GRD",
+            "includeInGPA": "14a52bd7-ba68-4aaa-8957-92ff423ad3d4:boolean:true"
+          },
+          {
+            "moduleCode": "654aaac1-8563-4a7b-ab60-b2b9a4135036:string:AR2102",
+            "moduleName": "a6d90725-e988-4bc7-95d5-adbb2a34ff08:string:DESIGN 4",
+            "grade": "90f2b482-09a3-4d05-87c0-c327c57320e5:string:A",
+            "credits": "86432972-0e83-4ee5-aa39-b92bfc369aee:number:12",
+            "gradingBasis": "4f01de31-0ffb-404b-a2fa-6237427eb572:string:GRD",
+            "includeInGPA": "a8fd8f9c-6436-4c4b-aee3-d3fffb12742e:boolean:true"
+          },
+          {
+            "moduleCode": "41ae381f-65e6-4370-b792-0fbdea2c8ae3:string:AR2221",
+            "moduleName": "117641ec-923d-46fb-b714-ce0a70c55a77:string:HISTORY & THEORY OF SEA ARCHITECTURE",
+            "grade": "1b09d9d2-e7e1-452e-8296-aa366a92cf3d:string:B-",
+            "credits": "89fb9f29-f82d-4848-ba78-0c824b784099:number:4",
+            "gradingBasis": "d4af45cf-4f3e-482b-b846-9d5c8cc37a32:string:GRD",
+            "includeInGPA": "f31be575-38fe-4338-90d4-0d37ac6d7824:boolean:true"
+          },
+          {
+            "moduleCode": "766b2e35-f014-4cb4-8d9a-3fe3c7268ceb:string:AR2223",
+            "moduleName": "de899cd5-3e9b-47e6-973d-a6051c53401d:string:THEORY OF URBAN DESIGN & PLANNING",
+            "grade": "a02677aa-da51-4998-b9fa-a6b853443e67:string:B-",
+            "credits": "667838d2-0e60-4944-a1aa-44e6cdc8fb62:number:4",
+            "gradingBasis": "461b02cc-acb7-4490-965b-dd247af52a9c:string:GRD",
+            "includeInGPA": "9fbdda1a-113b-4c86-8449-7f95a8587e94:boolean:true"
+          },
+          {
+            "moduleCode": "5519037e-c512-45f9-9a5f-da2c64fe0617:string:AR2326",
+            "moduleName": "c0cff1fd-c1c8-4508-8b71-9c87ef526fe4:string:ARCHITECTURAL CONSTRUCTION II",
+            "grade": "66cdf3db-f7e5-4cad-b41b-eb6546ef85b5:string:B-",
+            "credits": "8d4bf6fb-be36-4189-9858-47d98fd1beb7:number:4",
+            "gradingBasis": "216eb75f-030c-4552-9fbd-b3961cc922a9:string:GRD",
+            "includeInGPA": "1ac7335f-bab3-4cc0-b032-b9aa30ed6ed3:boolean:true"
+          },
+          {
+            "moduleCode": "2a23cd15-4afd-4ea0-94b9-76e5da1f444c:string:BU1481",
+            "moduleName": "dbfbfe3f-e5c2-4be9-ac08-d00994e139ac:string:BUILDING SCIENCE",
+            "grade": "7c1a8c8f-83a4-4b63-8a2b-743ef78490b0:string:C+",
+            "credits": "7df065a4-0410-4713-a937-e2fedabb13c1:number:4",
+            "gradingBasis": "44ff9cbc-5c26-49c5-98ad-9595771398a8:string:GRD",
+            "includeInGPA": "5ce9b6f5-4e40-48e1-be34-31d4737385bf:boolean:true"
+          }
+        ],
+        "summary": [
+          {
+            "programName": "ec32c0a9-743c-49cf-818e-d8a77bf38279:string:Bachelor of Arts (Architecture)",
+            "includeInGPA": "04d00591-ceee-4aac-a4cd-6ee9f3ff50f3:boolean:true",
+            "GPAName": "cd4a8c3e-2927-4742-9a6c-07cf848fa38b:string:Cumulative Average Point",
+            "GPA": "93ff7bd5-ee8d-43e4-8666-5b31aaef20c6:number:3.79"
+          }
+        ]
+      },
+      {
+        "name": "ab5242be-19c7-4fe1-9b15-2085f12dc2b5:string:0610",
+        "term": "79eab47c-ffb1-4f05-866c-6551f8a7f4dd:string:2006/2007 Semester 1",
+        "formOfStudy": "450b66bf-5398-46fb-b472-7a02df838e1a:string:ENRL",
+        "fosPrintArea": "75a56697-b927-4a43-aab3-c5901d04b86d:string:ND",
+        "modules": [
+          {
+            "moduleCode": "8e7c4456-e746-4a08-8cd4-eee9cf0f150c:string:AR3101",
+            "moduleName": "76b2770c-17df-4c75-8db1-1be7b8cb3178:string:Design 5",
+            "grade": "93573527-3350-4ba5-ab74-4fdef13ab128:string:A",
+            "credits": "13eb28fb-64da-4e67-8cd1-7c895253ac61:number:8",
+            "gradingBasis": "9550403a-3611-4654-89df-92cb1d751aad:string:GRD",
+            "includeInGPA": "1906d567-927c-4fb4-aef6-c237f990ea6e:boolean:true"
+          },
+          {
+            "moduleCode": "854b059f-5568-47b6-942e-a414e29adaf6:string:AR3222",
+            "moduleName": "7eda0600-bf54-4486-b1d0-486eb60ae024:string:History & Theory Of Western Architecture",
+            "grade": "5a408030-06fe-4c73-9ae4-dea8a0177c07:string:B-",
+            "credits": "fc43d687-afe4-4150-95b2-2767d99aa5ce:number:4",
+            "gradingBasis": "9fcc626e-80ff-4458-b678-e1b6e58225b1:string:GRD",
+            "includeInGPA": "8d2bdaf5-3e93-49d9-9658-73d3bb0e62bc:boolean:true"
+          },
+          {
+            "moduleCode": "4902bb50-1368-49d8-a296-2a6fe31949c8:string:BU2484",
+            "moduleName": "8734ff5b-3ffc-4d20-894c-79953d251bd0:string:Building Structures",
+            "grade": "2c8d1d41-8629-480e-8c15-cd3937fab7f7:string:B-",
+            "credits": "9908c893-c433-4a17-8232-4a17e09b934a:number:4",
+            "gradingBasis": "1cfae732-8ed1-4caf-81db-533f33e36b96:string:GRD",
+            "includeInGPA": "ae17e546-e469-42f1-9baa-976e0e799465:boolean:true"
+          },
+          {
+            "moduleCode": "2b217775-6dab-4f21-943b-a86dfd8a816f:string:HR3003",
+            "moduleName": "1704b450-e70e-45f4-8908-6f1528ca5ae8:string:Management And Human Relations",
+            "grade": "34916629-08b6-45d8-bf59-0a4393839456:string:C",
+            "credits": "70f160dd-db9f-4fdf-a11e-bac427ca45f1:number:4",
+            "gradingBasis": "9ddfe067-d793-42c3-8e3d-eba545583aaa:string:GRD",
+            "includeInGPA": "25f82465-30ae-46e8-a490-a352a3f14422:boolean:true"
+          }
+        ],
+        "summary": [
+          {
+            "programName": "00e1bc59-b412-48c9-a5e8-23a03124dbea:string:Bachelor of Arts (Architecture)",
+            "includeInGPA": "8f653bbd-8d91-4275-a25f-3670d351fbf9:boolean:true",
+            "GPAName": "8bf52cd1-196f-4477-b962-48c2bbee516f:string:Cumulative Average Point",
+            "GPA": "a054c736-1e4d-4e32-b264-a1ce73560fca:number:3.74"
+          }
+        ]
+      },
+      {
+        "name": "4bcce1aa-0bf8-41c7-849d-1635dd3ca8dd:string:0620",
+        "term": "60092aba-67e7-496c-8280-ba00a063bf88:string:2006/2007 Semester 2",
+        "formOfStudy": "8de73a73-647e-4b1e-b394-548d783d16d4:string:ENRL",
+        "fosPrintArea": "e7895dd6-d57d-4aeb-8893-2b2d8687a56f:string:ND",
+        "modules": [
+          {
+            "moduleCode": "a8749a34-495f-4cc3-a0b2-cc99e662f81a:string:AR3102",
+            "moduleName": "22fc841a-2b44-459c-98f6-1f962a77ea32:string:Design 6",
+            "grade": "5d2aef22-7a6a-4550-8b4d-74bf92476b58:string:B",
+            "credits": "54bfa360-f7f3-44d2-9595-3551bb755321:number:12",
+            "gradingBasis": "2d245527-35ab-499c-b76c-811519dcc5e6:string:GRD",
+            "includeInGPA": "208482dc-f74b-4e5b-afe8-b037b310d427:boolean:true"
+          },
+          {
+            "moduleCode": "efbe0655-6daa-4a6d-bf78-f64728d712ca:string:AR3323",
+            "moduleName": "082f1a5f-ad35-4c7b-8fbb-978145171e5b:string:Architectural Construction & Structures",
+            "grade": "b7fd37c3-682d-4348-9d76-1f86b3d16e25:string:A-",
+            "credits": "9a241fb1-391f-416f-bdd3-4a41f9747814:number:4",
+            "gradingBasis": "6154c7ea-2d65-4e46-bd8a-51c548c40fe0:string:GRD",
+            "includeInGPA": "aa12b814-4728-4e23-8f41-d4de4d586e27:boolean:true"
+          },
+          {
+            "moduleCode": "82ac49d9-4dbc-475a-a958-7e2b00ede6d2:string:BU2480",
+            "moduleName": "df88f784-4fbc-4029-a84f-af54de0f4b68:string:Building Services",
+            "grade": "76b39d1c-e6b3-4d97-80cd-0654cb2e836b:string:C+",
+            "credits": "aad37b03-f1fd-4da1-8b6b-785703db632c:number:4",
+            "gradingBasis": "a3dc6247-f937-47ab-bb1f-29fa0e1cea9d:string:GRD",
+            "includeInGPA": "a03f9a86-e4a8-4ac3-8208-1109626d7f3f:boolean:true"
+          },
+          {
+            "moduleCode": "37aa6f83-4549-40e7-9013-3a8e074199b6:string:GEK1022",
+            "moduleName": "0a04f6a5-66a3-470f-9a8c-48b95453f485:string:Geopolitics:Geographies of War & Peace",
+            "grade": "2f2336a6-4bf8-4fe5-a48e-b9af15ead6a2:string:S",
+            "credits": "0777254b-c151-4e95-b000-e4c718cbe95f:number:4",
+            "gradingBasis": "36866ffb-1106-4e11-bfa9-8b864de63522:string:SNU",
+            "includeInGPA": "fda79dd3-6751-4c41-914f-a5f728df65f7:boolean:false"
+          }
+        ],
+        "summary": [
+          {
+            "programName": "8e3b3066-310a-4bd0-a292-ac3c4ef5f873:string:Bachelor of Arts (Architecture)",
+            "includeInGPA": "d97a6fe9-7c6c-428b-8c64-45c2abf628c2:boolean:true",
+            "GPAName": "b79614fb-70d3-454f-b6a1-fde8d9a13000:string:Cumulative Average Point",
+            "GPA": "d050c529-9a08-4c60-9814-b07d092bdd69:number:3.68"
+          }
+        ]
+      },
+      {
+        "name": "8b4641b7-2bf0-4a15-ba13-8e8141e6ab7a:string:0710",
+        "term": "168d9f4b-84ee-4d36-8420-e5abcf06d072:string:2007/2008 Semester 1",
+        "formOfStudy": "d365c28d-7906-4459-aa6c-fc75218e5897:string:ENRL",
+        "fosPrintArea": "3ad1375c-653c-4c7d-884d-d5215e41c3c5:string:ND",
+        "modules": [
+          {
+            "moduleCode": "d503ef4c-380a-4517-9d32-fc0eae928e76:string:AR4101",
+            "moduleName": "f905c4d5-1b4e-4bfc-8ffe-03f694504c98:string:Design 7",
+            "grade": "ea17f56d-8e79-485a-bc79-fa74a66956dd:string:A",
+            "credits": "7bfbaed4-c144-4982-93ae-b44c105422e2:number:8",
+            "gradingBasis": "def01742-4c48-4e32-a215-622ffbd7343a:string:GRD",
+            "includeInGPA": "b0897eee-64ba-45be-91de-282bdda95b01:boolean:true"
+          },
+          {
+            "moduleCode": "cf949bfd-a046-4b8f-a9d5-52e7b2f403ce:string:AR5011",
+            "moduleName": "e870ada6-da6e-4125-b291-a2cb797cf6b8:string:RESEARCH METHODOLOGY",
+            "grade": "7ce8f238-be08-4e87-8f2d-eea0f6794707:string:B+",
+            "credits": "aa4bb460-4b48-467c-bced-b2173f7e9938:number:4",
+            "gradingBasis": "2de0190c-8dbd-4505-bc8b-3692f101cbd6:string:GRD",
+            "includeInGPA": "fd5316e2-260a-4c75-a8a4-f0adcca34255:boolean:true"
+          },
+          {
+            "moduleCode": "0b413eb7-00a5-42f9-8177-1c329cc93123:string:AR5321",
+            "moduleName": "b0106bb3-98c3-4e77-8b32-8a1a16c81de9:string:Advanced Architectural Technology",
+            "grade": "7c37f0e0-4611-4a59-a408-146299f6f3dd:string:B-",
+            "credits": "47283bcc-1acb-4629-9d33-bbd2ed636064:number:4",
+            "gradingBasis": "2d4813a8-e2eb-4a6b-a85b-2a5ee13fe6a8:string:GRD",
+            "includeInGPA": "7b0a8baf-6f1a-4364-9413-57bde985035d:boolean:true"
+          },
+          {
+            "moduleCode": "1b922c60-d776-4f5f-9f86-4e0e4edbb0cf:string:GEK1531",
+            "moduleName": "fe002e5e-9c18-4e71-93b7-a9bd8c499453:string:Introduction to Cybercrime",
+            "grade": "86c5ca50-060a-4fa5-8321-8d855212e248:string:S",
+            "credits": "2e79e7fe-905e-45be-ac5d-7815c9ae8940:number:4",
+            "gradingBasis": "9ae26047-ffac-4e78-97c5-b49dfa108143:string:SNU",
+            "includeInGPA": "c8b9630a-6d58-4397-b5c4-84c38b077f84:boolean:false"
+          },
+          {
+            "moduleCode": "5735f564-8c90-44fc-ab51-3da1a02b5a03:string:UD5221",
+            "moduleName": "07b2af13-c3b0-4aa0-87c0-5f61b0568e89:string:THEORY AND ELEMENTS OF URBAN DESIGN",
+            "grade": "eda8a6a9-3c6d-4d21-9915-a26b29d856d5:string:B-",
+            "credits": "add0b71d-8150-4691-b91d-de6d61443d33:number:4",
+            "gradingBasis": "0624aba1-eda9-4218-af4e-07e4caada6c4:string:GRD",
+            "includeInGPA": "9ee3fc3f-b922-4a62-9714-7d95a4a4af6b:boolean:true"
+          }
+        ],
+        "summary": [
+          {
+            "programName": "170c8ccc-9fc5-4ca0-bee9-367270d7e246:string:Bachelor of Arts (Architecture)",
+            "includeInGPA": "e9b6bcd6-055c-41da-9289-b33d5d2643d0:boolean:true",
+            "GPAName": "017990f7-2149-4f09-a91c-bc90724bea28:string:Cumulative Average Point",
+            "GPA": "77497759-db7e-43a2-beb8-261ad8c2dc41:number:3.74"
+          }
+        ]
+      },
+      {
+        "name": "e411d61b-00aa-4085-81de-5c1faadd04fa:string:0720",
+        "term": "036aefd1-a3e6-4b1c-92b6-bcc72d37fd4d:string:2007/2008 Semester 2",
+        "formOfStudy": "04ef98a9-98ad-4ce0-bf6c-0e29d7c85254:string:ENRL",
+        "fosPrintArea": "b6e488c0-872e-4592-bd73-689b7db4c063:string:ND",
+        "modules": [
+          {
+            "moduleCode": "c9b9db02-2b2e-4e4c-ac76-2b7f0fb1a49b:string:AR4102",
+            "moduleName": "d7a02c33-d00b-4ba3-a086-7dde53ea06cc:string:Design 8",
+            "grade": "f9d1b8d3-74f9-44de-8b0f-e887dee6baaa:string:B",
+            "credits": "b0c9a12e-302b-427f-87eb-bbfe5f44daa1:number:8",
+            "gradingBasis": "854ee708-efea-42bb-98e8-60255373d437:string:GRD",
+            "includeInGPA": "c5e39cd6-4d1c-4d4b-8eed-7cee9ca6fa24:boolean:true"
+          },
+          {
+            "moduleCode": "c702c601-3a9d-4e81-a1d2-e24fa8758221:string:GEK1506",
+            "moduleName": "523b9260-a6b1-4695-91b2-50eda8450b1b:string:Heavenly Mathematics: Cultural Astronomy",
+            "grade": "69278db6-e1c4-4773-934a-adbe312d95e2:string:B+",
+            "credits": "732a1f49-93ad-4587-9639-0a0d2d4a396a:number:4",
+            "gradingBasis": "f60b7bda-f758-49d5-8d8e-6ef3d812ce8d:string:GRD",
+            "includeInGPA": "e916f2dc-63df-4ec1-9366-47cdb19d00cf:boolean:true"
+          },
+          {
+            "moduleCode": "fef6cf52-53a6-44d6-9bf3-b4aae72abee1:string:SSA2209",
+            "moduleName": "dc129f8d-1a48-4054-80da-f2b0c70b524b:string:Government and Politics of Singapore",
+            "grade": "2d55b420-e7a5-47bd-8175-87447f05bd64:string:S",
+            "credits": "e598b6c7-68da-4226-89da-e428677d0ba4:number:4",
+            "gradingBasis": "5ab37d98-665f-488b-83d7-ddc4ab3f19b0:string:SNU",
+            "includeInGPA": "66c3f1fe-03c0-4def-a2ec-9b58a6b6d5a3:boolean:false"
+          }
+        ],
+        "summary": [
+          {
+            "programName": "b3985c25-28f3-4de9-af42-9da6f905fad8:string:Bachelor of Arts (Architecture)",
+            "includeInGPA": "af4bcefb-6914-4284-9a05-4da9bec10b58:boolean:true",
+            "GPAName": "d0f4b9b3-6300-448d-b995-2672dd5952b6:string:Cumulative Average Point",
+            "GPA": "50b83b78-4adf-4c42-b30a-54783d0f96b2:number:3.73"
+          }
+        ]
+      }
+    ],
+    "additionalData": {
+      "programData": [
+        {
+          "programCode": "4f908306-8b87-4498-8c26-99038e256708:string:B0510",
+          "programName": "79cbea59-b15f-48ef-9d5b-b0c8eedc00c8:string:Bachelor of Arts (Architecture)",
+          "statusCode": "71dad416-dde6-47e2-9c0f-4f174d6d2b74:string:CM",
+          "statusDescription": "f7673fed-09b8-4d4b-970b-c5e89b8d9597:string:Completed Programme",
+          "effectiveDate": "906e8988-a09d-4bad-bec4-4d36a000c13a:string:2008-06-30"
+        }
+      ],
+      "degreeData": [
+        {
+          "degreeTitle": "9dc83723-2693-494c-9697-6c6601d880f4:string:Bachelor of Arts (Architecture)",
+          "dateConferred": "302e0c3e-cd7b-48af-a6ec-c90bcfaf6119:string:2008-06-30",
+          "honours": "472513d7-064f-472d-8695-df470e549775:string:2nd Class Honours (Lower)"
+        }
+      ]
+    }
+  },
+  "privacy": {},
+  "signature": {
+    "type": "SHA3MerkleProof",
+    "targetHash": "ed4a31da6075d40cae2aae724cdad92a965c5ced4b6784f44ca56cdfdc634482",
+    "proof": [
+      "bff202a1367138078f3b7186610903677e9cd796d4f252e6ff78e923ddbf76fc",
+      "aee2eb59b2178c65408f47db3a7fce6acc497df8e9c68e2dc7117238f95b82e9",
+      "c130cfefc6991197e8996fea09fb80f15abe346873c568f1674c65a004553956"
+    ],
+    "merkleRoot": "ea7add325a41d6310ff169548e653c19163e7867be311df13e2c29bf0ed3db7f"
+  }
+}
