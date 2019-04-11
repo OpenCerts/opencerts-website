@@ -63,16 +63,14 @@ export const renderModuleCert = (mcItems, mcItemId, { hideCredit } = {}) => {
   return (
     <div key={mcItemId}>
       <div className="row ml-auto">
-        <div style={{ fontWeight: 700 }}>
-          {modularCertDescription}
-        </div>
+        <div style={{ fontWeight: 700 }}>{modularCertDescription}</div>
       </div>
       <table style={fullWidthStyle}>
         <tbody>
           <tr>
-          <th>MODULE</th>
-          {hideCredit ? null : <th>CREDIT UNIT</th>}
-          <th>GRADE</th>
+            <th>MODULE</th>
+            {hideCredit ? null : <th>CREDIT UNIT</th>}
+            <th>GRADE</th>
           </tr>
           {subjectRows}
         </tbody>
