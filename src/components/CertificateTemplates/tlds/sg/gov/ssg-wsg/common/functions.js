@@ -15,8 +15,8 @@ export const formatDate = dateString => {
     "NOV",
     "DEC"
   ];
-  const day = date.getDay();
-  const month = date.getMonth();
+  const day = date.getUTCDate();
+  const month = date.getUTCMonth();
   const year = date.getUTCFullYear();
   return `${day} ${months[month]} ${year}`;
 };

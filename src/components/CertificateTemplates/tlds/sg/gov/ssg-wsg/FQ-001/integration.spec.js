@@ -28,6 +28,6 @@ test("FQ001 certificate is rendered correctly", async t => {
     "ID No: S0000000A",
     "for successful attainment of the required industry approved competencies",
     "at WSQ_20180620",
-    "2 NOV 2018"
+    "20 NOV 2018"
   ]);
 });

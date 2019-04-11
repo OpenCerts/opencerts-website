@@ -160,7 +160,10 @@ export const renderAwardText = certificate => (
     <div className="d-flex">
       <p style={printTextStyle}>ID No: {certificate.recipient.id}</p>
     </div>
-    <div className="d-flex" style={{ marginTop: "1rem", marginBottom: "3rem" }}>
+    <div
+      className="d-flex col-lg-6 col-12"
+      style={{ marginTop: "1rem", marginBottom: "3rem", paddingLeft: "0px" }}
+    >
       <p style={awardTextStyle}>{certificate.additionalData.successful_text}</p>
     </div>
     {certificate.transcript.map(item => (
