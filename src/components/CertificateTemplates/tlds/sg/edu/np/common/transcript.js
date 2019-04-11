@@ -418,11 +418,13 @@ export const renderCourse = (certificate, course, courseId, opts) => {
   const modularCert = get(course, "[0].modularCertDescription");
 
   // For CET transcript, group modules by examinationDate and modular certification; for other transcript, group all modules by semesters
-  const groupedSubjects = modularCert ? groupBy(course, "examinationDate") : groupBy(course, "semester");
+  const groupedSubjects = modularCert
+    ? groupBy(course, "examinationDate")
+    : groupBy(course, "semester");
   const renderedGroups = Object.keys(groupedSubjects).map(item =>
     modularCert
-    ? renderExamDate(groupedSubjects[item], item, opts)
-    : renderSemester(groupedSubjects[item], item, opts)
+      ? renderExamDate(groupedSubjects[item], item, opts)
+      : renderSemester(groupedSubjects[item], item, opts)
   );
 
   // Get Course Note
