@@ -1,14 +1,14 @@
 import PropTypes from "prop-types";
 import { get, groupBy } from "lodash";
 import {
-  renderHeader,
+  renderHeaderNP,
   renderSignature,
   renderFinalStatement,
   fullWidthStyle,
   thWidth60Left
 } from "../common/transcript";
 
-import { formatDate } from "../common/functions";
+import { formatDate, formatDateFullMonth } from "../common/functions";
 
 const renderDPPGradingSystem = () => (
   <div className="row">
@@ -164,9 +164,7 @@ const renderStudentInfo = certificate => (
     <div className="row">
       <div className="col">
         <div className="row">
-          <div style={{ fontFamily: "Black Han Sans" }} className="col-3">
-            Name
-          </div>
+          <div className="col-3">Name</div>
           <div className="col-9">
             :&nbsp;&nbsp;
             {get(certificate, "recipient.name")}
@@ -208,7 +206,7 @@ const renderStudentInfo = certificate => (
           <div className="col-5">DATE OF GRADUATION</div>
           <div className="col-7">
             :&nbsp;&nbsp;
-            {formatDate(certificate.graduationDate)}
+            {formatDateFullMonth(certificate.graduationDate)}
           </div>
         </div>
       </div>
@@ -228,7 +226,7 @@ const Template = ({ certificate }) => (
       href="https://fonts.googleapis.com/css?family=Black+Han+Sans"
       rel="stylesheet"
     />
-    {renderHeader(certificate)}
+    {renderHeaderNP(certificate)}
     {renderDPPGradingSystem()}
     {renderStudentInfo(certificate)}
     {renderTranscript(certificate, { hideCredit: true })}

@@ -2,7 +2,7 @@ import { Selector } from "testcafe";
 
 fixture("Ngee Ann Polytechnic").page`http://localhost:3000`;
 
-const Certificate = "./NP_Certs_FT_LDH.opencert";
+const Certificate = "./NP_Certs_FT_PHARM_2018.opencert";
 
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
@@ -13,7 +13,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("LDH certificate is rendered correctly", async t => {
+test("PHARM 2018 certificate is rendered correctly", async t => {
   // Uploads certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
@@ -23,13 +23,16 @@ test("LDH certificate is rendered correctly", async t => {
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
-    "Student Name LDH Cert",
-    "Diploma with Merit",
-    "Landscape Design & Hort",
+    "Student Name PHARM Cert 2018",
+    "Diploma",
+    "Pharmacy Science",
     "Principal",
     "Council Chairman",
+    "Ngee Ann Polytechnic",
     "Chief Executive Officer",
-    "National Parks Board"
+    "National University Hospital",
+    "MAY 2018",
+    "PHARM180005"
   ]);
 
   // Navigate to Transcript tab
@@ -39,11 +42,20 @@ test("LDH certificate is rendered correctly", async t => {
   // Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
     "TRANSCRIPT OF ACADEMIC RECORD",
-    "Student Name LDH Cert",
-    "3D FORM & SPACE",
-    "S1234888A",
-    "Graduating GPA: 3.7635 (Graduating GPA is computed based on passed modules and has a maximum value of 4)",
+    "PASS WITH MERIT",
+    "0000005",
+    "Student Name PHARM Cert 2018",
+    "S1234567A",
+    "APRIL 2014",
+    "MOLECULAR BIOTECHNOLOGY",
+    "MINDWORKS",
+    "PHARMACY SCIENCE",
+    "WORLD ISSUES: A SINGAPORE PERSPECTIVE",
+    "allowed a transfer",
+    "National Physical Fitness Award",
+    "Graduating GPA: 3.7835",
     "Professional Preparation Programme",
-    "Director, Academic Affairs"
+    "The student has completed the full-time course in Diploma in Pharmacy Science",
+    "DIRECTOR, ACADEMIC AFFAIRS"
   ]);
 });

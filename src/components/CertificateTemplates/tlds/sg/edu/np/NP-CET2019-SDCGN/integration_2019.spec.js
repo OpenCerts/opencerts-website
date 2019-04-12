@@ -2,7 +2,7 @@ import { Selector } from "testcafe";
 
 fixture("Ngee Ann Polytechnic").page`http://localhost:3000`;
 
-const Certificate = "./NP_Certs_FT_ECH.opencert";
+const Certificate = "./NP_Certs_PDP_SDCGN_2019.opencert";
 
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
@@ -13,7 +13,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("ECH certificate is rendered correctly", async t => {
+test("PDP-SDCGN 2019 certificate is rendered correctly", async t => {
   // Uploads certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
@@ -23,13 +23,16 @@ test("ECH certificate is rendered correctly", async t => {
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
-    "Student Name ECH Cert",
-    "Diploma",
-    "Early Childhood Education",
+    "Student Name PDP SDCGN 2019",
+    "Specialist Diploma",
+    "Community Gerontology Nursing",
     "Principal",
     "Council Chairman",
+    "Ngee Ann Polytechnic",
     "Chief Executive Officer",
-    "NTUC First Campus Co-operative Ltd & Director, SEED Institute Pte Ltd"
+    "Tsao Foundation",
+    "MAY 2019",
+    "SDCGN19M3002"
   ]);
 
   // Navigate to Transcript tab
@@ -39,11 +42,18 @@ test("ECH certificate is rendered correctly", async t => {
   // Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
     "TRANSCRIPT OF ACADEMIC RECORD",
-    "Student Name ECH Cert",
-    "DIGITAL CINEMATOGRAPHY",
-    "S1234888A",
-    "Graduating GPA: 3.1535 (Graduating GPA is computed based on passed modules and has a maximum value of 4)",
-    "Professional Preparation Programme",
-    "Director, Academic Affairs"
+    "SUCCESSFULLY COMPLETED",
+    "0003002",
+    "Student Name PDP SDCGN 2019",
+    "S1234567A",
+    "APRIL 2015",
+    "SPECIALIST DIPLOMA IN COMMUNITY GERONTOLOGY NURSING",
+    "PDC IN COMMUNITY GERONTOLOGY NURSING 1",
+    "ANATOMY & PHYSIOLOGY 1",
+    "PDC IN COMMUNITY GERONTOLOGY NURSING 2",
+    "CLINICAL ATTACHMENT 1.1",
+    "Graduating GPA: 2.8276",
+    "The student has completed the course in SPECIALIST DIPLOMA IN COMMUNITY GERONTOLOGY NURSING",
+    "DIRECTOR, CET ACADEMY"
   ]);
 });
