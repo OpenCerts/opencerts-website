@@ -1,10 +1,6 @@
 language: node_js
 node_js:
-  - "stable"
-addons:
-  apt:
-    sources:
-      - google-chrome
+  - "10.14.2"
 
 cache: npm install
 script:
