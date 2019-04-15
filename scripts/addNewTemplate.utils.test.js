@@ -1,4 +1,3 @@
-import { stripIndent } from "common-tags";
 import path from "path";
 import {
   reverseDnsNotation,
@@ -61,14 +60,41 @@ describe("intermediateIndexTemplate", () => {
         subDirs: ["singaporetech", "np"],
         currDir: "edu"
       })
-    ).toBe(stripIndent`
-        import { addDirToTemplatePath } from "template-utils/addDirToTemplatePath";
+    ).toBe(
+      `/* eslint-disable camelcase */
+/* because we need to use _ to replace hyphens in dns */
+import { addDirToTemplatePath } from "template-utils/addDirToTemplatePath";
 
-        import singaporetech from "./singaporetech";
-        import np from "./np";
+import singaporetech from "./singaporetech";
+import np from "./np";
 
-        export default addDirToTemplatePath("edu", { ...singaporetech, ...np });
-    `);
+export default addDirToTemplatePath("edu", { ...singaporetech, ...np });
+`
+    );
+  });
+  test("should correctly throw when given a non-dns-compliant folder name", () => {
+    expect(() => {
+      generateIntermediateIndexTemplate({
+        subDirs: [".com"],
+        currDir: "edu"
+      });
+    }).toThrow();
+  });
+
+  test("should correctly replace hyphens with underscores", () => {
+    expect(
+      generateIntermediateIndexTemplate({
+        subDirs: ["ssg-wsg"],
+        currDir: "gov"
+      })
+    ).toBe(`/* eslint-disable camelcase */
+/* because we need to use _ to replace hyphens in dns */
+import { addDirToTemplatePath } from "template-utils/addDirToTemplatePath";
+
+import ssg_wsg from "./ssg-wsg";
+
+export default addDirToTemplatePath("gov", { ...ssg_wsg });
+`);
   });
 });
 
@@ -79,13 +105,12 @@ describe("generateOrganisationIndexExports", () => {
         templateTagMapping: { foo: "bar", qux: "baz" },
         organisationDir: "example"
       })
-    ).toBe(stripIndent`
-      import dynamic from "next/dynamic";
+    ).toBe(`import dynamic from "next/dynamic";
 
-      export default {
-        "foo": dynamic(import("./bar" /* webpackChunkName: "example-Templates" */))
-        "qux": dynamic(import("./baz" /* webpackChunkName: "example-Templates" */))
-      };
-      `);
+export default {
+  "foo": dynamic(import("./bar" /* webpackChunkName: "example-Templates" */))
+  "qux": dynamic(import("./baz" /* webpackChunkName: "example-Templates" */))
+};
+`);
   });
 });
