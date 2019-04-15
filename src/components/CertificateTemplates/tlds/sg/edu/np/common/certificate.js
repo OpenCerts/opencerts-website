@@ -54,19 +54,123 @@ export const renderLogoNP = () => (
   </div>
 );
 
-export const renderLogoNPPartner = logo => (
+export const renderLogoNPPartner = (logo, left) => (
   <div
     className="row d-flex justify-content-center align-items-center"
     style={{ marginTop: "3rem" }}
   >
     <div className="col-1" />
     <div className="col-5">
-      <img style={fullWidthStyle} src={IMG_LOGO_NP} />
+      <img style={fullWidthStyle} src={left ? logo : IMG_LOGO_NP} />
     </div>
     <div className="col-5">
-      <img style={fullWidthStyle} src={logo} />
+      <img style={fullWidthStyle} src={left ? IMG_LOGO_NP : logo} />
     </div>
     <div className="col-1" />
+  </div>
+);
+export const renderFourSignatures = certificate => (
+  <div>
+    <div
+      className="row d-flex justify-content-center align-items-end"
+      style={{ marginTop: "8rem", marginBottom: "1rem" }}
+    >
+      <div className="col-4" />
+      <div className="col-4">
+        <div className="px-4">
+          <img
+            style={fullWidthStyle}
+            src={get(
+              certificate,
+              "additionalData.certSignatories[0].signature"
+            )}
+          />
+          <hr />
+        </div>
+        <div className="text-center">
+          {get(certificate, "additionalData.certSignatories[0].name")}
+        </div>
+        <div className="text-center">
+          {get(certificate, "additionalData.certSignatories[0].position")}
+        </div>
+        <div className="text-center">
+          {get(certificate, "additionalData.certSignatories[0].organisation")}
+        </div>
+      </div>
+      <div className="col-4">
+        <div className="px-4">
+          <img
+            style={fullWidthStyle}
+            src={get(
+              certificate,
+              "additionalData.certSignatories[1].signature"
+            )}
+          />
+          <hr />
+        </div>
+        <div className="text-center">
+          {get(certificate, "additionalData.certSignatories[1].name")}
+        </div>
+        <div className="text-center">
+          {get(certificate, "additionalData.certSignatories[1].position")}
+        </div>
+        <div className="text-center">
+          {get(certificate, "additionalData.certSignatories[1].organisation")}
+        </div>
+      </div>
+    </div>
+    <div
+      className="row d-flex justify-content-center align-items-end"
+      style={{ marginTop: "1rem", marginBottom: "1rem" }}
+    >
+      <div className="col-4">
+        <img style={fullWidthStyle} src={IMG_CERTIFICATE_SEAL} />
+      </div>
+
+      <div className="col-4">
+        <div className="px-4">
+          <img
+            style={fullWidthStyle}
+            src={get(
+              certificate,
+              "additionalData.certSignatories[2].signature"
+            )}
+          />
+          <hr />
+        </div>
+        <div className="text-center">
+          {get(certificate, "additionalData.certSignatories[2].name")}
+        </div>
+        <div className="text-center">
+          {get(certificate, "additionalData.certSignatories[2].position")}
+        </div>
+        <div className="text-center">
+          {get(certificate, "additionalData.certSignatories[2].organisation")}
+        </div>
+      </div>
+
+      <div className="col-4">
+        <div className="px-4">
+          <img
+            style={fullWidthStyle}
+            src={get(
+              certificate,
+              "additionalData.certSignatories[3].signature"
+            )}
+          />
+          <hr />
+        </div>
+        <div className="text-center">
+          {get(certificate, "additionalData.certSignatories[3].name")}
+        </div>
+        <div className="text-center">
+          {get(certificate, "additionalData.certSignatories[3].position")}
+        </div>
+        <div className="text-center">
+          {get(certificate, "additionalData.certSignatories[3].organisation")}
+        </div>
+      </div>
+    </div>
   </div>
 );
 
@@ -223,7 +327,11 @@ export const renderAwardText = certificate => (
     </div>
     <div className="row d-flex justify-content-center">
       <div style={titleTextStyle}>
-        {formatCertName(certificate.name, certificate.additionalData.merit)}
+        {formatCertName(
+          certificate.id,
+          certificate.name,
+          certificate.additionalData.merit
+        )}
       </div>
     </div>
   </div>
@@ -251,19 +359,24 @@ export const renderFooter = certificate => (
 
 /* eslint-disable */
 // Disabled eslint as there's no way to add proptypes to an anonymous function like this
-export default ({ logo }) => ({ certificate }) => (
+export default ({ logo, left }) => ({ certificate }) => (
   <div>
     <div
       className="container"
       style={{ border: 5, borderColor: "#AAA", borderStyle: "solid" }}
     >
-      {logo ? renderLogoNPPartner(logo) : renderLogoNP()}
+      {logo ? renderLogoNPPartner(logo, left) : renderLogoNP()}
       {!logo ? renderSingapore() : ""}
       {renderAwardText(certificate)}
       {certificate.additionalData.certSignatories &&
-      certificate.additionalData.certSignatories[2]
-        ? renderThreeSignatures(certificate)
-        : renderTwoSignatures(certificate)}
+      certificate.additionalData.certSignatories[3]
+        ? renderFourSignatures(certificate) :
+		(certificate.additionalData.certSignatories &&
+      certificate.additionalData.certSignatories[2] ?
+	  	renderThreeSignatures(certificate)
+        : renderTwoSignatures(certificate)
+	  )
+	}
       {renderIssuingDate(certificate)}
     </div>
     {renderFooter(certificate)}

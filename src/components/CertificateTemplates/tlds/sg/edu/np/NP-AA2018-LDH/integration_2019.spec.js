@@ -2,7 +2,7 @@ import { Selector } from "testcafe";
 
 fixture("Ngee Ann Polytechnic").page`http://localhost:3000`;
 
-const Certificate = "./NP_Certs_FT_BMS.opencert";
+const Certificate = "./NP_Certs_FT_LDH_2019.opencert";
 
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
@@ -13,7 +13,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("BMS certificate is rendered correctly", async t => {
+test("LDH 2019 certificate is rendered correctly", async t => {
   // Uploads certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
@@ -23,13 +23,16 @@ test("BMS certificate is rendered correctly", async t => {
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
-    "Student Name BMS Cert",
-    "Diploma with Merit",
-    "Biomedical Science",
+    "Student Name LDH Cert 2019",
+    "Diploma",
+    "Landscape Design & Hort",
     "Principal",
     "Council Chairman",
+    "Ngee Ann Polytechnic",
     "Chief Executive Officer",
-    "National University Hospital"
+    "National Parks Board",
+    "MAY 2019",
+    "LDH190004"
   ]);
 
   // Navigate to Transcript tab
@@ -39,11 +42,19 @@ test("BMS certificate is rendered correctly", async t => {
   // Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
     "TRANSCRIPT OF ACADEMIC RECORD",
-    "Student Name BMS Cert",
+    "PASS WITH MERIT",
+    "0000004",
+    "Student Name LDH Cert 2019",
+    "S1234567A",
+    "APRIL 2014",
     "MOLECULAR BIOTECHNOLOGY",
-    "S1234888A",
-    "DRAWING & PERSPECTIVE",
-    "National Physical Fitness Award",
-    "Professional Preparation Programme"
+    "MINDWORKS",
+    "LANDSCAPE DESIGN & HORT",
+    "WORLD ISSUES: A SINGAPORE PERSPECTIVE",
+    "allowed a transfer",
+    "Graduating GPA: 3.7835",
+    "Professional Preparation Programme",
+    "The student has completed the full-time course in Diploma in Landscape Design & Hort",
+    "DIRECTOR, ACADEMIC AFFAIRS"
   ]);
 });

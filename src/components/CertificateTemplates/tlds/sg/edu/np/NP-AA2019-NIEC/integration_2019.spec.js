@@ -2,7 +2,7 @@ import { Selector } from "testcafe";
 
 fixture("Ngee Ann Polytechnic").page`http://localhost:3000`;
 
-const Certificate = "./NP_Certs_FT_MAIN.opencert";
+const Certificate = "./NP_Certs_FT_NIEC_2019.opencert";
 
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
@@ -13,7 +13,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("MAIN certificate is rendered correctly", async t => {
+test("NIEC 2019 certificate is rendered correctly", async t => {
   // Uploads certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
@@ -23,11 +23,16 @@ test("MAIN certificate is rendered correctly", async t => {
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
-    "Student Name MAIN Cert",
-    "Diploma with Merit",
-    "Animation & 3D Arts",
+    "Student Name ECH Cert 2019",
+    "Diploma",
+    "Early Childhood Development & Education",
     "Principal",
-    "Council Chairman"
+    "Council Chairman",
+    "Ngee Ann Polytechnic",
+    "Director",
+    "National Institute of Early Childhood Development",
+    "MAY 2019",
+    "ECH190003"
   ]);
 
   // Navigate to Transcript tab
@@ -37,12 +42,20 @@ test("MAIN certificate is rendered correctly", async t => {
   // Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
     "TRANSCRIPT OF ACADEMIC RECORD",
-    "Student Name MAIN Cert",
-    "3D FORM & SPACE",
-    "S1234888A",
-    "Graduating GPA: 3.5635 (Graduating GPA is computed based on passed modules and has a maximum value of 4)",
-    "The student has completed the full-time course in Diploma in Biomedical Science.",
+    "PASS WITH MERIT",
+    "0000003",
+    "Student Name ECH Cert 2019",
+    "S1234567A",
+    "APRIL 2014",
+    "EARLY CHILDHOOD EDUCATION",
+    "MINDWORKS",
+    "WORLD ISSUES: A SINGAPORE PERSPECTIVE",
+    "Graduating GPA: 3.7835",
     "Professional Preparation Programme",
-    "Director, Academic Affairs"
+    "The student has completed the full-time course in Diploma in Early Childhood Development & Education",
+    "REGISTRAR",
+    "NATIONAL INSTITUTE OF EARLY CHILDHOOD DEVELOPMENT",
+    "DIRECTOR, ACADEMIC AFFAIRS",
+    "NGEE ANN POLYTECHNIC"
   ]);
 });
