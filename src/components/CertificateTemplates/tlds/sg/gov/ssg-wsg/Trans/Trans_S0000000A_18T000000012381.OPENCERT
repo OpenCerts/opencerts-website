@@ -1,1 +1,138 @@
-{"schema":"opencerts/v1.4","data":{"id":"cb293f85-62fc-4ed8-b9f1-d472cc34e370:string:Trans_S0000000A_18T000000012381","name":"844f9644-f612-4215-850b-4d6a6182c6e3:string:Healthcare Support","$template":"7d4d6ecd-31c3-4485-9a43-86c633001e2e:string:sg/gov/ssgwsg/Trans","issuedOn":"6fcdb956-744e-4648-bb5d-d1ad4277d3dc:string:2018-11-20T00:00:00+00:00","issuers":[{"name":"8b819b45-3f22-4c90-b082-8918ebc28a34:string:Ropsten : Skillsfuture Singapore","certificateStore":"b8de3087-b198-4bdd-bcf4-f8f13cb9cc3a:string:0xCE4D56Fea4a4EB33E8A3502CEe6Db075224C896d"}],"recipient":{"id":"e3b51a8a-5748-4279-83c8-14573c087b3a:string:S0000000A","name":"58a60675-a104-48f4-8005-8c706fea9bea:string:Lee1","id_type":"2bf4c39b-3542-41b2-ba94-72b8863741c6:string:1"},"transcript":[{"cs_full_code":"61de145e-aa9e-4aa8-a0b9-d075b337faa5:string:HCS-POD-202E-1","name":"301e4516-a341-48b4-9012-57008b43e9db:string:Assist with foot screening and assessment","assmt_date":"92a91031-78ac-46f7-aca6-e85512189c8a:string:2018-11-20T00:00:00+00:00","result":"dfb89134-b240-40fd-8ac5-e60537dba94d:string:C","result_desc":"373cde73-3c89-47c7-b45a-0b91b1eb7a7b:string:Competent","assessment_org_name":"3b534ff3-3ba1-4c8e-a956-d6259983013a:string:WSQ_20180620"},{"cs_full_code":"7a8a6442-d725-41b9-83b2-3f28a9b9055b:string:HCS-PHARM-301C-1","name":"3883d674-5c4f-4e7f-be6a-f123f89e0241:string:Demonstrate understanding of basic pharmacology and drug development","assmt_date":"ba0e727c-3a0d-475f-aca8-9ce4c5390370:string:2018-09-09T00:00:00+00:00","result":"468f8a7d-9024-4c3d-b439-2ef8a98be3b3:string:C","result_desc":"a241e86a-5304-4f2f-8a4d-3b2a5e8f32b1:string:Competent","assessment_org_name":"3fe947e4-09d7-4894-9c85-539b86385daa:string:WSQ_20180620"},{"cs_full_code":"0afac12f-a541-4428-9084-836e5220ea61:string:HCS-POD-202C-1","name":"951fb69f-f7d5-4fef-ab50-c7820661094f:string:Assist with podiatry procedures","assmt_date":"52acce67-da62-464d-93b5-0e97c8859764:string:2018-07-31T00:00:00+00:00","result":"5b543c8b-2ea2-426a-b740-7bd6a14f1e76:string:C","result_desc":"8a689be9-f16a-4986-bbe3-87f9c466e23c:string:Competent","assessment_org_name":"21a09cc4-a484-4265-8db4-dcbea6b1cd6e:string:WSQ_20180620"}],"additionalData":{"qual_code":"92d7b323-c71e-47da-a3a7-40346d919dba:string:06","qual_cert_id":"11139838-5527-4faf-b178-d564b8029a94:number:100000023561856","level_of_conferment":"15e99907-82c3-4531-8202-25ba4bdc7413:string:Higher Certificate","qual_full_code":"6fdee78c-c2da-4f72-a057-2db1a0645a7f:string:HCS-HCT-06-1","assessor_id":"ee2f2762-c007-449f-ac3e-eb725c1e051f:string:S0000003J","serial_num":"7d6c69ec-ba25-464c-9e59-d44939ad14de:string:18T000000012381","cert_status":"eb740a8b-44d1-4760-9eb4-9db2ec2b6325:string:22","cert_description":"2d1a831f-0535-4354-83a5-32583966441e:string:E-cert Sent For Printing","date_last_update":"68b6eb06-25e2-4c04-9ebc-f31081ebc610:string:2018-12-20T00:00:00+00:00","assesment_org_uen":"fc099b5e-05b5-4402-b9fa-5587e132b53d:string:S0001153C","specialization":"f7e40fc2-ab00-4605-85ed-dcd688430370:string:Podiatry Support","certSignatories":[{"position":"54448de3-d8e1-4765-bac8-ff86e20df851:string:Chief Executive","organisation":"fb491133-adae-49e0-9a29-fda742571e3e:string:SkillsFuture Singapore Agency"}],"certLink":{"desc":"ff920410-78c9-4d55-a19b-945cdb444495:string:Transcript guide printed on reverse","link":"1eba94dc-54b2-401e-b3bd-0b1d91f1ef76:string:For verification of this certificate, please visit https://uat.myskillsfuture.sg/verify_eCert.html"},"qualificationStatement":"977d3d3b-9f3e-4d2e-92e9-32d2d08aaa05:string:A qualification is awarded to an individual in recognition of his/her attainment of the required industry validated competencies under the Singapore Workforce Skills Qualifications System (WSQ)","qualificationSystemDesc":{"name":"a058fe18-d39f-4b7a-ab15-c55f3bb688df:string:SINGAPORE WORKFORCE SKILLS QUALIFICATIONS SYSTEM","desc":"aa823fc5-37d8-4e4e-9c22-c34cca4e47c4:string:The WSQ is a national credential system that trains, develops, assesses and certifies skills and competencies for the workforce. As a continuing education and training (CET) system, WSQ supports the SkillsFuture movement to:","descPoints":[{"point":"e70b65a0-2766-42cd-86c9-cf83c4547650:string:Promote recognition of skills and competencies to facilitate progression, mastery and mobility;"},{"point":"36d76799-3605-4e12-82c1-c98cf30e98bb:string:Promote holistic development of workforce through technical and generic skills and competencies;"},{"point":"69d36495-b685-484c-9623-94ccc49316d8:string:Support economic development by professionalising skills and competencies to drive industry transformation efforts; and"},{"point":"cdcaa573-128a-4a97-ac8e-9be19def98ee:string:Encourage lifelong learning"}]},"trainingProgramDesc1":"3ba6316f-635a-4e17-9363-2193a781b30b:string:Training programmes developed by training providers under the WSQ system are based on the Technical Skill and Competencies (TSCs) and Generic Skills and Competencies (GSCs) covered in the Skills Frameworks that had been validated by employers, unions and professional bodies. This process ensures existing and emerging skills and competencies that are in demand are used to inform training and development under WSQ.","trainingProgramDesc2":"8470ff91-159e-48d2-b391-0c2f6dac6748:string:The TSCs comprise job-specific knowledge, skills and abilities that an individual needs to have to perform the work functions and key tasks required for the job while the GSCs consist of transferable skills and competencies. The WSQ programmes are funded and quality-assured by SkillsFuture Singapore (SSG), which awards the WSQ certifications.","qualificationPath":{"name":"d6e87079-48be-48ed-826e-6d459f9ee8ab:string:WSQ QUALIFICATIONS PROGRESSION PATH","desc":"888a4f71-c1d1-4850-837a-453a1ca7aaf3:string:WSQ provides a coherent and comprehensive system of qualifications which consists of the following levels:","pathPoints":[{"point":"c452d55e-b4c1-41ab-bdc9-45015e6e9010:string:WSQ Graduate Diploma / WSQ Graduate Certificate"},{"point":"8b01019e-2017-4cbe-9887-0b36955361c4:string:WSQ Specialist Diploma"},{"point":"c258ce4e-f3c7-4391-a7d3-3940c258c016:string: WSQ Diploma"},{"point":"ffbc332b-c6b9-4c14-9b77-776fd0171db1:string: WSQ Advanced Certificate"},{"point":"8ec20895-2d5d-41b4-836a-4447800c1244:string:WSQ Higher Certificate"},{"point":"28a59cc2-bb63-4091-825e-a9039ec295ae:string:WSQ Certificate"}]},"gradesDesc":{"name":"c2a9acd1-d950-4a39-a621-eb6b74c9c82f:string:EXPLANATION OF GRADES GRANTED","points":[{"name":"96197893-d237-4c10-a47a-5a4e4a6eda37:string:Competent","desc":"643b18f3-e378-413d-96c0-398494ee3319:string:Denotes attainment of the required industry validated competencies as assessed through WSQ accredited programmes"},{"name":"881f166e-6d43-486a-b4c1-8eb52d5bfd09:string:Not Yet Competent","desc":"e833b46a-cecf-45e7-bb4e-8ac6a8c304f8:string:Denotes non-attainment of the required industry validated competencies as assessed through WSQ accredited programmes"},{"name":"d3b2eb9f-2198-4a37-a571-865c4efc9059:string:Exempted","desc":"f90a4403-6986-474d-89ad-c4a4387ff979:string:Denotes attainment of the required industry validated competencies as assessed through non-WSQ programmes"}]},"webInfo":{"name":"ea1686ea-0649-42b9-9589-9e8c44d25c4c:string:FOR MORE INFORMATION","link":"06bf1e49-7aaa-467c-be6c-a84337a8a121:string:Details on the WSQ are available at http://www.ssg.gov.sg/wsq.html","copyright":"e0560c58-a53f-4e8d-adab-e8384e69ec91:string:Copyright @ 2016 All Rights Reserved SkillsFuture Singapore Agency"},"cert_code":"48539609-f9cf-4f5b-96ae-10b9fcdf4532:string:Trans"}},"privacy":{},"signature":{"type":"SHA3MerkleProof","targetHash":"b93d43528d266870a9a39a792fdda3e6a7e648dbf01785f1d336ae54efb8898b","proof":["bce4f1b87ed26401bcbf0f14cec690f1175705664c32da2bded118f08f2908bd","2c2915895e6add023db5ae0cf995cb300b24a9521a1835c293510d465f06ca90"],"merkleRoot":"e5719f3faf3d6895ebb40e1e7c7fef0e53905e317375760ba0f2b47e57740f60"}}
+{
+  "schema": "opencerts/v1.5",
+  "data": {
+    "id": "c3aec8ed-4228-42cb-a601-9f752faf9cfb:string:Trans_S0000000A_18T000000012381",
+    "name": "2b008c6b-8dce-4d63-867e-aa7f7efa843d:string:Healthcare Support",
+    "$template": "37581e54-aacd-494f-9789-b9c4ce16090c:string:sg/gov/ssgwsg/Trans",
+    "issuedOn": "e28a054a-fe60-4973-962d-9306e3579046:string:2018-11-20T00:00:00+00:00",
+    "issuers": [
+      {
+        "name": "30952e87-9c68-4b10-bbe1-f0eba6ad4f00:string:Ropsten : Skillsfuture Singapore",
+        "certificateStore": "8924b9f3-79ad-4cc3-b693-a697026cddb8:string:0xCE4D56Fea4a4EB33E8A3502CEe6Db075224C896d"
+      }
+    ],
+    "recipient": {
+      "id": "2ba7d08a-db70-4947-8322-e98bee0df16c:string:S0000000A",
+      "name": "52e34881-bd25-4649-9538-bfc68e79872f:string:Lee1"
+    },
+    "transcript": [
+      {
+        "cs_full_code": "8b4ac9c0-6324-466f-9dc4-1c2ced40590b:string:HCS-POD-202E-1",
+        "name": "7a05e6b8-e079-4a92-870a-b07dd56ed0c1:string:Assist with foot screening and assessment",
+        "assmt_date": "c16aa52a-a72d-4c79-8d11-fbd19d1f09b6:string:2018-11-20T00:00:00+00:00",
+        "result": "b80c4008-7e51-4501-83d9-c1fea630b0d0:string:C",
+        "result_desc": "bf82109c-eba2-4266-a119-022132938fb7:string:Competent",
+        "assessment_org_name": "93e60e6b-5392-4b70-9f0d-cfdcdc8fd34b:string:WSQ_20180620"
+      },
+      {
+        "cs_full_code": "862b9b9e-3e7d-4b11-acd6-06518deba87d:string:HCS-PHARM-301C-1",
+        "name": "5946c361-1db2-40bb-aaf1-5d59f6588f0c:string:Demonstrate understanding of basic pharmacology and drug development",
+        "assmt_date": "179d64fa-1942-4557-b240-e2cfbb3b851c:string:2018-09-09T00:00:00+00:00",
+        "result": "e40afb5b-09b4-40e9-ab1a-1ab8c19ce8d2:string:C",
+        "result_desc": "4ddbfe56-7a54-4c38-a656-0163bc1d1a2b:string:Competent",
+        "assessment_org_name": "f0cd2df2-9a3c-49c9-b3c7-edc347b2d0f0:string:WSQ_20180620"
+      },
+      {
+        "cs_full_code": "ac62e607-24b3-42a1-a905-8dbf6b38a4f9:string:HCS-POD-202C-1",
+        "name": "59c82c45-4477-49c6-a18c-c4ea7ea51fb8:string:Assist with podiatry procedures",
+        "assmt_date": "290da50a-45c7-4171-8602-bbcf2f794d78:string:2018-07-31T00:00:00+00:00",
+        "result": "005d51e9-1baa-4e19-bfe6-a2b03a8a06db:string:C",
+        "result_desc": "1125dad3-912e-4786-8390-89286d350422:string:Competent",
+        "assessment_org_name": "fc956a36-5556-4f0e-bb5c-65a0c7e0ba17:string:WSQ_20180620"
+      }
+    ],
+    "additionalData": {
+      "level_of_conferment": "e7aa3976-8228-4931-a6f2-773749e888a7:string:Higher Certificate",
+      "serial_num": "cfb967d4-232a-4fe0-88fb-d1b4cae88259:string:18T000000012381",
+      "cert_description": "70a26135-9ae1-4a85-98e3-3a7f44d3bc9e:string:E-cert Sent For Printing",
+      "specialization": "47925e31-b86c-48ef-9806-5df654734fd9:string:Podiatry Support",
+      "certSignatories": [
+        {
+          "position": "9d079d2c-707e-4466-8591-5a64488d8aa7:string:Chief Executive",
+          "organisation": "00eb39f5-11ea-44e7-9c70-84e3a3213f82:string:SkillsFuture Singapore Agency"
+        }
+      ],
+      "certLink": {
+        "desc": "05e1fe42-2b05-4d47-88b4-25ad2525bb18:string:Transcript guide printed on reverse",
+        "link": "6824040f-c6d3-43b3-adb8-c7c73ed136b4:string:For verification of this certificate, please visit https://uat.myskillsfuture.sg/verify_eCert.html"
+      },
+      "qualificationStatement": "0a7ca228-9005-420b-a356-8ea2a677ae56:string:A qualification is awarded to an individual in recognition of his/her attainment of the required industry validated competencies under the Singapore Workforce Skills Qualifications System (WSQ)",
+      "qualificationSystemDesc": {
+        "name": "bd013256-e109-40e0-8b36-6fa0fd9a699a:string:SINGAPORE WORKFORCE SKILLS QUALIFICATIONS SYSTEM",
+        "desc": "36e145cb-be4d-4839-b8c9-0f218e3e9e3e:string:The WSQ is a national credential system that trains, develops, assesses and certifies skills and competencies for the workforce. As a continuing education and training (CET) system, WSQ supports the SkillsFuture movement to:",
+        "descPoints": [
+          {
+            "point": "83b46e0a-7131-4f1c-8b2b-8eb427bd6d1a:string:Promote recognition of skills and competencies to facilitate progression, mastery and mobility;"
+          },
+          {
+            "point": "552942c3-bde0-4889-87d0-da19c994007d:string:Promote holistic development of workforce through technical and generic skills and competencies;"
+          },
+          {
+            "point": "2aee626f-c883-438a-8546-f44847300237:string:Support economic development by professionalising skills and competencies to drive industry transformation efforts; and"
+          },
+          {
+            "point": "771ee0f0-dd4b-41b3-bb91-e750ef1a2092:string:Encourage lifelong learning"
+          }
+        ]
+      },
+      "trainingProgramDesc1": "7f5d8699-2f94-4b3d-b654-e9158d0702ae:string:Training programmes developed by training providers under the WSQ system are based on the Technical Skill and Competencies (TSCs) and Generic Skills and Competencies (GSCs) covered in the Skills Frameworks that had been validated by employers, unions and professional bodies. This process ensures existing and emerging skills and competencies that are in demand are used to inform training and development under WSQ.",
+      "trainingProgramDesc2": "f6385b63-eaa4-49d7-8e86-8cbc3f64fa1e:string:The TSCs comprise job-specific knowledge, skills and abilities that an individual needs to have to perform the work functions and key tasks required for the job while the GSCs consist of transferable skills and competencies. The WSQ programmes are funded and quality-assured by SkillsFuture Singapore (SSG), which awards the WSQ certifications.",
+      "qualificationPath": {
+        "name": "94a1d08d-56c8-4768-b512-af1c976b8c6d:string:WSQ QUALIFICATIONS PROGRESSION PATH",
+        "desc": "1ab04ca1-6c6a-431c-bfb1-a1f6fe8cbe73:string:WSQ provides a coherent and comprehensive system of qualifications which consists of the following levels:",
+        "pathPoints": [
+          {
+            "point": "f944bd31-b2d0-41dc-be00-c0eec8ac42d5:string:WSQ Graduate Diploma / WSQ Graduate Certificate"
+          },
+          {
+            "point": "4084f72b-dce9-4463-a768-0f45a15113b8:string:WSQ Specialist Diploma"
+          },
+          {
+            "point": "f0098577-cd61-43cb-a9ae-646202d88e28:string: WSQ Diploma"
+          },
+          {
+            "point": "5d45f854-876d-4112-9c02-500231dae491:string: WSQ Advanced Certificate"
+          },
+          {
+            "point": "d6fb69e3-d472-4f68-b43b-a6daeea9eb8e:string:WSQ Higher Certificate"
+          },
+          {
+            "point": "8074abdc-447e-42bf-99e7-e3164d97e83a:string:WSQ Certificate"
+          }
+        ]
+      },
+      "gradesDesc": {
+        "name": "8bb9a0c9-dcee-42b9-ae33-4e968e42f1af:string:EXPLANATION OF GRADES GRANTED",
+        "points": [
+          {
+            "name": "20820df5-85a2-45c2-a7af-bc9a6647ac97:string:Competent",
+            "desc": "2c5be72d-3f9b-4912-b251-14aac2f8aceb:string:Denotes attainment of the required industry validated competencies as assessed through WSQ accredited programmes"
+          },
+          {
+            "name": "0bf13bfa-c05f-4242-a53a-3225a7595d9c:string:Not Yet Competent",
+            "desc": "648d6adc-a6aa-4a6f-9f50-3fe5a7912010:string:Denotes non-attainment of the required industry validated competencies as assessed through WSQ accredited programmes"
+          },
+          {
+            "name": "2fe5fa77-4d90-4cca-a67a-fa502e08fcf8:string:Exempted",
+            "desc": "5f341ccd-291a-436d-95fc-3c00e7808fac:string:Denotes attainment of the required industry validated competencies as assessed through non-WSQ programmes"
+          }
+        ]
+      },
+      "webInfo": {
+        "name": "fbfbcdee-e557-4867-8a26-aeb5ffbafc9b:string:FOR MORE INFORMATION",
+        "link": "bac963b4-1451-4686-b6a4-a60d29b46ad7:string:Details on the WSQ are available at http://www.ssg.gov.sg/wsq.html",
+        "copyright": "ac3924a8-3697-4f6b-a8db-620f463668ae:string:Copyright @ 2016 All Rights Reserved SkillsFuture Singapore Agency"
+      },
+      "cert_code": "47787050-b4c5-40e4-af70-27881be32309:string:Trans"
+    }
+  },
+  "privacy": {},
+  "signature": {
+    "type": "SHA3MerkleProof",
+    "targetHash": "88bbe15042eaf12b2ac1a1a496eff0fcaa756f02504bb71abcdba794ba9a3649",
+    "proof": [
+      "0af34719382d3744499f823feb4faa6189ca4b15544fe584e202bfcd1ed20229"
+    ],
+    "merkleRoot": "30ec6ad361bd6cb8b1e7511e30e9fba202bb65a7b8f7740d606690f745c7b565"
+  }
+}
