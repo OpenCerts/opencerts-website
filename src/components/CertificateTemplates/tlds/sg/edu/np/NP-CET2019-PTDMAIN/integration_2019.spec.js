@@ -55,6 +55,6 @@ test("PTD-MAIN 2019 certificate is rendered correctly", async t => {
     "allowed a transfer",
     "Graduating GPA: 2.8276",
     "The student has completed the course in DIPLOMA IN EARLY CHILDHOOD CARE & EDUCATION (TEACHING)",
-    "DIRECTOR, CET ACADEMY"
+    "CET ACADEMY"
   ]);
 });
