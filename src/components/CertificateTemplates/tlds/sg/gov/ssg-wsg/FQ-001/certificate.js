@@ -148,7 +148,7 @@ export const renderAwardText = certificate => (
       <p style={recipientTextStyle}>{certificate.recipient.name}</p>
     </div>
     <div className="d-flex">
-      <p style={printTextStyle}>ID No: {certificate.recipient.id}</p>
+      <p style={printTextStyle}>ID No: {certificate.recipient.nric}</p>
     </div>
     <div
       className="d-flex col-lg-6 col-12"

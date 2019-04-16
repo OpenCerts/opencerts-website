@@ -9,14 +9,14 @@ const SOA001 = dynamic(() =>
   import("./SOA-001" /* webpackChunkName: "SSGTemplates" */)
 );
 
-const Trans = dynamic(() =>
+const Transcript = dynamic(() =>
   import("./Trans" /* webpackChunkName: "SSGTemplates" */)
 );
 
 const templates = {
   "FQ-001": FQ001,
   "SOA-001": SOA001,
-  Trans
+  Trans: Transcript
 };
 
-export default addDirToTemplatePath("ssgwsg", templates);
+export default addDirToTemplatePath("ssg-wsg", templates);

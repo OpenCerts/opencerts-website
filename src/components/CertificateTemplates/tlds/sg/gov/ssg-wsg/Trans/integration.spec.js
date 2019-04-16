@@ -27,7 +27,7 @@ test("Transcript certificate is rendered correctly", async t => {
     "ID No.: S0000000A",
     "Qualification:",
     "Healthcare Support",
-    "CONFERMENT: CONFERRED THE Healthcare Support on 20 NOV 2018",
+    "CONFERMENT: CONFERRED THE Healthcare Support on 20 Nov 2018",
     "REMARKS:"
   ]);
 });

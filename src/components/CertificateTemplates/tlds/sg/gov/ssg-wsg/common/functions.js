@@ -1,24 +1,11 @@
+import { tz } from "moment-timezone";
+
+const TIMEZONE = "Asia/Singapore";
+
 export const formatDate = dateString => {
   if (!dateString) return null;
   const date = new Date(dateString);
-  const months = [
-    "JAN",
-    "FEB",
-    "MAR",
-    "APR",
-    "MAY",
-    "JUN",
-    "JUL",
-    "AUG",
-    "SEP",
-    "OCT",
-    "NOV",
-    "DEC"
-  ];
-  const day = date.getUTCDate();
-  const month = date.getUTCMonth();
-  const year = date.getUTCFullYear();
-  return `${day} ${months[month]} ${year}`;
+  return `${tz(date, TIMEZONE).format("DD MMM YYYY")}`;
 };
 
 export const formatNRIC = nricFin => {

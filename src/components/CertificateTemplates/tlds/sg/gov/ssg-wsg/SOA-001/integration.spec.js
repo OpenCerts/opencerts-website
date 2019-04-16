@@ -29,6 +29,6 @@ test("SOA001 certificate is rendered correctly", async t => {
     "for successful attainment of the following industry approved competencies",
     "HR-PRB-503E-1 Develop strategies for total remuneration",
     "at SINGAPORE NATIONAL EMPLOYERS FEDERATION",
-    "1 DEC 2018"
+    "1 Dec 2018"
   ]);
 });

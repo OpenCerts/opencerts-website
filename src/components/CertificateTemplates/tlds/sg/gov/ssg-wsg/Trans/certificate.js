@@ -75,11 +75,11 @@ export const footerLogoStyle = {
 
 const renderTranscriptItems = certificate =>
   certificate.transcript.map(item => (
-    <tr key={item.cs_full_code}>
-      <td>{item.cs_full_code}</td>
+    <tr key={item.courseCode}>
+      <td>{item.courseCode}</td>
       <td>{item.name}</td>
-      <td>{item.result_desc}</td>
-      <td>{item.assmt_date}</td>
+      <td>{item.description}</td>
+      <td>{item.examinationDate}</td>
       <td>{item.assessment_org_name}</td>
     </tr>
   ));
@@ -133,7 +133,7 @@ export const renderAwardText = certificate => (
       </div>
     </div>
     <div className="d-flex">
-      <p style={nameTextStyle}>ID No.: {certificate.recipient.id}</p>
+      <p style={nameTextStyle}>ID No.: {certificate.recipient.nric}</p>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
       <p style={qualHeaderStyle}>Qualification:</p>
@@ -157,14 +157,16 @@ export const renderTranscript = certificate => (
     </div>
     <div className="d-flex" style={{ overflowX: "auto" }}>
       <table cellPadding="10">
-        <tr style={{ borderBottom: "2px solid #343a40" }}>
-          <th>Competency Unit Code</th>
-          <th width="30%">Competency Unit</th>
-          <th>Results</th>
-          <th>Assessment Date</th>
-          <th>Issuing Institute</th>
-        </tr>
-        {renderTranscriptItems(certificate)}
+        <thead>
+          <tr style={{ borderBottom: "2px solid #343a40" }}>
+            <th>Competency Unit Code</th>
+            <th width="30%">Competency Unit</th>
+            <th>Results</th>
+            <th>Assessment Date</th>
+            <th>Issuing Institute</th>
+          </tr>
+        </thead>
+        <tbody>{renderTranscriptItems(certificate)}</tbody>
       </table>
     </div>
   </div>
@@ -252,13 +254,15 @@ export const renderQualificationText = certificate => (
     </div>
     <div className="d-flex" style={{ overflowX: "auto" }}>
       <table cellPadding="10">
-        {certificate.additionalData.gradesDesc.points.map((item, index) => (
-          <tr key={index}>
-            <td>{index + 1}.</td>
-            <td>{item.name}</td>
-            <td>{item.desc}</td>
-          </tr>
-        ))}
+        <tbody>
+          {certificate.additionalData.gradesDesc.points.map((item, index) => (
+            <tr key={index}>
+              <td>{index + 1}.</td>
+              <td>{item.name}</td>
+              <td>{item.desc}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
