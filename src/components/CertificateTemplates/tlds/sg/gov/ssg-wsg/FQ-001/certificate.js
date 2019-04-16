@@ -1,6 +1,6 @@
 import { get } from "lodash";
 import { IMG_LOGO_FQ001, IMG_SEAL_FQ001, IMG_SSGLOGO_FQ001 } from "../common";
-import { formatDate, formatCertID } from "../common/functions";
+import { formatDate } from "../common/functions";
 
 export const fullWidthStyle = {
   width: "100%",
@@ -112,25 +112,25 @@ export const renderSignature = certificate => (
         {get(certificate, "additionalData.certSignatories[0].organisation")}
       </div>
       <div style={footerTextStyle}>
-        {get(certificate, "additionalData.description")}
+        The training and assessment of the abovementioned learner are accredited
+        in accordance with the Singapore Workforce Skills Qualifications System.
       </div>
       <div style={footerTextStyle}>
-        <a href={get(certificate, "additionalData.link")}>
-          {get(certificate, "additionalData.link")}
-        </a>
+        <a href="www.ssg.gov.sg">www.ssg.gov.sg</a>
         <br />
-        {get(certificate, "additionalData.about")}
+        For verification of this certificate, please visit
+        https://uat.myskillsfuture.sg/verify_eCert.html
       </div>
     </div>
     <div className="col-lg-3 col-xs-12">
       <div style={{ marginBottom: "70px", marginTop: "60px" }}>
         <p style={printTextStyle}>
-          Cert No: {get(certificate, "additionalData.serial_num")}
+          Cert No: {get(certificate, "additionalData.serialNum")}
         </p>
       </div>
       <img style={footerLogoStyle} src={IMG_SSGLOGO_FQ001} />
       <div style={certCodeStyle}>
-        {get(certificate, "additionalData.cert_code")}
+        {get(certificate, "additionalData.certCode")}
       </div>
     </div>
   </div>
@@ -142,7 +142,7 @@ export const renderAwardText = certificate => (
       <p style={nameTextStyle}>{certificate.name}</p>
     </div>
     <div className="d-flex" style={{ marginTop: "3rem" }}>
-      <p style={awardTextStyle}>{certificate.additionalData.award_text}</p>
+      <p style={awardTextStyle}>is awarded to</p>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
       <p style={recipientTextStyle}>{certificate.recipient.name}</p>
@@ -154,11 +154,13 @@ export const renderAwardText = certificate => (
       className="d-flex col-lg-6 col-12"
       style={{ marginTop: "1rem", paddingLeft: "0px" }}
     >
-      <p style={awardTextStyle}>{certificate.additionalData.successful_text}</p>
+      <p style={awardTextStyle}>
+        for successful attainment of the required industry approved competencies
+      </p>
     </div>
     <div className="d-flex" style={{ marginTop: "3rem" }}>
       <p style={issuersTextStyle}>
-        at {certificate.additionalData.assessment_org_name}
+        at {certificate.additionalData.assessmentOrgName}
       </p>
     </div>
   </div>
@@ -166,18 +168,7 @@ export const renderAwardText = certificate => (
 
 export const renderIssuingDate = certificate => (
   <div className="d-flex" style={{ marginTop: "1rem" }}>
-    <p style={issuersTextStyle}>{formatDate(certificate.issuedOn)}</p>
-  </div>
-);
-
-export const renderFooter = certificate => (
-  <div className="container">
-    <div className="row d-flex justify-content-center">
-      <div className="col-6 text-left">
-        {get(certificate, "additionalData.additionalCertId")}
-      </div>
-      <div className="col-6 text-right">{formatCertID(certificate.id)}</div>
-    </div>
+    <p style={issuersTextStyle}>{formatDate(certificate.attainmentDate)}</p>
   </div>
 );
 

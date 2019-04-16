@@ -120,25 +120,25 @@ export const renderSignature = certificate => (
         {get(certificate, "additionalData.certSignatories[0].organisation")}
       </div>
       <div style={footerTextStyle}>
-        {get(certificate, "additionalData.description")}
+        The training and assessment of the abovementioned learner are accredited
+        in accordance with the Singapore Workforce Skills Qualifications System.
       </div>
       <div style={footerTextStyle}>
-        <a href={get(certificate, "additionalData.link")}>
-          {get(certificate, "additionalData.link")}
-        </a>
+        <a href="www.ssg.gov.sg">www.ssg.gov.sg</a>
         <br />
-        {get(certificate, "additionalData.about")}
+        For verification of this certificate, please visit
+        https://uat.myskillsfuture.sg/verify_eCert.html
       </div>
     </div>
     <div className="col-lg-3 col-xs-12">
       <div style={{ marginBottom: "70px", marginTop: "60px" }}>
         <p style={printTextStyle}>
-          Cert No: {get(certificate, "additionalData.serial_num")}
+          Cert No: {get(certificate, "additionalData.serialNum")}
         </p>
       </div>
       <img style={footerLogoStyle} src={IMG_SSGLOGO_FQ001} />
       <div style={certCodeStyle}>
-        {get(certificate, "additionalData.cert_code")}
+        {get(certificate, "additionalData.certCode")}
       </div>
     </div>
   </div>
@@ -147,12 +147,10 @@ export const renderSignature = certificate => (
 export const renderAwardText = certificate => (
   <div>
     <div className="d-flex" style={{ marginTop: "2rem" }}>
-      <p style={nameTextStyle}>
-        {get(certificate, "additionalData.statement_text")}
-      </p>
+      <p style={nameTextStyle}>STATEMENT OF ATTAINMENT</p>
     </div>
     <div className="d-flex" style={{ marginTop: "3rem" }}>
-      <p style={awardTextStyle}>{certificate.additionalData.award_text}</p>
+      <p style={awardTextStyle}>is awarded to</p>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
       <p style={recipientTextStyle}>{certificate.recipient.name}</p>
@@ -164,7 +162,10 @@ export const renderAwardText = certificate => (
       className="d-flex col-lg-6 col-12"
       style={{ marginTop: "1rem", marginBottom: "3rem", paddingLeft: "0px" }}
     >
-      <p style={awardTextStyle}>{certificate.additionalData.successful_text}</p>
+      <p style={awardTextStyle}>
+        for successful attainment of the following industry approved
+        competencies
+      </p>
     </div>
     {certificate.transcript.map(item => (
       <div className="d-flex" key={item.courseCode}>
@@ -175,7 +176,7 @@ export const renderAwardText = certificate => (
     ))}
     <div className="d-flex" style={{ marginTop: "3rem" }}>
       <p style={issuersTextStyle}>
-        at {certificate.additionalData.assessment_org_name}
+        at {certificate.additionalData.assessmentOrgName}
       </p>
     </div>
   </div>
@@ -183,7 +184,7 @@ export const renderAwardText = certificate => (
 
 export const renderIssuingDate = certificate => (
   <div className="d-flex" style={{ marginTop: "1rem" }}>
-    <p style={issuersTextStyle}>{formatDate(certificate.issuedOn)}</p>
+    <p style={issuersTextStyle}>{formatDate(certificate.attainmentDate)}</p>
   </div>
 );
 

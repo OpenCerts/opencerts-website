@@ -80,7 +80,7 @@ const renderTranscriptItems = certificate =>
       <td>{item.name}</td>
       <td>{item.description}</td>
       <td>{item.examinationDate}</td>
-      <td>{item.assessment_org_name}</td>
+      <td>{item.assessmentOrgName}</td>
     </tr>
   ));
 
@@ -104,11 +104,10 @@ export const renderSignature = certificate => (
       <div style={designationTextStyle}>
         {get(certificate, "additionalData.certSignatories[0].organisation")}
       </div>
-      <div style={footerTextStyle}>
-        {get(certificate, "additionalData.certLink.desc")}
-      </div>
+      <div style={footerTextStyle}>Transcript guide printed on reverse</div>
       <div style={footerLinkStyle}>
-        {get(certificate, "additionalData.certLink.link")}
+        For verification of this certificate, please visit
+        https://uat.myskillsfuture.sg/verify_eCert.html
       </div>
     </div>
     <div className="col-lg-2 col-xs-12" />
@@ -129,7 +128,7 @@ export const renderAwardText = certificate => (
         <span style={nameTextStyle}>Name: {certificate.recipient.name}</span>
       </div>
       <div className="col-lg-2 col-xs-12">
-        <span>{get(certificate, "additionalData.serial_num")}</span>
+        <span>{get(certificate, "additionalData.serialNum")}</span>
       </div>
     </div>
     <div className="d-flex">
@@ -144,7 +143,7 @@ export const renderAwardText = certificate => (
     <div className="d-flex" style={{ marginTop: "1rem" }}>
       <p style={printTextStyle}>
         CONFERMENT: CONFERRED THE {certificate.name} on{" "}
-        {formatDate(certificate.issuedOn)}
+        {formatDate(certificate.attainmentDate)}
       </p>
     </div>
   </div>
@@ -183,14 +182,13 @@ export const renderFooter = certificate => (
   </div>
 );
 
-export const renderCopyright = certificate => (
+export const renderCopyright = () => (
   <div>
     <div
       className="d-flex"
       style={{ marginTop: "15rem", marginBottom: "15rem" }}
     >
       <p style={copyrightStyle}>
-        {get(certificate, "additionalData.copyright")}
         Copyright @ 2016 All Rights Reserved SkillsFuture Singapore Agency
       </p>
     </div>
@@ -201,53 +199,81 @@ export const renderQualificationText = certificate => (
   <div>
     <div className="d-flex" style={{ marginTop: "3rem" }}>
       <p style={printTextStyle}>
-        {get(certificate, "additionalData.qualificationStatement")}
+        A qualification is awarded to an individual in recognition of his/her
+        attainment of the required industry validated competencies under the
+        Singapore Workforce Skills Qualifications System (WSQ)
       </p>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
       <p style={printTextStyle}>
-        {get(certificate, "additionalData.qualificationSystemDesc.name")}
+        SINGAPORE WORKFORCE SKILLS QUALIFICATIONS SYSTEM
       </p>
     </div>
     <div className="d-flex">
-      <p>{get(certificate, "additionalData.qualificationSystemDesc.desc")}</p>
+      <p>
+        The WSQ is a national credential system that trains, develops, assesses
+        and certifies skills and competencies for the workforce. As a continuing
+        education and training (CET) system, WSQ supports the SkillsFuture
+        movement to:
+      </p>
     </div>
     <div className="d-flex">
       <ul>
-        {certificate.additionalData.qualificationSystemDesc.descPoints.map(
-          (item, index) => (
-            <li key={index}>{item.point}</li>
-          )
-        )}
+        <li>
+          Promote recognition of skills and competencies to facilitate
+          progression, mastery and mobility;
+        </li>
+        <li>
+          Promote holistic development of workforce through technical and
+          generic skills and competencies;
+        </li>
+        <li>
+          Support economic development by professionalising skills and
+          competencies to drive industry transformation efforts; and
+        </li>
+        <li>Encourage lifelong learning</li>
       </ul>
     </div>
     <div className="d-flex">
-      <p>{get(certificate, "additionalData.trainingProgramDesc2")}</p>
-    </div>
-    <div className="d-flex">
-      <p>{get(certificate, "additionalData.trainingProgramDesc2")}</p>
-    </div>
-    <div className="d-flex" style={{ marginTop: "1rem" }}>
-      <p style={printTextStyle}>
-        {get(certificate, "additionalData.qualificationPath.name")}
+      <p>
+        Training programmes developed by training providers under the WSQ system
+        are based on the Technical Skill and Competencies (TSCs) and Generic
+        Skills and Competencies (GSCs) covered in the Skills Frameworks that had
+        been validated by employers, unions and professional bodies. This
+        process ensures existing and emerging skills and competencies that are
+        in demand are used to inform training and development under WSQ.
       </p>
     </div>
     <div className="d-flex">
-      <p>{get(certificate, "additionalData.qualificationPath.desc")}</p>
+      <p>
+        The TSCs comprise job-specific knowledge, skills and abilities that an
+        individual needs to have to perform the work functions and key tasks
+        required for the job while the GSCs consist of transferable skills and
+        competencies. The WSQ programmes are funded and quality-assured by
+        SkillsFuture Singapore (SSG), which awards the WSQ certifications.
+      </p>
+    </div>
+    <div className="d-flex" style={{ marginTop: "1rem" }}>
+      <p style={printTextStyle}>WSQ QUALIFICATIONS PROGRESSION PATH</p>
+    </div>
+    <div className="d-flex">
+      <p>
+        WSQ provides a coherent and comprehensive system of qualifications which
+        consists of the following levels:
+      </p>
     </div>
     <div className="d-flex">
       <ul>
-        {certificate.additionalData.qualificationPath.pathPoints.map(
-          (item, index) => (
-            <li key={index}>{item.point}</li>
-          )
-        )}
+        <li>WSQ Graduate Diploma / WSQ Graduate Certificate</li>
+        <li>WSQ Specialist Diploma</li>
+        <li>WSQ Diploma</li>
+        <li>WSQ Advanced Certificate</li>
+        <li>WSQ Higher Certificate</li>
+        <li>WSQ Certificate</li>
       </ul>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
-      <p style={printTextStyle}>
-        {get(certificate, "additionalData.gradesDesc.name")}
-      </p>
+      <p style={printTextStyle}>EXPLANATION OF GRADES GRANTED</p>
     </div>
     <div className="d-flex">
       <p>{get(certificate, "additionalData.qualificationPath.desc")}</p>
@@ -255,23 +281,38 @@ export const renderQualificationText = certificate => (
     <div className="d-flex" style={{ overflowX: "auto" }}>
       <table cellPadding="10">
         <tbody>
-          {certificate.additionalData.gradesDesc.points.map((item, index) => (
-            <tr key={index}>
-              <td>{index + 1}.</td>
-              <td>{item.name}</td>
-              <td>{item.desc}</td>
-            </tr>
-          ))}
+          <tr>
+            <td>1.</td>
+            <td>Competent</td>
+            <td>
+              Denotes attainment of the required industry validated competencies
+              as assessed through WSQ accredited programmes
+            </td>
+          </tr>
+          <tr>
+            <td>2.</td>
+            <td>Not Yet Competent</td>
+            <td>
+              Denotes non-attainment of the required industry validated
+              competencies as assessed through WSQ accredited programmes
+            </td>
+          </tr>
+          <tr>
+            <td>3.</td>
+            <td>Exempted</td>
+            <td>
+              Denotes attainment of the required industry validated competencies
+              as assessed through non-WSQ programmes
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
-      <p style={printTextStyle}>
-        {get(certificate, "additionalData.webInfo.name")}
-      </p>
+      <p style={printTextStyle}>FOR MORE INFORMATION</p>
     </div>
     <div className="d-flex">
-      <p>{get(certificate, "additionalData.webInfo.link")}</p>
+      <p>Details on the WSQ are available at http://www.ssg.gov.sg/wsq.html</p>
     </div>
   </div>
 );
