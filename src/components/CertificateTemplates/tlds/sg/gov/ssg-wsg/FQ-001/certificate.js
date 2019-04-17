@@ -1,6 +1,6 @@
 import { get } from "lodash";
 import { IMG_LOGO_FQ001, IMG_SEAL_FQ001, IMG_SSGLOGO_FQ001 } from "../common";
-import { formatDate } from "../common/functions";
+import { formatDate, getRecipientID } from "../common/functions";
 
 export const fullWidthStyle = {
   width: "100%",
@@ -151,7 +151,9 @@ export const renderAwardText = certificate => (
       <p style={recipientTextStyle}>{certificate.recipient.name}</p>
     </div>
     <div className="d-flex">
-      <p style={printTextStyle}>ID No: {certificate.recipient.nric}</p>
+      <p style={printTextStyle}>
+        ID No: {getRecipientID(certificate.recipient)}
+      </p>
     </div>
     <div
       className="d-flex col-lg-6 col-12"

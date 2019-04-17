@@ -1,6 +1,6 @@
 import { get } from "lodash";
 import { IMG_LOGO_FQ001, IMG_SSGLOGO_FQ001 } from "../common";
-import { formatDate, formatCertID } from "../common/functions";
+import { formatDate, formatCertID, getRecipientID } from "../common/functions";
 
 export const fullWidthStyle = {
   width: "100%",
@@ -16,6 +16,11 @@ export const printTextStyle = {
   fontWeight: "bold"
 };
 
+export const confermentTextStyle = {
+  fontWeight: "bold",
+  textTransform: "uppercase"
+};
+
 export const qualHeaderStyle = {
   fontWeight: "bold",
   marginBottom: "0px"
@@ -23,7 +28,8 @@ export const qualHeaderStyle = {
 
 export const qualTextStyle = {
   fontSize: "2rem",
-  fontWeight: "bold"
+  fontWeight: "bold",
+  textTransform: "uppercase"
 };
 
 export const singaporeTextStyle = {
@@ -132,7 +138,9 @@ export const renderAwardText = certificate => (
       </div>
     </div>
     <div className="d-flex">
-      <p style={nameTextStyle}>ID No.: {certificate.recipient.nric}</p>
+      <p style={nameTextStyle}>
+        ID No.: {getRecipientID(certificate.recipient)}
+      </p>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
       <p style={qualHeaderStyle}>Qualification:</p>
@@ -144,7 +152,7 @@ export const renderAwardText = certificate => (
       </p>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
-      <p style={printTextStyle}>
+      <p style={confermentTextStyle}>
         CONFERMENT: CONFERRED THE{" "}
         {get(certificate, "qualificationLevel[0].description")} in{" "}
         {certificate.name} - {get(certificate, "additionalData.specialization")}{" "}

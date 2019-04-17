@@ -38,3 +38,18 @@ export const formatCertID = certId => {
   const arrayCertId = certId.split(":");
   return arrayCertId.length > 0 ? arrayCertId[0] : null;
 };
+
+export const getRecipientID = recipient => {
+  if (!recipient) return null;
+
+  if (recipient.nric) {
+    return recipient.nric;
+  }
+  if (recipient.fin) {
+    return recipient.fin;
+  }
+  if (recipient.did) {
+    return recipient.did;
+  }
+  return null;
+};

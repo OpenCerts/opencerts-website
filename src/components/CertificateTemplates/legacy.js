@@ -8,47 +8,31 @@ import dynamic from "template-utils/dynamic";
 // Ngee Ann Polytechnic
 
 const NPAA2018MAIN = dynamic(() =>
-  import(
-    "./tlds/sg/edu/np/NP-AA2018-MAIN" /* webpackChunkName: "NgeeAnnTemplates" */
-  )
+  import("./tlds/sg/edu/np/NP-AA2018-MAIN" /* webpackChunkName: "NgeeAnnTemplates" */)
 );
 const NPAA2018OPTION = dynamic(() =>
-  import(
-    "./tlds/sg/edu/np/NP-AA2018-OPTION" /* webpackChunkName: "NgeeAnnTemplates" */
-  )
+  import("./tlds/sg/edu/np/NP-AA2018-OPTION" /* webpackChunkName: "NgeeAnnTemplates" */)
 );
 const NPAA2018BMSCLT = dynamic(() =>
-  import(
-    "./tlds/sg/edu/np/NP-AA2018-BMS(CLT)" /* webpackChunkName: "NgeeAnnTemplates" */
-  )
+  import("./tlds/sg/edu/np/NP-AA2018-BMS(CLT)" /* webpackChunkName: "NgeeAnnTemplates" */)
 );
 const NPAA2018ECH = dynamic(() =>
-  import(
-    "./tlds/sg/edu/np/NP-AA2018-ECH" /* webpackChunkName: "NgeeAnnTemplates" */
-  )
+  import("./tlds/sg/edu/np/NP-AA2018-ECH" /* webpackChunkName: "NgeeAnnTemplates" */)
 );
 const NPAA2018LDH = dynamic(() =>
-  import(
-    "./tlds/sg/edu/np/NP-AA2018-LDH" /* webpackChunkName: "NgeeAnnTemplates" */
-  )
+  import("./tlds/sg/edu/np/NP-AA2018-LDH" /* webpackChunkName: "NgeeAnnTemplates" */)
 );
 const NPAA2018PHARM = dynamic(() =>
-  import(
-    "./tlds/sg/edu/np/NP-AA2018-PHARM" /* webpackChunkName: "NgeeAnnTemplates" */
-  )
+  import("./tlds/sg/edu/np/NP-AA2018-PHARM" /* webpackChunkName: "NgeeAnnTemplates" */)
 );
 const NPAA2018DPP = dynamic(() =>
-  import(
-    "./tlds/sg/edu/np/NP-AA2018-DPP" /* webpackChunkName: "NgeeAnnTemplates" */
-  )
+  import("./tlds/sg/edu/np/NP-AA2018-DPP" /* webpackChunkName: "NgeeAnnTemplates" */)
 );
 
 // GovTech
 
 const OpenCertsAssociate2018 = dynamic(
-  import(
-    "./tlds/sg/gov/tech/2018-OpenCertsAssociate" /* webpackChunkName: "GovTechTemplates" */
-  )
+  import("./tlds/sg/gov/tech/2018-OpenCertsAssociate" /* webpackChunkName: "GovTechTemplates" */)
 );
 export default {
   "NP-AA2018-MAIN": NPAA2018MAIN,
