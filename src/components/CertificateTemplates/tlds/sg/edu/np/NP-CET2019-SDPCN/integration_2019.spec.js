@@ -56,6 +56,6 @@ test("PDP-SGPCN 2019 certificate is rendered correctly", async t => {
     "CLINICAL ATTACHMENT 1.1",
     "Graduating GPA: 2.8276",
     "The student has completed the course in SPECIALIST DIPLOMA IN PALLIATIVE CARE NURSING",
-    "DIRECTOR, CET ACADEMY"
+    "CET ACADEMY"
   ]);
 });

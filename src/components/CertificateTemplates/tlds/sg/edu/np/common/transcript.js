@@ -624,6 +624,9 @@ export const renderSignature = certificate => (
       <div className="text-center">
         {certificate.additionalData.transcriptSignatories[0].position}
       </div>
+      <div className="text-center">
+        {certificate.additionalData.transcriptSignatories[0].organisation}
+      </div>
     </div>
 
     <div className="col-2" />
