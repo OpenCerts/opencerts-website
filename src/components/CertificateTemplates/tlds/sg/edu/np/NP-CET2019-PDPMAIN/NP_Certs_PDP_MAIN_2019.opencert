@@ -1,5 +1,5 @@
 {
-  "schema": "opencerts/v1.5",
+  "schema": "opencerts/v1.4",
   "data": {
     "id": "16231767-e8b8-4fc4-b55e-b5e1a39ffb50:string:DCECT19M3001:PDP:12345678A_DCECT_DCECT_2019",
     "$template": "6a11dea0-a150-4842-aa38-6a3ad56f4aa9:string:sg/edu/np/NP-CET2019-PDPMAIN",
