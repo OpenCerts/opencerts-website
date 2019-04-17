@@ -1,11 +1,20 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import { get } from "lodash";
+import { certificateData, obfuscateFields } from "@govtechsg/open-certificate";
 import styles from "../../certificateViewer.scss";
 import InvalidCertificateNotice from "../InvalidCertificateNotice";
 import { analyticsEvent } from "../../Analytics";
 import Drawer from "../../UI/Drawer";
+import {
+  getCertificate,
+  getActiveTemplateTab,
+  updateObfuscatedCertificate,
+  registerTemplates,
+  selectTemplateTab
+} from "../../../reducers/certificate";
 
 import { getLogger } from "../../../utils/logger";
 
@@ -62,41 +71,51 @@ const storeCanRenderTemplate = ({ whitelist, certificate }) => {
  * @param {*} whitelist A list of contract store addresses which are allowed to use this template
  * @param {*} templates An array of template views to render using `renderTemplateToTab()`
  */
-export class MultiCertificateRenderer extends Component {
+class MultiCertificateRenderer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selectedTabIndex: 0
-    };
-    this.setTabIndex = this.setTabIndex.bind(this);
+    this.handleObfuscation = this.handleObfuscation.bind(this);
   }
 
   componentDidMount() {
-    const { certificate } = this.props;
+    const { document, templates, registerTemplates } = this.props;
+    const certificate = certificateData(document);
     analyticsEvent(window, {
       category: "CERTIFICATE_VIEWED",
       action: get(certificate, "issuers[0].certificateStore"),
       label: get(certificate, "id")
     });
+    registerTemplates(templates);
   }
 
-  setTabIndex(index) {
-    this.setState({ selectedTabIndex: index });
+  handleObfuscation(field) {
+    const updatedDocument = obfuscateFields(this.props.document, field);
+    this.props.updateObfuscatedCertificate(updatedDocument);
   }
 
   render() {
-    const { certificate, whitelist, templates, handleObfuscation } = this.props;
-    const { selectedTabIndex } = this.state;
+    const {
+      document,
+      whitelist,
+      templates,
+      activeTab,
+      selectTemplateTab
+    } = this.props;
+    const certificate = certificateData(document);
     const tabs = templates.map(template => {
       trace(`%o`, template);
-      return renderTemplateToTab({ template, certificate, handleObfuscation });
+      return renderTemplateToTab({
+        template,
+        certificate,
+        handleObfuscation: this.handleObfuscation
+      });
     });
     const allowedToRender = storeCanRenderTemplate({ whitelist, certificate });
     const validCertificateContent = (
       <>
         <Tabs
-          onSelect={this.setTabIndex}
-          selectedIndex={this.state.selectedTabIndex}
+          onSelect={selectTemplateTab}
+          selectedIndex={activeTab}
           selectedTabClassName={styles.active}
         >
           <div id={styles["header-ui"]}>
@@ -123,7 +142,7 @@ export class MultiCertificateRenderer extends Component {
           <div className="d-lg-none d-xl-none">
             <Drawer
               tabs={tabs}
-              activeIdx={selectedTabIndex}
+              activeIdx={activeTab}
               toggle={idx => this.setTabIndex(idx)}
             />
           </div>
@@ -149,6 +168,24 @@ export class MultiCertificateRenderer extends Component {
 MultiCertificateRenderer.propTypes = {
   whitelist: PropTypes.array,
   templates: PropTypes.array.isRequired,
-  certificate: PropTypes.object.isRequired,
-  handleObfuscation: PropTypes.func
+  document: PropTypes.object.isRequired,
+  updateObfuscatedCertificate: PropTypes.func.isRequired,
+  activeTab: PropTypes.number.isRequired
 };
+
+const mapStateToProps = store => ({
+  document: getCertificate(store),
+  activeTab: getActiveTemplateTab(store)
+});
+
+const mapDispatchToProps = dispatch => ({
+  updateObfuscatedCertificate: updatedDoc =>
+    dispatch(updateObfuscatedCertificate(updatedDoc)),
+  registerTemplates: templates => dispatch(registerTemplates(templates)),
+  selectTemplateTab: tabIndex => dispatch(selectTemplateTab(tabIndex))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MultiCertificateRenderer);

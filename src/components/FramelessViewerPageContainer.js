@@ -9,9 +9,13 @@ import {
 } from "@govtechsg/open-certificate";
 
 import styles from "./certificateViewer.scss";
-import { updateCertificate, getCertificate } from "../reducers/certificate";
+import {
+  updateCertificate,
+  getCertificate,
+  getTemplates,
+  selectTemplateTab
+} from "../reducers/certificate";
 import FramelessCertificateViewer from "./FramelessCertificateViewer";
-
 import { getLogger } from "../utils/logger";
 
 const { trace } = getLogger("components:FramelessViewerPageContainer");
@@ -22,6 +26,12 @@ class FramelessViewerContainer extends Component {
 
     this.handleCertificateChange = this.handleCertificateChange.bind(this);
     this.handleTextFieldChange = this.handleTextFieldChange.bind(this);
+  }
+
+  componentDidMount() {
+    window.renderCertificate = this.handleCertificateChange;
+    window.templates = () => this.props.templates;
+    window.selectTemplateTab = this.props.selectTemplateTab;
   }
 
   handleTextFieldChange(e) {
@@ -68,11 +78,13 @@ class FramelessViewerContainer extends Component {
 }
 
 const mapStateToProps = store => ({
-  document: getCertificate(store)
+  document: getCertificate(store),
+  templates: getTemplates(store)
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateCertificate: payload => dispatch(updateCertificate(payload))
+  updateCertificate: payload => dispatch(updateCertificate(payload)),
+  selectTemplateTab: tabIndex => dispatch(selectTemplateTab(tabIndex))
 });
 
 export default connect(
