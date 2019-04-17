@@ -121,7 +121,7 @@ export const renderSignature = certificate => (
 export const renderAwardText = certificate => (
   <div>
     <div className="d-flex" style={{ marginTop: "2rem" }}>
-      <p style={headerTextStyle}>{certificate.name}</p>
+      <p style={headerTextStyle}>OFFICIAL TRANSCRIPT</p>
     </div>
     <div className="row d-flex align-items-end" style={{ marginTop: "1rem" }}>
       <div className="col-lg-10 col-xs-12">
@@ -138,12 +138,17 @@ export const renderAwardText = certificate => (
       <p style={qualHeaderStyle}>Qualification:</p>
     </div>
     <div className="d-flex">
-      <p style={qualTextStyle}>{certificate.name}</p>
+      <p style={qualTextStyle}>
+        {get(certificate, "qualificationLevel[0].description")} in{" "}
+        {certificate.name} - {get(certificate, "additionalData.specialization")}
+      </p>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
       <p style={printTextStyle}>
-        CONFERMENT: CONFERRED THE {certificate.name} on{" "}
-        {formatDate(certificate.attainmentDate)}
+        CONFERMENT: CONFERRED THE{" "}
+        {get(certificate, "qualificationLevel[0].description")} in{" "}
+        {certificate.name} - {get(certificate, "additionalData.specialization")}{" "}
+        on {formatDate(certificate.attainmentDate)}
       </p>
     </div>
   </div>

@@ -22,12 +22,12 @@ test("Transcript certificate is rendered correctly", async t => {
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
-    "Healthcare Support",
+    "OFFICIAL TRANSCRIPT",
     "Name: Lee1",
     "ID No.: S0000000A",
     "Qualification:",
-    "Healthcare Support",
-    "CONFERMENT: CONFERRED THE Healthcare Support on 20 Nov 2018",
+    "Higher Certificate in Healthcare Support - Podiatry Support",
+    "CONFERMENT: CONFERRED THE Higher Certificate in Healthcare Support - Podiatry Support on 20 Nov 2018",
     "REMARKS:"
   ]);
 });

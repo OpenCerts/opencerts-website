@@ -22,7 +22,7 @@ test("FQ001 certificate is rendered correctly", async t => {
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
-    "Healthcare Support",
+    "Higher Certificate in Healthcare Support",
     "is awarded to",
     "Lee1",
     "ID No: S0000000A",

@@ -139,7 +139,10 @@ export const renderSignature = certificate => (
 export const renderAwardText = certificate => (
   <div>
     <div className="d-flex" style={{ marginTop: "2rem" }}>
-      <p style={nameTextStyle}>{certificate.name}</p>
+      <p style={nameTextStyle}>
+        {get(certificate, "qualificationLevel[0].description")} in{" "}
+        {certificate.name}
+      </p>
     </div>
     <div className="d-flex" style={{ marginTop: "3rem" }}>
       <p style={awardTextStyle}>is awarded to</p>
