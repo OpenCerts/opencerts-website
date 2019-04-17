@@ -70,7 +70,7 @@ const renderHeaderBlock = props => {
 };
 
 const CertificateViewer = props => {
-  const { certificate, handleObfuscation } = props;
+  const { certificate } = props;
 
   const renderedHeaderBlock = renderHeaderBlock(props);
   const selectedTemplateName = get(certificate, "$template", "default");
@@ -85,10 +85,7 @@ const CertificateViewer = props => {
       <div id={styles["top-header-ui"]}>
         <div className={styles["header-container"]}>{renderedHeaderBlock}</div>
       </div>
-      <SelectedTemplate
-        certificate={certificate}
-        handleObfuscation={handleObfuscation}
-      />
+      <SelectedTemplate />
       <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
         <CertificateSharingForm
           emailSendingState={props.emailSendingState}
@@ -104,7 +101,6 @@ const CertificateViewer = props => {
 
 CertificateViewer.propTypes = {
   handleCertificateChange: PropTypes.func,
-  handleObfuscation: PropTypes.func,
   toggleDetailedView: PropTypes.func,
   detailedVerifyVisible: PropTypes.bool,
   document: PropTypes.object,

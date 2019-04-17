@@ -7,7 +7,7 @@ import templates from "./CertificateTemplates";
 const { trace } = getLogger("components:CertificateViewer");
 
 const FramelessCertificateViewer = props => {
-  const { certificate, handleObfuscation } = props;
+  const { certificate } = props;
 
   const selectedTemplateName = get(certificate, "$template", "default");
   const SelectedTemplate = templates[selectedTemplateName] || templates.default;
@@ -16,17 +16,11 @@ const FramelessCertificateViewer = props => {
   trace(`Selected template: ${selectedTemplateName}`);
   trace(`Certificate content: %o`, certificate);
 
-  return (
-    <SelectedTemplate
-      certificate={certificate}
-      handleObfuscation={handleObfuscation}
-    />
-  );
+  return <SelectedTemplate />;
 };
 
 FramelessCertificateViewer.propTypes = {
   handleCertificateChange: PropTypes.func,
-  handleObfuscation: PropTypes.func,
   document: PropTypes.object,
   certificate: PropTypes.object
 };
