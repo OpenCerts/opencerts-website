@@ -11,6 +11,9 @@ import scss from "./degree.scss";
 // construct class names
 const cls = names => sassClassNames(names, scss);
 
+// replace regular spaces with hard spaces
+const rpspc = text => text.replace(/ /g, "\u00A0");
+
 class Degree extends Component {
   constructor(props) {
     super(props);
@@ -64,7 +67,7 @@ class Degree extends Component {
   };
 
   // render content
-  renderContent() {
+  renderContent(dataSource) {
     const style1 = {
       width: "6.32cm",
       height: "0.6cm",
@@ -80,7 +83,7 @@ class Degree extends Component {
       textAlign: "center",
       border: "0px solid"
     };
-    const degreeData = this.dataSource.additionalData.degreeData[0];
+    const degreeData = dataSource.additionalData.degreeData[0];
     const dateConferred = isoDateToLocalLong(degreeData.dateConferred);
     const html = (
       <table width="100%">
@@ -90,7 +93,7 @@ class Degree extends Component {
               {" "}
               {/* This is to certify that */}
               <div className={cls("cert-content")} style={style1}>
-                This&nbsp;&nbsp;&nbsp;is&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;certify&nbsp;&nbsp;&nbsp;that
+                {rpspc("This   is   to   certify   that")}
               </div>
             </td>
           </tr>
@@ -99,7 +102,7 @@ class Degree extends Component {
               {" "}
               {/* student name */}
               <div className={cls("cert-name")}>
-                {this.dataSource.recipient.name.toUpperCase()}
+                {dataSource.recipient.name.toUpperCase()}
               </div>
             </td>
           </tr>
@@ -108,7 +111,9 @@ class Degree extends Component {
               {" "}
               {/* having fulfilled the requirements prescribed */}
               <div style={style2}>
-                having&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fulfilled&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requirements&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prescribed
+                {rpspc(
+                  "having     fulfilled     the     requirements     prescribed"
+                )}
               </div>
             </td>
           </tr>
@@ -117,7 +122,9 @@ class Degree extends Component {
               {" "}
               {/* by the University was conferred the degree of */}
               <div style={style2}>
-                by&nbsp;&nbsp;the&nbsp;&nbsp;&nbsp;University&nbsp;&nbsp;&nbsp;was&nbsp;&nbsp;&nbsp;conferred&nbsp;&nbsp;&nbsp;the&nbsp;&nbsp;&nbsp;&nbsp;degree&nbsp;&nbsp;of
+                {rpspc(
+                  "by  the   University   was   conferred   the    degree  of"
+                )}
               </div>
             </td>
           </tr>
@@ -201,8 +208,7 @@ class Degree extends Component {
 
   // main render
   render() {
-    const html = [];
-    html.push(
+    const html = (
       <div className={cls("nus-degree")}>
         <div className={cls("a4-portrait")}>
           <article>
@@ -212,7 +218,7 @@ class Degree extends Component {
               {this.renderVoid("0.59cm")}
               {this.renderLogo()}
               {this.renderVoid("0.93cm")}
-              {this.renderContent()}
+              {this.renderContent(this.dataSource)}
             </div>
             <div style={{ border: "0px solid" }}>{this.renderSigs()}</div>
           </article>
@@ -227,7 +233,23 @@ Degree.propTypes = {
   dataSource: PropTypes.object.isRequired
 };
 
-const Template = ({ certificate }) => <Degree dataSource={certificate} />;
+const Template = ({ certificate }) => {
+  // 794px is width of A4 portrait (21cm)
+  const ratio = (window.innerWidth - 30) / 794;
+  const scale =
+    ratio < 1
+      ? {
+          transform: `scale(${ratio}, ${ratio})`,
+          transformOrigin: "top left"
+        }
+      : null;
+  const html = (
+    <div style={scale}>
+      <Degree dataSource={certificate} />
+    </div>
+  );
+  return html;
+};
 export default Template;
 Template.propTypes = {
   certificate: PropTypes.object.isRequired

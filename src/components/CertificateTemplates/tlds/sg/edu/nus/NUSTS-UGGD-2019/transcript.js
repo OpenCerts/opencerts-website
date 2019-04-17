@@ -1506,7 +1506,21 @@ const Template = ({ certificate }) => {
   new TranscriptData().render();
   dataFeeder.resetTermRange();
   // render data
-  return <Transcript maxPages="8" maxRows="50" />;
+  // 1123px is width of A4 portrait (29.7cm)
+  const ratio = (window.innerWidth - 30) / 1123;
+  const scale =
+    ratio < 1
+      ? {
+          transform: `scale(${ratio}, ${ratio})`,
+          transformOrigin: "top left"
+        }
+      : null;
+  const html = (
+    <div style={scale}>
+      <Transcript maxPages="8" maxRows="50" />;
+    </div>
+  );
+  return html;
 };
 export default Template;
 Template.propTypes = {

@@ -28,20 +28,6 @@ export const isBrowser = browser => {
   return userAgent.toUpperCase().indexOf(browser.toUpperCase()) >= 0;
 };
 
-export const isFireFox = () =>
-  // sample: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:65.0) Gecko/20100101 Firefox/65.0
-  isBrowser("Firefox");
-
-export const isChrome = () =>
-  // sample: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36
-  isBrowser("Chrome") && !isBrowser("Edge");
-
-export const isEdge = () =>
-  // sample: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299
-  isBrowser("Edge");
-
-export const isSafari = () => isBrowser("Safari");
-
 // simplify class names
 // NOTE: make sure SASS has been imported as style
 export const sassClassNames = (names, styles) => {
