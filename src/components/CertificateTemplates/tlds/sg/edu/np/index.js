@@ -40,6 +40,9 @@ const NPAA2019NIEC = dynamic(() =>
 const NPAA2019OPTNIEC = dynamic(() =>
   import("./NP-AA2019-OPT-NIEC" /* webpackChunkName: "NgeeAnnTemplates" */)
 );
+const NPAA1996MAIN = dynamic(() =>
+  import("./NP-AA1996-MAIN" /* webpackChunkName: "NgeeAnnTemplates" */)
+);
 const templates = {
   "2018-main": NPAA2018MAIN,
   "2018-option": NPAA2018OPTION,
@@ -53,7 +56,8 @@ const templates = {
   "NP-CET2019-SDPCN": NPCET2019SDPCN,
   "NP-CET2019-SDCGN": NPCET2019SDCGN,
   "NP-AA2019-NIEC": NPAA2019NIEC,
-  "NP-AA2019-OPT-NIEC": NPAA2019OPTNIEC
+  "NP-AA2019-OPT-NIEC": NPAA2019OPTNIEC,
+  "NP-AA1996-MAIN": NPAA1996MAIN
 };
 
 export default addDirToTemplatePath("np", templates);
