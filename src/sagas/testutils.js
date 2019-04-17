@@ -43,6 +43,15 @@ export class MakeCertUtil {
     return this;
   }
 
+  static makeFakeUUID() {
+    return "aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaaa";
+  }
+
+  addTemplateTag(tag) {
+    this.cert.data.$template = `${MakeCertUtil.makeFakeUUID()}:string:${tag}`;
+    return this;
+  }
+
   addDataField(field, value) {
     this.cert.data[field] = value;
     return this;

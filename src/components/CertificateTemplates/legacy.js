@@ -45,10 +45,8 @@ const NPAA2018DPP = dynamic(() =>
 
 // GovTech
 
-const OpenCertsAssociate2018 = dynamic(
-  import(
-    "./tlds/sg/gov/tech/2018-OpenCertsAssociate" /* webpackChunkName: "GovTechTemplates" */
-  )
+const OpenCertsAssociate2018 = dynamic(() =>
+  import("./tlds/sg/gov/tech/2018-OpenCertsAssociate" /* webpackChunkName: "GovTechTemplates" */)
 );
 export default {
   "NP-AA2018-MAIN": NPAA2018MAIN,
