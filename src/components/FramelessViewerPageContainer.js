@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
   certificateData,
-  obfuscateFields,
   validateSchema,
   verifySignature
 } from "@govtechsg/open-certificate";
@@ -29,8 +28,8 @@ class FramelessViewerContainer extends Component {
   }
 
   componentDidMount() {
-    window.renderCertificate = this.handleCertificateChange;
     window.templates = () => this.props.templates;
+    window.renderCertificate = this.handleCertificateChange;
     window.selectTemplateTab = this.props.selectTemplateTab;
   }
 
@@ -46,11 +45,6 @@ class FramelessViewerContainer extends Component {
     const verified = verifySignature(fieldContents);
     trace(`Certificate verification: ${verified}`);
     this.props.updateCertificate(fieldContents);
-  }
-
-  handleObfuscation(field) {
-    const updatedDocument = obfuscateFields(this.props.document, field);
-    this.props.updateObfuscatedCertificate(updatedDocument);
   }
 
   handleCertificateChange(certificate) {
@@ -93,8 +87,9 @@ export default connect(
 )(FramelessViewerContainer);
 
 FramelessViewerContainer.propTypes = {
-  updateCertificate: PropTypes.func,
+  updateCertificate: PropTypes.func.isRequired,
   document: PropTypes.object,
   certificate: PropTypes.object,
-  updateObfuscatedCertificate: PropTypes.func
+  selectTemplateTab: PropTypes.func.isRequired,
+  templates: PropTypes.array
 };

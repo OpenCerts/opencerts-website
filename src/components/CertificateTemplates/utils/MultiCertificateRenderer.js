@@ -12,8 +12,8 @@ import {
   getCertificate,
   getActiveTemplateTab,
   updateObfuscatedCertificate,
-  registerTemplates,
-  selectTemplateTab
+  registerTemplates as registerTemplatesAction,
+  selectTemplateTab as selectTemplateTabAction
 } from "../../../reducers/certificate";
 
 import { getLogger } from "../../../utils/logger";
@@ -170,6 +170,8 @@ MultiCertificateRenderer.propTypes = {
   templates: PropTypes.array.isRequired,
   document: PropTypes.object.isRequired,
   updateObfuscatedCertificate: PropTypes.func.isRequired,
+  registerTemplates: PropTypes.func.isRequired,
+  selectTemplateTab: PropTypes.func.isRequired,
   activeTab: PropTypes.number.isRequired
 };
 
@@ -181,8 +183,8 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => ({
   updateObfuscatedCertificate: updatedDoc =>
     dispatch(updateObfuscatedCertificate(updatedDoc)),
-  registerTemplates: templates => dispatch(registerTemplates(templates)),
-  selectTemplateTab: tabIndex => dispatch(selectTemplateTab(tabIndex))
+  registerTemplates: templates => dispatch(registerTemplatesAction(templates)),
+  selectTemplateTab: tabIndex => dispatch(selectTemplateTabAction(tabIndex))
 });
 
 export default connect(
