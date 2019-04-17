@@ -33,7 +33,7 @@ test("PDP-SGPCN 2019 certificate is rendered correctly", async t => {
     "National Cancer Centre Singapore",
     "Medical Director",
     "Dover Park Hospice",
-    "MAY 2019",
+    "May 2019",
     "SDPCN193003"
   ]);
 

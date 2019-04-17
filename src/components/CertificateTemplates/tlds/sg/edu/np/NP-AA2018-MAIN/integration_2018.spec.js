@@ -28,7 +28,7 @@ test("FT-MAIN 2018 certificate is rendered correctly", async t => {
     "Animation & 3D Arts",
     "Principal",
     "Council Chairman",
-    "MAY 2018",
+    "May 2018",
     "A3DA180001"
   ]);
 
