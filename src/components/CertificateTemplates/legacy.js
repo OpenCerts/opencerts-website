@@ -1,5 +1,10 @@
 import dynamic from "template-utils/dynamic";
 
+/*
+ * ** DO NOT MODIFY THIS FILE UNLESS YOU ARE OPENCERTS CORE DEV **
+ * ** ANY PULL REQUESTS VIOLATING THIS WILL BE REJECTED **
+ */
+
 // Ngee Ann Polytechnic
 
 const NPAA2018MAIN = dynamic(() =>

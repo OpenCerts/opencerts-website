@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { types as networkTypes } from "../../services/web3/getWeb3";
 import {
   updateWeb3,
   getNetwork,
   getCustomRpc
 } from "../../reducers/application";
 import css from "./networkSelector.scss";
+import { NETWORK_TYPES } from "../../config";
 
 class NetworkSelector extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class NetworkSelector extends Component {
   }
 
   render() {
-    const { INFURA_MAINNET, INFURA_ROPSTEN } = networkTypes;
+    const { INFURA_MAINNET, INFURA_ROPSTEN } = NETWORK_TYPES;
 
     return (
       <select

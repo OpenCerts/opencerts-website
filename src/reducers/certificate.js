@@ -309,10 +309,53 @@ export function verifyingCertificateIssuerSuccess(payload) {
   };
 }
 
-export function verifyingCertificateIssuerFailure(payload) {
+export function verifyingCertificateIssuerFailure({ error, certificate }) {
   return {
     type: types.VERIFYING_CERTIFICATE_ISSUER_FAILURE,
-    payload
+    error,
+    certificate
+  };
+}
+
+export function verifyingCertificateRevocationSuccess() {
+  return {
+    type: types.VERIFYING_CERTIFICATE_REVOCATION_SUCCESS
+  };
+}
+
+export function verifyingCertificateRevocationFailure({ error, certificate }) {
+  return {
+    type: types.VERIFYING_CERTIFICATE_REVOCATION_FAILURE,
+    error,
+    certificate
+  };
+}
+
+export function verifyingCertificateIssuedSuccess() {
+  return {
+    type: types.VERIFYING_CERTIFICATE_ISSUED_SUCCESS
+  };
+}
+
+export function verifyingCertificateIssuedFailure({ error, certificate }) {
+  return {
+    type: types.VERIFYING_CERTIFICATE_ISSUED_FAILURE,
+    error,
+    certificate
+  };
+}
+
+export function verifyingCertificateHashSuccess() {
+  return {
+    type: types.VERIFYING_CERTIFICATE_HASH_SUCCESS
+  };
+}
+
+export function verifyingCertificateHashFailure({ error, certificate }) {
+  return {
+    type: types.VERIFYING_CERTIFICATE_HASH_FAILURE,
+    error,
+    certificate
   };
 }
 

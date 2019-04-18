@@ -1,18 +1,43 @@
 import { put, call, select } from "redux-saga/effects";
 import sinon from "sinon";
+import * as openCertsApi from "@govtechsg/open-certificate";
 import {
+  verifyCertificateNotRevoked,
   verifyCertificateIssuer,
+  verifyCertificateHash,
+  verifyCertificateIssued,
   resolveEnsNamesToText,
   lookupEthereumAddresses,
-  sendCertificate
+  sendCertificate,
+  analyticsIssuerFail,
+  analyticsHashFail,
+  analyticsIssuedFail,
+  analyticsRevocationFail,
+  getIntermediateHashes
 } from "./certificate";
 import {
   getCertificate,
   verifyingCertificateIssuerSuccess,
-  verifyingCertificateIssuerFailure
+  verifyingCertificateIssuerFailure,
+  verifyingCertificateRevocationSuccess,
+  verifyingCertificateRevocationFailure,
+  verifyingCertificateIssuedSuccess,
+  verifyingCertificateIssuedFailure,
+  verifyingCertificateHashSuccess,
+  verifyingCertificateHashFailure
 } from "../reducers/certificate";
-import MakeCertUtil from "./makeCertUtil";
+import {
+  MakeCertUtil,
+  mockStore,
+  targetHash,
+  proof0,
+  proof1,
+  intermediateHash,
+  rootHash
+} from "./testutils";
 import * as sendEmail from "../services/email";
+
+const { certificateData } = openCertsApi;
 
 function whenThereIsOneEthereumAddressIssuer() {
   const ethereumAddresses = ["0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4F"];
@@ -247,6 +272,7 @@ describe("sagas/certificate", () => {
       } = whenThereAreMultipleEthereumAddressIssuers();
       const resolverReturnValue = [];
       const errorMsg = "Issuer identity missing in certificate";
+      const certData = certificateData(testCert);
       const issuerSaga = verifyCertificateIssuer({ certificate: testCert });
 
       expect(issuerSaga.next().value).toEqual(
@@ -257,7 +283,12 @@ describe("sagas/certificate", () => {
       // const resolvedPut = issuerSaga.throw(new Error(errorMsg)).value;
 
       expect(resolvedPut).toEqual(
-        put(verifyingCertificateIssuerFailure(errorMsg))
+        put(
+          verifyingCertificateIssuerFailure({
+            error: errorMsg,
+            certificate: certData
+          })
+        )
       );
       const isSagaFinished = issuerSaga.next().done;
 
@@ -292,16 +323,281 @@ describe("sagas/certificate", () => {
       } = whenThereAreMultipleEthereumAddressIssuers();
       const msg = "bam!";
       const issuerSaga = verifyCertificateIssuer({ certificate: testCert });
+      const certData = certificateData(testCert);
 
       expect(issuerSaga.next().value).toEqual(
         call(lookupEthereumAddresses, ethereumAddresses)
       );
       const resolvedPut = issuerSaga.throw(new Error(msg)).value;
 
-      expect(resolvedPut).toEqual(put(verifyingCertificateIssuerFailure(msg)));
+      expect(resolvedPut).toEqual(
+        put(
+          verifyingCertificateIssuerFailure({
+            error: msg,
+            certificate: certData
+          })
+        )
+      );
       const isSagaFinished = issuerSaga.next().done;
 
       expect(isSagaFinished).toBe(true);
+    });
+  });
+
+  describe("analytics*", () => {
+    beforeEach(() => {
+      global.window.ga = sinon.stub();
+    });
+
+    afterEach(() => {
+      global.window.ga = undefined;
+    });
+
+    it("analyticsIssuerFail should report to GA with errorType = 0", () => {
+      const {
+        testCert,
+        ethereumAddresses
+      } = whenThereIsOneEthereumAddressIssuer();
+      analyticsIssuerFail({ certificate: certificateData(testCert) }).next();
+
+      expect(global.window.ga.args[0]).toEqual([
+        "send",
+        "event",
+        "CERTIFICATE_ERROR",
+        ethereumAddresses[0],
+        "certificate-id",
+        0
+      ]);
+    });
+
+    it("analyticsHashFail should report to GA with errorType = 1", () => {
+      const {
+        testCert,
+        ethereumAddresses
+      } = whenThereIsOneEthereumAddressIssuer();
+      analyticsHashFail({ certificate: certificateData(testCert) }).next();
+
+      expect(global.window.ga.args[0]).toEqual([
+        "send",
+        "event",
+        "CERTIFICATE_ERROR",
+        ethereumAddresses[0],
+        "certificate-id",
+        1
+      ]);
+    });
+
+    it("analyticsIssuedFail should report to GA with errorType = 2", () => {
+      const {
+        testCert,
+        ethereumAddresses
+      } = whenThereIsOneEthereumAddressIssuer();
+      analyticsIssuedFail({ certificate: certificateData(testCert) }).next();
+
+      expect(global.window.ga.args[0]).toEqual([
+        "send",
+        "event",
+        "CERTIFICATE_ERROR",
+        ethereumAddresses[0],
+        "certificate-id",
+        2
+      ]);
+    });
+
+    it("analyticsRevocationFail should report to GA with errorType = 3", () => {
+      const {
+        testCert,
+        ethereumAddresses
+      } = whenThereIsOneEthereumAddressIssuer();
+      analyticsRevocationFail({
+        certificate: certificateData(testCert)
+      }).next();
+
+      expect(global.window.ga.args[0]).toEqual([
+        "send",
+        "event",
+        "CERTIFICATE_ERROR",
+        ethereumAddresses[0],
+        "certificate-id",
+        3
+      ]);
+    });
+  });
+
+  describe("getIntermediateHashes", () => {
+    it("should return targetHash only if there is no proof", () => {
+      expect(getIntermediateHashes(targetHash)).toEqual([`0x${targetHash}`]);
+    });
+    it("should return all intermediate (and final) hash", () => {
+      const intermediateHashes = getIntermediateHashes(targetHash, [
+        proof0,
+        proof1
+      ]);
+      expect(intermediateHashes.length).toBe(3);
+      expect(intermediateHashes[0]).toEqual(`0x${targetHash}`);
+      expect(intermediateHashes[2]).toEqual(`0x${rootHash}`);
+    });
+  });
+
+  describe("verifyCertificateNotRevoked", () => {
+    it("should return true and put success action if all the store returns false for all hashes", () => {
+      const certificateStores = [mockStore(), mockStore(), mockStore()];
+      const { testCert: certificate } = whenThereIsOneEthereumAddressIssuer();
+
+      const generator = verifyCertificateNotRevoked({
+        certificate,
+        certificateStores
+      });
+
+      generator.next();
+
+      // When all store returns false for target hash
+      generator.next([false, false, false]);
+      // When all store returns false for intermediate hash
+      generator.next([false, false, false]);
+      // When all store returns false for merkle root
+      const doneWithVerification = generator.next([false, false, false]);
+
+      // Assert that hashes is checked against all stores
+      const hashCheckSequence = [
+        [`0x${targetHash}`],
+        [`0x${intermediateHash}`],
+        [`0x${rootHash}`]
+      ];
+      expect(certificateStores[0].stub.args).toEqual(hashCheckSequence);
+      expect(certificateStores[1].stub.args).toEqual(hashCheckSequence);
+      expect(certificateStores[2].stub.args).toEqual(hashCheckSequence);
+
+      expect(doneWithVerification.value).toEqual(
+        put(verifyingCertificateRevocationSuccess())
+      );
+
+      const generatorEnd = generator.next();
+      expect(generatorEnd.value).toBe(true);
+      expect(generatorEnd.done).toBe(true);
+    });
+
+    it("should return false and put failure action if any of the store returns true for the check", () => {
+      const certificateStores = [mockStore(), mockStore(), mockStore()];
+      const { testCert: certificate } = whenThereIsOneEthereumAddressIssuer();
+
+      const generator = verifyCertificateNotRevoked({
+        certificate,
+        certificateStores
+      });
+
+      generator.next();
+
+      // When all store returns false for target hash
+      generator.next([false, false, false]);
+      // When all store returns false for intermediate hash
+      generator.next([false, false, false]);
+      // When all store returns false for merkle root
+      const doneWithVerification = generator.next([false, true, false]);
+
+      // Assert that hashes is checked against all stores
+      const hashCheckSequence = [
+        [`0x${targetHash}`],
+        [`0x${intermediateHash}`],
+        [`0x${rootHash}`]
+      ];
+      expect(certificateStores[0].stub.args).toEqual(hashCheckSequence);
+      expect(certificateStores[1].stub.args).toEqual(hashCheckSequence);
+      expect(certificateStores[2].stub.args).toEqual(hashCheckSequence);
+
+      expect(doneWithVerification.value).toEqual(
+        put(
+          verifyingCertificateRevocationFailure({
+            certificate: certificateData(certificate),
+            error:
+              "Certificate has been revoked, revoked hash: 0xfcfce0e79adc002c1fd78a2a02c768c0fdc00e5b96f1da8ef80bed02876e18d1"
+          })
+        )
+      );
+
+      const generatorEnd = generator.next();
+      expect(generatorEnd.value).toBe(false);
+      expect(generatorEnd.done).toBe(true);
+    });
+  });
+
+  describe("verifyCertificateHash", () => {
+    beforeEach(() => {
+      sinon.stub(openCertsApi, "verifySignature");
+    });
+    afterEach(() => {
+      openCertsApi.verifySignature.restore();
+    });
+    it("should return true when verification is successful", () => {
+      openCertsApi.verifySignature.returns(true);
+      const { testCert } = whenThereIsOneEthereumAddressIssuer();
+      const generator = verifyCertificateHash({ certificate: testCert });
+      expect(generator.next().value).toEqual(
+        put(verifyingCertificateHashSuccess())
+      );
+      const res = generator.next();
+      expect(res.value).toBe(true);
+      expect(res.done).toBe(true);
+    });
+
+    it("should return false and puts verifyingCertificateHashFailure when verification fails", () => {
+      openCertsApi.verifySignature.returns(false);
+      const { testCert } = whenThereIsOneEthereumAddressIssuer();
+      const generator = verifyCertificateHash({ certificate: testCert });
+      expect(generator.next().value).toEqual(
+        put(
+          verifyingCertificateHashFailure({
+            certificate: certificateData(testCert),
+            error: "Certificate data does not match target hash"
+          })
+        )
+      );
+      expect(generator.next().done).toBe(true);
+    });
+  });
+
+  describe("verifyCertificateIssued", () => {
+    it("should return true and puts success action when certificate is issued on all stores", () => {
+      const certificateStores = [mockStore(), mockStore()];
+      const { testCert: certificate } = whenThereIsOneEthereumAddressIssuer();
+      const generator = verifyCertificateIssued({
+        certificate,
+        certificateStores
+      });
+
+      generator.next();
+
+      expect(generator.next([true, true]).value).toEqual(
+        put(verifyingCertificateIssuedSuccess())
+      );
+
+      const res = generator.next();
+      expect(res.value).toBe(true);
+      expect(res.done).toBe(true);
+    });
+
+    it("should return false and puts success action when certificate is not issued on any stores", () => {
+      const certificateStores = [mockStore(), mockStore()];
+      const { testCert: certificate } = whenThereIsOneEthereumAddressIssuer();
+      const generator = verifyCertificateIssued({
+        certificate,
+        certificateStores
+      });
+
+      generator.next();
+
+      expect(generator.next([true, false]).value).toEqual(
+        put(
+          verifyingCertificateIssuedFailure({
+            certificate: certificateData(certificate),
+            error: "Certificate has not been issued"
+          })
+        )
+      );
+
+      const res = generator.next();
+      expect(res.value).toBe(false);
+      expect(res.done).toBe(true);
     });
   });
 });

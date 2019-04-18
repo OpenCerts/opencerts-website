@@ -1,0 +1,326 @@
+{
+  "schema": "opencerts/v1.4",
+  "data": {
+    "id": "0a9da697-1764-4a21-b99b-dd2247c28127:string:A_SAMPLE_CERTIFICATE",
+    "description": "22ca8dfd-94d8-464e-8de8-e3ffdd17c364:string:A Certificate",
+    "issuedOn": "74aa1052-fcfb-451c-a8e4-d351cf6606ef:string:2018-08-30T00:00:00+08:00",
+    "name": "5f580aae-6693-4c9b-9698-014c6670686c:string:Sample Certificate",
+    "admissionDate": "cd7a40c5-b0f3-435d-b237-ab80cd37a4e0:string:2017-08-01T00:00:00+08:00",
+    "graduationDate": "37d104a5-7c3b-46f2-a207-14521cbed89d:string:2018-08-01T00:00:00+08:00",
+    "issuers": [
+      {
+        "name": "1a05abb2-bfa5-4ea3-ba0f-cadd04d51182:string:TEST STORE",
+        "url": "c6c7a0b0-815e-435c-bfe6-657d14c19d98:string:https://tech.gov.sg",
+        "certificateStore": "01d99706-6a26-4b2a-839b-05491736c215:string:0x4Fd906b21dd96a2bde618CD8457A31793d148E48"
+      }
+    ],
+    "recipient": {
+      "name": "6accf0e3-5e65-43b4-9ae3-e1d13c124d48:string:A Student"
+    },
+    "transcript": [
+      {
+        "name": "c3971bf8-4bac-4728-9dd9-5e5134b07990:string:MINDWORKS",
+        "grade": "c125a931-2b4c-42a1-8b8a-6a12d9733042:string:A+",
+        "courseCredit": "6ca04ad4-e4c9-40bd-9e67-6efdeb959d0c:string:2",
+        "examinationDate": "60c5c2d2-cef8-4b37-831a-7e883036b39a:string:2014-02-01T00:00:00+08:00",
+        "programDescription": "a570750b-e62f-42e9-9995-e8e30af4a78f:string:MOLECULAR BIOTECHNOLOGY",
+        "semester": "6b417e99-026a-48d3-9322-bb3970500e78:number:1"
+      },
+      {
+        "name": "2f595aa7-39fd-4cf5-a34a-cf23c87b10d1:string:SPORTS & WELLNESS",
+        "grade": "142cf560-f4f4-4e7c-9f78-dc92751841cc:string:PX",
+        "courseCredit": "c21b224c-103d-43c5-9f30-a8d8b8c6e70d:string:2",
+        "examinationDate": "3cebbe79-fd08-4228-8de9-b12cc3bbbbbc:string:2014-02-01T00:00:00+08:00",
+        "programDescription": "35ec021a-c275-4915-ac2d-c1c2562d770b:string:MOLECULAR BIOTECHNOLOGY",
+        "semester": "47d502c9-3d8c-4936-b8bb-96fb7058721d:number:1"
+      },
+      {
+        "name": "14c13bf4-c0af-4a43-9ef5-fced5baadc91:string:DRAWING & PERSPECTIVE",
+        "grade": "c5312ae6-8137-4330-93d5-72ff63ec9f26:string:B",
+        "courseCredit": "3e77f055-977d-4ac9-8f11-9bfdc80ef6aa:string:4",
+        "examinationDate": "ea5dd6c9-e2fd-48b9-8212-b61d0a3ec85f:string:2014-08-01T00:00:00+08:00",
+        "programDescription": "e9eeae7d-e7ea-4a20-9fcd-2155dc5b387a:string:ANIMATION & 3D ARTS",
+        "semester": "9fe5a95c-68ef-4c38-b11b-cc0aaa3fe1dd:number:2"
+      },
+      {
+        "name": "c0192831-d555-49e3-b025-7441b673c167:string:FUNDAMENTALS FOR CREATIVE PROFESSIONALS",
+        "grade": "3edbd716-942a-478c-bc5a-0c08cfd33b24:string:B+",
+        "courseCredit": "8b734597-7218-419f-b26f-eb31a14bab84:string:2",
+        "examinationDate": "1141ee0c-7288-402f-be35-8e83d7433c81:string:2014-08-01T00:00:00+08:00",
+        "programDescription": "f10ec2e0-6f2c-4480-8528-9af416c8cdc7:string:ANIMATION & 3D ARTS",
+        "semester": "42ba58cf-6016-439c-a1b8-e819ade2c9b0:number:2"
+      },
+      {
+        "name": "8d2d5fbb-212d-4294-a043-39d0d17a2f54:string:HISTORY OF FILM & ANIMATION",
+        "grade": "a618bf43-cc4b-4846-bed5-9a349630c91c:string:B",
+        "courseCredit": "9aba9078-dabf-49e1-acdc-4de4ea2abf5d:string:4",
+        "examinationDate": "1aec8721-f6db-4db0-9d33-2f680cb291e0:string:2014-08-01T00:00:00+08:00",
+        "programDescription": "f7293953-b711-4176-8596-2a3c5df99c0f:string:ANIMATION & 3D ARTS",
+        "semester": "2a2d60d9-6fdc-425e-8c73-f6a77e4e5d24:number:2"
+      },
+      {
+        "name": "4d1921ae-ab71-442a-adce-819eaf515cd6:string:INNOVATION TOOLKIT",
+        "grade": "ae0a042d-3d4b-42c8-92ea-7b2376dce346:string:A",
+        "courseCredit": "d628e9c3-7b96-4c71-8d9c-dcbc4172ce5e:string:4",
+        "examinationDate": "6504caae-ff63-4625-a6bc-361481c4beaa:string:2014-08-01T00:00:00+08:00",
+        "programDescription": "5fce30a8-eade-41c4-a249-79ff3e2b1ff2:string:ANIMATION & 3D ARTS",
+        "semester": "e201f088-e476-4fc9-bb33-c90658827d72:number:2"
+      },
+      {
+        "name": "b2538149-120b-453f-96ec-11f7236999e3:string:LIGHT, COLOUR & DESIGN",
+        "grade": "e5d5b840-4e7d-4ce2-8c34-f6d645ce74af:string:C+",
+        "courseCredit": "7426ef5a-6009-46b8-8d34-8559c91fb1a9:string:4",
+        "examinationDate": "1c079c93-64fd-45bb-9e87-c730609e8234:string:2014-08-01T00:00:00+08:00",
+        "programDescription": "24845228-de98-4ba7-883b-440e1160a1b6:string:ANIMATION & 3D ARTS",
+        "semester": "390da811-0314-43b4-9ece-3d772459197c:number:2"
+      },
+      {
+        "name": "697dba06-44f9-4cb3-9cf4-1139d950f5d7:string:PRINCIPLES OF ANIMATION",
+        "grade": "a2bdcd35-70f8-482c-85fa-a69697d1b61b:string:B+",
+        "courseCredit": "b3e0a2dc-9cf0-4e66-827a-6a293db5650c:string:4",
+        "examinationDate": "5548f5bb-d8fd-4c15-9836-8a06b3ed3ff6:string:2014-08-01T00:00:00+08:00",
+        "programDescription": "b4fa3d4b-08ac-44f0-96b8-47611440710d:string:ANIMATION & 3D ARTS",
+        "semester": "547ad9dd-90c0-427f-9518-e53e919d08d0:number:2"
+      },
+      {
+        "name": "707e29e1-3b36-4363-bed0-6f5fff356b6e:string:STORYTELLING & SCRIPTWRITING",
+        "grade": "3b056e87-cc2b-492b-9e03-27c503da21e2:string:B",
+        "courseCredit": "dc440b19-7073-450b-a22e-7e3a82fc3bd5:string:4",
+        "examinationDate": "73892110-eb7c-4665-a23b-7311e3a32523:string:2014-08-01T00:00:00+08:00",
+        "programDescription": "9f4cb841-4ceb-4eee-9bcb-8989952acd10:string:ANIMATION & 3D ARTS",
+        "semester": "dce6a319-6bdc-4ed8-9a28-7bfb53f5a87e:number:2"
+      },
+      {
+        "name": "258f88d5-73be-4e96-8260-a104ab27df5c:string:MIND QUEST FOR EXCELLENCE",
+        "grade": "d4576400-1924-4878-b437-ce6fda8d616a:string:TRF",
+        "courseCredit": "e8133f30-53f3-4cc9-a8d6-11ddbc44677c:string:2",
+        "examinationDate": "252e9b21-cece-4dab-91df-1b4d8a6e4046:string:2014-08-01T00:00:00+08:00",
+        "programDescription": "32d6fe10-ad03-4e87-9b2c-ac1abd1f6986:string:ANIMATION & 3D ARTS",
+        "semester": "e18c6321-26a8-4c3e-b0bc-fee9f940e1ef:number:2"
+      },
+      {
+        "name": "da854846-8de4-40b5-8018-0a11488ce71f:string:SPORTS & WELLNESS",
+        "grade": "46a3f4ee-e6db-45c8-bad5-03ba4351cd77:string:TRF",
+        "courseCredit": "ce32de45-2833-45db-80c6-10a42ee8e500:string:2",
+        "examinationDate": "0226dd14-4581-476a-8bff-15c8fccfac3c:string:2014-08-01T00:00:00+08:00",
+        "programDescription": "d4889efc-48b3-4456-930c-269066aeed98:string:ANIMATION & 3D ARTS",
+        "semester": "363529a0-241b-4fa2-8c37-3f0c279e4464:number:2"
+      },
+      {
+        "name": "79c85612-7ea7-4117-afe9-3cc9916ad914:string:3D FORM & SPACE",
+        "grade": "b7de56b9-91af-4765-be5b-7daa19814393:string:C+",
+        "courseCredit": "934bf6aa-f807-4441-b145-d28e99312d53:string:4",
+        "examinationDate": "8551f164-95bd-4307-8550-3459a827038d:string:2015-02-01T00:00:00+08:00",
+        "programDescription": "fe474c18-dc95-48e8-9a5b-b7d40a99bf65:string:ANIMATION & 3D ARTS",
+        "semester": "1c9f6f4f-fe12-4323-abe7-7750abfef6a3:number:3"
+      },
+      {
+        "name": "70cf7336-68ab-4f1f-b1a3-d38350d882ec:string:COMMUNICATION & CONTEMPORARY ISSUES",
+        "grade": "d3d15639-7296-48d9-b4d4-240aa51e6446:string:A",
+        "courseCredit": "dd3868c4-be97-4b8e-b4f7-92c03a88848c:string:4",
+        "examinationDate": "e4a746e9-90ae-4ad7-9243-8b5d107dd41b:string:2015-02-01T00:00:00+08:00",
+        "programDescription": "3934def7-fa85-409f-a13f-3c13dbf7918b:string:ANIMATION & 3D ARTS",
+        "semester": "85949aeb-17f2-4b85-ac61-7480aa659876:number:3"
+      },
+      {
+        "name": "9a6e1f25-2ff0-4446-a517-0b072224d1be:string:FIGURE DRAWING",
+        "grade": "e2727f81-c92c-417e-8ca7-92bd223513ee:string:C+",
+        "courseCredit": "eef6eb5e-f68f-4785-8749-012faca534db:string:4",
+        "examinationDate": "57978f0f-fa11-43df-bf81-ae33c1e7bd9b:string:2015-02-01T00:00:00+08:00",
+        "programDescription": "6886e0b6-91ff-40df-96d5-5099c8a2fe5e:string:ANIMATION & 3D ARTS",
+        "semester": "2041a270-128a-4a1c-b3db-b9ec474a82f1:number:3"
+      },
+      {
+        "name": "92f818e9-2da3-486b-ba8d-d6f0bff8d35a:string:PRINCIPLES OF BODY MECHANICS",
+        "grade": "90807a88-61b3-46e3-8a1a-eed813636707:string:C+",
+        "courseCredit": "62b149c0-d74d-4ad4-a722-2c97eb2d0dd6:string:4",
+        "examinationDate": "4b64fd39-d448-4dbf-b6ff-2c5c4659e83b:string:2015-02-01T00:00:00+08:00",
+        "programDescription": "75a74616-442d-4223-a040-fdf24ee37d85:string:ANIMATION & 3D ARTS",
+        "semester": "191844a9-d8f6-41bc-b000-bcb3d534490c:number:3"
+      },
+      {
+        "name": "e2833db1-3fed-429b-881d-ba07dc7a86b3:string:STORYBOARDING",
+        "grade": "2e317017-27f8-42f4-8527-509282b5dfd5:string:A",
+        "courseCredit": "e96ac76d-5350-42eb-8dfc-119787bb9177:string:4",
+        "examinationDate": "aa26d34b-ca72-409a-b85b-4e5b12917e12:string:2015-02-01T00:00:00+08:00",
+        "programDescription": "3da92d43-00f7-4a54-8529-fc2eae4e994a:string:ANIMATION & 3D ARTS",
+        "semester": "f2d83c71-ea2f-49eb-9405-389f217d7bbd:number:3"
+      },
+      {
+        "name": "b775ce18-01a0-43a8-9d16-86eed559ea2b:string:TONE, COLOUR & COMPOSITION",
+        "grade": "8e3e2a90-b560-4a56-8397-204db28d625b:string:C+",
+        "courseCredit": "b3c31011-f8ba-4d08-93f5-0b32ad405226:string:4",
+        "examinationDate": "45b1f71d-9fd7-48a9-8546-79bcfd29b712:string:2015-02-01T00:00:00+08:00",
+        "programDescription": "7180d132-13cf-474a-b913-e2d2c8cd9be8:string:ANIMATION & 3D ARTS",
+        "semester": "ea9c1c99-9e2c-4fc5-87e9-9abedbd27f95:number:3"
+      },
+      {
+        "name": "ec95b939-0c49-4545-8053-14fb9595e1de:string:3D CHARACTER ANIMATION",
+        "grade": "7d02615a-e929-471d-bf03-7f8926cc82b2:string:B",
+        "courseCredit": "f101910b-e354-457a-bce6-98e055d9b977:string:4",
+        "examinationDate": "ed828a7c-d8e6-43c1-800c-0ec389805e9b:string:2015-08-01T00:00:00+08:00",
+        "programDescription": "2846b82d-b1b4-4053-9e63-659d2c7a3168:string:ANIMATION & 3D ARTS",
+        "semester": "9fbf3f17-22bf-45e4-ae2f-82e3bf8eaa46:number:4"
+      },
+      {
+        "name": "f6b3025a-39ec-4d60-8c80-060fc5750e86:string:3D MODELLING",
+        "grade": "791b3691-d67e-4293-9e25-70c10901bf6d:string:C+",
+        "courseCredit": "8e3e66a0-f557-4291-8d9c-dcc5a7f3ac44:string:4",
+        "examinationDate": "7e78eaf5-3b4c-4b33-91da-40551dea636d:string:2015-08-01T00:00:00+08:00",
+        "programDescription": "be6941e8-475d-42c2-b885-e6df90a3e1a1:string:ANIMATION & 3D ARTS",
+        "semester": "4c31f00b-2bd5-471f-bdf7-08e5bd1425d2:number:4"
+      },
+      {
+        "name": "34c32fd7-d345-435a-9adc-1bb62ff1851c:string:ADVANCED FIGURE DRAWING",
+        "grade": "40f3c2ff-333a-4147-b8d3-7baa970d3833:string:B",
+        "courseCredit": "3f10e01e-b942-4d0b-a3b2-96539bcf48e4:string:4",
+        "examinationDate": "352d3842-8737-4ae9-9192-3f1295d24ea5:string:2015-08-01T00:00:00+08:00",
+        "programDescription": "f0df8fc0-4c80-4e14-8d91-a9c9cbfd6eca:string:ANIMATION & 3D ARTS",
+        "semester": "f5fb6399-1d9a-407a-9222-b22fed993aec:number:4"
+      },
+      {
+        "name": "59d0c6cd-c710-486b-9e5b-d53bad9a17ad:string:ANIMAL ANATOMY",
+        "grade": "7235c63e-4097-4019-842f-58c181ac7008:string:B",
+        "courseCredit": "3896c42a-9414-47e3-95a6-7e07c51f5149:string:4",
+        "examinationDate": "05955a09-ac38-4b72-a426-ba55b18eebd9:string:2015-08-01T00:00:00+08:00",
+        "programDescription": "afedf548-e2ce-4174-a39c-7cf24ecb0c90:string:ANIMATION & 3D ARTS",
+        "semester": "e01eff79-39b8-496d-819d-cf9dba2de7db:number:4"
+      },
+      {
+        "name": "9258d625-561d-4671-903f-9f50c4f23250:string:CAREER AND PROFESSIONAL PREPARATION II",
+        "grade": "a1d72f7e-bd2c-4e02-a1b3-f1f5a13ca725:string:B",
+        "courseCredit": "f4072272-a083-4b99-96b8-a992e29dbeb2:string:2",
+        "examinationDate": "6d1cdf8c-a827-427a-bf24-2014c357e562:string:2015-08-01T00:00:00+08:00",
+        "programDescription": "b279fdf5-2804-486d-b27c-0fab5d4b7eb8:string:ANIMATION & 3D ARTS",
+        "semester": "d48a4b8e-a3fd-43f1-80db-a11285687787:number:4"
+      },
+      {
+        "name": "ef91c271-9e4d-49cc-ba77-11a35eda12b9:string:INTRODUCTION TO SOCIAL PSYCHOLOGY",
+        "grade": "49bc49c4-4e71-447b-86dc-9d1a6b906617:string:C+",
+        "courseCredit": "492fdd41-931c-4897-8fae-27d063b71412:string:2",
+        "examinationDate": "e59fe1c5-e662-461c-b007-e24dccdc0135:string:2015-08-01T00:00:00+08:00",
+        "programDescription": "860c6d84-da03-429c-b40b-e5f671dbba39:string:ANIMATION & 3D ARTS",
+        "semester": "3bdadbe3-b888-441f-899b-309ce81ec4ae:number:4"
+      },
+      {
+        "name": "563014f9-9e12-4b0c-8bef-2591121f10e5:string:TEXTURE & SHADING",
+        "grade": "d5195143-133e-41b6-8f96-5e20b17f054c:string:B",
+        "courseCredit": "fca9659f-a2d2-4327-9f0a-275b6adf4d43:string:4",
+        "examinationDate": "8d73eea2-ece1-421c-8b76-93fb259f3ccb:string:2015-08-01T00:00:00+08:00",
+        "programDescription": "3f29adc7-7512-456d-b0eb-1d454e9be9a2:string:ANIMATION & 3D ARTS",
+        "semester": "fed59420-7819-490a-a1cf-ed94b1c542f7:number:4"
+      },
+      {
+        "name": "9de351bf-e4df-4aaf-98ce-87eef82e2395:string:ADVANCED 3D MODELLING",
+        "grade": "2aaf76f7-a61c-4ee7-8379-e49a830258ae:string:B",
+        "courseCredit": "6431bc97-97fe-4d53-a73b-b132a5a7f497:string:4",
+        "examinationDate": "b1a511f8-79c6-4473-8a4f-fd35a49d742c:string:2016-02-01T00:00:00+08:00",
+        "programDescription": "e7050672-4215-40c7-b52c-2173b352b6bc:string:ANIMATION & 3D ARTS",
+        "semester": "1813c996-a6c3-4cec-a2ec-864c507545ae:number:5"
+      },
+      {
+        "name": "eef44b94-78ed-4545-a5a7-abbb032d926c:string:ARCHITECTURAL SPACES, DESIGN & LIGHTING",
+        "grade": "a4e1bcc8-3296-455a-8021-b927a818a613:string:B+",
+        "courseCredit": "e9f08e37-4fd1-41c0-940a-fdc9f60ba286:string:4",
+        "examinationDate": "6d028687-cc87-4afa-9254-14d815fdf4ec:string:2016-02-01T00:00:00+08:00",
+        "programDescription": "3a0dda3e-db12-4a0a-a0e8-5ad24694f2dd:string:ANIMATION & 3D ARTS",
+        "semester": "39495a1f-9721-403f-b996-4ee3b49d699b:number:5"
+      },
+      {
+        "name": "33299135-aacc-4242-a9d6-ff87977d4de3:string:BASIC CONVERSATIONAL FRENCH",
+        "grade": "316d7362-0481-4cd6-a657-13d1ae6e3cc8:string:B+",
+        "courseCredit": "98aeeab5-29ef-4ee1-a2fb-3a3ddd8eda64:string:2",
+        "examinationDate": "952c35ef-0097-4c82-a6f3-6dd6cfbc2b2d:string:2016-02-01T00:00:00+08:00",
+        "programDescription": "1d478d73-331b-44cd-8591-1f9fbcd25da1:string:ANIMATION & 3D ARTS",
+        "semester": "e7283ec4-2886-4f7f-ac04-45ef349d37f0:number:5"
+      },
+      {
+        "name": "173196d3-b317-47b7-9a68-44fe3da4df30:string:CHARACTER DESIGN",
+        "grade": "9ecdf09a-18b0-4588-9130-b5f152fb882c:string:B",
+        "courseCredit": "c30a9c7b-8585-4cf0-9515-667308aac559:string:4",
+        "examinationDate": "71a69fa0-b7b3-4320-8fce-32a556003064:string:2016-02-01T00:00:00+08:00",
+        "programDescription": "96416382-d876-4451-b58b-37d7100926f8:string:ANIMATION & 3D ARTS",
+        "semester": "02c1b789-c7ac-4f85-8b5b-6fbd23997d87:number:5"
+      },
+      {
+        "name": "6759830f-3f8a-42be-bc6f-c75a802beda5:string:HUMAN ANATOMY",
+        "grade": "660f89b3-b625-4da4-a9e2-8797e997d2af:string:B+",
+        "courseCredit": "979be919-2185-46cd-b40f-f53f55e654da:string:4",
+        "examinationDate": "ea3dcdf6-6bd3-4ab7-a85f-dc7210b878de:string:2016-02-01T00:00:00+08:00",
+        "programDescription": "01cda25a-ca5c-4287-a489-3bf93aecc13e:string:ANIMATION & 3D ARTS",
+        "semester": "bd1fc5f9-aaed-4a53-9dba-c68146ff77e3:number:5"
+      },
+      {
+        "name": "2a280ffb-5349-435a-aa88-dba7221944a0:string:PROPS & ENVIRONMENT DESIGN",
+        "grade": "0fe2b05c-f8f7-4c04-b208-be1942ca8542:string:B+",
+        "courseCredit": "47e31ad5-47e1-4313-8e14-267dfc31946b:string:4",
+        "examinationDate": "ba0c7310-ae8e-469d-ba2f-c376dbdc6ea2:string:2016-02-01T00:00:00+08:00",
+        "programDescription": "c136355a-567c-45e7-8b9c-9f336c201760:string:ANIMATION & 3D ARTS",
+        "semester": "04656fd8-8baf-4231-a75f-7d1f001c2eb4:number:5"
+      },
+      {
+        "name": "77f9734a-4b0e-4c6b-8fe8-22666eee398a:string:3D ANIMATION PRODUCTION",
+        "grade": "832498fb-8589-4ab5-abbf-ac70e2c6f6a0:string:B+",
+        "courseCredit": "8bc7ad2d-09db-4461-893a-77b7988cbfe4:string:4",
+        "examinationDate": "ff3d51da-c6f3-4799-b9a1-1327732458fa:string:2016-08-01T00:00:00+08:00",
+        "programDescription": "08536192-0fdf-495a-810d-56025d1d9f00:string:ANIMATION & 3D ARTS",
+        "semester": "b38f9023-412b-4330-9dd6-93e16bcba819:number:6"
+      },
+      {
+        "name": "77c656e2-0839-4b15-a197-925eb5c5e298:string:3D CHARACTER RIGGING",
+        "grade": "a02c5980-3d8d-40c7-abc4-e2d0e6acb874:string:B",
+        "courseCredit": "ae3a5467-32a0-4ae5-92b2-152d952e83a6:string:4",
+        "examinationDate": "411cd36f-0df5-442c-b984-ef5ba8e794cb:string:2016-08-01T00:00:00+08:00",
+        "programDescription": "80f19c24-d373-4211-9150-62adb2b698a9:string:ANIMATION & 3D ARTS",
+        "semester": "c5a6e7b5-1a24-4596-ac93-c75e5e305726:number:6"
+      },
+      {
+        "name": "395245fb-0dab-4078-b9a9-dfc1d81a16c7:string:3D ENVIRONMENT MODELLING",
+        "grade": "3f3896f7-eee1-41e1-82cc-3a4a67d37ea7:string:A",
+        "courseCredit": "5524f752-576e-43ba-8894-2a7b8bf11868:string:4",
+        "examinationDate": "384f7c59-c286-44ea-9b76-c5719a81153c:string:2016-08-01T00:00:00+08:00",
+        "programDescription": "391e9995-719d-47fe-965e-bc8afdf117ba:string:ANIMATION & 3D ARTS",
+        "semester": "a6ed7d33-b987-482f-88d7-4a0f405f7306:number:6"
+      },
+      {
+        "name": "186d4250-430e-4d61-8271-9b80a8943155:string:CONCEPT DEVELOPMENT",
+        "grade": "ebfe29c6-4601-4695-bdc3-b95917cbfcce:string:A",
+        "courseCredit": "22c344e5-d829-48d8-9d53-719bf1d25bce:string:4",
+        "examinationDate": "66952ffd-b55c-4f67-b219-923e2393e7cc:string:2016-08-01T00:00:00+08:00",
+        "programDescription": "8b1fee19-c4e9-4441-ae5b-5fdcef7d9706:string:ANIMATION & 3D ARTS",
+        "semester": "ac49b9a0-649e-4bda-b4f9-e2e887ac9e84:number:6"
+      },
+      {
+        "name": "8fa8390c-d0cb-4d60-b791-453de624bf4e:string:DIGITAL CINEMATOGRAPHY",
+        "grade": "3d859c82-fb53-4af1-a2f5-7e0023c6af50:string:B",
+        "courseCredit": "7f15d80d-b924-43cd-82e8-2d93c55a812d:string:4",
+        "examinationDate": "010bd9b5-7799-427e-a7ef-515f60085b81:string:2016-08-01T00:00:00+08:00",
+        "programDescription": "29a950c4-4cae-461e-b3af-7d89d1605c4d:string:ANIMATION & 3D ARTS",
+        "semester": "d9db0947-5738-44b6-95ad-009f5f17e4a4:number:6"
+      },
+      {
+        "name": "54337a68-cf78-4566-979a-1672ac1967d8:string:STUDIO-BASED PRODUCTION",
+        "grade": "562f69d3-660f-4cad-b42f-94b1f01969e1:string:B+",
+        "courseCredit": "ef59627c-1757-4780-82a4-0650ffd6542c:string:22",
+        "examinationDate": "1983d9db-965a-42a9-8726-4b5682abdee7:string:2017-02-01T00:00:00+08:00",
+        "programDescription": "54f917eb-0417-45ad-be63-5685dc4d8ded:string:ANIMATION & 3D ARTS",
+        "semester": "27f59d79-5c5c-4d50-8f38-78209148c074:number:7"
+      },
+      {
+        "name": "65cdba87-d490-471e-81b2-2e3cea22d626:string:WORLD ISSUES: A SINGAPORE PERSPECTIVE",
+        "grade": "ca6041f3-2fd4-4219-8f17-3821d85e39d2:string:B+",
+        "courseCredit": "e6a6bd05-de18-4752-96bc-9789e7377f32:string:2",
+        "examinationDate": "ae23b443-b110-45e3-8154-7ba914d9fe8b:string:2017-02-01T00:00:00+08:00",
+        "programDescription": "17d7ba57-9c8e-46b3-b3a6-dada7415e97c:string:ANIMATION & 3D ARTS",
+        "semester": "aad4c3e5-166b-4066-9c5f-66c313fb764c:number:7"
+      }
+    ]
+  },
+  "privacy": {},
+  "signature": {
+    "type": "SHA3MerkleProof",
+    "targetHash": "b042929168780bece945b6850f1d2eed584dad0aae3739a9ed85ccfebb975854",
+    "proof": [],
+    "merkleRoot": "b042929168780bece945b6850f1d2eed584dad0aae3739a9ed85ccfebb975854"
+  }
+}
