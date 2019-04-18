@@ -1,7 +1,7 @@
 import { get } from "lodash";
 import { IMG_LOGO_NP, IMG_CERTIFICATE_SEAL } from "./images";
 import {
-  formatDate,
+  formatDateFullMonthProper,
   formatDatePrefix,
   formatCertName,
   formatCertID
@@ -341,7 +341,7 @@ export const renderIssuingDate = certificate => (
   <div>
     <p>
       {formatDatePrefix(certificate.issuedOn)}{" "}
-      {formatDate(certificate.issuedOn)}
+      {formatDateFullMonthProper(certificate.issuedOn)}
     </p>
   </div>
 );

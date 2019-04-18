@@ -28,7 +28,7 @@ test("PTD-MAIN 2019 certificate is rendered correctly", async t => {
     "Early Childhood Care & Education",
     "Principal",
     "Council Chairman",
-    "MAY 2019",
+    "May 2019",
     "DCET119M2001"
   ]);
 

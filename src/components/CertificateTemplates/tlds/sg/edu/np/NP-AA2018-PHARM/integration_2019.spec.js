@@ -31,7 +31,7 @@ test("PHARM 2019 certificate is rendered correctly", async t => {
     "Ngee Ann Polytechnic",
     "Chief Executive Officer",
     "National University Hospital",
-    "MAY 2019",
+    "May 2019",
     "PHARM180005"
   ]);
 

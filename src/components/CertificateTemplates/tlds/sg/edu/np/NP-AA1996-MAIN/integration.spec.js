@@ -29,7 +29,7 @@ test("FT-MAIN 1996 certificate is rendered correctly", async t => {
     "Animation & 3D Arts",
     "Principal",
     "Council Chairman",
-    "MAY 1996",
+    "May 1996",
     "001"
   ]);
 });
