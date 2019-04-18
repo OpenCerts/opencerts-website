@@ -18,6 +18,12 @@ export const formatDateFullMonth = dateString => {
     .toUpperCase();
 };
 
+export const formatDateFullMonthProper = dateString => {
+  if (!dateString) return null;
+  const date = new Date(dateString);
+  return tz(date, TIMEZONE).format("MMMM YYYY");
+};
+
 export const formatNRIC = nricFin => {
   if (!nricFin) return null;
   const arrayNric = nricFin.split(":");

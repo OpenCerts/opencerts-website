@@ -31,7 +31,7 @@ test("BMS 2018 certificate is rendered correctly", async t => {
     "Ngee Ann Polytechnic",
     "Chief Executive Officer",
     "National University Hospital",
-    "MAY 2018",
+    "May 2018",
     "BMS180002"
   ]);
 

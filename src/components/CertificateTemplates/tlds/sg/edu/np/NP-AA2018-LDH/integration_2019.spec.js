@@ -31,7 +31,7 @@ test("LDH 2019 certificate is rendered correctly", async t => {
     "Ngee Ann Polytechnic",
     "Chief Executive Officer",
     "National Parks Board",
-    "MAY 2019",
+    "May 2019",
     "LDH190004"
   ]);
 

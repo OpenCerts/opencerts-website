@@ -31,7 +31,7 @@ test("NIEC 2019 certificate is rendered correctly", async t => {
     "Ngee Ann Polytechnic",
     "Director",
     "National Institute of Early Childhood Development",
-    "MAY 2019",
+    "May 2019",
     "ECH190003"
   ]);
 
