@@ -28,7 +28,7 @@ test("PDP-MAIN 2019 certificate is rendered correctly", async t => {
     "Early Childhood Teaching",
     "Principal",
     "Council Chairman",
-    "MAY 2019",
+    "May 2019",
     "DCECT19M3001"
   ]);
 

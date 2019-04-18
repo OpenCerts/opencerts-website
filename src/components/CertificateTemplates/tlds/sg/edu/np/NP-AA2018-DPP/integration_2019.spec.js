@@ -28,7 +28,7 @@ test("DPP 2019 certificate is rendered correctly", async t => {
     "French",
     "Principal",
     "Council Chairman",
-    "MAY 2019",
+    "May 2019",
     "CIF191001"
   ]);
 
@@ -41,6 +41,7 @@ test("DPP 2019 certificate is rendered correctly", async t => {
     "TRANSCRIPT OF ACADEMIC RECORD",
     "Student Name DPP Cert 2019",
     "S1234567A",
+    "MAY 2019",
     "CERTIFICATE IN FRENCH",
     "MINDWORKS",
     "DRAWING & PERSPECTIVE",

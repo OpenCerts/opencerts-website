@@ -30,7 +30,7 @@ test("ECH 2018 certificate is rendered correctly", async t => {
     "Council Chairman",
     "Ngee Ann Polytechnic",
     "NTUC First Campus Co-operative Ltd & Director, SEED Institute Pte Ltd",
-    "MAY 2018",
+    "May 2018",
     "ECH180003"
   ]);
 
