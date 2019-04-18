@@ -29,7 +29,8 @@ const calibri23ptBold = {
   fontSize: "30px",
   fontWeight: "bold",
   textAlign: "center",
-  color: "black"
+  color: "black",
+  whiteSpace: "pre-wrap"
 };
 
 const calibri9pt = {
@@ -62,7 +63,7 @@ const borderImgStyle = {
 
 const Template = ({ certificate }) => (
   <div className="container" style={borderImgStyle}>
-    <div style={{ marginLeft: "30rem", marginRight: "10rem" }}>
+    <div style={{ marginLeft: "30rem", marginRight: "2rem" }}>
       <div
         className="row d-flex justify-content-center"
         style={{ marginTop: "7rem" }}
@@ -155,7 +156,7 @@ const Template = ({ certificate }) => (
         </div>
       </div>
     </div>
-    <div style={{ marginLeft: "10rem", marginRight: "5rem" }}>
+    <div style={{ marginLeft: "16rem", marginRight: "2rem" }}>
       <div className="row d-flex justify-content-center">&nbsp;</div>
       <div
         className="row d-flex justify-content-center"
