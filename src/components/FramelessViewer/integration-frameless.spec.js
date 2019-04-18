@@ -35,12 +35,8 @@ test("Default certificate is rendered correctly", async t => {
 
   // Validate content of first tab
   await validateTextContent(t, RenderedCertificate, [
-    "Student Name MAIN Cert 2018",
-    "Diploma with Merit",
-    "Animation & 3D Arts",
     "Principal",
     "Council Chairman",
-    "MAY 2018",
     "A3DA180001"
   ]);
 
@@ -50,21 +46,6 @@ test("Default certificate is rendered correctly", async t => {
   // Validate content of second tab
   await validateTextContent(t, RenderedCertificate, [
     "TRANSCRIPT OF ACADEMIC RECORD",
-    "PASS WITH MERIT",
-    "0000001",
-    "Student Name MAIN Cert 2018",
-    "S1234567A",
-    "APRIL 2014",
-    "MOLECULAR BIOTECHNOLOGY",
-    "MINDWORKS",
-    "ANIMATION & 3D ARTS",
-    "WORLD ISSUES: A SINGAPORE PERSPECTIVE",
-    "National Physical Fitness Award",
-    "allowed a transfer",
-    "National Physical Fitness Award",
-    "Graduating GPA: 3.7835",
-    "Professional Preparation Programme",
-    "The student has completed the full-time course in Diploma in Biomedical Science",
     "DIRECTOR, ACADEMIC AFFAIRS"
   ]);
 });
