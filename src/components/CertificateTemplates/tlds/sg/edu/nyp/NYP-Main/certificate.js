@@ -63,7 +63,7 @@ const borderImgStyle = {
 
 const Template = ({ certificate }) => (
   <div className="container" style={borderImgStyle}>
-    <div style={{ marginLeft: "20rem", marginRight: "2rem" }}>
+    <div style={{ marginLeft: "25rem", marginRight: "5rem" }}>
       <div
         className="row d-flex justify-content-center"
         style={{ marginTop: "7rem" }}
@@ -72,7 +72,7 @@ const Template = ({ certificate }) => (
       </div>
       <div
         className="row d-flex justify-content-center align-items-center"
-        style={{ height: "100px", lineHeight: "160%" }}
+        style={{ height: "100px", lineHeight: "175%" }}
       >
         <span style={calibri24ptBold}>{certificate.recipient.name}</span>
       </div>
@@ -87,7 +87,7 @@ const Template = ({ certificate }) => (
       </div>
       <div
         className="row d-flex justify-content-center align-items-center"
-        style={{ height: "100px", lineHeight: "160%" }}
+        style={{ height: "100px", lineHeight: "170%" }}
       >
         <span style={calibri23ptBold}>
           {certificate.additionalData.courseName}
