@@ -63,7 +63,7 @@ const borderImgStyle = {
 
 const Template = ({ certificate }) => (
   <div className="container" style={borderImgStyle}>
-    <div style={{ marginLeft: "30rem", marginRight: "2rem" }}>
+    <div style={{ marginLeft: "20rem", marginRight: "2rem" }}>
       <div
         className="row d-flex justify-content-center"
         style={{ marginTop: "7rem" }}
@@ -156,7 +156,7 @@ const Template = ({ certificate }) => (
         </div>
       </div>
     </div>
-    <div style={{ marginLeft: "16rem", marginRight: "2rem" }}>
+    <div style={{ marginLeft: "10rem", marginRight: "2rem" }}>
       <div className="row d-flex justify-content-center">&nbsp;</div>
       <div
         className="row d-flex justify-content-center"
