@@ -48,8 +48,8 @@ export const getRecipientID = recipient => {
   if (recipient.fin) {
     return recipient.fin;
   }
-  if (recipient.did) {
-    return recipient.did;
+  if (recipient.id) {
+    return recipient.id;
   }
   return null;
 };

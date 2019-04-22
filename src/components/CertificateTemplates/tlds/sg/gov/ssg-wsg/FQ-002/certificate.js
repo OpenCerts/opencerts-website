@@ -1,7 +1,6 @@
 import { get } from "lodash";
-import { IMG_LOGO, IMG_SEAL, IMG_SSGLOGO } from "../common";
-// import { IMG_LOGO_FQ001, IMG_SEAL_FQ001, IMG_SSGLOGO_FQ001 } from "../common";
-import { formatDate, getRecipientID } from "../common/functions";
+import { IMG_LOGO, IMG_SEAL, IMG_SSGLOGO, IMG_ORDNANCE } from "../common";
+import { formatDate, formatCertID, getRecipientID } from "../common/functions";
 
 export const fullWidthStyle = {
   width: "100%",
@@ -41,7 +40,7 @@ export const singaporeTextStyle = {
 
 export const nameTextStyle = {
   fontSize: "2.3rem",
-  textAlign: "center",
+  textAlign: "left",
   fontWeight: "bold",
   wordBreak: "break-word"
 };
@@ -112,19 +111,27 @@ export const renderSignature = certificate => (
       <div style={designationTextStyle}>
         {get(certificate, "additionalData.certSignatories[0].organisation")}
       </div>
-      <div style={footerTextStyle}>
-        The training and assessment of the abovementioned learner are accredited
-        in accordance with the Singapore Workforce Skills Qualifications System.
+      <div style={{ paddingLeft: "0px" }} className="col-lg-5 col-12">
+        <img style={footerLogoStyle} src={IMG_SSGLOGO} />
       </div>
-      <div style={footerTextStyle}>
-        <a style={{ color: "rgb(51,0,144)" }} href="www.ssg.gov.sg">
-          www.ssg.gov.sg
-        </a>
-        <br />
-        For verification of this certificate, please visit
-        <a href="https://myskillsfuture.sg/verify_eCert.html">
-          https://myskillsfuture.sg/verify_eCert.html
-        </a>
+      <div className="col-lg-10 col-12" style={{ paddingLeft: "0px" }}>
+        <div style={footerTextStyle}>
+          The training and assessment of the abovementioned learner are
+          accredited
+          <br />
+          in accordance with the Singapore Workforce Skills Qualifications
+          System.
+        </div>
+        <div style={footerTextStyle}>
+          <a style={{ color: "rgb(51,0,144)" }} href="www.ssg.gov.sg">
+            www.ssg.gov.sg
+          </a>
+          <br />
+          For verification of this certificate, please visit{" "}
+          <a href="https://myskillsfuture.sg/verify_eCert.html">
+            https://myskillsfuture.sg/verify_eCert.html
+          </a>
+        </div>
       </div>
     </div>
     <div className="col-lg-3 col-xs-12">
@@ -133,7 +140,8 @@ export const renderSignature = certificate => (
           Cert No: {get(certificate, "additionalData.serialNum")}
         </p>
       </div>
-      <img style={footerLogoStyle} src={IMG_SSGLOGO} />
+      <div style={footerTextStyle}>In partnership with</div>
+      <img style={footerLogoStyle} src={IMG_ORDNANCE} />
       <div style={certCodeStyle}>
         {get(certificate, "additionalData.certCode")}
       </div>
@@ -181,6 +189,17 @@ export const renderAwardText = certificate => (
 export const renderIssuingDate = certificate => (
   <div className="d-flex" style={{ marginTop: "1rem" }}>
     <p style={issuersTextStyle}>{formatDate(certificate.attainmentDate)}</p>
+  </div>
+);
+
+export const renderFooter = certificate => (
+  <div className="container">
+    <div className="row d-flex justify-content-center">
+      <div className="col-6 text-left">
+        {get(certificate, "additionalData.additionalCertId")}
+      </div>
+      <div className="col-6 text-right">{formatCertID(certificate.id)}</div>
+    </div>
   </div>
 );
 

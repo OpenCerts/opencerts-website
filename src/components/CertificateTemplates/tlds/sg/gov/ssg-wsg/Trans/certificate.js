@@ -1,5 +1,5 @@
 import { get } from "lodash";
-import { IMG_LOGO_FQ001, IMG_SSGLOGO_FQ001 } from "../common";
+import { IMG_LOGO, IMG_SSGLOGO } from "../common";
 import { formatDate, formatCertID, getRecipientID } from "../common/functions";
 
 export const fullWidthStyle = {
@@ -93,7 +93,7 @@ const renderTranscriptItems = certificate =>
 export const renderLogoWSQ = () => (
   <div className="row d-flex" style={{ marginTop: "3rem" }}>
     <div className="col-lg-6 col-12">
-      <img style={fullWidthStyle} src={IMG_LOGO_FQ001} />
+      <img style={fullWidthStyle} src={IMG_LOGO} />
     </div>
   </div>
 );
@@ -113,12 +113,12 @@ export const renderSignature = certificate => (
       <div style={footerTextStyle}>Transcript guide printed on reverse</div>
       <div style={footerLinkStyle}>
         For verification of this certificate, please visit
-        https://uat.myskillsfuture.sg/verify_eCert.html
+        https://myskillsfuture.sg/verify_eCert.html
       </div>
     </div>
     <div className="col-lg-2 col-xs-12" />
     <div className="col-lg-3 col-xs-12">
-      <img style={footerLogoStyle} src={IMG_SSGLOGO_FQ001} />
+      <img style={footerLogoStyle} src={IMG_SSGLOGO} />
       <div style={certCodeStyle}>TRA</div>
     </div>
   </div>

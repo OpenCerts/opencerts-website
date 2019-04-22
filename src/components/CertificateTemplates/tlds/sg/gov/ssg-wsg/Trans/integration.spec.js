@@ -1,6 +1,6 @@
 import { Selector } from "testcafe";
 
-fixture("Ropsten : Skillsfuture Singapore").page`http://localhost:3000`;
+fixture("ROPSTEN : Skillsfuture Singapore").page`http://localhost:3000`;
 
 const Certificate = "./Trans_S0000000A_18T000000012381.OPENCERT";
 
@@ -13,7 +13,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("Transcript certificate is rendered correctly", async t => {
+test("Trans certificate is rendered correctly", async t => {
   // Uploads certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 

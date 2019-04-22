@@ -2,7 +2,7 @@ import { Selector } from "testcafe";
 
 fixture("ROPSTEN : Skillsfuture Singapore").page`http://localhost:3000`;
 
-const Certificate = "./SOA-001.OPENCERT";
+const Certificate = "./FQ-002.OPENCERT";
 
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
@@ -13,7 +13,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("SOA001 certificate is rendered correctly", async t => {
+test("FQ002 certificate is rendered correctly", async t => {
   // Uploads certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
@@ -22,13 +22,12 @@ test("SOA001 certificate is rendered correctly", async t => {
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
-    "STATEMENT OF ATTAINMENT",
+    "Higher Certificate in Healthcare Support",
     "is awarded to",
-    "A",
+    "Lee1",
     "ID No: S0000000A",
-    "for successful attainment of the following industry approved competencies",
-    "HR-PRB-503E-1 Develop strategies for total remuneration",
-    "at SINGAPORE NATIONAL EMPLOYERS FEDERATION",
-    "01 Dec 2018"
+    "for successful attainment of the requiredindustry approved competencies",
+    "at WSQ_20180620",
+    "20 Nov 2018"
   ]);
 });
