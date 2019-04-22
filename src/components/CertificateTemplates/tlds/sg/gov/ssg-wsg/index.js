@@ -43,6 +43,21 @@ const SOA001 = dynamic(() =>
 const SFSOA001 = dynamic(() =>
   import("./SF_SOA_001" /* webpackChunkName: "SSGTemplates" */)
 );
+const SOAReprint = dynamic(() =>
+  import("./SOA_Reprint" /* webpackChunkName: "SSGTemplates" */)
+);
+const SFSOAES001 = dynamic(() =>
+  import("./SF_SOA_ES_001" /* webpackChunkName: "SSGTemplates" */)
+);
+const SFSOAHR01 = dynamic(() =>
+  import("./SF_SOA_HR_01" /* webpackChunkName: "SSGTemplates" */)
+);
+const SFSOAIT001 = dynamic(() =>
+  import("./SF_SOA_IT_001" /* webpackChunkName: "SSGTemplates" */)
+);
+const SFSOAMF01 = dynamic(() =>
+  import("./SF_SOA_MF_01" /* webpackChunkName: "SSGTemplates" */)
+);
 const Transcript = dynamic(() =>
   import("./Trans" /* webpackChunkName: "SSGTemplates" */)
 );
@@ -56,9 +71,22 @@ const templates = {
   SF_FQ_001: SFFQ001,
   SF_FQ_002: SFFQ002,
   SF_FQ_004: SFFQ004,
+  SF_FQ_005: FQ005,
+  SF_FQ_006: FQ006,
   QUAL_Reprint: QualReprint,
   "SOA-001": SOA001,
   SF_SOA_001: SFSOA001,
+  SOA_Reprint: SOAReprint,
+
+  SF_SOA_ES_001: SFSOAES001,
+  SF_SOA_HR_01: SFSOAHR01,
+  SF_SOA_HR_02: SFSOAHR01,
+  SF_SOA_HR_03: SFSOAHR01,
+  SF_SOA_HR_04: SFSOAHR01,
+  SF_SOA_HR_05: SFSOAHR01,
+  SF_SOA_IT_001: SFSOAIT001,
+  SF_SOA_MF_01: SFSOAMF01,
+  SF_SOA_MF_02: SFSOAMF01,
   Trans: Transcript
 };
 
