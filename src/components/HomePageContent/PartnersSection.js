@@ -4,7 +4,13 @@ import { IMAGES } from "../../constants/PartnerLogo";
 const CarouselSection = () => {
   const items = IMAGES.map((item, i) => (
     <div className={css["logo-container"]} key={i}>
-      <img className="mx-auto" src={item.value} id={css[item.key]} />
+      <img
+        className="mx-auto"
+        src={item.value}
+        title={item.name}
+        alt={item.name}
+        id={css[item.key]}
+      />
     </div>
   ));
   return <div className="d-flex flex-wrap">{items}</div>;
