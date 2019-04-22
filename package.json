@@ -37,7 +37,7 @@
     "next-ga": "^2.3.4",
     "next-redux-wrapper": "^2.0.0",
     "node-sass": "^4.10.0",
-    "numbers-to-words": "^1.0.6",
+    "number-to-words": "^1.2.4",
     "prop-types": "^15.6.1",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
