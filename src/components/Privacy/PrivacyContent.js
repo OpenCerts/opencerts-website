@@ -58,7 +58,8 @@ const Policy = () => (
         sites.
       </li>
       <li>
-        Please contact 1800 211 0777 or qsm@tech.gov.sg if you:
+        Please contact 1800 211 0777 or{" "}
+        <a href="mailto:qsm@tech.gov.sg">qsm@tech.gov.sg</a> if you:
         <ol type="a">
           <li>
             have any enquires or feedback on our data protection policies and
