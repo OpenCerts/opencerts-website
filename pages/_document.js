@@ -37,10 +37,7 @@ export default class MyDocument extends Document {
           <meta property="og:url" content="https://opencerts.io/" />
           <meta property="og:site_name" content="OpenCerts" />
           <meta property="article:tag" content="OpenCerts" />
-          <meta
-            property="og:image"
-            content="../static/images/opencertslogo.svg"
-          />
+          <meta property="og:image" content="../static/images/opencerts.png" />
 
           <script
             src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
