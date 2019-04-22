@@ -40,11 +40,25 @@ const SOA001 = dynamic(() =>
   import("./SOA-001" /* webpackChunkName: "SSGTemplates" */)
 );
 
+const SOA002 = dynamic(() =>
+  import("./SOA-002" /* webpackChunkName: "SSGTemplates" */)
+);
+
+const SOA003 = dynamic(() =>
+  import("./SOA-003" /* webpackChunkName: "SSGTemplates" */)
+);
+
 const SFSOA001 = dynamic(() =>
   import("./SF_SOA_001" /* webpackChunkName: "SSGTemplates" */)
 );
 const SOAReprint = dynamic(() =>
   import("./SOA_Reprint" /* webpackChunkName: "SSGTemplates" */)
+);
+const SOASV001 = dynamic(() =>
+  import("./SOA_SV_001" /* webpackChunkName: "SSGTemplates" */)
+);
+const SOAES001 = dynamic(() =>
+  import("./SOA-ES-001" /* webpackChunkName: "SSGTemplates" */)
 );
 const SFSOAES001 = dynamic(() =>
   import("./SF_SOA_ES_001" /* webpackChunkName: "SSGTemplates" */)
@@ -75,9 +89,15 @@ const templates = {
   SF_FQ_006: FQ006,
   QUAL_Reprint: QualReprint,
   "SOA-001": SOA001,
+  "SOA-002": SOA002,
+  "SOA-003": SOA003,
   SF_SOA_001: SFSOA001,
+  SF_SOA_002: SOA002,
+  SF_SOA_003: SOA003,
   SOA_Reprint: SOAReprint,
-
+  SOA_SV_001: SOASV001,
+  SF_SOA_SV_001: SOASV001,
+  "SOA-ES-001": SOAES001,
   SF_SOA_ES_001: SFSOAES001,
   SF_SOA_HR_01: SFSOAHR01,
   SF_SOA_HR_02: SFSOAHR01,
