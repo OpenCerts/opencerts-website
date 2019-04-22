@@ -20,6 +20,27 @@ export default class MyDocument extends Document {
           />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta charSet="utf-8" />
+          <meta
+            name="description"
+            content="Whether you're a student or an employer, OpenCerts lets you verify the certificates you have of anyone from any institution. All in one place."
+          />
+          <meta
+            name="keywords"
+            content="OpenCerts, GovTech, Check, Verify, Certificate, Blockchain"
+          />
+          <meta name="author" content="GovTech" />
+          <meta property="og:title" content="OpenCerts" />
+          <meta
+            property="og:description"
+            content="Whether you're a student or an employer, OpenCerts lets you verify the certificates you have of anyone from any institution. All in one place."
+          />
+          <meta property="og:url" content="https://opencerts.io/" />
+          <meta property="og:site_name" content="OpenCerts" />
+          <meta property="article:tag" content="OpenCerts" />
+          <meta
+            property="og:image"
+            content="../static/images/opencertslogo.svg"
+          />
 
           <script
             src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

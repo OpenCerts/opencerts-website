@@ -7,7 +7,9 @@ import MainPageContainer from "../src/components/MainPageContainer";
 const VerifierPage = () => (
   <div>
     <Head>
-      <title>OpenCerts</title>
+      <title>
+        OpenCerts - An easy way to check and verify your certificates
+      </title>
     </Head>
     <NavigationBar active="home" />
     <MainPageContainer />
