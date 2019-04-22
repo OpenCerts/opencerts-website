@@ -10,7 +10,10 @@ const templates = [
   }
 ];
 
-const addresses = ["0x5f007251c78cA92d3053492cCf0EDC161063624c"];
+const addresses = [
+  "0x5f007251c78cA92d3053492cCf0EDC161063624c",
+  "0x5CA3b9daC85DA4DE4030e59C1a0248004209e348"
+];
 
 const NYPCert = ({ certificate }) => (
   <MultiCertificateRenderer
