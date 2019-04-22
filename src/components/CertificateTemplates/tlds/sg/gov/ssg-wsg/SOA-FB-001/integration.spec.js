@@ -2,7 +2,7 @@ import { Selector } from "testcafe";
 
 fixture("ROPSTEN : Skillsfuture Singapore").page`http://localhost:3000`;
 
-const Certificate = "./SOA-FB-001.opencert";
+const Certificate = "./SOA-FB-01.opencert";
 
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
