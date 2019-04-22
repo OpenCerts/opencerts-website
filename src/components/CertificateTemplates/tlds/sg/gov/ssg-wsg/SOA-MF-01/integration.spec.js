@@ -2,7 +2,7 @@ import { Selector } from "testcafe";
 
 fixture("ROPSTEN : Skillsfuture Singapore").page`http://localhost:3000`;
 
-const Certificate = "./Trans_S0000000A_18T000000012381.opencert";
+const Certificate = "./SOA-MF-01.opencert";
 
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
@@ -13,7 +13,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("Trans certificate is rendered correctly", async t => {
+test("SOAMF01 certificate is rendered correctly", async t => {
   // Uploads certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
@@ -22,12 +22,13 @@ test("Trans certificate is rendered correctly", async t => {
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
-    "OFFICIAL TRANSCRIPT",
-    "Name: Lee1",
-    "ID No.: S0000000A",
-    "Qualification:",
-    "Higher Certificate in Healthcare Support - Podiatry Support",
-    "CONFERMENT: CONFERRED THE Higher Certificate in Healthcare Support - Podiatry Support on 20 Nov 2018",
-    "REMARKS:"
+    "Industry and Generic Skills SOA",
+    "is awarded to",
+    "A",
+    "ID No: S0000000A",
+    "for successfully meeting the requirements of the above programme andattainment of the competencies in the following modules of the GenericManufacturing Skills WSQ Framework:",
+    "- Develop strategies for total remuneration (HR-PRB-503E-1)",
+    "at SINGAPORE NATIONAL EMPLOYERS FEDERATION",
+    "01 Dec 2018"
   ]);
 });

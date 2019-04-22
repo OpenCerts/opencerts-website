@@ -53,3 +53,18 @@ export const getRecipientID = recipient => {
   }
   return null;
 };
+
+export const getSpecialization = specialization => {
+  if (
+    specialization === undefined ||
+    specialization === "null" ||
+    specialization.trim() === ""
+  ) {
+    return "";
+  }
+
+  if (specialization) {
+    return ` - ${specialization}`;
+  }
+  return "";
+};

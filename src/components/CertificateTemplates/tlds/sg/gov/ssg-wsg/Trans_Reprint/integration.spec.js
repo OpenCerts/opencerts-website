@@ -13,7 +13,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("Trans certificate is rendered correctly", async t => {
+test("Trans_Reprint certificate is rendered correctly", async t => {
   // Uploads certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
@@ -27,7 +27,6 @@ test("Trans certificate is rendered correctly", async t => {
     "ID No.: S0000000A",
     "Qualification:",
     "Higher Certificate in Healthcare Support - Podiatry Support",
-    "CONFERMENT: CONFERRED THE Higher Certificate in Healthcare Support - Podiatry Support on 20 Nov 2018",
-    "REMARKS:"
+    "CONFERMENT: CONFERRED THE Higher Certificate in Healthcare Support - Podiatry Support on 20 Nov 2018"
   ]);
 });
