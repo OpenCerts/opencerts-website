@@ -1,0 +1,56 @@
+{
+    "schema": "opencerts/v1.5",
+    "data": {
+        "id": "6d07d23d-52e5-4821-bdba-98432334118c:string:SOA-001_S0000000A_180000000226558",
+        "name": "55422cbb-2a0c-4b05-b12a-d1ea88ca3c96:string:Industry and Generic Skills SOA",
+        "$template": "5c72d9e6-fdf3-4c36-9a0c-3b47c17dcb40:string:sg/gov/ssg-wsg/SOA_Reprint",
+        "issuedOn": "f80d1246-0970-4e0b-b9eb-5164ab19a62c:string:2019-04-18T05:30:00+00:00",
+        "attainmentDate": "f7c8d6b2-514f-4dda-bde1-27f23c395132:string:2018-12-01T00:00:00+00:00",
+        "issuers": [
+            {
+                "name": "ecccce6a-4c8c-4902-ab9e-a860b32a236d:string:ROPSTEN : Skillsfuture Singapore",
+                "certificateStore": "f5d55a10-9432-4e46-8a05-c39bd761a205:string:0xCE4D56Fea4a4EB33E8A3502CEe6Db075224C896d"
+            }
+        ],
+        "recipient": {
+            "nric": "58fc7836-0591-4ba2-9eb9-9fa98a512560:string:S0000000A",
+            "name": "31a924db-e873-4269-bf8e-fb1dcdc15518:string:A"
+        },
+        "transcript": [
+            {
+                "name": "40652062-8f47-4db1-88a9-50edc9ad2368:string:Develop strategies for total remuneration",
+                "grade": "414794f5-3b69-4028-a719-34b313a78bf9:string:C",
+                "courseCode": "08e48e0f-c883-4aa2-b4dd-2c3021dcaab7:string:HR-PRB-503E-1",
+                "examinationDate": "b9ec7f8e-6675-4cf8-b5bf-724d1d36b267:string:2018-12-01T00:00:00+00:00",
+                "description": "07b4edbb-9e7c-4d39-96ba-615e1e6305e8:string:Competent"
+            }
+        ],
+        "additionalData": {
+            "assessmentOrgName": "e8782988-610f-47b7-a940-ebed4231da91:string:SINGAPORE NATIONAL EMPLOYERS FEDERATION",
+            "certCode": "f5737c69-1af8-4a4e-a877-3fe85053448e:string:SOA_Reprint",
+            "serialNum": "5398d57c-698c-45b9-97b0-7df8a2f5fe62:string:180000000226558",
+            "certSignatories": [
+                {
+                    "signature": "fac82229-64ec-4b61-bec1-72abb96e523e:string:Certified Copy",
+                    "name": "1017cb96-979e-4e34-9185-fd2f99d708bb:string:Ng Cher Pong",
+                    "position": "f9185a52-e010-4f5a-a51c-f1ca8fd62f5a:string:Chief Executive",
+                    "organisation": "0a1e30fd-7fc4-4470-a8e9-d93f04f3f381:string:SkillsFuture Singapore Agency"
+                }
+            ]
+        }
+    },
+    "privacy": {},
+    "signature": {
+        "type": "SHA3MerkleProof",
+        "targetHash": "96ecbe1e68a212046ec614f6a611cdb7363feecf6f303d0684cb919c107f6a22",
+        "proof": [
+            "9525401f708cc5ac603a15b6e623b03fb6c8ac90117cc0c2758322dc1878e398",
+            "ef268b469114ee767a901475b2a1fe313d47e49ba7294ebda3f930f15c639f5d",
+            "9c25fb2b73c5bbc819d99eddc0c26e57fc74c006057e2a90b7a6ec3d5fa48225",
+            "cd60dbc101fff1ef96942a56a52d5a0dc0181a1286484849dd54fa4d0eb081d1",
+            "d5fedfa1acf93ff52e207d9651cf2abe041232290f2d13040ac92b7de40f650e",
+            "f9df9f5fff59f83c5806a467b114144c27a61530ee20550520db37f8aa89a749"
+        ],
+        "merkleRoot": "eb0b942d3bf1d5cdd2ea7b53c1635d932425d30359cf8134c4f1e9f3a8988451"
+    }
+}
