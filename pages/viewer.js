@@ -1,3 +1,4 @@
+import React from "react";
 import { connect } from "react-redux";
 import Head from "next/head";
 import NavigationBar from "../src/components/Layout/NavigationBar";
@@ -6,7 +7,7 @@ import ViewerPageContainer from "../src/components/ViewerPageContainer";
 import PrintWatermark from "../src/components/PrintWatermark";
 
 const VerifierPage = () => (
-  <div>
+  <React.Fragment>
     <Head>
       <title>OpenCerts - Certificate Viewer</title>
     </Head>
@@ -14,7 +15,7 @@ const VerifierPage = () => (
     <NavigationBar />
     <ViewerPageContainer />
     <FooterBar />
-  </div>
+  </React.Fragment>
 );
 
 export default connect()(VerifierPage);

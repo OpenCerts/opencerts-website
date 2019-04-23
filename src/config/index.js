@@ -27,6 +27,33 @@ export const EMAIL_API_URL = isMainnet
   : "https://api-ropsten.opencerts.io/email";
 export const INFURA_PROJECT_ID = "1f1ff2b3fca04f8d99f67d465c59e4ef";
 
+export const SEO = {
+  title: "An easy way to check and verify your certificates",
+  titleTemplate: `OpenCerts - %s`,
+  description:
+    "Whether you're a student or an employer, OpenCerts lets you verify the certificates you have of anyone from any institution. All in one place.",
+  openGraph: {
+    type: "website",
+    url: "https://opencerts.io",
+    title: "OpenCerts - An easy way to check and verify your certificates",
+    description:
+      "Whether you're a student or an employer, OpenCerts lets you verify the certificates you have of anyone from any institution. All in one place.",
+    images: [
+      {
+        url: "/static/images/opencerts.png",
+        width: 800,
+        height: 600,
+        alt: "OpenCerts"
+      }
+    ]
+  },
+  twitter: {
+    handle: "@handle",
+    site: "@site",
+    cardType: "summary_large_image"
+  }
+};
+
 trace(`DEFAULT_NETWORK: ${DEFAULT_NETWORK}`);
 trace(`CAPTCHA_CLIENT_KEY: ${CAPTCHA_CLIENT_KEY}`);
 trace(`EMAIL_API_URL: ${EMAIL_API_URL}`);
