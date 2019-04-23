@@ -1,8 +1,23 @@
 language: node_js
 node_js:
-  - "10.14.2"
+  - 10.14.2
 cache: npm install
-script:
-  - npm run lint
-  - npm run test
-  - npm run integration:headless
+addons:
+  sonarcloud:
+    organization: "opencerts"
+jobs:
+  include:
+    - stage: sonar
+      script:
+        - sonar-scanner
+    - stage: test
+      script:
+        - npm run lint
+        - npm run test
+    - stage: integration
+      script:
+        - npm run integration:headless
+stages:
+  - test
+  - sonar
+  - integration
