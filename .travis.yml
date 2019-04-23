@@ -18,6 +18,6 @@ jobs:
       script:
         - npm run integration:headless
 stages:
-  - sonar
   - test
+  - sonar
   - integration
