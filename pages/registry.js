@@ -1,13 +1,12 @@
 import { connect } from "react-redux";
 import NextSeo from "next-seo";
+import { merge } from "lodash";
 import NavigationBar from "../src/components/Layout/NavigationBar";
 import FooterBar from "../src/components/Layout/FooterBar";
 import RegistryPageContainer from "../src/components/RegistryPageContainer";
 import { SEO } from "../src/config";
 
-const _ = require("lodash");
-
-_.merge(SEO, {
+merge(SEO, {
   title: "Registry",
   description:
     "The registry is a list of recognised issuers with their certificate store addresses. Certificates from these issuers can be recognised and verified by our viewer.",
