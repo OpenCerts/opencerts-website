@@ -63,7 +63,7 @@ const renderHeaderBlock = props => {
             >
               <i
                 className="fas fa-file-download"
-                style={{ fontSize: "1.5rem", color: "#343a40" }}
+                style={{ fontSize: "1.5rem" }}
               />
             </button>
           </a>
