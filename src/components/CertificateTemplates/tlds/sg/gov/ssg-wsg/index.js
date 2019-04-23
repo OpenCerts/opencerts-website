@@ -5,7 +5,6 @@ const FQ001 = dynamic(() =>
   import("./FQ-001" /* webpackChunkName: "SSGTemplates" */)
 );
 
-
 const SFFQ002 = dynamic(() =>
   import("./SF_FQ_002" /* webpackChunkName: "SSGTemplates" */)
 );
@@ -15,7 +14,7 @@ const SFFQ004 = dynamic(() =>
 );
 const QualReprint = dynamic(() =>
   import("./QUAL_Reprint" /* webpackChunkName: "SSGTemplates" */)
-
+);
 const FQ002 = dynamic(() =>
   import("./FQ-002" /* webpackChunkName: "SSGTemplates" */)
 );
@@ -34,7 +33,6 @@ const FQ006 = dynamic(() =>
 
 const SFFQ001 = dynamic(() =>
   import("./SF_FQ_001" /* webpackChunkName: "SSGTemplates" */)
-
 );
 const SOA001 = dynamic(() =>
   import("./SOA-001" /* webpackChunkName: "SSGTemplates" */)
