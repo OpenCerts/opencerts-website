@@ -1,8 +1,8 @@
 import css from "./partnersPage.scss";
-import { IMAGES } from "../../constants/PartnerLogo";
+import Partners from "../../constants/PartnerLogo.json";
 
 const CarouselSection = () => {
-  const items = IMAGES.map((item, i) => (
+  const items = Partners.map((item, i) => (
     <div className={css["logo-container"]} key={i}>
       <img
         className="mx-auto"
