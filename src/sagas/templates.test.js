@@ -7,10 +7,11 @@ import { types as templateActions } from "../reducers/templates";
 import { MakeCertUtil } from "./testutils";
 
 describe("preload template", () => {
-  const template = "97d60572-7694-4d91-a9a1-f05771d51a8f:string:NP-AA2018-DPP";
-  const testCert = new MakeCertUtil()
-    .addDataField("$template", template)
-    .finish();
+  let testCert = {};
+  const templateTag = "NP-AA2018-DPP";
+  beforeEach(() => {
+    testCert = new MakeCertUtil().addTemplateTag(templateTag).finish();
+  });
 
   it("Should fetch the template name", () => {
     expect(get(certificateData(testCert), "$template", "default")).toEqual(
@@ -18,19 +19,16 @@ describe("preload template", () => {
     );
   });
 
-  const loadingTemplate = "NP-AA2018-DPP";
-
-  const saga = preloadTemplateChunk({ payload: testCert });
-
   it("Should prefetch the template chunk", () => {
+    const saga = preloadTemplateChunk({ payload: testCert });
     expect(saga.next().value).toEqual(
       put({
         type: templateActions.PRELOAD_TEMPLATE_CHUNK,
-        payload: loadingTemplate
+        payload: templateTag
       })
     );
 
-    expect(saga.next().value).toEqual(call(templates[loadingTemplate].preload));
+    expect(saga.next().value).toEqual(call(templates[templateTag].preload));
 
     expect(saga.next().value).toEqual(
       put({
