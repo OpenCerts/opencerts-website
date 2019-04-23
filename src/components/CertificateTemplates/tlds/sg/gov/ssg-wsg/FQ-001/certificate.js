@@ -1,6 +1,5 @@
 import { get } from "lodash";
 import { IMG_LOGO, IMG_SEAL, IMG_SSGLOGO } from "../common";
-// import { IMG_LOGO_FQ001, IMG_SEAL_FQ001, IMG_SSGLOGO_FQ001 } from "../common";
 import { formatDate, getRecipientID } from "../common/functions";
 
 export const fullWidthStyle = {
