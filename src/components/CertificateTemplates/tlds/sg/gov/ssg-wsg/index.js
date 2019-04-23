@@ -19,6 +19,7 @@ const SOA001 = dynamic(() =>
   import("./SOA-001" /* webpackChunkName: "SSGTemplates" */)
 );
 
+<<<<<<< HEAD
 const SOA002 = dynamic(() =>
   import("./SOA-002" /* webpackChunkName: "SSGTemplates" */)
 );
@@ -26,6 +27,12 @@ const SOA002 = dynamic(() =>
 const SOA003 = dynamic(() =>
   import("./SOA-003" /* webpackChunkName: "SSGTemplates" */)
 );
+=======
+const SOAIT001 = dynamic(() =>
+  import("./SOA-IT-001" /* webpackChunkName: "SSGTemplates" */)
+);
+
+>>>>>>> upstream/master
 const Transcript = dynamic(() =>
   import("./Trans" /* webpackChunkName: "SSGTemplates" */)
 );
@@ -37,8 +44,12 @@ const templates = {
 
   QUAL_Reprint: QualReprint,
   "SOA-001": SOA001,
+<<<<<<< HEAD
   "SOA-002": SOA002,
   "SOA-003": SOA003,
+=======
+  "SOA-IT-001": SOAIT001,
+>>>>>>> upstream/master
   Trans: Transcript
 };
 
