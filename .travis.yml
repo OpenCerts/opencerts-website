@@ -19,5 +19,5 @@ jobs:
         - npm run integration:headless
 stages:
   - test
-  - sonar
+#  - sonar  (need to figure out how to get this to run on external PRs)
   - integration
