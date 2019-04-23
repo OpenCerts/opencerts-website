@@ -56,7 +56,11 @@ const renderHeaderBlock = props => {
             target="_black"
             href={`data:text/plain;,${JSON.stringify(props.document, null, 2)}`}
           >
-            <button id="btn-download" className={styles["send-btn"]}>
+            <button
+              id="btn-download"
+              className={styles["send-btn"]}
+              title="Download"
+            >
               <i
                 className="fas fa-file-download"
                 style={{ fontSize: "1.5rem", color: "#343a40" }}
