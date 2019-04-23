@@ -29,7 +29,7 @@ const calibri24ptBold = {
 
 const calibri23ptBold = {
   fontFamily: "Calibri",
-  fontSize: "30px",
+  fontSize: "32px",
   fontWeight: "bold",
   textAlign: "center",
   color: "black",
