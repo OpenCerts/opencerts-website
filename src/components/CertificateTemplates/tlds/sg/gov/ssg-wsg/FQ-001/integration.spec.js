@@ -1,8 +1,8 @@
 import { Selector } from "testcafe";
 
-fixture("Ropsten : Skillsfuture Singapore").page`http://localhost:3000`;
+fixture("ROPSTEN : Skillsfuture Singapore").page`http://localhost:3000`;
 
-const Certificate = "./FQ-001_S0000000A_18Q000000012381.OPENCERT";
+const Certificate = "./FQ-001.opencert";
 
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
@@ -26,7 +26,7 @@ test("FQ001 certificate is rendered correctly", async t => {
     "is awarded to",
     "Lee1",
     "ID No: S0000000A",
-    "for successful attainment of the required industry approved competencies",
+    "for successful attainment of the requiredindustry approved competencies",
     "at WSQ_20180620",
     "20 Nov 2018"
   ]);
