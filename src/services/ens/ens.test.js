@@ -1,7 +1,7 @@
 import { getNamehash } from "./ens";
 
 describe("ens", () => {
-  describe("namehash", async () => {
+  describe("namehash", () => {
     test("ens", async () => {
       expect(getNamehash("")).toBe(
         "0x0000000000000000000000000000000000000000000000000000000000000000"
