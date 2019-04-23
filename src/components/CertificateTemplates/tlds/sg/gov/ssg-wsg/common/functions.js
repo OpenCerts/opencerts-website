@@ -48,8 +48,24 @@ export const getRecipientID = recipient => {
   if (recipient.fin) {
     return recipient.fin;
   }
-  if (recipient.did) {
-    return recipient.did;
+  if (recipient.id) {
+    return recipient.id;
   }
   return null;
+};
+
+export const getSpecialization = additionalData => {
+  if (
+    additionalData.specialization == undefined ||
+    additionalData.specialization == null ||
+    additionalData.specialization == "null" ||
+    additionalData.specialization.trim() == ""
+  ) {
+    return "";
+  }
+
+  if (additionalData.specialization) {
+    return ` - ${additionalData.specialization}`;
+  }
+  return "";
 };

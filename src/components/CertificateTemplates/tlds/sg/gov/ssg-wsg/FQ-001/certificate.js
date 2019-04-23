@@ -1,5 +1,6 @@
 import { get } from "lodash";
-import { IMG_LOGO_FQ001, IMG_SEAL_FQ001, IMG_SSGLOGO_FQ001 } from "../common";
+import { IMG_LOGO, IMG_SEAL, IMG_SSGLOGO } from "../common";
+// import { IMG_LOGO_FQ001, IMG_SEAL_FQ001, IMG_SSGLOGO_FQ001 } from "../common";
 import { formatDate, getRecipientID } from "../common/functions";
 
 export const fullWidthStyle = {
@@ -39,7 +40,7 @@ export const singaporeTextStyle = {
 };
 
 export const nameTextStyle = {
-  fontSize: "3rem",
+  fontSize: "2.3rem",
   textAlign: "center",
   fontWeight: "bold",
   wordBreak: "break-word"
@@ -82,7 +83,7 @@ export const footerLogoStyle = {
 export const renderLogoWSQ = () => (
   <div className="row d-flex" style={{ marginTop: "3rem" }}>
     <div className="col-lg-6 col-12">
-      <img style={fullWidthStyle} src={IMG_LOGO_FQ001} />
+      <img style={fullWidthStyle} src={IMG_LOGO} />
     </div>
     <div className="col-lg-6" />
   </div>
@@ -94,7 +95,7 @@ export const renderSignature = certificate => (
     style={{ marginTop: "8rem", marginBottom: "1rem" }}
   >
     <div className="col-lg-2 col-6">
-      <img style={sealWidthStyle} src={IMG_SEAL_FQ001} />
+      <img style={sealWidthStyle} src={IMG_SEAL} />
     </div>
 
     <div className="col-lg-7">
@@ -116,10 +117,14 @@ export const renderSignature = certificate => (
         in accordance with the Singapore Workforce Skills Qualifications System.
       </div>
       <div style={footerTextStyle}>
-        <a href="www.ssg.gov.sg">www.ssg.gov.sg</a>
+        <a style={{ color: "rgb(51,0,144)" }} href="www.ssg.gov.sg">
+          www.ssg.gov.sg
+        </a>
         <br />
         For verification of this certificate, please visit
-        https://uat.myskillsfuture.sg/verify_eCert.html
+        <a href="https://myskillsfuture.sg/verify_eCert.html">
+          https://myskillsfuture.sg/verify_eCert.html
+        </a>
       </div>
     </div>
     <div className="col-lg-3 col-xs-12">
@@ -128,7 +133,7 @@ export const renderSignature = certificate => (
           Cert No: {get(certificate, "additionalData.serialNum")}
         </p>
       </div>
-      <img style={footerLogoStyle} src={IMG_SSGLOGO_FQ001} />
+      <img style={footerLogoStyle} src={IMG_SSGLOGO} />
       <div style={certCodeStyle}>
         {get(certificate, "additionalData.certCode")}
       </div>
@@ -160,7 +165,9 @@ export const renderAwardText = certificate => (
       style={{ marginTop: "1rem", paddingLeft: "0px" }}
     >
       <p style={awardTextStyle}>
-        for successful attainment of the required industry approved competencies
+        for successful attainment of the required
+        <br />
+        industry approved competencies
       </p>
     </div>
     <div className="d-flex" style={{ marginTop: "3rem" }}>

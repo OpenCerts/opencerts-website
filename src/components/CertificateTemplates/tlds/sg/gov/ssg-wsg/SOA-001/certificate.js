@@ -1,5 +1,5 @@
 import { get } from "lodash";
-import { IMG_LOGO_FQ001, IMG_SEAL_FQ001, IMG_SSGLOGO_FQ001 } from "../common";
+import { IMG_LOGO, IMG_SEAL, IMG_SSGLOGO } from "../common";
 import { formatDate, formatCertID, getRecipientID } from "../common/functions";
 
 export const fullWidthStyle = {
@@ -23,13 +23,11 @@ export const printTextStyle = {
 
 export const issuersTextStyle = {
   fontWeight: "500!important",
-  textAlign: "center",
   fontSize: "24px"
 };
 
 export const transcriptTextStyle = {
   fontWeight: "500!important",
-  textAlign: "center",
   fontSize: "24px",
   marginBottom: "0px"
 };
@@ -46,8 +44,7 @@ export const singaporeTextStyle = {
 };
 
 export const nameTextStyle = {
-  fontSize: "2.5rem",
-  textAlign: "center",
+  fontSize: "2.3rem",
   fontWeight: "bold",
   color: "rgb(197,41,155)",
   wordBreak: "break-word"
@@ -90,7 +87,7 @@ export const footerLogoStyle = {
 export const renderLogoWSQ = () => (
   <div className="row d-flex" style={{ marginTop: "3rem" }}>
     <div className="col-lg-6 col-12">
-      <img style={fullWidthStyle} src={IMG_LOGO_FQ001} />
+      <img style={fullWidthStyle} src={IMG_LOGO} />
     </div>
     <div className="col-lg-6" />
   </div>
@@ -102,7 +99,7 @@ export const renderSignature = certificate => (
     style={{ marginTop: "8rem", marginBottom: "1rem" }}
   >
     <div className="col-lg-2 col-6">
-      <img style={sealWidthStyle} src={IMG_SEAL_FQ001} />
+      <img style={sealWidthStyle} src={IMG_SEAL} />
     </div>
 
     <div className="col-lg-7">
@@ -127,7 +124,7 @@ export const renderSignature = certificate => (
         <a href="www.ssg.gov.sg">www.ssg.gov.sg</a>
         <br />
         For verification of this certificate, please visit
-        https://uat.myskillsfuture.sg/verify_eCert.html
+        https://myskillsfuture.sg/verify_eCert.html
       </div>
     </div>
     <div className="col-lg-3 col-xs-12">
@@ -136,7 +133,7 @@ export const renderSignature = certificate => (
           Cert No: {get(certificate, "additionalData.serialNum")}
         </p>
       </div>
-      <img style={footerLogoStyle} src={IMG_SSGLOGO_FQ001} />
+      <img style={footerLogoStyle} src={IMG_SSGLOGO} />
       <div style={certCodeStyle}>
         {get(certificate, "additionalData.certCode")}
       </div>
