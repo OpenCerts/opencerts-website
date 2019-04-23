@@ -20,7 +20,7 @@ describe("sagas/certificate", () => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          data: JSON.stringify(certificate),
+          data: certificate,
           to: email,
           captcha
         })
