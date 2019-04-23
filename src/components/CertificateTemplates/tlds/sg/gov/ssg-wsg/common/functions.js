@@ -56,16 +56,16 @@ export const getRecipientID = recipient => {
 
 export const getSpecialization = additionalData => {
   if (
-    additionalData.specialization == undefined ||
-    additionalData.specialization == null ||
-    additionalData.specialization == "null" ||
-    additionalData.specialization.trim() == ""
+    additionalData.specialization === undefined ||
+    additionalData.specialization === null ||
+    additionalData.specialization === "null" ||
+    additionalData.specialization.trim() === ""
   ) {
     return "";
   }
 
   if (additionalData.specialization) {
-    return ` - ${additionalData.specialization}`;
+    return `- ${additionalData.specialization}`;
   }
   return "";
 };

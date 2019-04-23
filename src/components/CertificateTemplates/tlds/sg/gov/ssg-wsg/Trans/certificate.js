@@ -1,6 +1,11 @@
 import { get } from "lodash";
 import { IMG_LOGO, IMG_SSGLOGO } from "../common";
-import { formatDate, formatCertID, getRecipientID, getSpecialization} from "../common/functions";
+import {
+  formatDate,
+  formatCertID,
+  getRecipientID,
+  getSpecialization
+} from "../common/functions";
 
 export const fullWidthStyle = {
   width: "100%",
@@ -84,7 +89,7 @@ const renderTranscriptItems = certificate =>
       <td>{item.courseCode}</td>
       <td>{item.name}</td>
       <td>{item.description}</td>
-      <td>{item.examinationDate}</td>
+      <td>{formatDate(item.examinationDate)}</td>
       <td>{item.assessmentOrgName}</td>
     </tr>
   ));
@@ -154,8 +159,8 @@ export const renderAwardText = certificate => (
       <p style={confermentTextStyle}>
         CONFERMENT: CONFERRED THE{" "}
         {get(certificate, "qualificationLevel[0].description")} in{" "}
-        {certificate.name} {getSpecialization(certificate.additionalData)}{" "}
-        on {formatDate(certificate.attainmentDate)}
+        {certificate.name} {getSpecialization(certificate.additionalData)} on{" "}
+        {formatDate(certificate.attainmentDate)}
       </p>
     </div>
   </div>
