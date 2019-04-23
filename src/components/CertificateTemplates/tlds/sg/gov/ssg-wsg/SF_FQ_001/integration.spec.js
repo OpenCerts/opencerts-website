@@ -1,8 +1,8 @@
 import { Selector } from "testcafe";
 
-fixture("Ngee Ann Polytechnic").page`http://localhost:3000`;
+fixture("ROPSTEN : Skillsfuture Singapore").page`http://localhost:3000`;
 
-const Certificate = "./NP_Certs_OPTION_NIEC_2019.opencert";
+const Certificate = "./SF_FQ_001.opencert";
 
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
@@ -13,7 +13,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("OPTION-NIEC 2019 certificate is rendered correctly", async t => {
+test("SF_FQ_001 certificate is rendered correctly", async t => {
   // Uploads certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
@@ -22,15 +22,12 @@ test("OPTION-NIEC 2019 certificate is rendered correctly", async t => {
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
-    "Student Name Option Cert NIEC 2019",
-    "an option in",
-    "Business Studies",
-    "as part of the course of study in the",
-    "Diploma",
-    "Early Childhood Development & Education",
-    "Registrar, NIEC",
-    "Registrar, NP",
-    "May 2019",
-    "ECH190006"
+    "Healthcare SupportPodiatry Support",
+    "is awarded to",
+    "Lee1",
+    "ID No: S0000000A",
+    "for successful attainment of the requiredindustry approved competencies",
+    "at WSQ_20180620",
+    "20 Nov 2018"
   ]);
 });
