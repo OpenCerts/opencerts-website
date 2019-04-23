@@ -4,7 +4,7 @@ fixture("Nanyang Polytechnic").page`http://localhost:3000`;
 
 const Certificate = "./test1.opencert";
 
-const TemplateTabList = Selector("#template-tabs-list");
+// const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
 
 const validateTextContent = async (t, component, texts) =>
@@ -18,12 +18,12 @@ test("Graduation certificate is rendered correctly", async t => {
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
   // Certificate tabs rendered
-  await t.expect(TemplateTabList.textContent).contains("Certificate");
+  // await t.expect(TemplateTabList.textContent).contains("Certificate");
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "Student Name",
     "DIPLOMA IN TESTING ENGINEERING",
-    "2019-03-18"
+    "18 March 2019"
   ]);
 });

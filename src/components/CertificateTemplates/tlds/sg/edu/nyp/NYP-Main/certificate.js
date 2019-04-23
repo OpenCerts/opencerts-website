@@ -1,5 +1,8 @@
 import PropTypes from "prop-types";
+import { tz } from "moment-timezone";
 import { NYP_CERT_BG } from "./images";
+
+export const TIMEZONE = "Asia/Singapore";
 
 const calibri10pt = {
   fontFamily: "Calibri",
@@ -61,6 +64,12 @@ const borderImgStyle = {
   backgroundSize: "100%"
 };
 
+export const formatDateFullMonthProper = dateString => {
+  if (!dateString) return null;
+  const date = new Date(dateString);
+  return tz(date, TIMEZONE).format("D MMMM YYYY");
+};
+
 const Template = ({ certificate }) => (
   <div className="container" style={borderImgStyle}>
     <div style={{ marginLeft: "25rem", marginRight: "5rem" }}>
@@ -89,16 +98,14 @@ const Template = ({ certificate }) => (
         className="row d-flex justify-content-center align-items-center"
         style={{ height: "100px", lineHeight: "170%" }}
       >
-        <span style={calibri23ptBold}>
-          {certificate.additionalData.courseName}
-        </span>
+        <span style={calibri23ptBold}>{certificate.name}</span>
       </div>
       <div className="row d-flex justify-content-center">
         <span style={calibri22pt}>on</span>
       </div>
       <div className="row d-flex justify-content-center">
         <span style={calibri24ptBold}>
-          {certificate.additionalData.confDate}
+          {formatDateFullMonthProper(certificate.attainmentDate)}
         </span>
       </div>
     </div>
