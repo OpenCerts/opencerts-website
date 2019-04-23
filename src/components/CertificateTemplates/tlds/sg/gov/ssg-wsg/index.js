@@ -5,7 +5,6 @@ const FQ001 = dynamic(() =>
   import("./FQ-001" /* webpackChunkName: "SSGTemplates" */)
 );
 
-
 const SFFQ002 = dynamic(() =>
   import("./SF_FQ_002" /* webpackChunkName: "SSGTemplates" */)
 );
