@@ -17,7 +17,7 @@ const TranscriptHeader = () => (
     <br />
     <div className="row">
       <div className="col-7">
-        <img src="static/images/TP_logo.svg" className="tp-logo" />
+        <img src="/static/images/TP_logo.svg" className="tp-logo" />
       </div>
       <div className="col-5 page-title">ACADEMIC TRANSCRIPT</div>
     </div>

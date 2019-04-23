@@ -61,7 +61,7 @@ const Certificate = ({ certificate }) => (
 
     <div className="row">
       <div className="col-12">
-        <img src="static/images/TP_logo.svg" className="tp-logo" />
+        <img src="/static/images/TP_logo.svg" className="tp-logo" />
       </div>
     </div>
 
