@@ -12,7 +12,7 @@ const View = ({ hover, accept }) => (
     <div className={css["image-container"]}>
       <i>
         <img
-          alt="Dropzone"
+          alt=".opencert Dropzone"
           src="/static/images/dropzone/dropzone_illustration.svg"
         />
       </i>

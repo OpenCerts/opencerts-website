@@ -58,7 +58,7 @@ const Policy = () => (
         sites.
       </li>
       <li>
-        Please contact 1800 211 0777 or{" "}
+        Please contact <a href="tel:1800 211 0777">1800 211 0777</a> or{" "}
         <a href="mailto:qsm@tech.gov.sg">qsm@tech.gov.sg</a> if you:
         <ol type="a">
           <li>
