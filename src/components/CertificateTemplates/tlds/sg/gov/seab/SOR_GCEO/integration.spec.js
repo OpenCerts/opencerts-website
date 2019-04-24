@@ -3,7 +3,7 @@ import { Selector } from "testcafe";
 fixture("Singapore Examinations and Assessment Board (SOR_GCEO)")
   .page`http://localhost:3000`;
 
-const Certificate = "./SOR_ALL-2014_GCEO_20210060.opencert";
+const Certificate = "./SOR_ALL-2018_GCEO_20772009.opencert";
 
 const ButtonViewCertificateAnyway = Selector("#certificate-view-anyway");
 
@@ -40,9 +40,9 @@ test("sg/gov/seab/SOR_GCEO is rendered correctly", async t => {
     "This statement is issued to",
     "Singapore Examinations and Assessment Board",
     "SINGAPORE-CAMBRIDGE GENERAL CERTIFICATE OF EDUCATION ORDINARY LEVEL",
-    "S9845701A",
-    "2021/0060",
-    "EIGHT",
+    "A34378917",
+    "2077/2009",
+    "FIVE",
     "Chief Executive"
   ]);
 
