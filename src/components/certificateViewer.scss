@@ -77,7 +77,9 @@ li.tab {
 .send-btn {
   @include round-btn;
   margin-left: 1rem;
-  
+  i {
+    color: #343a40;
+  }
   svg {
     padding: 4px;
     height: 100%;
