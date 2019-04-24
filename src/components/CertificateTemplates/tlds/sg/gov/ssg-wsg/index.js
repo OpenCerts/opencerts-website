@@ -65,6 +65,7 @@ const SOAES001 = dynamic(() =>
 const SFSOAES001 = dynamic(() =>
   import("./SF_SOA_ES_001" /* webpackChunkName: "SSGTemplates" */)
 );
+
 const SOAIT001 = dynamic(() =>
   import("./SOA-IT-001" /* webpackChunkName: "SSGTemplates" */)
 );
@@ -96,6 +97,7 @@ const templates = {
   SF_SOA_SV_001: SOASV001,
   "SOA-ES-001": SOAES001,
   SF_SOA_ES_001: SFSOAES001,
+
   "SOA-IT-001": SOAIT001,
   Trans: Transcript
 };
