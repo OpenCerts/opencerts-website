@@ -8,10 +8,16 @@ const NavigationBar = () => (
         <NetworkSelector />
       </div>
       <div>
-        <a href="/faq">FAQ</a>
+        <a href="/registry">Registry</a>
       </div>
       <div>
-        <a href="/registry">Registry</a>
+        <a href="https://admin.opencerts.io/">Admin Panel</a>
+      </div>
+      <div>
+        <a href="https://docs.opencerts.io/">Documentation</a>
+      </div>
+      <div>
+        <a href="/faq">FAQ</a>
       </div>
       <div>
         <a href="/privacy">Privacy Policy</a>
