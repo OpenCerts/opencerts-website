@@ -5,8 +5,6 @@ fixture("Singapore Examinations and Assessment Board (SOR_GCEO)")
 
 const Certificate = "./SOR_ALL-2018_GCEO_20772009.opencert";
 
-const ButtonViewCertificateAnyway = Selector("#certificate-view-anyway");
-
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
 
@@ -19,7 +17,6 @@ const validateTextContent = async (t, component, texts) =>
 test("sg/gov/seab/SOR_GCEO is rendered correctly", async t => {
   // Uploads and click link certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
-  await t.click(ButtonViewCertificateAnyway);
 
   // Certificate tabs rendered
   await t.expect(TemplateTabList.textContent).contains("Statement of Results");
