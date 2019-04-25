@@ -1,12 +1,10 @@
 #!/bin/bash
 
-env
-
-export SONARQUBE_SKIPPE=false
+export SONARQUBE_SKIPPED=false
+export SONARQUBE_SCANNER_PARAMS='{ "sonar.scanner.skip" : "true" }'
 
 if ! [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
     sonar-scanner \
-        -Dsonar.scanner.skip=false \
         -Dsonar.projectKey=OpenCerts_opencerts-website \
         -Dsonar.organization=opencerts \
         -Dsonar.sources=. \
