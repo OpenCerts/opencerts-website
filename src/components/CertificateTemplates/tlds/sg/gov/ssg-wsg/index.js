@@ -70,6 +70,17 @@ const SOAIT001 = dynamic(() =>
   import("./SOA-IT-001" /* webpackChunkName: "SSGTemplates" */)
 );
 
+const SFSOAIT001 = dynamic(() =>
+  import("./SF_SOA_IT_001" /* webpackChunkName: "SSGTemplates" */)
+);
+
+const SOAMF01 = dynamic(() =>
+  import("./SOA-MF-01" /* webpackChunkName: "SSGTemplates" */)
+);
+
+const SFSOAMF01 = dynamic(() =>
+  import("./SF_SOA_MF_01" /* webpackChunkName: "SSGTemplates" */)
+);
 const Transcript = dynamic(() =>
   import("./Trans" /* webpackChunkName: "SSGTemplates" */)
 );
@@ -99,6 +110,11 @@ const templates = {
   SF_SOA_ES_001: SFSOAES001,
 
   "SOA-IT-001": SOAIT001,
+  SF_SOA_IT_001: SFSOAIT001,
+  "SOA-MF-01": SOAMF01,
+  SOA_MF_02: SOAMF01,
+  SF_SOA_MF_01: SFSOAMF01,
+  SF_SOA_MF_02: SFSOAMF01,
   Trans: Transcript
 };
 
