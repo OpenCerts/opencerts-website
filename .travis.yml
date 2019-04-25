@@ -2,14 +2,14 @@ language: node_js
 node_js:
   - 10.14.2
 cache: npm install
-addons:
-  sonarcloud:
-    organization: "opencerts"
+# addons:
+#  sonarcloud:
+#    organization: "opencerts"
 jobs:
   include:
-    - stage: sonar
-      script:
-        - sonar-scanner
+#    - stage: sonar
+#      script:
+#        - sonar-scanner
     - stage: test
       script:
         - npm run lint
@@ -19,5 +19,5 @@ jobs:
         - npm run integration:headless
 stages:
   - test
-  - sonar
+#  - sonar  (need to figure out how to get this to run on external PRs)
   - integration

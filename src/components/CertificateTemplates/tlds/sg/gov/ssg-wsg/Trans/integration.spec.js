@@ -1,8 +1,8 @@
 import { Selector } from "testcafe";
 
-fixture("Ropsten : Skillsfuture Singapore").page`http://localhost:3000`;
+fixture("ROPSTEN : Skillsfuture Singapore").page`http://localhost:3000`;
 
-const Certificate = "./Trans_S0000000A_18T000000012381.OPENCERT";
+const Certificate = "./Trans.opencert";
 
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
