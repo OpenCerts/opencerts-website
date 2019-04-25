@@ -69,6 +69,8 @@ export const formatDateFullMonthProper = dateString => {
   const date = new Date(dateString);
   return tz(date, TIMEZONE).format("D MMMM YYYY");
 };
+export const formatCertName = courseName =>
+  courseName.length > 50 ? courseName.replace("(", "\r\n(") : courseName;
 
 const Template = ({ certificate }) => (
   <div className="container" style={borderImgStyle}>
@@ -96,9 +98,9 @@ const Template = ({ certificate }) => (
       </div>
       <div
         className="row d-flex justify-content-center align-items-center"
-        style={{ height: "100px", lineHeight: "170%" }}
+        style={{ height: "100px", lineHeight: "190%" }}
       >
-        <span style={calibri23ptBold}>{certificate.name}</span>
+        <span style={calibri23ptBold}>{formatCertName(certificate.name)}</span>
       </div>
       <div className="row d-flex justify-content-center">
         <span style={calibri22pt}>on</span>
