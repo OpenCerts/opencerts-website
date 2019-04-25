@@ -27,7 +27,7 @@ export const EMAIL_API_URL = isMainnet
   : "https://api-ropsten.opencerts.io/email";
 export const INFURA_PROJECT_ID = "1f1ff2b3fca04f8d99f67d465c59e4ef";
 
-export const SEO = {
+export const DEFAULT_SEO = {
   title: "An easy way to check and verify your certificates",
   titleTemplate: `OpenCerts - %s`,
   description:

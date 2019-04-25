@@ -6,11 +6,11 @@ import FooterBar from "../src/components/Layout/FooterBar";
 import ViewerPageContainer from "../src/components/ViewerPageContainer";
 import PrintWatermark from "../src/components/PrintWatermark";
 
-import { SEO } from "../src/config";
+import { DEFAULT_SEO } from "../src/config";
 
 const VerifierPage = () => (
   <>
-    <NextSeo config={SEO} />
+    <NextSeo config={DEFAULT_SEO} />
     <PrintWatermark />
     <NavigationBar />
     <ViewerPageContainer />
