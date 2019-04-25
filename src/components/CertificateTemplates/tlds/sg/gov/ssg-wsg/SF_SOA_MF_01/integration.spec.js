@@ -1,8 +1,8 @@
 import { Selector } from "testcafe";
 
-fixture("Ngee Ann Polytechnic").page`http://localhost:3000`;
+fixture("ROPSTEN : Skillsfuture Singapore").page`http://localhost:3000`;
 
-const Certificate = "./NP_Certs_OPTION_NIEC_2019.opencert";
+const Certificate = "./SF_SOA_MF_01.opencert";
 
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
@@ -13,7 +13,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("OPTION-NIEC 2019 certificate is rendered correctly", async t => {
+test("SF_SOA_MF_01 certificate is rendered correctly", async t => {
   // Uploads certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
@@ -22,15 +22,13 @@ test("OPTION-NIEC 2019 certificate is rendered correctly", async t => {
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
-    "Student Name Option Cert NIEC 2019",
-    "an option in",
-    "Business Studies",
-    "as part of the course of study in the",
-    "Diploma",
-    "Early Childhood Development & Education",
-    "Registrar, NIEC",
-    "Registrar, NP",
-    "May 2019",
-    "ECH190006"
+    "Industry and Generic Skills SOA",
+    "is awarded to",
+    "A",
+    "ID No: S0000000A",
+    "for successfully meeting the requirements of the above programme andattainment of the competencies in the following modules of the GenericManufacturing Skills WSQ Framework:",
+    "Develop strategies for total remuneration (HR-PRB-503E-1)",
+    "at SINGAPORE NATIONAL EMPLOYERS FEDERATION",
+    "01 Dec 2018"
   ]);
 });
