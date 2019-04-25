@@ -15,5 +15,5 @@ elif [ "${TRAVIS_PULL_REQUEST}" = "master" ]; then
         -Dsonar.organization=opencerts \
         -Dsonar.sources=. \
         -Dsonar.host.url=https://sonarcloud.io \
-        -Dsonar.login=${SONAR_LOGIN} \
+        -Dsonar.login=${SONAR_LOGIN}
 fi;
