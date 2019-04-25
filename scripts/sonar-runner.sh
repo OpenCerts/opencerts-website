@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SONARQUBE_SKIPPED=false
+export SONARQUBE_SKIPPE=false
 
 if ! [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
     sonar-scanner \
