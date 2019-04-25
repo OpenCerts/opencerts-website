@@ -61,7 +61,7 @@ const borderImgStyle = {
   backgroundRepeat: "no-repeat",
   backgroundImage: `url(${NYP_CERT_BG})`,
   marginTop: "0",
-  backgroundSize: "100%"
+  backgroundSize: "cover"
 };
 
 export const formatDateFullMonthProper = dateString => {
