@@ -3,15 +3,14 @@ node_js:
   - 10.14.2
 cache: npm install
 addons:
-  sonarcloud:
-    organization: "opencerts"
+  sonarqube: true
 jobs:
   include:
     - stage: test
       script:
         - npm run lint
-        - npm run test
-        - if [ "$TRAVIS_SECURE_ENV_VARS" = true ]; then sonar-scanner; fi;
+        - npm run test -- --coverage=true
+        - ./scripts/sonar-runner.sh
     - stage: integration
       script:
         - npm run integration:headless
