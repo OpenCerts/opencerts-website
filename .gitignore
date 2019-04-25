@@ -6,3 +6,4 @@ out
 .coverage
 bundles/
 yarn.lock
+.scannerwork

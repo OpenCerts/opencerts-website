@@ -1,5 +1,9 @@
 import { tz } from "moment-timezone";
-import { TIMEZONE } from "./functions";
+import {
+  TIMEZONE,
+  formatDateFullMonthProper,
+  formatDatePrefix
+} from "./functions";
 import {
   renderLogoNP,
   renderLogoNPPartner,
@@ -112,7 +116,10 @@ const renderTwoSignatures = certificate => (
       <div className="col-1" />
     </div>
     <div>
-      <p>{formatDate(certificate.issuedOn)}</p>
+      <p>
+        {formatDatePrefix(certificate.issuedOn)}{" "}
+        {formatDateFullMonthProper(certificate.issuedOn)}
+      </p>
     </div>
   </div>
 );
