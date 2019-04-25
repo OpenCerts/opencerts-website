@@ -1,5 +1,7 @@
 #!/bin/bash
 
+SONARQUBE_SKIPPED=false
+
 if ! [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
     sonar-scanner \
         -Dsonar.projectKey=OpenCerts_opencerts-website \
