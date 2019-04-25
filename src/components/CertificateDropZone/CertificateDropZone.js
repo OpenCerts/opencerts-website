@@ -74,7 +74,7 @@ const onFileDrop = (
     }
   };
   if (acceptedFiles && acceptedFiles.length && acceptedFiles.length > 0)
-    acceptedFiles.map(f => reader.readAsBinaryString(f));
+    acceptedFiles.map(f => reader.readAsText(f));
 };
 
 const CertificateDropzone = ({
