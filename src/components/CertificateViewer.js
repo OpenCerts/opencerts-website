@@ -31,10 +31,10 @@ const renderVerifyBlock = props => (
 const renderHeaderBlock = props => {
   const renderedVerifyBlock = renderVerifyBlock(props);
   return (
-    <div className="container-fluid">
+    <div className={`container-fluid ${styles["pd-0"]}`}>
       <div className="row">
-        <div>{renderedVerifyBlock}</div>
-
+        <div className="col-md-12">{renderedVerifyBlock}</div>
+        <div className={`row col-md-12 ${styles["pd-0"]}`}>
         <div className="ml-auto">
           <button
             id="btn-print"
@@ -64,6 +64,7 @@ const renderHeaderBlock = props => {
             </button>
           </a>
         </div>
+      </div>
       </div>
     </div>
   );
