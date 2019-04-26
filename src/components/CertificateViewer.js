@@ -35,36 +35,40 @@ const renderHeaderBlock = props => {
       <div className="row">
         <div className="col-md-12">{renderedVerifyBlock}</div>
         <div className={`row col-md-12 ${styles["pd-0"]}`}>
-        <div className="ml-auto">
-          <button
-            id="btn-print"
-            className={styles["print-btn"]}
-            onClick={() => window.print()}
-          >
-            {images.print()}
-          </button>
-        </div>
-        <div />
-        <div className="ml-2" onClick={() => props.handleSharingToggle()}>
-          <button id="btn-email" className={styles["send-btn"]}>
-            {images.send()}
-          </button>
-        </div>
-        <div className="ml-2">
-          <a
-            download={`${props.certificate.id}.opencert`}
-            target="_black"
-            href={`data:text/plain;,${JSON.stringify(props.document, null, 2)}`}
-          >
-            <button id="btn-download" className={styles["send-btn"]}>
-              <i
-                className="fas fa-file-download"
-                style={{ fontSize: "1.5rem", color: "#343a40" }}
-              />
+          <div className="ml-auto">
+            <button
+              id="btn-print"
+              className={styles["print-btn"]}
+              onClick={() => window.print()}
+            >
+              {images.print()}
             </button>
-          </a>
+          </div>
+          <div />
+          <div className="ml-2" onClick={() => props.handleSharingToggle()}>
+            <button id="btn-email" className={styles["send-btn"]}>
+              {images.send()}
+            </button>
+          </div>
+          <div className="ml-2">
+            <a
+              download={`${props.certificate.id}.opencert`}
+              target="_black"
+              href={`data:text/plain;,${JSON.stringify(
+                props.document,
+                null,
+                2
+              )}`}
+            >
+              <button id="btn-download" className={styles["send-btn"]}>
+                <i
+                  className="fas fa-file-download"
+                  style={{ fontSize: "1.5rem", color: "#343a40" }}
+                />
+              </button>
+            </a>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );
