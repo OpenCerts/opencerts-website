@@ -1,7 +1,7 @@
 import { get } from "lodash";
 import { IMG_LOGO, IMG_SEAL, IMG_SSGLOGO } from "../common";
 import { formatDate, getRecipientID } from "../common/functions";
-import { fonts } from "../common/fonts";
+import fonts from "../common/fonts";
 
 export const fullWidthStyle = {
   width: "100%",
@@ -149,10 +149,14 @@ export const renderAwardText = certificate => (
       </p>
     </div>
     <div className="d-flex" style={{ marginTop: "3rem" }}>
-      <p style={awardTextStyle} className="RobotoMedium">is awarded to</p>
+      <p style={awardTextStyle} className="RobotoMedium">
+        is awarded to
+      </p>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
-      <p style={recipientTextStyle} className="RobotoMedium">{certificate.recipient.name}</p>
+      <p style={recipientTextStyle} className="RobotoMedium">
+        {certificate.recipient.name}
+      </p>
     </div>
     <div className="d-flex">
       <p style={printTextStyle} className="RobotoMedium">
@@ -179,7 +183,9 @@ export const renderAwardText = certificate => (
 
 export const renderIssuingDate = certificate => (
   <div className="d-flex" style={{ marginTop: "1rem" }}>
-    <p style={issuersTextStyle} className="RobotoRegular">{formatDate(certificate.attainmentDate)}</p>
+    <p style={issuersTextStyle} className="RobotoRegular">
+      {formatDate(certificate.attainmentDate)}
+    </p>
   </div>
 );
 

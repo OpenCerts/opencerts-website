@@ -1,6 +1,7 @@
 import { get } from "lodash";
 import { NICF_LOGO, IMG_LOGO, IMG_SEAL, IMG_SSGLOGO } from "../common";
 import { formatDate, formatCertID, getRecipientID } from "../common/functions";
+import fonts from "../common/fonts";
 
 export const fullWidthStyle = {
   width: "100%",
@@ -18,16 +19,14 @@ export const signatureWidthStyle = {
 };
 
 export const printTextStyle = {
-  fontWeight: "500!important"
+  color: "#000000"
 };
 
 export const issuersTextStyle = {
-  fontWeight: "500!important",
   fontSize: "24px"
 };
 
 export const transcriptTextStyle = {
-  fontWeight: "500!important",
   fontSize: "24px",
   marginBottom: "0px"
 };
@@ -35,7 +34,6 @@ export const transcriptTextStyle = {
 export const awardTextStyle = {
   fontSize: "22px",
   color: "rgb(197,41,155)",
-  fontWeight: "bold",
   textAlign: "left"
 };
 
@@ -45,14 +43,13 @@ export const singaporeTextStyle = {
 
 export const nameTextStyle = {
   fontSize: "2.3rem",
-  fontWeight: "bold",
   color: "rgb(197,41,155)",
   wordBreak: "break-word"
 };
 
 export const recipientTextStyle = {
   fontSize: "1.8rem",
-  textAlign: "center",
+  textAlign: "left",
   marginBottom: "0px"
 };
 
@@ -63,8 +60,7 @@ export const titleTextStyle = {
 };
 
 export const designationTextStyle = {
-  fontSize: "14px",
-  fontWeight: "bold"
+  fontSize: "14px"
 };
 
 export const footerTextStyle = {
@@ -90,8 +86,8 @@ export const footerLogoStyle = {
   height: "45px"
 };
 export const renderLogoWSQ = () => (
-  <div className="row d-flex" style={{ marginTop: "3rem" }}>
-    <div className="col-lg-6 col-12">
+  <div className="row d-flex">
+    <div className="col-lg-4 col-12">
       <img style={fullWidthStyle} src={NICF_LOGO} />
     </div>
     <div className="col-lg-6" />
@@ -117,14 +113,14 @@ export const renderSignature = certificate => (
             )}
           />
         </div>
-        <div style={designationTextStyle}>
+        <div style={designationTextStyle} className="RobotoBold">
           {get(certificate, "additionalData.certSignatories[0].name")},{" "}
           {get(certificate, "additionalData.certSignatories[0].position")}
         </div>
-        <div style={designationTextStyle}>
+        <div style={designationTextStyle} className="RobotoBold">
           {get(certificate, "additionalData.certSignatories[0].organisation")}
         </div>
-        <div style={footerTextStyle}>
+        <div style={footerTextStyle} className="RobotoLight">
           The training and assessment of the abovementioned learner are
           accredited
           <br />
@@ -136,17 +132,17 @@ export const renderSignature = certificate => (
       </div>
       <div className="col-lg-4 col-xs-12">
         <div style={{ marginBottom: "70px", marginTop: "60px" }}>
-          <p style={printTextStyle}>
+          <p style={printTextStyle} className="RobotoRegular">
             Cert No: {get(certificate, "additionalData.serialNum")}
           </p>
         </div>
       </div>
       <div className="col-lg-5 col-12">
-        <div style={footerAboutTextStyle}>
-          <a href="www.ssg.gov.sg">www.ssg.gov.sg</a>
+        <div style={footerAboutTextStyle} className="RobotoLight">
+          <a href="www.ssg.gov.sg" className="RobotoLight">www.ssg.gov.sg</a>
           <br />
           For verification of this certificate, please visit <br />
-          <a hred="https://myskillsfuture.sg/verify_eCert.html">
+          <a href="https://myskillsfuture.sg/verify_eCert.html" className="RobotoLight">
             https://myskillsfuture.sg/verify_eCert.html
           </a>
         </div>
@@ -170,16 +166,16 @@ export const renderSignature = certificate => (
 export const renderAwardText = certificate => (
   <div>
     <div className="d-flex" style={{ marginTop: "2rem" }}>
-      <p style={nameTextStyle}>STATEMENT OF ATTAINMENT</p>
+      <p style={nameTextStyle} className="RobotoBold">STATEMENT OF ATTAINMENT</p>
     </div>
     <div className="d-flex" style={{ marginTop: "3rem" }}>
-      <p style={awardTextStyle}>is awarded to</p>
+      <p style={awardTextStyle} className="RobotoMedium">is awarded to</p>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
-      <p style={recipientTextStyle}>{certificate.recipient.name}</p>
+      <p style={recipientTextStyle} className="RobotoMedium">{certificate.recipient.name}</p>
     </div>
     <div className="d-flex">
-      <p style={printTextStyle}>
+      <p style={printTextStyle} className="RobotoMedium">
         ID No: {getRecipientID(certificate.recipient)}
       </p>
     </div>
@@ -187,7 +183,7 @@ export const renderAwardText = certificate => (
       className="d-flex col-lg-6 col-12"
       style={{ marginTop: "1rem", marginBottom: "3rem", paddingLeft: "0px" }}
     >
-      <p style={awardTextStyle}>
+      <p style={awardTextStyle} className="RobotoMedium">
         for successful attainment of the following
         <br />
         industry approved competencies
@@ -195,13 +191,13 @@ export const renderAwardText = certificate => (
     </div>
     {certificate.transcript.map(item => (
       <div className="d-flex" key={item.courseCode}>
-        <p style={transcriptTextStyle}>
+        <p style={transcriptTextStyle} className="RobotoMedium">
           {item.courseCode} {item.name}
         </p>
       </div>
     ))}
     <div className="d-flex" style={{ marginTop: "3rem" }}>
-      <p style={issuersTextStyle}>
+      <p style={issuersTextStyle} className="RobotoRegular">
         at {certificate.additionalData.assessmentOrgName}
       </p>
     </div>
@@ -210,7 +206,7 @@ export const renderAwardText = certificate => (
 
 export const renderIssuingDate = certificate => (
   <div className="d-flex" style={{ marginTop: "1rem" }}>
-    <p style={issuersTextStyle}>{formatDate(certificate.attainmentDate)}</p>
+    <p style={issuersTextStyle} className="RobotoRegular">{formatDate(certificate.attainmentDate)}</p>
   </div>
 );
 
@@ -231,8 +227,9 @@ export default ({ logo }) => ({ certificate }) => (
   <div>
     <div
       className="container"
-      style={{ border: 5, borderColor: "#AAA", borderStyle: "solid",paddingLeft:"40px",paddingRight:"40px",paddingBottom:"100px", width:"100%", fontFamily:"Arial" }}
+      style={{ border: 5, borderColor: "#AAA", borderStyle: "solid", paddingLeft:"80px", paddingRight:"80px", paddingTop:"100px", paddingBottom:"100px", width:"100%", fontFamily:"Arial" }}
     >
+      {fonts()}
       {renderLogoWSQ()}
       {renderAwardText(certificate)}
       {renderIssuingDate(certificate)}

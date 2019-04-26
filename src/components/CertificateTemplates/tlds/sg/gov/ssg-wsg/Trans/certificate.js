@@ -6,7 +6,7 @@ import {
   getRecipientID,
   getSpecialization
 } from "../common/functions";
-import { fonts } from "../common/fonts";
+import fonts from "../common/fonts";
 
 export const fullWidthStyle = {
   width: "100%",
@@ -113,15 +113,22 @@ export const renderSignature = certificate => (
       <div style={designationTextStyle} className="RobotoLight">
         {get(certificate, "additionalData.certSignatories[0].organisation")}
       </div>
-      <div style={footerTextStyle} className="RobotoLight">Transcript guide printed on reverse</div>
+      <div style={footerTextStyle} className="RobotoLight">
+        Transcript guide printed on reverse
+      </div>
       <div style={footerLinkStyle} className="RobotoLight">
-        For verification of this certificate, please visit <a href="https://myskillsfuture.sg/verify_eCert.html">https://myskillsfuture.sg/verify_eCert.html</a>
+        For verification of this certificate, please visit{" "}
+        <a href="https://myskillsfuture.sg/verify_eCert.html">
+          https://myskillsfuture.sg/verify_eCert.html
+        </a>
       </div>
     </div>
     <div className="col-lg-2 col-xs-12" />
     <div className="col-lg-3 col-xs-12">
       <img style={footerLogoStyle} src={IMG_SSGLOGO} />
-      <div style={certCodeStyle} className="RobotoRegular">TRA</div>
+      <div style={certCodeStyle} className="RobotoRegular">
+        TRA
+      </div>
     </div>
   </div>
 );
@@ -129,11 +136,15 @@ export const renderSignature = certificate => (
 export const renderAwardText = certificate => (
   <div>
     <div className="d-flex" style={{ marginTop: "2rem" }}>
-      <p style={headerTextStyle} className="RobotoBold">OFFICIAL TRANSCRIPT</p>
+      <p style={headerTextStyle} className="RobotoBold">
+        OFFICIAL TRANSCRIPT
+      </p>
     </div>
     <div className="row d-flex align-items-end" style={{ marginTop: "1rem" }}>
       <div className="col-lg-10 col-xs-12">
-        <span style={nameTextStyle} className="RobotoMedium">Name: {certificate.recipient.name}</span>
+        <span style={nameTextStyle} className="RobotoMedium">
+          Name: {certificate.recipient.name}
+        </span>
       </div>
       <div className="col-lg-2 col-xs-12">
         <span>{get(certificate, "additionalData.serialNum")}</span>
@@ -145,7 +156,9 @@ export const renderAwardText = certificate => (
       </p>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
-      <p style={qualHeaderStyle} className="RobotoMedium">Qualification:</p>
+      <p style={qualHeaderStyle} className="RobotoMedium">
+        Qualification:
+      </p>
     </div>
     <div className="d-flex">
       <p style={qualTextStyle} className="RobotoMedium">
@@ -167,7 +180,9 @@ export const renderAwardText = certificate => (
 export const renderTranscript = certificate => (
   <div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
-      <p style={printTextStyle} className="RobotoRegular">REMARKS:</p>
+      <p style={printTextStyle} className="RobotoRegular">
+        REMARKS:
+      </p>
     </div>
     <div className="d-flex" style={{ overflowX: "auto" }}>
       <table cellPadding="10">
@@ -199,10 +214,7 @@ export const renderFooter = certificate => (
 
 export const renderCopyright = () => (
   <div>
-    <div
-      className="d-flex"
-      style={{ marginTop: "15rem" }}
-    >
+    <div className="d-flex" style={{ marginTop: "15rem" }}>
       <p style={copyrightStyle} className="RobotoLight">
         Copyright @ 2016 All Rights Reserved SkillsFuture Singapore Agency
       </p>
@@ -269,7 +281,9 @@ export const renderQualificationText = certificate => (
       </p>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
-      <p style={printTextStyle} className="RobotoRegular">WSQ QUALIFICATIONS PROGRESSION PATH</p>
+      <p style={printTextStyle} className="RobotoRegular">
+        WSQ QUALIFICATIONS PROGRESSION PATH
+      </p>
     </div>
     <div className="d-flex">
       <p className="RobotoLight">
@@ -279,7 +293,9 @@ export const renderQualificationText = certificate => (
     </div>
     <div className="d-flex">
       <ul>
-        <li className="RobotoLight">WSQ Graduate Diploma / WSQ Graduate Certificate</li>
+        <li className="RobotoLight">
+          WSQ Graduate Diploma / WSQ Graduate Certificate
+        </li>
         <li className="RobotoLight">WSQ Specialist Diploma</li>
         <li className="RobotoLight">WSQ Diploma</li>
         <li className="RobotoLight">WSQ Advanced Certificate</li>
@@ -288,7 +304,9 @@ export const renderQualificationText = certificate => (
       </ul>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
-      <p style={printTextStyle} className="RobotoRegular">EXPLANATION OF GRADES GRANTED</p>
+      <p style={printTextStyle} className="RobotoRegular">
+        EXPLANATION OF GRADES GRANTED
+      </p>
     </div>
     <div className="d-flex">
       <p>{get(certificate, "additionalData.qualificationPath.desc")}</p>
@@ -324,10 +342,17 @@ export const renderQualificationText = certificate => (
       </table>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
-      <p style={printTextStyle} className="RobotoRegular">FOR MORE INFORMATION</p>
+      <p style={printTextStyle} className="RobotoRegular">
+        FOR MORE INFORMATION
+      </p>
     </div>
     <div className="d-flex">
-      <p className="RobotoLight">Details on the WSQ are available at <a href="http://www.ssg.gov.sg/wsq.html">http://www.ssg.gov.sg/wsq.html</a></p>
+      <p className="RobotoLight">
+        Details on the WSQ are available at{" "}
+        <a href="http://www.ssg.gov.sg/wsq.html">
+          http://www.ssg.gov.sg/wsq.html
+        </a>
+      </p>
     </div>
   </div>
 );
