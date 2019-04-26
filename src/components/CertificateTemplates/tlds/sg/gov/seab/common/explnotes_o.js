@@ -209,7 +209,7 @@ export const renderExplonatoryNotes = () => (
   </div>
 );
 
-const Template = certificate => (
+const Template = () => (
   <div className="container-fluid">
     <div className="row justify-content-md-center">
       <div className="col-md-2" />
@@ -228,9 +228,7 @@ const Template = certificate => (
         <div className="col-md-12">
           <div className="row">
             <div className="col-md-1" />
-            <div className="col-md-11">
-              {renderExplonatoryNotes(certificate)}
-            </div>
+            <div className="col-md-11">{renderExplonatoryNotes()}</div>
           </div>
         </div>
         <div className="col-md-12">&nbsp;</div>
