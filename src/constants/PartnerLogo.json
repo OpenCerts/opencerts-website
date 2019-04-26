@@ -50,11 +50,6 @@
     "value": "/static/images/NUS_logo.png"
   },
   {
-    "key": "SIM",
-    "name": "Singapore Institute of Management",
-    "value": "/static/images/SIM_logo.png"
-  },
-  {
     "key": "SIT",
     "name": "Singapore Institute of Technology",
     "value": "/static/images/SIT_logo.png"
@@ -75,9 +70,14 @@
     "value": "/static/images/SUTD_logo.png"
   },
   {
-    "key": "CSC",
-    "name": "Civil Service College",
-    "value": "/static/images/CSC_logo.png"
+    "key": "NAFA",
+    "name": "Nanyang Academy of Fine Arts",
+    "value": "/static/images/NAFA_logo.png"
+  },
+  {
+    "key": "LASALLE",
+    "name": "LASALLE College of the Arts",
+    "value": "/static/images/LASALLE_logo.png"
   },
   {
     "key": "SSG",
