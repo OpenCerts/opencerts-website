@@ -2,6 +2,7 @@
 
 if ! [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
     sonar-scanner \
+        -Dsonar.scanner.skip=false \
         -Dsonar.projectKey=OpenCerts_opencerts-website \
         -Dsonar.organization=opencerts \
         -Dsonar.sources=. \
