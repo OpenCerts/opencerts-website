@@ -28,9 +28,11 @@ class FramelessViewerContainer extends Component {
   }
 
   componentDidMount() {
-    window.templates = () => this.props.templates;
-    window.renderCertificate = this.handleCertificateChange;
-    window.selectTemplateTab = this.props.selectTemplateTab;
+    window.opencerts = {
+      templates: () => this.props.templates,
+      renderCertificate: this.handleCertificateChange,
+      selectTemplateTab: this.props.selectTemplateTab
+    };
   }
 
   handleTextFieldChange(e) {

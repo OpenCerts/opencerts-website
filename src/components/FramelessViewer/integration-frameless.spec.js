@@ -15,17 +15,17 @@ const validateTextContent = async (t, component, texts) =>
   );
 
 test("Default certificate is rendered correctly", async t => {
-  // Inject javascript and execute window.renderCertificate
+  // Inject javascript and execute window.opencerts.renderCertificate
   const certificateContent = JSON.parse(
     readFileSync(join(__dirname, Certificate)).toString()
   );
-  await t.eval(() => window.renderCertificate(certificateContent), {
+  await t.eval(() => window.opencerts.renderCertificate(certificateContent), {
     dependencies: { certificateContent }
   });
 
-  // Check content of window.templates
+  // Check content of window.opencerts.templates
   await t.wait(500);
-  const templates = await t.eval(() => window.templates());
+  const templates = await t.eval(() => window.opencerts.templates());
   await t
     .expect(templates)
     .eql([
@@ -40,8 +40,8 @@ test("Default certificate is rendered correctly", async t => {
     "A3DA180001"
   ]);
 
-  // Navigate to next tab using window.selectTemplateTab
-  await t.eval(() => window.selectTemplateTab(1));
+  // Navigate to next tab using window.opencerts.selectTemplateTab
+  await t.eval(() => window.opencerts.selectTemplateTab(1));
 
   // Validate content of second tab
   await validateTextContent(t, RenderedCertificate, [
