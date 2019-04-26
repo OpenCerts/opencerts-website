@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Head from "next/head";
-import FramelessViewerPageContainer from "../src/components/FramelessViewerPageContainer";
+import FramelessViewerPageContainer from "../src/components/FramelessViewer/FramelessViewerPageContainer";
 
 const FramelessViewerPage = () => (
   <div>
