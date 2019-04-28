@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { IMG_LOGO_TP, IMG_LOGO_NIEC } from "../common/images";
 
 const Certificate = ({ certificate }) => (
   <div className="container">
@@ -7,13 +8,13 @@ const Certificate = ({ certificate }) => (
     .niec-logo {
       padding-top:3em;
       float:left;
-      width: 23%;
+      width: 25%;
     }
 
     .tp-logo {
       padding-top:3.5em;
       float:right;
-      width:28%;
+      width:30%;
     }
 
     .recipient-paragraph{
@@ -72,8 +73,8 @@ const Certificate = ({ certificate }) => (
 
     <div className="row">
       <div className="col-12">
-        <img src="/static/images/NIEC_logo.png" className="niec-logo" />
-        <img src="/static/images/TP_logo.svg" className="tp-logo" />
+        <img src={IMG_LOGO_NIEC} className="niec-logo" />
+        <img src={IMG_LOGO_TP} className="tp-logo" />
       </div>
     </div>
 

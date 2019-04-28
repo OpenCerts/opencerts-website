@@ -1,3 +1,5 @@
+import { IMG_LOGO_TP, IMG_LOGO_NIEC } from "../common/images";
+
 const TranscriptHeader = () => (
   <div className="container">
     <style>
@@ -11,7 +13,7 @@ const TranscriptHeader = () => (
       .tp-logo {
         padding-top:1.2em;
         float:right;
-        width:20%;
+        width:25%;
       }
       
       .page-title {
@@ -26,8 +28,8 @@ const TranscriptHeader = () => (
     <br />
     <div className="row">
       <div className="col-12">
-        <img src="/static/images/NIEC_logo.png" className="niec-logo" />
-        <img src="/static/images/TP_logo.svg" className="tp-logo" />
+        <img src={IMG_LOGO_NIEC} className="niec-logo" />
+        <img src={IMG_LOGO_TP} className="tp-logo" />
       </div>
     </div>
     <div className="row">

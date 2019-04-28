@@ -1,9 +1,12 @@
+import { IMG_LOGO_TP } from "./images";
+
 const TranscriptHeader = () => (
   <div className="container">
     <style>
       {`
       .tp-logo {
         padding-top:1em;
+        width:40%;
       }
       
       .page-title {
@@ -17,7 +20,7 @@ const TranscriptHeader = () => (
     <br />
     <div className="row">
       <div className="col-7">
-        <img src="/static/images/TP_logo.svg" className="tp-logo" />
+        <img src={IMG_LOGO_TP} className="tp-logo" />
       </div>
       <div className="col-5 page-title">ACADEMIC TRANSCRIPT</div>
     </div>

@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { IMG_LOGO_TP } from "../common/images";
 
 const Certificate = ({ certificate }) => {
   const Director = () => {
@@ -24,6 +25,7 @@ const Certificate = ({ certificate }) => {
           .tp-logo {
             padding-top:3em;
             float:right;
+            width:30%;
           }
 
           .recipient-paragraph{
@@ -84,7 +86,7 @@ const Certificate = ({ certificate }) => {
 
       <div className="row">
         <div className="col-12">
-          <img src="/static/images/TP_logo.svg" className="tp-logo" />
+          <img src={IMG_LOGO_TP} className="tp-logo" />
         </div>
       </div>
 
