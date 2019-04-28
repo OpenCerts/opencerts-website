@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import { MultiCertificateRenderer } from "template-utils/MultiCertificateRenderer";
 
-import TPCert from "../common/certificate";
-import TPTranscript from "../common/transcript";
+import TPCert from "./certificate";
+import TPTranscript from "./transcript";
 import ApprovedAddresses from "../common";
 
 const templates = [
@@ -18,7 +18,7 @@ const templates = [
   }
 ];
 
-const pre2012ftdipniec = ({ certificate }) => (
+const ftpfp = ({ certificate }) => (
   <MultiCertificateRenderer
     certificate={certificate}
     templates={templates}
@@ -26,8 +26,8 @@ const pre2012ftdipniec = ({ certificate }) => (
   />
 );
 
-pre2012ftdipniec.propTypes = {
+ftpfp.propTypes = {
   certificate: PropTypes.object.isRequired
 };
 
-export default pre2012ftdipniec;
+export default ftpfp;

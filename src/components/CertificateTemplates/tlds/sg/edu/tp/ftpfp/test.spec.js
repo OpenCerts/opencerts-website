@@ -13,7 +13,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("Certificate is rendered correctly.", async t => {
+test("Polytechnic Foundation Programme is rendered correctly.", async t => {
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
   await t.expect(TemplateTabList.textContent).contains("Certificate");
@@ -21,8 +21,9 @@ test("Certificate is rendered correctly.", async t => {
 
   // certificate tab content
   await validateTextContent(t, RenderedCertificate, [
-    "CHARLES MOHAMED MD NANWANI",
-    "Diploma in Computer Engineering"
+    "DUMMY STUDENT NAME",
+    "Polytechnic",
+    "Foundation Programme"
   ]);
 
   const transcriptTab = TemplateTabList.find(":nth-child(2)");
@@ -30,14 +31,12 @@ test("Certificate is rendered correctly.", async t => {
 
   // transcript tab content
   await validateTextContent(t, RenderedCertificate, [
-    "CHARLES MOHAMED MD NANWANI",
-    "S0367893H",
-    "0833994G",
-    "DIPLOMA IN COMPUTER ENGINEERING",
-    "GCD1001",
-    "Applied Principles for Effective Living 1",
-    "Cumulative Grade Point Average: 1.9",
-    "Awarded the DIPLOMA IN COMPUTER ENGINEERING",
+    "DUMMY STUDENT NAME",
+    "S0000000A",
+    "1234567A",
+    "S001",
+    "Dummy01 subject name",
+    "COMPLETED POLYTECHNIC FOUNDATION PROGRAMME",
     "Grading System"
   ]);
 });
