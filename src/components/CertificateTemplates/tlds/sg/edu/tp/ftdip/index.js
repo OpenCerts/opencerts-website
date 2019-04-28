@@ -18,7 +18,7 @@ const templates = [
   }
 ];
 
-const pre2012ftdip = ({ certificate }) => (
+const ftdip = ({ certificate }) => (
   <MultiCertificateRenderer
     certificate={certificate}
     templates={templates}
@@ -26,8 +26,8 @@ const pre2012ftdip = ({ certificate }) => (
   />
 );
 
-pre2012ftdip.propTypes = {
+ftdip.propTypes = {
   certificate: PropTypes.object.isRequired
 };
 
-export default pre2012ftdip;
+export default ftdip;
