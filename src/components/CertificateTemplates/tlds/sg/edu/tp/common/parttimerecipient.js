@@ -1,18 +1,14 @@
 import PropTypes from "prop-types";
 
-const Recipient = ({ certificate }) => (
+const PartTimeRecipient = ({ certificate }) => (
   <div className="container">
     <div className="row">
       <div className="col-7">
         <strong>{certificate.recipient.name}</strong>
         <br />
-        {certificate.additionalData.addressBlockHouseNumber}{" "}
-        {certificate.additionalData.addressStreetName}
         <br />
-        {certificate.additionalData.addressFloorNumber}{" "}
-        {certificate.additionalData.addressUnitNumber}
         <br />
-        {certificate.additionalData.addressCountry}
+        Course Name : &nbsp; {certificate.name.toUpperCase()}
       </div>
 
       <div className="col-5">
@@ -42,16 +38,6 @@ const Recipient = ({ certificate }) => (
             {new Date(certificate.graduationDate).toLocaleDateString("en-SG")}
           </div>
         </div>
-      </div>
-    </div>
-
-    <br />
-
-    <div className="row">
-      <div className="col-7">
-        Course Name : &nbsp; {certificate.name.toUpperCase()}
-      </div>
-      <div className="col-5">
         <div className="row">
           <div className="col-5">Course Type</div>
           <div className="col-1"> : </div>
@@ -59,13 +45,12 @@ const Recipient = ({ certificate }) => (
         </div>
       </div>
     </div>
-
     <br />
   </div>
 );
 
-Recipient.propTypes = {
+PartTimeRecipient.propTypes = {
   certificate: PropTypes.object.isRequired
 };
 
-export default Recipient;
+export default PartTimeRecipient;

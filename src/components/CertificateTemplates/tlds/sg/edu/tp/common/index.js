@@ -1,5 +1,5 @@
 const ApprovedAddresses = [
-  "0x4345280a485B8436603d08fcBe6336A4C62C9C98" // My Dummy Issuer - for development and testing
+  "0xe825e69383a57eB686Fc7b8c455Dd982bB9680f6" // ROPSTEN: Temasek Polytechnic
 ];
 
 export default ApprovedAddresses;

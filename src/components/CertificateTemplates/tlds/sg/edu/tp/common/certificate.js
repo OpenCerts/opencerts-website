@@ -78,29 +78,33 @@ const Certificate = ({ certificate }) => (
       having successfully completed the course of study was awarded the
     </div>
     <div className="certificate-name">
-      {!certificate.recipient.isMerit && !certificate.recipient.isExempted && (
-        <span>{certificate.name}</span>
-      )}
+      {!certificate.additionalData.isMerit &&
+        !certificate.additionalData.isExempted && (
+          <span>{certificate.name}</span>
+        )}
 
-      {!certificate.recipient.isMerit && certificate.recipient.isExempted && (
-        <span>{certificate.name}*</span>
-      )}
+      {!certificate.additionalData.isMerit &&
+        certificate.additionalData.isExempted && (
+          <span>{certificate.name}*</span>
+        )}
 
-      {certificate.recipient.isMerit && !certificate.recipient.isExempted && (
-        <span>
-          {certificate.name}
-          <br />
-          <small>WITH MERIT</small>
-        </span>
-      )}
+      {certificate.additionalData.isMerit &&
+        !certificate.additionalData.isExempted && (
+          <span>
+            {certificate.name}
+            <br />
+            <small>WITH MERIT</small>
+          </span>
+        )}
 
-      {certificate.recipient.isMerit && certificate.recipient.isExempted && (
-        <span>
-          {certificate.name}
-          <br />
-          <small>WITH MERIT*</small>
-        </span>
-      )}
+      {certificate.additionalData.isMerit &&
+        certificate.additionalData.isExempted && (
+          <span>
+            {certificate.name}
+            <br />
+            <small>WITH MERIT*</small>
+          </span>
+        )}
     </div>
     <div className="recipient-paragraph">
       by Temasek Polytechnic (Singapore) on{" "}
@@ -109,7 +113,7 @@ const Certificate = ({ certificate }) => (
         month: "long",
         year: "numeric"
       })}
-      {certificate.recipient.isExempted && (
+      {certificate.additionalData.isExempted && (
         <span className="exempted-paragraph">
           <br />* Exempted from satisfying the full range of assessment
           objectives of the diploma

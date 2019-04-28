@@ -1,7 +1,7 @@
 import _ from "lodash";
 import PropTypes from "prop-types";
 
-const ExamResults = ({ certificate }) => {
+const PartTimeExamResults = ({ certificate }) => {
   const semesters = _(certificate.transcript)
     .groupBy(t => t.semester)
     .map((values, key) => ({ semester: key, grades: values }))
@@ -34,6 +34,15 @@ const ExamResults = ({ certificate }) => {
     );
   });
 
+  const awardedCertificates = certificate.additionalData.awardedCertificates.map(
+    (n, j) => (
+      <span key={j}>
+        {n.toUpperCase()}
+        <br />
+      </span>
+    )
+  );
+
   return (
     <div className="container">
       <style>
@@ -63,7 +72,8 @@ const ExamResults = ({ certificate }) => {
       </style>
 
       <div className="exam-results-header row">
-        <div className="col-8">SUBJECT CODE</div>
+        <div className="col-2">SUBJECT CODE</div>
+        <div className="col-6">SUBJECT NAME</div>
         <div className="col-2 credit-unit">CREDIT UNIT</div>
         <div className="col-2 grade">GRADE</div>
       </div>
@@ -73,22 +83,29 @@ const ExamResults = ({ certificate }) => {
       <br />
 
       <div className="row">
-        <div className="col-2">&nbsp;</div>
-        <div className="col-10 exam-results-footer">
-          Cumulative Grade Point Average:{" "}
-          {certificate.cumulativeScore.toFixed(1)}
-          <br />
-          Awarded the {certificate.name.toUpperCase()}
+        <div className="col-3">Total Credit Units earned</div>
+        <div className="col-1">:</div>
+        <div className="col-8">
+          {certificate.additionalData.totalCreditUnitsEarned}
         </div>
       </div>
-
+      <div className="row">
+        <div className="col-3">Cumulative Grade Point Average</div>
+        <div className="col-1">:</div>
+        <div className="col-8">{certificate.cumulativeScore.toFixed(1)}</div>
+      </div>
+      <div className="row">
+        <div className="col-3">Certificate/Diploma Awarded</div>
+        <div className="col-1">:</div>
+        <div className="col-8">{awardedCertificates}</div>
+      </div>
       <br />
     </div>
   );
 };
 
-ExamResults.propTypes = {
+PartTimeExamResults.propTypes = {
   certificate: PropTypes.object.isRequired
 };
 
-export default ExamResults;
+export default PartTimeExamResults;

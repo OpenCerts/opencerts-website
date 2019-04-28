@@ -52,7 +52,7 @@ const TranscriptFooter = ({ certificate }) => (
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
           </span>
           <br />
-          <span className="registrar-sign-label">for Registrar</span>
+          <span className="registrar-sign-label">for REGISTRAR</span>
         </span>
       </div>
     </div>
