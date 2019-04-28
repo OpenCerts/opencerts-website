@@ -1,0 +1,53 @@
+{
+  "schema": "opencerts/v1.5",
+  "data": {
+    "id": "7ab726e0-79f5-42b6-89b2-d9c024910a69:string:sg-edu-tp-9999-D01-1234567A-DP001",
+    "$template": "4b0f51da-13e5-4aa8-beb6-c17e6fffb94a:string:sg/edu/tp/ptmc-2019",
+    "description": "665d85b7-2773-437f-bed3-812ab0e96c8a:string:Post-Diploma Certificate",
+    "issuedOn": "31fec4ec-3617-4455-b4b8-54a2a8882541:string:2019-04-28T00:00:00+08:00",
+    "expiresOn": "34b157a0-1522-4e79-afaa-8f5658c90966:string:9999-12-31T23:59:59.997+08:00",
+    "admissionDate": "d6e0e5d2-144c-4030-93d7-78e89a62ee61:string:2016-04-28T00:00:00+08:00",
+    "graduationDate": "2dd02fe0-e128-4077-a63e-a557ac8f00bf:string:2019-04-28T00:00:00+08:00",
+    "cumulativeScore": "12a13b7b-a854-439a-8a88-2a397d24f078:number:5",
+    "name": "614dc05e-ab39-47b5-b7e4-4a0264bfec3d:string:Post-diploma dummy certificate name",
+    "issuers": [
+      {
+        "name": "bb42cabe-0c1f-46de-91bd-c6d6971bc78d:string:ROPSTEN: Temasek Polytechnic",
+        "certificateStore": "5b7948d6-bb37-4269-bf44-d78fe0093ae0:string:0xe825e69383a57eB686Fc7b8c455Dd982bB9680f6"
+      }
+    ],
+    "recipient": {
+      "studentId": "c16372ba-0f50-4e1d-a6a7-c0be5cd91f1e:string:1234567A",
+      "name": "1d34ba4c-e1f7-4fe2-9f56-aa549e64efc3:string:DUMMY STUDENT NAME",
+      "nric": "bf1d4f9a-678e-414f-8efe-c9e9b5a79d5d:string:S0000000A",
+      "fin": "8ef88b03-ae8e-4bba-b5c9-6603837b7f5f:string:"
+    },
+    "transcript": [],
+    "additionalData": {
+      "addressBlockHouseNumber": "181956c8-84c3-40a8-88b3-f8a478d9c5dd:string:",
+      "addressUnitNumber": "6f0742a7-c724-4ee8-b41e-c7f06739e740:string:",
+      "addressFloorNumber": "4a6b8b93-1f58-430e-8e02-cb6e99a82fb4:string:",
+      "addressStreetName": "145b57d0-04cb-42c1-8d76-753194150d06:string:",
+      "addressCountry": "1d592b4b-2688-43eb-9563-789953b27d9b:string:",
+      "addressPostalCode": "b614416b-c60b-4bec-af38-851901526c93:string:",
+      "isMerit": "5d0b81cc-b0fc-46ea-8759-fd0d5b53c31f:boolean:false",
+      "isExempted": "867fd8d7-6a12-44a0-b4e5-32596bd901fa:boolean:false",
+      "courseType": "d1fff348-d365-42e0-ad96-a7d979d1cff9:string:",
+      "academicStanding": "8c024d77-eb85-44cf-aa96-960680cf75ea:string:",
+      "totalCreditUnitsEarned": "97aed43a-86ff-400d-9f49-e8e6e855d0aa:number:0",
+      "awardedCertificates": [],
+      "recoginzedTowardsCourseName": "dff3f1f0-1bbe-4320-9cfc-ea408a0d98aa:string:DUMMY COURSE NAME"
+    }
+  },
+  "privacy": {},
+  "signature": {
+    "type": "SHA3MerkleProof",
+    "targetHash": "1a42052ac09f912dfcc5e7bc5957d09be7fd402577e3803b7381c5a8bea431ef",
+    "proof": [
+      "36e022e08ea5f958c34dfdd8c7528fc2e851859f541b023697dd40c073a4bdc4",
+      "6414e659e2a26c6117c47881e7c9ceafb6b43f5d76c861056412fb172e1a0818",
+      "15d7fe31068951f8cf6d04e4141d97e3d165a8d84236d35fbd6f0927e055dfe0"
+    ],
+    "merkleRoot": "8a92f78add40979749dcbcae541f962e356bccedef6ae4f7a3374e7d4895be90"
+  }
+}
