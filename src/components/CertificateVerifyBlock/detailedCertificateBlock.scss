@@ -20,3 +20,9 @@
 .invalid-border-color {
   border-color: $invalid-color;
 }
+
+@media only screen and (max-width: 550px) {
+  .detailed-certificate-block {
+    min-width: 300px;
+  }
+}

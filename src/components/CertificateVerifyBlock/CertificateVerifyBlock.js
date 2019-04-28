@@ -113,24 +113,24 @@ const SimpleVerifyBlock = props => {
 const CertificateVerifyBlock = props => {
   const status = statusSummary(props);
   return (
-    <div className={`${css.verifyBlockPadding} d-none d-lg-block d-xl-block`}>
-      <div
-        id="certificate-verify-block"
-        className={`d-flex align-items-start ${css.verifyBlocksContainer}`}
-      >
-        <SimpleVerifyBlock {...props} />
-        {props.detailedVerifyVisible ? (
-          <DetailedCertificateVerifyBlock
-            statusSummary={status}
-            hashStatus={props.hashStatus}
-            issuedStatus={props.issuedStatus}
-            notRevokedStatus={props.notRevokedStatus}
-            issuerIdentityStatus={props.issuerIdentityStatus}
-          />
-        ) : (
-          ""
-        )}
-      </div>
+    <div
+      id="certificate-verify-block"
+      className={`align-items-start ${css["d-flex"]} ${
+        css.verifyBlocksContainer
+      }`}
+    >
+      <SimpleVerifyBlock {...props} />
+      {props.detailedVerifyVisible ? (
+        <DetailedCertificateVerifyBlock
+          statusSummary={status}
+          hashStatus={props.hashStatus}
+          issuedStatus={props.issuedStatus}
+          notRevokedStatus={props.notRevokedStatus}
+          issuerIdentityStatus={props.issuerIdentityStatus}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 };
