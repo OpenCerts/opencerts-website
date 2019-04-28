@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { MultiCertificateRenderer } from "template-utils/MultiCertificateRenderer";
+import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
 import Certificate from "./certificate";
 
 const templates = [
@@ -15,12 +15,8 @@ const addresses = [
   "0x5CA3b9daC85DA4DE4030e59C1a0248004209e348"
 ];
 
-const NYPCert = ({ certificate }) => (
-  <MultiCertificateRenderer
-    certificate={certificate}
-    templates={templates}
-    whitelist={addresses}
-  />
+const NYPCert = () => (
+  <MultiCertificateRenderer templates={templates} whitelist={addresses} />
 );
 
 NYPCert.propTypes = {
