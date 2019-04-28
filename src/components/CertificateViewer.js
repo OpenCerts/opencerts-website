@@ -31,38 +31,43 @@ const renderVerifyBlock = props => (
 const renderHeaderBlock = props => {
   const renderedVerifyBlock = renderVerifyBlock(props);
   return (
-    <div className="container-fluid">
+    <div className={`container-fluid ${styles["pd-0"]}`}>
       <div className="row">
-        <div>{renderedVerifyBlock}</div>
-
-        <div className="ml-auto">
-          <button
-            id="btn-print"
-            className={styles["print-btn"]}
-            onClick={() => window.print()}
-          >
-            {images.print()}
-          </button>
-        </div>
-        <div />
-        <div className="ml-2" onClick={() => props.handleSharingToggle()}>
-          <button id="btn-email" className={styles["send-btn"]}>
-            {images.send()}
-          </button>
-        </div>
-        <div className="ml-2">
-          <a
-            download={`${props.certificate.id}.opencert`}
-            target="_black"
-            href={`data:text/plain;,${JSON.stringify(props.document, null, 2)}`}
-          >
-            <button id="btn-download" className={styles["send-btn"]}>
-              <i
-                className="fas fa-file-download"
-                style={{ fontSize: "1.5rem", color: "#343a40" }}
-              />
+        <div className="col-md-12">{renderedVerifyBlock}</div>
+        <div className={`row col-md-12 ${styles["pd-0"]}`}>
+          <div className="ml-auto">
+            <button
+              id="btn-print"
+              className={styles["print-btn"]}
+              onClick={() => window.print()}
+            >
+              {images.print()}
             </button>
-          </a>
+          </div>
+          <div />
+          <div className="ml-2" onClick={() => props.handleSharingToggle()}>
+            <button id="btn-email" className={styles["send-btn"]}>
+              {images.send()}
+            </button>
+          </div>
+          <div className="ml-2">
+            <a
+              download={`${props.certificate.id}.opencert`}
+              target="_black"
+              href={`data:text/plain;,${JSON.stringify(
+                props.document,
+                null,
+                2
+              )}`}
+            >
+              <button id="btn-download" className={styles["send-btn"]}>
+                <i
+                  className="fas fa-file-download"
+                  style={{ fontSize: "1.5rem", color: "#343a40" }}
+                />
+              </button>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -70,7 +75,7 @@ const renderHeaderBlock = props => {
 };
 
 const CertificateViewer = props => {
-  const { certificate, handleObfuscation } = props;
+  const { certificate } = props;
 
   const renderedHeaderBlock = renderHeaderBlock(props);
   const selectedTemplateName = get(certificate, "$template", "default");
@@ -85,10 +90,7 @@ const CertificateViewer = props => {
       <div id={styles["top-header-ui"]}>
         <div className={styles["header-container"]}>{renderedHeaderBlock}</div>
       </div>
-      <SelectedTemplate
-        certificate={certificate}
-        handleObfuscation={handleObfuscation}
-      />
+      <SelectedTemplate />
       <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
         <CertificateSharingForm
           emailSendingState={props.emailSendingState}
@@ -104,7 +106,6 @@ const CertificateViewer = props => {
 
 CertificateViewer.propTypes = {
   handleCertificateChange: PropTypes.func,
-  handleObfuscation: PropTypes.func,
   toggleDetailedView: PropTypes.func,
   detailedVerifyVisible: PropTypes.bool,
   document: PropTypes.object,
