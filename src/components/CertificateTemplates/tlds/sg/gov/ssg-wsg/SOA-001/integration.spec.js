@@ -1,8 +1,8 @@
 import { Selector } from "testcafe";
 
-fixture("Ropsten : Skillsfuture Singapore").page`http://localhost:3000`;
+fixture("ROPSTEN : Skillsfuture Singapore").page`http://localhost:3000`;
 
-const Certificate = "./SOA-001_S0000000A_180000000226558.OPENCERT";
+const Certificate = "./SOA-001.opencert";
 
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
@@ -29,6 +29,6 @@ test("SOA001 certificate is rendered correctly", async t => {
     "for successful attainment of the following industry approved competencies",
     "HR-PRB-503E-1 Develop strategies for total remuneration",
     "at SINGAPORE NATIONAL EMPLOYERS FEDERATION",
-    "1 Dec 2018"
+    "01 Dec 2018"
   ]);
 });

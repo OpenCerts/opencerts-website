@@ -1,6 +1,11 @@
 import { get } from "lodash";
-import { IMG_LOGO_FQ001, IMG_SSGLOGO_FQ001 } from "../common";
-import { formatDate, formatCertID, getRecipientID } from "../common/functions";
+import { IMG_LOGO, IMG_SSGLOGO } from "../common";
+import {
+  formatDate,
+  formatCertID,
+  getRecipientID,
+  getSpecialization
+} from "../common/functions";
 
 export const fullWidthStyle = {
   width: "100%",
@@ -38,7 +43,6 @@ export const singaporeTextStyle = {
 
 export const headerTextStyle = {
   fontSize: "3rem",
-  textAlign: "center",
   color: "rgb(197, 41, 155)",
   fontWeight: "bold",
   wordBreak: "break-word"
@@ -85,7 +89,7 @@ const renderTranscriptItems = certificate =>
       <td>{item.courseCode}</td>
       <td>{item.name}</td>
       <td>{item.description}</td>
-      <td>{item.examinationDate}</td>
+      <td>{formatDate(item.examinationDate)}</td>
       <td>{item.assessmentOrgName}</td>
     </tr>
   ));
@@ -93,7 +97,7 @@ const renderTranscriptItems = certificate =>
 export const renderLogoWSQ = () => (
   <div className="row d-flex" style={{ marginTop: "3rem" }}>
     <div className="col-lg-6 col-12">
-      <img style={fullWidthStyle} src={IMG_LOGO_FQ001} />
+      <img style={fullWidthStyle} src={IMG_LOGO} />
     </div>
   </div>
 );
@@ -113,12 +117,12 @@ export const renderSignature = certificate => (
       <div style={footerTextStyle}>Transcript guide printed on reverse</div>
       <div style={footerLinkStyle}>
         For verification of this certificate, please visit
-        https://uat.myskillsfuture.sg/verify_eCert.html
+        https://myskillsfuture.sg/verify_eCert.html
       </div>
     </div>
     <div className="col-lg-2 col-xs-12" />
     <div className="col-lg-3 col-xs-12">
-      <img style={footerLogoStyle} src={IMG_SSGLOGO_FQ001} />
+      <img style={footerLogoStyle} src={IMG_SSGLOGO} />
       <div style={certCodeStyle}>TRA</div>
     </div>
   </div>
@@ -148,15 +152,15 @@ export const renderAwardText = certificate => (
     <div className="d-flex">
       <p style={qualTextStyle}>
         {get(certificate, "qualificationLevel[0].description")} in{" "}
-        {certificate.name} - {get(certificate, "additionalData.specialization")}
+        {certificate.name} {getSpecialization(certificate.additionalData)}
       </p>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
       <p style={confermentTextStyle}>
         CONFERMENT: CONFERRED THE{" "}
         {get(certificate, "qualificationLevel[0].description")} in{" "}
-        {certificate.name} - {get(certificate, "additionalData.specialization")}{" "}
-        on {formatDate(certificate.attainmentDate)}
+        {certificate.name} {getSpecialization(certificate.additionalData)} on{" "}
+        {formatDate(certificate.attainmentDate)}
       </p>
     </div>
   </div>
