@@ -1,17 +1,12 @@
 import { get } from "lodash";
-import { IMG_LOGO, IMG_SEAL, IMG_SSGLOGO } from "../common";
-import { formatDate, getRecipientID } from "../common/functions";
+import { IMG_SEAL, IMG_SSGLOGO } from "../common";
+import {
+  getRecipientID,
+  renderLogoWSQ,
+  renderIssuingDate
+} from "../common/functions";
 import fonts from "../common/fonts";
 import * as styles from "../common/style";
-
-export const renderLogoWSQ = () => (
-  <div className="row d-flex">
-    <div className="col-lg-4 col-12" style={{ paddingRight: "0px" }}>
-      <img style={styles.fullWidthStyle} src={IMG_LOGO} />
-    </div>
-    <div className="col-lg-6" />
-  </div>
-);
 
 export const renderSignature = certificate => (
   <div
@@ -103,14 +98,6 @@ export const renderAwardText = certificate => (
         at {certificate.additionalData.assessmentOrgName}
       </p>
     </div>
-  </div>
-);
-
-export const renderIssuingDate = certificate => (
-  <div className="d-flex" style={{ marginTop: "1rem" }}>
-    <p style={styles.issuersTextStyle} className="RobotoRegular">
-      {formatDate(certificate.attainmentDate)}
-    </p>
   </div>
 );
 

@@ -1,17 +1,12 @@
 import { get } from "lodash";
-import { NICF_LOGO, IMG_LOGO, IMG_SEAL, IMG_SSGLOGO } from "../common";
-import { formatDate, formatCertID, getRecipientID } from "../common/functions";
+import { IMG_LOGO, IMG_SEAL, IMG_SSGLOGO } from "../common";
+import {
+  getRecipientID,
+  renderLogoNICF,
+  renderIssuingDate
+} from "../common/functions";
 import fonts from "../common/fonts";
 import * as styles from "../common/style";
-
-export const renderLogoWSQ = () => (
-  <div className="row d-flex">
-    <div className="col-lg-4 col-12">
-      <img style={styles.fullWidthStyle} src={NICF_LOGO} />
-    </div>
-    <div className="col-lg-6" />
-  </div>
-);
 
 export const renderSignature = certificate => (
   <div
@@ -75,9 +70,9 @@ export const renderSignature = certificate => (
         className="col-lg-7 col-12 d-flex justify-content-center"
         style={{ alignItems: "center" }}
       >
-        <div style={{ marginTop: "15px" }}>
-          <img style={styles.footerLogoStyle} src={IMG_LOGO} />
-          <img style={styles.footerLogoStyle} src={IMG_SSGLOGO} />
+        <div style={{ margin: "15px" }}>
+          <img style={styles.dualLogoFooter} src={IMG_LOGO} />
+          <img style={styles.dualLogoFooter} src={IMG_SSGLOGO} />
         </div>
         <div style={styles.certCodeStyle}>
           {get(certificate, "additionalData.certCode")}
@@ -134,25 +129,6 @@ export const renderAwardText = certificate => (
   </div>
 );
 
-export const renderIssuingDate = certificate => (
-  <div className="d-flex" style={{ marginTop: "1rem" }}>
-    <p style={styles.issuersTextStyle} className="RobotoRegular">
-      {formatDate(certificate.attainmentDate)}
-    </p>
-  </div>
-);
-
-export const renderFooter = certificate => (
-  <div className="container">
-    <div className="row d-flex justify-content-center">
-      <div className="col-6 text-left">
-        {get(certificate, "additionalData.additionalCertId")}
-      </div>
-      <div className="col-6 text-right">{formatCertID(certificate.id)}</div>
-    </div>
-  </div>
-);
-
 /* eslint-disable */
 // Disabled eslint as there's no way to add proptypes to an anonymous function like this
 export default ({ logo }) => ({ certificate }) => (
@@ -162,7 +138,7 @@ export default ({ logo }) => ({ certificate }) => (
       style={{ border: 5, borderColor: "#AAA", borderStyle: "solid", paddingLeft:"80px", paddingRight:"80px", paddingTop:"100px", paddingBottom:"100px", width:"100%", fontFamily:"Arial" }}
     >
       {fonts()}
-      {renderLogoWSQ()}
+      {renderLogoNICF()}
       {renderAwardText(certificate)}
       {renderIssuingDate(certificate)}
       {certificate.additionalData.certSignatories

@@ -131,3 +131,8 @@ export const headerTextStyle = {
 export const copyrightStyle = {
   fontSize: "14px"
 };
+
+export const dualLogoFooter = {
+  width: "auto",
+  height: "45px"
+};
