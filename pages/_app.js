@@ -7,51 +7,14 @@ import { merge } from "lodash/fp";
 import React from "react";
 import { Provider } from "react-redux";
 import initStore from "../src/store";
-import { GA_ID, DEFAULT_SEO } from "../src/config";
-
-const ALL_SEO_CONFIG = {
-  faq: {
-    title: "Frequently Asked Questions",
-    description:
-      "Have some questions in mind? Here are a list of collated questions and answers that might answer your questions.",
-    openGraph: {
-      title: "OpenCerts - Frequently Asked Questions",
-      description:
-        "Have some questions in mind? Here are a list of collated questions and answers that might answer your questions.",
-      url: "https://opencerts.io/faq"
-    }
-  },
-  registry: {
-    title: "Registry",
-    description:
-      "The registry is a list of recognised issuers with their certificate store addresses. Certificates from these issuers can be recognised and verified by our viewer.",
-    openGraph: {
-      title: "OpenCerts - Registry",
-      description:
-        "The registry is a list of recognised issuers with their certificate store addresses. Certificates from these issuers can be recognised and verified by our viewer.",
-      url: "https://opencerts.io/registry"
-    }
-  },
-  privacy: {
-    title: "Privacy Policy",
-    description:
-      "This is a Government Agency digital service that may use “cookies”, where a small data file is sent to your browser to store and track information about you when you enter our websites.",
-    openGraph: {
-      title: "OpenCerts - Privacy Policy",
-      description:
-        "This is a Government Agency digital service that may use “cookies”, where a small data file is sent to your browser to store and track information about you when you enter our websites.",
-      url: "https://opencerts.io/privacy"
-    }
-  },
-  viewer: DEFAULT_SEO
-};
+import { GA_ID, SEO } from "../src/config";
 
 class MyApp extends App {
   getSEOConfig = path => {
-    let SEO_CONFIG = DEFAULT_SEO;
+    let SEO_CONFIG = SEO.default;
     const currentRoute = path.substr(1, path.length);
-    if (currentRoute !== "") {
-      SEO_CONFIG = merge({}, ALL_SEO_CONFIG[currentRoute], DEFAULT_SEO);
+    if (currentRoute !== "" && SEO[currentRoute]) {
+      SEO_CONFIG = merge({}, SEO[currentRoute], SEO.default);
     }
     return SEO_CONFIG;
   };
