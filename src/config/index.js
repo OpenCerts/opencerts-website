@@ -41,7 +41,7 @@ export const SEO = {
         "Whether you're a student or an employer, OpenCerts lets you verify the certificates you have of anyone from any institution. All in one place.",
       images: [
         {
-          url: "/static/images/opencerts.png",
+          url: "https://opencerts.io/static/images/opencerts.png",
           width: 800,
           height: 600,
           alt: "OpenCerts"
