@@ -62,6 +62,10 @@ li.tab {
     display: none;
   }
 }
+.pd-0 {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
 
 .view-another {
   @include btn($btn-outline);
@@ -77,10 +81,29 @@ li.tab {
 .send-btn {
   @include round-btn;
   margin-left: 1rem;
-
+  i {
+    color: #343a40;
+  }
   svg {
     padding: 4px;
     height: 100%;
     width: 100%;
+  }
+}
+
+.print-btn:hover,
+.send-btn:hover {
+  i {
+    color: #fff;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  #top-header-ui {
+    padding: 1rem .5rem;
+  }
+  .pd-0 {
+    padding-right: 15px !important;
+    padding-left: 15px !important;
   }
 }

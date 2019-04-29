@@ -1,5 +1,4 @@
-import PropTypes from "prop-types";
-import { MultiCertificateRenderer } from "template-utils/MultiCertificateRenderer";
+import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
 import { approvedAddresses } from "../common";
 import SSGCert from "./certificate";
 
@@ -11,17 +10,13 @@ const templates = [
   }
 ];
 
-const Qual = ({ certificate }) => (
+const Qual = () => (
   <MultiCertificateRenderer
-    certificate={certificate}
     templates={templates}
     whitelist={approvedAddresses}
   />
 );
 
 Qual.displayName = "Qual Template";
-Qual.propTypes = {
-  certificate: PropTypes.object.isRequired
-};
 
 export default Qual;
