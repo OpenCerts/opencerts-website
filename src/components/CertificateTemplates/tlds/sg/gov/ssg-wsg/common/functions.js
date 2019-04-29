@@ -1,4 +1,6 @@
 import { tz } from "moment-timezone";
+import { IMG_LOGO, NICF_LOGO } from "./images";
+import * as styles from "./style";
 
 const TIMEZONE = "Asia/Singapore";
 
@@ -69,3 +71,29 @@ export const getSpecialization = additionalData => {
   }
   return "";
 };
+
+export const renderLogoWSQ = () => (
+  <div className="row d-flex">
+    <div className="col-lg-4 col-12" style={{ paddingRight: "0px" }}>
+      <img style={styles.fullWidthStyle} src={IMG_LOGO} />
+    </div>
+    <div className="col-lg-6" />
+  </div>
+);
+
+export const renderIssuingDate = certificate => (
+  <div className="d-flex" style={{ marginTop: "1rem" }}>
+    <p style={styles.issuersTextStyle} className="RobotoRegular">
+      {formatDate(certificate.attainmentDate)}
+    </p>
+  </div>
+);
+
+export const renderLogoNICF = () => (
+  <div className="row d-flex">
+    <div className="col-lg-4 col-12">
+      <img style={styles.fullWidthStyle} src={NICF_LOGO} />
+    </div>
+    <div className="col-lg-6" />
+  </div>
+);
