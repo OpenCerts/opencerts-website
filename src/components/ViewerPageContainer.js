@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Router from "next/router";
-import { certificateData, obfuscateFields } from "@govtechsg/open-certificate";
+import { certificateData } from "@govtechsg/open-certificate";
 
 import {
   updateCertificate,
@@ -32,7 +32,6 @@ class MainPageContainer extends Component {
     this.handleCertificateChange = this.handleCertificateChange.bind(this);
     this.handleSharingToggle = this.handleSharingToggle.bind(this);
     this.handleSendCertificate = this.handleSendCertificate.bind(this);
-    this.handleObfuscation = this.handleObfuscation.bind(this);
   }
 
   componentDidMount() {
@@ -51,11 +50,6 @@ class MainPageContainer extends Component {
     this.setState({
       detailedVerifyVisible: !this.state.detailedVerifyVisible
     });
-  }
-
-  handleObfuscation(field) {
-    const updatedDocument = obfuscateFields(this.props.document, field);
-    this.props.updateObfuscatedCertificate(updatedDocument);
   }
 
   handleCertificateChange(certificate) {
@@ -85,7 +79,6 @@ class MainPageContainer extends Component {
         emailSendingState={this.props.emailSendingState}
         toggleDetailedView={this.toggleDetailedView}
         detailedVerifyVisible={this.state.detailedVerifyVisible}
-        handleObfuscation={this.handleObfuscation}
       />
     );
   }

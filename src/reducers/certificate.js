@@ -32,7 +32,10 @@ export const initialState = {
   verificationStatus: [],
 
   emailState: states.INITIAL,
-  emailError: null
+  emailError: null,
+
+  templates: null,
+  activeTemplateTab: 0
 };
 
 // Actions
@@ -66,7 +69,10 @@ export const types = {
   SENDING_CERTIFICATE_RESET: "SENDING_CERTIFICATE_RESET",
 
   CERTIFICATE_OBFUSCATE_RESET: "CERTIFICATE_OBFUSCATE_RESET",
-  CERTIFICATE_OBFUSCATE_UPDATE: "CERTIFICATE_OBFUSCATE_UPDATE"
+  CERTIFICATE_OBFUSCATE_UPDATE: "CERTIFICATE_OBFUSCATE_UPDATE",
+
+  CERTIFICATE_TEMPLATE_REGISTER: "CERTIFICATE_TEMPLATE_REGISTER",
+  CERTIFICATE_TEMPLATE_SELECT_TAB: "CERTIFICATE_TEMPLATE_SELECT_TAB"
 };
 
 // Reducers
@@ -275,6 +281,17 @@ export default function reducer(state = initialState, action) {
         ...state,
         rawModified: action.payload
       };
+    case types.CERTIFICATE_TEMPLATE_REGISTER:
+      return {
+        ...state,
+        templates: action.payload,
+        activeTemplateTab: 0
+      };
+    case types.CERTIFICATE_TEMPLATE_SELECT_TAB:
+      return {
+        ...state,
+        activeTemplateTab: action.payload
+      };
     default:
       return state;
   }
@@ -385,6 +402,20 @@ export function updateObfuscatedCertificate(payload) {
   };
 }
 
+export function registerTemplates(payload) {
+  return {
+    type: types.CERTIFICATE_TEMPLATE_REGISTER,
+    payload
+  };
+}
+
+export function selectTemplateTab(payload) {
+  return {
+    type: types.CERTIFICATE_TEMPLATE_SELECT_TAB,
+    payload
+  };
+}
+
 // Selectors
 export function getIssuerIdentityStatus(store) {
   const {
@@ -474,4 +505,12 @@ export function getVerificationStatus(store) {
 
 export function getEmailSendingState(store) {
   return store.certificate.emailState;
+}
+
+export function getActiveTemplateTab(store) {
+  return store.certificate.activeTemplateTab;
+}
+
+export function getTemplates(store) {
+  return store.certificate.templates;
 }
