@@ -139,10 +139,15 @@ export const renderSignature = certificate => (
       </div>
       <div className="col-lg-5 col-12">
         <div style={footerAboutTextStyle} className="RobotoLight">
-          <a href="www.ssg.gov.sg" className="RobotoLight">www.ssg.gov.sg</a>
+          <a href="www.ssg.gov.sg" className="RobotoLight">
+            www.ssg.gov.sg
+          </a>
           <br />
           For verification of this certificate, please visit <br />
-          <a href="https://myskillsfuture.sg/verify_eCert.html" className="RobotoLight">
+          <a
+            href="https://myskillsfuture.sg/verify_eCert.html"
+            className="RobotoLight"
+          >
             https://myskillsfuture.sg/verify_eCert.html
           </a>
         </div>
@@ -166,13 +171,19 @@ export const renderSignature = certificate => (
 export const renderAwardText = certificate => (
   <div>
     <div className="d-flex" style={{ marginTop: "2rem" }}>
-      <p style={nameTextStyle} className="RobotoBold">STATEMENT OF ATTAINMENT</p>
+      <p style={nameTextStyle} className="RobotoBold">
+        STATEMENT OF ATTAINMENT
+      </p>
     </div>
     <div className="d-flex" style={{ marginTop: "3rem" }}>
-      <p style={awardTextStyle} className="RobotoMedium">is awarded to</p>
+      <p style={awardTextStyle} className="RobotoMedium">
+        is awarded to
+      </p>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
-      <p style={recipientTextStyle} className="RobotoMedium">{certificate.recipient.name}</p>
+      <p style={recipientTextStyle} className="RobotoMedium">
+        {certificate.recipient.name}
+      </p>
     </div>
     <div className="d-flex">
       <p style={printTextStyle} className="RobotoMedium">
@@ -206,7 +217,9 @@ export const renderAwardText = certificate => (
 
 export const renderIssuingDate = certificate => (
   <div className="d-flex" style={{ marginTop: "1rem" }}>
-    <p style={issuersTextStyle} className="RobotoRegular">{formatDate(certificate.attainmentDate)}</p>
+    <p style={issuersTextStyle} className="RobotoRegular">
+      {formatDate(certificate.attainmentDate)}
+    </p>
   </div>
 );
 

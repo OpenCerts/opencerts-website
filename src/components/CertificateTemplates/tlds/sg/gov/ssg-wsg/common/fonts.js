@@ -6,7 +6,7 @@ const fonts = () => (
         rel="stylesheet"
       />
     </head>
-    <style jsx global>{`
+    <style>{`
       .RobotoLight {
         font-family: Roboto, sans-serif;
         font-weight: 300;
