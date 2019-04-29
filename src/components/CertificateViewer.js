@@ -66,25 +66,7 @@ const renderHeaderBlock = props => {
                 style={{ fontSize: "1.5rem" }}
               />
             </button>
-          </div>
-          <div className="ml-2">
-            <a
-              download={`${props.certificate.id}.opencert`}
-              target="_black"
-              href={`data:text/plain;,${JSON.stringify(
-                props.document,
-                null,
-                2
-              )}`}
-            >
-              <button id="btn-download" className={styles["send-btn"]}>
-                <i
-                  className="fas fa-file-download"
-                  style={{ fontSize: "1.5rem", color: "#343a40" }}
-                />
-              </button>
-            </a>
-          </div>
+          </a>
         </div>
       </div>
     </div>
