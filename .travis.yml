@@ -1,8 +1,19 @@
 language: node_js
 node_js:
-  - "10.14.2"
+  - 10.14.2
 cache: npm install
-script:
-  - npm run lint
-  - npm run test
-  - npm run integration:headless
+addons:
+  sonarqube: true
+jobs:
+  include:
+    - stage: test
+      script:
+        - npm run lint
+        - npm run test -- --coverage=true
+        - ./scripts/sonar-runner.sh
+    - stage: integration
+      script:
+        - npm run integration:headless
+stages:
+  - test
+  - integration

@@ -1,7 +1,6 @@
-import PropTypes from "prop-types";
 import { get, groupBy, find } from "lodash";
 import { IMG_LOGO_NP_HORIZONTAL } from "./images";
-import { formatDate } from "./functions";
+import { formatDate, formatDateFullMonth, isCETDiploma } from "./functions";
 
 export const fullWidthStyle = {
   width: "100%",
@@ -52,7 +51,97 @@ export const renderSemester = (semester, semesterId, { hideCredit } = {}) => {
   );
 };
 
-export const renderHeader = certificate => {
+export const renderModuleCert = (mcItems, mcItemId, { hideCredit } = {}) => {
+  const subjectRows = mcItems.map((m, i) => (
+    <tr key={i}>
+      <td style={thWidth60Left}>{m.name}</td>
+      <td>{m.courseCredit}</td>
+      <td>{m.grade}</td>
+    </tr>
+  ));
+  const modularCertDescription = get(mcItems, "[0].modularCertDescription");
+  return (
+    <div key={mcItemId}>
+      <div className="row ml-auto">
+        <div style={{ fontWeight: 700 }}>{modularCertDescription}</div>
+      </div>
+      <table style={fullWidthStyle}>
+        <tbody>
+          <tr>
+            <th>MODULE</th>
+            {hideCredit ? null : <th>CREDIT UNIT</th>}
+            <th>GRADE</th>
+          </tr>
+          {subjectRows}
+        </tbody>
+      </table>
+      <div className="row my-auto">&nbsp;</div>
+    </div>
+  );
+};
+
+export const renderExamDate = (groupItems, itemId, opts) => {
+  // display semester studies if it is not blank
+  const sem = get(groupItems, "[0].semester");
+  let semDisplay = "";
+  if (sem > 0) {
+    semDisplay = `SEMESTER OF STUDY  :  ${sem.toString()}`;
+  }
+  const date = get(groupItems, "[0].examinationDate");
+
+  // group module by Modular Certificate
+  const groupedModules = groupBy(groupItems, "modularCertDescription");
+  const renderedModuleGroups = Object.keys(groupedModules).map(mcItem =>
+    renderModuleCert(groupedModules[mcItem], mcItem, opts)
+  );
+  return (
+    <div className="col-6 my-4" key={itemId}>
+      <div className="row m-0 mb-2">
+        <div style={{ fontWeight: 700 }}>
+          DATE OF EXAM&nbsp;:&nbsp;
+          {formatDate(date)}
+        </div>
+        <div className="ml-auto" style={{ fontWeight: 700 }}>
+          {semDisplay}
+        </div>
+      </div>
+      <div>{renderedModuleGroups}</div>
+    </div>
+  );
+};
+
+export const renderHeaderNPPartner = (logo, left, certificate) => {
+  const serial = get(certificate, "additionalData.transcriptId");
+  return (
+    <div className="row">
+      <div className="col-6">
+        <div className="row d-flex justify-content-center align-items-center">
+          <div className="col-6">
+            <img
+              style={fullWidthStyle}
+              src={left ? logo : IMG_LOGO_NP_HORIZONTAL}
+            />
+          </div>
+          <div className="col-6">
+            <img
+              style={fullWidthStyle}
+              src={left ? IMG_LOGO_NP_HORIZONTAL : logo}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="col-2" />
+      <div className="col-4">
+        <div style={{ color: "navy", fontWeight: 500 }}>
+          TRANSCRIPT OF ACADEMIC RECORD
+        </div>
+        <div className="mt-3">SERIAL No. : {serial}</div>
+      </div>
+    </div>
+  );
+};
+
+export const renderHeaderNP = certificate => {
   const serial = get(certificate, "additionalData.transcriptId");
   return (
     <div className="row">
@@ -70,7 +159,7 @@ export const renderHeader = certificate => {
   );
 };
 
-export const renderGradingSystem = () => (
+export const renderFTGradingSystem = () => (
   <div className="row">
     <div className="col-6" />
     <div className="col-6 border" style={{ fontSize: "0.6rem" }}>
@@ -193,6 +282,129 @@ export const renderGradingSystem = () => (
   </div>
 );
 
+export const renderCETGradingSystem = () => (
+  <div className="row">
+    <div className="col-6" />
+    <div className="col-6 border" style={{ fontSize: "0.6rem" }}>
+      <div className="text-center">
+        <u>GRADING SYSTEM</u>
+      </div>
+      <div className="text-center" style={{ fontSize: "0.5rem" }}>
+        (EFFECTIVE FOR JULY 2001 INTAKE)
+      </div>
+      <div className="row">
+        <div className="col">
+          <table>
+            <tbody>
+              <tr>
+                <th>GRADE</th>
+                <th>GRADE POINT</th>
+                <th>MARKS</th>
+                <th>DESCRIPTION</th>
+              </tr>
+              <tr>
+                <td>AD*</td>
+                <td>4.0</td>
+                <td>80 - 100%</td>
+                <td>DISTINCTION</td>
+              </tr>
+              <tr>
+                <td>A+</td>
+                <td>4.0</td>
+                <td>85 - 100%</td>
+                <td>EXCELLENT</td>
+              </tr>
+              <tr>
+                <td>A</td>
+                <td>4.0</td>
+                <td>80 - 84%</td>
+                <td>EXCELLENT</td>
+              </tr>
+              <tr>
+                <td>B+</td>
+                <td>3.5</td>
+                <td>75 - 79%</td>
+                <td>VERY GOOD</td>
+              </tr>
+              <tr>
+                <td>B</td>
+                <td>3.0</td>
+                <td>70 - 74%</td>
+                <td>VERY GOOD</td>
+              </tr>
+              <tr>
+                <td>C+</td>
+                <td>2.5</td>
+                <td>65 - 69%</td>
+                <td>GOOD</td>
+              </tr>
+              <tr>
+                <td>C</td>
+                <td>2.0</td>
+                <td>60 - 64%</td>
+                <td>GOOD</td>
+              </tr>
+              <tr>
+                <td>D+</td>
+                <td>1.5</td>
+                <td>55 - 59%</td>
+                <td>PASS</td>
+              </tr>
+              <tr>
+                <td>D</td>
+                <td>1.0</td>
+                <td>50 - 54%</td>
+                <td>PASS</td>
+              </tr>
+              <tr>
+                <td>F</td>
+                <td>0</td>
+                <td>0 - 49%</td>
+                <td>FAIL</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div className="col">
+          <table>
+            <tbody>
+              <tr>
+                <th>GRADE</th>
+                <th>DESCRIPTION</th>
+              </tr>
+              <tr>
+                <td>PX</td>
+                <td>PASS IN MODULES GRADED PASS OR FAIL ONLY</td>
+              </tr>
+              <tr>
+                <td>ABS</td>
+                <td>ABSENT</td>
+              </tr>
+              <tr>
+                <td>DB</td>
+                <td>DEBARRED</td>
+              </tr>
+              <tr>
+                <td>EX</td>
+                <td>CREDIT EXEMPTION</td>
+              </tr>
+              <tr>
+                <td>TRF</td>
+                <td>CREDIT TRANSFER</td>
+              </tr>
+              <tr>
+                <td>SC</td>
+                <td>SUCCESSFULLY COMPLETED</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>* DISTINCTION GRADE IS AWARDED TO THE TOP 5% COHORT</div>
+    </div>
+  </div>
+);
+
 export const renderCourse = (certificate, course, courseId, opts) => {
   // Get student info and course description
   const graduateCourse = get(certificate, "description");
@@ -202,11 +414,17 @@ export const renderCourse = (certificate, course, courseId, opts) => {
   const admissionDate = get(certificate, "admissionDate");
   const graduationDate = get(certificate, "graduationDate");
   const currentCourse = get(course, "[0].programDescription");
+  // check if the transcript contains CET Modular Certification Description
+  const modularCert = get(course, "[0].modularCertDescription");
 
-  // Group all modules by semesters
-  const groupedSubjects = groupBy(course, "semester");
-  const renderedSemesters = Object.keys(groupedSubjects).map(semester =>
-    renderSemester(groupedSubjects[semester], semester, opts)
+  // For CET transcript, group modules by examinationDate and modular certification; for other transcript, group all modules by semesters
+  const groupedSubjects = modularCert
+    ? groupBy(course, "examinationDate")
+    : groupBy(course, "semester");
+  const renderedGroups = Object.keys(groupedSubjects).map(item =>
+    modularCert
+      ? renderExamDate(groupedSubjects[item], item, opts)
+      : renderSemester(groupedSubjects[item], item, opts)
   );
 
   // Get Course Note
@@ -267,22 +485,22 @@ export const renderCourse = (certificate, course, courseId, opts) => {
             <div className="col-5">DATE OF ADMISSION</div>
             <div className="col-6">
               :&nbsp;&nbsp;
-              {formatDate(admissionDate)}
+              {formatDateFullMonth(admissionDate)}
             </div>
           </div>
           <div className="row">
             <div className="col-5">DATE OF GRADUATION</div>
             <div className="col-6">
               :&nbsp;&nbsp;
-              {formatDate(graduationDate)}
+              {formatDateFullMonth(graduationDate)}
             </div>
           </div>
         </div>
       </div>
       <hr />
-      <div className="row">{renderedSemesters}</div>
+      <div className="row">{renderedGroups}</div>
       <br />
-      <div className="row">{courseNoteDisplay}</div>
+      <div className="row mx-auto">{courseNoteDisplay}</div>
       <br />
     </div>
   );
@@ -302,7 +520,7 @@ export const renderTranscript = (certificate, opts) => {
 export const renderNpfa = certificate => {
   const npfa = get(certificate, "additionalData.npfa", undefined);
   return npfa ? (
-    <div className="row">
+    <div className="row mx-auto">
       National Physical Fitness Award: {npfa}
       <br />
       <br />
@@ -313,7 +531,7 @@ export const renderNpfa = certificate => {
 export const renderGPA = certificate => {
   const GPA = get(certificate, "cumulativeScore", undefined);
   return GPA ? (
-    <div className="row">
+    <div className="row mx-auto">
       Graduating GPA: {GPA} (Graduating GPA is computed based on passed modules
       and has a maximum value of 4)
       <br />
@@ -326,7 +544,7 @@ export const renderCourseNote = (gradCourse, course, courseId) => {
   const courseNotes = course.map((c, i) => <p key={i}>{c.note}</p>);
 
   return gradCourse === courseId ? (
-    <div className="row" key={courseId}>
+    <div className="row mx-auto" key={courseId}>
       {courseNotes}
     </div>
   ) : null;
@@ -348,6 +566,46 @@ export const renderFinalStatement = certificate => {
   return <div>{renderedCourseNotes}</div>;
 };
 
+export const renderTwoSignature = certificate => (
+  <div
+    className="row d-flex justify-content-center align-items-end"
+    style={{ marginTop: "8rem", marginBottom: "2rem" }}
+  >
+    <div className="col-1" />
+    <div className="col-5">
+      <div className="px-5">
+        <img
+          style={fullWidthStyle}
+          src={certificate.additionalData.transcriptSignatories[0].signature}
+        />
+        <hr />
+      </div>
+      <div className="text-center">
+        {certificate.additionalData.transcriptSignatories[0].position}
+      </div>
+      <div className="text-center">
+        {certificate.additionalData.transcriptSignatories[0].organisation}
+      </div>
+    </div>
+    <div className="col-5">
+      <div className="px-5">
+        <img
+          style={fullWidthStyle}
+          src={certificate.additionalData.transcriptSignatories[1].signature}
+        />
+        <hr />
+      </div>
+      <div className="text-center">
+        {certificate.additionalData.transcriptSignatories[1].position}
+      </div>
+      <div className="text-center">
+        {certificate.additionalData.transcriptSignatories[1].organisation}
+      </div>
+    </div>
+    <div className="col-1" />
+  </div>
+);
+
 export const renderSignature = certificate => (
   <div
     className="row d-flex justify-content-center align-items-end"
@@ -366,26 +624,28 @@ export const renderSignature = certificate => (
       <div className="text-center">
         {certificate.additionalData.transcriptSignatories[0].position}
       </div>
+      <div className="text-center">
+        {certificate.additionalData.transcriptSignatories[0].organisation}
+      </div>
     </div>
 
     <div className="col-2" />
   </div>
 );
 
-const Template = ({ certificate }) => (
+/* eslint-disable */
+// Disabled eslint as there's no way to add proptypes to an anonymous function like this
+export default ({ logo, left }) => ({ certificate }) => (
   <div className="container" style={{ fontSize: "0.9rem" }}>
-    {renderHeader(certificate)}
-    {renderGradingSystem()}
+    {logo ? renderHeaderNPPartner(logo, left, certificate) : renderHeaderNP(certificate)}
+	{isCETDiploma(certificate.id)?renderCETGradingSystem():renderFTGradingSystem()}
     {renderTranscript(certificate)}
     {renderNpfa(certificate)}
     {renderGPA(certificate)}
     {renderFinalStatement(certificate)}
-    {renderSignature(certificate)}
-    <hr />
+    {certificate.additionalData.transcriptSignatories &&
+      certificate.additionalData.transcriptSignatories[1]
+        ? renderTwoSignature(certificate) :  renderSignature(certificate)
+	}
   </div>
 );
-
-Template.propTypes = {
-  certificate: PropTypes.object.isRequired
-};
-export default Template;

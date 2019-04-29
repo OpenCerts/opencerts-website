@@ -1,5 +1,5 @@
-# Certificate Web UI
-
+# Certificate Web UI 
+  
 [![Build Status](https://travis-ci.org/OpenCerts/opencerts-website.svg?branch=master)](https://travis-ci.org/OpenCerts/opencerts-website)
 
 See also:
@@ -49,7 +49,7 @@ NET=mainnet npm run dev
 
 ### Frameless Viewer
 
-For embedded certificate rendering, we have provided a frameless view located at `/frameless_viewer`
+For embedded certificate rendering, we have provided a frameless view located at `/frameless-viewer`
 
 More information at [opencerts-documentation](http://docs.opencerts.io/embedded_viewer.html)
 
