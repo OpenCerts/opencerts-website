@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
 import Certificate from "./certificate";
 
@@ -10,13 +11,16 @@ const templates = [
 ];
 
 const addresses = [
-  "0x536EdEd27ae895F503E64Af877ee742B7bBC1ea2",
-  "0x897E224a6a8b72535D67940B3B8CE53f9B596800",
-  "0x24a7DE31D231221ab6B1B325Ca5F1AA7bfbaaabA"
+  "0x5f007251c78cA92d3053492cCf0EDC161063624c",
+  "0x5CA3b9daC85DA4DE4030e59C1a0248004209e348"
 ];
 
-const SITCert = () => (
+const NYPCert = () => (
   <MultiCertificateRenderer templates={templates} whitelist={addresses} />
 );
 
-export default SITCert;
+NYPCert.propTypes = {
+  certificate: PropTypes.object.isRequired
+};
+
+export default NYPCert;
