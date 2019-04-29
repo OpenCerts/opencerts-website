@@ -7,80 +7,7 @@ import {
   getSpecialization
 } from "../common/functions";
 import fonts from "../common/fonts";
-
-export const fullWidthStyle = {
-  width: "100%",
-  height: "auto"
-};
-
-export const nameTextStyle = {
-  fontSize: "1.3rem"
-};
-
-export const printTextStyle = {
-  color: "#000000"
-};
-
-export const confermentTextStyle = {
-  textTransform: "uppercase"
-};
-
-export const qualHeaderStyle = {
-  fontWeight: "bold",
-  marginBottom: "0px"
-};
-
-export const qualTextStyle = {
-  fontSize: "2rem",
-  fontWeight: "bold",
-  textTransform: "uppercase"
-};
-
-export const singaporeTextStyle = {
-  fontSize: "3rem"
-};
-
-export const headerTextStyle = {
-  fontSize: "2.3rem",
-  color: "rgb(197, 41, 155)",
-  wordBreak: "break-word",
-  fontWeight: "600"
-};
-
-export const titleTextStyle = {
-  color: "rgb(30,93,200)",
-  fontSize: "3rem",
-  textAlign: "center"
-};
-
-export const designationTextStyle = {
-  fontSize: "16px"
-};
-
-export const footerTextStyle = {
-  fontSize: "16px",
-  marginTop: "15px"
-};
-
-export const footerLinkStyle = {
-  fontSize: "14px"
-};
-
-export const copyrightStyle = {
-  fontSize: "14px"
-};
-
-export const certCodeStyle = {
-  fontSize: "12px",
-  color: "#ea649c",
-  display: "inline-block",
-  transform: "rotate(-90deg)"
-};
-
-export const footerLogoStyle = {
-  width: "80%",
-  height: "auto"
-};
+import * as styles from "../common/style";
 
 const renderTranscriptItems = certificate =>
   certificate.transcript.map(item => (
@@ -96,7 +23,7 @@ const renderTranscriptItems = certificate =>
 export const renderLogoWSQ = () => (
   <div className="row d-flex">
     <div className="col-lg-4 col-12">
-      <img style={fullWidthStyle} src={IMG_LOGO} />
+      <img style={styles.fullWidthStyle} src={IMG_LOGO} />
     </div>
   </div>
 );
@@ -107,16 +34,16 @@ export const renderSignature = certificate => (
     style={{ marginTop: "8rem", marginBottom: "1rem" }}
   >
     <div className="col-lg-7 col-xs-12">
-      <div style={designationTextStyle} className="RobotoLight">
+      <div style={styles.designationTextStyle} className="RobotoLight">
         {get(certificate, "additionalData.certSignatories[0].position")}
       </div>
-      <div style={designationTextStyle} className="RobotoLight">
+      <div style={styles.designationTextStyle} className="RobotoLight">
         {get(certificate, "additionalData.certSignatories[0].organisation")}
       </div>
-      <div style={footerTextStyle} className="RobotoLight">
+      <div style={styles.footerTextStyle} className="RobotoLight">
         Transcript guide printed on reverse
       </div>
-      <div style={footerLinkStyle} className="RobotoLight">
+      <div style={styles.footerLinkStyle} className="RobotoLight">
         For verification of this certificate, please visit{" "}
         <a href="https://myskillsfuture.sg/verify_eCert.html">
           https://myskillsfuture.sg/verify_eCert.html
@@ -125,8 +52,8 @@ export const renderSignature = certificate => (
     </div>
     <div className="col-lg-2 col-xs-12" />
     <div className="col-lg-3 col-xs-12">
-      <img style={footerLogoStyle} src={IMG_SSGLOGO} />
-      <div style={certCodeStyle} className="RobotoRegular">
+      <img style={styles.transFooterLogoStyle} src={IMG_SSGLOGO} />
+      <div style={styles.certCodeStyle} className="RobotoRegular">
         TRA
       </div>
     </div>
@@ -136,13 +63,13 @@ export const renderSignature = certificate => (
 export const renderAwardText = certificate => (
   <div>
     <div className="d-flex" style={{ marginTop: "2rem" }}>
-      <p style={headerTextStyle} className="RobotoBold">
+      <p style={styles.headerTextStyle} className="RobotoBold">
         OFFICIAL TRANSCRIPT
       </p>
     </div>
     <div className="row d-flex align-items-end" style={{ marginTop: "1rem" }}>
       <div className="col-lg-10 col-xs-12">
-        <span style={nameTextStyle} className="RobotoMedium">
+        <span style={styles.transNameTextStyle} className="RobotoMedium">
           Name: {certificate.recipient.name}
         </span>
       </div>
@@ -151,23 +78,23 @@ export const renderAwardText = certificate => (
       </div>
     </div>
     <div className="d-flex">
-      <p style={nameTextStyle} className="RobotoMedium">
+      <p style={styles.transNameTextStyle} className="RobotoMedium">
         ID No.: {getRecipientID(certificate.recipient)}
       </p>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
-      <p style={qualHeaderStyle} className="RobotoMedium">
+      <p style={styles.qualHeaderStyle} className="RobotoMedium">
         Qualification:
       </p>
     </div>
     <div className="d-flex">
-      <p style={qualTextStyle} className="RobotoMedium">
+      <p style={styles.qualTextStyle} className="RobotoMedium">
         {get(certificate, "qualificationLevel[0].description")} in{" "}
         {certificate.name} {getSpecialization(certificate.additionalData)}
       </p>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
-      <p style={confermentTextStyle} className="RobotoRegular">
+      <p style={styles.confermentTextStyle} className="RobotoRegular">
         CONFERMENT: CONFERRED THE{" "}
         {get(certificate, "qualificationLevel[0].description")} in{" "}
         {certificate.name} {getSpecialization(certificate.additionalData)} on{" "}
@@ -180,7 +107,7 @@ export const renderAwardText = certificate => (
 export const renderTranscript = certificate => (
   <div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
-      <p style={printTextStyle} className="RobotoRegular">
+      <p style={styles.printTextStyle} className="RobotoRegular">
         REMARKS:
       </p>
     </div>
@@ -215,7 +142,7 @@ export const renderFooter = certificate => (
 export const renderCopyright = () => (
   <div>
     <div className="d-flex" style={{ marginTop: "15rem" }}>
-      <p style={copyrightStyle} className="RobotoLight">
+      <p style={styles.copyrightStyle} className="RobotoLight">
         Copyright @ 2016 All Rights Reserved SkillsFuture Singapore Agency
       </p>
     </div>
@@ -225,14 +152,14 @@ export const renderCopyright = () => (
 export const renderQualificationText = certificate => (
   <div>
     <div className="d-flex" style={{ marginTop: "3rem" }}>
-      <p style={printTextStyle} className="RobotoRegular">
+      <p style={styles.printTextStyle} className="RobotoRegular">
         A qualification is awarded to an individual in recognition of his/her
         attainment of the required industry validated competencies under the
         Singapore Workforce Skills Qualifications System (WSQ)
       </p>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
-      <p style={printTextStyle} className="RobotoRegular">
+      <p style={styles.printTextStyle} className="RobotoRegular">
         SINGAPORE WORKFORCE SKILLS QUALIFICATIONS SYSTEM
       </p>
     </div>
@@ -281,7 +208,7 @@ export const renderQualificationText = certificate => (
       </p>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
-      <p style={printTextStyle} className="RobotoRegular">
+      <p style={styles.printTextStyle} className="RobotoRegular">
         WSQ QUALIFICATIONS PROGRESSION PATH
       </p>
     </div>
@@ -304,7 +231,7 @@ export const renderQualificationText = certificate => (
       </ul>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
-      <p style={printTextStyle} className="RobotoRegular">
+      <p style={styles.printTextStyle} className="RobotoRegular">
         EXPLANATION OF GRADES GRANTED
       </p>
     </div>
@@ -342,7 +269,7 @@ export const renderQualificationText = certificate => (
       </table>
     </div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
-      <p style={printTextStyle} className="RobotoRegular">
+      <p style={styles.printTextStyle} className="RobotoRegular">
         FOR MORE INFORMATION
       </p>
     </div>
