@@ -1,32 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { merge } from "lodash/fp";
-import NextSeo from "next-seo";
 import NavigationBar from "../src/components/Layout/NavigationBar";
 import FooterBar from "../src/components/Layout/FooterBar";
 import FaqContent from "../src/components/FAQ/FaqContent";
 
-import { DEFAULT_SEO } from "../src/config";
-
-const SEO = merge(
-  {},
-  {
-    title: "Frequently Asked Questions",
-    description:
-      "Have some questions in mind? Here are a list of collated questions and answers that might answer your questions.",
-    openGraph: {
-      title: "OpenCerts - Frequently Asked Questions",
-      description:
-        "Have some questions in mind? Here are a list of collated questions and answers that might answer your questions.",
-      url: "https://opencerts.io/faq"
-    }
-  },
-  DEFAULT_SEO
-);
-
 const FaqPage = () => (
   <>
-    <NextSeo config={SEO} />
     <NavigationBar active="faq" />
     <FaqContent />
     <FooterBar />
