@@ -4,7 +4,7 @@
         "faq": [
             {
                 "question": "What is OpenCerts?",
-                "answer": "OpenCerts is the umbrella trademark under which we have released a few key components: \n 1. An open source schema for publishing educational credentials \n2. A set of tools for generating cryptographic protections for educational credentials \n3. the online website for verifying the authenticity of OpenCerts files."
+                "answer": "OpenCerts is the umbrella trademark under which we have released a few key components: \n 1. An open source schema for publishing educational credentials \n2. A set of tools for generating cryptographic protections for educational credentials \n3. The online website for verifying the authenticity of OpenCerts files."
             },
             {
                 "question": "Why use the Ethereum blockchain? (Why blockchain at all)?",
@@ -16,7 +16,7 @@
             },
             {
                 "question": "How do I send my OpenCerts certificate to someone?",
-                "answer": "You may use the share button that is visible when you view your certificate, or you can simply email the OpenCerts file to them"
+                "answer": "You may use the share button that is visible when you view your certificate, or you can simply email the OpenCerts file to them."
             },
             {
                 "question": "Why can't I print the certificate?",
@@ -28,7 +28,8 @@
             },
             {
                 "question": "What does it mean by Signature?",
-                "answer": "In every properly issued OpenCerts certificate file, there is a hash-based message authentication code which cryptographically certifies that the content of the certificate has not been altered. If you would like to know more about the technical nitty-gritty of how this works, check out our technical documentation at https://github.com/GovTechSG/opencerts-documentation"
+                "answer": "In every properly issued OpenCerts certificate file, there is a hash-based message authentication code which cryptographically certifies that the content of the certificate has not been altered. If you would like to know more about the technical nitty-gritty of how this works, check out our technical documentation at",
+                "url": "https://github.com/GovTechSG/opencerts-documentation"
             }
         ]
     },
@@ -38,7 +39,7 @@
         "faq": [
             {
                 "question": "What does it mean by Unascertained Issuer?",
-                "answer": "OpenCerts has to maintain a list of identified issuing institutes in order to detect fraudulent issuing institutes masquerading as legitimate ones. At this point in time, it is not unlikely that a legitimate issuing institute is not on our list of recognised institutions. If you are sure that your certificate is from a legitimate issuer, contact the institute directly"
+                "answer": "OpenCerts has to maintain a list of identified issuing institutes in order to detect fraudulent issuing institutes masquerading as legitimate ones. At this point in time, it is not unlikely that a legitimate issuing institute is not on our list of recognised institutions. If you are sure that your certificate is from a legitimate issuer, contact the institute directly."
             },
             {
                 "question": "What does it mean by Ethereum Blockchain?",
@@ -60,7 +61,8 @@
         "faq": [
             {
                 "question": "How can I add my institute to the list of recognised issuers?",
-                "answer": "Please see https://docs.opencerts.io/identity_registry"
+                "answer": "Please see ",
+                "url": "https://docs.opencerts.io/identity_registry"
             },
             {
                 "question": "How can I change the appearance of the certificates I issue?",
