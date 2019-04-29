@@ -18,6 +18,13 @@ const members = [
     phone: "+65 6466 6555",
     key: "np",
     logo: "/static/images/NP_logo.svg"
+  },
+  {
+  name: "Institute of Technical Education",
+  address: "0x908595e0B09Fb2d5950eCD196695490E211A6d4d",
+  website: "https://www.ite.edu.sg",
+  email: "training@ite.edu.sg",
+  phone: "+65 1800 2222 1111"
   }
 ];
 
