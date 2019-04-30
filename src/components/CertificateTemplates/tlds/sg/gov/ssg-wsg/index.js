@@ -92,7 +92,6 @@ const templates = {
   SF_FQ_004: SFFQ004,
 
   QUAL_Reprint: QualReprint,
-
   "FQ-002": FQ002,
   "FQ-004": FQ004,
   "FQ-005": FQ005,

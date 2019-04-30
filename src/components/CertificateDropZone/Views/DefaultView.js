@@ -11,7 +11,10 @@ const View = ({ hover, accept }) => (
   >
     <div className={css["image-container"]}>
       <i>
-        <img src="/static/images/dropzone/dropzone_illustration.svg" />
+        <img
+          alt=".opencert Dropzone"
+          src="/static/images/dropzone/dropzone_illustration.svg"
+        />
       </i>
     </div>
     {accept ? null : (
