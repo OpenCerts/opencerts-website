@@ -3,8 +3,8 @@ import {
   renderAwardTextSOAHR,
   renderLogoWSQ,
   renderIssuingDate
-} from "../common/functions";
-import fonts from "../common/fonts";
+} from "./functions";
+import fonts from "./fonts";
 
 /* eslint-disable */
 // Disabled eslint as there's no way to add proptypes to an anonymous function like this
