@@ -98,7 +98,7 @@ const SimpleVerifyBlock = props => {
     <div
       className={`p-2 pointer ${css["simple-verify-block"]} ${
         css[stateStyle]
-      } ${props.detailedVerifyVisible ? css.active : ""}`}
+      } ${props.detailedVerifyVisible ? css.active : ""} col-12`}
       onClick={props.toggleDetailedView}
     >
       <div className="row">
@@ -117,7 +117,7 @@ const CertificateVerifyBlock = props => {
       id="certificate-verify-block"
       className={`align-items-start ${css["d-flex"]} ${
         css.verifyBlocksContainer
-      } col-md-12 col-lg-9 col-xl-6`}
+      } col-sm-12 col-md-9 col-lg-9 col-xl-6`}
     >
       <SimpleVerifyBlock {...props} />
       {props.detailedVerifyVisible ? (
