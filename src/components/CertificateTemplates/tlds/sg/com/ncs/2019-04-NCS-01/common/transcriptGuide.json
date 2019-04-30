@@ -1,0 +1,71 @@
+{
+  "description": "NCS Grading System",
+  "grading" : [ 
+  {
+    "grade" : "A",
+    "gradePoint" : "5",
+    "remarks" : "Excellent performance demonstrating a superior understanding of the subject matter."
+  }, 
+  {
+    "grade" : "IC",
+    "gradePoint" : "Incomplete",
+    "remarks" : "IC is assigned when a student's work is incomplete for good reasons (e.g., illiness during the official examination period). The student is required to attend remedial class/retake the subject."
+  }, 
+  {
+    "grade" : "B",
+    "gradePoint" : "4",
+    "remarks" : "Good performance and good understanding of the subject matter."
+  }, 
+  {
+    "grade" : "IP",
+    "gradePoint" : "In progress",
+    "remarks" : "IP is assigned for a subject or a thesis that extends beyond more than one trimester. The evaluation of a students's performance is deferred until the completion of the subject. When the final grade is submitted, the final grade appears in the term in which the subject was completed. Not used in the computation of GPA."
+  }, 
+  {
+    "grade" : "C",
+    "gradePoint" : "3",
+    "remarks" : "Satisfactory performance and adequate understanding of the subject matter."
+  }, 
+  {
+    "grade" : "P",
+    "gradePoint" : "Pass",
+    "remarks" : "For subjects graded on Pass/Fail basis. Not used in the computation of GPA."
+  }, 
+  {
+    "grade" : "D",
+    "gradePoint" : "2",
+    "remarks" : "Minimally acceptable performance demonstrating some familarity with the subject matter. However, students may not be adequately equipped to move on to more adavnced subjects in the field without additional work."
+  }, 
+  {
+    "grade" : "S",
+    "gradePoint" : "Satisfactory",
+    "remarks" : "S is assigned for work (e.g. thesis) which has progressed satisfactorily. Not used in the computation of GPA."
+  }, 
+  {
+    "grade" : "F",
+    "gradePoint" : "0",
+    "remarks" : "Failed"
+  }, 
+  {
+    "grade" : "U",
+    "gradePoint" : "Unsatisfactory",
+    "remarks" : "U is assigned for work (e.g. thesis) which has progressed unsatisfactorily. Not used in the computation of GPA."
+  }, 
+  {
+    "grade" : "AU",
+    "gradePoint" : "Audit",
+    "remarks" : "AU is used for a subject the student is registered as a listener. Student will be awarded AU if he/she meets the class expectations or requirements for a successful audit. Not used in the computation of the GPA."
+  }, 
+  {
+    "grade" : "W",
+    "gradePoint" : "Withdrawn",
+    "remarks" : "Approved withdrawal from the subject/term. Not used in the computation of GPA."
+  }, 
+  {
+    "grade" : "EXE",
+    "gradePoint" : "Exempted",
+    "remarks" : "Used for similar academic subject completed in other universities or NCS. Credits given accordingly and count towards graduation requirements."
+  }         
+  
+  ]
+}
