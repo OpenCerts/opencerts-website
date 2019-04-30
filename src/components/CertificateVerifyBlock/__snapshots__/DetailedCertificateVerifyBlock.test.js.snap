@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly when there are no items 1`] = `
+<div
+  className="undefined undefined bg-white p-3"
+>
+  <div
+    className="mb-3"
+  >
+    <h5>
+      Details
+    </h5>
+  </div>
+  
+  <div>
+    <div
+      className="row"
+    >
+      <div
+        className="col-2"
+      >
+        <i
+          className="fas fa-check text-success mr-2"
+        />
+      </div>
+      <div
+        className="col-10"
+      >
+        <div
+          className="row"
+        >
+          Certificate has not been tampered with
+        </div>
+      </div>
+    </div>
+    <div
+      className="row"
+    >
+      <div
+        className="col-2"
+      >
+        <i
+          className="fas fa-check text-success mr-2"
+        />
+      </div>
+      <div
+        className="col-10"
+      >
+        <div
+          className="row"
+        >
+          Certificate has been issued
+        </div>
+      </div>
+    </div>
+    <div
+      className="row"
+    >
+      <div
+        className="col-2"
+      >
+        <i
+          className="fas fa-check text-success mr-2"
+        />
+      </div>
+      <div
+        className="col-10"
+      >
+        <div
+          className="row"
+        >
+          Issuer has been identified
+        </div>
+      </div>
+    </div>
+    <div
+      className="row"
+    >
+      <div
+        className="col-2"
+      >
+        <i
+          className="fas fa-check text-success mr-2"
+        />
+      </div>
+      <div
+        className="col-10"
+      >
+        <div
+          className="row"
+        >
+          Certificate has not been revoked
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

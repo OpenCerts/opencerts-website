@@ -80,6 +80,7 @@
     "nodemon": "^1.18.10",
     "prettier": "^1.15.3",
     "proxyquire": "^2.1.0",
+    "react-test-renderer": "^16.8.6",
     "sinon": "^7.1.1",
     "testcafe": "^1.1.0"
   },
