@@ -35,19 +35,19 @@ const renderHeaderBlock = props => {
         <div className="col-md-6 col-sm-6 col-xs-12">{renderedVerifyBlock}</div>
         <div className={`row col-md-6 col-sm-6 col-xs-12 ${styles["pd-0"]}`}>
           <div className="ml-auto">
-            <button
+            <div
               id="btn-print"
               className={styles["print-btn"]}
               onClick={() => window.print()}
             >
               <i className="fas fa-print" style={{ fontSize: "1.5rem" }} />
-            </button>
+            </div>
           </div>
           <div />
           <div className="ml-2" onClick={() => props.handleSharingToggle()}>
-            <button id="btn-email" className={styles["send-btn"]}>
+            <div id="btn-email" className={styles["send-btn"]}>
               <i className="fas fa-envelope" style={{ fontSize: "1.5rem" }} />
-            </button>
+            </div>
           </div>
           <div className="ml-2">
             <a
