@@ -86,7 +86,7 @@ export const footerLogoStyle = {
   height: "auto"
 };
 export const renderLogoWSQ = () => (
-  <div className="row d-flex" style={{ marginTop: "3rem" }}>
+  <div className="row d-flex">
     <div className="col-lg-6 col-12">
       <img style={fullWidthStyle} src={IMG_LOGO} />
     </div>
@@ -212,7 +212,7 @@ export default ({ logo }) => ({ certificate }) => (
   <div>
     <div
       className="container"
-      style={{ border: 5, borderColor: "#AAA", borderStyle: "solid",paddingLeft:"40px",paddingRight:"40px",paddingBottom:"100px", width:"100%", fontFamily:"Arial" }}
+      style={{ border: 5, borderColor: "#AAA", borderStyle: "solid",paddingLeft:"80px",paddingRight:"80px",paddingTop:"100px",paddingBottom:"100px", width:"100%", fontFamily:"Arial" }}
     >
       {renderLogoWSQ()}
       {renderAwardText(certificate)}
