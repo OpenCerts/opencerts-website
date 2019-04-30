@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { MultiCertificateRenderer } from "template-utils/MultiCertificateRenderer";
+import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
 import { approvedAddresses } from "../common";
 import SSGCert from "./certificate";
 
@@ -11,9 +11,8 @@ const templates = [
   }
 ];
 
-const SFSOAHR01 = ({ certificate }) => (
+const SFSOAHR01 = () => (
   <MultiCertificateRenderer
-    certificate={certificate}
     templates={templates}
     whitelist={approvedAddresses}
   />
