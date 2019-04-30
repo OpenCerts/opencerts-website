@@ -4,7 +4,6 @@ import { get } from "lodash";
 import CertificateVerifyBlock from "./CertificateVerifyBlock";
 import styles from "./certificateViewer.scss";
 import Modal from "./Modal";
-import images from "./ViewerPageImages";
 
 import { getLogger } from "../utils/logger";
 import templates from "./CertificateTemplates";
@@ -41,13 +40,13 @@ const renderHeaderBlock = props => {
               className={styles["print-btn"]}
               onClick={() => window.print()}
             >
-              {images.print()}
+              <i className="fas fa-print" style={{ fontSize: "1.5rem" }} />
             </button>
           </div>
           <div />
           <div className="ml-2" onClick={() => props.handleSharingToggle()}>
             <button id="btn-email" className={styles["send-btn"]}>
-              {images.send()}
+              <i className="fas fa-envelope" style={{ fontSize: "1.5rem" }} />
             </button>
           </div>
           <div className="ml-2">
