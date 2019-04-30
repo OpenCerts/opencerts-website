@@ -12,6 +12,7 @@ export const NETWORK_TYPES = {
   MOCK: "MOCK"
 };
 
+export const URL = "https://opencerts.io";
 const GA_PRODUCTION_ID = "UA-130492260-1";
 const GA_DEVELOPMENT_ID = "UA-130492260-2";
 
@@ -41,7 +42,7 @@ export const SEO = {
         "Whether you're a student or an employer, OpenCerts lets you verify the certificates you have of anyone from any institution. All in one place.",
       images: [
         {
-          url: "https://opencerts.io/static/images/opencerts.png",
+          url: `${URL}/static/images/opencerts.png`,
           width: 800,
           height: 600,
           alt: "OpenCerts"
