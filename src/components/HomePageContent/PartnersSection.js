@@ -1,10 +1,16 @@
 import css from "./partnersPage.scss";
-import { IMAGES } from "../../constants/PartnerLogo";
+import Partners from "../../constants/PartnerLogo.json";
 
 const CarouselSection = () => {
-  const items = IMAGES.map((item, i) => (
+  const items = Partners.map((item, i) => (
     <div className={css["logo-container"]} key={i}>
-      <img className="mx-auto" src={item.value} id={css[item.key]} />
+      <img
+        className="mx-auto"
+        src={item.value}
+        title={item.name}
+        alt={item.name}
+        id={css[item.key]}
+      />
     </div>
   ));
   return <div className="d-flex flex-wrap">{items}</div>;
