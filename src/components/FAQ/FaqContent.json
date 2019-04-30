@@ -23,7 +23,7 @@
                 "answer": "Printing the certificate discards all the advanced cryptographic protections we have built into OpenCerts, hence printing is not recommended. "
             },
             {
-                "question": "What happens if I modify the OpenCerts certificate .json file?",
+                "question": "What happens if I modify the OpenCerts file?",
                 "answer": "The modified certificate will fail validation and show up as having been tampered with."
             },
             {
