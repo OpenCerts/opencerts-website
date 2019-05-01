@@ -1,16 +1,11 @@
 import PropTypes from "prop-types";
-import { IMG_LOGO_TP } from "../common/images";
+import CertificateHeader from "../common/certificateheader";
+import CertificateFooter from "../common/certificatefooter";
 
 const Certificate = ({ certificate }) => (
   <div className="container">
     <style>
       {`
-      .tp-logo {
-        padding-top:3em;
-        float:right;
-        width:30%;
-      }
-
       .recipient-paragraph{
         font-style: italic;
         font-family: "Times New Roman", Times, serif;
@@ -41,31 +36,10 @@ const Certificate = ({ certificate }) => (
         padding-bottom:5em;
       }
 
-      .principal-sign,
-      .registrar-sign{
-        text-decoration: underline;
-        color: #aaa;        
-      }
-
-      .principal-sign-label,
-      .registrar-sign-label{
-        text-align:center;
-        color: #aaa;
-      }
-
-      .signature-container{
-        float:right;
-        text-align:center;
-        color:#aaa;
-      }
       `}
     </style>
 
-    <div className="row">
-      <div className="col-12">
-        <img src={IMG_LOGO_TP} className="tp-logo" />
-      </div>
-    </div>
+    <CertificateHeader />
 
     <br />
     <br />
@@ -91,7 +65,6 @@ const Certificate = ({ certificate }) => (
         year: "numeric"
       })}
     </div>
-    <br />
 
     <br />
     <br />
@@ -100,46 +73,8 @@ const Certificate = ({ certificate }) => (
     <br />
     <br />
 
-    <div className="row">
-      <div className="col-6">&nbsp;</div>
-      <div className="col-6">
-        <div className="row">
-          <div className="col-6">
-            <span className="signature-container">
-              <span className="principal-sign">
-                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;
-              </span>
-              <br />
-              <span className="principal-sign-label">Principal</span>
-            </span>
-          </div>
-          <div className="col-6">
-            <span className="signature-container">
-              <span className="registrar-sign">
-                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;
-              </span>
-              <br />
-              <span className="registrar-sign-label">Registrar</span>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <br />
-    <br />
-    <br />
-    <br />
+    <CertificateFooter />
+    
   </div>
 );
 

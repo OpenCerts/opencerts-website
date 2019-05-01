@@ -1,5 +1,9 @@
 import PropTypes from "prop-types";
-import { IMG_LOGO_TP, IMG_LOGO_NIEC } from "../common/images";
+import { IMG_LOGO_TP } from "../common/images";
+import { IMG_LOGO_NIEC } from "../common/images";
+import { IMG_SIGN_NIEC_DIR } from "../common/images";
+import { IMG_SIGN_TP_PCEO } from "../common/images";
+import { IMG_SIGN_TP_REGISTRAR } from "../common/images";
 
 const Certificate = ({ certificate }) => (
   <div className="container">
@@ -47,17 +51,29 @@ const Certificate = ({ certificate }) => (
       padding-bottom:5em;
     }
 
-    .niec-director-sign,
-    .principal-sign,
+    .niec-director-sign {
+      width: 30%;
+      color: #aaa;
+      padding-bottom: 1.8em;       
+    }
+
+    .principal-sign {
+      width: 80%;
+      color: #aaa;
+      padding-bottom: 1em;        
+    }
+
     .registrar-sign{
-      border-bottom: 1px solid #aaa;
-      width:100%;
-      color: #aaa;        
+      width: 80%;
+      color: #aaa;
+      padding-top: 2em;
+      padding-bottom: 0.6em;       
     }
 
     .niec-director-sign-label,
     .principal-sign-label,
     .registrar-sign-label{
+      border-top:1px solid #aaa;
       text-align:center;
       color: #aaa;
     }
@@ -146,36 +162,36 @@ const Certificate = ({ certificate }) => (
 
     <div className="row">
       <div className="col-6">
-        <span className="signature-container">
-          <div className="niec-director-sign">&nbsp;</div>
-          <span className="niec-director-sign-label">
+        <div className="signature-container">
+          <img src={IMG_SIGN_NIEC_DIR} className="niec-director-sign" />
+          <div className="niec-director-sign-label">
             Director
             <br />
             National Institute of Early Childhood Development
-          </span>
-        </span>
+          </div>
+        </div>
       </div>
       <div className="col-6">
         <div className="row">
           <div className="col-6">
-            <span className="signature-container">
-              <div className="principal-sign">&nbsp;</div>
-              <span className="principal-sign-label">
+            <div className="signature-container">
+              <img src={IMG_SIGN_TP_PCEO} className="principal-sign" />
+              <div className="principal-sign-label">
                 Principal
                 <br />
                 Temasek Polytechnic
-              </span>
-            </span>
+              </div>
+            </div>
           </div>
           <div className="col-6">
-            <span className="signature-container">
-              <div className="registrar-sign">&nbsp;</div>
-              <span className="registrar-sign-label">
+            <div className="signature-container">
+              <img src={IMG_SIGN_TP_REGISTRAR} className="registrar-sign" />
+              <div className="registrar-sign-label">
                 Registrar
                 <br />
                 Temasek Polytechnic
-              </span>
-            </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

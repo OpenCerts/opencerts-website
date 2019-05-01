@@ -5,7 +5,7 @@ import ExamResults from "./examresults";
 import PfpGradingScheme from "./pfpgradingscheme";
 import ExemptionFootNote from "./exemptionfootnote";
 import TranscriptHeader from "./transcriptheader";
-import TranscriptFooter from "./transcriptfooter";
+import TranscriptFooter from "../common/transcriptfooter";
 
 const Transcript = ({ certificate }) => (
   <div className="container">

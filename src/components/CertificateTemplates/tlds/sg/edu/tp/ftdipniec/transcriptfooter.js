@@ -1,3 +1,6 @@
+import { IMG_SIGN_NIEC_DEAN } from "../common/images";
+import { IMG_SIGN_TP_REGISTRAR } from "../common/images";
+
 const TranscriptFooter = () => (
   <div className="container">
     <style>
@@ -11,14 +14,19 @@ const TranscriptFooter = () => (
         text-decoration:underline;
       }
 
-      .niec-dean-sign,
+      .niec-dean-sign{
+        width:30%;
+        padding-bottom:1em;
+      }
+
       .registrar-sign{
-        border-bottom:1px solid #aaa;
-        width:100%;
+        width:80%;
+        padding-top:2em;
       }
 
       .niec-dean-sign-label,
       .registrar-sign-label{
+        border-top: 1px solid #212529;
         text-align: left;
       }
 
@@ -38,27 +46,31 @@ const TranscriptFooter = () => (
 
     <div className="row">
       <div className="col-6">
-        <span className="signature-container">
-          <div className="niec-dean-sign">&nbsp;</div>
-          <span className="niec-dean-sign-label">
+        <div className="signature-container">
+          <img src={IMG_SIGN_NIEC_DEAN} className="niec-dean-sign" />
+          <div className="niec-dean-sign-label">
             DEAN, ACADEMIC & STUDENT MANAGEMENT
             <br />
             NATIONAL INSTITUTE OF EARLY CHILDHOOD DEVELOPMENT
-          </span>
-        </span>
+          </div>
+        </div>
       </div>
       <div className="col-3">&nbsp;</div>
       <div className="col-3">
-        <span className="signature-container">
-          <div className="registrar-sign">&nbsp;</div>
-          <span className="registrar-sign-label">
+        <div className="signature-container">
+          <img src={IMG_SIGN_TP_REGISTRAR} className="registrar-sign" />
+          <div className="registrar-sign-label">
             for REGISTRAR
             <br />
             TEMASEK POLYTECHNIC
-          </span>
-        </span>
+          </div>
+        </div>
       </div>
     </div>
+
+    <br />
+    <br />
+
   </div>
 );
 

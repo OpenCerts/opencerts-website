@@ -1,4 +1,6 @@
 import PropTypes from "prop-types";
+import { IMG_SIGN_TP_REGISTRAR } from "./images";
+
 
 const TranscriptFooter = ({ certificate }) => (
   <div className="container">
@@ -10,19 +12,21 @@ const TranscriptFooter = ({ certificate }) => (
       }
 
       .issue-date{
-        text-decoration:underline;
+        border-bottom: 1px solid #212529;
+        text-align:left;
+        margin-top:2.5em;
       }
 
       .registrar-sign{
-        text-decoration:underline;
-      }
-
-      .registrar-sign-label{
-        text-align: left;
+        pointer-events: none !important;
+        width: 90%;
+        border-bottom: 1px solid #212529;
+        padding-bottom:0.2em;
       }
 
       .signature-container{
         float:right;
+        text-align: left;
       }
 
     `}
@@ -35,27 +39,24 @@ const TranscriptFooter = ({ certificate }) => (
 
     <div className="row">
       <div className="col-2">
-        <span className="issue-date">
-          &nbsp;&nbsp;&nbsp;&nbsp;
+        <div className="issue-date">
+          &nbsp;&nbsp;
           {new Date(certificate.issuedOn).toLocaleDateString("en-SG")}
-          &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-        </span>
-        <br />
+        </div>
         Date
       </div>
       <div className="col-8">&nbsp;</div>
       <div className="col-2">
         <span className="signature-container">
-          <span className="registrar-sign">
-            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-          </span>
+          <img src={IMG_SIGN_TP_REGISTRAR} className="registrar-sign" />
           <br />
-          <span className="registrar-sign-label">for REGISTRAR</span>
+          for REGISTRAR
         </span>
       </div>
     </div>
+
+    <br/>
+    <br/>
   </div>
 );
 
