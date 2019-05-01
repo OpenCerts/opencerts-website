@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import CertificateHeader from "../common/certificateheader";
-import CertificateFooter from "../common/parttimecertificatefooter";
+import PartTimeCertificateFooter from "../common/parttimecertificatefooter";
 
 const Certificate = ({ certificate }) => (
   <div className="container">
@@ -73,7 +73,7 @@ const Certificate = ({ certificate }) => (
     <br />
     <br />
 
-    <CertificateFooter />
+    <PartTimeCertificateFooter />
   </div>
 );
 

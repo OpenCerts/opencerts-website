@@ -1,6 +1,6 @@
 import { IMG_SIGN_TP_REGISTRAR } from "./images";
 
-const CertificateFooter = () => (
+const PartTimeCertificateFooter = () => (
   <div className="container">
     <style>
       {`
@@ -39,4 +39,4 @@ const CertificateFooter = () => (
   </div>
 );
 
-export default CertificateFooter;
+export default PartTimeCertificateFooter;
