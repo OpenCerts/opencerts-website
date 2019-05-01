@@ -1,5 +1,4 @@
-import { IMG_SIGN_NIEC_DEAN } from "../common/images";
-import { IMG_SIGN_TP_REGISTRAR } from "../common/images";
+import { IMG_SIGN_NIEC_DEAN, IMG_SIGN_TP_REGISTRAR } from "../common/images";
 
 const TranscriptFooter = () => (
   <div className="container">
@@ -70,7 +69,6 @@ const TranscriptFooter = () => (
 
     <br />
     <br />
-
   </div>
 );
 

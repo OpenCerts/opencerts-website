@@ -1,9 +1,7 @@
 import PropTypes from "prop-types";
-import { IMG_SIGN_TP_REGISTRAR } from "../common/images";
-import { IMG_SIGN_TP_DIR_HSS } from "../common/images";
+import { IMG_SIGN_TP_REGISTRAR, IMG_SIGN_TP_DIR_HSS } from "../common/images";
 
-const CertificateFooter = ({certificate}) => {
-
+const CertificateFooter = ({ certificate }) => {
   const Director = () => {
     const issuedYear = new Date(certificate.issuedOn).getFullYear();
 
@@ -30,9 +28,9 @@ const CertificateFooter = ({certificate}) => {
   };
 
   return (
-  <div className="container">
-    <style>
-      {`
+    <div className="container">
+      <style>
+        {`
       
       .director-sign{
         pointer-events: none !important;
@@ -56,31 +54,29 @@ const CertificateFooter = ({certificate}) => {
         color:#aaa;
       }
       `}
-    </style>
+      </style>
 
-    <div className="row">
-      <div className="col-6">&nbsp;</div>
-      <div className="col-3">
-        <Director />
+      <div className="row">
+        <div className="col-6">&nbsp;</div>
+        <div className="col-3">
+          <Director />
+        </div>
+        <div className="col-3">
+          <span className="signature-container">
+            <img src={IMG_SIGN_TP_REGISTRAR} className="registrar-sign" />
+            <br />
+            Registrar
+          </span>
+        </div>
       </div>
-      <div className="col-3">
-        <span className="signature-container">
-          <img src={IMG_SIGN_TP_REGISTRAR} className="registrar-sign" />
-          <br />
-          Registrar
-        </span>
-      </div>
+
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
-
-    <br />
-    <br />
-    <br />
-    <br />
-
-  </div>
   );
 };
-
 
 CertificateFooter.propTypes = {
   certificate: PropTypes.object.isRequired

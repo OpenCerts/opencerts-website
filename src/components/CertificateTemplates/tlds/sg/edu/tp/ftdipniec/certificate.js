@@ -1,9 +1,11 @@
 import PropTypes from "prop-types";
-import { IMG_LOGO_TP } from "../common/images";
-import { IMG_LOGO_NIEC } from "../common/images";
-import { IMG_SIGN_NIEC_DIR } from "../common/images";
-import { IMG_SIGN_TP_PCEO } from "../common/images";
-import { IMG_SIGN_TP_REGISTRAR } from "../common/images";
+import {
+  IMG_LOGO_TP,
+  IMG_LOGO_NIEC,
+  IMG_SIGN_NIEC_DIR,
+  IMG_SIGN_TP_PCEO,
+  IMG_SIGN_TP_REGISTRAR
+} from "../common/images";
 
 const Certificate = ({ certificate }) => (
   <div className="container">

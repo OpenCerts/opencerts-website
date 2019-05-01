@@ -3,7 +3,6 @@ import CertificateHeader from "../common/certificateheader";
 import CertificateFooter from "./certificatefooter";
 
 const Certificate = ({ certificate }) => (
-
   <div className="container">
     <style>
       {`
@@ -87,7 +86,6 @@ const Certificate = ({ certificate }) => (
     <br />
 
     <CertificateFooter certificate={certificate} />
-    
   </div>
 );
 

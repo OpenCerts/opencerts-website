@@ -104,7 +104,6 @@ const Certificate = ({ certificate }) => (
     <br />
 
     <CertificateFooter />
-    
   </div>
 );
 

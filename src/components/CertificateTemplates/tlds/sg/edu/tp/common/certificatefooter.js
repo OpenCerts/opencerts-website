@@ -1,5 +1,4 @@
-import { IMG_SIGN_TP_PCEO } from "./images";
-import { IMG_SIGN_TP_REGISTRAR } from "./images";
+import { IMG_SIGN_TP_PCEO, IMG_SIGN_TP_REGISTRAR } from "./images";
 
 const CertificateFooter = () => (
   <div className="container">
@@ -52,7 +51,6 @@ const CertificateFooter = () => (
     <br />
     <br />
     <br />
-
   </div>
 );
 

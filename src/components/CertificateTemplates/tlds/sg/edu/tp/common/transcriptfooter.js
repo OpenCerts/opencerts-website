@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { IMG_SIGN_TP_REGISTRAR } from "./images";
 
-
 const TranscriptFooter = ({ certificate }) => (
   <div className="container">
     <style>
@@ -55,8 +54,8 @@ const TranscriptFooter = ({ certificate }) => (
       </div>
     </div>
 
-    <br/>
-    <br/>
+    <br />
+    <br />
   </div>
 );
 

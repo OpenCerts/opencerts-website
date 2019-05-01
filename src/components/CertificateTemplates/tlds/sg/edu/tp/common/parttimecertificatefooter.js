@@ -36,7 +36,6 @@ const CertificateFooter = () => (
     <br />
     <br />
     <br />
-
   </div>
 );
 
