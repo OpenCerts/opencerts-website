@@ -205,9 +205,6 @@ export const GETSPAPERGRADE_GCEA = papergrade => {
   } else if (papergrade === "TWO") {
     paperalphaRender = "-";
     papernumericRender = "TWO";
-  } else if (papergrade === "UNGRADED") {
-    paperalphaRender = "UNGRADED";
-    papernumericRender = "-";
   }
 
   return (

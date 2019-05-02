@@ -95,7 +95,7 @@ const CertificateVerifyBlock = props => {
     <div
       className={`${css["detailed-certificate-block"]} ${
         css[borderColor]
-      } bg-white p-3`}
+      } bg-white p-3 col-12`}
     >
       <div className="mb-3">
         <h5>Details</h5>

@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import Link from "next/link";
 import styles from "./faq.scss";
 import content from "./FaqContent.json";
 
@@ -8,13 +9,22 @@ const FaqHeader = () => (
   </div>
 );
 
-const renderQuestion = ({ question, answer }, index) => (
+const renderQuestion = ({ question, answer, url }, index) => (
   <div className={styles["content-container"]} key={index}>
     <a className={styles.question}>
       <h5>{question}</h5>
     </a>
     <div>
-      <div className={styles.answer}>{answer}</div>
+      <div className={styles.answer}>
+        {answer}{" "}
+        {url ? (
+          <Link href={url}>
+            <a>{url}</a>
+          </Link>
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   </div>
 );
@@ -42,5 +52,6 @@ renderSection.propTypes = {
 
 renderQuestion.propTypes = {
   question: PropTypes.string,
-  answer: PropTypes.string
+  answer: PropTypes.string,
+  url: PropTypes.string
 };

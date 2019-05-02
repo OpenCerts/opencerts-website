@@ -1,5 +1,4 @@
-import PropTypes from "prop-types";
-import { MultiCertificateRenderer } from "template-utils/MultiCertificateRenderer";
+import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
 import { approvedAddresses } from "../common";
 import NPCert from "./certificate";
 import NPTranscript from "./transcript";
@@ -17,17 +16,13 @@ const templates = [
   }
 ];
 
-const NPCET2019PTDMAIN = ({ certificate }) => (
+const NPCET2019PTDMAIN = () => (
   <MultiCertificateRenderer
-    certificate={certificate}
     templates={templates}
     whitelist={approvedAddresses}
   />
 );
 
 NPCET2019PTDMAIN.displayName = "NP-CET2019-PTDMAIN Template";
-NPCET2019PTDMAIN.propTypes = {
-  certificate: PropTypes.object.isRequired
-};
 
 export default NPCET2019PTDMAIN;
