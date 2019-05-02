@@ -3,10 +3,12 @@
 .verifyBlocksContainer {
   position: absolute;
   z-index: 1;
+  padding-left: 0!important;
+  padding-right: 0!important;
 }
 
 .simple-verify-block {
-  min-width: 300px;
+  width: 100%;
   border-radius: 5px;
   color: white;
   height: 100%;
@@ -69,9 +71,20 @@
 @media only screen and (max-width: 550px) {
   .verifyBlocksContainer {
     position: relative;
-    margin: 0px 15px 15px 15px;
   }
   .d-flex {
+    display: block!important;
+  }
+}
+
+@media only screen and (min-width: 576px) {
+  .verifyBlocksContainer {
+    position: absolute!important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .verifyBlocksContainer {
     display: block!important;
   }
 }
