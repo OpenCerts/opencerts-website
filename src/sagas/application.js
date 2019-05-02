@@ -3,28 +3,14 @@ import { getNetwork, getNetworkPending, types } from "../reducers/application";
 import { setNewWeb3, getWeb3 } from "../services/web3";
 
 export function matchNetwork(networkId) {
-  let networkIdVerbose;
-
-  switch (networkId) {
-    case 1:
-      networkIdVerbose = "Main";
-      break;
-    case 2:
-      networkIdVerbose = "Morden";
-      break;
-    case 3:
-      networkIdVerbose = "Ropsten";
-      break;
-    case 4:
-      networkIdVerbose = "Rinkeby";
-      break;
-    case 42:
-      networkIdVerbose = "Kovan";
-      break;
-    default:
-      networkIdVerbose = `Custom Network: ${networkId}`;
-  }
-  return networkIdVerbose;
+  const networkIdVerbose = {
+    1: "Main",
+    2: "Morden",
+    3: "Ropsten",
+    4: "Rinkeby",
+    42: "Kovan"
+  };
+  return networkIdVerbose[networkId] || `Custom Network: ${networkId}`;
 }
 
 export function* getSelectedWeb3(getNew = false) {
