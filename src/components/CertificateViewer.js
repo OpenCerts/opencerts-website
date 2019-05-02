@@ -4,7 +4,6 @@ import { get } from "lodash";
 import CertificateVerifyBlock from "./CertificateVerifyBlock";
 import styles from "./certificateViewer.scss";
 import Modal from "./Modal";
-import images from "./ViewerPageImages";
 
 import { getLogger } from "../utils/logger";
 import templates from "./CertificateTemplates";
@@ -33,22 +32,22 @@ const renderHeaderBlock = props => {
   return (
     <div className={`container-fluid ${styles["pd-0"]}`}>
       <div className="row">
-        <div className="col-md-12">{renderedVerifyBlock}</div>
-        <div className={`row col-md-12 ${styles["pd-0"]}`}>
+        <div className="col-md-6 col-sm-6 col-xs-12">{renderedVerifyBlock}</div>
+        <div className={`row col-md-6 col-sm-6 col-xs-12 ${styles["pd-0"]}`}>
           <div className="ml-auto">
-            <button
+            <div
               id="btn-print"
               className={styles["print-btn"]}
               onClick={() => window.print()}
             >
-              {images.print()}
-            </button>
+              <i className="fas fa-print" style={{ fontSize: "1.5rem" }} />
+            </div>
           </div>
           <div />
           <div className="ml-2" onClick={() => props.handleSharingToggle()}>
-            <button id="btn-email" className={styles["send-btn"]}>
-              {images.send()}
-            </button>
+            <div id="btn-email" className={styles["send-btn"]}>
+              <i className="fas fa-envelope" style={{ fontSize: "1.5rem" }} />
+            </div>
           </div>
           <div className="ml-2">
             <a
@@ -60,10 +59,14 @@ const renderHeaderBlock = props => {
                 2
               )}`}
             >
-              <button id="btn-download" className={styles["send-btn"]}>
+              <button
+                id="btn-download"
+                className={styles["send-btn"]}
+                title="Download"
+              >
                 <i
                   className="fas fa-file-download"
-                  style={{ fontSize: "1.5rem", color: "#343a40" }}
+                  style={{ fontSize: "1.5rem" }}
                 />
               </button>
             </a>

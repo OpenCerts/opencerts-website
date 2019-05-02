@@ -80,12 +80,22 @@ li.tab {
 .print-btn,
 .send-btn {
   @include round-btn;
+  padding: .75rem;
   margin-left: 1rem;
-
+  i {
+    color: #343a40;
+  }
   svg {
     padding: 4px;
     height: 100%;
     width: 100%;
+  }
+}
+
+.print-btn:hover,
+.send-btn:hover {
+  i {
+    color: #fff;
   }
 }
 

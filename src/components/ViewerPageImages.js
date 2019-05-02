@@ -24,7 +24,7 @@ const viewerImages = {
             <stop offset="1" stopColor="#f47d4d" />
           </linearGradient>
         </defs>
-        <title>print</title>
+        <title>Print</title>
         <path
           d="M13.08,26.42V6.48a3.64,3.64,0,0,1,3.64-3.64H42.05a3.64,3.64,0,0,1,3.64,3.64V25M17.21,49.61H51.94A3.64,3.64,0,0,0,55.58,46V30.06a3.64,3.64,0,0,0-3.64-3.64H6.41a3.64,3.64,0,0,0-3.64,3.64V46a3.64,3.64,0,0,0,3.64,3.65H9.93M21.87,11.7H37.58m-15.71,7H37.58m5.58,15,6.81,0"
           transform="translate(-0.77 -0.84)"
@@ -84,7 +84,7 @@ const viewerImages = {
             xlinkHref="#a"
           />
         </defs>
-        <title>envelope</title>
+        <title>Email</title>
         <path
           d="M57.6,32.1V39a3.69,3.69,0,0,1-3.7,3.7H5.7A3.69,3.69,0,0,1,2,39V6.2A3.69,3.69,0,0,1,5.7,2.5H53.8a3.69,3.69,0,0,1,3.7,3.7V23.3"
           transform="translate(0 -0.5)"
