@@ -19,7 +19,7 @@ it("renders correctly when the certificate verfied", () => {
   expect(tree).toMatchSnapshot();
 });
 
-it("renders correctly when the certificate is not verfied", () => {
+it("renders correctly when the certificate`s hash status not verified", () => {
   const tree = renderer
     .create(
       <CertificateVerifyBlock
@@ -34,7 +34,7 @@ it("renders correctly when the certificate is not verfied", () => {
   expect(tree).toMatchSnapshot();
 });
 
-it("renders correctly when the certificate is not verfied", () => {
+it("renders correctly when the certificate`s issue status not verified", () => {
   const tree = renderer
     .create(
       <CertificateVerifyBlock
@@ -49,7 +49,7 @@ it("renders correctly when the certificate is not verfied", () => {
   expect(tree).toMatchSnapshot();
 });
 
-it("renders correctly when the certificate is not verfied", () => {
+it("renders correctly when the certificate has been revoked", () => {
   const tree = renderer
     .create(
       <CertificateVerifyBlock
@@ -64,7 +64,7 @@ it("renders correctly when the certificate is not verfied", () => {
   expect(tree).toMatchSnapshot();
 });
 
-it("renders correctly when the certificate is not verfied", () => {
+it("renders correctly when the certificate`s issuer not identified", () => {
   const tree = renderer
     .create(
       <CertificateVerifyBlock
@@ -79,7 +79,7 @@ it("renders correctly when the certificate is not verfied", () => {
   expect(tree).toMatchSnapshot();
 });
 
-it("renders correctly when the certificate is not verfied", () => {
+it("renders correctly when the certificate is invalid and hash, isseud, notRevoked, issuerIdentity status are not verified", () => {
   const tree = renderer
     .create(
       <CertificateVerifyBlock
