@@ -74,7 +74,7 @@ export const getSpecialization = additionalData => {
 
 export const renderLogoWSQ = () => (
   <div className="row d-flex">
-    <div className="col-lg-4 col-12" style={{ paddingRight: "0px" }}>
+    <div className="col-lg-5 col-12" style={{ paddingRight: "0px" }}>
       <img style={styles.fullWidthStyle} src={IMG_LOGO} />
     </div>
     <div className="col-lg-6" />
