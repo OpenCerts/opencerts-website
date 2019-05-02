@@ -2,7 +2,7 @@
 
 exports[`renders correctly when the certificate is not verfied 1`] = `
 <div
-  className="undefined undefined bg-white p-3"
+  className="undefined undefined bg-white p-3 col-12"
 >
   <div
     className="mb-3"
@@ -105,7 +105,7 @@ exports[`renders correctly when the certificate is not verfied 1`] = `
 
 exports[`renders correctly when the certificate is not verfied 2`] = `
 <div
-  className="undefined undefined bg-white p-3"
+  className="undefined undefined bg-white p-3 col-12"
 >
   <div
     className="mb-3"
@@ -208,7 +208,7 @@ exports[`renders correctly when the certificate is not verfied 2`] = `
 
 exports[`renders correctly when the certificate is not verfied 3`] = `
 <div
-  className="undefined undefined bg-white p-3"
+  className="undefined undefined bg-white p-3 col-12"
 >
   <div
     className="mb-3"
@@ -311,7 +311,7 @@ exports[`renders correctly when the certificate is not verfied 3`] = `
 
 exports[`renders correctly when the certificate is not verfied 4`] = `
 <div
-  className="undefined undefined bg-white p-3"
+  className="undefined undefined bg-white p-3 col-12"
 >
   <div
     className="mb-3"
@@ -414,7 +414,7 @@ exports[`renders correctly when the certificate is not verfied 4`] = `
 
 exports[`renders correctly when the certificate is not verfied 5`] = `
 <div
-  className="undefined undefined bg-white p-3"
+  className="undefined undefined bg-white p-3 col-12"
 >
   <div
     className="mb-3"
@@ -517,7 +517,7 @@ exports[`renders correctly when the certificate is not verfied 5`] = `
 
 exports[`renders correctly when the certificate verfied 1`] = `
 <div
-  className="undefined undefined bg-white p-3"
+  className="undefined undefined bg-white p-3 col-12"
 >
   <div
     className="mb-3"
