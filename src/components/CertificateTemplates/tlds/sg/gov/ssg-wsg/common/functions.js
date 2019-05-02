@@ -204,7 +204,7 @@ export const renderSignatureSOAIT = certificate => (
             style={{ color: "rgb(51,0,144)" }}
             href="https://myskillsfuture.sg/verify_eCert.html"
           >
-          https://myskillsfuture.sg/verify_eCert.html
+            https://myskillsfuture.sg/verify_eCert.html
           </a>
         </div>
       </div>
@@ -423,6 +423,47 @@ export const renderSignaturePartner = certificate => (
           </p>
         </div>
       </div>
+    </div>
+  </div>
+);
+
+export const renderAwardTextQUAL = certificate => (
+  <div>
+    <div className="d-flex" style={{ marginTop: "2rem" }}>
+      <p style={styles.nameTextStyle} className="RobotoRegular">
+        {get(certificate, "qualificationLevel[0].description")} in{" "}
+        {certificate.name}
+      </p>
+    </div>
+    <div className="d-flex" style={{ marginTop: "3rem" }}>
+      <p style={styles.awardTextStyle} className="RobotoMedium">
+        is awarded to
+      </p>
+    </div>
+    <div className="d-flex" style={{ marginTop: "1rem" }}>
+      <p style={styles.recipientTextStyle} className="RobotoMedium">
+        {certificate.recipient.name}
+      </p>
+    </div>
+    <div className="d-flex">
+      <p style={styles.printTextStyle} className="RobotoMedium">
+        ID No: {getRecipientID(certificate.recipient)}
+      </p>
+    </div>
+    <div
+      className="d-flex col-lg-6 col-12"
+      style={{ marginTop: "1rem", paddingLeft: "0px" }}
+    >
+      <p style={styles.awardTextStyle} className="RobotoMedium">
+        for successful attainment of the required
+        <br />
+        industry approved competencies
+      </p>
+    </div>
+    <div className="d-flex" style={{ marginTop: "3rem" }}>
+      <p style={styles.issuersTextStyle} className="RobotoRegular">
+        at {certificate.additionalData.assessmentOrgName}
+      </p>
     </div>
   </div>
 );
