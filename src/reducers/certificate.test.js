@@ -4,8 +4,7 @@ import reducer, {
   registerTemplates,
   selectTemplateTab,
   getActiveTemplateTab,
-  getTemplates,
-  resetCertificateState
+  getTemplates
 } from "./certificate";
 
 describe("reducers", () => {
