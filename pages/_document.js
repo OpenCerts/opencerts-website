@@ -18,7 +18,7 @@ export default class MyDocument extends Document {
             href="/static/images/favicon/favicon-16x16.png"
             sizes="16x16"
           />
-          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta charSet="utf-8" />
 
           <script

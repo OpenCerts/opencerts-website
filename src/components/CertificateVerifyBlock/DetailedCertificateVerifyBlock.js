@@ -27,8 +27,8 @@ const CHECKS = {
 
 const renderStatus = (props, type, typeVerified = true) => {
   const isVerified = props[type.id].verified;
-  const errorMsg = props[type.id].error ;
-  console.log(errorMsg)
+  const errorMsg = props[type.id].error;
+  
   if (isVerified !== typeVerified) return "";
   return isVerified ? (
     <div className="row">
