@@ -1,28 +1,8 @@
+import GradingSchemeStyles from "./gradingSchemeStyles";
+
 const PartTimeGradingScheme = () => (
   <div className="container">
-    <style>
-      {`
-      .grading-system{
-        font-size:0.9em;
-      }
-
-      .grading-system-cell {
-        border: 1px solid #212529;
-        border-right:none;
-        border-top:none;
-      }
-
-      .grading-system-header{
-        border: none;
-        border-bottom:1px solid #212529;
-      }
-
-      .grading-system-cell-last{
-        border:1px solid #212529;
-        border-top:none;
-      }
-      `}
-    </style>
+    <GradingSchemeStyles />
 
     <div className="grading-system">
       <div className="row">

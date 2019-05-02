@@ -1,23 +1,16 @@
 import PropTypes from "prop-types";
 
-import PartTimeRecipient from "./parttimerecipient";
-import PartTimeExamResults from "./parttimeexamresults";
-import PartTimeGradingScheme from "./parttimegradingscheme";
-import ExemptionFootNote from "./exemptionfootnote";
-import TranscriptHeader from "./transcriptheader";
-import TranscriptFooter from "./transcriptfooter";
+import PartTimeRecipient from "./partTimeRecipient";
+import PartTimeExamResults from "./partTimeExamResults";
+import PartTimeGradingScheme from "./partTimeGradingScheme";
+import ExemptionFootNote from "./exemptionFootNote";
+import TranscriptHeader from "./transcriptHeader";
+import TranscriptFooter from "./transcriptFooter";
+import TranscriptStyles from "./transcriptStyles";
 
 const PartTimeTranscript = ({ certificate }) => (
   <div className="container">
-    <style>
-      {`
-      .transcript-content {
-        font: 90%/1.6 Helvetica, Arial, sans-serif;
-        *font-size: 1em;
-      }
-
-      `}
-    </style>
+    <TranscriptStyles />
 
     <div className="transcript-content">
       <TranscriptHeader />

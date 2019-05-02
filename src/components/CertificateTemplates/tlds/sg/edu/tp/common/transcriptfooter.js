@@ -5,13 +5,7 @@ const TranscriptFooter = ({ certificate }) => (
   <div className="container">
     <style>
       {`
-      .end-of-records{
-        text-align: center;
-        font-size:0.8em;
-      }
-
       .issue-date{
-        border-bottom: 1px solid #212529;
         text-align:left;
         margin-top:2.5em;
       }
@@ -19,16 +13,14 @@ const TranscriptFooter = ({ certificate }) => (
       .registrar-sign{
         pointer-events: none !important;
         width: 90%;
-        border-bottom: 1px solid #212529;
-        padding-bottom:0.2em;
       }
 
-      .signature-container{
-        float:right;
-        text-align: left;
+      .issue-date-label,
+      .registrar-sign-label {
+        border-top: 1px solid #212529;
       }
 
-    `}
+      `}
     </style>
 
     <br />
@@ -42,15 +34,23 @@ const TranscriptFooter = ({ certificate }) => (
           &nbsp;&nbsp;
           {new Date(certificate.issuedOn).toLocaleDateString("en-SG")}
         </div>
-        Date
       </div>
       <div className="col-8">&nbsp;</div>
       <div className="col-2">
-        <span className="signature-container">
+        <div className="signature-container">
           <img src={IMG_SIGN_TP_REGISTRAR} className="registrar-sign" />
-          <br />
+        </div>
+      </div>
+    </div>
+    <div className="row">
+      <div className="col-2">
+        <div className="issue-date-label">Date</div>
+      </div>
+      <div className="col-8">&nbsp;</div>
+      <div className="col-2">
+        <div className="signature-container registrar-sign-label">
           for REGISTRAR
-        </span>
+        </div>
       </div>
     </div>
 

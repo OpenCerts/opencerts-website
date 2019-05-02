@@ -1,23 +1,16 @@
 import PropTypes from "prop-types";
 
 import Recipient from "./recipient";
-import ExamResults from "./examresults";
-import PfpGradingScheme from "./pfpgradingscheme";
-import ExemptionFootNote from "./exemptionfootnote";
-import TranscriptHeader from "./transcriptheader";
-import TranscriptFooter from "../common/transcriptfooter";
+import ExamResults from "./examResults";
+import PfpGradingScheme from "./pfpGradingScheme";
+import ExemptionFootNote from "../common/exemptionFootNote";
+import TranscriptHeader from "./transcriptHeader";
+import TranscriptFooter from "../common/transcriptFooter";
+import TranscriptStyles from "../common/transcriptStyles";
 
 const Transcript = ({ certificate }) => (
   <div className="container">
-    <style>
-      {`
-      .transcript-content {
-        font: 90%/1.6 Helvetica, Arial, sans-serif;
-        *font-size: 1em;
-      }
-
-      `}
-    </style>
+    <TranscriptStyles />
 
     <div className="transcript-content">
       <TranscriptHeader />

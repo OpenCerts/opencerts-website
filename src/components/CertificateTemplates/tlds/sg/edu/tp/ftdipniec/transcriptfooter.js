@@ -4,15 +4,6 @@ const TranscriptFooter = () => (
   <div className="container">
     <style>
       {`
-      .end-of-records{
-        text-align: center;
-        font-size:0.8em;
-      }
-
-      .issue-date{
-        text-decoration:underline;
-      }
-
       .niec-dean-sign{
         width:30%;
         padding-bottom:1em;
@@ -20,7 +11,8 @@ const TranscriptFooter = () => (
 
       .registrar-sign{
         width:80%;
-        padding-top:2em;
+        padding-top:1em;
+        padding-bottom:1em;
       }
 
       .niec-dean-sign-label,
@@ -28,14 +20,7 @@ const TranscriptFooter = () => (
         border-top: 1px solid #212529;
         text-align: left;
       }
-
-      .signature-container{
-        width:100%;
-        float:right;
-        text-align:left;
-      }
-
-    `}
+      `}
     </style>
 
     <br />
@@ -47,22 +32,29 @@ const TranscriptFooter = () => (
       <div className="col-6">
         <div className="signature-container">
           <img src={IMG_SIGN_NIEC_DEAN} className="niec-dean-sign" />
-          <div className="niec-dean-sign-label">
-            DEAN, ACADEMIC & STUDENT MANAGEMENT
-            <br />
-            NATIONAL INSTITUTE OF EARLY CHILDHOOD DEVELOPMENT
-          </div>
         </div>
       </div>
       <div className="col-3">&nbsp;</div>
       <div className="col-3">
         <div className="signature-container">
           <img src={IMG_SIGN_TP_REGISTRAR} className="registrar-sign" />
-          <div className="registrar-sign-label">
-            for REGISTRAR
-            <br />
-            TEMASEK POLYTECHNIC
-          </div>
+        </div>
+      </div>
+    </div>
+    <div className="row">
+      <div className="col-6">
+        <div className="signature-container niec-dean-sign-label">
+          DEAN, ACADEMIC & STUDENT MANAGEMENT
+          <br />
+          NATIONAL INSTITUTE OF EARLY CHILDHOOD DEVELOPMENT
+        </div>
+      </div>
+      <div className="col-3">&nbsp;</div>
+      <div className="col-3">
+        <div className="signature-container registrar-sign-label">
+          for REGISTRAR
+          <br />
+          TEMASEK POLYTECHNIC
         </div>
       </div>
     </div>

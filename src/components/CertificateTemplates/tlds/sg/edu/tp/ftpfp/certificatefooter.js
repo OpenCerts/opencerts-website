@@ -6,19 +6,11 @@ const CertificateFooter = ({ certificate }) => {
     const issuedYear = new Date(certificate.issuedOn).getFullYear();
 
     if (issuedYear <= 2017) {
-      return (
-        <span className="signature-container">
-          <img src={IMG_SIGN_TP_DIR_HSS} className="director-sign" />
-          <br />
-          Centre Director
-        </span>
-      );
+      return <span>Centre Director</span>;
     }
 
     return (
-      <span className="signature-container">
-        <img src={IMG_SIGN_TP_DIR_HSS} className="director-sign" />
-        <br />
+      <span>
         Director
         <br />
         School of Humanities
@@ -37,7 +29,6 @@ const CertificateFooter = ({ certificate }) => {
         width: 90%;
         padding-top: 2em;
         padding-bottom: 0.3em;
-        border-bottom: 1px solid #aaa;
       }
       
       .registrar-sign{
@@ -45,13 +36,24 @@ const CertificateFooter = ({ certificate }) => {
         width: 90%;
         padding-top: 3.5em;
         padding-bottom: 1.25em;
-        border-bottom: 1px solid #aaa;
       }
 
       .signature-container{
+        width:100%;
         float:right;
         text-align:center;
         color:#aaa;
+      }
+
+      .director-sign-label,
+      .registrar-sign-label{
+        border-top:1px solid #aaa;
+        text-align:center;
+        color: #aaa;
+      }
+
+      .signature-label-row {
+        margin-bottom:3em;
       }
       `}
       </style>
@@ -59,21 +61,30 @@ const CertificateFooter = ({ certificate }) => {
       <div className="row">
         <div className="col-6">&nbsp;</div>
         <div className="col-3">
-          <Director />
+          <div className="signature-container">
+            <img src={IMG_SIGN_TP_DIR_HSS} className="director-sign" />
+          </div>
         </div>
         <div className="col-3">
           <span className="signature-container">
             <img src={IMG_SIGN_TP_REGISTRAR} className="registrar-sign" />
-            <br />
-            Registrar
           </span>
         </div>
       </div>
 
-      <br />
-      <br />
-      <br />
-      <br />
+      <div className="row signature-label-row">
+        <div className="col-6">&nbsp;</div>
+        <div className="col-3">
+          <div className="signature-container director-sign-label">
+            <Director />
+          </div>
+        </div>
+        <div className="col-3">
+          <div className="signature-container registrar-sign-label">
+            Registrar
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

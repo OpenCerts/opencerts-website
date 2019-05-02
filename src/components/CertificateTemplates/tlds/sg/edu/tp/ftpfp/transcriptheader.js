@@ -6,7 +6,7 @@ const TranscriptHeader = () => (
       {`
       .tp-logo {
         padding-top:1em;
-        width:40%;
+        width:80%;
       }
 
       .page-title {
@@ -20,10 +20,10 @@ const TranscriptHeader = () => (
     <br />
     <br />
     <div className="row">
-      <div className="col-7">
+      <div className="col-4">
         <img src={IMG_LOGO_TP} className="tp-logo" />
       </div>
-      <div className="col-5 page-title">
+      <div className="col-8 page-title">
         Polytechnic Foundation Programme
         <br />
         STATEMENT OF EXAMINATION RESULTS
