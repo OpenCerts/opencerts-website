@@ -80,6 +80,7 @@ li.tab {
 .print-btn,
 .send-btn {
   @include round-btn;
+  padding: .75rem;
   margin-left: 1rem;
   i {
     color: #343a40;

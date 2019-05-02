@@ -23,7 +23,9 @@ const renderNavItem = active => {
       <a href={n.path}>{n.label}</a>
     </li>
   ));
-  return <ul className="navbar-nav ml-auto">{items}</ul>;
+  return (
+    <ul className="navbar-nav ml-auto d-none d-lg-flex d-xl-flex">{items}</ul>
+  );
 };
 
 const NavigationBar = ({ active }) => (
