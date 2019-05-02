@@ -366,7 +366,7 @@ export const GETSPAPERGRADE = (papergrade, examyr, examlvl) => {
 
   if (papergrade === "DIST") {
     if (
-      (examlvl === "O" && examyr <= 2001) ||
+      (examlvl === "GCEO" && examyr <= 2001) ||
       examlvl === "GCEA" ||
       examlvl === "GCEN"
     ) {
@@ -378,7 +378,7 @@ export const GETSPAPERGRADE = (papergrade, examyr, examlvl) => {
     }
   } else if (papergrade === "MERIT") {
     if (
-      (examlvl === "O" && examyr <= 2001) ||
+      (examlvl === "GCEO" && examyr <= 2001) ||
       examlvl === "GCEA" ||
       examlvl === "GCEN"
     ) {
@@ -390,7 +390,7 @@ export const GETSPAPERGRADE = (papergrade, examyr, examlvl) => {
     }
   } else if (papergrade === "PASS") {
     if (
-      (examlvl === "O" && examyr <= 2001) ||
+      (examlvl === "GCEO" && examyr <= 2001) ||
       examlvl === "GCEA" ||
       examlvl === "GCEN"
     ) {
@@ -435,7 +435,7 @@ export const GETSPAPERGRADE = (papergrade, examyr, examlvl) => {
     papernumericRender = "-";
   } else if (papergrade === "UNGRADED") {
     if (
-      (examlvl === "O" && examyr <= 2001) ||
+      (examlvl === "GCEO" && examyr <= 2001) ||
       examlvl === "GCEA" ||
       examlvl === "GCEN"
     ) {
