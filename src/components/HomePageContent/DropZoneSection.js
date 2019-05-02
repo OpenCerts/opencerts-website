@@ -10,7 +10,7 @@ const DropZoneSection = ({ handleCertificateChange }) => (
     <div className={css.main}>
       <div className="col-lg-5 col-md-12">
         <div className={css.description}>
-          <h2>An easy way to check and verify your certificates</h2>
+          <h1>An easy way to check and verify your certificates</h1>
           <p>
             Whether you&#39;re a student or an employer, OpenCerts lets you
             verify the certificates you have of anyone from any institution. All
