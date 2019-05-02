@@ -204,7 +204,7 @@ export const renderSignatureSOAIT = certificate => (
             style={{ color: "rgb(51,0,144)" }}
             href="https://myskillsfuture.sg/verify_eCert.html"
           >
-            https://myskillsfuture.sg/verify_eCert.html
+          https://myskillsfuture.sg/verify_eCert.html
           </a>
         </div>
       </div>

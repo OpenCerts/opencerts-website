@@ -45,6 +45,7 @@ const SOA002 = dynamic(() =>
 const SOA003 = dynamic(() =>
   import("./SOA-003" /* webpackChunkName: "SSGTemplates" */)
 );
+
 const SOAHR01 = dynamic(() =>
   import("./SOA-HR-01" /* webpackChunkName: "SSGTemplates" */)
 );
