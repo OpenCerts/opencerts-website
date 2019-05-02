@@ -210,7 +210,7 @@ export const renderCourse = (certificate, course, courseId) => {
       </div>
       <br />
       <br />
-      {renderTableHeader(certificate)}
+      {renderTableHeader()}
       <div className="row">{renderedSemesters}</div>
       <br />
       <br />
@@ -395,7 +395,7 @@ export const renderSignature = certificate => (
 
 const Template = ({ certificate }) => (
   <div className="container" style={{ fontSize: "0.9rem" }}>
-    {renderHeader(certificate)}
+    {renderHeader()}
     {renderTranscript(certificate)}
     {renderRemarks(certificate)}
     {renderAwards(certificate)}
