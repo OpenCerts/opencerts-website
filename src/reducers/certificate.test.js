@@ -15,7 +15,7 @@ describe("reducers", () => {
         type: types.RESET_CERTIFICATE
       };
       const prevState = { foo: "bar" };
-      expect(reducer(prevState, action)).toEqual(initialState);
+      expect(reducer(prevState, resetCertificateState())).toEqual(initialState);
     });
   });
   describe("CERTIFICATE_TEMPLATE_SELECT_TAB", () => {
@@ -110,14 +110,6 @@ describe("reducers", () => {
 });
 
 describe("actions", () => {
-  describe("Reset certificate should generate correct action", () => {
-    it("should reset the state to initial state", () => {
-      const expectedAction = {
-        type: types.RESET_CERTIFICATE
-      };
-      expect(resetCertificateState()).toEqual(expectedAction);
-    });
-  });
   it("registerTemplates should generate correct action", () => {
     const fn = registerTemplates;
     const payload = [
