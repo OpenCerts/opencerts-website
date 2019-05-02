@@ -50,6 +50,28 @@ const OpenCertsAssociate2018 = dynamic(() =>
     "./tlds/sg/gov/tech/2018-OpenCertsAssociate" /* webpackChunkName: "GovTechTemplates" */
   )
 );
+
+// ITE
+const ITE2019FULCERT1 = dynamic(() =>
+  import(
+    "./tlds/sg/edu/ite/ITE-2019-FUL-CERT-FULL1" /* webpackChunkName: "ITETemplates" */
+  )
+);
+const ITE2019FULCERTNIEC1 = dynamic(() =>
+  import(
+    "./tlds/sg/edu/ite/ITE-2019-FUL-CERT-FULL-NIEC1" /* webpackChunkName: "ITETemplates" */
+  )
+);
+const ITE2019COMCERTNIEC1 = dynamic(() =>
+  import(
+    "./tlds/sg/edu/ite/ITE-2019-COM-CERT-COM-NIEC1" /* webpackChunkName: "ITETemplates" */
+  )
+);
+const ITE2019COMCERT1 = dynamic(() =>
+  import(
+    "./tlds/sg/edu/ite/ITE-2019-COM-CERT-COM1" /* webpackChunkName: "ITETemplates" */
+  )
+);
 export default {
   "NP-AA2018-MAIN": NPAA2018MAIN,
   "NP-AA2018-OPTION": NPAA2018OPTION,
@@ -58,5 +80,9 @@ export default {
   "NP-AA2018-LDH": NPAA2018LDH,
   "NP-AA2018-PHARM": NPAA2018PHARM,
   "NP-AA2018-DPP": NPAA2018DPP,
-  "SG-GOVTECH-OPENCERTS": OpenCertsAssociate2018
+  "SG-GOVTECH-OPENCERTS": OpenCertsAssociate2018,
+  "ITE-2019-FUL-CERT-FULL1": ITE2019FULCERT1,
+  "ITE-2019-FUL-CERT-FULL-NIEC1": ITE2019FULCERTNIEC1,
+  "ITE-2019-COM-CERT-COM-NIEC1": ITE2019COMCERTNIEC1,
+  "ITE-2019-COM-CERT-COM1": ITE2019COMCERT1
 };
