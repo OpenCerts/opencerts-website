@@ -4,7 +4,8 @@ import reducer, {
   registerTemplates,
   selectTemplateTab,
   getActiveTemplateTab,
-  getTemplates
+  getTemplates,
+  resetCertificateState
 } from "./certificate";
 
 describe("reducers", () => {
@@ -109,6 +110,14 @@ describe("reducers", () => {
 });
 
 describe("actions", () => {
+  describe("Reset certificate should generate correct action", () => {
+    it("should reset the state to initial state", () => {
+      const expectedAction = {
+        type: types.RESET_CERTIFICATE
+      };
+      expect(resetCertificateState()).toEqual(expectedAction);
+    });
+  });
   it("registerTemplates should generate correct action", () => {
     const fn = registerTemplates;
     const payload = [
