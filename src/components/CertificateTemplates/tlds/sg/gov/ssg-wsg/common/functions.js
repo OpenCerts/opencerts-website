@@ -99,6 +99,72 @@ export const renderLogoNICF = () => (
   </div>
 );
 
+export const renderFooterText = footerTextStyle => (
+  <div style={footerTextStyle} className="RobotoLight">
+    <a style={{ color: "rgb(51,0,144)" }} href="https://www.ssg.gov.sg">
+      www.ssg.gov.sg
+    </a>
+    <br />
+    <p>
+      For verification of this certificate, please visit{" "}
+      <a
+        style={{ color: "rgb(51,0,144)" }}
+        href="https://myskillsfuture.sg/verify_eCert.html"
+      >
+        https://myskillsfuture.sg/verify_eCert.html
+      </a>
+    </p>
+  </div>
+);
+
+export const renderAwardedTo = () => (
+  <div className="d-flex" style={{ marginTop: "3rem" }}>
+    <p style={styles.awardTextStyle} className="RobotoMedium">
+      is awarded to
+    </p>
+  </div>
+);
+
+export const renderRecipientName = certificate => (
+  <div className="d-flex" style={{ marginTop: "1rem" }}>
+    <p style={styles.recipientTextStyle} className="RobotoMedium">
+      {certificate.recipient.name}
+    </p>
+  </div>
+);
+
+export const renderRecipientID = certificate => (
+  <div className="d-flex">
+    <p style={styles.printTextStyle} className="RobotoMedium">
+      ID No: {getRecipientID(certificate.recipient)}
+    </p>
+  </div>
+);
+
+export const renderSeal = () => (
+  <div className="col-lg-2 col-6">
+    <img style={styles.sealWidthStyle} src={IMG_SEAL} />
+  </div>
+);
+
+export const renderSignature = certificate => (
+  <div>
+    <div className="col-lg-3 col-12">
+      <img
+        style={styles.signatureWidthStyle}
+        src={get(certificate, "additionalData.certSignatories[0].signature")}
+      />
+    </div>
+    <div style={styles.designationTextStyle} className="RobotoBold">
+      {get(certificate, "additionalData.certSignatories[0].name")},{" "}
+      {get(certificate, "additionalData.certSignatories[0].position")}
+    </div>
+    <div style={styles.designationTextStyle} className="RobotoBold">
+      {get(certificate, "additionalData.certSignatories[0].organisation")}
+    </div>
+  </div>
+);
+
 export const renderAwardTextSOA = certificate => (
   <div>
     <div className="d-flex" style={{ marginTop: "2rem" }}>
@@ -142,22 +208,7 @@ export const renderSignatureSOAIT = certificate => (
     {renderSeal()}
     <div className="col-lg-10 col-12 row d-flex justify-content-center">
       <div className="col-lg-8">
-        <div className="col-lg-3 col-12">
-          <img
-            style={styles.signatureWidthStyle}
-            src={get(
-              certificate,
-              "additionalData.certSignatories[0].signature"
-            )}
-          />
-        </div>
-        <div style={styles.designationTextStyle} className="RobotoBold">
-          {get(certificate, "additionalData.certSignatories[0].name")},{" "}
-          {get(certificate, "additionalData.certSignatories[0].position")}
-        </div>
-        <div style={styles.designationTextStyle} className="RobotoBold">
-          {get(certificate, "additionalData.certSignatories[0].organisation")}
-        </div>
+        {renderSignature()}
         <div style={styles.footerTextStyle} className="RobotoLight">
           The training and assessment of the abovementioned learner are
           accredited
@@ -243,19 +294,7 @@ export const renderSignatureSOAHR = certificate => (
   >
     {renderSeal()}
     <div className="col-lg-6">
-      <div className="col-lg-3 col-12">
-        <img
-          style={styles.signatureWidthStyle}
-          src={get(certificate, "additionalData.certSignatories[0].signature")}
-        />
-      </div>
-      <div style={styles.designationTextStyle} className="RobotoBold">
-        {get(certificate, "additionalData.certSignatories[0].name")},{" "}
-        {get(certificate, "additionalData.certSignatories[0].position")}
-      </div>
-      <div style={styles.designationTextStyle} className="RobotoBold">
-        {get(certificate, "additionalData.certSignatories[0].organisation")}
-      </div>
+      {renderSignature()}
       <div style={styles.footerTextStyle} className="RobotoLight">
         The training and assessment of the abovementioned learner are accredited
         in accordance with the Singapore Workforce Skills Qualifications System.
@@ -303,19 +342,7 @@ export const renderSignaturePartner = certificate => (
   >
     {renderSeal()}
     <div className="col-lg-6">
-      <div className="col-lg-3 col-12">
-        <img
-          style={styles.signatureWidthStyle}
-          src={get(certificate, "additionalData.certSignatories[0].signature")}
-        />
-      </div>
-      <div style={styles.designationTextStyle} className="RobotoBold">
-        {get(certificate, "additionalData.certSignatories[0].name")},{" "}
-        {get(certificate, "additionalData.certSignatories[0].position")}
-      </div>
-      <div style={styles.designationTextStyle} className="RobotoBold">
-        {get(certificate, "additionalData.certSignatories[0].organisation")}
-      </div>
+      {renderSignature()}
       <img style={styles.signatureFooterLogoStyle} src={IMG_SSGLOGO} />
       <div style={styles.minHeightfooterTextStyle} className="RobotoLight">
         The training and assessment of the abovementioned learner are accredited{" "}
@@ -383,53 +410,5 @@ export const renderAwardTextQUAL = certificate => (
         at {certificate.additionalData.assessmentOrgName}
       </p>
     </div>
-  </div>
-);
-
-export const renderFooterText = (footerTextStyle) => (
-  <div style={footerTextStyle} className="RobotoLight">
-    <a style={{ color: "rgb(51,0,144)" }} href="https://www.ssg.gov.sg">
-      www.ssg.gov.sg
-    </a>
-    <br />
-    <p>
-      For verification of this certificate, please visit{" "}
-      <a
-        style={{ color: "rgb(51,0,144)" }}
-        href="https://myskillsfuture.sg/verify_eCert.html"
-      >
-        https://myskillsfuture.sg/verify_eCert.html
-      </a>
-    </p>
-  </div>
-);
-
-export const renderAwardedTo = () => (
-  <div className="d-flex" style={{ marginTop: "3rem" }}>
-    <p style={styles.awardTextStyle} className="RobotoMedium">
-      is awarded to
-    </p>
-  </div>
-);
-
-export const renderRecipientName = certificate => (
-  <div className="d-flex" style={{ marginTop: "1rem" }}>
-    <p style={styles.recipientTextStyle} className="RobotoMedium">
-      {certificate.recipient.name}
-    </p>
-  </div>
-);
-
-export const renderRecipientID = certificate => (
-  <div className="d-flex">
-    <p style={styles.printTextStyle} className="RobotoMedium">
-      ID No: {getRecipientID(certificate.recipient)}
-    </p>
-  </div>
-);
-
-export const renderSeal = () => (
-  <div className="col-lg-2 col-6">
-    <img style={styles.sealWidthStyle} src={IMG_SEAL} />
   </div>
 );
