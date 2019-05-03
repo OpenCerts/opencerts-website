@@ -27,7 +27,7 @@ const CHECKS = {
 
 const renderStatus = (props, type, typeVerified = true) => {
   const isVerified = props[type.id].verified;
-  const errorMsg = props[type.id].error;
+
   if (isVerified !== typeVerified) return "";
   return isVerified ? (
     <div className="row">
@@ -44,7 +44,7 @@ const renderStatus = (props, type, typeVerified = true) => {
         <i className="fas fa-times-circle text-danger mr-2" />
       </div>
       <div className="col-10">
-        <div className="row">{errorMsg}</div>
+        <div className="row">{type.failure}</div>
       </div>
     </div>
   );
