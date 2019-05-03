@@ -208,7 +208,7 @@ export const renderSignatureSOAIT = certificate => (
     {renderSeal()}
     <div className="col-lg-10 col-12 row d-flex justify-content-center">
       <div className="col-lg-8">
-        {renderSignature()}
+        {renderSignature(certificate)}
         <div style={styles.footerTextStyle} className="RobotoLight">
           The training and assessment of the abovementioned learner are
           accredited
@@ -294,7 +294,7 @@ export const renderSignatureSOAHR = certificate => (
   >
     {renderSeal()}
     <div className="col-lg-6">
-      {renderSignature()}
+      {renderSignature(certificate)}
       <div style={styles.footerTextStyle} className="RobotoLight">
         The training and assessment of the abovementioned learner are accredited
         in accordance with the Singapore Workforce Skills Qualifications System.
@@ -342,7 +342,7 @@ export const renderSignaturePartner = certificate => (
   >
     {renderSeal()}
     <div className="col-lg-6">
-      {renderSignature()}
+      {renderSignature(certificate)}
       <img style={styles.signatureFooterLogoStyle} src={IMG_SSGLOGO} />
       <div style={styles.minHeightfooterTextStyle} className="RobotoLight">
         The training and assessment of the abovementioned learner are accredited{" "}
