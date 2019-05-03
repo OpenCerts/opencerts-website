@@ -143,7 +143,7 @@ class MultiCertificateRenderer extends Component {
             <Drawer
               tabs={tabs}
               activeIdx={activeTab}
-              toggle={idx => this.setTabIndex(idx)}
+              toggle={idx => selectTemplateTab(idx)}
             />
           </div>
           <div
