@@ -7,23 +7,23 @@ const Certificate = "./1.5v_NCS-template2.opencert";
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
 
-const validateTextContent = async (tab, component, texts) =>
+const validateTextContent = async (t, component, texts) =>
   texts.reduce(
-    async (prev, curr) => tab.expect(component.textContent).contains(curr),
+    async (prev, curr) => t.expect(component.textContent).contains(curr),
     Promise.resolve()
   );
 
-test("2019-04-NCS-02 certificate is rendered correctly", async tab => {
+test("2019-04-NCS-02 certificate is rendered correctly", async t => {
   // Uploads certificate via dropzone
-  await tab.setFilesToUpload("input[type=file]", [Certificate]);
+  await t.setFilesToUpload("input[type=file]", [Certificate]);
 
   // Certificate tabs rendered
-  await tab.expect(TemplateTabList.textContent).contains("Certificate");
-  await tab.expect(TemplateTabList.textContent).contains("Transcript");
-  await tab.expect(TemplateTabList.textContent).contains("Static-Details");
+  await t.expect(TemplateTabList.textContent).contains("Certificate");
+  await t.expect(TemplateTabList.textContent).contains("Transcript");
+  await t.expect(TemplateTabList.textContent).contains("Static-Details");
 
   // Certificate tab content
-  await validateTextContent(tab, RenderedCertificate, [
+  await validateTextContent(t, RenderedCertificate, [
     "Teo Zhewei, Newton",
     "Blockchain Designing and Architecture",
     "Chair,Board of Trustees",
@@ -34,10 +34,10 @@ test("2019-04-NCS-02 certificate is rendered correctly", async tab => {
 
   // Navigate to Transcript tab
   const transcriptTab = TemplateTabList.find(":nth-child(2)");
-  await tab.click(transcriptTab);
+  await t.click(transcriptTab);
 
   // Transcript tab content
-  await validateTextContent(tab, RenderedCertificate, [
+  await validateTextContent(t, RenderedCertificate, [
     "Academic Transcript",
     "Completed Program",
     "12345678B",
@@ -51,10 +51,10 @@ test("2019-04-NCS-02 certificate is rendered correctly", async tab => {
 
   // Navigate to Static-Details tab
   const staticDetailsTab = TemplateTabList.find(":nth-child(3)");
-  await tab.click(staticDetailsTab);
+  await t.click(staticDetailsTab);
 
   // Static-Details tab content
-  await validateTextContent(tab, RenderedCertificate, [
+  await validateTextContent(t, RenderedCertificate, [
     "GUIDE TO ACADEMIC TRANSCRIPT",
     "GRADING SYSTEM (for 2012 to 2016 intakes only)",
     "CLASSIFICATIONS OF HONOURS",
