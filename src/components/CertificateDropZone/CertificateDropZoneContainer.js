@@ -10,7 +10,8 @@ import {
   getHashStatus,
   getIssuedStatus,
   getNotRevokedStatus,
-  getVerificationStatus
+  getVerificationStatus,
+  resetCertificateState
 } from "../../reducers/certificate";
 import { updateNetworkId } from "../../reducers/application";
 import CertificateDropZone from "./CertificateDropZone";
@@ -40,6 +41,10 @@ class CertificateDropZoneContainer extends Component {
     this.setState({ fileError: true });
   }
 
+  resetData() {
+    this.props.resetData();
+  }
+
   render() {
     return (
       <CertificateDropZone
@@ -53,6 +58,7 @@ class CertificateDropZoneContainer extends Component {
         issuedStatus={this.props.issuedStatus}
         notRevokedStatus={this.props.notRevokedStatus}
         verificationStatus={this.props.verificationStatus}
+        resetData={this.resetData.bind(this)}
       />
     );
   }
@@ -72,7 +78,8 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
   updateNetworkId: () => dispatch(updateNetworkId()),
-  updateCertificate: payload => dispatch(updateCertificate(payload))
+  updateCertificate: payload => dispatch(updateCertificate(payload)),
+  resetData: () => dispatch(resetCertificateState())
 });
 
 export default connect(
@@ -85,6 +92,7 @@ CertificateDropZoneContainer.propTypes = {
   document: PropTypes.object,
   handleCertificateChange: PropTypes.func,
   updateCertificate: PropTypes.func,
+  resetData: PropTypes.func,
   verifying: PropTypes.bool,
   issuerIdentityStatus: PropTypes.object,
   hashStatus: PropTypes.object,
