@@ -1,8 +1,8 @@
 import {
   renderLogoWSQ,
   renderIssuingDate,
-  renderAwardTextQUAL,
-  renderSignatureSOAHR
+  renderAwardTextSOA,
+  renderSignaturePartner
 } from "../common/functions";
 import fonts from "../common/fonts";
 
@@ -16,10 +16,10 @@ export default ({ logo }) => ({ certificate }) => (
     >
       {fonts()}
       {renderLogoWSQ()}
-      {renderAwardTextQUAL(certificate)}
+      {renderAwardTextSOA(certificate)}
       {renderIssuingDate(certificate)}
       {certificate.additionalData.certSignatories
-        ? renderSignatureSOAHR(certificate)
+        ? renderSignaturePartner(certificate)
         : ""}
     </div>
   </div>
