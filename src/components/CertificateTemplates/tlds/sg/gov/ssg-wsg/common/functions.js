@@ -106,21 +106,9 @@ export const renderAwardTextSOA = certificate => (
         STATEMENT OF ATTAINMENT
       </p>
     </div>
-    <div className="d-flex" style={{ marginTop: "3rem" }}>
-      <p style={styles.awardTextStyle} className="RobotoMedium">
-        is awarded to
-      </p>
-    </div>
-    <div className="d-flex" style={{ marginTop: "1rem" }}>
-      <p style={styles.recipientTextStyle} className="RobotoMedium">
-        {certificate.recipient.name}
-      </p>
-    </div>
-    <div className="d-flex">
-      <p style={styles.printTextStyle} className="RobotoMedium">
-        ID No: {getRecipientID(certificate.recipient)}
-      </p>
-    </div>
+    {renderAwardedTo()}
+    {renderRecipientName(certificate)}
+    {renderRecipientID(certificate)}
     <div
       className="d-flex col-lg-6 col-12"
       style={{ marginTop: "1rem", marginBottom: "3rem", paddingLeft: "0px" }}
@@ -151,9 +139,7 @@ export const renderSignatureSOAIT = certificate => (
     className="row d-flex justify-content-center"
     style={{ marginTop: "8rem", marginBottom: "1rem" }}
   >
-    <div className="col-lg-2 col-6">
-      <img style={styles.sealWidthStyle} src={IMG_SEAL} />
-    </div>
+    {renderSeal()}
     <div className="col-lg-10 col-12 row d-flex justify-content-center">
       <div className="col-lg-8">
         <div className="col-lg-3 col-12">
@@ -194,19 +180,7 @@ export const renderSignatureSOAIT = certificate => (
         </div>
       </div>
       <div className="col-lg-5 col-12">
-        <div style={styles.footerAboutTextStyle} className="RobotoLight">
-          <a style={{ color: "rgb(51,0,144)" }} href="https://www.ssg.gov.sg">
-            www.ssg.gov.sg
-          </a>
-          <br />
-          For verification of this certificate, please visit <br />
-          <a
-            style={{ color: "rgb(51,0,144)" }}
-            href="https://myskillsfuture.sg/verify_eCert.html"
-          >
-            https://myskillsfuture.sg/verify_eCert.html
-          </a>
-        </div>
+        {renderFooterText(styles.footerAboutTextStyle)}
       </div>
       <div
         className="col-lg-7 col-12 d-flex justify-content-center"
@@ -234,21 +208,9 @@ export const renderAwardTextSOAHR = certificate => (
         {certificate.name}
       </p>
     </div>
-    <div className="d-flex" style={{ marginTop: "3rem" }}>
-      <p style={styles.awardTextStyle} className="RobotoMedium">
-        is awarded to
-      </p>
-    </div>
-    <div className="d-flex" style={{ marginTop: "1rem" }}>
-      <p style={styles.recipientTextStyle} className="RobotoMedium">
-        {certificate.recipient.name}
-      </p>
-    </div>
-    <div className="d-flex">
-      <p style={styles.printTextStyle} className="RobotoMedium">
-        ID No: {getRecipientID(certificate.recipient)}
-      </p>
-    </div>
+    {renderAwardedTo()}
+    {renderRecipientName(certificate)}
+    {renderRecipientID(certificate)}
     <div
       className="d-flex col-lg-9"
       style={{ marginTop: "1rem", padding: "0px" }}
@@ -279,10 +241,7 @@ export const renderSignatureSOAHR = certificate => (
     className="row d-flex justify-content-center"
     style={{ marginTop: "8rem", marginBottom: "1rem" }}
   >
-    <div className="col-lg-2 col-6">
-      <img style={styles.sealWidthStyle} src={IMG_SEAL} />
-    </div>
-
+    {renderSeal()}
     <div className="col-lg-6">
       <div className="col-lg-3 col-12">
         <img
@@ -304,19 +263,7 @@ export const renderSignatureSOAHR = certificate => (
           ? "This WSQ programme is aligned to the Skills Framework."
           : ""}
       </div>
-      <div style={styles.footerTextStyle} className="RobotoLight">
-        <a style={{ color: "rgb(51,0,144)" }} href="https://www.ssg.gov.sg">
-          www.ssg.gov.sg
-        </a>
-        <br />
-        For verification of this certificate, please visit <br />
-        <a
-          style={{ color: "rgb(51,0,144)" }}
-          href="https://myskillsfuture.sg/verify_eCert.html"
-        >
-          https://myskillsfuture.sg/verify_eCert.html
-        </a>
-      </div>
+      {renderFooterText(styles.footerTextStyle)}
     </div>
     <div
       className="col-lg-4 col-xs-12 d-flex"
@@ -354,10 +301,7 @@ export const renderSignaturePartner = certificate => (
     className="row d-flex justify-content-center"
     style={{ marginTop: "8rem", marginBottom: "1rem" }}
   >
-    <div className="col-lg-2 col-6">
-      <img style={styles.sealWidthStyle} src={IMG_SEAL} />
-    </div>
-
+    {renderSeal()}
     <div className="col-lg-6">
       <div className="col-lg-3 col-12">
         <img
@@ -378,21 +322,7 @@ export const renderSignaturePartner = certificate => (
         <br />
         in accordance with the Singapore Workforce Skills Qualifications System.
       </div>
-      <div style={styles.footerTextStyle} className="RobotoLight">
-        <a style={{ color: "rgb(51,0,144)" }} href="https://www.ssg.gov.sg">
-          www.ssg.gov.sg
-        </a>
-        <br />
-        <p>
-          For verification of this certificate, please visit{" "}
-          <a
-            style={{ color: "rgb(51,0,144)" }}
-            href="https://myskillsfuture.sg/verify_eCert.html"
-          >
-            https://myskillsfuture.sg/verify_eCert.html
-          </a>
-        </p>
-      </div>
+      {renderFooterText(styles.footerTextStyle)}
     </div>
     <div
       className="col-lg-4 col-xs-12 d-flex"
@@ -435,21 +365,9 @@ export const renderAwardTextQUAL = certificate => (
         {certificate.name}
       </p>
     </div>
-    <div className="d-flex" style={{ marginTop: "3rem" }}>
-      <p style={styles.awardTextStyle} className="RobotoMedium">
-        is awarded to
-      </p>
-    </div>
-    <div className="d-flex" style={{ marginTop: "1rem" }}>
-      <p style={styles.recipientTextStyle} className="RobotoMedium">
-        {certificate.recipient.name}
-      </p>
-    </div>
-    <div className="d-flex">
-      <p style={styles.printTextStyle} className="RobotoMedium">
-        ID No: {getRecipientID(certificate.recipient)}
-      </p>
-    </div>
+    {renderAwardedTo()}
+    {renderRecipientName(certificate)}
+    {renderRecipientID(certificate)}
     <div
       className="d-flex col-lg-6 col-12"
       style={{ marginTop: "1rem", paddingLeft: "0px" }}
@@ -465,5 +383,53 @@ export const renderAwardTextQUAL = certificate => (
         at {certificate.additionalData.assessmentOrgName}
       </p>
     </div>
+  </div>
+);
+
+export const renderFooterText = (footerTextStyle) => (
+  <div style={footerTextStyle} className="RobotoLight">
+    <a style={{ color: "rgb(51,0,144)" }} href="https://www.ssg.gov.sg">
+      www.ssg.gov.sg
+    </a>
+    <br />
+    <p>
+      For verification of this certificate, please visit{" "}
+      <a
+        style={{ color: "rgb(51,0,144)" }}
+        href="https://myskillsfuture.sg/verify_eCert.html"
+      >
+        https://myskillsfuture.sg/verify_eCert.html
+      </a>
+    </p>
+  </div>
+);
+
+export const renderAwardedTo = () => (
+  <div className="d-flex" style={{ marginTop: "3rem" }}>
+    <p style={styles.awardTextStyle} className="RobotoMedium">
+      is awarded to
+    </p>
+  </div>
+);
+
+export const renderRecipientName = certificate => (
+  <div className="d-flex" style={{ marginTop: "1rem" }}>
+    <p style={styles.recipientTextStyle} className="RobotoMedium">
+      {certificate.recipient.name}
+    </p>
+  </div>
+);
+
+export const renderRecipientID = certificate => (
+  <div className="d-flex">
+    <p style={styles.printTextStyle} className="RobotoMedium">
+      ID No: {getRecipientID(certificate.recipient)}
+    </p>
+  </div>
+);
+
+export const renderSeal = () => (
+  <div className="col-lg-2 col-6">
+    <img style={styles.sealWidthStyle} src={IMG_SEAL} />
   </div>
 );
