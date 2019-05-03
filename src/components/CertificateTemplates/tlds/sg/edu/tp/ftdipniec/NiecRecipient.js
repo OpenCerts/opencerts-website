@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const Recipient = ({ certificate }) => (
+const NiecRecipient = ({ certificate }) => (
   <div className="container">
     <div className="row">
       <div className="col-7">
@@ -74,8 +74,8 @@ const Recipient = ({ certificate }) => (
   </div>
 );
 
-Recipient.propTypes = {
+NiecRecipient.propTypes = {
   certificate: PropTypes.object.isRequired
 };
 
-export default Recipient;
+export default NiecRecipient;

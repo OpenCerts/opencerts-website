@@ -1,6 +1,6 @@
 import { IMG_LOGO_TP, IMG_LOGO_NIEC } from "../common/images";
 
-const TranscriptHeader = () => (
+const NiecTranscriptHeader = () => (
   <div className="container">
     <style>
       {`
@@ -41,4 +41,4 @@ const TranscriptHeader = () => (
   </div>
 );
 
-export default TranscriptHeader;
+export default NiecTranscriptHeader;

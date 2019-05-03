@@ -1,29 +1,29 @@
 import PropTypes from "prop-types";
 
-import Recipient from "./recipient";
-import ExamResults from "./examResults";
-import FastGradingScheme from "../common/fastGradingScheme";
-import ExemptionFootNote from "../common/exemptionFootNote";
-import TranscriptHeader from "./transcriptHeader";
-import TranscriptFooter from "./transcriptFooter";
-import TranscriptStyles from "../common/transcriptStyles";
+import Niec from "./NiecRecipient";
+import NiecExamResults from "./NiecExamResults";
+import CommonFastGradingScheme from "../common/fastGradingScheme";
+import CommonExemptionFootNote from "../common/exemptionFootNote";
+import NiecTranscriptHeader from "./NiecTranscriptHeader";
+import NiecTranscriptFooter from "./NiecTranscriptFooter";
+import CommonTranscriptStyles from "../common/transcriptStyles";
 
 const Transcript = ({ certificate }) => (
   <div className="container">
-    <TranscriptStyles />
+    <CommonTranscriptStyles />
 
     <div className="transcript-content">
-      <TranscriptHeader />
+      <NiecTranscriptHeader />
 
-      <Recipient certificate={certificate} />
+      <Niec certificate={certificate} />
 
-      <ExamResults certificate={certificate} />
+      <NiecExamResults certificate={certificate} />
 
-      <FastGradingScheme />
+      <CommonFastGradingScheme />
 
-      <ExemptionFootNote certificate={certificate} />
+      <CommonExemptionFootNote certificate={certificate} />
 
-      <TranscriptFooter certificate={certificate} />
+      <NiecTranscriptFooter certificate={certificate} />
     </div>
   </div>
 );

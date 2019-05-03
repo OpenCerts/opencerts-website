@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import ExamResultsStyles from "../common/examResultsStyles";
 import SubjectGrades from "../common/subjectGrades";
 
-const ExamResults = ({ certificate }) => (
+const NiecExamResults = ({ certificate }) => (
   <div className="container">
     <ExamResultsStyles />
 
@@ -31,8 +31,8 @@ const ExamResults = ({ certificate }) => (
   </div>
 );
 
-ExamResults.propTypes = {
+NiecExamResults.propTypes = {
   certificate: PropTypes.object.isRequired
 };
 
-export default ExamResults;
+export default NiecExamResults;

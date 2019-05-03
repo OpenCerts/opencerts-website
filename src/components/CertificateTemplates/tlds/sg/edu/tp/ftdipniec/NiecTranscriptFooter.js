@@ -1,6 +1,6 @@
 import { IMG_SIGN_NIEC_DEAN, IMG_SIGN_TP_REGISTRAR } from "../common/images";
 
-const TranscriptFooter = () => (
+const NiecTranscriptFooter = () => (
   <div className="container">
     <style>
       {`
@@ -64,4 +64,4 @@ const TranscriptFooter = () => (
   </div>
 );
 
-export default TranscriptFooter;
+export default NiecTranscriptFooter;
