@@ -3,16 +3,19 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
   certificateData,
-  obfuscateFields,
   validateSchema,
   verifySignature
 } from "@govtechsg/open-certificate";
 
-import styles from "./certificateViewer.scss";
-import { updateCertificate, getCertificate } from "../reducers/certificate";
+import styles from "../certificateViewer.scss";
+import {
+  updateCertificate,
+  getCertificate,
+  getTemplates,
+  selectTemplateTab
+} from "../../reducers/certificate";
 import FramelessCertificateViewer from "./FramelessCertificateViewer";
-
-import { getLogger } from "../utils/logger";
+import { getLogger } from "../../utils/logger";
 
 const { trace } = getLogger("components:FramelessViewerPageContainer");
 
@@ -22,6 +25,14 @@ class FramelessViewerContainer extends Component {
 
     this.handleCertificateChange = this.handleCertificateChange.bind(this);
     this.handleTextFieldChange = this.handleTextFieldChange.bind(this);
+  }
+
+  componentDidMount() {
+    window.opencerts = {
+      templates: () => this.props.templates,
+      renderCertificate: this.handleCertificateChange,
+      selectTemplateTab: this.props.selectTemplateTab
+    };
   }
 
   handleTextFieldChange(e) {
@@ -36,11 +47,6 @@ class FramelessViewerContainer extends Component {
     const verified = verifySignature(fieldContents);
     trace(`Certificate verification: ${verified}`);
     this.props.updateCertificate(fieldContents);
-  }
-
-  handleObfuscation(field) {
-    const updatedDocument = obfuscateFields(this.props.document, field);
-    this.props.updateObfuscatedCertificate(updatedDocument);
   }
 
   handleCertificateChange(certificate) {
@@ -68,11 +74,13 @@ class FramelessViewerContainer extends Component {
 }
 
 const mapStateToProps = store => ({
-  document: getCertificate(store)
+  document: getCertificate(store),
+  templates: getTemplates(store)
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateCertificate: payload => dispatch(updateCertificate(payload))
+  updateCertificate: payload => dispatch(updateCertificate(payload)),
+  selectTemplateTab: tabIndex => dispatch(selectTemplateTab(tabIndex))
 });
 
 export default connect(
@@ -81,8 +89,9 @@ export default connect(
 )(FramelessViewerContainer);
 
 FramelessViewerContainer.propTypes = {
-  updateCertificate: PropTypes.func,
+  updateCertificate: PropTypes.func.isRequired,
   document: PropTypes.object,
   certificate: PropTypes.object,
-  updateObfuscatedCertificate: PropTypes.func
+  selectTemplateTab: PropTypes.func.isRequired,
+  templates: PropTypes.array
 };
