@@ -1,12 +1,20 @@
 import reducer, {
   types,
+  initialState,
   registerTemplates,
   selectTemplateTab,
   getActiveTemplateTab,
-  getTemplates
+  getTemplates,
+  resetCertificateState
 } from "./certificate";
 
 describe("reducers", () => {
+  describe("Reset certificate", () => {
+    it("should reset the state to initial state", () => {
+      const prevState = { foo: "bar" };
+      expect(reducer(prevState, resetCertificateState())).toEqual(initialState);
+    });
+  });
   describe("CERTIFICATE_TEMPLATE_SELECT_TAB", () => {
     it("should update activeTemplateTab", () => {
       const action = {
