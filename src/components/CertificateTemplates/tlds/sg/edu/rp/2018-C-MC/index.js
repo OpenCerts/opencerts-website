@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { MultiCertificateRenderer } from "template-utils/MultiCertificateRenderer";
+import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
 import { approvedAddresses } from "../common";
 import RPCert from "./certificate";
 import RPTranscript from "../common/transcript";
@@ -17,9 +17,8 @@ const templates = [
   }
 ];
 
-const RPAA2018CDPLUS = ({ certificate }) => (
+const RPAA2018CDPLUS = () => (
   <MultiCertificateRenderer
-    certificate={certificate}
     templates={templates}
     whitelist={approvedAddresses}
   />
