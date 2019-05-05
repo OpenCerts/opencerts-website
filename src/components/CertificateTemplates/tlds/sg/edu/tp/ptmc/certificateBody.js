@@ -21,7 +21,7 @@ const CertificateBody = ({ certificate }) => (
         })}
         <br />
         This Certificate is recognized towards the{" "}
-        {certificate.additionalData.recoginzedTowardsCourseName}.
+        {certificate.additionalData.recognizedTowardsCourseName}.
       </div>
     </div>
   </div>

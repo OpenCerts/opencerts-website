@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import CertificateBodyStyles from "../common/certificateBodyStyles";
 
 const CertificateBody = ({ certificate }) => {
-
   const firstLine = "Certificate in";
   const secondLine = certificate.name.replace(/certificate in/i, "").trim();
 
@@ -33,7 +32,6 @@ const CertificateBody = ({ certificate }) => {
       </div>
     </div>
   );
-
 };
 
 CertificateBody.propTypes = {
