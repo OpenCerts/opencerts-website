@@ -1,158 +1,160 @@
 {
   "schema": "opencerts/v1.5",
   "data": {
-    "id": "997af1ac-66b7-40d6-ac2c-f4a362ceb07f:string:sg-edu-tp-9999-D01-1234567A-D01",
-    "$template": "dcdd1011-29a7-4fca-b254-1be862b9fad9:string:sg/edu/tp/ftpfp-2019",
-    "description": "04a83dae-351b-4336-b772-29083b3fe97b:string:Diploma",
-    "issuedOn": "4ce6a9d9-4a8e-40cf-a6cc-a5c1454bb8c1:string:2019-05-05T00:00:00+08:00",
-    "expiresOn": "7fb3d6f4-9cc6-4f1f-a0a1-de05434f4935:string:9999-12-31T23:59:59.997+08:00",
-    "admissionDate": "f6cb31ab-2cc6-4d65-afad-700579dc5936:string:2016-05-05T00:00:00+08:00",
-    "graduationDate": "797bf315-6eb1-4344-9aee-23f5ef94e9fd:string:2019-05-05T00:00:00+08:00",
-    "cumulativeScore": "a994dcf4-ead2-4dac-ba34-6219e4bcf008:number:5",
-    "name": "e058eb14-5618-4ea3-a6c5-ed3d937756f6:string:DUMMY COURSE NAME",
+    "id": "51ac40c2-057b-463b-990e-6b8166d5d5a3:string:sg-edu-tp-9999-D01-1234567A-D01",
+    "$template": "dce0b02b-0cae-4c74-8bbe-aae3b0f38b13:string:sg/edu/tp/ftpfp-2019",
+    "description": "3b8b527d-feb9-41b2-b48a-3f7cc7410e75:string:Diploma",
+    "issuedOn": "7b8c3113-4c63-457e-95be-46bb4edea1c3:string:2019-05-06T00:00:00+08:00",
+    "expiresOn": "759fd68a-e0eb-4d7c-b86e-687b11f6ab4b:string:9999-12-31T23:59:59.997+08:00",
+    "admissionDate": "763e53f6-e2dc-4317-88da-7c5ec8e7a47a:string:2016-05-06T00:00:00+08:00",
+    "graduationDate": "61c29050-2f91-4295-93dd-d6ec456d72e1:string:2019-05-06T00:00:00+08:00",
+    "cumulativeScore": "1b3aeec2-a555-4262-a16b-2af02fc1264b:number:5",
+    "name": "a8299e4c-36ef-40fd-b52e-02ce713a99d6:string:DUMMY COURSE NAME",
     "issuers": [
       {
-        "name": "15e68f75-deb1-43fc-b1b4-7fc375329a92:string:ROPSTEN: Temasek Polytechnic",
-        "certificateStore": "7d0eec13-cb2a-4b2f-aeb1-3a1468d19cc6:string:0xe825e69383a57eB686Fc7b8c455Dd982bB9680f6"
+        "name": "14465296-28fb-4b0f-87c3-053ce22be9df:string:ROPSTEN: Temasek Polytechnic",
+        "certificateStore": "ba68d706-1402-4258-a837-0f9360cfad7f:string:0xe825e69383a57eB686Fc7b8c455Dd982bB9680f6"
       }
     ],
     "recipient": {
-      "studentId": "a70b29b6-5697-4e31-935d-4b2c8c2e0184:string:1234567A",
-      "name": "90989cb7-45da-4706-9908-83fedcd7c718:string:DUMMY STUDENT NAME",
-      "nric": "44ace542-42fd-4ac8-be07-1383cc50994d:string:S0000000A",
-      "fin": "95ec26c1-d189-4036-8c55-7cf36450f5b0:string:"
+      "studentId": "234b83bf-c64e-4f63-a9fb-7a6e5a37c7b0:string:1234567A",
+      "name": "4bf95cd8-3bc4-49e0-a145-525fa19b4f0f:string:DUMMY STUDENT NAME",
+      "nric": "1bc88735-151f-4461-85ec-d14937586add:string:S0000000A"
     },
     "transcript": [
       {
-        "name": "37359f97-8498-4a6c-9ed3-9baf7cecd43b:string:Dummy01 subject name",
-        "grade": "259876e9-a96e-448e-a472-3ddae3804626:string:A",
-        "courseCredit": "c33e8cd4-d3fa-472a-b85a-e7cf365282ad:string:5",
-        "courseCode": "c9423afa-c492-442f-a98c-d9a432e02d0c:string:S001",
-        "examinationDate": "e64c4daf-d591-4f3e-b857-aced096ba928:string:2019-05-05T00:00:00+08:00",
-        "academicYear": "560ac53e-c6ba-4d00-8eba-bf61461c7302:string:9999",
-        "semester": "403eb338-5824-4dfc-8d19-8c120cd5d414:string:AY9998/9999 Dummy0 Semester (Main)"
+        "name": "8e98b776-0e3e-4e5f-9232-18773f85c155:string:Dummy01 subject name",
+        "grade": "9dabb16f-6170-4d51-bda6-84905a98c3ac:string:A",
+        "courseCredit": "c6ffa120-9f3f-48b3-8667-1fcdc0852428:string:5",
+        "courseCode": "729578bc-3282-4706-9e90-99d695619e72:string:S001",
+        "examinationDate": "e58470c6-d0f9-45d3-aa91-d2ce83f06776:string:2019-05-06T00:00:00+08:00",
+        "academicYear": "b112d5eb-0375-4042-af2d-518c5dd3f9dd:string:9999",
+        "semester": "e422c889-0bf0-414c-892d-bd4cdd50a376:string:AY9998/9999 Dummy0 Semester (Main)"
       },
       {
-        "name": "509613cf-82fe-4b96-bb2e-75098d6ab6b0:string:Dummy02 subject name",
-        "grade": "6359b44c-ec97-4d54-ad4d-fc1738aa3dff:string:A",
-        "courseCredit": "2c789d95-f796-472d-adc4-a107a377d7be:string:5",
-        "courseCode": "891887e0-08cf-46b7-914f-2172144fbffd:string:S002",
-        "examinationDate": "093daf9b-c42e-48fb-b8a1-7e32ffc3757c:string:2019-05-05T00:00:00+08:00",
-        "academicYear": "ca48d85e-7bdf-4a00-bec1-d281ca02a157:string:9999",
-        "semester": "f2d8153c-147a-4357-a0f0-6da79735715e:string:AY9998/9999 Dummy0 Semester (Main)"
+        "name": "fe4d56fd-2dee-4897-a1fc-92c81faa2e9c:string:Dummy02 subject name",
+        "grade": "acc019a8-2b34-457c-ae4b-c0f952f0f648:string:A",
+        "courseCredit": "99672cae-7b85-4621-8ab2-41e5fa552206:string:5",
+        "courseCode": "b7a46ef8-de2c-43f2-beeb-8c6db92cb504:string:S002",
+        "examinationDate": "35426f76-1b5e-492b-90ac-ba17907ea05d:string:2019-05-06T00:00:00+08:00",
+        "academicYear": "ec00484c-7d8b-4892-9330-6004864f18ec:string:9999",
+        "semester": "9f24e41a-22ee-4e93-b0b9-8f6f4adbc1a7:string:AY9998/9999 Dummy0 Semester (Main)"
       },
       {
-        "name": "3c32bee1-179d-4cc9-b86d-cb206bdd078c:string:Dummy03 subject name",
-        "grade": "3e0f432f-123c-494d-9322-29a2311f2d82:string:A",
-        "courseCredit": "c513fd83-a18a-4b56-87cb-0fa5e4d5cd0d:string:5",
-        "courseCode": "e3fa7f44-d2f7-481b-a9c6-daf9ee4e1813:string:S003",
-        "examinationDate": "7542fda4-729c-4901-82cd-d7fc7ef7a044:string:2019-05-05T00:00:00+08:00",
-        "academicYear": "104b0e6c-3e62-4086-9dd9-60edbca28482:string:9999",
-        "semester": "232324b2-8334-485c-93da-53933ba6b2bb:string:AY9998/9999 Dummy0 Semester (Main)"
+        "name": "18e49df6-662b-41d9-858d-11e1726da847:string:Dummy03 subject name",
+        "grade": "e58bbd15-2ab9-40ac-8df5-f880a7adb078:string:A",
+        "courseCredit": "0f1ed6f3-da31-4c16-8e8a-d63cdbfcc337:string:5",
+        "courseCode": "6b88bd2f-192e-4ddb-8500-a6a810b053cf:string:S003",
+        "examinationDate": "ad7f1f62-7ca7-49ca-9d0a-d9c9b800d192:string:2019-05-06T00:00:00+08:00",
+        "academicYear": "c7416048-b03b-4cf8-82b6-b70647878847:string:9999",
+        "semester": "0260a1a7-4a17-4fb2-8e7d-a95428d97ab4:string:AY9998/9999 Dummy0 Semester (Main)"
       },
       {
-        "name": "3b356a67-aea2-484d-9cbb-d456c6d051f5:string:Dummy04 subject name",
-        "grade": "f2e286d7-c458-4c51-a1e4-71073f2f4372:string:A",
-        "courseCredit": "8304ef3e-ff39-438c-992f-fe7e08a63363:string:5",
-        "courseCode": "2b7b2916-fc08-4210-a217-04904467eb38:string:S004",
-        "examinationDate": "cea2d245-bed9-429d-aea0-14d9302e2e13:string:2019-05-05T00:00:00+08:00",
-        "academicYear": "046a8f06-1cf3-4612-92fa-41519a98420b:string:9999",
-        "semester": "5dcd1db4-127b-4b2c-91ba-aeb5872f3c6b:string:AY9998/9999 Dummy0 Semester (Main)"
+        "name": "522562ea-c166-4c7b-9c92-fd7b2170b0f4:string:Dummy04 subject name",
+        "grade": "0ddb43a7-59ec-43c2-8cb9-d9412e97a8ac:string:A",
+        "courseCredit": "b5711ea8-6170-410d-9f69-832c26d38eac:string:5",
+        "courseCode": "5933aa53-3844-4772-984c-1d815ae3763b:string:S004",
+        "examinationDate": "3b624377-cdd0-432e-8d08-54342a1d3cae:string:2019-05-06T00:00:00+08:00",
+        "academicYear": "d6b84374-3821-47bd-8f41-36dab5c39414:string:9999",
+        "semester": "4683d9f2-a28c-4074-84ce-1e7acb45355b:string:AY9998/9999 Dummy0 Semester (Main)"
       },
       {
-        "name": "16d47f23-d05d-427f-957c-ed8aef9990dd:string:Dummy11 subject name",
-        "grade": "261c49ab-832d-4bb6-b66e-a39b13cc9917:string:A",
-        "courseCredit": "a86c5c33-8d15-4eab-a5c9-6c6002e8a16e:string:5",
-        "courseCode": "6be15e02-f5e1-4886-9dda-7a32af444c0e:string:S011",
-        "examinationDate": "63a19540-2238-48c6-9b71-70ae27d534ec:string:2019-05-05T00:00:00+08:00",
-        "academicYear": "16c42fbb-6f65-44e3-b429-240b9b4292f4:string:9999",
-        "semester": "77e4134e-b88d-4109-a284-4adef3ae7a23:string:AY9998/9999 Dummy1 Semester (Main)"
+        "name": "a8287db4-9868-4ce4-a603-a0a5956becf4:string:Dummy11 subject name",
+        "grade": "7792f8c4-6994-4ecd-a217-aada7b2bb8cf:string:A",
+        "courseCredit": "89ce3d89-b514-4548-8a77-bb499ae3ba5e:string:5",
+        "courseCode": "096054e4-dedf-421d-b351-b72a2a841ddf:string:S011",
+        "examinationDate": "7c56a429-1f5c-40be-84ca-842295a443c3:string:2019-05-06T00:00:00+08:00",
+        "academicYear": "990834d3-14ec-4a6f-ada3-52d7a2c9b623:string:9999",
+        "semester": "bf3d864c-44fa-42e4-bf84-1f768b399598:string:AY9998/9999 Dummy1 Semester (Main)"
       },
       {
-        "name": "2c04813d-747d-4559-957e-c7065cec21ea:string:Dummy12 subject name",
-        "grade": "1b1b9a66-5776-4da0-802f-37fb1bebb5f8:string:A",
-        "courseCredit": "fb29024b-7c38-4d4c-b938-253f957d4bda:string:5",
-        "courseCode": "65da8502-47bf-4d15-8080-f10c2da77172:string:S012",
-        "examinationDate": "b543845e-1bee-4fb1-9311-3cb081ceda63:string:2019-05-05T00:00:00+08:00",
-        "academicYear": "6005ad5b-cbc7-4b7b-9f38-5fc7f346bf96:string:9999",
-        "semester": "7fea2758-12c2-433e-b63a-8a85fe4fcbf7:string:AY9998/9999 Dummy1 Semester (Main)"
+        "name": "dd21b733-cd64-48f9-97be-1f1d66160949:string:Dummy12 subject name",
+        "grade": "46f37220-d9c9-4bed-b7c6-fa9cb90c29f5:string:A",
+        "courseCredit": "0c722daf-0d46-4365-9d3b-bde88243aff9:string:5",
+        "courseCode": "c53ff4aa-03e4-4c31-9cd0-2e3818770242:string:S012",
+        "examinationDate": "dcb6231b-037c-4008-ac5e-60be1317c165:string:2019-05-06T00:00:00+08:00",
+        "academicYear": "fa61af49-870b-4b05-b0e1-f874e6184e42:string:9999",
+        "semester": "fc3ff17c-b912-4b0e-af64-b37fb27ad97d:string:AY9998/9999 Dummy1 Semester (Main)"
       },
       {
-        "name": "378a92d5-8d4f-4759-9aa5-b61bc262e5af:string:Dummy13 subject name",
-        "grade": "12a9a98a-c2d0-4833-86eb-a7feecdf5124:string:A",
-        "courseCredit": "e7cb7a48-ef60-42e1-b132-d0626d6d3da9:string:5",
-        "courseCode": "0d7a7bed-35d8-4f11-8fe7-39ed6b871f85:string:S013",
-        "examinationDate": "ddea4b2d-55c9-4bd4-b7dc-dae9c65a84d3:string:2019-05-05T00:00:00+08:00",
-        "academicYear": "a22425dc-71ff-4023-85e5-30efb173c6a0:string:9999",
-        "semester": "ff28b966-1652-4eb2-b80c-66e00e1d2ee0:string:AY9998/9999 Dummy1 Semester (Main)"
+        "name": "fdf01298-465a-4d3d-8a76-a3afae2dd282:string:Dummy13 subject name",
+        "grade": "e8fcb3e7-0ebe-451e-973c-d5d99d8bc608:string:A",
+        "courseCredit": "35a9a2b8-6a04-425a-b273-c54bd15e656f:string:5",
+        "courseCode": "efdf8a90-df67-438c-9314-68918b2bdfbe:string:S013",
+        "examinationDate": "60c6163a-8d03-41fd-acce-f5f61789886d:string:2019-05-06T00:00:00+08:00",
+        "academicYear": "7abd6d86-b87a-4795-8594-b6abb812305b:string:9999",
+        "semester": "3e362deb-55ad-4d0b-8198-74363ba55455:string:AY9998/9999 Dummy1 Semester (Main)"
       },
       {
-        "name": "87980aea-29b3-4f6d-812a-6fa58d9e20c5:string:Dummy14 subject name",
-        "grade": "7d64dcf0-cc6c-4b16-932c-f87fa62db470:string:A",
-        "courseCredit": "b6554113-6ef5-44dd-bc60-592fc1e8de9d:string:5",
-        "courseCode": "2ed4cfc4-4797-48e7-977d-f18135ae01aa:string:S014",
-        "examinationDate": "241492bf-5903-44fb-8f33-0154d256bac4:string:2019-05-05T00:00:00+08:00",
-        "academicYear": "0024a63a-fd12-49a3-ac92-50300396fcdd:string:9999",
-        "semester": "d123b65c-dff4-4165-b6c7-35388d389cfd:string:AY9998/9999 Dummy1 Semester (Main)"
+        "name": "26c22180-1e08-4a18-b2e4-6214c980203c:string:Dummy14 subject name",
+        "grade": "85a6c4a9-338b-4212-bc4e-a6dac55d6d8f:string:A",
+        "courseCredit": "adfc43b5-3d68-424d-80e1-31cb808654e3:string:5",
+        "courseCode": "49538a68-9fde-4906-94d5-0426e34a155a:string:S014",
+        "examinationDate": "f1a24f98-d50f-4981-97ab-836f351c84e1:string:2019-05-06T00:00:00+08:00",
+        "academicYear": "bf5b5c12-5408-45e5-bde1-f890a802e18e:string:9999",
+        "semester": "435df979-ed98-4b6d-a5e8-5111150fc3d3:string:AY9998/9999 Dummy1 Semester (Main)"
       },
       {
-        "name": "0f69609a-aa70-4abe-9232-6a37105a7ddd:string:Dummy21 subject name",
-        "grade": "2d86b639-6f33-4377-aa65-31fbc1d9a02d:string:A",
-        "courseCredit": "0704329f-36a0-4646-9ec5-7973fac67635:string:5",
-        "courseCode": "adce8473-51da-42bd-8259-1c4207a5c4b2:string:S021",
-        "examinationDate": "8daafd6c-1704-476d-9bf5-3da944ec49e0:string:2019-05-05T00:00:00+08:00",
-        "academicYear": "b8e393a9-88d9-422e-917a-bbd64dd843fb:string:9999",
-        "semester": "644185cc-8348-4222-a254-f3b9a6f36027:string:AY9998/9999 Dummy2 Semester (Main)"
+        "name": "5c2bb967-2b48-4f50-bb21-0d30ccf0bec9:string:Dummy21 subject name",
+        "grade": "f1a17e58-4655-458e-9d41-c810cd0f9de3:string:A",
+        "courseCredit": "95c01a9b-cf7a-4f64-9a4d-7b085dd6ae27:string:5",
+        "courseCode": "4eb18b18-ebc7-4131-a5c0-581511e7958f:string:S021",
+        "examinationDate": "0b66f3e9-8ef8-4a0f-b903-bf92b6bfa456:string:2019-05-06T00:00:00+08:00",
+        "academicYear": "8a0d23cf-6adc-425c-98b7-97e01408693f:string:9999",
+        "semester": "4a1248f2-b887-457b-99a9-ae1e4fec4054:string:AY9998/9999 Dummy2 Semester (Main)"
       },
       {
-        "name": "ad33b611-4ab2-4e28-b654-552536fb7118:string:Dummy22 subject name",
-        "grade": "35d7ca2b-bfcc-4ca5-9587-4b567bac61c0:string:A",
-        "courseCredit": "3ca7e080-43a3-4039-932b-04cb42c1d4d1:string:5",
-        "courseCode": "b8e2e09e-3fb6-443d-b764-036b005cf6b3:string:S022",
-        "examinationDate": "473edd8c-376a-4b33-bef6-60d11c8d9a1d:string:2019-05-05T00:00:00+08:00",
-        "academicYear": "d150bc72-4db9-494c-b257-a2471f985473:string:9999",
-        "semester": "2cb789d0-bf59-4505-93e1-b556074da2b2:string:AY9998/9999 Dummy2 Semester (Main)"
+        "name": "7ccffa0e-5c52-47c6-8a4c-1a128124248d:string:Dummy22 subject name",
+        "grade": "b29a8293-412b-4f72-a0d7-d6daca6a7d1d:string:A",
+        "courseCredit": "cbc2d0fc-bfa1-4a9e-adcd-9b42bb65696b:string:5",
+        "courseCode": "56f1ee12-f883-4bf2-9786-7ac220f878d6:string:S022",
+        "examinationDate": "6f13ee86-6fab-4b3b-bb91-3e020966e3d1:string:2019-05-06T00:00:00+08:00",
+        "academicYear": "8f101599-027f-48c0-b463-af250d332517:string:9999",
+        "semester": "e9c289dc-1eb4-4021-a3d6-b8440ef83df0:string:AY9998/9999 Dummy2 Semester (Main)"
       },
       {
-        "name": "f68d0cb1-5bb5-46a8-86ea-c8d907fb5475:string:Dummy23 subject name",
-        "grade": "93058f78-79a9-49ee-b5e4-e89f099d3443:string:A",
-        "courseCredit": "93d8998d-0ba6-40a0-9726-a273114945f9:string:5",
-        "courseCode": "601b76da-0c42-45c3-bbc7-16830ae67a26:string:S023",
-        "examinationDate": "24e03f58-b947-4c61-87a1-c494157bbd71:string:2019-05-05T00:00:00+08:00",
-        "academicYear": "2fea9c5d-ccb0-45f9-928b-714a570e73f4:string:9999",
-        "semester": "be095ac5-5897-4df5-a6f8-eba1e81cc8c0:string:AY9998/9999 Dummy2 Semester (Main)"
+        "name": "844c3c99-7188-4e2c-b438-a02d8dd55015:string:Dummy23 subject name",
+        "grade": "590a891f-f271-4d22-84f7-af7c0602d732:string:A",
+        "courseCredit": "4b7a67f4-c6df-45e1-bf9d-72b5f9b70e14:string:5",
+        "courseCode": "0979e38e-3793-4c47-81c8-d84a6f8feece:string:S023",
+        "examinationDate": "491f854a-7316-4348-8a73-9dd7ab342b88:string:2019-05-06T00:00:00+08:00",
+        "academicYear": "1b4c1c2c-5eef-42b4-8ec0-7070454cbe46:string:9999",
+        "semester": "906a5be1-04f1-4069-af4a-14c448f008bb:string:AY9998/9999 Dummy2 Semester (Main)"
       },
       {
-        "name": "a083e5b9-bb48-4552-a36d-4f581553a23e:string:Dummy24 subject name",
-        "grade": "85c5d35a-4e6c-457f-b678-948f22931285:string:A",
-        "courseCredit": "78da91c6-04cc-417e-849e-3c1c16a4c2d7:string:5",
-        "courseCode": "3831f6d0-1ee4-465c-920f-dff99248dfe4:string:S024",
-        "examinationDate": "a4919b20-13b8-4034-8919-ebd1f8255ea1:string:2019-05-05T00:00:00+08:00",
-        "academicYear": "246ec4aa-3f0b-4019-8710-21a40242ea64:string:9999",
-        "semester": "21012686-803f-49a4-b7ac-70f14309d581:string:AY9998/9999 Dummy2 Semester (Main)"
+        "name": "9eeefe33-4d92-483a-9dfb-cab10c735058:string:Dummy24 subject name",
+        "grade": "b2d89385-43a9-4c56-9cab-1bb23fc83ea1:string:A",
+        "courseCredit": "26cdae26-ca39-405a-9490-822d4fe2009f:string:5",
+        "courseCode": "7fc31236-46ba-45da-a1a6-b8362b8eb3e3:string:S024",
+        "examinationDate": "a5093a85-47f5-42a1-918d-ac5b8076979c:string:2019-05-06T00:00:00+08:00",
+        "academicYear": "6bc8025f-4451-4d0d-a90e-f05d34057c93:string:9999",
+        "semester": "4f4a3024-9fae-49f9-a96c-3b34050b48ed:string:AY9998/9999 Dummy2 Semester (Main)"
       }
     ],
     "additionalData": {
-      "addressBlockHouseNumber": "645f7aab-35e8-4c99-a75c-11a804b54d48:string:999",
-      "addressUnitNumber": "3d7b89c7-2bef-40ee-b21c-124983f8a2b8:string:01",
-      "addressFloorNumber": "0158ecf1-d12e-4112-9484-4d5cb951f68d:string:01",
-      "addressStreetName": "36ebe66f-6116-442c-b827-b12e68d32c50:string:Dummy street name",
-      "addressCountry": "97797571-32b6-4876-ab2b-0f89ac79e996:string:Singapore",
-      "addressPostalCode": "f811cab5-6a9c-4aef-ba57-85045441f3ee:string:999999",
-      "isMerit": "f7285bd1-2f54-4846-8a6d-57bc955ea268:boolean:true",
-      "isExempted": "de4de926-483e-4c28-995c-08c5d611c1d7:boolean:true",
-      "courseType": "a82e77bb-38f0-4320-bf09-da6aa1779f0c:string:Dummy course type",
-      "academicStanding": "9911b6ba-8177-4125-a928-d9ee754bcbd3:string:Completed course of study"
+      "addressBlockHouseNumber": "22e22c9b-5da7-42c5-822d-a0c38ca6be27:string:999",
+      "addressUnitNumber": "232a2485-b217-40c4-917a-5c77e9e27446:string:01",
+      "addressFloorNumber": "52c57d92-f43b-4648-968f-b3287253ec79:string:01",
+      "addressStreetName": "30723e36-92b5-4052-b27e-85552e2b6bee:string:Dummy street name",
+      "addressCountry": "d1f037a4-36bd-4a42-9db1-598f56cb1fd2:string:Singapore",
+      "addressPostalCode": "961bd148-7d51-46c6-929d-1fde8761a1e8:string:999999",
+      "isMerit": "b8d18a4c-4c2f-4593-9415-a47a26981384:boolean:true",
+      "isExempted": "4d88d660-0555-4d67-aeba-b63ce30c022d:boolean:true",
+      "courseType": "17d18477-08e3-4556-b9ff-1c4a17268996:string:Dummy course type",
+      "academicStanding": "c7d774b6-7ae3-47fa-bf91-f6dd153692d2:string:Completed course of study"
     }
   },
   "privacy": {},
   "signature": {
     "type": "SHA3MerkleProof",
-    "targetHash": "44af6771e88b7b60521b19c20c8512517411ad6c4777a7d357b41946588d596f",
+    "targetHash": "a2ce268896d5f35f318146d68af8fdaa759cb422e552f0ffd979438bb57426f0",
     "proof": [
-      "3a020c8105f24f2e0d1fa12e26fdb5de0be68be74ce44ffe58390da1e4b2921d",
-      "5ef93b8643ec44add0bdd29561bd0f45d4b90647f56d908e94f4bf9442532c29"
+      "848b4b0d7c41e09d2acdd70fbb08be5d27a5f5bc75bae8d2ab455aad16eacefa",
+      "5982d1c4032cdb31ef14aa60cc872487ddfb6263f90f0b99e6834cd957e14400",
+      "ff92b9da881c89df084872db504993f59bd6ca317798bb31b1f197f4a550cb12",
+      "66ac67b7d55ba85030c2edd544a3adf07d73fe33a590b9cbdcf0c38d6977fe33",
+      "ffbc55be2b912fae294e9e268b35ba62f5773b633fa70b51d40d9633b94fd28e"
     ],
-    "merkleRoot": "6ba3d6d55a739861cbb25d2a4097635d6c9dade1ee7e8940628784df413b99d3"
+    "merkleRoot": "1604ab57369877e3abde911895e71297e879e7be1922ca7c9041ca6fca99fa0e"
   }
 }
