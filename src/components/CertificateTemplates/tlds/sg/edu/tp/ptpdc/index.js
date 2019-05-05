@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
 
 import TPCert from "../ptmc/certificate";
-import ApprovedAddresses from "../common";
+import ApprovedAddresses from "../common/approvedAddresses";
 
 const templates = [
   {

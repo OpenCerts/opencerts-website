@@ -37,7 +37,7 @@ const PartTimeExamResults = ({ certificate }) => {
       <div className="row">
         <div className="col-3">Cumulative Grade Point Average</div>
         <div className="col-1">:</div>
-        <div className="col-8">{certificate.cumulativeScore.toFixed(1)}</div>
+        <div className="col-8">{certificate.cumulativeScore.toFixed(2)}</div>
       </div>
       <div className="row">
         <div className="col-3">Certificate/Diploma Awarded</div>
