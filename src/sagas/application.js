@@ -2,6 +2,17 @@ import { put, select, take, takeEvery } from "redux-saga/effects";
 import { getNetwork, getNetworkPending, types } from "../reducers/application";
 import { setNewWeb3, getWeb3 } from "../services/web3";
 
+export function matchNetwork(networkId) {
+  const networkIdVerbose = {
+    1: "Main",
+    2: "Morden",
+    3: "Ropsten",
+    4: "Rinkeby",
+    42: "Kovan"
+  };
+  return networkIdVerbose[networkId] || `Custom Network: ${networkId}`;
+}
+
 export function* getSelectedWeb3(getNew = false) {
   const networkPending = yield select(getNetworkPending);
   if (networkPending && !getNew) {
@@ -17,28 +28,8 @@ export function* updateNetworkId() {
   try {
     const web3 = yield getSelectedWeb3(true);
     const networkId = yield web3.eth.net.getId();
+    const networkIdVerbose = matchNetwork(networkId);
 
-    let networkIdVerbose;
-
-    switch (networkId) {
-      case 1:
-        networkIdVerbose = "Main";
-        break;
-      case 2:
-        networkIdVerbose = "Morden";
-        break;
-      case 3:
-        networkIdVerbose = "Ropsten";
-        break;
-      case 4:
-        networkIdVerbose = "Rinkeby";
-        break;
-      case 42:
-        networkIdVerbose = "Kovan";
-        break;
-      default:
-        networkIdVerbose = `Custom Network: ${networkId}`;
-    }
     yield put({
       type: types.UPDATE_NETWORK_ID_SUCCESS,
       payload: {
