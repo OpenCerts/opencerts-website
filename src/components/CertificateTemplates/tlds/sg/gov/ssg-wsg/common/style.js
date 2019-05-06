@@ -96,6 +96,11 @@ export const transFooterLogoStyle = {
   height: "auto"
 };
 
+export const footerLogoStyleSOHR = {
+  width: "100%",
+  height: "auto"
+};
+
 export const confermentTextStyle = {
   textTransform: "uppercase"
 };
