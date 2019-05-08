@@ -2,7 +2,7 @@ import dynamic from "template-utils/dynamic";
 import { addDirToTemplatePath } from "template-utils/addDirToTemplatePath";
 
 const FQ001 = dynamic(() =>
-  import("./FQ-001" /* webpackChunkName: "SSGTemplates" */)
+  import("./FQ-001"  /* webpackChunkName: "SSGTemplates" */)
 );
 
 const SFFQ002 = dynamic(() =>
