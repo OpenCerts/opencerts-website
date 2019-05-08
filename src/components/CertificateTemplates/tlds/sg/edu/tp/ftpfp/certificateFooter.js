@@ -1,11 +1,18 @@
 import PropTypes from "prop-types";
-import { IMG_SIGN_TP_REGISTRAR, IMG_SIGN_TP_DIR_HSS } from "../common/images";
+import {
+  IMG_SIGN_TP_REGISTRAR,
+  IMG_SIGN_TP_DIR_HSS,
+  IMG_SIGN_TP_DIR_AA
+} from "../common/images";
 
 const CertificateFooter = ({ certificate }) => {
-  const Director = () => {
-    const issuedYear = new Date(certificate.issuedOn).getFullYear();
+  const graduationDate = new Date(certificate.graduationDate).getFullYear();
 
-    if (issuedYear <= 2017) {
+  const directorSignature =
+    graduationDate <= 2017 ? IMG_SIGN_TP_DIR_AA : IMG_SIGN_TP_DIR_HSS;
+
+  const DirectorDesignation = () => {
+    if (graduationDate <= 2017) {
       return <span>Centre Director</span>;
     }
 
@@ -62,7 +69,7 @@ const CertificateFooter = ({ certificate }) => {
         <div className="col-6">&nbsp;</div>
         <div className="col-3">
           <div className="signature-container">
-            <img src={IMG_SIGN_TP_DIR_HSS} className="director-sign" />
+            <img src={directorSignature} className="director-sign" />
           </div>
         </div>
         <div className="col-3">
@@ -76,7 +83,7 @@ const CertificateFooter = ({ certificate }) => {
         <div className="col-6">&nbsp;</div>
         <div className="col-3">
           <div className="signature-container director-sign-label">
-            <Director />
+            <DirectorDesignation />
           </div>
         </div>
         <div className="col-3">
