@@ -45,6 +45,30 @@ const SOA002 = dynamic(() =>
 const SOA003 = dynamic(() =>
   import("./SOA-003" /* webpackChunkName: "SSGTemplates" */)
 );
+const SOAReprint = dynamic(() =>
+  import("./SOA_Reprint" /* webpackChunkName: "SSGTemplates" */)
+);
+
+const SOAHR01 = dynamic(() =>
+  import("./SOA-HR-01" /* webpackChunkName: "SSGTemplates" */)
+);
+
+const SFSOAHR01 = dynamic(() =>
+  import("./SF_SOA_HR_01" /* webpackChunkName: "SSGTemplates" */)
+);
+
+const SFSOA001 = dynamic(() =>
+  import("./SF_SOA_001" /* webpackChunkName: "SSGTemplates" */)
+);
+
+const SFSOAES001 = dynamic(() =>
+  import("./SF_SOA_ES_001" /* webpackChunkName: "SSGTemplates" */)
+);
+
+const SOAFB001 = dynamic(() =>
+  import("./SOA-FB-001" /* webpackChunkName: "SSGTemplates" */)
+);
+
 const SOAIT001 = dynamic(() =>
   import("./SOA-IT-001" /* webpackChunkName: "SSGTemplates" */)
 );
@@ -80,6 +104,21 @@ const templates = {
   "SOA-001": SOA001,
   "SOA-002": SOA002,
   "SOA-003": SOA003,
+  "SOA-HR-01": SOAHR01,
+  "SOA-FB-001": SOAFB001,
+  SF_SOA_FB_001: SOAFB001,
+  SF_SOA_001: SFSOA001,
+  SOA_Reprint: SOAReprint,
+  "SOA-HR-02": SOAHR01,
+  "SOA-HR-03": SOAHR01,
+  "SOA-HR-04": SOAHR01,
+  "SOA-HR-05": SOAHR01,
+  SF_SOA_HR_01: SFSOAHR01,
+  SF_SOA_HR_02: SFSOAHR01,
+  SF_SOA_HR_03: SFSOAHR01,
+  SF_SOA_HR_04: SFSOAHR01,
+  SF_SOA_HR_05: SFSOAHR01,
+  SF_SOA_ES_001: SFSOAES001,
   "SOA-IT-001": SOAIT001,
   SF_SOA_IT_001: SFSOAIT001,
   "SOA-MF-01": SOAMF01,
