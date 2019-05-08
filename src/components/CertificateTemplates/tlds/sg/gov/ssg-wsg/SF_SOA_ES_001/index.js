@@ -1,27 +1,26 @@
 import PropTypes from "prop-types";
 import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
-
-import TPCert from "./certificate";
-import ApprovedAddresses from "../common/approvedAddresses";
+import { approvedAddresses } from "../common";
+import SSGCert from "./certificate";
 
 const templates = [
   {
     id: "certificate",
     label: "Certificate",
-    template: TPCert
+    template: SSGCert({})
   }
 ];
 
-const ftdipplus = ({ certificate }) => (
+const SFSOAES001 = () => (
   <MultiCertificateRenderer
-    certificate={certificate}
     templates={templates}
-    whitelist={ApprovedAddresses}
+    whitelist={approvedAddresses}
   />
 );
 
-ftdipplus.propTypes = {
+SFSOAES001.displayName = "SFSOAES001 Template";
+SFSOAES001.propTypes = {
   certificate: PropTypes.object.isRequired
 };
 
-export default ftdipplus;
+export default SFSOAES001;
