@@ -180,7 +180,9 @@ export const renderAwardTextSOA = certificate => (
       style={{ marginTop: "1rem", marginBottom: "3rem", paddingLeft: "0px" }}
     >
       <p style={styles.awardTextStyle} className="RobotoMedium">
-        {get(certificate, "additionalData.certCode").startsWith("SF_SOA_ES_001")
+        {get(certificate, "additionalData.certCode").includes(
+          "SF_SOA_ES_001"
+        ) || get(certificate, "additionalData.certCode").includes("SOA-ES-001")
           ? "for successful attainment of the required competencies in"
           : "for successful attainment of the following industry approved competencies"}
       </p>
@@ -268,8 +270,11 @@ export const renderAwardTextSOAHR = certificate => (
     >
       <p style={styles.awardTextStyle} className="RobotoMedium">
         for successfully meeting the requirements of the above programme and
-        attainment of the competencies in the following modules of the Human
-        Resource WSQ Framework:
+        attainment of the competencies in the following modules of the
+        {get(certificate, "additionalData.certCode").includes("SOA_SV_001")
+          ? " Service Excellence"
+          : " Human Resource"}{" "}
+        WSQ Framework:
       </p>
     </div>
     {certificate.transcript.map(item => (
