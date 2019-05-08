@@ -2,7 +2,7 @@ import { Selector } from "testcafe";
 
 fixture("ROPSTEN : Skillsfuture Singapore").page`http://localhost:3000`;
 
-const Certificate = "./SOA-FB-01.opencert";
+const Certificate = "./SF_SOA_ES_001.opencert";
 
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
@@ -13,7 +13,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("SOAFB001 certificate is rendered correctly", async t => {
+test("SFSOAES001 certificate is rendered correctly", async t => {
   // Uploads certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
@@ -26,7 +26,7 @@ test("SOAFB001 certificate is rendered correctly", async t => {
     "is awarded to",
     "A",
     "ID No: S0000000A",
-    "for successful attainment of the following industry approved competencies",
+    "for successful attainment of the required competencies in",
     "HR-PRB-503E-1 Develop strategies for total remuneration",
     "at SINGAPORE NATIONAL EMPLOYERS FEDERATION",
     "01 Dec 2018"
