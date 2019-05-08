@@ -11,11 +11,14 @@ import {
   SOR_TOP_HEADER,
   SOR_TITLE,
   SOR_SUBJECT_REM_RIGHT_PAD,
-  SOR_TRANSCRIPT_FONT_SIZE_9,
+  SOR_SUBJECT_MARGIN_ALPHABET,
+  SOR_SUBJECT_MARGIN_NUMERICAL,
   SOR_BOLD_TEXT,
   SOR_CENTER_ALIGN,
   EXPLANATORY_PAGE_SIZE,
-  EXPLANATORY_TITLE
+  EXPLANATORY_TITLE,
+  SOR_30_WIDTH,
+  SOR_50_WIDTH
 } from "./style";
 
 import { RENDEREXPLANATORYNOTES_NA } from "./explnotes_na_detail";
@@ -25,6 +28,12 @@ import { RENDEREXPLANATORYNOTES_O } from "./explnotes_o_detail";
 import { RENDEREXPLANATORYNOTES_NT } from "./explnotes_nt_detail";
 
 import { RENDEREXPLANATORYNOTES_N } from "./explnotes_n_detail";
+
+import { RENDEREXPLANATORYNOTES_A } from "./explnotes_a_detail";
+
+import { RENDEREXPLANATORYNOTES_A2 } from "./explnotes_a2_detail";
+
+import { RENDEREXPLANATORYNOTES_A3 } from "./explnotes_a3_detail";
 
 export const SOR_TRANSCRIPT_FONT_SIZE_12 = {
   fontSize: "12px",
@@ -117,6 +126,12 @@ export const GETEXPLANATORYNOTES = examlvl => {
     explanatorynotes = RENDEREXPLANATORYNOTES_NT();
   } else if (examlvl === "GCEN") {
     explanatorynotes = RENDEREXPLANATORYNOTES_N();
+  } else if (examlvl === "GCEA") {
+    explanatorynotes = RENDEREXPLANATORYNOTES_A();
+  } else if (examlvl === "GCEA2") {
+    explanatorynotes = RENDEREXPLANATORYNOTES_A2();
+  } else if (examlvl === "GCEA3") {
+    explanatorynotes = RENDEREXPLANATORYNOTES_A3();
   }
 
   return explanatorynotes;
@@ -177,7 +192,10 @@ export const GETSUBJGRADE = (subjgrade, examyr, examlvltype) => {
       subjgrade === "B" ||
       subjgrade === "C" ||
       subjgrade === "D") &&
-    (examlvltype === "A" || examlvltype === "A2" || examlvltype === "NT")
+    (examlvltype === "A" ||
+      examlvltype === "A2" ||
+      examlvltype === "A3" ||
+      examlvltype === "NT")
   ) {
     if (subjgrade === "A") {
       alphaRender = "A";
@@ -192,7 +210,7 @@ export const GETSUBJGRADE = (subjgrade, examyr, examlvltype) => {
     numericRender = "-";
   } else if (
     (subjgrade === "F" || subjgrade === "O" || subjgrade === "E") &&
-    (examlvltype === "A" || examlvltype === "A2")
+    (examlvltype === "A" || examlvltype === "A2" || examlvltype === "A3")
   ) {
     if (subjgrade === "F") {
       alphaRender = "F";
@@ -281,6 +299,7 @@ export const GETSUBJGRADE = (subjgrade, examyr, examlvltype) => {
     subjgrade === "ABSENT" &&
     (examlvltype === "A" ||
       examlvltype === "A2" ||
+      examlvltype === "A3" ||
       examlvltype === "N" ||
       examlvltype === "NA" ||
       examlvltype === "NT" ||
@@ -292,7 +311,8 @@ export const GETSUBJGRADE = (subjgrade, examyr, examlvltype) => {
     subjgrade === "MERIT" &&
     ((examlvltype === "O" && examyr === 2001) ||
       examlvltype === "A" ||
-      examlvltype === "A2")
+      examlvltype === "A2" ||
+      examlvltype === "A3")
   ) {
     alphaRender = "MERIT";
     numericRender = "-";
@@ -306,7 +326,8 @@ export const GETSUBJGRADE = (subjgrade, examyr, examlvltype) => {
     subjgrade === "PASS" &&
     ((examlvltype === "O" && examyr === 2001) ||
       examlvltype === "A" ||
-      examlvltype === "A2")
+      examlvltype === "A2" ||
+      examlvltype === "A3")
   ) {
     alphaRender = "PASS";
     numericRender = "-";
@@ -318,6 +339,7 @@ export const GETSUBJGRADE = (subjgrade, examyr, examlvltype) => {
     ((examlvltype === "O" && examyr === 2001) ||
       examlvltype === "A" ||
       examlvltype === "A2" ||
+      examlvltype === "A3" ||
       examlvltype === "NT")
   ) {
     alphaRender = "UNGRADED";
@@ -340,6 +362,7 @@ export const GETSUBJGRADE = (subjgrade, examyr, examlvltype) => {
   } else if (
     subjgrade === "T" &&
     (examlvltype === "A2" ||
+      examlvltype === "A3" ||
       examlvltype === "N" ||
       examlvltype === "NA" ||
       examlvltype === "NT" ||
@@ -350,12 +373,25 @@ export const GETSUBJGRADE = (subjgrade, examyr, examlvltype) => {
   } else if (subjgrade === "U" && examlvltype === "A2") {
     alphaRender = "U";
     numericRender = "-";
+  } else if (subjgrade === "S" && examlvltype === "A3") {
+    alphaRender = "S";
+    numericRender = "-";
+  } else if (subjgrade === "DIST" && examlvltype === "A3") {
+    alphaRender = "DIST";
+    numericRender = "-";
   }
 
+  if (examlvltype === "A3") {
+    return <span>{alphaRender}</span>;
+  }
   return (
     <div className="row">
-      <div className="col-md-6">{alphaRender}</div>
-      <div className="col-md-6">{numericRender}</div>
+      <div className="col-md-6" style={SOR_CENTER_ALIGN}>
+        {alphaRender}
+      </div>
+      <div className="col-md-6" style={SOR_CENTER_ALIGN}>
+        {numericRender}
+      </div>
     </div>
   );
 };
@@ -447,10 +483,275 @@ export const GETSPAPERGRADE = (papergrade, examyr, examlvl) => {
     }
   }
 
+  if (examlvl === "GCEA" && examyr >= 2006) {
+    return (
+      <div className="row">
+        <div className="col-md-6">{papernumericRender}</div>
+        <div className="col-md-6">{paperalphaRender}</div>
+      </div>
+    );
+  }
   return (
     <div className="row">
-      <div className="col-md-6">{paperalphaRender}</div>
-      <div className="col-md-6">{papernumericRender}</div>
+      <div className="col-md-6" style={SOR_CENTER_ALIGN}>
+        {paperalphaRender}
+      </div>
+      <div className="col-md-6" style={SOR_CENTER_ALIGN}>
+        {papernumericRender}
+      </div>
+    </div>
+  );
+};
+
+export const EXAMININGAUTHORITYANDLANGUAGEMEDIUMTITLE = (
+  examlvltype,
+  examyr
+) => {
+  if (
+    (examlvltype === "A" && (examyr >= 2002 && examyr <= 2005)) ||
+    examlvltype === "A2"
+  ) {
+    return (
+      <div className="row">
+        <div className="col-md-6">
+          LANGUAGE <br />
+          MEDIUM
+        </div>
+      </div>
+    );
+  }
+  if (examlvltype === "A3") {
+    return (
+      <div className="row">
+        <div className="col-md-2" style={SOR_50_WIDTH}>
+          EXAMINING <br />
+          AUTHORITY
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="row">
+      <div className="col-md-6">
+        LANGUAGE <br />
+        MEDIUM
+      </div>
+      <div className="col-md-6">
+        EXAMINING <br />
+        AUTHORITY
+      </div>
+    </div>
+  );
+};
+
+export const EXAMININGAUTHORITYANDLANGUAGEMEDIUMSTAR = (
+  examlvltype,
+  examyr
+) => {
+  if (
+    (examlvltype === "A" && (examyr >= 2002 && examyr <= 2005)) ||
+    examlvltype === "A2" ||
+    examlvltype === "A3"
+  ) {
+    return (
+      <div className="row">
+        <div className="col-md-6">***************</div>
+      </div>
+    );
+  }
+  return (
+    <div className="row">
+      <div className="col-md-6">***************</div>
+      <div className="col-md-6">***************</div>
+    </div>
+  );
+};
+
+export const EXAMININGAUTHORITYANDLANGUAGEMEDIUMDATA = (
+  examlvltype,
+  examyr,
+  languagemedium,
+  examiningauthority
+) => {
+  if (
+    (examlvltype === "A" && (examyr >= 2002 && examyr <= 2005)) ||
+    examlvltype === "A2"
+  ) {
+    return (
+      <div className="row">
+        <div className="col-md-6">{languagemedium}</div>
+      </div>
+    );
+  }
+  if (examlvltype === "A3") {
+    return <span>{examiningauthority}</span>;
+  }
+  return (
+    <div className="row">
+      <div className="col-md-6">{languagemedium}</div>
+      <div className="col-md-6">{examiningauthority}</div>
+    </div>
+  );
+};
+
+export const EXAMGRADEHEADER = (examlvltype, examyr) => {
+  if (examlvltype === "A3") {
+    return (
+      <div className="row" style={SOR_BOLD_TEXT}>
+        <div className="col-md-4">SUBJECT</div>
+        <div className="col-md-2">LEVEL</div>
+        <div className="col-md-2">GRADE</div>
+        <div className="col-md-2">
+          EXAMINING <br />
+          AUTHORITY
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="row" style={SOR_BOLD_TEXT}>
+      <div className="col-md-4">SUBJECT</div>
+      <div className="col-md-2" style={SOR_CENTER_ALIGN}>
+        <div className="row">
+          <div className="col-md-12">GRADE</div>
+        </div>
+        <div className="row">
+          <div className="col-md-6" style={SOR_SUBJECT_MARGIN_ALPHABET}>
+            ALPHABETICAL
+          </div>
+          <div className="col-md-6" style={SOR_SUBJECT_MARGIN_NUMERICAL}>
+            NUMERICAL
+          </div>
+        </div>
+      </div>
+      <div className="col-md-2" style={SOR_30_WIDTH}>
+        LEVEL
+      </div>
+      <div className="col-md-4">
+        {EXAMININGAUTHORITYANDLANGUAGEMEDIUMTITLE(examlvltype, examyr)}
+      </div>
+    </div>
+  );
+};
+
+export const EXAMGRADESTAR = (examlvltype, examyr) => {
+  if (examlvltype === "A3") {
+    return (
+      <div className="row">
+        <div className="col-md-4">*****************************</div>
+        <div className="col-md-2">*******</div>
+        <div className="col-md-2">*************</div>
+        <div className="col-md-2">*************</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="row" style={SOR_BOLD_TEXT}>
+      <div className="col-md-4">*****************************</div>
+      <div className="col-md-2" style={SOR_CENTER_ALIGN}>
+        <div className="row">
+          <div className="col-md-6">*******</div>
+          <div className="col-md-6">*******</div>
+        </div>
+      </div>
+      <div className="col-md-2" style={SOR_30_WIDTH}>
+        ***************
+      </div>
+      <div className="col-md-4">
+        {EXAMININGAUTHORITYANDLANGUAGEMEDIUMSTAR(examlvltype, examyr)}
+      </div>
+    </div>
+  );
+};
+
+export const SUBJECTGRADE = (
+  examlvltype,
+  grade,
+  level,
+  examyr,
+  langugange,
+  examination
+) => {
+  if (examlvltype === "A3") {
+    return (
+      <div className="row">
+        <div className="col-md-3">{level}</div>
+        <div className="col-md-3">
+          {GETSUBJGRADE(grade, examyr, examlvltype)}
+        </div>
+        <div className="col-md-2">
+          {EXAMININGAUTHORITYANDLANGUAGEMEDIUMDATA(
+            examlvltype,
+            examyr,
+            langugange,
+            examination
+          )}
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="row">
+      <div className="col-md-3">{GETSUBJGRADE(grade, examyr, examlvltype)}</div>
+      <div className="col-md-3" style={SOR_30_WIDTH}>
+        {level}
+      </div>
+      <div className="col-md-6">
+        {EXAMININGAUTHORITYANDLANGUAGEMEDIUMDATA(
+          examlvltype,
+          examyr,
+          langugange,
+          examination
+        )}
+      </div>
+    </div>
+  );
+};
+
+export const PAPERGRADE = (
+  examlvltype,
+  examlvl,
+  papergrade,
+  examyr,
+  langugange,
+  examination
+) => {
+  if (examlvltype === "A3") {
+    return (
+      <div className="row">
+        <div className="col-md-6">
+          {GETSPAPERGRADE(papergrade, examyr, examlvl)}
+        </div>
+
+        <div className="col-md-2">
+          {EXAMININGAUTHORITYANDLANGUAGEMEDIUMDATA(
+            examlvltype,
+            examyr,
+            langugange,
+            examination
+          )}
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="row">
+      <div className="col-md-3">
+        {GETSPAPERGRADE(papergrade, examyr, examlvl)}
+      </div>
+      <div className="col-md-3" style={SOR_30_WIDTH}>
+        -
+      </div>
+      <div className="col-md-6">
+        {EXAMININGAUTHORITYANDLANGUAGEMEDIUMDATA(
+          examlvltype,
+          examyr,
+          langugange,
+          examination
+        )}
+      </div>
     </div>
   );
 };
@@ -624,7 +925,7 @@ export const RENDER_TRANSCRIPT = ({ certificate }, examlvl, examlvltype) => {
     <div className="row" style={SOR_TRANSCRIPT_FONT_SIZE_11} key={trn.name}>
       <div className="col-md-12">
         <div className="row">
-          <div className="col-md-3" style={SOR_SUBJECT_REM_RIGHT_PAD}>
+          <div className="col-md-4" style={SOR_SUBJECT_REM_RIGHT_PAD}>
             {trn.name}
             {trn.pExaminingAgency !== undefined &&
             trn.pExaminingAgency !== trn.examiningAuthority ? (
@@ -636,26 +937,34 @@ export const RENDER_TRANSCRIPT = ({ certificate }, examlvl, examlvltype) => {
               <span />
             )}
           </div>
-          <div className="col-md-3" style={SOR_CENTER_ALIGN}>
-            {GETSUBJGRADE(trn.grade, examyr, examlvltype)}
+          <div className="col-md-8">
+            {SUBJECTGRADE(
+              examlvltype,
+              trn.grade,
+              trn.level,
+              examyr,
+              trn.languageMedium,
+              trn.examiningAuthority
+            )}
           </div>
-          <div className="col-md-2">{trn.level}</div>
-          <div className="col-md-2">{trn.languageMedium}</div>
-          <div className="col-md-2">{trn.examiningAuthority}</div>
         </div>
       </div>
       {trn.subTranscript !== undefined ? (
         <div className="col-md-12">
           <div className="row">
-            <div className="col-md-3">
+            <div className="col-md-4">
               &nbsp;&nbsp;&nbsp;{trn.subTranscript}
             </div>
-            <div className="col-md-3" style={SOR_CENTER_ALIGN}>
-              {GETSPAPERGRADE(trn.paperGrade, examyr, examlvl)}
+            <div className="col-md-8">
+              {PAPERGRADE(
+                examlvltype,
+                examlvl,
+                trn.paperGrade,
+                examyr,
+                trn.languageMedium,
+                trn.examiningAuthority
+              )}
             </div>
-            <div className="col-md-2">-</div>
-            <div className="col-md-2">{trn.languageMedium}</div>
-            <div className="col-md-2">{trn.examiningAuthority}</div>
           </div>
         </div>
       ) : (
@@ -668,7 +977,7 @@ export const RENDER_TRANSCRIPT = ({ certificate }, examlvl, examlvltype) => {
     <div className="row" style={SOR_TRANSCRIPT_FONT_SIZE_12}>
       <div className="col-md-12">
         <div className="row">
-          <div className="col-md-3">&nbsp;</div>
+          <div className="col-md-12">&nbsp;</div>
         </div>
         <div className="row" style={SOR_BOLD_TEXT}>
           <div className="col-md-12">
@@ -676,48 +985,13 @@ export const RENDER_TRANSCRIPT = ({ certificate }, examlvl, examlvltype) => {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-3">&nbsp;</div>
+          <div className="col-md-12">&nbsp;</div>
         </div>
-        <div className="row" style={SOR_BOLD_TEXT}>
-          <div className="col-md-3">SUBJECT</div>
-          <div className="col-md-3" style={SOR_CENTER_ALIGN}>
-            <div className="row">
-              <div className="col-md-12">GRADE</div>
-            </div>
-            <div className="row">
-              <div className="col-md-6" style={SOR_TRANSCRIPT_FONT_SIZE_9}>
-                ALPHABETICAL
-              </div>
-              <div className="col-md-6" style={SOR_TRANSCRIPT_FONT_SIZE_9}>
-                NUMERICAL
-              </div>
-            </div>
-          </div>
-          <div className="col-md-2">LEVEL</div>
-          <div className="col-md-2">
-            LANGUAGE <br />
-            MEDIUM
-          </div>
-          <div className="col-md-2">
-            EXAMINING <br />
-            AUTHORITY
-          </div>
-        </div>
+        {EXAMGRADEHEADER(examlvltype, examyr)}
         <div className="row">&nbsp;</div>
         {transcriptDetails}
         <div className="row">&nbsp;</div>
-        <div className="row">
-          <div className="col-md-3">*****************************</div>
-          <div className="col-md-3" style={SOR_CENTER_ALIGN}>
-            <div className="row">
-              <div className="col-md-6">*******</div>
-              <div className="col-md-6">*******</div>
-            </div>
-          </div>
-          <div className="col-md-2">***************</div>
-          <div className="col-md-2">***************</div>
-          <div className="col-md-2">*************</div>
-        </div>
+        {EXAMGRADESTAR(examlvltype, examyr)}
         <div className="row">&nbsp;</div>
         <div className="row">
           <div className="col-md-12" style={SOR_TRANSCRIPT_FONT_SIZE_12}>

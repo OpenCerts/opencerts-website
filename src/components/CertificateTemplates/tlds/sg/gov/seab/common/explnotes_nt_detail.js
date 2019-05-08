@@ -2,7 +2,12 @@ import PropTypes from "prop-types";
 
 import { EXPLANATORY_CONTENT, EXPLANATORY_FONT_SIZE_13 } from "./style";
 
-import { COMMAN_EXPL_1, COMMAN_EXPL_2, COMMAN_EXPL_3 } from "./explnotes";
+import {
+  COMMAN_EXPL_1,
+  COMMAN_EXPL_2,
+  COMMAN_EXPL_3,
+  COMMAN_EXPL_4
+} from "./explnotes";
 
 export const RENDEREXPLANATORYNOTES_NT = () => (
   <div className="row">
@@ -74,12 +79,7 @@ export const RENDEREXPLANATORYNOTES_NT = () => (
         <div className="col-md-0.5" style={EXPLANATORY_FONT_SIZE_13}>
           7
         </div>
-        <div className="col-md-11" valign="top" style={EXPLANATORY_CONTENT}>
-          This document is issued on condition of your strict compliance with
-          the Examination Instructions and Regulations. You must comply with any
-          direction by the Singapore Examinations and Assessment Board (SEAB) to
-          return this document to SEAB.
-        </div>
+        {COMMAN_EXPL_4()}
       </div>
       <div className="row">
         <div className="col-md-12">&nbsp;</div>

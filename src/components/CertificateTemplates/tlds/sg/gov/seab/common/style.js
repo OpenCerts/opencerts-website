@@ -54,10 +54,6 @@ export const SOR_BOLD_TEXT = {
 export const SOR_CENTER_ALIGN = {
   textAlign: "center"
 };
-export const SOR_TRANSCRIPT_FONT_SIZE_9 = {
-  fontSize: "9px",
-  fontFamily: "Arial"
-};
 // Explanatory Notes CSS
 export const EXPLANATORY_PAGE_SIZE = {
   border: "1px solid black",
@@ -132,4 +128,20 @@ export const EXPLANATORY_MARGIN_LEFT = {
 };
 export const SOR_SUBJECT_REM_RIGHT_PAD = {
   paddingRight: "0px"
+};
+export const SOR_30_WIDTH = {
+  paddingLeft: "30px"
+};
+export const SOR_50_WIDTH = {
+  paddingLeft: "50px"
+};
+export const SOR_SUBJECT_MARGIN_ALPHABET = {
+  marginLeft: "-18px",
+  fontSize: "9px",
+  fontFamily: "Arial"
+};
+export const SOR_SUBJECT_MARGIN_NUMERICAL = {
+  marginLeft: "15px",
+  fontSize: "9px",
+  fontFamily: "Arial"
 };
