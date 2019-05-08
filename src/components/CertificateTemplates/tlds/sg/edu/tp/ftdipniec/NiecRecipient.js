@@ -12,7 +12,8 @@ const NiecRecipient = ({ certificate }) => (
         {certificate.additionalData.addressFloorNumber}{" "}
         {certificate.additionalData.addressUnitNumber}
         <br />
-        {certificate.additionalData.addressCountry}
+        {certificate.additionalData.addressCountry}{" "}
+        {certificate.additionalData.addressPostalCode}
       </div>
 
       <div className="col-5">

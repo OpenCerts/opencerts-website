@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { IMG_SIGN_TP_REGISTRAR } from "./images";
+import { IMG_SIGN_TP_DIR_AA } from "./images";
 
 const TranscriptFooter = ({ certificate }) => (
   <div className="container">
@@ -38,7 +38,7 @@ const TranscriptFooter = ({ certificate }) => (
       <div className="col-8">&nbsp;</div>
       <div className="col-2">
         <div className="signature-container">
-          <img src={IMG_SIGN_TP_REGISTRAR} className="registrar-sign" />
+          <img src={IMG_SIGN_TP_DIR_AA} className="registrar-sign" />
         </div>
       </div>
     </div>

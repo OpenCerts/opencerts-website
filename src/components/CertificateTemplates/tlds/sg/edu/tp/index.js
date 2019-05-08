@@ -17,6 +17,18 @@ const ftpfp = dynamic(() =>
   import("./ftpfp" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
 );
 
+const ptdip = dynamic(() =>
+  import("./ptdip" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
+);
+
+const ptmc = dynamic(() =>
+  import("./ptmc" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
+);
+
+const ptpdc = dynamic(() =>
+  import("./ptpdc" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
+);
+
 // keep it simple and stupid.
 // we will have to add/configure new mapping every year.
 // a bit tedious, but we have full control over which year use what template.
@@ -114,6 +126,14 @@ const templates = {
   "ftdipplus-2028": ftdipplus,
   "ftdipplus-2029": ftdipplus,
 
+  "ftpfp-2005": ftpfp,
+  "ftpfp-2006": ftpfp,
+  "ftpfp-2007": ftpfp,
+  "ftpfp-2008": ftpfp,
+  "ftpfp-2009": ftpfp,
+  "ftpfp-2010": ftpfp,
+  "ftpfp-2011": ftpfp,
+  "ftpfp-2012": ftpfp,
   "ftpfp-2013": ftpfp,
   "ftpfp-2014": ftpfp,
   "ftpfp-2015": ftpfp,
@@ -130,7 +150,90 @@ const templates = {
   "ftpfp-2026": ftpfp,
   "ftpfp-2027": ftpfp,
   "ftpfp-2028": ftpfp,
-  "ftpfp-2029": ftpfp
+  "ftpfp-2029": ftpfp,
+
+  "ptdip-1990": ptdip,
+  "ptdip-1991": ptdip,
+  "ptdip-1992": ptdip,
+  "ptdip-1993": ptdip,
+  "ptdip-1994": ptdip,
+  "ptdip-1995": ptdip,
+  "ptdip-1996": ptdip,
+  "ptdip-1997": ptdip,
+  "ptdip-1998": ptdip,
+  "ptdip-1999": ptdip,
+  "ptdip-2000": ptdip,
+  "ptdip-2001": ptdip,
+  "ptdip-2002": ptdip,
+  "ptdip-2003": ptdip,
+  "ptdip-2004": ptdip,
+  "ptdip-2005": ptdip,
+  "ptdip-2006": ptdip,
+  "ptdip-2007": ptdip,
+  "ptdip-2008": ptdip,
+  "ptdip-2009": ptdip,
+  "ptdip-2010": ptdip,
+  "ptdip-2011": ptdip,
+  "ptdip-2012": ptdip,
+  "ptdip-2013": ptdip,
+  "ptdip-2014": ptdip,
+  "ptdip-2015": ptdip,
+  "ptdip-2016": ptdip,
+  "ptdip-2017": ptdip,
+  "ptdip-2018": ptdip,
+  "ptdip-2019": ptdip,
+  "ptdip-2020": ptdip,
+  "ptdip-2021": ptdip,
+  "ptdip-2022": ptdip,
+  "ptdip-2023": ptdip,
+  "ptdip-2024": ptdip,
+  "ptdip-2025": ptdip,
+  "ptdip-2026": ptdip,
+  "ptdip-2027": ptdip,
+  "ptdip-2028": ptdip,
+  "ptdip-2029": ptdip,
+
+  "ptmc-2010": ptmc,
+  "ptmc-2011": ptmc,
+  "ptmc-2012": ptmc,
+  "ptmc-2013": ptmc,
+  "ptmc-2014": ptmc,
+  "ptmc-2015": ptmc,
+  "ptmc-2016": ptmc,
+  "ptmc-2017": ptmc,
+  "ptmc-2018": ptmc,
+  "ptmc-2019": ptmc,
+  "ptmc-2020": ptmc,
+  "ptmc-2021": ptmc,
+  "ptmc-2022": ptmc,
+  "ptmc-2023": ptmc,
+  "ptmc-2024": ptmc,
+  "ptmc-2025": ptmc,
+  "ptmc-2026": ptmc,
+  "ptmc-2027": ptmc,
+  "ptmc-2028": ptmc,
+  "ptmc-2029": ptmc,
+
+  "ptpdc-2010": ptpdc,
+  "ptpdc-2011": ptpdc,
+  "ptpdc-2012": ptpdc,
+  "ptpdc-2013": ptpdc,
+  "ptpdc-2014": ptpdc,
+  "ptpdc-2015": ptpdc,
+  "ptpdc-2016": ptpdc,
+  "ptpdc-2017": ptpdc,
+  "ptpdc-2018": ptpdc,
+  "ptpdc-2019": ptpdc,
+  "ptpdc-2020": ptpdc,
+  "ptpdc-2021": ptpdc,
+  "ptpdc-2022": ptpdc,
+  "ptpdc-2023": ptpdc,
+  "ptpdc-2024": ptpdc,
+  "ptpdc-2025": ptpdc,
+  "ptpdc-2026": ptpdc,
+  "ptpdc-2027": ptpdc,
+  "ptpdc-2028": ptpdc,
+  "ptpdc-2029": ptpdc
 };
 
 export default addDirToTemplatePath("tp", templates);

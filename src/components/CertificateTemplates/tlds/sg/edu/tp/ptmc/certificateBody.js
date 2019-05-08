@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import CertificateBodyStyles from "../common/certificateBodyStyles";
-import CertificateNameSection from "../common/certificateNameSection";
 
 const CertificateBody = ({ certificate }) => (
   <div className="container">
@@ -8,31 +7,21 @@ const CertificateBody = ({ certificate }) => (
 
     <div className="certificate-body">
       <div className="recipient-paragraph">It is hereby certified that</div>
-
       <div className="recipient-name">{certificate.recipient.name}</div>
-
-      <div className="recipient-paragraph">
-        having successfully completed the course of study was awarded the
+      <div className="recipient-paragraph">has successfully completed the</div>
+      <div className="certificate-name">
+        <span>{certificate.name}</span>
       </div>
-
-      <CertificateNameSection certificate={certificate} />
-
       <div className="recipient-paragraph">
-        by the National Institute of Early Childhood Development in
-        collaboration
-        <br />
-        with Temasek Polytechnic (Singapore) on{" "}
+        at Temasek Polytechnic (Singapore) on{" "}
         {new Date(certificate.issuedOn).toLocaleDateString("en-SG", {
           day: "numeric",
           month: "long",
           year: "numeric"
         })}
-        {certificate.additionalData.isExempted && (
-          <span className="exempted-paragraph">
-            <br />* Exempted from satisfying the full range of assessment
-            objectives of the diploma
-          </span>
-        )}
+        <br />
+        This Certificate is recognized towards the{" "}
+        {certificate.additionalData.recognizedTowardsCourseName}.
       </div>
     </div>
   </div>
