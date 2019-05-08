@@ -61,10 +61,6 @@ const SFSOA001 = dynamic(() =>
   import("./SF_SOA_001" /* webpackChunkName: "SSGTemplates" */)
 );
 
-const SFSOAES001 = dynamic(() =>
-  import("./SF_SOA_ES_001" /* webpackChunkName: "SSGTemplates" */)
-);
-
 const SOAFB001 = dynamic(() =>
   import("./SOA-FB-001" /* webpackChunkName: "SSGTemplates" */)
 );
@@ -128,7 +124,7 @@ const templates = {
   SF_SOA_HR_03: SFSOAHR01,
   SF_SOA_HR_04: SFSOAHR01,
   SF_SOA_HR_05: SFSOAHR01,
-  SF_SOA_ES_001: SFSOAES001,
+  SF_SOA_ES_001: SOAES01,
   "SOA-IT-001": SOAIT001,
   SF_SOA_IT_001: SFSOAIT001,
   "SOA-MF-01": SOAMF01,
