@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
 import Certificate from "./certificate";
 import Transcript from "./transcript";
@@ -23,16 +22,11 @@ const templates = [
   }
 ];
 
-const ComGlobal = ({ certificate }) => (
+const NCS1TEMPLATE = () => (
   <MultiCertificateRenderer
-    certificate={certificate}
     templates={templates}
     whitelist={approvedAddresses}
   />
 );
 
-ComGlobal.propTypes = {
-  certificate: PropTypes.object.isRequired
-};
-
-export default ComGlobal;
+export default NCS1TEMPLATE;
