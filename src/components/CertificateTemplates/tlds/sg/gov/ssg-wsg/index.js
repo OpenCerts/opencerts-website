@@ -2,7 +2,7 @@ import dynamic from "template-utils/dynamic";
 import { addDirToTemplatePath } from "template-utils/addDirToTemplatePath";
 
 const FQ001 = dynamic(() =>
-  import("./FQ-001"  /* webpackChunkName: "SSGTemplates" */)
+  import("./FQ-001" /* webpackChunkName: "SSGTemplates" */)
 );
 
 const SFFQ002 = dynamic(() =>
@@ -138,8 +138,7 @@ const templates = {
   SOA_SV_001: SOASV001,
   SF_SOA_SV_001: SOASV001,
   "SOA-ES-001": SOAES01,
-  Trans: Transcript,
-
+  Trans: Transcript
 };
 
 export default addDirToTemplatePath("ssg-wsg", templates);
