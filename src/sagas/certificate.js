@@ -24,7 +24,10 @@ import {
   verifyingCertificateHashFailure,
   getCertificate
 } from "../reducers/certificate";
-import { types as applicationTypes } from "../reducers/application";
+import {
+  types as applicationTypes,
+  getNetworkId
+} from "../reducers/application";
 import DocumentStoreDefinition from "../services/contracts/DocumentStore.json";
 import fetchIssuers from "../services/issuers";
 import { combinedHash } from "../utils";
@@ -32,7 +35,7 @@ import { ensResolveAddress, getText } from "../services/ens";
 import sendEmail from "../services/email";
 import { analyticsEvent } from "../components/Analytics";
 
-import { getSelectedWeb3 } from "./application";
+import { getSelectedWeb3, matchNetwork } from "./application";
 
 const { trace, error } = getLogger("saga:certificate");
 
@@ -178,8 +181,10 @@ function isApprovedENSDomain(issuerAddress) {
 }
 
 export function* lookupEthereumAddresses(ethereumAddressIssuers) {
+  const networkId = yield select(getNetworkId);
+  const networkName = matchNetwork(networkId);
   const registeredIssuers = yield fetchIssuers();
-  const issuersNormalised = mapKeys(registeredIssuers, (_, k) =>
+  const issuersNormalised = mapKeys(registeredIssuers[networkName], (_, k) =>
     k.toUpperCase()
   );
 

@@ -31,6 +31,7 @@ export const transcriptTextStyle = {
 export const awardTextStyle = {
   fontSize: "22px",
   color: "rgb(197,41,155)",
+  fontWeight: "bold",
   textAlign: "left"
 };
 
@@ -41,13 +42,6 @@ export const nameTextStyle = {
   textTransform: "uppercase",
   fontWeight: "600",
   color: "#000000"
-};
-
-export const soaNameTextStyle = {
-  fontSize: "2.3rem",
-  color: "rgb(197,41,155)",
-  wordBreak: "break-word",
-  textAlign: "left"
 };
 
 export const transNameTextStyle = {
@@ -102,6 +96,11 @@ export const transFooterLogoStyle = {
   height: "auto"
 };
 
+export const footerLogoStyleSOHR = {
+  width: "100%",
+  height: "auto"
+};
+
 export const confermentTextStyle = {
   textTransform: "uppercase"
 };
@@ -135,4 +134,56 @@ export const copyrightStyle = {
 export const dualLogoFooter = {
   width: "auto",
   height: "45px"
+};
+
+export const soaTranscriptTextStyle = {
+  fontWeight: "bold!important",
+  color: "rgb(197,41,155)",
+  fontSize: "24px",
+  marginBottom: "0px"
+};
+
+export const soaNameTextStyle = {
+  fontSize: "2.3rem",
+  color: "rgb(197,41,155)",
+  wordBreak: "break-word",
+  textAlign: "left",
+  textTransform: "uppercase",
+  fontWeight: "600"
+};
+
+export const signatureFooterLogoStyle = {
+  width: "50%",
+  height: "auto"
+};
+
+export const minHeightfooterTextStyle = {
+  minHeight: "55px",
+  fontSize: "12px",
+  color: "rgb(51,0,144)",
+  marginTop: "15px"
+};
+
+export const footerTextStyleHalfWidth = {
+  fontSize: "12px",
+  color: "rgb(51,0,144)",
+  marginTop: "15px",
+  width: "55%",
+  textAlign: "right"
+};
+
+export const soaFooterLogoStyle = {
+  width: "65%",
+  height: "auto"
+};
+
+export const soaCertCodeStyle = {
+  fontSize: "12px",
+  color: "#ea649c",
+  display: "inline-table",
+  transform: "rotate(-90deg)",
+  width: "max-content",
+  position: "absolute",
+  left: "0",
+  bottom: "30px"
 };
