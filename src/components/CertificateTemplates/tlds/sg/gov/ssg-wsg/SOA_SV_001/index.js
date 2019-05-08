@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
 import { approvedAddresses } from "../common";
-import SSGCert from "./certificate";
+import SSGCert from "../SOA-HR-01/certificate";
 
 const templates = [
   {
