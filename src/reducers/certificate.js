@@ -40,6 +40,7 @@ export const initialState = {
 
 // Actions
 export const types = {
+  RESET_CERTIFICATE: "RESET_CERTIFICATE",
   NETWORK_RESET: "NETWORK_RESET", // For network change
 
   UPDATE_CERTIFICATE: "UPDATE_CERTIFICATE",
@@ -78,6 +79,7 @@ export const types = {
 // Reducers
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case types.RESET_CERTIFICATE:
     case types.NETWORK_RESET:
       return {
         ...initialState
@@ -298,6 +300,12 @@ export default function reducer(state = initialState, action) {
 }
 
 // Action Creators
+export function resetCertificateState() {
+  return {
+    type: types.RESET_CERTIFICATE
+  };
+}
+
 export function updateCertificate(payload) {
   return {
     type: types.UPDATE_CERTIFICATE,
