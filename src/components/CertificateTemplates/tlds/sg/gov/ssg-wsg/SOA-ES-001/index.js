@@ -11,16 +11,16 @@ const templates = [
   }
 ];
 
-const SFSOAES001 = () => (
+const SOAES001 = () => (
   <MultiCertificateRenderer
     templates={templates}
     whitelist={approvedAddresses}
   />
 );
 
-SFSOAES001.displayName = "SFSOAES001 Template";
-SFSOAES001.propTypes = {
+SOAES001.displayName = "SOAES001 Template";
+SOAES001.propTypes = {
   certificate: PropTypes.object.isRequired
 };
 
-export default SFSOAES001;
+export default SOAES001;
