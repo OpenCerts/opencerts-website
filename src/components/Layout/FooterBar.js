@@ -13,7 +13,7 @@ const NavigationBar = () => (
         <a href="/privacy">Privacy Policy</a>
       </div>
       <div>
-        <a href="https://github.com/OpenCerts/open-certificate">Github</a>
+        <a href="https://github.com/OpenCerts">Github</a>
       </div>
     </div>
   </div>

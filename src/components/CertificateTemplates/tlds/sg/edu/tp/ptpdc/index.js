@@ -1,8 +1,7 @@
 import PropTypes from "prop-types";
 import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
 
-import TPCert from "../common/certificate";
-import TPTranscript from "../common/transcript";
+import TPCert from "../ptmc/certificate";
 import ApprovedAddresses from "../common/approvedAddresses";
 
 const templates = [
@@ -10,15 +9,10 @@ const templates = [
     id: "certificate",
     label: "Certificate",
     template: TPCert
-  },
-  {
-    id: "transcript",
-    label: "Transcript",
-    template: TPTranscript
   }
 ];
 
-const ftdip = ({ certificate }) => (
+const ptpdc = ({ certificate }) => (
   <MultiCertificateRenderer
     certificate={certificate}
     templates={templates}
@@ -26,8 +20,8 @@ const ftdip = ({ certificate }) => (
   />
 );
 
-ftdip.propTypes = {
+ptpdc.propTypes = {
   certificate: PropTypes.object.isRequired
 };
 
-export default ftdip;
+export default ptpdc;

@@ -180,9 +180,9 @@ export const renderAwardTextSOA = certificate => (
       style={{ marginTop: "1rem", marginBottom: "3rem", paddingLeft: "0px" }}
     >
       <p style={styles.awardTextStyle} className="RobotoMedium">
-        for successful attainment of the following
-        <br />
-        industry approved competencies
+        {get(certificate, "additionalData.certCode").startsWith("SF_SOA_ES_001")
+          ? "for successful attainment of the required competencies in"
+          : "for successful attainment of the following industry approved competencies"}
       </p>
     </div>
     {certificate.transcript.map(item => (
@@ -409,6 +409,56 @@ export const renderAwardTextQUAL = certificate => (
       <p style={styles.issuersTextStyle} className="RobotoRegular">
         at {certificate.additionalData.assessmentOrgName}
       </p>
+    </div>
+  </div>
+);
+
+export const renderSignatureSOACC = certificate => (
+  <div
+    className="row d-flex justify-content-center"
+    style={{ marginTop: "8rem", marginBottom: "1rem" }}
+  >
+    {renderSeal()}
+    <div className="col-lg-7">
+      <div
+        className="col-lg-4 col-12"
+        style={{ paddingLeft: "0px", fontSize: "1.5rem" }}
+      >
+        <p style={{ fontWeight: "bold", color: "#FF0000" }}>Certified Copy</p>
+      </div>
+      <div style={styles.designationTextStyle} className="RobotoBold">
+        {get(certificate, "additionalData.certSignatories[0].name")},{" "}
+        {get(certificate, "additionalData.certSignatories[0].position")}
+      </div>
+      <div style={styles.designationTextStyle} className="RobotoBold">
+        {get(certificate, "additionalData.certSignatories[0].organisation")}
+      </div>
+      <div style={styles.footerTextStyle} className="RobotoLight">
+        The training and assessment of the abovementioned learner are accredited
+        in accordance with the Singapore Workforce Skills Qualifications System.
+      </div>
+      {renderFooterText(styles.footerTextStyle)}
+    </div>
+    <div className="col-lg-3 col-xs-12">
+      <div style={{ marginBottom: "70px", marginTop: "60px" }}>
+        <p style={styles.printTextStyle} className="RobotoRegular">
+          Cert No: {get(certificate, "additionalData.serialNum")}
+        </p>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "flex-start",
+          marginBottom: "1rem",
+          marginTop: "1rem"
+        }}
+      >
+        <img style={styles.footerLogoStyle} src={IMG_SSGLOGO} />
+        <div style={styles.certCodeStyle}>
+          {get(certificate, "additionalData.certCode")}
+        </div>
+      </div>
     </div>
   </div>
 );

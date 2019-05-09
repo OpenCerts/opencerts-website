@@ -3,7 +3,7 @@ import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
 
 import TPCert from "./certificate";
 import TPTranscript from "./transcript";
-import ApprovedAddresses from "../common";
+import ApprovedAddresses from "../common/approvedAddresses";
 
 const templates = [
   {
