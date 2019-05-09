@@ -11,15 +11,14 @@ const templates = [
   }
 ];
 
-const ITE2019COMCERTNIEC1 = ({ certificate }) => (
+const ITE2019COMCERTNIEC1 = () => (
   <MultiCertificateRenderer
-    certificate={certificate}
     templates={templates}
     whitelist={approvedAddresses}
   />
 );
 
-ITE2019COMCERTNIEC1.displayName = "ITE-2019-FUL-CERT-FULL1 Template";
+ITE2019COMCERTNIEC1.displayName = "ITE-2019-COM-CERT-COM-NIEC1 Template";
 ITE2019COMCERTNIEC1.propTypes = {
   certificate: PropTypes.object.isRequired
 };

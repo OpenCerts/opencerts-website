@@ -1,10 +1,13 @@
 import { get } from "lodash";
+import { tz } from "moment-timezone";
 import {
   IMG_CERTIFICATE_SEAL,
   IMG_CERT_FULL1_LOGO_ITE,
   IMG_CERT_NIEC1_LOGO_ITE,
   IMG_CERT_NIEC1ITE_LOGO_ITE
 } from "./images";
+
+export const TIMEZONE = "Asia/Singapore";
 
 export const fullWidthStyle = {
   width: "100%",
@@ -128,7 +131,7 @@ export const renderLogoITEandPartner = () => (
   </div>
 );
 
-export const renderSignatory = (certificate, count, certnbr) => (
+export const renderSignatory = (certificate, count, certnbr, separ, stdid) => (
   <div
     className="col-4 justify-content-center"
     style={{ marginTop: "4rem", marginBottom: "0" }}
@@ -157,7 +160,11 @@ export const renderSignatory = (certificate, count, certnbr) => (
     </p>
     <div className="text-center">
       <strong>
-        <p style={timesNewRoman24Pt}>{certnbr}</p>
+        <p style={timesNewRoman24Pt}>
+          {certnbr}
+          {separ}
+          {stdid}
+        </p>
       </strong>
     </div>
   </div>
@@ -174,11 +181,13 @@ export const renderTwoSignatures = certificate => (
       </div>
     </div>
 
-    {renderSignatory(certificate, 0, "")}
+    {renderSignatory(certificate, 0, "", "", "")}
     {renderSignatory(
       certificate,
       1,
-      get(certificate, "additionalData.certNbr")
+      certificate.id,
+      "/",
+      certificate.recipient.studentId
     )}
   </div>
 );
@@ -191,10 +200,10 @@ export const renderITEFooter = certificate => (
     >
       <div className="col-1" />
       <div className="col-10 text-left">
-        <p style={arial5Pt}>{certificate.additionalData.footnote1}</p>
+        <p style={arial5Pt}>{certificate.additionalData.footnoteLine1}</p>
         <div className="ml-3">
           <div className="pl-4">
-            <p style={arial5Pt}>{certificate.additionalData.footnote2}</p>
+            <p style={arial5Pt}>{certificate.additionalData.footnoteLine2}</p>
           </div>
         </div>
         <br />
@@ -288,13 +297,19 @@ export const renderTwoNiecSignatures = certificate => (
       <div className="text-center">
         <strong>
           <p style={timesNewRoman24Pt}>
-            {get(certificate, "additionalData.certNbr")}
+            {certificate.id}/{certificate.recipient.studentId}
           </p>
         </strong>
       </div>
     </div>
   </div>
 );
+
+export const formatDateFullMonthProper = dateString => {
+  if (!dateString) return null;
+  const date = new Date(dateString);
+  return tz(date, TIMEZONE).format("D MMMM YYYY");
+};
 
 export const renderCertDescr = certificate => (
   <div>
@@ -305,8 +320,26 @@ export const renderCertDescr = certificate => (
       <div className="mr-5">
         <div className="row d-flex justify-content-center">
           <span style={timesNewRoman32Pt}>
+            <p style={timesNewRoman32Pt}>{certificate.description}</p>
+          </span>
+        </div>
+      </div>{" "}
+    </div>
+    <div className="ml-5">
+      <div className="mr-5">
+        <div className="row d-flex justify-content-center">
+          <span style={timesNewRoman32Pt}>
+            <p style={timesNewRoman32Pt}>in</p>
+          </span>
+        </div>
+      </div>{" "}
+    </div>
+    <div className="ml-5">
+      <div className="mr-5">
+        <div className="row d-flex justify-content-center">
+          <span style={timesNewRoman32Pt}>
             <p style={timesNewRoman32Pt}>
-              {certificate.additionalData.certDescr1}
+              {certificate.additionalData.courseDescription}
             </p>
           </span>
         </div>
@@ -317,29 +350,7 @@ export const renderCertDescr = certificate => (
         <div className="row d-flex justify-content-center">
           <span style={timesNewRoman32Pt}>
             <p style={timesNewRoman32Pt}>
-              {certificate.additionalData.certDescr2}
-            </p>
-          </span>
-        </div>
-      </div>{" "}
-    </div>
-    <div className="ml-5">
-      <div className="mr-5">
-        <div className="row d-flex justify-content-center">
-          <span style={timesNewRoman32Pt}>
-            <p style={timesNewRoman32Pt}>
-              {certificate.additionalData.certDescr3}
-            </p>
-          </span>
-        </div>
-      </div>{" "}
-    </div>
-    <div className="ml-5">
-      <div className="mr-5">
-        <div className="row d-flex justify-content-center">
-          <span style={timesNewRoman32Pt}>
-            <p style={timesNewRoman32Pt}>
-              {certificate.additionalData.certDescr4}
+              {certificate.additionalData.courseSpecialisation}
             </p>
           </span>
         </div>
@@ -350,7 +361,9 @@ export const renderCertDescr = certificate => (
     </div>
     <div className="row d-flex justify-content-center">
       <span style={timesNewRoman32Pt}>
-        <p style={timesNewRoman32Pt}>{certificate.additionalData.confDate}</p>
+        <p style={timesNewRoman32Pt}>
+          {formatDateFullMonthProper(certificate.graduationDate)}
+        </p>
       </span>
     </div>
   </div>
@@ -440,7 +453,7 @@ export default () => ({ certificate }) => (
       {renderLogoITE()}
       {renderAwardText(certificate)}
       {renderTwoSignatures(certificate)}
-	  {renderITEFooter(certificate)}
+	   {renderITEFooter(certificate)}
   </div>
   </div>
 );

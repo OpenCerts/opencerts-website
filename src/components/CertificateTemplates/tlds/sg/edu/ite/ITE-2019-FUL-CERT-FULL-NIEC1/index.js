@@ -11,9 +11,8 @@ const templates = [
   }
 ];
 
-const ITE2019FULCERTNIEC1 = ({ certificate }) => (
+const ITE2019FULCERTNIEC1 = () => (
   <MultiCertificateRenderer
-    certificate={certificate}
     templates={templates}
     whitelist={approvedAddresses}
   />

@@ -2,7 +2,7 @@ import { Selector } from "testcafe";
 
 fixture("Institute of Technical Education").page`http://localhost:3000`;
 
-const Certificate = "./ITE_TEST-2019-CERT-FULL-NIEC1.opencert";
+const Certificate = "./ITE_TEST-2019-CERT-FULL1.opencert";
 
 // Only Certficate, No Transcript
 // const TemplateTabList = Selector("#template-tabs-list");
@@ -14,7 +14,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("ITE-2019-FUL-CERT-FULL-NIEC1 certificate is rendered correctly", async t => {
+test("ITE-2019-CERT-FULL1 certificate is rendered correctly", async t => {
   // Uploads certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
@@ -23,13 +23,11 @@ test("ITE-2019-FUL-CERT-FULL-NIEC1 certificate is rendered correctly", async t =
 
   // Certificate content
   await validateTextContent(t, RenderedCertificate, [
-    "STUDENT NAME CERT FULLEC",
-    "Higher National ITE Certificate",
-    "in",
-    "Early Childhood Education",
-    "1 April 2019",
+    "STUDENT NAME CERT FULL",
+    "S1234567A",
+    "Technology",
+    "(Mechanical & Electrical Servicing)",
     "Designation One",
-    "Designation Two",
-    "ABCD201912346/S1234567A"
+    "Designation Two"
   ]);
 });
