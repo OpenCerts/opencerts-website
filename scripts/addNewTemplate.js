@@ -62,7 +62,7 @@ ${subDirectoryExports}
 }
 
 function makeDynamicImportFragment(subDir, templatesChunkName) {
-  return `dynamic(import("./${subDir}" /* webpackChunkName: "${templatesChunkName}-Templates" */))`;
+  return `dynamic(() => import("./${subDir}" /* webpackChunkName: "${templatesChunkName}-Templates" */))`;
 }
 export function generateSubDirectoryDynamicImports(
   subDirs,
