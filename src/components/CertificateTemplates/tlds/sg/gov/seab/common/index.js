@@ -1,6 +1,7 @@
-export * from "./style";
-export * from "./template";
-export * from "./function";
+export { default as ExplNotesO } from "./explnotes_o";
+export { default as ExplNotesN } from "./explnotes_n";
+export { default as ExplNotesNA } from "./explnotes_na";
+export { default as ExplNotesNT } from "./explnotes_nt";
 
 // Store Address - Issuer Name
 // UAT Store Id : Singapore Examinations and Assessment Board : 0xeDe1B6Fc03f1a9C6905C93a2fceb06E19624a55E
