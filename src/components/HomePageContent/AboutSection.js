@@ -44,8 +44,8 @@ const BenefitsSection = () => (
 
 const Demo = ({handleChange}) =>  (
       <>
-      <input draggable="true" type="file" value="abc"/>abc
-      {/* <div id="dragDemo" draggable="true" onDragStart={(e) => {console.log("starting"); e.dataTransfer.setData("isDemo", true)}} onDrop = {(e) => console.log('emnter', e.target.id)}>Click me</div> */}
+      {/* <input draggable="true" type="file" value="abc"/>abc */}
+      <div id="dragDemo" draggable="true" onDragStart={(e) => {console.log("starting"); e.dataTransfer.setData("isDemo", true)}} onDrop = {(e) => console.log('emnter', e.target.id)}>Click me</div>
       </>
     )
 
