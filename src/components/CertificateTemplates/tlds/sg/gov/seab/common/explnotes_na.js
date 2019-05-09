@@ -1,5 +1,5 @@
 import { TEMPLATE_EXPLANATORYNOTES } from "./template";
 
-const Template = () => <span>{TEMPLATE_EXPLANATORYNOTES("GCEO")}</span>;
+const Template = () => <span>{TEMPLATE_EXPLANATORYNOTES("GCENNA")}</span>;
 
 export default Template;
