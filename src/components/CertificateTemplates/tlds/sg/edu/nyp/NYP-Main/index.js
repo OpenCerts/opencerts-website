@@ -15,7 +15,6 @@ const addresses = [
   "0x5CA3b9daC85DA4DE4030e59C1a0248004209e348"
 ];
 
-
 const NYPCert = () => (
   <MultiCertificateRenderer templates={templates} whitelist={addresses} />
 );
