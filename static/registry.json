@@ -7,7 +7,8 @@
 			"0xE4a94Ef9C26904A02Cd6735F7D4De1D840146a0f": "Singapore Examinations and Assessment Board",
 			"0x24a7DE31D231221ab6B1B325Ca5F1AA7bfbaaabA": "Singapore Institute of Technology",
 			"0x78CE67fcb40D9D9552A313670A2e0eef11043995": "SkillsFuture Singapore",
-			"0x4d05f843718da742b4229938f972a3eb969c25ce": "Temasek Polytechnic"
+			"0x4d05f843718da742b4229938f972a3eb969c25ce": "Temasek Polytechnic",
+      "0x908595e0B09Fb2d5950eCD196695490E211A6d4d": "Institute of Technical Education"
 		},
 		"Ropsten": {
 			"0x5f007251c78cA92d3053492cCf0EDC161063624c": "ROPSTEN: Nanyang Polytechnic",
@@ -18,7 +19,8 @@
 			"0x897E224a6a8b72535D67940B3B8CE53f9B596800": "ROPSTEN: Singapore Institute of Technology",
 			"0x3f43FB8546E97b2c1D5eD087767C0d2eb2e13f8b": "ROPSTEN: Singapore Institute of Technology (Ledger Nano)",
 			"0xCE4D56Fea4a4EB33E8A3502CEe6Db075224C896d": "ROPSTEN: Skillsfuture Singapore",
-			"0xe825e69383a57eB686Fc7b8c455Dd982bB9680f6": "ROPSTEN: Temasek Polytechnic"
+			"0xe825e69383a57eB686Fc7b8c455Dd982bB9680f6": "ROPSTEN: Temasek Polytechnic",
+      	"0xE5c693015460868F817799CAFb363EEDb4F9E446": "ROPSTEN: Institute of Technical Education"
 		}
 	}
 }
