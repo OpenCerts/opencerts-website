@@ -27,39 +27,41 @@ export const subjectCodeWidth = {
   textAlign: "left"
 };
 
-export const renderSemester = (semester = {}) => {
+export const renderSemester = (semester, semesterId = {}) => {
   const subjectRows = semester.map((s, i) => (
-    <tr key={i}>
-      <td style={subjectCodeWidth}>{s.subjectCode}</td>
-      <td>{s.name}</td>
-      <td style={alignRight}>{s.level}</td>
-      <td style={alignCenter}>{s.courseCredit}</td>
-      <td style={alignLeft}>{s.grade}</td>
-    </tr>
+    <div className="ml-4" key={i}>
+      <table style={tableStyle}>
+        <tbody>
+          <tr>
+            <td style={subjectCodeWidth}>{s.subjectCode}</td>
+            <td>{s.name}</td>
+            <td style={alignRight}>{s.level}</td>
+            <td style={alignCenter}>{s.courseCredit}</td>
+            <td style={alignLeft}>&nbsp;&nbsp;{s.grade}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   ));
   const term = get(semester, "[0].term");
   const termAverage = get(semester, "[0].termAverage");
   const cumalativeAverage = get(semester, "[0].cumalativeAverage");
   return (
-    <div style={fullWidthStyle}>
-      <table className="ml-3" style={tableStyle}>
-        <tbody>
-          <div className="row m-0 mb-2 mt-3">
-            <div style={{ fontWeight: 700 }}>{term}&nbsp;&nbsp;TERM</div>
-            <div className="ml-auto" style={{ fontWeight: 700 }} />
-          </div>
-          {subjectRows}
-        </tbody>
-      </table>
+    <div style={fullWidthStyle} key={semesterId}>
+      <div className="row m-0 mb-2 mt-3 ml-4">
+        <div style={{ fontWeight: 700 }}>{term}&nbsp;&nbsp;TERM</div>
+        <div className="ml-auto" style={{ fontWeight: 700 }} />
+      </div>
+      {subjectRows}
       <br />
-      <div className="row m-0 mb-2 ml-3">
+      <div className="row m-0 mb-2 ml-4">
         <div>
           Term Grade Point Average&nbsp;:&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
           <b>{termAverage}</b>
         </div>
       </div>
-      <div className="row m-0 mb-2 ml-3">
+      <div className="row m-0 mb-2 ml-4">
         <div>
           Cumalative Grade Point Average&nbsp;:&nbsp;&nbsp;
           <b>{cumalativeAverage}</b>
@@ -137,7 +139,7 @@ export const renderCourse = (certificate, course, courseId) => {
   // Group all modules by semesters
   const groupedSubjects = groupBy(course, "semester");
   const renderedSemesters = Object.keys(groupedSubjects).map(semester =>
-    renderSemester(groupedSubjects[semester])
+    renderSemester(groupedSubjects[semester], semester)
   );
 
   return (
