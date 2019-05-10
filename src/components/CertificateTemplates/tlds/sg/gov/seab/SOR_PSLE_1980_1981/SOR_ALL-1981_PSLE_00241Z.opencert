@@ -1,0 +1,69 @@
+{
+  "schema": "opencerts/v1.5",
+  "data": {
+    "attainmentDate": "24468fbf-ab3b-42ed-a50a-cb553196f103:string:1981-12-31T23:59:00+08:00",
+    "transcript": [
+      {
+        "grade": "c23af568-d1c6-4cec-bcf0-c438c509fd59:string:D",
+        "name": "f05a955e-dc0e-4f61-82f3-d4453ec8c1a3:string:ENGLISH LANGUAGE",
+        "languageMedium": "944b74f8-f6c4-4dbf-adde-fb0e64846617:string:ENGLISH"
+      },
+      {
+        "grade": "6a1a83ef-deef-49f5-9dc0-122667cbf228:string:D",
+        "name": "913f4090-5c1d-4142-ad26-19465aec247b:string:MATHEMATICS",
+        "languageMedium": "913ee423-670b-488c-902c-810774729e36:string:ENGLISH"
+      },
+      {
+        "grade": "01237f69-3167-475a-bfef-f4acd2935f26:string:D",
+        "name": "81200f37-5f9d-4868-88c9-d763393f649a:string:SCIENCE",
+        "languageMedium": "c2dd6d26-1ecc-4826-8ae6-98cf06fb1156:string:ENGLISH"
+      }
+    ],
+    "$template": "8def5db0-4ebc-4b8c-a57b-684e3c2ecbb6:string:sg/gov/seab/SOR_PSLE_1980_1981",
+    "qualificationLevel": [
+      {
+        "frameworkVersion": "8dfdfa2f-c507-4066-9237-a9376d41bf14:string:2015",
+        "code": "175e758c-429b-4de1-86f0-387c720dfc44:string:03",
+        "frameworkName": "93148cff-6f34-4f85-a8ca-bfc2af4cedda:string:singapore/ssec-eqa",
+        "description": "7b79acd0-a26d-4569-acb0-631a8171957d:string:Primary education without PSLE / PSPE certification or their equivalent"
+      }
+    ],
+    "name": "45e96ccb-7ebd-436f-a11a-cc3bbaae5eac:string:PRIMARY SCHOOL LEAVING EXAMINATION",
+    "recipient": {
+      "name": "4275be0e-30c6-4433-aaeb-33dde5528d9f:string:NAME OF S6824548F",
+      "nric": "edd22260-ecbd-4e35-8634-156c336f01d5:string:S6824548F"
+    },
+    "id": "be8f82cb-f38e-43bc-bf74-6337358f30ac:string:SOR_ALL_1981PSLE00241Z2019-05-09",
+    "additionalData": {
+      "aggregateScore": "168c0333-e1b4-4a9b-b1c3-65468e83625b:string:N.A",
+      "indexNo": "654c1c4e-798d-461e-a02e-6d499f1cf3ed:string:00241Z",
+      "streamEligibleFor": "7fc70780-3a68-4342-8238-c74759d8a4fa:string:N.A",
+      "overallResults": "983694fb-bcfa-4361-bb2d-ea08bae8f56c:string:N.A",
+      "certifierDesignation": "a25ad5d7-5f30-4e1f-bd5c-05b9ff4f23ca:string:Chief Executive",
+      "schoolName": "8f89e4c2-a529-4c28-b4e7-798dee17cf52:string:SCHNAME OF 5008",
+      "certifierName": "3b6349f9-421f-47f2-8a32-84500dc60b5f:string:Mr Yue Lip Sin"
+    },
+    "issuers": [
+      {
+        "name": "f6b5f772-3abc-4e14-9c8d-d8d12d94cd1e:string:Singapore Examinations and Assessment Board",
+        "certificateStore": "30b30f81-36b7-4230-acc2-4b5294db77f9:string:0xeDe1B6Fc03f1a9C6905C93a2fceb06E19624a55E"
+      }
+    ],
+    "fieldOfStudy": [
+      {
+        "frameworkVersion": "4dec1c8c-a2c0-4dca-b181-081619df75de:string:2015",
+        "code": "d767d6a8-e268-4265-aced-537837420d8c:string:0001",
+        "frameworkName": "33c30707-0c3e-495c-a360-39a0e546793c:string:singapore/ssec-fos",
+        "description": "458e6c83-7c89-4e29-ba06-3272a502c303:string:Basic Programmes and Qualifications"
+      }
+    ],
+    "issuedOn": "5f764872-b37c-450b-be9c-4affbafa827a:string:2019-05-09T10:00:36+08:00"
+  },
+  "privacy": {},
+  "signature": {
+    "type": "SHA3MerkleProof",
+    "targetHash": "863c64e42b333dc5430d85086d3a6800d0b2383ddc1020316a2480980f159b9c",
+    "proof": [],
+    "merkleRoot": "863c64e42b333dc5430d85086d3a6800d0b2383ddc1020316a2480980f159b9c"
+  }
+}
