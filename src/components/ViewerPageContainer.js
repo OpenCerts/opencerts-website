@@ -15,7 +15,8 @@ import {
   getIssuedStatus,
   getNotRevokedStatus,
   getVerified,
-  getEmailSendingState
+  getEmailSendingState,
+  updateObfuscatedCertificate
 } from "../reducers/certificate";
 import CertificateViewer from "./CertificateViewer";
 
@@ -100,7 +101,9 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => ({
   updateCertificate: payload => dispatch(updateCertificate(payload)),
   sendCertificate: payload => dispatch(sendCertificate(payload)),
-  sendCertificateReset: () => dispatch(sendCertificateReset())
+  sendCertificateReset: () => dispatch(sendCertificateReset()),
+  updateObfuscatedCertificate: updatedDoc =>
+    dispatch(updateObfuscatedCertificate(updatedDoc))
 });
 
 export default connect(
@@ -120,5 +123,6 @@ MainPageContainer.propTypes = {
   verified: PropTypes.bool,
   emailSendingState: PropTypes.string,
   sendCertificate: PropTypes.func,
-  sendCertificateReset: PropTypes.func
+  sendCertificateReset: PropTypes.func,
+  updateObfuscatedCertificate: PropTypes.func
 };

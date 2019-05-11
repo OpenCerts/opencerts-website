@@ -5,3 +5,5 @@ yarn-error.log
 out
 .coverage
 bundles/
+yarn.lock
+.scannerwork

@@ -1,5 +1,4 @@
-import PropTypes from "prop-types";
-import { MultiCertificateRenderer } from "../MultiCertificateRenderer";
+import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
 import DefaultCert from "./certificate";
 
 const templates = [
@@ -10,12 +9,10 @@ const templates = [
   }
 ];
 
-const DefaultTemplate = ({ certificate }) => (
-  <MultiCertificateRenderer certificate={certificate} templates={templates} />
+const DefaultTemplate = () => (
+  <MultiCertificateRenderer templates={templates} />
 );
 
 DefaultTemplate.displayName = "Default Template";
-DefaultTemplate.propTypes = {
-  certificate: PropTypes.object.isRequired
-};
+
 export default DefaultTemplate;

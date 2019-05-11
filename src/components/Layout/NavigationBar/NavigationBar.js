@@ -23,7 +23,9 @@ const renderNavItem = active => {
       <a href={n.path}>{n.label}</a>
     </li>
   ));
-  return <ul className="navbar-nav ml-auto">{items}</ul>;
+  return (
+    <ul className="navbar-nav ml-auto d-none d-lg-flex d-xl-flex">{items}</ul>
+  );
 };
 
 const NavigationBar = ({ active }) => (
@@ -35,7 +37,7 @@ const NavigationBar = ({ active }) => (
         <img src="/static/images/opencertslogo.svg" alt="OpenCerts" />
       </a>
       <button
-        className={css["navbar-toggler"]}
+        className={`${css["navbar-toggler"]} d-none`}
         type="button"
         data-toggle="collapse"
         data-target="#top-nav"

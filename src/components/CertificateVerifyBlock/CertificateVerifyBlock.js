@@ -98,7 +98,7 @@ const SimpleVerifyBlock = props => {
     <div
       className={`p-2 pointer ${css["simple-verify-block"]} ${
         css[stateStyle]
-      } ${props.detailedVerifyVisible ? css.active : ""}`}
+      } ${props.detailedVerifyVisible ? css.active : ""} col-12`}
       onClick={props.toggleDetailedView}
     >
       <div className="row">
@@ -113,21 +113,24 @@ const SimpleVerifyBlock = props => {
 const CertificateVerifyBlock = props => {
   const status = statusSummary(props);
   return (
-    <div className={css.verifyBlockPadding}>
-      <div className={`d-flex align-items-start ${css.verifyBlocksContainer}`}>
-        <SimpleVerifyBlock {...props} />
-        {props.detailedVerifyVisible ? (
-          <DetailedCertificateVerifyBlock
-            statusSummary={status}
-            hashStatus={props.hashStatus}
-            issuedStatus={props.issuedStatus}
-            notRevokedStatus={props.notRevokedStatus}
-            issuerIdentityStatus={props.issuerIdentityStatus}
-          />
-        ) : (
-          ""
-        )}
-      </div>
+    <div
+      id="certificate-verify-block"
+      className={`align-items-start ${css["d-flex"]} ${
+        css.verifyBlocksContainer
+      } col-sm-12 col-md-9 col-lg-9 col-xl-6 mb-md-0 mb-3`}
+    >
+      <SimpleVerifyBlock {...props} />
+      {props.detailedVerifyVisible ? (
+        <DetailedCertificateVerifyBlock
+          statusSummary={status}
+          hashStatus={props.hashStatus}
+          issuedStatus={props.issuedStatus}
+          notRevokedStatus={props.notRevokedStatus}
+          issuerIdentityStatus={props.issuerIdentityStatus}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 };

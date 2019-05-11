@@ -7,6 +7,7 @@ export const states = {
 
 export const initialState = {
   raw: null,
+  rawModified: null,
   store: null,
   storeError: null,
   storeLoading: false,
@@ -31,11 +32,15 @@ export const initialState = {
   verificationStatus: [],
 
   emailState: states.INITIAL,
-  emailError: null
+  emailError: null,
+
+  templates: null,
+  activeTemplateTab: 0
 };
 
 // Actions
 export const types = {
+  RESET_CERTIFICATE: "RESET_CERTIFICATE",
   NETWORK_RESET: "NETWORK_RESET", // For network change
 
   UPDATE_CERTIFICATE: "UPDATE_CERTIFICATE",
@@ -62,12 +67,19 @@ export const types = {
   SENDING_CERTIFICATE: "SENDING_CERTIFICATE",
   SENDING_CERTIFICATE_SUCCESS: "SENDING_CERTIFICATE_SUCCESS",
   SENDING_CERTIFICATE_FAILURE: "SENDING_CERTIFICATE_FAILURE",
-  SENDING_CERTIFICATE_RESET: "SENDING_CERTIFICATE_RESET"
+  SENDING_CERTIFICATE_RESET: "SENDING_CERTIFICATE_RESET",
+
+  CERTIFICATE_OBFUSCATE_RESET: "CERTIFICATE_OBFUSCATE_RESET",
+  CERTIFICATE_OBFUSCATE_UPDATE: "CERTIFICATE_OBFUSCATE_UPDATE",
+
+  CERTIFICATE_TEMPLATE_REGISTER: "CERTIFICATE_TEMPLATE_REGISTER",
+  CERTIFICATE_TEMPLATE_SELECT_TAB: "CERTIFICATE_TEMPLATE_SELECT_TAB"
 };
 
 // Reducers
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case types.RESET_CERTIFICATE:
     case types.NETWORK_RESET:
       return {
         ...initialState
@@ -76,6 +88,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...initialState,
         raw: action.payload,
+        rawModified: action.payload,
         store: null,
         storeError: null,
         storeLoading: true
@@ -260,12 +273,39 @@ export default function reducer(state = initialState, action) {
         emailState: states.FAILURE,
         emailError: action.payload
       };
+    case types.CERTIFICATE_OBFUSCATE_RESET:
+      return {
+        ...initialState,
+        rawModified: state.raw
+      };
+    case types.CERTIFICATE_OBFUSCATE_UPDATE:
+      return {
+        ...state,
+        rawModified: action.payload
+      };
+    case types.CERTIFICATE_TEMPLATE_REGISTER:
+      return {
+        ...state,
+        templates: action.payload,
+        activeTemplateTab: 0
+      };
+    case types.CERTIFICATE_TEMPLATE_SELECT_TAB:
+      return {
+        ...state,
+        activeTemplateTab: action.payload
+      };
     default:
       return state;
   }
 }
 
 // Action Creators
+export function resetCertificateState() {
+  return {
+    type: types.RESET_CERTIFICATE
+  };
+}
+
 export function updateCertificate(payload) {
   return {
     type: types.UPDATE_CERTIFICATE,
@@ -294,10 +334,53 @@ export function verifyingCertificateIssuerSuccess(payload) {
   };
 }
 
-export function verifyingCertificateIssuerFailure(payload) {
+export function verifyingCertificateIssuerFailure({ error, certificate }) {
   return {
     type: types.VERIFYING_CERTIFICATE_ISSUER_FAILURE,
-    payload
+    error,
+    certificate
+  };
+}
+
+export function verifyingCertificateRevocationSuccess() {
+  return {
+    type: types.VERIFYING_CERTIFICATE_REVOCATION_SUCCESS
+  };
+}
+
+export function verifyingCertificateRevocationFailure({ error, certificate }) {
+  return {
+    type: types.VERIFYING_CERTIFICATE_REVOCATION_FAILURE,
+    error,
+    certificate
+  };
+}
+
+export function verifyingCertificateIssuedSuccess() {
+  return {
+    type: types.VERIFYING_CERTIFICATE_ISSUED_SUCCESS
+  };
+}
+
+export function verifyingCertificateIssuedFailure({ error, certificate }) {
+  return {
+    type: types.VERIFYING_CERTIFICATE_ISSUED_FAILURE,
+    error,
+    certificate
+  };
+}
+
+export function verifyingCertificateHashSuccess() {
+  return {
+    type: types.VERIFYING_CERTIFICATE_HASH_SUCCESS
+  };
+}
+
+export function verifyingCertificateHashFailure({ error, certificate }) {
+  return {
+    type: types.VERIFYING_CERTIFICATE_HASH_FAILURE,
+    error,
+    certificate
   };
 }
 
@@ -311,6 +394,33 @@ export function sendCertificate(payload) {
 export function sendCertificateReset() {
   return {
     type: types.SENDING_CERTIFICATE_RESET
+  };
+}
+
+export function resetCertificateObfuscation() {
+  return {
+    type: types.CERTIFICATE_OBFUSCATE_RESET
+  };
+}
+
+export function updateObfuscatedCertificate(payload) {
+  return {
+    type: types.CERTIFICATE_OBFUSCATE_UPDATE,
+    payload
+  };
+}
+
+export function registerTemplates(payload) {
+  return {
+    type: types.CERTIFICATE_TEMPLATE_REGISTER,
+    payload
+  };
+}
+
+export function selectTemplateTab(payload) {
+  return {
+    type: types.CERTIFICATE_TEMPLATE_SELECT_TAB,
+    payload
   };
 }
 
@@ -370,7 +480,7 @@ export function getNotRevokedStatus(store) {
 }
 
 export function getCertificate(store) {
-  return store.certificate.raw;
+  return store.certificate.rawModified;
 }
 
 export function getVerifying(store) {
@@ -403,4 +513,12 @@ export function getVerificationStatus(store) {
 
 export function getEmailSendingState(store) {
   return store.certificate.emailState;
+}
+
+export function getActiveTemplateTab(store) {
+  return store.certificate.activeTemplateTab;
+}
+
+export function getTemplates(store) {
+  return store.certificate.templates;
 }

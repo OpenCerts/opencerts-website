@@ -8,6 +8,7 @@ import UnverifiedView from "./Views/UnverifiedView";
 const renderDropzoneContent = props => {
   const {
     handleRenderOverwrite,
+    resetData,
     isDragAccept,
     isDragReject,
     verifying,
@@ -41,6 +42,7 @@ const renderDropzoneContent = props => {
     return (
       <UnverifiedView
         handleRenderOverwrite={handleRenderOverwrite}
+        resetData={() => resetData()}
         hashStatus={hashStatus}
         issuedStatus={issuedStatus}
         notRevokedStatus={notRevokedStatus}
@@ -74,11 +76,12 @@ const onFileDrop = (
     }
   };
   if (acceptedFiles && acceptedFiles.length && acceptedFiles.length > 0)
-    acceptedFiles.map(f => reader.readAsBinaryString(f));
+    acceptedFiles.map(f => reader.readAsText(f));
 };
 
 const CertificateDropzone = ({
   handleCertificateChange,
+  resetData,
   handleFileError,
   handleRenderOverwrite,
   fileError,
@@ -91,6 +94,7 @@ const CertificateDropzone = ({
   verificationStatus
 }) => (
   <Dropzone
+    id="certificate-dropzone"
     onDrop={acceptedFiles =>
       onFileDrop(acceptedFiles, handleCertificateChange, handleFileError)
     }
@@ -98,6 +102,7 @@ const CertificateDropzone = ({
   >
     {renderDropzoneContentCurry({
       handleCertificateChange,
+      resetData,
       handleRenderOverwrite,
       fileError,
       verifying,
@@ -113,6 +118,7 @@ const CertificateDropzone = ({
 
 CertificateDropzone.propTypes = {
   document: PropTypes.object,
+  resetData: PropTypes.func,
   handleCertificateChange: PropTypes.func,
   handleFileError: PropTypes.func,
   handleRenderOverwrite: PropTypes.func,
@@ -128,6 +134,7 @@ CertificateDropzone.propTypes = {
 
 renderDropzoneContent.propTypes = {
   handleRenderOverwrite: PropTypes.func,
+  resetData: PropTypes.func,
   document: PropTypes.object,
   fileError: PropTypes.bool,
   verifying: PropTypes.bool,
