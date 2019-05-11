@@ -13,7 +13,5 @@ test("E27-TEST-2019-ECHELON-CERT certificate is rendered correctly", async t => 
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
   await t.expect(RenderedCertificate.visible).ok();
-  await t
-    .expect(RenderedCertificate.textContent)
-    .contains("Mother of Dragons");
+  await t.expect(RenderedCertificate.textContent).contains("Mother of Dragons");
 });
