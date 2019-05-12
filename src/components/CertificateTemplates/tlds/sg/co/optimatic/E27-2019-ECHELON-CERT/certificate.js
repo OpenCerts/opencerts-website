@@ -68,7 +68,7 @@ const Template = ({ certificate, document }) => {
               width: "100%"
             }}
           >
-            Name of participant
+            {certificate.recipient.name}
           </div>
         </div>
         <div style={{ marginTop: 32 }}>
