@@ -156,7 +156,7 @@ export const renderSeal = () => (
 
 export const renderSignature = certificate => (
   <div>
-    <div className="col-lg-3 col-12">
+    <div className="col-lg-4 col-12">
       <img
         style={styles.signatureWidthStyle}
         src={get(certificate, "additionalData.certSignatories[0].signature")}
