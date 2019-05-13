@@ -19,7 +19,6 @@ export const printTextStyle = {
 };
 
 export const issuersTextStyle = {
-  textAlign: "center",
   fontSize: "24px"
 };
 
@@ -190,7 +189,6 @@ export const soaCertCodeStyle = {
 
 export const specTextStyle = {
   fontSize: "2rem",
-  textAlign: "center",
   wordBreak: "break-word"
 };
 
