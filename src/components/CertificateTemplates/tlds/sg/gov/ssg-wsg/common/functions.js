@@ -172,6 +172,14 @@ export const renderSignature = certificate => (
   </div>
 );
 
+export const renderSpecialization = certificate => (
+  <div className="d-flex">
+    <p style={styles.specTextStyle}>
+      {certificate.additionalData.specialization}
+    </p>
+  </div>
+);
+
 export const renderAwardTextSOA = certificate => (
   <div>
     <div className="d-flex" style={{ marginTop: "2rem" }}>
@@ -310,7 +318,13 @@ export const renderSignatureSOAHR = certificate => (
       <div style={styles.footerTextStyle} className="RobotoLight">
         The training and assessment of the abovementioned learner are accredited
         in accordance with the Singapore Workforce Skills Qualifications System.
-        {get(certificate, "additionalData.certCode").startsWith("SF_SOA_HR_")
+        {[
+          "SF_SOA_HR_01",
+          "SF_SOA_HR_02",
+          "SF_SOA_HR_03",
+          "SF_SOA_HR_04",
+          "SF_SOA_HR_05"
+        ].includes(get(certificate, "additionalData.certCode"))
           ? "This WSQ programme is aligned to the Skills Framework."
           : ""}
       </div>
@@ -404,6 +418,9 @@ export const renderAwardTextQUAL = certificate => (
         {certificate.name}
       </p>
     </div>
+    {["FQ-004", "FQ-005"].includes(get(certificate, "additionalData.certCode"))
+      ? renderSpecialization(certificate)
+      : ""}
     {renderAwardedTo()}
     {renderRecipientName(certificate)}
     {renderRecipientID(certificate)}
