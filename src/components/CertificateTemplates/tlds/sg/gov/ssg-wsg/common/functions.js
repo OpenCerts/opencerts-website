@@ -323,7 +323,8 @@ export const renderSignatureSOAHR = certificate => (
           "SF_SOA_HR_02",
           "SF_SOA_HR_03",
           "SF_SOA_HR_04",
-          "SF_SOA_HR_05"
+          "SF_SOA_HR_05",
+          "SF_FQ_001"
         ].includes(get(certificate, "additionalData.certCode"))
           ? "This WSQ programme is aligned to the Skills Framework."
           : ""}
@@ -418,7 +419,7 @@ export const renderAwardTextQUAL = certificate => (
         {certificate.name}
       </p>
     </div>
-    {["FQ-004", "FQ-005"].includes(get(certificate, "additionalData.certCode"))
+    {["FQ-004", "FQ-005", "SF_FQ_001", "SF_FQ_002", "SF_FQ_004"].includes(get(certificate, "additionalData.certCode"))
       ? renderSpecialization(certificate)
       : ""}
     {renderAwardedTo()}
