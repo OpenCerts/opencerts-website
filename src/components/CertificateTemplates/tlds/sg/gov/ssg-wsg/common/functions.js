@@ -1,6 +1,13 @@
 import { tz } from "moment-timezone";
 import { get } from "lodash";
-import { IMG_LOGO, IMG_SEAL, NICF_LOGO, IMG_SSGLOGO, NEA_LOGO } from "./images";
+import {
+  IMG_LOGO,
+  IMG_SEAL,
+  NICF_LOGO,
+  IMG_SSGLOGO,
+  NEA_LOGO,
+  CASAS_LOGO
+} from "./images";
 import * as styles from "./style";
 
 const TIMEZONE = "Asia/Singapore";
@@ -149,7 +156,7 @@ export const renderSeal = () => (
 
 export const renderSignature = certificate => (
   <div>
-    <div className="col-lg-3 col-12">
+    <div className="col-lg-4 col-12">
       <img
         style={styles.signatureWidthStyle}
         src={get(certificate, "additionalData.certSignatories[0].signature")}
@@ -180,7 +187,9 @@ export const renderAwardTextSOA = certificate => (
       style={{ marginTop: "1rem", marginBottom: "3rem", paddingLeft: "0px" }}
     >
       <p style={styles.awardTextStyle} className="RobotoMedium">
-        {get(certificate, "additionalData.certCode").startsWith("SF_SOA_ES_001")
+        {get(certificate, "additionalData.certCode").includes(
+          "SF_SOA_ES_001"
+        ) || get(certificate, "additionalData.certCode").includes("SOA-ES-001")
           ? "for successful attainment of the required competencies in"
           : "for successful attainment of the following industry approved competencies"}
       </p>
@@ -268,8 +277,11 @@ export const renderAwardTextSOAHR = certificate => (
     >
       <p style={styles.awardTextStyle} className="RobotoMedium">
         for successfully meeting the requirements of the above programme and
-        attainment of the competencies in the following modules of the Human
-        Resource WSQ Framework:
+        attainment of the competencies in the following modules of the
+        {get(certificate, "additionalData.certCode").includes("SOA_SV_001")
+          ? " Service Excellence"
+          : " Human Resource"}{" "}
+        WSQ Framework:
       </p>
     </div>
     {certificate.transcript.map(item => (
@@ -458,6 +470,66 @@ export const renderSignatureSOACC = certificate => (
         <div style={styles.certCodeStyle}>
           {get(certificate, "additionalData.certCode")}
         </div>
+      </div>
+    </div>
+  </div>
+);
+
+export const renderSignatureSOAES = certificate => (
+  <div
+    className="row d-flex justify-content-center"
+    style={{ marginTop: "8rem", marginBottom: "1rem" }}
+  >
+    {renderSeal()}
+    <div className="col-lg-6">
+      {renderSignature(certificate)}
+      <img style={styles.signatureFooterLogoStyle} src={IMG_SSGLOGO} />
+      <div style={styles.minHeightfooterTextStyle} className="RobotoLight">
+        The training and assessment of the abovementioned learner are accredited
+        <br />
+        in accordance with the Singapore Workforce Skills Qualifications System.
+        <br />
+        {get(certificate, "additionalData.certCode").startsWith("SF_SOA_ES_")
+          ? "This WSQ programme is aligned to the Skills Framework."
+          : ""}
+      </div>
+      {renderFooterText(styles.footerTextStyle)}
+    </div>
+    <div className="col-lg-4 col-xs-12 d-flex">
+      <div
+        className="col-lg-10 col-8"
+        style={{ textAlign: "right", alignSelf: "flex-end", padding: "0px" }}
+      >
+        <div style={{ flex: "1", marginTop: "60px" }}>
+          <p style={styles.printTextStyle} className="RobotoRegular">
+            Cert No: {get(certificate, "additionalData.serialNum")}
+          </p>
+        </div>
+        <div style={styles.footerTextStyle} className="RobotoRegular">
+          <p>
+            A workplace literacy assessment system for adults
+            <br />
+            developed in colaboration with
+          </p>
+        </div>
+        <div>
+          <img style={styles.footerLogoStyle} src={CASAS_LOGO} />
+        </div>
+        <div style={styles.footerTextStyle}>
+          <p>
+            Recognised by
+            <br />
+            the US Departments of Education and Labour
+          </p>
+        </div>
+      </div>
+      <div
+        className="col-lg-2 col-4"
+        style={{ display: "block", position: "relative", padding: "0px" }}
+      >
+        <p style={styles.soaCertCodeStyle}>
+          {get(certificate, "additionalData.certCode")}
+        </p>
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { tz } from "moment-timezone";
-import { NYP_CERT_BG } from "./images";
+import { NYP_CERT_BG, NYP_CERT_LOGO } from "./images";
 
 export const TIMEZONE = "Asia/Singapore";
 
@@ -56,12 +56,18 @@ export const signatureWidthStyle = {
 const borderImgStyle = {
   border: "1px solid transparent",
   borderColor: "black",
-  paddingRight: "0px",
-  paddingLeft: "0px",
-  backgroundRepeat: "no-repeat",
+  backgroundPosition: "-2px",
+  backgroundRepeat: "repeat",
   backgroundImage: `url(${NYP_CERT_BG})`,
-  marginTop: "0",
-  backgroundSize: "cover"
+  backgroundSize: "88px 758px",
+  minWidth: "900px",
+  minHeight: "760px"
+};
+
+const logoImgStyle = {
+  width: "350px",
+  height: "756px",
+  marginLeft: "-15px"
 };
 
 export const formatDateFullMonthProper = dateString => {
@@ -74,7 +80,12 @@ export const formatCertName = courseName =>
 
 const Template = ({ certificate }) => (
   <div className="container" style={borderImgStyle}>
-    <div style={{ marginLeft: "25rem", marginRight: "5rem" }}>
+    <img
+      src={NYP_CERT_LOGO}
+      style={logoImgStyle}
+      className="pull-left float-left"
+    />
+    <div style={{ marginLeft: "0px", marginRight: "5rem" }}>
       <div
         className="row d-flex justify-content-center"
         style={{ marginTop: "7rem" }}
@@ -111,7 +122,7 @@ const Template = ({ certificate }) => (
         </span>
       </div>
     </div>
-    <div style={{ marginLeft: "15rem", marginRight: "5rem" }}>
+    <div style={{ marginLeft: "0px", marginRight: "5rem" }}>
       <div>
         <div
           className="d-flex justify-content-center"
@@ -119,7 +130,7 @@ const Template = ({ certificate }) => (
         >
           <div className="col-0" />
           <div className="col-3  justify-content-center">
-            <div className="px-2 text-left " style={{ lineHeight: "100%" }}>
+            <div className="px-0 text-left " style={{ lineHeight: "100%" }}>
               <img
                 style={signatureWidthStyle}
                 src={certificate.additionalData.certSignatories[0].signature}
@@ -137,8 +148,8 @@ const Template = ({ certificate }) => (
           </div>
           <div className="col-1" />
 
-          <div className="col-2">
-            <div className="px-2 text-center">
+          <div className="col-3">
+            <div className="px-0 text-center">
               <img
                 style={signatureWidthStyle}
                 src={certificate.additionalData.certSignatories[1].signature}
@@ -150,8 +161,8 @@ const Template = ({ certificate }) => (
           </div>
           <div className="col-1" />
 
-          <div className="col-2">
-            <div className="px-2 text-center">
+          <div className="col-3">
+            <div className="px-0 text-center">
               <img
                 style={signatureWidthStyle}
                 src={certificate.additionalData.certSignatories[2].signature}
