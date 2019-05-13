@@ -1,17 +1,23 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import CertificateDropzone from "../CertificateDropZone";
 import css from "./dropZoneSection.scss";
+import { updateCertificate } from "../../reducers/certificate";
+import {json} from './demoCert.js';
 
 class DropZoneSection extends Component {
   constructor(props) {
     super(props);
   }
   componentDidMount() {
-    document.getElementById('demoDrop').addEventListener("drop", (e) => console.log("dropped here", e.dataTransfer.getData("isDemo")))
+    document.getElementById('demoDrop').addEventListener("drop", (e) => { if(e.dataTransfer.getData("isDemo")) { this.handleChange()}})
   }
   componentWillUnmount() {
     document.getElementById('demoDrop').removeEventListener("drop", () => console.log("dropped here"))
+  }
+  handleChange =() => {
+    this.props.updateCertificate(json);
   }
   render() {
     const { handleCertificateChange } = this.props;
@@ -29,6 +35,7 @@ class DropZoneSection extends Component {
                 verify the certificates you have of anyone from any institution. All
                 in one place.
           </p>
+          <button className="btn btn-success btn-lg" draggable="true" onDragStart={(e) => {console.log("starting"); e.dataTransfer.setData("isDemo", true)}} onDrop = {(e) => console.log('emnter', e.target.id)}>Try Me: Drag me to DropZone</button>
             </div>
           </div>
           <div className="col-lg-7 col-md-12 col-sm-12" id="demoDrop">
@@ -42,7 +49,14 @@ class DropZoneSection extends Component {
   }
 }
 
-export default DropZoneSection;
+const mapDispatchToProps = dispatch => ({
+  updateCertificate: payload => dispatch(updateCertificate(payload))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(DropZoneSection);
 
 DropZoneSection.propTypes = {
   handleCertificateChange: PropTypes.func

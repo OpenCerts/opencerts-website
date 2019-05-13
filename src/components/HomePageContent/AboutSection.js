@@ -1,11 +1,5 @@
-import React, {Component} from 'react';
-import { connect } from "react-redux";
 import css from "./aboutSection.scss";
 import images from "./AboutImages";
-import {json} from './abc.js';
-import {
-  updateCertificate
-} from "../../reducers/certificate";
 
 const BenefitsSection = () => (
   <div className={css.section}>
@@ -42,15 +36,7 @@ const BenefitsSection = () => (
   </div>
 );
 
-const Demo = ({handleChange}) =>  (
-      <>
-      {/* <input draggable="true" type="file" value="abc"/>abc */}
-      <div id="dragDemo" draggable="true" onDragStart={(e) => {console.log("starting"); e.dataTransfer.setData("isDemo", true)}} onDrop = {(e) => console.log('emnter', e.target.id)}>Click me</div>
-      </>
-    )
-
-
-const HowItWorks = ({handleChange}) => {
+const HowItWorks = () => {
   const sections = [
     {
       key: "onetwo",
@@ -79,22 +65,11 @@ const HowItWorks = ({handleChange}) => {
   return (
     <div className={css.howitworks}>
       <div className={css["hiw-container"]}>{section}</div>
-      <Demo handleChange={() => handleChange()}/>
     </div>
   );
 };
 
-class AboutSection extends Component { 
-  constructor(props) {
-    super(props);
-  }
-
-  handleChange =() => {
-    this.props.updateCertificate(json);
-  }
-  
-  render() {
-  return (
+const AboutSection = () => (
   <div>
     <div className="row bg-light" id={css.benefits}>
       <div className={css.main}>
@@ -105,21 +80,11 @@ class AboutSection extends Component {
       <div className={css.main}>
         <div className={css.section}>
           <h3>How it works</h3>
-          <HowItWorks handleChange={() => this.handleChange()}/>
+          <HowItWorks />
         </div>
       </div>
     </div>
   </div>
-)
-  }
-}
+);
 
-const mapDispatchToProps = dispatch => ({
-  updateCertificate: payload => dispatch(updateCertificate(payload))
-});
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(AboutSection);
-
+export default AboutSection;

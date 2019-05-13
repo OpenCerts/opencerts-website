@@ -95,8 +95,7 @@ const CertificateDropzone = ({
 }) => (
   <Dropzone
     id="certificate-dropzone"
-    onDrop={(acceptedFiles, a, b) => {
-      console.log(acceptedFiles, "-----||" , a, "----" , b);
+    onDrop={acceptedFiles => {
       onFileDrop(acceptedFiles, handleCertificateChange, handleFileError)
     }
     }
