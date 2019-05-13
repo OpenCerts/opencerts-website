@@ -27,6 +27,7 @@ const { trace } = getLogger("components:MultiCertificateRenderer");
  * @param {*} certificate
  */
 export const renderTemplateToTab = ({
+  document,
   template,
   certificate,
   handleObfuscation
@@ -35,6 +36,7 @@ export const renderTemplateToTab = ({
   return Object.assign({}, template, {
     content: (
       <Template
+        document={document}
         certificate={certificate}
         handleObfuscation={handleObfuscation}
       />
@@ -105,6 +107,7 @@ class MultiCertificateRenderer extends Component {
     const tabs = templates.map(template => {
       trace(`%o`, template);
       return renderTemplateToTab({
+        document,
         template,
         certificate,
         handleObfuscation: this.handleObfuscation
