@@ -35,7 +35,7 @@ const Template = ({ certificate }) => (
         <i>has successfully completed the</i>
       </div>
       <div className="h1 mb-4 mb-lg-5 d-flex justify-content-center">
-        Certified OpenCerts Associate
+        XYZ Course
       </div>
       <div className="h5 mb-4 mb-lg-5 d-flex justify-content-center">
         <i>certification through training administered by</i>
