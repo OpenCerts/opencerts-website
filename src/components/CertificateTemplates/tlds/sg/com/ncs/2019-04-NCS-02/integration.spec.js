@@ -25,10 +25,10 @@ test("2019-04-NCS-02 certificate is rendered correctly", async t => {
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "Teo Zhewei, Newton",
-    "Blockchain Designing and Architecture",
+    "Blockchain Designing and Modelling",
     "Chair,Board of Trustees",
     "President",
-    "06 Jun 2019",
+    "05 Jun 2019",
     "159753"
   ]);
 
@@ -42,11 +42,11 @@ test("2019-04-NCS-02 certificate is rendered correctly", async t => {
     "Completed Program",
     "12345678B",
     "Teo Zhewei, Newton",
-    "Blockchain Designing and Architecture",
+    "Blockchain Designing and Modelling",
     "SPORTS & WELLNESS",
     "FUNDAMENTALS FOR CREATIVE PROFESSIONALS",
     "PARTICIPATED IN GLOBAL LEADERSHIP PROGRAM IN MIT IN MAY - AUG 2016",
-    "06 Jun 2019"
+    "05 Jun 2019"
   ]);
 
   // Navigate to Static-Details tab
