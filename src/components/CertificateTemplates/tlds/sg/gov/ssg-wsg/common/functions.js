@@ -419,7 +419,9 @@ export const renderAwardTextQUAL = certificate => (
         {certificate.name}
       </p>
     </div>
-    {["FQ-004", "FQ-005", "SF_FQ_001", "SF_FQ_002", "SF_FQ_004"].includes(get(certificate, "additionalData.certCode"))
+    {["FQ-004", "FQ-005", "SF_FQ_001", "SF_FQ_002", "SF_FQ_004"].includes(
+      get(certificate, "additionalData.certCode")
+    )
       ? renderSpecialization(certificate)
       : ""}
     {renderAwardedTo()}
@@ -548,6 +550,64 @@ export const renderSignatureSOAES = certificate => (
         <p style={styles.soaCertCodeStyle}>
           {get(certificate, "additionalData.certCode")}
         </p>
+      </div>
+    </div>
+  </div>
+);
+
+export const renderSignatureQual = (certificate, IMG_BOTTOM_LOGO) => (
+  <div
+    className="row d-flex justify-content-center"
+    style={{ marginTop: "8rem", marginBottom: "1rem" }}
+  >
+    {renderSeal()}
+
+    <div className="col-lg-7">
+      {renderSignature(certificate)}
+      <div style={{ paddingLeft: "0px" }} className="col-lg-5 col-12">
+        <img style={styles.footerLogoStyle} src={IMG_SSGLOGO} />
+      </div>
+      <div className="col-lg-11 col-12" style={{ paddingLeft: "0px" }}>
+        <div style={styles.footerTextStyle} className="RobotoLight">
+          The training and assessment of the abovementioned learner are
+          accredited
+          <br />
+          in accordance with the Singapore Workforce Skills Qualifications
+          System.
+          <br />
+          {get(certificate, "additionalData.certCode").includes("FQ-004")
+            ? "and the Early Childhood Development Agency (ECDA)"
+            : ""}
+          <br />
+          {get(certificate, "additionalData.certCode").includes("FQ-004")
+            ? "Accreditation Standards for Early Childhood Teacher Training Courses."
+            : ""}
+        </div>
+        <div style={styles.footerTextStyle} className="RobotoLight">
+          <a style={{ color: "rgb(51,0,144)" }} href="www.ssg.gov.sg">
+            www.ssg.gov.sg
+          </a>
+          <br />
+          For verification of this certificate, please visit{" "}
+          <a
+            style={{ color: "rgb(51,0,144)" }}
+            href="https://myskillsfuture.sg/verify_eCert.html"
+          >
+            https://myskillsfuture.sg/verify_eCert.html
+          </a>
+        </div>
+      </div>
+    </div>
+    <div className="col-lg-3 col-xs-12">
+      <div style={{ marginBottom: "70px", marginTop: "60px" }}>
+        <p style={styles.printTextStyle} className="RobotoRegular">
+          Cert No: {get(certificate, "additionalData.serialNum")}
+        </p>
+      </div>
+      <div style={styles.footerTextStyle}>In partnership with</div>
+      <img style={styles.footerLogoStyle} src={IMG_BOTTOM_LOGO} />
+      <div style={styles.certCodeStyle}>
+        {get(certificate, "additionalData.certCode")}
       </div>
     </div>
   </div>
