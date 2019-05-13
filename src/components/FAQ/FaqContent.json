@@ -4,7 +4,7 @@
     "faq": [
       {
         "question": "What is OpenCerts?",
-        "answer": "OpenCerts is the umbrella trademark under which we have released a few key components (developed by <a href="https://www.tech.gov.sg/">Govtech Singapore</a>): \n 1. An open source schema for publishing educational credentials \n2. A set of tools for generating cryptographic protections for educational credentials \n3. The online website for verifying the authenticity of OpenCerts files."
+        "answer": "OpenCerts is the umbrella trademark under which we have released a few key components (developed by <a href=\"https:\/\/www.tech.gov.sg\/\">Govtech Singapore<\/a>): \n 1. An open source schema for publishing educational credentials \n2. A set of tools for generating cryptographic protections for educational credentials \n3. The online website for verifying the authenticity of OpenCerts files."
       },
       {
         "question": "Where do I get an OpenCerts certificate?",
