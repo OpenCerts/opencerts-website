@@ -4,7 +4,7 @@ import backgroundImg from "./resources";
 
 const Template = ({ certificate }) => (
   <div
-    className="p-2"
+    className="p-2 container"
     style={{
       backgroundImage: `url('${backgroundImg}')`,
       backgroundPosition: "center",

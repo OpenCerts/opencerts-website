@@ -636,7 +636,7 @@ export const renderSignature = certificate => (
 
 /* eslint-disable */
 // Disabled eslint as there's no way to add proptypes to an anonymous function like this
-const  Transcript({ logo, left }) => ({ certificate }) => (
+const  Transcript = ({ logo, left }) => ({certificate}) => (
   <div className="container" style={{ fontSize: "0.9rem" }}>
     {logo ? renderHeaderNPPartner(logo, left, certificate) : renderHeaderNP(certificate)}
 	{isCETDiploma(certificate.id)?renderCETGradingSystem():renderFTGradingSystem()}
@@ -644,10 +644,10 @@ const  Transcript({ logo, left }) => ({ certificate }) => (
     {renderNpfa(certificate)}
     {renderGPA(certificate)}
     {renderFinalStatement(certificate)}
-    {certificate.additionalData.transcriptSignatories &&
+    {/* {certificate.additionalData.transcriptSignatories &&
       certificate.additionalData.transcriptSignatories[1]
         ? renderTwoSignature(certificate) :  renderSignature(certificate)
-	}
+	} */}
   </div>
 );
 
