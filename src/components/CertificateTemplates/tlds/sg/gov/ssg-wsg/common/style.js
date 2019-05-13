@@ -187,3 +187,14 @@ export const soaCertCodeStyle = {
   left: "0",
   bottom: "30px"
 };
+
+export const specTextStyle = {
+  fontSize: "2rem",
+  textAlign: "center",
+  wordBreak: "break-word"
+};
+
+export const ssgLogoStyle = {
+  width: "75%",
+  height: "auto"
+};
