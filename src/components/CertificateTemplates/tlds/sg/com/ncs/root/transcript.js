@@ -412,3 +412,4 @@ export default ({ logo }) => ({ certificate }) => (
     <hr />
   </div>
 );
+//end of file

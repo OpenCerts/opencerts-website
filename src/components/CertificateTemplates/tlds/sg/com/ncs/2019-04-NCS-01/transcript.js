@@ -4,3 +4,4 @@ import { ncsLogo } from "./resources";
 const Template = Transcript({ logo: ncsLogo });
 
 export default Template;
+// end of file

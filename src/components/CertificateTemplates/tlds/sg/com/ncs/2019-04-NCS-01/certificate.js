@@ -7,3 +7,4 @@ const Template = Certificate({
 });
 
 export default Template;
+// end of file

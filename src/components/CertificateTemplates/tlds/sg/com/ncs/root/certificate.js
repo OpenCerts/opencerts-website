@@ -155,3 +155,4 @@ export default ({ backgroundImg, stamp, logo }) => ({ certificate }) => (
     </div>
   </div>
 );
+//end of file
