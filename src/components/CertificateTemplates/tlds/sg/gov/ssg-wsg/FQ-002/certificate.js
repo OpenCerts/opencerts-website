@@ -13,7 +13,7 @@ export default ({ logo }) => ({ certificate }) => (
   <div>
     <div
       className="container"
-      style={{ border: 5, borderColor: "#AAA", borderStyle: "solid", paddingLeft:"80px", paddingRight:"80px", paddingTop:"100px", paddingBottom:"100px", width:"100%", fontFamily:"Arial" }}
+      style={{ border: 5, borderColor: "#AAA", borderStyle: "solid", paddingRight:"6%", paddingLeft:"6%", paddingTop:"100px", paddingBottom:"100px", width:"100%", fontFamily:"Arial" }}
     >
       {fonts()}
       {renderLogoWSQ()}

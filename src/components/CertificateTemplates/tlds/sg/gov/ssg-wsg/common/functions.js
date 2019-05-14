@@ -574,14 +574,37 @@ export const renderSignatureQual = (certificate, IMG_BOTTOM_LOGO) => (
           <br />
           in accordance with the Singapore Workforce Skills Qualifications
           System.
-          <br />
-          {get(certificate, "additionalData.certCode").includes("FQ-004")
-            ? "and the Early Childhood Development Agency (ECDA)"
-            : ""}
-          <br />
-          {get(certificate, "additionalData.certCode").includes("FQ-004")
-            ? "Accreditation Standards for Early Childhood Teacher Training Courses."
-            : ""}
+          {["FQ-004", "SF_FQ_004"].includes(
+            get(certificate, "additionalData.certCode")
+          ) ? (
+            <span>
+              <br />
+              and the Early Childhood Development Agency (ECDA)
+            </span>
+          ) : (
+            ""
+          )}
+          {["FQ-004", "SF_FQ_004"].includes(
+            get(certificate, "additionalData.certCode")
+          ) ? (
+            <span>
+              <br />
+              Accreditation Standards for Early Childhood Teacher Training
+              Courses.
+            </span>
+          ) : (
+            ""
+          )}
+          {["SF_FQ_002", "SF_FQ_004"].includes(
+            get(certificate, "additionalData.certCode")
+          ) ? (
+            <span>
+              <br />
+              This WSQ programme is aligned to the Skills Framework.
+            </span>
+          ) : (
+            ""
+          )}
         </div>
         <div style={styles.footerTextStyle} className="RobotoLight">
           <a style={{ color: "rgb(51,0,144)" }} href="www.ssg.gov.sg">
@@ -605,7 +628,7 @@ export const renderSignatureQual = (certificate, IMG_BOTTOM_LOGO) => (
         </p>
       </div>
       <div style={styles.footerTextStyle}>In partnership with</div>
-      <img style={styles.footerLogoStyle} src={IMG_BOTTOM_LOGO} />
+      <img style={styles.ssgLogoStyle} src={IMG_BOTTOM_LOGO} />
       <div style={styles.certCodeStyle}>
         {get(certificate, "additionalData.certCode")}
       </div>
