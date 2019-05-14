@@ -288,7 +288,10 @@ export const renderAwardTextSOAHR = certificate => (
         attainment of the competencies in the following modules of the
         {get(certificate, "additionalData.certCode").includes("SOA_SV_001")
           ? " Service Excellence"
+          : get(certificate, "additionalData.certCode").includes("SF_SOA_MF_01")
+          ? " Generic Manufacturing Skills"
           : " Human Resource"}{" "}
+        
         WSQ Framework:
       </p>
     </div>
@@ -324,7 +327,8 @@ export const renderSignatureSOAHR = certificate => (
           "SF_SOA_HR_03",
           "SF_SOA_HR_04",
           "SF_SOA_HR_05",
-          "SF_FQ_001"
+          "SF_FQ_001",
+          "SF_SOA_MF_01"
         ].includes(get(certificate, "additionalData.certCode"))
           ? "This WSQ programme is aligned to the Skills Framework."
           : ""}
