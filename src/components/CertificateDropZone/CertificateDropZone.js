@@ -96,9 +96,8 @@ const CertificateDropzone = ({
   <Dropzone
     id="certificate-dropzone"
     onDrop={acceptedFiles => {
-      onFileDrop(acceptedFiles, handleCertificateChange, handleFileError)
-    }
-    }
+      onFileDrop(acceptedFiles, handleCertificateChange, handleFileError);
+    }}
     className="h-100"
   >
     {renderDropzoneContentCurry({

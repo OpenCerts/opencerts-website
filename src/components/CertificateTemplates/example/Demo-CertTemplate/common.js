@@ -1,5 +1,8 @@
 import { get } from "lodash";
-import { IMG_LOGO_NP, IMG_CERTIFICATE_SEAL } from "../../tlds/sg/edu/np/common/images";
+import {
+  IMG_LOGO_NP,
+  IMG_CERTIFICATE_SEAL
+} from "../../tlds/sg/edu/np/common/images";
 import {
   formatDateFullMonthProper,
   formatDatePrefix,
