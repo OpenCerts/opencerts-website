@@ -5,7 +5,6 @@ fixture("Optimatic Pte Ltd").page`http://localhost:3000`;
 const Certificate = "./E27-TEST-2019-ECHELON-CERT.opencert";
 
 // Only Certficate, No Transcript
-// const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
 
 test("E27-TEST-2019-ECHELON-CERT certificate is rendered correctly", async t => {

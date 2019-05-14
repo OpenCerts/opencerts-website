@@ -3,7 +3,7 @@ import { addDirToTemplatePath } from "template-utils/addDirToTemplatePath";
 
 // E27
 const E272019ECHELONCERT = dynamic(() =>
-  import("./E27-2019-ECHELON-CERT" /* webpackChunkName: "ITETemplates" */)
+  import("./E27-2019-ECHELON-CERT" /* webpackChunkName: "E27Templates" */)
 );
 
 const templates = {

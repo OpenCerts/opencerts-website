@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { get } from 'lodash';
 import { EchelonLogo, E27Logo, ApacLogo } from "./resources";
 
 const Template = ({ certificate, document }) => {
@@ -42,7 +43,7 @@ const Template = ({ certificate, document }) => {
             alignItems: "flex-end"
           }}
         >
-          Certificate of Participation
+          {get(certificate, 'name').split('|')[0]}
         </div>
       </div>
       <div>
@@ -68,7 +69,7 @@ const Template = ({ certificate, document }) => {
               width: "100%"
             }}
           >
-            {certificate.recipient.name}
+            {get(certificate, 'recipient.name')}
           </div>
         </div>
         <div style={{ marginTop: 32 }}>
@@ -143,7 +144,7 @@ const Template = ({ certificate, document }) => {
               width: "100%"
             }}
           >
-            Top 100 Finalist
+            {get(certificate, 'name').split('|')[1]}
           </div>
         </div>
         <div style={{ marginTop: 32 }}>

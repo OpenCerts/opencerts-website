@@ -1,5 +1,6 @@
 import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
 import Certificate from "./certificate";
+import { approvedAddresses } from "../common";
 
 const templates = [
   {
@@ -10,7 +11,7 @@ const templates = [
 ];
 
 const Template2019FebExample = () => (
-  <MultiCertificateRenderer templates={templates} />
+  <MultiCertificateRenderer templates={templates}  whitelist={approvedAddresses} />
 );
 
 export default Template2019FebExample;
