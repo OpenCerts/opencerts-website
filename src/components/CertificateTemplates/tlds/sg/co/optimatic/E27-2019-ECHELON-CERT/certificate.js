@@ -1,9 +1,14 @@
+import React from 'react';
 import PropTypes from "prop-types";
 import { get } from 'lodash';
 import { EchelonLogo, E27Logo, ApacLogo } from "./resources";
 
 const Template = ({ certificate, document }) => {
-  const scaleValue = window.innerWidth / 595;
+  const [width, setWidth] = React.useState(0);
+  React.useEffect(() => {
+    setWidth(window.document.getElementsByClassName('react-tabs')[0].clientWidth);
+  }, []);
+  const scaleValue = width / 595;
   const translateX = (scaleValue - 1.06) * 50;
   const translateY = (scaleValue - 1.07) * 50;
   return (
