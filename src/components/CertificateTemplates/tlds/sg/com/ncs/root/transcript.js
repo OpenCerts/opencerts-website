@@ -283,17 +283,19 @@ export const renderConclusion = certificate => {
 export const renderRemarks = certificate => {
   const remarksArray = get(certificate, "additionalData.remarks");
   // const remark = get(remarksArray, "note");
-  const remarksRows = remarksArray.map((r, j) => (
-    <div className="mb-2" key={j}>
-      <table>
-        <tbody>
-          <tr>
-            <td style={subjectCodeWidth}>{r.note}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  ));
+  const remarksRows = remarksArray
+    ? remarksArray.map((r, j) => (
+        <div className="mb-2" key={j}>
+          <table>
+            <tbody>
+              <tr>
+                <td style={subjectCodeWidth}>{r.note}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      ))
+    : null;
   return remarksArray ? (
     <div>
       <hr style={{ border: "1px solid black" }} />
@@ -309,21 +311,23 @@ export const renderRemarks = certificate => {
 
 export const renderAwards = certificate => {
   const awardsArray = get(certificate, "additionalData.awards");
-  const awardRows = awardsArray.map((r, k) => (
-    <div className="mb-1 ml-5" style={tableStyle} key={k}>
-      <table>
-        <tbody>
-          <tr style={{ width: "40%" }}>
-            <td style={{ textAlign: "left" }}>{r.time}&nbsp;:</td>
-            <td style={{ textAlign: "left" }}>
-              &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-            </td>
-            <td style={{ textAlign: "left" }}>{r.name}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  ));
+  const awardRows = awardsArray
+    ? awardsArray.map((r, k) => (
+        <div className="mb-1 ml-5" style={tableStyle} key={k}>
+          <table>
+            <tbody>
+              <tr style={{ width: "40%" }}>
+                <td style={{ textAlign: "left" }}>{r.time}&nbsp;:</td>
+                <td style={{ textAlign: "left" }}>
+                  &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td style={{ textAlign: "left" }}>{r.name}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      ))
+    : null;
   return awardsArray ? (
     <div>
       <div className="row m-0 mb-2">
