@@ -45,6 +45,7 @@
     "react-dom": "^16.6.3",
     "react-dropzone": "^7.0.1",
     "react-google-recaptcha": "^1.0.5",
+    "react-qr-svg": "^2.2.1",
     "react-redux": "^5.1.1",
     "react-tabs": "^2.3.0",
     "redux": "^4.0.0",
