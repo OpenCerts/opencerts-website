@@ -8,11 +8,27 @@ const SubjectGrades = ({ certificate }) => {
     .orderBy(s => s.semester)
     .value();
 
-  const subjects = semesters.map((s, j) => {
-    const semesterParts = s.semester.split(" ");
-    const acadYear = semesterParts[0];
-    const semesterName = `${semesterParts[1]} ${semesterParts[2]}`;
+  const semesterHeader = s => {
+    if (s.semester.startsWith("AY")) {
+      const semesterParts = s.semester.split(" ");
+      const acadYear = semesterParts[0];
+      const semesterName = `${semesterParts[1]} ${semesterParts[2]}`;
 
+      return (
+        <div className="row">
+          <div className="semester-header col-2">{acadYear}</div>
+          <div className="semester-header col-10">{semesterName}</div>
+        </div>
+      );
+    }
+    return (
+      <div className="row">
+        <div className="semester-header exemption col-12">{s.semester}</div>
+      </div>
+    );
+  };
+
+  const subjects = semesters.map((s, j) => {
     const semesterSubjects = s.grades.map((t, i) => (
       <div className="row" key={i}>
         <div className="col-2">{t.courseCode}</div>
@@ -24,17 +40,14 @@ const SubjectGrades = ({ certificate }) => {
 
     return (
       <div key={j}>
-        <div className="row">
-          <span className="semester-header col-2">{acadYear}</span>
-          <span className="semester-header col-10">{semesterName}</span>
-        </div>
+        {semesterHeader(s)}
         {semesterSubjects}
         <br />
       </div>
     );
   });
 
-  return <div className="container">{subjects}</div>;
+  return <div>{subjects}</div>;
 };
 
 SubjectGrades.propTypes = {
