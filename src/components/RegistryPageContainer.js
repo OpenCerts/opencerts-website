@@ -87,7 +87,7 @@ const RegistryPage = () => (
             <p>
               Certificates with unverified issuer means that the certificate
               store address is not registered. This could mean that the issuer
-              has not registered with OpenCerts or the cert
+              has not registered with OpenCerts.
             </p>
           </div>
         </div>

@@ -423,7 +423,9 @@ export const renderAwardTextQUAL = certificate => (
         {certificate.name}
       </p>
     </div>
-    {["FQ-004", "FQ-005", "SF_FQ_001", "SF_FQ_002", "SF_FQ_004"].includes(get(certificate, "additionalData.certCode"))
+    {["FQ-004", "FQ-005", "SF_FQ_001", "SF_FQ_002", "SF_FQ_004"].includes(
+      get(certificate, "additionalData.certCode")
+    )
       ? renderSpecialization(certificate)
       : ""}
     {renderAwardedTo()}
