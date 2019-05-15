@@ -174,7 +174,7 @@ export const renderSignature = certificate => (
 
 export const renderSpecialization = certificate => (
   <div className="d-flex">
-    <p style={styles.specTextStyle}>
+    <p style={styles.specTextStyle} className="RobotoRegular">
       {certificate.additionalData.specialization}
     </p>
   </div>
@@ -419,7 +419,7 @@ export const renderAwardTextQUAL = certificate => (
         {certificate.name}
       </p>
     </div>
-    {["FQ-004", "FQ-005", "SF_FQ_001", "SF_FQ_002", "SF_FQ_004"].includes(
+    {["FQ-004", "FQ-005", "FQ-005", "SF_FQ_001", "SF_FQ_002", "SF_FQ_004", "SF_FQ_005", "SF_FQ_006"].includes(
       get(certificate, "additionalData.certCode")
     )
       ? renderSpecialization(certificate)
