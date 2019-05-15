@@ -7,7 +7,8 @@ const ExamResults = ({ certificate }) => (
     <ExamResultsStyles />
 
     <div className="exam-results-header row">
-      <div className="col-8">SUBJECT CODE</div>
+      <div className="col-2">SUBJECT CODE</div>
+      <div className="col-6">SUBJECT</div>
       <div className="col-2 credit-unit">CREDIT UNIT</div>
       <div className="col-2 grade">GRADE</div>
     </div>

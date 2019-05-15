@@ -26,7 +26,7 @@ test("SF_FQ_004 certificate is rendered correctly", async t => {
     "is awarded to",
     "Lee1",
     "ID No: S0000000A",
-    "for successful attainment of the required industry approved competencies",
+    "for successful attainment of the requiredindustry approved competencies",
     "at WSQ_20180620",
     "20 Nov 2018"
   ]);

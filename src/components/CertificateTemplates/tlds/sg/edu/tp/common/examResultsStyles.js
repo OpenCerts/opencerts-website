@@ -13,6 +13,10 @@ const ExamResultsStyles = () => (
         text-transform:uppercase;
       }
 
+      .semester-header.exemption {
+        text-transform: none;
+      }
+
       .credit-unit,
       .grade {
         text-align: center

@@ -21,6 +21,9 @@ test("Full-time Diploma Plus is rendered correctly.", async t => {
   // certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "DUMMY STUDENT NAME",
-    "Dummy diploma plus name"
+    "Dummy diploma plus name",
+    "by Temasek Polytechnic (Singapore)",
+    "Principal",
+    "Registrar"
   ]);
 });
