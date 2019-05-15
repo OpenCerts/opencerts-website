@@ -1,5 +1,5 @@
 import {
-  renderLogoWSQ,  
+  renderLogoWSQ,
   renderSignatureSOAHR,
   renderIssuingDate,
   renderAwardTextSOA

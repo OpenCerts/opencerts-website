@@ -1,5 +1,5 @@
 import { IMG_ECDA } from "../common";
-import { 
+import {
   renderSignatureQual,
   renderIssuingDate,
   renderAwardTextSOA,

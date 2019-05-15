@@ -154,6 +154,9 @@ export const renderSeal = () => (
   </div>
 );
 
+export const ternaryOperatorFunction = (condition, then, otherwise) =>
+  condition ? then : otherwise;
+
 export const renderSignature = certificate => (
   <div>
     <div className="col-lg-4 col-12">
@@ -288,10 +291,13 @@ export const renderAwardTextSOAHR = certificate => (
         attainment of the competencies in the following modules of the
         {get(certificate, "additionalData.certCode").includes("SOA_SV_001")
           ? " Service Excellence"
-          : get(certificate, "additionalData.certCode").includes("SF_SOA_MF_01")
-          ? " Generic Manufacturing Skills"
-          : " Human Resource"}{" "}
-        
+          : ternaryOperatorFunction(
+              get(certificate, "additionalData.certCode").includes(
+                "SF_SOA_MF_01"
+              ),
+              " Generic Manufacturing Skills",
+              " Human Resource"
+            )}{" "}
         WSQ Framework:
       </p>
     </div>
@@ -578,7 +584,7 @@ export const renderSignatureQual = (certificate, IMG_BOTTOM_LOGO) => (
           <br />
           in accordance with the Singapore Workforce Skills Qualifications
           System.
-          {["FQ-004", "SF_FQ_004","SOA-002"].includes(
+          {["FQ-004", "SF_FQ_004", "SOA-002"].includes(
             get(certificate, "additionalData.certCode")
           ) ? (
             <span>
@@ -588,7 +594,7 @@ export const renderSignatureQual = (certificate, IMG_BOTTOM_LOGO) => (
           ) : (
             ""
           )}
-          {["FQ-004", "SF_FQ_004","SOA-002"].includes(
+          {["FQ-004", "SF_FQ_004", "SOA-002"].includes(
             get(certificate, "additionalData.certCode")
           ) ? (
             <span>
