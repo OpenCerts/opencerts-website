@@ -3,8 +3,12 @@
     "category": "General",
     "faq": [
       {
+        "question": "Who developed OpenCerts?",
+        "answer": "<a href=\"https://www.tech.gov.sg/\">GovTech Singapore</a> developed OpenCerts in cooperation with the OpenCerts Consortium."
+      },
+      {
         "question": "What is OpenCerts?",
-        "answer": "OpenCerts is the umbrella trademark under which we have released a few key components (developed by <a href=\"https://www.tech.gov.sg/\">Govtech Singapore</a>): <br><ol><li>An <a href=\"https://github.com/OpenCerts/open-certificate\">open source schema</a> for publishing educational credentials </li><li><a href=\"https://github.com/OpenCerts/certificate-cli\"> A set of tools</a> for generating cryptographic protections for educational credentials </li><li>This online website for verifying the authenticity of OpenCerts files.</li></ol>"
+        "answer": "OpenCerts is the umbrella trademark under which we have released a few key components: <br><ol><li>An <a href=\"https://github.com/OpenCerts/open-certificate\">open source schema</a> for publishing educational credentials </li><li><a href=\"https://github.com/OpenCerts/certificate-cli\"> A set of tools</a> for generating cryptographic protections for educational credentials </li><li>This online website for verifying the authenticity of OpenCerts files.</li></ol>"
       },
       {
         "question": "Where do I get an OpenCerts certificate?",
