@@ -4,10 +4,12 @@ import singaporetech from "./singaporetech";
 import np from "./np";
 import nyp from "./nyp";
 import tp from "./tp";
+import ntu from "./ntu";
 
 export default addDirToTemplatePath("edu", {
   ...singaporetech,
   ...np,
   ...nyp,
-  ...tp
+  ...tp,
+  ...ntu
 });
