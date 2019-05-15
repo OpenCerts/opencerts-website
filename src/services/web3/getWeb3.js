@@ -5,7 +5,6 @@ const ProviderEngine = require("web3-provider-engine");
 const WebsocketSubProvider = require("web3-provider-engine/subproviders/websocket.js");
 
 let web3Instance;
-let web3InstanceType;
 
 async function loadWeb3InfuraWebsocket(mainnet = true) {
   const rpcUrl = mainnet
@@ -76,7 +75,6 @@ async function resolveWeb3(
       default:
         web3Instance = await loadWeb3InfuraWebsocket();
     }
-    web3InstanceType = t;
     resolve(web3Instance);
   } catch (e) {
     reject(e);
