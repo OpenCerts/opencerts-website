@@ -3,8 +3,12 @@
     "category": "General",
     "faq": [
       {
+        "question": "Who developed OpenCerts?",
+        "answer": "<a href=\"https://www.tech.gov.sg/\">GovTech Singapore</a> developed OpenCerts in cooperation with the OpenCerts Consortium."
+      },
+      {
         "question": "What is OpenCerts?",
-        "answer": "OpenCerts is the umbrella trademark under which we have released a few key components: \n 1. An open source schema for publishing educational credentials \n2. A set of tools for generating cryptographic protections for educational credentials \n3. The online website for verifying the authenticity of OpenCerts files."
+        "answer": "OpenCerts is the umbrella trademark under which we have released a few key components: <br><ol><li>An <a href=\"https://github.com/OpenCerts/open-certificate\">open source schema</a> for publishing educational credentials </li><li><a href=\"https://github.com/OpenCerts/certificate-cli\"> A set of tools</a> for generating cryptographic protections for educational credentials </li><li>This online website for verifying the authenticity of OpenCerts files.</li></ol>"
       },
       {
         "question": "Where do I get an OpenCerts certificate?",
@@ -28,7 +32,7 @@
       },
       {
         "question": "Why can't I print the certificate?",
-        "answer": "Printing the certificate discards all the advanced cryptographic protections we have built into OpenCerts, hence printing is not recommended. "
+        "answer": "Printing the certificate discards all the advanced cryptographic protections we have built into OpenCerts, hence printed certificates are not to be considered authentic."
       },
       {
         "question": "What happens if I modify the OpenCerts file?",
@@ -36,8 +40,7 @@
       },
       {
         "question": "What does it mean by Signature?",
-        "answer": "In every properly issued OpenCerts certificate file, there is a hash-based message authentication code which cryptographically certifies that the content of the certificate has not been altered. If you would like to know more about the technical nitty-gritty of how this works, check out our technical documentation at",
-        "url": "https://github.com/GovTechSG/opencerts-documentation"
+        "answer": "In every properly issued OpenCerts certificate file, there is a hash-based message authentication code which cryptographically certifies that the content of the certificate has not been altered. If you would like to know more about the technical nitty-gritty of how this works, check out our <a href=\"https://docs.opencerts.io\">technical documentation</a>."
       }
     ]
   },
@@ -69,8 +72,7 @@
     "faq": [
       {
         "question": "How can I add my institute to the list of recognised issuers?",
-        "answer": "Please see ",
-        "url": "https://docs.opencerts.io/identity_registry.html"
+        "answer": "Please see our <a href=\"https://docs.opencerts.io/identity_registry.html\">documentation</a>"
       },
       {
         "question": "How can I change the appearance of the certificates I issue?",
