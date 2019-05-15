@@ -1,8 +1,8 @@
 import {
   renderLogoWSQ,
+  renderSignatureSOAHR,
   renderIssuingDate,
-  renderAwardTextSOAHR,
-  renderSignatureSOAHR
+  renderAwardTextSOAHR
 } from "../common/functions";
 import fonts from "../common/fonts";
 
@@ -12,7 +12,7 @@ export default ({ logo }) => ({ certificate }) => (
   <div>
     <div
       className="container"
-      style={{ border: 5, borderColor: "#AAA", borderStyle: "solid", paddingLeft:"6%", paddingRight:"6%", paddingTop:"100px", paddingBottom:"100px", width:"100%", fontFamily:"Arial" }}
+      style={{ border: 5, borderColor: "#AAA", borderStyle: "solid", paddingTop:"100px", paddingBottom:"100px", width:"100%",paddingLeft:"6%", paddingRight:"6%", fontFamily:"Arial" }}
     >
       {fonts()}
       {renderLogoWSQ()}
