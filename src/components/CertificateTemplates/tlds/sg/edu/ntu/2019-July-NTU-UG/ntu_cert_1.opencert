@@ -1,0 +1,81 @@
+{
+  "schema": "opencerts/v1.4",
+  "data": {
+    "id": "03699657-3515-45b1-81ae-020526a7a7dd:string:SERIAL-2018-08-01-001",
+    "$template": "ede56167-5d82-42de-abd4-99246642607d:string:sg/edu/ntu/2019-ntu-degree",
+    "issuedOn": "3f082cf0-b915-4770-b097-b4f9948864c3:string:2018-08-01T00:00:00+08:00",
+    "name": "c4866b88-bcc5-4c64-abb3-49d58f5e0844:string:NTU Degree in EEE",
+    "admissionDate": "6c63029a-ad46-46f5-b2f6-6f10d6736c1c:string:2016-08-01T00:00:00+08:00",
+    "graduationDate": "a8857643-6255-4162-94bc-868151bab629:string:2018-08-01T00:00:00+08:00",
+    "issuers": [
+      {
+        "name": "926526e4-783a-46d8-87a0-38116d695005:string:Pace College",
+        "did": "38f0dc3e-7b49-4220-acea-f15ee28d22f4:string:DID:SG-UEN:PACE123456",
+        "url": "3ba3b120-c51b-40e7-b3b9-4b54f640c7a3:string:https://copace.ntu.edu.sg",
+        "email": "37a704cc-a041-4d54-b470-85a1122f4586:string:copace@ntu.edu.sg",
+        "certificateStore": "11becb82-9913-4746-a25a-bb33572d3699:string:0x3FFB6b913E9874c7ddabD564d85676Bc5cAd16d4"
+      }
+    ],
+    "recipient": {
+      "name": "c16cc81a-f323-4183-a541-5f167262e772:string:NTU Student Name",
+      "did": "0ea2b429-ac4a-487c-8bbd-6e6b64b0ed72:string:DID:SG-NRIC:S1234567A",
+      "email": "1c9e025f-104b-48b0-96ca-c8cb9a53af78:string:student@ntu.edu.sg",
+      "phone": "d27e6e3e-aa91-42a7-90f1-7a92f2d77daf:string:+65 12345678"
+    },
+    "transcript": [
+      {
+        "name": "37b18892-77e2-4bf6-b8d0-62eeb9326293:string:Circuit Analysis",
+        "grade": "65720ff2-3b0b-4ef4-bcb9-5db777dbd432:string:A+",
+        "courseCredit": "72aa879b-4365-401f-9a5f-aed8e1bbd871:number:5",
+        "courseCode": "ab43edb7-24ce-46c5-bc5d-2c5a12fa8413:string:EE2001",
+        "examinationDate": "ef644139-8749-450f-ad6b-10a7b2e5679d:string:2018-08-01T00:00:00+08:00",
+        "url": "60a72a00-5bee-4412-b129-343d7e8b8301:string:https://copace.ntu.edu.sg/subject/EE2001",
+        "description": "4a264755-37da-447c-816a-9aca52e25dc6:string:EEE Circuit Analysis"
+      },
+      {
+        "name": "b3fbbf09-0888-49cf-82c7-ab9c6376f351:string:Semiconductor Physics",
+        "grade": "f7331606-d2e1-4573-8e91-5557315774a8:string:A+",
+        "courseCredit": "2334d37b-7806-4f22-afd2-f79655fc5592:number:5",
+        "courseCode": "eb8e487f-69a9-4419-94ec-ab140bf71557:string:EE2007",
+        "examinationDate": "116a5b16-8832-4a37-a35d-ddbcf78eb1ae:string:2018-08-01T00:00:00+08:00",
+        "url": "6722d6bb-f5cb-486d-b3ca-7e37cd619414:string:https://copace.ntu.edu.sg/subject/EE2007",
+        "description": "51d4069a-3d10-4f37-a5f3-3384029672c9:string:EEE Semiconductor Physics"
+      }
+    ],
+    "cumulativeScore": "6776ede1-d821-480a-a693-9cc93f09d5b0:number:10",
+    "additionalData": {
+      "coCurricularActivities": [
+        {
+          "name": "b4ff1c31-39ce-4eb1-b6f0-98e2837b7fbf:string:Crypto-investment Club",
+          "position": "7e0c68a2-af86-47ca-b52d-6371cf2e7a1e:string:Club President",
+          "startDate": "f9936eec-e53b-4e92-b747-204973d528c9:string:2017-08-01T00:00:00+08:00",
+          "endDate": "73173ab1-3485-4eba-8797-de12fa396e5b:string:2018-08-01T00:00:00+08:00",
+          "remarks": "793b90a4-c551-40f9-bdcb-525419adae9d:string:Top trader (2018)"
+        }
+      ],
+      "npfa": "ef1a4629-7d31-442b-8d03-5a6476466dd1:string:silver",
+      "images": {
+        "signature1": {
+          "name": "3d435667-952e-4422-bab1-5cbbd5cc563c:string:Mr Important",
+          "designation": "e963bdb1-6702-4e2e-8c9d-805333c64900:string:President",
+          "signature": "4ee5307d-92ed-4baa-9321-fa3c51451562:string:<-- Base64 Image -->"
+        },
+        "signature2": {
+          "name": "32acb7dc-234b-43eb-a814-d9814a48f7d6:string:Mr Not-So-Important",
+          "designation": "d8aae82a-e167-4d4a-841b-a208df179666:string:Chairman, Blockchain Faculty",
+          "signature": "39a0b376-2fa5-479a-878c-15aa5af54827:string:<-- Base64 Image -->"
+        }
+      }
+    }
+  },
+  "privacy": {},
+  "signature": {
+    "type": "SHA3MerkleProof",
+    "targetHash": "2327bc807c02afd338b9d9d7310856e38fd524f473dd6b7205ee3ac957752d61",
+    "proof": [
+      "2c84c3ea126a7df8baa49a75fe545095d613909e009f8a07eefe07aa8ed9cac1",
+      "ea8530eeced4870a39881a84b793183303da3be603b6c5a18343ed88eabb9316"
+    ],
+    "merkleRoot": "e68f562965f98c716ed965701d43bd2c26c65eae999d98a5c47e90aa11f0d858"
+  }
+}
