@@ -165,8 +165,8 @@ export const switchOperatorFunction = certificate => {
     case "SF_SOA_MF_01":
       return " Generic Manufacturing Skills";
 
-    case "SF_SOA_MF_01":
-      return " Generic Manufacturing Skills";  
+    case "SF_SOA_MF_02":
+      return " Generic Manufacturing Skills";
 
     default:
       return " Human Resource";
