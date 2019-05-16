@@ -33,6 +33,33 @@ class FramelessViewerContainer extends Component {
       renderCertificate: this.handleCertificateChange,
       selectTemplateTab: this.props.selectTemplateTab
     };
+
+    const handleMessage = ({ data, source, origin }) => {
+      switch (data.type) {
+        case "CERTIFICATE_CHANGE":
+          this.handleCertificateChange(data.payload);
+          break;
+        case "RENDER_CERTIFICATE":
+          this.renderCertificate(data.payload);
+          break;
+        case "TEMPLATES":
+          source.postMessage(
+            {
+              type: "TEMPLATES",
+              payload: JSON.parse(JSON.stringify(this.props.templates))
+            },
+            origin
+          );
+          break;
+        default:
+      }
+    };
+
+    if (window.addEventListener) {
+      window.addEventListener("message", handleMessage, false);
+    } else {
+      window.attachEvent("onmessage", handleMessage);
+    }
   }
 
   handleTextFieldChange(e) {
