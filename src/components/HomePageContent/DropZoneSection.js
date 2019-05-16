@@ -4,13 +4,11 @@ import PropTypes from "prop-types";
 import CertificateDropzone from "../CertificateDropZone";
 import css from "./dropZoneSection.scss";
 import { updateCertificate } from "../../reducers/certificate";
-var json = require("../CertificateTemplates/example/Demo-CertTemplate/DEMO_2019.json");
-console.log("certjson", json)
-class DropZoneSection extends Component {
-  constructor(props) {
-    super(props);
-  }
+import { trace } from "../../utils/logger";
 
+const json = require("../CertificateTemplates/example/Demo-CertTemplate/DEMO_2019.json");
+
+class DropZoneSection extends Component {
   componentDidMount() {
     document.getElementById("demoDrop").addEventListener("drop", e => {
       if (e.dataTransfer.getData("isDemo")) {
@@ -22,13 +20,12 @@ class DropZoneSection extends Component {
   componentWillUnmount() {
     document
       .getElementById("demoDrop")
-      .removeEventListener("drop", () => console.log("listener detached"));
+      .removeEventListener("drop", () => this.removeListener());
   }
 
-  handleChange = () => {
-    // readOpenCertFile("../CertificateTemplates/example/Demo-CertTemplate/DEMO_2019.opencert");
-    this.props.updateCertificate(json);
-  };
+  removeListener = () => trace("drop listener removed");
+
+  handleChange = () => this.props.updateCertificate(json);
 
   render() {
     const { handleCertificateChange } = this.props;
@@ -76,5 +73,6 @@ export default connect(
 )(DropZoneSection);
 
 DropZoneSection.propTypes = {
-  handleCertificateChange: PropTypes.func
+  handleCertificateChange: PropTypes.func,
+  updateCertificate: PropTypes.func
 };

@@ -1,5 +1,4 @@
 const { keccak256 } = require("ethereumjs-util");
-const fs = require("fs");
 
 function bufSortJoin(...args) {
   return Buffer.concat([...args].sort(Buffer.compare));
@@ -25,15 +24,4 @@ export default combinedHash;
 const ethereumAddressMatcher = /^0x[a-fA-F0-9]{40}$/;
 export function isEthereumAddress(address) {
   return ethereumAddressMatcher.test(address);
-}
-
-export function readOpenCertFile(file) {
-  try {  
-    const dirListing = fs.readdirSync(dirPath, {
-      withFileTypes: true
-    });
-    console.log(dirListing.toString());    
-  } catch(e) {
-      console.log('Error:', e.stack);
-  }
 }

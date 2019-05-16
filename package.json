@@ -29,7 +29,6 @@
     "date-fns": "^1.29.0",
     "debug": "^4.1.0",
     "ethereumjs-util": "^6.0.0",
-    "fs": "0.0.1-security",
     "fs-extra": "^7.0.1",
     "inquirer": "^6.2.2",
     "isomorphic-fetch": "^2.2.1",
