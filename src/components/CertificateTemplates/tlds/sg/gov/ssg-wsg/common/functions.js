@@ -154,8 +154,24 @@ export const renderSeal = () => (
   </div>
 );
 
-export const ternaryOperatorFunction = (condition, then, otherwise) =>
-  condition ? then : otherwise;
+export const switchOperatorFunction = certificate => {
+  switch (get(certificate, "additionalData.certCode")) {
+    case "SOA_SV_001":
+      return " Service Excellence";
+
+    case "SF_SOA_SV_001":
+      return " Service Excellence";
+
+    case "SF_SOA_MF_01":
+      return " Generic Manufacturing Skills";
+
+    case "SF_SOA_MF_01":
+      return " Generic Manufacturing Skills";  
+
+    default:
+      return " Human Resource";
+  }
+};
 
 export const renderSignature = certificate => (
   <div>
@@ -289,16 +305,7 @@ export const renderAwardTextSOAHR = certificate => (
       <p style={styles.awardTextStyle} className="RobotoMedium">
         for successfully meeting the requirements of the above programme and
         attainment of the competencies in the following modules of the
-        {get(certificate, "additionalData.certCode").includes("SOA_SV_001")
-          ? " Service Excellence"
-          : ternaryOperatorFunction(
-              get(certificate, "additionalData.certCode").includes(
-                "SF_SOA_MF_01"
-              ),
-              " Generic Manufacturing Skills",
-              " Human Resource"
-            )}{" "}
-        WSQ Framework:
+        {switchOperatorFunction(certificate)} WSQ Framework:
       </p>
     </div>
     {certificate.transcript.map(item => (
