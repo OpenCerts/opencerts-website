@@ -154,14 +154,26 @@ export const renderSeal = () => (
   </div>
 );
 
+export const ternaryOperatorFunction = (condition, then, otherwise) =>
+  condition ? then : otherwise;
+
 export const renderSignature = certificate => (
   <div>
-    <div className="col-lg-4 col-12">
-      <img
-        style={styles.signatureWidthStyle}
-        src={get(certificate, "additionalData.certSignatories[0].signature")}
-      />
-    </div>
+    {["QUAL_Reprint"].includes(get(certificate, "additionalData.certCode")) ? (
+      <div
+        className="col-lg-5 col-12"
+        style={{ paddingLeft: "0px", fontSize: "1.5rem" }}
+      >
+        <p style={{ fontWeight: "bold", color: "#FF0000" }}>Certified Copy</p>
+      </div>
+    ) : (
+      <div className="col-lg-4 col-12">
+        <img
+          style={styles.signatureWidthStyle}
+          src={get(certificate, "additionalData.certSignatories[0].signature")}
+        />
+      </div>
+    )}
     <div style={styles.designationTextStyle} className="RobotoBold">
       {get(certificate, "additionalData.certSignatories[0].name")},{" "}
       {get(certificate, "additionalData.certSignatories[0].position")}
@@ -174,7 +186,7 @@ export const renderSignature = certificate => (
 
 export const renderSpecialization = certificate => (
   <div className="d-flex">
-    <p style={styles.specTextStyle} className="RobotoRegular">
+    <p style={styles.specTextStyle}>
       {certificate.additionalData.specialization}
     </p>
   </div>
@@ -288,7 +300,13 @@ export const renderAwardTextSOAHR = certificate => (
         attainment of the competencies in the following modules of the
         {get(certificate, "additionalData.certCode").includes("SOA_SV_001")
           ? " Service Excellence"
-          : " Human Resource"}{" "}
+          : ternaryOperatorFunction(
+              get(certificate, "additionalData.certCode").includes(
+                "SF_SOA_MF_01"
+              ),
+              " Generic Manufacturing Skills",
+              " Human Resource"
+            )}{" "}
         WSQ Framework:
       </p>
     </div>
@@ -324,7 +342,8 @@ export const renderSignatureSOAHR = certificate => (
           "SF_SOA_HR_03",
           "SF_SOA_HR_04",
           "SF_SOA_HR_05",
-          "SF_FQ_001"
+          "SF_FQ_001",
+          "SF_SOA_MF_01"
         ].includes(get(certificate, "additionalData.certCode"))
           ? "This WSQ programme is aligned to the Skills Framework."
           : ""}
@@ -354,7 +373,11 @@ export const renderSignatureSOAHR = certificate => (
 
         <div className="col-lg-5 col-5">
           <p style={styles.certCodeStyle}>
-            {get(certificate, "additionalData.certCode")}
+            {["QUAL_Reprint"].includes(
+              get(certificate, "additionalData.certCode")
+            )
+              ? "QUAL"
+              : get(certificate, "additionalData.certCode")}
           </p>
         </div>
       </div>
@@ -419,7 +442,7 @@ export const renderAwardTextQUAL = certificate => (
         {certificate.name}
       </p>
     </div>
-    {["FQ-004", "FQ-005", "FQ-005", "SF_FQ_001", "SF_FQ_002", "SF_FQ_004", "SF_FQ_005", "SF_FQ_006"].includes(
+    {["FQ-004", "FQ-005", "SF_FQ_001", "SF_FQ_002", "SF_FQ_004"].includes(
       get(certificate, "additionalData.certCode")
     )
       ? renderSpecialization(certificate)
@@ -574,7 +597,7 @@ export const renderSignatureQual = (certificate, IMG_BOTTOM_LOGO) => (
           <br />
           in accordance with the Singapore Workforce Skills Qualifications
           System.
-          {["FQ-004", "SF_FQ_004"].includes(
+          {["FQ-004", "SF_FQ_004", "SOA-002"].includes(
             get(certificate, "additionalData.certCode")
           ) ? (
             <span>
@@ -584,7 +607,7 @@ export const renderSignatureQual = (certificate, IMG_BOTTOM_LOGO) => (
           ) : (
             ""
           )}
-          {["FQ-004", "SF_FQ_004"].includes(
+          {["FQ-004", "SF_FQ_004", "SOA-002"].includes(
             get(certificate, "additionalData.certCode")
           ) ? (
             <span>
