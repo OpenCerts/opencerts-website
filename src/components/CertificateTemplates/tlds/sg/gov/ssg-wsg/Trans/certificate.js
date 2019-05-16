@@ -109,13 +109,13 @@ export const renderTranscript = certificate => (
     <div className="d-flex" style={{ marginTop: "1rem" }}>
       <p style={styles.printTextStyle} className="RobotoRegular">
         REMARKS:{" "}
-        {/* {get(certificate, "additionalData.certCode").includes("Trans") ? (
+        {get(certificate, "$template").includes("sg/gov/ssg-wsg/Trans") ? (
           ""
         ) : (
           <span style={{ fontWeight: "bold", color: "#FF0000" }}>
             Certified Copy
           </span>
-        )} */}
+        )}
       </p>
     </div>
     <div className="d-flex" style={{ overflowX: "auto" }}>
