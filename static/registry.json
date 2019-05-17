@@ -81,6 +81,15 @@
       "logo": "/static/images/RP_logo.svg",
       "id": "rp-registry"
     },
+    "0x7c5574eA0BB0Fc18887CB98E4e91EC829A7d0D9A": {
+      "name": "SIPMM Institute",
+      "displayCard": true,
+      "website": "https://sipmm.edu.sg/",
+      "email": "courses@sipmm.edu.sg",
+      "phone": "+65 6817 1717",
+      "logo": "/static/images/SIPMM_logo.svg",
+      "id": "sipmm-registry"
+    },
     "0x5f007251c78cA92d3053492cCf0EDC161063624c": {
       "name": "ROPSTEN: Nanyang Polytechnic",
       "displayCard": false
@@ -127,6 +136,10 @@
     },
     "0x061aFcFF60b90E0F633F8ef157e01BaB9b2FfDD3": {
       "name:": "ROPSTEN: Republic Polytechnic",
+      "displayCard": false
+    },
+    "0xF65496c6f830E1190e969bcf4A4fe90b1ea784FB": {
+      "name": "ROPSTEN: SIPMM Institute",
       "displayCard": false
     }
   }

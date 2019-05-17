@@ -1,22 +1,31 @@
 import PropTypes from "prop-types";
 import { get } from "lodash";
-import { format } from "date-fns";
+import { tz } from "moment-timezone";
 import { transcriptLogo } from "./resources";
+import { TIMEZONE } from "../common";
 
-import { trasnciptHeaderContainerClass, transciptLogoClass }from "./styles.scss";
+import {
+  trasnciptHeaderContainerClass,
+  transciptLogoClass
+} from "./styles.scss";
 
-
-const getTranscriptSummaries = transcriptSummaries => transcriptSummaries.map((summary, key) => (
-  <div key={key} className="row mb-2 mb-lg-3">
-    {summary.note}
-  </div>
-));
+const getTranscriptSummaries = transcriptSummaries =>
+  transcriptSummaries.map((summary, key) => (
+    <div key={key} className="row mb-2 mb-lg-3">
+      {summary.note}
+    </div>
+  ));
 
 const getTranscriptSection = transcriptData => (
-  <div style={{ overflowX: "auto" }} className="row mb-4">
+  <div key="Data" style={{ overflowX: "auto" }} className="row mb-4">
     <table cellPadding="10" className="w-100">
       <tbody>
-        <tr style={{ borderTop: "4px solid black", borderBottom: "4px solid black" }}>
+        <tr
+          style={{
+            borderTop: "4px solid black",
+            borderBottom: "4px solid black"
+          }}
+        >
           <th>Year</th>
           <th>Code</th>
           <th>Module Name</th>
@@ -25,21 +34,11 @@ const getTranscriptSection = transcriptData => (
         </tr>
         {transcriptData.map((course, key) => (
           <tr key={key}>
-            <td>
-              {format(course.examinationDate, "YYYY")}
-            </td>
-            <td>
-              {course.courseCode}
-            </td>
-            <td>
-              {course.name}
-            </td>
-            <td>
-              {course.grade}
-            </td>
-            <td>
-              {course.gradeDescription}
-            </td>
+            <td>{tz(course.examinationDate, TIMEZONE).format("YYYY")}</td>
+            <td>{course.courseCode}</td>
+            <td>{course.name}</td>
+            <td>{course.grade}</td>
+            <td>{course.gradeDescription}</td>
           </tr>
         ))}
       </tbody>
@@ -62,7 +61,11 @@ const getTranscriptSignatories = transcriptSignatories => (
 const getGradeClassification = () => (
   <div
     className="col-6 mb-4 mb-lg-5"
-    style={{ fontSize: "0.9rem", border: "1px solid #000000", overflowX: "auto" }}
+    style={{
+      fontSize: "0.9rem",
+      border: "1px solid #000000",
+      overflowX: "auto"
+    }}
   >
     <div className="text-center mt-2 mt-lg-3 mb-2 mb-lg-3">
       <u style={{ fontWeight: "bold" }}>GRADE CLASSIFICATION</u>
@@ -115,8 +118,10 @@ const getGradeClassification = () => (
       <table className="w-100 mb-2 mb-lg-3">
         <tbody>
           <tr>
-            <th></th>
-            <th style={{ textDecoration: "underline", fontWeight: "bold" }}>Notes</th>
+            <th />
+            <th style={{ textDecoration: "underline", fontWeight: "bold" }}>
+              Notes
+            </th>
           </tr>
           <tr>
             <td>+</td>
@@ -125,8 +130,8 @@ const getGradeClassification = () => (
           <tr>
             <td>++</td>
             <td>
-              Candidates must not exceed the minimun number of
-              Conditional Passes to qualify for the Academic Award.
+              Candidates must not exceed the minimun number of Conditional
+              Passes to qualify for the Academic Award.
             </td>
           </tr>
         </tbody>
@@ -143,7 +148,11 @@ const Template = ({ certificate }) => {
   const transcriptData = get(certificate, "transcript", []);
   const transcriptSummaries = get(certificate, "TranscriptSummary", []);
   const additionalData = get(certificate, "additionalData", {});
-  const transcriptSignatories = get(additionalData, "transcriptSignatories", []);
+  const transcriptSignatories = get(
+    additionalData,
+    "transcriptSignatories",
+    []
+  );
 
   return (
     <div style={{ fontFamily: "Arial", maxWidth: 900 }} className="container">
@@ -154,43 +163,59 @@ const Template = ({ certificate }) => {
           style={{ maxWidth: 600, maxHeight: 85 }}
         />
         <div
-          style={{ color: "#065f2c", fontFamily: "Times New Roman", fontWeight: "700" }}
+          style={{
+            color: "#065f2c",
+            fontFamily: "Times New Roman",
+            fontWeight: "700"
+          }}
           className="h2 text-center"
         >
           RESULT TRANSCRIPT
         </div>
       </div>
       <div className="row mb-4">
-        {issuedOn && <div className="w-100">Date: {format(issuedOn, "DD MMMM YYYY")}</div>}
+        {issuedOn && (
+          <div className="w-100">
+            Date: {tz(issuedOn, TIMEZONE).format("DD MMMM YYYY")}
+          </div>
+        )}
         <div className="w-100">Name of Student: {studentName}</div>
         <div lassName="w-100">Student ID: {studentId}</div>
         <div className="w-100">Course Admitted: {certificateName}</div>
       </div>
-      {transcriptSummaries !== [] && getTranscriptSummaries(transcriptSummaries)}
+      {transcriptSummaries !== [] &&
+        getTranscriptSummaries(transcriptSummaries)}
       {transcriptData !== [] && [
         getTranscriptSection(transcriptData),
-        <div className="row d-flex mb-4 mb-lg-5">
-          <div style={{ padding: 0, textDecoration: "underline" }} className="col-2">RESULT:</div>
+        <div key="Results" className="row d-flex mb-4 mb-lg-5">
+          <div
+            style={{ padding: 0, textDecoration: "underline" }}
+            className="col-2"
+          >
+            RESULT:
+          </div>
           <div className="col-10">
-            Student has satisfied all requirements for above Course and the Academic Board has
-            approved the award of {transcriptData[0].programDescription}
+            Student has satisfied all requirements for above Course and the
+            Academic Board has approved the award of{" "}
+            {transcriptData[0].programDescription}
             {additionalData.merit && ` (${additionalData.merit})`}
           </div>
         </div>
       ]}
 
       <div className="d-flex">
-        {transcriptSignatories !== [] && getTranscriptSignatories(transcriptSignatories)}
+        {transcriptSignatories !== [] &&
+          getTranscriptSignatories(transcriptSignatories)}
         <div className="col-3" />
         {getGradeClassification()}
       </div>
       <div>Copy: Academic Record.</div>
     </div>
   );
-}
+};
 
 Template.propTypes = {
-  certificate: PropTypes.object.isRequired,
+  certificate: PropTypes.object.isRequired
 };
 
 export default Template;

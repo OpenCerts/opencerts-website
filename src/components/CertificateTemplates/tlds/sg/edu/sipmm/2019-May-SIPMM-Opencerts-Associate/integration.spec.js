@@ -4,7 +4,6 @@ fixture("SIPMM").page`http://localhost:3000`;
 
 const Certificate = "./2019-May-SIPMM-Opencerts-Associate.opencert";
 
-const ButtonViewCertificateAnyway = Selector("#certificate-view-anyway");
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
 
@@ -17,8 +16,6 @@ const validateTextContent = async (t, component, texts) =>
 test("2019-May-SIPMM certificate is rendered correctly", async t => {
   // Uploads certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
-
-  await t.click(ButtonViewCertificateAnyway);
 
   // Certificate tabs rendered
   await t.expect(TemplateTabList.textContent).contains("Certificate");

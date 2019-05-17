@@ -1,0 +1,5 @@
+export const TIMEZONE = "AWST";
+export const whiteList = [
+  "0xF65496c6f830E1190e969bcf4A4fe90b1ea784FB",
+  "0x7c5574eA0BB0Fc18887CB98E4e91EC829A7d0D9A"
+];
