@@ -43,13 +43,21 @@ class DropZoneSection extends Component {
                 verify the certificates you have of anyone from any institution.
                 All in one place.
               </p>
-              <button
+              <a
                 className="btn btn-success btn-lg"
+                role="button"
+                href={`data:text/plain;,${JSON.stringify(
+                  json,
+                  null,
+                  2
+                )}`}
+                target="_blank"
+                download="demo.opencert"
                 draggable="true"
                 onDragStart={e => e.dataTransfer.setData("isDemo", true)}
               >
                 Try Me: Drag me to DropZone
-              </button>
+              </a>
             </div>
           </div>
           <div className="col-lg-7 col-md-12 col-sm-12" id="demoDrop">

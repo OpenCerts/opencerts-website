@@ -111,7 +111,7 @@ export const renderExamDate = (groupItems, itemId, opts) => {
   );
 };
 
-export const renderHeaderNPPartner = (logo, left, certificate) => {
+export const renderHeaderPartner = (logo, left, certificate) => {
   const serial = get(certificate, "additionalData.transcriptId");
   return (
     <div className="row">
@@ -142,7 +142,7 @@ export const renderHeaderNPPartner = (logo, left, certificate) => {
   );
 };
 
-export const renderHeaderNP = certificate => {
+export const renderHeader = certificate => {
   const serial = get(certificate, "additionalData.transcriptId");
   return (
     <div className="row">
@@ -518,17 +518,6 @@ export const renderTranscript = (certificate, opts) => {
   return <div>{renderedCourses}</div>;
 };
 
-export const renderNpfa = certificate => {
-  const npfa = get(certificate, "additionalData.npfa", undefined);
-  return npfa ? (
-    <div className="row mx-auto">
-      National Physical Fitness Award: {npfa}
-      <br />
-      <br />
-    </div>
-  ) : null;
-};
-
 export const renderGPA = certificate => {
   const GPA = get(certificate, "cumulativeScore", undefined);
   return GPA ? (
@@ -638,10 +627,9 @@ export const renderSignature = certificate => (
 // Disabled eslint as there's no way to add proptypes to an anonymous function like this
 const  Transcript = ({ logo, left }) => ({certificate}) => (
   <div className="container" style={{ fontSize: "0.9rem" }}>
-    {logo ? renderHeaderNPPartner(logo, left, certificate) : renderHeaderNP(certificate)}
+    {logo ? renderHeaderPartner(logo, left, certificate) : renderHeader(certificate)}
 	{isCETDiploma(certificate.id)?renderCETGradingSystem():renderFTGradingSystem()}
     {renderTranscript(certificate)}
-    {renderNpfa(certificate)}
     {renderGPA(certificate)}
     {renderFinalStatement(certificate)}
     {/* {certificate.additionalData.transcriptSignatories &&
@@ -653,7 +641,6 @@ const  Transcript = ({ logo, left }) => ({certificate}) => (
 
 
 const Script = Transcript({
-  logo: backgroundImg,
   left: "Y"
 });
 
