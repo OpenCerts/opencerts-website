@@ -290,7 +290,9 @@ export const renderCertName = certificate => (
         <p style={printTextStyle}>with</p>
       </div>
       <div className="col-1 align-items-end">
-        <p style={certNameHonorTextStyle}>Honours</p>
+        <p style={certNameHonorTextStyle}>
+          {certificate.additionalData.classification}
+        </p>
       </div>
     </div>
   </div>
