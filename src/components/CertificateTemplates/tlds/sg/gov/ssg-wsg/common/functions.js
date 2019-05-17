@@ -168,6 +168,9 @@ export const switchOperatorFunction = certificate => {
     case "SF_SOA_MF_02":
       return " Generic Manufacturing Skills";
 
+    case "SOA-MF-01":
+      return " Generic Manufacturing Skills";
+
     default:
       return " Human Resource";
   }
@@ -341,7 +344,8 @@ export const renderSignatureSOAHR = certificate => (
           "SF_SOA_HR_04",
           "SF_SOA_HR_05",
           "SF_FQ_001",
-          "SF_SOA_MF_01"
+          "SF_SOA_MF_01",
+          "SF_SOA_MF_02"
         ].includes(get(certificate, "additionalData.certCode"))
           ? "This WSQ programme is aligned to the Skills Framework."
           : ""}
@@ -436,7 +440,7 @@ export const renderAwardTextQUAL = certificate => (
         {certificate.name}
       </p>
     </div>
-    {["FQ-004", "FQ-005", "SF_FQ_001", "SF_FQ_002", "SF_FQ_004"].includes(
+    {["FQ-004", "FQ-005", "SF_FQ_001", "SF_FQ_002", "SF_FQ_004","SF_FQ_005"].includes(
       get(certificate, "additionalData.certCode")
     )
       ? renderSpecialization(certificate)
@@ -649,6 +653,15 @@ export const renderSignatureQual = (certificate, IMG_BOTTOM_LOGO) => (
       <div style={styles.certCodeStyle}>
         {get(certificate, "additionalData.certCode")}
       </div>
+      {["SOA-003"].includes(get(certificate, "additionalData.certCode")) ? (
+        <div>
+          <a href="www.scdf.gov.sg" style={styles.footerTextStyle}>
+            www.scdf.gov.sg
+          </a>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   </div>
 );
