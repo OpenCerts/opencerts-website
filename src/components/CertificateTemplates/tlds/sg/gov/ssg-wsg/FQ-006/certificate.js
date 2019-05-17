@@ -9,7 +9,7 @@ export const renderLogoWSQ = () => (
     <div className="col-lg-5 col-12">
       <img style={styles.fullWidthStyleQual} src={IMG_LOGO} />
     </div>
-    <div className="col-lg-2 col-12"></div>
+    <div className="col-lg-2 col-12" />
     <div className="col-lg-5 col-12">
       <img style={styles.fullWidthStyleQual} src={DIGIPEN_LOGO} />
     </div>
@@ -79,7 +79,10 @@ export const renderSignature = certificate => (
             </a>
             <br />
             For verification of this certificate, please visit{" "}
-            <a style={{ color: "rgb(51,0,144)" }} href="https://myskillsfuture.sg/verify_eCert.html">
+            <a
+              style={{ color: "rgb(51,0,144)" }}
+              href="https://myskillsfuture.sg/verify_eCert.html"
+            >
               https://myskillsfuture.sg/verify_eCert.html
             </a>
           </div>
@@ -115,19 +118,25 @@ export const renderAwardText = certificate => (
       </p>
     </div>
     <div className="d-flex justify-content-center">
-      <p style={styles.specTextStyle} className="RobotoRegular">{certificate.additionalData.specialization}</p>
+      <p style={styles.specTextStyle} className="RobotoRegular">
+        {certificate.additionalData.specialization}
+      </p>
     </div>
     <div
       className="d-flex justify-content-center"
       style={{ marginTop: "3rem" }}
     >
-      <p style={styles.awardTextStyle} className="RobotoMedium">is awarded to</p>
+      <p style={styles.awardTextStyle} className="RobotoMedium">
+        is awarded to
+      </p>
     </div>
     <div
       className="d-flex justify-content-center"
       style={{ marginTop: "1rem" }}
     >
-      <p style={styles.recipientTextStyle} className="RobotoMedium">{certificate.recipient.name}</p>
+      <p style={styles.recipientTextStyle} className="RobotoMedium">
+        {certificate.recipient.name}
+      </p>
     </div>
     <div className="d-flex justify-content-center">
       <p style={styles.printTextStyle} className="RobotoMedium">
@@ -138,7 +147,10 @@ export const renderAwardText = certificate => (
       className="d-flex justify-content-center"
       style={{ marginTop: "2rem" }}
     >
-      <div className="col-lg-6 col-12 text-center RobotoMedium" style={styles.awardTextStyle}>
+      <div
+        className="col-lg-6 col-12 text-center RobotoMedium"
+        style={styles.awardTextStyle}
+      >
         for successful attainment of the required
         <br />
         industry approved competencies

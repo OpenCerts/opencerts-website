@@ -1,6 +1,6 @@
 import { get } from "lodash";
 import { NICF_LOGO, IMG_LOGO, IMG_SEAL, IMG_SSGLOGO } from "../common";
-import { renderIssuingDate, renderAwardTextQUAL, getRecipientID } from "../common/functions";
+import { renderIssuingDate, renderAwardTextQUAL } from "../common/functions";
 import fonts from "../common/fonts";
 import * as styles from "../common/style";
 
@@ -61,7 +61,10 @@ export const renderSignature = certificate => (
           </a>
           <br />
           For verification of this certificate, please visit{" "}
-          <a style={{ color: "rgb(51,0,144)" }} href="https://myskillsfuture.sg/verify_eCert.html">
+          <a
+            style={{ color: "rgb(51,0,144)" }}
+            href="https://myskillsfuture.sg/verify_eCert.html"
+          >
             https://myskillsfuture.sg/verify_eCert.html
           </a>
         </div>
@@ -81,7 +84,6 @@ export const renderSignature = certificate => (
     </div>
   </div>
 );
-
 
 /* eslint-disable */
 // Disabled eslint as there's no way to add proptypes to an anonymous function like this
