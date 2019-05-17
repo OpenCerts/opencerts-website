@@ -1,0 +1,14 @@
+.trasnciptHeaderContainerClass {
+  display: flex;
+}
+
+@media only screen and (max-width: 860px) {
+  .trasnciptHeaderContainerClass {
+    display: block !important;
+  }
+
+  .transciptLogoClass {
+    max-width: unset !important;
+    max-height: unset !important;
+  }
+}
