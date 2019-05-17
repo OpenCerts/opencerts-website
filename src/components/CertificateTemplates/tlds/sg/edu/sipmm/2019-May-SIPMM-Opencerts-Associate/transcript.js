@@ -161,7 +161,7 @@ const Template = ({ certificate }) => {
         </div>
       </div>
       <div className="row mb-4">
-        {issuedOn && <div className="w-100">Date: ${format(issuedOn, "DD MMMM YYYY")}</div>}
+        {issuedOn && <div className="w-100">Date: {format(issuedOn, "DD MMMM YYYY")}</div>}
         <div className="w-100">Name of Student: {studentName}</div>
         <div lassName="w-100">Student ID: {studentId}</div>
         <div className="w-100">Course Admitted: {certificateName}</div>
