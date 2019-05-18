@@ -35,15 +35,41 @@
     font-size: 1.5rem !important;
   }
 
-  .colSixMobileClass {
-    max-width: 50% !important;
+  .wrapperTrasncriptClass {
+    font-size: 12px;
   }
+}
 
+@media only screen and (max-width: 1000px) {
   .wrapperContainerClass {
-    font-size: 12px !important;
+    max-width: 1000px !important;
+    transform: scale(0.8);
+    transform-origin: left top;
   }
 
-  .qrClass {
+  .innerWrapperContainerClass {
     max-width: 100% !important;
+  }
+
+  .upperWrapperContainerClass {
+    height: 130vw;
+  }
+}
+
+@media only screen and (max-width: 830px) {
+  .wrapperContainerClass {
+    transform: scale(0.6);
+  }
+}
+
+@media only screen and (max-width: 630px) {
+  .wrapperContainerClass {
+    transform: scale(0.4);
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  .wrapperContainerClass {
+    transform: scale(0.3);
   }
 }

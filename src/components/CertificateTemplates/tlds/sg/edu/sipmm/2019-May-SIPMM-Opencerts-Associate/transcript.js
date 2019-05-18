@@ -7,7 +7,7 @@ import { TIMEZONE } from "../common";
 import {
   trasnciptHeaderContainerClass,
   transciptLogoClass,
-  wrapperContainerClass,
+  wrapperTrasncriptClass,
   resultTextClass,
   bottomSectionContainerClass,
   bottomSectionItemClass,
@@ -169,7 +169,7 @@ const Template = ({ certificate }) => {
   return (
     <div
       style={{ fontFamily: "Arial", maxWidth: 900, fontSize: 16 }}
-      className={`container ${wrapperContainerClass}`}
+      className={`container ${wrapperTrasncriptClass}`}
     >
       <div className={`mb-4 mb-lg-5 ${trasnciptHeaderContainerClass}`}>
         <img

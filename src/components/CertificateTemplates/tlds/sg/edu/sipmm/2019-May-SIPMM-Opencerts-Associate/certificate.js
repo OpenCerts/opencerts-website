@@ -5,20 +5,20 @@ import { tz } from "moment-timezone";
 import { logo, seal, qr } from "./resources";
 import { TIMEZONE } from "../common";
 import {
-  colSixMobileClass,
-  qrClass,
-  wrapperContainerClass
+  wrapperContainerClass,
+  innerWrapperContainerClass,
+  upperWrapperContainerClass
 } from "./styles.scss";
 
 const getCertSignatures = certSignatories => (
   <div
-  style={{
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column"
-  }}
-  className={`col-6 my-5 text-center`}
+    style={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      flexDirection: "column"
+    }}
+    className="col-6 my-5 text-center"
   >
     {certSignatories.map((signatureData, key) => (
       <div className=" w-100 mb-3 mb-lg-3" key={key}>
@@ -30,9 +30,9 @@ const getCertSignatures = certSignatories => (
 );
 
 const getCertInfoSection = (id, issuedOn) => (
-  <div className={`col-6 my-5 text-center`}>
+  <div className="col-6 my-5 text-center">
     <div className="mb-3 mb-lg-3 text-center">
-      <img className={qrClass} style={{ maxWidth: "20%" }} src={qr} />
+      <img style={{ maxWidth: "20%" }} src={qr} />
     </div>
     <div className="mb-3 mb-lg-3 d-flex justify-content-center">
       Certificate No. {id}
@@ -60,136 +60,139 @@ const Template = ({ certificate }) => {
   );
 
   return (
-    <div
-      className="container"
-      style={{
-        border: "2px solid #AAA",
-        padding: "0",
-        maxWidth: 1000
-      }}
-    >
-      <link
-        href="https://fonts.googleapis.com/css?family=Noto+Serif"
-        rel="stylesheet"
-      />
+    <div className={`${upperWrapperContainerClass}`}>
       <div
-        className="container"
+        className={`container ${wrapperContainerClass}`}
         style={{
-          border: "5px solid #ffffff",
-          padding: "0"
+          border: "2px solid #AAA",
+          padding: "0",
+          width: 1000
         }}
       >
-        <div
-          style={{
-            width: "100%",
-            backgroundColor: "#568666",
-            height: "15px"
-          }}
+        <link
+          href="https://fonts.googleapis.com/css?family=Noto+Serif"
+          rel="stylesheet"
         />
         <div
+          className={`container ${innerWrapperContainerClass}`}
           style={{
-            width: "100%",
-            backgroundColor: "#42c058",
-            height: "15px"
+            border: "5px solid #ffffff",
+            padding: "0"
           }}
-        />
-        <div
-          style={{
-            fontFamily: "'Noto Serif', serif",
-            maxWidth: 900,
-            fontSize: 14
-          }}
-          className={`container ${wrapperContainerClass}`}
         >
-          <div className="my-5 m-lg-5 text-center">
-            <img src={logo} className="w-100" style={{ maxWidth: 300 }} />
+          <div
+            style={{
+              width: "100%",
+              backgroundColor: "#568666",
+              height: "15px"
+            }}
+          />
+          <div
+            style={{
+              width: "100%",
+              backgroundColor: "#42c058",
+              height: "15px"
+            }}
+          />
+          <div
+            style={{
+              fontFamily: "'Noto Serif', serif",
+              width: 900,
+              fontSize: 14
+            }}
+            className={`container ${innerWrapperContainerClass}`}
+          >
+            <div className="my-5 m-lg-5 text-center">
+              <img src={logo} className="w-100" style={{ maxWidth: 300 }} />
+            </div>
+            <div
+              style={{
+                margin: "0 auto",
+                textAlign: "center",
+                fontSize: "2.5em",
+                maxWidth: 700
+              }}
+              className="h1 mb-4 mb-lg-5 d-flex justify-content-center"
+            >
+              <b>{certificateName}</b>
+            </div>
+            <div
+              style={{ fontSize: "1.4em" }}
+              className="mb-3 mb-lg-4 d-flex justify-content-center"
+            >
+              <p>This is to certify that</p>
+            </div>
+            <div
+              style={{
+                margin: "0 auto",
+                textAlign: "center",
+                fontSize: "2.5em"
+              }}
+              className="h2 mb-3 mb-lg-4 d-flex justify-content-center"
+            >
+              <b>{studentName}</b>
+            </div>
+            <div
+              style={{
+                margin: "0 auto",
+                textAlign: "center",
+                maxWidth: 700,
+                fontSize: "1.4em"
+              }}
+              className="mb-3 mb-lg-4 d-flex justify-content-center"
+            >
+              <p>
+                has successfully completed the above course and has passed the
+                prescribed examinations leading the award of the
+              </p>
+            </div>
+            <div
+              style={{
+                margin: "0 auto",
+                textAlign: "center",
+                fontSize: "2em",
+                maxWidth: 700
+              }}
+              className="h3 mb-3 mb-lg-4 d-flex justify-content-center"
+            >
+              <b>
+                {certificateName}
+                {OverallGradeClassification &&
+                  ` (${OverallGradeClassification})`}
+              </b>
+            </div>
+            <div
+              style={{ fontSize: "1.4em" }}
+              className="mb-3 mb-lg-4 d-flex text-center justify-content-center"
+            >
+              <p>and is entitled to use the post-nominal designatory letters</p>
+            </div>
+            <div
+              style={{ fontSize: "2em" }}
+              className="h3 mb-3 mb-lg-4 d-flex justify-content-center text-center"
+            >
+              <b>{description} (SIPMM)</b>
+            </div>
+            <div className="d-flex justify-content-between">
+              {getCertInfoSection(id, issuedOn)}
+              {certSignatories !== [] && getCertSignatures(certSignatories)}
+            </div>
           </div>
           <div
             style={{
-              margin: "0 auto",
-              textAlign: "center",
-              fontSize: "2.5em",
-              maxWidth: 700
+              width: "100%",
+              backgroundColor: "#42c058",
+              height: "15px"
             }}
-            className="h1 mb-4 mb-lg-5 d-flex justify-content-center"
-          >
-            <b>{certificateName}</b>
-          </div>
-          <div
-            style={{ fontSize: "1.4em" }}
-            className="mb-3 mb-lg-4 d-flex justify-content-center"
-          >
-            <p>This is to certify that</p>
-          </div>
+          />
           <div
             style={{
-              margin: "0 auto",
-              textAlign: "center",
-              fontSize: "2.5em"
+              width: "100%",
+              backgroundColor: "#568666",
+              height: "15px"
             }}
-            className="h2 mb-3 mb-lg-4 d-flex justify-content-center"
-          >
-            <b>{studentName}</b>
-          </div>
-          <div
-            style={{
-              margin: "0 auto",
-              textAlign: "center",
-              maxWidth: 700,
-              fontSize: "1.4em"
-            }}
-            className="mb-3 mb-lg-4 d-flex justify-content-center"
-          >
-            <p>
-              has successfully completed the above course and has passed the
-              prescribed examinations leading the award of the
-            </p>
-          </div>
-          <div
-            style={{
-              margin: "0 auto",
-              textAlign: "center",
-              fontSize: "2em",
-              maxWidth: 700
-            }}
-            className="h3 mb-3 mb-lg-4 d-flex justify-content-center"
-          >
-            <b>
-              {certificateName}
-              {OverallGradeClassification && ` (${OverallGradeClassification})`}
-            </b>
-          </div>
-          <div
-            style={{ fontSize: "1.4em" }}
-            className="mb-3 mb-lg-4 d-flex text-center justify-content-center"
-          >
-            <p>and is entitled to use the post-nominal designatory letters</p>
-          </div>
-          <div
-            style={{ fontSize: "2em" }}
-            className="h3 mb-3 mb-lg-4 d-flex justify-content-center text-center"
-          >
-            <b>{description} (SIPMM)</b>
-          </div>
-          <div className="d-flex justify-content-between">
-            {getCertInfoSection(id, issuedOn)}
-            {certSignatories !== [] && getCertSignatures(certSignatories)}
-          </div>
+          />
         </div>
-        <div
-          style={{
-            width: "100%",
-            backgroundColor: "#42c058",
-            height: "15px"
-          }}
-        />
-        <div
-          style={{
-            width: "100%",
-            backgroundColor: "#568666",
-            height: "15px"
-          }}
-        />
       </div>
     </div>
   );
