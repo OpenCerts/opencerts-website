@@ -42,7 +42,7 @@ test("2019-May-SIPMM certificate is rendered correctly", async t => {
   await validateTextContent(t, RenderedCertificate, [
     "10 May 2019",
     "Student Name",
-    "S1234561H",
+    "S1234567H",
     "Advanced Diploma in Logistics and Supply Management",
     "2019",
     "LPS402",
