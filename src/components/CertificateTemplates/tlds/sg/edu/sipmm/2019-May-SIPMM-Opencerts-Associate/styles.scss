@@ -12,3 +12,17 @@
     max-height: unset !important;
   }
 }
+
+@media only screen and (max-width: 500px) {
+  .colSixMobileClass {
+    max-width: 50% !important;
+  }
+
+  .wrapperContainerClass {
+    font-size: 12px !important;
+  }
+
+  .qrClass {
+    max-width: 100% !important;
+  }
+}

@@ -1,12 +1,13 @@
 import PropTypes from "prop-types";
 import { get } from "lodash";
 import { tz } from "moment-timezone";
+
 import { transcriptLogo } from "./resources";
 import { TIMEZONE } from "../common";
-
 import {
   trasnciptHeaderContainerClass,
-  transciptLogoClass
+  transciptLogoClass,
+  wrapperContainerClass
 } from "./styles.scss";
 
 const getTranscriptSummaries = transcriptSummaries =>
@@ -62,7 +63,7 @@ const getGradeClassification = () => (
   <div
     className="col-6 mb-4 mb-lg-5"
     style={{
-      fontSize: "0.9rem",
+      fontSize: "0.9em",
       border: "1px solid #000000",
       overflowX: "auto"
     }}
@@ -155,7 +156,10 @@ const Template = ({ certificate }) => {
   );
 
   return (
-    <div style={{ fontFamily: "Arial", maxWidth: 900 }} className="container">
+    <div
+      style={{ fontFamily: "Arial", maxWidth: 900, fontSize: 16 }}
+      className={`container ${wrapperContainerClass}`}
+    >
       <div className={`mb-4 mb-lg-5 ${trasnciptHeaderContainerClass}`}>
         <img
           src={transcriptLogo}
@@ -195,10 +199,10 @@ const Template = ({ certificate }) => {
             RESULT:
           </div>
           <div className="col-10">
-            Student has satisfied all requirements for above Course and the
+            Student has satisfied all requiements for above Course and the
             Academic Board has approved the award of{" "}
             {transcriptData[0].programDescription}
-            {additionalData.merit && ` (${additionalData.merit})`}
+            {additionalData.OverallGradeClassification && ` (${additionalData.OverallGradeClassification})`}
           </div>
         </div>
       ]}

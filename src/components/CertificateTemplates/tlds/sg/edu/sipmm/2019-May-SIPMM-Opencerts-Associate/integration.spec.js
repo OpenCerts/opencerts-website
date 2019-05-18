@@ -24,10 +24,11 @@ test("2019-May-SIPMM certificate is rendered correctly", async t => {
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "Advanced Diploma in Logistics and Supply Management",
-    "Jason Lim Seng Teck",
+    "Student Name",
     "Advanced Diploma in Logistics and Supply Management",
-    "merit",
-    "2019051569",
+    "Merit",
+    "ADLSM",
+    "19001234",
     "10 May 2019",
     "President",
     "Registrar"
@@ -40,7 +41,7 @@ test("2019-May-SIPMM certificate is rendered correctly", async t => {
   // Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
     "10 May 2019",
-    "Jason Lim Seng Teck",
+    "Student Name",
     "S1234561H",
     "Advanced Diploma in Logistics and Supply Management",
     "2019",
@@ -49,8 +50,7 @@ test("2019-May-SIPMM certificate is rendered correctly", async t => {
     "B",
     "Credit",
     "Advanced Diploma in Logistics and Supply Management",
-    "merit",
-    "Sophia Poh",
+    "Merit",
     "Registrar"
   ]);
 });

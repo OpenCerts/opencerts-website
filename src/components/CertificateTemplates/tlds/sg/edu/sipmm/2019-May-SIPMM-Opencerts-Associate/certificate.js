@@ -1,24 +1,31 @@
 import PropTypes from "prop-types";
 import { get } from "lodash";
 import { tz } from "moment-timezone";
+
 import { logo, seal, qr } from "./resources";
 import { TIMEZONE } from "../common";
+import {
+  colSixMobileClass,
+  certNameClass,
+  qrClass,
+  wrapperContainerClass
+} from "./styles.scss";
 
 const getCertSignatures = certSignatories => (
-  <div className="col-5 text-center">
+  <div className={`col-5 my-5 text-center ${colSixMobileClass}`}>
     {certSignatories.map((signatureData, key) => (
-      <div key={key}>
+      <div className="mb-4 mb-lg-3" key={key}>
         <img className="w-100" src={signatureData.signature} />
-        <div style={{ fontSize: "1.4rem" }}>{signatureData.position}</div>
+        <div style={{ fontSize: "1.4em" }}>{signatureData.position}</div>
       </div>
     ))}
   </div>
 );
 
 const getCertInfoSection = (id, issuedOn) => (
-  <div className="col-5 my-5">
+  <div className={`col-5 my-5 ${colSixMobileClass}`}>
     <div className="mb-4 mb-lg-3 text-center">
-      <img style={{ maxWidth: "40%" }} src={qr} />
+      <img className={qrClass} style={{ maxWidth: "40%" }} src={qr} />
     </div>
     <div className="mb-4 mb-lg-3 d-flex justify-content-center">
       Certificate No. {id}
@@ -35,11 +42,12 @@ const getCertInfoSection = (id, issuedOn) => (
 const Template = ({ certificate }) => {
   const id = get(certificate, "id");
   const certificateName = get(certificate, "name");
+  const description = get(certificate, "description");
   const issuedOn = get(certificate, "issuedOn");
   const studentName = get(certificate, "recipient.name");
   const additionalData = get(certificate, "additionalData", {});
   const certSignatories = get(additionalData, "certSignatories", []);
-  const merit = get(additionalData, "merit");
+  const OverallGradeClassification = get(additionalData, "OverallGradeClassification");
 
   return (
     <div
@@ -75,8 +83,8 @@ const Template = ({ certificate }) => {
           }}
         />
         <div
-          style={{ fontFamily: "'Noto Serif', serif", maxWidth: 900 }}
-          className="container"
+          style={{ fontFamily: "'Noto Serif', serif", maxWidth: 900, fontSize: 16 }}
+          className={`container ${wrapperContainerClass}`}
         >
           <div className="my-5 m-lg-5 text-center">
             <img src={logo} className="w-100" style={{ maxWidth: 300 }} />
@@ -85,7 +93,7 @@ const Template = ({ certificate }) => {
             style={{
               margin: "0 auto",
               textAlign: "center",
-              fontSize: "3.5rem",
+              fontSize: "3.5em",
               maxWidth: 700
             }}
             className="h1 mb-4 mb-lg-5 d-flex justify-content-center"
@@ -93,7 +101,7 @@ const Template = ({ certificate }) => {
             <b>{certificateName}</b>
           </div>
           <div
-            style={{ fontSize: "1.4rem" }}
+            style={{ fontSize: "1.4em" }}
             className="mb-4 mb-lg-5 d-flex justify-content-center"
           >
             <p>This is to certify that</p>
@@ -102,7 +110,7 @@ const Template = ({ certificate }) => {
             style={{
               margin: "0 auto",
               textAlign: "center",
-              fontSize: "2.5rem"
+              fontSize: "2.5em"
             }}
             className="h2 mb-4 mb-lg-5 d-flex justify-content-center"
           >
@@ -113,7 +121,7 @@ const Template = ({ certificate }) => {
               margin: "0 auto",
               textAlign: "center",
               maxWidth: 700,
-              fontSize: "1.4rem"
+              fontSize: "1.4em"
             }}
             className="mb-4 mb-lg-5 d-flex justify-content-center"
           >
@@ -126,27 +134,27 @@ const Template = ({ certificate }) => {
             style={{
               margin: "0 auto",
               textAlign: "center",
-              fontSize: "2rem",
+              fontSize: "2em",
               maxWidth: 700
             }}
             className="h3 mb-4 mb-lg-5 d-flex justify-content-center"
           >
             <b>
               {certificateName}
-              {merit && ` (${merit})`}
+              {OverallGradeClassification && ` (${OverallGradeClassification})`}
             </b>
           </div>
           <div
-            style={{ fontSize: "1.4rem" }}
+            style={{ fontSize: "1.4em" }}
             className="mb-4 mb-lg-5 d-flex text-center justify-content-center"
           >
             <p>and is entitled to use the post-nominal designatory letters</p>
           </div>
           <div
-            style={{ fontSize: "2rem" }}
-            className="h3 mb-4 mb-lg-5 d-flex justify-content-center"
+            style={{ fontSize: "2em" }}
+            className="h3 mb-4 mb-lg-5 d-flex justify-content-center text-center"
           >
-            <b>{""} (SIPMM)</b>
+            <b>{description} (SIPMM)</b>
           </div>
           <div className="d-flex justify-content-between m-3 p-2 mb-5">
             {getCertInfoSection(id, issuedOn)}
