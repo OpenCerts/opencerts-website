@@ -202,7 +202,8 @@ const Template = ({ certificate }) => {
             Student has satisfied all requiements for above Course and the
             Academic Board has approved the award of{" "}
             {transcriptData[0].programDescription}
-            {additionalData.OverallGradeClassification && ` (${additionalData.OverallGradeClassification})`}
+            {additionalData.OverallGradeClassification &&
+              ` (${additionalData.OverallGradeClassification})`}
           </div>
         </div>
       ]}

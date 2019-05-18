@@ -6,7 +6,6 @@ import { logo, seal, qr } from "./resources";
 import { TIMEZONE } from "../common";
 import {
   colSixMobileClass,
-  certNameClass,
   qrClass,
   wrapperContainerClass
 } from "./styles.scss";
@@ -47,7 +46,10 @@ const Template = ({ certificate }) => {
   const studentName = get(certificate, "recipient.name");
   const additionalData = get(certificate, "additionalData", {});
   const certSignatories = get(additionalData, "certSignatories", []);
-  const OverallGradeClassification = get(additionalData, "OverallGradeClassification");
+  const OverallGradeClassification = get(
+    additionalData,
+    "OverallGradeClassification"
+  );
 
   return (
     <div
@@ -83,7 +85,11 @@ const Template = ({ certificate }) => {
           }}
         />
         <div
-          style={{ fontFamily: "'Noto Serif', serif", maxWidth: 900, fontSize: 16 }}
+          style={{
+            fontFamily: "'Noto Serif', serif",
+            maxWidth: 900,
+            fontSize: 16
+          }}
           className={`container ${wrapperContainerClass}`}
         >
           <div className="my-5 m-lg-5 text-center">
