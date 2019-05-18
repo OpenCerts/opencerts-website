@@ -11,9 +11,30 @@
     max-width: unset !important;
     max-height: unset !important;
   }
+
+  .bottomSectionContainerClass {
+    display: block !important;
+  }
+
+  .bottomSectionItemClass {
+    max-width: 100% !important;
+  }
+
+  .hideMobileClass {
+    display: none !important;
+  }
+
+  .signatureClass {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 @media only screen and (max-width: 500px) {
+  .resultTextClass {
+    font-size: 1.5rem !important;
+  }
+
   .colSixMobileClass {
     max-width: 50% !important;
   }

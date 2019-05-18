@@ -11,9 +11,17 @@ import {
 } from "./styles.scss";
 
 const getCertSignatures = certSignatories => (
-  <div className={`col-5 my-5 text-center ${colSixMobileClass}`}>
+  <div
+  style={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column"
+  }}
+  className={`col-6 my-5 text-center`}
+  >
     {certSignatories.map((signatureData, key) => (
-      <div className="mb-4 mb-lg-3" key={key}>
+      <div className=" w-100 mb-3 mb-lg-3" key={key}>
         <img className="w-100" src={signatureData.signature} />
         <div style={{ fontSize: "1.4em" }}>{signatureData.position}</div>
       </div>
@@ -22,19 +30,19 @@ const getCertSignatures = certSignatories => (
 );
 
 const getCertInfoSection = (id, issuedOn) => (
-  <div className={`col-5 my-5 ${colSixMobileClass}`}>
-    <div className="mb-4 mb-lg-3 text-center">
-      <img className={qrClass} style={{ maxWidth: "40%" }} src={qr} />
+  <div className={`col-6 my-5 text-center`}>
+    <div className="mb-3 mb-lg-3 text-center">
+      <img className={qrClass} style={{ maxWidth: "20%" }} src={qr} />
     </div>
-    <div className="mb-4 mb-lg-3 d-flex justify-content-center">
+    <div className="mb-3 mb-lg-3 d-flex justify-content-center">
       Certificate No. {id}
     </div>
     {issuedOn && (
-      <div className="mb-4 mb-lg-3 d-flex justify-content-center">
+      <div className="mb-3 mb-lg-3 d-flex justify-content-center">
         Date of award: {tz(issuedOn, TIMEZONE).format("DD MMMM YYYY")}
       </div>
     )}
-    <img className="w-100" src={seal} />
+    <img style={{ maxWidth: "80%" }} src={seal} />
   </div>
 );
 
@@ -56,7 +64,8 @@ const Template = ({ certificate }) => {
       className="container"
       style={{
         border: "2px solid #AAA",
-        padding: "0"
+        padding: "0",
+        maxWidth: 1000
       }}
     >
       <link
@@ -74,21 +83,21 @@ const Template = ({ certificate }) => {
           style={{
             width: "100%",
             backgroundColor: "#568666",
-            height: "20px"
+            height: "15px"
           }}
         />
         <div
           style={{
             width: "100%",
             backgroundColor: "#42c058",
-            height: "20px"
+            height: "15px"
           }}
         />
         <div
           style={{
             fontFamily: "'Noto Serif', serif",
             maxWidth: 900,
-            fontSize: 16
+            fontSize: 14
           }}
           className={`container ${wrapperContainerClass}`}
         >
@@ -99,7 +108,7 @@ const Template = ({ certificate }) => {
             style={{
               margin: "0 auto",
               textAlign: "center",
-              fontSize: "3.5em",
+              fontSize: "2.5em",
               maxWidth: 700
             }}
             className="h1 mb-4 mb-lg-5 d-flex justify-content-center"
@@ -108,7 +117,7 @@ const Template = ({ certificate }) => {
           </div>
           <div
             style={{ fontSize: "1.4em" }}
-            className="mb-4 mb-lg-5 d-flex justify-content-center"
+            className="mb-3 mb-lg-4 d-flex justify-content-center"
           >
             <p>This is to certify that</p>
           </div>
@@ -118,7 +127,7 @@ const Template = ({ certificate }) => {
               textAlign: "center",
               fontSize: "2.5em"
             }}
-            className="h2 mb-4 mb-lg-5 d-flex justify-content-center"
+            className="h2 mb-3 mb-lg-4 d-flex justify-content-center"
           >
             <b>{studentName}</b>
           </div>
@@ -129,7 +138,7 @@ const Template = ({ certificate }) => {
               maxWidth: 700,
               fontSize: "1.4em"
             }}
-            className="mb-4 mb-lg-5 d-flex justify-content-center"
+            className="mb-3 mb-lg-4 d-flex justify-content-center"
           >
             <p>
               has successfully completed the above course and has passed the
@@ -143,7 +152,7 @@ const Template = ({ certificate }) => {
               fontSize: "2em",
               maxWidth: 700
             }}
-            className="h3 mb-4 mb-lg-5 d-flex justify-content-center"
+            className="h3 mb-3 mb-lg-4 d-flex justify-content-center"
           >
             <b>
               {certificateName}
@@ -152,17 +161,17 @@ const Template = ({ certificate }) => {
           </div>
           <div
             style={{ fontSize: "1.4em" }}
-            className="mb-4 mb-lg-5 d-flex text-center justify-content-center"
+            className="mb-3 mb-lg-4 d-flex text-center justify-content-center"
           >
             <p>and is entitled to use the post-nominal designatory letters</p>
           </div>
           <div
             style={{ fontSize: "2em" }}
-            className="h3 mb-4 mb-lg-5 d-flex justify-content-center text-center"
+            className="h3 mb-3 mb-lg-4 d-flex justify-content-center text-center"
           >
             <b>{description} (SIPMM)</b>
           </div>
-          <div className="d-flex justify-content-between m-3 p-2 mb-5">
+          <div className="d-flex justify-content-between">
             {getCertInfoSection(id, issuedOn)}
             {certSignatories !== [] && getCertSignatures(certSignatories)}
           </div>
@@ -171,14 +180,14 @@ const Template = ({ certificate }) => {
           style={{
             width: "100%",
             backgroundColor: "#42c058",
-            height: "20px"
+            height: "15px"
           }}
         />
         <div
           style={{
             width: "100%",
             backgroundColor: "#568666",
-            height: "20px"
+            height: "15px"
           }}
         />
       </div>

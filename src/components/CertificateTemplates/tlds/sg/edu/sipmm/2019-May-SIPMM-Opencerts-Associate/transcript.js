@@ -7,7 +7,12 @@ import { TIMEZONE } from "../common";
 import {
   trasnciptHeaderContainerClass,
   transciptLogoClass,
-  wrapperContainerClass
+  wrapperContainerClass,
+  resultTextClass,
+  bottomSectionContainerClass,
+  bottomSectionItemClass,
+  hideMobileClass,
+  signatureClass
 } from "./styles.scss";
 
 const getTranscriptSummaries = transcriptSummaries =>
@@ -48,9 +53,15 @@ const getTranscriptSection = transcriptData => (
 );
 
 const getTranscriptSignatories = transcriptSignatories => (
-  <div className="col-3">
+  <div
+    style={{
+      display: "flex",
+      alignItems: "flex-end"
+    }}
+    className={`col-3 ${bottomSectionItemClass}`}
+  >
     {transcriptSignatories.map((signatorie, key) => (
-      <div key={key} className="text-center mb-4 mb-lg-5">
+      <div key={key} className={`text-center mb-4 mb-lg-5 ${signatureClass}`}>
         <img className="w-100" src={signatorie.signature} />
         <div>{signatorie.name}</div>
         <div>{signatorie.position}</div>
@@ -61,7 +72,7 @@ const getTranscriptSignatories = transcriptSignatories => (
 
 const getGradeClassification = () => (
   <div
-    className="col-6 mb-4 mb-lg-5"
+    className={`col-6 mb-4 mb-lg-5 ${bottomSectionItemClass}`}
     style={{
       fontSize: "0.9em",
       border: "1px solid #000000",
@@ -170,9 +181,10 @@ const Template = ({ certificate }) => {
           style={{
             color: "#065f2c",
             fontFamily: "Times New Roman",
-            fontWeight: "700"
+            fontWeight: "700",
+            fontSize: "2.2em"
           }}
-          className="h2 text-center"
+          className={`h2 text-center ${resultTextClass}`}
         >
           RESULT TRANSCRIPT
         </div>
@@ -208,10 +220,10 @@ const Template = ({ certificate }) => {
         </div>
       ]}
 
-      <div className="d-flex">
+      <div style={{ display: "flex" }} className={bottomSectionContainerClass}>
         {transcriptSignatories !== [] &&
           getTranscriptSignatories(transcriptSignatories)}
-        <div className="col-3" />
+        <div className={`col-3 ${hideMobileClass}`} />
         {getGradeClassification()}
       </div>
       <div>Copy: Academic Record.</div>
