@@ -106,5 +106,10 @@
     "name": "Government Technology Agency",
     "value": "/static/images/GOVTECH_logo.png",
     "link": "https://www.tech.gov.sg/"
+  },
+  {
+    "key": "SIPMM",
+    "name": "SIPMM Institute",
+    "value": "/static/images/SIPMM_logo.png"
   }
 ]
