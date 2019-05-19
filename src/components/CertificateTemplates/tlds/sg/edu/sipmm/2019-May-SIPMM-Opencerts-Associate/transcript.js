@@ -23,7 +23,11 @@ const getTranscriptSummaries = transcriptSummaries =>
   ));
 
 const getTranscriptSection = transcriptData => (
-  <div key="Data" style={{ overflowX: "auto" }} className="row mb-4">
+  <div
+    key="Data"
+    style={{ overflowX: "auto", fontSize: "12px" }}
+    className="row mb-4"
+  >
     <table cellPadding="10" className="w-100">
       <tbody>
         <tr
