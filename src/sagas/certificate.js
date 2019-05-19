@@ -5,7 +5,8 @@ import {
   compact,
   filter,
   isEmpty,
-  mapKeys
+  mapKeys,
+  map
 } from "lodash";
 import { put, all, call, select, takeEvery } from "redux-saga/effects";
 import { certificateData, verifySignature } from "@govtechsg/open-certificate";
@@ -282,13 +283,17 @@ export function* verifyCertificate({ payload }) {
   });
   const certificateStores = yield call(loadCertificateContracts, { payload });
   const args = { certificateStores, certificate: payload };
-  const verificationStatuses = yield all([
-    call(verifyCertificateHash, args),
-    call(verifyCertificateIssued, args),
-    call(verifyCertificateNotRevoked, args),
-    call(verifyCertificateIssuer, args)
-  ]);
-  const verified = verificationStatuses.reduce((prev, curr) => prev && curr);
+  const verificationStatuses = yield all({
+    certificateIssued: call(verifyCertificateIssued, args),
+    certificateHashValid: call(verifyCertificateHash, args),
+    certificateNotRevoked: call(verifyCertificateNotRevoked, args),
+    certificateIssuerRecognised: call(verifyCertificateIssuer, args)
+  });
+  trace(verificationStatuses);
+  const verified =
+    verificationStatuses.certificateIssued &&
+    verificationStatuses.certificateHashValid &&
+    verificationStatuses.certificateNotRevoked;
   if (verified) {
     Router.push("/viewer");
   }
