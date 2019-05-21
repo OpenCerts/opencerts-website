@@ -1,8 +1,8 @@
 import { Selector } from "testcafe";
 
-fixture("Ngee Ann Polytechnic").page`http://localhost:3000`;
+fixture("Demo Cert Govtech").page`http://localhost:3000`;
 
-const Certificate = "./NP_Certs_FT_NIEC_2019.opencert";
+const Certificate = "./DEMO_2019.opencert";
 
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
@@ -13,7 +13,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("NIEC 2019 certificate is rendered correctly", async t => {
+test("Demo certificate is rendered correctly", async t => {
   // Uploads certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 

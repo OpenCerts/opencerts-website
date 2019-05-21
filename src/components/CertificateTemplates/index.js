@@ -8,7 +8,7 @@ const DemoCert = dynamic(() => import("./example/Demo-CertTemplate"));
 
 const templates = {
   default: DefaultCert,
-  DEMOCERT: DemoCert,
+  demoCert: DemoCert,
   ...legacy,
   ...tlds
 };

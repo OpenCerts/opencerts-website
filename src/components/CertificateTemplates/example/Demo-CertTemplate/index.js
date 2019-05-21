@@ -1,5 +1,5 @@
 import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
-import { approvedAddresses } from "../../tlds/sg/edu/np/common";
+import approvedAddresses from "./common";
 import Cert from "./certificate";
 import Script from "./transcript";
 
