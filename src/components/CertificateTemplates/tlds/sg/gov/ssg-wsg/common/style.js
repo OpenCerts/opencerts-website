@@ -196,3 +196,9 @@ export const ssgLogoStyle = {
   width: "70%",
   height: "auto"
 };
+
+export const fullWidthStyleQual = {
+  width: "90%",
+  height: "auto",
+  marginBottom: "10px"
+};
