@@ -1,7 +1,5 @@
 import { get, groupBy, find } from "lodash";
-// import { IMG_LOGO_NP_HORIZONTAL } from "./images";
-import backgroundImg from "./resources";
-import { formatDate, formatDateFullMonth, isCETDiploma } from "./functions";
+import { formatDate, formatDateFullMonth } from "./common/functions";
 
 export const fullWidthStyle = {
   width: "100%",
@@ -111,37 +109,6 @@ export const renderExamDate = (groupItems, itemId, opts) => {
   );
 };
 
-export const renderHeaderPartner = (logo, left, certificate) => {
-  const serial = get(certificate, "additionalData.transcriptId");
-  return (
-    <div className="row">
-      <div className="col-6">
-        <div className="row d-flex justify-content-center align-items-center">
-          <div className="col-6">
-            {/* <img
-              style={fullWidthStyle}
-              src={left ? logo : IMG_LOGO_NP_HORIZONTAL}
-            /> */}
-          </div>
-          <div className="col-6">
-            {/* <img
-              style={fullWidthStyle}
-              src={left ? IMG_LOGO_NP_HORIZONTAL : logo}
-            /> */}
-          </div>
-        </div>
-      </div>
-      <div className="col-2" />
-      <div className="col-4">
-        <div style={{ color: "navy", fontWeight: 500 }}>
-          TRANSCRIPT OF ACADEMIC RECORD
-        </div>
-        <div className="mt-3">SERIAL No. : {serial}</div>
-      </div>
-    </div>
-  );
-};
-
 export const renderHeader = certificate => {
   const serial = get(certificate, "additionalData.transcriptId");
   return (
@@ -160,130 +127,7 @@ export const renderHeader = certificate => {
   );
 };
 
-export const renderFTGradingSystem = () => (
-  <div className="row">
-    <div className="col-6" />
-    <div className="col-6 border" style={{ fontSize: "0.6rem" }}>
-      <div className="text-center">
-        <u>GRADING SYSTEM</u>
-      </div>
-      <div className="text-center" style={{ fontSize: "0.5rem" }}>
-        (EFFECTIVE FOR JULY 2001 INTAKE)
-      </div>
-      <div className="row">
-        <div className="col">
-          <table>
-            <tbody>
-              <tr>
-                <th>GRADE</th>
-                <th>GRADE POINT</th>
-                <th>MARKS</th>
-                <th>DESCRIPTION</th>
-              </tr>
-              <tr>
-                <td>AD*</td>
-                <td>4.0</td>
-                <td>80 - 100%</td>
-                <td>DISTINCTION</td>
-              </tr>
-              <tr>
-                <td>A+</td>
-                <td>4.0</td>
-                <td>85 - 100%</td>
-                <td>EXCELLENT</td>
-              </tr>
-              <tr>
-                <td>A</td>
-                <td>4.0</td>
-                <td>80 - 84%</td>
-                <td>EXCELLENT</td>
-              </tr>
-              <tr>
-                <td>B+</td>
-                <td>3.5</td>
-                <td>75 - 79%</td>
-                <td>VERY GOOD</td>
-              </tr>
-              <tr>
-                <td>B</td>
-                <td>3.0</td>
-                <td>70 - 74%</td>
-                <td>VERY GOOD</td>
-              </tr>
-              <tr>
-                <td>C+</td>
-                <td>2.5</td>
-                <td>65 - 69%</td>
-                <td>GOOD</td>
-              </tr>
-              <tr>
-                <td>C</td>
-                <td>2.0</td>
-                <td>60 - 64%</td>
-                <td>GOOD</td>
-              </tr>
-              <tr>
-                <td>D+</td>
-                <td>1.5</td>
-                <td>55 - 59%</td>
-                <td>PASS</td>
-              </tr>
-              <tr>
-                <td>D</td>
-                <td>1.0</td>
-                <td>50 - 54%</td>
-                <td>PASS</td>
-              </tr>
-              <tr>
-                <td>F</td>
-                <td>0</td>
-                <td>0 - 49%</td>
-                <td>FAIL</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div className="col">
-          <table>
-            <tbody>
-              <tr>
-                <th>GRADE</th>
-                <th>DESCRIPTION</th>
-              </tr>
-              <tr>
-                <td>PM</td>
-                <td>PASS WITH MERIT</td>
-              </tr>
-              <tr>
-                <td>PX</td>
-                <td>PASS IN MODULES GRADED PASS OR FAIL ONLY</td>
-              </tr>
-              <tr>
-                <td>ABS</td>
-                <td>ABSENT</td>
-              </tr>
-              <tr>
-                <td>DB</td>
-                <td>DEBARRED</td>
-              </tr>
-              <tr>
-                <td>EX</td>
-                <td>CREDIT EXEMPTION</td>
-              </tr>
-              <tr>
-                <td>TRF</td>
-                <td>CREDIT TRANSFER</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div>* DISTINCTION GRADE IS AWARDED TO THE TOP 5% COHORT</div>
-    </div>
-  </div>
-);
-
-export const renderCETGradingSystem = () => (
+export const renderGradingSystem = () => (
   <div className="row">
     <div className="col-6" />
     <div className="col-6 border" style={{ fontSize: "0.6rem" }}>
@@ -627,8 +471,8 @@ export const renderSignature = certificate => (
 // Disabled eslint as there's no way to add proptypes to an anonymous function like this
 const  Transcript = ({ logo, left }) => ({certificate}) => (
   <div className="container" style={{ fontSize: "0.9rem" }}>
-    {logo ? renderHeaderPartner(logo, left, certificate) : renderHeader(certificate)}
-	{isCETDiploma(certificate.id)?renderCETGradingSystem():renderFTGradingSystem()}
+    {renderHeader(certificate)}
+	  {renderGradingSystem()}
     {renderTranscript(certificate)}
     {renderGPA(certificate)}
     {renderFinalStatement(certificate)}

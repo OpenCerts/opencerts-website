@@ -46,12 +46,7 @@ class DropZoneSection extends Component {
               <a
                 className="btn btn-success btn-lg"
                 role="button"
-                href={`data:text/plain;,${JSON.stringify(
-                  json,
-                  null,
-                  2
-                )}`}
-                target="_blank"
+                href={`data:text/plain;,${JSON.stringify(json, null, 2)}`}
                 download="demo.opencert"
                 draggable="true"
                 onDragStart={e => e.dataTransfer.setData("isDemo", true)}

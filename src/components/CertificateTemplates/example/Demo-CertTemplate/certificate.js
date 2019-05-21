@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { format } from "date-fns";
-import backgroundImg from "./resources";
+import backgroundImg from "./common/resources";
 
 const Template = ({ certificate }) => (
   <div
