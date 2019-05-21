@@ -170,7 +170,7 @@ export const switchOperatorFunction = certificate => {
 
     case "SOA-MF-01":
       return " Generic Manufacturing Skills";
-      
+
     default:
       return " Human Resource";
   }
@@ -226,9 +226,9 @@ export const renderAwardTextSOA = certificate => (
       style={{ marginTop: "1rem", marginBottom: "3rem", paddingLeft: "0px" }}
     >
       <p style={styles.awardTextStyle} className="RobotoMedium">
-        {get(certificate, "additionalData.certCode").includes(
+        {(get(certificate, "additionalData.certCode").includes(
           "SF_SOA_ES_001"
-        ) || get(certificate, "additionalData.certCode").includes("SOA-ES-001")
+        ) || get(certificate, "additionalData.certCode").includes("SOA-ES-001"))
           ? "for successful attainment of the required competencies in"
           : "for successful attainment of the following industry approved competencies"}
       </p>
