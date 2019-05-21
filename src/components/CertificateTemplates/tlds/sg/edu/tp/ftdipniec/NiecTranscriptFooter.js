@@ -1,11 +1,17 @@
-import { IMG_SIGN_NIEC_DEAN, IMG_SIGN_TP_REGISTRAR } from "../common/images";
+import { IMG_SIGN_NIEC_DEAN, IMG_SIGN_TP_DIR_AA } from "../common/images";
 
 const NiecTranscriptFooter = () => (
   <div className="container">
     <style>
       {`
+      .signature-container{
+        width:100%;
+        float:right;
+        text-align:center;
+      }
+
       .niec-dean-sign{
-        width:30%;
+        width:40%;
         padding-bottom:1em;
       }
 
@@ -18,7 +24,7 @@ const NiecTranscriptFooter = () => (
       .niec-dean-sign-label,
       .registrar-sign-label{
         border-top: 1px solid #212529;
-        text-align: left;
+        text-align: center;
       }
       `}
     </style>
@@ -29,27 +35,27 @@ const NiecTranscriptFooter = () => (
     <br />
 
     <div className="row">
-      <div className="col-6">
+      <div className="col-5">
         <div className="signature-container">
           <img src={IMG_SIGN_NIEC_DEAN} className="niec-dean-sign" />
         </div>
       </div>
-      <div className="col-3">&nbsp;</div>
+      <div className="col-4">&nbsp;</div>
       <div className="col-3">
         <div className="signature-container">
-          <img src={IMG_SIGN_TP_REGISTRAR} className="registrar-sign" />
+          <img src={IMG_SIGN_TP_DIR_AA} className="registrar-sign" />
         </div>
       </div>
     </div>
     <div className="row">
-      <div className="col-6">
+      <div className="col-5">
         <div className="signature-container niec-dean-sign-label">
           DEAN, ACADEMIC & STUDENT MANAGEMENT
           <br />
           NATIONAL INSTITUTE OF EARLY CHILDHOOD DEVELOPMENT
         </div>
       </div>
-      <div className="col-3">&nbsp;</div>
+      <div className="col-4">&nbsp;</div>
       <div className="col-3">
         <div className="signature-container registrar-sign-label">
           for REGISTRAR

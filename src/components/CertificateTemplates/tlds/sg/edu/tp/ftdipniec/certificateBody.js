@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import CertificateBodyStyles from "../common/certificateBodyStyles";
+import CertificateNameSection from "../common/certificateNameSection";
 
 const CertificateBody = ({ certificate }) => (
   <div className="container">
@@ -7,39 +8,15 @@ const CertificateBody = ({ certificate }) => (
 
     <div className="certificate-body">
       <div className="recipient-paragraph">It is hereby certified that</div>
+
       <div className="recipient-name">{certificate.recipient.name}</div>
+
       <div className="recipient-paragraph">
         having successfully completed the course of study was awarded the
       </div>
-      <div className="certificate-name">
-        {!certificate.additionalData.isMerit &&
-          !certificate.additionalData.isExempted && (
-            <span>{certificate.name}</span>
-          )}
 
-        {!certificate.additionalData.isMerit &&
-          certificate.additionalData.isExempted && (
-            <span>{certificate.name}*</span>
-          )}
+      <CertificateNameSection certificate={certificate} />
 
-        {certificate.additionalData.isMerit &&
-          !certificate.additionalData.isExempted && (
-            <span>
-              {certificate.name}
-              <br />
-              <small>WITH MERIT</small>
-            </span>
-          )}
-
-        {certificate.additionalData.isMerit &&
-          certificate.additionalData.isExempted && (
-            <span>
-              {certificate.name}
-              <br />
-              <small>WITH MERIT*</small>
-            </span>
-          )}
-      </div>
       <div className="recipient-paragraph">
         by the National Institute of Early Childhood Development in
         collaboration

@@ -21,9 +21,10 @@ const NiecExamResults = ({ certificate }) => (
       <div className="col-2">&nbsp;</div>
       <div className="col-10 exam-results-footer">
         Cumulative Grade Point Average Score:{" "}
-        {certificate.cumulativeScore.toFixed(1)}
+        {certificate.cumulativeScore.toFixed(2)}
         <br />
         Awarded the {certificate.name.toUpperCase()}
+        {certificate.additionalData.isMerit && <span>&nbsp;WITH MERIT</span>}
       </div>
     </div>
 

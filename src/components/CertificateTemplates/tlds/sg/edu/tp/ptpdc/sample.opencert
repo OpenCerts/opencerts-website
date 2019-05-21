@@ -1,0 +1,42 @@
+{
+  "schema": "opencerts/v1.5",
+  "data": {
+    "id": "d009d571-ed68-407d-ac28-a59c6a0628bf:string:sg-edu-tp-9999-D01-1234567A-DP001",
+    "$template": "1fbab0ac-7887-4705-9c97-decbec5367cd:string:sg/edu/tp/ptmc-2019",
+    "description": "917d5ba9-0981-40eb-9ec1-a887bf2310fc:string:Post-Diploma Certificate",
+    "issuedOn": "698b5af3-9364-4b51-8aee-3f4ce8a951a9:string:2019-05-06T00:00:00+08:00",
+    "expiresOn": "09198435-18aa-4463-b5e0-0f4317386774:string:9999-12-31T23:59:59.997+08:00",
+    "admissionDate": "9273cd72-7f30-4277-99ad-44080fc66277:string:2016-05-06T00:00:00+08:00",
+    "graduationDate": "ff996044-9fc4-4105-be1a-971648949c1d:string:2019-05-06T00:00:00+08:00",
+    "cumulativeScore": "1510b084-e64b-48f8-bd56-7cea7b9cad3a:number:5",
+    "name": "787d8823-7ccd-45d1-8e13-acc7c3260699:string:Post-diploma dummy certificate name",
+    "issuers": [
+      {
+        "name": "02ad4c75-e457-40b0-9745-c7da7e137b4b:string:ROPSTEN: Temasek Polytechnic",
+        "certificateStore": "8d90b446-8075-41f1-a1f5-eb4d9395a323:string:0xe825e69383a57eB686Fc7b8c455Dd982bB9680f6"
+      }
+    ],
+    "recipient": {
+      "studentId": "27450cd3-3ccc-47a1-b96c-602f04727c16:string:1234567A",
+      "name": "186fec03-9c33-48c4-8e54-0196144bfb70:string:DUMMY STUDENT NAME",
+      "nric": "17d2da9f-d054-485e-9104-6825a5ccd55e:string:S0000000A"
+    },
+    "transcript": [],
+    "additionalData": {
+      "totalCreditUnitsEarned": "d3fdc637-72b1-49f3-be41-180efd8bfbc2:number:0",
+      "awardedCertificates": [],
+      "recognizedTowardsCourseName": "4486c36c-4852-45c3-a1e6-3a68bbd973c4:string:DUMMY COURSE NAME"
+    }
+  },
+  "privacy": {},
+  "signature": {
+    "type": "SHA3MerkleProof",
+    "targetHash": "837c0ae43a5417671ba52689979b95901963c979711a13eea365d6972bb4a2f7",
+    "proof": [
+      "fb2794c0b96d7d5d75e3002a96a16bfd88ed0cfe395a93a2f56e43341c34224e",
+      "287b4fb4f2ff151f286670a4805881c7033c167cc491de4dc991ee1dd8f65c43",
+      "3f78d474118d966a329117370807d321ac4dec8f2360b3d81aec697f1c3c3945"
+    ],
+    "merkleRoot": "ad0e39d212a806e35f1a19e941e074fcafca718821076d678288b44f93e267fa"
+  }
+}

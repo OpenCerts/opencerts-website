@@ -19,7 +19,6 @@ export const printTextStyle = {
 };
 
 export const issuersTextStyle = {
-  textAlign: "center",
   fontSize: "24px"
 };
 
@@ -186,4 +185,20 @@ export const soaCertCodeStyle = {
   position: "absolute",
   left: "0",
   bottom: "30px"
+};
+
+export const specTextStyle = {
+  fontSize: "2rem",
+  wordBreak: "break-word"
+};
+
+export const ssgLogoStyle = {
+  width: "70%",
+  height: "auto"
+};
+
+export const fullWidthStyleQual = {
+  width: "90%",
+  height: "auto",
+  marginBottom: "10px"
 };
