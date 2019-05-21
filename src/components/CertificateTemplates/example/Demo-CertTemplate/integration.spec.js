@@ -2,7 +2,7 @@ import { Selector } from "testcafe";
 
 fixture("Demo Cert Govtech").page`http://localhost:3000`;
 
-const Certificate = "./DEMO_2019.opencert";
+const Certificate = "./DEMO_CERT.json";
 
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");

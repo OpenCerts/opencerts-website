@@ -6,7 +6,7 @@ import css from "./dropZoneSection.scss";
 import { updateCertificate } from "../../reducers/certificate";
 import { trace } from "../../utils/logger";
 
-const json = require("../CertificateTemplates/example/Demo-CertTemplate/DEMO_2019.json");
+const json = require("../CertificateTemplates/example/Demo-CertTemplate/DEMO_CERT.json");
 
 class DropZoneSection extends Component {
   componentDidMount() {
