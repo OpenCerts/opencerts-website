@@ -26,7 +26,7 @@ test("SOAMF01 certificate is rendered correctly", async t => {
     "is awarded to",
     "A",
     "ID No: S0000000A",
-    "for successfully meeting the requirements of the above programme andattainment of the competencies in the following modules of the GenericManufacturing Skills WSQ Framework:",
+    "for successfully meeting the requirements of the above programme and attainment of the competencies in the following modules of the Generic Manufacturing Skills WSQ Framework:",
     "- Develop strategies for total remuneration (HR-PRB-503E-1)",
     "at SINGAPORE NATIONAL EMPLOYERS FEDERATION",
     "01 Dec 2018"
