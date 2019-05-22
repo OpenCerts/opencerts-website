@@ -17,7 +17,6 @@ import {
   SOR_CENTER_ALIGN,
   EXPLANATORY_PAGE_SIZE,
   EXPLANATORY_TITLE,
-  SOR_20_WIDTH,
   SOR_30_WIDTH,
   SOR_50_WIDTH,
   SOR_PSLE_NAME_1979,
@@ -37,6 +36,8 @@ import { RENDEREXPLANATORYNOTES_A } from "./explnotes_a_detail";
 import { RENDEREXPLANATORYNOTES_A2 } from "./explnotes_a2_detail";
 
 import { RENDEREXPLANATORYNOTES_A3 } from "./explnotes_a3_detail";
+
+import { RENDEREXPLANATORYNOTES_PSLE } from "./explnotes_psle_detail";
 
 export const SOR_TRANSCRIPT_FONT_SIZE_12 = {
   fontSize: "12px",
@@ -135,6 +136,8 @@ export const GETEXPLANATORYNOTES = examlvl => {
     explanatorynotes = RENDEREXPLANATORYNOTES_A2();
   } else if (examlvl === "GCEA3") {
     explanatorynotes = RENDEREXPLANATORYNOTES_A3();
+  } else if (examlvl === "PSLE") {
+    explanatorynotes = RENDEREXPLANATORYNOTES_PSLE();
   }
 
   return explanatorynotes;
@@ -839,15 +842,15 @@ export const SUBJECTNAME = (
     return (
       <div className="row">
         <div className="col-md-3" />
-        <div className="col-md-6">{subjectname}</div>
+        <div className="col-md-8">{subjectname}</div>
       </div>
     );
   }
   if (examlvltype === "PSLE1979") {
     return (
       <div className="row">
-        <div className="col-md-6" />
-        <div className="col-md-6" style={SOR_PSLE_NAME_1979}>
+        <div className="col-md-3" />
+        <div className="col-md-8" style={SOR_PSLE_NAME_1979}>
           {subjectname}
         </div>
       </div>
@@ -884,23 +887,43 @@ export const ADDITIONALINFO = (
         <div className="row">
           <div className="col-md-1" />
           <div className="col-md-3">
-            <strong>AGGREGATE SCORE:</strong>
+            <strong>AGGREGATE SCORE</strong>
           </div>
-          <div className="col-md-1">{aggregatescore}</div>
+          <div className="col-md-3">: &nbsp;&nbsp;&nbsp;{aggregatescore}</div>
         </div>
         <div className="row">
-          <div style={SOR_20_WIDTH} />
+          <div className="col-md-1" />
           <div className="col-md-3">
-            <strong>OVERALL RESULTS:</strong>
+            <strong>OVERALL RESULTS</strong>
           </div>
-          <div className="col-md-1">{overallResults}</div>
+          <div className="col-md-3">: &nbsp;&nbsp;&nbsp;{overallResults}</div>
         </div>
         <div className="row">
-          <div style={SOR_20_WIDTH} />
+          <div className="col-md-1" />
           <div className="col-md-3">
-            <strong>STREAM ELIGIBLE FOR:</strong>
+            <strong>STREAM ELIGIBLE FOR</strong>
           </div>
-          <div className="col-md-1">{streameligible}</div>
+          <div className="col-md-3">: &nbsp;&nbsp;&nbsp;{streameligible}</div>
+        </div>
+      </span>
+    );
+  }
+  if (examlvltype === "PSLE2013") {
+    return (
+      <span>
+        <div className="row">
+          <div className="col-md-1" />
+          <div className="col-md-3">
+            <strong>AGGREGATE SCORE</strong>
+          </div>
+          <div className="col-md-3">: &nbsp;&nbsp;&nbsp;{aggregatescore}</div>
+        </div>
+        <div className="row">
+          <div className="col-md-1" />
+          <div className="col-md-3">
+            <strong>STREAM ELIGIBLE FOR</strong>
+          </div>
+          <div className="col-md-3">: &nbsp;&nbsp;&nbsp;{streameligible}</div>
         </div>
       </span>
     );
@@ -913,21 +936,21 @@ export const ADDITIONALINFO = (
           <div className="col-md-3">
             <strong>AGGREGATE SCORE</strong>
           </div>
-          <div className="col-md-1">:{aggregatescore}</div>
+          <div className="col-md-3">: &nbsp;&nbsp;&nbsp;{aggregatescore}</div>
         </div>
         <div className="row">
           <div className="col-md-1" />
           <div className="col-md-3">
             <strong>OVERALL RESULTS</strong>
           </div>
-          <div className="col-md-1">:{overallResults}</div>
+          <div className="col-md-3">: &nbsp;&nbsp;&nbsp;{overallResults}</div>
         </div>
         <div className="row">
           <div className="col-md-1" />
           <div className="col-md-3">
             <strong>STREAM ELIGIBLE FOR</strong>
           </div>
-          <div className="col-md-1">:{streameligible}</div>
+          <div className="col-md-3">: &nbsp;&nbsp;&nbsp;{streameligible}</div>
         </div>
         <br />
         <div className="row">
@@ -935,34 +958,14 @@ export const ADDITIONALINFO = (
           <div className="col-md-3">
             <strong>HIGHEST AGGREGATE SCORE</strong>
           </div>
-          <div className="col-md-1">:{highestscore}</div>
+          <div className="col-md-3">: &nbsp;&nbsp;&nbsp;{highestscore}</div>
         </div>
         <div className="row">
           <div className="col-md-1" />
           <div className="col-md-3">
             <strong>LOWEST AGGREGATE SCORE</strong>
           </div>
-          <div className="col-md-1">:{lowestscore}</div>
-        </div>
-      </span>
-    );
-  }
-  if (examlvltype === "PSLE2013") {
-    return (
-      <span>
-        <div className="row">
-          <div className="col-md-1" />
-          <div className="col-md-3">
-            <strong>AGGREGATE SCORE:</strong>
-          </div>
-          <div className="col-md-1">{aggregatescore}</div>
-        </div>
-        <div className="row">
-          <div className="col-md-1" />
-          <div className="col-md-3">
-            <strong>STREAM ELIGIBLE FOR:</strong>
-          </div>
-          <div className="col-md-1">{streameligible}</div>
+          <div className="col-md-3">: &nbsp;&nbsp;&nbsp;{lowestscore}</div>
         </div>
       </span>
     );
@@ -1233,8 +1236,8 @@ export const RENDER_TRANSCRIPT = ({ certificate }, examlvl, examlvltype) => {
               certificate.additionalData.aggregateScore,
               certificate.additionalData.overallResults,
               certificate.additionalData.streamEligibleFor,
-              certificate.additionalData.highestAggregatenumericalGrade,
-              certificate.additionalData.lowestAggregatenumericalGrade
+              certificate.additionalData.highestAggregateScore,
+              certificate.additionalData.lowestAggregateScore
             )}
           </div>
         </div>
