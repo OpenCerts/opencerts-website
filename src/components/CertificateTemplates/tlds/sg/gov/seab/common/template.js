@@ -17,8 +17,11 @@ import {
   SOR_CENTER_ALIGN,
   EXPLANATORY_PAGE_SIZE,
   EXPLANATORY_TITLE,
+  SOR_20_WIDTH,
   SOR_30_WIDTH,
-  SOR_50_WIDTH
+  SOR_50_WIDTH,
+  SOR_PSLE_NAME_1979,
+  SOR_PSLE_GRADE_1979
 } from "./style";
 
 import { RENDEREXPLANATORYNOTES_NA } from "./explnotes_na_detail";
@@ -28,6 +31,12 @@ import { RENDEREXPLANATORYNOTES_O } from "./explnotes_o_detail";
 import { RENDEREXPLANATORYNOTES_NT } from "./explnotes_nt_detail";
 
 import { RENDEREXPLANATORYNOTES_N } from "./explnotes_n_detail";
+
+import { RENDEREXPLANATORYNOTES_A } from "./explnotes_a_detail";
+
+import { RENDEREXPLANATORYNOTES_A2 } from "./explnotes_a2_detail";
+
+import { RENDEREXPLANATORYNOTES_A3 } from "./explnotes_a3_detail";
 
 export const SOR_TRANSCRIPT_FONT_SIZE_12 = {
   fontSize: "12px",
@@ -120,6 +129,12 @@ export const GETEXPLANATORYNOTES = examlvl => {
     explanatorynotes = RENDEREXPLANATORYNOTES_NT();
   } else if (examlvl === "GCEN") {
     explanatorynotes = RENDEREXPLANATORYNOTES_N();
+  } else if (examlvl === "GCEA") {
+    explanatorynotes = RENDEREXPLANATORYNOTES_A();
+  } else if (examlvl === "GCEA2") {
+    explanatorynotes = RENDEREXPLANATORYNOTES_A2();
+  } else if (examlvl === "GCEA3") {
+    explanatorynotes = RENDEREXPLANATORYNOTES_A3();
   }
 
   return explanatorynotes;
@@ -384,7 +399,7 @@ export const GETSUBJGRADE = (subjgrade, examyr, examlvltype) => {
   );
 };
 
-export const GETSPAPERGRADE = (papergrade, examyr, examlvl) => {
+export const GETPAPERGRADE = (papergrade, examyr, examlvl) => {
   let paperalphaRender;
   let papernumericRender;
 
@@ -491,7 +506,7 @@ export const GETSPAPERGRADE = (papergrade, examyr, examlvl) => {
   );
 };
 
-export const EXAMININGAUTHORITYANDLANGUAGEMEDIUMTITLE = (
+export const EXAMININGAUTHORITYANDLANGUAGEMEDIUMHEADER = (
   examlvltype,
   examyr
 ) => {
@@ -563,7 +578,9 @@ export const EXAMININGAUTHORITYANDLANGUAGEMEDIUMDATA = (
 ) => {
   if (
     (examlvltype === "A" && (examyr >= 2002 && examyr <= 2005)) ||
-    examlvltype === "A2"
+    examlvltype === "A2" ||
+    examlvltype === "PSLE19801981" ||
+    examlvltype === "PSLE19821992"
   ) {
     return (
       <div className="row">
@@ -596,7 +613,28 @@ export const EXAMGRADEHEADER = (examlvltype, examyr) => {
       </div>
     );
   }
-
+  if (examlvltype === "PSLE19801981" || examlvltype === "PSLE19821992") {
+    return (
+      <div className="row" style={SOR_BOLD_TEXT}>
+        <div className="col-md-1" />
+        <div className="col-md-3">SUBJECT</div>
+        <div className="col-md-2">GRADE</div>
+        <div className="col-md-4">LANGUAGE MEDIUM</div>
+      </div>
+    );
+  }
+  if (examlvltype === "PSLE19932012" || examlvltype === "PSLE2013") {
+    return (
+      <div className="row" style={SOR_BOLD_TEXT}>
+        <div className="col-md-1" />
+        <div className="col-md-5">SUBJECT</div>
+        <div className="col-md-2">GRADE</div>
+      </div>
+    );
+  }
+  if (examlvltype === "PSLE1979") {
+    return <span />;
+  }
   return (
     <div className="row" style={SOR_BOLD_TEXT}>
       <div className="col-md-4">SUBJECT</div>
@@ -617,7 +655,7 @@ export const EXAMGRADEHEADER = (examlvltype, examyr) => {
         LEVEL
       </div>
       <div className="col-md-4">
-        {EXAMININGAUTHORITYANDLANGUAGEMEDIUMTITLE(examlvltype, examyr)}
+        {EXAMININGAUTHORITYANDLANGUAGEMEDIUMHEADER(examlvltype, examyr)}
       </div>
     </div>
   );
@@ -633,6 +671,15 @@ export const EXAMGRADESTAR = (examlvltype, examyr) => {
         <div className="col-md-2">*************</div>
       </div>
     );
+  }
+  if (
+    examlvltype === "PSLE19801981" ||
+    examlvltype === "PSLE19821992" ||
+    examlvltype === "PSLE19932012" ||
+    examlvltype === "PSLE2013" ||
+    examlvltype === "PSLE1979"
+  ) {
+    return <span />;
   }
 
   return (
@@ -680,6 +727,39 @@ export const SUBJECTGRADE = (
       </div>
     );
   }
+  if (examlvltype === "PSLE19801981" || examlvltype === "PSLE19821992") {
+    return (
+      <div className="row">
+        <div className="col-md-3">{grade}</div>
+        <div className="col-md-4">
+          {EXAMININGAUTHORITYANDLANGUAGEMEDIUMDATA(
+            examlvltype,
+            examyr,
+            langugange,
+            examination
+          )}
+        </div>
+      </div>
+    );
+  }
+  if (examlvltype === "PSLE19932012" || examlvltype === "PSLE2013") {
+    return (
+      <div className="row">
+        <div className="col-md-3" />
+        <div className="col-md-3">{grade}</div>
+      </div>
+    );
+  }
+  if (examlvltype === "PSLE1979") {
+    return (
+      <div className="row">
+        <div className="col-md-3" />
+        <div className="col-md-3" style={SOR_PSLE_GRADE_1979}>
+          {grade}
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="row">
       <div className="col-md-3">{GETSUBJGRADE(grade, examyr, examlvltype)}</div>
@@ -710,7 +790,7 @@ export const PAPERGRADE = (
     return (
       <div className="row">
         <div className="col-md-6">
-          {GETSPAPERGRADE(papergrade, examyr, examlvl)}
+          {GETPAPERGRADE(papergrade, examyr, examlvl)}
         </div>
 
         <div className="col-md-2">
@@ -727,7 +807,7 @@ export const PAPERGRADE = (
   return (
     <div className="row">
       <div className="col-md-3">
-        {GETSPAPERGRADE(papergrade, examyr, examlvl)}
+        {GETPAPERGRADE(papergrade, examyr, examlvl)}
       </div>
       <div className="col-md-3" style={SOR_30_WIDTH}>
         -
@@ -741,6 +821,163 @@ export const PAPERGRADE = (
         )}
       </div>
     </div>
+  );
+};
+
+export const SUBJECTNAME = (
+  examlvltype,
+  subjectname,
+  examiningagency,
+  examiningauthority
+) => {
+  if (
+    examlvltype === "PSLE19801981" ||
+    examlvltype === "PSLE19821992" ||
+    examlvltype === "PSLE19932012" ||
+    examlvltype === "PSLE2013"
+  ) {
+    return (
+      <div className="row">
+        <div className="col-md-3" />
+        <div className="col-md-6">{subjectname}</div>
+      </div>
+    );
+  }
+  if (examlvltype === "PSLE1979") {
+    return (
+      <div className="row">
+        <div className="col-md-6" />
+        <div className="col-md-6" style={SOR_PSLE_NAME_1979}>
+          {subjectname}
+        </div>
+      </div>
+    );
+  }
+  return (
+    <span>
+      {subjectname}
+      {examiningagency !== undefined &&
+      examiningagency !== examiningauthority ? (
+        <span>
+          <br />
+          &nbsp;&nbsp;{examiningagency}
+        </span>
+      ) : (
+        <span />
+      )}
+    </span>
+  );
+};
+
+export const ADDITIONALINFO = (
+  examlvltype,
+  totalsubjects,
+  aggregatescore,
+  overallResults,
+  streameligible,
+  highestscore,
+  lowestscore
+) => {
+  if (examlvltype === "PSLE19801981") {
+    return (
+      <span>
+        <div className="row">
+          <div className="col-md-1" />
+          <div className="col-md-3">
+            <strong>AGGREGATE SCORE:</strong>
+          </div>
+          <div className="col-md-1">{aggregatescore}</div>
+        </div>
+        <div className="row">
+          <div style={SOR_20_WIDTH} />
+          <div className="col-md-3">
+            <strong>OVERALL RESULTS:</strong>
+          </div>
+          <div className="col-md-1">{overallResults}</div>
+        </div>
+        <div className="row">
+          <div style={SOR_20_WIDTH} />
+          <div className="col-md-3">
+            <strong>STREAM ELIGIBLE FOR:</strong>
+          </div>
+          <div className="col-md-1">{streameligible}</div>
+        </div>
+      </span>
+    );
+  }
+  if (examlvltype === "PSLE19821992" || examlvltype === "PSLE19932012") {
+    return (
+      <span>
+        <div className="row">
+          <div className="col-md-1" />
+          <div className="col-md-3">
+            <strong>AGGREGATE SCORE</strong>
+          </div>
+          <div className="col-md-1">:{aggregatescore}</div>
+        </div>
+        <div className="row">
+          <div className="col-md-1" />
+          <div className="col-md-3">
+            <strong>OVERALL RESULTS</strong>
+          </div>
+          <div className="col-md-1">:{overallResults}</div>
+        </div>
+        <div className="row">
+          <div className="col-md-1" />
+          <div className="col-md-3">
+            <strong>STREAM ELIGIBLE FOR</strong>
+          </div>
+          <div className="col-md-1">:{streameligible}</div>
+        </div>
+        <br />
+        <div className="row">
+          <div className="col-md-1" />
+          <div className="col-md-3">
+            <strong>HIGHEST AGGREGATE SCORE</strong>
+          </div>
+          <div className="col-md-1">:{highestscore}</div>
+        </div>
+        <div className="row">
+          <div className="col-md-1" />
+          <div className="col-md-3">
+            <strong>LOWEST AGGREGATE SCORE</strong>
+          </div>
+          <div className="col-md-1">:{lowestscore}</div>
+        </div>
+      </span>
+    );
+  }
+  if (examlvltype === "PSLE2013") {
+    return (
+      <span>
+        <div className="row">
+          <div className="col-md-1" />
+          <div className="col-md-3">
+            <strong>AGGREGATE SCORE:</strong>
+          </div>
+          <div className="col-md-1">{aggregatescore}</div>
+        </div>
+        <div className="row">
+          <div className="col-md-1" />
+          <div className="col-md-3">
+            <strong>STREAM ELIGIBLE FOR:</strong>
+          </div>
+          <div className="col-md-1">{streameligible}</div>
+        </div>
+      </span>
+    );
+  }
+  if (examlvltype === "PSLE1979") {
+    return <span />;
+  }
+  return (
+    <span>
+      <strong>Total number of subjects recorded:</strong>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <span style={SOR_TRANSCRIPT_FONT_SIZE_11}>
+        {GETNUMBER(totalsubjects)}
+      </span>
+    </span>
   );
 };
 
@@ -903,6 +1140,17 @@ export const RENDER_SOR_INFO_PSLE = ({ certificate }) => (
   </div>
 );
 
+export const GETESORTYPE = (certificate, examlvl) => {
+  let infotype = "";
+  if (examlvl === "PSLE") {
+    infotype = RENDER_SOR_INFO_PSLE(certificate);
+  } else {
+    infotype = RENDER_SOR_INFO(certificate);
+  }
+
+  return infotype;
+};
+
 export const RENDER_TRANSCRIPT = ({ certificate }, examlvl, examlvltype) => {
   // Get transcript info
   const transcript = get(certificate, "transcript");
@@ -914,15 +1162,11 @@ export const RENDER_TRANSCRIPT = ({ certificate }, examlvl, examlvltype) => {
       <div className="col-md-12">
         <div className="row">
           <div className="col-md-4" style={SOR_SUBJECT_REM_RIGHT_PAD}>
-            {trn.name}
-            {trn.pExaminingAgency !== undefined &&
-            trn.pExaminingAgency !== trn.examiningAuthority ? (
-              <span>
-                <br />
-                &nbsp;&nbsp;{trn.pExaminingAgency}
-              </span>
-            ) : (
-              <span />
+            {SUBJECTNAME(
+              examlvltype,
+              trn.name,
+              trn.pExaminingAgency,
+              trn.examiningAuthority
             )}
           </div>
           <div className="col-md-8">
@@ -983,11 +1227,15 @@ export const RENDER_TRANSCRIPT = ({ certificate }, examlvl, examlvltype) => {
         <div className="row">&nbsp;</div>
         <div className="row">
           <div className="col-md-12" style={SOR_TRANSCRIPT_FONT_SIZE_12}>
-            <strong>Total number of subjects recorded:</strong>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <span style={SOR_TRANSCRIPT_FONT_SIZE_11}>
-              {GETNUMBER(totalsubjects)}
-            </span>
+            {ADDITIONALINFO(
+              examlvltype,
+              totalsubjects,
+              certificate.additionalData.aggregateScore,
+              certificate.additionalData.overallResults,
+              certificate.additionalData.streamEligibleFor,
+              certificate.additionalData.highestAggregatenumericalGrade,
+              certificate.additionalData.lowestAggregatenumericalGrade
+            )}
           </div>
         </div>
       </div>
@@ -1041,7 +1289,7 @@ export const TEMPLATE_ESOR = (certificate, examlvl, examlvltype) => (
           </div>
 
           <div className="row">
-            <div className="col-md-12">{RENDER_SOR_INFO(certificate)}</div>
+            <div className="col-md-12">{GETESORTYPE(certificate, examlvl)}</div>
           </div>
 
           <div className="row">
