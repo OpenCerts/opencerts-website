@@ -5,8 +5,7 @@ import {
   compact,
   filter,
   isEmpty,
-  mapKeys,
-  map
+  mapKeys
 } from "lodash";
 import { put, all, call, select, takeEvery } from "redux-saga/effects";
 import { certificateData, verifySignature } from "@govtechsg/open-certificate";

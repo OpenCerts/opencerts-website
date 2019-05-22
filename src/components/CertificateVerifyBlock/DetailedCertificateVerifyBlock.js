@@ -2,52 +2,64 @@ import PropTypes from "prop-types";
 import css from "./detailedCertificateBlock.scss";
 import { LOG_LEVEL } from "./constants";
 
-const CHECKS = {
-  HASH: {
-    id: "hashStatus",
-    success: "Certificate has not been tampered with",
-    failure: "Certificate has been tampered with"
-  },
-  ISSUED: {
-    id: "issuedStatus",
-    success: "Certificate has been issued",
-    failure: "Certificate has not been issued"
-  },
-  ISSUER_IDENTITY: {
-    id: "issuerIdentityStatus",
-    success: "Issuer has been identified",
-    failure: "Issuer cannot be identified"
-  },
-  NOT_REVOKED: {
-    id: "notRevokedStatus",
-    success: "Certificate has not been revoked",
-    failure: "Certificate has been revoked"
-  }
-};
+const SuccessIcon = () => <i className="fas fa-check text-success mr-2" />;
+
+const FailureIcon = () => (
+  <i className="fas fa-times-circle text-danger mr-2" />
+);
+
+const WarningIcon = () => <i className="fas fa-question text-warning mr-2" />;
+
+const CheckStatusRow = ({ message, icon }) => (
+  <div className="row">
+    <div className="col-2">{icon}</div>
+    <div className="col-10">
+      <div className="row">{message}</div>
+    </div>
+  </div>
+);
+
+const renderFailure = check => (
+  <CheckStatusRow message={check.failure} icon={check.failureStatusIcon()} />
+);
+
+const renderSuccess = check => (
+  <CheckStatusRow message={check.success} icon={SuccessIcon()} />
+);
 
 const renderStatus = (props, type, typeVerified = true) => {
   const isVerified = props[type.id].verified;
 
   if (isVerified !== typeVerified) return "";
-  return isVerified ? (
-    <div className="row">
-      <div className="col-2">
-        <i className="fas fa-check text-success mr-2" />
-      </div>
-      <div className="col-10">
-        <div className="row">{type.success}</div>
-      </div>
-    </div>
-  ) : (
-    <div className="row">
-      <div className="col-2">
-        <i className="fas fa-times-circle text-danger mr-2" />
-      </div>
-      <div className="col-10">
-        <div className="row">{type.failure}</div>
-      </div>
-    </div>
-  );
+
+  return isVerified ? renderSuccess(type) : renderFailure(type);
+};
+
+const CHECKS = {
+  HASH: {
+    id: "hashStatus",
+    success: "Certificate has not been tampered with",
+    failure: "Certificate has been tampered with",
+    failureStatusIcon: FailureIcon
+  },
+  ISSUED: {
+    id: "issuedStatus",
+    success: "Certificate has been issued",
+    failure: "Certificate has not been issued",
+    failureStatusIcon: FailureIcon
+  },
+  ISSUER_IDENTITY: {
+    id: "issuerIdentityStatus",
+    success: "Certificate from institution in our registry",
+    failure: "Institution not in our registry",
+    failureStatusIcon: WarningIcon
+  },
+  NOT_REVOKED: {
+    id: "notRevokedStatus",
+    success: "Certificate has not been revoked",
+    failure: "Certificate has been revoked",
+    failureStatusIcon: WarningIcon
+  }
 };
 
 const renderVerifiedStatuses = props => (
@@ -113,6 +125,11 @@ CertificateVerifyBlock.propTypes = {
   notRevokedStatus: PropTypes.object,
   issuerIdentityStatus: PropTypes.object,
   detailedVerifyVisible: PropTypes.bool
+};
+
+CheckStatusRow.propTypes = {
+  message: PropTypes.string,
+  icon: PropTypes.element
 };
 renderUnverifiedStatuses.propTypes = CertificateVerifyBlock.propTypes;
 
