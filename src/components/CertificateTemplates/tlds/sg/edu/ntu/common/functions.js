@@ -2,22 +2,23 @@ export const formatDate = dateString => {
   if (!dateString) return null;
   const date = new Date(dateString);
   const months = [
-    "JAN",
-    "FEB",
-    "MAR",
-    "APR",
+    "JANUARY",
+    "FEBRUARY",
+    "MARCH",
+    "APRIL",
     "MAY",
-    "JUN",
-    "JUL",
-    "AUG",
-    "SEP",
-    "OCT",
-    "NOV",
-    "DEC"
+    "JUNE",
+    "JULY",
+    "AUGUST",
+    "SEPTEMBER",
+    "OCTOCBER",
+    "NOVEMBER",
+    "DECEMBER"
   ];
   const month = date.getMonth();
   const year = date.getUTCFullYear();
-  return `${months[month]} ${year}`;
+  const day = date.getDate();
+  return `${day} ${months[month]} ${year}`;
 };
 
 export const formatNRIC = nricFin => {
@@ -45,12 +46,7 @@ export const formatDatePrefix = dateString => {
       daySup = "th";
   }
 
-  return (
-    <span>
-      on {day}
-      <sup>{daySup}</sup> day of
-    </span>
-  );
+  return <span>on {day}</span>;
 };
 
 export const formatCertID = certId => {
