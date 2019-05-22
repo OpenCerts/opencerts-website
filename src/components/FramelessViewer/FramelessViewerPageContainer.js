@@ -6,7 +6,7 @@ import {
   validateSchema,
   verifySignature
 } from "@govtechsg/open-certificate";
-
+import connectToParent from "penpal/lib/connectToParent";
 import styles from "../certificateViewer.scss";
 import {
   updateCertificate,
@@ -28,38 +28,35 @@ class FramelessViewerContainer extends Component {
   }
 
   componentDidMount() {
+    const getTempates = () => this.props.templates.bind(this);
+    const renderCertificate = this.handleCertificateChange;
+    const selectTemplateTab = this.props.selectTemplateTab;
+
     window.opencerts = {
-      templates: () => this.props.templates,
-      renderCertificate: this.handleCertificateChange,
-      selectTemplateTab: this.props.selectTemplateTab
+      getTempates,
+      renderCertificate,
+      selectTemplateTab
     };
 
-    const handleMessage = ({ data, source, origin }) => {
-      switch (data.type) {
-        case "CERTIFICATE_CHANGE":
-          this.handleCertificateChange(data.payload);
-          break;
-        case "RENDER_CERTIFICATE":
-          this.renderCertificate(data.payload);
-          break;
-        case "TEMPLATES":
-          source.postMessage(
-            {
-              type: "TEMPLATES",
-              payload: JSON.parse(JSON.stringify(this.props.templates))
-            },
-            origin
-          );
-          break;
-        default:
-      }
-    };
+    const inIframe = window.location !== window.parent.location;
 
-    if (window.addEventListener) {
-      window.addEventListener("message", handleMessage, false);
-    } else {
-      window.attachEvent("onmessage", handleMessage);
-    }
+    inIframe &&
+      connectToParent({
+        methods: {
+          renderCertificate(certificate) {
+            renderCertificate(certificate);
+          },
+          selectTemplateTab(index) {
+            selectTemplateTab(index);
+          },
+          getTemplates() {
+            console.log(this.props.templates)
+          },
+          height() {
+            return document.documentElement.scrollHeight;
+          }
+        }
+      });
   }
 
   handleTextFieldChange(e) {
