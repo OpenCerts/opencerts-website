@@ -22,7 +22,6 @@ test("NTU Undergrad certificate is rendered correctly", async t => {
 
   // Certificate tabs rendered
   await t.expect(TemplateTabList.textContent).contains("Certificate");
-  await t.expect(TemplateTabList.textContent).contains("Transcript");
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [

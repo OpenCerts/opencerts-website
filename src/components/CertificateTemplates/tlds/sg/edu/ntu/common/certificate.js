@@ -23,9 +23,11 @@ export const printTextStyle = {
   fontFamily: "Avant Garde,Avantgarde,Century Gothic,CenturyGothic,AppleGothic",
   fontWeight: "500!important",
   fontSize: "1.2rem",
-  color: "#555",
   textAlign: "left",
-  textAlignVertical: "bottom"
+  marginBottom: "0",
+  bottom: 0,
+  position: "absolute"
+  //textAlignVertical: "bottom"
 };
 
 export const universityNameTextStyle = {
@@ -43,9 +45,9 @@ export const certNameTextStyle = {
   fontWeight: "700",
   fontStyle: "italic",
   fontSize: "1.875rem",
-  color: "#555",
   marginBottom: "0",
-  textAlign: "left"
+  textAlign: "left",
+  lineHeight: 1
 };
 
 export const certNameHonorTextStyle = {
@@ -53,10 +55,23 @@ export const certNameHonorTextStyle = {
   fontWeight: "700",
   fontStyle: "italic",
   fontSize: "1.437rem",
-  color: "#555",
   marginBottom: "0",
   textAlign: "left",
-  textAlignVertical: "bottom"
+  bottom: 0,
+  position: "absolute"
+  //textAlignVertical: "bottom"
+};
+
+export const certIssueDateTextStyle = {
+  fontFamily: "Avant Garde,Avantgarde,Century Gothic,CenturyGothic,AppleGothic",
+  fontWeight: "700",
+  fontStyle: "italic",
+  fontSize: "1.1rem",
+  marginBottom: "0",
+  textAlign: "left",
+  bottom: 0,
+  position: "absolute"
+  //textAlignVertical: "bottom"
 };
 
 export const singaporeTextStyle = {
@@ -67,9 +82,10 @@ export const singaporeTextStyle = {
 export const nameTextStyle = {
   fontFamily: "FootlightMT",
   fontSize: "2.5rem",
-  textAlign: "center",
+  textAlign: "left",
   fontStyle: "italic",
-  fontWeight: "700"
+  fontWeight: "700",
+  lineHeight: 1
 };
 
 export const titleTextStyle = {
@@ -268,7 +284,9 @@ export const renderTwoSignatures = certificate => (
 export const renderSchoolName = (
   <div>
     <div className="row d-flex justify-content-start">
-      <img src={IMG_NTU_TEXT} />
+      <div className="col">
+        <img src={IMG_NTU_TEXT} />
+      </div>
     </div>
 
     {/* <div className="row d-flex justify-content-start">
@@ -283,13 +301,15 @@ export const renderSchoolName = (
 export const renderCertName = certificate => (
   <div>
     <div className="row d-flex justify-content-start">
-      <p style={certNameTextStyle}>{certificate.name}</p>
+      <div className="col">
+        <p style={certNameTextStyle}>{certificate.name}</p>
+      </div>
     </div>
-    <div className="row justify-content-start">
-      <div className="col-1 align-items-end">
+    <div className="row d-flex mt-4 justify-content-start">
+      <div className="col-1 mt-3">
         <p style={printTextStyle}>with</p>
       </div>
-      <div className="col-1 align-items-end">
+      <div className="col-5 mt-3">
         <p style={certNameHonorTextStyle}>
           {certificate.additionalData.classification}
         </p>
@@ -301,16 +321,22 @@ export const renderCertName = certificate => (
 export const renderAwardText = certificate => (
   <div>
     <div
-      className="row d-flex justify-content-start"
+      className="row d-flex justify-content-start pb-1"
       style={{ marginTop: "1.5rem" }}
     >
-      <img src={IMG_AWARD_TEXT_A} />
+      <div className="col">
+        <img src={IMG_AWARD_TEXT_A} />
+      </div>
     </div>
     <div className="row d-flex justify-content-start">
-      <p style={nameTextStyle}>{certificate.recipient.name}</p>
+      <div className="col">
+        <p style={nameTextStyle}>{certificate.recipient.name}</p>
+      </div>
     </div>
-    <div className="row d-flex justify-content-start">
-      <img src={IMG_AWARD_TEXT_B} />
+    <div className="row d-flex justify-content-start pb-1">
+      <div className="col">
+        <img src={IMG_AWARD_TEXT_B} />
+      </div>
     </div>
 
     {/* <div
@@ -334,11 +360,13 @@ export const renderAwardText = certificate => (
 );
 
 export const renderIssuingDate = certificate => (
-  <div>
-    <p>
-      {formatDatePrefix(certificate.issuedOn)}{" "}
-      {formatDate(certificate.issuedOn)}
-    </p>
+  <div className="row d-flex mt-4 justify-content-start">
+    <div className="col-1">
+      <p style={printTextStyle}>on</p>
+    </div>
+    <div className="col-5">
+      <p style={certIssueDateTextStyle}>{formatDate(certificate.issuedOn)}</p>
+    </div>
   </div>
 );
 
@@ -361,7 +389,7 @@ export default ({ logo }) => ({ certificate }) => (
       className="container"
       style={{ border: 1, borderColor: "#AAA", borderStyle: "solid" }}
     >
-      <div className="row justify-content-start mt-5 ml-3 mr-3">
+      <div className="row justify-content-start mt-5 ml-1 mr-1">
         <div className="col-9">
           {renderSchoolName}
           {renderAwardText(certificate)}
