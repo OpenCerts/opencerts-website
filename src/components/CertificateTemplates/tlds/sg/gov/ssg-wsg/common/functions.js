@@ -175,12 +175,21 @@ export const switchOperatorFunction = certificate => {
 
 export const renderSignature = certificate => (
   <div>
-    <div className="col-lg-4 col-12">
-      <img
-        style={styles.signatureWidthStyle}
-        src={get(certificate, "additionalData.certSignatories[0].signature")}
-      />
-    </div>
+    {["QUAL_Reprint"].includes(get(certificate, "additionalData.certCode")) ? (
+      <div
+        className="col-lg-5 col-12"
+        style={{ paddingLeft: "0px", fontSize: "1.5rem" }}
+      >
+        <p style={{ fontWeight: "bold", color: "#FF0000" }}>Certified Copy</p>
+      </div>
+    ) : (
+      <div className="col-lg-4 col-12">
+        <img
+          style={styles.signatureWidthStyle}
+          src={get(certificate, "additionalData.certSignatories[0].signature")}
+        />
+      </div>
+    )}
     <div style={styles.designationTextStyle} className="RobotoBold">
       {get(certificate, "additionalData.certSignatories[0].name")},{" "}
       {get(certificate, "additionalData.certSignatories[0].position")}
@@ -371,7 +380,11 @@ export const renderSignatureSOAHR = certificate => (
 
         <div className="col-lg-5 col-5">
           <p style={styles.certCodeStyle}>
-            {get(certificate, "additionalData.certCode")}
+            {["QUAL_Reprint"].includes(
+              get(certificate, "additionalData.certCode")
+            )
+              ? "QUAL"
+              : get(certificate, "additionalData.certCode")}
           </p>
         </div>
       </div>
