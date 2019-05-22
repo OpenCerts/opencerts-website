@@ -69,7 +69,7 @@ const renderText = status => {
       text = "Certificate Verified";
       break;
     case LOG_LEVEL.WARNING:
-      text = "Unknown Institution";
+      text = "Institution not in our registry";
       break;
     default:
       text = "Invalid Certificate";
