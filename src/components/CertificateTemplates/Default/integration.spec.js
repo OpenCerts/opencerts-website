@@ -21,7 +21,7 @@ test("Default certificate is rendered correctly", async t => {
   // Header items rendered
   await t
     .expect(CertificateVerifyBlock.textContent)
-    .contains("Unknown Institution");
+    .contains("Institution not in our registry");
   await t.expect(ButtonPrint.visible).ok();
   await t.expect(ButtonEmail.visible).ok();
   await t.expect(ButtonDownload.visible).ok();
