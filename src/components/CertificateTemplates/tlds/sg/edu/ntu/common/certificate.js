@@ -104,13 +104,13 @@ export const renderSingapore = () => (
 );
 
 export const renderLogoNTU = () => (
-  <div className="row d-flex justify-content-left">
+  <div className="row d-flex justify-content-between">
     {/* <div className="col">
       <img style={certificateDimension} src={IMG_LOGO_NTU} />
     </div> */}
 
     <div className="col-1" />
-    <div className="col-7">
+    <div className="col-5">
       <img style={fullWidthStyle} src={IMG_LOGO_NTU} />
     </div>
     <div className="col-1" />
@@ -163,11 +163,8 @@ export const renderThreeSignatures = certificate => (
       </div>
       <div className="col-2" />
     </div>
-    <div
-      className="row d-flex justify-content-center align-items-end"
-      style={{ marginTop: "1rem", marginBottom: "1rem" }}
-    >
-      <div className="col-4">
+    <div className="row d-flex ">
+      <div className="col-5">
         <img style={fullWidthStyle} src={IMG_CERTIFICATE_SEAL} />
       </div>
 
@@ -219,11 +216,8 @@ export const renderThreeSignatures = certificate => (
 );
 
 export const renderTwoSignatures = certificate => (
-  <div
-    className="row d-flex justify-content-between align-items-end"
-    style={{ marginTop: "1rem", marginBottom: "1rem" }}
-  >
-    <div className="col-3">
+  <div className="row d-flex justify-content-between mt-5">
+    <div className="col-3 ml-3">
       <img style={fullWidthStyle} src={IMG_CERTIFICATE_SEAL} />
     </div>
 
@@ -305,16 +299,20 @@ export const renderCertName = certificate => (
         <p style={certNameTextStyle}>{certificate.name}</p>
       </div>
     </div>
-    <div className="row d-flex mt-4 justify-content-start">
-      <div className="col-1 mt-3">
-        <p style={printTextStyle}>with</p>
+
+    {certificate.additionalData.classification && (
+      <div className="row d-flex mt-4 justify-content-start">
+        <div className="col-1 mt-3">
+          <p style={printTextStyle}>with</p>
+        </div>
+
+        <div className="col-5 mt-3">
+          <p style={certNameHonorTextStyle}>
+            {certificate.additionalData.classification}
+          </p>
+        </div>
       </div>
-      <div className="col-5 mt-3">
-        <p style={certNameHonorTextStyle}>
-          {certificate.additionalData.classification}
-        </p>
-      </div>
-    </div>
+    )}
   </div>
 );
 
@@ -361,11 +359,11 @@ export const renderAwardText = certificate => (
 
 export const renderIssuingDate = certificate => (
   <div className="row d-flex mt-4 justify-content-start">
-    <div className="col-1">
+    <div className="col-1 mt-2">
       <p style={printTextStyle}>on</p>
     </div>
-    <div className="col-5">
-      <p style={certIssueDateTextStyle}>{formatDate(certificate.issuedOn)}</p>
+    <div className="col-5 mt-2">
+      <p style={certIssueDateTextStyle}>{formatDate(certificate.issuedOn)}.</p>
     </div>
   </div>
 );
