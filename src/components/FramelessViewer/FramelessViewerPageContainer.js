@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
@@ -19,12 +19,21 @@ import { getLogger } from "../../utils/logger";
 
 const { trace } = getLogger("components:FramelessViewerPageContainer");
 
+const inIframe = window.location !== window.parent.location;
+
 class FramelessViewerContainer extends Component {
   constructor(props) {
     super(props);
 
     this.handleCertificateChange = this.handleCertificateChange.bind(this);
     this.handleTextFieldChange = this.handleTextFieldChange.bind(this);
+  }
+
+  componentDidUpdate() {
+    inIframe &&
+      connectToParent().promise.then(parent =>
+        parent.updateHeight(document.documentElement.scrollHeight)
+      );
   }
 
   componentDidMount() {
@@ -38,8 +47,6 @@ class FramelessViewerContainer extends Component {
       selectTemplateTab
     };
 
-    const inIframe = window.location !== window.parent.location;
-
     inIframe &&
       connectToParent({
         methods: {
@@ -50,7 +57,7 @@ class FramelessViewerContainer extends Component {
             selectTemplateTab(index);
           },
           getTemplates() {
-            console.log(this.props.templates)
+            console.log(this.props.templates);
           },
           height() {
             return document.documentElement.scrollHeight;
