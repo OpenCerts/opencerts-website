@@ -14,14 +14,11 @@ const validateTextContent = async (t, component, texts) =>
   );
 
 test("Demo certificate is rendered correctly", async t => {
-  // Uploads certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
-  // Certificate tabs rendered
   await t.expect(TemplateTabList.textContent).contains("Certificate");
   await t.expect(TemplateTabList.textContent).contains("Transcript");
 
-  // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "Your Name",
     "XYZ Course",
@@ -33,7 +30,6 @@ test("Demo certificate is rendered correctly", async t => {
   const transcriptTab = TemplateTabList.find(":nth-child(2)");
   await t.click(transcriptTab);
 
-  // Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
     "TRANSCRIPT OF ACADEMIC RECORD",
     "001",

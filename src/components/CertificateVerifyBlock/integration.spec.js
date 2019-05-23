@@ -3,7 +3,7 @@ import { Selector, ClientFunction } from "testcafe";
 fixture("Govtech DemoCert").page`http://localhost:3000`;
 
 const Certificate =
-  "../../components/CertificateTemplates/example/Demo-CertTemplate/DEMO_2019.opencert";
+  "../../components/CertificateTemplates/example/Demo-CertTemplate/DEMO_CERT.json";
 
 const RenderedCertificate = Selector("#rendered-certificate");
 
