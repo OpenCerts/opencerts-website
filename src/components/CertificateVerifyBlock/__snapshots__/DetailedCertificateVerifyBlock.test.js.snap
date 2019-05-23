@@ -22,7 +22,7 @@ exports[`renders correctly when the certificate has been revoked 1`] = `
         className="col-2"
       >
         <i
-          className="fas fa-times-circle text-danger mr-2"
+          className="fas fa-question text-warning mr-2"
         />
       </div>
       <div
@@ -94,7 +94,7 @@ exports[`renders correctly when the certificate has been revoked 1`] = `
         <div
           className="row"
         >
-          Issuer has been identified
+          Certificate from institution in our registry
         </div>
       </div>
     </div>
@@ -162,7 +162,7 @@ exports[`renders correctly when the certificate is invalid and hash, isseud, not
         className="col-2"
       >
         <i
-          className="fas fa-times-circle text-danger mr-2"
+          className="fas fa-question text-warning mr-2"
         />
       </div>
       <div
@@ -171,7 +171,7 @@ exports[`renders correctly when the certificate is invalid and hash, isseud, not
         <div
           className="row"
         >
-          Issuer cannot be identified
+          Institution not in our registry
         </div>
       </div>
     </div>
@@ -182,7 +182,7 @@ exports[`renders correctly when the certificate is invalid and hash, isseud, not
         className="col-2"
       >
         <i
-          className="fas fa-times-circle text-danger mr-2"
+          className="fas fa-question text-warning mr-2"
         />
       </div>
       <div
@@ -275,7 +275,7 @@ exports[`renders correctly when the certificate verfied 1`] = `
         <div
           className="row"
         >
-          Issuer has been identified
+          Certificate from institution in our registry
         </div>
       </div>
     </div>
@@ -378,7 +378,7 @@ exports[`renders correctly when the certificate\`s hash status not verified 1`] 
         <div
           className="row"
         >
-          Issuer has been identified
+          Certificate from institution in our registry
         </div>
       </div>
     </div>
@@ -481,7 +481,7 @@ exports[`renders correctly when the certificate\`s issue status not verified 1`]
         <div
           className="row"
         >
-          Issuer has been identified
+          Certificate from institution in our registry
         </div>
       </div>
     </div>
@@ -530,7 +530,7 @@ exports[`renders correctly when the certificate\`s issuer not identified 1`] = `
         className="col-2"
       >
         <i
-          className="fas fa-times-circle text-danger mr-2"
+          className="fas fa-question text-warning mr-2"
         />
       </div>
       <div
@@ -539,7 +539,7 @@ exports[`renders correctly when the certificate\`s issuer not identified 1`] = `
         <div
           className="row"
         >
-          Issuer cannot be identified
+          Institution not in our registry
         </div>
       </div>
     </div>
