@@ -35,7 +35,10 @@ describe("generatePartialChildPaths", () => {
 
 describe("getSubDirs", () => {
   test("should return 'example' when used on example dir", () => {
-    expect(getSubDirs(EXAMPLE_DIR)).toEqual(["2019-Feb-ExampleTemplate"]);
+    expect(getSubDirs(EXAMPLE_DIR)).toEqual([
+      "2019-Feb-ExampleTemplate",
+      "Demo-CertTemplate"
+    ]);
   });
 });
 
