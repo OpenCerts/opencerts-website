@@ -44,7 +44,7 @@ class FramelessViewerContainer extends Component {
 
   componentDidMount() {
     const { selectTemplateTab } = this.props;
-    const getTemplates = (() => flatten(this.props.templates)).bind(this);
+    const getTemplates = () => flatten(this.props.templates);
     const renderCertificate = this.handleCertificateChange;
     const frameHeight = document.documentElement.scrollHeight;
 
