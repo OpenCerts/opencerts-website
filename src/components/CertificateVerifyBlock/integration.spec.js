@@ -14,10 +14,8 @@ const validateTextContent = async (t, component, texts) =>
   );
 
 test("DEMO certificate is rendered correctly", async t => {
-  // Uploads certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
-  // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "Your Name",
     "MINDWORKS",
