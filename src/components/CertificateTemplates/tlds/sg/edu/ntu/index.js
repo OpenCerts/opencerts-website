@@ -1,4 +1,4 @@
-import dynamic from "next/dynamic";
+import dynamic from "template-utils/dynamic";
 import { addDirToTemplatePath } from "template-utils/addDirToTemplatePath";
 
 const NTUDEGREE = dynamic(() =>
