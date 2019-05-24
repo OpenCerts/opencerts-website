@@ -38,8 +38,7 @@ test("sg/gov/seab/SOR_PSLE_1980_1981 is rendered correctly", async t => {
     "PRIMARY SCHOOL LEAVING EXAMINATION",
     "S2197004B",
     "01313F",
-    "Chief Executive",
-    "PRIMARY SCHOOL LEAVING EXAMINATION"
+    "Chief Executive"
   ]);
 
   // Navigate to Explanatory Notes tab

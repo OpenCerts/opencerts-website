@@ -34,7 +34,12 @@ test("sg/gov/seab/SOR_PSLE_1982_1992 is rendered correctly", async t => {
     "GRADE",
     "AGGREGATE SCORE",
     "This statement is issued to",
-    "Singapore Examinations and Assessment Board"
+    "Singapore Examinations and Assessment Board",
+	"00197I",
+	"S8002528I",
+	"SCHNAME OF 1013",
+	"Chief Executive",
+	"PRIMARY SCHOOL LEAVING EXAMINATION"
   ]);
 
   // Navigate to Explanatory Notes tab
