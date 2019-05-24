@@ -69,7 +69,7 @@ const renderText = status => {
       text = "Certificate Verified";
       break;
     case LOG_LEVEL.WARNING:
-      text = "Unknown Institution";
+      text = "Institution not in our registry";
       break;
     default:
       text = "Invalid Certificate";
@@ -115,9 +115,9 @@ const CertificateVerifyBlock = props => {
   return (
     <div
       id="certificate-verify-block"
-      className={`align-items-start ${css["d-flex"]} ${
+      className={`align-items-start flex-nowrap ${css["d-flex"]} ${
         css.verifyBlocksContainer
-      } col-sm-12 col-md-9 col-lg-9 col-xl-6 mb-md-0 mb-3`}
+      } col-sm-12 col-md-11 col-lg-10 col-xl-7 mb-md-0 mb-3`}
     >
       <SimpleVerifyBlock {...props} />
       {props.detailedVerifyVisible ? (
