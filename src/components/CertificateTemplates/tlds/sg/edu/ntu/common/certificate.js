@@ -1,13 +1,7 @@
 import { get } from "lodash";
-import {
-  IMG_LOGO_NTU,
-  IMG_CERTIFICATE_SEAL,
-  IMG_NTU_TEXT,
-  IMG_AWARD_TEXT_A,
-  IMG_AWARD_TEXT_B
-} from "./images";
+import { IMG_LOGO_NTU, IMG_CERTIFICATE_SEAL, IMG_NTU_TEXT } from "./images";
 
-import { formatDate, formatDatePrefix, formatCertID } from "./functions";
+import { formatDate, formatCertID } from "./functions";
 
 export const fullWidthStyle = {
   width: "100%",
@@ -27,7 +21,7 @@ export const printTextStyle = {
   marginBottom: "0",
   bottom: 0,
   position: "absolute"
-  //textAlignVertical: "bottom"
+  // textAlignVertical: "bottom"
 };
 
 export const universityNameTextStyle = {
@@ -59,19 +53,19 @@ export const certNameHonorTextStyle = {
   textAlign: "left",
   bottom: 0,
   position: "absolute"
-  //textAlignVertical: "bottom"
+  // textAlignVertical: "bottom"
 };
 
 export const certIssueDateTextStyle = {
   fontFamily: "Avant Garde,Avantgarde,Century Gothic,CenturyGothic,AppleGothic",
   fontWeight: "700",
   fontStyle: "italic",
-  fontSize: "1.1rem",
+  fontSize: "1.2rem",
   marginBottom: "0",
   textAlign: "left",
   bottom: 0,
   position: "absolute"
-  //textAlignVertical: "bottom"
+  // textAlignVertical: "bottom"
 };
 
 export const singaporeTextStyle = {
@@ -133,142 +127,32 @@ export const renderLogoNTUPartner = logo => (
   </div>
 );
 
-export const renderThreeSignatures = certificate => (
-  <div>
-    <div
-      className="row d-flex justify-content-center align-items-end"
-      style={{ marginTop: "8rem", marginBottom: "1rem" }}
-    >
-      <div className="col-6" />
-      <div className="col-4">
-        <div className="px-4">
-          <img
-            style={fullWidthStyle}
-            src={get(
-              certificate,
-              "additionalData.certSignatories[0].signature"
-            )}
-          />
-          <hr />
-        </div>
-        <div className="text-center">
-          {get(certificate, "additionalData.certSignatories[0].name")}
-        </div>
-        <div className="text-center">
-          {get(certificate, "additionalData.certSignatories[0].position")}
-        </div>
-        <div className="text-center">
-          {get(certificate, "additionalData.certSignatories[0].organisation")}
-        </div>
-      </div>
-      <div className="col-2" />
-    </div>
-    <div className="row d-flex ">
-      <div className="col-5">
-        <img style={fullWidthStyle} src={IMG_CERTIFICATE_SEAL} />
-      </div>
-
-      <div className="col-4">
-        <div className="px-4">
-          <img
-            style={fullWidthStyle}
-            src={get(
-              certificate,
-              "additionalData.certSignatories[1].signature"
-            )}
-          />
-          <hr />
-        </div>
-        <div className="text-center">
-          {get(certificate, "additionalData.certSignatories[1].name")}
-        </div>
-        <div className="text-center">
-          {get(certificate, "additionalData.certSignatories[1].position")}
-        </div>
-        <div className="text-center">
-          {get(certificate, "additionalData.certSignatories[1].organisation")}
-        </div>
-      </div>
-
-      <div className="col-4">
-        <div className="px-4">
-          <img
-            style={fullWidthStyle}
-            src={get(
-              certificate,
-              "additionalData.certSignatories[2].signature"
-            )}
-          />
-          <hr />
-        </div>
-        <div className="text-center">
-          {get(certificate, "additionalData.certSignatories[2].name")}
-        </div>
-        <div className="text-center">
-          {get(certificate, "additionalData.certSignatories[2].position")}
-        </div>
-        <div className="text-center">
-          {get(certificate, "additionalData.certSignatories[2].organisation")}
-        </div>
-      </div>
-    </div>
-  </div>
-);
-
 export const renderTwoSignatures = certificate => (
   <div className="row d-flex justify-content-between mt-5">
-    <div className="col-3 ml-3">
+    <div className="col-3 ml-3 mt-4">
       <img style={fullWidthStyle} src={IMG_CERTIFICATE_SEAL} />
     </div>
 
-    <div className="col-4">
+    <div className="col-3 mr-5 mt-2">
       <div className="row">
         <div className="col">
-          <div className="px">
-            <img
-              style={fullWidthStyle}
-              src={get(
-                certificate,
-                "additionalData.certSignatories[0].signature"
-              )}
-            />
-            <hr />
-          </div>
-          President
-          <div className="text-center">
-            {get(certificate, "additionalData.certSignatories[0].name")}
-          </div>
-          <div className="text-center">
-            {get(certificate, "additionalData.certSignatories[0].position")}
-          </div>
-          <div className="text-center">
-            {get(certificate, "additionalData.certSignatories[0].organisation")}
-          </div>
+          <img
+            style={fullWidthStyle}
+            src={get(certificate, "additionalData.president")}
+          />
+          <hr className="mt-0 mb-0" />
+          <span>President</span>
         </div>
       </div>
 
       <div className="row">
         <div className="col">
-          <div className="px">
-            <img
-              style={fullWidthStyle}
-              src={get(
-                certificate,
-                "additionalData.certSignatories[1].signature"
-              )}
-            />
-            <hr />
-          </div>
-          Registrar
-          <div className="text-center">
-            {get(certificate, "additionalData.certSignatories[1].name")}
-          </div>
-          <div className="text-center">
-            {get(certificate, "additionalData.certSignatories[1].position")}
-          </div>
-          <div className="text-center">
-            {get(certificate, "additionalData.certSignatories[1].organisation")}
-          </div>
+          <img
+            style={fullWidthStyle}
+            src={get(certificate, "additionalData.registrar")}
+          />
+          <hr className="mt-0 mb-0" />
+          <span>Registrar</span>
         </div>
       </div>
     </div>
@@ -322,18 +206,23 @@ export const renderAwardText = certificate => (
       className="row d-flex justify-content-start pb-1"
       style={{ marginTop: "1.5rem" }}
     >
-      <div className="col">
-        <img src={IMG_AWARD_TEXT_A} />
+      <div className="col pt-3">
+        {/* <img src={IMG_AWARD_TEXT_A} /> */}
+        <p style={printTextStyle}>It is hereby certified that</p>
       </div>
     </div>
     <div className="row d-flex justify-content-start">
-      <div className="col">
+      <div className="col mt-2 mb-2">
         <p style={nameTextStyle}>{certificate.recipient.name}</p>
       </div>
     </div>
-    <div className="row d-flex justify-content-start pb-1">
+    <div className="row d-flex justify-content-start pb-1 pt-5">
       <div className="col">
-        <img src={IMG_AWARD_TEXT_B} />
+        {/* <img src={IMG_AWARD_TEXT_B} /> */}
+        <p style={printTextStyle}>
+          Having satisfied the requirements of the University, <br />
+          was conferred the degree of
+        </p>
       </div>
     </div>
 
@@ -358,12 +247,21 @@ export const renderAwardText = certificate => (
 );
 
 export const renderIssuingDate = certificate => (
-  <div className="row d-flex mt-4 justify-content-start">
-    <div className="col-1 mt-2">
+  <div className="row mt-4 ">
+    {/* <div className="col-1 mt-2">
       <p style={printTextStyle}>on</p>
     </div>
     <div className="col-5 mt-2">
       <p style={certIssueDateTextStyle}>{formatDate(certificate.issuedOn)}.</p>
+    </div> */}
+
+    <div className="col-1 mt-2">
+      <span style={printTextStyle}>on</span>
+    </div>
+    <div className="col-3 mt-2">
+      <span style={certIssueDateTextStyle}>
+        {formatDate(certificate.issuedOn)}.
+      </span>
     </div>
   </div>
 );
@@ -387,7 +285,7 @@ export default ({ logo }) => ({ certificate }) => (
       className="container"
       style={{ border: 1, borderColor: "#AAA", borderStyle: "solid" }}
     >
-      <div className="row justify-content-start mt-5 ml-1 mr-1">
+      <div className="row justify-content-start mt-5 ml-5 mr-1">
         <div className="col-9">
           {renderSchoolName}
           {renderAwardText(certificate)}
@@ -398,8 +296,8 @@ export default ({ logo }) => ({ certificate }) => (
           <div className="row">{renderLogoNTU()}</div>
         </div>
       </div>
-      <div className="row">
-        <div className="col-10">{renderTwoSignatures(certificate)}</div>
+      <div className="row ml-4 mb-4">
+        <div className="col">{renderTwoSignatures(certificate)}</div>
       </div>
     </div>
     {renderFooter(certificate)}

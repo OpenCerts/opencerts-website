@@ -27,28 +27,6 @@ export const formatNRIC = nricFin => {
   return arrayNric.length === 3 ? arrayNric[2] : null;
 };
 
-export const formatDatePrefix = dateString => {
-  if (!dateString) return null;
-  const date = new Date(dateString);
-  const day = date.getDate();
-  let daySup = "";
-  switch (day % 10) {
-    case 1:
-      daySup = "st";
-      break;
-    case 2:
-      daySup = "nd";
-      break;
-    case 3:
-      daySup = "rd";
-      break;
-    default:
-      daySup = "th";
-  }
-
-  return <span>on {day}</span>;
-};
-
 export const formatCertID = certId => {
   if (!certId) return null;
   const arrayCertId = certId.split(":");
