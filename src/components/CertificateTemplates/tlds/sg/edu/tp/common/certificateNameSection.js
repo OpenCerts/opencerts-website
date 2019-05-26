@@ -1,40 +1,54 @@
 import PropTypes from "prop-types";
 
 const CertificateNameSection = ({ certificate }) => {
-  const firstLine = "Diploma in";
-  const secondLine = certificate.name.replace(/diploma in/i, "").trim();
+
+  const splitTwoLines = (value) => {
+    const index = value.search(/ in /i); 
+
+    if(index > 0) {
+
+      const firstLineEnd = index + 3;
+      const firstLine = certificate.name.substring(0, firstLineEnd);
+      
+      const secondLineStart = index + 4;
+      const secondLindEnd = certificate.name.length;
+      const secondLine = certificate.name.substring(secondLineStart, secondLindEnd);
+      
+      return (
+        <span>
+          {firstLine}
+          <br />
+          {secondLine}
+        </span>
+      );
+    } else {
+      return (
+        <span>
+        {certificate.name}
+        </span>
+      );
+    }
+  };
 
   return (
     <div className="certificate-name">
-      {firstLine}
+      
+      {splitTwoLines(certificate.name) }
 
-      <br />
+      {certificate.additionalData.isMerit && (
+        <span>
+        <br />
+        <small>WITH MERIT</small>
+        </span>
+      )}
 
-      {!certificate.additionalData.isMerit &&
-        !certificate.additionalData.isExempted && <span>{secondLine}</span>}
+      {certificate.additionalData.isExempted && (
+        <span>*</span>
+      )}
 
-      {!certificate.additionalData.isMerit &&
-        certificate.additionalData.isExempted && <span>{secondLine}*</span>}
-
-      {certificate.additionalData.isMerit &&
-        !certificate.additionalData.isExempted && (
-          <span>
-            {secondLine}
-            <br />
-            <small>WITH MERIT</small>
-          </span>
-        )}
-
-      {certificate.additionalData.isMerit &&
-        certificate.additionalData.isExempted && (
-          <span>
-            {secondLine}
-            <br />
-            <small>WITH MERIT*</small>
-          </span>
-        )}
     </div>
   );
+  
 };
 
 CertificateNameSection.propTypes = {
