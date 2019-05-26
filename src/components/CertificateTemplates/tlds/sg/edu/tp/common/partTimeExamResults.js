@@ -1,10 +1,11 @@
+import _ from "lodash";
 import PropTypes from "prop-types";
 import ExamResultsStyles from "./examResultsStyles";
-import SubjectGrades from "./subjectGrades";
+import SubjectGrades from "./partTimeSubjectGrades";
 
 const PartTimeExamResults = ({ certificate }) => {
-  const awardedCertificates = certificate.additionalData.awardedCertificates.map(
-    (n, j) => (
+  const awardedCertificates = _.uniq(certificate.additionalData.awardedCertificates)
+    .map((n, j) => (
       <span key={j}>
         {n.toUpperCase()}
         <br />
