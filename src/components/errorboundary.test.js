@@ -1,5 +1,5 @@
 import { mount } from "enzyme";
-import ErrorBoundary from "./ErrorBoundry";
+import ErrorBoundary from "./ErrorBoundary";
 
 const ProblemChild = () => {
   throw new Error("Error thrown from problem child");
