@@ -46,7 +46,7 @@
     },
     "overrides": [
       {
-        "files": ["errorboundry.test.js"],
+        "files": ["errorboundary.test.js"],
         "rules": {
           "no-console": "off"
         }
