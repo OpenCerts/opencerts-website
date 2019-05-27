@@ -36,7 +36,7 @@ export default class ErrorBoundary extends Component {
           <i className="fas fa-exclamation-triangle" style={iconStyle} />
           <h2>
             Something has gone wrong with this certificate, please contact your
-            issuing institution
+            issuing institution.
           </h2>
         </div>
       );
