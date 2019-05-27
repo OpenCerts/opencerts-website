@@ -2,7 +2,6 @@ import _ from "lodash";
 import PropTypes from "prop-types";
 
 const PartTimeSubjectGrades = ({ certificate }) => {
-  
   const semesterHeader = s => {
     if (s.semester.startsWith("AY")) {
       const semesterParts = s.semester.split(" ");
@@ -23,18 +22,14 @@ const PartTimeSubjectGrades = ({ certificate }) => {
     );
   };
 
-  const moduleHeader = m => {
-    return (
-      <div className="row">
-        <div className="col-12">
-          {m.mcname}
-        </div>
-      </div>
-    );
-  };
+  const moduleHeader = m => (
+    <div className="row">
+      <div className="col-12">{m.mcname}</div>
+    </div>
+  );
 
-  const moduleSubjects = m => {
-    return m.grades.map((t, i) => (
+  const moduleSubjects = m =>
+    m.grades.map((t, i) => (
       <div className="row" key={i}>
         <div className="col-2">{t.courseCode}</div>
         <div className="col-6">{t.name}</div>
@@ -42,7 +37,6 @@ const PartTimeSubjectGrades = ({ certificate }) => {
         <div className="col-2 grade">{t.grade}</div>
       </div>
     ));
-  }; 
 
   const semesters = _(certificate.transcript)
     .groupBy(t => t.semester)
@@ -51,14 +45,13 @@ const PartTimeSubjectGrades = ({ certificate }) => {
     .value();
 
   const subjects = semesters.map((s, j) => {
-
     const modules = _(s.grades)
-      .groupBy(g=> g.mcname)
-      .map((values, key) => ({ mcname: key, grades: values}))
-      .orderBy(g=> g.mcname)
+      .groupBy(g => g.mcname)
+      .map((values, key) => ({ mcname: key, grades: values }))
+      .orderBy(g => g.mcname)
       .value();
 
-    const semesterSubjects = modules.map((m, i)=> (
+    const semesterSubjects = modules.map((m, i) => (
       <div key={i}>
         {moduleHeader(m)}
         {moduleSubjects(m)}

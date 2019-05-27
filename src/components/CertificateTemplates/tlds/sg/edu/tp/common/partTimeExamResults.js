@@ -4,14 +4,14 @@ import ExamResultsStyles from "./examResultsStyles";
 import SubjectGrades from "./partTimeSubjectGrades";
 
 const PartTimeExamResults = ({ certificate }) => {
-  const awardedCertificates = _.uniq(certificate.additionalData.awardedCertificates)
-    .map((n, j) => (
-      <span key={j}>
-        {n.toUpperCase()}
-        <br />
-      </span>
-    )
-  );
+  const awardedCertificates = _.uniq(
+    certificate.additionalData.awardedCertificates
+  ).map((n, j) => (
+    <span key={j}>
+      {n.toUpperCase()}
+      <br />
+    </span>
+  ));
 
   return (
     <div className="container">
