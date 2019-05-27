@@ -14,7 +14,8 @@ const style = {
 };
 const iconStyle = {
   color: "red",
-  fontSize: 50
+  fontSize: 50,
+  marginBottom: 20
 };
 
 export default class ErrorBoundary extends Component {
