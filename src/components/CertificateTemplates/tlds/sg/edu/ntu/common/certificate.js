@@ -18,6 +18,10 @@ export const certificateDimension = {
   height: "auto"
 };
 
+export const hrLineStyle = {
+  backgroundColor: "black"
+};
+
 export const printTextStyle = {
   fontFamily: "Avant Garde,Avantgarde,Century Gothic,CenturyGothic,AppleGothic",
   fontWeight: "500!important",
@@ -43,7 +47,7 @@ export const certNameTextStyle = {
     "FootlightMT,TimesNewRoman,Times New Roman,Times,Baskerville,Georgia",
   fontWeight: "700",
   fontStyle: "italic",
-  fontSize: "1.875rem",
+  fontSize: "2.2rem",
   marginBottom: "0",
   textAlign: "left",
   lineHeight: 1
@@ -53,7 +57,7 @@ export const certNameHonorTextStyle = {
   fontFamily: "Avantgarde,Avant Garde,Century Gothic,CenturyGothic,AppleGothic",
   fontWeight: "700",
   fontStyle: "italic",
-  fontSize: "1.437rem",
+  fontSize: "1.7rem",
   marginBottom: "0",
   textAlign: "left",
   bottom: 0,
@@ -66,7 +70,7 @@ export const certIssueDateTextStyle = {
   fontFamily: "Avantgarde,Avant Garde,Century Gothic,CenturyGothic,AppleGothic",
   fontWeight: "700",
   fontStyle: "italic",
-  fontSize: "1.35rem",
+  fontSize: "1.5rem",
   marginBottom: "0",
   textAlign: "left",
   bottom: 0,
@@ -146,13 +150,7 @@ export const renderTwoSignatures = certificate => (
             style={fullWidthStyleSignature}
             src={get(certificate, "additionalData.president")}
           />
-          <hr
-            className="mt-1 mb-0"
-            style={{
-              border: "solid 1px",
-              borderColor: "black"
-            }}
-          />
+          <hr className="mt-1 mb-0" style={hrLineStyle} />
           <span>President</span>
         </div>
       </div>
@@ -163,13 +161,7 @@ export const renderTwoSignatures = certificate => (
             style={fullWidthStyleSignature}
             src={get(certificate, "additionalData.registrar")}
           />
-          <hr
-            className="mt-1 mb-0"
-            style={{
-              border: "solid 1px",
-              borderColor: "black"
-            }}
-          />
+          <hr className="mt-1 mb-0" style={hrLineStyle} />
           <span>Registrar</span>
         </div>
       </div>
@@ -208,7 +200,7 @@ export const renderCertName = certificate => (
           <p style={printTextStyle}>with</p>
         </div>
 
-        <div className="col-10 mt-3">
+        <div className="col-11 mt-4">
           <p style={certNameHonorTextStyle}>
             {certificate.additionalData.classification}
           </p>
@@ -230,11 +222,11 @@ export const renderAwardText = certificate => (
       </div>
     </div>
     <div className="row d-flex justify-content-start">
-      <div className="col mt-2 mb-2">
+      <div className="col-12 mt-2 mb-2">
         <p style={nameTextStyle}>{certificate.recipient.name}</p>
       </div>
     </div>
-    <div className="row d-flex justify-content-start pb-1 pt-5">
+    <div className="row d-flex justify-content-start mb-1 mt-5">
       <div className="col">
         {/* <img src={IMG_AWARD_TEXT_B} /> */}
         <p style={printTextStyle}>
@@ -273,10 +265,20 @@ export const renderIssuingDate = certificate => (
       <p style={certIssueDateTextStyle}>{formatDate(certificate.issuedOn)}.</p>
     </div> */}
 
-    <div className="col-1 mt-2">
+    <div
+      className={
+        certificate.additionalData.classification ? "col-1 mt-2" : "col-1 mt-3"
+      }
+    >
       <p style={printTextStyle}>on</p>
     </div>
-    <div className="col-10 mt-2">
+    <div
+      className={
+        certificate.additionalData.classification
+          ? "col-10 mt-2"
+          : "col-10 mt-3"
+      }
+    >
       <p style={certIssueDateTextStyle}>{formatDate(certificate.issuedOn)}.</p>
     </div>
   </div>
