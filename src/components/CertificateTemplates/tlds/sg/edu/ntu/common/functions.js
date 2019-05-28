@@ -2,18 +2,18 @@ export const formatDate = dateString => {
   if (!dateString) return null;
   const date = new Date(dateString);
   const months = [
-    "JANUARY",
-    "FEBRUARY",
-    "MARCH",
-    "APRIL",
-    "MAY",
-    "JUNE",
-    "JULY",
-    "AUGUST",
-    "SEPTEMBER",
-    "OCTOCBER",
-    "NOVEMBER",
-    "DECEMBER"
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
   ];
   const month = date.getMonth();
   const year = date.getUTCFullYear();

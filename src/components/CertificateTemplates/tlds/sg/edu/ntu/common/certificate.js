@@ -16,7 +16,7 @@ export const certificateDimension = {
 export const printTextStyle = {
   fontFamily: "Avant Garde,Avantgarde,Century Gothic,CenturyGothic,AppleGothic",
   fontWeight: "500!important",
-  fontSize: "1.2rem",
+  fontSize: "1.3rem",
   textAlign: "left",
   marginBottom: "0",
   bottom: 0,
@@ -45,7 +45,7 @@ export const certNameTextStyle = {
 };
 
 export const certNameHonorTextStyle = {
-  fontFamily: "Avant Garde,Avantgarde,Century Gothic,CenturyGothic,AppleGothic",
+  fontFamily: "Avantgarde,Avant Garde,Century Gothic,CenturyGothic,AppleGothic",
   fontWeight: "700",
   fontStyle: "italic",
   fontSize: "1.437rem",
@@ -53,14 +53,15 @@ export const certNameHonorTextStyle = {
   textAlign: "left",
   bottom: 0,
   position: "absolute"
+
   // textAlignVertical: "bottom"
 };
 
 export const certIssueDateTextStyle = {
-  fontFamily: "Avant Garde,Avantgarde,Century Gothic,CenturyGothic,AppleGothic",
+  fontFamily: "Avantgarde,Avant Garde,Century Gothic,CenturyGothic,AppleGothic",
   fontWeight: "700",
   fontStyle: "italic",
-  fontSize: "1.2rem",
+  fontSize: "1.35rem",
   marginBottom: "0",
   textAlign: "left",
   bottom: 0,
@@ -104,7 +105,7 @@ export const renderLogoNTU = () => (
     </div> */}
 
     <div className="col-1" />
-    <div className="col-5">
+    <div className="col-6">
       <img style={fullWidthStyle} src={IMG_LOGO_NTU} />
     </div>
     <div className="col-1" />
@@ -129,12 +130,12 @@ export const renderLogoNTUPartner = logo => (
 
 export const renderTwoSignatures = certificate => (
   <div className="row d-flex justify-content-between mt-5">
-    <div className="col-3 ml-3 mt-4">
+    <div className="col-3 ml-3 mt-4 mb-1">
       <img style={fullWidthStyle} src={IMG_CERTIFICATE_SEAL} />
     </div>
 
     <div className="col-3 mr-5 mt-2">
-      <div className="row">
+      <div className="row mb-3">
         <div className="col">
           <img
             style={fullWidthStyle}
@@ -206,7 +207,7 @@ export const renderAwardText = certificate => (
       className="row d-flex justify-content-start pb-1"
       style={{ marginTop: "1.5rem" }}
     >
-      <div className="col pt-3">
+      <div className="col pt-5">
         {/* <img src={IMG_AWARD_TEXT_A} /> */}
         <p style={printTextStyle}>It is hereby certified that</p>
       </div>
@@ -220,7 +221,7 @@ export const renderAwardText = certificate => (
       <div className="col">
         {/* <img src={IMG_AWARD_TEXT_B} /> */}
         <p style={printTextStyle}>
-          Having satisfied the requirements of the University, <br />
+          having satisfied the requirements of the University, <br />
           was conferred the degree of
         </p>
       </div>
@@ -296,7 +297,7 @@ export default ({ logo }) => ({ certificate }) => (
           <div className="row">{renderLogoNTU()}</div>
         </div>
       </div>
-      <div className="row ml-4 mb-4">
+      <div className="row ml-4 mb-5">
         <div className="col">{renderTwoSignatures(certificate)}</div>
       </div>
     </div>
