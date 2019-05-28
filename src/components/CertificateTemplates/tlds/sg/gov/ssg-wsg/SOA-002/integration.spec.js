@@ -26,7 +26,7 @@ test("SOA002 certificate is rendered correctly", async t => {
     "is awarded to",
     "A",
     "ID No: S0000000A",
-    "for successful attainment of the required industry approved competencies",
+    "for successful attainment of the following industry approved competencies",
     "HR-PRB-503E-1 Develop strategies for total remuneration",
     "at SINGAPORE NATIONAL EMPLOYERS FEDERATION",
     "01 Dec 2018"

@@ -12,8 +12,7 @@ const GradingSchemeStyles = () => (
     }
 
     .grading-system-header{
-      border: none;
-      border-bottom:1px solid #212529;
+      border:1px solid #212529;
     }
 
     .grading-system-cell-last{

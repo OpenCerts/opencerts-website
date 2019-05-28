@@ -108,7 +108,14 @@ export const renderTranscript = certificate => (
   <div>
     <div className="d-flex" style={{ marginTop: "1rem" }}>
       <p style={styles.printTextStyle} className="RobotoRegular">
-        REMARKS:
+        REMARKS:{" "}
+        {get(certificate, "$template").includes("sg/gov/ssg-wsg/Trans") ? (
+          ""
+        ) : (
+          <span style={{ fontWeight: "bold", color: "#FF0000" }}>
+            Certified Copy
+          </span>
+        )}
       </p>
     </div>
     <div className="d-flex" style={{ overflowX: "auto" }}>
@@ -289,7 +296,7 @@ export default ({ logo }) => ({ certificate }) => (
   <div>
     <div
       className="container"
-      style={{ border: 5, borderColor: "#AAA", borderStyle: "solid", paddingLeft:"40px", paddingRight:"40px", paddingBottom:"80px", paddingTop:"80px", fontFamily:"Arial" }}
+      style={{ border: 5, borderColor: "#AAA", borderStyle: "solid", paddingLeft:"6%", paddingRight:"6%", paddingBottom:"100px", paddingTop:"100px", fontFamily:"Arial", width:"100%" }}
     >
       {fonts()}
       {renderLogoWSQ()}

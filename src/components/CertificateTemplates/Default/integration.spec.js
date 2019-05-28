@@ -4,7 +4,6 @@ fixture("Default Certificate Template").page`http://localhost:3000`;
 
 const Certificate = "./DEFAULT_CERTIFICATE.opencert";
 
-const ButtonViewCertificateAnyway = Selector("#certificate-view-anyway");
 const CertificateVerifyBlock = Selector("#certificate-verify-block");
 const ButtonPrint = Selector("#btn-print");
 const ButtonEmail = Selector("#btn-email");
@@ -17,13 +16,12 @@ const RenderedCertificate = Selector("#rendered-certificate");
 test("Default certificate is rendered correctly", async t => {
   // Uploads certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
-  await t.click(ButtonViewCertificateAnyway);
 
   // Validates rendering of the certificate
   // Header items rendered
   await t
     .expect(CertificateVerifyBlock.textContent)
-    .contains("Unknown Institution");
+    .contains("Institution not in our registry");
   await t.expect(ButtonPrint.visible).ok();
   await t.expect(ButtonEmail.visible).ok();
   await t.expect(ButtonDownload.visible).ok();

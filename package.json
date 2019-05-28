@@ -17,7 +17,8 @@
     "analyze": "BUNDLE_ANALYZE=browser npm run start",
     "dev-cli": "node -r esm ./scripts/cli.js",
     "serve-static": "http-server out -s -p 3000",
-    "integration": "testcafe firefox src/**/*.spec.js",
+    "integration": "testcafe firefox *.spec.js",
+    "integration:all": "testcafe firefox src/**/*.spec.js",
     "integration:headless": "npm run build:static && testcafe firefox:headless src/**/*.spec.js --app \"npm run serve-static\"",
     "integration:watch": "nodemon --exec \"npm run integration\" --watch src"
   },
