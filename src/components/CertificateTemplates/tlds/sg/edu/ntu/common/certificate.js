@@ -8,6 +8,11 @@ export const fullWidthStyle = {
   height: "auto"
 };
 
+export const fullWidthStyleNTUText = {
+  width: "70%",
+  height: "auto"
+};
+
 export const fullWidthStyleSignature = {
   width: "80%",
   height: "auto"
@@ -173,7 +178,7 @@ export const renderSchoolName = (
   <div>
     <div className="row d-flex justify-content-start">
       <div className="col">
-        <img src={IMG_NTU_TEXT} />
+        <img style={fullWidthStyleNTUText} src={IMG_NTU_TEXT} />
       </div>
     </div>
 
