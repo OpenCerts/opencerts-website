@@ -8,6 +8,11 @@ export const fullWidthStyle = {
   height: "auto"
 };
 
+export const fullWidthStyleSignature = {
+  width: "80%",
+  height: "auto"
+};
+
 export const certificateDimension = {
   width: "100%",
   height: "auto"
@@ -105,10 +110,10 @@ export const renderLogoNTU = () => (
     </div> */}
 
     <div className="col-1" />
-    <div className="col-6">
+    <div className="col-8">
       <img style={fullWidthStyle} src={IMG_LOGO_NTU} />
     </div>
-    <div className="col-1" />
+    {/* <div className="col-1" /> */}
   </div>
 );
 
@@ -134,25 +139,37 @@ export const renderTwoSignatures = certificate => (
       <img style={fullWidthStyle} src={IMG_CERTIFICATE_SEAL} />
     </div>
 
-    <div className="col-3 mr-5 mt-2">
+    <div className="col-3 mr-5 mt-4">
       <div className="row mb-3">
-        <div className="col">
+        <div className="col-10">
           <img
-            style={fullWidthStyle}
+            style={fullWidthStyleSignature}
             src={get(certificate, "additionalData.president")}
           />
-          <hr className="mt-0 mb-0" />
+          <hr
+            className="mt-1 mb-0"
+            style={{
+              border: "solid 1px",
+              borderColor: "black"
+            }}
+          />
           <span>President</span>
         </div>
       </div>
 
       <div className="row">
-        <div className="col">
+        <div className="col-10">
           <img
-            style={fullWidthStyle}
+            style={fullWidthStyleSignature}
             src={get(certificate, "additionalData.registrar")}
           />
-          <hr className="mt-0 mb-0" />
+          <hr
+            className="mt-1 mb-0"
+            style={{
+              border: "solid 1px",
+              borderColor: "black"
+            }}
+          />
           <span>Registrar</span>
         </div>
       </div>
@@ -191,7 +208,7 @@ export const renderCertName = certificate => (
           <p style={printTextStyle}>with</p>
         </div>
 
-        <div className="col-5 mt-3">
+        <div className="col-10 mt-3">
           <p style={certNameHonorTextStyle}>
             {certificate.additionalData.classification}
           </p>
@@ -257,12 +274,10 @@ export const renderIssuingDate = certificate => (
     </div> */}
 
     <div className="col-1 mt-2">
-      <span style={printTextStyle}>on</span>
+      <p style={printTextStyle}>on</p>
     </div>
-    <div className="col-3 mt-2">
-      <span style={certIssueDateTextStyle}>
-        {formatDate(certificate.issuedOn)}.
-      </span>
+    <div className="col-10 mt-2">
+      <p style={certIssueDateTextStyle}>{formatDate(certificate.issuedOn)}.</p>
     </div>
   </div>
 );
@@ -293,7 +308,7 @@ export default ({ logo }) => ({ certificate }) => (
           {renderIssuingDate(certificate)}
         </div>
 
-        <div className="col-3">
+        <div className="col-2">
           <div className="row">{renderLogoNTU()}</div>
         </div>
       </div>
