@@ -1,6 +1,6 @@
 import { Selector } from "testcafe";
 
-fixture("Frameless Viewer").page`./Iframe.html`;
+fixture("Frameless Viewer").page`http://localhost:3001`;
 
 const RenderButton = Selector("#render-certificate");
 const IFrame = Selector("#frameless-iframe");

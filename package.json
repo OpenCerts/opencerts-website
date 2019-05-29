@@ -16,10 +16,10 @@
     "deploy": "rm -rf out && npm run build:static",
     "analyze": "BUNDLE_ANALYZE=browser npm run start",
     "dev-cli": "node -r esm ./scripts/cli.js",
+    "serve-iframe": "http-server src/components/FramelessViewer -s -p 3001",
     "serve-static": "http-server out -s -p 3000",
-    "integration": "testcafe firefox *.spec.js",
-    "integration:all": "testcafe firefox src/**/*.spec.js",
-    "integration:headless": "npm run build:static && testcafe firefox:headless src/**/*.spec.js --app \"npm run serve-static\"",
+    "integration": "testcafe chrome src/**/*.spec.js",
+    "integration:headless": "testcafe chrome:headless src/**/*.spec.js",
     "integration:watch": "nodemon --exec \"npm run integration\" --watch src"
   },
   "dependencies": {
