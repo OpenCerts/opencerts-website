@@ -4,6 +4,7 @@ node_js:
 cache: npm install
 addons:
   sonarqube: true
+  firefox: "latest"
 jobs:
   include:
     - stage: test
