@@ -1,3 +1,4 @@
 npm run build:static && \
+cp src/components/FramelessViewer/iframe.html out/iframe.html && \
 npm run integration:headless -- \
---app "npx concurrently 'npm run serve-static' 'npm run serve-iframe'"
+--app "npm run serve-static"
