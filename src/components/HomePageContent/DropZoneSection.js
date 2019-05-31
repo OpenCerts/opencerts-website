@@ -50,7 +50,7 @@ const MobileDemoCertificate = () => (
       draggable="true"
       id="demoClick"
       style={{
-        background: "#28a745",
+        background: "#ff9933",
         border: "none",
         cursor: "pointer"
       }}
@@ -68,7 +68,7 @@ class DropZoneSection extends Component {
         this.props.updateCertificate(DEMO_CERT);
       }
     });
-    document.getElementById("demoClick").addEventListener("click", e => {
+    document.getElementById("demoClick").addEventListener("click", () => {
       this.props.updateCertificate(DEMO_CERT);
     });
   }
