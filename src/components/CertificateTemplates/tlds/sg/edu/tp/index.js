@@ -29,6 +29,10 @@ const ptpdc = dynamic(() =>
   import("./ptpdc" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
 );
 
+const ptdipdpss = dynamic(() =>
+  import("./ptdipdpss" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
+);
+
 // keep it simple and stupid.
 // we will have to add/configure new mapping every year.
 // a bit tedious, but we have full control over which year use what template.
@@ -233,7 +237,28 @@ const templates = {
   "ptpdc-2026": ptpdc,
   "ptpdc-2027": ptpdc,
   "ptpdc-2028": ptpdc,
-  "ptpdc-2029": ptpdc
+  "ptpdc-2029": ptpdc,
+
+  "ptdipdpss-2010": ptdipdpss,
+  "ptdipdpss-2011": ptdipdpss,
+  "ptdipdpss-2012": ptdipdpss,
+  "ptdipdpss-2013": ptdipdpss,
+  "ptdipdpss-2014": ptdipdpss,
+  "ptdipdpss-2015": ptdipdpss,
+  "ptdipdpss-2016": ptdipdpss,
+  "ptdipdpss-2017": ptdipdpss,
+  "ptdipdpss-2018": ptdipdpss,
+  "ptdipdpss-2019": ptdipdpss,
+  "ptdipdpss-2020": ptdipdpss,
+  "ptdipdpss-2021": ptdipdpss,
+  "ptdipdpss-2022": ptdipdpss,
+  "ptdipdpss-2023": ptdipdpss,
+  "ptdipdpss-2024": ptdipdpss,
+  "ptdipdpss-2025": ptdipdpss,
+  "ptdipdpss-2026": ptdipdpss,
+  "ptdipdpss-2027": ptdipdpss,
+  "ptdipdpss-2028": ptdipdpss,
+  "ptdipdpss-2029": ptdipdpss
 };
 
 export default addDirToTemplatePath("tp", templates);
