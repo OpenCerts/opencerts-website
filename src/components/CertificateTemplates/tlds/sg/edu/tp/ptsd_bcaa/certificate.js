@@ -8,7 +8,9 @@ import { IMG_LOGO_BCAA } from "../common/images";
 const Certificate = ({ certificate }) => {
   const supporter = {
     logo: IMG_LOGO_BCAA,
-    logoStyle: "bcaa-logo"
+    logoStyle: "bcaa-logo",
+    logoTitle: "BCA Academy",
+    paragraph: "This programme is jointly offered by"
   };
 
   return (
