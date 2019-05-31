@@ -5,7 +5,7 @@ const CertificateFooter = () => (
     <style>
       {`
       
-      .principal-sign {
+      .director-sign {
         pointer-events: none !important;
         width: 80%;
         color: #aaa;
@@ -21,7 +21,7 @@ const CertificateFooter = () => (
         padding-bottom: 0.6em;       
       }
 
-      .principal-sign-label,
+      .director-sign-label,
       .registrar-sign-label{
         border-top:1px solid #aaa;
         text-align:center;
@@ -44,7 +44,7 @@ const CertificateFooter = () => (
     <div className="row">
       <div className="col-3">
         <div className="signature-container">
-          <img src={IMG_SIGN_TP_REGISTRAR} className="principal-sign" />
+          <img src={IMG_SIGN_TP_REGISTRAR} className="director-sign" />
         </div>
       </div>
       <div className="col-6" />
@@ -57,7 +57,7 @@ const CertificateFooter = () => (
 
     <div className="row signature-label-row">
       <div className="col-3">
-        <div className="signature-container principal-sign-label">
+        <div className="signature-container director-sign-label">
           Director
           <br />
           Civil Defence Academy

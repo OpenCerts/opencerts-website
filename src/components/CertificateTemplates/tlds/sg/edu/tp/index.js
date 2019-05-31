@@ -557,28 +557,7 @@ const templates = {
   "ptsd_np-2026": ptsdNp,
   "ptsd_np-2027": ptsdNp,
   "ptsd_np-2028": ptsdNp,
-  "ptsd_np-2029": ptsdNp,
-
-  "ptfsm-2010": ptfsm,
-  "ptfsm-2011": ptfsm,
-  "ptfsm-2012": ptfsm,
-  "ptfsm-2013": ptfsm,
-  "ptfsm-2014": ptfsm,
-  "ptfsm-2015": ptfsm,
-  "ptfsm-2016": ptfsm,
-  "ptfsm-2017": ptfsm,
-  "ptfsm-2018": ptfsm,
-  "ptfsm-2019": ptfsm,
-  "ptfsm-2020": ptfsm,
-  "ptfsm-2021": ptfsm,
-  "ptfsm-2022": ptfsm,
-  "ptfsm-2023": ptfsm,
-  "ptfsm-2024": ptfsm,
-  "ptfsm-2025": ptfsm,
-  "ptfsm-2026": ptfsm,
-  "ptfsm-2027": ptfsm,
-  "ptfsm-2028": ptfsm,
-  "ptfsm-2029": ptfsm
+  "ptsd_np-2029": ptsdNp
 };
 
 export default addDirToTemplatePath("tp", templates);
