@@ -50,7 +50,7 @@ const MobileDemoCertificate = () => (
       draggable="true"
       id="demoClick"
       style={{
-        background: "#ff9933",
+        background: "#28a745",
         border: "none",
         cursor: "pointer"
       }}
