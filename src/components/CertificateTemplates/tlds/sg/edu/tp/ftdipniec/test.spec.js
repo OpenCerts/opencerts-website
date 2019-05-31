@@ -6,6 +6,7 @@ const Certificate = "./sample.opencert";
 
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
+const NiecLogo = Selector('img[title="National Institute of Early Childhood Development"]');
 
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(
@@ -19,6 +20,8 @@ test("Full-time NIEC Diploma is rendered correctly.", async t => {
   await t.expect(TemplateTabList.textContent).contains("Certificate");
   await t.expect(TemplateTabList.textContent).contains("Transcript");
 
+  await t.expect(NiecLogo.exists).ok();
+  
   // certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "DUMMY STUDENT NAME",
