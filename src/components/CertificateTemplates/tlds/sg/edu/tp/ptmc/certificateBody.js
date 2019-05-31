@@ -20,9 +20,15 @@ const CertificateBody = ({ certificate }) => (
           month: "long",
           year: "numeric"
         })}
-        <br />
-        This Certificate is recognized towards the{" "}
-        {certificate.additionalData.recognizedTowardsCourseName}.
+
+        {certificate.additionalData.recognizedTowardsCourseName && (
+          <span>
+            <br />
+            This Certificate is recognized towards the{" "}
+            {certificate.additionalData.recognizedTowardsCourseName}.  
+          </span>
+        )}
+        
       </div>
     </div>
   </div>
