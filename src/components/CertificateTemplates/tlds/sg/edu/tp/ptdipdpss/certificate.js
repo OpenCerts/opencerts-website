@@ -50,15 +50,21 @@ const Certificate = ({ certificate }) => {
           <img
             src={IMG_LOGO_SINGAPORE_POLICE_FORCE}
             className="singapore-police-force"
+            title="Singapore Police Force"
           />
         </div>
         <div className="col-3">
-          <img src={IMG_LOGO_CERTIS_CISCO} className="certis-cisco" />
+          <img 
+            src={IMG_LOGO_CERTIS_CISCO} 
+            className="certis-cisco"
+            title="Certis"
+          />
         </div>
         <div className="col-2">
           <img
             src={IMG_LOGO_AUXILIARY_POLICE_FORCE}
             className="auxiliary-police-force"
+            title="Auxiliary Police Force"
           />
         </div>
         <div className="col-4" />
