@@ -29,6 +29,10 @@ const ptpdc = dynamic(() =>
   import("./ptpdc" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
 );
 
+const ptsdBcaa = dynamic(() =>
+  import("./ptsd_bcaa" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
+);
+
 // keep it simple and stupid.
 // we will have to add/configure new mapping every year.
 // a bit tedious, but we have full control over which year use what template.
@@ -233,7 +237,28 @@ const templates = {
   "ptpdc-2026": ptpdc,
   "ptpdc-2027": ptpdc,
   "ptpdc-2028": ptpdc,
-  "ptpdc-2029": ptpdc
+  "ptpdc-2029": ptpdc,
+
+  "ptsd_bcaa-2010": ptsdBcaa,
+  "ptsd_bcaa-2011": ptsdBcaa,
+  "ptsd_bcaa-2012": ptsdBcaa,
+  "ptsd_bcaa-2013": ptsdBcaa,
+  "ptsd_bcaa-2014": ptsdBcaa,
+  "ptsd_bcaa-2015": ptsdBcaa,
+  "ptsd_bcaa-2016": ptsdBcaa,
+  "ptsd_bcaa-2017": ptsdBcaa,
+  "ptsd_bcaa-2018": ptsdBcaa,
+  "ptsd_bcaa-2019": ptsdBcaa,
+  "ptsd_bcaa-2020": ptsdBcaa,
+  "ptsd_bcaa-2021": ptsdBcaa,
+  "ptsd_bcaa-2022": ptsdBcaa,
+  "ptsd_bcaa-2023": ptsdBcaa,
+  "ptsd_bcaa-2024": ptsdBcaa,
+  "ptsd_bcaa-2025": ptsdBcaa,
+  "ptsd_bcaa-2026": ptsdBcaa,
+  "ptsd_bcaa-2027": ptsdBcaa,
+  "ptsd_bcaa-2028": ptsdBcaa,
+  "ptsd_bcaa-2029": ptsdBcaa
 };
 
 export default addDirToTemplatePath("tp", templates);
