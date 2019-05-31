@@ -8,7 +8,8 @@ import { IMG_LOGO_MHA } from "../common/images";
 const Certificate = ({ certificate }) => {
   const supporter = {
     logo: IMG_LOGO_MHA,
-    logoStyle: "mha-logo"
+    logoStyle: "mha-logo",
+    logoTitle: "Ministry of Home Affairs"
   };
 
   return (
