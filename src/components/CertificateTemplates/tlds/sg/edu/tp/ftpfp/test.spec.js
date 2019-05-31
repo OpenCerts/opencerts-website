@@ -17,7 +17,7 @@ test("Polytechnic Foundation Programme is rendered correctly.", async t => {
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
   await t.expect(TemplateTabList.textContent).contains("Certificate");
-  await t.expect(TemplateTabList.textContent).contains("Transcript");
+  await t.expect(TemplateTabList.textContent).contains("Statement of Examination Results");
 
   // certificate tab content
   await validateTextContent(t, RenderedCertificate, [
@@ -37,6 +37,7 @@ test("Polytechnic Foundation Programme is rendered correctly.", async t => {
 
   // transcript tab content
   await validateTextContent(t, RenderedCertificate, [
+    "STATEMENT OF EXAMINATION RESULTS",
     "DUMMY STUDENT NAME",
     "999",
     "Dummy street name 1",

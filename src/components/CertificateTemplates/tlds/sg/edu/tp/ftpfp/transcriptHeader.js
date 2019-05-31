@@ -21,7 +21,7 @@ const TranscriptHeader = () => (
     <br />
     <div className="row">
       <div className="col-4">
-        <img src={IMG_LOGO_TP} className="tp-logo" />
+        <img src={IMG_LOGO_TP} className="tp-logo" title="Temasek Polytechnic" />
       </div>
       <div className="col-8 page-title">
         Polytechnic Foundation Programme
