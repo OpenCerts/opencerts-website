@@ -5,14 +5,44 @@ import CertificateDropzone from "../CertificateDropZone";
 import css from "./dropZoneSection.scss";
 import { updateCertificate } from "../../reducers/certificate";
 import { trace } from "../../utils/logger";
+import DEMO_CERT from "../CertificateTemplates/tlds/sg/demo/govtech/Govtech-Demo-Cert/Govtech-Demo-Cert.json";
 
-const json = require("../CertificateTemplates/tlds/sg/demo/govtech/Govtech-Demo-Cert/Govtech-Demo-Cert.json");
+const DEMO_CONTENT_KEY = "DEMO_CONTENT";
 
+const DraggableDemoCertificate = () => {
+  return (
+    <div className="d-none d-lg-block">
+      <div className="row">
+        <div className="col">
+          <div
+            className={css.pulse}
+            draggable="true"
+            onDragStart={e => e.dataTransfer.setData(DEMO_CONTENT_KEY, true)}
+          >
+            <a
+              href={`data:text/plain;,${JSON.stringify(DEMO_CERT, null, 2)}`}
+              download="demo.opencert"
+            >
+              <img
+                style={{ cursor: "grabbing" }}
+                src="/static/images/dropzone/cert.png"
+                width="100%"
+              />
+            </a>
+          </div>
+        </div>
+        <div className="col">
+          <img src="/static/images/dropzone/arrow3.png" width="100%" />
+        </div>
+      </div>
+    </div>
+  );
+};
 class DropZoneSection extends Component {
   componentDidMount() {
     document.getElementById("demoDrop").addEventListener("drop", e => {
-      if (e.dataTransfer.getData("isDemo")) {
-        this.handleChange();
+      if (e.dataTransfer.getData(DEMO_CONTENT_KEY)) {
+        this.props.updateCertificate(DEMO_CERT);
       }
     });
   }
@@ -25,15 +55,9 @@ class DropZoneSection extends Component {
 
   removeListener = () => trace("drop listener removed");
 
-  handleChange = () => this.props.updateCertificate(json);
-
   render() {
-    const { handleCertificateChange } = this.props;
     return (
-      <div
-        className="row p-5 bg-brand-dark text-white"
-        // style={{ boxShadow: "inset 0 0 50px 0 rgba(102, 120, 138, 0.2)" }}
-      >
+      <div className="row p-5 bg-brand-dark text-white">
         <div className={css.main}>
           <div className="col-lg-5 col-md-12">
             <div className={css.description}>
@@ -43,45 +67,11 @@ class DropZoneSection extends Component {
                 verify the certificates you have of anyone from any institution.
                 All in one place.
               </p>
-              <div className="row">
-                <div className="col">
-                  <div
-                    className={css.pulse}
-                    draggable="true"
-                    onDragStart={e => e.dataTransfer.setData("isDemo", true)}
-                  >
-                    <a
-                      href={`data:text/plain;,${JSON.stringify(json, null, 2)}`}
-                      download="demo.opencert"
-                    >
-                      <img
-                        style={{ cursor: "grabbing" }}
-                        src="/static/images/dropzone/cert.png"
-                        width="100%"
-                      />
-                    </a>
-                  </div>
-                </div>
-                <div className="col">
-                  <img src="/static/images/dropzone/arrow3.png" width="100%" />
-                </div>
-              </div>
-              {/* <a
-                className="btn btn-success btn-lg"
-                role="button"
-                href={`data:text/plain;,${JSON.stringify(json, null, 2)}`}
-                download="demo.opencert"
-                draggable="true"
-                onDragStart={e => e.dataTransfer.setData("isDemo", true)}
-              >
-                Try Me: Drag me to DropZone
-              </a> */}
+              <DraggableDemoCertificate />
             </div>
           </div>
           <div className="col-lg-7 col-md-12 col-sm-12" id="demoDrop">
-            <CertificateDropzone
-              handleCertificateChange={handleCertificateChange}
-            />
+            <CertificateDropzone />
           </div>
         </div>
       </div>
@@ -99,6 +89,5 @@ export default connect(
 )(DropZoneSection);
 
 DropZoneSection.propTypes = {
-  handleCertificateChange: PropTypes.func,
   updateCertificate: PropTypes.func
 };

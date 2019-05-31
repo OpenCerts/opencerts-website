@@ -82,9 +82,7 @@ class Template extends Component {
           className="p-2 container"
           style={{
             backgroundImage: `url('${backgroundImg}')`,
-            backgroundPosition: "center",
-            backgroundSize: "cover"
-            // minWidth: "540px"
+            backgroundRepeat: "repeat"
           }}
         >
           <div className="row" style={{ paddingLeft: "30px" }}>

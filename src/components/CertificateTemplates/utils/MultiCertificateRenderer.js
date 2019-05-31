@@ -90,11 +90,9 @@ class MultiCertificateRenderer extends Component {
     registerTemplates(templates);
   }
 
-  handleObfuscation(editable, field) {
-    if (editable) {
-      const updatedDocument = obfuscateFields(this.props.document, field);
-      this.props.updateObfuscatedCertificate(updatedDocument);
-    }
+  handleObfuscation(field) {
+    const updatedDocument = obfuscateFields(this.props.document, field);
+    this.props.updateObfuscatedCertificate(updatedDocument);
   }
 
   render() {
