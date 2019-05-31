@@ -15,9 +15,26 @@ const Template = ({ certificate }) => (
     <div
       className="p-2"
       style={{
-        border: "5px solid #787878"
+        border: "0px solid #787878"
       }}
     >
+      <div>
+        <img
+          src="/static/images/opencertsdemo.png"
+          style={{
+            position: "absolute",
+            zindex: 999,
+            // justifyContent: "center",
+            flex: 1,
+            justifyContent: "flex-end",
+            alignItems: "flex-start",
+            width: "14%",
+            height: "auto",
+            top: "30%",
+            left: "20%"
+          }}
+        />
+      </div>
       <div className="my-5 m-lg-5 text-center">
         <img
           src="/static/images/opencertslogo.svg"

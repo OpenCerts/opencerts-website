@@ -6,7 +6,7 @@ import css from "./dropZoneSection.scss";
 import { updateCertificate } from "../../reducers/certificate";
 import { trace } from "../../utils/logger";
 
-const json = require("../CertificateTemplates/example/Demo-CertTemplate/DEMO_CERT.json");
+const json = require("../CertificateTemplates/tlds/sg/demo/govtech/Govtech-Demo-Cert/Govtech-Demo-Cert.json");
 
 class DropZoneSection extends Component {
   componentDidMount() {
@@ -43,7 +43,30 @@ class DropZoneSection extends Component {
                 verify the certificates you have of anyone from any institution.
                 All in one place.
               </p>
-              <a
+              <div className="row">
+                <div className="col">
+                  <div
+                    className={css.pulse}
+                    draggable="true"
+                    onDragStart={e => e.dataTransfer.setData("isDemo", true)}
+                  >
+                    <a
+                      href={`data:text/plain;,${JSON.stringify(json, null, 2)}`}
+                      download="demo.opencert"
+                    >
+                      <img
+                        style={{ cursor: "grabbing" }}
+                        src="/static/images/dropzone/cert.png"
+                        width="100%"
+                      />
+                    </a>
+                  </div>
+                </div>
+                <div className="col">
+                  <img src="/static/images/dropzone/arrow3.png" width="100%" />
+                </div>
+              </div>
+              {/* <a
                 className="btn btn-success btn-lg"
                 role="button"
                 href={`data:text/plain;,${JSON.stringify(json, null, 2)}`}
@@ -52,7 +75,7 @@ class DropZoneSection extends Component {
                 onDragStart={e => e.dataTransfer.setData("isDemo", true)}
               >
                 Try Me: Drag me to DropZone
-              </a>
+              </a> */}
             </div>
           </div>
           <div className="col-lg-7 col-md-12 col-sm-12" id="demoDrop">

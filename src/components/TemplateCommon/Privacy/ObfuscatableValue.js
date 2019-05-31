@@ -5,7 +5,7 @@ import css from "./obfuscatableValueStyles.scss";
 const ObfuscatableValue = ({ field, value, handleObfuscation, editable }) =>
   value ? (
     <div
-      onClick={() => handleObfuscation(field)}
+      onClick={() => handleObfuscation(editable, field)}
       style={{ display: "inline-block" }}
     >
       {value}{" "}
