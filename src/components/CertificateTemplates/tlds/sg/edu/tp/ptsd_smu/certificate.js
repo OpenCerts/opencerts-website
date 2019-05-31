@@ -8,7 +8,8 @@ import { IMG_LOGO_SMU } from "../common/images";
 const Certificate = ({ certificate }) => {
   const supporter = {
     logo: IMG_LOGO_SMU,
-    logoStyle: "smu-logo"
+    logoStyle: "smu-logo",
+    logoTitle: "Singapore Management University"
   };
 
   return (
