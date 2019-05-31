@@ -26,7 +26,7 @@ const CertificateSupporter = ({ supporter }) => {
 
       <div className="row col-12 supporter-logos">
         <div className="col-3">
-          <img src={supporter.logo} className={supporter.logoStyle} />
+          <img src={supporter.logo} className={supporter.logoStyle} title={supporter.logoTitle} />
         </div>
         <div className="col-10" />
       </div>
