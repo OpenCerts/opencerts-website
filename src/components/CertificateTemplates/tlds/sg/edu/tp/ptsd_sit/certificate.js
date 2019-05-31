@@ -8,7 +8,8 @@ import { IMG_LOGO_SIT } from "../common/images";
 const Certificate = ({ certificate }) => {
   const supporter = {
     logo: IMG_LOGO_SIT,
-    logoStyle: "sit-logo"
+    logoStyle: "sit-logo",
+    logoTitle: "Singapore Institute of Technology"
   };
 
   return (
