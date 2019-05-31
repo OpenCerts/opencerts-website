@@ -8,7 +8,8 @@ import { IMG_LOGO_CERTIS_CISCO } from "../common/images";
 const Certificate = ({ certificate }) => {
   const supporter = {
     logo: IMG_LOGO_CERTIS_CISCO,
-    logoStyle: "certis-logo"
+    logoStyle: "certis-logo",
+    logoTitle: "Certis"
   };
 
   return (
