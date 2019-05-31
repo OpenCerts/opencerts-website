@@ -8,7 +8,8 @@ import { IMG_LOGO_SUSS } from "../common/images";
 const Certificate = ({ certificate }) => {
   const supporter = {
     logo: IMG_LOGO_SUSS,
-    logoStyle: "suss-logo"
+    logoStyle: "suss-logo",
+    logoTitle: "Singapore University of Social Sciences"
   };
 
   return (
@@ -16,7 +17,7 @@ const Certificate = ({ certificate }) => {
       <style>
         {`
           .suss-logo {
-            width: 60%;
+            width: 50%;
             margin-top: 0em;
           }
         `}
