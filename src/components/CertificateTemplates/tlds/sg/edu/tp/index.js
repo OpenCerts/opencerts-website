@@ -21,10 +21,6 @@ const ptdip = dynamic(() =>
   import("./ptdip" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
 );
 
-const ptpostdip = dynamic(() =>
-  import("./ptpostdip" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
-);
-
 const ptmc = dynamic(() =>
   import("./ptmc" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
 );
