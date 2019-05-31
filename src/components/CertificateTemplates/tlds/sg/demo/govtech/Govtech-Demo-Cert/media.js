@@ -1,27 +1,11 @@
-import PropTypes from "prop-types";
-
-const Template = ({ certificate }) => (
-  <div
-    style={{ overflow: "hidden", paddingTop: "56.25%", position: "relative" }}
-  >
+const Template = () => (
+  <div class="embed-responsive embed-responsive-16by9">
     <iframe
-      style={{
-        height: "100%",
-        left: "0px",
-        top: "0px",
-        width: "100%",
-        position: "absolute"
-      }}
+      class="embed-responsive-item"
       src="https://www.youtube.com/embed/oskddwGpwUw?autoplay=1"
-      frameBorder="0"
-      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
+      allowfullscreen
     />
   </div>
 );
-
-Template.propTypes = {
-  certificate: PropTypes.object.isRequired
-};
 
 export default Template;

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { get } from "lodash";
 import PropTypes from "prop-types";
-import SimplePrivacyFilterBanner from "../../../../../../TemplateCommon/Privacy/SimplePrivacyFilterBanner";
-import ObfuscatableValue from "../../../../../../TemplateCommon/Privacy/ObfuscatableValue";
+import SimplePrivacyFilterBanner from "template-commons/Privacy/SimplePrivacyFilterBanner";
+import ObfuscatableValue from "template-commons/Privacy/ObfuscatableValue";
 import { formatDate } from "./common/functions";
-import backgroundImg from "./common/bgtranscript";
+import { transcriptBg } from "./common/backgrounds";
 
 class Template extends Component {
   constructor(props) {
@@ -81,7 +81,7 @@ class Template extends Component {
         <div
           className="p-2 container"
           style={{
-            backgroundImage: `url('${backgroundImg}')`,
+            backgroundImage: `url('${transcriptBg}')`,
             backgroundRepeat: "repeat"
           }}
         >
@@ -223,10 +223,6 @@ class Template extends Component {
               </div>
             </div>
           </div>
-
-          <div style={{ textAlign: "center", paddingTop: "30px" }}>
-            <h4>VERIFIED GOVTECH OFFICIAL TRANSCRIPT</h4>
-          </div>
         </div>
       </div>
     );
@@ -234,7 +230,6 @@ class Template extends Component {
 }
 Template.propTypes = {
   certificate: PropTypes.object.isRequired,
-  // course: PropTypes.object.isRequired,
   handleObfuscation: PropTypes.func
 };
 

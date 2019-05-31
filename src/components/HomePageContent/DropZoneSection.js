@@ -5,8 +5,10 @@ import CertificateDropzone from "../CertificateDropZone";
 import css from "./dropZoneSection.scss";
 import { updateCertificate } from "../../reducers/certificate";
 import { trace } from "../../utils/logger";
-import DEMO_CERT from "../CertificateTemplates/tlds/sg/demo/govtech/Govtech-Demo-Cert/Govtech-Demo-Cert.json";
+import { IS_MAINNET } from "../../config";
+import {MAIN, ROPSTEN} from "../CertificateTemplates/tlds/sg/demo/govtech/Govtech-Demo-Cert/demoCertificates";
 
+const DEMO_CERT = IS_MAINNET ? MAIN : ROPSTEN;
 const DEMO_CONTENT_KEY = "DEMO_CONTENT";
 
 const DraggableDemoCertificate = () => {

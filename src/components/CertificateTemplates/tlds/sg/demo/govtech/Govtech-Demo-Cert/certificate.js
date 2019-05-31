@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
 import { format } from "date-fns";
 import { get } from "lodash";
-import backgroundImg from "./common/resources";
+import { certificateBg } from "./common/backgrounds";
 
 const Template = ({ certificate }) => (
   <div
     className="p-2 container"
     style={{
-      backgroundImage: `url('${backgroundImg}')`,
+      backgroundImage: `url('${certificateBg}')`,
       backgroundPosition: "center",
       backgroundSize: "cover",
       border: "10px solid #324353"
