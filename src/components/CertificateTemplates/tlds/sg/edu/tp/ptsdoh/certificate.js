@@ -53,16 +53,16 @@ const Certificate = ({ certificate }) => {
 
       <div className="row col-12 supporter-logos">
         <div className="col-2">
-          <img src={IMG_LOGO_MOH} className="moh" />
+          <img src={IMG_LOGO_MOH} className="moh" title="Ministry of Health" />
         </div>
         <div className="col-3">
-          <img src={IMG_LOGO_NEA} className="nea" />
+          <img src={IMG_LOGO_NEA} className="nea" title="National Environment Agency" />
         </div>
         <div className="col-2">
-          <img src={IMG_LOGO_NPARK} className="npark" />
+          <img src={IMG_LOGO_NPARK} className="npark" title="National Parks" />
         </div>
         <div className="col-3">
-          <img src={IMG_LOGO_SFA} className="sfa" />
+          <img src={IMG_LOGO_SFA} className="sfa" title="Singapore Food Agency" />
         </div>
         <div className="col-2" />
       </div>
