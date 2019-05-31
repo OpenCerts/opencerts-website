@@ -349,7 +349,6 @@ const templates = {
   "ptpdc-mod-2028": ptpdcModularCourse,
   "ptpdc-mod-2029": ptpdcModularCourse,
 
-
   "ptpdc-2010": ptpdc,
   "ptpdc-2011": ptpdc,
   "ptpdc-2012": ptpdc,

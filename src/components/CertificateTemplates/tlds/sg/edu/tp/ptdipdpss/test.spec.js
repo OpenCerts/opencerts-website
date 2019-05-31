@@ -27,7 +27,7 @@ test("Part-time Joint Diploma with Singapore Police Force is rendered correctly.
   await t.expect(SpfLogo.exists).ok();
   await t.expect(CertisLogo.exists).ok();
   await t.expect(SatsLogo.exists).ok();
-  
+
   // certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "DUMMY STUDENT NAME",
@@ -36,7 +36,6 @@ test("Part-time Joint Diploma with Singapore Police Force is rendered correctly.
     "Principal",
     "Registrar"
   ]);
-
 
   const transcriptTab = TemplateTabList.find(":nth-child(2)");
   await t.click(transcriptTab);

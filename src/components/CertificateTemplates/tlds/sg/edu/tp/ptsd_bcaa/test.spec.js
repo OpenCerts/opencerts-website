@@ -23,7 +23,7 @@ test("Part-time Joint Specialist Diploma with BCAA is rendered correctly.", asyn
 
   await t.expect(TpLogo.exists).ok();
   await t.expect(BcaaLogo.exists).ok();
-  
+
   // certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "DUMMY STUDENT NAME",
@@ -33,7 +33,6 @@ test("Part-time Joint Specialist Diploma with BCAA is rendered correctly.", asyn
     "Registrar",
     "This programme is jointly offered by"
   ]);
-
 
   const transcriptTab = TemplateTabList.find(":nth-child(2)");
   await t.click(transcriptTab);

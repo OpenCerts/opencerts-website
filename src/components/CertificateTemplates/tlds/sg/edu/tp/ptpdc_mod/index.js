@@ -18,7 +18,6 @@ const templates = [
   }
 ];
 
-
 const ptpdcModularCourse = ({ certificate }) => (
   <MultiCertificateRenderer
     certificate={certificate}

@@ -21,7 +21,7 @@ test("Part-time Modular Certificate of Modular Courses is rendered correctly.", 
   await t.expect(TemplateTabList.textContent).contains("Statement of Results");
 
   await t.expect(TpLogo.exists).ok();
-  
+
   // certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "DUMMY STUDENT NAME",
@@ -29,7 +29,6 @@ test("Part-time Modular Certificate of Modular Courses is rendered correctly.", 
     "Temasek Polytechnic",
     "Registrar"
   ]);
-
 
   const transcriptTab = TemplateTabList.find(":nth-child(2)");
   await t.click(transcriptTab);

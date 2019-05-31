@@ -22,7 +22,7 @@ test("Part-time Joint Certificate with SCDF is rendered correctly.", async t => 
 
   await t.expect(TpLogo.exists).ok();
   await t.expect(ScdfLogo.exists).ok();
-  
+
   // certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "Accredited Training Institution Scheme",
@@ -35,5 +35,4 @@ test("Part-time Joint Certificate with SCDF is rendered correctly.", async t => 
     "Registrar",
     "Temasek Polytechnic"
   ]);
-
 });

@@ -7,7 +7,9 @@ const Certificate = "./sample.opencert";
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
 const TpLogo = Selector('img[title="Temasek Polytechnic"]');
-const SussLogo = Selector('img[title="Singapore University of Social Sciences"]');
+const SussLogo = Selector(
+  'img[title="Singapore University of Social Sciences"]'
+);
 
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(
@@ -23,7 +25,7 @@ test("Part-time Joint Specialist Diploma with SUSS is rendered correctly.", asyn
 
   await t.expect(TpLogo.exists).ok();
   await t.expect(SussLogo.exists).ok();
-  
+
   // certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "DUMMY STUDENT NAME",
@@ -33,7 +35,6 @@ test("Part-time Joint Specialist Diploma with SUSS is rendered correctly.", asyn
     "Registrar",
     "The programme is supported by"
   ]);
-
 
   const transcriptTab = TemplateTabList.find(":nth-child(2)");
   await t.click(transcriptTab);

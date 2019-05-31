@@ -23,7 +23,7 @@ test("Part-time Joint Specialist Diploma with SMU is rendered correctly.", async
 
   await t.expect(TpLogo.exists).ok();
   await t.expect(SmuLogo.exists).ok();
-  
+
   // certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "DUMMY STUDENT NAME",
@@ -33,7 +33,6 @@ test("Part-time Joint Specialist Diploma with SMU is rendered correctly.", async
     "Registrar",
     "The programme is supported by"
   ]);
-
 
   const transcriptTab = TemplateTabList.find(":nth-child(2)");
   await t.click(transcriptTab);

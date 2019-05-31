@@ -29,7 +29,7 @@ test("Part-time Joint Specialist Diploma with SUSS is rendered correctly.", asyn
   await t.expect(NeaLogo.exists).ok();
   await t.expect(NparkLogo.exists).ok();
   await t.expect(SfaLogo.exists).ok();
-  
+
   // certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "DUMMY STUDENT NAME",
@@ -39,7 +39,6 @@ test("Part-time Joint Specialist Diploma with SUSS is rendered correctly.", asyn
     "Registrar",
     "The programme is supported by"
   ]);
-
 
   const transcriptTab = TemplateTabList.find(":nth-child(2)");
   await t.click(transcriptTab);

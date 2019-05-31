@@ -54,8 +54,8 @@ const Certificate = ({ certificate }) => {
           />
         </div>
         <div className="col-3">
-          <img 
-            src={IMG_LOGO_CERTIS_CISCO} 
+          <img
+            src={IMG_LOGO_CERTIS_CISCO}
             className="certis-cisco"
             title="Certis"
           />

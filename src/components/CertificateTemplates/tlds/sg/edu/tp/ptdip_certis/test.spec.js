@@ -23,7 +23,7 @@ test("Part-time Joint Diploma with Certis is rendered correctly.", async t => {
 
   await t.expect(TpLogo.exists).ok();
   await t.expect(CertisLogo.exists).ok();
-  
+
   // certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "DUMMY STUDENT NAME",
@@ -32,7 +32,6 @@ test("Part-time Joint Diploma with Certis is rendered correctly.", async t => {
     "Principal",
     "Registrar"
   ]);
-
 
   const transcriptTab = TemplateTabList.find(":nth-child(2)");
   await t.click(transcriptTab);
