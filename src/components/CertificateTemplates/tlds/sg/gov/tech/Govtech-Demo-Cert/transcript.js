@@ -85,8 +85,8 @@ class Template extends Component {
             backgroundRepeat: "repeat"
           }}
         >
-          <div className="row" style={{ paddingLeft: "30px" }}>
-            <h1>
+          <div className="row" style={{ paddingLeft: "3%" }}>
+            <h1 style={{ fontSize: "3vw" }}>
               <b>{certificateName}</b>
             </h1>
           </div>
@@ -94,35 +94,36 @@ class Template extends Component {
           <div
             className="row"
             style={{
-              paddingTop: "25px",
-              paddingLeft: "20px"
+              paddingTop: "3%",
+              paddingLeft: "2%",
+              fontSize: "2vw"
             }}
           >
             <div className="col">
               <div className="row">
-                <div className="col-3">NAME</div>
-                <div className="col-9">
+                <div className="col">NAME</div>
+                <div className="col">
                   :&nbsp;&nbsp;
                   {recipientName}
                 </div>
               </div>
               <div className="row">
-                <div className="col-3">COURSE</div>
-                <div className="col-9">
+                <div className="col">COURSE</div>
+                <div className="col">
                   :&nbsp;&nbsp;
                   {recipientCourse}
                 </div>
               </div>
               <div className="row">
-                <div className="col-3">NRIC/FIN</div>
-                <div className="col-9">
+                <div className="col">NRIC/FIN</div>
+                <div className="col">
                   :&nbsp;&nbsp;
                   {recipientNric}
                 </div>
               </div>
               <div className="row">
-                <div className="col-3">STUDENT ID</div>
-                <div className="col-9">
+                <div className="col">STUDENT ID</div>
+                <div className="col">
                   :&nbsp;&nbsp;
                   {studentId}
                 </div>
@@ -130,29 +131,29 @@ class Template extends Component {
             </div>
             <div className="col">
               <div className="row">
-                <div className="col-5">CERTIFICATE ID</div>
-                <div className="col-6">
+                <div className="col">CERTIFICATE ID</div>
+                <div className="col">
                   :&nbsp;&nbsp;
                   {certificateId}
                 </div>
               </div>
               <div className="row">
-                <div className="col-5">DATE OF ISSUANCE</div>
-                <div className="col-6">
+                <div className="col">DATE OF ISSUANCE</div>
+                <div className="col">
                   :&nbsp;&nbsp;
                   {formatDate(issuanceDate)}
                 </div>
               </div>
               <div className="row">
-                <div className="col-5">DATE OF ADMISSION</div>
-                <div className="col-6">
+                <div className="col">DATE OF ADMISSION</div>
+                <div className="col">
                   :&nbsp;&nbsp;
                   {formatDate(admissionDate)}
                 </div>
               </div>
               <div className="row">
-                <div className="col-5">DATE OF GRADUATION</div>
-                <div className="col-6">
+                <div className="col">DATE OF GRADUATION</div>
+                <div className="col">
                   :&nbsp;&nbsp;
                   {formatDate(graduationDate)}
                 </div>
@@ -163,13 +164,13 @@ class Template extends Component {
           {transcriptData !== [] && (
             <div
               className="row mb-4"
-              style={{ paddingLeft: "30px", paddingTop: "25px" }}
+              style={{ paddingLeft: "3%", paddingTop: "5%" }}
             >
-              <h3 style={{ color: "black" }}>
+              <h3 style={{ color: "black", fontSize: "3vw" }}>
                 <b>Transcript</b>
               </h3>
               <table className="w-100">
-                <tbody>
+                <tbody style={{ fontSize: "2vw" }}>
                   <tr>
                     <th>Course Code</th>
                     <th>Name</th>
@@ -188,9 +189,10 @@ class Template extends Component {
               <img
                 className="w-100"
                 style={{
-                  paddingTop: "45px",
-                  paddingLeft: "20px",
-                  minWidth: "200px"
+                  paddingTop: "40%",
+                  paddingLeft: "5%",
+                  width: "100%",
+                  height: "auto"
                 }}
                 src="/static/images/logo-govtech.png"
               />
@@ -198,7 +200,12 @@ class Template extends Component {
             <div className="col" />
             <div
               className="col text-center"
-              style={{ paddingTop: "30px", paddingRight: "30px" }}
+              style={{
+                paddingTop: "5%",
+                paddingRight: "3%",
+                width: "100%",
+                height: "auto"
+              }}
             >
               <img
                 className="w-100"
@@ -208,12 +215,11 @@ class Template extends Component {
                 )}
               />
               <hr className="m-1" />
-              <div>
+              <div style={{ fontSize: "2.5vw" }}>
                 <b>
                   {get(certificate, "additionalData.certSignatories[0].name")}
                 </b>
-              </div>
-              <div>
+                <br />
                 {get(certificate, "additionalData.certSignatories[0].position")}
                 ,{" "}
                 {get(

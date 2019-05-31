@@ -6,40 +6,61 @@ import css from "./dropZoneSection.scss";
 import { updateCertificate } from "../../reducers/certificate";
 import { trace } from "../../utils/logger";
 import { IS_MAINNET } from "../../config";
-import {MAIN, ROPSTEN} from "../CertificateTemplates/tlds/sg/demo/govtech/Govtech-Demo-Cert/demoCertificates";
+import {
+  MAIN,
+  ROPSTEN
+} from "../CertificateTemplates/tlds/sg/gov/tech/Govtech-Demo-Cert/demoCertificates";
 
 const DEMO_CERT = IS_MAINNET ? MAIN : ROPSTEN;
 const DEMO_CONTENT_KEY = "DEMO_CONTENT";
 
-const DraggableDemoCertificate = () => {
-  return (
-    <div className="d-none d-lg-block">
-      <div className="row">
-        <div className="col">
-          <div
-            className={css.pulse}
-            draggable="true"
-            onDragStart={e => e.dataTransfer.setData(DEMO_CONTENT_KEY, true)}
+const DraggableDemoCertificate = () => (
+  <div className="d-none d-lg-block">
+    <div className="row">
+      <div className="col">
+        <div
+          className={css.pulse}
+          draggable="true"
+          onDragStart={e => e.dataTransfer.setData(DEMO_CONTENT_KEY, true)}
+        >
+          <a
+            href={`data:text/plain;,${JSON.stringify(DEMO_CERT, null, 2)}`}
+            download="demo.opencert"
           >
-            <a
-              href={`data:text/plain;,${JSON.stringify(DEMO_CERT, null, 2)}`}
-              download="demo.opencert"
-            >
-              <img
-                style={{ cursor: "grabbing" }}
-                src="/static/images/dropzone/cert.png"
-                width="100%"
-              />
-            </a>
-          </div>
-        </div>
-        <div className="col">
-          <img src="/static/images/dropzone/arrow3.png" width="100%" />
+            <img
+              style={{ cursor: "grabbing" }}
+              src="/static/images/dropzone/cert.png"
+              width="100%"
+            />
+          </a>
         </div>
       </div>
+      <div className="col">
+        <img src="/static/images/dropzone/arrow3.png" width="100%" />
+      </div>
     </div>
-  );
-};
+  </div>
+);
+
+const MobileDemoCertificate = () => (
+  <div className="d-block d-lg-none d-xl-none">
+    <a
+      className="btn btn-primary btn-lg"
+      role="button"
+      draggable="true"
+      id="demoClick"
+      style={{
+        background: "#28a745",
+        border: "none",
+        cursor: "pointer"
+      }}
+      onClick
+    >
+      Click me for a demo certificate!
+    </a>
+  </div>
+);
+
 class DropZoneSection extends Component {
   componentDidMount() {
     document.getElementById("demoDrop").addEventListener("drop", e => {
@@ -47,16 +68,20 @@ class DropZoneSection extends Component {
         this.props.updateCertificate(DEMO_CERT);
       }
     });
+    document.getElementById("demoClick").addEventListener("click", e => {
+      this.props.updateCertificate(DEMO_CERT);
+    });
   }
 
   componentWillUnmount() {
     document
-      .getElementById("demoDrop")
+      .getElementById("demoDrop", "demoClick")
       .removeEventListener("drop", () => this.removeListener());
   }
 
   removeListener = () => trace("drop listener removed");
 
+  // eslint-disable-next-line class-methods-use-this
   render() {
     return (
       <div className="row p-5 bg-brand-dark text-white">
@@ -70,6 +95,7 @@ class DropZoneSection extends Component {
                 All in one place.
               </p>
               <DraggableDemoCertificate />
+              <MobileDemoCertificate />
             </div>
           </div>
           <div className="col-lg-7 col-md-12 col-sm-12" id="demoDrop">

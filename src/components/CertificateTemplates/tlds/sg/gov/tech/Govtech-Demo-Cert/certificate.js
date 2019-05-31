@@ -23,22 +23,37 @@ const Template = ({ certificate }) => (
         <img
           src="/static/images/opencertslogo.svg"
           className="w-100"
-          style={{ minWidth: "300px" }}
+          style={{ width: "100%", height: "auto" }}
         />
       </div>
-      <div className="h5 mb-4 mb-lg-5 d-flex justify-content-center">
+      <div
+        className="h5 mb-4 mb-lg-5 d-flex justify-content-center"
+        style={{ fontSize: "4vw" }}
+      >
         <i>This is to certify that</i>
       </div>
-      <div className="h3 mb-4 mb-lg-5 d-flex justify-content-center">
+      <div
+        className="h3 mb-4 mb-lg-5 d-flex justify-content-center"
+        style={{ fontSize: "5vw" }}
+      >
         <b>{certificate.recipient.name}</b>
       </div>
-      <div className="h5 mb-4 mb-lg-5 d-flex justify-content-center">
+      <div
+        className="h5 mb-4 mb-lg-5 d-flex justify-content-center"
+        style={{ fontSize: "3vw" }}
+      >
         <i>has successfully completed the</i>
       </div>
-      <div className="h1 mb-4 mb-lg-5 d-flex justify-content-center">
+      <div
+        className="h1 mb-4 mb-lg-5 d-flex justify-content-center"
+        style={{ fontSize: "5vw" }}
+      >
         OpenCerts Demo
       </div>
-      <div className="h5 mb-4 mb-lg-5 d-flex justify-content-center">
+      <div
+        className="h5 mb-4 mb-lg-5 d-flex justify-content-center"
+        style={{ fontSize: "3vw" }}
+      >
         <i>certification through training administered by</i>
       </div>
       <div className="row">
@@ -46,7 +61,7 @@ const Template = ({ certificate }) => (
         <div className="col">
           <img
             className="w-100"
-            style={{ minWidth: "300px" }}
+            style={{ width: "100%", height: "auto", minWidth: "100px" }}
             src="/static/images/logo-govtech.png"
           />
         </div>
@@ -56,34 +71,44 @@ const Template = ({ certificate }) => (
       <div
         className="row"
         style={{
-          paddingLeft: "50px",
-          paddingRight: "50px",
-          paddingTop: "30px"
+          paddingLeft: "8%",
+          paddingTop: "5%"
         }}
       >
-        <div className="col-4 text-center">
+        <div className="col text-center">
           <img
-            className="w-100"
+            style={{ width: "100%", height: "auto" }}
             src={get(
               certificate,
               "additionalData.certSignatories[0].signature"
             )}
           />
-          <hr className="m-3" />
-          <div>
+          <hr
+            style={{
+              border: "none",
+              height: "1px",
+              backgroundColor: "#333"
+            }}
+          />
+          <div style={{ fontSize: "2.5vw" }}>
             <b>{get(certificate, "additionalData.certSignatories[0].name")}</b>
-          </div>
-          <div>
-            {get(certificate, "additionalData.certSignatories[0].position")},{" "}
+            <br />
+            {get(
+              certificate,
+              "additionalData.certSignatories[0].position"
+            )},{" "}
             {get(certificate, "additionalData.certSignatories[0].organisation")}
           </div>
         </div>
 
-        <div className="col-4" />
+        <div className="col" />
 
         <div
-          className="d-flex flex-row-reverse col-4"
-          style={{ paddingTop: "20px" }}
+          className="d-flex flex-row-reverse col"
+          style={{
+            paddingTop: "5%",
+            fontSize: "2.5vw"
+          }}
         >
           Dated {format(certificate.issuedOn, "DD/MM/YYYY")}
         </div>
