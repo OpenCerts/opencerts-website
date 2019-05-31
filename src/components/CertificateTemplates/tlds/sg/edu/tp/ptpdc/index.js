@@ -12,6 +12,7 @@ const templates = [
   }
 ];
 
+
 const ptpdc = ({ certificate }) => (
   <MultiCertificateRenderer
     certificate={certificate}
