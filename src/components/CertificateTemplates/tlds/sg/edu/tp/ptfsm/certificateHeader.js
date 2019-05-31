@@ -20,8 +20,8 @@ const CertificateHeader = () => (
 
     <div className="row">
       <div className="col-12">
-        <img src={IMG_LOGO_SCDF} className="scdf-logo" />
-        <img src={IMG_LOGO_TP} className="tp-logo" />
+        <img src={IMG_LOGO_SCDF} className="scdf-logo" title="Singapore Civil Defence Force" />
+        <img src={IMG_LOGO_TP} className="tp-logo" title="Temasek Polytechnic" />
       </div>
     </div>
   </div>
