@@ -12,7 +12,7 @@ const CertificateNameSection = ({ certificate }) => {
         </span>
       );
     }
-    return <span>{certificate.name}</span>;
+    return <span>{value}</span>;
   };
 
   return (
