@@ -2,24 +2,13 @@ import PropTypes from "prop-types";
 
 const CertificateNameSection = ({ certificate }) => {
   const splitTwoLines = value => {
-    const index = value.search(/ in /i);
-
-    if (index > 0) {
-      const firstLineEnd = index + 3;
-      const firstLine = certificate.name.substring(0, firstLineEnd);
-
-      const secondLineStart = index + 4;
-      const secondLindEnd = certificate.name.length;
-      const secondLine = certificate.name.substring(
-        secondLineStart,
-        secondLindEnd
-      );
-
+    const lines = value.split(/ in (.+)/i);
+    if (lines.length > 1) {
       return (
         <span>
-          {firstLine}
+          {lines[0]} in
           <br />
-          {secondLine}
+          {lines[1]}
         </span>
       );
     }
