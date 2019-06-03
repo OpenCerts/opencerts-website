@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
 
 import TPCert from "../ptmc/certificate";
@@ -18,16 +17,11 @@ const templates = [
   }
 ];
 
-const ptmcModularCourse = ({ certificate }) => (
+const ptmcModularCourse = () => (
   <MultiCertificateRenderer
-    certificate={certificate}
     templates={templates}
     whitelist={ApprovedAddresses}
   />
 );
-
-ptmcModularCourse.propTypes = {
-  certificate: PropTypes.object.isRequired
-};
 
 export default ptmcModularCourse;
