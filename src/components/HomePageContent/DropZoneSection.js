@@ -54,7 +54,6 @@ const MobileDemoCertificate = () => (
         border: "none",
         cursor: "pointer"
       }}
-      onClick
     >
       Click me for a demo certificate!
     </a>
