@@ -108,8 +108,8 @@ describe("generateOrganisationIndexExports", () => {
     ).toBe(`import dynamic from "next/dynamic";
 
 export default {
-  "foo": dynamic(() => import("./bar" /* webpackChunkName: "GovTechTemplates" */))
-  "qux": dynamic(() => import("./baz" /* webpackChunkName: "GovTechTemplates" */))
+  "foo": dynamic(() => import("./bar" /* webpackChunkName: "tech-Templates" */))
+  "qux": dynamic(() => import("./baz" /* webpackChunkName: "tech-Templates" */))
 };
 `);
   });
