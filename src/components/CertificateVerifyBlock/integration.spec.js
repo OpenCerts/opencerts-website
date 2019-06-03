@@ -3,7 +3,7 @@ import { Selector, ClientFunction } from "testcafe";
 fixture("Govtech DemoCert").page`http://localhost:3000`;
 
 const Certificate =
-  "../../components/CertificateTemplates/example/Demo-CertTemplate/DEMO_2019.opencert";
+  "../../components/CertificateTemplates/tlds/sg/gov/tech/Govtech-Demo-Cert/Ropsten-Demo.json";
 
 const RenderedCertificate = Selector("#rendered-certificate");
 
@@ -18,31 +18,25 @@ test("DEMO certificate is rendered correctly", async t => {
 
   await validateTextContent(t, RenderedCertificate, [
     "Your Name",
-    "MINDWORKS",
-    "SPORTS & WELLNESS",
-    "https://tech.gov.sg",
-    "DEMO STORE",
-    "PRINCIPLES OF ANIMATION",
-    "MIND QUEST FOR EXCELLENCE",
-    "TRF",
-    "2",
-    "PX",
-    "C+"
+    "SXXXXXXXY",
+    "123456",
+    "53b75bbe",
+    "CS 1110",
+    "Introduction to Programming",
+    "A+",
+    "3"
   ]);
 
   await ClientFunction(() => window.history.back())();
   await t.setFilesToUpload("input[type=file]", [Certificate]);
   await validateTextContent(t, RenderedCertificate, [
     "Your Name",
-    "MINDWORKS",
-    "SPORTS & WELLNESS",
-    "https://tech.gov.sg",
-    "DEMO STORE",
-    "PRINCIPLES OF ANIMATION",
-    "MIND QUEST FOR EXCELLENCE",
-    "TRF",
-    "2",
-    "PX",
-    "C+"
+    "SXXXXXXXY",
+    "123456",
+    "53b75bbe",
+    "CS 1110",
+    "Introduction to Programming",
+    "A+",
+    "3"
   ]);
 });

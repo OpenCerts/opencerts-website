@@ -9,7 +9,7 @@ import {
 } from "./addNewTemplate";
 
 const EXAMPLE_DIR =
-  "./src/components/CertificateTemplates/tlds/sg/gov/tech/Gotech-Demo-Cert";
+  "./src/components/CertificateTemplates/tlds/sg/gov/tech/Govtech-Demo-Cert";
 
 describe("reverseDnsNotation", () => {
   test("should work correctly", () => {
