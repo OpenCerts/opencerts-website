@@ -8,8 +8,7 @@ import {
   getDirsToMake
 } from "./addNewTemplate";
 
-const EXAMPLE_DIR =
-  "./src/components/CertificateTemplates/tlds/sg/gov/tech/Govtech-Demo-Cert";
+const EXAMPLE_DIR = "./src/components/CertificateTemplates/tlds/sg/gov/tech";
 
 describe("reverseDnsNotation", () => {
   test("should work correctly", () => {
@@ -104,7 +103,7 @@ describe("generateOrganisationIndexExports", () => {
     expect(
       generateOrganisationIndexExports({
         templateTagMapping: { foo: "bar", qux: "baz" },
-        organisationDir: "Govtech-Demo-Cert"
+        organisationDir: "tech"
       })
     ).toBe(`import dynamic from "next/dynamic";
 
