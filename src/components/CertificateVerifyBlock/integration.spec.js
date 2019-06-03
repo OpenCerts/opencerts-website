@@ -17,26 +17,26 @@ test("DEMO certificate is rendered correctly", async t => {
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
   await validateTextContent(t, RenderedCertificate, [
+    "This is to certify that",
     "Your Name",
-    "SXXXXXXXY",
-    "123456",
-    "53b75bbe",
-    "CS 1110",
-    "Introduction to Programming",
-    "A+",
-    "3"
+    "has successfully completed the",
+    "OpenCerts Demo",
+    "certification through training administered by",
+    "John Demo",
+    "Dean of Demos, Govtech",
+    "Dated 29/05/2019"
   ]);
 
   await ClientFunction(() => window.history.back())();
   await t.setFilesToUpload("input[type=file]", [Certificate]);
   await validateTextContent(t, RenderedCertificate, [
+    "This is to certify that",
     "Your Name",
-    "SXXXXXXXY",
-    "123456",
-    "53b75bbe",
-    "CS 1110",
-    "Introduction to Programming",
-    "A+",
-    "3"
+    "has successfully completed the",
+    "OpenCerts Demo",
+    "certification through training administered by",
+    "John Demo",
+    "Dean of Demos, Govtech",
+    "Dated 29/05/2019"
   ]);
 });
