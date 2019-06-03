@@ -23,8 +23,7 @@ test("DEMO certificate is rendered correctly", async t => {
     "OpenCerts Demo",
     "certification through training administered by",
     "John Demo",
-    "Dean of Demos, Govtech",
-    "Dated 29/05/2019"
+    "Dean of Demos, Govtech"
   ]);
 
   await ClientFunction(() => window.history.back())();
@@ -36,7 +35,6 @@ test("DEMO certificate is rendered correctly", async t => {
     "OpenCerts Demo",
     "certification through training administered by",
     "John Demo",
-    "Dean of Demos, Govtech",
-    "Dated 29/05/2019"
+    "Dean of Demos, Govtech"
   ]);
 });
