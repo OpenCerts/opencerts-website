@@ -5,6 +5,7 @@ import SimplePrivacyFilterBanner from "template-commons/Privacy/SimplePrivacyFil
 import ObfuscatableValue from "template-commons/Privacy/ObfuscatableValue";
 import { formatDate } from "./common/functions";
 import { transcriptBg } from "./common/backgrounds";
+import css from "./common/demoStyles.scss";
 
 class Template extends Component {
   constructor(props) {
@@ -85,18 +86,15 @@ class Template extends Component {
             backgroundRepeat: "repeat"
           }}
         >
-          <div className="row" style={{ paddingLeft: "3%" }}>
-            <h1 style={{ fontSize: "3vw" }}>
-              <b>{certificateName}</b>
-            </h1>
+          <div className={`row ${css.title}`} style={{ paddingLeft: "3%" }}>
+            <b>{certificateName}</b>
           </div>
 
           <div
-            className="row"
+            className={`row ${css.transcript}`}
             style={{
               paddingTop: "3%",
-              paddingLeft: "2%",
-              fontSize: "2vw"
+              paddingLeft: "2%"
             }}
           >
             <div className="col">
@@ -166,11 +164,11 @@ class Template extends Component {
               className="row mb-4"
               style={{ paddingLeft: "3%", paddingTop: "5%" }}
             >
-              <h3 style={{ color: "black", fontSize: "3vw" }}>
+              <div className={`${css.title}`}>
                 <b>Transcript</b>
-              </h3>
-              <table className="w-100">
-                <tbody style={{ fontSize: "2vw" }}>
+              </div>
+              <table className={`w-100 ${css.transcript}`}>
+                <tbody>
                   <tr>
                     <th>Course Code</th>
                     <th>Name</th>
@@ -190,7 +188,7 @@ class Template extends Component {
                 className="w-100"
                 style={{
                   paddingTop: "40%",
-                  paddingLeft: "5%",
+                  paddingLeft: "3%",
                   width: "100%",
                   height: "auto"
                 }}
@@ -202,7 +200,7 @@ class Template extends Component {
               className="col text-center"
               style={{
                 paddingTop: "5%",
-                paddingRight: "3%",
+                paddingRight: "5%",
                 width: "100%",
                 height: "auto"
               }}
@@ -215,7 +213,7 @@ class Template extends Component {
                 )}
               />
               <hr className="m-1" />
-              <div style={{ fontSize: "2.5vw" }}>
+              <div className={`${css.transcript}`}>
                 <b>
                   {get(certificate, "additionalData.certSignatories[0].name")}
                 </b>

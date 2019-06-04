@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { format } from "date-fns";
 import { get } from "lodash";
 import { certificateBg } from "./common/backgrounds";
+import css from "./common/demoStyles.scss";
 
 const Template = ({ certificate }) => (
   <div
@@ -22,37 +23,35 @@ const Template = ({ certificate }) => (
       <div className="my-5 m-lg-5 text-center">
         <img
           src="/static/images/opencertslogo.svg"
-          className="w-100"
-          style={{ width: "100%", height: "auto" }}
+          style={{ width: "60%", height: "auto", maxWidth: "1000px" }}
         />
       </div>
       <div
-        className="h5 mb-4 mb-lg-5 d-flex justify-content-center"
-        style={{ fontSize: "4vw" }}
+        className={`mb-4 mb-lg-5 d-flex justify-content-center ${css.body}`}
+        style={{ textAlign: "center" }}
       >
         <i>This is to certify that</i>
       </div>
       <div
-        className="h3 mb-4 mb-lg-5 d-flex justify-content-center"
-        style={{ fontSize: "5vw" }}
+        className={`mb-4 mb-lg-5 d-flex justify-content-center ${css.title}`}
       >
         <b>{certificate.recipient.name}</b>
       </div>
       <div
-        className="h5 mb-4 mb-lg-5 d-flex justify-content-center"
-        style={{ fontSize: "3vw" }}
+        className={`mb-4 mb-lg-5 d-flex justify-content-center ${css.body}`}
+        style={{ textAlign: "center" }}
       >
         <i>has successfully completed the</i>
       </div>
       <div
-        className="h1 mb-4 mb-lg-5 d-flex justify-content-center"
-        style={{ fontSize: "5vw" }}
+        className={`mb-4 mb-lg-5 d-flex justify-content-center ${css.title}`}
+        style={{ textAlign: "center" }}
       >
         OpenCerts Demo
       </div>
       <div
-        className="h5 mb-4 mb-lg-5 d-flex justify-content-center"
-        style={{ fontSize: "3vw" }}
+        className={`mb-4 mb-lg-5 d-flex justify-content-center ${css.body}`}
+        style={{ textAlign: "center" }}
       >
         <i>certification through training administered by</i>
       </div>
@@ -75,7 +74,7 @@ const Template = ({ certificate }) => (
           paddingTop: "5%"
         }}
       >
-        <div className="col text-center">
+        <div className={`col text-center ${css.body}`}>
           <img
             style={{ width: "100%", height: "auto" }}
             src={get(
@@ -86,11 +85,11 @@ const Template = ({ certificate }) => (
           <hr
             style={{
               border: "none",
-              height: "1px",
+              height: "2px",
               backgroundColor: "#333"
             }}
           />
-          <div style={{ fontSize: "2.5vw" }}>
+          <div>
             <b>{get(certificate, "additionalData.certSignatories[0].name")}</b>
             <br />
             {get(
@@ -104,10 +103,10 @@ const Template = ({ certificate }) => (
         <div className="col" />
 
         <div
-          className="d-flex flex-row-reverse col"
+          className={`d-flex flex-row-reverse col ${css.body}`}
           style={{
             paddingTop: "5%",
-            fontSize: "2.5vw"
+            paddingRight: "5%"
           }}
         >
           Dated {format(certificate.issuedOn, "DD/MM/YYYY")}
