@@ -29,6 +29,10 @@ const ptpdc = dynamic(() =>
   import("./ptpdc" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
 );
 
+const ptpostdip = dynamic(() =>
+  import("./ptpostdip" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
+);
+
 const ptmcModularCourse = dynamic(() =>
   import("./ptmc_mod" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
 );
@@ -242,6 +246,47 @@ const templates = {
   "ptpdc-2027": ptpdc,
   "ptpdc-2028": ptpdc,
   "ptpdc-2029": ptpdc,
+
+  "ptpostdip-1990": ptpostdip,
+  "ptpostdip-1991": ptpostdip,
+  "ptpostdip-1992": ptpostdip,
+  "ptpostdip-1993": ptpostdip,
+  "ptpostdip-1994": ptpostdip,
+  "ptpostdip-1995": ptpostdip,
+  "ptpostdip-1996": ptpostdip,
+  "ptpostdip-1997": ptpostdip,
+  "ptpostdip-1998": ptpostdip,
+  "ptpostdip-1999": ptpostdip,
+  "ptpostdip-2000": ptpostdip,
+  "ptpostdip-2001": ptpostdip,
+  "ptpostdip-2002": ptpostdip,
+  "ptpostdip-2003": ptpostdip,
+  "ptpostdip-2004": ptpostdip,
+  "ptpostdip-2005": ptpostdip,
+  "ptpostdip-2006": ptpostdip,
+  "ptpostdip-2007": ptpostdip,
+  "ptpostdip-2008": ptpostdip,
+  "ptpostdip-2009": ptpostdip,
+  "ptpostdip-2010": ptpostdip,
+  "ptpostdip-2011": ptpostdip,
+  "ptpostdip-2012": ptpostdip,
+  "ptpostdip-2013": ptpostdip,
+  "ptpostdip-2014": ptpostdip,
+  "ptpostdip-2015": ptpostdip,
+  "ptpostdip-2016": ptpostdip,
+  "ptpostdip-2017": ptpostdip,
+  "ptpostdip-2018": ptpostdip,
+  "ptpostdip-2019": ptpostdip,
+  "ptpostdip-2020": ptpostdip,
+  "ptpostdip-2021": ptpostdip,
+  "ptpostdip-2022": ptpostdip,
+  "ptpostdip-2023": ptpostdip,
+  "ptpostdip-2024": ptpostdip,
+  "ptpostdip-2025": ptpostdip,
+  "ptpostdip-2026": ptpostdip,
+  "ptpostdip-2027": ptpostdip,
+  "ptpostdip-2028": ptpostdip,
+  "ptpostdip-2029": ptpostdip,
 
   "ptmc-mod-2010": ptmcModularCourse,
   "ptmc-mod-2011": ptmcModularCourse,
