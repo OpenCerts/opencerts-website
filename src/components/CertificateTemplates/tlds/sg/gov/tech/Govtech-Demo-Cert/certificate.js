@@ -74,7 +74,7 @@ const Template = ({ certificate }) => (
           paddingTop: "5%"
         }}
       >
-        <div className={`col text-center ${css.body}`}>
+        <div className={`col text-center ${css.transcript}`}>
           <img
             style={{ width: "100%", height: "auto" }}
             src={get(
@@ -85,7 +85,7 @@ const Template = ({ certificate }) => (
           <hr
             style={{
               border: "none",
-              height: "2px",
+              height: "1px",
               backgroundColor: "#333"
             }}
           />
@@ -103,7 +103,7 @@ const Template = ({ certificate }) => (
         <div className="col" />
 
         <div
-          className={`d-flex flex-row-reverse col ${css.body}`}
+          className={`d-flex flex-row-reverse col ${css.transcript}`}
           style={{
             paddingTop: "5%",
             paddingRight: "5%"
