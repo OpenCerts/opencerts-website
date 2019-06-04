@@ -29,6 +29,10 @@ const ptpdc = dynamic(() =>
   import("./ptpdc" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
 );
 
+const ptsdNp = dynamic(() =>
+  import("./ptsd_np" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
+);
+
 const ptsdMha = dynamic(() =>
   import("./ptsd_mha" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
 );
@@ -262,6 +266,27 @@ const templates = {
   "ptpdc-2027": ptpdc,
   "ptpdc-2028": ptpdc,
   "ptpdc-2029": ptpdc,
+
+  "ptsd_np-2010": ptsdNp,
+  "ptsd_np-2011": ptsdNp,
+  "ptsd_np-2012": ptsdNp,
+  "ptsd_np-2013": ptsdNp,
+  "ptsd_np-2014": ptsdNp,
+  "ptsd_np-2015": ptsdNp,
+  "ptsd_np-2016": ptsdNp,
+  "ptsd_np-2017": ptsdNp,
+  "ptsd_np-2018": ptsdNp,
+  "ptsd_np-2019": ptsdNp,
+  "ptsd_np-2020": ptsdNp,
+  "ptsd_np-2021": ptsdNp,
+  "ptsd_np-2022": ptsdNp,
+  "ptsd_np-2023": ptsdNp,
+  "ptsd_np-2024": ptsdNp,
+  "ptsd_np-2025": ptsdNp,
+  "ptsd_np-2026": ptsdNp,
+  "ptsd_np-2027": ptsdNp,
+  "ptsd_np-2028": ptsdNp,
+  "ptsd_np-2029": ptsdNp,
 
   "ptsd_mha-2010": ptsdMha,
   "ptsd_mha-2011": ptsdMha,
