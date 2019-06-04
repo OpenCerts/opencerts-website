@@ -113,7 +113,6 @@ export const renderAwardText = certificate => (
       style={{ marginTop: "2rem" }}
     >
       <p style={styles.nameTextStyle} className="RobotoRegular text-center">
-        {get(certificate, "qualificationLevel[0].description")} in{" "}
         {certificate.name}
       </p>
     </div>
