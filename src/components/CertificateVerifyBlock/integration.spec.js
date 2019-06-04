@@ -3,7 +3,7 @@ import { Selector, ClientFunction } from "testcafe";
 fixture("Govtech DemoCert").page`http://localhost:3000`;
 
 const Certificate =
-  "../../components/CertificateTemplates/example/Demo-CertTemplate/DEMO_2019.opencert";
+  "../../components/CertificateTemplates/tlds/sg/gov/tech/Govtech-Demo-Cert/Ropsten-Demo.json";
 
 const RenderedCertificate = Selector("#rendered-certificate");
 
@@ -17,32 +17,24 @@ test("DEMO certificate is rendered correctly", async t => {
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
   await validateTextContent(t, RenderedCertificate, [
+    "This is to certify that",
     "Your Name",
-    "MINDWORKS",
-    "SPORTS & WELLNESS",
-    "https://tech.gov.sg",
-    "DEMO STORE",
-    "PRINCIPLES OF ANIMATION",
-    "MIND QUEST FOR EXCELLENCE",
-    "TRF",
-    "2",
-    "PX",
-    "C+"
+    "has successfully completed the",
+    "OpenCerts Demo",
+    "certification through training administered by",
+    "John Demo",
+    "Dean of Demos, Govtech"
   ]);
 
   await ClientFunction(() => window.history.back())();
   await t.setFilesToUpload("input[type=file]", [Certificate]);
   await validateTextContent(t, RenderedCertificate, [
+    "This is to certify that",
     "Your Name",
-    "MINDWORKS",
-    "SPORTS & WELLNESS",
-    "https://tech.gov.sg",
-    "DEMO STORE",
-    "PRINCIPLES OF ANIMATION",
-    "MIND QUEST FOR EXCELLENCE",
-    "TRF",
-    "2",
-    "PX",
-    "C+"
+    "has successfully completed the",
+    "OpenCerts Demo",
+    "certification through training administered by",
+    "John Demo",
+    "Dean of Demos, Govtech"
   ]);
 });
