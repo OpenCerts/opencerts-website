@@ -286,7 +286,7 @@ const templates = {
   "ptpostdip-2026": ptpostdip,
   "ptpostdip-2027": ptpostdip,
   "ptpostdip-2028": ptpostdip,
-  "ptpostdip-2029": ptpostdip
+  "ptpostdip-2029": ptpostdip,
 
   "ptmc-mod-2010": ptmcModularCourse,
   "ptmc-mod-2011": ptmcModularCourse,
