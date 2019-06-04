@@ -18,9 +18,7 @@ const CertificateBody = ({ certificate }) => {
 
       <div className="certificate-body">
         <div className="recipient-paragraph">It is hereby certified that</div>
-
         <div className="recipient-name">{certificate.recipient.name}</div>
-
         <div className="recipient-paragraph">
           having successfully completed the course of study was awarded the
         </div>

@@ -13,7 +13,7 @@ const templates = [
   },
   {
     id: "transcript",
-    label: "Transcript",
+    label: "Statement of Examination Results",
     template: TPTranscript
   }
 ];
