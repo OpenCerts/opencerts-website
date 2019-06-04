@@ -35,7 +35,10 @@ describe("generatePartialChildPaths", () => {
 
 describe("getSubDirs", () => {
   test("should return 'Govtech-Demo-Cert' when used on example dir", () => {
-    expect(getSubDirs(EXAMPLE_DIR)).toEqual(["Govtech-Demo-Cert"]);
+    expect(getSubDirs(EXAMPLE_DIR)).toEqual([
+      "2018-OpenCertsAssociate",
+      "Govtech-Demo-Cert"
+    ]);
   });
 });
 
