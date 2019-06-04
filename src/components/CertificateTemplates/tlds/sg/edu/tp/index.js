@@ -29,6 +29,14 @@ const ptpdc = dynamic(() =>
   import("./ptpdc" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
 );
 
+const ptsdoh = dynamic(() =>
+  import("./ptsdoh" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
+);
+
+const ptsdSuss = dynamic(() =>
+  import("./ptsd_suss" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
+);
+
 const ptsdSmu = dynamic(() =>
   import("./ptsd_smu" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
 );
@@ -274,6 +282,48 @@ const templates = {
   "ptpdc-2027": ptpdc,
   "ptpdc-2028": ptpdc,
   "ptpdc-2029": ptpdc,
+
+  "ptsdoh-2010": ptsdoh,
+  "ptsdoh-2011": ptsdoh,
+  "ptsdoh-2012": ptsdoh,
+  "ptsdoh-2013": ptsdoh,
+  "ptsdoh-2014": ptsdoh,
+  "ptsdoh-2015": ptsdoh,
+  "ptsdoh-2016": ptsdoh,
+  "ptsdoh-2017": ptsdoh,
+  "ptsdoh-2018": ptsdoh,
+  "ptsdoh-2019": ptsdoh,
+  "ptsdoh-2020": ptsdoh,
+  "ptsdoh-2021": ptsdoh,
+  "ptsdoh-2022": ptsdoh,
+  "ptsdoh-2023": ptsdoh,
+  "ptsdoh-2024": ptsdoh,
+  "ptsdoh-2025": ptsdoh,
+  "ptsdoh-2026": ptsdoh,
+  "ptsdoh-2027": ptsdoh,
+  "ptsdoh-2028": ptsdoh,
+  "ptsdoh-2029": ptsdoh,
+
+  "ptsd_suss-2010": ptsdSuss,
+  "ptsd_suss-2011": ptsdSuss,
+  "ptsd_suss-2012": ptsdSuss,
+  "ptsd_suss-2013": ptsdSuss,
+  "ptsd_suss-2014": ptsdSuss,
+  "ptsd_suss-2015": ptsdSuss,
+  "ptsd_suss-2016": ptsdSuss,
+  "ptsd_suss-2017": ptsdSuss,
+  "ptsd_suss-2018": ptsdSuss,
+  "ptsd_suss-2019": ptsdSuss,
+  "ptsd_suss-2020": ptsdSuss,
+  "ptsd_suss-2021": ptsdSuss,
+  "ptsd_suss-2022": ptsdSuss,
+  "ptsd_suss-2023": ptsdSuss,
+  "ptsd_suss-2024": ptsdSuss,
+  "ptsd_suss-2025": ptsdSuss,
+  "ptsd_suss-2026": ptsdSuss,
+  "ptsd_suss-2027": ptsdSuss,
+  "ptsd_suss-2028": ptsdSuss,
+  "ptsd_suss-2029": ptsdSuss,
 
   "ptsd_smu-2010": ptsdSmu,
   "ptsd_smu-2011": ptsdSmu,
