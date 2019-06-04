@@ -2,91 +2,109 @@
   {
     "key": "NP",
     "name": "Ngee Ann Polytechnic",
-    "value": "/static/images/NP_logo.svg"
+    "value": "/static/images/NP_logo.svg",
+    "link": "https://www.np.edu.sg/Pages/default.aspx"
   },
   {
     "key": "NYP",
     "name": "Nanyang Polytechnic",
-    "value": "/static/images/NYP_logo.png"
+    "value": "/static/images/NYP_logo.png",
+    "link": "https://www.nyp.edu.sg/"
   },
   {
     "key": "RP",
     "name": "Republic Polytechnic",
-    "value": "/static/images/RP_logo.svg"
+    "value": "/static/images/RP_logo.svg",
+    "link": "https://www.rp.edu.sg/"
   },
   {
     "key": "SP",
     "name": "Singapore Polytechnic",
-    "value": "/static/images/SP_logo.svg"
+    "value": "/static/images/SP_logo.svg",
+    "link": "https://www.sp.edu.sg/"
   },
   {
     "key": "TP",
     "name": "Temasek Polytechnic",
-    "value": "/static/images/TP_logo.svg"
+    "value": "/static/images/TP_logo.svg",
+    "link": "hhttps://www.tp.edu.sg/"
   },
   {
     "key": "SEAB",
     "name": "Singapore Examinations and Assessment Board",
-    "value": "/static/images/SEAB_logo.png"
+    "value": "/static/images/SEAB_logo.png",
+    "link": "https://www.seab.gov.sg/"
   },
   {
     "key": "ITE",
     "name": "Institute of Technical Education",
-    "value": "/static/images/ITE_logo.png"
+    "value": "/static/images/ITE_logo.png",
+    "link": "https://www.ite.edu.sg/"
   },
   {
     "key": "NIEC",
     "name": "National Institute of Early Childhood Development",
-    "value": "/static/images/NIEC_logo.png"
+    "value": "/static/images/NIEC_logo.png",
+    "link": "https://www.niec.edu.sg/"
   },
   {
     "key": "NTU",
     "name": "Nanyang Technological University",
-    "value": "/static/images/NTU_logo.png"
+    "value": "/static/images/NTU_logo.png",
+    "link": "https://www.ntu.edu.sg/"
   },
   {
     "key": "NUS",
     "name": "National University of Singapore",
-    "value": "/static/images/NUS_logo.png"
+    "value": "/static/images/NUS_logo.png",
+    "link": "http://nus.edu.sg/"
   },
   {
     "key": "SIT",
     "name": "Singapore Institute of Technology",
-    "value": "/static/images/SIT_logo.png"
+    "value": "/static/images/SIT_logo.png",
+    "link": "https://www.singaporetech.edu.sg/"
   },
   {
     "key": "SMU",
     "name": "Singapore Management University",
-    "value": "/static/images/SMU_logo.png"
+    "value": "/static/images/SMU_logo.png",
+    "link": "https://www.smu.edu.sg/"
   },
   {
     "key": "SUSS",
     "name": "Singapore University of Social Sciences",
-    "value": "/static/images/SUSS_logo.png"
+    "value": "/static/images/SUSS_logo.png",
+    "link": "https://www.suss.edu.sg/"
   },
   {
     "key": "SUTD",
     "name": "Singapore University of Technology and Design",
-    "value": "/static/images/SUTD_logo.png"
+    "value": "/static/images/SUTD_logo.png",
+    "link": "https://sutd.edu.sg/"
   },
   {
     "key": "NAFA",
     "name": "Nanyang Academy of Fine Arts",
-    "value": "/static/images/NAFA_logo.png"
+    "value": "/static/images/NAFA_logo.png",
+    "link": "https://www.nafa.edu.sg/"
   },
   {
     "key": "LASALLE",
     "name": "LASALLE College of the Arts",
-    "value": "/static/images/LASALLE_logo.png"
+    "value": "/static/images/LASALLE_logo.png",
+    "link": "https://www.lasalle.edu.sg/"
   },
   {
     "key": "SSG",
     "name": "SkillsFuture Singapore Agency",
-    "value": "/static/images/SSG_logo.png"
+    "value": "/static/images/SSG_logo.png",
+    "link": "https://www.ssg-wsg.gov.sg/"
   },
   {
     "key": "govtech",
     "name": "Government Technology Agency",
-    "value": "/static/images/GOVTECH_logo.png"
+    "value": "/static/images/GOVTECH_logo.png",
+    "link": "https://www.tech.gov.sg/"
   }
 ]
