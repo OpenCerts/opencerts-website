@@ -29,6 +29,14 @@ const ptpdc = dynamic(() =>
   import("./ptpdc" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
 );
 
+const ptmcModularCourse = dynamic(() =>
+  import("./ptmc_mod" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
+);
+
+const ptpdcModularCourse = dynamic(() =>
+  import("./ptpdc_mod" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
+);
+
 // keep it simple and stupid.
 // we will have to add/configure new mapping every year.
 // a bit tedious, but we have full control over which year use what template.
@@ -233,7 +241,49 @@ const templates = {
   "ptpdc-2026": ptpdc,
   "ptpdc-2027": ptpdc,
   "ptpdc-2028": ptpdc,
-  "ptpdc-2029": ptpdc
+  "ptpdc-2029": ptpdc,
+
+  "ptmc-mod-2010": ptmcModularCourse,
+  "ptmc-mod-2011": ptmcModularCourse,
+  "ptmc-mod-2012": ptmcModularCourse,
+  "ptmc-mod-2013": ptmcModularCourse,
+  "ptmc-mod-2014": ptmcModularCourse,
+  "ptmc-mod-2015": ptmcModularCourse,
+  "ptmc-mod-2016": ptmcModularCourse,
+  "ptmc-mod-2017": ptmcModularCourse,
+  "ptmc-mod-2018": ptmcModularCourse,
+  "ptmc-mod-2019": ptmcModularCourse,
+  "ptmc-mod-2020": ptmcModularCourse,
+  "ptmc-mod-2021": ptmcModularCourse,
+  "ptmc-mod-2022": ptmcModularCourse,
+  "ptmc-mod-2023": ptmcModularCourse,
+  "ptmc-mod-2024": ptmcModularCourse,
+  "ptmc-mod-2025": ptmcModularCourse,
+  "ptmc-mod-2026": ptmcModularCourse,
+  "ptmc-mod-2027": ptmcModularCourse,
+  "ptmc-mod-2028": ptmcModularCourse,
+  "ptmc-mod-2029": ptmcModularCourse,
+
+  "ptpdc-mod-2010": ptpdcModularCourse,
+  "ptpdc-mod-2011": ptpdcModularCourse,
+  "ptpdc-mod-2012": ptpdcModularCourse,
+  "ptpdc-mod-2013": ptpdcModularCourse,
+  "ptpdc-mod-2014": ptpdcModularCourse,
+  "ptpdc-mod-2015": ptpdcModularCourse,
+  "ptpdc-mod-2016": ptpdcModularCourse,
+  "ptpdc-mod-2017": ptpdcModularCourse,
+  "ptpdc-mod-2018": ptpdcModularCourse,
+  "ptpdc-mod-2019": ptpdcModularCourse,
+  "ptpdc-mod-2020": ptpdcModularCourse,
+  "ptpdc-mod-2021": ptpdcModularCourse,
+  "ptpdc-mod-2022": ptpdcModularCourse,
+  "ptpdc-mod-2023": ptpdcModularCourse,
+  "ptpdc-mod-2024": ptpdcModularCourse,
+  "ptpdc-mod-2025": ptpdcModularCourse,
+  "ptpdc-mod-2026": ptpdcModularCourse,
+  "ptpdc-mod-2027": ptpdcModularCourse,
+  "ptpdc-mod-2028": ptpdcModularCourse,
+  "ptpdc-mod-2029": ptpdcModularCourse
 };
 
 export default addDirToTemplatePath("tp", templates);
