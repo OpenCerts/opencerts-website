@@ -449,7 +449,6 @@ export const renderAwardTextQUAL = certificate => (
   <div>
     <div className="d-flex" style={{ marginTop: "2rem" }}>
       <p style={styles.nameTextStyle} className="RobotoRegular">
-        {get(certificate, "qualificationLevel[0].description")} in{" "}
         {certificate.name}
       </p>
     </div>
