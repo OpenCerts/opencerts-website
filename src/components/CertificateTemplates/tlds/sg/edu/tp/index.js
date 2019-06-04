@@ -29,6 +29,10 @@ const ptpdc = dynamic(() =>
   import("./ptpdc" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
 );
 
+const ptdipCertis = dynamic(() =>
+  import("./ptdip_certis" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
+);
+
 const ptpostdip = dynamic(() =>
   import("./ptpostdip" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
 );
@@ -246,6 +250,27 @@ const templates = {
   "ptpdc-2027": ptpdc,
   "ptpdc-2028": ptpdc,
   "ptpdc-2029": ptpdc,
+
+  "ptdip_certis-2010": ptdipCertis,
+  "ptdip_certis-2011": ptdipCertis,
+  "ptdip_certis-2012": ptdipCertis,
+  "ptdip_certis-2013": ptdipCertis,
+  "ptdip_certis-2014": ptdipCertis,
+  "ptdip_certis-2015": ptdipCertis,
+  "ptdip_certis-2016": ptdipCertis,
+  "ptdip_certis-2017": ptdipCertis,
+  "ptdip_certis-2018": ptdipCertis,
+  "ptdip_certis-2019": ptdipCertis,
+  "ptdip_certis-2020": ptdipCertis,
+  "ptdip_certis-2021": ptdipCertis,
+  "ptdip_certis-2022": ptdipCertis,
+  "ptdip_certis-2023": ptdipCertis,
+  "ptdip_certis-2024": ptdipCertis,
+  "ptdip_certis-2025": ptdipCertis,
+  "ptdip_certis-2026": ptdipCertis,
+  "ptdip_certis-2027": ptdipCertis,
+  "ptdip_certis-2028": ptdipCertis,
+  "ptdip_certis-2029": ptdipCertis,
 
   "ptpostdip-1990": ptpostdip,
   "ptpostdip-1991": ptpostdip,
