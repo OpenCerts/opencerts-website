@@ -1099,11 +1099,11 @@ export const RENDER_SOR_INFO_PSLE = ({ certificate }) => (
   <div className="row">
     <div className="col-md-12">
       <div className="row">
-        <div className="col-md-12" style={SOR_TRANSCRIPT_FONT_SIZE_12}>
-          <strong>held in the year</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-          <span style={SOR_TRANSCRIPT_FONT_SIZE_11}>
-            {FORMATYEARPREFIX(certificate.attainmentDate)}
-          </span>
+        <div className="col-md-2" style={SOR_TRANSCRIPT_FONT_SIZE_12}>
+          <strong>held in the year</strong>
+        </div>
+        <div className="col-md-10" style={SOR_TRANSCRIPT_FONT_SIZE_11}>
+          {FORMATYEARPREFIX(certificate.attainmentDate)}
         </div>
       </div>
       <div className="row">&nbsp;</div>
