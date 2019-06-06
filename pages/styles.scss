@@ -1,0 +1,88 @@
+.backgroundSection {
+  height: 300px;
+  width: 100%;
+  background-size: contain;
+}
+
+.backgroundLogoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.backgroundSectionLogo {
+  max-width: 100%;
+  padding: 20px;
+}
+
+.contentSection {
+  padding: 50px;
+}
+
+.contentSectionText {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.contentSectionName {
+  font-weight: 800;
+  color: #f3791f;
+}
+
+.footerSection {
+  text-align: center;
+}
+
+.govtechLogo {
+  max-width: 100%;
+  padding: 20px 50px 20px 50px;
+}
+
+// @media (min-width: 992px) {
+@media (min-width: 992px) {
+  .backgroundSection {
+    height: 100vh;
+    width: 100%;
+    background-size: auto;
+    -webkit-clip-path: polygon(0 0, 0% 100%, 100% 0);
+    clip-path: polygon(0 0, 0% 100%, 100% 0);
+  }
+
+  .backgroundSectionLogo {
+    margin-left: 12.5%;
+    margin-top: 12.5%;
+  }
+
+  .backgroundLogoContainer {
+    display: block;
+  }
+
+  .contentSection {
+    position: absolute;
+    bottom: 25%;
+    right: 12.5%;
+    width: 50%;
+  }
+  
+  .contentSectionName {
+    font-size: 2.2em;
+  }
+
+  .contentSectionText {
+    text-align: right;
+  }
+
+  .footerSection {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 12.5%;
+    right: 12.5%;
+    width: 50%;
+  }
+
+  .govtechLogo {
+    padding: 0;
+  }
+}
