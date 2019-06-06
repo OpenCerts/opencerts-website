@@ -17,9 +17,8 @@
     "analyze": "BUNDLE_ANALYZE=browser npm run start",
     "dev-cli": "node -r esm ./scripts/cli.js",
     "serve-static": "http-server out -s -p 3000",
-    "integration": "testcafe chrome *.spec.js",
-    "integration:all": "testcafe chrome src/**/*.spec.js",
-    "integration:headless": "npm run build:static && testcafe chrome:headless src/**/*.spec.js --app \"npm run serve-static\"",
+    "integration": "testcafe chrome src/**/*.spec.js",
+    "integration:headless": "testcafe chrome:headless src/**/*.spec.js",
     "integration:watch": "nodemon --exec \"npm run integration\" --watch src"
   },
   "dependencies": {
@@ -41,6 +40,7 @@
     "next-seo": "^1.11.2",
     "node-sass": "^4.12.0",
     "number-to-words": "^1.2.4",
+    "penpal": "^4.0.0",
     "prop-types": "^15.6.1",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
