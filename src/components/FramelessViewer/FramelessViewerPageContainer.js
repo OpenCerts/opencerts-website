@@ -44,21 +44,20 @@ class FramelessViewerContainer extends Component {
     }
   }
 
-  
   /**
    * Upon mounting, the frameless viewer will expose two ways to interact with it: postMessage and window.opencerts method
-   * 
-   * On mobile webViews: CORS is not implemented and window.opencerts can be called directly. 
+   *
+   * On mobile webViews: CORS is not implemented and window.opencerts can be called directly.
    * On browsers: CORS is implemented and the parent website can only interact with this iframe via postMessage.
-   * 
+   *
    * Three methods, getTemplates, renderCertificate and selectTemplateTab is available for both implementation
-   * 
+   *
    * renderCertificate(certificate)
-   * The function takes in a certificate object and render it in the frame. Upon rendering, the getTemplate() function can 
-   * be used to query the number (and labels) of tabs available to this certificate. Then, selectTemplateTab(index) can be 
+   * The function takes in a certificate object and render it in the frame. Upon rendering, the getTemplate() function can
+   * be used to query the number (and labels) of tabs available to this certificate. Then, selectTemplateTab(index) can be
    * used to select the index of the tab to be displayed.
-   * 
-   * 
+   *
+   *
    * getTemplate()
    * returns an array of templates available for a given certificate, each template has both id and label properties.
    * example of returned array:
@@ -69,16 +68,16 @@ class FramelessViewerContainer extends Component {
    *   id: "transcript",
    *   label: "Transcript"
    * }]
-   * 
+   *
    * selectTemplateTab(index)
-   * The function is used to select the tab to render the certificate. The index, corresponding to the getTemplate results, 
+   * The function is used to select the tab to render the certificate. The index, corresponding to the getTemplate results,
    * is needed to select which tab to render.
-   * 
+   *
    * Only for iframes:
-   * 
+   *
    * frameHeight()
    * returns the height of the component to allow parent component to scale accordingly. This is used to remove the double
-   * scrollbar issue. 
+   * scrollbar issue.
    */
   componentDidMount() {
     const { selectTemplateTab } = this.props;
