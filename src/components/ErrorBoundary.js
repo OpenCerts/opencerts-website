@@ -1,22 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
-const style = {
-  borderRadius: 10,
-  padding: 10,
-  width: "70%",
-  background: "#f8f9fa",
-  border: "1px solid #dc3545",
-  margin: "50px auto",
-  textAlign: "center",
-  verticalAlign: "middle",
-  lineHeight: 0.1
-};
-const iconStyle = {
-  color: "red",
-  fontSize: 50,
-  marginBottom: 20
-};
+import css from "./error.scss";
 
 export default class ErrorBoundary extends Component {
   constructor(props) {
@@ -33,12 +17,23 @@ export default class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div style={style}>
-          <i className="fas fa-exclamation-triangle" style={iconStyle} />
-          <h2>
-            Something has gone wrong with this certificate, please contact your
-            issuing institution.
-          </h2>
+        <div className={`${css.box}`}>
+          <div id="error">
+            <div className={`${css.error}`}>
+              {/* <i className={`fas fa-exclamation-triangle ${css.icon}`} /> */}
+              <br />
+              <img
+                src="/static/images/errorpage/error.png"
+                style={{ height: "15vh" }}
+              />
+              <h2>Something went wrong!</h2>
+              <p>
+                There is an error with this certificate, please contact your
+                issuing institution.
+              </p>
+              <a href="/index">Go Back</a>
+            </div>
+          </div>
         </div>
       );
     }
