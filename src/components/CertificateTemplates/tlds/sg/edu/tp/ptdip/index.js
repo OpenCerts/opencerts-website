@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
 
 import TPCert from "../common/certificate";
-import TPTranscript from "../common/partTimeTranscript";
+import PartTimeTranscript from "../common/partTimeTranscript";
 import ApprovedAddresses from "../common/approvedAddresses";
 
 const templates = [
@@ -14,7 +14,7 @@ const templates = [
   {
     id: "transcript",
     label: "Transcript",
-    template: TPTranscript
+    template: PartTimeTranscript
   }
 ];
 

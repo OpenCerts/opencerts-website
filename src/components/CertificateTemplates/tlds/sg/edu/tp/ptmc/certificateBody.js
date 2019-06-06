@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import CertificateNameSection from "../common/certificateNameSection";
 import CertificateBodyStyles from "../common/certificateBodyStyles";
 
 const CertificateBody = ({ certificate }) => (
@@ -9,9 +10,9 @@ const CertificateBody = ({ certificate }) => (
       <div className="recipient-paragraph">It is hereby certified that</div>
       <div className="recipient-name">{certificate.recipient.name}</div>
       <div className="recipient-paragraph">has successfully completed the</div>
-      <div className="certificate-name">
-        <span>{certificate.name}</span>
-      </div>
+
+      <CertificateNameSection certificate={certificate} />
+
       <div className="recipient-paragraph">
         at Temasek Polytechnic (Singapore) on{" "}
         {new Date(certificate.issuedOn).toLocaleDateString("en-SG", {
@@ -19,9 +20,13 @@ const CertificateBody = ({ certificate }) => (
           month: "long",
           year: "numeric"
         })}
-        <br />
-        This Certificate is recognized towards the{" "}
-        {certificate.additionalData.recognizedTowardsCourseName}.
+        {certificate.additionalData.recognizedTowardsCourseName && (
+          <span>
+            <br />
+            This Certificate is recognized towards the{" "}
+            {certificate.additionalData.recognizedTowardsCourseName}.
+          </span>
+        )}
       </div>
     </div>
   </div>
