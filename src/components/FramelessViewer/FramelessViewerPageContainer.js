@@ -21,7 +21,9 @@ import { getLogger } from "../../utils/logger";
 const { trace } = getLogger("components:FramelessViewerPageContainer");
 
 const inIframe = () => window.location !== window.parent.location;
-const flatten = o => JSON.parse(JSON.stringify(o));
+const formatTemplate = template =>
+  template ? template.map(o => ({ label: o.label, id: o.id })) : null;
+
 class FramelessViewerContainer extends Component {
   constructor(props) {
     super(props);
@@ -37,14 +39,14 @@ class FramelessViewerContainer extends Component {
         if (parent.updateHeight)
           parent.updateHeight(document.documentElement.scrollHeight);
         if (parent.updateTemplates)
-          parent.updateTemplates(flatten(this.props.templates));
+          parent.updateTemplates(formatTemplate(this.props.templates));
       });
     }
   }
 
   componentDidMount() {
     const { selectTemplateTab } = this.props;
-    const getTemplates = () => flatten(this.props.templates);
+    const getTemplates = () => formatTemplate(this.props.templates);
     const renderCertificate = this.handleCertificateChange;
     const frameHeight = document.documentElement.scrollHeight;
 

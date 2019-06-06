@@ -16,7 +16,7 @@
       title="Rendered Certificate"
       id="frameless-iframe"
       src="http://localhost:3000/frameless-viewer"
-      style="width: 100%; border: 0px;"
+      style="width: 100%; border: 0px; overflow: hidden;"
     ></iframe>
   </body>
 
@@ -30,7 +30,7 @@
 
     updateHeight = function(h) {
       // Adding 60 to account for extra height on firefox
-      iframe.height = h + 60;
+      iframe.height = h;
     };
 
     updateTemplates = function(templates) {
