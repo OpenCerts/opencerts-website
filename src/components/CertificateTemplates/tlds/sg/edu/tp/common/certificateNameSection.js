@@ -1,38 +1,32 @@
 import PropTypes from "prop-types";
 
 const CertificateNameSection = ({ certificate }) => {
-  const firstLine = "Diploma in";
-  const secondLine = certificate.name.replace(/diploma in/i, "").trim();
+  const splitTwoLines = value => {
+    const lines = value.split(/ in (.+)/i);
+    if (lines.length > 1) {
+      return (
+        <span>
+          {lines[0]} in
+          <br />
+          {lines[1]}
+        </span>
+      );
+    }
+    return <span>{value}</span>;
+  };
 
   return (
     <div className="certificate-name">
-      {firstLine}
+      {splitTwoLines(certificate.name)}
 
-      <br />
+      {certificate.additionalData.isMerit && (
+        <span>
+          <br />
+          <small>WITH MERIT</small>
+        </span>
+      )}
 
-      {!certificate.additionalData.isMerit &&
-        !certificate.additionalData.isExempted && <span>{secondLine}</span>}
-
-      {!certificate.additionalData.isMerit &&
-        certificate.additionalData.isExempted && <span>{secondLine}*</span>}
-
-      {certificate.additionalData.isMerit &&
-        !certificate.additionalData.isExempted && (
-          <span>
-            {secondLine}
-            <br />
-            <small>WITH MERIT</small>
-          </span>
-        )}
-
-      {certificate.additionalData.isMerit &&
-        certificate.additionalData.isExempted && (
-          <span>
-            {secondLine}
-            <br />
-            <small>WITH MERIT*</small>
-          </span>
-        )}
+      {certificate.additionalData.isExempted && <span>*</span>}
     </div>
   );
 };

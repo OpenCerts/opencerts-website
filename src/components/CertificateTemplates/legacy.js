@@ -50,6 +50,7 @@ const OpenCertsAssociate2018 = dynamic(() =>
     "./tlds/sg/gov/tech/2018-OpenCertsAssociate" /* webpackChunkName: "GovTechTemplates" */
   )
 );
+
 export default {
   "NP-AA2018-MAIN": NPAA2018MAIN,
   "NP-AA2018-OPTION": NPAA2018OPTION,

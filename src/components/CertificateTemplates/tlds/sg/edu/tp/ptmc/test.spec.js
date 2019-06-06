@@ -6,6 +6,7 @@ const Certificate = "./sample.opencert";
 
 const TemplateTabList = Selector("#template-tabs-list");
 const RenderedCertificate = Selector("#rendered-certificate");
+const TpLogo = Selector('img[title="Temasek Polytechnic"]');
 
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(
@@ -18,10 +19,13 @@ test("Part-time Modular Certificate is rendered correctly.", async t => {
 
   await t.expect(TemplateTabList.textContent).contains("Certificate");
 
+  await t.expect(TpLogo.exists).ok();
+
   // certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "DUMMY STUDENT NAME",
-    "Post-diploma dummy certificate name",
-    "DUMMY COURSE NAME"
+    "Dummy Modular Certificate Name 1",
+    "DUMMY COURSE NAME",
+    "Registrar"
   ]);
 });

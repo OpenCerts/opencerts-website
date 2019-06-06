@@ -1,5 +1,8 @@
+/* eslint-disable camelcase */
+/* because we need to use _ to replace hyphens in dns */
 import { addDirToTemplatePath } from "template-utils/addDirToTemplatePath";
-import gov from "./gov";
-import edu from "./edu";
 
-export default addDirToTemplatePath("sg", { ...gov, ...edu });
+import edu from "./edu";
+import gov from "./gov";
+
+export default addDirToTemplatePath("sg", { ...edu, ...gov });
