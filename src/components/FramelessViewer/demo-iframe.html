@@ -29,7 +29,6 @@
     };
 
     updateHeight = function(h) {
-      // Adding 60 to account for extra height on firefox
       iframe.height = h;
     };
 
@@ -37,11 +36,11 @@
       if (!templates) return;
       const templateSelector = document.getElementById("template-selectors");
       templateSelector.innerHTML = "";
-      templates.forEach((t, i) => {
+      templates.forEach((tab, index) => {
         const btn = document.createElement("button");
-        btn.innerHTML = t.label;
-        btn.id = `selector-${t.id}`;
-        btn.onclick = () => selectTemplateTab(i);
+        btn.innerHTML = tab.label;
+        btn.id = `selector-${tab.id}`;
+        btn.onclick = () => selectTemplateTab(index);
         templateSelector.appendChild(btn);
       });
     };

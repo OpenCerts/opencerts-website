@@ -1,7 +1,7 @@
 import { Selector } from "testcafe";
 
 // iframe.html is copied in scripts/integration-headless.sh
-fixture("Frameless Viewer").page`http://localhost:3000/iframe.html`;
+fixture("Frameless Viewer").page`http://localhost:3000/demo-iframe.html`;
 
 const RenderButton = Selector("#render-certificate");
 const IFrame = Selector("#frameless-iframe");
