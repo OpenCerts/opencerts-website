@@ -25,12 +25,12 @@ test("Default certificate is rendered correctly", async t => {
 
   // Check content of window.opencerts.templates
   await t.wait(500);
-  const templates = await t.eval(() => window.opencerts.templates());
+  const templates = await t.eval(() => window.opencerts.getTemplates());
   await t
     .expect(templates)
     .eql([
-      { id: "certificate", label: "Certificate", template: undefined },
-      { id: "transcript", label: "Transcript", template: undefined }
+      { id: "certificate", label: "Certificate" },
+      { id: "transcript", label: "Transcript" }
     ]);
 
   // Validate content of first tab
