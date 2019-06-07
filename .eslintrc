@@ -43,13 +43,5 @@
     "chai-expect/missing-assertion": "error",
     "chai-expect/terminating-properties": "error",
     "prefer-destructuring": "off"
-    },
-    "overrides": [
-      {
-        "files": ["errorboundary.test.js"],
-        "rules": {
-          "no-console": "off"
-        }
-      }
-    ]
+    }
 }
