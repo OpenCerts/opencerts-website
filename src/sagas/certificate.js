@@ -184,7 +184,7 @@ export function* lookupEthereumAddresses(ethereumAddressIssuers) {
   const networkId = yield select(getNetworkId);
   const networkName = matchNetwork(networkId);
   const registeredIssuers = yield fetchIssuers();
-  const issuersNormalised = mapKeys(registeredIssuers[networkName], (_, k) =>
+  const issuersNormalised = mapKeys(registeredIssuers, (_, k) =>
     k.toUpperCase()
   );
 
