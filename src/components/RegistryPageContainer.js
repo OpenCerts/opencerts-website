@@ -1,15 +1,16 @@
+import { filter } from "lodash";
 import css from "./registry.scss";
 import registry from "../../static/RegistryInfo";
 
-const members = [];
-Object.keys(registry.issuers).map(issuer =>
-  registry.issuers[issuer].displayCard
-    ? members.push(registry.issuers[issuer])
-    : false
-);
+const members = Object.keys(registry.issuers).map(k => ({
+  ...registry.issuers[k],
+  address: k
+}));
+
+const finalmembers = filter(members, "displayCard");
 
 const renderMembers = () =>
-  members.map((m, i) => (
+  finalmembers.map((m, i) => (
     <div
       key={i}
       className={`col-lg-6 col-md-12 ${css["mb-3"]} ${css["m-pd-0"]}`}
