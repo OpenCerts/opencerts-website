@@ -20,7 +20,6 @@ export default class ErrorBoundary extends Component {
         <div className={`${css.box}`}>
           <div id="error">
             <div className={`${css.error}`}>
-              {/* <i className={`fas fa-exclamation-triangle ${css.icon}`} /> */}
               <br />
               <img
                 src="/static/images/errorpage/error.png"
@@ -31,7 +30,7 @@ export default class ErrorBoundary extends Component {
                 There is an error with this certificate, please contact your
                 issuing institution.
               </p>
-              <a href="/index">Go Back</a>
+              <a href="/">Go Back</a>
             </div>
           </div>
         </div>

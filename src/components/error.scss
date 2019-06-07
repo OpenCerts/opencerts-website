@@ -4,7 +4,7 @@
   width: 100%;
   height: 100%;
   min-width: 100%;
-  min-height: calc(100vh - 180px);
+  min-height: calc(100vh - 214px);
   position: relative;
   display: inline-block;
   padding-top: 150px;
@@ -22,104 +22,103 @@
   text-align: center;
   height: auto;
   line-height: 1.4;
-}
+  h2 {
+    font-family: "Cabin", sans-serif;
+    font-weight: 700;
+    font-size: 35px;
+    color: #ff9933;
+    text-transform: uppercase;
+    letter-spacing: 7px;
+    padding-top: 20px;
+    padding-bottom: 10px;
 
-.error h2 {
-  font-family: "Cabin", sans-serif;
-  font-weight: 700;
-  font-size: 35px;
-  color: #ff9933;
-  text-transform: uppercase;
-  letter-spacing: 7px;
-  padding-top: 20px;
-  padding-bottom: 10px;
+    @media (max-width: 200px) {
+      font-size: 1.5em;
+    }
+    @media (min-width: 599px) {
+      font-size: 2em;
+    }
+    @media (min-width: 600px) {
+      font-size: 2.5em;
+    }
+    @media (min-width: 900px) {
+      font-size: 3em;
+    }
+    @media (min-width: 1200px) {
+      font-size: 3.5em;
+    }
+    @media (min-width: 1800px) {
+      font-size: 4em;
+    }
+  }
 
-  @media (max-width: 200px) {
-    font-size: 1.5em;
-  }
-  @media (min-width: 599px) {
-    font-size: 2em;
-  }
-  @media (min-width: 600px) {
-    font-size: 2.5em;
-  }
-  @media (min-width: 900px) {
-    font-size: 3em;
-  }
-  @media (min-width: 1200px) {
-    font-size: 3.5em;
-  }
-  @media (min-width: 1800px) {
-    font-size: 4em;
-  }
-}
+  p {
+    font-family: "Cabin", sans-serif;
+    font-size: 16px;
+    color: #000;
+    font-weight: 400;
+    padding-bottom: 10px;
 
-.error p {
-  font-family: "Cabin", sans-serif;
-  font-size: 16px;
-  color: #000;
-  font-weight: 400;
-  padding-bottom: 10px;
+    @media (max-width: 200px) {
+      font-size: 0.5em;
+    }
+    @media (min-width: 599px) {
+      font-size: 0.75em;
+    }
+    @media (min-width: 600px) {
+      font-size: 1em;
+    }
+    @media (min-width: 900px) {
+      font-size: 1.25em;
+    }
+    @media (min-width: 1200px) {
+      font-size: 1.5em;
+    }
+    @media (min-width: 1800px) {
+      font-size: 1.75em;
+    }
+  }
 
-  @media (max-width: 200px) {
-    font-size: 0.5em;
-  }
-  @media (min-width: 599px) {
-    font-size: 0.75em;
-  }
-  @media (min-width: 600px) {
-    font-size: 1em;
-  }
-  @media (min-width: 900px) {
-    font-size: 1.25em;
-  }
-  @media (min-width: 1200px) {
-    font-size: 1.5em;
-  }
-  @media (min-width: 1800px) {
-    font-size: 1.75em;
-  }
-}
+  a {
+    font-family: "Cabin", sans-serif;
+    display: inline-block;
+    padding: 15px 35px;
+    background-color: #324353;
+    border: none;
+    border-radius: 40px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    -webkit-transition: 0.2s all;
+    transition: 0.2s all;
 
-.error a {
-  font-family: "Cabin", sans-serif;
-  display: inline-block;
-  padding: 15px 35px;
-  background-color: #324353;
-  border: none;
-  border-radius: 40px;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 700;
-  text-transform: uppercase;
-  text-decoration: none;
-  -webkit-transition: 0.2s all;
-  transition: 0.2s all;
+    @media (max-width: 200px) {
+      font-size: 0.5em;
+    }
+    @media (min-width: 599px) {
+      font-size: 0.75em;
+    }
+    @media (min-width: 600px) {
+      font-size: 1em;
+    }
+    @media (min-width: 900px) {
+      font-size: 1.25em;
+    }
+    @media (min-width: 1200px) {
+      font-size: 1.5em;
+    }
+    @media (min-width: 1800px) {
+      font-size: 1.75em;
+    }
+  }
 
-  @media (max-width: 200px) {
-    font-size: 0.5em;
+  a:hover {
+    background-color: #ff9933;
+    color: #fff;
+    text-decoration: none;
   }
-  @media (min-width: 599px) {
-    font-size: 0.75em;
-  }
-  @media (min-width: 600px) {
-    font-size: 1em;
-  }
-  @media (min-width: 900px) {
-    font-size: 1.25em;
-  }
-  @media (min-width: 1200px) {
-    font-size: 1.5em;
-  }
-  @media (min-width: 1800px) {
-    font-size: 1.75em;
-  }
-}
-
-.error a:hover {
-  background-color: #ff9933;
-  color: #fff;
-  text-decoration: none;
 }
 
 .icon {
