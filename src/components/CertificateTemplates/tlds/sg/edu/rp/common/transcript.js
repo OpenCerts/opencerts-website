@@ -253,7 +253,7 @@ export const renderCourse = (certificate, course) => {
             ? s.name
             : formatBold(s.name)}
         </td>
-        <td>{isCET > 0 || s.courseCredit === "0" ? "" : s.courseCredit}</td>
+        <td>{isCET > 0 || s.courseCredit === 0 ? "" : s.courseCredit}</td>
         <td>{s.courseCode !== "ZZZ" ? s.grade : ""}</td>
       </tr>
     ))
