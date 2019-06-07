@@ -48,9 +48,10 @@ export const sassClassNames = (names, styles) => {
 };
 
 // render imageData as a <img>
-// imageData is has properties: type(PNG/JPG/SVG), data(base64), width, height and unit(cm/em/pt/px)
+// imageData is has properties: data(base64), width, height and unit(cm/em/pt/px)
 export const renderImage = imageData => {
   if (!imageData) return "";
+  /*
   let type;
   switch (imageData.type.toUpperCase()) {
     case "PNG":
@@ -67,13 +68,14 @@ export const renderImage = imageData => {
       type = "";
       break;
   }
+  */
   const html = (
     <img
       style={{
         width: imageData.width + imageData.unit.toLowerCase(),
         height: imageData.height + imageData.unit.toLowerCase()
       }}
-      src={`data:image/${type};base64,${imageData.data}`}
+      src={imageData.data}
     />
   );
   return html;
