@@ -23,14 +23,12 @@ const renderNavItem = active => {
       <a href={n.path}>{n.label}</a>
     </li>
   ));
-  return (
-    <ul className="navbar-nav ml-auto d-none d-lg-flex d-xl-flex">{items}</ul>
-  );
+  return <ul className="navbar-nav ml-auto d-lg-flex d-xl-flex">{items}</ul>;
 };
 
 const NavigationBar = ({ active }) => (
   <nav
-    className={`${css.navbar} ${"navbar-expand-md navbar-dark bg-brand-dark"}`}
+    className={`${css.navbar} ${"navbar-expand-lg navbar-dark bg-brand-dark"}`}
   >
     <div className={css.innerbar}>
       <a className="navbar-brand" href="/">
@@ -46,6 +44,18 @@ const NavigationBar = ({ active }) => (
         aria-label="Toggle navigation"
       >
         <span className={`${css["toggler-icon"]} ${"navbar-toggler-icon"}`} />
+      </button>
+
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#top-nav"
+        aria-controls="top-nav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon" />
       </button>
 
       <div className="collapse navbar-collapse" id="top-nav">
