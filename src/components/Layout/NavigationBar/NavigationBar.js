@@ -8,6 +8,11 @@ const navItems = [
     path: "/"
   },
   {
+    id: "partner",
+    label: "Partners",
+    path: "/partner"
+  },
+  {
     id: "faq",
     label: "FAQ",
     path: "/faq"
