@@ -13,7 +13,7 @@ const renderMembers = () =>
   finalmembers.map((m, i) => (
     <div
       key={i}
-      className={`col-lg-6 col-md-12 ${css["mb-3"]} ${css["m-pd-0"]}`}
+      className={`col ${css["mb-3"]} ${css["m-pd-0"]}`}
       style={{ padding: "10px" }}
     >
       <div className={css["partner-block"]}>
@@ -23,7 +23,8 @@ const renderMembers = () =>
           id={css[m.key]}
           style={{
             maxHeight: "80px",
-            height: "100%",
+            maxWidth: "250px",
+            height: "auto",
             width: "auto"
           }}
         />
