@@ -4,6 +4,9 @@ const NavigationBar = () => (
   <div className="bg-brand-dark py-3 m-0" id={css["footer-print"]}>
     <div className={css.footer}>
       <div>
+        <a href="/partner">Partners</a>
+      </div>
+      <div>
         <a href="/faq">FAQ</a>
       </div>
       <div>
