@@ -18,6 +18,7 @@ module.exports = withBundleAnalyzer(
         return {
           "/": { page: "/" },
           "/registry": { page: "/registry" },
+          "/partner": { page: "/partner" },
           "/privacy": { page: "/privacy" },
           "/viewer": { page: "/viewer" },
           "/faq": { page: "/faq" },

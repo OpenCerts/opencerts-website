@@ -31,26 +31,23 @@ const renderMembers = () =>
   members.map((m, i) => (
     <div
       key={i}
-      className={`col-lg-4 col-sm-12 ${css["mb-3"]} ${css["m-pd-0"]}`}
+      className={`col-lg-4 col-md-6 col-sm-12 ${css["mb-3"]} ${css["m-pd-0"]}`}
+      style={{ paddingBottom: "36px" }}
     >
-      <div className={css["partner-block"]}>
-        <img className={`${css.logo}`} src={m.logo} id={css[m.key]} />
-        <h4 className={css["partner-name"]} style={{ fontWeight: "bold" }}>
-          {m.name}
-        </h4>
-        {m.description ? <div>{m.description}</div> : ""}
-        <br />
-        {m.website ? (
-          <div>
-            Website:{" "}
-            <a href={m.website} target="_blank" rel="noopener noreferrer">
-              {m.website}
-            </a>
-          </div>
-        ) : (
-          ""
-        )}
-      </div>
+      <a
+        href={m.website}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ color: "#000", textDecoration: "none" }}
+      >
+        <div className={css["partner-block"]}>
+          <img className={`${css.logo}`} src={m.logo} id={css[m.key]} />
+          <h4 className={css["partner-name"]} style={{ fontWeight: "bold" }}>
+            {m.name}
+          </h4>
+          {m.description ? <div>{m.description}</div> : ""}
+        </div>
+      </a>
     </div>
   ));
 
@@ -64,7 +61,7 @@ const PartnerPage = () => (
       </div>
       <div className={`conatiner bg-brand-dark text-white ${css["r-section"]}`}>
         <div className={css["section-width"]}>
-          <div className={`col-lg-8 col-md-12 my-3 ${css["m-pd-0"]}`}>
+          <div className={`col-lg-68 col-md-12 my-3 ${css["m-pd-0"]}`}>
             <p>
               OpenCerts has partnered with key companies to help you issue and
               distribute certificates easily.
