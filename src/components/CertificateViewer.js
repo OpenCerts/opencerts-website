@@ -7,6 +7,7 @@ import Modal from "./Modal";
 
 import { getLogger } from "../utils/logger";
 import templates from "./CertificateTemplates";
+import ErrorBoundary from "./ErrorBoundary";
 
 const { trace } = getLogger("components:CertificateViewer");
 
@@ -104,7 +105,7 @@ const CertificateViewer = props => {
     </div>
   );
 
-  return <div>{validCertificateContent} </div>;
+  return <ErrorBoundary>{validCertificateContent} </ErrorBoundary>;
 };
 
 CertificateViewer.propTypes = {
