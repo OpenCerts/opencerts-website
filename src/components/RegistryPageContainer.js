@@ -15,7 +15,7 @@ const renderMembers = () =>
       key={i}
       id={m.key}
       className={`col ${css["mb-3"]} ${css["m-pd-0"]}`}
-      style={{ padding: "10px" }}
+      style={{ padding: "10px", wordWrap: "break-word" }}
     >
       <div className={css["partner-block"]}>
         <img
