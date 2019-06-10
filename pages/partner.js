@@ -21,7 +21,7 @@ const PAGE_SEO = {
 const PartnerPage = () => (
   <>
     <NextSeo config={merge(DEFAULT_SEO, PAGE_SEO)} />
-    <NavigationBar active="registry" />
+    <NavigationBar active="partner" />
     <PartnerPageContainer />
     <FooterBar />
   </>
