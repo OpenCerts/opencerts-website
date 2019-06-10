@@ -6,7 +6,8 @@
       "website": "https://www.tech.gov.sg",
       "email": "info@tech.gov.sg",
       "phone": "+65 6211 2100",
-      "logo": "/static/images/GOVTECH_logo.png"
+      "logo": "/static/images/GOVTECH_logo.png",
+      "key": "govtech"
     },
     "0x5CA3b9daC85DA4DE4030e59C1a0248004209e348": {
       "name": "Nanyang Polytechnic",
@@ -14,7 +15,8 @@
       "website": "https://www.nyp.edu.sg/",
       "email": "askNYP@nyp.edu.sg",
       "phone": "+65 6451 5115",
-      "logo": "/static/images/NYP_logo.png"
+      "logo": "/static/images/NYP_logo.png",
+      "key": "nyp"
     },
     "0xa5d801265D29A6F1015a641BfC0e39Ee3dA2AC76": {
       "name": "Ngee Ann Polytechnic",
@@ -22,7 +24,8 @@
       "website": "https://www.np.edu.sg",
       "email": "asknp@np.edu.sg",
       "phone": "+65 6466 6555",
-      "logo": "/static/images/NP_logo.svg"
+      "logo": "/static/images/NP_logo.svg",
+      "key": "np"
     },
     "0xE4a94Ef9C26904A02Cd6735F7D4De1D840146a0f": {
       "name": "Singapore Examinations and Assessment Board",
@@ -30,7 +33,8 @@
       "website": "https://www.seab.gov.sg/",
       "email": "",
       "phone": "+65 6872 2220",
-      "logo": "/static/images/SEAB_logo_crop.png"
+      "logo": "/static/images/SEAB_logo_crop.png",
+      "key": "seab"
     },
     "0x24a7DE31D231221ab6B1B325Ca5F1AA7bfbaaabA": {
       "name": "Singapore Institute of Technology",
@@ -38,7 +42,8 @@
       "website": "https://www.singaporetech.edu.sg/",
       "email": "",
       "phone": "+65 6592 1136",
-      "logo": "/static/images/SIT_logo.png"
+      "logo": "/static/images/SIT_logo.png",
+      "key": "sit"
     },
     "0x78CE67fcb40D9D9552A313670A2e0eef11043995": {
       "name": "SkillsFuture Singapore",
@@ -46,7 +51,8 @@
       "website": "https://www.ssg-wsg.gov.sg/",
       "email": "",
       "phone": "+65 6785 5785",
-      "logo": "/static/images/SSG_logo.png"
+      "logo": "/static/images/SSG_logo.png",
+      "key": "ssg"
     },
     "0x4d05f843718da742b4229938f972a3eb969c25ce": {
       "name": "Temasek Polytechnic",
@@ -62,7 +68,8 @@
       "website": "https://www.ite.edu.sg/",
       "email": "ithelpdesk@ite.edu.sg",
       "phone": "1800-2222 111",
-      "logo": "/static/images/ITE_logo.png"
+      "logo": "/static/images/ITE_logo.png",
+      "key": "ite"
     },
     "0x5f007251c78cA92d3053492cCf0EDC161063624c": {
       "name": "ROPSTEN: Nanyang Polytechnic",
