@@ -5,6 +5,7 @@ const ProblemChild = () => {
   throw new Error("Error thrown from problem child");
 };
 /* eslint-disable no-console */
+// disabled lint for the overridden console to not show the error from the problem child.
 const pauseErrorLogging = codeToRun => {
   const logger = console.error;
   console.error = () => {};
