@@ -28,9 +28,7 @@ const renderNavItem = active => {
       <a href={n.path}>{n.label}</a>
     </li>
   ));
-  return (
-    <ul className="navbar-nav ml-auto d-none d-lg-flex d-xl-flex">{items}</ul>
-  );
+  return <ul className="navbar-nav ml-auto">{items}</ul>;
 };
 
 const NavigationBar = ({ active }) => (
@@ -42,7 +40,7 @@ const NavigationBar = ({ active }) => (
         <img src="/static/images/opencertslogo.svg" alt="OpenCerts" />
       </a>
       <button
-        className={`${css["navbar-toggler"]} d-none`}
+        className="navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target="#top-nav"
@@ -50,7 +48,7 @@ const NavigationBar = ({ active }) => (
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span className={`${css["toggler-icon"]} ${"navbar-toggler-icon"}`} />
+        <span className="navbar-toggler-icon d-block d-lg-none d-xl-none" />
       </button>
 
       <div className="collapse navbar-collapse" id="top-nav">
