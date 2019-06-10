@@ -37,7 +37,7 @@ const renderMembers = () =>
       <a
         href={m.website}
         target="_blank"
-        rel="noopener noreferrer"
+        rel="noopener noreferrer nofollow"
         style={{ color: "#000", textDecoration: "none" }}
       >
         <div className={css["partner-block"]}>
