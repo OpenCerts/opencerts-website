@@ -9,11 +9,11 @@ import { URL, DEFAULT_SEO } from "../src/config";
 const PAGE_SEO = {
   title: "Partners",
   description:
-    "We work closely with these partners to provide a better certificate system for all.",
+    "OpenCerts has partnered with key companies to help you issue and distribute certificates easily.",
   openGraph: {
     title: "OpenCerts - Partners",
     description:
-      "We work closely with these partners to provide a better certificate system for all.",
+      "OpenCerts has partnered with key companies to help you issue and distribute certificates easily.",
     url: `${URL}/registry`
   }
 };

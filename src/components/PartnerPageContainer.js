@@ -64,10 +64,14 @@ const PartnerPage = () => (
       </div>
       <div className={`conatiner bg-brand-dark text-white ${css["r-section"]}`}>
         <div className={css["section-width"]}>
-          <div className={`col-lg-6 col-md-12 my-3 ${css["m-pd-0"]}`}>
+          <div className={`col-lg-8 col-md-12 my-3 ${css["m-pd-0"]}`}>
             <p>
-              A list of recognised partners that we work closely with to create
-              a better distributed blockchain certificate system for all.
+              OpenCerts has partnered with key companies to help you issue and
+              distribute certificates easily.
+            </p>
+            <p>
+              We work closely with these partners to provide a more transparent
+              and efficient system for all.
             </p>
           </div>
         </div>
