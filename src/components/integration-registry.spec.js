@@ -2,7 +2,7 @@ import { Selector } from "testcafe";
 
 fixture("Registry page").page`http://localhost:3000/registry`;
 
-const Govtech = Selector("#govtech");
+const Govtech = Selector("#govtech-registry");
 
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(

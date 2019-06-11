@@ -13,7 +13,7 @@ const renderMembers = () =>
   finalmembers.map((m, i) => (
     <div
       key={i}
-      id={m.key}
+      id={m.id}
       className={`col ${css["mb-3"]} ${css["m-pd-0"]}`}
       style={{ padding: "10px", wordWrap: "break-word" }}
     >
