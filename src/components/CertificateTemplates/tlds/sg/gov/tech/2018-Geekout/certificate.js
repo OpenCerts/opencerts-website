@@ -20,6 +20,7 @@ const Template = ({ certificate }) => (
     >
       <div className={css.backgroundLogoContainer}>
         <img className={css.backgroundSectionLogo} src={logo} />
+        <div className={css.courseDateText}>10 June - 14 June 2019</div>
       </div>
     </div>
     <div className={css.contentSection}>
