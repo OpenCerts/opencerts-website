@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import css from "./styles.scss";
 
@@ -26,7 +27,7 @@ const Template = ({ certificate }) => (
     <div className={css.contentSection}>
       <div className={css.contentSectionText}>
         <p>Congratulations</p>
-        <p className={css.contentSectionName}>Raymond Yeh</p>
+        <p className={css.contentSectionName}>{certificate.recipient.name}</p>
         <p>for successfully completing GeekOut 2019!</p>
         <p className={css.contentSectionQuote}>
           Accept nothing less than your goals!

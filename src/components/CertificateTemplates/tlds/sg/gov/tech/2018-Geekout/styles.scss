@@ -5,11 +5,12 @@
 }
 
 .backgroundLogoContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  flex-direction: column;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   height: 100%;
+  //   flex-direction: column;
+  text-align: center;
 }
 
 .backgroundSectionLogo {
@@ -51,6 +52,10 @@
   font-size: 2em;
 }
 
+.footerSection h3 {
+  color: black;
+}
+
 @media (min-width: 992px) {
   .backgroundSection {
     height: 100vh;
@@ -61,17 +66,15 @@
   }
 
   .backgroundLogoContainer {
-    display: block;
-    text-align: center;
-    position: absolute;
-    left: 12.5%;
-    top: 10%;
+    position: relative;
+    left: -20%;
+    top: 15%;
   }
 
   .contentSection {
     position: absolute;
-    bottom: 25%;
-    right: 12.5%;
+    bottom: 10%;
+    right: 10%;
     width: 50%;
   }
 
@@ -91,8 +94,8 @@
     display: flex;
     justify-content: space-between;
     position: absolute;
-    bottom: 12.5%;
-    right: 12.5%;
+    bottom: 0;
+    right: 10%;
     width: 50%;
   }
 
