@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
+import { filter } from "lodash";
 import css from "./viewerStyles.scss";
 
 const View = ({
@@ -9,6 +10,38 @@ const View = ({
   issuedStatus,
   notRevokedStatus
 }) => {
+  const errorMessages = [
+    {
+      title: "Certificate revoked",
+      message:
+        "This certificate has been revoked by your issuing institution. Please contact your issuing institution for more details.",
+      error: !notRevokedStatus.verified
+    },
+    {
+      title: "Certificate has been tampered with",
+      message:
+        "The contents of this certificate are inaccurate and have been tampered with.",
+      error: !hashStatus.verified
+    },
+    {
+      title: "Certificate not found",
+      message:
+        "This certificate has not been issued. Please contact your issuing institution for help or issue the certificate before trying again.",
+      error: !issuedStatus.verified
+    },
+    {
+      title: "Certificate from unregistered institution",
+      message:
+        "The institution that issued this certificate is unknown. Your institution has to register with OpenCerts first.",
+      error: !issuerIdentityStatus.verified
+    }
+  ];
+
+  const stack = filter(errorMessages, ["error", true]);
+  console.log("STACK", stack);
+  const error = stack.pop();
+  console.log("ERROR", error);
+
   const isWarning =
     hashStatus.verified && issuedStatus.verified && notRevokedStatus.verified;
   return (
@@ -38,6 +71,15 @@ const View = ({
       </span>
 
       <div className={css.verifications}>
+        {error !== null ? (
+          <p className={css.messages}>
+            {error.title}
+            <br />
+            {error.message}
+          </p>
+        ) : null}
+      </div>
+      {/* <div className={css.verifications}>
         {!hashStatus.verified ? (
           <p className={css.messages}>
             The certificate&#39;s contents are inaccurate
@@ -63,7 +105,7 @@ const View = ({
             </p>
           </div>
         ) : null}
-      </div>
+      </div> */}
 
       <Link href="/faq">
         <div className={css["unverified-btn"]}>What should I do?</div>
