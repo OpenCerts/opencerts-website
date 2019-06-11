@@ -70,11 +70,10 @@ const View = ({
 
       <div className={css.verifications}>
         {error !== null ? (
-          <p className={css.messages}>
-            {error.title}
-            <br />
-            {error.message}
-          </p>
+          <div>
+            <p className={css.messages}>{error.title}</p>
+            <p>{error.message}</p>
+          </div>
         ) : null}
       </div>
 
