@@ -9,6 +9,7 @@
   justify-content: center;
   align-items: center;
   height: 100%;
+  flex-direction: column;
 }
 
 .backgroundSectionLogo {
@@ -30,6 +31,11 @@
   color: #f3791f;
 }
 
+.contentSectionQuote {
+  font-weight: 800;
+  color: #f3791f;
+}
+
 .footerSection {
   text-align: center;
 }
@@ -39,7 +45,12 @@
   padding: 20px 50px 20px 50px;
 }
 
-// @media (min-width: 992px) {
+.courseDateText {
+  color: white;
+  font-weight: 800;
+  font-size: 2em;
+}
+
 @media (min-width: 992px) {
   .backgroundSection {
     height: 100vh;
@@ -49,13 +60,12 @@
     clip-path: polygon(0 0, 0% 100%, 100% 0);
   }
 
-  .backgroundSectionLogo {
-    margin-left: 12.5%;
-    margin-top: 12.5%;
-  }
-
   .backgroundLogoContainer {
     display: block;
+    text-align: center;
+    position: absolute;
+    left: 12.5%;
+    top: 10%;
   }
 
   .contentSection {
@@ -64,7 +74,11 @@
     right: 12.5%;
     width: 50%;
   }
-  
+
+  .contentSectionQuote {
+    font-size: 1.1em;
+  }
+
   .contentSectionName {
     font-size: 2.2em;
   }
