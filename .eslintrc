@@ -7,7 +7,8 @@
   },
   "extends": ["plugin:react/recommended", "airbnb-base", "prettier", "plugin:testcafe/recommended"],
   "env": {
-    "mocha": true
+    "mocha": true,
+    "jest": true
   },
   "parserOptions": {
     "ecmaVersion": 2018,
@@ -42,5 +43,5 @@
     "chai-expect/missing-assertion": "error",
     "chai-expect/terminating-properties": "error",
     "prefer-destructuring": "off"
-  }
+    }
 }
