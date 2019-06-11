@@ -2,6 +2,7 @@
   "name": "opencerts-website",
   "version": "2.0.0",
   "scripts": {
+    "commit": "npx git-cz",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "test:update": "jest -u",
