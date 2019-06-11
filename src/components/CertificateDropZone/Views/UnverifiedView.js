@@ -38,9 +38,7 @@ const View = ({
   ];
 
   const stack = filter(errorMessages, ["error", true]);
-  console.log("STACK", stack);
   const error = stack.pop();
-  console.log("ERROR", error);
 
   const isWarning =
     hashStatus.verified && issuedStatus.verified && notRevokedStatus.verified;
@@ -79,33 +77,6 @@ const View = ({
           </p>
         ) : null}
       </div>
-      {/* <div className={css.verifications}>
-        {!hashStatus.verified ? (
-          <p className={css.messages}>
-            The certificate&#39;s contents are inaccurate
-          </p>
-        ) : null}
-
-        {!issuedStatus.verified ? (
-          <p className={css.messages}>The certificate records are not found</p>
-        ) : null}
-
-        {!notRevokedStatus.verified ? (
-          <p className={css.messages}>The certificate has been revoked</p>
-        ) : null}
-
-        {!issuerIdentityStatus.verified ? (
-          <div>
-            <p className={css.messages}>
-              Certificate from unregistered institution
-            </p>
-            <p>
-              We are unable to verify the certificate as this institution has
-              not registered with OpenCerts
-            </p>
-          </div>
-        ) : null}
-      </div> */}
 
       <Link href="/faq">
         <div className={css["unverified-btn"]}>What should I do?</div>
