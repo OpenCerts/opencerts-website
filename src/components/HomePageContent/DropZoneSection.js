@@ -8,9 +8,17 @@ import { trace } from "../../utils/logger";
 import { IS_MAINNET } from "../../config";
 import MAIN from "../CertificateTemplates/tlds/sg/gov/tech/Govtech-Demo-Cert/Main-Demo";
 import ROPSTEN from "../CertificateTemplates/tlds/sg/gov/tech/Govtech-Demo-Cert/Ropsten-Demo";
+import { analyticsEvent } from "../Analytics/index";
 
 const DEMO_CERT = IS_MAINNET ? MAIN : ROPSTEN;
 const DEMO_CONTENT_KEY = "DEMO_CONTENT";
+
+function demoCount() {
+  analyticsEvent(window, {
+    category: "USER_INTERACTION",
+    action: "DEMO_CERTIFICATE_VIEWED"
+  });
+}
 
 const DraggableDemoCertificate = () => (
   <div className="d-none d-lg-block">
@@ -20,6 +28,7 @@ const DraggableDemoCertificate = () => (
           className={css.pulse}
           draggable="true"
           onDragStart={e => e.dataTransfer.setData(DEMO_CONTENT_KEY, true)}
+          onDragEnd={demoCount}
         >
           <a
             href={`data:text/plain;,${JSON.stringify(DEMO_CERT, null, 2)}`}
@@ -34,7 +43,11 @@ const DraggableDemoCertificate = () => (
         </div>
       </div>
       <div className="col">
-        <img src="/static/images/dropzone/arrow3.png" width="100%" />
+        <img
+          src="/static/images/dropzone/arrow3.png"
+          width="100%"
+          draggable="false"
+        />
       </div>
     </div>
   </div>
@@ -45,13 +58,14 @@ const MobileDemoCertificate = () => (
     <a
       className="btn btn-primary btn-lg"
       role="button"
-      draggable="true"
+      draggable="false"
       id="demoClick"
       style={{
         background: "#28a745",
         border: "none",
         cursor: "pointer"
       }}
+      onClick={demoCount}
     >
       Click me for a demo certificate!
     </a>
