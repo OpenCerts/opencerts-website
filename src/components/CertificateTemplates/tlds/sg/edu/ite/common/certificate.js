@@ -328,9 +328,11 @@ export const renderCertDescr = certificate => (
     <div className="ml-5">
       <div className="mr-5">
         <div className="row d-flex justify-content-center">
-          <span style={timesNewRoman32Pt}>
-            <p style={timesNewRoman32Pt}>in</p>
-          </span>
+          {!certificate.description.includes(" in ") && (
+            <span style={timesNewRoman32Pt}>
+              <p style={timesNewRoman32Pt}>in</p>
+            </span>
+          )}
         </div>
       </div>{" "}
     </div>

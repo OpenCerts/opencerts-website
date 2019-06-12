@@ -133,11 +133,13 @@ class FramelessViewerContainer extends Component {
       );
     }
     return (
-      <FramelessCertificateViewer
-        id={styles["frameless-container"]}
-        document={this.props.document}
-        certificate={certificateData(this.props.document)}
-      />
+      <div className="frameless-tabs">
+        <FramelessCertificateViewer
+          id={styles["frameless-container"]}
+          document={this.props.document}
+          certificate={certificateData(this.props.document)}
+        />
+      </div>
     );
   }
 }
