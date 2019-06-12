@@ -1,0 +1,122 @@
+/*
+ * 1em = 12pt = 16px = 0.3515mm
+ */
+
+$debug: false;
+
+.nus-degree {
+
+    @if ($debug) {
+        table td {
+            border: 1px solid blue;
+        }
+
+        div {
+            border: 1px solid blue;
+        }
+    }
+
+    font-family: Arial;
+
+    .a4-portrait {
+        background: white;
+        height: 29.7cm;
+        width: 21cm;
+        display: block;
+        margin: 0 auto;
+        padding: 0px 30px;
+        box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
+        overflow-y: hidden;
+        box-sizing: border-box;
+    }
+
+    .cert-header-table {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        text-align: center;
+    }
+
+    .cert-header-name {
+        display: float;
+        font-size: 11pt;
+        text-align: center;
+        font-family: Georgia, Times, "Times New Roman", serif;
+        font-weight: bold;
+        color: rgb(83, 86, 90);
+        line-height: 1em;
+    }
+
+    .cert-logo-nus {
+        display: float;
+        width: 3.2cm;
+    }
+
+    .cert-seal {
+        display: float;
+        width: 4.95cm;
+    }
+    
+    .cert-logo-jhu {
+        display: float;
+        width: 3.2cm;
+    }
+
+    .cert-content-table {
+        display: float;
+        font-size: 14pt;
+        font-family: Georgia, Times, "Times New Roman", serif;
+        font-weight: bold;
+        color: rgb(83, 86, 90);
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        word-spacing: 0.1cm;
+        line-height: 14pt;
+    }
+
+    .cert-content-name {
+        display: float;
+        font-size: 26pt;
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: 500;
+        font-style: italic;
+        text-transform: uppercase;
+        word-spacing: normal;
+    }
+
+    .cert-content-beforename {
+        text-align-last: center;
+        word-spacing: 0.3cm;
+    }
+
+    .cert-content-date {
+        text-align-last: center;
+        font-weight: normal;
+        font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+    }
+
+    .cert-degree-title {
+        display: float;
+        font-size: 22pt;
+        font-family: 'Times New Roman', Times, serif;
+        font-variant: small-caps;
+        font-feature-settings: smcp;
+        font-weight: normal;
+        text-align-last: center;
+        color: rgb(203, 92, 82);
+        border: 0px solid;
+        line-height: 24pt;
+    }
+
+    .cert-sig {
+        display: float;
+        width: 100%;
+        font-size: 12pt;
+        font-family: "Century Schoolbook", Georgia, serif;
+        font-style: italic;
+        color: rgb(83, 86, 90);
+        text-align: left;
+        border: 0px solid;
+    }
+}

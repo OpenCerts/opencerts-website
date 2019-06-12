@@ -1,6 +1,16 @@
 export * from "./routines";
 export { storeAddresses } from "./configure";
 export { NUS_LOGO } from "./imgNUSLogo";
+export { NUS_SEAL } from "./imgNUSSeal";
+export { DUKE_LOGO } from "./imgDUKELogo";
+export { DUKE_SEAL } from "./imgDUKESeal";
+export { NUS_YALENUS_LOGO } from "./imgNUSYaleNUSLogo";
+export { ANU_LOGO } from "./imgANULogo";
+export { ANU_SEAL } from "./imgANUSeal";
+export { ICL_LOGO } from "./imgICLLogo";
+export { ICL_SEAL } from "./imgICLSeal";
+export { JHU_LOGO } from "./imgJHULogo";
+export { UNC_SEAL } from "./imgUNCSeal";
 export { NUS_TS_BACKIMG } from "./imgNUSTsBack";
 export { NUS_TS_LEGEND } from "./imgNUSTsLegend";
 export { NUS_TS_LEGEND_DUKE } from "./imgNUSTsLegendDuke";

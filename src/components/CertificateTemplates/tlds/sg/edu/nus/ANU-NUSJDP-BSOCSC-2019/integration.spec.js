@@ -13,7 +13,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("NUS-K1-2019 degree scroll is rendered correctly", async t => {
+test("ANU-NUSJDP-BSOCSC-2019 degree scroll is rendered correctly", async t => {
   // Uploads certificate via dropzone
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
@@ -22,12 +22,11 @@ test("NUS-K1-2019 degree scroll is rendered correctly", async t => {
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
+    "THE AUSTRALIAN NATIONAL",
+    "UNIVERSITY",
     "NATIONAL UNIVERSITY",
     "OF SINGAPORE",
-    "BACHELOR OF APPLIED SCIENCE",
-    "SECOND CLASS HONOURS (UPPER)",
-    "28 February 2015",
-    "Chair, Board of Trustees",
-    "President"
+    "bachelor of social sciences",
+    "HONOURS"
   ]);
 });

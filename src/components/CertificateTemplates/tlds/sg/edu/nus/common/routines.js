@@ -1,27 +1,13 @@
 import React from "react";
+import { tz } from "moment-timezone";
+
+export const TIMEZONE = "Asia/Singapore";
 
 export const isoDateToLocal = isoDate =>
-  `${isoDate.slice(8, 10)}/${isoDate.slice(5, 7)}/${isoDate.slice(0, 4)}`;
+  tz(isoDate, TIMEZONE).format("DD/MM/YYYY");
 
-export const isoDateToLocalLong = isoDate => {
-  const day = isoDate.slice(8, 10);
-  const year = isoDate.slice(0, 4);
-  const month = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-  ][parseInt(isoDate.slice(5, 7), 10) - 1];
-  return `${day} ${month} ${year}`;
-};
+export const isoDateToLocalLong = isoDate =>
+  tz(isoDate, TIMEZONE).format("DD MMMM YYYY");
 
 export const isBrowser = browser => {
   const { userAgent } = window.navigator;
@@ -51,24 +37,6 @@ export const sassClassNames = (names, styles) => {
 // imageData is has properties: data(base64), width, height and unit(cm/em/pt/px)
 export const renderImage = imageData => {
   if (!imageData) return "";
-  /*
-  let type;
-  switch (imageData.type.toUpperCase()) {
-    case "PNG":
-      type = "png";
-      break;
-    case "JPG":
-    case "JPEG":
-      type = "jpeg";
-      break;
-    case "SVG":
-      type = "svg+xml";
-      break;
-    default:
-      type = "";
-      break;
-  }
-  */
   const html = (
     <img
       style={{
@@ -79,4 +47,165 @@ export const renderImage = imageData => {
     />
   );
   return html;
+};
+
+export const dateToWords = isoDate => {
+  const day = [
+    "First",
+    "Second",
+    "Third",
+    "Fourth",
+    "Fifth",
+    "Sixth",
+    "Seventh",
+    "Eighth",
+    "Nineth",
+    "Tenth",
+    "Eleventh",
+    "Twelfth",
+    "Thirteenth",
+    "Fourteenth",
+    "Fifteenth",
+    "Sixteenth",
+    "Seventeenth",
+    "Eighteenth",
+    "Nineteenth",
+    "Twentieth",
+    "Twenty first",
+    "Twenty second",
+    "Twenty third",
+    "Twenty fourth",
+    "Twenty fifth",
+    "Twenty sixth",
+    "Twenty seventh",
+    "Twenty eighth",
+    "Twenty nineth",
+    "Thirtieth",
+    "Thirty first"
+  ][parseInt(isoDate.slice(8, 10), 10) - 1];
+
+  const month = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ][parseInt(isoDate.slice(5, 7), 10) - 1];
+  const yr = [
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine"
+  ][parseInt(isoDate.slice(0, 1), 10) - 1];
+  const hundrd = [
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine"
+  ][parseInt(isoDate.slice(1, 2), 10) - 1];
+  const Tens = [
+    "Twenty",
+    "Thirty",
+    "Forty",
+    "Fifty",
+    "Sixty",
+    "Seventy",
+    "Eighty",
+    "Ninety"
+  ][parseInt(isoDate.slice(2, 3), 10) - 2];
+  let twodigit = "";
+  const onedigit = isoDate.slice(2, 3);
+  if (onedigit === "0") {
+    twodigit = isoDate.slice(3, 4);
+  } else {
+    twodigit = isoDate.slice(2, 4);
+  }
+
+  const tens1 = [
+    "ten",
+    "eleven",
+    "twelve",
+    "thirteen",
+    "fourteen",
+    "fifteen",
+    "sixteen",
+    "seventeen",
+    "eighteen",
+    "nineteen",
+    "twenty"
+  ][parseInt(isoDate.slice(2, 4), 10) - 10];
+  const ones = [
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine"
+  ][parseInt(isoDate.slice(3, 4), 10) - 1];
+  let tenFnl = "";
+  let hundrds = "";
+  const hundrdchk = isoDate.slice(1, 2);
+  if (hundrdchk > 0) {
+    hundrds = `${hundrd} hundred and`;
+  } else {
+    hundrds = "and";
+  }
+  if (twodigit > 9 && twodigit < 21) {
+    tenFnl = tens1;
+  } else if (twodigit > 20) {
+    tenFnl = `${Tens} ${ones}`;
+  } else {
+    tenFnl = ones;
+  }
+  // return a date/month string and a year string;
+  return {
+    year: `${yr} thousand ${hundrds} ${tenFnl}`,
+    month,
+    day: day.toLowerCase(),
+    dayMonth: `this ${day.toLowerCase()} day of ${month}`,
+    monthDay: `${month} ${day.toLowerCase()}`
+  };
+};
+
+export const capitalizedText = inputString => {
+  let txt = "";
+  const splitSentence = inputString.split(" ");
+  for (let i = 0; i < splitSentence.length; i += 1) {
+    const temptext = splitSentence[i];
+    if (i === 0)
+      txt =
+        temptext.slice(0, 1).toUpperCase() + temptext.slice(1, temptext.length);
+    else if (temptext === "of") txt = `${txt} ${temptext}`;
+    else if (temptext.slice(0, 1) === "(")
+      txt = `${txt} ${temptext.slice(0, 2).toUpperCase()}${temptext.slice(
+        2,
+        temptext.length
+      )}`;
+    else
+      txt = `${txt} ${temptext.slice(0, 1).toUpperCase()}${temptext.slice(
+        1,
+        temptext.length
+      )}`;
+  }
+  return txt;
 };

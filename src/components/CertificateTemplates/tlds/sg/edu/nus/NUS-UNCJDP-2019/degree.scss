@@ -1,0 +1,139 @@
+/*
+ * 1em = 12pt = 16px = 0.3515mm
+ */
+
+$debug: false;
+
+.nus-degree {
+
+    @import url(//db.onlinewebfonts.com/c/432692186d563157d06b4da8cbe900b6?family=Flemish+Script);
+    @font-face {font-family: "Flemish Script";
+        src: url("//db.onlinewebfonts.com/t/432692186d563157d06b4da8cbe900b6.eot");
+        src: url("//db.onlinewebfonts.com/t/432692186d563157d06b4da8cbe900b6.eot?#iefix") format("embedded-opentype"),
+        url("//db.onlinewebfonts.com/t/432692186d563157d06b4da8cbe900b6.woff2") format("woff2"),
+        url("//db.onlinewebfonts.com/t/432692186d563157d06b4da8cbe900b6.woff") format("woff"),
+        url("//db.onlinewebfonts.com/t/432692186d563157d06b4da8cbe900b6.ttf") format("truetype"),
+        url("//db.onlinewebfonts.com/t/432692186d563157d06b4da8cbe900b6.svg#Flemish Script") format("svg");
+    }
+
+    @if ($debug) {
+        table td {
+            border: 1px solid blue;
+        }
+
+        div {
+            border: 1px solid blue;
+        }
+    }
+
+    font-family: Arial;
+
+    .ncch-custom {
+        background: white;
+        height: 14in;
+        width: 17in;
+        display: block;
+        margin: 0 auto;
+        padding: 0px 30px;
+        box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
+        overflow-y: hidden;
+        box-sizing: border-box;
+    }
+
+    .cert-header-table {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        text-align: center;
+        font-size: 36px;
+        font-family: "Old English Text MT", fantasy, serif;
+    }
+
+    .cert-header-name {
+        display: float;
+        font-size: 38pt;
+        text-align: center;
+        font-family: "Old English Text MT", fantasy, serif;
+        line-height: 1em;
+    }
+
+    .cert-content-table {
+        display: float;
+        font-size: 24pt;
+        font-family: "Old English Text MT", fantasy, serif;
+        color: black;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        line-height: 1em;
+    }
+
+    .cert-content-small {
+        font-size: 20pt;
+    }
+
+    .cert-content-name {
+        display: float;
+        font-size: 48pt;
+        font-family: "Old English Text MT", fantasy, serif;
+        color: black;
+        text-transform: capitalize;
+        word-spacing: normal;
+    }
+
+    .cert-content-beforename {
+        text-align-last: center;
+        word-spacing: 0.3cm;
+    }
+
+    .cert-content-date {
+        text-align-last: center;
+        font-weight: normal;
+        font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+    }
+
+    .cert-degree-title {
+        display: float;
+        font-size: 29pt;
+        font-family: "Old English Text MT", fantasy, serif;
+        font-feature-settings: smcp;
+        font-weight: normal;
+        color: black;
+        border: 0px solid;
+    }
+
+    .cert-degree-major {
+        display: float;
+        font-size: 29pt;
+        font-family: "Old English Text MT", fantasy, serif;
+        font-feature-settings: smcp;
+        font-weight: normal;
+        color: black;
+        border: 0px solid;
+    }
+
+    .cert-seal {
+        position: absolute;
+        top: 50%;
+        left: 0;
+    }
+
+    .cert-unc-seal {
+        display: float;
+        width: 4.58cm;
+    }
+
+    .cert-sig {
+        display: float;
+        width: 100%;
+        font-size: 11pt;
+        font-family: "Old English Text MT", fantasy, serif;
+        text-align: center;
+        border: 0px solid;
+    }
+
+    .cert-sig-line {
+        border-top: 1px solid;
+        text-align: right;
+    }
+}

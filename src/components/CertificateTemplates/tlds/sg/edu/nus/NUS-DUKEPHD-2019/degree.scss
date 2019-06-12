@@ -57,19 +57,21 @@ $debug: false;
     .cert-content { 
         display: block;
         font-size: 16pt; 
-        font-family: Times, "New Century"; 
+        font-family: "Minion Pro"; 
         font-weight: bold;
         color: rgb(83, 86, 90);
         margin-left: auto;
         margin-right: auto;
     }
+
     .cert-justify {
         text-align-last: justify;
-    } 
+    }
+    
     .cert-name {
         display: block;
         font-size: 23pt; 
-        font-family: Times, Cambria; 
+        font-family: Times, "New Roman"; 
         font-style: italic;
         text-align: center;
         color: rgb(83, 86, 90);
@@ -79,9 +81,10 @@ $debug: false;
     
     .cert-degree {
         display: block;
-        font-size: 21pt; 
-        font-family: Times, Cambria; 
-        font-style: normal;
+        font-size: 30pt; 
+		font-family: Times, "New Roman"; 
+		font-variant: small-caps;
+		font-feature-settings: smcp;
         text-align: center;
         color: rgb(203, 92, 82);
         border: 0px solid;

@@ -1,9 +1,10 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import {
   isoDateToLocalLong,
   sassClassNames,
   renderImage,
+  capitalizedText,
   NUS_LOGO,
   NUS_SEAL
 } from "../common";
@@ -11,6 +12,19 @@ import scss from "./degree.scss";
 
 // construct class names
 const cls = names => sassClassNames(names, scss);
+
+const checkPosition = inputString => {
+  let position1 = 0;
+  const splitSentence = inputString.split(" ");
+  for (let i = 0; i < splitSentence.length; i += 1) {
+    const temptext = splitSentence[i];
+    if (temptext === "Bachelor" && i !== 0) {
+      position1 = i - 1;
+      break;
+    }
+  }
+  return position1;
+};
 
 class Degree extends Component {
   constructor(props) {
@@ -31,7 +45,7 @@ class Degree extends Component {
   );
 
   // render cert title
-  renderTitle = () => (
+  renderTitle1 = () => (
     <div className={cls("cert-header")}>
       NATIONAL UNIVERSITY
       <br />
@@ -44,47 +58,59 @@ class Degree extends Component {
 
   // render degree and honours
   renderDegree = degreeData => {
-    const htmlDegree = (
-      <div className={cls("cert-degree")}>
-        {degreeData.degreeTitle.toUpperCase()}
-      </div>
-    );
-    let htmlDegHonors = "";
+    const DegreeTitle = capitalizedText(degreeData.degreeTitle.toLowerCase());
+    const position = checkPosition(DegreeTitle);
+    let txt1 = "";
+    let txt2 = "";
+    const splitSentence = DegreeTitle.split(" ");
     let honorsTitle = degreeData.honours ? degreeData.honours : "";
-    if (honorsTitle) {
-      honorsTitle = honorsTitle.replace(/1st/gi, "FIRST");
-      honorsTitle = honorsTitle.replace(/2nd/gi, "SECOND");
-      htmlDegHonors = (
+    honorsTitle = honorsTitle.replace("PASS", "HONORS");
+    honorsTitle = capitalizedText(honorsTitle.toLowerCase());
+    let html;
+    if (position > 0) {
+      for (let i = 0; i < position; i += 1) {
+        txt1 = `${txt1} ${splitSentence[i]}`;
+      }
+      for (let i = position + 1; i < splitSentence.length; i += 1) {
+        txt2 = `${txt2} ${splitSentence[i]}`;
+      }
+      if (honorsTitle) {
+        html = (
+          <div className={cls("cert-degree")}>
+            {txt1} <br />
+            {splitSentence[position]} <br />
+            {txt2}
+            <span style={{ fontSize: "15pt" }}>WITH&nbsp;</span>
+            {honorsTitle}
+          </div>
+        );
+      } else {
+        html = (
+          <div className={cls("cert-degree")}>
+            {txt1} <br />
+            {splitSentence[position]} <br />
+            {txt2}
+          </div>
+        );
+      }
+    } else if (honorsTitle) {
+      html = (
         <div className={cls("cert-degree")}>
-          <span style={{ fontSize: "18pt" }}>WITH&nbsp;</span>
-          {honorsTitle.toUpperCase()}
+          {DegreeTitle} <span style={{ fontSize: "15pt" }}>WITH&nbsp;</span>
+          {honorsTitle}
         </div>
       );
+    } else {
+      html = <div className={cls("cert-degree")}>{DegreeTitle}</div>;
     }
-    let htmlMajor = "";
-    const majorTitle = degreeData.major ? degreeData.major : "";
-    if (majorTitle) {
-      htmlMajor = (
-        <div className={cls("cert-degree")}>
-          <span style={{ fontSize: "18pt" }}>IN&nbsp;</span>
-          {majorTitle.toUpperCase()}
-        </div>
-      );
-    }
-    return (
-      <Fragment>
-        {htmlDegree}
-        {htmlDegHonors}
-        {htmlMajor}
-      </Fragment>
-    );
+    return html;
   };
 
   // render content
-  renderContent(dataSource) {
+  renderContent() {
     const style1 = {
       width: "6.32cm",
-      height: "0.6cm",
+      height: "0.4cm",
       textAlign: "center",
       border: "0px solid"
     };
@@ -93,11 +119,11 @@ class Degree extends Component {
       marginLeft: "auto",
       marginRight: "auto",
       width: "13.16cm",
-      height: "0.6cm",
+      height: "0.4cm",
       textAlign: "center",
       border: "0px solid"
     };
-    const degreeData = dataSource.additionalData.degreeData[0];
+    const degreeData = this.dataSource.additionalData.degreeData[0];
     const dateConferred = isoDateToLocalLong(degreeData.dateConferred);
     const html = (
       <table width="100%">
@@ -105,7 +131,7 @@ class Degree extends Component {
           <tr>
             <td>
               {/* This is to certify that */}
-              <div className={cls("cert-content")} style={style1}>
+              <div className={cls("cert-content cert-justify")} style={style1}>
                 This is to certify that
               </div>
             </td>
@@ -114,7 +140,7 @@ class Degree extends Component {
             <td>
               {/* student name */}
               <div className={cls("cert-name")}>
-                {dataSource.recipient.name.toUpperCase()}
+                {this.dataSource.recipient.name.toUpperCase()}
               </div>
             </td>
           </tr>
@@ -147,9 +173,11 @@ class Degree extends Component {
             <td>{this.renderVoid("0.32cm")}</td>
           </tr>
           <tr>
-            <td className={cls("cert-content")}>
+            <td>
               {/* on */}
-              <div style={style2}>on</div>
+              <div className={cls("cert-content")} style={style1}>
+                on
+              </div>
             </td>
           </tr>
           <tr>
@@ -167,9 +195,6 @@ class Degree extends Component {
     return html;
   }
 
-  // render seal
-  renderSeal = () => <img src={NUS_SEAL} className={cls("cert-seal")}/>;
-
   // render signatures
   renderSigs = () => {
     let sig1;
@@ -182,7 +207,7 @@ class Degree extends Component {
       <table width="100%">
         <tbody>
           <tr>
-            <td rowspan="2" width="50%" style={{textAlign: "center"}}>
+            <td rowspan="2" width="50%" align="center">
               {this.renderSeal()}
             </td>
             <td align="center">
@@ -211,6 +236,9 @@ class Degree extends Component {
     return html;
   };
 
+  // render seal
+  renderSeal = () => <img src={NUS_SEAL} className={cls("cert-seal")} />
+
   // main render
   render() {
     const html = (
@@ -219,11 +247,11 @@ class Degree extends Component {
           <article>
             <div style={{ height: "23.4cm", border: "0px solid" }}>
               {this.renderVoid("2.13cm")}
-              {this.renderTitle()}
+              {this.renderTitle1()}
               {this.renderVoid("0.59cm")}
               {this.renderLogo()}
               {this.renderVoid("0.93cm")}
-              {this.renderContent(this.dataSource)}
+              {this.renderContent()}
             </div>
             <div style={{ border: "0px solid" }}>{this.renderSigs()}</div>
           </article>

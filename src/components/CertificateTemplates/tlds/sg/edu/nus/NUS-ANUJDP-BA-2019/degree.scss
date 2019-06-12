@@ -32,15 +32,15 @@ $debug: false;
     
     .cert-header {
         display: block;
-        font-size: 26pt; 
-        text-align: center; 
+        font-size: 10pt; 
+		text-align: center; 
         font-family: Times, "New Century"; 
         font-weight: bold;
         color: rgb(83, 86, 90);
         margin-left: auto;
         margin-right: auto;
     }
-    
+	    
     .cert-logo {
         display: block;
         margin-left: auto;
@@ -48,42 +48,72 @@ $debug: false;
         width: 2.8cm;
         height: 3.56cm;
     }
-    
+	.cert-logo1 {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 4.2cm;
+        height: 3.4cm;
+    }
     .cert-seal {
         display: float;
         width: 4.95cm;
+        margin-left: 40px;
     }
-    
+    .cert-justify {
+        text-align-last: justify;
+    } 
     .cert-content { 
         display: block;
         font-size: 16pt; 
-        font-family: Times, "New Century"; 
+        font-family: Times, "New Roman"; 
+		font-weight: bold;
+        color: rgb(83, 86, 90);
+        margin-left: auto;
+        margin-right: auto;
+        letter-spacing: 1px;
+    }
+    .cert-content1 { 
+        display: block;
+        font-size: 16pt; 
+        font-family: Times, "New Roman"; 
+		font-weight: bold;
+        color: rgb(83, 86, 90);
+        margin-left: auto;
+        margin-right: auto;
+        letter-spacing: 2px;
+    }
+	.cert-headerdet { 
+        display: block;
+        font-size: 18pt; 
+        font-family: Times, "New Roman"; 
         font-weight: bold;
         color: rgb(83, 86, 90);
         margin-left: auto;
         margin-right: auto;
     }
-    .cert-justify {
-        text-align-last: justify;
-    } 
+    
     .cert-name {
         display: block;
         font-size: 23pt; 
-        font-family: Times, Cambria; 
+        font-family: Times, "New Roman"; 
         font-style: italic;
+		font-weight: normal;
         text-align: center;
         color: rgb(83, 86, 90);
-        padding: 37px 0;
+        padding: 25px 0;
         border: 0px solid;
     }
     
     .cert-degree {
         display: block;
-        font-size: 21pt; 
-        font-family: Times, Cambria; 
-        font-style: normal;
+        font-size: 30pt; 
+		font-family: Times, "New Roman"; 
+		font-variant: small-caps;
+		font-feature-settings: smcp;
         text-align: center;
         color: rgb(203, 92, 82);
+        line-height: 32pt;
         border: 0px solid;
     }
     
@@ -104,7 +134,7 @@ $debug: false;
         font-family: Times, "New Century"; 
         font-style: italic;
         color: rgb(83, 86, 90);
-        text-align: right;
+        text-align: left;
         border: 0px solid;
     }
 }

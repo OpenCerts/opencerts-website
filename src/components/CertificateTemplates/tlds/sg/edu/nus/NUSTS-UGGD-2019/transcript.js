@@ -464,7 +464,7 @@ class TranscriptCreditTransfer {
         dataFeeder.push(
           "ts-term-trf-eqnus",
           <td colSpan="4">
-            CREDITS TRANSFERRED (WITH EQUIVALENT NUS GRADE) FROM{" "}
+            CREDITS TRANSFERRED (WITH EQUIVALENT NUS GRADE) FROM
             {transferData.orgName}:
           </td>
         );

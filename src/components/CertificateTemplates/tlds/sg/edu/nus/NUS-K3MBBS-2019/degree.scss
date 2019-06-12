@@ -54,6 +54,10 @@ $debug: false;
         width: 4.95cm;
     }
     
+    .cert-justify {
+        text-align-last: justify;
+    }
+    
     .cert-content { 
         display: block;
         font-size: 16pt; 
@@ -63,9 +67,7 @@ $debug: false;
         margin-left: auto;
         margin-right: auto;
     }
-    .cert-justify {
-        text-align-last: justify;
-    } 
+    
     .cert-name {
         display: block;
         font-size: 23pt; 
@@ -81,7 +83,8 @@ $debug: false;
         display: block;
         font-size: 21pt; 
         font-family: Times, Cambria; 
-        font-style: normal;
+        font-variant: small-caps;
+		font-feature-settings: smcp;
         text-align: center;
         color: rgb(203, 92, 82);
         border: 0px solid;
