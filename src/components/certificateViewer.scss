@@ -7,6 +7,14 @@
   }
 }
 
+:global(.frameless-tabs .react-tabs .d-lg-none.d-xl-none) {
+  display: none;
+}
+
+:global(.frameless-tabs .react-tabs .d-none.d-lg-block.d-xl-block) {
+  display: none !important;
+}
+
 #top-header-ui,
 #header-ui {
   background-color: $header-ui-bg;
@@ -80,7 +88,7 @@ li.tab {
 .print-btn,
 .send-btn {
   @include round-btn;
-  padding: .75rem;
+  padding: 0.75rem;
   margin-left: 1rem;
   i {
     color: #343a40;
@@ -101,7 +109,7 @@ li.tab {
 
 @media only screen and (max-width: 550px) {
   #top-header-ui {
-    padding: 1rem .5rem;
+    padding: 1rem 0.5rem;
   }
   .pd-0 {
     padding-right: 15px !important;
