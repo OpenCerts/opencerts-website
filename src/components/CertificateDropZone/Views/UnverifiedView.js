@@ -31,15 +31,26 @@ const View = ({
       error: !hashStatus.verified
     },
     {
-      title: "Certificate not found",
+      title: "Certificate not issued",
       message:
-        "This certificate has not been issued. Please contact your issuing institution for help or issue the certificate before trying again.",
+        "This certificate cannot be found. Please contact your issuing institution for help or issue the certificate before trying again.",
       error: !issuedStatus.verified
     },
     {
-      title: "Certificate store address is not valid",
-      message: "The certificate store does not exist",
+      title: "Certificate store address is invalid",
+      message:
+        "The certificate store does not exist. Please check that you have a valid certificate store address in your file before proceeding.",
       error: !storeStatus.verified
+    },
+    {
+      title: "File cannot be read",
+      message: "Please check that you have a valid .opencert or .json file.",
+      error:
+        !hashStatus.verified &&
+        !issuedStatus.verified &&
+        !notRevokedStatus.verified &&
+        !issuerIdentityStatus.verified &&
+        !storeStatus.verified
     }
   ];
 

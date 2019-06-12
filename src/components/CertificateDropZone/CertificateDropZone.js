@@ -25,6 +25,7 @@ const renderDropzoneContent = props => {
   // fileError is when the file is not in JSON format and threw when deserilising
   // valid JSON files will be handled by handleCertificateChange()
   if (isDragReject || fileError) {
+    console.log("ACCEPT=FALSE");
     return <DefaultView hover={true} accept={false} />;
   }
   if (isDragAccept) {
@@ -32,16 +33,6 @@ const renderDropzoneContent = props => {
   }
   if (verifying) {
     return <VerifyingView verificationStatus={verificationStatus} />;
-  }
-  if (
-    document &&
-    !hashStatus.verified &&
-    !issuedStatus.verified &&
-    !notRevokedStatus.verified &&
-    !issuerIdentityStatus.verified &&
-    !storeStatus.verified
-  ) {
-    return <DefaultView hover={true} accept={false} />;
   }
   if (
     document &&
