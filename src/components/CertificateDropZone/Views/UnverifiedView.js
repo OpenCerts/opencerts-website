@@ -8,9 +8,16 @@ const View = ({
   issuerIdentityStatus,
   hashStatus,
   issuedStatus,
-  notRevokedStatus
+  notRevokedStatus,
+  storeStatus
 }) => {
   const errorMessages = [
+    {
+      title: "Certificate from unregistered institution",
+      message:
+        "The institution that issued this certificate is unknown. Your institution has to register with OpenCerts first.",
+      error: !issuerIdentityStatus.verified
+    },
     {
       title: "Certificate revoked",
       message:
@@ -30,10 +37,9 @@ const View = ({
       error: !issuedStatus.verified
     },
     {
-      title: "Certificate from unregistered institution",
-      message:
-        "The institution that issued this certificate is unknown. Your institution has to register with OpenCerts first.",
-      error: !issuerIdentityStatus.verified
+      title: "Certificate store address is not valid",
+      message: "The certificate store does not exist",
+      error: !storeStatus.verified
     }
   ];
 
@@ -125,7 +131,8 @@ View.propTypes = {
   issuerIdentityStatus: PropTypes.object,
   hashStatus: PropTypes.object,
   issuedStatus: PropTypes.object,
-  notRevokedStatus: PropTypes.object
+  notRevokedStatus: PropTypes.object,
+  storeStatus: PropTypes.object
 };
 
 export default View;

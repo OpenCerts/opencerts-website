@@ -22,6 +22,8 @@ import {
   verifyingCertificateIssuedFailure,
   verifyingCertificateHashSuccess,
   verifyingCertificateHashFailure,
+  verifyingCertificateStoreSuccess,
+  verifyingCertificateStoreFailure,
   getCertificate
 } from "../reducers/certificate";
 import {
@@ -80,6 +82,37 @@ export function* loadCertificateContracts({ payload }) {
   }
 }
 
+export function* verifyCertificateStore({ certificate }) {
+  const web3 = yield getSelectedWeb3();
+  try {
+    const data = certificateData(certificate);
+    const contractStoreAddresses = get(data, "issuers", []).map(
+      issuer => issuer.certificateStore
+    );
+
+    // const keccak = web3.eth
+    //   .getCode(contractStoreAddresses[0])
+    //   .then(bc => web3.utils.keccak256(bc))
+    //   .then(console.log);
+    // console.log("HERE");
+
+    if (web3.utils.isAddress(contractStoreAddresses[0])) {
+      yield put(verifyingCertificateStoreSuccess());
+      return true;
+    }
+    throw new Error("Store not valid");
+  } catch (e) {
+    error(e);
+    yield put(
+      verifyingCertificateStoreFailure({
+        error: e.message,
+        certificate: certificateData(certificate)
+      })
+    );
+    return false;
+  }
+}
+
 export function* verifyCertificateHash({ certificate }) {
   const verified = verifySignature(certificate);
   if (verified) {
@@ -103,6 +136,7 @@ export function* verifyCertificateIssued({ certificate, certificateStores }) {
     const issuedStatuses = yield all(
       certificateStores.map(store => store.methods.isIssued(merkleRoot).call())
     );
+    if (issuedStatuses.length === 0) throw new Error("Invalid file");
     const isIssued = issuedStatuses.reduce((prev, curr) => prev && curr, true);
     if (!isIssued) throw new Error("Certificate has not been issued");
     yield put(verifyingCertificateIssuedSuccess());
@@ -286,13 +320,15 @@ export function* verifyCertificate({ payload }) {
     certificateIssued: call(verifyCertificateIssued, args),
     certificateHashValid: call(verifyCertificateHash, args),
     certificateNotRevoked: call(verifyCertificateNotRevoked, args),
-    certificateIssuerRecognised: call(verifyCertificateIssuer, args)
+    certificateIssuerRecognised: call(verifyCertificateIssuer, args),
+    certificateStoreValid: call(verifyCertificateStore, args)
   });
   trace(verificationStatuses);
   const verified =
     verificationStatuses.certificateIssued &&
     verificationStatuses.certificateHashValid &&
-    verificationStatuses.certificateNotRevoked;
+    verificationStatuses.certificateNotRevoked &&
+    verificationStatuses.certificateStoreValid;
   if (verified) {
     Router.push("/viewer");
   }
