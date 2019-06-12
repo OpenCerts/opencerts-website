@@ -8,7 +8,7 @@ import {
   getDirsToMake
 } from "./addNewTemplate";
 
-const EXAMPLE_DIR = "./src/components/CertificateTemplates/example";
+const EXAMPLE_DIR = "./src/components/CertificateTemplates/tlds/sg/gov/tech";
 
 describe("reverseDnsNotation", () => {
   test("should work correctly", () => {
@@ -34,10 +34,11 @@ describe("generatePartialChildPaths", () => {
 });
 
 describe("getSubDirs", () => {
-  test("should return 'example' when used on example dir", () => {
+  test("should return 'Govtech-Demo-Cert' when used on example dir", () => {
     expect(getSubDirs(EXAMPLE_DIR)).toEqual([
-      "2019-Feb-ExampleTemplate",
-      "Demo-CertTemplate"
+      "2018-Geekout",
+      "2018-OpenCertsAssociate",
+      "Govtech-Demo-Cert"
     ]);
   });
 });
@@ -106,13 +107,13 @@ describe("generateOrganisationIndexExports", () => {
     expect(
       generateOrganisationIndexExports({
         templateTagMapping: { foo: "bar", qux: "baz" },
-        organisationDir: "example"
+        organisationDir: "tech"
       })
     ).toBe(`import dynamic from "next/dynamic";
 
 export default {
-  "foo": dynamic(() => import("./bar" /* webpackChunkName: "example-Templates" */))
-  "qux": dynamic(() => import("./baz" /* webpackChunkName: "example-Templates" */))
+  "foo": dynamic(() => import("./bar" /* webpackChunkName: "tech-Templates" */))
+  "qux": dynamic(() => import("./baz" /* webpackChunkName: "tech-Templates" */))
 };
 `);
   });
