@@ -1,4 +1,4 @@
-const defaultUrl = "/static/RegistryInfo.json";
+const defaultUrl = "/static/registry.json";
 
 export default function fetchIssuers(url = defaultUrl) {
   return window

@@ -1,6 +1,6 @@
 import { filter } from "lodash";
 import css from "./registry.scss";
-import registry from "../../static/RegistryInfo";
+import registry from "../../static/registry.json";
 
 const members = Object.keys(registry.issuers).map(k => ({
   ...registry.issuers[k],
