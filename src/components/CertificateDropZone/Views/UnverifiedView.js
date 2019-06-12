@@ -41,16 +41,6 @@ const View = ({
       message:
         "The certificate store does not exist. Please check that you have a valid certificate store address in your file before proceeding.",
       error: !storeStatus.verified
-    },
-    {
-      title: "File cannot be read",
-      message: "Please check that you have a valid .opencert or .json file.",
-      error:
-        !hashStatus.verified &&
-        !issuedStatus.verified &&
-        !notRevokedStatus.verified &&
-        !issuerIdentityStatus.verified &&
-        !storeStatus.verified
     }
   ];
 
