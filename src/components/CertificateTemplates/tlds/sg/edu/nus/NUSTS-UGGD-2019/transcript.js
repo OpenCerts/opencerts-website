@@ -219,7 +219,7 @@ class TranscriptFooter extends Component {
 }
 
 TranscriptFooter.propTypes = {
-  page: PropTypes.string.isRequired
+  page: PropTypes.number.isRequired
 };
 
 // transcript content - program info
@@ -1324,7 +1324,7 @@ class Transcript extends Component {
         for (let k = this.maxRows; k >= 0; k -= 1) {
           const node = this.rowEl(i, j, k);
           if (node)
-            if (!node.filled) node.remove();
+            if (node.filled === "false" ) node.remove();
             else {
               node.removeAttribute("id");
               node.removeAttribute("filled");
@@ -1457,7 +1457,7 @@ class Transcript extends Component {
     // render blank pages
     for (let i = 0; i < this.maxPages; i += 1) {
       html.push(
-        <div id={`page-${i}`} filled={false} className={cls("nus-transcript")}>
+        <div id={`page-${i}`} filled="false" className={cls("nus-transcript")}>
           {this.renderPage(i)}
         </div>
       );
@@ -1469,8 +1469,8 @@ class Transcript extends Component {
 }
 
 Transcript.propTypes = {
-  maxPages: PropTypes.number,
-  maxRows: PropTypes.number
+  maxPages: PropTypes.string,
+  maxRows: PropTypes.string
 };
 
 // transcript data row
@@ -1485,7 +1485,7 @@ class TranscriptDataRow extends Component {
   }
 
   render() {
-    this.props.parent.filled = true;
+    this.props.parent.filled = "true";
     return this.props.data;
   }
 }
