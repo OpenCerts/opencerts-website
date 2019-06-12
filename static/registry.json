@@ -1,27 +1,120 @@
 {
   "issuers": {
-    "Main": {
-      "0x007d40224f6562461633ccfbaffd359ebb2fc9ba": "Government Technology Agency of Singapore (GovTech)",
-      "0x5CA3b9daC85DA4DE4030e59C1a0248004209e348": "Nanyang Polytechnic",
-      "0xa5d801265D29A6F1015a641BfC0e39Ee3dA2AC76": "Ngee Ann Polytechnic",
-      "0xE4a94Ef9C26904A02Cd6735F7D4De1D840146a0f": "Singapore Examinations and Assessment Board",
-      "0x24a7DE31D231221ab6B1B325Ca5F1AA7bfbaaabA": "Singapore Institute of Technology",
-      "0x78CE67fcb40D9D9552A313670A2e0eef11043995": "SkillsFuture Singapore",
-      "0x4d05f843718da742b4229938f972a3eb969c25ce": "Temasek Polytechnic",
-      "0x0CE38eBEa3B943Ee6DA24163710b25Ef8654f39E": "Institute of Technical Education"
+    "0x007d40224f6562461633ccfbaffd359ebb2fc9ba": {
+      "name": "Government Technology Agency of Singapore (GovTech)",
+      "displayCard": true,
+      "website": "https://www.tech.gov.sg",
+      "email": "info@tech.gov.sg",
+      "phone": "+65 6211 2100",
+      "logo": "/static/images/GOVTECH_logo.png",
+      "id": "govtech-registry"
     },
-    "Ropsten": {
-      "0x5f007251c78cA92d3053492cCf0EDC161063624c": "ROPSTEN: Nanyang Polytechnic",
-      "0xfEbB273495F5C2c4783E23424Fe9773691b57fcB": "ROPSTEN: National University of Singapore",
-      "0x866Fb78aC3c87019aBff9FB566acfF66F75Cfa46": "ROPSTEN: Ngee Ann Polytechnic",
-      "0xc36484efa1544c32ffed2e80a1ea9f0dfc517495": "ROPSTEN: Ngee Ann Polytechnic",
-      "0xeDe1B6Fc03f1a9C6905C93a2fceb06E19624a55E": "ROPSTEN: Singapore Examinations and Assessment Board",
-      "0x897E224a6a8b72535D67940B3B8CE53f9B596800": "ROPSTEN: Singapore Institute of Technology",
-      "0x3f43FB8546E97b2c1D5eD087767C0d2eb2e13f8b": "ROPSTEN: Singapore Institute of Technology (Ledger Nano)",
-      "0xCE4D56Fea4a4EB33E8A3502CEe6Db075224C896d": "ROPSTEN: Skillsfuture Singapore",
-      "0xe825e69383a57eB686Fc7b8c455Dd982bB9680f6": "ROPSTEN: Temasek Polytechnic",
-      "0xE5c693015460868F817799CAFb363EEDb4F9E446": "ROPSTEN: Institute of Technical Education",
-      "0xdcA6Eea7024151c270b50FcA9E67161119B06BAD": "ROPSTEN: Government Technology Agency of Singapore (GovTech)"
+    "0x5CA3b9daC85DA4DE4030e59C1a0248004209e348": {
+      "name": "Nanyang Polytechnic",
+      "displayCard": true,
+      "website": "https://www.nyp.edu.sg/",
+      "email": "askNYP@nyp.edu.sg",
+      "phone": "+65 6451 5115",
+      "logo": "/static/images/NYP_logo.png",
+      "id": "nyp-registry"
+    },
+    "0xa5d801265D29A6F1015a641BfC0e39Ee3dA2AC76": {
+      "name": "Ngee Ann Polytechnic",
+      "displayCard": true,
+      "website": "https://www.np.edu.sg",
+      "email": "asknp@np.edu.sg",
+      "phone": "+65 6466 6555",
+      "logo": "/static/images/NP_logo.svg",
+      "id": "np-registry"
+    },
+    "0xE4a94Ef9C26904A02Cd6735F7D4De1D840146a0f": {
+      "name": "Singapore Examinations and Assessment Board",
+      "displayCard": true,
+      "website": "https://www.seab.gov.sg/",
+      "email": "",
+      "phone": "+65 6872 2220",
+      "logo": "/static/images/SEAB_logo_crop.png",
+      "id": "seab-registry"
+    },
+    "0x24a7DE31D231221ab6B1B325Ca5F1AA7bfbaaabA": {
+      "name": "Singapore Institute of Technology",
+      "displayCard": true,
+      "website": "https://www.singaporetech.edu.sg/",
+      "email": "",
+      "phone": "+65 6592 1136",
+      "logo": "/static/images/SIT_logo.png",
+      "id": "sit-registry"
+    },
+    "0x78CE67fcb40D9D9552A313670A2e0eef11043995": {
+      "name": "SkillsFuture Singapore",
+      "displayCard": true,
+      "website": "https://www.ssg-wsg.gov.sg/",
+      "email": "",
+      "phone": "+65 6785 5785",
+      "logo": "/static/images/SSG_logo.png",
+      "id": "ssg-registry"
+    },
+    "0x4d05f843718da742b4229938f972a3eb969c25ce": {
+      "name": "Temasek Polytechnic",
+      "displayCard": true,
+      "website": "https://www.tp.edu.sg/home",
+      "email": "enquiry@tp.edu.sg",
+      "phone": "+65 6789 8220",
+      "logo": "/static/images/TP_logo.svg",
+      "id": "tp-registry"
+    },
+    "0x908595e0B09Fb2d5950eCD196695490E211A6d4d": {
+      "name": "Institute of Technical Education",
+      "displayCard": true,
+      "website": "https://www.ite.edu.sg/",
+      "email": "ithelpdesk@ite.edu.sg",
+      "phone": "1800-2222 111",
+      "logo": "/static/images/ITE_logo.png",
+      "id": "ite-registry"
+    },
+    "0x5f007251c78cA92d3053492cCf0EDC161063624c": {
+      "name": "ROPSTEN: Nanyang Polytechnic",
+      "displayCard": false
+    },
+    "0xfEbB273495F5C2c4783E23424Fe9773691b57fcB": {
+      "name": "ROPSTEN: National University of Singapore",
+      "displayCard": false
+    },
+    "0x866Fb78aC3c87019aBff9FB566acfF66F75Cfa46": {
+      "name": "ROPSTEN: Ngee Ann Polytechnic",
+      "displayCard": false
+    },
+    "0xc36484efa1544c32ffed2e80a1ea9f0dfc517495": {
+      "name": "ROPSTEN: Ngee Ann Polytechnic",
+      "displayCard": false
+    },
+    "0xeDe1B6Fc03f1a9C6905C93a2fceb06E19624a55E": {
+      "name": "ROPSTEN: Singapore Examinations and Assessment Board",
+      "displayCard": false
+    },
+    "0x897E224a6a8b72535D67940B3B8CE53f9B596800": {
+      "name": "ROPSTEN: Singapore Institute of Technology",
+      "displayCard": false
+    },
+    "0x3f43FB8546E97b2c1D5eD087767C0d2eb2e13f8b": {
+      "name": "ROPSTEN: Singapore Institute of Technology (Ledger Nano)",
+      "displayCard": false
+    },
+    "0xCE4D56Fea4a4EB33E8A3502CEe6Db075224C896d": {
+      "name": "ROPSTEN: Skillsfuture Singapore",
+      "displayCard": false
+    },
+    "0xe825e69383a57eB686Fc7b8c455Dd982bB9680f6": {
+      "name": "ROPSTEN: Temasek Polytechnic",
+      "displayCard": false
+    },
+    "0xE5c693015460868F817799CAFb363EEDb4F9E446": {
+      "name": "ROPSTEN: Institute of Technical Education",
+      "displayCard": false
+    },
+    "0xdcA6Eea7024151c270b50FcA9E67161119B06BAD": {
+      "name": "ROPSTEN: Government Technology Agency of Singapore (GovTech)",
+      "displayCard": false
     }
   }
 }
