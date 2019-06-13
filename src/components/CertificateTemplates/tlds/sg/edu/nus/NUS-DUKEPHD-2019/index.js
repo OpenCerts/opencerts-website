@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { MultiCertificateRenderer } from "template-utils/MultiCertificateRenderer";
+import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
 import { storeAddresses } from "../common";
 import Degree from "./degree";
 
@@ -11,9 +11,8 @@ const templates = [
   }
 ];
 
-const Cert = ({ certificate }) => (
+const Cert = () => (
   <MultiCertificateRenderer
-    certificate={certificate}
     templates={templates}
     whitelist={storeAddresses}
   />

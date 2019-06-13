@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { storeAddresses } from "../common";
 import Transcript from "./transcript";
-import { MultiCertificateRenderer } from "../../../../../utils/MultiCertificateRenderer";
+import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
 
 const templates = [
   {
@@ -11,9 +11,8 @@ const templates = [
   }
 ];
 
-const Cert = ({ certificate }) => (
+const Cert = () => (
   <MultiCertificateRenderer
-    certificate={certificate}
     templates={templates}
     whitelist={storeAddresses}
   />
