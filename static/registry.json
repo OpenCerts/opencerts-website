@@ -72,6 +72,15 @@
       "logo": "/static/images/ITE_logo.png",
       "id": "ite-registry"
     },
+    "0x18270bA6dA0380a2cbC705bc6C0AD6651282bD14": {
+      "name": "Republic Polytechnic",
+      "displayCard": true,
+      "website": "https://www.rp.edu.sg/",
+      "email": "one-stop@rp.edu.sg",
+      "phone": "+65 6510 3000",
+      "logo": "/static/images/RP_logo.svg",
+      "id": "rp-registry"
+    },
     "0x5f007251c78cA92d3053492cCf0EDC161063624c": {
       "name": "ROPSTEN: Nanyang Polytechnic",
       "displayCard": false
@@ -114,6 +123,10 @@
     },
     "0xdcA6Eea7024151c270b50FcA9E67161119B06BAD": {
       "name": "ROPSTEN: Government Technology Agency of Singapore (GovTech)",
+      "displayCard": false
+    },
+    "0x061aFcFF60b90E0F633F8ef157e01BaB9b2FfDD3": {
+      "name:": "ROPSTEN: Republic Polytechnic",
       "displayCard": false
     }
   }
