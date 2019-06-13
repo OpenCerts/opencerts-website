@@ -159,7 +159,7 @@ li.slanted-tab.active {
 #how-it-works-section .nav-link.active {
   color: black;
   background-color: white;
-  border-radus: 0;
+  border-radius: 0;
   border-bottom-left-radius: 0.25rem;
   border-top-left-radius: 0.25rem;
 }
