@@ -63,14 +63,23 @@
       "logo": "/static/images/TP_logo.svg",
       "id": "tp-registry"
     },
-    "0x908595e0B09Fb2d5950eCD196695490E211A6d4d": {
+    "0x0CE38eBEa3B943Ee6DA24163710b25Ef8654f39E": {
       "name": "Institute of Technical Education",
       "displayCard": true,
-      "website": "https://www.ite.edu.sg/",
-      "email": "ithelpdesk@ite.edu.sg",
+      "website": "https://ite.edu.sg",
+      "email": "training@ite.edu.sg",
       "phone": "1800-2222 111",
       "logo": "/static/images/ITE_logo.png",
       "id": "ite-registry"
+    },
+    "0x18270bA6dA0380a2cbC705bc6C0AD6651282bD14": {
+      "name": "Republic Polytechnic",
+      "displayCard": true,
+      "website": "https://www.rp.edu.sg/",
+      "email": "one-stop@rp.edu.sg",
+      "phone": "+65 6510 3000",
+      "logo": "/static/images/RP_logo.svg",
+      "id": "rp-registry"
     },
     "0x5f007251c78cA92d3053492cCf0EDC161063624c": {
       "name": "ROPSTEN: Nanyang Polytechnic",
@@ -114,6 +123,10 @@
     },
     "0xdcA6Eea7024151c270b50FcA9E67161119B06BAD": {
       "name": "ROPSTEN: Government Technology Agency of Singapore (GovTech)",
+      "displayCard": false
+    },
+    "0x061aFcFF60b90E0F633F8ef157e01BaB9b2FfDD3": {
+      "name:": "ROPSTEN: Republic Polytechnic",
       "displayCard": false
     }
   }
