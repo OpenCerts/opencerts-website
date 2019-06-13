@@ -6,16 +6,6 @@ $debug: false;
 
 .nus-degree {
 
-    @import url(//db.onlinewebfonts.com/c/432692186d563157d06b4da8cbe900b6?family=Flemish+Script);
-    @font-face {font-family: "Flemish Script";
-        src: url("//db.onlinewebfonts.com/t/432692186d563157d06b4da8cbe900b6.eot");
-        src: url("//db.onlinewebfonts.com/t/432692186d563157d06b4da8cbe900b6.eot?#iefix") format("embedded-opentype"),
-        url("//db.onlinewebfonts.com/t/432692186d563157d06b4da8cbe900b6.woff2") format("woff2"),
-        url("//db.onlinewebfonts.com/t/432692186d563157d06b4da8cbe900b6.woff") format("woff"),
-        url("//db.onlinewebfonts.com/t/432692186d563157d06b4da8cbe900b6.ttf") format("truetype"),
-        url("//db.onlinewebfonts.com/t/432692186d563157d06b4da8cbe900b6.svg#Flemish Script") format("svg");
-    }
-
     @if ($debug) {
         table td {
             border: 1px solid blue;

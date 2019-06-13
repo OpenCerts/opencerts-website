@@ -60,7 +60,7 @@ $debug: false;
         display: float;
         font-size: 18pt;
 		text-align: center;
-        font-family: 'RotisSerif', 'Times New Roman', Times, serif;
+        font-family: 'RotisSerif', 'Palatino Linotype', 'Times New Roman', Times, serif;
         color: rgb(83, 86, 90);
     }
 
@@ -82,7 +82,7 @@ $debug: false;
     .cert-content-table {
         display: float;
         font-size: 18pt;
-        font-family: 'RotisSerif', 'Times New Roman', Times, serif;
+        font-family: 'RotisSerif', 'Palatino Linotype', 'Times New Roman', Times, serif;
         color: rgb(83, 86, 90);
         margin-left: auto;
         margin-right: auto;
@@ -94,8 +94,7 @@ $debug: false;
     .cert-content-name {
         display: float;
         font-size: 60pt;
-        // Font should be Lucian Bernhard
-        font-family: 'Ribbon 131', 'Times New Roman', Times, serif;
+        font-family: 'Ribbon 131', 'Brush Script MT', 'Times New Roman', Times, serif;
         text-align: center;
         text-transform: capitalize;
     }
@@ -104,7 +103,7 @@ $debug: false;
         display: float;
         font-size: 32pt;
         // Font should be Rotis Serif
-		font-family: 'RotisSerif', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		font-family: 'RotisSerif', 'Palatino Linotype', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 		font-feature-settings: smcp;
         text-align: center;
         text-transform: capitalize;
