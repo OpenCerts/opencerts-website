@@ -63,11 +63,11 @@
       "logo": "/static/images/TP_logo.svg",
       "id": "tp-registry"
     },
-    "0x908595e0B09Fb2d5950eCD196695490E211A6d4d": {
+    "0x0CE38eBEa3B943Ee6DA24163710b25Ef8654f39E": {
       "name": "Institute of Technical Education",
       "displayCard": true,
-      "website": "https://www.ite.edu.sg/",
-      "email": "ithelpdesk@ite.edu.sg",
+      "website": "https://ite.edu.sg",
+      "email": "training@ite.edu.sg",
       "phone": "1800-2222 111",
       "logo": "/static/images/ITE_logo.png",
       "id": "ite-registry"
