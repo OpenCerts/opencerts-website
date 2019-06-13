@@ -135,9 +135,6 @@ export const EXPLANATORY_MARGIN_LEFT = {
 export const SOR_SUBJECT_REM_RIGHT_PAD = {
   paddingRight: "0px"
 };
-export const SOR_20_WIDTH = {
-  paddingLeft: "20px"
-};
 export const SOR_30_WIDTH = {
   paddingLeft: "30px"
 };

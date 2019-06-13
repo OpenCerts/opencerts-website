@@ -25,6 +25,21 @@ const SORGCEA2 = dynamic(() =>
 const SORGCEA3 = dynamic(() =>
   import("./SOR_GCEA_2006_NewSyll" /* webpackChunkName: "SEABTemplates" */)
 );
+const SORPSLE19801981 = dynamic(() =>
+  import("./SOR_PSLE_1980_1981" /* webpackChunkName: "SEABTemplates" */)
+);
+const SORPSLE19821992 = dynamic(() =>
+  import("./SOR_PSLE_1982_1992" /* webpackChunkName: "SEABTemplates" */)
+);
+const SORPSLE19932012 = dynamic(() =>
+  import("./SOR_PSLE_1993_2012" /* webpackChunkName: "SEABTemplates" */)
+);
+const SORPSLE2013 = dynamic(() =>
+  import("./SOR_PSLE_2013" /* webpackChunkName: "SEABTemplates" */)
+);
+const SORPSLEBefore1979 = dynamic(() =>
+  import("./SOR_PSLE_before_1979" /* webpackChunkName: "SEABTemplates" */)
+);
 
 const templates = {
   SOR_GCEO: SORGCEO,
@@ -34,7 +49,12 @@ const templates = {
   SOR_GCEA_before_2002: SORGCEABefore2002,
   SOR_GCEA_2002_2005: SORGCEA20022005,
   SOR_GCEA_2006_OldSyll: SORGCEA2,
-  SOR_GCEA_2006_NewSyll: SORGCEA3
+  SOR_GCEA_2006_NewSyll: SORGCEA3,
+  SOR_PSLE_1980_1981: SORPSLE19801981,
+  SOR_PSLE_1982_1992: SORPSLE19821992,
+  SOR_PSLE_1993_2012: SORPSLE19932012,
+  SOR_PSLE_2013: SORPSLE2013,
+  SOR_PSLE_before_1979: SORPSLEBefore1979
 };
 
 export default addDirToTemplatePath("seab", templates);
