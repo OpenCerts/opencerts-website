@@ -7,7 +7,7 @@ const members = [
       "NextCert helps you produce next-generation academic and professional certificates, that are cryptographically secure and verifiable.",
     website: "https://nextid.com",
     key: "nextid",
-    logo: "/static/images/partners/NEXTID_logo.png"
+    logo: "/static/images/collaborate/NEXTID_logo.png"
   },
   {
     name: "Edufied",
@@ -15,7 +15,7 @@ const members = [
       "Edufied provides a  secured and decentralized system for Certificate Issuers, Individuals and Employers to store & verify certifications and credentials using Blockchain Technology.",
     website: "https://edufied.network",
     key: "edified",
-    logo: "/static/images/partners/EDUFIED_logo.png"
+    logo: "/static/images/collaborate/EDUFIED_logo.png"
   },
   {
     name: "Ceito",
@@ -23,7 +23,7 @@ const members = [
       "Ceito makes it easy to integrate blockchain by providing a suite of lightweight APIs to help you create the best possible product for your users.",
     website: "https://www.ceito.io/",
     key: "ceito",
-    logo: "/static/images/partners/CEITO_logo.png"
+    logo: "/static/images/collaborate/CEITO_logo.png"
   }
 ];
 
@@ -51,24 +51,32 @@ const renderMembers = () =>
     </div>
   ));
 
-const PartnerPage = () => (
+const CollaboratePage = () => (
   <>
     <div className="container-fluid" style={{ backgroundColor: "#324353" }}>
       <div className={`conatiner bg-brand-dark text-white ${css["r-section"]}`}>
         <h1 className={`col-12 ${css["m-pd-0"]} ${css["section-width"]}`}>
-          Partners
+          Collaborate
         </h1>
       </div>
       <div className={`conatiner bg-brand-dark text-white ${css["r-section"]}`}>
         <div className={css["section-width"]}>
           <div className={`col-lg-68 col-md-12 my-3 ${css["m-pd-0"]}`}>
             <p>
-              OpenCerts has partnered with key companies to help you issue and
-              distribute certificates easily.
+              If you are from an institution and would like to get started on
+              OpenCerts, here are some companies that can help to issue your
+              certificates.
             </p>
             <p>
-              We work closely with these partners to provide a more transparent
-              and efficient system for all.
+              If you are from a company that can help to issue certificates and
+              would like to be added to this list, please &nbsp;
+              <a
+                href="https://form.gov.sg/5d01b2542ce4bb0011a86934"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                fill in this form.
+              </a>
             </p>
           </div>
         </div>
@@ -80,4 +88,4 @@ const PartnerPage = () => (
   </>
 );
 
-export default PartnerPage;
+export default CollaboratePage;

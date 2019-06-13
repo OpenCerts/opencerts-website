@@ -8,9 +8,9 @@ const navItems = [
     path: "/"
   },
   {
-    id: "partner",
-    label: "Partners",
-    path: "/partner"
+    id: "collaborate",
+    label: "Collaborate",
+    path: "/collaborate"
   },
   {
     id: "faq",
