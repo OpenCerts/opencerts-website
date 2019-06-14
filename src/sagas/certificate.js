@@ -42,7 +42,8 @@ const ANALYTICS_VERIFICATION_ERROR_CODE = {
   ISSUER_IDENTITY: 0,
   CERTIFICATE_HASH: 1,
   UNISSUED_CERTIFICATE: 2,
-  REVOKED_CERTIFICATE: 3
+  REVOKED_CERTIFICATE: 3,
+  CERTIFICATE_STORE: 4
 };
 
 export function* loadCertificateContracts({ payload }) {
@@ -403,6 +404,15 @@ export function* analyticsRevocationFail({ certificate }) {
   });
 }
 
+export function* analyticsStoreFail({ certificate }) {
+  yield analyticsEvent(window, {
+    category: "CERTIFICATE_ERROR",
+    action: get(certificate, "issuers[0].certificateStore"),
+    label: get(certificate, "id"),
+    value: ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_STORE
+  });
+}
+
 export default [
   takeEvery(types.UPDATE_CERTIFICATE, verifyCertificate),
   takeEvery(types.SENDING_CERTIFICATE, sendCertificate),
@@ -414,5 +424,6 @@ export default [
     analyticsRevocationFail
   ),
   takeEvery(types.VERIFYING_CERTIFICATE_ISSUED_FAILURE, analyticsIssuedFail),
-  takeEvery(types.VERIFYING_CERTIFICATE_HASH_FAILURE, analyticsHashFail)
+  takeEvery(types.VERIFYING_CERTIFICATE_HASH_FAILURE, analyticsHashFail),
+  takeEvery(types.VERIFYING_CERTIFICATE_STORE_FAILURE, analyticsStoreFail)
 ];
