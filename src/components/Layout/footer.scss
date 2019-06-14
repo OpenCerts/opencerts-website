@@ -1,14 +1,15 @@
 @import "../../styles/variables.scss";
 
 .footer {
-  margin: auto;
+  margin: 0 auto;
   position: relative;
   bottom: 0;
   width: 100%;
   height: auto;
   background-color: #324353;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  max-width: 1280px;
 
   a {
     font-family: "Montserrat", sans-serif;
