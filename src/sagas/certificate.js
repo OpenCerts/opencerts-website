@@ -89,16 +89,13 @@ export function* verifyCertificateStore({ certificate }) {
     );
 
     // Checks if issuing institution has a valid smart contract with OpenCerts
-    web3.eth
-      .getCode(contractStoreAddresses[0])
-      .then(bc => {
-        const bytecode =
-          "0x7135575eac76f1817c27b06c452bdc2b7e1b13240797415684e227def063a127";
-        if (web3.utils.keccak256(bc) !== bytecode) {
-          throw new Error("Smart contract does not exist");
-        }
-      })
-      .catch(error);
+    const bytecode =
+      "0x7135575eac76f1817c27b06c452bdc2b7e1b13240797415684e227def063a127";
+    const prom = yield web3.eth.getCode(contractStoreAddresses[0]);
+    const keccak = web3.utils.keccak256(prom);
+    if (keccak !== bytecode) {
+      throw new Error("Smart contract does not exist");
+    }
 
     // Checks if certificate has a valid certificate store address
     if (web3.utils.isAddress(contractStoreAddresses[0])) {
