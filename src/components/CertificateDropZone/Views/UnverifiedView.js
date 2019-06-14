@@ -39,7 +39,7 @@ const View = ({
     {
       title: "Certificate store address is invalid",
       message:
-        "The certificate store does not exist. Please check that you have a valid certificate store address in your file before proceeding.",
+        "Please check that you have a valid smart contract with us and a correct certificate store address before proceeding.",
       error: !storeStatus.verified
     }
   ];

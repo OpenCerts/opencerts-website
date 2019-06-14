@@ -87,11 +87,16 @@ export function* verifyCertificateStore({ certificate }) {
       issuer => issuer.certificateStore
     );
 
-    // const keccak = web3.eth
-    //   .getCode(contractStoreAddresses[0])
-    //   .then(bc => web3.utils.keccak256(bc))
-    //   .then(console.log);
-    // console.log("HERE");
+    web3.eth
+      .getCode(contractStoreAddresses[0])
+      .then(bc => {
+        const bytecode =
+          "0x7135575eac76f1817c27b06c452bdc2b7e1b13240797415684e227def063a127";
+        if (web3.utils.keccak256(bc) !== bytecode) {
+          throw new Error("Smart contract does not exist");
+        }
+      })
+      .catch(error);
 
     if (web3.utils.isAddress(contractStoreAddresses[0])) {
       yield put(verifyingCertificateStoreSuccess());
