@@ -1,26 +1,32 @@
-$brand-blue: #0099CC;
-$brand-orange: #FF9933;
-$light-grey: #E5E5E5;
-$grey-blue: #C1C9D1;
+$brand-blue: #0099cc;
+$brand-orange: #ff9933;
+$light-grey: #e5e5e5;
+$grey-blue: #c1c9d1;
 $brand-dark: #324353;
-$faint-blue: #F5F8FB;
-$faint-green: #F5FBF7;
+$faint-blue: #f5f8fb;
+$faint-green: #f5fbf7;
 
 $header-ui-bg: #f3f8fc;
-$low-translucency-white: rgba(255,255,255, 0.7);
+$low-translucency-white: rgba(255, 255, 255, 0.7);
 
 $success-color: #28a745;
-$warning-color: #FFBF00;
-$warning-background: #FFF9E8;
-$invalid-color: #E46767;
-$invalid-background: #FBEBE7;
+$warning-color: #ffbf00;
+$warning-background: #fff9e8;
+$invalid-color: #e46767;
+$invalid-background: #fbebe7;
 
 $btn-outline: $brand-dark;
 $round-btn-outline: $brand-dark;
 
 $max-width: 1280px;
 
-@mixin btn($color, $hover-bg: $color, $text: $color, $bg:$color, $hover-outline: $hover-bg) {
+@mixin btn(
+  $color,
+  $hover-bg: $color,
+  $text: $color,
+  $bg: $color,
+  $hover-outline: $hover-bg
+) {
   border: 1px solid $color;
   color: $text;
   background-color: $bg;
@@ -42,28 +48,30 @@ $max-width: 1280px;
 }
 
 @mixin round-btn {
-    border: 1px solid $round-btn-outline;
-    background-color: #fff;
-    border-radius: (50%);
-    display: block;
-    height: 50px;
-    width: 50px;
-    cursor: pointer;
-    
-    svg {
-      path, line {
-        stroke: $round-btn-outline;
-      }
-    }
+  border: 1px solid $round-btn-outline;
+  background-color: #fff;
+  border-radius: (50%);
+  display: block;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
 
-    &:hover {
-        background-color:$round-btn-outline;
-        box-shadow: 2px 2px 6px 0 #a7afb7;
-        svg path{
-          fill: $round-btn-outline;
-        }
-        path, line {
-          stroke: #fff;
-        }
+  svg {
+    path,
+    line {
+      stroke: $round-btn-outline;
     }
+  }
+
+  &:hover {
+    background-color: $round-btn-outline;
+    box-shadow: 2px 2px 6px 0 #a7afb7;
+    svg path {
+      fill: $round-btn-outline;
+    }
+    path,
+    line {
+      stroke: #fff;
+    }
+  }
 }
