@@ -87,6 +87,7 @@ export function* verifyCertificateStore({ certificate }) {
       issuer => issuer.certificateStore
     );
 
+    // Checks if issuing institution has a valid smart contract with OpenCerts
     web3.eth
       .getCode(contractStoreAddresses[0])
       .then(bc => {
@@ -98,6 +99,7 @@ export function* verifyCertificateStore({ certificate }) {
       })
       .catch(error);
 
+    // Checks if certificate has a valid certificate store address
     if (web3.utils.isAddress(contractStoreAddresses[0])) {
       yield put(verifyingCertificateStoreSuccess());
       return true;
