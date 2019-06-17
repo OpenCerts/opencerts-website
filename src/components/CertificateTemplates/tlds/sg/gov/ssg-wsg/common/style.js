@@ -193,7 +193,7 @@ export const specTextStyle = {
 };
 
 export const ssgLogoStyle = {
-  width: "70%",
+  width: "65%",
   height: "auto"
 };
 
