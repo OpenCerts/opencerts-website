@@ -38,7 +38,7 @@ $debug: false;
         font-size: 11pt; 
         text-align: left; 
         margin-left: 3cm;
-        font-family: "Times New Roman"; 
+        font-family: "Times New Roman", Serif; 
         font-weight: bold;
         color: rgb(83, 86, 90);
         margin-right: auto;
@@ -88,7 +88,7 @@ $debug: false;
     .cert-content { 
         display: block;
         font-size: 13pt; 
-        font-family: "Old English Text MT"; 
+        font-family: "Old English Text MT", Serif; 
         font-weight: bold;
         color: rgb(74, 75, 76);
         margin-left: auto;
@@ -99,7 +99,7 @@ $debug: false;
     .cert-content1 { 
         display: block;
         font-size: 13pt; 
-        font-family: "Old English Text MT"; 
+        font-family: "Old English Text MT", Serif; 
         font-weight: bold;
         margin-top: 10px;
         line-height: 1px;
@@ -108,7 +108,7 @@ $debug: false;
      .cert-headerdet { 
         display: block;
         font-size: 18pt; 
-        font-family: "Times New Roman"; 
+        font-family: "Times New Roman", Serif; 
         font-weight: bold;
         color: rgb(42, 41, 45);
         margin-left: auto;
@@ -118,7 +118,7 @@ $debug: false;
     .cert-name {
         display: block;
         font-size: 18pt; 
-        font-family: "Old English Text MT"; 
+        font-family: "Old English Text MT", Serif; 
         font-weight: bold;
         text-align: center;
         padding: 10px 0;
@@ -128,7 +128,7 @@ $debug: false;
     .cert-degree {
         display: block;
         font-size: 18pt; 
-        font-family: "Old English Text MT";
+        font-family: "Old English Text MT", Serif;
         font-feature-settings: smcp;
         text-align: center; 
         text-shadow: 1px 0 #888888; 
@@ -140,7 +140,7 @@ $debug: false;
     .cert-date {
         display: block;
         font-size: 15pt;
-        font-family: "Old English Text MT";
+        font-family: "Old English Text MT", Serif;
         font-style: normal;
         text-align: center;
         color: rgb(74, 75, 76);
@@ -150,7 +150,7 @@ $debug: false;
         display: block;
         width: 100%;
         font-size: 10pt; 
-        font-family: 'Old English Text MT'; 
+        font-family: 'Old English Text MT', Serif; 
         text-align: left;
         border: 0px solid;
         font-weight: bold;
@@ -160,7 +160,7 @@ $debug: false;
         text-align: center;
         width: 3cm;
         height: auto;
-        font-family: Garamond, 'times new roman';
+        font-family: Garamond, 'times new roman', Serif;
         font-size: 30pt;
         text-decoration: underline;
         margin-top: 5px;
@@ -168,7 +168,7 @@ $debug: false;
     };
     .cert-td11 {
         text-align: center;
-        font-family: arial, 'times new roman';
+        font-family: arial, 'times new roman', Serif;
         font-size: 10pt;
         width: auto;
         height: auto;
@@ -199,14 +199,14 @@ $debug: false;
     .cert-td31{
         text-align: center;
         font-size: 13pt;
-        font-family: "Old English Text MT";
+        font-family: "Old English Text MT", Serif;
         display: inline !important;
     };
 
     .cert-td32{
         text-align: center;
         font-size: 24pt;
-        font-family: "Old English Text MT";
+        font-family: "Old English Text MT", Serif;
         display: inline !important;
         line-height:70px;
     };
@@ -222,7 +222,7 @@ $debug: false;
     .cert-td41{
         text-align: center;
         color: #000000;
-        font-family:times new roman;
+        font-family: "times new roman", Serif;
         font-size:11pt;
         height: 12px;
         font-weight: bold;
@@ -238,7 +238,7 @@ $debug: false;
     .cert-td7{
          text-align: center;
          font-size: 24pt;
-         font-family: "Old English Text MT";
+         font-family: "Old English Text MT", Serif;
          display: inline !important;
          line-height:70px;
     };

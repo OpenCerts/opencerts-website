@@ -16,7 +16,7 @@ $debug: false;
         }
     }
     
-    font-family: Arial; 
+    font-family: Arial, Serif; 
     
     .a4-portrait { 
         background: white; 
@@ -34,7 +34,7 @@ $debug: false;
         display: block;
         font-size: 26pt; 
         text-align: center; 
-        font-family: "Times New Roman"; 
+        font-family: "Times New Roman", Serif; 
         font-weight: bold;
         color: rgb(83, 86, 90);
         margin-left: auto;
@@ -57,7 +57,7 @@ $debug: false;
     .cert-content { 
         display: block;
         font-size: 16pt; 
-        font-family: "Times New Roman"; 
+        font-family: "Times New Roman", Serif; 
         font-weight: bold;
         color: rgb(83, 86, 90);
         margin-left: auto;
@@ -69,7 +69,7 @@ $debug: false;
     .cert-name {
         display: block;
         font-size: 23pt; 
-        font-family: "Times New Roman"; 
+        font-family: "Times New Roman", Serif; 
         font-style: italic;
         text-align: center;
         color: rgb(83, 86, 90);
@@ -80,7 +80,7 @@ $debug: false;
     .cert-degree {
         display: block;
         font-size: 21pt; 
-        font-family: "Times New Roman"; 
+        font-family: "Times New Roman", Serif; 
         font-style: normal;
         text-align: center;
         color: rgb(203, 92, 82);
@@ -90,7 +90,7 @@ $debug: false;
     .cert-date {
         display: block;
         font-size: 15pt; 
-        font-family: "Time New Roman"; 
+        font-family: "Time New Roman", Serif; 
         font-style: normal;
         text-align: center;
         color: rgb(83, 86, 90);
@@ -101,7 +101,7 @@ $debug: false;
         display: block;
         width: 80%;
         font-size: 12pt; 
-        font-family: "Times New Roman"; 
+        font-family: "Times New Roman", Serif; 
         font-style: italic;
         color: rgb(83, 86, 90);
         text-align: right;
