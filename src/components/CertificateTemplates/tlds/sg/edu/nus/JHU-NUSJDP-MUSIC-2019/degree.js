@@ -5,6 +5,7 @@ import {
   capitalizedText,
   sassClassNames,
   renderImage,
+  renderVoid,
   NUS_LOGO,
   JHU_LOGO
 } from "../common";
@@ -18,18 +19,6 @@ class Degree extends Component {
     super(props);
     this.dataSource = this.props.dataSource;
   }
-
-  // render an empty div with specified height
-  renderVoid = height => (
-    <div
-      style={{
-        display: "block",
-        width: "100%",
-        height,
-        border: "0px solid"
-      }}
-    />
-  );
 
   // render NUS name
   renderNUSTitle = () => (
@@ -91,7 +80,7 @@ class Degree extends Component {
             <td>have conferred upon</td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.5cm")}</td>
+            <td>{renderVoid("0.5cm")}</td>
           </tr>
           <tr>
             <td className={cls("cert-content-name")}>
@@ -99,13 +88,13 @@ class Degree extends Component {
             </td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.3cm")}</td>
+            <td>{renderVoid("0.3cm")}</td>
           </tr>
           <tr>
             <td>the degree of</td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.2cm")}</td>
+            <td>{renderVoid("0.2cm")}</td>
           </tr>
           <tr>
             <td>{this.renderDegreeTitle(degreeData)}</td>
@@ -114,7 +103,7 @@ class Degree extends Component {
             <td>{this.renderDegreeMajor(degreeData)}</td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.2cm")}</td>
+            <td>{renderVoid("0.2cm")}</td>
           </tr>
           <tr>
             <td>
@@ -219,7 +208,7 @@ class Degree extends Component {
         <div className={cls("jhu-custom")}>
           <article>
             <div style={{ border: "0px solid" }}>
-              {this.renderVoid("3cm")}
+              {renderVoid("3cm")}
               <table className={cls("cert-header-table")}>
                 <tbody>
                   <tr>
@@ -229,7 +218,7 @@ class Degree extends Component {
                     <td width="15%" />
                   </tr>
                   <tr>
-                    <td>{this.renderVoid("0.5cm")}</td>
+                    <td>{renderVoid("0.5cm")}</td>
                   </tr>
                   <tr>
                     <td />
@@ -244,9 +233,9 @@ class Degree extends Component {
                   </tr>
                 </tbody>
               </table>
-              {this.renderVoid("0.2cm")}
+              {renderVoid("0.2cm")}
               <div style={{ textAlign: "center" }}>{this.renderContent()}</div>
-              {this.renderVoid("0.4cm")}
+              {renderVoid("0.4cm")}
             </div>
             <div style={{ border: "0px solid" }}>{this.renderSigns()}</div>
           </article>

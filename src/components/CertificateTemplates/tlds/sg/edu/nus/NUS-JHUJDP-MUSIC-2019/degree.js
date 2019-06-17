@@ -5,8 +5,9 @@ import {
   capitalizedText,
   sassClassNames,
   renderImage,
+  renderVoid,
+  renderNUSSeal,
   NUS_LOGO,
-  NUS_SEAL,
   JHU_LOGO
 } from "../common";
 import scss from "./degree.scss";
@@ -19,18 +20,6 @@ class Degree extends Component {
     super(props);
     this.dataSource = this.props.dataSource;
   }
-
-  // render an empty div with specified height
-  renderVoid = height => (
-    <div
-      style={{
-        display: "block",
-        width: "100%",
-        height,
-        border: "0px solid"
-      }}
-    />
-  );
 
   // render NUS name
   renderNUSTitle = () => (
@@ -67,9 +56,6 @@ class Degree extends Component {
     return html;
   };
 
-  // render the official seal
-  renderSeal = () => <img src={NUS_SEAL} className={cls("cert-seal")} />;
-
   // render starting phrase before name
   renderContent() {
     const degreeData = this.dataSource.additionalData.degreeData[0];
@@ -85,7 +71,7 @@ class Degree extends Component {
             <td width="12%" />
           </tr>
           <tr>
-            <td colSpan="3">{this.renderVoid("0.5cm")}</td>
+            <td colSpan="3">{renderVoid("0.5cm")}</td>
           </tr>
           <tr>
             <td />
@@ -95,7 +81,7 @@ class Degree extends Component {
             <td />
           </tr>
           <tr>
-            <td colSpan="3">{this.renderVoid("0.5cm")}</td>
+            <td colSpan="3">{renderVoid("0.5cm")}</td>
           </tr>
           <tr>
             <td />
@@ -133,19 +119,19 @@ class Degree extends Component {
             <td />
           </tr>
           <tr>
-            <td colSpan="3">{this.renderVoid("0.2cm")}</td>
+            <td colSpan="3">{renderVoid("0.2cm")}</td>
           </tr>
           <tr>
             <td colSpan="3">{this.renderDegreeTitle(degreeData)}</td>
           </tr>
           <tr>
-            <td colSpan="3">{this.renderVoid("0.2cm")}</td>
+            <td colSpan="3">{renderVoid("0.2cm")}</td>
           </tr>
           <tr>
             <td colSpan="3">on</td>
           </tr>
           <tr>
-            <td colSpan="3">{this.renderVoid("0.3cm")}</td>
+            <td colSpan="3">{renderVoid("0.3cm")}</td>
           </tr>
           <tr>
             <td colSpan="3" className={cls("cert-content-date")}>
@@ -192,7 +178,7 @@ class Degree extends Component {
             </td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.5cm")}</td>
+            <td>{renderVoid("0.5cm")}</td>
           </tr>
           <tr>
             <td />
@@ -213,11 +199,11 @@ class Degree extends Component {
             </td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.3cm")}</td>
+            <td>{renderVoid("0.3cm")}</td>
           </tr>
           <tr>
             <td colSpan="3" style={{ textAlign: "center" }}>
-              {this.renderSeal()}
+              {renderNUSSeal()}
             </td>
           </tr>
         </tbody>
@@ -234,7 +220,7 @@ class Degree extends Component {
         <div className={cls("a4-portrait")}>
           <article>
             <div style={{ border: "0px solid" }}>
-              {this.renderVoid("1.6cm")}
+              {renderVoid("1.6cm")}
               <table className={cls("cert-header-table")}>
                 <tbody>
                   <tr>
@@ -248,7 +234,7 @@ class Degree extends Component {
                   </tr>
                   <tr>
                     <td />
-                    <td>{this.renderVoid("0.1cm")}</td>
+                    <td>{renderVoid("0.1cm")}</td>
                   </tr>
                   <tr>
                     <td />
@@ -257,9 +243,9 @@ class Degree extends Component {
                   </tr>
                 </tbody>
               </table>
-              {this.renderVoid("0.6cm")}
+              {renderVoid("0.6cm")}
               <div style={{ textAlign: "center" }}>{this.renderContent()}</div>
-              {this.renderVoid("1cm")}
+              {renderVoid("1cm")}
             </div>
             <div style={{ border: "0px solid" }}>{this.renderSigns()}</div>
           </article>

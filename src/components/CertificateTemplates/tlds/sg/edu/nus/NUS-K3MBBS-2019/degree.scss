@@ -30,30 +30,6 @@ $debug: false;
         box-sizing: border-box; 
     }
     
-    .cert-header {
-        display: block;
-        font-size: 26pt; 
-        text-align: center; 
-        font-family: "Times New Roman", Serif; 
-        font-weight: bold;
-        color: rgb(83, 86, 90);
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .cert-logo {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 2.8cm;
-        height: 3.56cm;
-    }
-    
-    .cert-seal {
-        display: float;
-        width: 4.95cm;
-    }
-    
     .cert-justify {
         text-align-last: justify;
     }

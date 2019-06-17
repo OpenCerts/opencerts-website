@@ -1,5 +1,7 @@
 import React from "react";
 import { tz } from "moment-timezone";
+import { NUS_LOGO } from "./imgNUSLogo";
+import { NUS_SEAL } from "./imgNUSSeal";
 
 export const TIMEZONE = "Asia/Singapore";
 
@@ -208,4 +210,61 @@ export const capitalizedText = inputString => {
       )}`;
   }
   return txt;
+};
+
+// render an empty div with specified height
+export const renderVoid = height => (
+  <div
+    style={{
+      display: "block",
+      width: "100%",
+      height,
+      border: "0px solid"
+    }}
+  />
+);
+
+// render NUS title
+export const renderNUSTitle = () => {
+  const style = {
+    display: "block",
+    fontSize: "26pt",
+    textAlign: "center",
+    fontFamily: "'Times New Roman', Serif",
+    fontWeight: "bold",
+    color: "rgb(83, 86, 90)",
+    marginLeft: "auto",
+    marginRight: "auto"
+  };
+  const html = (
+    <div style={style}>
+      NATIONAL UNIVERSITY
+      <br />
+      OF SINGAPORE
+    </div>
+  );
+  return html;
+};
+
+// render NUS logo
+export const renderNUSLogo = () => {
+  const style = {
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
+    width: "2.8cm",
+    height: "3.56cm"
+  };
+  const html = <img src={NUS_LOGO} style={style} />;
+  return html;
+};
+
+// render NUS seal
+export const renderNUSSeal = () => {
+  const style = {
+    display: "float",
+    width: "4.95cm"
+  };
+  const html = <img src={NUS_SEAL} style={style} />;
+  return html;
 };

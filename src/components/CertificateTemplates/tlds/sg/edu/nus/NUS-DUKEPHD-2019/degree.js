@@ -5,6 +5,7 @@ import {
   capitalizedText,
   sassClassNames,
   renderImage,
+  renderVoid,
   NUS_LOGO,
   NUS_SEAL
 } from "../common";
@@ -18,18 +19,6 @@ class Degree extends Component {
     super(props);
     this.dataSource = this.props.dataSource;
   }
-
-  // render an empty div with specified height
-  renderVoid = height => (
-    <div
-      style={{
-        display: "block",
-        width: "100%",
-        height,
-        border: "0px solid"
-      }}
-    />
-  );
 
   // render cert title
   renderTitle = () => (
@@ -127,7 +116,7 @@ class Degree extends Component {
             </td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.32cm")}</td>
+            <td>{renderVoid("0.32cm")}</td>
           </tr>
           <tr>
             <td>
@@ -136,7 +125,7 @@ class Degree extends Component {
             </td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.32cm")}</td>
+            <td>{renderVoid("0.32cm")}</td>
           </tr>
           <tr>
             <td>
@@ -147,7 +136,7 @@ class Degree extends Component {
             </td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.78cm")}</td>
+            <td>{renderVoid("0.78cm")}</td>
           </tr>
           <tr>
             <td className={cls("cert-date")}>
@@ -213,11 +202,11 @@ class Degree extends Component {
         <div className={cls("a4-portrait")}>
           <article>
             <div style={{ height: "23.4cm", border: "0px solid" }}>
-              {this.renderVoid("2.13cm")}
+              {renderVoid("2.13cm")}
               {this.renderTitle()}
-              {this.renderVoid("0.59cm")}
+              {renderVoid("0.59cm")}
               {this.renderLogo()}
-              {this.renderVoid("0.93cm")}
+              {renderVoid("0.93cm")}
               {this.renderContent()}
             </div>
             <div style={{ border: "0px solid" }}>{this.renderSigs()}</div>

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {
   capitalizedText,
   sassClassNames,
+  renderVoid,
   NUS_LOGO,
   NUS_SEAL,
   DUKE_LOGO,
@@ -19,18 +20,6 @@ class Degree extends Component {
     super(props);
     this.dataSource = this.props.dataSource;
   }
-
-  // render an empty div with specified height
-  renderVoid = height => (
-    <div
-      style={{
-        display: "block",
-        width: "100%",
-        height,
-        border: "0px solid"
-      }}
-    />
-  );
 
   // render degree and honours
   renderDegree = degreeData => {
@@ -308,7 +297,7 @@ class Degree extends Component {
         <div className={cls("a4-portrait")}>
           <article>
             <div style={{ height: "auto", border: "0px solid" }}>
-              {this.renderVoid("0.93cm")}
+              {renderVoid("0.93cm")}
               {this.renderHeader()}
               {this.renderContent()}
             </div>

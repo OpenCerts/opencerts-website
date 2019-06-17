@@ -5,8 +5,9 @@ import {
   capitalizedText,
   sassClassNames,
   renderImage,
-  NUS_YALENUS_LOGO,
-  NUS_SEAL
+  renderVoid,
+  renderNUSSeal,
+  NUS_YALENUS_LOGO
 } from "../common";
 import scss from "./degree.scss";
 
@@ -19,25 +20,10 @@ class Degree extends Component {
     this.dataSource = this.props.dataSource;
   }
 
-  // render an empty div with specified height
-  renderVoid = height => (
-    <div
-      style={{
-        display: "block",
-        width: "100%",
-        height,
-        border: "0px solid"
-      }}
-    />
-  );
-
   // render logo
   renderLogo = () => (
     <img src={NUS_YALENUS_LOGO} className={cls("cert-logo")} />
   );
-
-  // render seal
-  renderSeal = () => <img src={NUS_SEAL} className={cls("cert-seal")} />;
 
   // render taglone
   renderTagline = () => {
@@ -87,7 +73,7 @@ class Degree extends Component {
             <td>certifies that</td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.3cm")}</td>
+            <td>{renderVoid("0.3cm")}</td>
           </tr>
           <tr>
             <td className={cls("cert-content-name")}>
@@ -95,7 +81,7 @@ class Degree extends Component {
             </td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.3cm")}</td>
+            <td>{renderVoid("0.3cm")}</td>
           </tr>
           <tr>
             <td>
@@ -107,13 +93,13 @@ class Degree extends Component {
             <td>of the College was awarded the degree of</td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.3cm")}</td>
+            <td>{renderVoid("0.3cm")}</td>
           </tr>
           <tr>
             <td>{this.renderDegreeTitle(degreeData)}</td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.3cm")}</td>
+            <td>{renderVoid("0.3cm")}</td>
           </tr>
           <tr>
             <td style={{ fontWeight: "bold" }}>{dateConferred}.</td>
@@ -140,7 +126,7 @@ class Degree extends Component {
         <tbody>
           <tr>
             <td width="33%">{sig1}</td>
-            <td rowSpan="5">{this.renderSeal()}</td>
+            <td rowSpan="5">{renderNUSSeal()}</td>
             <td>{sig2}</td>
           </tr>
           <tr>
@@ -156,7 +142,7 @@ class Degree extends Component {
             </td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.3cm")}</td>
+            <td>{renderVoid("0.3cm")}</td>
             <td />
           </tr>
           <tr>
@@ -185,14 +171,14 @@ class Degree extends Component {
         <div className={cls("a4-landscape")}>
           <article>
             <div style={{ height: "13cm", border: "0px solid" }}>
-              {this.renderVoid("2cm")}
+              {renderVoid("2cm")}
               <table className={cls("cert-header-table")}>
                 <tbody>
                   <tr>
                     <td>{this.renderLogo()}</td>
                   </tr>
                   <tr>
-                    <td>{this.renderVoid("0.1cm")}</td>
+                    <td>{renderVoid("0.1cm")}</td>
                   </tr>
                   <tr>
                     <td style={{ textAlign: "center" }}>
@@ -200,7 +186,7 @@ class Degree extends Component {
                     </td>
                   </tr>
                   <tr>
-                    <td>{this.renderVoid("0.1cm")}</td>
+                    <td>{renderVoid("0.1cm")}</td>
                   </tr>
                 </tbody>
               </table>

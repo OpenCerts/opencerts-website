@@ -5,8 +5,9 @@ import {
   capitalizedText,
   sassClassNames,
   renderImage,
+  renderVoid,
+  renderNUSSeal,
   NUS_LOGO,
-  NUS_SEAL,
   ANU_LOGO,
   ANU_SEAL
 } from "../common";
@@ -176,7 +177,7 @@ class Degree extends Component {
             </td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.32cm")}</td>
+            <td>{renderVoid("0.32cm")}</td>
           </tr>
           <tr>
             <td>
@@ -185,7 +186,7 @@ class Degree extends Component {
             </td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.2cm")}</td>
+            <td>{renderVoid("0.2cm")}</td>
           </tr>
           <tr>
             <td>
@@ -196,7 +197,7 @@ class Degree extends Component {
             </td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.20cm")}</td>
+            <td>{renderVoid("0.20cm")}</td>
           </tr>
           <tr>
             <td className={cls("cert-date")}>
@@ -210,9 +211,7 @@ class Degree extends Component {
     return html;
   }
 
-  // render seal
-  renderSealNUS = () => <img src={NUS_SEAL} className={cls("cert-seal")} />;
-
+  // render ANU seal
   renderSealANU = () => <img src={ANU_SEAL} className={cls("cert-seal")} />;
 
   // render signatures
@@ -276,7 +275,7 @@ class Degree extends Component {
             </td>
           </tr>
           <tr>
-            <td>{this.renderSealNUS()}</td>
+            <td style={{ paddingLeft: "40px" }}>{renderNUSSeal()}</td>
             <td>{this.renderSealANU()}</td>
           </tr>
         </tbody>
@@ -292,7 +291,7 @@ class Degree extends Component {
         <div className={cls("a4-portrait")}>
           <article>
             <div style={{ height: "18.4cm", border: "0px solid" }}>
-              {this.renderVoid("1cm")}
+              {renderVoid("1cm")}
               <table width="100%">
                 <tbody>
                   <tr>
@@ -305,7 +304,7 @@ class Degree extends Component {
                   </tr>
                 </tbody>
               </table>
-              {this.renderVoid("0.93cm")}
+              {renderVoid("0.93cm")}
               {this.renderContent()}
             </div>
             <div style={{ border: "0px solid" }}>{this.renderSigs()}</div>

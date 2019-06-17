@@ -5,6 +5,7 @@ import {
   capitalizedText,
   sassClassNames,
   renderImage,
+  renderVoid,
   UNC_SEAL
 } from "../common";
 import scss from "./degree.scss";
@@ -17,18 +18,6 @@ class Degree extends Component {
     super(props);
     this.dataSource = this.props.dataSource;
   }
-
-  // render an empty div with specified height
-  renderVoid = height => (
-    <div
-      style={{
-        display: "block",
-        width: "100%",
-        height,
-        border: "0px solid"
-      }}
-    />
-  );
 
   // render NUS name
   renderNUSTitle = () => (
@@ -78,9 +67,9 @@ class Degree extends Component {
     const html = (
       <Fragment>
         <div style={{ fontSize: "28pt" }}>
-          {this.renderVoid("0.5cm")}
+          {renderVoid("0.5cm")}
           with a major in
-          {this.renderVoid("0.5cm")}
+          {renderVoid("0.5cm")}
         </div>
         <div className={cls("cert-degree-major")}>{degreeMajor}</div>
       </Fragment>
@@ -110,7 +99,7 @@ class Degree extends Component {
             </td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.7cm")}</td>
+            <td>{renderVoid("0.7cm")}</td>
           </tr>
           <tr>
             <td className={cls("cert-content-name")}>
@@ -118,7 +107,7 @@ class Degree extends Component {
             </td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.7cm")}</td>
+            <td>{renderVoid("0.7cm")}</td>
           </tr>
           <tr>
             <td className={cls("cert-content-small")}>
@@ -130,16 +119,16 @@ class Degree extends Component {
             <td>for the degree of</td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.2cm")}</td>
+            <td>{renderVoid("0.2cm")}</td>
           </tr>
           <tr>
             <td>{this.renderFirstDegreeTitle(degreeData)}</td>
           </tr>
           <tr>
             <td style={{ fontSize: "28pt" }}>
-              {this.renderVoid("0.5cm")}
+              {renderVoid("0.5cm")}
               and
-              {this.renderVoid("0.3cm")}
+              {renderVoid("0.3cm")}
             </td>
           </tr>
           <tr>
@@ -149,7 +138,7 @@ class Degree extends Component {
             <td>{this.renderDegreeMajor(degreeData)}</td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.5cm")}</td>
+            <td>{renderVoid("0.5cm")}</td>
           </tr>
           <tr>
             <td>has been conferred the degrees with all the rights, honors,</td>
@@ -158,7 +147,7 @@ class Degree extends Component {
             <td>responsibilities, and privileges pertaining thereunto.</td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.5cm")}</td>
+            <td>{renderVoid("0.5cm")}</td>
           </tr>
           <tr>
             <td>Given on {dayMonthConferred},</td>
@@ -276,7 +265,7 @@ class Degree extends Component {
                 marginLeft: "6.4cm"
               }}
             >
-              {this.renderVoid("3cm")}
+              {renderVoid("3cm")}
               <div className={cls("cert-seal")}>{this.renderSeal()}</div>
               <table className={cls("cert-header-table")}>
                 <tbody>
@@ -299,9 +288,9 @@ class Degree extends Component {
                   </tr>
                 </tbody>
               </table>
-              {this.renderVoid("0.5cm")}
+              {renderVoid("0.5cm")}
               <div style={{ textAlign: "center" }}>{this.renderContent()}</div>
-              {this.renderVoid("1cm")}
+              {renderVoid("1cm")}
             </div>
             <div style={{ border: "0px solid", marginLeft: "6.4cm" }}>
               {this.renderSigns()}

@@ -4,9 +4,11 @@ import {
   isoDateToLocalLong,
   sassClassNames,
   renderImage,
-  capitalizedText,
-  NUS_LOGO,
-  NUS_SEAL
+  renderVoid,
+  renderNUSTitle,
+  renderNUSLogo,
+  renderNUSSeal,
+  capitalizedText
 } from "../common";
 import scss from "./degree.scss";
 
@@ -31,30 +33,6 @@ class Degree extends Component {
     super(props);
     this.dataSource = this.props.dataSource;
   }
-
-  // render an empty div with specified height
-  renderVoid = height => (
-    <div
-      style={{
-        display: "block",
-        width: "100%",
-        height,
-        border: "0px solid"
-      }}
-    />
-  );
-
-  // render cert title
-  renderTitle1 = () => (
-    <div className={cls("cert-header")}>
-      NATIONAL UNIVERSITY
-      <br />
-      OF SINGAPORE
-    </div>
-  );
-
-  // render logo
-  renderLogo = () => <img src={NUS_LOGO} className={cls("cert-logo")} />;
 
   // render degree and honours
   renderDegree = degreeData => {
@@ -161,7 +139,7 @@ class Degree extends Component {
             </td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.32cm")}</td>
+            <td>{renderVoid("0.32cm")}</td>
           </tr>
           <tr>
             <td>
@@ -170,7 +148,7 @@ class Degree extends Component {
             </td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.32cm")}</td>
+            <td>{renderVoid("0.32cm")}</td>
           </tr>
           <tr>
             <td>
@@ -181,7 +159,7 @@ class Degree extends Component {
             </td>
           </tr>
           <tr>
-            <td>{this.renderVoid("0.78cm")}</td>
+            <td>{renderVoid("0.78cm")}</td>
           </tr>
           <tr>
             <td className={cls("cert-date")}>
@@ -208,7 +186,7 @@ class Degree extends Component {
         <tbody>
           <tr>
             <td rowSpan="2" width="50%" align="center">
-              {this.renderSeal()}
+              {renderNUSSeal()}
             </td>
             <td align="center">
               {/* signature 1 */}
@@ -236,9 +214,6 @@ class Degree extends Component {
     return html;
   };
 
-  // render seal
-  renderSeal = () => <img src={NUS_SEAL} className={cls("cert-seal")} />;
-
   // main render
   render() {
     const html = (
@@ -246,11 +221,11 @@ class Degree extends Component {
         <div className={cls("a4-portrait")}>
           <article>
             <div style={{ height: "23.4cm", border: "0px solid" }}>
-              {this.renderVoid("2.13cm")}
-              {this.renderTitle1()}
-              {this.renderVoid("0.59cm")}
-              {this.renderLogo()}
-              {this.renderVoid("0.93cm")}
+              {renderVoid("2.13cm")}
+              {renderNUSTitle()}
+              {renderVoid("0.59cm")}
+              {renderNUSLogo()}
+              {renderVoid("0.93cm")}
               {this.renderContent()}
             </div>
             <div style={{ border: "0px solid" }}>{this.renderSigs()}</div>

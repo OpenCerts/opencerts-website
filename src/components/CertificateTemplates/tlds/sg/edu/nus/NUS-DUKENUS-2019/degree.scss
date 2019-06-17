@@ -6,6 +6,16 @@ $debug: false;
 
 .nus-degree {
 
+    @import url(//db.onlinewebfonts.com/c/a0f33b8a3febb69aa498dba7d9e8cab2?family=Old+English+Text+MT+Std);
+    @font-face {font-family: "Old English Text MT Std";
+        src: url("//db.onlinewebfonts.com/t/a0f33b8a3febb69aa498dba7d9e8cab2.eot");
+        src: url("//db.onlinewebfonts.com/t/a0f33b8a3febb69aa498dba7d9e8cab2.eot?#iefix") format("embedded-opentype"),
+        url("//db.onlinewebfonts.com/t/a0f33b8a3febb69aa498dba7d9e8cab2.woff2") format("woff2"),
+        url("//db.onlinewebfonts.com/t/a0f33b8a3febb69aa498dba7d9e8cab2.woff") format("woff"),
+        url("//db.onlinewebfonts.com/t/a0f33b8a3febb69aa498dba7d9e8cab2.ttf") format("truetype"),
+        url("//db.onlinewebfonts.com/t/a0f33b8a3febb69aa498dba7d9e8cab2.svg#Old English Text MT Std") format("svg");
+    }
+
     @if ($debug) {
         table td {
             border: 1px solid blue; 
@@ -88,7 +98,7 @@ $debug: false;
     .cert-content { 
         display: block;
         font-size: 13pt; 
-        font-family: "Old English Text MT", Serif; 
+        font-family: "Old English Text MT Std", "Old English Text MT", Serif; 
         font-weight: bold;
         color: rgb(74, 75, 76);
         margin-left: auto;
@@ -99,7 +109,7 @@ $debug: false;
     .cert-content1 { 
         display: block;
         font-size: 13pt; 
-        font-family: "Old English Text MT", Serif; 
+        font-family: "Old English Text MT Std", "Old English Text MT", Serif; 
         font-weight: bold;
         margin-top: 10px;
         line-height: 1px;
@@ -118,7 +128,7 @@ $debug: false;
     .cert-name {
         display: block;
         font-size: 18pt; 
-        font-family: "Old English Text MT", Serif; 
+        font-family: "Old English Text MT Std", "Old English Text MT", Serif; 
         font-weight: bold;
         text-align: center;
         padding: 10px 0;
@@ -128,7 +138,7 @@ $debug: false;
     .cert-degree {
         display: block;
         font-size: 18pt; 
-        font-family: "Old English Text MT", Serif;
+        font-family: "Old English Text MT Std", "Old English Text MT", Serif;
         font-feature-settings: smcp;
         text-align: center; 
         text-shadow: 1px 0 #888888; 
@@ -140,7 +150,7 @@ $debug: false;
     .cert-date {
         display: block;
         font-size: 15pt;
-        font-family: "Old English Text MT", Serif;
+        font-family: "Old English Text MT Std", "Old English Text MT", Serif;
         font-style: normal;
         text-align: center;
         color: rgb(74, 75, 76);
@@ -199,14 +209,14 @@ $debug: false;
     .cert-td31{
         text-align: center;
         font-size: 13pt;
-        font-family: "Old English Text MT", Serif;
+        font-family: "Old English Text MT Std", "Old English Text MT", Serif;
         display: inline !important;
     }
 
     .cert-td32{
         text-align: center;
         font-size: 24pt;
-        font-family: "Old English Text MT", Serif;
+        font-family: "Old English Text MT Std", "Old English Text MT", Serif;
         display: inline !important;
         line-height:70px;
     }
@@ -238,7 +248,7 @@ $debug: false;
     .cert-td7{
          text-align: center;
          font-size: 24pt;
-         font-family: "Old English Text MT", Serif;
+         font-family: "Old English Text MT Std", "Old English Text MT", Serif;
          display: inline !important;
          line-height:70px;
     }
