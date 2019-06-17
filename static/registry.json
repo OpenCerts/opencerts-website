@@ -1,5 +1,14 @@
 {
   "issuers": {
+    "0xcc052fE14a3b017554e66fB87582B2a97C712C0a": {
+      "name": "BitDegree Foundation",
+      "displayCard": true,
+      "website": "https://www.bitdegree.org",
+      "email": "hello@bitdegree.org",
+      "phone": "+37061780199",
+      "logo": "/static/images/BITDEGREE_logo.svg",
+      "id": "bitdegree-registry"
+    },    
     "0x007d40224f6562461633ccfbaffd359ebb2fc9ba": {
       "name": "Government Technology Agency of Singapore (GovTech)",
       "displayCard": true,
