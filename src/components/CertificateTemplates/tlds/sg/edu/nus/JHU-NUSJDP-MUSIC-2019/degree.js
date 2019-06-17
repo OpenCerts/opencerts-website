@@ -43,9 +43,7 @@ class Degree extends Component {
   // render logos
   renderNUSLogo = () => <img src={NUS_LOGO} className={cls("cert-logo-nus")} />;
 
-  renderJHULogo = () => (
-    <img src={JHU_LOGO} className={cls("cert-logo-jhu")} />
-  );
+  renderJHULogo = () => <img src={JHU_LOGO} className={cls("cert-logo-jhu")} />;
 
   // render degree title
   renderDegreeTitle = degreeData => {

@@ -78,7 +78,7 @@ class Degree extends Component {
   };
 
   // render the official seal
-  renderSeal = () => <img src={NUS_SEAL} className={cls("cert-seal")} />
+  renderSeal = () => <img src={NUS_SEAL} className={cls("cert-seal")} />;
 
   // render starting phrase before name
   renderContent() {

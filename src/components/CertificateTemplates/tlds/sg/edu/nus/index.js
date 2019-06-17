@@ -1,43 +1,43 @@
 import dynamic from "template-utils/dynamic";
 import { addDirToTemplatePath } from "template-utils/addDirToTemplatePath";
 
-const NUSK12019 = dynamic(() => 
+const NUSK12019 = dynamic(() =>
   import("./NUS-K1-2019" /* webpackChunkName: "NUSTemplates" */)
 );
-const NUSK3MBBS2019 = dynamic(() => 
+const NUSK3MBBS2019 = dynamic(() =>
   import("./NUS-K3MBBS-2019" /* webpackChunkName: "NUSTemplates" */)
 );
-const NUSDUKENUS2019 = dynamic(() => 
+const NUSDUKENUS2019 = dynamic(() =>
   import("./NUS-DUKENUS-2019" /* webpackChunkName: "NUSTemplates" */)
 );
-const NUSDUKEPHD2019 = dynamic(() => 
+const NUSDUKEPHD2019 = dynamic(() =>
   import("./NUS-DUKEPHD-2019" /* webpackChunkName: "NUSTemplates" */)
 );
-const NUSYALE2019 = dynamic(() => 
+const NUSYALE2019 = dynamic(() =>
   import("./NUS-YALE-2019" /* webpackChunkName: "NUSTemplates" */)
 );
-const ANUNUSJDPBSOCSC2019 = dynamic(() => 
+const ANUNUSJDPBSOCSC2019 = dynamic(() =>
   import("./ANU-NUSJDP-BSOCSC-2019" /* webpackChunkName: "NUSTemplates" */)
 );
-const NUSANUJDPBA2019 = dynamic(() => 
+const NUSANUJDPBA2019 = dynamic(() =>
   import("./NUS-ANUJDP-BA-2019" /* webpackChunkName: "NUSTemplates" */)
 );
-const NUSICLJDP2019 = dynamic(() => 
+const NUSICLJDP2019 = dynamic(() =>
   import("./NUS-ICLJDP-2019" /* webpackChunkName: "NUSTemplates" */)
 );
-const NUSMUSIC2019 = dynamic(() => 
+const NUSMUSIC2019 = dynamic(() =>
   import("./NUS-MUSIC-2019" /* webpackChunkName: "NUSTemplates" */)
 );
-const NUSJHUJDPMUSIC2019 = dynamic(() => 
+const NUSJHUJDPMUSIC2019 = dynamic(() =>
   import("./NUS-JHUJDP-MUSIC-2019" /* webpackChunkName: "NUSTemplates" */)
 );
-const JHUNUSJDPMUSIC2019 = dynamic(() => 
+const JHUNUSJDPMUSIC2019 = dynamic(() =>
   import("./JHU-NUSJDP-MUSIC-2019" /* webpackChunkName: "NUSTemplates" */)
 );
-const NUSUNCJDP2019 = dynamic(() => 
+const NUSUNCJDP2019 = dynamic(() =>
   import("./NUS-UNCJDP-2019" /* webpackChunkName: "NUSTemplates" */)
 );
-const NUSTSUGGD2019 = dynamic(() => 
+const NUSTSUGGD2019 = dynamic(() =>
   import("./NUSTS-UGGD-2019" /* webpackChunkName: "NUSTemplates" */)
 );
 

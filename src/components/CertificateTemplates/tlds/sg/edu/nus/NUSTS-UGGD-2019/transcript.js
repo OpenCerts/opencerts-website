@@ -1324,7 +1324,7 @@ class Transcript extends Component {
         for (let k = this.maxRows; k >= 0; k -= 1) {
           const node = this.rowEl(i, j, k);
           if (node)
-            if (node.filled === "false" ) node.remove();
+            if (node.filled === "false") node.remove();
             else {
               node.removeAttribute("id");
               node.removeAttribute("filled");

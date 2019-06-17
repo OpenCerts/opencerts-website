@@ -53,9 +53,7 @@ class Degree extends Component {
   // render logos
   renderNUSLogo = () => <img src={NUS_LOGO} className={cls("cert-logo-nus")} />;
 
-  renderANULogo = () => (
-    <img src={ANU_LOGO} className={cls("cert-logo-anu")} />
-  );
+  renderANULogo = () => <img src={ANU_LOGO} className={cls("cert-logo-anu")} />;
 
   // render degree title
   renderDegreeTitle = degreeData => {
@@ -104,8 +102,9 @@ class Degree extends Component {
     return seal;
   }
   */
-  renderSealNUS = () => <img src={NUS_SEAL} className={cls("cert-seal")} />
-  renderSealANU = () => <img src={ANU_SEAL} className={cls("cert-seal")} />
+  renderSealNUS = () => <img src={NUS_SEAL} className={cls("cert-seal")} />;
+
+  renderSealANU = () => <img src={ANU_SEAL} className={cls("cert-seal")} />;
 
   // render starting phrase before name
   renderContent() {

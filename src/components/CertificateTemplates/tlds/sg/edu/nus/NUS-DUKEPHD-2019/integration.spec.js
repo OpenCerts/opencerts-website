@@ -23,7 +23,7 @@ test("NUS-DUKEPHD-2019 degree scroll is rendered correctly", async t => {
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "NATIONAL UNIVERSITY",
-    "OF SINGAPORE", 
+    "OF SINGAPORE",
     "Duke-NUS Medical"
   ]);
 });

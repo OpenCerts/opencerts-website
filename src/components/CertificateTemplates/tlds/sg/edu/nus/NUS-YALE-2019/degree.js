@@ -140,9 +140,7 @@ class Degree extends Component {
         <tbody>
           <tr>
             <td width="33%">{sig1}</td>
-            <td rowspan="5">
-              {this.renderSeal()}
-            </td>
+            <td rowSpan="5">{this.renderSeal()}</td>
             <td>{sig2}</td>
           </tr>
           <tr>

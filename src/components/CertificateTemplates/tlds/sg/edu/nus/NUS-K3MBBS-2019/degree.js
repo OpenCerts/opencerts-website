@@ -207,7 +207,7 @@ class Degree extends Component {
       <table width="100%">
         <tbody>
           <tr>
-            <td rowspan="2" width="50%" align="center">
+            <td rowSpan="2" width="50%" align="center">
               {this.renderSeal()}
             </td>
             <td align="center">
@@ -237,7 +237,7 @@ class Degree extends Component {
   };
 
   // render seal
-  renderSeal = () => <img src={NUS_SEAL} className={cls("cert-seal")} />
+  renderSeal = () => <img src={NUS_SEAL} className={cls("cert-seal")} />;
 
   // main render
   render() {

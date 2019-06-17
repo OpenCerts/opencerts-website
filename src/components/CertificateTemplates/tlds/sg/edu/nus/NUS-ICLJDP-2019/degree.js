@@ -45,9 +45,7 @@ class Degree extends Component {
   // render logo
   renderLogo = () => <img src={NUS_LOGO} className={cls("cert-logo")} />;
 
-  renderLogo1 = () => (
-    <img src={ICL_LOGO} className={cls("cert-logo1")} />
-  );
+  renderLogo1 = () => <img src={ICL_LOGO} className={cls("cert-logo1")} />;
 
   // render degree and honours
   renderDegree = degreeData => {
@@ -230,12 +228,8 @@ class Degree extends Component {
             </td>
           </tr>
           <tr>
-            <td>
-              {this.renderSealNUS()}
-            </td>
-            <td>
-              {this.renderSealICL()}
-            </td>
+            <td>{this.renderSealNUS()}</td>
+            <td>{this.renderSealICL()}</td>
           </tr>
         </tbody>
       </table>
@@ -244,8 +238,9 @@ class Degree extends Component {
   };
 
   // render seals
-  renderSealNUS = () => <img src={NUS_SEAL} className={cls("cert-seal")}/>
-  renderSealICL = () => <img src={ICL_SEAL} className={cls("cert-seal")}/>
+  renderSealNUS = () => <img src={NUS_SEAL} className={cls("cert-seal")} />;
+
+  renderSealICL = () => <img src={ICL_SEAL} className={cls("cert-seal")} />;
 
   // main render
   render() {

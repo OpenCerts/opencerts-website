@@ -12,10 +12,7 @@ const templates = [
 ];
 
 const Cert = () => (
-  <MultiCertificateRenderer
-    templates={templates}
-    whitelist={storeAddresses}
-  />
+  <MultiCertificateRenderer templates={templates} whitelist={storeAddresses} />
 );
 
 Cert.propTypes = {

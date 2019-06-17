@@ -199,13 +199,9 @@ class Degree extends Component {
             </td>
           </tr>
           <tr>
-            <td>
-              {this.renderSealDUKE()}
-            </td>
-            <td/>
-            <td>
-              {this.renderSealNUS()}
-            </td>
+            <td>{this.renderSealDUKE()}</td>
+            <td />
+            <td>{this.renderSealNUS()}</td>
           </tr>
         </tbody>
       </table>
@@ -214,7 +210,10 @@ class Degree extends Component {
   };
 
   // render seals
-  renderSealDUKE = () => <img src={DUKE_SEAL} className={cls("cert-duke-seal")} />;
+  renderSealDUKE = () => (
+    <img src={DUKE_SEAL} className={cls("cert-duke-seal")} />
+  );
+
   renderSealNUS = () => <img src={NUS_SEAL} className={cls("cert-nus-seal")} />;
 
   // render date conferred
