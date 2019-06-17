@@ -89,8 +89,8 @@ class Degree extends Component {
           <tr>
             <td>
               {/* This is to certify that */}
-              <div className={cls("cert-content")} style={style1}>
-                This&nbsp;&nbsp;&nbsp;is&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;certify&nbsp;&nbsp;&nbsp;that
+              <div className={cls("cert-content cert-justify")} style={style1}>
+                This is to certify that
               </div>
             </td>
           </tr>

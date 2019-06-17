@@ -16,7 +16,7 @@ $debug: false;
         }
     }
     
-    font-family: Arial; 
+    font-family: Arial, Serif; 
     
     .a4-portrait { 
         background: white; 
@@ -34,7 +34,7 @@ $debug: false;
         display: block;
         font-size: 26pt; 
         text-align: center; 
-        font-family: Times, "New Century"; 
+        font-family: "Times New Roman"; 
         font-weight: bold;
         color: rgb(83, 86, 90);
         margin-left: auto;
@@ -57,7 +57,7 @@ $debug: false;
     .cert-content { 
         display: block;
         font-size: 16pt; 
-        font-family: "Minion Pro"; 
+        font-family: "Times New Roman"; 
         font-weight: bold;
         color: rgb(83, 86, 90);
         margin-left: auto;
@@ -71,7 +71,7 @@ $debug: false;
     .cert-name {
         display: block;
         font-size: 23pt; 
-        font-family: Times, "New Roman"; 
+        font-family: "Times New Roman"; 
         font-style: italic;
         text-align: center;
         color: rgb(83, 86, 90);
@@ -82,7 +82,7 @@ $debug: false;
     .cert-degree {
         display: block;
         font-size: 30pt; 
-		font-family: Times, "New Roman"; 
+		font-family: "Times New Roman"; 
 		font-variant: small-caps;
 		font-feature-settings: smcp;
         text-align: center;
@@ -93,7 +93,7 @@ $debug: false;
     .cert-date {
         display: block;
         font-size: 15pt; 
-        font-family: Time, Cambria; 
+        font-family: "Times New Roman"; 
         font-style: normal;
         text-align: center;
         color: rgb(83, 86, 90);
@@ -104,7 +104,7 @@ $debug: false;
         display: block;
         width: 80%;
         font-size: 12pt; 
-        font-family: Times, "New Century"; 
+        font-family: "Times New Roman"; 
         font-style: italic;
         color: rgb(83, 86, 90);
         text-align: right;
