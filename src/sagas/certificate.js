@@ -84,25 +84,23 @@ export function* verifyCertificateStore({ certificate }) {
   const web3 = yield getSelectedWeb3();
   try {
     const data = certificateData(certificate);
-    const contractStoreAddresses = get(data, "issuers", []).map(
-      issuer => issuer.certificateStore
-    );
-
-    // Checks if issuing institution has a valid smart contract with OpenCerts
-    const bytecode =
-      "0x7135575eac76f1817c27b06c452bdc2b7e1b13240797415684e227def063a127";
-    const prom = yield web3.eth.getCode(contractStoreAddresses[0]);
-    const keccak = web3.utils.keccak256(prom);
-    if (keccak !== bytecode) {
-      throw new Error("Smart contract does not exist");
-    }
+    const contractStoreAddress = get(data, "issuers[0].certificateStore");
 
     // Checks if certificate has a valid certificate store address
-    if (web3.utils.isAddress(contractStoreAddresses[0])) {
-      yield put(verifyingCertificateStoreSuccess());
-      return true;
+    if (!web3.utils.isAddress(contractStoreAddress)) {
+      throw new Error("Invalid certificate store address");
     }
-    throw new Error("Store not valid");
+
+    // Checks if issuing institution has a valid smart contract with OpenCerts
+    const supportedKeccakHash =
+      "0x7135575eac76f1817c27b06c452bdc2b7e1b13240797415684e227def063a127";
+    const certificateByteCode = yield web3.eth.getCode(contractStoreAddress);
+    const certificateKeccakHash = web3.utils.keccak256(certificateByteCode);
+    if (certificateKeccakHash !== supportedKeccakHash) {
+      throw new Error("Invalid smart contract");
+    }
+    yield put(verifyingCertificateStoreSuccess());
+    return true;
   } catch (e) {
     error(e);
     yield put(
