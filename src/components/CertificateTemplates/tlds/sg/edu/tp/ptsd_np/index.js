@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
 
 import TPCert from "./certificate";
@@ -18,16 +17,11 @@ const templates = [
   }
 ];
 
-const ptsdNp = ({ certificate }) => (
+const ptsdNp = () => (
   <MultiCertificateRenderer
-    certificate={certificate}
     templates={templates}
     whitelist={ApprovedAddresses}
   />
 );
-
-ptsdNp.propTypes = {
-  certificate: PropTypes.object.isRequired
-};
 
 export default ptsdNp;
