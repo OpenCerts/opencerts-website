@@ -351,7 +351,8 @@ class TranscriptCreditTransfer {
         } else if (isNUSAPCTest) {
           title =
             "AWARDED ADVANCED PLACEMENT CREDITS FOR PASSING THE PLACEMENT TEST(S) CONDUCTED BY NUS";
-        } else { // isAPC === true
+        } else {
+          // isAPC === true
           title = "AWARDED ADVANCED PLACEMENT CREDITS";
         }
         const grade = isNUSAPCTest || isAPC ? "-" : "";
