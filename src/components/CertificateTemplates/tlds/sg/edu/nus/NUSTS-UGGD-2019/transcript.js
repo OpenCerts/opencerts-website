@@ -273,37 +273,38 @@ class TranscriptCreditTransfer {
   // main render
   render() {
     // bypass non-transfer
-    if (!this.termData.creditTransfer) return "";
-    // identify external and internal
-    let internal = false;
-    let external = false;
-    for (let i = 0; i < this.termData.creditTransfer.length; i += 1) {
-      const transferData = this.termData.creditTransfer[i];
-      if (transferData.sourceType === "E") external = true;
-      else if (transferData.sourceType === "I") internal = true;
-      if (internal && external) break;
-    }
-    if (this.termIdx === 0) {
-      // only print in 1st term
-      if (external) {
-        // external transfer title
-        this.renderExtTrfTitle();
-        // APC
-        this.renderAPC();
-      } else {
-        // internal APC
-        this.renderIntAPC();
+    if (this.termData.creditTransfer) {
+      // identify external and internal
+      let internal = false;
+      let external = false;
+      for (let i = 0; i < this.termData.creditTransfer.length; i += 1) {
+        const transferData = this.termData.creditTransfer[i];
+        if (transferData.sourceType === "E") external = true;
+        else if (transferData.sourceType === "I") internal = true;
+        if (internal && external) break;
       }
-    } else {
-      // only print for 2nd term onward
-      this.renderIntTrfSummary();
+      if (this.termIdx === 0) {
+        // only print in 1st term
+        if (external) {
+          // external transfer title
+          this.renderExtTrfTitle();
+          // APC
+          this.renderAPC();
+        } else {
+          // internal APC
+          this.renderIntAPC();
+        }
+      } else {
+        // only print for 2nd term onward
+        this.renderIntTrfSummary();
+      }
+      this.renderIntTrfDetail();
+      if (this.termIdx !== 0) {
+        // from 2nd term onward
+        this.renderTrfFromExtOrg();
+      }
+      this.renderTrfEqualNUS();
     }
-    this.renderIntTrfDetail();
-    if (this.termIdx !== 0) {
-      // from 2nd term onward
-      this.renderTrfFromExtOrg();
-    }
-    this.renderTrfEqualNUS();
     return "";
   }
 
@@ -694,32 +695,31 @@ class TranscriptTermRemarks {
 
   // render enrollment remarks
   renderEnrollRemarks() {
-    if (!this.termData.modules) return "";
-    // remarks of NCP
-    this.termData.modules.forEach(data => {
-      if (data.includeInGPA && data.gradingBasis === "NCP") {
-        this.cache.push(
-          "ts-term-rem-ncp",
-          <td colSpan="4" className={cls("ts-termrem")}>
-            *{data.moduleCode} - Module was excluded from computation of the
-            final Cumulative Average Points/Marks.
-          </td>
-        );
-      }
-    });
-    // other remarks
-    this.termData.modules.forEach(data => {
-      if (data.remarks) {
-        this.cache.push(
-          "ts-term-rem-oth",
-          <td colSpan="4" className={cls("ts-termrem")}>
-            {data.moduleCode} - {data.remarks}
-          </td>
-        );
-      }
-    });
-    // to pass lint
-    this.dummy = 0;
+    if (this.termData.modules) {
+      // remarks of NCP
+      this.termData.modules.forEach(data => {
+        if (data.includeInGPA && data.gradingBasis === "NCP") {
+          this.cache.push(
+            "ts-term-rem-ncp",
+            <td colSpan="4" className={cls("ts-termrem")}>
+              *{data.moduleCode} - Module was excluded from computation of the
+              final Cumulative Average Points/Marks.
+            </td>
+          );
+        }
+      });
+      // other remarks
+      this.termData.modules.forEach(data => {
+        if (data.remarks) {
+          this.cache.push(
+            "ts-term-rem-oth",
+            <td colSpan="4" className={cls("ts-termrem")}>
+              {data.moduleCode} - {data.remarks}
+            </td>
+          );
+        }
+      });
+    }
     return "";
   }
 
@@ -857,10 +857,11 @@ class TranscriptLeave {
 
   // main render
   render() {
-    if (!this.leaveData) return "";
-    this.leaveData.forEach(data => {
-      this.renderLeave(data);
-    });
+    if (this.leaveData) {
+      this.leaveData.forEach(data => {
+        this.renderLeave(data);
+      });
+    }
     return "";
   }
 
@@ -889,11 +890,12 @@ class TranscriptDegree {
 
   // main render
   render() {
-    if (!this.degreeData) return "";
-    this.renderDegreeInfoTitle();
-    this.degreeData.forEach(data => {
-      this.renderDegree(data);
-    });
+    if (this.degreeData) {
+      this.renderDegreeInfoTitle();
+      this.degreeData.forEach(data => {
+        this.renderDegree(data);
+      });
+    }
     return "";
   }
 
@@ -912,64 +914,67 @@ class TranscriptDegree {
 
   // render major/minor
   renderMajorMinor(data) {
-    if (!data.plans) return "";
-    let descr;
-    data.plans.forEach(planData => {
-      if (!planData.specialProgram) {
-        if (planData.type === "HON")
-          descr = `MAJOR: ${planData.transcriptDescr}`;
-        else descr = `${planData.typeName}: ${planData.transcriptDescr}`;
-        if (planData.type === "JMP" && planData.planDescr)
-          descr += ` with ${planData.planDescr}`;
-        dataFeeder.push(
-          "ts-deg-plan",
-          <td colSpan="4" className={cls("ts-title ts-highlight")}>
-            &nbsp;&nbsp;&nbsp;&nbsp;{descr.toUpperCase()}
-          </td>
-        );
-      }
-    });
-    // to pass lint
-    this.dummy = 0;
+    if (data.plans) {
+      let descr;
+      data.plans.forEach(planData => {
+        if (!planData.specialProgram) {
+          if (planData.type === "HON")
+            descr = `MAJOR: ${planData.transcriptDescr}`;
+          else descr = `${planData.typeName}: ${planData.transcriptDescr}`;
+          if (planData.type === "JMP" && planData.planDescr)
+            descr += ` with ${planData.planDescr}`;
+          dataFeeder.push(
+            "ts-deg-plan",
+            <td colSpan="4" className={cls("ts-title ts-highlight")}>
+              &nbsp;&nbsp;&nbsp;&nbsp;{descr.toUpperCase()}
+            </td>
+          );
+        }
+      });
+      // to pass lint
+      this.dummy = 0;
+    }
     return "";
   }
 
   // render subplans
   renderSubplans(data) {
-    if (!data.plans) return "";
-    let descr;
-    data.plans.forEach(planData => {
-      if (planData.subplans)
-        planData.subplans.forEach(subplData => {
-          descr = `${subplData.typeName}: ${subplData.transcriptDescr}`;
-          dataFeeder.push(
-            "ts-deg-spln",
-            <td colSpan="4" className={cls("ts-title ts-highlight")}>
-              &nbsp;&nbsp;&nbsp;&nbsp;{descr.toUpperCase()}
-            </td>
-          );
-        });
-    });
-    // to pass lint
-    this.dummy = 0;
+    if (data.plans) {
+      let descr;
+      data.plans.forEach(planData => {
+        if (planData.subplans)
+          planData.subplans.forEach(subplData => {
+            descr = `${subplData.typeName}: ${subplData.transcriptDescr}`;
+            dataFeeder.push(
+              "ts-deg-spln",
+              <td colSpan="4" className={cls("ts-title ts-highlight")}>
+                &nbsp;&nbsp;&nbsp;&nbsp;{descr.toUpperCase()}
+              </td>
+            );
+          });
+      });
+      // to pass lint
+      this.dummy = 0;
+    }
     return "";
   }
 
   // render specializations
   renderSpecializations(data) {
-    if (!data.specializations) return "";
-    let descr;
-    data.specializations.forEach(splData => {
-      descr = `${splData.typeName}: ${splData.transcriptDescr}`;
-      dataFeeder.push(
-        "ts-deg-spcl",
-        <td colSpan="4" className={cls("ts-title ts-highlight")}>
-          &nbsp;&nbsp;&nbsp;&nbsp;{descr.toUpperCase()}
-        </td>
-      );
-    });
-    // to pass lint
-    this.dummy = 0;
+    if (data.specializations) {
+      let descr;
+      data.specializations.forEach(splData => {
+        descr = `${splData.typeName}: ${splData.transcriptDescr}`;
+        dataFeeder.push(
+          "ts-deg-spcl",
+          <td colSpan="4" className={cls("ts-title ts-highlight")}>
+            &nbsp;&nbsp;&nbsp;&nbsp;{descr.toUpperCase()}
+          </td>
+        );
+      });
+      // to pass lint
+      this.dummy = 0;
+    }
     return "";
   }
 
@@ -1001,18 +1006,19 @@ class TranscriptMilestone {
 
   // main render
   render() {
-    if (!this.msData) return "";
-    this.msData.forEach(data => {
-      if (data.milestoneTitle) {
-        const descr = `${data.milestoneTitle}: ${data.thesisTitle}`;
-        dataFeeder.push(
-          "ts-ms",
-          <td colSpan="4" className={cls("ts-title ts-highlight")}>
-            &nbsp;&nbsp;&nbsp;&nbsp;{descr.toUpperCase()}
-          </td>
-        );
-      }
-    });
+    if (this.msData) {
+      this.msData.forEach(data => {
+        if (data.milestoneTitle) {
+          const descr = `${data.milestoneTitle}: ${data.thesisTitle}`;
+          dataFeeder.push(
+            "ts-ms",
+            <td colSpan="4" className={cls("ts-title ts-highlight")}>
+              &nbsp;&nbsp;&nbsp;&nbsp;{descr.toUpperCase()}
+            </td>
+          );
+        }
+      });
+    }
     return "";
   }
 }
@@ -1026,22 +1032,23 @@ class TranscriptSpclProg {
 
   // main render
   render() {
-    if (!this.degreeData) return "";
-    this.degreeData.forEach(data => {
-      if (data.plans)
-        data.plans.forEach(planData => {
-          if (planData.specialProgram) {
-            let descr = planData.transcriptDescr;
-            if (planData.planDescr) descr += ` ${planData.planDescr}`;
-            dataFeeder.push(
-              "ts-splprg",
-              <td colSpan="4" className={cls("ts-title ts-highlight")}>
-                &nbsp;&nbsp;&nbsp;&nbsp;{descr.toUpperCase()}
-              </td>
-            );
-          }
-        });
-    });
+    if (this.degreeData) {
+      this.degreeData.forEach(data => {
+        if (data.plans)
+          data.plans.forEach(planData => {
+            if (planData.specialProgram) {
+              let descr = planData.transcriptDescr;
+              if (planData.planDescr) descr += ` ${planData.planDescr}`;
+              dataFeeder.push(
+                "ts-splprg",
+                <td colSpan="4" className={cls("ts-title ts-highlight")}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;{descr.toUpperCase()}
+                </td>
+              );
+            }
+          });
+      });
+    }
     return "";
   }
 }
@@ -1138,35 +1145,37 @@ class TranscriptData {
   // render conferment date
   renderConferDate() {
     const { degreeData } = jsonData.additionalData;
-    if (!degreeData) return "";
-    const date = isoDateToLocal(degreeData[0].dateConferred);
-    dataFeeder.push(
-      "ts-confdt",
-      <td colSpan="4" className={cls("ts-title ts-highlight")}>
-        CONFERMENT DATE: {date}
-      </td>
-    );
-    // to pass lint
-    this.dummy = 0;
+    if (degreeData) {
+      const date = isoDateToLocal(degreeData[0].dateConferred);
+      dataFeeder.push(
+        "ts-confdt",
+        <td colSpan="4" className={cls("ts-title ts-highlight")}>
+          CONFERMENT DATE: {date}
+        </td>
+      );
+      // to pass lint
+      this.dummy = 0;
+    }
     return "";
   }
 
   // render final remarks
   renderDegreeRemarks() {
     const remarksData = jsonData.additionalData.remarks;
-    if (!remarksData) return "";
-    let text = "";
-    remarksData.forEach(line => {
-      text += `${line.trim()} `;
-    });
-    dataFeeder.push(
-      "ts-degrem",
-      <td colSpan="4" className={cls("ts-title ts-highlight")}>
-        {text}
-      </td>
-    );
-    // to pass lint
-    this.dummy = 0;
+    if (remarksData) {
+      let text = "";
+      remarksData.forEach(line => {
+        text += `${line.trim()} `;
+      });
+      dataFeeder.push(
+        "ts-degrem",
+        <td colSpan="4" className={cls("ts-title ts-highlight")}>
+          {text}
+        </td>
+      );
+      // to pass lint
+      this.dummy = 0;
+    }
     return "";
   }
 
