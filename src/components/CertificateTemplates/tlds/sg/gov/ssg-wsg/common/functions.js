@@ -670,7 +670,9 @@ export const renderSignatureQual = (certificate, IMG_BOTTOM_LOGO) => (
       <div style={styles.certCodeStyle}>
         {get(certificate, "additionalData.certCode")}
       </div>
-      {["SOA-003"].includes(get(certificate, "additionalData.certCode")) ? (
+      {["SOA-003", "SF_SOA_003"].includes(
+        get(certificate, "additionalData.certCode")
+      ) ? (
         <div>
           <a href="www.scdf.gov.sg" style={styles.footerTextStyle}>
             www.scdf.gov.sg
