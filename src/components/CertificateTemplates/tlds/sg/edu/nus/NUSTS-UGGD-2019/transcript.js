@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
 import { createStore } from "redux";
@@ -257,8 +258,6 @@ class TranscriptProgram {
         </div>
       </td>
     );
-    // to pass lint
-    this.dummy = 0;
   }
 }
 
@@ -305,7 +304,6 @@ class TranscriptCreditTransfer {
       }
       this.renderTrfEqualNUS();
     }
-    return "";
   }
 
   // render external transfer title
@@ -316,8 +314,6 @@ class TranscriptCreditTransfer {
         CREDITS RECOGNISED ON ADMISSION
       </td>
     );
-    // to pass lint
-    this.dummy = 0;
   }
 
   // render APC
@@ -546,8 +542,6 @@ class TranscriptEnrollment {
         ENROLLED IN THE FOLLOWING NUS MODULES:
       </td>
     );
-    // to pass lint
-    this.dummy = 0;
   }
 
   // render supplementary exam title
@@ -558,8 +552,6 @@ class TranscriptEnrollment {
         SUPPLEMENTARY EXAMINATION:
       </td>
     );
-    // to pass lint
-    this.dummy = 0;
   }
 
   // render module enrollment data
@@ -611,8 +603,6 @@ class TranscriptSummary {
         {sumData.programName.toUpperCase()}
       </td>
     );
-    // to pass lint
-    this.dummy = 0;
   }
 
   // render GPA
@@ -626,8 +616,6 @@ class TranscriptSummary {
         {`${sumData.GPAName.toUpperCase()} : ${gpa}`}
       </td>
     );
-    // to pass lint
-    this.dummy = 0;
   }
 
   // render special GPA
@@ -641,8 +629,6 @@ class TranscriptSummary {
         </td>
       );
     });
-    // to pass lint
-    this.dummy = 0;
   }
 
   // render term honours
@@ -655,8 +641,6 @@ class TranscriptSummary {
         </td>
       );
     });
-    // to pass lint
-    this.dummy = 0;
   }
 }
 
@@ -689,8 +673,6 @@ class TranscriptTermRemarks {
         <u>REMARKS:</u>
       </td>
     );
-    // to pass lint
-    this.dummy = 0;
   }
 
   // render enrollment remarks
@@ -720,7 +702,6 @@ class TranscriptTermRemarks {
         }
       });
     }
-    return "";
   }
 
   // render credit transfer remarks
@@ -862,7 +843,6 @@ class TranscriptLeave {
         this.renderLeave(data);
       });
     }
-    return "";
   }
 
   // render leave data
@@ -876,8 +856,6 @@ class TranscriptLeave {
         {text}
       </td>
     );
-    // to pass lint
-    this.dummy = 0;
   }
 }
 
@@ -896,7 +874,6 @@ class TranscriptDegree {
         this.renderDegree(data);
       });
     }
-    return "";
   }
 
   // render degree info beginning title
@@ -908,8 +885,6 @@ class TranscriptDegree {
         CONFERRED/AWARDED THE DEGREE(S)/DIPLOMA(S) OF:
       </td>
     );
-    // to pass lint
-    this.dummy = 0;
   }
 
   // render major/minor
@@ -931,10 +906,7 @@ class TranscriptDegree {
           );
         }
       });
-      // to pass lint
-      this.dummy = 0;
     }
-    return "";
   }
 
   // render subplans
@@ -953,10 +925,7 @@ class TranscriptDegree {
             );
           });
       });
-      // to pass lint
-      this.dummy = 0;
     }
-    return "";
   }
 
   // render specializations
@@ -972,10 +941,7 @@ class TranscriptDegree {
           </td>
         );
       });
-      // to pass lint
-      this.dummy = 0;
     }
-    return "";
   }
 
   // render degree
@@ -1019,7 +985,6 @@ class TranscriptMilestone {
         }
       });
     }
-    return "";
   }
 }
 
@@ -1049,7 +1014,6 @@ class TranscriptSpclProg {
           });
       });
     }
-    return "";
   }
 }
 
@@ -1066,8 +1030,6 @@ class TranscriptAward {
       this.renderAwardHeader();
       this.renderAwardDetails();
     }
-    // to pass lint
-    return "";
   }
 
   // render award header
@@ -1079,9 +1041,6 @@ class TranscriptAward {
         AWARDS:
       </td>
     );
-    // to pass lint
-    this.dummy = 0;
-    return "";
   }
 
   renderAwardDetails() {
@@ -1153,10 +1112,7 @@ class TranscriptData {
           CONFERMENT DATE: {date}
         </td>
       );
-      // to pass lint
-      this.dummy = 0;
     }
-    return "";
   }
 
   // render final remarks
@@ -1173,10 +1129,7 @@ class TranscriptData {
           {text}
         </td>
       );
-      // to pass lint
-      this.dummy = 0;
     }
-    return "";
   }
 
   // render end of transcript
@@ -1188,9 +1141,6 @@ class TranscriptData {
         {line}END OF TRANSCRIPT{line}
       </td>
     );
-    // to pass lint
-    this.dummy = 0;
-    return "";
   }
 }
 
