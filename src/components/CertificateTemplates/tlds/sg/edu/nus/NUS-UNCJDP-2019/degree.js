@@ -19,15 +19,6 @@ class Degree extends Component {
     this.dataSource = this.props.dataSource;
   }
 
-  // render NUS name
-  renderNUSTitle = () => (
-    <div className={cls("cert-header-name")}>
-      NATIONAL UNIVERSITY
-      <br />
-      OF SINGAPORE
-    </div>
-  );
-
   // render first degree title
   renderFirstDegreeTitle = degreeData => {
     if (degreeData) {

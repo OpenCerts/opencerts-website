@@ -6,8 +6,9 @@ import {
   sassClassNames,
   renderImage,
   renderVoid,
+  renderNUSTitle,
+  renderNUSLogo,
   renderNUSSeal,
-  NUS_LOGO,
   ANU_LOGO,
   ANU_SEAL
 } from "../common";
@@ -22,27 +23,6 @@ class Degree extends Component {
     this.dataSource = this.props.dataSource;
   }
 
-  // render an empty div with specified height
-  renderVoid = height => (
-    <div
-      style={{
-        display: "block",
-        width: "100%",
-        height,
-        border: "0px solid"
-      }}
-    />
-  );
-
-  // render cert title
-  renderTitle = () => (
-    <div className={cls("cert-header")}>
-      NATIONAL UNIVERSITY
-      <br />
-      OF SINGAPORE
-    </div>
-  );
-
   // render cert title
   renderANUTitle = () => (
     <div className={cls("cert-header")}>
@@ -52,10 +32,8 @@ class Degree extends Component {
     </div>
   );
 
-  // render logo
-  renderLogo = () => <img src={NUS_LOGO} className={cls("cert-logo")} />;
-
-  renderLogo1 = () => <img src={ANU_LOGO} className={cls("cert-logo1")} />;
+  // render ANU logo
+  renderANULogo = () => <img src={ANU_LOGO} className={cls("cert-logo1")} />;
 
   // render degree and honours
   renderDegree = degreeData => {
@@ -275,7 +253,7 @@ class Degree extends Component {
             </td>
           </tr>
           <tr>
-            <td style={{ paddingLeft: "40px" }}>{renderNUSSeal()}</td>
+            <td>{renderNUSSeal(cls("cert-seal"))}</td>
             <td>{this.renderSealANU()}</td>
           </tr>
         </tbody>
@@ -295,12 +273,12 @@ class Degree extends Component {
               <table width="100%">
                 <tbody>
                   <tr>
-                    <td width="50%">{this.renderTitle()} </td>
+                    <td width="50%">{renderNUSTitle(cls("cert-header"))} </td>
                     <td>{this.renderANUTitle()}</td>
                   </tr>
                   <tr>
-                    <td> {this.renderLogo()} </td>
-                    <td>{this.renderLogo1()}</td>
+                    <td> {renderNUSLogo(cls("cert-logo"))} </td>
+                    <td>{this.renderANULogo()}</td>
                   </tr>
                 </tbody>
               </table>

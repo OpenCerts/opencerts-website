@@ -6,8 +6,9 @@ import {
   sassClassNames,
   renderImage,
   renderVoid,
+  renderNUSTitle,
+  renderNUSLogo,
   renderNUSSeal,
-  NUS_LOGO,
   JHU_LOGO
 } from "../common";
 import scss from "./degree.scss";
@@ -21,18 +22,7 @@ class Degree extends Component {
     this.dataSource = this.props.dataSource;
   }
 
-  // render NUS name
-  renderNUSTitle = () => (
-    <div className={cls("cert-header-name")}>
-      NATIONAL UNIVERSITY
-      <br />
-      OF SINGAPORE
-    </div>
-  );
-
-  // render logos
-  renderNUSLogo = () => <img src={NUS_LOGO} className={cls("cert-logo-nus")} />;
-
+  // render JHU logo
   renderJHULogo = () => <img src={JHU_LOGO} className={cls("cert-logo-jhu")} />;
 
   // render degree title
@@ -225,7 +215,9 @@ class Degree extends Component {
                 <tbody>
                   <tr>
                     <td width="10%" />
-                    <td width="35%">{this.renderNUSTitle()}</td>
+                    <td width="35%">
+                      {renderNUSTitle(cls("cert-header-name"))}
+                    </td>
                     <td width="10%" />
                     <td width="35%" rowSpan="3">
                       {this.renderJHULogo()}
@@ -238,7 +230,7 @@ class Degree extends Component {
                   </tr>
                   <tr>
                     <td />
-                    <td>{this.renderNUSLogo()}</td>
+                    <td>{renderNUSLogo(cls("cert-logo-nus"))}</td>
                     <td />
                   </tr>
                 </tbody>

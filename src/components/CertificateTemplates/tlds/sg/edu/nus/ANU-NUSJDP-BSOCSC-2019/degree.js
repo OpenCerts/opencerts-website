@@ -5,8 +5,9 @@ import {
   sassClassNames,
   renderImage,
   renderVoid,
+  renderNUSTitle,
+  renderNUSLogo,
   renderNUSSeal,
-  NUS_LOGO,
   ANU_LOGO,
   ANU_SEAL
 } from "../common";
@@ -21,16 +22,7 @@ class Degree extends Component {
     this.dataSource = this.props.dataSource;
   }
 
-  // render NUS name
-  renderNUSTitle = () => (
-    <div className={cls("cert-header-name")}>
-      NATIONAL UNIVERSITY
-      <br />
-      OF SINGAPORE
-    </div>
-  );
-
-  // render ANU name
+  // render ANU title
   renderANUTitle = () => (
     <div className={cls("cert-header-name")}>
       THE AUSTRALIAN NATIONAL
@@ -39,9 +31,7 @@ class Degree extends Component {
     </div>
   );
 
-  // render logos
-  renderNUSLogo = () => <img src={NUS_LOGO} className={cls("cert-logo-nus")} />;
-
+  // render ANU logo
   renderANULogo = () => <img src={ANU_LOGO} className={cls("cert-logo-anu")} />;
 
   // render degree title
@@ -82,7 +72,7 @@ class Degree extends Component {
     return html;
   };
 
-  renderSealANU = () => <img src={ANU_SEAL} className={cls("cert-seal")} />;
+  renderANUSeal = () => <img src={ANU_SEAL} className={cls("cert-seal")} />;
 
   // render starting phrase before name
   renderContent() {
@@ -203,7 +193,7 @@ class Degree extends Component {
           </tr>
           <tr>
             <td />
-            <td>{this.renderSealANU()}</td>
+            <td>{this.renderANUSeal()}</td>
             <td>{renderNUSSeal()}</td>
             <td />
           </tr>
@@ -226,7 +216,9 @@ class Degree extends Component {
                   <tr>
                     <td width="5%" />
                     <td width="45%">{this.renderANUTitle()}</td>
-                    <td width="45%">{this.renderNUSTitle()}</td>
+                    <td width="45%">
+                      {renderNUSTitle(cls("cert-header-name"))}
+                    </td>
                     <td width="5%" />
                   </tr>
                   <tr>
@@ -235,7 +227,7 @@ class Degree extends Component {
                   <tr>
                     <td />
                     <td>{this.renderANULogo()}</td>
-                    <td>{this.renderNUSLogo()}</td>
+                    <td>{renderNUSLogo(cls("cert-logo-nus"))}</td>
                     <td />
                   </tr>
                 </tbody>

@@ -6,8 +6,9 @@ import {
   sassClassNames,
   renderImage,
   renderVoid,
+  renderNUSTitle,
+  renderNUSLogo,
   renderNUSSeal,
-  NUS_LOGO,
   ICL_LOGO,
   ICL_SEAL
 } from "../common";
@@ -22,19 +23,8 @@ class Degree extends Component {
     this.dataSource = this.props.dataSource;
   }
 
-  // render cert title
-  renderTitle = () => (
-    <div className={cls("cert-header")}>
-      NATIONAL UNIVERSITY
-      <br />
-      OF SINGAPORE
-    </div>
-  );
-
-  // render logo
-  renderLogo = () => <img src={NUS_LOGO} className={cls("cert-logo")} />;
-
-  renderLogo1 = () => <img src={ICL_LOGO} className={cls("cert-logo1")} />;
+  // render ICL logo
+  renderICLLogo = () => <img src={ICL_LOGO} className={cls("cert-logo1")} />;
 
   // render degree and honours
   renderDegree = degreeData => {
@@ -217,7 +207,7 @@ class Degree extends Component {
             </td>
           </tr>
           <tr>
-            <td style={{ paddingLeft: "40px" }}>{renderNUSSeal()}</td>
+            <td>{renderNUSSeal(cls("cert-seal"))}</td>
             <td>{this.renderSealICL()}</td>
           </tr>
         </tbody>
@@ -241,10 +231,10 @@ class Degree extends Component {
                 <tbody>
                   <tr>
                     <td width="25%">
-                      {this.renderTitle()}
-                      {this.renderLogo()}
+                      {renderNUSTitle(cls("cert-header"))}
+                      {renderNUSLogo(cls("cert-logo"))}
                     </td>
-                    <td>{this.renderLogo1()}</td>
+                    <td>{this.renderICLLogo()}</td>
                   </tr>
                 </tbody>
               </table>

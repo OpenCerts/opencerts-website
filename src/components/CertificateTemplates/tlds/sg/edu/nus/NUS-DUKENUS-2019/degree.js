@@ -4,8 +4,8 @@ import {
   capitalizedText,
   sassClassNames,
   renderVoid,
-  NUS_LOGO,
-  NUS_SEAL,
+  renderNUSLogo,
+  renderNUSSeal,
   DUKE_LOGO,
   DUKE_SEAL,
   dateToWords
@@ -188,9 +188,9 @@ class Degree extends Component {
             </td>
           </tr>
           <tr>
-            <td>{this.renderSealDUKE()}</td>
+            <td>{this.renderDUKESeal()}</td>
             <td />
-            <td>{this.renderSealNUS()}</td>
+            <td>{renderNUSSeal(cls("cert-nus-seal"))}</td>
           </tr>
         </tbody>
       </table>
@@ -198,12 +198,10 @@ class Degree extends Component {
     return html;
   };
 
-  // render seals
-  renderSealDUKE = () => (
+  // render DUKE seal
+  renderDUKESeal = () => (
     <img src={DUKE_SEAL} className={cls("cert-duke-seal")} />
   );
-
-  renderSealNUS = () => <img src={NUS_SEAL} className={cls("cert-nus-seal")} />;
 
   // render date conferred
   renderDateConferred = dateConferred => {
@@ -275,9 +273,7 @@ class Degree extends Component {
                   </tr>
                   <tr>
                     <td>
-                      <div>
-                        <img src={NUS_LOGO} className={cls("cert-nus")} />
-                      </div>
+                      <div>{renderNUSLogo(cls("cert-nus"))}</div>
                     </td>
                   </tr>
                 </tbody>

@@ -225,46 +225,87 @@ export const renderVoid = height => (
 );
 
 // render NUS title
-export const renderNUSTitle = () => {
-  const style = {
-    display: "block",
-    fontSize: "26pt",
-    textAlign: "center",
-    fontFamily: "'Times New Roman', Serif",
-    fontWeight: "bold",
-    color: "rgb(83, 86, 90)",
-    marginLeft: "auto",
-    marginRight: "auto"
-  };
-  const html = (
-    <div style={style}>
-      NATIONAL UNIVERSITY
-      <br />
-      OF SINGAPORE
-    </div>
-  );
+export const renderNUSTitle = (names, styles) => {
+  let html;
+  if (names && styles)
+    html = (
+      <div className={names} style={styles}>
+        NATIONAL UNIVERSITY
+        <br />
+        OF SINGAPORE
+      </div>
+    );
+  else if (names)
+    html = (
+      <div className={names}>
+        NATIONAL UNIVERSITY
+        <br />
+        OF SINGAPORE
+      </div>
+    );
+  else if (styles)
+    html = (
+      <div style={styles}>
+        NATIONAL UNIVERSITY
+        <br />
+        OF SINGAPORE
+      </div>
+    );
+  else {
+    const defaultStyle = {
+      display: "block",
+      fontSize: "26pt",
+      textAlign: "center",
+      fontFamily: "'Times New Roman', Serif",
+      fontWeight: "bold",
+      color: "rgb(83, 86, 90)",
+      marginLeft: "auto",
+      marginRight: "auto"
+    };
+    html = (
+      <div style={defaultStyle}>
+        NATIONAL UNIVERSITY
+        <br />
+        OF SINGAPORE
+      </div>
+    );
+  }
   return html;
 };
 
 // render NUS logo
-export const renderNUSLogo = () => {
-  const style = {
-    display: "block",
-    marginLeft: "auto",
-    marginRight: "auto",
-    width: "2.8cm",
-    height: "3.56cm"
-  };
-  const html = <img src={NUS_LOGO} style={style} />;
+export const renderNUSLogo = (names, styles) => {
+  let html;
+  if (names && styles)
+    html = <img src={NUS_LOGO} className={names} style={styles} />;
+  else if (names) html = <img src={NUS_LOGO} className={names} />;
+  else if (styles) html = <img src={NUS_LOGO} style={styles} />;
+  else {
+    const defaultStyle = {
+      display: "block",
+      marginLeft: "auto",
+      marginRight: "auto",
+      width: "2.8cm",
+      height: "3.56cm"
+    };
+    html = <img src={NUS_LOGO} style={defaultStyle} />;
+  }
   return html;
 };
 
 // render NUS seal
-export const renderNUSSeal = () => {
-  const style = {
-    display: "float",
-    width: "4.95cm"
-  };
-  const html = <img src={NUS_SEAL} style={style} />;
+export const renderNUSSeal = (names, styles) => {
+  let html;
+  if (names && styles)
+    html = <img src={NUS_SEAL} className={names} style={styles} />;
+  else if (names) html = <img src={NUS_SEAL} className={names} />;
+  else if (styles) html = <img src={NUS_SEAL} style={styles} />;
+  else {
+    const defaultStyle = {
+      display: "float",
+      width: "4.95cm"
+    };
+    html = <img src={NUS_SEAL} style={defaultStyle} />;
+  }
   return html;
 };
