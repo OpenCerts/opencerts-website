@@ -128,6 +128,10 @@
     "0x061aFcFF60b90E0F633F8ef157e01BaB9b2FfDD3": {
       "name:": "ROPSTEN: Republic Polytechnic",
       "displayCard": false
+    },
+    "0x3FFB6b913E9874c7ddabD564d85676Bc5cAd16d4": {
+      "name:": "ROPSTEN: Nanyang Technological University",
+      "displayCard": false
     }
   }
 }
