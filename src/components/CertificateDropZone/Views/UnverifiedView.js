@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
-import { filter } from "lodash";
 import css from "./viewerStyles.scss";
 
 const View = ({
@@ -11,42 +10,6 @@ const View = ({
   notRevokedStatus,
   storeStatus
 }) => {
-  const errorMessages = [
-    {
-      title: "Certificate from unregistered institution",
-      message:
-        "The institution that issued this certificate is unknown. Your institution has to register with OpenCerts first.",
-      error: !issuerIdentityStatus.verified
-    },
-    {
-      title: "Certificate revoked",
-      message:
-        "This certificate has been revoked by your issuing institution. Please contact your issuing institution for more details.",
-      error: !notRevokedStatus.verified
-    },
-    {
-      title: "Certificate has been tampered with",
-      message:
-        "The contents of this certificate are inaccurate and have been tampered with.",
-      error: !hashStatus.verified
-    },
-    {
-      title: "Certificate not issued",
-      message:
-        "This certificate cannot be found. Please contact your issuing institution for help or issue the certificate before trying again.",
-      error: !issuedStatus.verified
-    },
-    {
-      title: "Certificate store address is invalid",
-      message:
-        "Please check that you have a valid smart contract with us and a correct certificate store address before proceeding.",
-      error: !storeStatus.verified
-    }
-  ];
-
-  const stack = filter(errorMessages, ["error", true]);
-  const error = stack.pop();
-
   const isWarning =
     hashStatus.verified && issuedStatus.verified && notRevokedStatus.verified;
   return (
@@ -76,11 +39,26 @@ const View = ({
       </span>
 
       <div className={css.verifications}>
-        {error !== null ? (
-          <div>
-            <p className={css.messages}>{error.title}</p>
-            <p>{error.message}</p>
-          </div>
+        {!issuerIdentityStatus.verified ? (
+          <p className={css.messages}>
+            Certificate from unregistered institution
+          </p>
+        ) : null}
+
+        {!notRevokedStatus.verified ? (
+          <p className={css.messages}>Certificate revoked</p>
+        ) : null}
+
+        {!hashStatus.verified ? (
+          <p className={css.messages}>Certificate has been tampered with</p>
+        ) : null}
+
+        {!issuedStatus.verified ? (
+          <p className={css.messages}>Certificate not issued</p>
+        ) : null}
+
+        {!storeStatus.verified ? (
+          <p className={css.messages}>Certificate store address is invalid</p>
         ) : null}
       </div>
 

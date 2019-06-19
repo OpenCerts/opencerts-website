@@ -554,13 +554,15 @@ export function getVerifying(store) {
     certificateIssuerVerifying,
     certificateHashVerifying,
     certificateIssuedVerifying,
-    certificateNotRevokedVerifying
+    certificateNotRevokedVerifying,
+    certificateStoreVerifying
   } = store.certificate;
   return (
     certificateIssuerVerifying ||
     certificateHashVerifying ||
     certificateIssuedVerifying ||
-    certificateNotRevokedVerifying
+    certificateNotRevokedVerifying ||
+    certificateStoreVerifying
   );
 }
 
