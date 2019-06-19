@@ -53,7 +53,7 @@ export const renderHeader = () => (
   </div>
 );
 
-// additiona remarks for PET only
+// additional remarks for PET only
 export const renderRemarksGradingSystem = isNOTDPLUS => (
   <span>
     <br />
@@ -253,8 +253,12 @@ export const renderCourse = (certificate, course) => {
             ? s.name
             : formatBold(s.name)}
         </td>
-        <td>{isCET > 0 || s.courseCredit === 0 ? "" : s.courseCredit}</td>
-        <td>{s.courseCode !== "ZZZ" ? s.grade : ""}</td>
+        <td>
+          {isCET > 0 || s.courseCredit === 0 || s.courseCredit === "0"
+            ? ""
+            : s.courseCredit}
+        </td>
+        <td>{s.courseCode !== "ZZZ" ? s.grade.padEnd(2, " ") : ""}&nbsp;</td>
       </tr>
     ))
   );
