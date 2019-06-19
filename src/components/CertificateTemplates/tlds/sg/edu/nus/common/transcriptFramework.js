@@ -1,12 +1,8 @@
-/* eslint-disable class-methods-use-this */
 import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
 import { createStore } from "redux";
 import PropTypes from "prop-types";
-import {
-  isoDateToLocal,
-  sassClassNames,
-} from "./";
+import { isoDateToLocal, sassClassNames } from ".";
 import scss from "./transcriptFramework.scss";
 
 // constants
@@ -35,14 +31,12 @@ const gState = createStore(onPrintRow);
 const cls = names => sassClassNames(names, scss);
 
 // obtain data to be reflected in header
-export const renderTranscriptHeaderData = (dataSource) => {
-    return {
-        name: dataSource.recipient.name,
-        studentId: dataSource.recipient.studentId,
-        dateOfBirth: dataSource.recipient.dateOfBirth,
-        issuedOn: dataSource.issuedOn
-    }
-}
+export const renderTranscriptHeaderData = dataSource => ({
+  name: dataSource.recipient.name,
+  studentId: dataSource.recipient.studentId,
+  dateOfBirth: dataSource.recipient.dateOfBirth,
+  issuedOn: dataSource.issuedOn
+});
 
 // render a blank table with column width information
 const setColWidth = () => {
@@ -159,9 +153,7 @@ class TranscriptHeader extends Component {
   constructor(props) {
     super(props);
     this.myRef = React.createRef();
-    this.headerData = this.props.headerData 
-      ? this.props.headerData 
-      : {};
+    this.headerData = this.props.headerData ? this.props.headerData : {};
   }
 
   // main render
@@ -189,15 +181,15 @@ class TranscriptHeader extends Component {
               <td colwidth="11.5%">{this.headerData.studentId}</td>
               <td className={cls("header-pers-info-key")}>DATE OF BIRTH:</td>
               <td colwidth="12.1%">
-                {this.headerData.dateOfBirth 
-                   ? isoDateToLocal(this.headerData.dateOfBirth)
-                   : ''}
+                {this.headerData.dateOfBirth
+                  ? isoDateToLocal(this.headerData.dateOfBirth)
+                  : ""}
               </td>
               <td className={cls("header-pers-info-key")}>DATE ISSUED:</td>
               <td colwidth="12.1%">
-                {this.headerData.issuedOn 
-                   ? isoDateToLocal(this.headerData.issuedOn)
-                   : ''}
+                {this.headerData.issuedOn
+                  ? isoDateToLocal(this.headerData.issuedOn)
+                  : ""}
               </td>
             </tr>
             <tr>
@@ -263,9 +255,9 @@ class TranscriptPage extends Component {
   // main render
   render() {
     // cannot put background image into css file because loading image may fail
-    const backgroundImg = (this.props.backImgUrl) 
-          ? { backgroundImage: this.props.backImgUrl }
-          : {};
+    const backgroundImg = this.props.backImgUrl
+      ? { backgroundImage: this.props.backImgUrl }
+      : {};
     const idx = this.props.pageIdx;
     const html = (
       <div className={cls("a4-landscape ts-background")} style={backgroundImg}>
@@ -358,8 +350,7 @@ export class Transcript extends Component {
     this.firstHeaderPrinted = false;
     this.redundant = [];
     this.feeder = this.props.dataFeeder;
-    if (! this.feeder)
-      this.feeder = new TranscriptDataFeeder();
+    if (!this.feeder) this.feeder = new TranscriptDataFeeder();
   }
 
   // get table row by id
@@ -530,12 +521,13 @@ export class Transcript extends Component {
   // render a page
   renderPage(idx) {
     const html = (
-        <TranscriptPage 
-          pageIdx={idx} 
-          rowsPerCol={this.maxRows} 
-          headerData={this.feeder.headerData} 
-          backImgUrl = {this.props.backImgUrl}
-        />);
+      <TranscriptPage
+        pageIdx={idx}
+        rowsPerCol={this.maxRows}
+        headerData={this.feeder.headerData}
+        backImgUrl={this.props.backImgUrl}
+      />
+    );
     return html;
   }
 
@@ -551,9 +543,13 @@ export class Transcript extends Component {
       );
       html.push(<p id={`para-${i}`} />);
     }
-    if (this.props.legendPage) 
-      html.push(renderTranscriptLegendPage(this.props.legendPage, 
-          this.props.legendRatio ? Number(this.props.legendRatio, 10) : 1));
+    if (this.props.legendPage)
+      html.push(
+        renderTranscriptLegendPage(
+          this.props.legendPage,
+          this.props.legendRatio ? Number(this.props.legendRatio, 10) : 1
+        )
+      );
     return html;
   }
 }

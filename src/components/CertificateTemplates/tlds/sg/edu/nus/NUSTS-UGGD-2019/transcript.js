@@ -5,7 +5,7 @@ import {
   isoDateToLocal,
   sassClassNames,
   NUS_TS_BACKIMG,
-  NUS_TS_LEGEND,
+  NUS_TS_LEGEND
 } from "../common";
 import {
   TranscriptDataFeeder,
@@ -14,20 +14,19 @@ import {
 } from "../common/transcriptFramework";
 import scss from "../common/transcriptFramework.scss";
 
-// global variables
-// JSON data source
-let jsonData;
-// HTML representation of JSON data
-let dataFeeder;
-
 // construct class names
 const cls = names => sassClassNames(names, scss);
 
 // transcript content - program info
 class TranscriptProgram {
+  constructor(dataSource, dataFeeder) {
+    this.dataSource = dataSource;
+    this.dataFeeder = dataFeeder;
+  }
+
   // main render
   render() {
-    const progData = jsonData.additionalData.programData;
+    const progData = this.dataSource.additionalData.programData;
     if (progData)
       progData.forEach(data => {
         if (data.statusCode !== "DC") this.renderProgData(data);
@@ -36,7 +35,7 @@ class TranscriptProgram {
 
   // render for a program
   renderProgData(data) {
-    dataFeeder.push(
+    this.dataFeeder.push(
       "ts-prog",
       <td colSpan="4">
         <div className={cls("prog-row ts-title")}>
@@ -47,7 +46,7 @@ class TranscriptProgram {
         </div>
       </td>
     );
-    dataFeeder.push(
+    this.dataFeeder.push(
       "ts-prog",
       <td colSpan="4">
         <div className={cls("prog-row ts-title")}>
@@ -64,9 +63,10 @@ class TranscriptProgram {
 // transcript credit transfer
 class TranscriptCreditTransfer {
   // constructor
-  constructor(termData, termIdx) {
+  constructor(termData, termIdx, dataFeeder) {
     this.termData = termData;
     this.termIdx = termIdx;
+    this.dataFeeder = dataFeeder;
   }
 
   // main render
@@ -108,7 +108,7 @@ class TranscriptCreditTransfer {
 
   // render external transfer title
   renderExtTrfTitle() {
-    dataFeeder.push(
+    this.dataFeeder.push(
       "ts-term-trf-extitle",
       <td colSpan="4" className={cls("ts-termrem")}>
         CREDITS RECOGNISED ON ADMISSION
@@ -121,7 +121,7 @@ class TranscriptCreditTransfer {
     this.termData.creditTransfer.forEach(transferData => {
       if (transferData.sourceType === "E" && transferData.creditsNoGPA > 0) {
         // APC
-        dataFeeder.push(
+        this.dataFeeder.push(
           "ts-term-trf-apc",
           <Fragment>
             <td colSpan="2" className={cls("ts-termrem")}>
@@ -160,7 +160,7 @@ class TranscriptCreditTransfer {
           transferData.creditsNoGPA !== 0
             ? transferData.creditsNoGPA.toFixed(2)
             : "";
-        dataFeeder.push(
+        this.dataFeeder.push(
           "ts-term-trf-intapc",
           <Fragment>
             <td span="2" className={cls("ts-termrem")}>
@@ -190,7 +190,7 @@ class TranscriptCreditTransfer {
           transferData.creditsNoGPA !== 0
             ? transferData.creditsNoGPA.toFixed(2)
             : "";
-        dataFeeder.push(
+        this.dataFeeder.push(
           "ts-term-trf-inttrf",
           <Fragment>
             <td span="2" className={cls("ts-termrem")}>
@@ -216,7 +216,7 @@ class TranscriptCreditTransfer {
           ) {
             const credits =
               detail.credits !== 0 ? detail.credits.toFixed(2) : "-";
-            dataFeeder.push(
+            this.dataFeeder.push(
               "ts-term-trf-inttrfdtl",
               <Fragment>
                 <td className={cls("ts-col0 ts-modcode")}>
@@ -239,7 +239,7 @@ class TranscriptCreditTransfer {
   renderTrfFromExtOrg() {
     this.termData.creditTransfer.forEach(transferData => {
       if (transferData.sourceType === "E" && transferData.creditsNoGPA > 0) {
-        dataFeeder.push(
+        this.dataFeeder.push(
           "ts-term-trf-fromorg",
           <Fragment>
             <td colSpan="2" className={cls("ts-termrem")}>
@@ -259,7 +259,7 @@ class TranscriptCreditTransfer {
   renderTrfEqualNUS() {
     this.termData.creditTransfer.forEach(transferData => {
       if (transferData.sourceType === "E" && transferData.creditsGPA > 0) {
-        dataFeeder.push(
+        this.dataFeeder.push(
           "ts-term-trf-eqnus",
           <td colSpan="4">
             CREDITS TRANSFERRED (WITH EQUIVALENT NUS GRADE) FROM
@@ -274,7 +274,7 @@ class TranscriptCreditTransfer {
           ) {
             const credits =
               detail.credits !== 0 ? detail.credits.toFixed(2) : "-";
-            dataFeeder.push(
+            this.dataFeeder.push(
               "ts-term-trf-eqnusdtl",
               <Fragment>
                 <td className={cls("ts-col0 ts-modcode")}>
@@ -297,8 +297,9 @@ class TranscriptCreditTransfer {
 // render individual module enrollment info
 class TranscriptModuleEnroll {
   // constructor
-  constructor(data) {
+  constructor(data, dataFeeder) {
     this.data = data;
+    this.dataFeeder = dataFeeder;
   }
 
   // main render
@@ -311,7 +312,7 @@ class TranscriptModuleEnroll {
       moduleCode = `*${moduleCode}`;
     const credits =
       this.data.credits === 0 ? "-" : this.data.credits.toFixed(2);
-    dataFeeder.push(
+    this.dataFeeder.push(
       "ts-term-enl-mod",
       <Fragment>
         <td className={cls("ts-col0 ts-modcode")}>{moduleCode}</td>
@@ -326,8 +327,9 @@ class TranscriptModuleEnroll {
 // render module enrollment
 class TranscriptEnrollment {
   // constructor
-  constructor(termData) {
+  constructor(termData, dataFeeder) {
     this.termData = termData;
+    this.dataFeeder = dataFeeder;
   }
 
   // main render
@@ -337,7 +339,7 @@ class TranscriptEnrollment {
 
   // render module enrollment title
   renderEnrollTitle() {
-    dataFeeder.push(
+    this.dataFeeder.push(
       "ts-term-enl-title",
       <td colSpan="4" className={cls("ts-termrem")}>
         ENROLLED IN THE FOLLOWING NUS MODULES:
@@ -347,7 +349,7 @@ class TranscriptEnrollment {
 
   // render supplementary exam title
   renderSupplementaryTitle() {
-    dataFeeder.push(
+    this.dataFeeder.push(
       "ts-term-enl-suptitle",
       <td colSpan="4" className={cls("ts-termrem")}>
         SUPPLEMENTARY EXAMINATION:
@@ -364,13 +366,13 @@ class TranscriptEnrollment {
     let hasSuppl = false;
     this.termData.modules.forEach(data => {
       if (data.gradingBasis === "SUP") hasSuppl = true;
-      else new TranscriptModuleEnroll(data).render();
+      else new TranscriptModuleEnroll(data, this.dataFeeder).render();
     });
     if (!hasSuppl) return;
     this.renderSupplementaryTitle();
     this.termData.modules.forEach(data => {
       if (data.gradingBasis === "SUP")
-        new TranscriptModuleEnroll(data).render();
+        new TranscriptModuleEnroll(data, this.dataFeeder).render();
     });
   }
 }
@@ -378,8 +380,9 @@ class TranscriptEnrollment {
 // render transcript summary
 class TranscriptSummary {
   // constructor
-  constructor(termData) {
+  constructor(termData, dataFeeder) {
     this.termData = termData;
+    this.dataFeeder = dataFeeder;
   }
 
   // main render
@@ -397,7 +400,7 @@ class TranscriptSummary {
 
   // render degree
   renderTermDegree(sumData) {
-    dataFeeder.push(
+    this.dataFeeder.push(
       "ts-term-deg",
       <td colSpan="4" className={cls("ts-termrem ts-highlight")}>
         <p />
@@ -411,7 +414,7 @@ class TranscriptSummary {
     let gpa;
     if (sumData.includeInGPA) gpa = sumData.GPA.toFixed(2);
     else gpa = "NOT APPLICABLE";
-    dataFeeder.push(
+    this.dataFeeder.push(
       "ts-term-gpa",
       <td colSpan="4" className={cls("ts-termrem ts-highlight")}>
         {`${sumData.GPAName.toUpperCase()} : ${gpa}`}
@@ -423,7 +426,7 @@ class TranscriptSummary {
   renderSpecialGPA(sumData) {
     sumData.specialGPA.forEach(data => {
       const name = data.type === "FCAP" ? "*" : `${data.name}`;
-      dataFeeder.push(
+      this.dataFeeder.push(
         "ts-term-sgpa",
         <td colSpan="4" className={cls("ts-termrem ts-highlight")}>
           {`${name.toUpperCase()} :${data.GPA.toFixed(2)}`}
@@ -435,7 +438,7 @@ class TranscriptSummary {
   // render term honours
   renderTermHonours(sumData) {
     sumData.awards.forEach(data => {
-      dataFeeder.push(
+      this.dataFeeder.push(
         "ts-term-awd",
         <td colSpan="4" className={cls("ts-termrem ts-highlight")}>
           {data.awardName.toUpperCase()}
@@ -448,9 +451,10 @@ class TranscriptSummary {
 // render remarks at the end of a term
 class TranscriptTermRemarks {
   // constructor
-  constructor(termData) {
+  constructor(termData, dataFeeder) {
     this.termData = termData;
     this.cache = new TranscriptDataFeeder();
+    this.dataFeeder = dataFeeder;
   }
 
   // main render
@@ -462,12 +466,12 @@ class TranscriptTermRemarks {
     if (this.cache.length === 0) return;
     this.renderRemarksTitle();
     for (let i = 0; i < this.cache.length; i += 1)
-      dataFeeder.push(this.cache.type(i), this.cache.data(i));
+      this.dataFeeder.push(this.cache.type(i), this.cache.data(i));
   }
 
   // render remarks title
   renderRemarksTitle() {
-    dataFeeder.push(
+    this.dataFeeder.push(
       "ts-term-rem-title",
       <td colSpan="4" className={cls("ts-termrem ts-highlight")}>
         <p />
@@ -566,9 +570,10 @@ class TranscriptTermRemarks {
 // transcript term data
 class TranscriptTermData {
   // constructor
-  constructor(termData, termIdx) {
+  constructor(termData, termIdx, dataFeeder) {
     this.termData = termData;
     this.termIdx = termIdx;
+    this.dataFeeder = dataFeeder;
   }
 
   // main render
@@ -583,7 +588,7 @@ class TranscriptTermData {
 
   // render academic year
   renderAcadYear() {
-    dataFeeder.push(
+    this.dataFeeder.push(
       "ts-term-year",
       <td colSpan="4" className={cls("ts-title ts-highlight")}>
         <p />
@@ -600,7 +605,7 @@ class TranscriptTermData {
       this.termData.fosDescription &&
       this.termData.organization
     ) {
-      dataFeeder.push(
+      this.dataFeeder.push(
         "ts-term-fos",
         <td colSpan="4" className={cls("ts-termrem")}>
           {`${this.termData.fosDescription} ${this.termData.organization}`}
@@ -611,30 +616,35 @@ class TranscriptTermData {
 
   // render credit transfer data
   renderCreditTransfer() {
-    new TranscriptCreditTransfer(this.termData, this.termIdx).render();
+    new TranscriptCreditTransfer(
+      this.termData,
+      this.termIdx,
+      this.dataFeeder
+    ).render();
   }
 
   // render module enrollment data
   renderEnrollment() {
-    new TranscriptEnrollment(this.termData).render();
+    new TranscriptEnrollment(this.termData, this.dataFeeder).render();
   }
 
   // render term summary info
   renderTermSummary() {
-    new TranscriptSummary(this.termData).render();
+    new TranscriptSummary(this.termData, this.dataFeeder).render();
   }
 
   // render term remarks
   renderTermRemarks() {
-    new TranscriptTermRemarks(this.termData).render();
+    new TranscriptTermRemarks(this.termData, this.dataFeeder).render();
   }
 }
 
 // render student LOA data
 class TranscriptLeave {
   // constructor
-  constructor(leaveData) {
+  constructor(leaveData, dataFeeder) {
     this.leaveData = leaveData;
+    this.dataFeeder = dataFeeder;
   }
 
   // main render
@@ -650,7 +660,7 @@ class TranscriptLeave {
   renderLeave(data) {
     let text = `LEAVE OF ABSENCE FROM ${isoDateToLocal(data.from)}`;
     if (data.to) text += ` TO ${isoDateToLocal(data.to)}`;
-    dataFeeder.push(
+    this.dataFeeder.push(
       "ts-loa",
       <td colSpan="4" className={cls("ts-title ts-highlight")}>
         <hr />
@@ -663,8 +673,9 @@ class TranscriptLeave {
 // render degree conferment
 class TranscriptDegree {
   // constructor
-  constructor(degreeData) {
+  constructor(degreeData, dataFeeder) {
     this.degreeData = degreeData;
+    this.dataFeeder = dataFeeder;
   }
 
   // main render
@@ -679,7 +690,7 @@ class TranscriptDegree {
 
   // render degree info beginning title
   renderDegreeInfoTitle() {
-    dataFeeder.push(
+    this.dataFeeder.push(
       "ts-deg-begin",
       <td colSpan="4" className={cls("ts-title ts-highlight")}>
         <hr />
@@ -699,7 +710,7 @@ class TranscriptDegree {
           else descr = `${planData.typeName}: ${planData.transcriptDescr}`;
           if (planData.type === "JMP" && planData.planDescr)
             descr += ` with ${planData.planDescr}`;
-          dataFeeder.push(
+          this.dataFeeder.push(
             "ts-deg-plan",
             <td colSpan="4" className={cls("ts-title ts-highlight")}>
               &nbsp;&nbsp;&nbsp;&nbsp;{descr.toUpperCase()}
@@ -718,7 +729,7 @@ class TranscriptDegree {
         if (planData.subplans)
           planData.subplans.forEach(subplData => {
             descr = `${subplData.typeName}: ${subplData.transcriptDescr}`;
-            dataFeeder.push(
+            this.dataFeeder.push(
               "ts-deg-spln",
               <td colSpan="4" className={cls("ts-title ts-highlight")}>
                 &nbsp;&nbsp;&nbsp;&nbsp;{descr.toUpperCase()}
@@ -735,7 +746,7 @@ class TranscriptDegree {
       let descr;
       data.specializations.forEach(splData => {
         descr = `${splData.typeName}: ${splData.transcriptDescr}`;
-        dataFeeder.push(
+        this.dataFeeder.push(
           "ts-deg-spcl",
           <td colSpan="4" className={cls("ts-title ts-highlight")}>
             &nbsp;&nbsp;&nbsp;&nbsp;{descr.toUpperCase()}
@@ -752,7 +763,7 @@ class TranscriptDegree {
       if (data.isYNC) degTitle += `, ${data.honours}`;
       else degTitle += ` with ${data.honours}`;
     }
-    dataFeeder.push(
+    this.dataFeeder.push(
       "ts-deg-title",
       <td colSpan="4" className={cls("ts-title ts-highlight")}>
         &nbsp;&nbsp;{degTitle.toUpperCase()}
@@ -767,8 +778,9 @@ class TranscriptDegree {
 // render milestones
 class TranscriptMilestone {
   // constructor
-  constructor(msData) {
+  constructor(msData, dataFeeder) {
     this.msData = msData;
+    this.dataFeeder = dataFeeder;
   }
 
   // main render
@@ -777,7 +789,7 @@ class TranscriptMilestone {
       this.msData.forEach(data => {
         if (data.milestoneTitle) {
           const descr = `${data.milestoneTitle}: ${data.thesisTitle}`;
-          dataFeeder.push(
+          this.dataFeeder.push(
             "ts-ms",
             <td colSpan="4" className={cls("ts-title ts-highlight")}>
               &nbsp;&nbsp;&nbsp;&nbsp;{descr.toUpperCase()}
@@ -792,8 +804,9 @@ class TranscriptMilestone {
 // render special programs
 class TranscriptSpclProg {
   // constructor
-  constructor(degreeData) {
+  constructor(degreeData, dataFeeder) {
     this.degreeData = degreeData;
+    this.dataFeeder = dataFeeder;
   }
 
   // main render
@@ -805,7 +818,7 @@ class TranscriptSpclProg {
             if (planData.specialProgram) {
               let descr = planData.transcriptDescr;
               if (planData.planDescr) descr += ` ${planData.planDescr}`;
-              dataFeeder.push(
+              this.dataFeeder.push(
                 "ts-splprg",
                 <td colSpan="4" className={cls("ts-title ts-highlight")}>
                   &nbsp;&nbsp;&nbsp;&nbsp;{descr.toUpperCase()}
@@ -821,8 +834,9 @@ class TranscriptSpclProg {
 // render awards
 class TranscriptAward {
   // constructor
-  constructor(awardData) {
+  constructor(awardData, dataFeeder) {
     this.awardData = awardData;
+    this.dataFeeder = dataFeeder;
   }
 
   // main render
@@ -835,7 +849,7 @@ class TranscriptAward {
 
   // render award header
   renderAwardHeader() {
-    dataFeeder.push(
+    this.dataFeeder.push(
       "ts-awd-head",
       <td colSpan="4" className={cls("ts-title ts-highlight")}>
         <hr />
@@ -846,7 +860,7 @@ class TranscriptAward {
 
   renderAwardDetails() {
     this.awardData.forEach(data => {
-      dataFeeder.push(
+      this.dataFeeder.push(
         "ts-awd-l1",
         <td colSpan="4" style={{ paddingTop: "0", paddingBottom: "0" }}>
           <div className={cls("awd-col0")} />
@@ -858,7 +872,7 @@ class TranscriptAward {
           </div>
         </td>
       );
-      dataFeeder.push(
+      this.dataFeeder.push(
         "ts-awd-l2",
         <td colSpan="4" style={{ paddingTop: "0", paddingBottom: "0" }}>
           <div className={cls("awd-col0")} />
@@ -875,39 +889,56 @@ class TranscriptAward {
 // transcript data
 class TranscriptData {
   // constructor
-  constructor() {
+  constructor(dataSource, dataFeeder) {
     this.keyPrefix = "ts";
+    this.dataSource = dataSource;
+    this.dataFeeder = dataFeeder;
   }
 
   // main render
   render() {
     // render transcript term data
     // build for each term, termIdx is used to identify 1st term
-    jsonData.transcript.forEach((termData, termIdx) => {
-      new TranscriptTermData(termData, termIdx).render();
+    this.dataSource.transcript.forEach((termData, termIdx) => {
+      new TranscriptTermData(termData, termIdx, this.dataFeeder).render();
     });
     // render LOA data
-    new TranscriptLeave(jsonData.additionalData.leaveData).render();
+    new TranscriptLeave(
+      this.dataSource.additionalData.leaveData,
+      this.dataFeeder
+    ).render();
     // render degree data
-    new TranscriptDegree(jsonData.additionalData.degreeData).render();
+    new TranscriptDegree(
+      this.dataSource.additionalData.degreeData,
+      this.dataFeeder
+    ).render();
     // render milestone data
-    new TranscriptMilestone(jsonData.additionalData.milestoneData).render();
+    new TranscriptMilestone(
+      this.dataSource.additionalData.milestoneData,
+      this.dataFeeder
+    ).render();
     // render special program data
-    new TranscriptSpclProg(jsonData.additionalData.degreeData).render();
+    new TranscriptSpclProg(
+      this.dataSource.additionalData.degreeData,
+      this.dataFeeder
+    ).render();
     this.renderConferDate();
     this.renderDegreeRemarks();
     // render award data
-    new TranscriptAward(jsonData.additionalData.awardData).render();
+    new TranscriptAward(
+      this.dataSource.additionalData.awardData,
+      this.dataFeeder
+    ).render();
     // end of transcript
     this.renderTranscriptEnd();
   }
 
   // render conferment date
   renderConferDate() {
-    const { degreeData } = jsonData.additionalData;
+    const { degreeData } = this.dataSource.additionalData;
     if (degreeData) {
       const date = isoDateToLocal(degreeData[0].dateConferred);
-      dataFeeder.push(
+      this.dataFeeder.push(
         "ts-confdt",
         <td colSpan="4" className={cls("ts-title ts-highlight")}>
           CONFERMENT DATE: {date}
@@ -918,13 +949,13 @@ class TranscriptData {
 
   // render final remarks
   renderDegreeRemarks() {
-    const remarksData = jsonData.additionalData.remarks;
+    const remarksData = this.dataSource.additionalData.remarks;
     if (remarksData) {
       let text = "";
       remarksData.forEach(line => {
         text += `${line.trim()} `;
       });
-      dataFeeder.push(
+      this.dataFeeder.push(
         "ts-degrem",
         <td colSpan="4" className={cls("ts-title ts-highlight")}>
           {text}
@@ -936,7 +967,7 @@ class TranscriptData {
   // render end of transcript
   renderTranscriptEnd() {
     const line = "*".repeat(50);
-    dataFeeder.push(
+    this.dataFeeder.push(
       "ts-end",
       <td colSpan="4" className={cls("ts-text")} align="center">
         {line}END OF TRANSCRIPT{line}
@@ -949,12 +980,12 @@ class TranscriptData {
 // render
 const Template = ({ certificate }) => {
   // JSON data source
-  jsonData = certificate;
+  const jsonData = certificate;
   // prepare data
-  dataFeeder = new TranscriptDataFeeder();
+  const dataFeeder = new TranscriptDataFeeder();
   dataFeeder.headerData = renderTranscriptHeaderData(jsonData);
-  new TranscriptProgram().render();
-  new TranscriptData().render();
+  new TranscriptProgram(jsonData, dataFeeder).render();
+  new TranscriptData(jsonData, dataFeeder).render();
   dataFeeder.resetTermRange();
   // render data
   // 1123px is width of A4 portrait (29.7cm)
@@ -968,14 +999,15 @@ const Template = ({ certificate }) => {
       : null;
   const html = (
     <div style={scale}>
-      <Transcript 
-        maxPages="8" 
-        maxRows="50" 
-        dataFeeder={dataFeeder} 
+      <Transcript
+        maxPages="8"
+        maxRows="50"
+        dataFeeder={dataFeeder}
         backImgUrl={`url(${NUS_TS_BACKIMG})`}
         legendPage={NUS_TS_LEGEND}
         legendRatio="0.95"
-      />;
+      />
+      ;
     </div>
   );
   return html;
