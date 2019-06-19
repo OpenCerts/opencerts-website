@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
+import { filter } from "lodash";
 import css from "./viewerStyles.scss";
 
 const View = ({
@@ -9,6 +10,42 @@ const View = ({
   issuedStatus,
   notRevokedStatus
 }) => {
+  const errorMessages = [
+    {
+      title: "Certificate from unregistered institution",
+      message:
+        "The institution that issued this certificate is unknown. Your institution has to register with OpenCerts first.",
+      error: !issuerIdentityStatus.verified
+    },
+    {
+      title: "Certificate revoked",
+      message:
+        "This certificate has been revoked by your issuing institution. Please contact your issuing institution for more details.",
+      error: !notRevokedStatus.verified
+    },
+    {
+      title: "Certificate has been tampered with",
+      message:
+        "The contents of this certificate are inaccurate and have been tampered with.",
+      error: !hashStatus.verified
+    },
+    {
+      title: "Certificate not issued",
+      message:
+        "This certificate cannot be found. Please contact your issuing institution for help or issue the certificate before trying again.",
+      error: !issuedStatus.verified
+    }
+    // {
+    //   title: "Certificate store address is invalid",
+    //   message:
+    //     "Please check that you have a valid smart contract with us and a correct certificate store address before proceeding.",
+    //   error: !storeStatus.verified
+    // }
+  ];
+
+  const stack = filter(errorMessages, ["error", true]);
+  const error = stack.pop();
+
   const isWarning =
     hashStatus.verified && issuedStatus.verified && notRevokedStatus.verified;
   return (
@@ -38,29 +75,10 @@ const View = ({
       </span>
 
       <div className={css.verifications}>
-        {!hashStatus.verified ? (
-          <p className={css.messages}>
-            The certificate&#39;s contents are inaccurate
-          </p>
-        ) : null}
-
-        {!issuedStatus.verified ? (
-          <p className={css.messages}>The certificate records are not found</p>
-        ) : null}
-
-        {!notRevokedStatus.verified ? (
-          <p className={css.messages}>The certificate has been revoked</p>
-        ) : null}
-
-        {!issuerIdentityStatus.verified ? (
+        {error !== null ? (
           <div>
-            <p className={css.messages}>
-              Certificate from unregistered institution
-            </p>
-            <p>
-              We are unable to verify the certificate as this institution has
-              not registered with OpenCerts
-            </p>
+            <p className={css.messages}>{error.title}</p>
+            <p>{error.message}</p>
           </div>
         ) : null}
       </div>
