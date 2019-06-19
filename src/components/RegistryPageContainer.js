@@ -1,34 +1,34 @@
+import { filter } from "lodash";
 import css from "./registry.scss";
+import registry from "../../static/registry.json";
 
-const members = [
-  {
-    name: "Government Technology Agency of Singapore (GovTech)",
-    address: "0x007d40224f6562461633ccfbaffd359ebb2fc9ba",
-    website: "https://www.tech.gov.sg",
-    email: "info@tech.gov.sg",
-    phone: "+65 6211 2100",
-    key: "govtech",
-    logo: "/static/images/GOVTECH_logo.png"
-  },
-  {
-    name: "Ngee Ann Polytechnic",
-    address: "0xa5d801265D29A6F1015a641BfC0e39Ee3dA2AC76",
-    website: "https://www.np.edu.sg",
-    email: "asknp@np.edu.sg",
-    phone: "+65 6466 6555",
-    key: "np",
-    logo: "/static/images/NP_logo.svg"
-  }
-];
+const members = Object.keys(registry.issuers).map(k => ({
+  ...registry.issuers[k],
+  address: k
+}));
+
+const finalmembers = filter(members, "displayCard");
 
 const renderMembers = () =>
-  members.map((m, i) => (
+  finalmembers.map((m, i) => (
     <div
       key={i}
-      className={`col-lg-6 col-md-12 ${css["mb-3"]} ${css["m-pd-0"]}`}
+      id={m.id}
+      className={`col ${css["mb-3"]} ${css["m-pd-0"]}`}
+      style={{ padding: "10px", wordWrap: "break-word" }}
     >
       <div className={css["partner-block"]}>
-        <img className={`${css.logo}`} src={m.logo} id={css[m.key]} />
+        <img
+          className={`${css.logo}`}
+          src={m.logo}
+          id={css[m.key]}
+          style={{
+            maxHeight: "80px",
+            maxWidth: "250px",
+            height: "auto",
+            width: "auto"
+          }}
+        />
         <h4 className={css["partner-name"]}>{m.name}</h4>
         {m.address ? (
           <div>
@@ -87,7 +87,7 @@ const RegistryPage = () => (
             <p>
               Certificates with unverified issuer means that the certificate
               store address is not registered. This could mean that the issuer
-              has not registered with OpenCerts or the cert
+              has not registered with OpenCerts.
             </p>
           </div>
         </div>

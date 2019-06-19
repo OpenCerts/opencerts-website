@@ -7,6 +7,7 @@ import Modal from "./Modal";
 
 import { getLogger } from "../utils/logger";
 import templates from "./CertificateTemplates";
+import ErrorBoundary from "./ErrorBoundary";
 
 const { trace } = getLogger("components:CertificateViewer");
 
@@ -32,8 +33,8 @@ const renderHeaderBlock = props => {
   return (
     <div className={`container-fluid ${styles["pd-0"]}`}>
       <div className="row">
-        <div className="col-md-6 col-sm-6 col-xs-12">{renderedVerifyBlock}</div>
-        <div className={`row col-md-6 col-sm-6 col-xs-12 ${styles["pd-0"]}`}>
+        <div className="col-sm-7 col-xs-12">{renderedVerifyBlock}</div>
+        <div className={`row col-sm-5 col-xs-12 ${styles["pd-0"]}`}>
           <div className="ml-auto">
             <div
               id="btn-print"
@@ -104,7 +105,7 @@ const CertificateViewer = props => {
     </div>
   );
 
-  return <div>{validCertificateContent} </div>;
+  return <ErrorBoundary>{validCertificateContent} </ErrorBoundary>;
 };
 
 CertificateViewer.propTypes = {

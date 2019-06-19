@@ -128,13 +128,14 @@ const templates = {
   "SOA-IT-001": SOAIT001,
   SF_SOA_IT_001: SFSOAIT001,
   "SOA-MF-01": SOAMF01,
-  SOA_MF_02: SOAMF01,
+  "SOA-MF-02": SOAMF01,
   SF_SOA_MF_01: SFSOAMF01,
   SF_SOA_MF_02: SFSOAMF01,
   SOA_SV_001: SOASV001,
   SF_SOA_SV_001: SOASV001,
   "SOA-ES-001": SOAES01,
-  Trans: Transcript
+  Trans: Transcript,
+  Trans_Reprint: Transcript
 };
 
 export default addDirToTemplatePath("ssg-wsg", templates);

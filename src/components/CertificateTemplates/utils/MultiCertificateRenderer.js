@@ -27,6 +27,7 @@ const { trace } = getLogger("components:MultiCertificateRenderer");
  * @param {*} certificate
  */
 export const renderTemplateToTab = ({
+  document,
   template,
   certificate,
   handleObfuscation
@@ -35,6 +36,7 @@ export const renderTemplateToTab = ({
   return Object.assign({}, template, {
     content: (
       <Template
+        document={document}
         certificate={certificate}
         handleObfuscation={handleObfuscation}
       />
@@ -105,6 +107,7 @@ class MultiCertificateRenderer extends Component {
     const tabs = templates.map(template => {
       trace(`%o`, template);
       return renderTemplateToTab({
+        document,
         template,
         certificate,
         handleObfuscation: this.handleObfuscation
@@ -118,12 +121,12 @@ class MultiCertificateRenderer extends Component {
           selectedIndex={activeTab}
           selectedTabClassName={styles.active}
         >
-          <div id={styles["header-ui"]}>
+          <div
+            id={styles["header-ui"]}
+            className="d-none d-lg-block d-xl-block"
+          >
             <div className={styles["header-container"]}>
-              <TabList
-                id="template-tabs-list"
-                className="nav nav-tabs d-none d-lg-block d-xl-block"
-              >
+              <TabList id="template-tabs-list" className="nav nav-tabs">
                 {tabs.map(tab => (
                   <Tab key={tab.id} className={styles.tab}>
                     {tab.label}

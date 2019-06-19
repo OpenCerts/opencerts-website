@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import RecipientAddress from "../common/recipientAddress";
 
 const Recipient = ({ certificate }) => (
   <div className="container">
@@ -6,15 +7,7 @@ const Recipient = ({ certificate }) => (
       <div className="col-7">
         <strong>{certificate.recipient.name}</strong>
         <br />
-        <br />
-        {certificate.additionalData.addressBlockHouseNumber}{" "}
-        {certificate.additionalData.addressStreetName}
-        <br />
-        {certificate.additionalData.addressFloorNumber}{" "}
-        {certificate.additionalData.addressUnitNumber}
-        <br />
-        {certificate.additionalData.addressCountry}{" "}
-        {certificate.additionalData.addressPostalCode}
+        <RecipientAddress certificate={certificate} />
       </div>
 
       <div className="col-5">

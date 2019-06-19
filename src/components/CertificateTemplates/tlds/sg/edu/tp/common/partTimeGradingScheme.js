@@ -3,12 +3,26 @@ import GradingSchemeStyles from "./gradingSchemeStyles";
 const PartTimeGradingScheme = () => (
   <div className="container">
     <GradingSchemeStyles />
+    <style>
+      {`
+      .grading-system-header{
+        border:none;
+        border-bottom:1px solid #212529;
+      }
+
+      .column-header{
+        font-weight:bold;
+      }
+    `}
+    </style>
 
     <div className="grading-system">
       <div className="row">
-        <div className="col-12 grading-system-header">Grading System</div>
+        <div className="col-12 grading-system-header column-header">
+          Grading System
+        </div>
       </div>
-      <div className="row">
+      <div className="row column-header">
         <div className="grading-system-cell col-3">
           <div className="row">
             <div className="col-4">Grade</div>

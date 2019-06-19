@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
 
 import TPCert from "./certificate";
@@ -13,21 +12,16 @@ const templates = [
   },
   {
     id: "transcript",
-    label: "Transcript",
+    label: "Statement of Examination Results",
     template: TPTranscript
   }
 ];
 
-const ftpfp = ({ certificate }) => (
+const ftpfp = () => (
   <MultiCertificateRenderer
-    certificate={certificate}
     templates={templates}
     whitelist={ApprovedAddresses}
   />
 );
-
-ftpfp.propTypes = {
-  certificate: PropTypes.object.isRequired
-};
 
 export default ftpfp;

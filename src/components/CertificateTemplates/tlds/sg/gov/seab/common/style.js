@@ -54,6 +54,12 @@ export const SOR_BOLD_TEXT = {
 export const SOR_CENTER_ALIGN = {
   textAlign: "center"
 };
+export const SOR_PSLE_NAME_1979 = {
+  marginLeft: "35em"
+};
+export const SOR_PSLE_GRADE_1979 = {
+  marginLeft: "-20em"
+};
 // Explanatory Notes CSS
 export const EXPLANATORY_PAGE_SIZE = {
   border: "1px solid black",

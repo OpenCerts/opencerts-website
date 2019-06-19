@@ -22,12 +22,12 @@ test("QUAL_Reprint certificate is rendered correctly", async t => {
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
-    "Healthcare Support",
+    "HIGHER CERTIFICATE IN HEALTHCARE SUPPORT",
     "is awarded to",
-    "Lee1",
+    "LEE1",
     "ID No: S0000000A",
-    "for successful attainment of the required industry approved competencies",
+    "for successful attainment of the requiredindustry approved competencies",
     "at WSQ_20180620",
-    "18 Apr 2019"
+    "20 Nov 2018"
   ]);
 });
