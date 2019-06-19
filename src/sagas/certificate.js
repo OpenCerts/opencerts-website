@@ -85,7 +85,9 @@ export function* analyticsRevocationFail({ certificate }) {
 export function* analyticsStoreFail({ certificate }) {
   yield analyticsEvent(window, {
     category: "CERTIFICATE_ERROR",
-    action: get(certificate, "issuers[0].certificateStore"),
+    action: get(certificate, "issuers", []).map(
+      issuer => issuer.certificateStore
+    ),
     label: get(certificate, "id"),
     value: ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_STORE
   });
@@ -180,6 +182,7 @@ export function* verifyCertificateStore({ certificate }) {
 
     // Checks if issuing institution has a valid smart contract with OpenCerts
     yield combinedStoreAddresses.map(address => isValidSmartContract(address));
+
     yield put(verifyingCertificateStoreSuccess());
     return true;
   } catch (e) {
@@ -190,6 +193,7 @@ export function* verifyCertificateStore({ certificate }) {
         certificate: certificateData(certificate)
       })
     );
+    analyticsStoreFail(certificate);
     return false;
   }
 }
@@ -206,6 +210,7 @@ export function* verifyCertificateHash({ certificate }) {
       certificate: certificateData(certificate)
     })
   );
+  analyticsHashFail(certificate);
   return false;
 }
 
@@ -229,6 +234,7 @@ export function* verifyCertificateIssued({ certificate, certificateStores }) {
         error: e.message
       })
     );
+    analyticsIssuedFail(certificate);
     return false;
   }
 }
@@ -281,6 +287,7 @@ export function* verifyCertificateNotRevoked({
         error: e.message
       })
     );
+    analyticsRevocationFail(certificate);
     return false;
   }
 }
@@ -385,6 +392,7 @@ export function* verifyCertificateIssuer({ certificate }) {
         certificate: certificateData(certificate)
       })
     );
+    analyticsIssuerFail(certificate);
     return false;
   }
 }
