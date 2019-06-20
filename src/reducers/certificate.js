@@ -44,6 +44,8 @@ export const types = {
   NETWORK_RESET: "NETWORK_RESET", // For network change
 
   UPDATE_CERTIFICATE: "UPDATE_CERTIFICATE",
+  UPDATE_CERTIFICATE_WITHOUT_VERIFICATION:
+    "UPDATE_CERTIFICATE_WITHOUT_VERIFICATION",
 
   LOADING_STORE_SUCCESS: "LOADING_STORE_SUCCESS",
   LOADING_STORE_FAILURE: "LOADING_STORE_FAILURE",
@@ -85,6 +87,7 @@ export default function reducer(state = initialState, action) {
         ...initialState
       };
     case types.UPDATE_CERTIFICATE:
+    case types.UPDATE_CERTIFICATE_WITHOUT_VERIFICATION:
       return {
         ...initialState,
         raw: action.payload,
@@ -309,6 +312,13 @@ export function resetCertificateState() {
 export function updateCertificate(payload) {
   return {
     type: types.UPDATE_CERTIFICATE,
+    payload
+  };
+}
+
+export function updateCertificateWithoutVerification(payload) {
+  return {
+    type: types.UPDATE_CERTIFICATE_WITHOUT_VERIFICATION,
     payload
   };
 }

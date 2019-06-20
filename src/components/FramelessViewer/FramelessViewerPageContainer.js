@@ -13,7 +13,8 @@ import {
   getCertificate,
   getTemplates as getTemplatesAction,
   getActiveTemplateTab,
-  selectTemplateTab as selectTemplateTabAction
+  selectTemplateTab as selectTemplateTabAction,
+  updateCertificateWithoutVerification
 } from "../../reducers/certificate";
 import FramelessCertificateViewer from "./FramelessCertificateViewer";
 import { getLogger } from "../../utils/logger";
@@ -151,7 +152,8 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateCertificate: payload => dispatch(updateCertificate(payload)),
+  updateCertificate: payload =>
+    dispatch(updateCertificateWithoutVerification(payload)),
   selectTemplateTab: tabIndex => dispatch(selectTemplateTabAction(tabIndex))
 });
 

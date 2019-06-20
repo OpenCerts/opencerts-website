@@ -18,7 +18,15 @@ import {
 
 import { getLogger } from "../../../utils/logger";
 
+import DecentralisedRenderer from "../../DecentralisedTemplateRenderer/DecentralisedRenderer";
+
 const { trace } = getLogger("components:MultiCertificateRenderer");
+
+const data = {
+  type: "",
+  name: "",
+  url: "http://localhost:3001/frameless-viewer"
+};
 
 /**
  * Renders the template view using the provided template function and certificate.
@@ -82,11 +90,11 @@ class MultiCertificateRenderer extends Component {
   componentDidMount() {
     const { document, templates, registerTemplates } = this.props;
     const certificate = certificateData(document);
-    analyticsEvent(window, {
-      category: "CERTIFICATE_VIEWED",
-      action: get(certificate, "issuers[0].certificateStore"),
-      label: get(certificate, "id")
-    });
+    // analyticsEvent(window, {
+    //   category: "CERTIFICATE_VIEWED",
+    //   action: get(certificate, "issuers[0].certificateStore"),
+    //   label: get(certificate, "id")
+    // });
     registerTemplates(templates);
   }
 
@@ -153,9 +161,14 @@ class MultiCertificateRenderer extends Component {
             className="tab-content bg-white p-3 mt-3 rounded"
             id="rendered-certificate"
           >
-            {tabs.map(tab => (
+            <DecentralisedRenderer
+              template={data}
+              certificate={certificate}
+              tabId={activeTab}
+            />
+            {/* {tabs.map(tab => (
               <TabPanel key={tab.id}>{tab.content}</TabPanel>
-            ))}
+            ))} */}
           </div>
         </Tabs>
       </>
