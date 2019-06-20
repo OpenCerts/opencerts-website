@@ -8,6 +8,7 @@ import Modal from "./Modal";
 import { getLogger } from "../utils/logger";
 import templates from "./CertificateTemplates";
 import ErrorBoundary from "./ErrorBoundary";
+import DecentralisedRenderer from "./DecentralisedTemplateRenderer/DecentralisedRenderer";
 
 const { trace } = getLogger("components:CertificateViewer");
 
@@ -79,22 +80,20 @@ const renderHeaderBlock = props => {
 };
 
 const CertificateViewer = props => {
-  const { certificate } = props;
+  const { document } = props;
 
   const renderedHeaderBlock = renderHeaderBlock(props);
-  const selectedTemplateName = get(certificate, "$template", "default");
-  const SelectedTemplate = templates[selectedTemplateName] || templates.default;
-
-  trace(`Templates Mapping: %o`, templates);
-  trace(`Selected template: ${selectedTemplateName}`);
-  trace(`Certificate content: %o`, certificate);
 
   const validCertificateContent = (
     <div>
       <div id={styles["top-header-ui"]}>
         <div className={styles["header-container"]}>{renderedHeaderBlock}</div>
       </div>
-      <SelectedTemplate />
+      <DecentralisedRenderer 
+        certificate={document}
+        template={{url: "http://localhost:3000/frameless-viewer"}}
+        tabId={0}
+      />
       <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
         <CertificateSharingForm
           emailSendingState={props.emailSendingState}

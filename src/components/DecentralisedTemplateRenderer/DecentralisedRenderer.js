@@ -78,30 +78,10 @@ class DecentralisedRenderer extends Component {
     );
   }
 }
-
-// const mapStateToProps = store => ({
-//   document: getCertificate(store),
-//   templates: getTemplatesAction(store),
-//   activeTab: getActiveTemplateTab(store) // required to trigger componentDidUpdate when tab changes
-// });
-
-// const mapDispatchToProps = dispatch => ({
-//   registerTemplates: templates => dispatch(registerTemplatesAction(templates)),
-//   selectTemplateTab: tabIndex => dispatch(selectTemplateTabAction(tabIndex))
-// });
-
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(DecentralisedRenderer);
 export default DecentralisedRenderer;
 
 DecentralisedRenderer.propTypes = {
-  //   document: PropTypes.object,
   certificate: PropTypes.object,
-  //   selectTemplateTab: PropTypes.func.isRequired,
   template: PropTypes.object,
   tabId: PropTypes.number
-
-  //   registerTemplates: PropTypes.func
 };
