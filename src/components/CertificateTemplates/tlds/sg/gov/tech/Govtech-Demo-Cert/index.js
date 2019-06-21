@@ -22,13 +22,13 @@ const templates = [
   }
 ];
 
-const GovtechDemoCert = () => (
+const GovtechDemoCert = ({document, activeTab}) => (
   <MultiCertificateRenderer
     templates={templates}
     whitelist={approvedAddresses}
+    document={document}
+    activeTab={activeTab}
   />
 );
-
-GovtechDemoCert.displayName = "Govtech Demo Cert";
 
 export default GovtechDemoCert;

@@ -29,13 +29,23 @@ class FramelessViewerContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.handleCertificateChange = this.handleCertificateChange.bind(this);
-    this.handleTextFieldChange = this.handleTextFieldChange.bind(this);
-    this.state = { parentFrameConnection: null };
+    this.handleDocumentChange = this.handleDocumentChange.bind(this);
+    this.handleTemplateTabChange = this.handleTemplateTabChange.bind(this);
+    this.state = {
+      parentFrameConnection: null,
+      document: null,
+      activeTab: 0,
+      templates: null
+    };
   }
 
   componentDidUpdate() {
     if (inIframe()) {
+      console.log(
+        "Trying to update",
+        document.documentElement.scrollHeight,
+        this.props.template
+      );
       this.state.parentFrameConnection.promise.then(parent => {
         if (parent.updateHeight)
           parent.updateHeight(document.documentElement.scrollHeight);
@@ -81,9 +91,9 @@ class FramelessViewerContainer extends Component {
    * scrollbar issue.
    */
   componentDidMount() {
-    const { selectTemplateTab } = this.props;
+    const { selectTemplateTab } = this.handleTemplateTabChange;
     const getTemplates = () => formatTemplate(this.props.templates);
-    const renderCertificate = this.handleCertificateChange;
+    const renderCertificate = this.handleDocumentChange;
     const frameHeight = document.documentElement.scrollHeight;
 
     window.opencerts = {
@@ -105,67 +115,62 @@ class FramelessViewerContainer extends Component {
     }
   }
 
-  handleTextFieldChange(e) {
-    const fieldContents = JSON.parse(e.target.value);
-    trace(fieldContents);
-    const validated = validateSchema(fieldContents);
-    if (!validated) {
-      throw new Error(
-        "Certificate string does not conform to OpenCerts schema"
-      );
-    }
-    const verified = verifySignature(fieldContents);
-    trace(`Certificate verification: ${verified}`);
-    this.props.updateCertificate(fieldContents);
+  // handleTextFieldChange(e) {
+  //   const fieldContents = JSON.parse(e.target.value);
+  //   trace(fieldContents);
+  //   const validated = validateSchema(fieldContents);
+  //   if (!validated) {
+  //     throw new Error(
+  //       "Certificate string does not conform to OpenCerts schema"
+  //     );
+  //   }
+  //   const verified = verifySignature(fieldContents);
+  //   trace(`Certificate verification: ${verified}`);
+  //   this.props.updateCertificate(fieldContents);
+  // }
+
+  handleTemplateTabChange(activeTab) {
+    console.log("Trying to update tab", activeTab);
+    this.setState({ activeTab });
   }
 
-  handleCertificateChange(certificate) {
-    this.props.updateCertificate(certificate);
+  handleDocumentChange(document) {
+    this.setState({ document });
   }
 
   render() {
-    if (!this.props.document) {
+    console.log("PROPS", this.props);
+    console.log("STATE", this.state);
+    if (!this.state.document) {
       return (
-        <input
-          id="certificateContentsString"
-          type="hidden"
-          onChange={this.handleTextFieldChange}
-        />
+        <div>No cert</div>
       );
     }
     return (
       <div className="frameless-tabs">
         <FramelessCertificateViewer
           id={styles["frameless-container"]}
-          document={this.props.document}
-          certificate={certificateData(this.props.document)}
+          activeTab={this.state.activeTab}
+          document={this.state.document}
+          certificate={certificateData(this.state.document)}
         />
       </div>
     );
   }
 }
 
-const mapStateToProps = store => ({
-  document: getCertificate(store),
-  templates: getTemplatesAction(store),
-  activeTab: getActiveTemplateTab(store) // required to trigger componentDidUpdate when tab changes
-});
+// const mapStateToProps = store => ({
+//   document: getCertificate(store),
+//   templates: getTemplatesAction(store),
+//   activeTab: getActiveTemplateTab(store) // required to trigger componentDidUpdate when tab changes
+// });
 
-const mapDispatchToProps = dispatch => ({
-  updateCertificate: payload =>
-    dispatch(updateCertificateWithoutVerification(payload)),
-  selectTemplateTab: tabIndex => dispatch(selectTemplateTabAction(tabIndex))
-});
+// const mapDispatchToProps = dispatch => ({
+//   updateCertificate: payload =>
+//     dispatch(updateCertificateWithoutVerification(payload)),
+//   selectTemplateTab: tabIndex => dispatch(selectTemplateTabAction(tabIndex))
+// });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FramelessViewerContainer);
+export default FramelessViewerContainer;
 
-FramelessViewerContainer.propTypes = {
-  updateCertificate: PropTypes.func.isRequired,
-  document: PropTypes.object,
-  certificate: PropTypes.object,
-  selectTemplateTab: PropTypes.func.isRequired,
-  templates: PropTypes.array
-};
+FramelessViewerContainer.propTypes = {};

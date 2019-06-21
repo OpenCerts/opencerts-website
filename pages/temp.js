@@ -21,8 +21,8 @@ class DecentralisedTemplateRenderer extends Component {
   }
 
   toggletab() {
-    this.setState({ tabId: this.state.tabId + 1 });
     console.log(this.state.tabId);
+    this.setState({ tabId: this.state.tabId + 1 });
   }
 
   render() {
