@@ -77,6 +77,10 @@ const ptpdcModularCourse = dynamic(() =>
   import("./ptpdc_mod" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
 );
 
+const ptfsm = dynamic(() =>
+  import("./ptfsm" /* webpackChunkName: "TemasekPolytechnicTemplates" */)
+);
+
 // keep it simple and stupid.
 // we will have to add/configure new mapping every year.
 // a bit tedious, but we have full control over which year use what template.
@@ -553,7 +557,28 @@ const templates = {
   "ptpdc-mod-2026": ptpdcModularCourse,
   "ptpdc-mod-2027": ptpdcModularCourse,
   "ptpdc-mod-2028": ptpdcModularCourse,
-  "ptpdc-mod-2029": ptpdcModularCourse
+  "ptpdc-mod-2029": ptpdcModularCourse,
+
+  "ptfsm-2010": ptfsm,
+  "ptfsm-2011": ptfsm,
+  "ptfsm-2012": ptfsm,
+  "ptfsm-2013": ptfsm,
+  "ptfsm-2014": ptfsm,
+  "ptfsm-2015": ptfsm,
+  "ptfsm-2016": ptfsm,
+  "ptfsm-2017": ptfsm,
+  "ptfsm-2018": ptfsm,
+  "ptfsm-2019": ptfsm,
+  "ptfsm-2020": ptfsm,
+  "ptfsm-2021": ptfsm,
+  "ptfsm-2022": ptfsm,
+  "ptfsm-2023": ptfsm,
+  "ptfsm-2024": ptfsm,
+  "ptfsm-2025": ptfsm,
+  "ptfsm-2026": ptfsm,
+  "ptfsm-2027": ptfsm,
+  "ptfsm-2028": ptfsm,
+  "ptfsm-2029": ptfsm
 };
 
 export default addDirToTemplatePath("tp", templates);
