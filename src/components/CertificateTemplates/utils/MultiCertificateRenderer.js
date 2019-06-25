@@ -8,30 +8,6 @@ import { analyticsEvent } from "../../Analytics";
 import { updateObfuscatedCertificate } from "../../../reducers/certificate";
 
 /**
- * Renders the template view using the provided template function and certificate.
- * Adds this rendered content under the .content key and returns it.
- * @param {*} template
- * @param {*} certificate
- */
-export const renderTemplateToTab = ({
-  document,
-  template,
-  certificate,
-  handleObfuscation
-}) => {
-  const Template = template.template;
-  return Object.assign({}, template, {
-    content: (
-      <Template
-        document={document}
-        certificate={certificate}
-        handleObfuscation={handleObfuscation}
-      />
-    )
-  });
-};
-
-/**
  * Retrieves the contract store address from the provided certificate
  * and tries to find it in the provided whitelist of allowed addresses
  *
