@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
 import approvedAddresses from "./common";
 import DemoCert from "./certificate";
@@ -22,11 +23,19 @@ const templates = [
   }
 ];
 
-const GovtechDemoCert = ({ document }) => (
+const GovtechDemoCert = ({
+  document,
+  activeTab,
+  updateCurrentHeight,
+  updateTemplateTabs
+}) => (
   <MultiCertificateRenderer
     templates={templates}
     whitelist={approvedAddresses}
     document={document}
+    activeTab={activeTab}
+    updateCurrentHeight={updateCurrentHeight}
+    updateTemplateTabs={updateTemplateTabs}
   />
 );
 

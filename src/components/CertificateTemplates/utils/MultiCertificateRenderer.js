@@ -9,10 +9,7 @@ import InvalidCertificateNotice from "../InvalidCertificateNotice";
 import { analyticsEvent } from "../../Analytics";
 import Drawer from "../../UI/Drawer";
 import {
-  getCertificate,
-  getActiveTemplateTab,
   updateObfuscatedCertificate,
-  registerTemplates as registerTemplatesAction,
   selectTemplateTab as selectTemplateTabAction
 } from "../../../reducers/certificate";
 
@@ -80,14 +77,26 @@ class MultiCertificateRenderer extends Component {
   }
 
   componentDidMount() {
-    const { document, templates, registerTemplates } = this.props;
+    const {
+      document,
+      templates,
+      updateCurrentHeight,
+      updateTemplateTabs
+    } = this.props;
+
+    // Analytics
     const certificate = certificateData(document);
     analyticsEvent(window, {
       category: "CERTIFICATE_VIEWED",
       action: get(certificate, "issuers[0].certificateStore"),
       label: get(certificate, "id")
     });
-    registerTemplates(templates);
+
+    // Templates
+    updateTemplateTabs(templates);
+
+    // Update Height
+    updateCurrentHeight();
   }
 
   handleObfuscation(field) {
@@ -173,24 +182,19 @@ MultiCertificateRenderer.propTypes = {
   templates: PropTypes.array.isRequired,
   document: PropTypes.object.isRequired,
   updateObfuscatedCertificate: PropTypes.func.isRequired,
-  registerTemplates: PropTypes.func.isRequired,
   selectTemplateTab: PropTypes.func.isRequired,
-  activeTab: PropTypes.number.isRequired
+  activeTab: PropTypes.number.isRequired,
+  updateCurrentHeight: PropTypes.func,
+  updateTemplateTabs: PropTypes.func
 };
-
-const mapStateToProps = store => ({
-  // document: getCertificate(store),
-  activeTab: getActiveTemplateTab(store)
-});
 
 const mapDispatchToProps = dispatch => ({
   updateObfuscatedCertificate: updatedDoc =>
     dispatch(updateObfuscatedCertificate(updatedDoc)),
-  registerTemplates: templates => dispatch(registerTemplatesAction(templates)),
   selectTemplateTab: tabIndex => dispatch(selectTemplateTabAction(tabIndex))
 });
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(MultiCertificateRenderer);

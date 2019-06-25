@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 // import { certificateData } from "@govtechsg/open-certificate";
 // import connectToParent from "penpal/lib/connectToParent";
 import connectToChild from "penpal/lib/connectToChild";
@@ -22,8 +23,7 @@ class DecentralisedRenderer extends Component {
 
   updateTemplates(templates) {
     if (!templates) return;
-    // this.selectTemplateTab(1);
-    //   this.props.registerTemplates(templates);
+    this.props.registerTemplates(templates);
   }
 
   renderCertificate(doc) {
@@ -72,10 +72,18 @@ class DecentralisedRenderer extends Component {
     );
   }
 }
-export default DecentralisedRenderer;
+const mapDispatchToProps = dispatch => ({
+  registerTemplates: templates => dispatch(registerTemplatesAction(templates))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(DecentralisedRenderer);
 
 DecentralisedRenderer.propTypes = {
   certificate: PropTypes.object,
   template: PropTypes.object,
-  tabId: PropTypes.number
+  tabId: PropTypes.number,
+  registerTemplates: PropTypes.func
 };

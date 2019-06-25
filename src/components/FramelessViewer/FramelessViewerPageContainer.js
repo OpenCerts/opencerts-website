@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import {
   certificateData,
   validateSchema,
@@ -8,18 +6,8 @@ import {
 } from "@govtechsg/open-certificate";
 import connectToParent from "penpal/lib/connectToParent";
 import styles from "../certificateViewer.scss";
-import {
-  updateCertificate,
-  getCertificate,
-  getTemplates as getTemplatesAction,
-  getActiveTemplateTab,
-  selectTemplateTab as selectTemplateTabAction,
-  updateCertificateWithoutVerification
-} from "../../reducers/certificate";
-import FramelessCertificateViewer from "./FramelessCertificateViewer";
-import { getLogger } from "../../utils/logger";
 
-const { trace } = getLogger("components:FramelessViewerPageContainer");
+import FramelessCertificateViewer from "./FramelessCertificateViewer";
 
 const inIframe = () => window.location !== window.parent.location;
 const formatTemplate = template =>
@@ -41,11 +29,6 @@ class FramelessViewerContainer extends Component {
 
   componentDidUpdate() {
     if (inIframe()) {
-      console.log(
-        "Trying to update",
-        document.documentElement.scrollHeight,
-        this.props.template
-      );
       this.state.parentFrameConnection.promise.then(parent => {
         if (parent.updateHeight)
           parent.updateHeight(document.documentElement.scrollHeight);
@@ -130,7 +113,6 @@ class FramelessViewerContainer extends Component {
   // }
 
   handleTemplateTabChange(activeTab) {
-    console.log("Trying to update tab", activeTab);
     this.setState({ activeTab });
   }
 
@@ -138,13 +120,29 @@ class FramelessViewerContainer extends Component {
     this.setState({ document });
   }
 
+  updateCurrentHeight() {
+    if (inIframe()) {
+      this.state.parentFrameConnection.promise.then(parent => {
+        if (parent.updateHeight)
+          parent.updateHeight(document.documentElement.scrollHeight);
+      });
+    }
+  }
+
+  updateTemplateTabs(templates) {
+    if (inIframe()) {
+      this.state.parentFrameConnection.promise.then(parent => {
+        if (parent.updateTemplates)
+          parent.updateTemplates(formatTemplate(templates));
+      });
+    }
+  }
+
   render() {
     console.log("PROPS", this.props);
     console.log("STATE", this.state);
     if (!this.state.document) {
-      return (
-        <div>No cert</div>
-      );
+      return <div>No cert</div>;
     }
     return (
       <div className="frameless-tabs">
@@ -153,24 +151,12 @@ class FramelessViewerContainer extends Component {
           activeTab={this.state.activeTab}
           document={this.state.document}
           certificate={certificateData(this.state.document)}
+          updateCurrentHeight={this.updateCurrentHeight.bind(this)}
+          updateTemplateTabs={this.updateTemplateTabs.bind(this)}
         />
       </div>
     );
   }
 }
 
-// const mapStateToProps = store => ({
-//   document: getCertificate(store),
-//   templates: getTemplatesAction(store),
-//   activeTab: getActiveTemplateTab(store) // required to trigger componentDidUpdate when tab changes
-// });
-
-// const mapDispatchToProps = dispatch => ({
-//   updateCertificate: payload =>
-//     dispatch(updateCertificateWithoutVerification(payload)),
-//   selectTemplateTab: tabIndex => dispatch(selectTemplateTabAction(tabIndex))
-// });
-
 export default FramelessViewerContainer;
-
-FramelessViewerContainer.propTypes = {};
