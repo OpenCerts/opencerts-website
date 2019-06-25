@@ -32,8 +32,8 @@ class FramelessViewerContainer extends Component {
       this.state.parentFrameConnection.promise.then(parent => {
         if (parent.updateHeight)
           parent.updateHeight(document.documentElement.scrollHeight);
-        if (parent.updateTemplates)
-          parent.updateTemplates(formatTemplate(this.props.templates));
+        // if (parent.updateTemplates)
+        //   parent.updateTemplates(formatTemplate(this.props.templates));
       });
     }
   }
@@ -75,12 +75,10 @@ class FramelessViewerContainer extends Component {
    */
   componentDidMount() {
     const { selectTemplateTab } = this.handleTemplateTabChange;
-    const getTemplates = () => formatTemplate(this.props.templates);
     const renderCertificate = this.handleDocumentChange;
     const frameHeight = document.documentElement.scrollHeight;
 
     window.opencerts = {
-      getTemplates,
       renderCertificate,
       selectTemplateTab
     };
@@ -90,7 +88,6 @@ class FramelessViewerContainer extends Component {
         methods: {
           renderCertificate,
           selectTemplateTab,
-          getTemplates,
           frameHeight
         }
       });
