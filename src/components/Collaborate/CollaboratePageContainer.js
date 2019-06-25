@@ -35,7 +35,7 @@ const CollaboratePage = () => (
       </div>
       <div className={`conatiner bg-brand-dark text-white ${css["r-section"]}`}>
         <div className={css["section-width"]}>
-          <div className={`col-lg-68 col-md-12 my-3 ${css["m-pd-0"]}`}>
+          <div className={`col-lg-6 col-md-12 my-3 ${css["m-pd-0"]}`}>
             <p>
               If you are from an institution and would like to get started on
               OpenCerts, here are some companies that can help to issue your
