@@ -9,12 +9,12 @@ import { URL, DEFAULT_SEO } from "../src/config";
 const PAGE_SEO = {
   title: "Collaborate",
   description:
-    "OpenCerts has partnered with key companies to help you issue and distribute certificates easily.",
+    "If you are from an institution and would like to get started on OpenCerts, here are some companies that can help to issue your certificates.",
   openGraph: {
     title: "OpenCerts - Collaborate",
     description:
-      "OpenCerts has partnered with key companies to help you issue and distribute certificates easily.",
-    url: `${URL}/registry`
+      "If you are from an institution and would like to get started on OpenCerts, here are some companies that can help to issue your certificates.",
+    url: `${URL}/collaborate`
   }
 };
 
