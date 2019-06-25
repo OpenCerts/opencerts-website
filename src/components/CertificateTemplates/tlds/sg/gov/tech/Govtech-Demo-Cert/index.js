@@ -22,12 +22,11 @@ const templates = [
   }
 ];
 
-const GovtechDemoCert = ({document, activeTab}) => (
+const GovtechDemoCert = ({ document }) => (
   <MultiCertificateRenderer
     templates={templates}
     whitelist={approvedAddresses}
     document={document}
-    activeTab={activeTab}
   />
 );
 

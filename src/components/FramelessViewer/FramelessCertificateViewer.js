@@ -11,12 +11,12 @@ const FramelessCertificateViewer = props => {
 
   const selectedTemplateName = get(certificate, "$template", "default");
   const SelectedTemplate = templates[selectedTemplateName] || templates.default;
-  
+
   trace(`Templates Mapping: %o`, templates);
   trace(`Selected template: ${selectedTemplateName}`);
   trace(`Certificate content: %o`, certificate);
 
-  return <SelectedTemplate document={document} activeTab={activeTab} />;
+  return <SelectedTemplate document={document} />;
 };
 
 FramelessCertificateViewer.propTypes = {
