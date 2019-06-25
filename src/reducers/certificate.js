@@ -571,9 +571,9 @@ export function getVerified(store) {
   const issued = getIssuedStatus(store).verified;
   const notRevoked = getNotRevokedStatus(store).verified;
   const identity = getIssuerIdentityStatus(store).verified;
-  const storestatus = getStoreStatus(store).verified;
+  const storeStatus = getStoreStatus(store).verified;
 
-  return hash && issued && notRevoked && identity && storestatus;
+  return hash && issued && notRevoked && identity && storeStatus;
 }
 
 export function getVerificationStatus(store) {

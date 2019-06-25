@@ -13,7 +13,8 @@ import {
   analyticsHashFail,
   analyticsIssuedFail,
   analyticsRevocationFail,
-  getIntermediateHashes
+  getIntermediateHashes,
+  verifyCertificateStore
 } from "./certificate";
 import {
   getCertificate,
@@ -24,7 +25,8 @@ import {
   verifyingCertificateIssuedSuccess,
   verifyingCertificateIssuedFailure,
   verifyingCertificateHashSuccess,
-  verifyingCertificateHashFailure
+  verifyingCertificateHashFailure,
+  verifyingCertificateStoreSuccess
 } from "../reducers/certificate";
 import {
   MakeCertUtil,
@@ -85,6 +87,7 @@ function whenThereAreEnsNamesAndEthereumAddresses() {
     "0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4F",
     "0x0096Ca31c87771a2Ed212D4b2E689e712Bd938F9"
   ];
+
   const testCert = new MakeCertUtil()
     .addIssuer(ensNames[0])
     .addIssuer(ensNames[1])
@@ -95,6 +98,15 @@ function whenThereAreEnsNamesAndEthereumAddresses() {
   return { testCert, ensNames, ethereumAddresses };
 }
 
+function whenThereIsOneValidCertStoreAddress() {
+  const GOVTECH_VALID_CERT_STORE = "0x007d40224f6562461633ccfbaffd359ebb2fc9ba";
+
+  const testCert = new MakeCertUtil()
+    .addIssuer(GOVTECH_VALID_CERT_STORE)
+    .finish();
+
+  return { testCert, GOVTECH_VALID_CERT_STORE };
+}
 describe("sagas/certificate", () => {
   describe("sendCertificate", () => {
     let emailStub;
@@ -104,7 +116,7 @@ describe("sagas/certificate", () => {
     afterEach(() => {
       emailStub.restore();
     });
-    it("should put SENDING_CERTIFICATE_SUCCESS on success", () => {
+    test("should put SENDING_CERTIFICATE_SUCCESS on success", () => {
       const { testCert } = whenThereIsOneEthereumAddressIssuer();
       const email = "admin@opencerts.io";
       const captcha = "ABCD";
@@ -126,7 +138,7 @@ describe("sagas/certificate", () => {
       expect(saga.next().done).toBe(true);
     });
 
-    it("should put SENDING_CERTIFICATE_SUCCESS on failure", () => {
+    test("should put SENDING_CERTIFICATE_SUCCESS on failure", () => {
       const { testCert } = whenThereIsOneEthereumAddressIssuer();
       const email = "admin@opencerts.io";
       const captcha = "ABCD";
@@ -149,7 +161,7 @@ describe("sagas/certificate", () => {
       expect(saga.next().done).toBe(true);
     });
 
-    it("should put SENDING_CERTIFICATE_SUCCESS on error", () => {
+    test("should put SENDING_CERTIFICATE_SUCCESS on error", () => {
       const { testCert } = whenThereIsOneEthereumAddressIssuer();
       const email = "admin@opencerts.io";
       const captcha = "ABCD";
@@ -173,8 +185,46 @@ describe("sagas/certificate", () => {
       expect(saga.next().done).toBe(true);
     });
   });
+
+  describe.only("verifyCertificateStore", () => {
+    describe("single issuer", () => {
+      describe("should put a verifying certificate store success when:", () => {
+        test.only("the issuer has a document store contract at its specified ethereum address", () => {
+          const { testCert } = whenThereIsOneValidCertStoreAddress();
+
+          const verificationSaga = verifyCertificateStore({
+            certificate: testCert
+          });
+
+          expect(verificationSaga.next().value).toEqual([]);
+          verificationSaga.next();
+          expect(verificationSaga.next().value).toEqual(
+            put(verifyingCertificateStoreSuccess())
+          );
+
+          expect(verificationSaga.next().done).toBe(true)
+        });
+        test("the issuer has a document store contract at its specified ens address", () => {});
+      });
+
+      // describe("should put a verifying certificate store failure when:", () => {
+      //   test(
+      //     "the certificate issuer's document store has an invalid ethereum address and is not an ens address"
+      //   );
+      //   test(
+      //     "the certificate issuer's document store address has the wrong smart contract"
+      //   );
+      //   test(
+      //     "the certificate issuer's document store is not an ethereum address and is an ens with an invalid smart contract"
+      //   );
+      // });
+    });
+
+    describe("multiple issuers", () => {});
+  });
+
   describe("verifyCertificateIssuer", () => {
-    it("should resolve singular issuer ens name", () => {
+    test("should resolve singular issuer ens name", () => {
       const { testCert, ensNames } = whenThereIsOnlyOneEnsName();
       const resolverReturnValue = ["test store"];
       const issuerSaga = verifyCertificateIssuer({ certificate: testCert });
@@ -192,7 +242,7 @@ describe("sagas/certificate", () => {
       expect(isSagaFinished).toBe(true);
     });
 
-    it("should resolve multiple issuer ens name", () => {
+    test("should resolve multiple issuer ens name", () => {
       const { testCert, ensNames } = whenThereAreMultipleEnsNames();
       const resolverReturnValue = ["test store", "test store 2"];
       const issuerSaga = verifyCertificateIssuer({ certificate: testCert });
@@ -210,7 +260,7 @@ describe("sagas/certificate", () => {
       expect(isSagaFinished).toBe(true);
     });
 
-    it("should resolve issuer ethereum address", () => {
+    test("should resolve issuer ethereum address", () => {
       const {
         testCert,
         ethereumAddresses
@@ -231,7 +281,7 @@ describe("sagas/certificate", () => {
       expect(isSagaFinished).toBe(true);
     });
 
-    it("should resolve issuer ethereum address", () => {
+    test("should resolve issuer ethereum address", () => {
       const {
         testCert,
         ensNames,
@@ -265,7 +315,7 @@ describe("sagas/certificate", () => {
       expect(isSagaFinished).toBe(true);
     });
 
-    it("should throw if there are no issuer identity", () => {
+    test("should throw if there are no issuer identity", () => {
       const {
         testCert,
         ethereumAddresses
@@ -295,7 +345,7 @@ describe("sagas/certificate", () => {
       expect(isSagaFinished).toBe(true);
     });
 
-    it("should put verifyingCertificateIssuerSuccess on success", () => {
+    test("should put verifyingCertificateIssuerSuccess on success", () => {
       const {
         testCert,
         ethereumAddresses
@@ -316,7 +366,7 @@ describe("sagas/certificate", () => {
       expect(isSagaFinished).toBe(true);
     });
 
-    it("should put verifyingCertificateIssuerFailure on failure", () => {
+    test("should put verifyingCertificateIssuerFailure on failure", () => {
       const {
         testCert,
         ethereumAddresses
@@ -353,7 +403,7 @@ describe("sagas/certificate", () => {
       global.window.ga = undefined;
     });
 
-    it("analyticsIssuerFail should report to GA with errorType = 0", () => {
+    test("analyticsIssuerFail should report to GA with errorType = 0", () => {
       const {
         testCert,
         ethereumAddresses
@@ -370,7 +420,7 @@ describe("sagas/certificate", () => {
       ]);
     });
 
-    it("analyticsHashFail should report to GA with errorType = 1", () => {
+    test("analyticsHashFail should report to GA with errorType = 1", () => {
       const {
         testCert,
         ethereumAddresses
@@ -387,7 +437,7 @@ describe("sagas/certificate", () => {
       ]);
     });
 
-    it("analyticsIssuedFail should report to GA with errorType = 2", () => {
+    test("analyticsIssuedFail should report to GA with errorType = 2", () => {
       const {
         testCert,
         ethereumAddresses
@@ -404,7 +454,7 @@ describe("sagas/certificate", () => {
       ]);
     });
 
-    it("analyticsRevocationFail should report to GA with errorType = 3", () => {
+    test("analyticsRevocationFail should report to GA with errorType = 3", () => {
       const {
         testCert,
         ethereumAddresses
@@ -425,10 +475,10 @@ describe("sagas/certificate", () => {
   });
 
   describe("getIntermediateHashes", () => {
-    it("should return targetHash only if there is no proof", () => {
+    test("should return targetHash only if there is no proof", () => {
       expect(getIntermediateHashes(targetHash)).toEqual([`0x${targetHash}`]);
     });
-    it("should return all intermediate (and final) hash", () => {
+    test("should return all intermediate (and final) hash", () => {
       const intermediateHashes = getIntermediateHashes(targetHash, [
         proof0,
         proof1
@@ -440,7 +490,7 @@ describe("sagas/certificate", () => {
   });
 
   describe("verifyCertificateNotRevoked", () => {
-    it("should return true and put success action if all the store returns false for all hashes", () => {
+    test("should return true and put success action if all the store returns false for all hashes", () => {
       const certificateStores = [mockStore(), mockStore(), mockStore()];
       const { testCert: certificate } = whenThereIsOneEthereumAddressIssuer();
 
@@ -477,7 +527,7 @@ describe("sagas/certificate", () => {
       expect(generatorEnd.done).toBe(true);
     });
 
-    it("should return false and put failure action if any of the store returns true for the check", () => {
+    test("should return false and put failure action if any of the store returns true for the check", () => {
       const certificateStores = [mockStore(), mockStore(), mockStore()];
       const { testCert: certificate } = whenThereIsOneEthereumAddressIssuer();
 
@@ -528,7 +578,7 @@ describe("sagas/certificate", () => {
     afterEach(() => {
       openCertsApi.verifySignature.restore();
     });
-    it("should return true when verification is successful", () => {
+    test("should return true when verification is successful", () => {
       openCertsApi.verifySignature.returns(true);
       const { testCert } = whenThereIsOneEthereumAddressIssuer();
       const generator = verifyCertificateHash({ certificate: testCert });
@@ -540,7 +590,7 @@ describe("sagas/certificate", () => {
       expect(res.done).toBe(true);
     });
 
-    it("should return false and puts verifyingCertificateHashFailure when verification fails", () => {
+    test("should return false and puts verifyingCertificateHashFailure when verification fails", () => {
       openCertsApi.verifySignature.returns(false);
       const { testCert } = whenThereIsOneEthereumAddressIssuer();
       const generator = verifyCertificateHash({ certificate: testCert });
@@ -557,7 +607,7 @@ describe("sagas/certificate", () => {
   });
 
   describe("verifyCertificateIssued", () => {
-    it("should return true and puts success action when certificate is issued on all stores", () => {
+    test("should return true and puts success action when certificate is issued on all stores", () => {
       const certificateStores = [mockStore(), mockStore()];
       const { testCert: certificate } = whenThereIsOneEthereumAddressIssuer();
       const generator = verifyCertificateIssued({
@@ -576,7 +626,7 @@ describe("sagas/certificate", () => {
       expect(res.done).toBe(true);
     });
 
-    it("should return false and puts success action when certificate is not issued on any stores", () => {
+    test("should return false and puts success action when certificate is not issued on any stores", () => {
       const certificateStores = [mockStore(), mockStore()];
       const { testCert: certificate } = whenThereIsOneEthereumAddressIssuer();
       const generator = verifyCertificateIssued({
