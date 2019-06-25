@@ -1,34 +1,8 @@
-import css from "./registry.scss";
-
-const members = [
-  {
-    name: "NextID",
-    description:
-      "NextCert helps you produce next-generation academic and professional certificates, that are cryptographically secure and verifiable.",
-    website: "https://nextid.com",
-    key: "nextid",
-    logo: "/static/images/collaborate/NEXTID_logo.png"
-  },
-  {
-    name: "Edufied",
-    description:
-      "Edufied provides a  secured and decentralized system for Certificate Issuers, Individuals and Employers to store & verify certifications and credentials using Blockchain Technology.",
-    website: "https://edufied.network",
-    key: "edified",
-    logo: "/static/images/collaborate/EDUFIED_logo.png"
-  },
-  {
-    name: "Ceito",
-    description:
-      "Ceito makes it easy to integrate blockchain by providing a suite of lightweight APIs to help you create the best possible product for your users.",
-    website: "https://www.ceito.io/",
-    key: "ceito",
-    logo: "/static/images/collaborate/CEITO_logo.png"
-  }
-];
+import css from "../registry.scss";
+import collaborators from "./collaborators";
 
 const renderMembers = () =>
-  members.map((m, i) => (
+  collaborators.map((m, i) => (
     <div
       key={i}
       className={`col-lg-4 col-md-6 col-sm-12 ${css["mb-3"]} ${css["m-pd-0"]}`}

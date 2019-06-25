@@ -3,7 +3,7 @@ import { merge } from "lodash/fp";
 import { connect } from "react-redux";
 import NavigationBar from "../src/components/Layout/NavigationBar";
 import FooterBar from "../src/components/Layout/FooterBar";
-import CollaboratePageContainer from "../src/components/CollaboratePageContainer";
+import CollaboratePageContainer from "../src/components/Collaborate/CollaboratePageContainer";
 import { URL, DEFAULT_SEO } from "../src/config";
 
 const PAGE_SEO = {
