@@ -49,7 +49,9 @@ const ANALYTICS_VERIFICATION_ERROR_CODE = {
 export function* analyticsIssuerFail({ certificate }) {
   yield analyticsEvent(window, {
     category: "CERTIFICATE_ERROR",
-    action: get(certificate, "issuers[0].certificateStore"),
+    action: get(certificate, "issuers", []).map(
+      issuer => issuer.certificateStore
+    ),
     label: get(certificate, "id"),
     value: ANALYTICS_VERIFICATION_ERROR_CODE.ISSUER_IDENTITY
   });
@@ -58,7 +60,9 @@ export function* analyticsIssuerFail({ certificate }) {
 export function* analyticsHashFail({ certificate }) {
   yield analyticsEvent(window, {
     category: "CERTIFICATE_ERROR",
-    action: get(certificate, "issuers[0].certificateStore"),
+    action: get(certificate, "issuers", []).map(
+      issuer => issuer.certificateStore
+    ),
     label: get(certificate, "id"),
     value: ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_HASH
   });
@@ -67,7 +71,9 @@ export function* analyticsHashFail({ certificate }) {
 export function* analyticsIssuedFail({ certificate }) {
   yield analyticsEvent(window, {
     category: "CERTIFICATE_ERROR",
-    action: get(certificate, "issuers[0].certificateStore"),
+    action: get(certificate, "issuers", []).map(
+      issuer => issuer.certificateStore
+    ),
     label: get(certificate, "id"),
     value: ANALYTICS_VERIFICATION_ERROR_CODE.UNISSUED_CERTIFICATE
   });
@@ -76,7 +82,9 @@ export function* analyticsIssuedFail({ certificate }) {
 export function* analyticsRevocationFail({ certificate }) {
   yield analyticsEvent(window, {
     category: "CERTIFICATE_ERROR",
-    action: get(certificate, "issuers[0].certificateStore"),
+    action: get(certificate, "issuers", []).map(
+      issuer => issuer.certificateStore
+    ),
     label: get(certificate, "id"),
     value: ANALYTICS_VERIFICATION_ERROR_CODE.REVOKED_CERTIFICATE
   });
@@ -147,7 +155,7 @@ export function* isValidSmartContract(storeAddress) {
   const hashOfOnChainByteCode = web3.utils.keccak256(onChainByteCode);
   // console.log("KECCAK", hashOfOnChainByteCode);
   if (!supportedContractHashes.includes(hashOfOnChainByteCode)) {
-    throw new Error("Invalid smart contract");
+    throw new Error("Invalid smart contract: "`${storeAddress}`);
   }
   return true;
 }
@@ -169,10 +177,8 @@ export function* verifyCertificateStore({ certificate }) {
     trace("unresolvedEnsNames", unresolvedEnsNames);
 
     const resolvedEnsNames = yield unresolvedEnsNames.map(unresolvedEnsName =>
-      isValidENSDomain(unresolvedEnsName)
+      call(isValidENSDomain, unresolvedEnsName)
     );
-
-    // console.log("RESOLVED ENS TEXTS", resolvedEnsNames);
 
     // Concat the 2 arrays
     const combinedStoreAddresses = compact(
@@ -182,9 +188,9 @@ export function* verifyCertificateStore({ certificate }) {
 
     // Checks if issuing institution has a valid smart contract with OpenCerts
     yield combinedStoreAddresses.map(address => isValidSmartContract(address));
-
     yield put(verifyingCertificateStoreSuccess());
-    return true;
+    return combinedStoreAddresses;
+    // return true;
   } catch (e) {
     error(e);
     yield put(
@@ -193,7 +199,6 @@ export function* verifyCertificateStore({ certificate }) {
         certificate: certificateData(certificate)
       })
     );
-    analyticsStoreFail(certificate);
     return false;
   }
 }
@@ -210,7 +215,6 @@ export function* verifyCertificateHash({ certificate }) {
       certificate: certificateData(certificate)
     })
   );
-  analyticsHashFail(certificate);
   return false;
 }
 
@@ -234,7 +238,6 @@ export function* verifyCertificateIssued({ certificate, certificateStores }) {
         error: e.message
       })
     );
-    analyticsIssuedFail(certificate);
     return false;
   }
 }
@@ -287,7 +290,6 @@ export function* verifyCertificateNotRevoked({
         error: e.message
       })
     );
-    analyticsRevocationFail(certificate);
     return false;
   }
 }
@@ -392,7 +394,6 @@ export function* verifyCertificateIssuer({ certificate }) {
         certificate: certificateData(certificate)
       })
     );
-    analyticsIssuerFail(certificate);
     return false;
   }
 }
@@ -455,14 +456,14 @@ export function* networkReset() {
 export default [
   takeEvery(types.UPDATE_CERTIFICATE, verifyCertificate),
   takeEvery(types.SENDING_CERTIFICATE, sendCertificate),
-  takeEvery(applicationTypes.UPDATE_WEB3, networkReset)
+  takeEvery(applicationTypes.UPDATE_WEB3, networkReset),
 
-  // takeEvery(types.VERIFYING_CERTIFICATE_ISSUER_FAILURE, analyticsIssuerFail),
-  // takeEvery(
-  //   types.VERIFYING_CERTIFICATE_REVOCATION_FAILURE,
-  //   analyticsRevocationFail
-  // ),
-  // takeEvery(types.VERIFYING_CERTIFICATE_ISSUED_FAILURE, analyticsIssuedFail),
-  // takeEvery(types.VERIFYING_CERTIFICATE_HASH_FAILURE, analyticsHashFail),
-  // takeEvery(types.VERIFYING_CERTIFICATE_STORE_FAILURE, analyticsStoreFail)
+  takeEvery(types.VERIFYING_CERTIFICATE_ISSUER_FAILURE, analyticsIssuerFail),
+  takeEvery(
+    types.VERIFYING_CERTIFICATE_REVOCATION_FAILURE,
+    analyticsRevocationFail
+  ),
+  takeEvery(types.VERIFYING_CERTIFICATE_ISSUED_FAILURE, analyticsIssuedFail),
+  takeEvery(types.VERIFYING_CERTIFICATE_HASH_FAILURE, analyticsHashFail),
+  takeEvery(types.VERIFYING_CERTIFICATE_STORE_FAILURE, analyticsStoreFail)
 ];

@@ -6,6 +6,7 @@ import {
   verifyCertificateIssuer,
   verifyCertificateHash,
   verifyCertificateIssued,
+  isValidENSDomain,
   resolveEnsNamesToText,
   lookupEthereumAddresses,
   sendCertificate,
@@ -26,7 +27,8 @@ import {
   verifyingCertificateIssuedFailure,
   verifyingCertificateHashSuccess,
   verifyingCertificateHashFailure,
-  verifyingCertificateStoreSuccess
+  verifyingCertificateStoreSuccess,
+  verifyingCertificateStoreFailure
 } from "../reducers/certificate";
 import {
   MakeCertUtil,
@@ -107,6 +109,82 @@ function whenThereIsOneValidCertStoreAddress() {
 
   return { testCert, GOVTECH_VALID_CERT_STORE };
 }
+
+function whenThereIsOneInvalidCertStoreAddress() {
+  const invalidAddress = "0x007d40224f6562461633ccfbaffd359ebb2fc9b";
+
+  const invalidCert = new MakeCertUtil().addIssuer(invalidAddress).finish();
+
+  return { invalidCert, invalidAddress };
+}
+
+function whenThereIsWrongSmartContract() {
+  const invalidContract = "0x007d40224F6562461633ccFBaffd359EbB2FC9Ba";
+
+  const invalidCert = new MakeCertUtil().addIssuer(invalidContract).finish();
+
+  return { invalidCert, invalidContract };
+}
+
+function whenThereAreValidEnsNamesAndEthereumAddresses() {
+  const ensNames = [
+    "govtech-test.sg.opencerts.eth",
+    "govtech-test2.sg.opencerts.eth"
+  ];
+  const ethereumAddresses = [
+    "0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4F",
+    "0x0096Ca31c87771a2Ed212D4b2E689e712Bd938F9"
+  ];
+
+  const testCert = new MakeCertUtil()
+    .addIssuer("govtech-test.sg.opencerts.eth")
+    .addIssuer("govtech-test2.sg.opencerts.eth")
+    .addIssuer("0x007d40224f6562461633ccfbaffd359ebb2fc9ba")
+    .addIssuer("0xc36484efa1544c32ffed2e80a1ea9f0dfc517495")
+    .finish();
+
+  return { testCert, ensNames, ethereumAddresses };
+}
+
+function whenThereIsOneInvalidEnsNameAndOneValidEthereumAddress() {
+  const ensName = "aardvark.eth";
+
+  const ethereumAddress = "0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4F";
+
+  const invalidCert = new MakeCertUtil()
+    .addIssuer(ensName)
+    .addIssuer(ethereumAddress)
+    .finish();
+
+  return { invalidCert, ensName, ethereumAddress };
+}
+
+function whenThereIsOneInvalidEthereumAddressAndOneValidENS() {
+  const ensName = "govtech-test.sg.opencerts.eth";
+
+  const ethereumAddress = "0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4";
+
+  const invalidCert = new MakeCertUtil()
+    .addIssuer(ensName)
+    .addIssuer(ethereumAddress)
+    .finish();
+
+  return { invalidCert, ensName, ethereumAddress };
+}
+
+function whenThereAreInvalidEnsNameAndEthereumAddress() {
+  const ensName = "aardvark.eth";
+
+  const ethereumAddress = "0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4";
+
+  const invalidCert = new MakeCertUtil()
+    .addIssuer(ensName)
+    .addIssuer(ethereumAddress)
+    .finish();
+
+  return { invalidCert, ensName, ethereumAddress };
+}
+
 describe("sagas/certificate", () => {
   describe("sendCertificate", () => {
     let emailStub;
@@ -186,10 +264,10 @@ describe("sagas/certificate", () => {
     });
   });
 
-  describe.only("verifyCertificateStore", () => {
+  describe("verifyCertificateStore", () => {
     describe("single issuer", () => {
       describe("should put a verifying certificate store success when:", () => {
-        test.only("the issuer has a document store contract at its specified ethereum address", () => {
+        test("the issuer has a document store contract at its specified ethereum address", () => {
           const { testCert } = whenThereIsOneValidCertStoreAddress();
 
           const verificationSaga = verifyCertificateStore({
@@ -202,25 +280,187 @@ describe("sagas/certificate", () => {
             put(verifyingCertificateStoreSuccess())
           );
 
-          expect(verificationSaga.next().done).toBe(true)
+          expect(verificationSaga.next().done).toBe(true);
         });
-        test("the issuer has a document store contract at its specified ens address", () => {});
+        test("the issuer has a document store contract at its specified ens address", () => {
+          const { testCert, ensNames } = whenThereIsOnlyOneEnsName();
+
+          const verificationSaga = verifyCertificateStore({
+            certificate: testCert
+          });
+
+          expect(verificationSaga.next().value).toEqual([
+            call(isValidENSDomain, ensNames[0])
+          ]);
+
+          verificationSaga.next();
+          expect(verificationSaga.next().value).toEqual(
+            put(verifyingCertificateStoreSuccess())
+          );
+
+          expect(verificationSaga.next().done).toBe(true);
+        });
       });
 
-      // describe("should put a verifying certificate store failure when:", () => {
-      //   test(
-      //     "the certificate issuer's document store has an invalid ethereum address and is not an ens address"
-      //   );
-      //   test(
-      //     "the certificate issuer's document store address has the wrong smart contract"
-      //   );
-      //   test(
-      //     "the certificate issuer's document store is not an ethereum address and is an ens with an invalid smart contract"
-      //   );
-      // });
+      describe("should put a verifying certificate store failure when:", () => {
+        test("the certificate issuer's document store has an invalid ethereum address and is not an ens address", () => {
+          const { invalidCert } = whenThereIsOneInvalidCertStoreAddress();
+          const certData = certificateData(invalidCert);
+          const errorMsg = "Invalid ENS";
+
+          const verificationSaga = verifyCertificateStore({
+            certificate: invalidCert
+          });
+
+          verificationSaga.next();
+          expect(verificationSaga.throw(new Error(errorMsg)).value).toEqual(
+            put(
+              verifyingCertificateStoreFailure({
+                error: errorMsg,
+                certificate: certData
+              })
+            )
+          );
+
+          expect(verificationSaga.next().done).toBe(true);
+        });
+
+        test("the certificate issuer's document store address has the wrong smart contract", () => {
+          const { invalidCert } = whenThereIsWrongSmartContract();
+          const certData = certificateData(invalidCert);
+          const errorMsg = "Invalid Smart Contract";
+
+          const verificationSaga = verifyCertificateStore({
+            certificate: invalidCert
+          });
+
+          verificationSaga.next();
+          verificationSaga.next();
+          expect(verificationSaga.throw(new Error(errorMsg)).value).toEqual(
+            put(
+              verifyingCertificateStoreFailure({
+                error: errorMsg,
+                certificate: certData
+              })
+            )
+          );
+
+          expect(verificationSaga.next().done).toBe(true);
+        });
+      });
     });
 
-    describe("multiple issuers", () => {});
+    describe("multiple issuers", () => {
+      describe("should put a verifying certificate store success when:", () => {
+        test("the issuer has a 1 valid ethereum address and 1 valid ENS", () => {
+          const {
+            testCert,
+            ensNames,
+            ethereumAddresses
+          } = whenThereAreValidEnsNamesAndEthereumAddresses();
+
+          const verificationSaga = verifyCertificateStore({
+            certificate: testCert
+          });
+
+          expect(verificationSaga.next().value).toEqual([
+            call(isValidENSDomain, ensNames[0]),
+            call(isValidENSDomain, ensNames[1])
+          ]);
+
+          verificationSaga.next();
+          expect(verificationSaga.next().value).toEqual(
+            put(verifyingCertificateStoreSuccess())
+          );
+
+          expect(verificationSaga.next().done).toBe(true);
+        });
+      });
+    });
+
+    describe("should put a verifying certificate store failure when:", () => {
+      test("the certificate has an invalid ENS but valid ethereum address", () => {
+        const {
+          invalidCert,
+          ensName,
+          ethereumAddress
+        } = whenThereIsOneInvalidEnsNameAndOneValidEthereumAddress();
+        const certData = certificateData(invalidCert);
+        const errorMsg = "Invalid ENS";
+
+        const verificationSaga = verifyCertificateStore({
+          certificate: invalidCert
+        });
+        expect(verificationSaga.next().value).toEqual([
+          call(isValidENSDomain, ensName)
+        ]);
+        verificationSaga.next();
+        expect(verificationSaga.throw(new Error(errorMsg)).value).toEqual(
+          put(
+            verifyingCertificateStoreFailure({
+              error: errorMsg,
+              certificate: certData
+            })
+          )
+        );
+        expect(verificationSaga.next().done).toBe(true);
+      });
+      test("the certificate has an invalid ethereum address but valid ENS", () => {
+        const {
+          invalidCert,
+          ensName,
+          ethereumAddress
+        } = whenThereIsOneInvalidEthereumAddressAndOneValidENS();
+        const certData = certificateData(invalidCert);
+        const errorMsg = "Invalid ENS";
+
+        const verificationSaga = verifyCertificateStore({
+          certificate: invalidCert
+        });
+        expect(verificationSaga.next().value).toEqual([
+          call(isValidENSDomain, ensName),
+          call(isValidENSDomain, ethereumAddress)
+        ]);
+        verificationSaga.next();
+        expect(verificationSaga.throw(new Error(errorMsg)).value).toEqual(
+          put(
+            verifyingCertificateStoreFailure({
+              error: errorMsg,
+              certificate: certData
+            })
+          )
+        );
+        expect(verificationSaga.next().done).toBe(true);
+      });
+
+      test("the certificate issuer's has an invalid ethereum address and invalid ENS", () => {
+        const {
+          invalidCert,
+          ensName,
+          ethereumAddress
+        } = whenThereAreInvalidEnsNameAndEthereumAddress();
+        const certData = certificateData(invalidCert);
+        const errorMsg = "Invalid ENS";
+
+        const verificationSaga = verifyCertificateStore({
+          certificate: invalidCert
+        });
+        expect(verificationSaga.next().value).toEqual([
+          call(isValidENSDomain, ensName),
+          call(isValidENSDomain, ethereumAddress)
+        ]);
+        verificationSaga.next();
+        expect(verificationSaga.throw(new Error(errorMsg)).value).toEqual(
+          put(
+            verifyingCertificateStoreFailure({
+              error: errorMsg,
+              certificate: certData
+            })
+          )
+        );
+        expect(verificationSaga.next().done).toBe(true);
+      });
+    });
   });
 
   describe("verifyCertificateIssuer", () => {
