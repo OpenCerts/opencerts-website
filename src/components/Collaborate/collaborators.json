@@ -14,10 +14,10 @@
     "logo": "/static/images/collaborate/EDUFIED_logo.png"
   },
   {
-    "name": "Ceito",
-    "description": "Ceito makes it easy to integrate blockchain by providing a suite of lightweight APIs to help you create the best possible product for your users.",
-    "website": "https://www.ceito.io/",
-    "key": "ceito",
-    "logo": "/static/images/collaborate/CEITO_logo.png"
+    "name": "Accredify",
+    "description": "Enables institutions to issue tamper-proof digital certificates using the OpenCerts Schema.",
+    "website": "https://www.accredify.io",
+    "key": "accredify",
+    "logo": "/static/images/collaborate/ACCREDIFY_logo.png"
   }
 ]
