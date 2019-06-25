@@ -1,5 +1,5 @@
 import { get } from "lodash";
-import { IMG_LOGO_NTU, IMG_CERTIFICATE_SEAL, IMG_NTU_TEXT } from "./images";
+import { IMG_LOGO_NTU, IMG_CERTIFICATE_SEAL } from "./images";
 
 import { formatDate, formatCertID } from "./functions";
 
@@ -39,12 +39,18 @@ export const printTextStyle = {
 };
 
 export const universityNameTextStyle = {
-  fontFamily: "Century Gothic,CenturyGothic,AppleGothic,sans-serif",
-  fontWeight: "700",
-  fontSize: "1.4375rem",
-  color: "#a2703e",
+  fontFamily: "Poppins,Century Gothic,CenturyGothic,AppleGothic,sans-serif",
+  fontWeight: "600",
+  fontSize: "2rem",
+  color: "#BE781B",
   marginBottom: "0",
   textAlign: "left"
+};
+
+export const singaporeTextStyle = {
+  fontFamily: "Poppins,Century Gothic,CenturyGothic,AppleGothic,sans-serif",
+  color: "#BE781B",
+  fontSize: "1.5rem"
 };
 
 export const certNameTextStyle = {
@@ -81,11 +87,6 @@ export const certIssueDateTextStyle = {
   bottom: 0,
   position: "absolute"
   // textAlignVertical: "bottom"
-};
-
-export const singaporeTextStyle = {
-  color: "#c7b996",
-  fontSize: "1.125rem"
 };
 
 export const nameTextStyle = {
@@ -176,18 +177,23 @@ export const renderTwoSignatures = certificate => (
 
 export const renderSchoolName = (
   <div>
-    <div className="row d-flex justify-content-start">
+    {/* <div className="row d-flex justify-content-start">
       <div className="col">
         <img style={fullWidthStyleNTUText} src={IMG_NTU_TEXT} />
       </div>
+    </div> */}
+
+    <div className="row d-flex justify-content-start">
+      <div className="col">
+        <p style={universityNameTextStyle}>Nanyang Technological University</p>
+      </div>
     </div>
 
-    {/* <div className="row d-flex justify-content-start">
-      <p style={universityNameTextStyle}>Nanyang Technological University</p>
-    </div>
     <div className="row d-flex justify-content-start">
-      <p style={singaporeTextStyle}>Republic of Singapore</p>
-    </div> */}
+      <div className="col">
+        <p style={singaporeTextStyle}>Republic of Singapore</p>
+      </div>
+    </div>
   </div>
 );
 
@@ -304,6 +310,12 @@ export const renderFooter = certificate => (
 // Disabled eslint as there's no way to add proptypes to an anonymous function like this
 export default ({ logo }) => ({ certificate }) => (
   <div>
+    <head>
+      <link
+        href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap"
+        rel="stylesheet"
+      />
+    </head>
     <div
       className="container"
       style={{ border: 1, borderColor: "#AAA", borderStyle: "solid" }}
