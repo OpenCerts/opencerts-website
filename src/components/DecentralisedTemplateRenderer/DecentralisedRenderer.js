@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-// import { certificateData } from "@govtechsg/open-certificate";
-// import connectToParent from "penpal/lib/connectToParent";
 import connectToChild from "penpal/lib/connectToChild";
+import {
+  registerTemplates as registerTemplatesAction,
+  selectTemplateTab as selectTemplateTabAction
+} from "../../reducers/certificate";
 
 class DecentralisedRenderer extends Component {
   constructor(props) {
     super(props);
     this.connection = null;
-    this.selectTemplateTab = this.selectTemplateTab.bind(this);
   }
 
   selectTemplateTab(i) {
-    console.log("I'm instruction to update tab", i);
     this.connection.promise.then(frame => frame.selectTemplateTab(i));
   }
 
@@ -47,7 +47,6 @@ class DecentralisedRenderer extends Component {
     const certificate = this.props.certificate;
     const updateHeight = this.updateHeight.bind(this);
     const updateTemplates = this.updateTemplates.bind(this);
-
     this.connection = connectToChild({
       iframe,
       methods: {
@@ -72,8 +71,10 @@ class DecentralisedRenderer extends Component {
     );
   }
 }
+
 const mapDispatchToProps = dispatch => ({
-  registerTemplates: templates => dispatch(registerTemplatesAction(templates))
+  registerTemplates: templates => dispatch(registerTemplatesAction(templates)),
+  selectTemplateTab: tabIndex => dispatch(selectTemplateTabAction(tabIndex))
 });
 
 export default connect(
@@ -85,5 +86,6 @@ DecentralisedRenderer.propTypes = {
   certificate: PropTypes.object,
   template: PropTypes.object,
   tabId: PropTypes.number,
-  registerTemplates: PropTypes.func
+  registerTemplates: PropTypes.func,
+  selectTemplateTab: PropTypes.func
 };

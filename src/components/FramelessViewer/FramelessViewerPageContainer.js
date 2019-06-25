@@ -18,63 +18,18 @@ class FramelessViewerContainer extends Component {
     super(props);
 
     this.handleDocumentChange = this.handleDocumentChange.bind(this);
-    this.handleTemplateTabChange = this.handleTemplateTabChange.bind(this);
+    this.selectTemplateTab = this.selectTemplateTab.bind(this);
+    this.updateCurrentHeight = this.updateCurrentHeight.bind(this);
+    this.updateTemplateTabs = this.updateTemplateTabs.bind(this);
     this.state = {
       parentFrameConnection: null,
       document: null,
-      activeTab: 0,
-      templates: null
+      activeTab: 0
     };
   }
 
-  componentDidUpdate() {
-    if (inIframe()) {
-      this.state.parentFrameConnection.promise.then(parent => {
-        if (parent.updateHeight)
-          parent.updateHeight(document.documentElement.scrollHeight);
-        // if (parent.updateTemplates)
-        //   parent.updateTemplates(formatTemplate(this.props.templates));
-      });
-    }
-  }
-
-  /**
-   * Upon mounting, the frameless viewer will expose two ways to interact with it: postMessage and window.opencerts method
-   *
-   * On mobile webViews: CORS is not implemented and window.opencerts can be called directly.
-   * On browsers: CORS is implemented and the parent website can only interact with this iframe via postMessage.
-   *
-   * Three methods, getTemplates, renderCertificate and selectTemplateTab is available for both implementation
-   *
-   * renderCertificate(certificate)
-   * The function takes in a certificate object and render it in the frame. Upon rendering, the getTemplate() function can
-   * be used to query the number (and labels) of tabs available to this certificate. Then, selectTemplateTab(index) can be
-   * used to select the index of the tab to be displayed.
-   *
-   *
-   * getTemplate()
-   * returns an array of templates available for a given certificate, each template has both id and label properties.
-   * example of returned array:
-   * [{
-   *   id: "certificate",
-   *   label: "Certificate"
-   * },{
-   *   id: "transcript",
-   *   label: "Transcript"
-   * }]
-   *
-   * selectTemplateTab(index)
-   * The function is used to select the tab to render the certificate. The index, corresponding to the getTemplate results,
-   * is needed to select which tab to render.
-   *
-   * Only for iframes:
-   *
-   * frameHeight()
-   * returns the height of the component to allow parent component to scale accordingly. This is used to remove the double
-   * scrollbar issue.
-   */
   componentDidMount() {
-    const { selectTemplateTab } = this.handleTemplateTabChange;
+    const selectTemplateTab = this.selectTemplateTab;
     const renderCertificate = this.handleDocumentChange;
     const frameHeight = document.documentElement.scrollHeight;
 
@@ -109,8 +64,13 @@ class FramelessViewerContainer extends Component {
   //   this.props.updateCertificate(fieldContents);
   // }
 
-  handleTemplateTabChange(activeTab) {
-    this.setState({ activeTab });
+  selectTemplateTab(activeTab) {
+    if (inIframe()) {
+      this.state.parentFrameConnection.promise.then(parent => {
+        if (parent.selectTemplateTab) parent.selectTemplateTab(activeTab);
+        this.setState({ activeTab });
+      });
+    }
   }
 
   handleDocumentChange(document) {
@@ -136,10 +96,8 @@ class FramelessViewerContainer extends Component {
   }
 
   render() {
-    console.log("PROPS", this.props);
-    console.log("STATE", this.state);
     if (!this.state.document) {
-      return <div>No cert</div>;
+      return null;
     }
     return (
       <div className="frameless-tabs">
@@ -148,8 +106,8 @@ class FramelessViewerContainer extends Component {
           activeTab={this.state.activeTab}
           document={this.state.document}
           certificate={certificateData(this.state.document)}
-          updateCurrentHeight={this.updateCurrentHeight.bind(this)}
-          updateTemplateTabs={this.updateTemplateTabs.bind(this)}
+          updateCurrentHeight={this.updateCurrentHeight}
+          updateTemplateTabs={this.updateTemplateTabs}
         />
       </div>
     );

@@ -23,19 +23,11 @@ const templates = [
   }
 ];
 
-const GovtechDemoCert = ({
-  document,
-  activeTab,
-  updateCurrentHeight,
-  updateTemplateTabs
-}) => (
+const GovtechDemoCert = props => (
   <MultiCertificateRenderer
     templates={templates}
     whitelist={approvedAddresses}
-    document={document}
-    activeTab={activeTab}
-    updateCurrentHeight={updateCurrentHeight}
-    updateTemplateTabs={updateTemplateTabs}
+    {...props}
   />
 );
 

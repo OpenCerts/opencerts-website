@@ -25,7 +25,7 @@ const FramelessCertificateViewer = props => {
   return (
     <SelectedTemplate
       document={document}
-      activetab={activeTab}
+      activeTab={activeTab}
       updateCurrentHeight={updateCurrentHeight}
       updateTemplateTabs={updateTemplateTabs}
     />
