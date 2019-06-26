@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import connectToChild from "penpal/lib/connectToChild";
 import {
+  getActiveTemplateTab,
   updateObfuscatedCertificate,
   registerTemplates as registerTemplatesAction,
   selectTemplateTab as selectTemplateTabAction
@@ -36,13 +37,13 @@ class DecentralisedRenderer extends Component {
     this.connection.promise.then(frame => frame.renderCertificate(doc));
   }
 
-  // Do not re-render component if only tabId changes
+  // Do not re-render component if only activeTab changes
   shouldComponentUpdate(nextProps) {
     if (
-      this.props.tabId !== nextProps.tabId &&
+      this.props.activeTab !== nextProps.activeTab &&
       this.props.certificate === nextProps.certificate
     ) {
-      this.selectTemplateTab(nextProps.tabId);
+      this.selectTemplateTab(nextProps.activeTab);
       return false;
     }
     return true;
@@ -80,10 +81,10 @@ class DecentralisedRenderer extends Component {
   }
 }
 
-// const mapStateToProps = store => ({
-//   document: getCertificate(store),
-//   activeTab: getActiveTemplateTab(store)
-// });
+const mapStateToProps = store => ({
+  // document: getCertificate(store),
+  activeTab: getActiveTemplateTab(store)
+});
 
 const mapDispatchToProps = dispatch => ({
   updateObfuscatedCertificate: updatedDoc =>
@@ -93,14 +94,14 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(DecentralisedRenderer);
 
 DecentralisedRenderer.propTypes = {
   certificate: PropTypes.object,
   template: PropTypes.object,
-  tabId: PropTypes.number,
+  activeTab: PropTypes.number,
   registerTemplates: PropTypes.func,
   selectTemplateTab: PropTypes.func,
   updateObfuscatedCertificate: PropTypes.func

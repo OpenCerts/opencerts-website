@@ -69,9 +69,9 @@ class FramelessViewerContainer extends Component {
     if (inIframe()) {
       this.state.parentFrameConnection.promise.then(parent => {
         if (parent.selectTemplateTab) parent.selectTemplateTab(activeTab);
-        this.setState({ activeTab });
       });
     }
+    this.setState({ activeTab });
   }
 
   handleDocumentChange(document) {
@@ -83,17 +83,17 @@ class FramelessViewerContainer extends Component {
       this.state.parentFrameConnection.promise.then(parent => {
         if (parent.updateCertificate) {
           parent.updateCertificate(document);
-          this.setState({ document });
         }
       });
     }
+    this.setState({ document });
   }
 
   updateParentHeight() {
     if (inIframe()) {
       this.state.parentFrameConnection.promise.then(parent => {
         if (parent.updateHeight)
-          parent.updateHeight(document.documentElement.scrollHeight);
+          parent.updateHeight(document.documentElement.scrollHeight + 150);
       });
     }
   }
