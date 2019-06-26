@@ -11,8 +11,9 @@ const FramelessCertificateViewer = props => {
     certificate,
     document,
     activeTab,
-    updateCurrentHeight,
-    updateTemplateTabs
+    updateParentHeight,
+    updateParentTemplates,
+    updateParentCertificate
   } = props;
 
   const selectedTemplateName = get(certificate, "$template", "default");
@@ -26,8 +27,9 @@ const FramelessCertificateViewer = props => {
     <SelectedTemplate
       document={document}
       activeTab={activeTab}
-      updateCurrentHeight={updateCurrentHeight}
-      updateTemplateTabs={updateTemplateTabs}
+      updateParentHeight={updateParentHeight}
+      updateParentTemplates={updateParentTemplates}
+      updateParentCertificate={updateParentCertificate}
     />
   );
 };
@@ -37,8 +39,9 @@ FramelessCertificateViewer.propTypes = {
   document: PropTypes.object,
   certificate: PropTypes.object,
   activeTab: PropTypes.number,
-  updateCurrentHeight: PropTypes.func,
-  updateTemplateTabs: PropTypes.func
+  updateParentHeight: PropTypes.func,
+  updateParentTemplates: PropTypes.func,
+  updateParentCertificate: PropTypes.func
 };
 
 export default FramelessCertificateViewer;
