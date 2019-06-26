@@ -78,6 +78,7 @@ class MultiCertificateRenderer extends Component {
         <SelectedTemplateTab
           certificate={certificate}
           handleObfuscation={this.handleObfuscation}
+          updateParentHeight={this.props.updateParentHeight}
         />
       );
     }

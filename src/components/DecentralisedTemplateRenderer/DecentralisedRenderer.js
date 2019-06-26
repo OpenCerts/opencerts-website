@@ -21,6 +21,7 @@ class DecentralisedRenderer extends Component {
   }
 
   updateHeight(h) {
+    console.log("UPDATE HEIGHT", h);
     this.iframe.height = h;
   }
 

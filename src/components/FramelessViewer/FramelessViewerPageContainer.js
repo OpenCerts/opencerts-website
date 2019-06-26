@@ -29,10 +29,13 @@ class FramelessViewerContainer extends Component {
     };
   }
 
+  componentDidUpdate() {
+    this.updateParentHeight();
+  }
+
   componentDidMount() {
     const selectTemplateTab = this.selectTemplateTab;
     const renderCertificate = this.handleDocumentChange;
-    const frameHeight = document.documentElement.scrollHeight;
 
     window.opencerts = {
       renderCertificate,
@@ -43,11 +46,14 @@ class FramelessViewerContainer extends Component {
       const parentFrameConnection = connectToParent({
         methods: {
           renderCertificate,
-          selectTemplateTab,
-          frameHeight
+          selectTemplateTab
         }
       });
       this.setState({ parentFrameConnection });
+      parentFrameConnection.promise.then(parent => {
+        if (parent.updateHeight)
+          parent.updateHeight(document.documentElement.offsetHeight);
+      });
     }
   }
 
@@ -93,7 +99,7 @@ class FramelessViewerContainer extends Component {
     if (inIframe()) {
       this.state.parentFrameConnection.promise.then(parent => {
         if (parent.updateHeight)
-          parent.updateHeight(document.documentElement.scrollHeight + 150);
+          parent.updateHeight(document.documentElement.offsetHeight);
       });
     }
   }
