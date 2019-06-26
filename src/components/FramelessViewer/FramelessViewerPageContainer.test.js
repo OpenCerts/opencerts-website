@@ -46,5 +46,15 @@ it("does not crash when updateParentTemplateTabs is called when not in iframe", 
 
 it("does not crash when updateParentHeight is called when not in iframe", () => {
   const component = shallow(<FramelessViewerPageContainer />);
-  component.instance().updateParentHeight(1);
+  component.instance().updateParentHeight();
+});
+
+it("does not crash when updateParentTemplates is called when not in iframe", () => {
+  const component = shallow(<FramelessViewerPageContainer />);
+  component.instance().updateParentTemplates();
+});
+
+it("does not crash when updateParentCertificate is called when not in iframe", () => {
+  const component = shallow(<FramelessViewerPageContainer />);
+  component.instance().updateParentCertificate();
 });

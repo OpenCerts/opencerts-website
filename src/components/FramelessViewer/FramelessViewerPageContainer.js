@@ -8,10 +8,7 @@ import connectToParent from "penpal/lib/connectToParent";
 import styles from "../certificateViewer.scss";
 
 import FramelessCertificateViewer from "./FramelessCertificateViewer";
-
-const inIframe = () => window.location !== window.parent.location;
-const formatTemplate = template =>
-  template ? template.map(o => ({ label: o.label, id: o.id })) : null;
+import { inIframe, formatTemplate } from "./utils";
 
 class FramelessViewerContainer extends Component {
   constructor(props) {

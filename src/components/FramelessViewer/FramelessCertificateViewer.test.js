@@ -1,37 +1,57 @@
 import React from "react";
 import { mount } from "enzyme";
 import FramelessCertificateViewer from "./FramelessCertificateViewer";
-import templates from "../CertificateTemplates";
 
-const SelectedTemplate = templates.default;
-console.log("Selected", templates.default);
+jest.mock("./FramelessViewerPageContainer.js", () => jest.fn());
 
-// jest.mock("./utils", () => ({
-//   documentTemplates: jest.fn()
-// }));
+jest.mock("../CertificateTemplates/", () => ({
+  default: () => <div>Default</div>,
+  custom: () => <div>Custom</div>
+}));
 
-it("renders the right template depending on the tabIndex", () => {
-  /* eslint-disable */
-  SelectedTemplate.mockReturnValue([
-    { template: ({ document }) => <div id="content">{document.foo}</div> },
-    { template: ({ document }) => <div id="content">{document.cow}</div> }
-  ]);
-  /* eslint-enable */
+it("renders default template if no other templates are specified", () => {
+  const component = mount(<FramelessCertificateViewer />);
+  expect(component.text()).toBe("Default");
+});
 
-  const document = { foo: "bar", cow: "moo" };
+it("renders default template if template key is not found", () => {
+  const mockCertificate = { $template: "notFound" };
+  const component = mount(
+    <FramelessCertificateViewer certificate={mockCertificate} />
+  );
+  expect(component.text()).toBe("Default");
+});
+
+it("renders selected template if template key is found", () => {
+  const mockCertificate = { $template: "custom" };
+  const component = mount(
+    <FramelessCertificateViewer certificate={mockCertificate} />
+  );
+  expect(component.text()).toBe("Custom");
+});
+
+it("props are passed correctly to SelectedTemplate", () => {
+  const mockCertificate = { $template: "custom" };
+  const mockUpdateParentCertificate = jest.fn();
+  const mockUpdateParentHeight = jest.fn();
+  const mockUpdateParentTemplates = jest.fn();
+
   const component = mount(
     <FramelessCertificateViewer
-      activeTab={0}
-      document={document}
-      updateParentHeight={() => {}}
-      updateParentTemplates={() => {}}
-      updateParentCertificate={() => {}}
+      certificate={mockCertificate}
+      updateParentCertificate={mockUpdateParentCertificate}
+      updateParentHeight={mockUpdateParentHeight}
+      updateParentTemplates={mockUpdateParentTemplates}
     />
   );
-  // Check content from tab 1
-  expect(component.find("#content").text()).toBe("bar");
 
-  // Check content from tab 2
-  component.setProps({ tabIndex: 1 });
-  expect(component.find("#content").text()).toBe("moo");
+  expect(component.children().prop("updateParentCertificate")).toEqual(
+    mockUpdateParentCertificate
+  );
+  expect(component.children().prop("updateParentHeight")).toEqual(
+    mockUpdateParentHeight
+  );
+  expect(component.children().prop("updateParentTemplates")).toEqual(
+    mockUpdateParentTemplates
+  );
 });
