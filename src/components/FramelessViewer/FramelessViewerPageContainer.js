@@ -19,8 +19,9 @@ class FramelessViewerContainer extends Component {
 
     this.handleDocumentChange = this.handleDocumentChange.bind(this);
     this.selectTemplateTab = this.selectTemplateTab.bind(this);
-    this.updateCurrentHeight = this.updateCurrentHeight.bind(this);
-    this.updateTemplateTabs = this.updateTemplateTabs.bind(this);
+    this.updateParentHeight = this.updateParentHeight.bind(this);
+    this.updateParentTemplates = this.updateParentTemplates.bind(this);
+    this.updateParentCertificate = this.updateParentCertificate.bind(this);
     this.state = {
       parentFrameConnection: null,
       document: null,
@@ -77,7 +78,18 @@ class FramelessViewerContainer extends Component {
     this.setState({ document });
   }
 
-  updateCurrentHeight() {
+  updateParentCertificate(document) {
+    if (inIframe()) {
+      this.state.parentFrameConnection.promise.then(parent => {
+        if (parent.updateCertificate) {
+          parent.updateCertificate(document);
+          this.setState({ document });
+        }
+      });
+    }
+  }
+
+  updateParentHeight() {
     if (inIframe()) {
       this.state.parentFrameConnection.promise.then(parent => {
         if (parent.updateHeight)
@@ -86,7 +98,7 @@ class FramelessViewerContainer extends Component {
     }
   }
 
-  updateTemplateTabs(templates) {
+  updateParentTemplates(templates) {
     if (inIframe()) {
       this.state.parentFrameConnection.promise.then(parent => {
         if (parent.updateTemplates)
@@ -106,8 +118,9 @@ class FramelessViewerContainer extends Component {
           activeTab={this.state.activeTab}
           document={this.state.document}
           certificate={certificateData(this.state.document)}
-          updateCurrentHeight={this.updateCurrentHeight}
-          updateTemplateTabs={this.updateTemplateTabs}
+          updateParentHeight={this.updateParentHeight}
+          updateParentTemplates={this.updateParentTemplates}
+          updateParentCertificate={this.updateParentCertificate}
         />
       </div>
     );

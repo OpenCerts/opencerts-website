@@ -1,16 +1,10 @@
 import PropTypes from "prop-types";
 import dynamic from "next/dynamic";
-import { get } from "lodash";
 import CertificateVerifyBlock from "./CertificateVerifyBlock";
 import styles from "./certificateViewer.scss";
 import Modal from "./Modal";
-
-import { getLogger } from "../utils/logger";
-import templates from "./CertificateTemplates";
 import ErrorBoundary from "./ErrorBoundary";
 import DecentralisedRenderer from "./DecentralisedTemplateRenderer/DecentralisedRenderer";
-
-const { trace } = getLogger("components:CertificateViewer");
 
 const CertificateSharingForm = dynamic(
   import("./CertificateSharing/CertificateSharingForm")
@@ -89,9 +83,9 @@ const CertificateViewer = props => {
       <div id={styles["top-header-ui"]}>
         <div className={styles["header-container"]}>{renderedHeaderBlock}</div>
       </div>
-      <DecentralisedRenderer 
+      <DecentralisedRenderer
         certificate={document}
-        template={{url: "http://localhost:3000/frameless-viewer"}}
+        template={{ url: "http://localhost:3000/frameless-viewer" }}
         tabId={0}
       />
       <Modal show={props.showSharing} toggle={props.handleSharingToggle}>

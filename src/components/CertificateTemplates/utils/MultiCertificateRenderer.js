@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { get } from "lodash";
 import { certificateData, obfuscateFields } from "@govtechsg/open-certificate";
 import InvalidCertificateNotice from "../InvalidCertificateNotice";
 import { analyticsEvent } from "../../Analytics";
-import { updateObfuscatedCertificate } from "../../../reducers/certificate";
 
 /**
  * Retrieves the contract store address from the provided certificate
@@ -46,8 +44,8 @@ class MultiCertificateRenderer extends Component {
     const {
       document,
       templates,
-      updateCurrentHeight,
-      updateTemplateTabs
+      updateParentHeight,
+      updateParentTemplates
     } = this.props;
 
     // Analytics
@@ -59,15 +57,15 @@ class MultiCertificateRenderer extends Component {
     });
 
     // Templates
-    updateTemplateTabs(templates);
+    updateParentTemplates(templates);
 
     // Update Height
-    updateCurrentHeight();
+    updateParentHeight();
   }
 
   handleObfuscation(field) {
     const updatedDocument = obfuscateFields(this.props.document, field);
-    this.props.updateObfuscatedCertificate(updatedDocument);
+    this.props.updateParentCertificate(updatedDocument);
   }
 
   render() {
@@ -76,7 +74,12 @@ class MultiCertificateRenderer extends Component {
     const SelectedTemplateTab = templates[activeTab].template;
     const allowedToRender = storeCanRenderTemplate({ whitelist, certificate });
     if (allowedToRender) {
-      return <SelectedTemplateTab certificate={certificate} />;
+      return (
+        <SelectedTemplateTab
+          certificate={certificate}
+          handleObfuscation={this.handleObfuscation}
+        />
+      );
     }
     return <InvalidCertificateNotice />;
   }
@@ -86,18 +89,10 @@ MultiCertificateRenderer.propTypes = {
   whitelist: PropTypes.array,
   templates: PropTypes.array.isRequired,
   document: PropTypes.object.isRequired,
-  updateObfuscatedCertificate: PropTypes.func.isRequired,
   activeTab: PropTypes.number.isRequired,
-  updateCurrentHeight: PropTypes.func,
-  updateTemplateTabs: PropTypes.func
+  updateParentHeight: PropTypes.func,
+  updateParentTemplates: PropTypes.func,
+  updateParentCertificate: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = dispatch => ({
-  updateObfuscatedCertificate: updatedDoc =>
-    dispatch(updateObfuscatedCertificate(updatedDoc))
-});
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(MultiCertificateRenderer);
+export default MultiCertificateRenderer;
