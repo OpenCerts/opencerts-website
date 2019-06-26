@@ -1,0 +1,53 @@
+@import "../../../styles/variables";
+.card {
+  padding-bottom: "36px";
+  word-wrap: "break-word";
+}
+
+.logo {
+  max-height: 80px;
+  max-width: 200px;
+  height: auto;
+  width: auto;
+  display: block;
+  margin: 15px auto;
+}
+
+.partner-block {
+  padding: 25px;
+  background: #eff2f2;
+  height: 100%;
+  border-radius: 10px;
+  h4 {
+    padding: 10px 0;
+  }
+
+  div {
+    line-height: 1.7;
+    a {
+      color: #53615e;
+      font-weight: 600;
+    }
+  }
+}
+
+.section-width {
+  margin: auto !important;
+  max-width: 1280px !important;
+}
+
+.mb-3 {
+  margin-bottom: 0 !important;
+}
+
+@media only screen and (max-width: 550px) {
+  .m-pd-0 {
+    padding: 0px !important;
+  }
+  .partner-block {
+    padding: 10px;
+  }
+  .mb-3 {
+    margin-bottom: 1rem !important;
+  }
+}

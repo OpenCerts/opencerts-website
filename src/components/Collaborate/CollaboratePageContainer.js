@@ -1,39 +1,27 @@
 import css from "../registry.scss";
 import collaborators from "./collaborators";
+import Card from "../UI/Card/card";
 
 const renderMembers = () =>
-  collaborators.map((m, i) => (
-    <div
-      key={i}
-      className={`col-lg-4 col-md-6 col-sm-12 ${css["mb-3"]} ${css["m-pd-0"]}`}
-      style={{ paddingBottom: "36px" }}
-    >
-      <a
-        href={m.website}
-        target="_blank"
-        rel="noopener noreferrer nofollow"
-        style={{ color: "#000", textDecoration: "none" }}
-      >
-        <div className={css["partner-block"]}>
-          <img className={`${css.logo}`} src={m.logo} id={css[m.key]} />
-          <h4 className={css["partner-name"]} style={{ fontWeight: "bold" }}>
-            {m.name}
-          </h4>
-          {m.description ? <div>{m.description}</div> : ""}
-        </div>
-      </a>
-    </div>
+  collaborators.map((collaborator, index) => (
+    <Card key={index} info={collaborator} />
   ));
 
 const CollaboratePage = () => (
   <>
     <div className="container-fluid" style={{ backgroundColor: "#324353" }}>
-      <div className={`conatiner bg-brand-dark text-white ${css["r-section"]}`}>
-        <h1 className={`col-12 ${css["m-pd-0"]} ${css["section-width"]}`}>
+      <div className={`container bg-brand-dark text-white ${css["r-section"]}`}>
+        <h1
+          id="page-title"
+          className={`col-12 ${css["m-pd-0"]} ${css["section-width"]}`}
+        >
           Collaborate
         </h1>
       </div>
-      <div className={`conatiner bg-brand-dark text-white ${css["r-section"]}`}>
+      <div
+        id="page-description"
+        className={`container bg-brand-dark text-white ${css["r-section"]}`}
+      >
         <div className={css["section-width"]}>
           <div className={`col-lg-6 col-md-12 my-3 ${css["m-pd-0"]}`}>
             <p>
