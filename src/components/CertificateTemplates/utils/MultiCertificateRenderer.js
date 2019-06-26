@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { get } from "lodash";
-import { certificateData, obfuscateFields } from "@govtechsg/open-certificate";
+import { certificateData } from "@govtechsg/open-certificate";
 import InvalidCertificateNotice from "../InvalidCertificateNotice";
 import { analyticsEvent } from "../../Analytics";
 
@@ -64,8 +64,9 @@ class MultiCertificateRenderer extends Component {
   }
 
   handleObfuscation(field) {
-    const updatedDocument = obfuscateFields(this.props.document, field);
-    this.props.updateParentCertificate(updatedDocument);
+    // const updatedDocument = obfuscateFields(this.props.document, field);
+    // this.props.updateParentCertificate(updatedDocument);
+    this.props.updateParentCertificate(field);
   }
 
   render() {

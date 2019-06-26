@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React from "react";
 import { mount } from "enzyme";
 import FramelessCertificateViewer from "./FramelessCertificateViewer";

@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import connectToChild from "penpal/lib/connectToChild";
+import { obfuscateFields } from "@govtechsg/open-certificate";
 import {
+  getCertificate,
   getActiveTemplateTab,
   updateObfuscatedCertificate,
   registerTemplates as registerTemplatesAction,
@@ -29,8 +31,12 @@ class DecentralisedRenderer extends Component {
     this.props.registerTemplates(templates);
   }
 
-  updateCertificate(document) {
-    this.props.updateObfuscatedCertificate(document);
+  updateCertificate(field) {
+    const updatedDocument = obfuscateFields(this.props.document, field);
+    this.props.updateObfuscatedCertificate(updatedDocument);
+    this.connection.promise.then(frame =>
+      frame.renderCertificate(this.props.document)
+    );
   }
 
   renderCertificate(doc) {
@@ -82,7 +88,7 @@ class DecentralisedRenderer extends Component {
 }
 
 const mapStateToProps = store => ({
-  // document: getCertificate(store),
+  document: getCertificate(store),
   activeTab: getActiveTemplateTab(store)
 });
 
@@ -99,6 +105,7 @@ export default connect(
 )(DecentralisedRenderer);
 
 DecentralisedRenderer.propTypes = {
+  document: PropTypes.object,
   certificate: PropTypes.object,
   template: PropTypes.object,
   activeTab: PropTypes.number,

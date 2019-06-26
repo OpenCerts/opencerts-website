@@ -81,15 +81,14 @@ class FramelessViewerContainer extends Component {
     this.setState({ document });
   }
 
-  updateParentCertificate(document) {
+  updateParentCertificate(field) {
     if (inIframe()) {
       this.state.parentFrameConnection.promise.then(parent => {
         if (parent.updateCertificate) {
-          parent.updateCertificate(document);
+          parent.updateCertificate(field);
         }
       });
     }
-    this.setState({ document });
   }
 
   updateParentHeight() {
