@@ -9,8 +9,6 @@ import DecentralisedRenderer from "./DecentralisedTemplateRenderer/Decentralised
 import MultiTabs from "./MultiTabs";
 import { selectTemplateTab as selectTemplateTabAction } from "../reducers/certificate";
 
-import { certificateData } from "@govtechsg/open-certificate";
-
 const CertificateSharingForm = dynamic(
   import("./CertificateSharing/CertificateSharingForm")
 );

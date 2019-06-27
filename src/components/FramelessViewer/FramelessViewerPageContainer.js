@@ -10,11 +10,16 @@ import styles from "../certificateViewer.scss";
 import FramelessCertificateViewer from "./FramelessCertificateViewer";
 import { inIframe, formatTemplate } from "./utils";
 
+import { getLogger } from "../../utils/logger";
+
+const { trace } = getLogger("components:FramelessViewerPageContainer");
+
 class FramelessViewerContainer extends Component {
   constructor(props) {
     super(props);
 
     this.handleDocumentChange = this.handleDocumentChange.bind(this);
+    this.handleTextFieldChange = this.handleTextFieldChange.bind(this);
     this.selectTemplateTab = this.selectTemplateTab.bind(this);
     this.updateParentHeight = this.updateParentHeight.bind(this);
     this.updateParentTemplates = this.updateParentTemplates.bind(this);
@@ -54,19 +59,19 @@ class FramelessViewerContainer extends Component {
     }
   }
 
-  // handleTextFieldChange(e) {
-  //   const fieldContents = JSON.parse(e.target.value);
-  //   trace(fieldContents);
-  //   const validated = validateSchema(fieldContents);
-  //   if (!validated) {
-  //     throw new Error(
-  //       "Certificate string does not conform to OpenCerts schema"
-  //     );
-  //   }
-  //   const verified = verifySignature(fieldContents);
-  //   trace(`Certificate verification: ${verified}`);
-  //   this.props.updateCertificate(fieldContents);
-  // }
+  handleTextFieldChange(e) {
+    const fieldContents = JSON.parse(e.target.value);
+    trace(fieldContents);
+    const validated = validateSchema(fieldContents);
+    if (!validated) {
+      throw new Error(
+        "Certificate string does not conform to OpenCerts schema"
+      );
+    }
+    const verified = verifySignature(fieldContents);
+    trace(`Certificate verification: ${verified}`);
+    this.updateParentCertificate(fieldContents);
+  }
 
   selectTemplateTab(activeTab) {
     if (inIframe()) {
@@ -111,7 +116,13 @@ class FramelessViewerContainer extends Component {
 
   render() {
     if (!this.state.document) {
-      return null;
+      return (
+        <input
+          id="certificateContentsString"
+          type="hidden"
+          onChange={this.handleTextFieldChange}
+        />
+      );
     }
     return (
       <div className="frameless-tabs">
