@@ -10,8 +10,6 @@ const mockCertificateTemplates = [
 
 const mockField = "Change Template";
 
-const mockCertificate = { foo: "bar", cow: "moo" };
-
 jest.mock("./FramelessCertificateViewer", () => jest.fn());
 jest.mock("penpal/lib/connectToParent", () => jest.fn());
 
