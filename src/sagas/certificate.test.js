@@ -355,8 +355,7 @@ describe("sagas/certificate", () => {
         test("the issuer has a 1 valid ethereum address and 1 valid ENS", () => {
           const {
             testCert,
-            ensNames,
-            ethereumAddresses
+            ensNames
           } = whenThereAreValidEnsNamesAndEthereumAddresses();
 
           const verificationSaga = verifyCertificateStore({
@@ -382,8 +381,7 @@ describe("sagas/certificate", () => {
       test("the certificate has an invalid ENS but valid ethereum address", () => {
         const {
           invalidCert,
-          ensName,
-          ethereumAddress
+          ensName
         } = whenThereIsOneInvalidEnsNameAndOneValidEthereumAddress();
         const certData = certificateData(invalidCert);
         const errorMsg = "Invalid ENS";
