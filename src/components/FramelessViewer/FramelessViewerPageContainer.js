@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import {
+  validateSchema,
+  verifySignature,
   certificateData
-  // validateSchema,
-  // verifySignature
 } from "@govtechsg/open-certificate";
 import connectToParent from "penpal/lib/connectToParent";
 import styles from "../certificateViewer.scss";
 import FramelessCertificateViewer from "./FramelessCertificateViewer";
 import { inIframe, formatTemplate } from "./utils";
-// import { getLogger } from "../../utils/logger";
+import { getLogger } from "../../utils/logger";
 
-// const { trace } = getLogger("components:FramelessViewerPageContainer");
+const { trace } = getLogger("components:FramelessViewerPageContainer");
 
 class FramelessViewerContainer extends Component {
   constructor(props) {
@@ -18,6 +18,7 @@ class FramelessViewerContainer extends Component {
 
     this.handleDocumentChange = this.handleDocumentChange.bind(this);
     this.selectTemplateTab = this.selectTemplateTab.bind(this);
+    this.handleTextFieldChange = this.handleTextFieldChange.bind(this);
     this.updateParentHeight = this.updateParentHeight.bind(this);
     this.updateParentTemplates = this.updateParentTemplates.bind(this);
     this.updateParentCertificate = this.updateParentCertificate.bind(this);
@@ -47,73 +48,84 @@ class FramelessViewerContainer extends Component {
           renderCertificate,
           selectTemplateTab
         }
-      });
+      }).promise;
       this.setState({ parentFrameConnection });
-      parentFrameConnection.promise.then(parent => {
+
+      parentFrameConnection.then(parent => {
         if (parent.updateHeight)
           parent.updateHeight(document.documentElement.offsetHeight);
       });
     }
   }
 
-  // handleTextFieldChange(e) {
-  //   const fieldContents = JSON.parse(e.target.value);
-  //   trace(fieldContents);
-  //   const validated = validateSchema(fieldContents);
-  //   if (!validated) {
-  //     throw new Error(
-  //       "Certificate string does not conform to OpenCerts schema"
-  //     );
-  //   }
-  //   const verified = verifySignature(fieldContents);
-  //   trace(`Certificate verification: ${verified}`);
-  //   this.updateParentCertificate(fieldContents);
-  // }
-
-  selectTemplateTab(activeTab) {
-    if (inIframe()) {
-      this.state.parentFrameConnection.promise.then(parent => {
-        if (parent.selectTemplateTab) parent.selectTemplateTab(activeTab);
-      });
+  handleTextFieldChange(e) {
+    const fieldContents = JSON.parse(e.target.value);
+    trace(fieldContents);
+    const validated = validateSchema(fieldContents);
+    if (!validated) {
+      throw new Error(
+        "Certificate string does not conform to OpenCerts schema"
+      );
     }
-    this.setState({ activeTab });
+    const verified = verifySignature(fieldContents);
+    trace(`Certificate verification: ${verified}`);
+    this.updateParentCertificate(fieldContents);
+  }
+
+  async selectTemplateTab(activeTab) {
+    if (inIframe()) {
+      const { parentFrameConnection } = this.state;
+      const parent = await parentFrameConnection;
+      if (parent.selectTemplateTab) {
+        parent.selectTemplateTab(activeTab);
+      }
+      this.setState({ activeTab });
+    }
   }
 
   handleDocumentChange(document) {
     this.setState({ document });
   }
 
-  updateParentCertificate(field) {
+  async updateParentCertificate(obfuscateField) {
     if (inIframe()) {
-      this.state.parentFrameConnection.promise.then(parent => {
-        if (parent.updateCertificate) {
-          parent.updateCertificate(field);
-        }
-      });
+      const { parentFrameConnection } = this.state;
+      const parent = await parentFrameConnection;
+      if (parent.updateCertificate) {
+        parent.updateCertificate(obfuscateField);
+      }
     }
   }
 
-  updateParentHeight() {
+  async updateParentHeight() {
     if (inIframe()) {
-      this.state.parentFrameConnection.promise.then(parent => {
-        if (parent.updateHeight)
-          parent.updateHeight(document.documentElement.offsetHeight);
-      });
+      const { parentFrameConnection } = this.state;
+      const parent = await parentFrameConnection;
+      if (parent.updateHeight) {
+        parent.updateHeight(document.documentElement.offsetHeight);
+      }
     }
   }
 
-  updateParentTemplates(templates) {
+  async updateParentTemplates(templates) {
     if (inIframe()) {
-      this.state.parentFrameConnection.promise.then(parent => {
-        if (parent.updateTemplates)
-          parent.updateTemplates(formatTemplate(templates));
-      });
+      const { parentFrameConnection } = this.state;
+      const parent = await parentFrameConnection;
+      if (parent.updateTemplates) {
+        parent.updateTemplates(formatTemplate(templates));
+      }
     }
   }
 
   render() {
     if (!this.state.document) {
-      return null;
+      return (
+        <input
+          id="certificateContentsString"
+          type="hidden"
+          onChange={this.handleTextFieldChange}
+        />
+      );
     }
     return (
       <div className="frameless-tabs">

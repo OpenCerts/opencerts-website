@@ -63,10 +63,8 @@ class MultiCertificateRenderer extends Component {
     updateParentHeight();
   }
 
-  handleObfuscation(field) {
-    // const updatedDocument = obfuscateFields(this.props.document, field);
-    // this.props.updateParentCertificate(updatedDocument);
-    this.props.updateParentCertificate(field);
+  handleObfuscation(obfuscateField) {
+    this.props.updateParentCertificate(obfuscateField);
   }
 
   render() {

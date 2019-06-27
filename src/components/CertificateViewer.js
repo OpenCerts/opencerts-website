@@ -89,7 +89,7 @@ const CertificateViewer = props => {
       <MultiTabs selectTemplateTab={selectTemplateTab} />
       <DecentralisedRenderer
         certificate={document}
-        template={{ url: "http://localhost:3000/frameless-viewer" }}
+        template={{ url: "/frameless-viewer" }}
       />
       <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
         <CertificateSharingForm

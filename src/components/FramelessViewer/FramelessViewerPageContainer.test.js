@@ -4,9 +4,9 @@ import FramelessViewerPageContainer from "./FramelessViewerPageContainer";
 
 jest.mock("./FramelessCertificateViewer", () => jest.fn());
 
-it("returns null if there are no document", () => {
+it("returns false because of certificateContentsString", () => {
   const component = shallow(<FramelessViewerPageContainer />);
-  expect(component.isEmptyRender()).toBe(true);
+  expect(component.isEmptyRender()).toBe(false);
 });
 
 it("initialise window methods on mount", () => {

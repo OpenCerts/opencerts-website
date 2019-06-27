@@ -18,7 +18,7 @@ class DecentralisedRenderer extends Component {
   }
 
   selectTemplateTab(i) {
-    this.connection.promise.then(iframe => iframe.selectTemplateTab(i));
+    this.connection.then(iframe => iframe.selectTemplateTab(i));
     this.props.selectTemplateTab(i);
   }
 
