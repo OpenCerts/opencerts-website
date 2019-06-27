@@ -34,9 +34,7 @@ class DecentralisedRenderer extends Component {
   updateCertificate(field) {
     const updatedDocument = obfuscateFields(this.props.document, field);
     this.props.updateObfuscatedCertificate(updatedDocument);
-    this.connection.promise.then(frame =>
-      frame.renderCertificate(this.props.document)
-    );
+    this.renderCertificate(updatedDocument);
   }
 
   renderCertificate(doc) {

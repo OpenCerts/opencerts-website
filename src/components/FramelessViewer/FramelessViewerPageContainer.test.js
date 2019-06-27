@@ -4,10 +4,6 @@ import FramelessViewerPageContainer from "./FramelessViewerPageContainer";
 
 jest.mock("./FramelessCertificateViewer", () => jest.fn());
 
-// jest.mock("./utils", () => ({
-//   inIframe: () => false
-// }));
-
 it("returns null if there are no document", () => {
   const component = shallow(<FramelessViewerPageContainer />);
   expect(component.isEmptyRender()).toBe(true);
