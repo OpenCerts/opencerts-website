@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import { format } from "date-fns";
 import { get } from "lodash";
+import React, { useEffect } from "react";
 import { certificateBg } from "./common/backgrounds";
 import css from "./common/demoStyles.scss";
-import React, { useState, useEffect } from "react";
 
 const Template = ({ certificate, updateParentHeight }) => {
   useEffect(() => {
@@ -129,6 +129,7 @@ const Template = ({ certificate, updateParentHeight }) => {
 };
 
 Template.propTypes = {
-  certificate: PropTypes.object.isRequired
+  certificate: PropTypes.object.isRequired,
+  updateParentHeight: PropTypes.func
 };
 export default Template;
