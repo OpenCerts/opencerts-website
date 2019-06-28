@@ -9,12 +9,12 @@ it("returns false because of certificateContentsString", () => {
   expect(component.isEmptyRender()).toBe(false);
 });
 
-it("initialise window methods on mount if connected to parent and inIframe", async () => {
+it("initialise window methods on mount if connected to parent and inIframe", () => {
   const component = shallow(<FramelessViewerPageContainer />);
   window.opencerts.renderCertificate("NEW_CERTIFICATE");
   expect(component.state("certificate")).toBe("NEW_CERTIFICATE");
 
-  await component.instance().selectTemplateTab(2);
+  component.instance().selectTemplateTab(2);
   expect(component.state("activeTab")).toBe(2);
 });
 
