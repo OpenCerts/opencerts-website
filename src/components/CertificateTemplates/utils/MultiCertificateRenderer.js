@@ -35,11 +35,6 @@ const storeCanRenderTemplate = ({ whitelist, certificate }) => {
  * @param {*} templates An array of template views to render using `renderTemplateToTab()`
  */
 class MultiCertificateRenderer extends Component {
-  constructor(props) {
-    super(props);
-    this.handleObfuscation = this.handleObfuscation.bind(this);
-  }
-
   componentDidMount() {
     const {
       document,
@@ -63,21 +58,27 @@ class MultiCertificateRenderer extends Component {
     updateParentHeight();
   }
 
-  handleObfuscation(obfuscateField) {
-    this.props.updateParentCertificate(obfuscateField);
-  }
-
   render() {
-    const { document, whitelist, templates, activeTab } = this.props;
+    const {
+      document,
+      whitelist,
+      templates,
+      activeTab,
+      obfuscateField,
+      updateParentHeight
+    } = this.props;
     const certificate = certificateData(document);
     const SelectedTemplateTab = templates[activeTab].template;
-    const allowedToRender = storeCanRenderTemplate({ whitelist, certificate });
+    const allowedToRender = storeCanRenderTemplate({
+      whitelist,
+      certificate
+    });
     if (allowedToRender) {
       return (
         <SelectedTemplateTab
           certificate={certificate}
-          handleObfuscation={this.handleObfuscation}
-          updateParentHeight={this.props.updateParentHeight}
+          handleObfuscation={obfuscateField}
+          updateParentHeight={updateParentHeight}
         />
       );
     }
@@ -92,7 +93,7 @@ MultiCertificateRenderer.propTypes = {
   activeTab: PropTypes.number.isRequired,
   updateParentHeight: PropTypes.func,
   updateParentTemplates: PropTypes.func,
-  updateParentCertificate: PropTypes.func.isRequired
+  obfuscateField: PropTypes.func
 };
 
 export default MultiCertificateRenderer;

@@ -53,7 +53,7 @@ const renderHeaderBlock = props => {
               download={`${props.certificate.id}.opencert`}
               target="_black"
               href={`data:text/plain;,${JSON.stringify(
-                props.certificate,
+                props.document,
                 null,
                 2
               )}`}

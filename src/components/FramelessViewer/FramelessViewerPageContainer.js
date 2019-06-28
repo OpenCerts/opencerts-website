@@ -21,7 +21,7 @@ class FramelessViewerContainer extends Component {
     this.handleTextFieldChange = this.handleTextFieldChange.bind(this);
     this.updateParentHeight = this.updateParentHeight.bind(this);
     this.updateParentTemplates = this.updateParentTemplates.bind(this);
-    this.updateParentCertificate = this.updateParentCertificate.bind(this);
+    this.obfuscateField = this.obfuscateField.bind(this);
     this.state = {
       parentFrameConnection: null,
       document: null,
@@ -69,7 +69,7 @@ class FramelessViewerContainer extends Component {
     }
     const verified = verifySignature(fieldContents);
     trace(`Certificate verification: ${verified}`);
-    this.updateParentCertificate(fieldContents);
+    this.obfuscateField(fieldContents);
   }
 
   async selectTemplateTab(activeTab) {
@@ -77,7 +77,7 @@ class FramelessViewerContainer extends Component {
       const { parentFrameConnection } = this.state;
       const parent = await parentFrameConnection;
       if (parent.selectTemplateTab) {
-        parent.selectTemplateTab(activeTab);
+        await parent.selectTemplateTab(activeTab);
       }
       this.setState({ activeTab });
     }
@@ -87,12 +87,12 @@ class FramelessViewerContainer extends Component {
     this.setState({ document });
   }
 
-  async updateParentCertificate(obfuscateField) {
+  async obfuscateField(field) {
     if (inIframe()) {
       const { parentFrameConnection } = this.state;
       const parent = await parentFrameConnection;
       if (parent.updateCertificate) {
-        parent.updateCertificate(obfuscateField);
+        parent.updateCertificate(field);
       }
     }
   }
@@ -102,7 +102,7 @@ class FramelessViewerContainer extends Component {
       const { parentFrameConnection } = this.state;
       const parent = await parentFrameConnection;
       if (parent.updateHeight) {
-        parent.updateHeight(document.documentElement.offsetHeight);
+        await parent.updateHeight(document.documentElement.offsetHeight);
       }
     }
   }
@@ -136,7 +136,7 @@ class FramelessViewerContainer extends Component {
           certificate={certificateData(this.state.document)}
           updateParentHeight={this.updateParentHeight}
           updateParentTemplates={this.updateParentTemplates}
-          updateParentCertificate={this.updateParentCertificate}
+          obfuscateField={this.obfuscateField}
         />
       </div>
     );

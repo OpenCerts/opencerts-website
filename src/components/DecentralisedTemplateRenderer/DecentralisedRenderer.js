@@ -14,11 +14,15 @@ import {
 class DecentralisedRenderer extends Component {
   constructor(props) {
     super(props);
-    this.connection = null;
+    this.state = {
+      childFrameConnection: null
+    };
   }
 
-  selectTemplateTab(i) {
-    this.connection.then(iframe => iframe.selectTemplateTab(i));
+  async selectTemplateTab(i) {
+    const { childFrameConnection } = this.state;
+    const child = await childFrameConnection;
+    await child.selectTemplateTab(i);
     this.props.selectTemplateTab(i);
   }
 
@@ -37,8 +41,10 @@ class DecentralisedRenderer extends Component {
     this.renderCertificate(updatedDocument);
   }
 
-  renderCertificate(doc) {
-    this.connection.promise.then(frame => frame.renderCertificate(doc));
+  async renderCertificate(doc) {
+    const { childFrameConnection } = this.state;
+    const child = await childFrameConnection;
+    await child.renderCertificate(doc);
   }
 
   // Do not re-render component if only activeTab changes
@@ -55,19 +61,22 @@ class DecentralisedRenderer extends Component {
 
   componentDidMount() {
     const iframe = this.iframe;
-    const certificate = this.props.certificate;
     const updateHeight = this.updateHeight.bind(this);
     const updateTemplates = this.updateTemplates.bind(this);
     const updateCertificate = this.updateCertificate.bind(this);
-    this.connection = connectToChild({
+    const childFrameConnection = connectToChild({
       iframe,
       methods: {
         updateHeight,
         updateTemplates,
         updateCertificate
       }
-    });
-    this.renderCertificate(certificate);
+    }).promise;
+    this.setState({ childFrameConnection });
+
+    childFrameConnection.then(frame =>
+      frame.renderCertificate(this.props.certificate)
+    );
   }
 
   render() {
