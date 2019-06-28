@@ -10,13 +10,13 @@ import { analyticsEvent } from "../../Analytics";
  *
  * @returns true if contract store address is present in whitelist, or if whitelist is empty
  * @param {*} whitelist
- * @param {*} certificate
+ * @param {*} document
  */
-const storeCanRenderTemplate = ({ whitelist, certificate }) => {
+const storeCanRenderTemplate = ({ whitelist, document }) => {
   if (!whitelist || whitelist === []) {
     return true;
   }
-  const issuers = get(certificate, "issuers", []);
+  const issuers = get(document, "issuers", []);
   const validStoreAddressForTemplate = whitelist.map(a => a.toLowerCase());
   return issuers.reduce((prev, curr) => {
     const storeAddress = get(curr, "certificateStore", "").toLowerCase();
@@ -29,14 +29,14 @@ const storeCanRenderTemplate = ({ whitelist, certificate }) => {
 
 /**
  * This React component renders a certificate's data, given an array of template views.
- * @param {*} certificate Certificate Data
+ * @param {*} document Certificate Data
  * @param {*} whitelist A list of contract store addresses which are allowed to use this template
  * @param {*} templates An array of template views to render using `renderTemplateToTab()`
  */
 class MultiCertificateRenderer extends Component {
   componentDidMount() {
     const {
-      certificate,
+      document,
       templates,
       updateParentHeight,
       updateParentTemplates
@@ -45,8 +45,8 @@ class MultiCertificateRenderer extends Component {
     // Analytics
     analyticsEvent(window, {
       category: "CERTIFICATE_VIEWED",
-      action: get(certificate, "issuers[0].certificateStore"),
-      label: get(certificate, "id")
+      action: get(document, "issuers[0].certificateStore"),
+      label: get(document, "id")
     });
 
     // Templates
@@ -58,22 +58,22 @@ class MultiCertificateRenderer extends Component {
 
   render() {
     const {
-      certificate,
+      document,
       whitelist,
       templates,
-      activeTab,
+      tabIndex,
       obfuscateField,
       updateParentHeight
     } = this.props;
-    const SelectedTemplateTab = templates[activeTab].template;
+    const SelectedTemplateTab = templates[tabIndex].template;
     const allowedToRender = storeCanRenderTemplate({
       whitelist,
-      certificate
+      document
     });
     if (allowedToRender) {
       return (
         <SelectedTemplateTab
-          certificate={certificate}
+          certificate={document}
           handleObfuscation={obfuscateField}
           updateParentHeight={updateParentHeight}
         />
@@ -86,8 +86,8 @@ class MultiCertificateRenderer extends Component {
 MultiCertificateRenderer.propTypes = {
   whitelist: PropTypes.array,
   templates: PropTypes.array.isRequired,
-  certificate: PropTypes.object.isRequired,
-  activeTab: PropTypes.number.isRequired,
+  document: PropTypes.object.isRequired,
+  tabIndex: PropTypes.number.isRequired,
   updateParentHeight: PropTypes.func,
   updateParentTemplates: PropTypes.func,
   obfuscateField: PropTypes.func

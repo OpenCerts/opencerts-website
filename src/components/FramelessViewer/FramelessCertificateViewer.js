@@ -8,24 +8,24 @@ const { trace } = getLogger("components:CertificateViewer");
 
 const FramelessCertificateViewer = props => {
   const {
-    certificate,
-    activeTab,
+    document,
+    tabIndex,
     updateParentHeight,
     updateParentTemplates,
     obfuscateField
   } = props;
 
-  const selectedTemplateName = get(certificate, "$template", "default");
+  const selectedTemplateName = get(document, "$template", "default");
   const SelectedTemplate = templates[selectedTemplateName] || templates.default;
 
   trace(`Templates Mapping: %o`, templates);
   trace(`Selected template: ${selectedTemplateName}`);
-  trace(`Certificate content: %o`, certificate);
+  trace(`Certificate content: %o`, document);
 
   return (
     <SelectedTemplate
-      certificate={certificate}
-      activeTab={activeTab}
+      document={document}
+      tabIndex={tabIndex}
       updateParentHeight={updateParentHeight}
       updateParentTemplates={updateParentTemplates}
       obfuscateField={obfuscateField}
@@ -34,9 +34,8 @@ const FramelessCertificateViewer = props => {
 };
 
 FramelessCertificateViewer.propTypes = {
-  handleCertificateChange: PropTypes.func,
-  certificate: PropTypes.object,
-  activeTab: PropTypes.number,
+  document: PropTypes.object,
+  tabIndex: PropTypes.number,
   updateParentHeight: PropTypes.func,
   updateParentTemplates: PropTypes.func,
   obfuscateField: PropTypes.func

@@ -12,7 +12,7 @@ class FramelessViewerContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.handleCertificateChange = this.handleCertificateChange.bind(this);
+    this.handleDocumentChange = this.handleDocumentChange.bind(this);
     this.selectTemplateTab = this.selectTemplateTab.bind(this);
     this.handleTextFieldChange = this.handleTextFieldChange.bind(this);
     this.updateParentHeight = this.updateParentHeight.bind(this);
@@ -20,8 +20,8 @@ class FramelessViewerContainer extends Component {
     this.obfuscateField = this.obfuscateField.bind(this);
     this.state = {
       parentFrameConnection: null,
-      certificate: null,
-      activeTab: 0
+      document: null,
+      tabIndex: 0
     };
   }
 
@@ -31,17 +31,17 @@ class FramelessViewerContainer extends Component {
 
   componentDidMount() {
     const selectTemplateTab = this.selectTemplateTab;
-    const renderCertificate = this.handleCertificateChange;
+    const renderDocument = this.handleDocumentChange;
 
     window.opencerts = {
-      renderCertificate,
+      renderDocument,
       selectTemplateTab
     };
 
     if (inIframe()) {
       const parentFrameConnection = connectToParent({
         methods: {
-          renderCertificate,
+          renderDocument,
           selectTemplateTab
         }
       }).promise;
@@ -68,19 +68,19 @@ class FramelessViewerContainer extends Component {
     this.obfuscateField(fieldContents);
   }
 
-  async selectTemplateTab(activeTab) {
+  async selectTemplateTab(tabIndex) {
     if (inIframe()) {
       const { parentFrameConnection } = this.state;
       const parent = await parentFrameConnection;
       if (parent.selectTemplateTab) {
-        await parent.selectTemplateTab(activeTab);
+        await parent.selectTemplateTab(tabIndex);
       }
     }
-    this.setState({ activeTab });
+    this.setState({ tabIndex });
   }
 
-  handleCertificateChange(certificate) {
-    this.setState({ certificate });
+  handleDocumentChange(document) {
+    this.setState({ document });
   }
 
   async obfuscateField(field) {
@@ -114,7 +114,7 @@ class FramelessViewerContainer extends Component {
   }
 
   render() {
-    if (!this.state.certificate) {
+    if (!this.state.document) {
       return (
         <input
           id="certificateContentsString"
@@ -127,9 +127,8 @@ class FramelessViewerContainer extends Component {
       <div className="frameless-tabs">
         <FramelessCertificateViewer
           id={styles["frameless-container"]}
-          activeTab={this.state.activeTab}
-          certificate={this.state.certificate}
-          // certificate={certificateData(this.state.document)}
+          tabIndex={this.state.tabIndex}
+          document={this.state.document}
           updateParentHeight={this.updateParentHeight}
           updateParentTemplates={this.updateParentTemplates}
           obfuscateField={this.obfuscateField}

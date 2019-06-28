@@ -39,13 +39,13 @@ class DecentralisedRenderer extends Component {
     const updatedDocument = obfuscateFields(this.props.document, field);
     this.props.updateObfuscatedCertificate(updatedDocument);
     const updatedCertificate = certificateData(updatedDocument);
-    this.renderCertificate(updatedCertificate);
+    this.renderDocument(updatedCertificate);
   }
 
-  async renderCertificate(certificate) {
+  async renderDocument(certificate) {
     const { childFrameConnection } = this.state;
     const child = await childFrameConnection;
-    await child.renderCertificate(certificate);
+    await child.renderDocument(certificate);
   }
 
   // Do not re-render component if only activeTab changes
@@ -76,7 +76,7 @@ class DecentralisedRenderer extends Component {
     this.setState({ childFrameConnection });
 
     childFrameConnection.then(frame =>
-      frame.renderCertificate(this.props.certificate)
+      frame.renderDocument(this.props.certificate)
     );
   }
 
