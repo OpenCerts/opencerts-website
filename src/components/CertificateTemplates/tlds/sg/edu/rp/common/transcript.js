@@ -365,7 +365,7 @@ export const renderTranscript = certificate => {
 // display GPA for PET and DPLUS
 export const renderPETGPA = GPA => (
   <span>
-    Grade Point Average (GPA): {GPA} /4.00
+    Grade Point Average (GPA): {GPA.toFixed(2)} /4.00
     <br />
   </span>
 );
