@@ -1,20 +1,20 @@
 import React from "react";
 import { shallow } from "enzyme";
-import FramelessViewerPageContainer from "./FramelessViewerPageContainer";
+import FramelessViewerPageContainer from "../FramelessViewerPageContainer";
 
-jest.mock("./FramelessCertificateViewer", () => jest.fn());
+jest.mock("../FramelessCertificateViewer", () => jest.fn());
 
 it("returns false because of certificateContentsString", () => {
   const component = shallow(<FramelessViewerPageContainer />);
   expect(component.isEmptyRender()).toBe(false);
 });
 
-it("initialise window methods on mount", () => {
+it("initialise window methods on mount if connected to parent and inIframe", async () => {
   const component = shallow(<FramelessViewerPageContainer />);
-  window.opencerts.renderCertificate("NEW_DOCUMENT");
-  expect(component.state("document")).toBe("NEW_DOCUMENT");
+  window.opencerts.renderCertificate("NEW_CERTIFICATE");
+  expect(component.state("certificate")).toBe("NEW_CERTIFICATE");
 
-  window.opencerts.selectTemplateTab(2);
+  await component.instance().selectTemplateTab(2);
   expect(component.state("activeTab")).toBe(2);
 });
 
@@ -23,16 +23,15 @@ it("does not initialise connection to parent not in iframe on mount", () => {
   expect(component.state("parentFrameConnection")).toBe(null);
 });
 
-it("sets document state when handleDocumentChange is called", () => {
+it("sets certificate state when handleCertificateChange is called", () => {
   const component = shallow(<FramelessViewerPageContainer />);
-  component.instance().handleDocumentChange("DOCUMENT");
-  expect(component.state("document")).toBe("DOCUMENT");
+  component.instance().handleCertificateChange("CERTIFICATE");
+  expect(component.state("certificate")).toBe("CERTIFICATE");
 });
 
-it("sets tabIndex state when selectTemplateTab is called", () => {
+it("does not crash when selectTemplateTab is called when not in iframe", () => {
   const component = shallow(<FramelessViewerPageContainer />);
   component.instance().selectTemplateTab(5);
-  expect(component.state("activeTab")).toBe(5);
 });
 
 it("does not crash when updateParentTemplateTabs is called when not in iframe", () => {
@@ -50,7 +49,7 @@ it("does not crash when updateParentTemplates is called when not in iframe", () 
   component.instance().updateParentTemplates();
 });
 
-it("does not crash when updateParentCertificate is called when not in iframe", () => {
+it("does not crash when obfuscateField is called when not in iframe", () => {
   const component = shallow(<FramelessViewerPageContainer />);
-  component.instance().updateParentCertificate();
+  component.instance().obfuscateField();
 });

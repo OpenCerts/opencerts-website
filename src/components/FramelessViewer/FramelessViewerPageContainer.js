@@ -12,7 +12,7 @@ class FramelessViewerContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.handleCerticiateChange = this.handleCerticiateChange.bind(this);
+    this.handleCertificateChange = this.handleCertificateChange.bind(this);
     this.selectTemplateTab = this.selectTemplateTab.bind(this);
     this.handleTextFieldChange = this.handleTextFieldChange.bind(this);
     this.updateParentHeight = this.updateParentHeight.bind(this);
@@ -31,7 +31,7 @@ class FramelessViewerContainer extends Component {
 
   componentDidMount() {
     const selectTemplateTab = this.selectTemplateTab;
-    const renderCertificate = this.handleCerticiateChange;
+    const renderCertificate = this.handleCertificateChange;
 
     window.opencerts = {
       renderCertificate,
@@ -75,11 +75,11 @@ class FramelessViewerContainer extends Component {
       if (parent.selectTemplateTab) {
         await parent.selectTemplateTab(activeTab);
       }
-      this.setState({ activeTab });
     }
+    this.setState({ activeTab });
   }
 
-  handleCerticiateChange(certificate) {
+  handleCertificateChange(certificate) {
     this.setState({ certificate });
   }
 

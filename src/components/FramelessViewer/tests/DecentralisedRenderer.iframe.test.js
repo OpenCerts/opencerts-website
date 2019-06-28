@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import connectToParent from "penpal/lib/connectToParent";
-import FramelessViewerPageContainer from "./FramelessViewerPageContainer";
+import FramelessViewerPageContainer from "../FramelessViewerPageContainer";
 
 const mockCertificateTemplates = [
   { id: "template1", label: "Template 1" },
@@ -10,10 +10,10 @@ const mockCertificateTemplates = [
 
 const mockField = "Change Template";
 
-jest.mock("./FramelessCertificateViewer", () => jest.fn());
+jest.mock("../FramelessCertificateViewer", () => jest.fn());
 jest.mock("penpal/lib/connectToParent", () => jest.fn());
 
-jest.mock("./utils", () => ({
+jest.mock("../utils", () => ({
   inIframe: () => true,
   formatTemplate: () => mockCertificateTemplates
 }));
@@ -39,9 +39,9 @@ beforeEach(() => {
   resetMocks();
 });
 
-it("returns null if there are no document", () => {
+it("returns input text when there is no certificate", () => {
   const component = shallow(<FramelessViewerPageContainer />);
-  expect(component.isEmptyRender()).toBe(true);
+  expect(component.isEmptyRender()).toBe(false);
 });
 
 it("initialise and save connection to parent on mount to parentFrameConnection", () => {
@@ -73,10 +73,10 @@ it("calls parent frame's updateTemplates when updateParentTemplates is called", 
   );
 });
 
-it("calls parent frame's updateCertificate when updateParentCertificate is called", async () => {
+it("calls parent frame's updateCertificate when obfuscateField is called", async () => {
   const component = shallow(<FramelessViewerPageContainer />);
   resetMocks();
-  await component.instance().updateParentCertificate(mockField);
+  await component.instance().obfuscateField(mockField);
   expect(mockParent.updateCertificate).toHaveBeenCalledWith(mockField);
 });
 
