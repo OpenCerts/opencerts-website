@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { get } from "lodash";
-import { certificateData } from "@govtechsg/open-certificate";
 import InvalidCertificateNotice from "../InvalidCertificateNotice";
 import { analyticsEvent } from "../../Analytics";
 
@@ -37,14 +36,13 @@ const storeCanRenderTemplate = ({ whitelist, certificate }) => {
 class MultiCertificateRenderer extends Component {
   componentDidMount() {
     const {
-      document,
+      certificate,
       templates,
       updateParentHeight,
       updateParentTemplates
     } = this.props;
 
     // Analytics
-    const certificate = certificateData(document);
     analyticsEvent(window, {
       category: "CERTIFICATE_VIEWED",
       action: get(certificate, "issuers[0].certificateStore"),
@@ -60,14 +58,13 @@ class MultiCertificateRenderer extends Component {
 
   render() {
     const {
-      document,
+      certificate,
       whitelist,
       templates,
       activeTab,
       obfuscateField,
       updateParentHeight
     } = this.props;
-    const certificate = certificateData(document);
     const SelectedTemplateTab = templates[activeTab].template;
     const allowedToRender = storeCanRenderTemplate({
       whitelist,
@@ -89,7 +86,7 @@ class MultiCertificateRenderer extends Component {
 MultiCertificateRenderer.propTypes = {
   whitelist: PropTypes.array,
   templates: PropTypes.array.isRequired,
-  document: PropTypes.object.isRequired,
+  certificate: PropTypes.object.isRequired,
   activeTab: PropTypes.number.isRequired,
   updateParentHeight: PropTypes.func,
   updateParentTemplates: PropTypes.func,

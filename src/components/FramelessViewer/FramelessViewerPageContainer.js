@@ -1,9 +1,5 @@
 import React, { Component } from "react";
-import {
-  validateSchema,
-  verifySignature,
-  certificateData
-} from "@govtechsg/open-certificate";
+import { validateSchema, verifySignature } from "@govtechsg/open-certificate";
 import connectToParent from "penpal/lib/connectToParent";
 import styles from "../certificateViewer.scss";
 import FramelessCertificateViewer from "./FramelessCertificateViewer";
@@ -16,7 +12,7 @@ class FramelessViewerContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.handleDocumentChange = this.handleDocumentChange.bind(this);
+    this.handleCerticiateChange = this.handleCerticiateChange.bind(this);
     this.selectTemplateTab = this.selectTemplateTab.bind(this);
     this.handleTextFieldChange = this.handleTextFieldChange.bind(this);
     this.updateParentHeight = this.updateParentHeight.bind(this);
@@ -24,7 +20,7 @@ class FramelessViewerContainer extends Component {
     this.obfuscateField = this.obfuscateField.bind(this);
     this.state = {
       parentFrameConnection: null,
-      document: null,
+      certificate: null,
       activeTab: 0
     };
   }
@@ -35,7 +31,7 @@ class FramelessViewerContainer extends Component {
 
   componentDidMount() {
     const selectTemplateTab = this.selectTemplateTab;
-    const renderCertificate = this.handleDocumentChange;
+    const renderCertificate = this.handleCerticiateChange;
 
     window.opencerts = {
       renderCertificate,
@@ -83,8 +79,8 @@ class FramelessViewerContainer extends Component {
     }
   }
 
-  handleDocumentChange(document) {
-    this.setState({ document });
+  handleCerticiateChange(certificate) {
+    this.setState({ certificate });
   }
 
   async obfuscateField(field) {
@@ -118,7 +114,7 @@ class FramelessViewerContainer extends Component {
   }
 
   render() {
-    if (!this.state.document) {
+    if (!this.state.certificate) {
       return (
         <input
           id="certificateContentsString"
@@ -132,8 +128,8 @@ class FramelessViewerContainer extends Component {
         <FramelessCertificateViewer
           id={styles["frameless-container"]}
           activeTab={this.state.activeTab}
-          document={this.state.document}
-          certificate={certificateData(this.state.document)}
+          certificate={this.state.certificate}
+          // certificate={certificateData(this.state.document)}
           updateParentHeight={this.updateParentHeight}
           updateParentTemplates={this.updateParentTemplates}
           obfuscateField={this.obfuscateField}

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import connectToChild from "penpal/lib/connectToChild";
-import { obfuscateFields } from "@govtechsg/open-certificate";
+import { certificateData, obfuscateFields } from "@govtechsg/open-certificate";
 import {
   getCertificate,
   getActiveTemplateTab,
@@ -38,20 +38,21 @@ class DecentralisedRenderer extends Component {
   updateCertificate(field) {
     const updatedDocument = obfuscateFields(this.props.document, field);
     this.props.updateObfuscatedCertificate(updatedDocument);
-    this.renderCertificate(updatedDocument);
+    const updatedCertificate = certificateData(updatedDocument);
+    this.renderCertificate(updatedCertificate);
   }
 
-  async renderCertificate(doc) {
+  async renderCertificate(certificate) {
     const { childFrameConnection } = this.state;
     const child = await childFrameConnection;
-    await child.renderCertificate(doc);
+    await child.renderCertificate(certificate);
   }
 
   // Do not re-render component if only activeTab changes
   shouldComponentUpdate(nextProps) {
     if (
       this.props.activeTab !== nextProps.activeTab &&
-      this.props.certificate === nextProps.certificate
+      this.props.document === nextProps.document
     ) {
       this.selectTemplateTab(nextProps.activeTab);
       return false;

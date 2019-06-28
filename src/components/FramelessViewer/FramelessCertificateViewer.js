@@ -9,7 +9,6 @@ const { trace } = getLogger("components:CertificateViewer");
 const FramelessCertificateViewer = props => {
   const {
     certificate,
-    document,
     activeTab,
     updateParentHeight,
     updateParentTemplates,
@@ -25,7 +24,7 @@ const FramelessCertificateViewer = props => {
 
   return (
     <SelectedTemplate
-      document={document}
+      certificate={certificate}
       activeTab={activeTab}
       updateParentHeight={updateParentHeight}
       updateParentTemplates={updateParentTemplates}
@@ -36,7 +35,6 @@ const FramelessCertificateViewer = props => {
 
 FramelessCertificateViewer.propTypes = {
   handleCertificateChange: PropTypes.func,
-  document: PropTypes.object,
   certificate: PropTypes.object,
   activeTab: PropTypes.number,
   updateParentHeight: PropTypes.func,

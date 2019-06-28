@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import dynamic from "next/dynamic";
 import { connect } from "react-redux";
+import { certificateData } from "@govtechsg/open-certificate";
 import CertificateVerifyBlock from "./CertificateVerifyBlock";
 import styles from "./certificateViewer.scss";
 import Modal from "./Modal";
@@ -79,6 +80,8 @@ const renderHeaderBlock = props => {
 const CertificateViewer = props => {
   const { document, selectTemplateTab } = props;
 
+  const certificate = certificateData(document);
+
   const renderedHeaderBlock = renderHeaderBlock(props);
 
   const validCertificateContent = (
@@ -88,7 +91,7 @@ const CertificateViewer = props => {
       </div>
       <MultiTabs selectTemplateTab={selectTemplateTab} />
       <DecentralisedRenderer
-        certificate={document}
+        certificate={certificate}
         template={{ url: "/frameless-viewer" }}
       />
       <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
