@@ -11,11 +11,11 @@ it("returns false because of certificateContentsString", () => {
 
 it("initialise window methods on mount if connected to parent and inIframe", () => {
   const component = shallow(<FramelessViewerPageContainer />);
-  window.opencerts.renderCertificate("NEW_CERTIFICATE");
-  expect(component.state("certificate")).toBe("NEW_CERTIFICATE");
+  window.opencerts.renderDocument("NEW_CERTIFICATE");
+  expect(component.state("document")).toBe("NEW_CERTIFICATE");
 
   component.instance().selectTemplateTab(2);
-  expect(component.state("activeTab")).toBe(2);
+  expect(component.state("tabIndex")).toBe(2);
 });
 
 it("does not initialise connection to parent not in iframe on mount", () => {
@@ -23,10 +23,10 @@ it("does not initialise connection to parent not in iframe on mount", () => {
   expect(component.state("parentFrameConnection")).toBe(null);
 });
 
-it("sets certificate state when handleCertificateChange is called", () => {
+it("sets certificate state when handleDocumentChange is called", () => {
   const component = shallow(<FramelessViewerPageContainer />);
-  component.instance().handleCertificateChange("CERTIFICATE");
-  expect(component.state("certificate")).toBe("CERTIFICATE");
+  component.instance().handleDocumentChange("CERTIFICATE");
+  expect(component.state("document")).toBe("CERTIFICATE");
 });
 
 it("does not crash when selectTemplateTab is called when not in iframe", () => {

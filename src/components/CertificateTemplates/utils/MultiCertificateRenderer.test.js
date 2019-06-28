@@ -25,8 +25,8 @@ it("update functions are executed on mount", () => {
   mount(
     <MultiCertificateRenderer
       templates={mockCertificateTemplates}
-      activeTab={1}
-      certificate={mockCertificate}
+      tabIndex={1}
+      document={mockCertificate}
       updateParentHeight={mockUpdateParentHeight}
       updateParentTemplates={mockUpdateParentTemplates}
       whitelist={mockValidWhiteList}
@@ -42,8 +42,8 @@ it("returns InvalidCertificateNotice if whitelist is wrong", () => {
   const component = shallow(
     <MultiCertificateRenderer
       templates={mockCertificateTemplates}
-      activeTab={0}
-      certificate={mockCertificate}
+      tabIndex={0}
+      document={mockCertificate}
       updateParentHeight={mockUpdateParentHeight}
       updateParentTemplates={mockUpdateParentTemplates}
       whitelist={mockInvalidWhiteList}
@@ -56,8 +56,8 @@ it("returns SelectedTemplateTab if whitelist is correct", () => {
   const component = shallow(
     <MultiCertificateRenderer
       templates={mockCertificateTemplates}
-      activeTab={1}
-      certificate={mockCertificate}
+      tabIndex={1}
+      document={mockCertificate}
       updateParentHeight={mockUpdateParentHeight}
       updateParentTemplates={mockUpdateParentTemplates}
       whitelist={mockValidWhiteList}

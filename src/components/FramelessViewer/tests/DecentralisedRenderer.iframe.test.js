@@ -23,7 +23,7 @@ const mockParent = {
   updateTemplates: jest.fn(),
   updateCertificate: jest.fn(),
   selectTemplateTab: jest.fn(),
-  renderCertificate: jest.fn()
+  renderDocument: jest.fn()
 };
 
 connectToParent.mockReturnValue({ promise: Promise.resolve(mockParent) });
@@ -49,9 +49,7 @@ it("initialise and save connection to parent on mount to parentFrameConnection",
 
   expect(connectToParent).toHaveBeenCalled();
   expect(component.state("parentFrameConnection")).toBeTruthy();
-  expect(
-    connectToParent.mock.calls[0][0].methods.renderCertificate
-  ).toBeTruthy();
+  expect(connectToParent.mock.calls[0][0].methods.renderDocument).toBeTruthy();
   expect(
     connectToParent.mock.calls[0][0].methods.selectTemplateTab
   ).toBeTruthy();

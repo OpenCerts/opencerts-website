@@ -18,7 +18,7 @@ it("renders default template if no other templates are specified", () => {
 it("renders default template if template key is not found", () => {
   const mockCertificate = { $template: "notFound" };
   const component = mount(
-    <FramelessCertificateViewer certificate={mockCertificate} />
+    <FramelessCertificateViewer document={mockCertificate} />
   );
   expect(component.text()).toBe("Default");
 });
@@ -26,7 +26,7 @@ it("renders default template if template key is not found", () => {
 it("renders selected template if template key is found", () => {
   const mockCertificate = { $template: "custom" };
   const component = mount(
-    <FramelessCertificateViewer certificate={mockCertificate} />
+    <FramelessCertificateViewer document={mockCertificate} />
   );
   expect(component.text()).toBe("Custom");
 });
@@ -39,7 +39,7 @@ it("props are passed correctly to SelectedTemplate", () => {
 
   const component = mount(
     <FramelessCertificateViewer
-      certificate={mockCertificate}
+      document={mockCertificate}
       obfuscateField={mockObfuscateField}
       updateParentHeight={mockUpdateParentHeight}
       updateParentTemplates={mockUpdateParentTemplates}
