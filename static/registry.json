@@ -128,6 +128,10 @@
     "0x061aFcFF60b90E0F633F8ef157e01BaB9b2FfDD3": {
       "name:": "ROPSTEN: Republic Polytechnic",
       "displayCard": false
+    },
+    "0x5ABAA2fE232E2d29873D4d01417a9551dc84F0aF": {
+      "name:": "ROPSTEN: Edufied",
+      "displayCard": false
     }
   }
 }
