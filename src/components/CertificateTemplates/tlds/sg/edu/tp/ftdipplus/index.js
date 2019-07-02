@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
 
 import TPCert from "./certificate";
@@ -12,16 +11,11 @@ const templates = [
   }
 ];
 
-const ftdipplus = ({ certificate }) => (
+const ftdipplus = () => (
   <MultiCertificateRenderer
-    certificate={certificate}
     templates={templates}
     whitelist={ApprovedAddresses}
   />
 );
-
-ftdipplus.propTypes = {
-  certificate: PropTypes.object.isRequired
-};
 
 export default ftdipplus;
