@@ -41,16 +41,16 @@ export const printTextStyle = {
 export const universityNameTextStyle = {
   fontFamily: "Poppins,Century Gothic,CenturyGothic,AppleGothic,sans-serif",
   fontWeight: "600",
-  fontSize: "2rem",
-  color: "#BE781B",
+  fontSize: "2.25rem",
+  color: "#c29046",
   marginBottom: "0",
   textAlign: "left"
 };
 
 export const singaporeTextStyle = {
   fontFamily: "Poppins,Century Gothic,CenturyGothic,AppleGothic,sans-serif",
-  color: "#BE781B",
-  fontSize: "1.5rem"
+  color: "#c29046",
+  fontSize: "1.7rem"
 };
 
 export const certNameTextStyle = {
