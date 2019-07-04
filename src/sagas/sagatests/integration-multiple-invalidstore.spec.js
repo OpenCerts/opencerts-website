@@ -2,7 +2,7 @@ import { Selector } from "testcafe";
 
 fixture("Multiple Invalid Stores Cert").page`http://localhost:3000`;
 
-const Certificate = "./multipleinvalidstore.opencert";
+const Certificate = "./multipleinvalidstores.opencert";
 
 const RenderedCertificate = Selector("#certificate-dropzone");
 const InvalidMessage = Selector(".invalid");

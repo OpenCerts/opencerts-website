@@ -20,6 +20,6 @@ test("Unissued certificate's error message is correct'", async t => {
 
   await validateTextContent(t, RenderedCertificate, [
     "This certificate is not valid",
-    "Certificate has been issued"
+    "Certificate not issued"
   ]);
 });
