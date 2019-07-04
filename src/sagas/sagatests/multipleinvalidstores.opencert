@@ -13,7 +13,7 @@
         "name": "d53c6192-559d-46ec-8d74-a45cd2b79f98:string:Wrong Smart Contract",
         "url": "ea0a84c1-b449-4405-a886-09ea7a83a461:string:https://www.ite.edu.sg/",
         "email": "f363c373-c319-42f2-a015-9c77f0195231:string:help@ite.edu.sg",
-        "certificateStore": "1c2f5e67-8317-49cb-a8e1-0272bfdb4363:string:      0x007d40224F6562461633ccFBaffd359EbB2FC9Ba"
+        "certificateStore": "1c2f5e67-8317-49cb-a8e1-0272bfdb4363:string:0x007d40224F6562461633ccFBaffd359EbB2FC9Ba"
       },
       {
         "name": "d53c6192-559d-46ec-8d74-a45cd2b79f98:string:Invalid Address",
