@@ -1,4 +1,4 @@
-import { Selector, ClientFunction } from "testcafe";
+import { Selector } from "testcafe";
 
 fixture("Wrong Merkle Cert").page`http://localhost:3000`;
 
@@ -18,14 +18,6 @@ test("Wrong merkle certificate's error message is correct'", async t => {
 
   await InvalidMessage.with({ visibilityCheck: true })();
 
-  await validateTextContent(t, RenderedCertificate, [
-    "This certificate is not valid",
-    "Certificate not issued"
-  ]);
-
-  await ClientFunction(() => window.history.back())();
-  await t.setFilesToUpload("input[type=file]", [Certificate]);
-  await InvalidMessage.with({ visibilityCheck: true })();
   await validateTextContent(t, RenderedCertificate, [
     "This certificate is not valid",
     "Certificate not issued"

@@ -1,4 +1,4 @@
-import { Selector, ClientFunction } from "testcafe";
+import { Selector } from "testcafe";
 
 fixture("Tampered Cert").page`http://localhost:3000`;
 
@@ -18,14 +18,6 @@ test("Tampered certificate's error message is correct'", async t => {
 
   await InvalidMessage.with({ visibilityCheck: true })();
 
-  await validateTextContent(t, RenderedCertificate, [
-    "This certificate is not valid",
-    "Certificate has been tampered with"
-  ]);
-
-  await ClientFunction(() => window.history.back())();
-  await t.setFilesToUpload("input[type=file]", [Certificate]);
-  await InvalidMessage.with({ visibilityCheck: true })();
   await validateTextContent(t, RenderedCertificate, [
     "This certificate is not valid",
     "Certificate has been tampered with"
