@@ -8,6 +8,7 @@ import ErrorBoundary from "./ErrorBoundary";
 import DecentralisedRenderer from "./DecentralisedTemplateRenderer/DecentralisedRenderer";
 import MultiTabs from "./MultiTabs";
 import { selectTemplateTab as selectTemplateTabAction } from "../reducers/certificate";
+import { certificateData } from "@govtechsg/open-certificate";
 
 const CertificateSharingForm = dynamic(
   import("./CertificateSharing/CertificateSharingForm")
@@ -79,6 +80,8 @@ const renderHeaderBlock = props => {
 const CertificateViewer = props => {
   const { document, selectTemplateTab } = props;
 
+  const certificate = certificateData(document);
+
   const renderedHeaderBlock = renderHeaderBlock(props);
 
   const validCertificateContent = (
@@ -92,7 +95,7 @@ const CertificateViewer = props => {
         source={`${
           typeof document.data.$template === "string"
             ? "/frameless-viewer"
-            : document.data.$template.url
+            : certificate.$template.url
         }`}
       />
       <Modal show={props.showSharing} toggle={props.handleSharingToggle}>

@@ -48,7 +48,7 @@ export function* loadCertificateContracts({ payload }) {
     const data = certificateData(payload);
     trace(`Loading certificate: ${data}`);
     const unresolvedContractStoreAddresses = get(data, "issuers", []).map(
-      issuer => issuer.certificateStore
+      issuer => issuer.certificateStore || issuer.documentStore
     );
     const web3 = yield getSelectedWeb3();
     const contractStoreAddresses = yield all(
@@ -218,7 +218,7 @@ export function* verifyCertificateIssuer({ certificate }) {
   try {
     const data = certificateData(certificate);
     const contractStoreAddresses = get(data, "issuers", []).map(
-      issuer => issuer.certificateStore
+      issuer => issuer.certificateStore || issuer.documentStore
     );
     trace(
       `Attempting to verify certificate issuers: ${contractStoreAddresses}`
@@ -327,7 +327,7 @@ export function* networkReset() {
 export function* analyticsIssuerFail({ certificate }) {
   yield analyticsEvent(window, {
     category: "CERTIFICATE_ERROR",
-    action: get(certificate, "issuers[0].certificateStore"),
+    action: get(certificate, "issuers[0].certificateStore", "Something"),
     label: get(certificate, "id"),
     value: ANALYTICS_VERIFICATION_ERROR_CODE.ISSUER_IDENTITY
   });
@@ -336,7 +336,7 @@ export function* analyticsIssuerFail({ certificate }) {
 export function* analyticsHashFail({ certificate }) {
   yield analyticsEvent(window, {
     category: "CERTIFICATE_ERROR",
-    action: get(certificate, "issuers[0].certificateStore"),
+    action: get(certificate, "issuers[0].certificateStore", "Something"),
     label: get(certificate, "id"),
     value: ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_HASH
   });
@@ -345,7 +345,7 @@ export function* analyticsHashFail({ certificate }) {
 export function* analyticsIssuedFail({ certificate }) {
   yield analyticsEvent(window, {
     category: "CERTIFICATE_ERROR",
-    action: get(certificate, "issuers[0].certificateStore"),
+    action: get(certificate, "issuers[0].certificateStore", "Something"),
     label: get(certificate, "id"),
     value: ANALYTICS_VERIFICATION_ERROR_CODE.UNISSUED_CERTIFICATE
   });
@@ -354,7 +354,7 @@ export function* analyticsIssuedFail({ certificate }) {
 export function* analyticsRevocationFail({ certificate }) {
   yield analyticsEvent(window, {
     category: "CERTIFICATE_ERROR",
-    action: get(certificate, "issuers[0].certificateStore"),
+    action: get(certificate, "issuers[0].certificateStore", "Something"),
     label: get(certificate, "id"),
     value: ANALYTICS_VERIFICATION_ERROR_CODE.REVOKED_CERTIFICATE
   });
