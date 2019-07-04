@@ -38,6 +38,8 @@ class FramelessViewerContainer extends Component {
       selectTemplateTab
     };
 
+    window.addEventListener("resize", this.updateParentHeight);
+
     if (inIframe()) {
       const parentFrameConnection = connectToParent({
         methods: {
@@ -46,11 +48,6 @@ class FramelessViewerContainer extends Component {
         }
       }).promise;
       this.setState({ parentFrameConnection });
-
-      parentFrameConnection.then(parent => {
-        if (parent.updateHeight)
-          parent.updateHeight(document.documentElement.offsetHeight);
-      });
     }
   }
 
