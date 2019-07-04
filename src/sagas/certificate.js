@@ -139,7 +139,6 @@ export function* isValidENSDomain(storeAddress) {
   trace(`Checking if ${storeAddress} is a valid ENS Domain`);
   const web3 = yield getSelectedWeb3();
   const ensToAddress = yield web3.eth.ens.getAddress(storeAddress);
-  // console.log("IMPORTANT", ensToAddress);
   if (ensToAddress === null) {
     throw new Error("Invalid ENS");
   }
@@ -153,7 +152,6 @@ export function* isValidSmartContract(storeAddress) {
   ];
   const onChainByteCode = yield web3.eth.getCode(storeAddress);
   const hashOfOnChainByteCode = web3.utils.keccak256(onChainByteCode);
-  // console.log("KECCAK", hashOfOnChainByteCode);
   if (!supportedContractHashes.includes(hashOfOnChainByteCode)) {
     throw new Error("Invalid smart contract: "`${storeAddress}`);
   }
@@ -184,13 +182,11 @@ export function* verifyCertificateStore({ certificate }) {
     const combinedStoreAddresses = compact(
       ethereumAddressIssuers.concat(resolvedEnsNames)
     );
-    // console.log("COMBINED", combinedStoreAddresses);
 
     // Checks if issuing institution has a valid smart contract with OpenCerts
     yield combinedStoreAddresses.map(address => isValidSmartContract(address));
     yield put(verifyingCertificateStoreSuccess());
     return combinedStoreAddresses;
-    // return true;
   } catch (e) {
     error(e);
     yield put(
