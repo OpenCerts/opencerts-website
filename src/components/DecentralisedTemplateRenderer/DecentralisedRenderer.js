@@ -76,7 +76,7 @@ class DecentralisedRenderer extends Component {
     this.setState({ childFrameConnection });
 
     childFrameConnection.then(frame =>
-      frame.renderDocument(this.props.certificate)
+      frame.renderDocument(certificateData(this.props.certificate))
     );
   }
 
@@ -88,7 +88,7 @@ class DecentralisedRenderer extends Component {
         ref={iframe => {
           this.iframe = iframe;
         }}
-        src={this.props.template.url}
+        src={this.props.source}
         style={{ width: "100%", border: 0 }}
       />
     );
@@ -115,7 +115,7 @@ export default connect(
 DecentralisedRenderer.propTypes = {
   document: PropTypes.object,
   certificate: PropTypes.object,
-  template: PropTypes.object,
+  source: PropTypes.string,
   activeTab: PropTypes.number,
   registerTemplates: PropTypes.func,
   selectTemplateTab: PropTypes.func,
