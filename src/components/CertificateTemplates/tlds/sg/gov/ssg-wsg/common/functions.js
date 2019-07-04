@@ -526,7 +526,9 @@ export const renderSignatureSOACC = certificate => (
       >
         <img style={styles.footerLogoStyle} src={IMG_SSGLOGO} />
         <div style={styles.certCodeStyle}>
-          {get(certificate, "additionalData.certCode")}
+          {["SOA_Reprint"].includes(get(certificate, "additionalData.certCode"))
+            ? "SOA"
+            : get(certificate, "additionalData.certCode")}
         </div>
       </div>
     </div>
