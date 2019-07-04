@@ -121,7 +121,7 @@ class FramelessViewerContainer extends Component {
       );
     }
     return (
-      <div className="frameless-tabs">
+      <div className="frameless-tabs" id="rendered-certificate">
         <FramelessCertificateViewer
           id={styles["frameless-container"]}
           tabIndex={this.state.tabIndex}
