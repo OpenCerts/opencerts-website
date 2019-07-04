@@ -5,6 +5,7 @@ fixture("Unissued Cert").page`http://localhost:3000`;
 const Certificate = "./unissued.opencert";
 
 const RenderedCertificate = Selector("#certificate-dropzone");
+const InvalidMessage = Selector(".invalid");
 
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(
@@ -15,6 +16,8 @@ const validateTextContent = async (t, component, texts) =>
 test("Unissued certificate's error message is correct'", async t => {
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
+  await InvalidMessage.with({ visibilityCheck: true })();
+
   await validateTextContent(t, RenderedCertificate, [
     "This certificate is not valid",
     "Certificate has been issued"
@@ -22,6 +25,7 @@ test("Unissued certificate's error message is correct'", async t => {
 
   await ClientFunction(() => window.history.back())();
   await t.setFilesToUpload("input[type=file]", [Certificate]);
+  await InvalidMessage.with({ visibilityCheck: true })();
   await validateTextContent(t, RenderedCertificate, [
     "This certificate is not valid",
     "Certificate has been issued"
