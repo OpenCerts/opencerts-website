@@ -17,7 +17,7 @@ class FramelessViewerContainer extends Component {
     this.handleTextFieldChange = this.handleTextFieldChange.bind(this);
     this.updateParentHeight = this.updateParentHeight.bind(this);
     this.updateParentTemplates = this.updateParentTemplates.bind(this);
-    this.obfuscateField = this.obfuscateField.bind(this);
+    this.obfuscateDocument = this.obfuscateDocument.bind(this);
     this.state = {
       parentFrameConnection: null,
       document: null,
@@ -62,7 +62,7 @@ class FramelessViewerContainer extends Component {
     }
     const verified = verifySignature(fieldContents);
     trace(`Certificate verification: ${verified}`);
-    this.obfuscateField(fieldContents);
+    this.obfuscateDocument(fieldContents);
   }
 
   async selectTemplateTab(tabIndex) {
@@ -80,7 +80,7 @@ class FramelessViewerContainer extends Component {
     this.setState({ document });
   }
 
-  async obfuscateField(field) {
+  async obfuscateDocument(field) {
     if (inIframe()) {
       const { parentFrameConnection } = this.state;
       const parent = await parentFrameConnection;
@@ -128,7 +128,7 @@ class FramelessViewerContainer extends Component {
           document={this.state.document}
           updateParentHeight={this.updateParentHeight}
           updateParentTemplates={this.updateParentTemplates}
-          obfuscateField={this.obfuscateField}
+          obfuscateDocument={this.obfuscateDocument}
         />
       </div>
     );

@@ -71,10 +71,10 @@ it("calls parent frame's updateTemplates when updateParentTemplates is called", 
   );
 });
 
-it("calls parent frame's updateCertificate when obfuscateField is called", async () => {
+it("calls parent frame's updateCertificate when obfuscateDocument is called", async () => {
   const component = shallow(<FramelessViewerPageContainer />);
   resetMocks();
-  await component.instance().obfuscateField(mockField);
+  await component.instance().obfuscateDocument(mockField);
   expect(mockParent.updateCertificate).toHaveBeenCalledWith(mockField);
 });
 

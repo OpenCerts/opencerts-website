@@ -49,7 +49,7 @@ it("does not crash when updateParentTemplates is called when not in iframe", () 
   component.instance().updateParentTemplates();
 });
 
-it("does not crash when obfuscateField is called when not in iframe", () => {
+it("does not crash when obfuscateDocument is called when not in iframe", () => {
   const component = shallow(<FramelessViewerPageContainer />);
-  component.instance().obfuscateField();
+  component.instance().obfuscateDocument();
 });

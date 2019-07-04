@@ -62,7 +62,7 @@ class MultiCertificateRenderer extends Component {
       whitelist,
       templates,
       tabIndex,
-      obfuscateField,
+      obfuscateDocument,
       updateParentHeight
     } = this.props;
     const SelectedTemplateTab = templates[tabIndex].template;
@@ -74,7 +74,7 @@ class MultiCertificateRenderer extends Component {
       return (
         <SelectedTemplateTab
           certificate={document}
-          handleObfuscation={obfuscateField}
+          handleObfuscation={obfuscateDocument}
           updateParentHeight={updateParentHeight}
         />
       );
@@ -90,7 +90,7 @@ MultiCertificateRenderer.propTypes = {
   tabIndex: PropTypes.number.isRequired,
   updateParentHeight: PropTypes.func,
   updateParentTemplates: PropTypes.func,
-  obfuscateField: PropTypes.func
+  obfuscateDocument: PropTypes.func
 };
 
 export default MultiCertificateRenderer;

@@ -12,7 +12,7 @@ const mockCertificateTemplates = [
 
 const mockUpdateParentHeight = jest.fn();
 const mockUpdateParentTemplates = jest.fn();
-const mockObfuscateField = jest.fn();
+const mockObfuscateDocument = jest.fn();
 const mockCertificate = {
   id: "mockCert",
   description: "Mock Cert",
@@ -30,7 +30,7 @@ it("update functions are executed on mount", () => {
       updateParentHeight={mockUpdateParentHeight}
       updateParentTemplates={mockUpdateParentTemplates}
       whitelist={mockValidWhiteList}
-      obfuscateField={mockObfuscateField}
+      obfuscateDocument={mockObfuscateDocument}
     />
   );
 
@@ -61,7 +61,7 @@ it("returns SelectedTemplateTab if whitelist is correct", () => {
       updateParentHeight={mockUpdateParentHeight}
       updateParentTemplates={mockUpdateParentTemplates}
       whitelist={mockValidWhiteList}
-      obfuscateField={mockObfuscateField}
+      obfuscateDocument={mockObfuscateDocument}
     />
   );
 
@@ -72,6 +72,6 @@ it("returns SelectedTemplateTab if whitelist is correct", () => {
     mockUpdateParentHeight
   );
   expect(SelectedTemplate.prop("handleObfuscation")).toEqual(
-    mockObfuscateField
+    mockObfuscateDocument
   );
 });
