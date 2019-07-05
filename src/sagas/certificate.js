@@ -329,12 +329,16 @@ export function* networkReset() {
   });
 }
 
+export function getAnalyticsStores(certificate) {
+  return get(certificate, "issuers", [])
+    .map(issuer => getDocumentStore(issuer))
+    .toString();
+}
+
 export function* analyticsIssuerFail({ certificate }) {
   yield analyticsEvent(window, {
     category: "CERTIFICATE_ERROR",
-    action: get(certificate, "issuers", []).map(issuer =>
-      getDocumentStore(issuer)
-    ),
+    action: getAnalyticsStores(certificate),
     label: get(certificate, "id"),
     value: ANALYTICS_VERIFICATION_ERROR_CODE.ISSUER_IDENTITY
   });
@@ -343,9 +347,7 @@ export function* analyticsIssuerFail({ certificate }) {
 export function* analyticsHashFail({ certificate }) {
   yield analyticsEvent(window, {
     category: "CERTIFICATE_ERROR",
-    action: get(certificate, "issuers", []).map(issuer =>
-      getDocumentStore(issuer)
-    ),
+    action: getAnalyticsStores(certificate),
     label: get(certificate, "id"),
     value: ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_HASH
   });
@@ -354,9 +356,7 @@ export function* analyticsHashFail({ certificate }) {
 export function* analyticsIssuedFail({ certificate }) {
   yield analyticsEvent(window, {
     category: "CERTIFICATE_ERROR",
-    action: get(certificate, "issuers", []).map(issuer =>
-      getDocumentStore(issuer)
-    ),
+    action: getAnalyticsStores(certificate),
     label: get(certificate, "id"),
     value: ANALYTICS_VERIFICATION_ERROR_CODE.UNISSUED_CERTIFICATE
   });
@@ -365,9 +365,7 @@ export function* analyticsIssuedFail({ certificate }) {
 export function* analyticsRevocationFail({ certificate }) {
   yield analyticsEvent(window, {
     category: "CERTIFICATE_ERROR",
-    action: get(certificate, "issuers", []).map(issuer =>
-      getDocumentStore(issuer)
-    ),
+    action: getAnalyticsStores(certificate),
     label: get(certificate, "id"),
     value: ANALYTICS_VERIFICATION_ERROR_CODE.REVOKED_CERTIFICATE
   });
