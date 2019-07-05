@@ -22,6 +22,8 @@ import {
   verifyingCertificateIssuedFailure,
   verifyingCertificateHashSuccess,
   verifyingCertificateHashFailure,
+  verifyingCertificateStoreSuccess,
+  verifyingCertificateStoreFailure,
   getCertificate
 } from "../reducers/certificate";
 import { types as applicationTypes } from "../reducers/application";
@@ -40,8 +42,60 @@ const ANALYTICS_VERIFICATION_ERROR_CODE = {
   ISSUER_IDENTITY: 0,
   CERTIFICATE_HASH: 1,
   UNISSUED_CERTIFICATE: 2,
-  REVOKED_CERTIFICATE: 3
+  REVOKED_CERTIFICATE: 3,
+  CERTIFICATE_STORE: 4
 };
+
+export function getAnalyticsStores(certificate) {
+  return get(certificate, "issuers", [])
+    .map(issuer => issuer.certificateStore)
+    .toString();
+}
+
+export function* analyticsIssuerFail({ certificate }) {
+  yield analyticsEvent(window, {
+    category: "CERTIFICATE_ERROR",
+    action: getAnalyticsStores(certificate),
+    label: get(certificate, "id"),
+    value: ANALYTICS_VERIFICATION_ERROR_CODE.ISSUER_IDENTITY
+  });
+}
+
+export function* analyticsHashFail({ certificate }) {
+  yield analyticsEvent(window, {
+    category: "CERTIFICATE_ERROR",
+    action: getAnalyticsStores(certificate),
+    label: get(certificate, "id"),
+    value: ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_HASH
+  });
+}
+
+export function* analyticsIssuedFail({ certificate }) {
+  yield analyticsEvent(window, {
+    category: "CERTIFICATE_ERROR",
+    action: getAnalyticsStores(certificate),
+    label: get(certificate, "id"),
+    value: ANALYTICS_VERIFICATION_ERROR_CODE.UNISSUED_CERTIFICATE
+  });
+}
+
+export function* analyticsRevocationFail({ certificate }) {
+  yield analyticsEvent(window, {
+    category: "CERTIFICATE_ERROR",
+    action: getAnalyticsStores(certificate),
+    label: get(certificate, "id"),
+    value: ANALYTICS_VERIFICATION_ERROR_CODE.REVOKED_CERTIFICATE
+  });
+}
+
+export function* analyticsStoreFail({ certificate }) {
+  yield analyticsEvent(window, {
+    category: "CERTIFICATE_ERROR",
+    action: getAnalyticsStores(certificate),
+    label: get(certificate, "id"),
+    value: ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_STORE
+  });
+}
 
 export function* loadCertificateContracts({ payload }) {
   try {
@@ -77,6 +131,73 @@ export function* loadCertificateContracts({ payload }) {
   }
 }
 
+export function* isValidENSDomain(storeAddress) {
+  trace(`Checking if ${storeAddress} is a valid ENS Domain`);
+  if (storeAddress == null) {
+    throw new Error("No address in certificate");
+  }
+  const web3 = yield getSelectedWeb3();
+  const ensToAddress = yield web3.eth.ens.getAddress(storeAddress);
+  if (ensToAddress === null) {
+    throw new Error("Invalid ENS");
+  }
+  return ensToAddress;
+}
+
+export function* isValidSmartContract(storeAddress) {
+  const web3 = yield getSelectedWeb3();
+  const supportedContractHashes = [
+    "0x7135575eac76f1817c27b06c452bdc2b7e1b13240797415684e227def063a127"
+  ];
+  const onChainByteCode = yield web3.eth.getCode(storeAddress);
+  const hashOfOnChainByteCode = web3.utils.keccak256(onChainByteCode);
+  if (!supportedContractHashes.includes(hashOfOnChainByteCode)) {
+    throw new Error("Invalid smart contract: "`${storeAddress}`);
+  }
+  return true;
+}
+
+export function* verifyCertificateStore({ certificate }) {
+  try {
+    const data = certificateData(certificate);
+
+    const contractStoreAddresses = get(data, "issuers", []).map(
+      issuer => issuer.certificateStore
+    );
+    trace(`Attempting to verify certificate store: ${contractStoreAddresses}`);
+
+    const [ethereumAddressIssuers, unresolvedEnsNames] = partition(
+      contractStoreAddresses,
+      isEthereumAddress
+    );
+    trace("ethereumAddressIssuers", ethereumAddressIssuers);
+    trace("unresolvedEnsNames", unresolvedEnsNames);
+
+    const resolvedEnsNames = yield unresolvedEnsNames.map(unresolvedEnsName =>
+      call(isValidENSDomain, unresolvedEnsName)
+    );
+
+    // Concat the 2 arrays
+    const combinedStoreAddresses = compact(
+      ethereumAddressIssuers.concat(resolvedEnsNames)
+    );
+
+    // Checks if issuing institution has a valid smart contract with OpenCerts
+    yield combinedStoreAddresses.map(address => isValidSmartContract(address));
+    yield put(verifyingCertificateStoreSuccess());
+    return combinedStoreAddresses;
+  } catch (e) {
+    error(e);
+    yield put(
+      verifyingCertificateStoreFailure({
+        error: e.message,
+        certificate: certificateData(certificate)
+      })
+    );
+    return false;
+  }
+}
+
 export function* verifyCertificateHash({ certificate }) {
   const verified = verifySignature(certificate);
   if (verified) {
@@ -100,6 +221,7 @@ export function* verifyCertificateIssued({ certificate, certificateStores }) {
     const issuedStatuses = yield all(
       certificateStores.map(store => store.methods.isIssued(merkleRoot).call())
     );
+    if (issuedStatuses.length === 0) throw new Error("Invalid file");
     const isIssued = issuedStatuses.reduce((prev, curr) => prev && curr, true);
     if (!isIssued) throw new Error("Certificate has not been issued");
     yield put(verifyingCertificateIssuedSuccess());
@@ -281,13 +403,15 @@ export function* verifyCertificate({ payload }) {
     certificateIssued: call(verifyCertificateIssued, args),
     certificateHashValid: call(verifyCertificateHash, args),
     certificateNotRevoked: call(verifyCertificateNotRevoked, args),
-    certificateIssuerRecognised: call(verifyCertificateIssuer, args)
+    certificateIssuerRecognised: call(verifyCertificateIssuer, args),
+    certificateStoreValid: call(verifyCertificateStore, args)
   });
   trace(verificationStatuses);
   const verified =
     verificationStatuses.certificateIssued &&
     verificationStatuses.certificateHashValid &&
-    verificationStatuses.certificateNotRevoked;
+    verificationStatuses.certificateNotRevoked &&
+    verificationStatuses.certificateStoreValid;
   if (verified) {
     Router.push("/viewer");
   }
@@ -324,42 +448,6 @@ export function* networkReset() {
   });
 }
 
-export function* analyticsIssuerFail({ certificate }) {
-  yield analyticsEvent(window, {
-    category: "CERTIFICATE_ERROR",
-    action: get(certificate, "issuers[0].certificateStore"),
-    label: get(certificate, "id"),
-    value: ANALYTICS_VERIFICATION_ERROR_CODE.ISSUER_IDENTITY
-  });
-}
-
-export function* analyticsHashFail({ certificate }) {
-  yield analyticsEvent(window, {
-    category: "CERTIFICATE_ERROR",
-    action: get(certificate, "issuers[0].certificateStore"),
-    label: get(certificate, "id"),
-    value: ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_HASH
-  });
-}
-
-export function* analyticsIssuedFail({ certificate }) {
-  yield analyticsEvent(window, {
-    category: "CERTIFICATE_ERROR",
-    action: get(certificate, "issuers[0].certificateStore"),
-    label: get(certificate, "id"),
-    value: ANALYTICS_VERIFICATION_ERROR_CODE.UNISSUED_CERTIFICATE
-  });
-}
-
-export function* analyticsRevocationFail({ certificate }) {
-  yield analyticsEvent(window, {
-    category: "CERTIFICATE_ERROR",
-    action: get(certificate, "issuers[0].certificateStore"),
-    label: get(certificate, "id"),
-    value: ANALYTICS_VERIFICATION_ERROR_CODE.REVOKED_CERTIFICATE
-  });
-}
-
 export default [
   takeEvery(types.UPDATE_CERTIFICATE, verifyCertificate),
   takeEvery(types.SENDING_CERTIFICATE, sendCertificate),
@@ -371,5 +459,6 @@ export default [
     analyticsRevocationFail
   ),
   takeEvery(types.VERIFYING_CERTIFICATE_ISSUED_FAILURE, analyticsIssuedFail),
-  takeEvery(types.VERIFYING_CERTIFICATE_HASH_FAILURE, analyticsHashFail)
+  takeEvery(types.VERIFYING_CERTIFICATE_HASH_FAILURE, analyticsHashFail),
+  takeEvery(types.VERIFYING_CERTIFICATE_STORE_FAILURE, analyticsStoreFail)
 ];

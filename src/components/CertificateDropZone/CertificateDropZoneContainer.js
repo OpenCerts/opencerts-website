@@ -11,7 +11,8 @@ import {
   getIssuedStatus,
   getNotRevokedStatus,
   getVerificationStatus,
-  resetCertificateState
+  resetCertificateState,
+  getStoreStatus
 } from "../../reducers/certificate";
 import { updateNetworkId } from "../../reducers/application";
 import CertificateDropZone from "./CertificateDropZone";
@@ -59,6 +60,7 @@ class CertificateDropZoneContainer extends Component {
         notRevokedStatus={this.props.notRevokedStatus}
         verificationStatus={this.props.verificationStatus}
         resetData={this.resetData.bind(this)}
+        storeStatus={this.props.storeStatus}
       />
     );
   }
@@ -73,7 +75,8 @@ const mapStateToProps = store => ({
   hashStatus: getHashStatus(store),
   issuedStatus: getIssuedStatus(store),
   notRevokedStatus: getNotRevokedStatus(store),
-  verificationStatus: getVerificationStatus(store)
+  verificationStatus: getVerificationStatus(store),
+  storeStatus: getStoreStatus(store)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -98,5 +101,6 @@ CertificateDropZoneContainer.propTypes = {
   hashStatus: PropTypes.object,
   issuedStatus: PropTypes.object,
   notRevokedStatus: PropTypes.object,
-  verificationStatus: PropTypes.array
+  verificationStatus: PropTypes.array,
+  storeStatus: PropTypes.object
 };
