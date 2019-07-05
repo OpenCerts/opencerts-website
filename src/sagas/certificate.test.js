@@ -652,7 +652,7 @@ describe("sagas/certificate", () => {
         "send",
         "event",
         "CERTIFICATE_ERROR",
-        [ethereumAddresses[0]],
+        ethereumAddresses[0],
         "certificate-id",
         0
       ]);
@@ -669,7 +669,7 @@ describe("sagas/certificate", () => {
         "send",
         "event",
         "CERTIFICATE_ERROR",
-        [ethereumAddresses[0]],
+        ethereumAddresses[0],
         "certificate-id",
         1
       ]);
@@ -686,7 +686,7 @@ describe("sagas/certificate", () => {
         "send",
         "event",
         "CERTIFICATE_ERROR",
-        [ethereumAddresses[0]],
+        ethereumAddresses[0],
         "certificate-id",
         2
       ]);
@@ -705,7 +705,7 @@ describe("sagas/certificate", () => {
         "send",
         "event",
         "CERTIFICATE_ERROR",
-        [ethereumAddresses[0]],
+        ethereumAddresses[0],
         "certificate-id",
         3
       ]);
