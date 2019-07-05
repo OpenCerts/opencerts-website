@@ -83,7 +83,6 @@ export function* loadCertificateContracts({ payload }) {
 
 export function* verifyCertificateHash({ certificate }) {
   const verified = openAttestation.verifySignature(certificate);
-  console.log(verified);
 
   if (verified) {
     yield put(verifyingCertificateHashSuccess());
