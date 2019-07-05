@@ -133,6 +133,9 @@ export function* loadCertificateContracts({ payload }) {
 
 export function* isValidENSDomain(storeAddress) {
   trace(`Checking if ${storeAddress} is a valid ENS Domain`);
+  if (storeAddress == null) {
+    throw new Error("No address in certificate");
+  }
   const web3 = yield getSelectedWeb3();
   const ensToAddress = yield web3.eth.ens.getAddress(storeAddress);
   if (ensToAddress === null) {
