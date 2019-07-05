@@ -17,10 +17,11 @@ const templates = [
   }
 ];
 
-const RPAA2018CMC = () => (
+const RPAA2018CMC = props => (
   <MultiCertificateRenderer
     templates={templates}
     whitelist={approvedAddresses}
+    {...props}
   />
 );
 

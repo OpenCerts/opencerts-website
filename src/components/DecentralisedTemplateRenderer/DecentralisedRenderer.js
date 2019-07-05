@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import connectToChild from "penpal/lib/connectToChild";
-import { certificateData, obfuscateFields } from "@govtechsg/open-certificate";
+import { getData, obfuscateDocument } from "@govtechsg/open-attestation";
 import {
   getCertificate,
   getActiveTemplateTab,
@@ -36,9 +36,9 @@ class DecentralisedRenderer extends Component {
   }
 
   updateCertificate(field) {
-    const updatedDocument = obfuscateFields(this.props.document, field);
+    const updatedDocument = obfuscateDocument(this.props.document, field);
     this.props.updateObfuscatedCertificate(updatedDocument);
-    const updatedCertificate = certificateData(updatedDocument);
+    const updatedCertificate = getData(updatedDocument);
     this.renderDocument(updatedCertificate);
   }
 
@@ -76,7 +76,7 @@ class DecentralisedRenderer extends Component {
     this.setState({ childFrameConnection });
 
     childFrameConnection.then(frame =>
-      frame.renderDocument(certificateData(this.props.certificate))
+      frame.renderDocument(getData(this.props.certificate))
     );
   }
 

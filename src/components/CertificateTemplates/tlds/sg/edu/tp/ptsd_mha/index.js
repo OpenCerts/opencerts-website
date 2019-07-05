@@ -17,10 +17,11 @@ const templates = [
   }
 ];
 
-const ptsdMha = () => (
+const ptsdMha = props => (
   <MultiCertificateRenderer
     templates={templates}
     whitelist={ApprovedAddresses}
+    {...props}
   />
 );
 

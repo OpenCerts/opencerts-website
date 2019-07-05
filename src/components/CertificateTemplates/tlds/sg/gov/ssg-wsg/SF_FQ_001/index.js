@@ -10,10 +10,11 @@ const templates = [
   }
 ];
 
-const SFFQ001 = () => (
+const SFFQ001 = props => (
   <MultiCertificateRenderer
     templates={templates}
     whitelist={approvedAddresses}
+    {...props}
   />
 );
 

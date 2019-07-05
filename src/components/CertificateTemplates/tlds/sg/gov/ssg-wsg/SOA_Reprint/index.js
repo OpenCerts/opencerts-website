@@ -11,10 +11,11 @@ const templates = [
   }
 ];
 
-const SOAReprint = () => (
+const SOAReprint = props => (
   <MultiCertificateRenderer
     templates={templates}
     whitelist={approvedAddresses}
+    {...props}
   />
 );
 

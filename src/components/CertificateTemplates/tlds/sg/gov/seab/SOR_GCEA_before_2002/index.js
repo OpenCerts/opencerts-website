@@ -16,10 +16,11 @@ const templates = [
   }
 ];
 
-const SEABCert = () => (
+const SEABCert = props => (
   <MultiCertificateRenderer
     templates={templates}
     whitelist={approvedAddresses}
+    {...props}
   />
 );
 

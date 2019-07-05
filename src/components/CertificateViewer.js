@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import dynamic from "next/dynamic";
 import { connect } from "react-redux";
+import { getData } from "@govtechsg/open-attestation";
 import CertificateVerifyBlock from "./CertificateVerifyBlock";
 import styles from "./certificateViewer.scss";
 import Modal from "./Modal";
@@ -8,7 +9,6 @@ import ErrorBoundary from "./ErrorBoundary";
 import DecentralisedRenderer from "./DecentralisedTemplateRenderer/DecentralisedRenderer";
 import MultiTabs from "./MultiTabs";
 import { selectTemplateTab as selectTemplateTabAction } from "../reducers/certificate";
-import { certificateData } from "@govtechsg/open-certificate";
 
 const CertificateSharingForm = dynamic(
   import("./CertificateSharing/CertificateSharingForm")
@@ -80,7 +80,7 @@ const renderHeaderBlock = props => {
 const CertificateViewer = props => {
   const { document, selectTemplateTab } = props;
 
-  const certificate = certificateData(document);
+  const certificate = getData(document);
 
   const renderedHeaderBlock = renderHeaderBlock(props);
 

@@ -17,10 +17,11 @@ const templates = [
   }
 ];
 
-const RPAA2018CDCJP = () => (
+const RPAA2018CDCJP = props => (
   <MultiCertificateRenderer
     templates={templates}
     whitelist={approvedAddresses}
+    {...props}
   />
 );
 

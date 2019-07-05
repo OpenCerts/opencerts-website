@@ -8,7 +8,7 @@ import {
   mapKeys
 } from "lodash";
 import { put, all, call, select, takeEvery } from "redux-saga/effects";
-import { certificateData, verifySignature } from "@govtechsg/open-certificate";
+import * as openAttestation from "@govtechsg/open-attestation";
 import { isValidAddress as isEthereumAddress } from "ethereumjs-util";
 import Router from "next/router";
 import { getLogger } from "../utils/logger";
@@ -49,7 +49,7 @@ function getDocumentStore(issuer) {
 
 export function* loadCertificateContracts({ payload }) {
   try {
-    const data = certificateData(payload);
+    const data = openAttestation.getData(payload);
     trace(`Loading certificate: ${data}`);
     const unresolvedContractStoreAddresses = get(data, "issuers", []).map(
       issuer => getDocumentStore(issuer)
@@ -82,7 +82,9 @@ export function* loadCertificateContracts({ payload }) {
 }
 
 export function* verifyCertificateHash({ certificate }) {
-  const verified = verifySignature(certificate);
+  const verified = openAttestation.verifySignature(certificate);
+  console.log(verified);
+
   if (verified) {
     yield put(verifyingCertificateHashSuccess());
     return true;
@@ -90,7 +92,7 @@ export function* verifyCertificateHash({ certificate }) {
   yield put(
     verifyingCertificateHashFailure({
       error: "Certificate data does not match target hash",
-      certificate: certificateData(certificate)
+      certificate: openAttestation.getData(certificate)
     })
   );
   return false;
@@ -111,7 +113,7 @@ export function* verifyCertificateIssued({ certificate, certificateStores }) {
   } catch (e) {
     yield put(
       verifyingCertificateIssuedFailure({
-        certificate: certificateData(certificate),
+        certificate: openAttestation.getData(certificate),
         error: e.message
       })
     );
@@ -163,7 +165,7 @@ export function* verifyCertificateNotRevoked({
   } catch (e) {
     yield put(
       verifyingCertificateRevocationFailure({
-        certificate: certificateData(certificate),
+        certificate: openAttestation.getData(certificate),
         error: e.message
       })
     );
@@ -220,7 +222,7 @@ export function* resolveEnsNamesToText(ensNames) {
 
 export function* verifyCertificateIssuer({ certificate }) {
   try {
-    const data = certificateData(certificate);
+    const data = openAttestation.getData(certificate);
     const contractStoreAddresses = get(data, "issuers", []).map(issuer =>
       getDocumentStore(issuer)
     );
@@ -268,7 +270,7 @@ export function* verifyCertificateIssuer({ certificate }) {
     yield put(
       verifyingCertificateIssuerFailure({
         error: e.message,
-        certificate: certificateData(certificate)
+        certificate: openAttestation.getData(certificate)
       })
     );
     return false;

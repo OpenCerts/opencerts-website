@@ -17,10 +17,11 @@ const templates = [
   }
 ];
 
-const ptpdcModularCourse = () => (
+const ptpdcModularCourse = props => (
   <MultiCertificateRenderer
     templates={templates}
     whitelist={ApprovedAddresses}
+    {...props}
   />
 );
 

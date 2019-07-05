@@ -17,10 +17,11 @@ const templates = [
   }
 ];
 
-const ftpfp = () => (
+const ftpfp = props => (
   <MultiCertificateRenderer
     templates={templates}
     whitelist={ApprovedAddresses}
+    {...props}
   />
 );
 
