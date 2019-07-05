@@ -47,7 +47,7 @@ class FramelessViewerContainer extends Component {
       }).promise;
       this.setState({ parentFrameConnection });
     }
-    window.addEventListener("resize", this.updateParentHeight);
+    this.updateHeightWhenResize();
   }
 
   handleTextFieldChange(e) {
@@ -77,6 +77,10 @@ class FramelessViewerContainer extends Component {
 
   handleDocumentChange(document) {
     this.setState({ document });
+  }
+
+  updateHeightWhenResize() {
+    window.addEventListener("resize", this.updateParentHeight);
   }
 
   async obfuscateDocument(field) {
