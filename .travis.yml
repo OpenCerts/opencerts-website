@@ -13,7 +13,8 @@ jobs:
         - ./scripts/sonar-runner.sh
     - stage: integration
       script:
-        - ./scripts/integration-headless.sh
+        - echo "skipping tests"
+        # - ./scripts/integration-headless.sh
 stages:
   - test
   - integration
