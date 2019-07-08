@@ -114,8 +114,8 @@ export function* verifyCertificateStore({ certificate }) {
   try {
     const data = getData(certificate);
 
-    const contractStoreAddresses = get(data, "issuers", []).map(
-      issuer => issuer.certificateStore
+    const contractStoreAddresses = get(data, "issuers", []).map(issuer =>
+      getDocumentStore(issuer)
     );
     trace(`Attempting to verify certificate store: ${contractStoreAddresses}`);
 
