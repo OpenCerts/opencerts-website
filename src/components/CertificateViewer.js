@@ -9,6 +9,7 @@ import ErrorBoundary from "./ErrorBoundary";
 import DecentralisedRenderer from "./DecentralisedTemplateRenderer/DecentralisedRenderer";
 import MultiTabs from "./MultiTabs";
 import { selectTemplateTab as selectTemplateTabAction } from "../reducers/certificate";
+import { LEGACY_OPENCERTS_RENDERER } from "../config";
 
 const CertificateSharingForm = dynamic(
   import("./CertificateSharing/CertificateSharingForm")
@@ -94,7 +95,7 @@ const CertificateViewer = props => {
         certificate={document}
         source={`${
           typeof document.data.$template === "string"
-            ? "/frameless-viewer"
+            ? LEGACY_OPENCERTS_RENDERER
             : certificate.$template.url
         }`}
       />
