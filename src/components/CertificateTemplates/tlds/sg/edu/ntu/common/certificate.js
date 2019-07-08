@@ -199,11 +199,25 @@ export const renderSchoolName = (
 
 export const renderCertName = certificate => (
   <div>
-    <div className="row d-flex justify-content-start">
-      <div className="col">
-        <p style={certNameTextStyle}>{certificate.name}</p>
+    {certificate.additionalData.name_line_one &&
+    certificate.additionalData.name_line_two ? (
+      <div className="row d-flex justify-content-start">
+        <div className="col">
+          <p style={certNameTextStyle}>
+            {certificate.additionalData.name_line_one}
+          </p>
+          <p style={certNameTextStyle}>
+            {certificate.additionalData.name_line_two}
+          </p>
+        </div>
       </div>
-    </div>
+    ) : (
+      <div className="row d-flex justify-content-start">
+        <div className="col">
+          <p style={certNameTextStyle}>{certificate.name}</p>
+        </div>
+      </div>
+    )}
 
     {certificate.additionalData.classification && (
       <div className="row d-flex mt-4 justify-content-start">

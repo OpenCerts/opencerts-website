@@ -132,6 +132,10 @@
     "0x3FFB6b913E9874c7ddabD564d85676Bc5cAd16d4": {
       "name:": "ROPSTEN: Nanyang Technological University",
       "displayCard": false
+    },
+    "0x6395E41DEc7cd3b0A38F51CB1fD171c822d527eA": {
+      "name:": "LEDGER ROPSTEN: Nanyang Technological University",
+      "displayCard": false
     }
   }
 }
