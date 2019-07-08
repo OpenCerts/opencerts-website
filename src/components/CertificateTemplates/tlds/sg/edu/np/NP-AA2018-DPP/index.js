@@ -16,10 +16,11 @@ const templates = [
   }
 ];
 
-const NPAA2018DPP = () => (
+const NPAA2018DPP = props => (
   <MultiCertificateRenderer
     templates={templates}
     whitelist={approvedAddresses}
+    {...props}
   />
 );
 

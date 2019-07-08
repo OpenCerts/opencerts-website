@@ -15,8 +15,12 @@ const addresses = [
   "0x24a7DE31D231221ab6B1B325Ca5F1AA7bfbaaabA"
 ];
 
-const SITCert = () => (
-  <MultiCertificateRenderer templates={templates} whitelist={addresses} />
+const SITCert = props => (
+  <MultiCertificateRenderer
+    templates={templates}
+    whitelist={addresses}
+    {...props}
+  />
 );
 
 export default SITCert;

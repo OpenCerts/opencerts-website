@@ -11,10 +11,11 @@ const templates = [
   }
 ];
 
-const ITE2019FULCERT1 = () => (
+const ITE2019FULCERT1 = props => (
   <MultiCertificateRenderer
     templates={templates}
     whitelist={approvedAddresses}
+    {...props}
   />
 );
 

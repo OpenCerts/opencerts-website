@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { validateSchema, verifySignature } from "@govtechsg/open-certificate";
+import { validateSchema, verifySignature } from "@govtechsg/open-attestation";
 import connectToParent from "penpal/lib/connectToParent";
 import styles from "../certificateViewer.scss";
 import FramelessCertificateViewer from "./FramelessCertificateViewer";
@@ -38,8 +38,6 @@ class FramelessViewerContainer extends Component {
       selectTemplateTab
     };
 
-    window.addEventListener("resize", this.updateParentHeight);
-
     if (inIframe()) {
       const parentFrameConnection = connectToParent({
         methods: {
@@ -49,6 +47,7 @@ class FramelessViewerContainer extends Component {
       }).promise;
       this.setState({ parentFrameConnection });
     }
+    this.updateHeightWhenResize();
   }
 
   handleTextFieldChange(e) {
@@ -78,6 +77,10 @@ class FramelessViewerContainer extends Component {
 
   handleDocumentChange(document) {
     this.setState({ document });
+  }
+
+  updateHeightWhenResize() {
+    window.addEventListener("resize", this.updateParentHeight);
   }
 
   async obfuscateDocument(field) {

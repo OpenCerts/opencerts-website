@@ -9,10 +9,9 @@ const templates = [
   }
 ];
 
-const DefaultTemplate = () => (
-  <MultiCertificateRenderer templates={templates} />
+const DefaultTemplate = props => (
+  <MultiCertificateRenderer templates={templates} {...props} />
 );
-
 DefaultTemplate.displayName = "Default Template";
 
 export default DefaultTemplate;

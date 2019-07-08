@@ -9,7 +9,9 @@ const templates = [
   }
 ];
 
-const GovTech = () => <MultiCertificateRenderer templates={templates} />;
+const GovTech = props => (
+  <MultiCertificateRenderer templates={templates} {...props} />
+);
 
 GovTech.propTypes = {};
 

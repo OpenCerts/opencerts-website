@@ -11,10 +11,11 @@ const templates = [
   }
 ];
 
-const SOASV001 = () => (
+const SOASV001 = props => (
   <MultiCertificateRenderer
     templates={templates}
     whitelist={approvedAddresses}
+    {...props}
   />
 );
 

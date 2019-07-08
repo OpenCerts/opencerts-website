@@ -1,6 +1,6 @@
 import { put, call, select } from "redux-saga/effects";
 import sinon from "sinon";
-import * as openCertsApi from "@govtechsg/open-certificate";
+import * as openAttestation from "@govtechsg/open-attestation";
 import {
   verifyCertificateNotRevoked,
   verifyCertificateIssuer,
@@ -37,7 +37,17 @@ import {
 } from "./testutils";
 import * as sendEmail from "../services/email";
 
-const { certificateData } = openCertsApi;
+jest.mock("@govtechsg/open-attestation", () => {
+  // Require the original module to not be mocked...
+  const originalModule = jest.requireActual("@govtechsg/open-attestation");
+
+  return {
+    __esModule: true,
+    ...originalModule,
+    verifySignature: jest.fn()
+  };
+});
+const { getData } = openAttestation;
 
 function whenThereIsOneEthereumAddressIssuer() {
   const ethereumAddresses = ["0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4F"];
@@ -272,7 +282,7 @@ describe("sagas/certificate", () => {
       } = whenThereAreMultipleEthereumAddressIssuers();
       const resolverReturnValue = [];
       const errorMsg = "Issuer identity missing in certificate";
-      const certData = certificateData(testCert);
+      const certData = getData(testCert);
       const issuerSaga = verifyCertificateIssuer({ certificate: testCert });
 
       expect(issuerSaga.next().value).toEqual(
@@ -323,7 +333,7 @@ describe("sagas/certificate", () => {
       } = whenThereAreMultipleEthereumAddressIssuers();
       const msg = "bam!";
       const issuerSaga = verifyCertificateIssuer({ certificate: testCert });
-      const certData = certificateData(testCert);
+      const certData = getData(testCert);
 
       expect(issuerSaga.next().value).toEqual(
         call(lookupEthereumAddresses, ethereumAddresses)
@@ -358,7 +368,7 @@ describe("sagas/certificate", () => {
         testCert,
         ethereumAddresses
       } = whenThereIsOneEthereumAddressIssuer();
-      analyticsIssuerFail({ certificate: certificateData(testCert) }).next();
+      analyticsIssuerFail({ certificate: getData(testCert) }).next();
 
       expect(global.window.ga.args[0]).toEqual([
         "send",
@@ -375,7 +385,7 @@ describe("sagas/certificate", () => {
         testCert,
         ethereumAddresses
       } = whenThereIsOneEthereumAddressIssuer();
-      analyticsHashFail({ certificate: certificateData(testCert) }).next();
+      analyticsHashFail({ certificate: getData(testCert) }).next();
 
       expect(global.window.ga.args[0]).toEqual([
         "send",
@@ -392,7 +402,7 @@ describe("sagas/certificate", () => {
         testCert,
         ethereumAddresses
       } = whenThereIsOneEthereumAddressIssuer();
-      analyticsIssuedFail({ certificate: certificateData(testCert) }).next();
+      analyticsIssuedFail({ certificate: getData(testCert) }).next();
 
       expect(global.window.ga.args[0]).toEqual([
         "send",
@@ -410,7 +420,7 @@ describe("sagas/certificate", () => {
         ethereumAddresses
       } = whenThereIsOneEthereumAddressIssuer();
       analyticsRevocationFail({
-        certificate: certificateData(testCert)
+        certificate: getData(testCert)
       }).next();
 
       expect(global.window.ga.args[0]).toEqual([
@@ -508,7 +518,7 @@ describe("sagas/certificate", () => {
       expect(doneWithVerification.value).toEqual(
         put(
           verifyingCertificateRevocationFailure({
-            certificate: certificateData(certificate),
+            certificate: getData(certificate),
             error:
               "Certificate has been revoked, revoked hash: 0xfcfce0e79adc002c1fd78a2a02c768c0fdc00e5b96f1da8ef80bed02876e18d1"
           })
@@ -523,13 +533,10 @@ describe("sagas/certificate", () => {
 
   describe("verifyCertificateHash", () => {
     beforeEach(() => {
-      sinon.stub(openCertsApi, "verifySignature");
-    });
-    afterEach(() => {
-      openCertsApi.verifySignature.restore();
+      openAttestation.verifySignature.mockClear();
     });
     it("should return true when verification is successful", () => {
-      openCertsApi.verifySignature.returns(true);
+      openAttestation.verifySignature.mockReturnValue(true);
       const { testCert } = whenThereIsOneEthereumAddressIssuer();
       const generator = verifyCertificateHash({ certificate: testCert });
       expect(generator.next().value).toEqual(
@@ -541,13 +548,13 @@ describe("sagas/certificate", () => {
     });
 
     it("should return false and puts verifyingCertificateHashFailure when verification fails", () => {
-      openCertsApi.verifySignature.returns(false);
+      openAttestation.verifySignature.mockReturnValue(false);
       const { testCert } = whenThereIsOneEthereumAddressIssuer();
       const generator = verifyCertificateHash({ certificate: testCert });
       expect(generator.next().value).toEqual(
         put(
           verifyingCertificateHashFailure({
-            certificate: certificateData(testCert),
+            certificate: getData(testCert),
             error: "Certificate data does not match target hash"
           })
         )
@@ -589,7 +596,7 @@ describe("sagas/certificate", () => {
       expect(generator.next([true, false]).value).toEqual(
         put(
           verifyingCertificateIssuedFailure({
-            certificate: certificateData(certificate),
+            certificate: getData(certificate),
             error: "Certificate has not been issued"
           })
         )

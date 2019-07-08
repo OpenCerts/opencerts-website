@@ -16,10 +16,11 @@ const templates = [
   }
 ];
 
-const NPCET2019SDPCN = () => (
+const NPCET2019SDPCN = props => (
   <MultiCertificateRenderer
     templates={templates}
     whitelist={approvedAddresses}
+    {...props}
   />
 );
 
