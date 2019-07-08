@@ -18,7 +18,8 @@ const renderDropzoneContent = props => {
     issuedStatus,
     notRevokedStatus,
     document,
-    verificationStatus
+    verificationStatus,
+    storeStatus
   } = props;
   // isDragReject is checking for mimetype (but we skipped it)
   // fileError is when the file is not in JSON format and threw when deserilising
@@ -46,6 +47,7 @@ const renderDropzoneContent = props => {
         issuedStatus={issuedStatus}
         notRevokedStatus={notRevokedStatus}
         issuerIdentityStatus={issuerIdentityStatus}
+        storeStatus={storeStatus}
       />
     );
   }
@@ -90,7 +92,8 @@ const CertificateDropzone = ({
   issuedStatus,
   notRevokedStatus,
   document,
-  verificationStatus
+  verificationStatus,
+  storeStatus
 }) => (
   <Dropzone
     id="certificate-dropzone"
@@ -110,7 +113,8 @@ const CertificateDropzone = ({
       issuedStatus,
       notRevokedStatus,
       document,
-      verificationStatus
+      verificationStatus,
+      storeStatus
     })}
   </Dropzone>
 );
@@ -128,7 +132,8 @@ CertificateDropzone.propTypes = {
   hashStatus: PropTypes.object,
   issuedStatus: PropTypes.object,
   notRevokedStatus: PropTypes.object,
-  verificationStatus: PropTypes.array
+  verificationStatus: PropTypes.array,
+  storeStatus: PropTypes.object
 };
 
 renderDropzoneContent.propTypes = {
@@ -143,7 +148,8 @@ renderDropzoneContent.propTypes = {
   hashStatus: PropTypes.object,
   issuedStatus: PropTypes.object,
   notRevokedStatus: PropTypes.object,
-  verificationStatus: PropTypes.array
+  verificationStatus: PropTypes.array,
+  storeStatus: PropTypes.object
 };
 
 export default CertificateDropzone;
