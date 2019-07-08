@@ -16,10 +16,11 @@ const templates = [
   }
 ];
 
-const NPAA2019NIEC = () => (
+const NPAA2019NIEC = props => (
   <MultiCertificateRenderer
     templates={templates}
     whitelist={approvedAddresses}
+    {...props}
   />
 );
 

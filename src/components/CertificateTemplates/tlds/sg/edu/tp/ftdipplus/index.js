@@ -11,10 +11,11 @@ const templates = [
   }
 ];
 
-const ftdipplus = () => (
+const ftdipplus = props => (
   <MultiCertificateRenderer
     templates={templates}
     whitelist={ApprovedAddresses}
+    {...props}
   />
 );
 

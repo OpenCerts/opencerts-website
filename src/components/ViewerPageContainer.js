@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Router from "next/router";
-import { certificateData } from "@govtechsg/open-certificate";
+import { getData } from "@govtechsg/open-attestation";
 
 import {
   updateCertificate,
@@ -65,7 +65,7 @@ class MainPageContainer extends Component {
     return (
       <CertificateViewer
         document={this.props.document}
-        certificate={certificateData(this.props.document)}
+        certificate={getData(this.props.document)}
         verifying={this.props.verifying}
         hashStatus={this.props.hashStatus}
         issuedStatus={this.props.issuedStatus}

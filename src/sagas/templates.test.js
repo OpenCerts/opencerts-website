@@ -1,6 +1,6 @@
 import { put, call } from "redux-saga/effects";
 import { get } from "lodash";
-import { certificateData } from "@govtechsg/open-certificate";
+import { getData } from "@govtechsg/open-attestation";
 import templates from "../components/CertificateTemplates";
 import { preloadTemplateChunk } from "./templates";
 import { types as templateActions } from "../reducers/templates";
@@ -14,7 +14,7 @@ describe("preload template", () => {
   });
 
   it("Should fetch the template name", () => {
-    expect(get(certificateData(testCert), "$template", "default")).toEqual(
+    expect(get(getData(testCert), "$template", "default")).toEqual(
       "NP-AA2018-DPP"
     );
   });

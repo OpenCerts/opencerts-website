@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { format } from "date-fns";
 import { get } from "lodash";
+import React from "react";
 import { certificateBg } from "./common/backgrounds";
 import css from "./common/demoStyles.scss";
 
@@ -117,6 +118,7 @@ const Template = ({ certificate }) => (
 );
 
 Template.propTypes = {
-  certificate: PropTypes.object.isRequired
+  certificate: PropTypes.object.isRequired,
+  updateParentHeight: PropTypes.func
 };
 export default Template;

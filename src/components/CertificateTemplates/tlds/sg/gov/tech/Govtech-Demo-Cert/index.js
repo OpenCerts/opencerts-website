@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
 import approvedAddresses from "./common";
 import DemoCert from "./certificate";
@@ -22,13 +23,12 @@ const templates = [
   }
 ];
 
-const GovtechDemoCert = () => (
+const GovtechDemoCert = props => (
   <MultiCertificateRenderer
     templates={templates}
     whitelist={approvedAddresses}
+    {...props}
   />
 );
-
-GovtechDemoCert.displayName = "Govtech Demo Cert";
 
 export default GovtechDemoCert;

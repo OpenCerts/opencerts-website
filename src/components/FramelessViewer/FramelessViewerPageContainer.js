@@ -1,107 +1,53 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import {
-  certificateData,
-  validateSchema,
-  verifySignature
-} from "@govtechsg/open-certificate";
+import { validateSchema, verifySignature } from "@govtechsg/open-attestation";
 import connectToParent from "penpal/lib/connectToParent";
 import styles from "../certificateViewer.scss";
-import {
-  updateCertificate,
-  getCertificate,
-  getTemplates as getTemplatesAction,
-  getActiveTemplateTab,
-  selectTemplateTab as selectTemplateTabAction
-} from "../../reducers/certificate";
 import FramelessCertificateViewer from "./FramelessCertificateViewer";
+import { inIframe, formatTemplate } from "./utils";
 import { getLogger } from "../../utils/logger";
 
 const { trace } = getLogger("components:FramelessViewerPageContainer");
-
-const inIframe = () => window.location !== window.parent.location;
-const formatTemplate = template =>
-  template ? template.map(o => ({ label: o.label, id: o.id })) : null;
 
 class FramelessViewerContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.handleCertificateChange = this.handleCertificateChange.bind(this);
+    this.handleDocumentChange = this.handleDocumentChange.bind(this);
+    this.selectTemplateTab = this.selectTemplateTab.bind(this);
     this.handleTextFieldChange = this.handleTextFieldChange.bind(this);
-    this.state = { parentFrameConnection: null };
+    this.updateParentHeight = this.updateParentHeight.bind(this);
+    this.updateParentTemplates = this.updateParentTemplates.bind(this);
+    this.obfuscateDocument = this.obfuscateDocument.bind(this);
+    this.state = {
+      parentFrameConnection: null,
+      document: null,
+      tabIndex: 0
+    };
   }
 
   componentDidUpdate() {
-    if (inIframe()) {
-      this.state.parentFrameConnection.promise.then(parent => {
-        if (parent.updateHeight)
-          parent.updateHeight(document.documentElement.scrollHeight);
-        if (parent.updateTemplates)
-          parent.updateTemplates(formatTemplate(this.props.templates));
-      });
-    }
+    this.updateParentHeight();
   }
 
-  /**
-   * Upon mounting, the frameless viewer will expose two ways to interact with it: postMessage and window.opencerts method
-   *
-   * On mobile webViews: CORS is not implemented and window.opencerts can be called directly.
-   * On browsers: CORS is implemented and the parent website can only interact with this iframe via postMessage.
-   *
-   * Three methods, getTemplates, renderCertificate and selectTemplateTab is available for both implementation
-   *
-   * renderCertificate(certificate)
-   * The function takes in a certificate object and render it in the frame. Upon rendering, the getTemplate() function can
-   * be used to query the number (and labels) of tabs available to this certificate. Then, selectTemplateTab(index) can be
-   * used to select the index of the tab to be displayed.
-   *
-   *
-   * getTemplate()
-   * returns an array of templates available for a given certificate, each template has both id and label properties.
-   * example of returned array:
-   * [{
-   *   id: "certificate",
-   *   label: "Certificate"
-   * },{
-   *   id: "transcript",
-   *   label: "Transcript"
-   * }]
-   *
-   * selectTemplateTab(index)
-   * The function is used to select the tab to render the certificate. The index, corresponding to the getTemplate results,
-   * is needed to select which tab to render.
-   *
-   * Only for iframes:
-   *
-   * frameHeight()
-   * returns the height of the component to allow parent component to scale accordingly. This is used to remove the double
-   * scrollbar issue.
-   */
   componentDidMount() {
-    const { selectTemplateTab } = this.props;
-    const getTemplates = () => formatTemplate(this.props.templates);
-    const renderCertificate = this.handleCertificateChange;
-    const frameHeight = document.documentElement.scrollHeight;
+    const selectTemplateTab = this.selectTemplateTab;
+    const renderDocument = this.handleDocumentChange;
 
     window.opencerts = {
-      getTemplates,
-      renderCertificate,
+      renderDocument,
       selectTemplateTab
     };
 
     if (inIframe()) {
       const parentFrameConnection = connectToParent({
         methods: {
-          renderCertificate,
-          selectTemplateTab,
-          getTemplates,
-          frameHeight
+          renderDocument,
+          selectTemplateTab
         }
-      });
+      }).promise;
       this.setState({ parentFrameConnection });
     }
+    this.updateHeightWhenResize();
   }
 
   handleTextFieldChange(e) {
@@ -115,15 +61,60 @@ class FramelessViewerContainer extends Component {
     }
     const verified = verifySignature(fieldContents);
     trace(`Certificate verification: ${verified}`);
-    this.props.updateCertificate(fieldContents);
+    this.obfuscateDocument(fieldContents);
   }
 
-  handleCertificateChange(certificate) {
-    this.props.updateCertificate(certificate);
+  async selectTemplateTab(tabIndex) {
+    if (inIframe()) {
+      const { parentFrameConnection } = this.state;
+      const parent = await parentFrameConnection;
+      if (parent.selectTemplateTab) {
+        await parent.selectTemplateTab(tabIndex);
+      }
+    }
+    this.setState({ tabIndex });
+  }
+
+  handleDocumentChange(document) {
+    this.setState({ document });
+  }
+
+  updateHeightWhenResize() {
+    window.addEventListener("resize", this.updateParentHeight);
+  }
+
+  async obfuscateDocument(field) {
+    if (inIframe()) {
+      const { parentFrameConnection } = this.state;
+      const parent = await parentFrameConnection;
+      if (parent.updateCertificate) {
+        parent.updateCertificate(field);
+      }
+    }
+  }
+
+  async updateParentHeight() {
+    if (inIframe()) {
+      const { parentFrameConnection } = this.state;
+      const parent = await parentFrameConnection;
+      if (parent.updateHeight) {
+        await parent.updateHeight(document.documentElement.offsetHeight);
+      }
+    }
+  }
+
+  async updateParentTemplates(templates) {
+    if (inIframe()) {
+      const { parentFrameConnection } = this.state;
+      const parent = await parentFrameConnection;
+      if (parent.updateTemplates) {
+        parent.updateTemplates(formatTemplate(templates));
+      }
+    }
   }
 
   render() {
-    if (!this.props.document) {
+    if (!this.state.document) {
       return (
         <input
           id="certificateContentsString"
@@ -133,37 +124,18 @@ class FramelessViewerContainer extends Component {
       );
     }
     return (
-      <div className="frameless-tabs">
+      <div className="frameless-tabs" id="rendered-certificate">
         <FramelessCertificateViewer
           id={styles["frameless-container"]}
-          document={this.props.document}
-          certificate={certificateData(this.props.document)}
+          tabIndex={this.state.tabIndex}
+          document={this.state.document}
+          updateParentHeight={this.updateParentHeight}
+          updateParentTemplates={this.updateParentTemplates}
+          obfuscateDocument={this.obfuscateDocument}
         />
       </div>
     );
   }
 }
 
-const mapStateToProps = store => ({
-  document: getCertificate(store),
-  templates: getTemplatesAction(store),
-  activeTab: getActiveTemplateTab(store) // required to trigger componentDidUpdate when tab changes
-});
-
-const mapDispatchToProps = dispatch => ({
-  updateCertificate: payload => dispatch(updateCertificate(payload)),
-  selectTemplateTab: tabIndex => dispatch(selectTemplateTabAction(tabIndex))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FramelessViewerContainer);
-
-FramelessViewerContainer.propTypes = {
-  updateCertificate: PropTypes.func.isRequired,
-  document: PropTypes.object,
-  certificate: PropTypes.object,
-  selectTemplateTab: PropTypes.func.isRequired,
-  templates: PropTypes.array
-};
+export default FramelessViewerContainer;

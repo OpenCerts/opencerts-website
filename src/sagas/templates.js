@@ -1,13 +1,13 @@
 import { takeEvery, put, call } from "redux-saga/effects";
 import { get } from "lodash";
-import { certificateData } from "@govtechsg/open-certificate";
+import { getData } from "@govtechsg/open-attestation";
 
 import templates from "../components/CertificateTemplates";
 import { types as certificateActions } from "../reducers/certificate";
 import { types as templateActions } from "../reducers/templates";
 
 export function* preloadTemplateChunk({ payload }) {
-  const templateName = get(certificateData(payload), "$template", "default");
+  const templateName = get(getData(payload), "$template", "default");
   const templateComponent = templates[templateName] || templates.default;
 
   yield put({

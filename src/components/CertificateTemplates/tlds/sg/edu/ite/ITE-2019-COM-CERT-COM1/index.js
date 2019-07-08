@@ -11,10 +11,11 @@ const templates = [
   }
 ];
 
-const ITE2019COMCERT1 = () => (
+const ITE2019COMCERT1 = props => (
   <MultiCertificateRenderer
     templates={templates}
     whitelist={approvedAddresses}
+    {...props}
   />
 );
 
