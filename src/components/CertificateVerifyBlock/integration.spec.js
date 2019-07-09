@@ -2,8 +2,7 @@ import { Selector, ClientFunction } from "testcafe";
 
 fixture("Govtech DemoCert").page`http://localhost:3000`;
 
-const Certificate =
-  "../../components/CertificateTemplates/tlds/sg/gov/tech/Govtech-Demo-Cert/Ropsten-Demo.json";
+const Certificate = "../HomePageContent/Ropsten-Demo.json";
 
 const RenderedCertificate = Selector("#rendered-certificate");
 
