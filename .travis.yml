@@ -13,7 +13,7 @@ jobs:
         - ./scripts/sonar-runner.sh
     - stage: integration
       script:
-        - ./scripts/integration-headless.sh
+        - npm run integration:headless -- --app "npm run serve-static"
 stages:
   - test
   - integration
