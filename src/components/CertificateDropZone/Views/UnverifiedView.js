@@ -9,6 +9,15 @@ const View = ({
   issuedStatus,
   notRevokedStatus
 }) => {
+  /* Array of error messages with priority of error messages determined by a stack. 
+  Error messages are first placed into the stack and the error message with the highest priority is popped off the stack
+  and displayed.
+  
+  The priority of error messages are as follows:
+  1. Invalid store
+  2. Tampered
+  3. Not issued
+  4. Revoked */
   const errorMessages = [
     {
       title: "Certificate revoked",
