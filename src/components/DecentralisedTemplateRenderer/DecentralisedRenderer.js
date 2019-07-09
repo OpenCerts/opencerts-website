@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import connectToChild from "penpal/lib/connectToChild";
 import { getData, obfuscateDocument } from "@govtechsg/open-attestation";
+import { get } from "lodash";
 import {
   getCertificate,
   getActiveTemplateTab,
@@ -10,6 +11,8 @@ import {
   registerTemplates as registerTemplatesAction,
   selectTemplateTab as selectTemplateTabAction
 } from "../../reducers/certificate";
+import { analyticsEvent } from "../Analytics";
+import { getAnalyticsStores } from "../../sagas/certificate";
 
 class DecentralisedRenderer extends Component {
   constructor(props) {
@@ -78,6 +81,12 @@ class DecentralisedRenderer extends Component {
     childFrameConnection.then(frame =>
       frame.renderDocument(getData(this.props.certificate))
     );
+
+    analyticsEvent(window, {
+      category: "CERTIFICATE_VIEWED",
+      action: getAnalyticsStores(getData(this.props.certificate)),
+      label: get(getData(this.props.certificate), "id")
+    });
   }
 
   render() {
