@@ -7,7 +7,8 @@ const View = ({
   issuerIdentityStatus,
   hashStatus,
   issuedStatus,
-  notRevokedStatus
+  notRevokedStatus,
+  storeStatus
 }) => {
   const isWarning =
     hashStatus.verified && issuedStatus.verified && notRevokedStatus.verified;
@@ -38,30 +39,26 @@ const View = ({
       </span>
 
       <div className={css.verifications}>
-        {!hashStatus.verified ? (
+        {!issuerIdentityStatus.verified ? (
           <p className={css.messages}>
-            The certificate&#39;s contents are inaccurate
+            Certificate from unregistered institution
           </p>
         ) : null}
 
-        {!issuedStatus.verified ? (
-          <p className={css.messages}>The certificate records are not found</p>
-        ) : null}
-
         {!notRevokedStatus.verified ? (
-          <p className={css.messages}>The certificate has been revoked</p>
+          <p className={css.messages}>Certificate revoked</p>
         ) : null}
 
-        {!issuerIdentityStatus.verified ? (
-          <div>
-            <p className={css.messages}>
-              Certificate from unregistered institution
-            </p>
-            <p>
-              We are unable to verify the certificate as this institution has
-              not registered with OpenCerts
-            </p>
-          </div>
+        {!hashStatus.verified ? (
+          <p className={css.messages}>Certificate has been tampered with</p>
+        ) : null}
+
+        {!issuedStatus.verified ? (
+          <p className={css.messages}>Certificate not issued</p>
+        ) : null}
+
+        {!storeStatus.verified ? (
+          <p className={css.messages}>Certificate store address is invalid</p>
         ) : null}
       </div>
 
@@ -113,7 +110,8 @@ View.propTypes = {
   issuerIdentityStatus: PropTypes.object,
   hashStatus: PropTypes.object,
   issuedStatus: PropTypes.object,
-  notRevokedStatus: PropTypes.object
+  notRevokedStatus: PropTypes.object,
+  storeStatus: PropTypes.object
 };
 
 export default View;

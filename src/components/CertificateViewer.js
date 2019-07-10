@@ -1,15 +1,15 @@
 import PropTypes from "prop-types";
 import dynamic from "next/dynamic";
-import { get } from "lodash";
+import { connect } from "react-redux";
+import { getData } from "@govtechsg/open-attestation";
 import CertificateVerifyBlock from "./CertificateVerifyBlock";
 import styles from "./certificateViewer.scss";
 import Modal from "./Modal";
-
-import { getLogger } from "../utils/logger";
-import templates from "./CertificateTemplates";
 import ErrorBoundary from "./ErrorBoundary";
-
-const { trace } = getLogger("components:CertificateViewer");
+import DecentralisedRenderer from "./DecentralisedTemplateRenderer/DecentralisedRenderer";
+import MultiTabs from "./MultiTabs";
+import { selectTemplateTab as selectTemplateTabAction } from "../reducers/certificate";
+import { LEGACY_OPENCERTS_RENDERER } from "../config";
 
 const CertificateSharingForm = dynamic(
   import("./CertificateSharing/CertificateSharingForm")
@@ -79,22 +79,26 @@ const renderHeaderBlock = props => {
 };
 
 const CertificateViewer = props => {
-  const { certificate } = props;
+  const { document, selectTemplateTab } = props;
+
+  const certificate = getData(document);
 
   const renderedHeaderBlock = renderHeaderBlock(props);
-  const selectedTemplateName = get(certificate, "$template", "default");
-  const SelectedTemplate = templates[selectedTemplateName] || templates.default;
-
-  trace(`Templates Mapping: %o`, templates);
-  trace(`Selected template: ${selectedTemplateName}`);
-  trace(`Certificate content: %o`, certificate);
 
   const validCertificateContent = (
     <div>
       <div id={styles["top-header-ui"]}>
         <div className={styles["header-container"]}>{renderedHeaderBlock}</div>
       </div>
-      <SelectedTemplate />
+      <MultiTabs selectTemplateTab={selectTemplateTab} />
+      <DecentralisedRenderer
+        certificate={document}
+        source={`${
+          typeof document.data.$template === "string"
+            ? LEGACY_OPENCERTS_RENDERER
+            : certificate.$template.url
+        }`}
+      />
       <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
         <CertificateSharingForm
           emailSendingState={props.emailSendingState}
@@ -108,8 +112,16 @@ const CertificateViewer = props => {
   return <ErrorBoundary>{validCertificateContent} </ErrorBoundary>;
 };
 
+const mapDispatchToProps = dispatch => ({
+  selectTemplateTab: tabIndex => dispatch(selectTemplateTabAction(tabIndex))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(CertificateViewer);
+
 CertificateViewer.propTypes = {
-  handleCertificateChange: PropTypes.func,
   toggleDetailedView: PropTypes.func,
   detailedVerifyVisible: PropTypes.bool,
   document: PropTypes.object,
@@ -123,10 +135,10 @@ CertificateViewer.propTypes = {
   showSharing: PropTypes.bool,
   emailSendingState: PropTypes.string,
   handleSharingToggle: PropTypes.func,
-  handleSendCertificate: PropTypes.func
+  handleSendCertificate: PropTypes.func,
+
+  selectTemplateTab: PropTypes.func
 };
 
 renderVerifyBlock.propTypes = CertificateViewer.propTypes;
 renderHeaderBlock.propTypes = CertificateViewer.propTypes;
-
-export default CertificateViewer;

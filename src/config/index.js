@@ -28,6 +28,7 @@ export const EMAIL_API_URL = IS_MAINNET
   ? "https://api.opencerts.io/email"
   : "https://api-ropsten.opencerts.io/email";
 export const INFURA_PROJECT_ID = "1f1ff2b3fca04f8d99f67d465c59e4ef";
+export const LEGACY_OPENCERTS_RENDERER = "https://legacy.opencerts.io/";
 
 export const DEFAULT_SEO = {
   title: "An easy way to check and verify your certificates",
