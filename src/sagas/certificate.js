@@ -30,7 +30,6 @@ import {
   types as applicationTypes,
   getNetworkId
 } from "../reducers/application";
-import { getDocumentStoreRecords } from "opencerts-dnsprove";
 import DocumentStoreDefinition from "../services/contracts/DocumentStore.json";
 import fetchIssuers from "../services/issuers";
 import { combinedHash } from "../utils";
