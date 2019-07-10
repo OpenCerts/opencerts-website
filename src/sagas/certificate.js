@@ -5,12 +5,14 @@ import {
   compact,
   filter,
   isEmpty,
-  mapKeys
+  mapKeys,
+  flatten
 } from "lodash";
 import { put, all, call, select, takeEvery } from "redux-saga/effects";
 import { certificateData, verifySignature } from "@govtechsg/open-certificate";
 import { isValidAddress as isEthereumAddress } from "ethereumjs-util";
 import Router from "next/router";
+import { getDocumentStoreRecords } from "opencerts-dnsprove";
 import { getLogger } from "../utils/logger";
 import {
   types,
@@ -82,6 +84,7 @@ export function* loadCertificateContracts({ payload }) {
 
 export function* verifyCertificateHash({ certificate }) {
   const verified = verifySignature(certificate);
+  console.log(verified, "verified it");
   if (verified) {
     yield put(verifyingCertificateHashSuccess());
     return true;
@@ -219,10 +222,44 @@ export function* resolveEnsNamesToText(ensNames) {
   return getTextResults;
 }
 
-export function* verifyCertificateIssuer({ certificate }) {
+export function* verifyCertificateDnsIssuer({ certData }) {
   try {
-    const data = certificateData(certificate);
-    const contractStoreAddresses = get(data, "issuers", []).map(
+    const issuers = get(certData, "issuers", []);
+    const identityProof = issuers.map(issuer =>
+      issuer.identityProof && issuer.identityProof.type === "DNS"
+        ? issuer.identityProof.url
+        : null
+    );
+    if (!identityProof) return false;
+    const dnsRecords = yield all(
+      identityProof.map(url => call(getDocumentStoreRecords, url))
+    );
+    const identityStatus = flatten(dnsRecords);
+    trace(`Flatten DNS records: ${identityStatus}`);
+    const verificationStatus = issuers.reduce(
+      (status, issuer) =>
+        identityStatus.some(
+          identity => !!(identity.address === issuer.documentStore && status)
+        ),
+      true
+    );
+    yield put(verifyingCertificateIssuerSuccess(identityProof));
+    return verificationStatus;
+  } catch (e) {
+    yield put(
+      verifyingCertificateIssuerFailure({
+        document: certData,
+        error: e.message
+      })
+    );
+
+    return false;
+  }
+}
+
+export function* verifyCertificateRegistryIssuer({ certData }) {
+  try {
+    const contractStoreAddresses = get(certData, "issuers", []).map(
       issuer => issuer.certificateStore
     );
     trace(
@@ -269,11 +306,20 @@ export function* verifyCertificateIssuer({ certificate }) {
     yield put(
       verifyingCertificateIssuerFailure({
         error: e.message,
-        certificate: certificateData(certificate)
+        certificate: certData
       })
     );
     return false;
   }
+}
+
+export function* verifyCertificateIssuer({ certificate }) {
+  const data = certificateData(certificate);
+
+  const issuers = get(data, "issuers", [])[0];
+  return issuers.identityProof && issuers.identityProof.type === "DNS"
+    ? yield call(verifyCertificateDnsIssuer, { certData: data })
+    : yield call(verifyCertificateRegistryIssuer, { certData: data });
 }
 
 export function* verifyCertificate({ payload }) {
