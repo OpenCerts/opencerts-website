@@ -90,7 +90,7 @@ class Degree extends Component {
       textAlign: "center",
       border: "0px solid"
     };
-    const degreeData = this.dataSource.additionalData.degreeData[0];
+    const degreeData = this.dataSource.additionalData.degreeScroll[0];
     const dateConferred = isoDateToLocalLong(degreeData.dateConferred);
     // let honorsTitle = "";
     // if(degreeData.degreeTitle.indexOf("ART") !== -1)
@@ -201,8 +201,10 @@ class Degree extends Component {
     if (this.dataSource.additionalData.images) {
       sig1 = renderImage(this.dataSource.additionalData.images.TRUSTEES);
       sig2 = renderImage(this.dataSource.additionalData.images.PRESIDENT);
-      sig3 = renderImage(this.dataSource.additionalData.images.TRUSTEESANU);
-      sig4 = renderImage(this.dataSource.additionalData.images.PRESIDENTANU);
+      sig3 = renderImage(this.dataSource.additionalData.images.ANU_CHANCELLOR);
+      sig4 = renderImage(
+        this.dataSource.additionalData.images.ANU_VICE_CHANCELLOR
+      );
     }
     const html = (
       <table width="100%">

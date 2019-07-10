@@ -91,24 +91,24 @@ const renderTranscriptTermHeader = () => {
 export class TranscriptDataFeeder {
   constructor() {
     this.length = 0;
-    this.dataArray = [];
-    this.dataType = [];
+    this.attrs = [];
     this.termDataRange = { start: -1, end: -1 };
     this.headerData = {};
   }
 
   // append a row
-  pushRow(type, data) {
-    this.dataType.push(type);
-    this.dataArray.push(data);
+  pushRow(type, data, cannotBeLastRow) {
+    const attr = { type, data };
+    if (cannotBeLastRow) attr.cannotBeLastRow = true;
+    this.attrs.push(attr);
     this.length += 1;
   }
 
   // set term data range
-  resetTermRange() {
+  resetTermRange(termDataPrefix) {
     this.termDataRange = { start: -1, end: -1 };
-    this.dataType.some((type, i) => {
-      if (type.startsWith("ts-term")) {
+    this.attrs.some((attr, i) => {
+      if (attr.type.startsWith(termDataPrefix)) {
         this.termDataRange.start = i;
         return true;
       }
@@ -116,7 +116,7 @@ export class TranscriptDataFeeder {
     });
     if (this.termDataRange.start >= 0) {
       for (let i = this.termDataRange.start; i < this.length; i += 1) {
-        if (!this.dataType[i].startsWith("ts-term")) {
+        if (!this.attrs[i].type.startsWith(termDataPrefix)) {
           this.termDataRange.end = i;
           break;
         }
@@ -127,24 +127,31 @@ export class TranscriptDataFeeder {
   }
 
   // append a row or an array of rows
-  push(type, data) {
+  push(type, data, cannotBeLastRow) {
     if (typeof data === "object" && data instanceof Array)
       data.forEach(x => {
+        // attribute 'cannotBeLastRow' is not applicable to array
         this.push(type, x);
       });
-    else this.pushRow(type, data);
+    else this.pushRow(type, data, cannotBeLastRow);
   }
 
   // getter of row data
   data(i) {
-    if (i < this.length) return this.dataArray[i];
+    if (i < this.length) return this.attrs[i].data;
     return null;
   }
 
   // getter of data type
   type(i) {
-    if (i < this.length) return this.dataType[i];
+    if (i < this.length) return this.attrs[i].type;
     return null;
+  }
+
+  // getter of attribute 'cannotBeLastRow'
+  cannotBeLastRow(i) {
+    if (i < this.length) if (this.attrs[i].cannotBeLastRow) return true;
+    return false;
   }
 }
 
@@ -378,39 +385,27 @@ export class Transcript extends Component {
   cleanup() {
     // clean up pages
     for (let i = this.maxPages - 1; i > this.page; i -= 1) {
-      this.pageEl(i).remove();
-      this.paraEl(i).remove();
+      let el = this.pageEl(i);
+      if (el) el.remove();
+      el = this.paraEl(i);
+      if (el) el.remove();
     }
-    for (let i = this.page; i >= 0; i -= 1) {
-      this.pageEl(i).removeAttribute("id");
-      this.paraEl(i).removeAttribute("id");
-      this.canvasEl(i).removeAttribute("id");
-    }
-    // delete redundant lines
+    // delete content in the redundant rows
     this.redundant.forEach(x => {
       const node = this.rowEl(x.page, x.col, x.row);
-      if (node) node.remove();
+      let child = node.lastElementChild;
+      while (child) {
+        node.removeChild(child);
+        child = node.lastElementChild;
+      }
     });
-    // clean up rows
-    for (let i = 0; i <= this.page; i += 1) {
-      for (let j = 0; j < 2; j += 1)
-        for (let k = this.maxRows; k >= 0; k -= 1) {
-          const node = this.rowEl(i, j, k);
-          if (node)
-            if (node.filled === "false") node.remove();
-            else {
-              node.removeAttribute("id");
-              node.removeAttribute("filled");
-            }
-        }
-    }
   }
 
-  // fill up transcript pages
+  // render data into transcript pages
   componentDidMount() {
     let dataRow;
     let node;
-    // print subsequence rows
+    // print subsequenct rows
     gState.subscribe(() => {
       if (this.dataIdx >= this.feeder.length) {
         // all data has been rendered
@@ -420,7 +415,7 @@ export class Transcript extends Component {
       }
       if (gState.getState()) {
         // state is {nextCol: true}, change column (and page when necessary)
-        if (this.feeder.type(this.dataIdx - 1) === "ts-term-year") {
+        if (this.feeder.cannotBeLastRow(this.dataIdx - 1)) {
           // check for orphan acad year line
           this.dataIdx -= 1; // need to re-render acad year line
           this.keepRedundant(this.page, this.col, this.row - 1);
@@ -559,6 +554,6 @@ Transcript.propTypes = {
   maxRows: PropTypes.string,
   dataFeeder: PropTypes.object,
   backImgUrl: PropTypes.string,
-  legendPage: PropTypes.object,
+  legendPage: PropTypes.string,
   legendRatio: PropTypes.string
 };

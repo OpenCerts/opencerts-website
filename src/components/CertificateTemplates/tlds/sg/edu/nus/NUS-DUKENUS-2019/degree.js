@@ -85,7 +85,7 @@ class Degree extends Component {
       textAlign: "center",
       border: "0px solid"
     };
-    const degreeData = this.dataSource.additionalData.degreeData[0];
+    const degreeData = this.dataSource.additionalData.degreeScroll[0];
     const html = (
       <table width="100%">
         <tbody>

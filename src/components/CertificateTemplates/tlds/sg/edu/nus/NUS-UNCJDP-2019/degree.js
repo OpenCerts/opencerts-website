@@ -31,7 +31,7 @@ class Degree extends Component {
       );
       return html;
     }
-    return null;
+    return "";
   };
 
   // render second degree title
@@ -54,23 +54,26 @@ class Degree extends Component {
 
   // render degree major
   renderDegreeMajor = degreeData => {
-    const degreeMajor = capitalizedText(degreeData.major.toLowerCase());
-    const html = (
-      <Fragment>
-        <div style={{ fontSize: "28pt" }}>
-          {renderVoid("0.5cm")}
-          with a major in
-          {renderVoid("0.5cm")}
-        </div>
-        <div className={cls("cert-degree-major")}>{degreeMajor}</div>
-      </Fragment>
-    );
-    return html;
+    if (degreeData.major) {
+      const degreeMajor = capitalizedText(degreeData.major.toLowerCase());
+      const html = (
+        <Fragment>
+          <div style={{ fontSize: "28pt" }}>
+            {renderVoid("0.5cm")}
+            with a major in
+            {renderVoid("0.5cm")}
+          </div>
+          <div className={cls("cert-degree-major")}>{degreeMajor}</div>
+        </Fragment>
+      );
+      return html;
+    }
+    return "";
   };
 
   // render starting phrase before name
   renderContent() {
-    const degreeData = this.dataSource.additionalData.degreeData[0];
+    const degreeData = this.dataSource.additionalData.degreeScroll[0];
     const words = dateToWords(degreeData.dateConferred);
     const dayMonthConferred = words.dayMonth;
     const yearConferred = words.year[0].toUpperCase() + words.year.substring(1);
@@ -161,11 +164,11 @@ class Degree extends Component {
     let sig4;
     let sig5;
     if (this.dataSource.additionalData.images) {
-      sig1 = renderImage(this.dataSource.additionalData.images.TRUSTEES);
-      sig2 = renderImage(this.dataSource.additionalData.images.PRESIDENT);
-      sig3 = renderImage(this.dataSource.additionalData.images.TRUSTEESANU);
-      sig4 = renderImage(this.dataSource.additionalData.images.PRESIDENTANU);
-      sig5 = renderImage(this.dataSource.additionalData.images.TRUSTEES);
+      sig1 = renderImage(this.dataSource.additionalData.images.UNC_TRUSTEES);
+      sig2 = renderImage(this.dataSource.additionalData.images.UNC_CHANCELLOR);
+      sig3 = renderImage(this.dataSource.additionalData.images.UNC_DEAN);
+      sig4 = renderImage(this.dataSource.additionalData.images.TRUSTEES);
+      sig5 = renderImage(this.dataSource.additionalData.images.PRESIDENT);
     }
     const html = (
       <table className={cls("cert-sig")}>

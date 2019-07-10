@@ -37,14 +37,13 @@ class Degree extends Component {
   // render degree title
   renderDegreeTitle = degreeData => {
     const degreeTitleCase = degreeData.degreeTitle.toLowerCase();
-    const degreeMajor = degreeData.major.toLowerCase();
 
     let html;
-    if (degreeMajor) {
+    if (degreeData.major) {
       html = (
         <div className={cls("cert-degree-title")}>
           {degreeTitleCase}
-          <br />({degreeMajor})
+          <br />({degreeData.major.toLowerCase()})
         </div>
       );
     } else {
@@ -76,7 +75,7 @@ class Degree extends Component {
 
   // render starting phrase before name
   renderContent() {
-    const degreeData = this.dataSource.additionalData.degreeData[0];
+    const degreeData = this.dataSource.additionalData.degreeScroll[0];
     const dateConferred = isoDateToLocalLong(degreeData.dateConferred);
 
     const html = (
@@ -146,10 +145,12 @@ class Degree extends Component {
     let sig3;
     let sig4;
     if (this.dataSource.additionalData.images) {
-      sig1 = renderImage(this.dataSource.additionalData.images.TRUSTEES);
-      sig2 = renderImage(this.dataSource.additionalData.images.PRESIDENT);
-      sig3 = renderImage(this.dataSource.additionalData.images.TRUSTEESANU);
-      sig4 = renderImage(this.dataSource.additionalData.images.PRESIDENTANU);
+      sig1 = renderImage(this.dataSource.additionalData.images.ANU_CHANCELLOR);
+      sig2 = renderImage(
+        this.dataSource.additionalData.images.ANU_VICE_CHANCELLOR
+      );
+      sig3 = renderImage(this.dataSource.additionalData.images.TRUSTEES);
+      sig4 = renderImage(this.dataSource.additionalData.images.PRESIDENT);
     }
 
     const html = (

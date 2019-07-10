@@ -46,7 +46,7 @@ class Degree extends Component {
 
   // render starting phrase before name
   renderContent() {
-    const degreeData = this.dataSource.additionalData.degreeData[0];
+    const degreeData = this.dataSource.additionalData.degreeScroll[0];
     const words = dateToWords(degreeData.dateConferred);
     const dateConferred = `${words.monthDay}, ${words.year}`;
     const html = (
@@ -123,11 +123,11 @@ class Degree extends Component {
     let sig4;
     let sig5;
     if (this.dataSource.additionalData.images) {
-      sig1 = renderImage(this.dataSource.additionalData.images.TRUSTEES);
-      sig2 = renderImage(this.dataSource.additionalData.images.PRESIDENT);
-      sig3 = renderImage(this.dataSource.additionalData.images.TRUSTEESANU);
-      sig4 = renderImage(this.dataSource.additionalData.images.PRESIDENTANU);
-      sig5 = renderImage(this.dataSource.additionalData.images.TRUSTEES);
+      sig1 = renderImage(this.dataSource.additionalData.images.JHU_DEAN);
+      sig2 = renderImage(this.dataSource.additionalData.images.JHU_PRESIDENT);
+      sig3 = renderImage(this.dataSource.additionalData.images.JHU_TRUSTEES);
+      sig4 = renderImage(this.dataSource.additionalData.images.TRUSTEES);
+      sig5 = renderImage(this.dataSource.additionalData.images.PRESIDENT);
     }
 
     const html = (

@@ -6,7 +6,7 @@ import Transcript from "./transcript";
 const templates = [
   {
     id: "transcript",
-    label: "NUS Transcript",
+    label: "Transcript",
     template: Transcript
   }
 ];

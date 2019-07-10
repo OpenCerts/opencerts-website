@@ -48,7 +48,7 @@ class Degree extends Component {
 
   // render starting phrase before name
   renderContent() {
-    const degreeData = this.dataSource.additionalData.degreeData[0];
+    const degreeData = this.dataSource.additionalData.degreeScroll[0];
     const dateConferred = isoDateToLocalLong(degreeData.dateConferred);
     const html = (
       <table className={cls("cert-content-table")}>
@@ -143,8 +143,8 @@ class Degree extends Component {
     if (this.dataSource.additionalData.images) {
       sig1 = renderImage(this.dataSource.additionalData.images.TRUSTEES);
       sig2 = renderImage(this.dataSource.additionalData.images.PRESIDENT);
-      sig3 = renderImage(this.dataSource.additionalData.images.TRUSTEESANU);
-      sig4 = renderImage(this.dataSource.additionalData.images.PRESIDENTANU);
+      sig3 = renderImage(this.dataSource.additionalData.images.JHU_TRUSTEES);
+      sig4 = renderImage(this.dataSource.additionalData.images.JHU_PRESIDENT);
     }
     const html = (
       <table className={cls("cert-sig")}>

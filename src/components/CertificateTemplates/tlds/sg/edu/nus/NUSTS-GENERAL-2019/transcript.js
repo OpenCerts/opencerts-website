@@ -17,6 +17,11 @@ import scss from "../common/transcriptFramework.scss";
 // construct class names
 const cls = names => sassClassNames(names, scss);
 
+// flags to calssify transcript type
+let isDuke;
+let isMedDen;
+let isCDP;
+
 // transcript content - program info
 class TranscriptProgram {
   constructor(dataSource, dataFeeder) {
@@ -46,6 +51,18 @@ class TranscriptProgram {
         </div>
       </td>
     );
+    if (isDuke) {
+      // print DUKE school name under program name
+      this.dataFeeder.push(
+        "ts-prog",
+        <td colSpan="4">
+          <div className={cls("prog-row ts-title")}>
+            <div className={cls("prog-key prog-col0")} />
+            <div className={cls("prog-col1")}>DUKE-NUS MEDICAL SCHOOL</div>
+          </div>
+        </td>
+      );
+    }
     this.dataFeeder.push(
       "ts-prog",
       <td colSpan="4">
@@ -98,6 +115,7 @@ class TranscriptCreditTransfer {
         this.renderIntTrfSummary();
       }
       this.renderIntTrfDetail();
+      if (isMedDen) this.renderFormOfStudy();
       if (this.termIdx !== 0) {
         // from 2nd term onward
         this.renderTrfFromExtOrg();
@@ -121,19 +139,45 @@ class TranscriptCreditTransfer {
     this.termData.creditTransfer.forEach(transferData => {
       if (transferData.sourceType === "E" && transferData.creditsNoGPA > 0) {
         // APC
-        this.dataFeeder.push(
-          "ts-term-trf-apc",
-          <Fragment>
-            <td colSpan="2" className={cls("ts-termrem")}>
-              AWARDED ADVANCED PLACEMENT CREDITS FOR THE ACADEMIC WORK COMPLETED
-              AT {transferData.orgName.toUpperCase()}
-            </td>
-            <td className={cls("ts-grade")}>-</td>
-            <td className={cls("ts-credits")}>
-              {transferData.creditsNoGPA.toFixed(2)}
-            </td>
-          </Fragment>
-        );
+        if (isCDP) {
+          const isNUSAPCTest = transferData.orgId === "E0000002277";
+          const isAPC = transferData.orgId === "E0000002430";
+          let title = "";
+          if (!isNUSAPCTest && !isAPC) {
+            title = `AWARDED ADVANCED PLACEMENT CREDITS FOR THE ACADEMIC WORK COMPLETED AT ${transferData.orgName.toUpperCase()}`;
+          } else if (isNUSAPCTest) {
+            title =
+              "AWARDED ADVANCED PLACEMENT CREDITS FOR PASSING THE PLACEMENT TEST(S) CONDUCTED BY NUS";
+          }
+          if (title) {
+            this.dataFeeder.push(
+              "ts-term-trf-apc",
+              <Fragment>
+                <td colSpan="2" className={cls("ts-termrem")}>
+                  {title}
+                </td>
+                <td className={cls("ts-grade")}>-</td>
+                <td className={cls("ts-credits")}>
+                  {transferData.creditsNoGPA.toFixed(2)}
+                </td>
+              </Fragment>
+            );
+          }
+        } else {
+          this.dataFeeder.push(
+            "ts-term-trf-apc",
+            <Fragment>
+              <td colSpan="2" className={cls("ts-termrem")}>
+                AWARDED ADVANCED PLACEMENT CREDITS FOR THE ACADEMIC WORK
+                COMPLETED AT {transferData.orgName.toUpperCase()}
+              </td>
+              <td className={cls("ts-grade")}>-</td>
+              <td className={cls("ts-credits")}>
+                {isMedDen ? "" : transferData.creditsNoGPA.toFixed(2)}
+              </td>
+            </Fragment>
+          );
+        }
       }
     });
   }
@@ -145,7 +189,10 @@ class TranscriptCreditTransfer {
         const isNUSAPCTest = transferData.orgId === "E0000002277";
         const isAPC = transferData.orgId === "E0000002430";
         let title;
-        if (!isNUSAPCTest && !isAPC) {
+        if (isDuke || isMedDen) {
+          title =
+            "CREDITS RECOGNISED ON ADMISSION (NUS MODULES COMPLETED PRIOR TO CURRENT PROGRAMME):";
+        } else if (!isNUSAPCTest && !isAPC) {
           title =
             "CREDITS RECOGNISED ON ADMISSION (NUS MODULES COMPLETED PRIOR TO CURRENT PROGRAMME):";
         } else if (isNUSAPCTest) {
@@ -177,17 +224,22 @@ class TranscriptCreditTransfer {
   // render internal transfer summary
   renderIntTrfSummary() {
     this.termData.creditTransfer.forEach(transferData => {
-      if (transferData.sourceType === "I") {
+      const isNUSAPCTest = transferData.orgId === "E0000002277";
+      const isAPC = transferData.orgId === "E0000002430";
+      if (
+        transferData.sourceType === "I" &&
+        (!isCDP || (!isNUSAPCTest && !isAPC))
+      ) {
         let title;
         if (transferData.sourceCareer) {
           title = `CREDITS RECOGNISED (COMPLETED MODULES FROM ${
             transferData.sourceCareer
           } CAREER)`;
-        } else {
+        } else if (!isMedDen) {
           title = "CREDITS RECOGNISED (COMPLETED MODULES FROM OTHER PROGRAMME)";
         }
         const credits =
-          transferData.creditsNoGPA !== 0
+          transferData.creditsNoGPA !== 0 && !isMedDen
             ? transferData.creditsNoGPA.toFixed(2)
             : "";
         this.dataFeeder.push(
@@ -207,15 +259,20 @@ class TranscriptCreditTransfer {
   // render internal transfer details
   renderIntTrfDetail() {
     this.termData.creditTransfer.forEach(transferData => {
-      if (transferData.sourceType === "I") {
+      if (
+        transferData.sourceType === "I" &&
+        ((isDuke && transferData.creditsNoGPA > 0) || !isDuke)
+      ) {
         transferData.details.forEach(detail => {
           if (
             detail.status === "P" &&
             (detail.includeInGPA ||
-              (detail.grade === "S" || detail.grade === "CS"))
+              (detail.grade === "S" || detail.grade === "CS") ||
+              isMedDen)
           ) {
-            const credits =
-              detail.credits !== 0 ? detail.credits.toFixed(2) : "-";
+            let credits = "";
+            if (!isMedDen)
+              credits = detail.credits !== 0 ? detail.credits.toFixed(2) : "-";
             this.dataFeeder.push(
               "ts-term-trf-inttrfdtl",
               <Fragment>
@@ -247,7 +304,7 @@ class TranscriptCreditTransfer {
             </td>
             <td className={cls("ts-grade")}>-</td>
             <td className={cls("ts-credits")}>
-              {transferData.creditsNoGPA.toFixed(2)}
+              {isMedDen ? "" : transferData.creditsNoGPA.toFixed(2)}
             </td>
           </Fragment>
         );
@@ -272,8 +329,9 @@ class TranscriptCreditTransfer {
             (detail.includeInGPA ||
               (detail.grade === "S" || detail.grade === "CS"))
           ) {
-            const credits =
-              detail.credits !== 0 ? detail.credits.toFixed(2) : "-";
+            let credits = "";
+            if (!isMedDen)
+              credits = detail.credits !== 0 ? detail.credits.toFixed(2) : "-";
             this.dataFeeder.push(
               "ts-term-trf-eqnusdtl",
               <Fragment>
@@ -307,16 +365,26 @@ class TranscriptModuleEnroll {
     let { moduleCode } = this.data;
     if (
       (this.data.gradingBasis === "NCP" && this.data.includeInGPA) ||
-      this.data.remarks
+      this.data.remarks ||
+      isDuke ||
+      isMedDen
     )
       moduleCode = `*${moduleCode}`;
-    const credits =
-      this.data.credits === 0 ? "-" : this.data.credits.toFixed(2);
+    let moduleDescr = this.data.moduleName;
+    const isMedDenSuppl =
+      isMedDen &&
+      (this.data.gradingBasis === "SUP" || this.data.gradingBasis === "SPN");
+    if (this.data.moduleType && !isMedDenSuppl)
+      moduleDescr += ` ${this.data.moduleType}`;
+    if (this.data.moduleNotes) moduleDescr += ` ${this.data.moduleNotes}`;
+    let credits = "";
+    if (!isMedDen)
+      credits = this.data.credits === 0 ? "-" : this.data.credits.toFixed(2);
     this.dataFeeder.push(
       "ts-term-enl-mod",
       <Fragment>
         <td className={cls("ts-col0 ts-modcode")}>{moduleCode}</td>
-        <td className={cls("ts-col1 ts-modname")}>{this.data.moduleName}</td>
+        <td className={cls("ts-col1 ts-modname")}>{moduleDescr}</td>
         <td className={cls("ts-col2 ts-grade")}>{this.data.grade}</td>
         <td className={cls("ts-col3 ts-credits")}>{credits}</td>
       </Fragment>
@@ -357,6 +425,26 @@ class TranscriptEnrollment {
     );
   }
 
+  // render repeat modules title
+  renderRepeatModulesTitle() {
+    this.dataFeeder.push(
+      "ts-term-enl-suptitle",
+      <td colSpan="4" className={cls("ts-termrem")}>
+        REPEAT MODULE(S):
+      </td>
+    );
+  }
+
+  // render remediate modules title
+  renderRemediateModulesTitle() {
+    this.dataFeeder.push(
+      "ts-term-enl-suptitle",
+      <td colSpan="4" className={cls("ts-termrem")}>
+        REMEDIATE MODULE(S):
+      </td>
+    );
+  }
+
   // render module enrollment data
   renderEnrollData() {
     if (!this.termData.modules) return;
@@ -364,16 +452,41 @@ class TranscriptEnrollment {
       this.renderEnrollTitle();
     }
     let hasSuppl = false;
+    let hasRepeat = false;
+    let hasRemediate = false;
     this.termData.modules.forEach(data => {
-      if (data.gradingBasis === "SUP") hasSuppl = true;
+      if (
+        data.gradingBasis === "SUP" ||
+        (isMedDen && data.gradingBasis === "SPN")
+      )
+        hasSuppl = true;
+      else if (isDuke && data.gradingBasis === "REP") hasRepeat = true;
+      else if (isDuke && data.gradingBasis === "REM") hasRemediate = true;
       else new TranscriptModuleEnroll(data, this.dataFeeder).render();
     });
-    if (!hasSuppl) return;
-    this.renderSupplementaryTitle();
-    this.termData.modules.forEach(data => {
-      if (data.gradingBasis === "SUP")
-        new TranscriptModuleEnroll(data, this.dataFeeder).render();
-    });
+    if (hasSuppl) {
+      this.renderSupplementaryTitle();
+      this.termData.modules.forEach(data => {
+        if (data.gradingBasis === "SUP")
+          new TranscriptModuleEnroll(data, this.dataFeeder).render();
+      });
+    }
+    if (hasRepeat) {
+      // only for DUKE
+      this.renderRepeatModulesTitle();
+      this.termData.modules.forEach(data => {
+        if (data.gradingBasis === "REP")
+          new TranscriptModuleEnroll(data, this.dataFeeder).render();
+      });
+    }
+    if (hasRemediate) {
+      // only for DUKE
+      this.renderRemediateModulesTitle();
+      this.termData.modules.forEach(data => {
+        if (data.gradingBasis === "REM")
+          new TranscriptModuleEnroll(data, this.dataFeeder).render();
+      });
+    }
   }
 }
 
@@ -392,7 +505,9 @@ class TranscriptSummary {
       this.renderTermDegree(data);
       // GPA
       if (data.specialGPA) this.renderSpecialGPA(data);
-      else this.renderGPA(data);
+      else if (!isMedDen) this.renderGPA(data);
+      // acad standing
+      if (isMedDen) this.renderAcadStanding(data);
       // term honours
       if (data.awards) this.renderTermHonours(data);
     });
@@ -412,12 +527,18 @@ class TranscriptSummary {
   // render GPA
   renderGPA(sumData) {
     let gpa;
-    if (sumData.includeInGPA) gpa = sumData.GPA.toFixed(2);
-    else gpa = "NOT APPLICABLE";
+    let gpaName;
+    if (sumData.includeInGPA) {
+      gpa = sumData.GPA.toFixed(2);
+      gpaName = sumData.GPAName.toUpperCase();
+    } else {
+      gpa = "NOT APPLICABLE";
+      gpaName = "CUMULATIVE AVERAGE POINT";
+    }
     this.dataFeeder.push(
       "ts-term-gpa",
       <td colSpan="4" className={cls("ts-termrem ts-highlight")}>
-        {`${sumData.GPAName.toUpperCase()} : ${gpa}`}
+        {`${gpaName} : ${gpa}`}
       </td>
     );
   }
@@ -433,6 +554,17 @@ class TranscriptSummary {
         </td>
       );
     });
+  }
+
+  // render acad standing
+  renderAcadStanding(sumData) {
+    if (sumData.standing)
+      this.dataFeeder.push(
+        "ts-term-standing",
+        <td colSpan="4" className={cls("ts-termrem ts-highlight")}>
+          {`RESULT : ${sumData.standing}`}
+        </td>
+      );
   }
 
   // render term honours
@@ -461,7 +593,7 @@ class TranscriptTermRemarks {
   render() {
     this.renderEnrollRemarks();
     this.renderTransferRemarks();
-    this.renderFinalGPARemarks();
+    if (!isMedDen) this.renderFinalGPARemarks();
     this.renderTranscriptTexts();
     if (this.cache.length === 0) return;
     this.renderRemarksTitle();
@@ -485,7 +617,12 @@ class TranscriptTermRemarks {
     if (this.termData.modules) {
       // remarks of NCP
       this.termData.modules.forEach(data => {
-        if (data.includeInGPA && data.gradingBasis === "NCP") {
+        if (
+          data.includeInGPA &&
+          data.gradingBasis === "NCP" &&
+          !isDuke &&
+          !isMedDen
+        ) {
           this.cache.push(
             "ts-term-rem-ncp",
             <td colSpan="4" className={cls("ts-termrem")}>
@@ -516,7 +653,7 @@ class TranscriptTermRemarks {
         if (transferData.sourceType === "E") {
           const isNUSAPCTest = transferData.orgId === "E0000002277";
           const isAPC = transferData.orgId === "E0000002430";
-          if (!isNUSAPCTest && !isAPC) {
+          if ((!isNUSAPCTest && !isAPC) || isDuke || isMedDen) {
             this.cache.push(
               "ts-term-rem-trf",
               <td colSpan="4" className={cls("ts-termrem")}>
@@ -541,14 +678,15 @@ class TranscriptTermRemarks {
       }
       return false;
     });
-    if (!hasFinalGPA) return;
-    this.cache.push(
-      "ts-term-rem-fgpa",
-      <td colSpan="4" className={cls("ts-termrem")}>
-        The Final Cumulative Average Point takes into account student&rsquo;s
-        academic performance at the Partner University.
-      </td>
-    );
+    if (hasFinalGPA) {
+      this.cache.push(
+        "ts-term-rem-fgpa",
+        <td colSpan="4" className={cls("ts-termrem")}>
+          The Final Cumulative Average Point takes into account student&rsquo;s
+          academic performance at the Partner University.
+        </td>
+      );
+    }
   }
 
   // render transcript texts
@@ -578,8 +716,9 @@ class TranscriptTermData {
 
   // main render
   render() {
+    // NOTE: all term data rows should have a type starting with "ts-term"
     this.renderAcadYear();
-    this.renderFormOfStudy();
+    if (!isMedDen) this.renderFormOfStudy();
     this.renderCreditTransfer();
     this.renderEnrollment();
     this.renderTermSummary();
@@ -588,13 +727,15 @@ class TranscriptTermData {
 
   // render academic year
   renderAcadYear() {
+    // acad year can't be last row
     this.dataFeeder.push(
       "ts-term-year",
       <td colSpan="4" className={cls("ts-title ts-highlight")}>
         <p />
         ACADEMIC YEAR {this.termData.term.toUpperCase()}
         <p />
-      </td>
+      </td>,
+      true
     );
   }
 
@@ -890,7 +1031,6 @@ class TranscriptAward {
 class TranscriptData {
   // constructor
   constructor(dataSource, dataFeeder) {
-    this.keyPrefix = "ts";
     this.dataSource = dataSource;
     this.dataFeeder = dataFeeder;
   }
@@ -981,12 +1121,18 @@ class TranscriptData {
 const Template = ({ certificate }) => {
   // JSON data source
   const jsonData = certificate;
+  // to be used in rendering
+  isDuke = jsonData.additionalData.transcriptType.startsWith("DK");
+  isCDP = jsonData.additionalData.transcriptType.startsWith("CDP");
+  isMedDen =
+    jsonData.additionalData.transcriptType.startsWith("UM") ||
+    jsonData.additionalData.transcriptType.startsWith("UD");
   // prepare data
   const dataFeeder = new TranscriptDataFeeder();
   dataFeeder.headerData = renderTranscriptHeaderData(jsonData);
   new TranscriptProgram(jsonData, dataFeeder).render();
   new TranscriptData(jsonData, dataFeeder).render();
-  dataFeeder.resetTermRange();
+  dataFeeder.resetTermRange("ts-term");
   // render data
   // 1123px is width of A4 portrait (29.7cm)
   const ratio = (window.innerWidth - 30) / 1123;

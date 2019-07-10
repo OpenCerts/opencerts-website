@@ -55,7 +55,7 @@ class Degree extends Component {
       textAlign: "center",
       border: "0px solid"
     };
-    const degreeData = this.dataSource.additionalData.degreeData[0];
+    const degreeData = this.dataSource.additionalData.degreeScroll[0];
     const dateConferred = isoDateToLocalLong(degreeData.dateConferred);
     const html = (
       <table width="100%">
@@ -154,9 +154,9 @@ class Degree extends Component {
     let sig4;
     if (this.dataSource.additionalData.images) {
       sig1 = renderImage(this.dataSource.additionalData.images.TRUSTEES);
-      sig2 = renderImage(this.dataSource.additionalData.images.PRESIDENT);
-      sig3 = renderImage(this.dataSource.additionalData.images.TRUSTEESIMP);
-      sig4 = renderImage(this.dataSource.additionalData.images.PRESIDENTIMP);
+      sig2 = renderImage(this.dataSource.additionalData.images.ICL_PRESIDENT);
+      sig3 = renderImage(this.dataSource.additionalData.images.PRESIDENT);
+      sig4 = renderImage(this.dataSource.additionalData.images.ICL_REGISTRAR);
     }
     const html = (
       <table width="100%">

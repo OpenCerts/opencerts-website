@@ -62,7 +62,7 @@ class Degree extends Component {
 
   // render main content
   renderContent() {
-    const degreeData = this.dataSource.additionalData.degreeData[0];
+    const degreeData = this.dataSource.additionalData.degreeScroll[0];
     const words = dateToWords(degreeData.dateConferred);
     const dateConferred = `${words.dayMonth} ${words.year}`;
 
@@ -117,8 +117,8 @@ class Degree extends Component {
     let sig3;
     if (this.dataSource.additionalData.images) {
       sig1 = renderImage(this.dataSource.additionalData.images.TRUSTEES);
-      sig2 = renderImage(this.dataSource.additionalData.images.TRUSTEESANU);
-      sig3 = renderImage(this.dataSource.additionalData.images.PRESIDENTANU);
+      sig2 = renderImage(this.dataSource.additionalData.images.YNC_GOVERNING);
+      sig3 = renderImage(this.dataSource.additionalData.images.YNC_PRESIDENT);
     }
 
     const html = (

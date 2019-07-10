@@ -58,7 +58,7 @@ class Degree extends Component {
   // render starting phrase before name
   renderContent() {
     const html = [];
-    const degreeData = this.dataSource.additionalData.degreeData[0];
+    const degreeData = this.dataSource.additionalData.degreeScroll[0];
     const dateConferred = isoDateToLocalLong(degreeData.dateConferred);
     const style1 = { lineHeight: "14pt" };
 
