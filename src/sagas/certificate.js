@@ -28,6 +28,7 @@ import {
   types as applicationTypes,
   getNetworkId
 } from "../reducers/application";
+import { getDocumentStoreRecords } from "opencerts-dnsprove";
 import DocumentStoreDefinition from "../services/contracts/DocumentStore.json";
 import fetchIssuers from "../services/issuers";
 import { combinedHash } from "../utils";
@@ -82,6 +83,7 @@ export function* loadCertificateContracts({ payload }) {
 
 export function* verifyCertificateHash({ certificate }) {
   const verified = verifySignature(certificate);
+  console.log(verified, "verified it")
   if (verified) {
     yield put(verifyingCertificateHashSuccess());
     return true;
@@ -220,9 +222,53 @@ export function* resolveEnsNamesToText(ensNames) {
 }
 
 export function* verifyCertificateIssuer({ certificate }) {
+  const data = certificateData(certificate);
+
+    const issuers = get(data, "issuers", [])[0];
+    issuers.identityProof && issuers.identityProof.type === "DNS" 
+    ? yield call(verifyCertificateDnsIssuer, {certificateData: data}) 
+    : yield call(verifyCertificateRegistryIssuer, {certificateData: data});
+}
+
+export function* verifyCertificateDnsIssuer(certificateData) {
   try {
-    const data = certificateData(certificate);
-    const contractStoreAddresses = get(data, "issuers", []).map(
+    const issuers = get(certificateData, "issuers", []);
+    const identityProof = issuers.map(issuer =>
+      issuer.identityProof && issuer.identityProof.type === "DNS"
+        ? issuer.identityProof.url
+        : null
+    );
+    const dnsRecords = await Promise.all(
+      identityProof.map(url => {
+        if (url) return getDocumentStoreRecords(url);
+      })
+    );
+    const identityStatus = flatten(dnsRecords);
+    info(`Flatten DNS records: ${identityStatus}`);
+    const verificationStatus = issuers.reduce(
+      (status, issuer) =>
+        identityStatus.some(identity =>
+          identity.address === issuer.documentStore && status ? true : false
+        ),
+      true
+    );
+    await next(verifyingDocumentIssuerSuccess(identityProof));
+    return verificationStatus;
+  } catch (e) {
+    await next(
+      verifyingDocumenteIssuerFailure({
+        document: getData(document),
+        error: e.message
+      })
+    );
+
+    return false;
+  }
+}
+
+export function* verifyCertificateRegistryIssuer(certificateData) {
+  try {
+    const contractStoreAddresses = get(certificateData, "issuers", []).map(
       issuer => issuer.certificateStore
     );
     trace(
