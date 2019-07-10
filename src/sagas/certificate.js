@@ -30,6 +30,7 @@ import {
   types as applicationTypes,
   getNetworkId
 } from "../reducers/application";
+import { getDocumentStoreRecords } from "opencerts-dnsprove";
 import DocumentStoreDefinition from "../services/contracts/DocumentStore.json";
 import fetchIssuers from "../services/issuers";
 import { combinedHash } from "../utils";
@@ -84,7 +85,6 @@ export function* loadCertificateContracts({ payload }) {
 
 export function* verifyCertificateHash({ certificate }) {
   const verified = verifySignature(certificate);
-  console.log(verified, "verified it");
   if (verified) {
     yield put(verifyingCertificateHashSuccess());
     return true;
