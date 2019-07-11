@@ -37,7 +37,8 @@ const renderDropzoneContent = props => {
     document &&
     (!hashStatus.verified ||
       !issuedStatus.verified ||
-      !notRevokedStatus.verified)
+      !notRevokedStatus.verified ||
+      !storeStatus.verified)
   ) {
     return (
       <UnverifiedView
