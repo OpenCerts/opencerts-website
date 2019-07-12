@@ -294,12 +294,13 @@ export function* resolveEnsNamesToText(ensNames) {
 
 export function* verifyCertificateDnsIssuer({ certData }) {
   const issuers = get(certData, "issuers", []);
-  const identityProof = issuers.map(issuer => issuer.identityProof.url);
+
+  const identityProof = issuers.map(issuer => issuer.identityProof.location);
   trace(`identityProof: ${identityProof}`);
   if (!identityProof) return false;
 
   const dnsRecords = yield all(
-    identityProof.map(url => call(getDocumentStoreRecords, url))
+    identityProof.map(location => call(getDocumentStoreRecords, location))
   );
   const identityStatus = flatten(dnsRecords);
   trace(`Flatten DNS records: ${identityStatus}`);
@@ -355,7 +356,7 @@ export function* verifyCertificateRegistryIssuer({ certData }) {
     }
 
     trace("combinedIssuerIdentities", combinedIssuerIdentities);
-    return combinedIssuerIdentities;
+    return combinedIssuerIdentities || false;
   } catch (e) {
     return { error: e };
   }
@@ -373,21 +374,28 @@ export function* verifyCertificateIssuer({ certificate }) {
     if (
       issuers.identityProof &&
       issuers.identityProof.type === "DNS-TXT" &&
-      !issuerRegistryStatus.error
+      (!issuerRegistryStatus || !issuerRegistryStatus.error)
     )
       dnsVerificationStatus = yield call(verifyCertificateDnsIssuer, {
         certData: data
       });
     trace(`issuer status: ${issuerRegistryStatus}`);
-
-    if (issuerRegistryStatus.error && !dnsVerificationStatus)
-      throw new Error(issuerRegistryStatus.error);
+    if (
+      (!issuerRegistryStatus || issuerRegistryStatus.error) &&
+      !dnsVerificationStatus
+    )
+      throw new Error(
+        issuerRegistryStatus
+          ? issuerRegistryStatus.error
+          : "Issuer Identity Can not be verified."
+      );
 
     yield put(
       verifyingCertificateIssuerSuccess({
-        registryIdentiy: issuerRegistryStatus.error
-          ? false
-          : issuerRegistryStatus,
+        registryIdentity:
+          !issuerRegistryStatus || issuerRegistryStatus.error
+            ? false
+            : issuerRegistryStatus,
         dnsIdentity: dnsVerificationStatus
       })
     );
