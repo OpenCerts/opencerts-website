@@ -293,14 +293,11 @@ export function* resolveEnsNamesToText(ensNames) {
 }
 
 export function* verifyCertificateDnsIssuer({ certData }) {
-  try {
     const issuers = get(certData, "issuers", []);
-    const identityProof = issuers.map(issuer =>
-      issuer.identityProof && issuer.identityProof.type === "DNS"
-        ? issuer.identityProof.url
-        : null
-    );
+    const identityProof = issuers.map(issuer => issuer.identityProof.url);
+    trace(`identityProof: ${identityProof}`);
     if (!identityProof) return false;
+    console.log(identityProof)
     const dnsRecords = yield all(
       identityProof.map(url => call(getDocumentStoreRecords, url))
     );
@@ -313,24 +310,12 @@ export function* verifyCertificateDnsIssuer({ certData }) {
         ),
       true
     );
-    yield put(verifyingCertificateIssuerSuccess(identityProof));
     return verificationStatus;
-  } catch (e) {
-    yield put(
-      verifyingCertificateIssuerFailure({
-        document: certData,
-        error: e.message
-      })
-    );
-
-    return false;
-  }
 }
 
 export function* verifyCertificateRegistryIssuer({ certData }) {
-  try {
-    const data = getData(certificate);
-    const contractStoreAddresses = get(data, "issuers", []).map(issuer =>
+  try{
+    const contractStoreAddresses = get(certData, "issuers", []).map(issuer =>
       getDocumentStore(issuer)
     );
     trace(
@@ -370,27 +355,38 @@ export function* verifyCertificateRegistryIssuer({ certData }) {
     }
 
     trace("combinedIssuerIdentities", combinedIssuerIdentities);
-    yield put(verifyingCertificateIssuerSuccess(combinedIssuerIdentities));
+    yield put(verifyingCertificateIssuerRegistrySuccess(combinedIssuerIdentities));
     return combinedIssuerIdentities;
-  } catch (e) {
-    error(e);
-    yield put(
-      verifyingCertificateIssuerFailure({
-        error: e.message,
-        certificate: certData
-      })
-    );
-    return false;
+  } catch(e) {
+    return {error: e};
   }
 }
 
 export function* verifyCertificateIssuer({ certificate }) {
   const data = getData(certificate);
-
+  try {
   const issuers = get(data, "issuers", [])[0];
-  return issuers.identityProof && issuers.identityProof.type === "DNS"
-    ? yield call(verifyCertificateDnsIssuer, { certData: data })
-    : yield call(verifyCertificateRegistryIssuer, { certData: data });
+  const issuerStatus = yield all({
+    regIssuerIdentities: call(verifyCertificateRegistryIssuer, { certData: data }),
+    dnsVerificationStatus: issuers.identityProof && issuers.identityProof.type === "DNS-TXT" ?
+      call(verifyCertificateDnsIssuer, { certData: data }) : false});
+  trace(`issuer status: ${issuerStatus}`);
+  console.log(issuerStatus)
+  if(issuerStatus.regIssuerIdentities.error && !issuerStatus.dnsVerificationStatus) throw new Error(issuerStatus.regIssuerIdentities.error); 
+
+  if(!issuerStatus.regIssuerIdentities && !issuerStatus.dnsVerificationStatus) throw new Error("Issuer identity missing in certificate")
+  yield put(verifyingCertificateIssuerSuccess({ registryIdentiy: issuerStatus.regIssuerIdentities, dnsIdentity: issuerStatus.dnsVerificationStatus}));
+  if(issuerStatus.regIssuerIdentities.error) return issuerStatus.dnsVerificationStatus;
+  return issuerStatus.regIssuerIdentities;
+  } catch(e) {
+    yield put(
+      verifyingCertificateIssuerFailure({
+        error: e.message,
+        certificate: data
+      })
+    );
+    return false;
+  }
 }
 
 export function* verifyCertificate({ payload }) {
@@ -400,11 +396,11 @@ export function* verifyCertificate({ payload }) {
   const certificateStores = yield call(loadCertificateContracts, { payload });
   const args = { certificateStores, certificate: payload };
   const verificationStatuses = yield all({
-    certificateIssued: call(verifyCertificateIssued, args),
-    certificateHashValid: call(verifyCertificateHash, args),
-    certificateNotRevoked: call(verifyCertificateNotRevoked, args),
+    // certificateIssued: call(verifyCertificateIssued, args),
+    // certificateHashValid: call(verifyCertificateHash, args),
+    // certificateNotRevoked: call(verifyCertificateNotRevoked, args),
     certificateIssuerRecognised: call(verifyCertificateIssuer, args),
-    certificateStoreValid: call(verifyCertificateStore, args)
+    // certificateStoreValid: call(verifyCertificateStore, args)
   });
   trace(verificationStatuses);
   const verified =
@@ -413,7 +409,7 @@ export function* verifyCertificate({ payload }) {
     verificationStatuses.certificateNotRevoked &&
     verificationStatuses.certificateStoreValid;
   if (verified) {
-    Router.push("/viewer");
+    // Router.push("/viewer");
   }
 }
 
