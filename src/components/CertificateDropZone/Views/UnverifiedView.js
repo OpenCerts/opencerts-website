@@ -4,12 +4,52 @@ import css from "./viewerStyles.scss";
 
 const View = ({
   resetData,
-  issuerIdentityStatus,
+  storeStatus,
   hashStatus,
   issuedStatus,
-  notRevokedStatus,
-  storeStatus
+  notRevokedStatus
 }) => {
+  /* Array of error messages with priority of error messages determined by a stack. 
+  Error messages are first placed into the stack and the error message with the highest priority is popped off the stack
+  and displayed.
+  
+  The priority of error messages are as follows:
+  1. Invalid store
+  2. Tampered
+  3. Not issued
+  4. Revoked */
+  const errorMessages = [
+    {
+      title: "Certificate revoked",
+      message:
+        "This certificate has been revoked by your issuing institution. Please contact your issuing institution for more details.",
+      error: !notRevokedStatus.verified
+    },
+    {
+      title: "Certificate not issued",
+      message:
+        "This certificate cannot be found. Please contact your issuing institution for help or issue the certificate before trying again.",
+      error: !issuedStatus.verified
+    },
+    {
+      title: "Certificate has been tampered with",
+      message:
+        "The contents of this certificate are inaccurate and have been tampered with.",
+      error: !hashStatus.verified
+    },
+    {
+      title: "Certificate store address is invalid",
+      message:
+        "Please check that you have a valid smart contract with us and a correct certificate store address before proceeding.",
+      error: !storeStatus.verified
+    }
+  ];
+
+  const stack = errorMessages.filter(
+    errorMessage => errorMessage.error === true
+  );
+  const error = stack.pop();
+
   const isWarning =
     hashStatus.verified && issuedStatus.verified && notRevokedStatus.verified;
   return (
@@ -39,26 +79,11 @@ const View = ({
       </span>
 
       <div className={css.verifications}>
-        {!issuerIdentityStatus.verified ? (
-          <p className={css.messages}>
-            Certificate from unregistered institution
-          </p>
-        ) : null}
-
-        {!notRevokedStatus.verified ? (
-          <p className={css.messages}>Certificate revoked</p>
-        ) : null}
-
-        {!hashStatus.verified ? (
-          <p className={css.messages}>Certificate has been tampered with</p>
-        ) : null}
-
-        {!issuedStatus.verified ? (
-          <p className={css.messages}>Certificate not issued</p>
-        ) : null}
-
-        {!storeStatus.verified ? (
-          <p className={css.messages}>Certificate store address is invalid</p>
+        {error !== undefined ? (
+          <div>
+            <p className={css.messages}>{error.title}</p>
+            <p>{error.message}</p>
+          </div>
         ) : null}
       </div>
 
@@ -107,7 +132,6 @@ View.propTypes = {
   resetData: PropTypes.func,
   document: PropTypes.object,
 
-  issuerIdentityStatus: PropTypes.object,
   hashStatus: PropTypes.object,
   issuedStatus: PropTypes.object,
   notRevokedStatus: PropTypes.object,
