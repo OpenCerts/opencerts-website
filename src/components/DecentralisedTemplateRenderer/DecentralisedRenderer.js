@@ -38,7 +38,7 @@ class DecentralisedRenderer extends Component {
     this.props.registerTemplates(templates);
   }
 
-  updateCertificate(field) {
+  handleObfuscation(field) {
     const updatedDocument = obfuscateDocument(this.props.document, field);
     this.props.updateObfuscatedCertificate(updatedDocument);
     const updatedCertificate = getData(updatedDocument);
@@ -67,13 +67,13 @@ class DecentralisedRenderer extends Component {
     const iframe = this.iframe;
     const updateHeight = this.updateHeight.bind(this);
     const updateTemplates = this.updateTemplates.bind(this);
-    const updateCertificate = this.updateCertificate.bind(this);
+    const handleObfuscation = this.handleObfuscation.bind(this);
     const childFrameConnection = connectToChild({
       iframe,
       methods: {
         updateHeight,
         updateTemplates,
-        updateCertificate
+        handleObfuscation
       }
     }).promise;
     this.setState({ childFrameConnection });
