@@ -255,6 +255,49 @@ function isApprovedENSDomain(issuerAddress) {
   );
 }
 
+// mixedId should upgrade to "Accredited by SSG"
+// const mixedId = {
+//   "0xABCD": {
+//     registry: "ABCD Corp",
+//     dns: "abcd.com"
+//   },
+//   "0x1234": {
+//     dns: "1234.com"
+//   }
+// }
+
+// mixedUnverified should fail (Institute(s) not registered)
+// const mixedUnverified = {
+//   "0xABCD": {
+//     registry: "ABCD Corp",
+//     dns: undefined
+//   },
+//   "0x1234": {
+//     dns: undefined,
+//     registry: undefined
+//   }
+// }
+
+// Should show both 
+// const mixedDns = {
+//   "0xABCD": {
+//     dns: "abcd.com"
+//   },
+//   "0x1234": {
+//     dns: "1234.com"
+//   }
+// }
+
+// const mixedDns = {
+//   "0xABCD": {
+//     dns: "abcd.com"
+//   },
+//   "0x1234": {
+//     dns: "1234.com"
+//   }
+// }
+
+// This function should no longer short circuit when there is the first error
 export function* lookupEthereumAddresses(ethereumAddressIssuers) {
   const registeredIssuers = yield fetchIssuers();
   const issuersNormalised = mapKeys(registeredIssuers, (_, k) =>
@@ -365,7 +408,12 @@ export function* verifyCertificateRegistryIssuer({ certData }) {
 export function* verifyCertificateIssuer({ certificate }) {
   const data = getData(certificate);
   try {
+    // We cannot just verify issuer 0
     const issuers = get(data, "issuers", [])[0];
+
+    // Map storeAddress => {dns: "", registry: ""}
+    // Reduce result to 1. Accredited by SSG, 2. DNS verified, 3. Unverified institute
+
     let dnsVerificationStatus = false;
     const issuerRegistryStatus = yield call(verifyCertificateRegistryIssuer, {
       certData: data
