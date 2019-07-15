@@ -18,12 +18,13 @@ test("NUS-ICLJDP-2019 degree scroll is rendered correctly", async t => {
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
   // Certificate tabs rendered
-  await t.expect(TemplateTabList.textContent).contains("NUS Degree");
+  await t.expect(TemplateTabList.textContent).contains("Certificate");
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "NATIONAL UNIVERSITY",
     "OF SINGAPORE",
-    "Imperial College London"
+    "Imperial College London",
+    "Doctor of Philosophy"
   ]);
 });

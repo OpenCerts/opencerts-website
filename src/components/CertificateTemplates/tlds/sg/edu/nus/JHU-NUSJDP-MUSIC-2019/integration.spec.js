@@ -18,13 +18,12 @@ test("JHU-NUSJDP-MUSIC-2019 degree scroll is rendered correctly", async t => {
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
   // Certificate tabs rendered
-  await t.expect(TemplateTabList.textContent).contains("NUS Degree");
+  await t.expect(TemplateTabList.textContent).contains("Certificate");
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "The Johns Hopkins University",
     "National University of Singapore",
-    "Bachelor of Music",
-    "Voice"
+    "Bachelor of Music"
   ]);
 });

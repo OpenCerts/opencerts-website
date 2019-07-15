@@ -5,7 +5,10 @@ import {
   isoDateToLocal,
   sassClassNames,
   NUS_TS_BACKIMG,
-  NUS_TS_LEGEND
+  NUS_TS_BACKIMG_YALE,
+  NUS_TS_LEGEND,
+  NUS_TS_LEGEND_DUKE,
+  NUS_TS_LEGEND_YALE
 } from "../common";
 import {
   TranscriptDataFeeder,
@@ -21,6 +24,7 @@ const cls = names => sassClassNames(names, scss);
 let isDuke;
 let isMedDen;
 let isCDP;
+let isYaleNUS;
 
 // transcript content - program info
 class TranscriptProgram {
@@ -32,10 +36,17 @@ class TranscriptProgram {
   // main render
   render() {
     const progData = this.dataSource.additionalData.programData;
-    if (progData)
+    if (progData) {
       progData.forEach(data => {
         if (data.statusCode !== "DC") this.renderProgData(data);
       });
+      this.dataFeeder.push(
+        "ts-prog-end",
+        <td colSpan="4">
+          <hr />
+        </td>
+      );
+    }
   }
 
   // render for a program
@@ -128,7 +139,7 @@ class TranscriptCreditTransfer {
   renderExtTrfTitle() {
     this.dataFeeder.push(
       "ts-term-trf-extitle",
-      <td colSpan="4" className={cls("ts-termrem")}>
+      <td colSpan="4" className={cls("ts-termrem ts-highlight")}>
         CREDITS RECOGNISED ON ADMISSION
       </td>
     );
@@ -210,7 +221,7 @@ class TranscriptCreditTransfer {
         this.dataFeeder.push(
           "ts-term-trf-intapc",
           <Fragment>
-            <td span="2" className={cls("ts-termrem")}>
+            <td colSpan="2" className={cls("ts-termrem")}>
               {title}
             </td>
             <td className={cls("ts-grade")}>{grade}</td>
@@ -245,10 +256,9 @@ class TranscriptCreditTransfer {
         this.dataFeeder.push(
           "ts-term-trf-inttrf",
           <Fragment>
-            <td span="2" className={cls("ts-termrem")}>
+            <td colSpan="3" className={cls("ts-termrem")}>
               {title}
             </td>
-            <td>&nbsp;</td>
             <td className={cls("ts-credits")}>{credits}</td>
           </Fragment>
         );
@@ -300,7 +310,7 @@ class TranscriptCreditTransfer {
           "ts-term-trf-fromorg",
           <Fragment>
             <td colSpan="2" className={cls("ts-termrem")}>
-              CREDITS TRANSFERRED FROM {transferData.orgName}
+              CREDITS TRANSFERRED FROM {transferData.orgName.toUpperCase()}
             </td>
             <td className={cls("ts-grade")}>-</td>
             <td className={cls("ts-credits")}>
@@ -318,9 +328,9 @@ class TranscriptCreditTransfer {
       if (transferData.sourceType === "E" && transferData.creditsGPA > 0) {
         this.dataFeeder.push(
           "ts-term-trf-eqnus",
-          <td colSpan="4">
+          <td colSpan="4" className={cls("ts-termrem")}>
             CREDITS TRANSFERRED (WITH EQUIVALENT NUS GRADE) FROM
-            {transferData.orgName}:
+            {transferData.orgName.toUpperCase()}:
           </td>
         );
         transferData.details.forEach(detail => {
@@ -364,10 +374,8 @@ class TranscriptModuleEnroll {
   render() {
     let { moduleCode } = this.data;
     if (
-      (this.data.gradingBasis === "NCP" && this.data.includeInGPA) ||
-      this.data.remarks ||
-      isDuke ||
-      isMedDen
+      (this.data.gradingBasis === "NCP" && !this.data.includeInGPA) ||
+      this.data.remarks
     )
       moduleCode = `*${moduleCode}`;
     let moduleDescr = this.data.moduleName;
@@ -409,7 +417,8 @@ class TranscriptEnrollment {
   renderEnrollTitle() {
     this.dataFeeder.push(
       "ts-term-enl-title",
-      <td colSpan="4" className={cls("ts-termrem")}>
+      <td colSpan="4" className={cls("ts-termrem ts-highlight")}>
+        <p />
         ENROLLED IN THE FOLLOWING NUS MODULES:
       </td>
     );
@@ -419,7 +428,8 @@ class TranscriptEnrollment {
   renderSupplementaryTitle() {
     this.dataFeeder.push(
       "ts-term-enl-suptitle",
-      <td colSpan="4" className={cls("ts-termrem")}>
+      <td colSpan="4" className={cls("ts-termrem ts-highlight")}>
+        <p />
         SUPPLEMENTARY EXAMINATION:
       </td>
     );
@@ -502,7 +512,7 @@ class TranscriptSummary {
   render() {
     this.termData.summary.forEach(data => {
       // degree name
-      this.renderTermDegree(data);
+      if (!isMedDen) this.renderTermDegree(data);
       // GPA
       if (data.specialGPA) this.renderSpecialGPA(data);
       else if (!isMedDen) this.renderGPA(data);
@@ -528,7 +538,7 @@ class TranscriptSummary {
   renderGPA(sumData) {
     let gpa;
     let gpaName;
-    if (sumData.includeInGPA) {
+    if (sumData.includeInGPA || isDuke) {
       gpa = sumData.GPA.toFixed(2);
       gpaName = sumData.GPAName.toUpperCase();
     } else {
@@ -597,8 +607,9 @@ class TranscriptTermRemarks {
     this.renderTranscriptTexts();
     if (this.cache.length === 0) return;
     this.renderRemarksTitle();
-    for (let i = 0; i < this.cache.length; i += 1)
+    for (let i = 0; i < this.cache.length; i += 1) {
       this.dataFeeder.push(this.cache.type(i), this.cache.data(i));
+    }
   }
 
   // render remarks title
@@ -618,7 +629,7 @@ class TranscriptTermRemarks {
       // remarks of NCP
       this.termData.modules.forEach(data => {
         if (
-          data.includeInGPA &&
+          !data.includeInGPA &&
           data.gradingBasis === "NCP" &&
           !isDuke &&
           !isMedDen
@@ -696,12 +707,14 @@ class TranscriptTermRemarks {
     this.termData.remarks.forEach(data => {
       text += `${data.trim()} `;
     });
-    this.cache.push(
-      "ts-term-rem-txt",
-      <td colSpan="4" className={cls("ts-termrem")}>
-        {text}
-      </td>
-    );
+    if (text) {
+      this.cache.push(
+        "ts-term-rem-txt",
+        <td colSpan="4" className={cls("ts-termrem")}>
+          {text}
+        </td>
+      );
+    }
   }
 }
 
@@ -749,7 +762,7 @@ class TranscriptTermData {
       this.dataFeeder.push(
         "ts-term-fos",
         <td colSpan="4" className={cls("ts-termrem")}>
-          {`${this.termData.fosDescription} ${this.termData.organization}`}
+          {`${this.termData.fosDescription.toUpperCase()} ${this.termData.organization.toUpperCase()}`}
         </td>
       );
     }
@@ -791,23 +804,32 @@ class TranscriptLeave {
   // main render
   render() {
     if (this.leaveData) {
-      this.leaveData.forEach(data => {
-        this.renderLeave(data);
+      this.leaveData.forEach((data, idx) => {
+        this.renderLeave(data, idx);
       });
     }
   }
 
   // render leave data
-  renderLeave(data) {
+  renderLeave(data, idx) {
     let text = `LEAVE OF ABSENCE FROM ${isoDateToLocal(data.from)}`;
     if (data.to) text += ` TO ${isoDateToLocal(data.to)}`;
-    this.dataFeeder.push(
-      "ts-loa",
-      <td colSpan="4" className={cls("ts-title ts-highlight")}>
-        <hr />
-        {text}
-      </td>
-    );
+    if (idx === 0)
+      // print a line before 1st row
+      this.dataFeeder.push(
+        "ts-loa",
+        <td colSpan="4" className={cls("ts-title ts-highlight")}>
+          <hr />
+          {text}
+        </td>
+      );
+    else
+      this.dataFeeder.push(
+        "ts-loa",
+        <td colSpan="4" className={cls("ts-title ts-highlight")}>
+          {text}
+        </td>
+      );
   }
 }
 
@@ -853,8 +875,12 @@ class TranscriptDegree {
             descr += ` with ${planData.planDescr}`;
           this.dataFeeder.push(
             "ts-deg-plan",
-            <td colSpan="4" className={cls("ts-title ts-highlight")}>
-              &nbsp;&nbsp;&nbsp;&nbsp;{descr.toUpperCase()}
+            <td
+              colSpan="4"
+              className={cls("ts-title ts-highlight")}
+              style={{ paddingLeft: "20px" }}
+            >
+              {descr.toUpperCase()}
             </td>
           );
         }
@@ -872,8 +898,12 @@ class TranscriptDegree {
             descr = `${subplData.typeName}: ${subplData.transcriptDescr}`;
             this.dataFeeder.push(
               "ts-deg-spln",
-              <td colSpan="4" className={cls("ts-title ts-highlight")}>
-                &nbsp;&nbsp;&nbsp;&nbsp;{descr.toUpperCase()}
+              <td
+                colSpan="4"
+                className={cls("ts-title ts-highlight")}
+                style={{ paddingLeft: "20px" }}
+              >
+                {descr.toUpperCase()}
               </td>
             );
           });
@@ -889,8 +919,12 @@ class TranscriptDegree {
         descr = `${splData.typeName}: ${splData.transcriptDescr}`;
         this.dataFeeder.push(
           "ts-deg-spcl",
-          <td colSpan="4" className={cls("ts-title ts-highlight")}>
-            &nbsp;&nbsp;&nbsp;&nbsp;{descr.toUpperCase()}
+          <td
+            colSpan="4"
+            className={cls("ts-title ts-highlight")}
+            style={{ paddingLeft: "20px" }}
+          >
+            {descr.toUpperCase()}
           </td>
         );
       });
@@ -906,8 +940,12 @@ class TranscriptDegree {
     }
     this.dataFeeder.push(
       "ts-deg-title",
-      <td colSpan="4" className={cls("ts-title ts-highlight")}>
-        &nbsp;&nbsp;{degTitle.toUpperCase()}
+      <td
+        colSpan="4"
+        className={cls("ts-title ts-highlight")}
+        style={{ paddingLeft: "10px" }}
+      >
+        {degTitle.toUpperCase()}
       </td>
     );
     this.renderMajorMinor(data);
@@ -929,11 +967,15 @@ class TranscriptMilestone {
     if (this.msData) {
       this.msData.forEach(data => {
         if (data.milestoneTitle) {
-          const descr = `${data.milestoneTitle}: ${data.thesisTitle}`;
+          const descr = `${data.milestoneTitle} ${data.thesisTitle}`;
           this.dataFeeder.push(
             "ts-ms",
-            <td colSpan="4" className={cls("ts-title ts-highlight")}>
-              &nbsp;&nbsp;&nbsp;&nbsp;{descr.toUpperCase()}
+            <td
+              colSpan="4"
+              className={cls("ts-title ts-highlight")}
+              style={{ paddingLeft: "20px" }}
+            >
+              {descr.toUpperCase()}
             </td>
           );
         }
@@ -961,8 +1003,12 @@ class TranscriptSpclProg {
               if (planData.planDescr) descr += ` ${planData.planDescr}`;
               this.dataFeeder.push(
                 "ts-splprg",
-                <td colSpan="4" className={cls("ts-title ts-highlight")}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;{descr.toUpperCase()}
+                <td
+                  colSpan="4"
+                  className={cls("ts-title ts-highlight")}
+                  style={{ paddingLeft: "10px" }}
+                >
+                  {descr.toUpperCase()}
                 </td>
               );
             }
@@ -1127,6 +1173,13 @@ const Template = ({ certificate }) => {
   isMedDen =
     jsonData.additionalData.transcriptType.startsWith("UM") ||
     jsonData.additionalData.transcriptType.startsWith("UD");
+  isYaleNUS = (transcriptData => {
+    const programData = transcriptData.additionalData.programData;
+    if (programData)
+      for (let i = 0; i < programData.length; i += 1)
+        if (programData[i].programCode.substring(1, 3) === "17") return true;
+    return false;
+  })(jsonData);
   // prepare data
   const dataFeeder = new TranscriptDataFeeder();
   dataFeeder.headerData = renderTranscriptHeaderData(jsonData);
@@ -1143,17 +1196,20 @@ const Template = ({ certificate }) => {
           transformOrigin: "top left"
         }
       : null;
+  let legend;
+  if (isDuke) legend = NUS_TS_LEGEND_DUKE;
+  else if (isYaleNUS) legend = NUS_TS_LEGEND_YALE;
+  else legend = NUS_TS_LEGEND;
   const html = (
     <div style={scale}>
       <Transcript
         maxPages="8"
         maxRows="50"
         dataFeeder={dataFeeder}
-        backImgUrl={`url(${NUS_TS_BACKIMG})`}
-        legendPage={NUS_TS_LEGEND}
+        backImgUrl={`url(${isYaleNUS ? NUS_TS_BACKIMG_YALE : NUS_TS_BACKIMG})`}
+        legendPage={legend}
         legendRatio="0.95"
       />
-      ;
     </div>
   );
   return html;

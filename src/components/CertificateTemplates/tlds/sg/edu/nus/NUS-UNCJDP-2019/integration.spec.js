@@ -18,13 +18,13 @@ test("NUS-UNCJDP-2019 degree scroll is rendered correctly", async t => {
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
   // Certificate tabs rendered
-  await t.expect(TemplateTabList.textContent).contains("NUS Degree");
+  await t.expect(TemplateTabList.textContent).contains("Certificate");
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "National University of Singapore",
     "The University of North Carolina at Chapel Hill",
-    "Bachelor of Science (UNC-Chapel Hill)",
-    "Biology"
+    "Bachelor of Arts (UNC-Chapel Hill)",
+    "Bachelor of Arts Honours Pass With Merit(NUS)"
   ]);
 });

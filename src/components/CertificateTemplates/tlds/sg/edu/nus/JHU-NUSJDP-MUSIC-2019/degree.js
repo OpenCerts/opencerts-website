@@ -38,10 +38,14 @@ class Degree extends Component {
 
   // render degree major
   renderDegreeMajor = degreeData => {
-    const degreeMajor = capitalizedText(degreeData.major.toLowerCase());
-
-    const html = <div className={cls("cert-degree-major")}>{degreeMajor}</div>;
-    return html;
+    if (degreeData.major) {
+      const degreeMajor = capitalizedText(degreeData.major.toLowerCase());
+      const html = (
+        <div className={cls("cert-degree-major")}>{degreeMajor}</div>
+      );
+      return html;
+    }
+    return "";
   };
 
   // render starting phrase before name

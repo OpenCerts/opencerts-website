@@ -18,7 +18,7 @@ test("NUS-ANUJDP-BA-2019 degree scroll is rendered correctly", async t => {
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
   // Certificate tabs rendered
-  await t.expect(TemplateTabList.textContent).contains("NUS Degree");
+  await t.expect(TemplateTabList.textContent).contains("Certificate");
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
@@ -26,7 +26,7 @@ test("NUS-ANUJDP-BA-2019 degree scroll is rendered correctly", async t => {
     "OF SINGAPORE",
     "THE AUSTRALIAN NATIONAL",
     "UNIVERSITY",
-    "Bachelor of Arts",
-    "Honours (Distinction)"
+    "Bachelor of Social Sciences",
+    "First Class Honours"
   ]);
 });

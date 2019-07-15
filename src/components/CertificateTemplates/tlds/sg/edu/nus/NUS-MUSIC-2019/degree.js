@@ -26,7 +26,9 @@ class Degree extends Component {
     const degreeTitleCase = capitalizedText(
       degreeData.degreeTitle.toLowerCase()
     );
-    const degreeMajor = capitalizedText(degreeData.major.toLowerCase());
+    const degreeMajor = capitalizedText(
+      degreeData.major ? degreeData.major.toLowerCase() : ""
+    );
     const honorsTitle = capitalizedText(
       degreeData.honours ? degreeData.honours : ""
     );

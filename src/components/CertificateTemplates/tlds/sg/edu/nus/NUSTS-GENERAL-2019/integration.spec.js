@@ -18,15 +18,14 @@ test("NUSTS-GENERAL-2019 transcript is rendered correctly", async t => {
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
   // Certificate tabs rendered
-  await t.expect(TemplateTabList.textContent).contains("NUS Transcript");
+  await t.expect(TemplateTabList.textContent).contains("Transcript");
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
-    "A0000414H",
-    "BACHELOR OF ARTS (ARCHITECTURE)",
-    "AR1222",
-    "HISTORY & THEORY OF MODERN ARCHITECTURE",
-    "BACHELOR OF ARTS (ARCHITECTURE) WITH 2ND CLASS HONOURS (LOWER)",
-    "30/06/2008"
+    "A0056627Y",
+    "BACHELOR OF ENGINEERING (MECHANICAL ENGINEERING)",
+    "ME2103",
+    "Engineering Visualization & Modeling",
+    "30/06/2013"
   ]);
 });

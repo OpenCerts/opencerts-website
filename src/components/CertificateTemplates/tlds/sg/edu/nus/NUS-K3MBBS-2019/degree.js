@@ -58,7 +58,7 @@ class Degree extends Component {
             {txt1} <br />
             {splitSentence[position]} <br />
             {txt2}
-            <span style={{ fontSize: "15pt" }}>WITH&nbsp;</span>
+            <span style={{ fontSize: "15pt" }}>&nbsp;WITH&nbsp;</span>
             {honorsTitle}
           </div>
         );

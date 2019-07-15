@@ -12,6 +12,7 @@ export { ICL_SEAL } from "./imgICLSeal";
 export { JHU_LOGO } from "./imgJHULogo";
 export { UNC_SEAL } from "./imgUNCSeal";
 export { NUS_TS_BACKIMG } from "./imgNUSTsBack";
+export { NUS_TS_BACKIMG_YALE } from "./imgNUSTsBackYale";
 export { NUS_TS_LEGEND } from "./imgNUSTsLegend";
 export { NUS_TS_LEGEND_DUKE } from "./imgNUSTsLegendDuke";
 export { NUS_TS_LEGEND_YALE } from "./imgNUSTsLegendYale";

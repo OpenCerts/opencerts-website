@@ -18,13 +18,13 @@ test("NUS-YALE-2019 degree scroll is rendered correctly", async t => {
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
   // Certificate tabs rendered
-  await t.expect(TemplateTabList.textContent).contains("NUS Degree");
+  await t.expect(TemplateTabList.textContent).contains("Certificate");
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "the National University of Singapore",
     "the College",
-    "Bachelor of Arts with Honours",
-    "this thirtieth day of June two thousand and seventeen"
+    "Bachelor of Arts With Honours with Magna Cum Laude",
+    "this thirtieth day of June two thousand and eighteen"
   ]);
 });

@@ -18,15 +18,16 @@ test("NUS-K1-2019 degree scroll is rendered correctly", async t => {
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
   // Certificate tabs rendered
-  await t.expect(TemplateTabList.textContent).contains("NUS Degree");
+  await t.expect(TemplateTabList.textContent).contains("Certificate");
 
   // Certificate tab content
   await validateTextContent(t, RenderedCertificate, [
     "NATIONAL UNIVERSITY",
     "OF SINGAPORE",
-    "BACHELOR OF APPLIED SCIENCE",
-    "SECOND CLASS HONOURS (UPPER)",
-    "28 February 2015",
+    "BACHELOR OF ENGINEERING",
+    "PASS",
+    "MECHANICAL ENGINEERING (HONS)",
+    "30 June 2013",
     "Chair, Board of Trustees",
     "President"
   ]);
