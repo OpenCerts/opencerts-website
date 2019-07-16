@@ -28,6 +28,12 @@ const renderVerifyBlock = props => (
   />
 );
 
+const LoadingIframe = (
+  <div id={styles["renderer-loader"]}>
+    <i className="text-blue fas fa-spinner fa-pulse fa-3x" />
+  </div>
+);
+
 const renderHeaderBlock = props => {
   const renderedVerifyBlock = renderVerifyBlock(props);
   return (
@@ -91,7 +97,9 @@ const CertificateViewer = props => {
         <div className={styles["header-container"]}>{renderedHeaderBlock}</div>
       </div>
       <MultiTabs selectTemplateTab={selectTemplateTab} />
+      {LoadingIframe}
       <DecentralisedRenderer
+        style={{ zIndex: 9999 }}
         certificate={document}
         source={`${
           typeof document.data.$template === "object"

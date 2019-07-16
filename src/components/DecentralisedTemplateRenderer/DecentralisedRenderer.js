@@ -98,7 +98,7 @@ class DecentralisedRenderer extends Component {
           this.iframe = iframe;
         }}
         src={this.props.source}
-        style={{ width: "100%", border: 0 }}
+        style={{ width: "100%", border: 0, position: "relative" }}
       />
     );
   }
