@@ -8,8 +8,8 @@ import {
   verifyCertificateHash,
   verifyCertificateIssued,
   isValidENSDomain,
-  resolveEnsNamesToText,
-  lookupEthereumAddresses,
+  resolveEnsNameToText,
+  lookupEthereumAddress,
   sendCertificate,
   analyticsIssuerFail,
   analyticsHashFail,
@@ -529,7 +529,7 @@ describe("sagas/certificate", () => {
       const registryIssuerSaga = verifyCertificateRegistryIssuer({ certData });
 
       expect(registryIssuerSaga.next().value).toEqual(
-        call(resolveEnsNamesToText, ensNames)
+        call(resolveEnsNameToText, ensNames)
       );
       const resolvedPut = issuerSaga.next(testValue).value;
 
@@ -559,7 +559,7 @@ describe("sagas/certificate", () => {
       const registryIssuerSaga = verifyCertificateRegistryIssuer({ certData });
 
       expect(registryIssuerSaga.next().value).toEqual(
-        call(resolveEnsNamesToText, ensNames)
+        call(resolveEnsNameToText, ensNames)
       );
       const resolvedPut = issuerSaga.next(testValue).value;
 
@@ -591,7 +591,7 @@ describe("sagas/certificate", () => {
       const registryIssuerSaga = verifyCertificateRegistryIssuer({ certData });
 
       expect(registryIssuerSaga.next().value).toEqual(
-        call(lookupEthereumAddresses, ethereumAddresses)
+        call(lookupEthereumAddress, ethereumAddresses)
       );
       const resolvedPut = issuerSaga.next(testValue).value;
 
@@ -628,11 +628,11 @@ describe("sagas/certificate", () => {
       const registryIssuerSaga = verifyCertificateRegistryIssuer({ certData });
 
       expect(registryIssuerSaga.next().value).toEqual(
-        call(resolveEnsNamesToText, ensNames)
+        call(resolveEnsNameToText, ensNames)
       );
 
       expect(registryIssuerSaga.next(testValue).value).toEqual(
-        call(lookupEthereumAddresses, ethereumAddresses)
+        call(lookupEthereumAddress, ethereumAddresses)
       );
       const resolvedPut = issuerSaga.next(
         testValue.concat(issuerRegistryReturnValue)
@@ -663,7 +663,7 @@ describe("sagas/certificate", () => {
       const registryIssuerSaga = verifyCertificateRegistryIssuer({ certData });
 
       expect(registryIssuerSaga.next().value).toEqual(
-        call(lookupEthereumAddresses, ethereumAddresses)
+        call(lookupEthereumAddress, ethereumAddresses)
       );
 
       const resolvedPut = registryIssuerSaga.next(resolverReturnValue).value;
@@ -695,7 +695,7 @@ describe("sagas/certificate", () => {
       const registryIssuerSaga = verifyCertificateRegistryIssuer({ certData });
 
       expect(registryIssuerSaga.next().value).toEqual(
-        call(lookupEthereumAddresses, ethereumAddresses)
+        call(lookupEthereumAddress, ethereumAddresses)
       );
       const resolvedPut = issuerSaga.next(testValue).value;
 
@@ -723,7 +723,7 @@ describe("sagas/certificate", () => {
       const registryIssuerSaga = verifyCertificateRegistryIssuer({ certData });
 
       expect(registryIssuerSaga.next().value).toEqual(
-        call(lookupEthereumAddresses, ethereumAddresses)
+        call(lookupEthereumAddress, ethereumAddresses)
       );
       const resolvedPut = issuerSaga.throw(new Error(msg)).value;
 

@@ -13,7 +13,7 @@ export const initialState = {
   storeLoading: false,
 
   issuerIdentities: null,
-  issuerDnsIdentiy: null,
+  issuerDnsIdentity: null,
   certificateHash: false,
   certificateIssued: false,
   certificateNotRevoked: false,
@@ -116,7 +116,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         issuerIdentities: null,
-        issuerDnsIdentiy: null,
+        issuerDnsIdentity: null,
         certificateHash: false,
         certificateIssued: false,
         certificateNotRevoked: false,
@@ -488,7 +488,7 @@ export function getIssuerIdentityStatus(store) {
     certificateIssuer
   } = store.certificate;
   return {
-    identities: issuerIdentities,
+    issuerRegistryIdentity: issuerIdentities,
     issuerDnsIdentity,
     verified: certificateIssuer,
     verifying: certificateIssuerVerifying,
