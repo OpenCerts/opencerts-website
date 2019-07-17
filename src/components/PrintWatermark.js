@@ -1,5 +1,5 @@
 const STATEMENT =
-  "Printed from True Copy. For verification, please visit opencerts.io with the electronic version of this certificate.";
+  "Printed from the digital version of certificate. For verification, please visit OpenCerts.io (http://opencerts.io/) with the .opencert file.";
 const PrintWatermark = () => (
   <div
     className="print-only"
