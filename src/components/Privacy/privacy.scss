@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import '../../styles/variables.scss';
 
 .main {
   max-width: 1280px;
@@ -33,22 +33,22 @@
     color: $brand-orange;
     margin-bottom: 0;
   }
-}
 
-ol {
-  counter-reset: item;
-  padding-inline-start: 20px;
-}
+  ol {
+    counter-reset: item;
+    padding-inline-start: 20px;
+  }
 
-li {
-  display: block;
-  list-style-position: outside;
-  position: relative;
-}
+  li {
+    display: block;
+    list-style-position: outside;
+    position: relative;
+  }
 
-li:before {
-  content: counters(item, ".") ". ";
-  position: absolute;
-  left: -3em;
-  counter-increment: item;
+  li:before {
+    content: counters(item, '.') '. ';
+    position: absolute;
+    left: -3em;
+    counter-increment: item;
+  }
 }
