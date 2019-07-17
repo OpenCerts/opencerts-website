@@ -56,8 +56,7 @@ describe("reducers", () => {
             id: "transcript",
             label: "Transcript"
           }
-        ],
-        activeTemplateTab: 0
+        ]
       };
       expect(reducer(prevState, action)).toEqual(expectedState);
     });
@@ -85,7 +84,7 @@ describe("reducers", () => {
           },
           { id: "certificate", label: "Certificate" }
         ],
-        activeTemplateTab: 1
+        activeTemplateTab: 0
       };
       const expectedState = {
         foo: "bar",
