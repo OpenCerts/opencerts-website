@@ -94,7 +94,7 @@ exports[`renders correctly when the certificate has been revoked 1`] = `
         <div
           className="row"
         >
-          Certificate from institution in our registry
+          Certificate issued from abc.com
         </div>
       </div>
     </div>
@@ -171,7 +171,7 @@ exports[`renders correctly when the certificate is invalid and hash, isseud, not
         <div
           className="row"
         >
-          Institution not in our registry
+          Institution identity can not be verified by registry or dns
         </div>
       </div>
     </div>
@@ -275,7 +275,7 @@ exports[`renders correctly when the certificate verfied 1`] = `
         <div
           className="row"
         >
-          Certificate from institution in our registry
+          Certificate issued from abc.com
         </div>
       </div>
     </div>
@@ -378,7 +378,7 @@ exports[`renders correctly when the certificate\`s hash status not verified 1`] 
         <div
           className="row"
         >
-          Certificate from institution in our registry
+          Certificate issued from abc.com
         </div>
       </div>
     </div>
@@ -481,7 +481,7 @@ exports[`renders correctly when the certificate\`s issue status not verified 1`]
         <div
           className="row"
         >
-          Certificate from institution in our registry
+          Certificate issued from abc.com
         </div>
       </div>
     </div>
@@ -539,7 +539,7 @@ exports[`renders correctly when the certificate\`s issuer not identified 1`] = `
         <div
           className="row"
         >
-          Institution not in our registry
+          Institution identity can not be verified by registry or dns
         </div>
       </div>
     </div>

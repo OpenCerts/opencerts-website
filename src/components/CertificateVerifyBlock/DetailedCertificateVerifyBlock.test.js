@@ -12,7 +12,7 @@ it("renders correctly when the certificate verfied", () => {
         hashStatus={{ verified: true }}
         issuedStatus={{ verified: true }}
         notRevokedStatus={{ verified: true }}
-        issuerIdentityStatus={{ verified: true }}
+        issuerIdentityStatus={{ verified: true, issuerDnsIdentity: "abc.com" }}
       />
     )
     .toJSON();
@@ -27,7 +27,7 @@ it("renders correctly when the certificate`s hash status not verified", () => {
         hashStatus={{ verified: false }}
         issuedStatus={{ verified: true }}
         notRevokedStatus={{ verified: true }}
-        issuerIdentityStatus={{ verified: true }}
+        issuerIdentityStatus={{ verified: true, issuerDnsIdentity: "abc.com" }}
       />
     )
     .toJSON();
@@ -42,7 +42,7 @@ it("renders correctly when the certificate`s issue status not verified", () => {
         hashStatus={{ verified: true }}
         issuedStatus={{ verified: false }}
         notRevokedStatus={{ verified: true }}
-        issuerIdentityStatus={{ verified: true }}
+        issuerIdentityStatus={{ verified: true, issuerDnsIdentity: "abc.com" }}
       />
     )
     .toJSON();
@@ -57,7 +57,7 @@ it("renders correctly when the certificate has been revoked", () => {
         hashStatus={{ verified: true }}
         issuedStatus={{ verified: true }}
         notRevokedStatus={{ verified: false }}
-        issuerIdentityStatus={{ verified: true }}
+        issuerIdentityStatus={{ verified: true, issuerDnsIdentity: "abc.com" }}
       />
     )
     .toJSON();
@@ -72,7 +72,7 @@ it("renders correctly when the certificate`s issuer not identified", () => {
         hashStatus={{ verified: true }}
         issuedStatus={{ verified: true }}
         notRevokedStatus={{ verified: true }}
-        issuerIdentityStatus={{ verified: false }}
+        issuerIdentityStatus={{ verified: false, issuerDnsIdentity: null }}
       />
     )
     .toJSON();
@@ -87,7 +87,7 @@ it("renders correctly when the certificate is invalid and hash, isseud, notRevok
         hashStatus={{ verified: false }}
         issuedStatus={{ verified: false }}
         notRevokedStatus={{ verified: false }}
-        issuerIdentityStatus={{ verified: false }}
+        issuerIdentityStatus={{ verified: false, issuerDnsIdentity: null }}
       />
     )
     .toJSON();

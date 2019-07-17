@@ -273,7 +273,6 @@ export function* resolveEnsNameToText(ensName) {
 
   const getTextResult = yield call(getText, ensName, "issuerName");
   trace(`Got texts records for ${ensName}`, getTextResult);
-  trace(getTextResult);
   return getTextResult;
 }
 
@@ -302,9 +301,7 @@ export function* verifyCertificateRegistryIssuer({ issuer }) {
     trace(
       `Attempting to verify certificate issuers: ${contractStoreAddresses}`
     );
-
     const isValidEthereumAddress = isEthereumAddress(contractStoreAddresses);
-
     let issuerIdentitiesFromRegistry = null;
 
     trace("isValidEthereumAddress", contractStoreAddresses);
@@ -326,7 +323,6 @@ export function* verifyCertificateRegistryIssuer({ issuer }) {
         `Resolved ethereum address ${contractStoreAddresses} to ${issuerIdentitiesFromRegistry}`
       );
     }
-
     trace("issuerIdentitiesFromRegistry", issuerIdentitiesFromRegistry);
     return issuerIdentitiesFromRegistry || false;
   } catch (e) {
@@ -337,7 +333,6 @@ export function* verifyCertificateRegistryIssuer({ issuer }) {
 function getVerificationStatusSummary({ verificationStatuses }) {
   let registryStatus = false;
   let dnsStatus = false;
-
   if (verificationStatuses && verificationStatuses.length > 0)
     verificationStatuses.forEach(status => {
       if (!status.registry && !status.dns) {
@@ -353,7 +348,7 @@ function getVerificationStatusSummary({ verificationStatuses }) {
   return { registryStatus, dnsStatus };
 }
 
-function* getDetailedIssuerStatus({ issuer }) {
+export function* getDetailedIssuerStatus({ issuer }) {
   const verificationStatus = {
     documentStore: getDocumentStore(issuer),
     registry: false,
@@ -378,23 +373,19 @@ function* getDetailedIssuerStatus({ issuer }) {
 
 export function* verifyCertificateIssuer({ certificate }) {
   const data = getData(certificate);
-  let verificationStatuses = [];
   try {
+    let verificationStatuses = []; // [{dns, registry, documentStore}]
     const issuers = get(data, "issuers", []);
     verificationStatuses = yield all(
-      issuers.map((issuer, idx) =>
-        call(getDetailedIssuerStatus, { issuer, idx })
-      )
+      issuers.map(issuer => call(getDetailedIssuerStatus, { issuer }))
     );
-
-    const verificationStatus = getVerificationStatusSummary({
+    const verificationSummary = getVerificationStatusSummary({
       verificationStatuses
     });
-
     yield put(
       verifyingCertificateIssuerSuccess({
-        registryIdentity: verificationStatus.registryStatus,
-        dnsIdentity: verificationStatus.dnsStatus
+        registryIdentity: verificationSummary.registryStatus,
+        dnsIdentity: verificationSummary.dnsStatus
       })
     );
     return true;
