@@ -1,5 +1,5 @@
 const STATEMENT =
-  "Printed OpenCerts cannot be verified. Please ask the certificate holder for their .opencert file. Visit opencerts.io for more information.";
+  "Printed from True Copy. For verification, please visit opencerts.io with the electronic version of this certificate.";
 const PrintWatermark = () => (
   <div
     className="print-only"
@@ -11,7 +11,7 @@ const PrintWatermark = () => (
       height: "100%",
       marginRight: "-50%",
       marginTop: "-50%",
-      opacity: 0.2,
+      opacity: 0.15,
       fontSize: "4em",
       fontWeight: "900",
       zIndex: 1000,
