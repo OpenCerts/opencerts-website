@@ -8,6 +8,11 @@ const navItems = [
     path: "/"
   },
   {
+    id: "collaborate",
+    label: "Collaborate",
+    path: "/collaborate"
+  },
+  {
     id: "faq",
     label: "FAQ",
     path: "/faq"
