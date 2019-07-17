@@ -326,8 +326,7 @@ export default function reducer(state = initialState, action) {
     case types.CERTIFICATE_TEMPLATE_REGISTER:
       return {
         ...state,
-        templates: action.payload,
-        activeTemplateTab: 0
+        templates: action.payload
       };
     case types.CERTIFICATE_TEMPLATE_SELECT_TAB:
       return {

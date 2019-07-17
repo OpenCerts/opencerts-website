@@ -94,9 +94,9 @@ const CertificateViewer = props => {
       <DecentralisedRenderer
         certificate={document}
         source={`${
-          typeof document.data.$template === "string"
-            ? LEGACY_OPENCERTS_RENDERER
-            : certificate.$template.url
+          typeof document.data.$template === "object"
+            ? certificate.$template.url
+            : LEGACY_OPENCERTS_RENDERER
         }`}
       />
       <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
