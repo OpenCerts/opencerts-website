@@ -13,6 +13,10 @@ body {
   font-family: "Source Sans Pro", sans-serif;
   line-height: 1.5;
   margin: 0px;
+  min-height: 100%;
+}
+html {
+  height: 100%;
 }
 
 .navbar-toggler {
