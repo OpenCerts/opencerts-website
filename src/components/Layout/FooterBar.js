@@ -13,6 +13,9 @@ const NavigationBar = () => (
         <a href="/privacy">Privacy Policy</a>
       </div>
       <div>
+        <a href="/terms">Terms of Use</a>
+      </div>
+      <div>
         <a href="https://github.com/OpenCerts">Github</a>
       </div>
     </div>
