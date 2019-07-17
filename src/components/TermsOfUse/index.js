@@ -1,3 +1,3 @@
-import TOUContent from "./TOUContent";
+import TermsOfUseContent from "./TermsOfUseContent";
 
-export default TOUContent;
+export default TermsOfUseContent;

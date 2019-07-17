@@ -4,7 +4,7 @@ import { merge } from "lodash/fp";
 import { connect } from "react-redux";
 import NavigationBar from "../src/components/Layout/NavigationBar";
 import FooterBar from "../src/components/Layout/FooterBar";
-import TOUContent from "../src/components/TermsOfUse";
+import TermsOfUse from "../src/components/TermsOfUse";
 import { URL, DEFAULT_SEO } from "../src/config";
 
 const PAGE_SEO = {
@@ -23,7 +23,7 @@ const PrivacyPage = () => (
   <>
     <NextSeo config={merge(DEFAULT_SEO, PAGE_SEO)} />
     <NavigationBar active="tou" />
-    <TOUContent />
+    <TermsOfUse />
     <FooterBar />
   </>
 );

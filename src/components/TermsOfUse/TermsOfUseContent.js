@@ -1,6 +1,6 @@
-import styles from "./tou.scss";
+import styles from "./termsOfUse.scss";
 
-const HeaderTOU = () => (
+const HeaderTermsOfUse = () => (
   <div className={styles["header-container"]}>
     <h1 className={styles.title}>Terms of Use</h1>
   </div>
@@ -12,7 +12,7 @@ const HeaderSchedule = () => (
   </div>
 );
 
-const TOU = () => (
+const TermsOfUse = () => (
   <div className={styles["content-container"]}>
     <ol>
       <li>
@@ -514,8 +514,8 @@ const Schedule = () => (
 );
 const Content = () => (
   <div className={styles.main}>
-    <HeaderTOU />
-    <TOU />
+    <HeaderTermsOfUse />
+    <TermsOfUse />
     <HeaderSchedule />
     <Schedule />
   </div>
