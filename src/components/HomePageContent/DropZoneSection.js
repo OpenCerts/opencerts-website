@@ -48,9 +48,16 @@ const DraggableDemoCertificate = () => (
           width="100%"
           draggable="false"
         />
-        <h8 style={{ fontSize: 14, textAlign: "justify", color: "#ff9933" }}>
+        <span
+          style={{
+            // fontSize: "15px",
+            // width: "160px",
+            textAlign: "justify",
+            color: "#ff9933"
+          }}
+        >
           Drag me over here to see a demo certificate and other features
-        </h8>
+        </span>
         <img
           src="/static/images/dropzone/opencerts.png"
           width="100%"
