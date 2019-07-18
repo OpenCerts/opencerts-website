@@ -2,7 +2,7 @@ import { put, call, select, all } from "redux-saga/effects";
 import { get } from "lodash";
 import sinon from "sinon";
 import * as openAttestation from "@govtechsg/open-attestation";
-import { getDocumentStoreRecords } from "opencerts-dnsprove";
+import * as dnsProve from "opencerts-dnsprove";
 import {
   verifyCertificateNotRevoked,
   verifyCertificateIssuer,
@@ -63,13 +63,14 @@ jest.mock("opencerts-dnsprove", () => {
   return {
     __esModule: true,
     ...originalModule,
-    getDocumentStoreRecords: jest.fn().mockReturnValueOnce([
+    getDocumentStoreRecords: jest.fn().mockReturnValue([
       {
-        documentSotre: "0x0c9d5E6C766030cc6f0f49951D275Ad0701F81E2"
+        address: "0x0c9d5E6C766030cc6f0f49951D275Ad0701F81E2"
       }
     ])
   };
 });
+const { getDocumentStoreRecords} = dnsProve;
 function whenThereIsOneEthereumAddressIssuer() {
   const ethereumAddresses = ["0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4F"];
   const testCert = new MakeCertUtil().addIssuer(ethereumAddresses[0]).finish();
@@ -156,7 +157,7 @@ function whenThereAreMultipleDnsNameAndEthereumAddress() {
       },
       {
         identityProof: { type: "DNS-TXT", location: dnsNames[1] },
-        documentSotre: ethereumAddress[0]
+        documentSotre: ethereumAddress[1]
       }
     ])
     .finish();
@@ -796,10 +797,15 @@ describe("sagas/certificate", () => {
       );
 
       const dnsIssuerSaga = verifyCertificateDnsIssuer({ issuer: issuers[0] });
-
-      expect(dnsIssuerSaga.next(dnsNames[0]).value).toEqual(
-        call(getDocumentStoreRecords, dnsNames[0])
+      expect(dnsIssuerSaga.next().value).toEqual(
+          call(getDocumentStoreRecords, dnsNames[0])
       );
+
+        const dnsIssuerSaga1 = verifyCertificateDnsIssuer({ issuer: issuers[1] });
+        expect(dnsIssuerSaga1.next().value).toEqual(
+          call(getDocumentStoreRecords, dnsNames[1])
+      );
+
       const resolvedPut = issuerSaga.next(testValue).value;
 
       expect(resolvedPut).toEqual(
