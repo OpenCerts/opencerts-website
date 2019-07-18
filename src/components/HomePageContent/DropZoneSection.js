@@ -44,7 +44,15 @@ const DraggableDemoCertificate = () => (
       </div>
       <div className="col">
         <img
-          src="/static/images/dropzone/arrow3.png"
+          src="/static/images/dropzone/arrow.png"
+          width="100%"
+          draggable="false"
+        />
+        <h8 style={{ fontSize: 14, textAlign: "justify", color: "#ff9933" }}>
+          Drag me over here to see a demo certificate and other features
+        </h8>
+        <img
+          src="/static/images/dropzone/opencerts.png"
           width="100%"
           draggable="false"
         />
