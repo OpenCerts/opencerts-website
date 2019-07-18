@@ -8,7 +8,7 @@ describe("Certificate verify block getIdentityVerificationText", () => {
 
   test("when registry is unverified but dns is verified", () => {
     const testValue = [{ registry: false, dns: "abc.com" }];
-    expect(getIdentityVerificationText(testValue)).toEqual("Issued by abc.com");
+    expect(getIdentityVerificationText(testValue)).toEqual("Issued by ABC.COM");
   });
 
   test("when multiple registry is verified", () => {
@@ -24,7 +24,7 @@ describe("Certificate verify block getIdentityVerificationText", () => {
       { registry: false, dns: "demo.com" }
     ];
     expect(getIdentityVerificationText(testValue)).toEqual(
-      "Issued by abc.com & demo.com"
+      "Issued by ABC.COM & DEMO.COM"
     );
   });
 });

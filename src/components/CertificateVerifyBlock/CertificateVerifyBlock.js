@@ -63,7 +63,7 @@ export const getIdentityVerificationText = identityStatus => {
       /* eslint-disable-next-line no-param-reassign */
       if (next.registry && !prev.message) prev.message = "Accredited by SSG";
 
-      if (next.dns) prev.dns.push(next.dns);
+      if (next.dns) prev.dns.push(next.dns.toUpperCase());
 
       return prev;
     },
