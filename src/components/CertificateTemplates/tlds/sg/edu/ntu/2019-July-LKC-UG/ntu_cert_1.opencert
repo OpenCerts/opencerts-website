@@ -1,0 +1,32 @@
+{
+  "schema": "opencerts/v1.5",
+  "data": {
+    "id": "936b56ba-73d1-4647-ac31-2a16fd667cf4:string:SERIAL-2019-07-08-002",
+    "$template": "1501f31c-0c57-4438-81c2-976b71eab0e8:string:sg/edu/ntu/2019-lkc-degree",
+    "name": "150d9ac8-7c52-4b93-b28f-1c4af06fbec4:string:Bachelor of Medicine and Bachelor of Surgery",
+    "issuedOn": "4803c02f-7941-4ec1-96fd-af6aa791fea8:string:2019-07-08T00:00:00+08:00",
+    "graduationDate": "ca171643-a600-4139-95d2-07e4de349b4a:string:2019-07-08T00:00:00+08:00",
+    "issuers": [
+      {
+        "name": "f36c4cb2-1314-4538-a617-3057004763b9:string:NTU",
+        "certificateStore": "652e2533-d459-4dbe-a485-f3d5e7847ad2:string:0x3FFB6b913E9874c7ddabD564d85676Bc5cAd16d4"
+      }
+    ],
+    "recipient": {
+      "name": "b4e60ec1-8e21-4c9b-bb82-318aa06d1f9b:string:(Name of Student2)"
+    },
+    "additionalData": {
+      "signature1": "9c9c7fd8-58a6-4f1d-8c38-3d6c1f2725ac:string:",
+      "signature2": "9c83c243-1715-48eb-aa55-9e799476011b:string:"
+    }
+  },
+  "privacy": {},
+  "signature": {
+    "type": "SHA3MerkleProof",
+    "targetHash": "95efbb6ae5b7fecb7228ca40309a8afda85371fd95fc868572c239c1c93acb33",
+    "proof": [
+      "97d45023033f052e26fb5209db623a5573639d4ed4ac21d6e6f26e9c28a32112"
+    ],
+    "merkleRoot": "03b367398c031a52e8b91f3b6ee99ec86848fb9685c82dff53d21a3332d9517d"
+  }
+}
