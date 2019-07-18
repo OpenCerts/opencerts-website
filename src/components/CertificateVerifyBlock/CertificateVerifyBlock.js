@@ -57,7 +57,7 @@ const renderIcon = status => {
   );
 };
 
-const getIdentityVerificationText = identityStatus => {
+export const getIdentityVerificationText = identityStatus => {
   const verifiedText = identityStatus.reduce(
     (prev, next) => {
       /* eslint-disable-next-line no-param-reassign */
@@ -72,7 +72,7 @@ const getIdentityVerificationText = identityStatus => {
 
   return verifiedText.message
     ? verifiedText.message
-    : `Issued by ${verifiedText.dns.join()}`;
+    : `Issued by ${verifiedText.dns.join(" & ")}`;
 };
 
 const renderText = (status, props) => {

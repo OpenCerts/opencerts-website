@@ -9,7 +9,6 @@ import {
   verifyCertificateHash,
   verifyCertificateIssued,
   isValidENSDomain,
-  resolveEnsNameToText,
   lookupEthereumAddress,
   sendCertificate,
   analyticsIssuerFail,
@@ -94,38 +93,6 @@ function whenThereIsOnlyOneEnsName() {
   const testCert = new MakeCertUtil().addIssuer(ensNames[0]).finish();
 
   return { testCert, ensNames };
-}
-function whenThereAreMultipleEnsNames() {
-  const ensNames = [
-    "govtech-test.sg.opencerts.eth",
-    "govtech-test2.sg.opencerts.eth"
-  ];
-  const testCert = new MakeCertUtil()
-    .addIssuer(ensNames[0])
-    .addIssuer(ensNames[1])
-    .finish();
-
-  return { testCert, ensNames };
-}
-
-function whenThereAreEnsNamesAndEthereumAddresses() {
-  const ensNames = [
-    "govtech-test.sg.opencerts.eth",
-    "govtech-test2.sg.opencerts.eth"
-  ];
-  const ethereumAddresses = [
-    "0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4F",
-    "0x0096Ca31c87771a2Ed212D4b2E689e712Bd938F9"
-  ];
-
-  const testCert = new MakeCertUtil()
-    .addIssuer(ensNames[0])
-    .addIssuer(ensNames[1])
-    .addIssuer(ethereumAddresses[0])
-    .addIssuer(ethereumAddresses[1])
-    .finish();
-
-  return { testCert, ensNames, ethereumAddresses };
 }
 
 function whenThereAreDnsNameAndEthereumAddress() {
@@ -527,79 +494,13 @@ describe("sagas/certificate", () => {
   });
 
   describe("verifyCertificateIssuer via registry", () => {
-    test("should resolve singular issuer ens name", () => {
-      const { testCert, ensNames } = whenThereIsOnlyOneEnsName();
-      const resolverReturnValue = {
-        dnsIdentity: false,
-        registryIdentity: true
-      };
-      const testValue = [{ registry: true, dns: false }];
-      const issuerSaga = verifyCertificateIssuer({ certificate: testCert });
-      const certData = getData(testCert);
-      const issuers = get(certData, "issuers", []);
-      expect(issuerSaga.next(resolverReturnValue).value).toEqual(
-        all(issuers.map(issuer => call(getDetailedIssuerStatus, { issuer })))
-      );
-
-      const statusIssuerSaga = getDetailedIssuerStatus({ issuer: issuers[0] });
-
-      expect(statusIssuerSaga.next().value).toEqual(
-        call(verifyCertificateRegistryIssuer, { issuer: issuers[0] })
-      );
-
-      const registryIssuerSaga = verifyCertificateRegistryIssuer({
-        issuer: issuers[0]
-      });
-      expect(registryIssuerSaga.next(true).value).toEqual(
-        call(resolveEnsNameToText, ensNames[0])
-      );
-      registryIssuerSaga.next(true);
-
-      const resolvedPut = issuerSaga.next(testValue).value;
-
-      expect(resolvedPut).toEqual(
-        put(verifyingCertificateIssuerSuccess(resolverReturnValue))
-      );
-      const isSagaFinished = issuerSaga.next().done;
-
-      expect(isSagaFinished).toBe(true);
-    });
-
-    test("should resolve multiple issuer ens name", () => {
-      const { testCert } = whenThereAreMultipleEnsNames();
-      const resolverReturnValue = {
-        dnsIdentity: false,
-        registryIdentity: true
-      };
-
-      const issuerSaga = verifyCertificateIssuer({ certificate: testCert });
-      const certData = getData(testCert);
-      const issuers = get(certData, "issuers", []);
-      expect(issuerSaga.next().value).toEqual(
-        all(issuers.map(issuer => call(getDetailedIssuerStatus, { issuer })))
-      );
-
-      expect(
-        issuerSaga.next([
-          { registry: true, dns: false },
-          { registry: true, dns: false }
-        ]).value
-      ).toEqual(put(verifyingCertificateIssuerSuccess(resolverReturnValue)));
-      const isSagaFinished = issuerSaga.next().done;
-
-      expect(isSagaFinished).toBe(true);
-    });
-
-    test("should resolve issuer ethereum address", () => {
+    test("should resolve singular issuer ethereum address", () => {
       const {
         testCert,
         ethereumAddresses
       } = whenThereIsOneEthereumAddressIssuer();
       const testValue = [{ registry: true, dns: false }];
-      const resolverReturnValue = {
-        dnsIdentity: false,
-        registryIdentity: true
-      };
+
       const issuerSaga = verifyCertificateIssuer({ certificate: testCert });
       const certData = getData(testCert);
       const issuers = get(certData, "issuers", []);
@@ -617,31 +518,29 @@ describe("sagas/certificate", () => {
       const resolvedPut = issuerSaga.next(testValue).value;
 
       expect(resolvedPut).toEqual(
-        put(verifyingCertificateIssuerSuccess(resolverReturnValue))
+        put(verifyingCertificateIssuerSuccess({ issuerIdentities: testValue }))
       );
       const isSagaFinished = issuerSaga.next().done;
 
       expect(isSagaFinished).toBe(true);
     });
 
-    test("should resolve issuer ethereum address", () => {
+    test("should resolve multiple issuer ethereum address", () => {
       const {
         testCert,
-        ensNames,
         ethereumAddresses
-      } = whenThereAreEnsNamesAndEthereumAddresses();
+      } = whenThereAreMultipleEthereumAddressIssuers();
       const issuerRegistryReturnValue = [
         "ethereum address registry 1",
         "ethereum address registry 2"
       ];
-      const testValue = ["resolved ens 1", "resolved ens 2"];
-      const resolverReturnValue = {
-        dnsIdentity: false,
-        registryIdentity: testValue.concat(issuerRegistryReturnValue)
-      };
-      const demoTestValue = [
-        { dns: false, registry: testValue.concat(issuerRegistryReturnValue) }
+      const resolverReturnValue = [
+        {
+          dns: false,
+          registry: issuerRegistryReturnValue
+        }
       ];
+
       const issuerSaga = verifyCertificateIssuer({ certificate: testCert });
       const certData = getData(testCert);
       const issuers = get(certData, "issuers", []);
@@ -653,30 +552,22 @@ describe("sagas/certificate", () => {
         issuer: issuers[0]
       });
       expect(registryIssuerSaga0.next().value).toEqual(
-        call(resolveEnsNameToText, ensNames[0])
+        call(lookupEthereumAddress, ethereumAddresses[0])
       );
       const registryIssuerSaga1 = verifyCertificateRegistryIssuer({
         issuer: issuers[1]
       });
       expect(registryIssuerSaga1.next().value).toEqual(
-        call(resolveEnsNameToText, ensNames[1])
-      );
-      const registryIssuerSaga2 = verifyCertificateRegistryIssuer({
-        issuer: issuers[2]
-      });
-      expect(registryIssuerSaga2.next().value).toEqual(
-        call(lookupEthereumAddress, ethereumAddresses[0])
-      );
-      const registryIssuerSaga3 = verifyCertificateRegistryIssuer({
-        issuer: issuers[3]
-      });
-      expect(registryIssuerSaga3.next().value).toEqual(
         call(lookupEthereumAddress, ethereumAddresses[1])
       );
-      const resolvedPut = issuerSaga.next(demoTestValue).value;
+      const resolvedPut = issuerSaga.next(resolverReturnValue).value;
 
       expect(resolvedPut).toEqual(
-        put(verifyingCertificateIssuerSuccess(resolverReturnValue))
+        put(
+          verifyingCertificateIssuerSuccess({
+            issuerIdentities: resolverReturnValue
+          })
+        )
       );
       const isSagaFinished = issuerSaga.next().done;
 
@@ -714,10 +605,12 @@ describe("sagas/certificate", () => {
   describe("verifyCertificateIssuer via DNS", () => {
     test("should resolve singular issuer DNS", () => {
       const { testCert, dnsName } = whenThereAreDnsNameAndEthereumAddress();
-      const resolverReturnValue = {
-        dnsIdentity: "abc.com",
-        registryIdentity: false
-      };
+      const resolverReturnValue = [
+        {
+          dns: "abc.com",
+          registry: false
+        }
+      ];
       const issuerSaga = verifyCertificateIssuer({ certificate: testCert });
 
       const certData = getData(testCert);
@@ -735,7 +628,11 @@ describe("sagas/certificate", () => {
         .value;
 
       expect(resolvedPut).toEqual(
-        put(verifyingCertificateIssuerSuccess(resolverReturnValue))
+        put(
+          verifyingCertificateIssuerSuccess({
+            issuerIdentities: resolverReturnValue
+          })
+        )
       );
       const isSagaFinished = dnsIssuerSaga.next().done;
 
@@ -747,10 +644,12 @@ describe("sagas/certificate", () => {
         testCert,
         dnsNames
       } = whenThereAreMultipleDnsNameAndEthereumAddress();
-      const resolverReturnValue = {
-        dnsIdentity: "abc.com",
-        registryIdentity: false
-      };
+      const resolverReturnValue = [
+        {
+          dns: "abc.com",
+          registry: false
+        }
+      ];
       const issuerSaga = verifyCertificateIssuer({ certificate: testCert });
       const certData = getData(testCert);
       const issuers = get(certData, "issuers", []);
@@ -774,7 +673,11 @@ describe("sagas/certificate", () => {
         .value;
 
       expect(resolvedPut).toEqual(
-        put(verifyingCertificateIssuerSuccess(resolverReturnValue))
+        put(
+          verifyingCertificateIssuerSuccess({
+            issuerIdentities: resolverReturnValue
+          })
+        )
       );
       const isSagaFinished = issuerSaga.next().done;
 
