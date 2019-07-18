@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { get } from "lodash";
 import DetailedCertificateVerifyBlock from "./DetailedCertificateVerifyBlock";
 import { LOG_LEVEL } from "./constants";
 import css from "./certificateVerifyBlock.scss";
@@ -56,7 +57,25 @@ const renderIcon = status => {
   );
 };
 
-const renderText = status => {
+const getIdentityVerificationText = identityStatus => {
+  const verifiedText = identityStatus.reduce(
+    (prev, next) => {
+      /* eslint-disable-next-line no-param-reassign */
+      if (next.registry && !prev.message) prev.message = "Accredited by SSG";
+
+      if (next.dns) prev.dns.push(next.dns);
+
+      return prev;
+    },
+    { dns: [], message: "" }
+  );
+
+  return verifiedText.message
+    ? verifiedText.message
+    : `Issued by ${verifiedText.dns.join()}`;
+};
+
+const renderText = (status, props) => {
   let text;
   switch (status) {
     case LOG_LEVEL.CONNECTING:
@@ -65,9 +84,11 @@ const renderText = status => {
     case LOG_LEVEL.VERIFYING:
       text = "Verifying Certificate ...";
       break;
-    case LOG_LEVEL.VALID:
-      text = "Certificate Verified";
+    case LOG_LEVEL.VALID: {
+      const identity = get(props, "issuerIdentityStatus", []);
+      text = getIdentityVerificationText(identity);
       break;
+    }
     case LOG_LEVEL.WARNING:
       text = "Institution not in our registry";
       break;
@@ -80,7 +101,7 @@ const renderText = status => {
 const SimpleVerifyBlock = props => {
   const status = statusSummary(props);
   const renderedIcon = renderIcon(status);
-  const renderedText = renderText(status);
+  const renderedText = renderText(status, props);
 
   let stateStyle;
   switch (status) {

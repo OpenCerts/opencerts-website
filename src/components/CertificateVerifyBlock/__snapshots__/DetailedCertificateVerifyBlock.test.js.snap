@@ -94,7 +94,7 @@ exports[`renders correctly when the certificate has been revoked 1`] = `
         <div
           className="row"
         >
-          Certificate issued from abc.com
+          Certificate Verified
         </div>
       </div>
     </div>
@@ -275,7 +275,7 @@ exports[`renders correctly when the certificate verfied 1`] = `
         <div
           className="row"
         >
-          Certificate issued from abc.com
+          Certificate Verified
         </div>
       </div>
     </div>
@@ -378,7 +378,7 @@ exports[`renders correctly when the certificate\`s hash status not verified 1`] 
         <div
           className="row"
         >
-          Certificate issued from abc.com
+          Certificate Verified
         </div>
       </div>
     </div>
@@ -481,7 +481,7 @@ exports[`renders correctly when the certificate\`s issue status not verified 1`]
         <div
           className="row"
         >
-          Certificate issued from abc.com
+          Certificate Verified
         </div>
       </div>
     </div>

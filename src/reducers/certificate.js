@@ -13,7 +13,6 @@ export const initialState = {
   storeLoading: false,
 
   issuerIdentities: null,
-  issuerDnsIdentity: null,
   certificateHash: false,
   certificateIssued: false,
   certificateNotRevoked: false,
@@ -116,7 +115,6 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         issuerIdentities: null,
-        issuerDnsIdentity: null,
         certificateHash: false,
         certificateIssued: false,
         certificateNotRevoked: false,
@@ -230,8 +228,7 @@ export default function reducer(state = initialState, action) {
     case types.VERIFYING_CERTIFICATE_ISSUER_SUCCESS:
       return {
         ...state,
-        issuerIdentities: action.payload.registryIdentity,
-        issuerDnsIdentity: action.payload.dnsIdentity,
+        issuerIdentities: action.payload,
         certificateIssuer: true,
         certificateIssuerVerifying: false,
         certificateIssuerError: null,
@@ -481,14 +478,12 @@ export function selectTemplateTab(payload) {
 export function getIssuerIdentityStatus(store) {
   const {
     issuerIdentities,
-    issuerDnsIdentity,
     certificateIssuerVerifying,
     certificateIssuerError,
     certificateIssuer
   } = store.certificate;
   return {
-    issuerRegistryIdentity: issuerIdentities,
-    issuerDnsIdentity,
+    issuerIdentities,
     verified: certificateIssuer,
     verifying: certificateIssuerVerifying,
     error: certificateIssuerError

@@ -35,7 +35,7 @@ const renderStatus = (props, type, typeVerified = true) => {
   return isVerified ? renderSuccess(type) : renderFailure(type);
 };
 
-const verificationChecks = props => ({
+const CHECKS = {
   HASH: {
     id: "hashStatus",
     success: "Certificate has not been tampered with",
@@ -48,17 +48,9 @@ const verificationChecks = props => ({
     failure: "Certificate has not been issued",
     failureStatusIcon: FailureIcon
   },
-  ISSUER_REGISTRY_IDENTITY: {
+  ISSUER_IDENTITY: {
     id: "issuerIdentityStatus",
-    success: "Accredited by SSG",
-    failure: "Institution identity can not be verified by registry or dns",
-    failureStatusIcon: WarningIcon
-  },
-  ISSUER_DNS_IDENTITY: {
-    id: "issuerIdentityStatus",
-    success: `Certificate issued from ${
-      props ? props.issuerIdentityStatus.issuerDnsIdentity : ""
-    }`,
+    success: "Certificate Verified",
     failure: "Institution identity can not be verified by registry or dns",
     failureStatusIcon: WarningIcon
   },
@@ -68,16 +60,14 @@ const verificationChecks = props => ({
     failure: "Certificate has been revoked",
     failureStatusIcon: WarningIcon
   }
-});
+};
 
 const renderVerifiedStatuses = props => (
   <div>
-    {renderStatus(props, verificationChecks().HASH)}
-    {renderStatus(props, verificationChecks().ISSUED)}
-    {props.issuerIdentityStatus.issuerRegistryIdentity
-      ? renderStatus(props, verificationChecks().ISSUER_REGISTRY_IDENTITY)
-      : renderStatus(props, verificationChecks(props).ISSUER_DNS_IDENTITY)}
-    {renderStatus(props, verificationChecks().NOT_REVOKED)}
+    {renderStatus(props, CHECKS.HASH)}
+    {renderStatus(props, CHECKS.ISSUED)}
+    {renderStatus(props, CHECKS.ISSUER_IDENTITY)}
+    {renderStatus(props, CHECKS.NOT_REVOKED)}
   </div>
 );
 
@@ -89,14 +79,10 @@ const renderUnverifiedStatuses = props => {
     !props.notRevokedStatus.verified;
   return show ? (
     <div>
-      {renderStatus(props, verificationChecks().HASH, false)}
-      {renderStatus(props, verificationChecks().ISSUED, false)}
-      {renderStatus(
-        props,
-        verificationChecks().ISSUER_REGISTRY_IDENTITY,
-        false
-      )}
-      {renderStatus(props, verificationChecks().NOT_REVOKED, false)}
+      {renderStatus(props, CHECKS.HASH, false)}
+      {renderStatus(props, CHECKS.ISSUED, false)}
+      {renderStatus(props, CHECKS.ISSUER_IDENTITY, false)}
+      {renderStatus(props, CHECKS.NOT_REVOKED, false)}
       <hr />
     </div>
   ) : (
@@ -146,9 +132,6 @@ CheckStatusRow.propTypes = {
   icon: PropTypes.element
 };
 
-renderVerifiedStatuses.propTypes = {
-  issuerIdentityStatus: PropTypes.object
-};
 renderUnverifiedStatuses.propTypes = CertificateVerifyBlock.propTypes;
 
 export default CertificateVerifyBlock;

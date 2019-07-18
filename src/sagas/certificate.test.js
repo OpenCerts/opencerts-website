@@ -70,7 +70,7 @@ jest.mock("opencerts-dnsprove", () => {
     ])
   };
 });
-const { getDocumentStoreRecords} = dnsProve;
+const { getDocumentStoreRecords } = dnsProve;
 function whenThereIsOneEthereumAddressIssuer() {
   const ethereumAddresses = ["0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4F"];
   const testCert = new MakeCertUtil().addIssuer(ethereumAddresses[0]).finish();
@@ -798,12 +798,12 @@ describe("sagas/certificate", () => {
 
       const dnsIssuerSaga = verifyCertificateDnsIssuer({ issuer: issuers[0] });
       expect(dnsIssuerSaga.next().value).toEqual(
-          call(getDocumentStoreRecords, dnsNames[0])
+        call(getDocumentStoreRecords, dnsNames[0])
       );
 
-        const dnsIssuerSaga1 = verifyCertificateDnsIssuer({ issuer: issuers[1] });
-        expect(dnsIssuerSaga1.next().value).toEqual(
-          call(getDocumentStoreRecords, dnsNames[1])
+      const dnsIssuerSaga1 = verifyCertificateDnsIssuer({ issuer: issuers[1] });
+      expect(dnsIssuerSaga1.next().value).toEqual(
+        call(getDocumentStoreRecords, dnsNames[1])
       );
 
       const resolvedPut = issuerSaga.next(testValue).value;

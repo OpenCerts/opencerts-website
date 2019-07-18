@@ -28,6 +28,7 @@ import sendEmail from "../services/email";
 import { analyticsEvent } from "../components/Analytics";
 
 import { getSelectedWeb3 } from "./application";
+import { IS_MAINNET } from "../config";
 
 const { trace, error } = getLogger("saga:certificate");
 
@@ -276,23 +277,23 @@ export function* resolveEnsNameToText(ensName) {
   return getTextResult;
 }
 
-// how do we check for ropsten and mainnet or metmask ?
 export function* verifyCertificateDnsIssuer({ issuer }) {
-  if (!issuer.identityProof.location) return false;
+  const location = get(issuer, "identityProof.location");
 
-  const dnsRecords = yield call(
-    getDocumentStoreRecords,
-    issuer.identityProof.location
-  );
+  if (!location) return false;
+
+  const dnsRecords = yield call(getDocumentStoreRecords, location);
 
   trace(`DNS records: ${dnsRecords}`); // dnsRecords: [{address: "0xabc", netId: 3}]
   let verificationStatus = false;
   const documentStore = getDocumentStore(issuer);
   if (dnsRecords && dnsRecords.length > 0) {
-    verificationStatus = dnsRecords.find(dns => dns.address === documentStore);
+    verificationStatus = dnsRecords.find(
+      dns => dns.address === documentStore && dns.netId === (IS_MAINNET ? 1 : 3)
+    );
   }
   trace(`DNS Verification Status: ${verificationStatus}`);
-  return verificationStatus ? issuer.identityProof.location : false;
+  return verificationStatus ? location : false;
 }
 
 export function* verifyCertificateRegistryIssuer({ issuer }) {
@@ -302,50 +303,37 @@ export function* verifyCertificateRegistryIssuer({ issuer }) {
       `Attempting to verify certificate issuers: ${contractStoreAddresses}`
     );
     const isValidEthereumAddress = isEthereumAddress(contractStoreAddresses);
-    let issuerIdentitiesFromRegistry = null;
+
+    if (!isValidEthereumAddress) {
+      throw new Error(
+        `${contractStoreAddresses} is not a valid Ethereum Address`
+      );
+    }
 
     trace("isValidEthereumAddress", contractStoreAddresses);
 
-    if (!isValidEthereumAddress) {
-      issuerIdentitiesFromRegistry = yield call(
-        resolveEnsNameToText,
-        contractStoreAddresses
-      );
-      trace(
-        `Resolved ens name ${contractStoreAddresses} to ${issuerIdentitiesFromRegistry}`
-      );
-    } else {
-      issuerIdentitiesFromRegistry = yield call(
-        lookupEthereumAddress,
-        contractStoreAddresses
-      );
-      trace(
-        `Resolved ethereum address ${contractStoreAddresses} to ${issuerIdentitiesFromRegistry}`
-      );
-    }
-    trace("issuerIdentitiesFromRegistry", issuerIdentitiesFromRegistry);
-    return issuerIdentitiesFromRegistry || false;
+    const issuerIdentitiesFromRegistry = yield call(
+      lookupEthereumAddress,
+      contractStoreAddresses
+    );
+    trace(
+      `Resolved ethereum address ${contractStoreAddresses} to ${issuerIdentitiesFromRegistry}`
+    );
+    return get(issuerIdentitiesFromRegistry, "name") || false;
   } catch (e) {
     return false;
   }
 }
 
-function getVerificationStatusSummary({ verificationStatuses }) {
-  let registryStatus = false;
-  let dnsStatus = false;
-  if (verificationStatuses && verificationStatuses.length > 0)
-    verificationStatuses.forEach(status => {
-      if (!status.registry && !status.dns) {
-        throw new Error(
-          `Issuer identity cannot be verified: ${status.documentStore}`
-        );
-      } else if (!status.registry) {
-        dnsStatus = status.dns;
-      } else {
-        registryStatus = status.registry;
-      }
-    });
-  return { registryStatus, dnsStatus };
+function throwErrorIfNotVerified(verificationStatuses) {
+  verificationStatuses.forEach(status => {
+    if (!status.registry && !status.dns) {
+      throw new Error(
+        `Issuer identity cannot be verified: ${status.documentStore}`
+      );
+    }
+  });
+  return true;
 }
 
 export function* getDetailedIssuerStatus({ issuer }) {
@@ -359,11 +347,7 @@ export function* getDetailedIssuerStatus({ issuer }) {
     issuer
   });
 
-  if (
-    issuer.identityProof &&
-    issuer.identityProof.type === "DNS-TXT" &&
-    !verificationStatus.registry
-  )
+  if (get(issuer, "identityProof.type") === "DNS-TXT")
     verificationStatus.dns = yield call(verifyCertificateDnsIssuer, {
       issuer
     });
@@ -374,18 +358,17 @@ export function* getDetailedIssuerStatus({ issuer }) {
 export function* verifyCertificateIssuer({ certificate }) {
   const data = getData(certificate);
   try {
-    let verificationStatuses = []; // [{dns, registry, documentStore}]
     const issuers = get(data, "issuers", []);
-    verificationStatuses = yield all(
+    // verificationStatuses: [{dns: "abc.com", registry:"Govtech", documentStore: "0xabc"}]
+    const verificationStatuses = yield all(
       issuers.map(issuer => call(getDetailedIssuerStatus, { issuer }))
     );
-    const verificationSummary = getVerificationStatusSummary({
-      verificationStatuses
-    });
+
+    throwErrorIfNotVerified(verificationStatuses);
+
     yield put(
       verifyingCertificateIssuerSuccess({
-        registryIdentity: verificationSummary.registryStatus,
-        dnsIdentity: verificationSummary.dnsStatus
+        issuerIdentities: verificationStatuses
       })
     );
     return true;
