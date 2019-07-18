@@ -5,6 +5,10 @@
   #top-header-ui {
     display: none;
   }
+
+  iframe {
+    height: 100vh;
+  }
 }
 
 :global(.frameless-tabs .react-tabs .d-lg-none.d-xl-none) {
