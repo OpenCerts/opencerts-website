@@ -289,7 +289,8 @@ export function* verifyCertificateDnsIssuer({ issuer }) {
   const documentStore = getDocumentStore(issuer);
   if (dnsRecords && dnsRecords.length > 0) {
     verificationStatus = dnsRecords.find(
-      dns => dns.address === documentStore && dns.netId === (IS_MAINNET ? 1 : 3)
+      dns =>
+        dns.address === documentStore && dns.netId === (IS_MAINNET ? "1" : "3")
     );
   }
   trace(`DNS Verification Status: ${verificationStatus}`);
