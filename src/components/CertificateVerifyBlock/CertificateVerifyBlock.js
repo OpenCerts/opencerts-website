@@ -61,17 +61,17 @@ export const getIdentityVerificationText = identityStatus => {
   const verifiedText = identityStatus.reduce(
     (prev, next) => {
       /* eslint-disable-next-line no-param-reassign */
-      if (next.registry && !prev.message) prev.message = "Accredited by SSG";
+      if (next.registry && !prev.isRegistry) prev.isRegistry = true;
 
       if (next.dns) prev.dns.push(next.dns.toUpperCase());
 
       return prev;
     },
-    { dns: [], message: "" }
+    { dns: [], isRegistry: false }
   );
 
-  return verifiedText.message
-    ? verifiedText.message
+  return verifiedText.isRegistry
+    ? "Accredited by SSG"
     : `Issued by ${verifiedText.dns.join(" & ")}`;
 };
 

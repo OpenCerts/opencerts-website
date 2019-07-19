@@ -12,7 +12,7 @@ it("renders correctly when the certificate verfied", () => {
         hashStatus={{ verified: true }}
         issuedStatus={{ verified: true }}
         notRevokedStatus={{ verified: true }}
-        issuerIdentityStatus={{ verified: true}}
+        issuerIdentityStatus={{ verified: true }}
       />
     )
     .toJSON();
