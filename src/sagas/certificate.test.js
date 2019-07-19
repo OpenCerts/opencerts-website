@@ -88,6 +88,12 @@ function whenThereAreMultipleEthereumAddressIssuers() {
   return { testCert, ethereumAddresses };
 }
 
+function whenThereIsNoIssuer() {
+  const testCert = new MakeCertUtil().finish();
+
+  return { testCert };
+}
+
 function whenThereIsOnlyOneEnsName() {
   const ensNames = ["govtech-test.sg.opencerts.eth"];
   const testCert = new MakeCertUtil().addIssuer(ensNames[0]).finish();
@@ -575,8 +581,8 @@ describe("sagas/certificate", () => {
     });
 
     test("should throw if there are no issuer identity", () => {
-      const { testCert } = whenThereAreMultipleEthereumAddressIssuers();
-      const errorMsg = "Issuer identity missing in certificate";
+      const { testCert } = whenThereIsNoIssuer();
+      const errorMsg = "No issuers found in the document";
       const certData = getData(testCert);
       const issuerSaga = verifyCertificateIssuer({ certificate: testCert });
 
@@ -585,7 +591,7 @@ describe("sagas/certificate", () => {
         all(issuers.map(issuer => call(getDetailedIssuerStatus, { issuer })))
       );
 
-      const resolvedPut = issuerSaga.throw(new Error(errorMsg)).value;
+      const resolvedPut = issuerSaga.next([]).value;
 
       expect(resolvedPut).toEqual(
         put(
