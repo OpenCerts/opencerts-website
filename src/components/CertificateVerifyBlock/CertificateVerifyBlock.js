@@ -85,7 +85,7 @@ const renderText = (status, props) => {
       text = "Verifying Certificate ...";
       break;
     case LOG_LEVEL.VALID: {
-      const identity = get(props, "issuerIdentityStatus", []);
+      const identity = get(props, "issuerIdentityStatus.identities", []);
       text = getIdentityVerificationText(identity);
       break;
     }

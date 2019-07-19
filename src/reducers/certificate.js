@@ -363,10 +363,10 @@ export function updateFilteredCertificate(payload) {
   };
 }
 
-export function verifyingCertificateIssuerSuccess(payload) {
+export function verifyingCertificateIssuerSuccess({ issuerIdentities }) {
   return {
     type: types.VERIFYING_CERTIFICATE_ISSUER_SUCCESS,
-    payload
+    payload: issuerIdentities
   };
 }
 
@@ -483,7 +483,7 @@ export function getIssuerIdentityStatus(store) {
     certificateIssuer
   } = store.certificate;
   return {
-    issuerIdentities,
+    identities: issuerIdentities,
     verified: certificateIssuer,
     verifying: certificateIssuerVerifying,
     error: certificateIssuerError
