@@ -2,7 +2,7 @@ import { put, call, select, all } from "redux-saga/effects";
 import { get } from "lodash";
 import sinon from "sinon";
 import * as openAttestation from "@govtechsg/open-attestation";
-import * as dnsProve from "opencerts-dnsprove";
+import * as dnsProve from "@govtechsg/dnsprove";
 import {
   verifyCertificateNotRevoked,
   verifyCertificateIssuer,
@@ -56,8 +56,8 @@ jest.mock("@govtechsg/open-attestation", () => {
   };
 });
 const { getData } = openAttestation;
-jest.mock("opencerts-dnsprove", () => {
-  const originalModule = jest.requireActual("opencerts-dnsprove");
+jest.mock("@govtechsg/dnsprove", () => {
+  const originalModule = jest.requireActual("@govtechsg/dnsprove");
 
   return {
     __esModule: true,

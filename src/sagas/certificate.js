@@ -3,7 +3,7 @@ import { put, all, call, select, takeEvery } from "redux-saga/effects";
 import { getData, verifySignature } from "@govtechsg/open-attestation";
 import { isValidAddress as isEthereumAddress } from "ethereumjs-util";
 import Router from "next/router";
-import { getDocumentStoreRecords } from "opencerts-dnsprove";
+import { getDocumentStoreRecords } from "@govtechsg/dnsprove";
 import { getLogger } from "../utils/logger";
 import {
   types,
