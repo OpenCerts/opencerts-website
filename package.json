@@ -22,7 +22,7 @@
     "integration:watch": "nodemon --exec \"npm run integration\" --watch src"
   },
   "dependencies": {
-    "@govtechsg/dnsprove": "^2.0.1",
+    "@govtechsg/dnsprove": "^2.0.2",
     "@govtechsg/open-attestation": "^1.1.30",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-sass": "^1.0.1",
@@ -53,7 +53,6 @@
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.7",
     "redux-saga": "^0.16.0",
-    "tls": "0.0.1",
     "web3": "^1.0.0-beta.52",
     "web3-provider-engine": "14.0.6"
   },
