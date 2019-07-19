@@ -9,7 +9,7 @@ import {
   verifyCertificateHash,
   verifyCertificateIssued,
   isValidENSDomain,
-  lookupEthereumAddress,
+  lookupAddressOnRegistry,
   sendCertificate,
   analyticsIssuerFail,
   analyticsHashFail,
@@ -513,7 +513,7 @@ describe("sagas/certificate", () => {
       });
 
       expect(registryIssuerSaga.next().value).toEqual(
-        call(lookupEthereumAddress, ethereumAddresses[0])
+        call(lookupAddressOnRegistry, ethereumAddresses[0])
       );
       const resolvedPut = issuerSaga.next(testValue).value;
 
@@ -552,13 +552,13 @@ describe("sagas/certificate", () => {
         issuer: issuers[0]
       });
       expect(registryIssuerSaga0.next().value).toEqual(
-        call(lookupEthereumAddress, ethereumAddresses[0])
+        call(lookupAddressOnRegistry, ethereumAddresses[0])
       );
       const registryIssuerSaga1 = verifyCertificateRegistryIssuer({
         issuer: issuers[1]
       });
       expect(registryIssuerSaga1.next().value).toEqual(
-        call(lookupEthereumAddress, ethereumAddresses[1])
+        call(lookupAddressOnRegistry, ethereumAddresses[1])
       );
       const resolvedPut = issuerSaga.next(resolverReturnValue).value;
 
@@ -586,7 +586,6 @@ describe("sagas/certificate", () => {
       );
 
       const resolvedPut = issuerSaga.throw(new Error(errorMsg)).value;
-      // const resolvedPut = registryIssuerSaga.throw(new Error(errorMsg)).value;
 
       expect(resolvedPut).toEqual(
         put(

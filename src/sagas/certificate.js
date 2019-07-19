@@ -247,7 +247,7 @@ function isApprovedENSDomain(issuerAddress) {
   );
 }
 
-export function* lookupEthereumAddress(ethereumAddressIssuer) {
+export function* lookupAddressOnRegistry(ethereumAddressIssuer) {
   const registeredIssuers = yield fetchIssuers();
   const issuersNormalised = mapKeys(registeredIssuers, (_, k) =>
     k.toUpperCase()
@@ -314,7 +314,7 @@ export function* verifyCertificateRegistryIssuer({ issuer }) {
     trace("isValidEthereumAddress", contractStoreAddresses);
 
     const issuerIdentitiesFromRegistry = yield call(
-      lookupEthereumAddress,
+      lookupAddressOnRegistry,
       contractStoreAddresses
     );
     trace(
@@ -326,32 +326,36 @@ export function* verifyCertificateRegistryIssuer({ issuer }) {
   }
 }
 
-function throwErrorIfNotVerified(verificationStatuses) {
-  verificationStatuses.forEach(status => {
-    if (!status.registry && !status.dns) {
-      throw new Error(
-        `Issuer identity cannot be verified: ${status.documentStore}`
-      );
-    }
-  });
-  return true;
+function throwIfAnyIdentityIsNotVerified(verificationStatuses) {
+  const invalidIdentities = verificationStatuses.filter(
+    status => !status.registry && !status.dns
+  );
+  if (invalidIdentities.length > 0) {
+    const invalidStoreAddresses = invalidIdentities.map(
+      identity => identity.documentStore
+    );
+    throw new Error(
+      `Issuer identity cannot be verified: ${invalidStoreAddresses.join(", ")}`
+    );
+  }
 }
 
 export function* getDetailedIssuerStatus({ issuer }) {
   const verificationStatus = {
     documentStore: getDocumentStore(issuer),
-    registry: false,
-    dns: false
+    registry: null,
+    dns: null
   };
 
   verificationStatus.registry = yield call(verifyCertificateRegistryIssuer, {
     issuer
   });
 
-  if (get(issuer, "identityProof.type") === "DNS-TXT")
+  if (get(issuer, "identityProof.type") === "DNS-TXT") {
     verificationStatus.dns = yield call(verifyCertificateDnsIssuer, {
       issuer
     });
+  }
   trace(`issuer status: ${verificationStatus}`);
   return verificationStatus;
 }
@@ -365,7 +369,8 @@ export function* verifyCertificateIssuer({ certificate }) {
       issuers.map(issuer => call(getDetailedIssuerStatus, { issuer }))
     );
 
-    throwErrorIfNotVerified(verificationStatuses);
+    // If any identity is not verified, this should return false
+    throwIfAnyIdentityIsNotVerified(verificationStatuses);
 
     yield put(
       verifyingCertificateIssuerSuccess({
