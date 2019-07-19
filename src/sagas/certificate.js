@@ -327,6 +327,8 @@ export function* verifyCertificateRegistryIssuer({ issuer }) {
 }
 
 function throwIfAnyIdentityIsNotVerified(verificationStatuses) {
+  if (verificationStatuses.length === 0)
+    throw new Error("No issuers found in the document");
   const invalidIdentities = verificationStatuses.filter(
     status => !status.registry && !status.dns
   );

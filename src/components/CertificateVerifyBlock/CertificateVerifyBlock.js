@@ -61,7 +61,7 @@ export const getIdentityVerificationText = identityStatus => {
   const verifiedText = identityStatus.reduce(
     (prev, next) => {
       /* eslint-disable-next-line no-param-reassign */
-      if (next.registry && !prev.isRegistry) prev.isRegistry = true;
+      if (next.registry) prev.isRegistry = true;
 
       if (next.dns) prev.dns.push(next.dns.toUpperCase());
 
