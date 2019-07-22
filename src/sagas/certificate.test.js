@@ -64,7 +64,7 @@ jest.mock("@govtechsg/dnsprove", () => {
     ...originalModule,
     getDocumentStoreRecords: jest.fn().mockReturnValue([
       {
-        address: "0x0c9d5E6C766030cc6f0f49951D275Ad0701F81E2"
+        addr: "0x0c9d5E6C766030cc6f0f49951D275Ad0701F81E2"
       }
     ])
   };

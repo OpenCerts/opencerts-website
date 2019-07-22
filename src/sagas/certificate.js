@@ -284,13 +284,13 @@ export function* verifyCertificateDnsIssuer({ issuer }) {
 
   const dnsRecords = yield call(getDocumentStoreRecords, location);
 
-  trace(`DNS records: ${dnsRecords}`); // dnsRecords: [{address: "0xabc", netId: 3}]
+  trace(`DNS records: ${dnsRecords}`); // dnsRecords: [{addr: "0xabc", netId: 3}]
   let verificationStatus = false;
   const documentStore = getDocumentStore(issuer);
   if (dnsRecords && dnsRecords.length > 0) {
     verificationStatus = dnsRecords.find(
       dns =>
-        dns.address === documentStore && dns.netId === (IS_MAINNET ? "1" : "3")
+        dns.addr === documentStore && dns.netId === (IS_MAINNET ? "1" : "3")
     );
   }
   trace(`DNS Verification Status: ${verificationStatus}`);
