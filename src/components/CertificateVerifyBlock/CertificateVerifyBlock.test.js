@@ -2,21 +2,21 @@ import { getIdentityVerificationText } from "./CertificateVerifyBlock";
 
 describe("Certificate verify block getIdentityVerificationText", () => {
   describe("When registry is verified", () => {
-    test("singular registry is verified", () => {
+    test("should return appropriate display text when singular registry is verified", () => {
       const testValue = [{ registry: "Govtech", dns: "abc.com" }];
       expect(getIdentityVerificationText(testValue)).toEqual(
         "Accredited by SSG"
       );
     });
 
-    test("registry is verified but dns is unverified", () => {
+    test("should return appropriate display text when registry is verified but dns is unverified", () => {
       const testValue = [{ registry: "Demo", dns: "false" }];
       expect(getIdentityVerificationText(testValue)).toEqual(
         "Accredited by SSG"
       );
     });
 
-    test("when multiple registry is verified", () => {
+    test("should return appropriate display text when multiple registry is verified", () => {
       const testValue = [
         { registry: "govtech", dns: "abc.com" },
         { registry: "demo", dns: "demo.com" }
@@ -26,7 +26,7 @@ describe("Certificate verify block getIdentityVerificationText", () => {
       );
     });
 
-    test("when one of each registry and dns verified", () => {
+    test("should return appropriate display text when one of each registry and dns verified", () => {
       const testValue = [
         { registry: false, dns: "abc.com" },
         { registry: "demo", dns: false }
@@ -37,7 +37,7 @@ describe("Certificate verify block getIdentityVerificationText", () => {
     });
   });
 
-  describe("When dns is verified", () => {
+  describe("should return appropriate display text when dns is verified", () => {
     test("when registry is unverified but dns is verified", () => {
       const testValue = [{ registry: false, dns: "abc.com" }];
       expect(getIdentityVerificationText(testValue)).toEqual(
@@ -45,7 +45,7 @@ describe("Certificate verify block getIdentityVerificationText", () => {
       );
     });
 
-    test("when multiple dns is verified", () => {
+    test("should return appropriate display text when multiple dns is verified", () => {
       const testValue = [
         { registry: false, dns: "abc.com" },
         { registry: false, dns: "demo.com" }
