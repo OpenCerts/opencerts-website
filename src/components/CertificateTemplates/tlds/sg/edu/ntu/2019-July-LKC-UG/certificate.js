@@ -320,7 +320,7 @@ export const renderAwardText = certificate => (
       </div>
     </div>
     <div className="col-12 mt-2 mb-4">
-      <p style={printTextStyle}>the degree of</p>
+      <p style={printTextStyle}>the degrees of</p>
     </div>
 
     {renderCertName(certificate)}
