@@ -28,7 +28,7 @@ const renderVerifyBlock = props => (
   />
 );
 
-const LoadingIframe = (
+const LoadingIframe = () => (
   <div id={styles["renderer-loader"]} className="text-blue">
     <i className="fas fa-spinner fa-pulse fa-3x" />
     <div className="m-3" style={{ fontSize: "1.5rem" }}>
@@ -101,7 +101,7 @@ const CertificateViewer = props => {
       </div>
       <MultiTabs selectTemplateTab={selectTemplateTab} />
       <div>
-        {LoadingIframe}
+        <LoadingIframe />
         <DecentralisedRenderer
           certificate={document}
           source={`${
