@@ -50,8 +50,6 @@ const DraggableDemoCertificate = () => (
         />
         <span
           style={{
-            // fontSize: "15px",
-            // width: "160px",
             textAlign: "justify",
             color: "#ff9933"
           }}
