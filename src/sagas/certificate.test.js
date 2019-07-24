@@ -108,7 +108,7 @@ function whenThereAreDnsNameAndEthereumAddress() {
     .addDataField("issuers", [
       {
         identityProof: { type: "DNS-TXT", location: dnsName },
-        documentSotre: ethereumAddress
+        documentStore: ethereumAddress
       }
     ])
     .finish();
@@ -126,11 +126,11 @@ function whenThereAreMultipleDnsNameAndEthereumAddress() {
     .addDataField("issuers", [
       {
         identityProof: { type: "DNS-TXT", location: dnsNames[0] },
-        documentSotre: ethereumAddress[0]
+        documentStore: ethereumAddress[0]
       },
       {
         identityProof: { type: "DNS-TXT", location: dnsNames[1] },
-        documentSotre: ethereumAddress[1]
+        documentStore: ethereumAddress[1]
       }
     ])
     .finish();

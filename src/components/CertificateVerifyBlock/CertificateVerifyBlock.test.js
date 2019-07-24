@@ -47,11 +47,11 @@ describe("Certificate verify block getIdentityVerificationText", () => {
 
     test("should return appropriate display text when multiple dns is verified", () => {
       const testValue = [
-        { registry: false, dns: "abc.com" },
+        { registry: false, dns: "xyz.com" },
         { registry: false, dns: "demo.com" }
       ];
       expect(getIdentityVerificationText(testValue)).toEqual(
-        "Issued by ABC.COM & DEMO.COM"
+        "Issued by DEMO.COM"
       );
     });
   });

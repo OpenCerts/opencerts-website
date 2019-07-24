@@ -33,8 +33,8 @@ const renderHeaderBlock = props => {
   return (
     <div className={`container-fluid ${styles["pd-0"]}`}>
       <div className="row">
-        <div className="col-sm-7 col-xs-12">{renderedVerifyBlock}</div>
-        <div className={`row col-sm-5 col-xs-12 ${styles["pd-0"]}`}>
+        <div className="col-sm-7 col-md-8 col-xs-12">{renderedVerifyBlock}</div>
+        <div className={`row col-sm-5 col-md-4 col-xs-12 ${styles["pd-0"]}`}>
           <div className="ml-auto">
             <div
               id="btn-print"
