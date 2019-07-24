@@ -2,7 +2,8 @@
 import { get } from "lodash";
 import {
   IMG_LOGO_NTU_COAT_OF_ARMS,
-  IMG_CERTIFICATE_SEAL
+  IMG_CERTIFICATE_SEAL,
+  IMG_CERTIFICATE_SEAL2
 } from "../common/images";
 import { formatDate, formatCertID } from "../common/functions";
 import { IMG_PARTNER_SEAL, IMG_LOGO_IMPERIAL_COLLEGE } from "./images/logo";
@@ -26,6 +27,11 @@ export const partnerLogoFullWidthStyle = {
 
 export const fullWidthStyle = {
   width: "80%",
+  height: "auto"
+};
+
+export const fullWidthStyle2 = {
+  width: "84%",
   height: "auto"
 };
 
@@ -347,19 +353,25 @@ export const renderIssuingDate = certificate => (
   </div>
 );
 
-export const renderSeal = (
-  <div className="row mb-0">
-    <div className="col-1" />
-    <div className="col-4">
-      <img style={fullWidthStyle} src={IMG_CERTIFICATE_SEAL} />
+export const renderSeal = certificate => {
+  return (
+    <div className="row mb-0">
+      <div className="col-1" />
+      <div className="col-4">
+        {certificate.additionalData.isNewSeal === "true" ? (
+          <img style={fullWidthStyle} src={IMG_CERTIFICATE_SEAL} />
+        ) : (
+          <img style={fullWidthStyle2} src={IMG_CERTIFICATE_SEAL2} />
+        )}
+      </div>
+      <div className="col-2" />
+      <div className="col-4">
+        <img style={partnerFullWidthStyle} src={IMG_PARTNER_SEAL} />
+      </div>
+      <div className="col-1" />
     </div>
-    <div className="col-2" />
-    <div className="col-4">
-      <img style={partnerFullWidthStyle} src={IMG_PARTNER_SEAL} />
-    </div>
-    <div className="col-1" />
-  </div>
-);
+  );
+};
 
 export const renderFinePrint = (
   <div className="row mb-2 mt-2">
@@ -416,7 +428,7 @@ export default ({ logo }) => ({ certificate }) => (
         <div className="col">{renderTwoSignatures(certificate)}</div>
       </div>
       <div className="row ml-5 mb-4">
-        <div className="col">{renderSeal}</div>
+        <div className="col">{renderSeal(certificate)}</div>
       </div>
       <div className="row ml-5 mb-4">
         <div className="col-12">{renderFinePrint}</div>
