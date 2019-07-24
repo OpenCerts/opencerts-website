@@ -38,19 +38,19 @@ class Degree extends Component {
   // render content
   renderContent() {
     const style1 = {
-      width: "10cm",
+      width: "12cm",
       height: ".9cm",
       textAlign: "center",
       border: "0px solid"
     };
     const style3 = {
-      width: "10cm",
+      width: "12cm",
       height: ".2cm",
       textAlign: "center",
       border: "0px solid"
     };
     const style2 = {
-      width: "10cm",
+      width: "12cm",
       height: "0.5cm",
       textAlign: "center",
       border: "0px solid"

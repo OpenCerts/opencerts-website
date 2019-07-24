@@ -61,7 +61,7 @@ class Degree extends Component {
   // render additional content
   renderContAdd = degreeData => {
     const style = {
-      width: "13.4cm",
+      width: "15.4cm",
       height: ".5cm",
       textAlign: "center",
       border: "0px solid"
@@ -85,7 +85,7 @@ class Degree extends Component {
   // render content
   renderContent() {
     const style1 = {
-      width: "13.4cm",
+      width: "15.4cm",
       height: ".5cm",
       textAlign: "center",
       border: "0px solid"
