@@ -284,7 +284,7 @@ export function* verifyCertificateDnsIssuer({ issuer }) {
 
   const dnsRecords = yield call(getDocumentStoreRecords, location);
 
-  trace(`DNS records: ${dnsRecords}`); // dnsRecords: [{addr: "0xabc", netId: 3}]
+  trace(`DNS records: ${JSON.stringify(dnsRecords)}`); // dnsRecords: [{addr: "0xabc", netId: 3}]
   let verificationStatus = false;
   const documentStore = getDocumentStore(issuer);
   if (dnsRecords && dnsRecords.length > 0) {
@@ -293,7 +293,7 @@ export function* verifyCertificateDnsIssuer({ issuer }) {
         dns.addr === documentStore && dns.netId === (IS_MAINNET ? "1" : "3")
     );
   }
-  trace(`DNS Verification Status: ${verificationStatus}`);
+  trace(`DNS Verification Status: ${JSON.stringify(verificationStatus)}`);
   return verificationStatus ? location : false;
 }
 
@@ -358,7 +358,7 @@ export function* getDetailedIssuerStatus({ issuer }) {
       issuer
     });
   }
-  trace(`issuer status: ${verificationStatus}`);
+  trace(`issuer status: ${JSON.stringify(verificationStatus)}`);
   return verificationStatus;
 }
 
