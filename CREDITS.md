@@ -12,7 +12,7 @@ https://github.com/OpenCerts/dnsprove
 ### License
 MIT License
 
-Copyright (c) 2018 RJ Chow
+Copyright (c) 2018 GovTech Singapore
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
