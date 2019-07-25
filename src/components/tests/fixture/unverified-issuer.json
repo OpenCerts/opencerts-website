@@ -1,0 +1,99 @@
+{
+  "schema": "opencerts/v2.0",
+  "data": {
+    "id": "8b83c25e-0f4c-40b4-b535-37e5da1f6ced:string:SERIAL-2018-08-01-112",
+    "$template": {
+      "name": "64390564-2fdd-479c-863f-abac27f351f9:string:CUSTOM_TEMPLATE",
+      "type": "f6ee4e77-ed38-47ba-839d-ae609b6e56ae:string:EMBEDDED_RENDERER",
+      "url": "a3a89cc5-079e-4114-b88c-9f64ce807714:string:https://demo-renderer.opencerts.io"
+    },
+    "description": "54075175-18d0-484d-a1e6-ed7d9f8b5a38:string:This masters is awarded to developers who can blockchain",
+    "issuedOn": "b32c73c9-2333-478c-ba6d-9e2a67717e76:string:2018-08-01T00:00:00+08:00",
+    "expiresOn": "468b0725-c83a-4a96-ad2f-589880cce041:string:2118-08-01T00:00:00+08:00",
+    "name": "2c337729-5db4-4f84-a08c-1e3d0409c3bf:string:Master of Blockchain",
+    "admissionDate": "d0a738ff-8571-462f-becb-555c490ef4be:string:2017-07-01T00:00:00+08:00",
+    "graduationDate": "44e11344-f6e7-4a8d-b146-a3df370a56c7:string:2018-08-01T00:00:00+08:00",
+    "attainmentDate": "069aabb7-8ebc-44c8-b70d-3fc15f2092b4:string:2018-07-25T00:00:00+08:00",
+    "issuers": [
+      {
+        "name": "761a6100-afec-4feb-879c-f168e5eb7b0c:string:Blockchain Academy",
+        "did": "3ae815a9-cb5b-4013-9a1a-712b338ba7df:string:DID:SG-UEN:U18274928E",
+        "url": "d55dadd3-f6b1-4edc-bdd0-d6558c0b8cfe:string:https://blockchainacademy.com",
+        "email": "9fc174fa-8967-4268-b70a-ba6893cb562e:string:registrar@blockchainacademy.com",
+        "certificateStore": "d8fbeca3-6453-493b-9f77-798652e2f83e:string:0x8c269AA86336212A93E474148e40cF33A09CB1C0",
+        "additionalProp": "542967d1-0fd4-41bc-bfb4-11deadd0bc4f:string:0x0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "name": "d9352a83-87eb-48fc-956e-2465ded8b296:string:School of Crypto-economics",
+        "url": "d6330bd1-be63-40fd-b5bc-2e6cb70b68f9:string:https://ceschool.sg",
+        "certificateStore": "188de190-1ca2-4013-b967-d4adbe876da7:string:0x2f60375e8144e16Adf1979936301D8341D58C36C",
+        "identityProof": {
+          "type": "77b5ef75-88dd-4237-93b0-5f4acac415c8:string:DNS-TXT",
+          "location": "210dc495-7074-4e7e-bb74-0c7d12fc3e87:string:example.openattestation.com"
+        }
+      }
+    ],
+    "recipient": {
+      "name": "8b6b392b-f59c-41e1-b02d-b42e9d343c39:string:Mr Blockchain",
+      "did": "01fb1dcb-0ecd-48c4-a277-d7220a3ab3e4:string:DID:SG-NRIC:S99999999A",
+      "email": "5343047e-fa8d-4cd6-bea7-0402bf677291:string:mr-blockchain@gmail.com",
+      "phone": "262ffe87-6535-46a9-8ec7-489ce4d1fc95:string:+65 88888888",
+      "additionalProp": "f76ca53c-a333-4fe1-aeb0-982296c12ece:string:0x0000000000000000000000000000000000000000000000000000000000000000",
+      "nric": "11b2800f-0d04-42c3-80e9-434797d8a535:string:S0000001Z",
+      "fin": "f667e111-c021-463a-b5a2-095e27e2a0c3:string:F0000001Z",
+      "studentId": "af73ac47-6dd7-4717-8300-0f8425950efd:string:1232"
+    },
+    "qualificationLevel": [
+      {
+        "frameworkName": "861c2124-6303-453b-b3d0-dffc55cf7e92:string:singapore/ssec-eqa",
+        "frameworkVersion": "231f3b62-e500-4af4-910b-946631b43d0d:string:2015",
+        "code": "d796edd6-3f6b-4f96-87a4-4094b6865483:string:51",
+        "description": "b58616fa-133b-4348-952d-1175c60bd8aa:string:Polytechnic Diploma"
+      },
+      {
+        "frameworkName": "21d2adb3-f72c-4426-95a2-693201c8b2f9:string:international/isced",
+        "frameworkVersion": "80ed6cce-a136-4897-a5a3-f521a1318360:string:2011",
+        "code": "4b4391a8-ce2c-4cc3-a816-5886df4c0828:string:55",
+        "description": "07e91301-4bf5-47e4-abd2-4f003842b71e:string:(Short-cycle tertiary education) Vocational"
+      }
+    ],
+    "fieldOfStudy": [
+      {
+        "frameworkName": "014f8393-756c-4eb2-aa68-652588831c4e:string:singapore/ssec-fos",
+        "frameworkVersion": "1bda8697-3d1e-4570-99a0-0f46143adfe5:string:2015",
+        "code": "7fadc41e-c4e3-4f35-8993-38e596c90bba:string:0897",
+        "description": "61a426ab-10b2-4bb2-84ae-abe2ff042976:string:Biomedical Science"
+      }
+    ],
+    "transcript": [
+      {
+        "name": "eaa99149-2c49-4bf8-992b-c230e5a500e8:string:Bitcoin",
+        "grade": "8685c354-622a-4a44-ad18-85ab434a7c22:string:A+",
+        "courseCredit": "45702fdf-1949-4d9f-b975-a10a71d02400:number:3",
+        "courseCode": "b8268e1a-0b36-4376-8eb6-756ce42d7b50:string:BTC-01",
+        "examinationDate": "707a17d8-ef76-43ec-9b34-3f7d07f26f66:string:2018-08-01T00:00:00+08:00",
+        "url": "4e139b31-3598-4292-90e7-780927bdd570:string:https://blockchainacademy.com/subject/BTC-01",
+        "description": "5503683b-1dba-4d65-8b3a-b614b327b3b2:string:Everything and more about bitcoin!"
+      },
+      {
+        "name": "a4938661-742b-4d87-bc2f-40e6e12cf459:string:Ethereum",
+        "grade": "9c99d01c-844d-47c9-9395-a835d044de3a:string:A+",
+        "courseCredit": "74baa61b-34ff-400c-aa40-97d57122ce64:string:3.5",
+        "courseCode": "639a3f2b-5312-42b2-8a39-7b78fdb2b16e:string:ETH-01",
+        "examinationDate": "12d37497-5daa-4bb6-b136-67ffe352f721:string:2018-08-01T00:00:00+08:00",
+        "url": "6a2eab30-91b6-4d9d-be60-3b2a1870e8b1:string:https://blockchainacademy.com/subject/ETH-01",
+        "description": "7ef201c1-2d50-4914-bc11-64521a3f7252:string:Everything and more about ethereum!"
+      }
+    ],
+    "cumulativeScore": "90510db5-41b1-4445-b0a2-bceebd189433:number:3.9935"
+  },
+  "privacy": {
+    "obfuscatedData": []
+  },
+  "signature": {
+    "type": "SHA3MerkleProof",
+    "targetHash": "5b86657f5f5702bf57f5befd18b373941f0975d72a8507ef5daf97f8f11bc4c6",
+    "proof": [],
+    "merkleRoot": "5b86657f5f5702bf57f5befd18b373941f0975d72a8507ef5daf97f8f11bc4c6"
+  }
+}
