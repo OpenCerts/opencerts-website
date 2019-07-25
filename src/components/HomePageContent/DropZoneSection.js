@@ -1,23 +1,23 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import CertificateDropzone from "../CertificateDropZone";
-import css from "./dropZoneSection.scss";
-import { updateCertificate } from "../../reducers/certificate";
-import { trace } from "../../utils/logger";
-import { IS_MAINNET } from "../../config";
-import MAIN from "./Main-Demo";
-import ROPSTEN from "./Ropsten-Demo";
-import { analyticsEvent } from "../Analytics/index";
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import CertificateDropzone from '../CertificateDropZone'
+import css from './dropZoneSection.scss'
+import { updateCertificate } from '../../reducers/certificate'
+import { trace } from '../../utils/logger'
+import { IS_MAINNET } from '../../config'
+import MAIN from './Main-Demo'
+import ROPSTEN from './Ropsten-Demo'
+import { analyticsEvent } from '../Analytics/index'
 
-const DEMO_CERT = IS_MAINNET ? MAIN : ROPSTEN;
-const DEMO_CONTENT_KEY = "DEMO_CONTENT";
+const DEMO_CERT = IS_MAINNET ? MAIN : ROPSTEN
+const DEMO_CONTENT_KEY = 'DEMO_CONTENT'
 
 function demoCount() {
   analyticsEvent(window, {
-    category: "USER_INTERACTION",
-    action: "DEMO_CERTIFICATE_VIEWED"
-  });
+    category: 'USER_INTERACTION',
+    action: 'DEMO_CERTIFICATE_VIEWED'
+  })
 }
 
 const DraggableDemoCertificate = () => (
@@ -35,7 +35,7 @@ const DraggableDemoCertificate = () => (
             download="demo.opencert"
           >
             <img
-              style={{ cursor: "grabbing" }}
+              style={{ cursor: 'grabbing' }}
               src="/static/images/dropzone/cert.png"
               width="100%"
             />
@@ -50,21 +50,21 @@ const DraggableDemoCertificate = () => (
         />
         <span
           style={{
-            textAlign: "justify",
-            color: "#ff9933"
+            textAlign: 'justify',
+            color: '#ff9933'
           }}
         >
           Drag me over here to see a demo certificate and other features
         </span>
         <img
-          src="/static/images/dropzone/opencerts.png"
+          src="/static/images/opencertslogo.svg"
           width="100%"
           draggable="false"
         />
       </div>
     </div>
   </div>
-);
+)
 
 const MobileDemoCertificate = () => (
   <div className="d-block d-lg-none d-xl-none">
@@ -74,36 +74,36 @@ const MobileDemoCertificate = () => (
       draggable="false"
       id="demoClick"
       style={{
-        background: "#28a745",
-        border: "none",
-        cursor: "pointer"
+        background: '#28a745',
+        border: 'none',
+        cursor: 'pointer'
       }}
       onClick={demoCount}
     >
       Click me for a demo certificate!
     </a>
   </div>
-);
+)
 
 class DropZoneSection extends Component {
   componentDidMount() {
-    document.getElementById("demoDrop").addEventListener("drop", e => {
+    document.getElementById('demoDrop').addEventListener('drop', e => {
       if (e.dataTransfer.getData(DEMO_CONTENT_KEY)) {
-        this.props.updateCertificate(DEMO_CERT);
+        this.props.updateCertificate(DEMO_CERT)
       }
-    });
-    document.getElementById("demoClick").addEventListener("click", () => {
-      this.props.updateCertificate(DEMO_CERT);
-    });
+    })
+    document.getElementById('demoClick').addEventListener('click', () => {
+      this.props.updateCertificate(DEMO_CERT)
+    })
   }
 
   componentWillUnmount() {
     document
-      .getElementById("demoDrop", "demoClick")
-      .removeEventListener("drop", () => this.removeListener());
+      .getElementById('demoDrop', 'demoClick')
+      .removeEventListener('drop', () => this.removeListener())
   }
 
-  removeListener = () => trace("drop listener removed");
+  removeListener = () => trace('drop listener removed')
 
   // eslint-disable-next-line class-methods-use-this
   render() {
@@ -127,19 +127,19 @@ class DropZoneSection extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   updateCertificate: payload => dispatch(updateCertificate(payload))
-});
+})
 
 export default connect(
   null,
   mapDispatchToProps
-)(DropZoneSection);
+)(DropZoneSection)
 
 DropZoneSection.propTypes = {
   updateCertificate: PropTypes.func
-};
+}
