@@ -87,7 +87,7 @@ const renderText = (status, props) => {
       break;
     }
     case LOG_LEVEL.WARNING:
-      text = "Institution not in our registry";
+      text = "Institution identity not verified";
       break;
     default:
       text = "Invalid Certificate";
@@ -118,6 +118,7 @@ const SimpleVerifyBlock = props => {
         css[stateStyle]
       } ${props.detailedVerifyVisible ? css.active : ""}`}
       onClick={props.toggleDetailedView}
+      id="certificate-status"
     >
       <div className="row" style={{ flexWrap: "inherit" }}>
         {renderedIcon}
