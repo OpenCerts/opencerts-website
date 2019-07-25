@@ -81,6 +81,10 @@
       "logo": "/static/images/RP_logo.svg",
       "id": "rp-registry"
     },
+     "0x140dcce78b7264543ccba4531da91127adf3f790": {
+      "name": "Edufied",
+      "displayCard": false
+    },
     "0x5f007251c78cA92d3053492cCf0EDC161063624c": {
       "name": "ROPSTEN: Nanyang Polytechnic",
       "displayCard": false
