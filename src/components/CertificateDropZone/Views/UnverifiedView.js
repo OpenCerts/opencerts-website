@@ -39,9 +39,8 @@ const View = ({
       error: !hashStatus.verified
     },
     {
-      title: "Certificate issuer identity can not be verified",
-      message:
-        "The issuer idenity of this certificate can not be verified using registry or dns.",
+      title: "Certificate issuer identity invalid",
+      message: "This certificate was issued by an invalid issuer.",
       error: !issuerIdentityStatus.verified
     },
     {
