@@ -13,7 +13,6 @@ export const initialState = {
   storeLoading: false,
 
   issuerIdentities: null,
-
   certificateHash: false,
   certificateIssued: false,
   certificateNotRevoked: false,
@@ -116,7 +115,6 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         issuerIdentities: null,
-
         certificateHash: false,
         certificateIssued: false,
         certificateNotRevoked: false,
@@ -365,10 +363,10 @@ export function updateFilteredCertificate(payload) {
   };
 }
 
-export function verifyingCertificateIssuerSuccess(payload) {
+export function verifyingCertificateIssuerSuccess({ issuerIdentities }) {
   return {
     type: types.VERIFYING_CERTIFICATE_ISSUER_SUCCESS,
-    payload
+    payload: issuerIdentities
   };
 }
 

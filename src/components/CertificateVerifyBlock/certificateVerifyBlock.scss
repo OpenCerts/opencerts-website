@@ -9,6 +9,7 @@
 
 .simple-verify-block {
   width: 100%;
+  min-width: 300px;
   border-radius: 5px;
   color: white;
   height: 100%;
@@ -45,7 +46,7 @@
 
 .arrow {
   height:100%;
-  margin: auto;
+  margin: 6px 15px 0 15px;
 }
 
 .valid {
@@ -63,28 +64,44 @@
 .verification-text {
   font-size: 1.25rem;
 }
-.d-flex {
-  display: -ms-flexbox!important;
-  display: flex!important;
+
+.verified-icon {
+  margin: 0 10px !important;
 }
 
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 575px) {
   .verifyBlocksContainer {
     position: relative;
   }
   .d-flex {
     display: block!important;
   }
-}
-
-@media only screen and (min-width: 576px) {
-  .verifyBlocksContainer {
-    position: absolute!important;
+  .verification-text {
+    font-size: 1rem;
   }
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (min-width: 576px) and (max-width: 979px) {
   .verifyBlocksContainer {
     display: block!important;
+  }
+  .d-flex {
+    display: block!important;
+  }
+  .verification-text {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (min-width: 980px) {
+  .verifyBlocksContainer {
+    position: block!important;
+  }
+  .d-flex {
+    display: -ms-flexbox!important;
+    display: flex!important;
+  }
+  .verification-text {
+    font-size: 1.25rem;
   }
 }
