@@ -1,36 +1,25 @@
 import { Selector } from "testcafe";
 
-fixture("UnVerified Certificate Rendering").page`http://localhost:3000`;
+fixture("Unverified Ceritifcate Rendering").page`http://localhost:3000`;
 
-const Document = "./fixture/unverified-issuer.json";
-const IframeBlock = Selector("#iframe");
-const SampleTemplate = Selector("#rendered-certificate");
-const StatusButton = Selector("#certificate-status");
+const Certificate = "./fixture/unverified-issuer.json";
+
+const RenderedCertificate = Selector("#certificate-dropzone");
+const InvalidMessage = Selector(".invalid");
 
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(
-    async (_prev, curr) => t.expect(component.textContent).contains(curr),
+    async (prev, curr) => t.expect(component.textContent).contains(curr),
     Promise.resolve()
   );
 
-test("Sample document is rendered correctly when issuer is unverfied", async t => {
-  await t.setFilesToUpload("input[type=file]", [Document]);
+test("Error view rendered when certificate issuers are unverfied", async t => {
+  await t.setFilesToUpload("input[type=file]", [Certificate]);
 
-  await validateTextContent(t, StatusButton, [
-    "Institution identity not verified"
-  ]);
+  await InvalidMessage.with({ visibilityCheck: true })();
 
-  await t
-    .expect(StatusButton.getStyleProperty("background-color"))
-    .eql("rgb(255, 191, 0)");
-
-  await t.switchToIframe(IframeBlock);
-
-  await validateTextContent(t, SampleTemplate, [
-    "Rendered with custom template",
-    "Master of Blockchain",
-    "CUSTOM_TEMPLATE",
-    "Blockchain Academy",
-    "Bitcoin"
+  await validateTextContent(t, RenderedCertificate, [
+    "Certificate issuer identity invalid",
+    "This certificate was issued by an invalid issuer."
   ]);
 });

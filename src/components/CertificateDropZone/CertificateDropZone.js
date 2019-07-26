@@ -38,6 +38,7 @@ const renderDropzoneContent = props => {
     (!hashStatus.verified ||
       !issuedStatus.verified ||
       !notRevokedStatus.verified ||
+      !issuerIdentityStatus.verified ||
       !storeStatus.verified)
   ) {
     return (
