@@ -409,6 +409,7 @@ export function* verifyCertificate({ payload }) {
     verificationStatuses.certificateIssued &&
     verificationStatuses.certificateHashValid &&
     verificationStatuses.certificateNotRevoked &&
+    verificationStatuses.certificateIssuerRecognised &&
     verificationStatuses.certificateStoreValid;
   if (verified) {
     Router.push("/viewer");
