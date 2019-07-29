@@ -1,7 +1,7 @@
 ---
 name: Certificate Template Addition
 about: This is the workflow for requesting new certificate templates to be added to
-  the OpenCerts repository
+  the TradeTrust repository
 title: "[New Template]"
 labels: new template
 assignees: ''
@@ -14,7 +14,7 @@ This document is a work in progress but here are some basic checks. As these are
 ### Pre-merge checks
 
 - [ ] Did not modify any files outside of your organisation's template folder (e.g package-lock.json or anything else)
-- [ ] Ensure that your code has been [rebased](https://www.digitalocean.com/community/tutorials/how-to-rebase-and-update-a-pull-request) on top of latest OpenCerts master
+- [ ] Ensure that your code has been [rebased](https://www.digitalocean.com/community/tutorials/how-to-rebase-and-update-a-pull-request) on top of latest TradeTrust master
 - [ ] Linter issues resolved (Run `npm run lint:fix` to see issues)
 - [ ] `npm run test` passes
 - [ ] `npm run test:integration` passes
@@ -22,7 +22,7 @@ This document is a work in progress but here are some basic checks. As these are
 
 ### Certificate Template 
 - [ ] No more than 5 templates or 25 added/modified files in the pull request
-- [ ] Ensure that your .opencert file's data complies with the intentions of the OpenCerts' schema - e.g recipient related information is inside the `recipient` object, etc.
+- [ ] Ensure that your .opencert file's data complies with the intentions of the TradeTrust' schema - e.g recipient related information is inside the `recipient` object, etc.
 - [ ] Integration test for each template that checks that the correct rendering is done given a sample certificate
 - [ ] Sample certificate file included for each template, located alongside the integration test for each template
 - [ ] Sample certificates must obviously be a sample certificate

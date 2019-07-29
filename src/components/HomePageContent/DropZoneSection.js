@@ -101,9 +101,8 @@ class DropZoneSection extends Component {
             <div className={css.description}>
               <h1>An easy way to check and verify your documents</h1>
               <p>
-                Whether you&#39;re a student or an employer, OpenCerts lets you
-                verify the certificates you have of anyone from any institution.
-                All in one place.
+                TradeTrust lets you verify the documents you have of anyone from
+                any issuer. All in one place.
               </p>
               <DraggableDemoCertificate />
               <MobileDemoCertificate />

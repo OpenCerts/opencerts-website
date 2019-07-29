@@ -1,41 +1,6 @@
 import css from "./aboutSection.scss";
 import images from "./AboutImages";
 
-const BenefitsSection = () => (
-  <div className={css.section}>
-    <h3>What we can help you do</h3>
-    <div className={css.container}>
-      <div className="col-lg-4 col-sm-12">
-        <div className={css.benefits}>
-          {images.valid()}
-          <div className={css["benefit-text"]}>
-            <h4 className={css["benefit-header"]}>View</h4>
-            <p>Easy way to view your certificate</p>
-          </div>
-        </div>
-      </div>
-      <div className="col-lg-4 col-sm-12">
-        <div className={css.benefits}>
-          {images.genuine()}
-          <div className={css["benefit-text"]}>
-            <h4 className={css["benefit-header"]}>Check</h4>
-            <p>Make sure it has not been tampered with</p>
-          </div>
-        </div>
-      </div>
-      <div className="col-lg-4 col-sm-12">
-        <div className={css.benefits}>
-          {images.institution()}
-          <div className={css["benefit-text"]}>
-            <h4 className={css["benefit-header"]}>Verify</h4>
-            <p>Find out if it is from a recognised institution</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-);
-
 const HowItWorks = () => {
   const sections = [
     {
@@ -70,14 +35,14 @@ const HowItWorks = () => {
 };
 
 const AboutSection = () => (
-    <div className="row bg-light" id="how-it-works">
-      <div className={css.main}>
-        <div className={css.section}>
-          <h3>How it works</h3>
-          <HowItWorks />
-        </div>
+  <div className="row bg-light" id="how-it-works">
+    <div className={css.main}>
+      <div className={css.section}>
+        <h3>How it works</h3>
+        <HowItWorks />
       </div>
     </div>
+  </div>
 );
 
 export default AboutSection;

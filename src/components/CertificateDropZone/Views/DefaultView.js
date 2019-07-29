@@ -19,7 +19,8 @@ const View = ({ hover, accept }) => (
     </div>
     {accept ? null : (
       <div>
-        File cannot be read. Please check that you have a valid .tt or .json file
+        File cannot be read. Please check that you have a valid .tt or .json
+        file
       </div>
     )}
     <div
