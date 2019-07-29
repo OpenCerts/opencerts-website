@@ -31,8 +31,8 @@ export const INFURA_PROJECT_ID = "1f1ff2b3fca04f8d99f67d465c59e4ef";
 export const LEGACY_OPENCERTS_RENDERER = "https://legacy.opencerts.io/";
 
 export const DEFAULT_SEO = {
-  title: "An easy way to check and verify your certificates",
-  titleTemplate: `OpenCerts - %s`,
+  title: "An easy way to check and verify your documents",
+  titleTemplate: `TradeTrust - %s`,
   description:
     "Whether you're a student or an employer, OpenCerts lets you verify the certificates you have of anyone from any institution. All in one place.",
   openGraph: {

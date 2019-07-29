@@ -11,7 +11,7 @@ const PAGE_SEO = {
   description:
     "The registry is a list of recognised issuers with their certificate store addresses. Certificates from these issuers can be recognised and verified by our viewer.",
   openGraph: {
-    title: "OpenCerts - Registry",
+    title: "TradeTrust - Registry",
     description:
       "The registry is a list of recognised issuers with their certificate store addresses. Certificates from these issuers can be recognised and verified by our viewer.",
     url: `${URL}/registry`

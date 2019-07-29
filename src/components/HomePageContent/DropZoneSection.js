@@ -32,7 +32,7 @@ const DraggableDemoCertificate = () => (
         >
           <a
             href={`data:text/plain;,${JSON.stringify(DEMO_CERT, null, 2)}`}
-            download="demo.opencert"
+            download="demo.tt"
           >
             <img
               style={{ cursor: "grabbing" }}
@@ -99,7 +99,7 @@ class DropZoneSection extends Component {
         <div className={css.main}>
           <div className="col-lg-5 col-md-12">
             <div className={css.description}>
-              <h1>An easy way to check and verify your certificates</h1>
+              <h1>An easy way to check and verify your documents</h1>
               <p>
                 Whether you&#39;re a student or an employer, OpenCerts lets you
                 verify the certificates you have of anyone from any institution.

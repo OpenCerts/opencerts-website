@@ -41,17 +41,17 @@ const HowItWorks = () => {
     {
       key: "onetwo",
       text:
-        "When an OpenCerts certificate is created, a unique digital code is tagged to it. This code, together with condensed information from the certificate, is stored on the blockchain."
+        "When a TradeTrust certificate is created, a unique digital code is tagged to it. This code, together with condensed information from the document, is stored on the blockchain."
     },
     {
       key: "three",
       text:
-        "When you open the .opencert file on this site, its contents will be compared with what was stored on the blockchain."
+        "When you open the .tt file on this site, its contents will be compared with what was stored on the blockchain."
     },
     {
       key: "four",
       text:
-        "We'll check if the contents match and if the certificate comes from a recognised insitution.\n\nThis way, you'll know if the certificate is valid when you try to view it."
+        "We'll check if the contents match and if the document comes from a recognised issuer.\n\nThis way, you'll know if the document is valid when you try to view it."
     }
   ];
 
@@ -70,12 +70,6 @@ const HowItWorks = () => {
 };
 
 const AboutSection = () => (
-  <div>
-    <div className="row bg-light" id={css.benefits}>
-      <div className={css.main}>
-        <BenefitsSection />
-      </div>
-    </div>
     <div className="row bg-light" id="how-it-works">
       <div className={css.main}>
         <div className={css.section}>
@@ -84,7 +78,6 @@ const AboutSection = () => (
         </div>
       </div>
     </div>
-  </div>
 );
 
 export default AboutSection;

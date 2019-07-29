@@ -6,7 +6,7 @@
     justify-content: flex-start;
     margin: 0 auto;
     img {
-        height: 40px;
+        height: 50px;
     }
 }
 
@@ -15,7 +15,7 @@
     justify-content: flex-start;
     margin: 0 auto;
     background-color: $brand-dark;
-    padding: 1rem 2rem;
+    padding: 1rem 1rem;
 
     @media print {
         display: none;
