@@ -1,7 +1,6 @@
-import { some, get, partition, compact, mapKeys } from "lodash";
+import { get, partition, compact } from "lodash";
 import { put, all, call, select, takeEvery } from "redux-saga/effects";
 import { getData, verifySignature } from "@govtechsg/open-attestation";
-import { isValidAddress as isEthereumAddress } from "ethereumjs-util";
 import Router from "next/router";
 import { getDocumentStoreRecords } from "@govtechsg/dnsprove";
 import { getLogger } from "../utils/logger";
@@ -21,9 +20,8 @@ import {
 } from "../reducers/certificate";
 import { types as applicationTypes } from "../reducers/application";
 import DocumentStoreDefinition from "../services/contracts/DocumentStore.json";
-import fetchIssuers from "../services/issuers";
 import { combinedHash } from "../utils";
-import { ensResolveAddress, getText } from "../services/ens";
+import { ensResolveAddress } from "../services/ens";
 import sendEmail from "../services/email";
 import { analyticsEvent } from "../components/Analytics";
 
@@ -76,19 +74,6 @@ export function* loadCertificateContracts({ payload }) {
     });
     return null;
   }
-}
-
-export function* isValidENSDomain(storeAddress) {
-  trace(`Checking if ${storeAddress} is a valid ENS Domain`);
-  if (storeAddress == null) {
-    throw new Error("No address in certificate");
-  }
-  const web3 = yield getSelectedWeb3();
-  const ensToAddress = yield web3.eth.ens.getAddress(storeAddress);
-  if (ensToAddress === null) {
-    throw new Error("Invalid ENS");
-  }
-  return ensToAddress;
 }
 
 export function* isValidSmartContract(storeAddress) {
@@ -237,46 +222,6 @@ export function* verifyCertificateNotRevoked({
   }
 }
 
-function isApprovedENSDomain(issuerAddress) {
-  trace(`Checking if ${issuerAddress} is opencerts TLD`);
-  const approvedENSDomains = [/(opencerts.eth)$/];
-  return some(
-    approvedENSDomains.map(domainMask =>
-      domainMask.test(issuerAddress.toLowerCase())
-    )
-  );
-}
-
-export function* lookupAddressOnRegistry(ethereumAddressIssuer) {
-  const registeredIssuers = yield fetchIssuers();
-  const issuersNormalised = mapKeys(registeredIssuers, (_, k) =>
-    k.toUpperCase()
-  );
-
-  const identity = issuersNormalised[ethereumAddressIssuer.toUpperCase()];
-  if (!identity) {
-    throw new Error(
-      `Issuer identity cannot be verified: ${ethereumAddressIssuer}`
-    );
-  }
-  return identity;
-}
-
-export function* resolveEnsNameToText(ensName) {
-  trace("resolving ", ensName);
-  if (!isApprovedENSDomain(ensName)) {
-    const invalidEnsError = new Error(
-      `Issuer identity cannot be verified: ${ensName}`
-    );
-    error(invalidEnsError);
-    throw invalidEnsError;
-  }
-
-  const getTextResult = yield call(getText, ensName, "issuerName");
-  trace(`Got texts records for ${ensName}`, getTextResult);
-  return getTextResult;
-}
-
 export function* verifyCertificateDnsIssuer({ issuer }) {
   const location = get(issuer, "identityProof.location");
 
@@ -297,41 +242,10 @@ export function* verifyCertificateDnsIssuer({ issuer }) {
   return verificationStatus ? location : false;
 }
 
-export function* verifyCertificateRegistryIssuer({ issuer }) {
-  try {
-    const contractStoreAddresses = getDocumentStore(issuer);
-    trace(
-      `Attempting to verify certificate issuers: ${contractStoreAddresses}`
-    );
-    const isValidEthereumAddress = isEthereumAddress(contractStoreAddresses);
-
-    if (!isValidEthereumAddress) {
-      throw new Error(
-        `${contractStoreAddresses} is not a valid Ethereum Address`
-      );
-    }
-
-    trace("isValidEthereumAddress", contractStoreAddresses);
-
-    const issuerIdentitiesFromRegistry = yield call(
-      lookupAddressOnRegistry,
-      contractStoreAddresses
-    );
-    trace(
-      `Resolved ethereum address ${contractStoreAddresses} to ${issuerIdentitiesFromRegistry}`
-    );
-    return get(issuerIdentitiesFromRegistry, "name") || false;
-  } catch (e) {
-    return false;
-  }
-}
-
 function throwIfAnyIdentityIsNotVerified(verificationStatuses) {
   if (verificationStatuses.length === 0)
     throw new Error("No issuers found in the document");
-  const invalidIdentities = verificationStatuses.filter(
-    status => !status.registry && !status.dns
-  );
+  const invalidIdentities = verificationStatuses.filter(status => !status.dns);
   if (invalidIdentities.length > 0) {
     const invalidStoreAddresses = invalidIdentities.map(
       identity => identity.documentStore
@@ -345,13 +259,8 @@ function throwIfAnyIdentityIsNotVerified(verificationStatuses) {
 export function* getDetailedIssuerStatus({ issuer }) {
   const verificationStatus = {
     documentStore: getDocumentStore(issuer),
-    registry: null,
     dns: null
   };
-
-  verificationStatus.registry = yield call(verifyCertificateRegistryIssuer, {
-    issuer
-  });
 
   if (get(issuer, "identityProof.type") === "DNS-TXT") {
     verificationStatus.dns = yield call(verifyCertificateDnsIssuer, {
@@ -366,7 +275,7 @@ export function* verifyCertificateIssuer({ certificate }) {
   const data = getData(certificate);
   try {
     const issuers = get(data, "issuers", []);
-    // verificationStatuses: [{dns: "abc.com", registry:"Govtech", documentStore: "0xabc"}]
+    // verificationStatuses: [{dns: "abc.com", documentStore: "0xabc"}]
     const verificationStatuses = yield all(
       issuers.map(issuer => call(getDetailedIssuerStatus, { issuer }))
     );

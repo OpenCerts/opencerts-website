@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { get, some, sortBy } from "lodash";
+import { get, sortBy } from "lodash";
 import DetailedCertificateVerifyBlock from "./DetailedCertificateVerifyBlock";
 import { LOG_LEVEL } from "./constants";
 import css from "./certificateVerifyBlock.scss";
@@ -62,9 +62,6 @@ const renderIcon = status => {
 };
 
 export const getIdentityVerificationText = identityStatus => {
-  if (some(identityStatus, ({ registry }) => !!registry)) {
-    return "Accredited by SSG";
-  }
   // note filter Boolean is to remove empty values
   const dnsNames = sortBy(identityStatus, ["dns"])
     .map(({ dns }) => (dns ? dns.toUpperCase() : null))

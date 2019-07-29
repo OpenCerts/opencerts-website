@@ -1,10 +1,10 @@
-# Certificate Web UI 
+# TradeTrust Web UI 
   
 [![Build Status](https://travis-ci.org/OpenCerts/opencerts-website.svg?branch=master)](https://travis-ci.org/OpenCerts/opencerts-website)
 
 See also:
 
-* [opencerts-documentation](https://github.com/OpenCerts/opencerts-documentation)
+* [tradetrust-documentation](https://github.com/OpenCerts/opencerts-documentation)
 * [open-certificate](https://github.com/OpenCerts/open-certificate)
 * [certificate-contract](https://github.com/OpenCerts/certificate-store-contract)
 * [certificate-cli](https://github.com/OpenCerts/certificate-cli)
