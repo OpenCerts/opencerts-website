@@ -1,10 +1,13 @@
 #!/bin/bash
 
+PROJECT_KEY="TradeTrust_tradetrust-website"
+ORGANISATION_KEY="tradetrust"
+
 if ! [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
     sonar-scanner \
         -Dsonar.scanner.skip=false \
-        -Dsonar.projectKey=OpenCerts_opencerts-website \
-        -Dsonar.organization=opencerts \
+        -Dsonar.projectKey=$PROJECT_KEY \
+        -Dsonar.organization=$ORGANISATION_KEY \
         -Dsonar.sources=. \
         -Dsonar.host.url=https://sonarcloud.io \
         -Dsonar.login=${SONAR_LOGIN} \
@@ -13,8 +16,8 @@ if ! [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
 elif [ "${TRAVIS_BRANCH}" = "master" ]; then
     sonar-scanner \
         -Dsonar.scanner.skip=false \
-        -Dsonar.projectKey=OpenCerts_opencerts-website \
-        -Dsonar.organization=opencerts \
+        -Dsonar.projectKey=$PROJECT_KEY \
+        -Dsonar.organization=$ORGANISATION_KEY \
         -Dsonar.sources=. \
         -Dsonar.host.url=https://sonarcloud.io \
         -Dsonar.login=${SONAR_LOGIN}
