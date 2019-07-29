@@ -1,6 +1,7 @@
 import { get, partition, compact } from "lodash";
 import { put, all, call, select, takeEvery } from "redux-saga/effects";
 import { getData, verifySignature } from "@govtechsg/open-attestation";
+import { isValidAddress as isEthereumAddress } from "ethereumjs-util";
 import Router from "next/router";
 import { getDocumentStoreRecords } from "@govtechsg/dnsprove";
 import { getLogger } from "../utils/logger";
@@ -74,6 +75,19 @@ export function* loadCertificateContracts({ payload }) {
     });
     return null;
   }
+}
+
+export function* isValidENSDomain(storeAddress) {
+  trace(`Checking if ${storeAddress} is a valid ENS Domain`);
+  if (storeAddress == null) {
+    throw new Error("No address in certificate");
+  }
+  const web3 = yield getSelectedWeb3();
+  const ensToAddress = yield web3.eth.ens.getAddress(storeAddress);
+  if (ensToAddress === null) {
+    throw new Error("Invalid ENS");
+  }
+  return ensToAddress;
 }
 
 export function* isValidSmartContract(storeAddress) {
