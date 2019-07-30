@@ -10,6 +10,7 @@ import DecentralisedRenderer from "./DecentralisedTemplateRenderer/Decentralised
 import MultiTabs from "./MultiTabs";
 import { selectTemplateTab as selectTemplateTabAction } from "../reducers/certificate";
 import { LEGACY_OPENCERTS_RENDERER } from "../config";
+import { isEmailFeatureActive } from "../config/feature-config";
 
 const CertificateSharingForm = dynamic(
   import("./CertificateSharing/CertificateSharingForm")
@@ -45,11 +46,13 @@ const renderHeaderBlock = props => {
             </div>
           </div>
           <div />
-          <div className="ml-2" onClick={() => props.handleSharingToggle()}>
-            <div id="btn-email" className={styles["send-btn"]}>
-              <i className="fas fa-envelope" style={{ fontSize: "1.5rem" }} />
+          {isEmailFeatureActive && (
+            <div className="ml-2" onClick={() => props.handleSharingToggle()}>
+              <div id="btn-email" className={styles["send-btn"]}>
+                <i className="fas fa-envelope" style={{ fontSize: "1.5rem" }} />
+              </div>
             </div>
-          </div>
+          )}
           <div className="ml-2">
             <a
               download={`${props.certificate.id}.tt`}
