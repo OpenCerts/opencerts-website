@@ -1,5 +1,5 @@
 {
-  "name": "opencerts-website",
+  "name": "tradetrust-website",
   "version": "2.0.0",
   "scripts": {
     "test": "jest",
@@ -12,7 +12,6 @@
     "build:static": "next build && next export",
     "start": "next build && next start",
     "start:watch": "nodemon --exec \"npm run start\"",
-    "cname": "echo 'opencerts.io' > out/CNAME",
     "deploy": "rm -rf out && npm run build:static",
     "analyze": "BUNDLE_ANALYZE=browser npm run start",
     "dev-cli": "node -r esm ./scripts/cli.js",

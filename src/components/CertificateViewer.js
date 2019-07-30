@@ -52,7 +52,7 @@ const renderHeaderBlock = props => {
           </div>
           <div className="ml-2">
             <a
-              download={`${props.certificate.id}.opencert`}
+              download={`${props.certificate.id}.tt`}
               target="_black"
               href={`data:text/plain;,${JSON.stringify(
                 props.document,

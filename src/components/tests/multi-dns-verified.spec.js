@@ -17,6 +17,8 @@ const validateTextContent = async (t, component, texts) =>
 test("Sample document is rendered correctly when multiple dns is verfied", async t => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 
+  await StatusButton.with({ visibilityCheck: true })();
+
   await validateTextContent(t, StatusButton, [
     "Issued by EXAMPLE.OPENATTESTATION.COM"
   ]);
