@@ -6,16 +6,6 @@ const navItems = [
     id: "home",
     label: "Home",
     path: "/"
-  },
-  {
-    id: "collaborate",
-    label: "Collaborate",
-    path: "/collaborate"
-  },
-  {
-    id: "faq",
-    label: "FAQ",
-    path: "/faq"
   }
 ];
 
@@ -39,7 +29,7 @@ const NavigationBar = ({ active }) => (
   >
     <div className={css.innerbar}>
       <a className="navbar-brand" href="/">
-        <img src="/static/images/opencertslogo.svg" alt="OpenCerts" />
+        <img src="/static/images/tradetrust_logo.svg" alt="TradeTrust" />
       </a>
       <button
         className={`${css["navbar-toggler"]} d-none`}

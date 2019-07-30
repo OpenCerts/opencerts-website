@@ -12,7 +12,7 @@ const PAGE_SEO = {
   description:
     "Have some questions in mind? Here are a list of collated questions and answers that might answer your questions.",
   openGraph: {
-    title: "OpenCerts - Frequently Asked Questions",
+    title: "TradeTrust - Frequently Asked Questions",
     description:
       "Have some questions in mind? Here are a list of collated questions and answers that might answer your questions.",
     url: `${URL}/faq`

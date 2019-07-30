@@ -422,7 +422,7 @@ const TermsOfUse = () => (
 const Schedule = () => (
   <div className={styles["content-container"]}>
     <ol>
-      <li>Name of Service: OpenCerts</li>
+      <li>Name of Service: TradeTrust</li>
       <li>
         Nature of Service and Special Terms
         <ol>

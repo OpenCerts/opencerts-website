@@ -17,6 +17,8 @@ const validateTextContent = async (t, component, texts) =>
 test("Sample doc is rendered correctly when any one of dns or registry is verfied and doc store mismatch in domain", async t => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 
+  await StatusButton.with({ visibilityCheck: true })();
+
   await validateTextContent(t, StatusButton, ["Accredited by SSG"]);
 
   await t.switchToIframe(IframeBlock);
