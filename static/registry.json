@@ -81,6 +81,10 @@
       "logo": "/static/images/RP_logo.svg",
       "id": "rp-registry"
     },
+     "0x140dcce78b7264543ccba4531da91127adf3f790": {
+      "name": "Edufied",
+      "displayCard": false
+    },
     "0x5f007251c78cA92d3053492cCf0EDC161063624c": {
       "name": "ROPSTEN: Nanyang Polytechnic",
       "displayCard": false
@@ -131,6 +135,10 @@
     },
     "0x061aFcFF60b90E0F633F8ef157e01BaB9b2FfDD3": {
       "name": "ROPSTEN: Republic Polytechnic",
+      "displayCard": false
+    },
+    "0x5ABAA2fE232E2d29873D4d01417a9551dc84F0aF": {
+      "name:": "ROPSTEN: Edufied",
       "displayCard": false
     }
   }
