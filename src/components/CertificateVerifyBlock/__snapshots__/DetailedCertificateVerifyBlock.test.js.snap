@@ -2,7 +2,7 @@
 
 exports[`renders correctly when the certificate has been revoked 1`] = `
 <div
-  className="undefined undefined bg-white p-3 col-12"
+  className="undefined undefined bg-white p-3"
 >
   <div
     className="mb-3"
@@ -94,7 +94,7 @@ exports[`renders correctly when the certificate has been revoked 1`] = `
         <div
           className="row"
         >
-          Certificate from institution in our registry
+          Certificate Verified
         </div>
       </div>
     </div>
@@ -105,7 +105,7 @@ exports[`renders correctly when the certificate has been revoked 1`] = `
 
 exports[`renders correctly when the certificate is invalid and hash, isseud, notRevoked, issuerIdentity status are not verified 1`] = `
 <div
-  className="undefined undefined bg-white p-3 col-12"
+  className="undefined undefined bg-white p-3"
 >
   <div
     className="mb-3"
@@ -171,7 +171,7 @@ exports[`renders correctly when the certificate is invalid and hash, isseud, not
         <div
           className="row"
         >
-          Institution not in our registry
+          Institution identity can not be verified by registry or dns
         </div>
       </div>
     </div>
@@ -208,7 +208,7 @@ exports[`renders correctly when the certificate is invalid and hash, isseud, not
 
 exports[`renders correctly when the certificate verfied 1`] = `
 <div
-  className="undefined undefined bg-white p-3 col-12"
+  className="undefined undefined bg-white p-3"
 >
   <div
     className="mb-3"
@@ -275,7 +275,7 @@ exports[`renders correctly when the certificate verfied 1`] = `
         <div
           className="row"
         >
-          Certificate from institution in our registry
+          Certificate Verified
         </div>
       </div>
     </div>
@@ -305,7 +305,7 @@ exports[`renders correctly when the certificate verfied 1`] = `
 
 exports[`renders correctly when the certificate\`s hash status not verified 1`] = `
 <div
-  className="undefined undefined bg-white p-3 col-12"
+  className="undefined undefined bg-white p-3"
 >
   <div
     className="mb-3"
@@ -378,7 +378,7 @@ exports[`renders correctly when the certificate\`s hash status not verified 1`] 
         <div
           className="row"
         >
-          Certificate from institution in our registry
+          Certificate Verified
         </div>
       </div>
     </div>
@@ -408,7 +408,7 @@ exports[`renders correctly when the certificate\`s hash status not verified 1`] 
 
 exports[`renders correctly when the certificate\`s issue status not verified 1`] = `
 <div
-  className="undefined undefined bg-white p-3 col-12"
+  className="undefined undefined bg-white p-3"
 >
   <div
     className="mb-3"
@@ -481,7 +481,7 @@ exports[`renders correctly when the certificate\`s issue status not verified 1`]
         <div
           className="row"
         >
-          Certificate from institution in our registry
+          Certificate Verified
         </div>
       </div>
     </div>
@@ -511,7 +511,7 @@ exports[`renders correctly when the certificate\`s issue status not verified 1`]
 
 exports[`renders correctly when the certificate\`s issuer not identified 1`] = `
 <div
-  className="undefined undefined bg-white p-3 col-12"
+  className="undefined undefined bg-white p-3"
 >
   <div
     className="mb-3"
@@ -539,7 +539,7 @@ exports[`renders correctly when the certificate\`s issuer not identified 1`] = `
         <div
           className="row"
         >
-          Institution not in our registry
+          Institution identity can not be verified by registry or dns
         </div>
       </div>
     </div>

@@ -125,8 +125,12 @@
       "name": "ROPSTEN: Government Technology Agency of Singapore (GovTech)",
       "displayCard": false
     },
+    "0x532C9Ff853CA54370D7492cD84040F9f8099f11B": {
+      "name": "ROPSTEN: Government Technology Agency of Singapore (GovTech)",
+      "displayCard": false
+    },
     "0x061aFcFF60b90E0F633F8ef157e01BaB9b2FfDD3": {
-      "name:": "ROPSTEN: Republic Polytechnic",
+      "name": "ROPSTEN: Republic Polytechnic",
       "displayCard": false
     }
   }

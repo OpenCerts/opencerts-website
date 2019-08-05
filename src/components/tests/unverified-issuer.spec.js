@@ -1,8 +1,8 @@
 import { Selector } from "testcafe";
 
-fixture("Unissued Cert").page`http://localhost:3000`;
+fixture("Unverified Ceritifcate Rendering").page`http://localhost:3000`;
 
-const Certificate = "./unissued.opencert";
+const Certificate = "./fixture/unverified-issuer.json";
 
 const RenderedCertificate = Selector("#certificate-dropzone");
 const InvalidMessage = Selector(".invalid");
@@ -13,7 +13,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("Unissued certificate's error message is correct'", async t => {
+test("Error view rendered when certificate issuers are unverfied", async t => {
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
   await InvalidMessage.with({ visibilityCheck: true })();

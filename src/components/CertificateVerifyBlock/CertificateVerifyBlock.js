@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { get, some, sortBy } from "lodash";
 import DetailedCertificateVerifyBlock from "./DetailedCertificateVerifyBlock";
 import { LOG_LEVEL } from "./constants";
 import css from "./certificateVerifyBlock.scss";
@@ -50,13 +51,28 @@ const renderIcon = status => {
       icon = <i id="verify-invalid" className="fas fa-times-circle fa-2x" />;
   }
   return (
-    <div className="col-3 d-flex justify-content-center align-items-center">
+    <div
+      className={`d-flex justify-content-center align-items-center ${
+        css["verified-icon"]
+      }`}
+    >
       {icon}
     </div>
   );
 };
 
-const renderText = status => {
+export const getIdentityVerificationText = identityStatus => {
+  if (some(identityStatus, ({ registry }) => !!registry)) {
+    return "Accredited by SSG";
+  }
+  // note filter Boolean is to remove empty values
+  const dnsNames = sortBy(identityStatus, ["dns"])
+    .map(({ dns }) => (dns ? dns.toUpperCase() : null))
+    .filter(Boolean);
+  return `Issued by ${dnsNames.length > 0 ? dnsNames[0] : "Unknown"}`;
+};
+
+const renderText = (status, props) => {
   let text;
   switch (status) {
     case LOG_LEVEL.CONNECTING:
@@ -65,11 +81,13 @@ const renderText = status => {
     case LOG_LEVEL.VERIFYING:
       text = "Verifying Certificate ...";
       break;
-    case LOG_LEVEL.VALID:
-      text = "Certificate Verified";
+    case LOG_LEVEL.VALID: {
+      const identity = get(props, "issuerIdentityStatus.identities", []);
+      text = getIdentityVerificationText(identity);
       break;
+    }
     case LOG_LEVEL.WARNING:
-      text = "Institution not in our registry";
+      text = "Institution identity not verified";
       break;
     default:
       text = "Invalid Certificate";
@@ -80,7 +98,7 @@ const renderText = status => {
 const SimpleVerifyBlock = props => {
   const status = statusSummary(props);
   const renderedIcon = renderIcon(status);
-  const renderedText = renderText(status);
+  const renderedText = renderText(status, props);
 
   let stateStyle;
   switch (status) {
@@ -98,13 +116,20 @@ const SimpleVerifyBlock = props => {
     <div
       className={`p-2 pointer ${css["simple-verify-block"]} ${
         css[stateStyle]
-      } ${props.detailedVerifyVisible ? css.active : ""} col-12`}
+      } ${props.detailedVerifyVisible ? css.active : ""}`}
       onClick={props.toggleDetailedView}
+      id="certificate-status"
     >
-      <div className="row">
+      <div className="row" style={{ flexWrap: "inherit" }}>
         {renderedIcon}
         {renderedText}
-        <span className={css.arrow}>{icons.arrow()}</span>
+        <span
+          className={`d-flex justify-content-center align-items-center ${
+            css.arrow
+          }`}
+        >
+          {icons.arrow()}
+        </span>
       </div>
     </div>
   );
@@ -117,7 +142,7 @@ const CertificateVerifyBlock = props => {
       id="certificate-verify-block"
       className={`align-items-start flex-nowrap ${css["d-flex"]} ${
         css.verifyBlocksContainer
-      } col-sm-12 col-md-11 col-lg-10 col-xl-7 mb-md-0 mb-3`}
+      } mb-md-0 mb-3`}
     >
       <SimpleVerifyBlock {...props} />
       {props.detailedVerifyVisible ? (
