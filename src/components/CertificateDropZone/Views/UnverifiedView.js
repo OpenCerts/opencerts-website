@@ -7,6 +7,7 @@ const View = ({
   storeStatus,
   hashStatus,
   issuedStatus,
+  issuerIdentityStatus,
   notRevokedStatus
 }) => {
   /* Array of error messages with priority of error messages determined by a stack. 
@@ -38,6 +39,11 @@ const View = ({
       error: !hashStatus.verified
     },
     {
+      title: "Certificate issuer identity invalid",
+      message: "This certificate was issued by an invalid issuer.",
+      error: !issuerIdentityStatus.verified
+    },
+    {
       title: "Certificate store address is invalid",
       message:
         "Please check that you have a valid smart contract with us and a correct certificate store address before proceeding.",
@@ -51,7 +57,10 @@ const View = ({
   const error = stack.pop();
 
   const isWarning =
-    hashStatus.verified && issuedStatus.verified && notRevokedStatus.verified;
+    hashStatus.verified &&
+    issuedStatus.verified &&
+    notRevokedStatus.verified &&
+    issuerIdentityStatus.verified;
   return (
     <div
       className={`${css["viewer-container"]} ${
@@ -135,6 +144,7 @@ View.propTypes = {
   hashStatus: PropTypes.object,
   issuedStatus: PropTypes.object,
   notRevokedStatus: PropTypes.object,
+  issuerIdentityStatus: PropTypes.object,
   storeStatus: PropTypes.object
 };
 

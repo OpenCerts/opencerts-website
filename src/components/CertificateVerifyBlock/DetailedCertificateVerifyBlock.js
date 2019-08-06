@@ -50,8 +50,8 @@ const CHECKS = {
   },
   ISSUER_IDENTITY: {
     id: "issuerIdentityStatus",
-    success: "Certificate from institution in our registry",
-    failure: "Institution not in our registry",
+    success: "Certificate Verified",
+    failure: "Institution identity can not be verified by registry or dns",
     failureStatusIcon: WarningIcon
   },
   NOT_REVOKED: {
@@ -107,7 +107,7 @@ const CertificateVerifyBlock = props => {
     <div
       className={`${css["detailed-certificate-block"]} ${
         css[borderColor]
-      } bg-white p-3 col-12`}
+      } bg-white p-3`}
     >
       <div className="mb-3">
         <h5>Details</h5>
@@ -131,6 +131,7 @@ CheckStatusRow.propTypes = {
   message: PropTypes.string,
   icon: PropTypes.element
 };
+
 renderUnverifiedStatuses.propTypes = CertificateVerifyBlock.propTypes;
 
 export default CertificateVerifyBlock;
