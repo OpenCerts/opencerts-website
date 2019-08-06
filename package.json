@@ -33,7 +33,7 @@
     "fs-extra": "^7.0.1",
     "inquirer": "^6.2.2",
     "isomorphic-fetch": "^2.2.1",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "moment-timezone": "^0.5.23",
     "next": "^7.0.1",
     "next-ga": "^2.3.4",
