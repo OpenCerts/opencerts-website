@@ -36,6 +36,10 @@ export const initialState = {
   emailState: states.INITIAL,
   emailError: null,
 
+  shareLink: {},
+  shareLinkState: states.INITIAL,
+  shareLinkError: null,
+
   templates: null,
   activeTemplateTab: 0
 };
@@ -73,6 +77,10 @@ export const types = {
   SENDING_CERTIFICATE_SUCCESS: "SENDING_CERTIFICATE_SUCCESS",
   SENDING_CERTIFICATE_FAILURE: "SENDING_CERTIFICATE_FAILURE",
   SENDING_CERTIFICATE_RESET: "SENDING_CERTIFICATE_RESET",
+
+  GENERATE_SHARE_LINK: "GENERATE_SHARE_LINK",
+  GENERATE_SHARE_LINK_SUCCESS: "GENERATE_SHARE_LINK_SUCCESS",
+  GENERATE_SHARE_LINK_FAILURE: "GENERATE_SHARE_LINK_FAILURE",
 
   CERTIFICATE_OBFUSCATE_RESET: "CERTIFICATE_OBFUSCATE_RESET",
   CERTIFICATE_OBFUSCATE_UPDATE: "CERTIFICATE_OBFUSCATE_UPDATE",
@@ -310,6 +318,18 @@ export default function reducer(state = initialState, action) {
         emailState: states.FAILURE,
         emailError: action.payload
       };
+    case types.GENERATE_SHARE_LINK_SUCCESS:
+      return {
+        ...state,
+        shareLink: action.payload,
+        shareLinkState: states.SUCCESS
+      };
+    case types.GENERATE_SHARE_LINK_FAILURE:
+      return {
+        ...state,
+        shareLink: {},
+        shareLinkState: states.FAILURE
+      };
     case types.CERTIFICATE_OBFUSCATE_RESET:
       return {
         ...initialState,
@@ -439,6 +459,12 @@ export function sendCertificate(payload) {
 export function sendCertificateReset() {
   return {
     type: types.SENDING_CERTIFICATE_RESET
+  };
+}
+
+export function generateShareLink() {
+  return {
+    type: types.GENERATE_SHARE_LINK
   };
 }
 
@@ -574,6 +600,10 @@ export function getVerificationStatus(store) {
 
 export function getEmailSendingState(store) {
   return store.certificate.emailState;
+}
+
+export function getShareLink(store) {
+  return store.certificate.shareLink;
 }
 
 export function getActiveTemplateTab(store) {

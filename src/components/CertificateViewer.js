@@ -10,6 +10,7 @@ import DecentralisedRenderer from "./DecentralisedTemplateRenderer/Decentralised
 import MultiTabs from "./MultiTabs";
 import { selectTemplateTab as selectTemplateTabAction } from "../reducers/certificate";
 import { LEGACY_OPENCERTS_RENDERER } from "../config";
+import CertificateShareLinkForm from "./CertificateShareLink/CertificateShareLinkForm";
 
 const CertificateSharingForm = dynamic(
   import("./CertificateSharing/CertificateSharingForm")
@@ -54,6 +55,11 @@ const renderHeaderBlock = props => {
             </div>
           </div>
           <div />
+          <div className="ml-2" onClick={() => props.handleShareLinkToggle()}>
+            <div id="btn-link" className={styles["send-btn"]}>
+              <i className="fas fa-link" style={{ fontSize: "1.5rem" }} />
+            </div>
+          </div>
           <div className="ml-2" onClick={() => props.handleSharingToggle()}>
             <div id="btn-email" className={styles["send-btn"]}>
               <i className="fas fa-envelope" style={{ fontSize: "1.5rem" }} />
@@ -118,6 +124,12 @@ const CertificateViewer = props => {
           handleSharingToggle={props.handleSharingToggle}
         />
       </Modal>
+      <Modal show={props.showShareLink} toggle={props.handleShareLinkToggle}>
+        <CertificateShareLinkForm
+          shareLink={props.shareLink}
+          handleShareLinkToggle={props.handleShareLinkToggle}
+        />
+      </Modal>
     </div>
   );
 
@@ -139,15 +151,18 @@ CertificateViewer.propTypes = {
   document: PropTypes.object,
   certificate: PropTypes.object,
   verifying: PropTypes.bool,
+  shareLink: PropTypes.object,
 
   hashStatus: PropTypes.object,
   issuedStatus: PropTypes.object,
   notRevokedStatus: PropTypes.object,
   issuerIdentityStatus: PropTypes.object,
   showSharing: PropTypes.bool,
+  showShareLink: PropTypes.bool,
   emailSendingState: PropTypes.string,
   handleSharingToggle: PropTypes.func,
   handleSendCertificate: PropTypes.func,
+  handleShareLinkToggle: PropTypes.func,
 
   selectTemplateTab: PropTypes.func
 };

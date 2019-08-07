@@ -8,6 +8,7 @@ import {
   updateCertificate,
   sendCertificate,
   sendCertificateReset,
+  generateShareLink,
   getCertificate,
   getVerifying,
   getIssuerIdentityStatus,
@@ -16,6 +17,7 @@ import {
   getNotRevokedStatus,
   getVerified,
   getEmailSendingState,
+  getShareLink,
   updateObfuscatedCertificate
 } from "../reducers/certificate";
 import CertificateViewer from "./CertificateViewer";
@@ -31,6 +33,7 @@ class MainPageContainer extends Component {
     this.toggleDetailedView = this.toggleDetailedView.bind(this);
     this.handleCertificateChange = this.handleCertificateChange.bind(this);
     this.handleSharingToggle = this.handleSharingToggle.bind(this);
+    this.handleShareLinkToggle = this.handleShareLinkToggle.bind(this);
     this.handleSendCertificate = this.handleSendCertificate.bind(this);
   }
 
@@ -44,6 +47,13 @@ class MainPageContainer extends Component {
   handleSharingToggle() {
     this.props.sendCertificateReset();
     this.setState({ showSharing: !this.state.showSharing });
+  }
+
+  handleShareLinkToggle() {
+    if (!this.state.showShareLink) {
+      this.props.generateShareLink();
+    }
+    this.setState({ showShareLink: !this.state.showShareLink });
   }
 
   toggleDetailedView() {
@@ -73,9 +83,12 @@ class MainPageContainer extends Component {
         issuerIdentityStatus={this.props.issuerIdentityStatus}
         handleCertificateChange={this.handleCertificateChange}
         showSharing={this.state.showSharing}
+        showShareLink={this.state.showShareLink}
+        shareLink={this.props.shareLink}
         emailAddress={this.state.emailAddress}
         handleSendCertificate={this.handleSendCertificate}
         handleSharingToggle={this.handleSharingToggle}
+        handleShareLinkToggle={this.handleShareLinkToggle}
         emailSendingState={this.props.emailSendingState}
         toggleDetailedView={this.toggleDetailedView}
         detailedVerifyVisible={this.state.detailedVerifyVisible}
@@ -89,6 +102,7 @@ const mapStateToProps = store => ({
 
   // Verification statuses used in verifier block
   emailSendingState: getEmailSendingState(store),
+  shareLink: getShareLink(store),
   verifying: getVerifying(store),
   issuerIdentityStatus: getIssuerIdentityStatus(store),
   hashStatus: getHashStatus(store),
@@ -102,6 +116,7 @@ const mapDispatchToProps = dispatch => ({
   updateCertificate: payload => dispatch(updateCertificate(payload)),
   sendCertificate: payload => dispatch(sendCertificate(payload)),
   sendCertificateReset: () => dispatch(sendCertificateReset()),
+  generateShareLink: () => dispatch(generateShareLink()),
   updateObfuscatedCertificate: updatedDoc =>
     dispatch(updateObfuscatedCertificate(updatedDoc))
 });
@@ -124,5 +139,7 @@ MainPageContainer.propTypes = {
   emailSendingState: PropTypes.string,
   sendCertificate: PropTypes.func,
   sendCertificateReset: PropTypes.func,
+  generateShareLink: PropTypes.func,
+  shareLink: PropTypes.object,
   updateObfuscatedCertificate: PropTypes.func
 };

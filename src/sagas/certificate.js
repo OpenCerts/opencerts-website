@@ -25,6 +25,7 @@ import fetchIssuers from "../services/issuers";
 import { combinedHash } from "../utils";
 import { ensResolveAddress, getText } from "../services/ens";
 import sendEmail from "../services/email";
+import generateLink from "../services/link";
 import { analyticsEvent } from "../components/Analytics";
 import {
   getDocumentStore,
@@ -442,6 +443,27 @@ export function* sendCertificate({ payload }) {
   }
 }
 
+export function* generateShareLink() {
+  try {
+    const certificate = yield select(getCertificate);
+    const success = yield generateLink(certificate);
+
+    if (!success) {
+      throw new Error("Fail to generate certificate share link");
+    }
+
+    yield put({
+      type: types.GENERATE_SHARE_LINK_SUCCESS,
+      payload: success
+    });
+  } catch (e) {
+    yield put({
+      type: types.GENERATE_SHARE_LINK_FAILURE,
+      payload: e.message
+    });
+  }
+}
+
 export function* networkReset() {
   yield put({
     type: types.NETWORK_RESET
@@ -511,6 +533,7 @@ export function* analyticsStoreFail() {
 export default [
   takeEvery(types.UPDATE_CERTIFICATE, verifyCertificate),
   takeEvery(types.SENDING_CERTIFICATE, sendCertificate),
+  takeEvery(types.GENERATE_SHARE_LINK, generateShareLink),
   takeEvery(applicationTypes.UPDATE_WEB3, networkReset),
 
   takeEvery(types.VERIFYING_CERTIFICATE_ISSUER_FAILURE, analyticsIssuerFail),
