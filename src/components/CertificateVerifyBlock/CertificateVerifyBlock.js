@@ -124,7 +124,10 @@ const SimpleVerifyBlock = props => {
         {renderedIcon}
         {renderedText}
         <span
-          className={`d-flex justify-content-center align-items-center ${css.arrow}`}
+          // eslint-disable-next-line prettier/prettier
+          className={`d-flex justify-content-center align-items-center ${
+            css.arrow
+          }`}
         >
           {icons.arrow()}
         </span>
