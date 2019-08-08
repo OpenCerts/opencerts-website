@@ -22,6 +22,7 @@
     "integration:watch": "nodemon --exec \"npm run integration\" --watch src"
   },
   "dependencies": {
+    "@govtechsg/dnsprove": "^2.0.3",
     "@govtechsg/open-attestation": "^1.1.30",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-sass": "^1.0.1",
@@ -32,7 +33,7 @@
     "fs-extra": "^7.0.1",
     "inquirer": "^6.2.2",
     "isomorphic-fetch": "^2.2.1",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "moment-timezone": "^0.5.23",
     "next": "^7.0.1",
     "next-ga": "^2.3.4",
