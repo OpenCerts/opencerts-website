@@ -3,11 +3,7 @@ import PropTypes from "prop-types";
 import NextSeo from "next-seo";
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
-import {
-  getEncryptedCertificate,
-  retrieveCertificateByLink,
-  getEncryptedCertificateStatus
-} from "../src/reducers/certificate";
+import { retrieveCertificateByLink } from "../src/reducers/certificate";
 import NavigationBar from "../src/components/Layout/NavigationBar";
 import FooterBar from "../src/components/Layout/FooterBar";
 import MainPageContainer from "../src/components/MainPageContainer";
@@ -41,18 +37,13 @@ const VerifierPage = props => {
   );
 };
 
-const mapStateToProps = store => ({
-  encryptedCertificate: getEncryptedCertificate(store),
-  encryptedCertificateStatus: getEncryptedCertificateStatus(store)
-});
-
 const mapDispatchToProps = dispatch => ({
   retrieveCertificateByLink: payload =>
     dispatch(retrieveCertificateByLink(payload))
 });
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(withRouter(VerifierPage));
 

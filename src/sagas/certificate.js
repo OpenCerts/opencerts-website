@@ -446,6 +446,9 @@ export function* sendCertificate({ payload }) {
 
 export function* generateShareLink() {
   try {
+    yield put({
+      type: types.GENERATE_SHARE_LINK_RESET
+    });
     const certificate = yield select(getCertificate);
     const success = yield generateLink(certificate);
 

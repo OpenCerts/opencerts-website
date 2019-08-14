@@ -85,6 +85,7 @@ export const types = {
   GENERATE_SHARE_LINK: "GENERATE_SHARE_LINK",
   GENERATE_SHARE_LINK_SUCCESS: "GENERATE_SHARE_LINK_SUCCESS",
   GENERATE_SHARE_LINK_FAILURE: "GENERATE_SHARE_LINK_FAILURE",
+  GENERATE_SHARE_LINK_RESET: "GENERATE_SHARE_LINK_RESET",
 
   GET_CERTIFICATE_BY_ID: "GET_CERTIFICATE_BY_ID",
   GET_CERTIFICATE_BY_ID_SUCCESS: "GET_CERTIFICATE_BY_ID_SUCCESS",
@@ -337,6 +338,12 @@ export default function reducer(state = initialState, action) {
         ...state,
         shareLink: {},
         shareLinkState: states.FAILURE
+      };
+    case types.GENERATE_SHARE_LINK_RESET:
+      return {
+        ...state,
+        shareLink: {},
+        shareLinkState: states.INITIAL
       };
     case types.GET_CERTIFICATE_BY_ID_SUCCESS:
       return {
