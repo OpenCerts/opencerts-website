@@ -14,7 +14,7 @@ export function generateLink(certificate) {
         document: certificate
       })
     })
-    .then(res => res.json());
+    .then(res => res.status === 200);
 }
 
 export function getCertificateById(certificateId) {
@@ -26,5 +26,5 @@ export function getCertificateById(certificateId) {
         "Content-Type": "application/json"
       }
     })
-    .then(res => res.json());
+    .then(res => res.status === 200);
 }
