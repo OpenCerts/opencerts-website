@@ -40,6 +40,10 @@ export const initialState = {
   shareLinkState: states.INITIAL,
   shareLinkError: null,
 
+  encryptedCertificate: {},
+  encryptedCertificateState: states.INITIAL,
+  encryptedCertificateError: null,
+
   templates: null,
   activeTemplateTab: 0
 };
@@ -81,6 +85,10 @@ export const types = {
   GENERATE_SHARE_LINK: "GENERATE_SHARE_LINK",
   GENERATE_SHARE_LINK_SUCCESS: "GENERATE_SHARE_LINK_SUCCESS",
   GENERATE_SHARE_LINK_FAILURE: "GENERATE_SHARE_LINK_FAILURE",
+
+  GET_CERTIFICATE_BY_ID: "GET_CERTIFICATE_BY_ID",
+  GET_CERTIFICATE_BY_ID_SUCCESS: "GET_CERTIFICATE_BY_ID_SUCCESS",
+  GET_CERTIFICATE_BY_ID_FAILURE: "GET_CERTIFICATE_BY_ID_FAILURE",
 
   CERTIFICATE_OBFUSCATE_RESET: "CERTIFICATE_OBFUSCATE_RESET",
   CERTIFICATE_OBFUSCATE_UPDATE: "CERTIFICATE_OBFUSCATE_UPDATE",
@@ -330,6 +338,19 @@ export default function reducer(state = initialState, action) {
         shareLink: {},
         shareLinkState: states.FAILURE
       };
+    case types.GET_CERTIFICATE_BY_ID_SUCCESS:
+      return {
+        ...state,
+        encryptedCertificate: action.payload,
+        encryptedCertificateState: states.SUCCESS
+      };
+    case types.GET_CERTIFICATE_BY_ID_FAILURE:
+      return {
+        ...state,
+        encryptedCertificate: {},
+        encryptedCertificateState: states.FAILURE,
+        encryptedCertificateError: action.payload
+      };
     case types.CERTIFICATE_OBFUSCATE_RESET:
       return {
         ...initialState,
@@ -465,6 +486,13 @@ export function sendCertificateReset() {
 export function generateShareLink() {
   return {
     type: types.GENERATE_SHARE_LINK
+  };
+}
+
+export function retrieveCertificateByLink(payload) {
+  return {
+    type: types.GET_CERTIFICATE_BY_ID,
+    payload
   };
 }
 
@@ -604,6 +632,18 @@ export function getEmailSendingState(store) {
 
 export function getShareLink(store) {
   return store.certificate.shareLink;
+}
+
+export function getShareLinkState(store) {
+  return store.certificate.shareLinkState;
+}
+
+export function getEncryptedCertificate(store) {
+  return store.certificate.encryptedCertificate;
+}
+
+export function getEncryptedCertificateStatus(store) {
+  return store.certificate.encryptedCertificateState;
 }
 
 export function getActiveTemplateTab(store) {

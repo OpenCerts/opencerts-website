@@ -18,6 +18,7 @@ import {
   getVerified,
   getEmailSendingState,
   getShareLink,
+  getShareLinkState,
   updateObfuscatedCertificate
 } from "../reducers/certificate";
 import CertificateViewer from "./CertificateViewer";
@@ -103,12 +104,12 @@ const mapStateToProps = store => ({
   // Verification statuses used in verifier block
   emailSendingState: getEmailSendingState(store),
   shareLink: getShareLink(store),
+  shareLinkState: getShareLinkState(store),
   verifying: getVerifying(store),
   issuerIdentityStatus: getIssuerIdentityStatus(store),
   hashStatus: getHashStatus(store),
   issuedStatus: getIssuedStatus(store),
   notRevokedStatus: getNotRevokedStatus(store),
-
   verified: getVerified(store)
 });
 

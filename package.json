@@ -27,6 +27,7 @@
   "dependencies": {
     "@govtechsg/dnsprove": "^2.0.3",
     "@govtechsg/open-attestation": "^1.1.30",
+    "@govtechsg/opencerts-encryption": "^1.0.0",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-sass": "^1.0.1",
     "common-tags": "^1.8.0",

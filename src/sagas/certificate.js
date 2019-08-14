@@ -4,6 +4,7 @@ import { getData, verifySignature } from "@govtechsg/open-attestation";
 import { isValidAddress as isEthereumAddress } from "ethereumjs-util";
 import Router from "next/router";
 import { getDocumentStoreRecords } from "@govtechsg/dnsprove";
+import { decryptString } from "@govtechsg/opencerts-encryption";
 import { getLogger } from "../utils/logger";
 import {
   types,
@@ -25,7 +26,7 @@ import fetchIssuers from "../services/issuers";
 import { combinedHash } from "../utils";
 import { ensResolveAddress, getText } from "../services/ens";
 import sendEmail from "../services/email";
-import generateLink from "../services/link";
+import { generateLink, getCertificateById } from "../services/link";
 import { analyticsEvent } from "../components/Analytics";
 import {
   getDocumentStore,
@@ -464,6 +465,35 @@ export function* generateShareLink() {
   }
 }
 
+export function* retrieveCertificateByLink({ payload }) {
+  try {
+    const encryptedCertificate = yield getCertificateById(payload.id);
+    const certificate = JSON.parse(
+      decryptString({
+        tag: encryptedCertificate.document.tag,
+        cipherText: encryptedCertificate.document.cipherText,
+        iv: encryptedCertificate.document.iv,
+        key: payload.encryptionKey,
+        type: "OPEN-ATTESTATION-TYPE-1"
+      })
+    );
+
+    if (!encryptedCertificate) {
+      throw new Error("Fail to retrieve certificate by id");
+    }
+
+    yield put({
+      type: types.UPDATE_CERTIFICATE,
+      payload: certificate
+    });
+  } catch (e) {
+    yield put({
+      type: types.GET_CERTIFICATE_BY_ID_FAILURE,
+      payload: e.message
+    });
+  }
+}
+
 export function* networkReset() {
   yield put({
     type: types.NETWORK_RESET
@@ -534,6 +564,7 @@ export default [
   takeEvery(types.UPDATE_CERTIFICATE, verifyCertificate),
   takeEvery(types.SENDING_CERTIFICATE, sendCertificate),
   takeEvery(types.GENERATE_SHARE_LINK, generateShareLink),
+  takeEvery(types.GET_CERTIFICATE_BY_ID, retrieveCertificateByLink),
   takeEvery(applicationTypes.UPDATE_WEB3, networkReset),
 
   takeEvery(types.VERIFYING_CERTIFICATE_ISSUER_FAILURE, analyticsIssuerFail),

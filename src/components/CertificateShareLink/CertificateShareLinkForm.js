@@ -1,15 +1,16 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import QRCode from "qrcode.react";
 import css from "./sharing.scss";
+import { URL } from "../../config";
+import { getShareLinkState } from "../../reducers/certificate";
 
 class CertificateShareLinkForm extends Component {
   render() {
+    const { shareLink, shareLinkState } = this.props;
     const certificateLink =
-      this.props.shareLink &&
-      `https://opencerts.io/view/${this.props.shareLink.id}#${
-        this.props.shareLink.key
-      }`;
+      shareLink && `${URL}/?documentId=${shareLink.id}#${shareLink.key}`;
     return (
       <div className="container">
         <div className="row">
@@ -25,17 +26,24 @@ class CertificateShareLinkForm extends Component {
                 regenerated.
               </small>
             </div>
-            <div className="row my-4 d-flex justify-content-center">
-              <input
-                className="w-100"
-                value={certificateLink}
-                placeholder="Certificate link"
-                disabled
-              />
-            </div>
-            <div className="row d-flex justify-content-center m-3">
-              <QRCode value={certificateLink} />
-            </div>
+
+            {shareLinkState === "INITIAL" ? (
+              <Loader />
+            ) : (
+              <>
+                <div className="row my-4 d-flex justify-content-center">
+                  <input
+                    className="w-100"
+                    value={certificateLink}
+                    placeholder="Certificate link"
+                    disabled
+                  />
+                </div>
+                <div className="row d-flex justify-content-center m-3">
+                  <QRCode value={certificateLink} />
+                </div>
+              </>
+            )}
             <div className="row d-flex justify-content-center m-3">
               <button
                 type="button"
@@ -52,9 +60,24 @@ class CertificateShareLinkForm extends Component {
   }
 }
 
+const Loader = () => (
+  <div className={css["renderer-loader"]}>
+    <i className="fas fa-spinner fa-pulse fa-2x" />
+    <div className="m-3">Generating Share Link ...</div>
+  </div>
+);
+
+const mapStateToProps = store => ({
+  shareLinkState: getShareLinkState(store)
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(CertificateShareLinkForm);
+
 CertificateShareLinkForm.propTypes = {
   shareLink: PropTypes.object,
+  shareLinkState: PropTypes.string,
   handleShareLinkToggle: PropTypes.func
 };
-
-export default CertificateShareLinkForm;

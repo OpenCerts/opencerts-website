@@ -1,9 +1,9 @@
 import "isomorphic-fetch";
 import { SHARE_LINK_API_URL } from "../../config";
 
-export default function generateLink(certificate) {
+export function generateLink(certificate) {
   return window
-    .fetch(SHARE_LINK_API_URL, {
+    .fetch(`${SHARE_LINK_API_URL}/create`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -13,6 +13,18 @@ export default function generateLink(certificate) {
         ttl: 900,
         document: certificate
       })
+    })
+    .then(res => res.json());
+}
+
+export function getCertificateById(certificateId) {
+  return window
+    .fetch(`${SHARE_LINK_API_URL}/get/${certificateId}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
     })
     .then(res => res.json());
 }
