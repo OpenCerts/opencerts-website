@@ -78,7 +78,9 @@ export const types = {
   CERTIFICATE_OBFUSCATE_UPDATE: "CERTIFICATE_OBFUSCATE_UPDATE",
 
   CERTIFICATE_TEMPLATE_REGISTER: "CERTIFICATE_TEMPLATE_REGISTER",
-  CERTIFICATE_TEMPLATE_SELECT_TAB: "CERTIFICATE_TEMPLATE_SELECT_TAB"
+  CERTIFICATE_TEMPLATE_SELECT_TAB: "CERTIFICATE_TEMPLATE_SELECT_TAB",
+
+  CERTIFICATE_PROCESS_QR_CODE: "CERTIFICATE_PROCESS_QR_CODE"
 };
 
 // Reducers
@@ -473,6 +475,11 @@ export function selectTemplateTab(payload) {
     payload
   };
 }
+
+export const processQrCode = payload => ({
+  type: types.CERTIFICATE_PROCESS_QR_CODE,
+  payload
+});
 
 // Selectors
 export function getIssuerIdentityStatus(store) {

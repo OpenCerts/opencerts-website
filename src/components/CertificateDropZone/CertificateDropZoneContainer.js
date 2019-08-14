@@ -12,25 +12,35 @@ import {
   getNotRevokedStatus,
   getVerificationStatus,
   resetCertificateState,
-  getStoreStatus
+  getStoreStatus,
+  processQrCode
 } from "../../reducers/certificate";
 import { updateNetworkId } from "../../reducers/application";
 import CertificateDropZone from "./CertificateDropZone";
+import QrReader from "../QrReader";
 
 class CertificateDropZoneContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      fileError: false
+      fileError: false,
+      qrReaderVisible: false
     };
     this.handleCertificateChange = this.handleCertificateChange.bind(this);
     this.handleFileError = this.handleFileError.bind(this);
+    this.toggleQrReaderVisible = this.toggleQrReaderVisible.bind(this);
+    this.handleQrScanned = this.handleQrScanned.bind(this);
   }
 
   componentDidMount() {
     this.props.updateNetworkId();
     Router.prefetch("/viewer");
+  }
+
+  handleQrScanned(data) {
+    this.props.processQr(data);
+    this.setState({ qrReaderVisible: false });
   }
 
   handleCertificateChange(certificate) {
@@ -42,26 +52,38 @@ class CertificateDropZoneContainer extends Component {
     this.setState({ fileError: true });
   }
 
+  toggleQrReaderVisible() {
+    this.setState({ qrReaderVisible: !this.state.qrReaderVisible });
+  }
+
   resetData() {
     this.props.resetData();
   }
 
   render() {
-    return (
-      <CertificateDropZone
-        document={this.props.document}
-        fileError={this.state.fileError}
-        handleCertificateChange={this.handleCertificateChange}
-        handleFileError={this.handleFileError}
-        verifying={this.props.verifying}
-        issuerIdentityStatus={this.props.issuerIdentityStatus}
-        hashStatus={this.props.hashStatus}
-        issuedStatus={this.props.issuedStatus}
-        notRevokedStatus={this.props.notRevokedStatus}
-        verificationStatus={this.props.verificationStatus}
-        resetData={this.resetData.bind(this)}
-        storeStatus={this.props.storeStatus}
-      />
+    return this.state.qrReaderVisible ? (
+      <>
+        <QrReader handleQrScanned={this.handleQrScanned} />
+        <div onClick={this.toggleQrReaderVisible}>Disable</div>
+      </>
+    ) : (
+      <>
+        <CertificateDropZone
+          document={this.props.document}
+          fileError={this.state.fileError}
+          handleCertificateChange={this.handleCertificateChange}
+          handleFileError={this.handleFileError}
+          verifying={this.props.verifying}
+          issuerIdentityStatus={this.props.issuerIdentityStatus}
+          hashStatus={this.props.hashStatus}
+          issuedStatus={this.props.issuedStatus}
+          notRevokedStatus={this.props.notRevokedStatus}
+          verificationStatus={this.props.verificationStatus}
+          resetData={this.resetData.bind(this)}
+          storeStatus={this.props.storeStatus}
+        />
+        <div onClick={this.toggleQrReaderVisible}>Enable</div>
+      </>
     );
   }
 }
@@ -82,7 +104,8 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => ({
   updateNetworkId: () => dispatch(updateNetworkId()),
   updateCertificate: payload => dispatch(updateCertificate(payload)),
-  resetData: () => dispatch(resetCertificateState())
+  resetData: () => dispatch(resetCertificateState()),
+  processQr: payload => dispatch(processQrCode(payload))
 });
 
 export default connect(
@@ -102,5 +125,6 @@ CertificateDropZoneContainer.propTypes = {
   issuedStatus: PropTypes.object,
   notRevokedStatus: PropTypes.object,
   verificationStatus: PropTypes.array,
-  storeStatus: PropTypes.object
+  storeStatus: PropTypes.object,
+  processQr: PropTypes.func
 };
