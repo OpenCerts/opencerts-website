@@ -485,7 +485,7 @@ const Schedule = () => (
           <li>
             Google Analytics (
             <a href="https://www.google.com/policies/privacy/partners/">
-              www.google.com/policies/privacy/partners/
+              https://www.google.com/policies/privacy/partners/
             </a>
             )
           </li>
