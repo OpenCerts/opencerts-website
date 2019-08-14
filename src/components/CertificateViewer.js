@@ -28,6 +28,15 @@ const renderVerifyBlock = props => (
   />
 );
 
+const LoadingIframe = () => (
+  <div id={styles["renderer-loader"]} className="text-blue">
+    <i className="fas fa-spinner fa-pulse fa-3x" />
+    <div className="m-3" style={{ fontSize: "1.5rem" }}>
+      Loading Renderer...
+    </div>
+  </div>
+);
+
 const renderHeaderBlock = props => {
   const renderedVerifyBlock = renderVerifyBlock(props);
   return (
@@ -91,14 +100,17 @@ const CertificateViewer = props => {
         <div className={styles["header-container"]}>{renderedHeaderBlock}</div>
       </div>
       <MultiTabs selectTemplateTab={selectTemplateTab} />
-      <DecentralisedRenderer
-        certificate={document}
-        source={`${
-          typeof document.data.$template === "object"
-            ? certificate.$template.url
-            : LEGACY_OPENCERTS_RENDERER
-        }`}
-      />
+      <div>
+        <LoadingIframe />
+        <DecentralisedRenderer
+          certificate={document}
+          source={`${
+            typeof document.data.$template === "object"
+              ? certificate.$template.url
+              : LEGACY_OPENCERTS_RENDERER
+          }`}
+        />
+      </div>
       <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
         <CertificateSharingForm
           emailSendingState={props.emailSendingState}
