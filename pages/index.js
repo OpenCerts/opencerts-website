@@ -49,7 +49,6 @@ export default connect(
 
 VerifierPage.propTypes = {
   router: PropTypes.object,
-  encryptedCertificate: PropTypes.object,
   encryptedCertificateStatus: PropTypes.string,
   retrieveCertificateByLink: PropTypes.func
 };

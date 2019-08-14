@@ -12,7 +12,7 @@ export const NETWORK_TYPES = {
   MOCK: "MOCK"
 };
 
-export const URL = "http://localhost:3000";
+export const URL = "https://opencerts.io";
 export const API_MAIN_URL = "https://api.opencerts.io";
 export const API_ROPSTEN_URL = "https://api-ropsten.opencerts.io";
 

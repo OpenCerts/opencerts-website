@@ -88,6 +88,7 @@ export const types = {
   GENERATE_SHARE_LINK_RESET: "GENERATE_SHARE_LINK_RESET",
 
   GET_CERTIFICATE_BY_ID: "GET_CERTIFICATE_BY_ID",
+  GET_CERTIFICATE_BY_ID_PENDING: "GET_CERTIFICATE_BY_ID_PENDING",
   GET_CERTIFICATE_BY_ID_SUCCESS: "GET_CERTIFICATE_BY_ID_SUCCESS",
   GET_CERTIFICATE_BY_ID_FAILURE: "GET_CERTIFICATE_BY_ID_FAILURE",
 
@@ -344,6 +345,11 @@ export default function reducer(state = initialState, action) {
         ...state,
         shareLink: {},
         shareLinkState: states.INITIAL
+      };
+    case types.GET_CERTIFICATE_BY_ID_PENDING:
+      return {
+        ...state,
+        encryptedCertificateState: states.PENDING
       };
     case types.GET_CERTIFICATE_BY_ID_SUCCESS:
       return {

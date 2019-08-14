@@ -470,6 +470,9 @@ export function* generateShareLink() {
 
 export function* retrieveCertificateByLink({ payload }) {
   try {
+    yield put({
+      type: types.GET_CERTIFICATE_BY_ID_PENDING
+    });
     const encryptedCertificate = yield getCertificateById(payload.id);
     const certificate = JSON.parse(
       decryptString({
@@ -488,6 +491,9 @@ export function* retrieveCertificateByLink({ payload }) {
     yield put({
       type: types.UPDATE_CERTIFICATE,
       payload: certificate
+    });
+    yield put({
+      type: types.GET_CERTIFICATE_BY_ID_SUCCESS
     });
   } catch (e) {
     yield put({

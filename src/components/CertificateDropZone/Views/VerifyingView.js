@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const View = ({ verificationStatus }) => {
+const View = ({ verificationStatus, retrieveCertificateStatus }) => {
   const lastStatus =
     verificationStatus && verificationStatus[verificationStatus.length - 1];
 
@@ -25,7 +25,9 @@ const View = ({ verificationStatus }) => {
     >
       <i className="fas fa-spinner fa-pulse fa-3x" />
       <div className="m-3" style={{ fontSize: "1.5rem" }}>
-        Verifying Certificate...
+        {retrieveCertificateStatus === "PENDING"
+          ? "Retrieving Certificate..."
+          : "Verifying Certificate..."}
       </div>
       {lastStatus && lastStatus.message ? (
         <div className="text-muted">
@@ -40,5 +42,6 @@ const View = ({ verificationStatus }) => {
 export default View;
 
 View.propTypes = {
-  verificationStatus: PropTypes.array
+  verificationStatus: PropTypes.array,
+  retrieveCertificateStatus: PropTypes.object
 };
