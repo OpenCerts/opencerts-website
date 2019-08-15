@@ -9,7 +9,7 @@
     "lint": "eslint . --ext .js --max-warnings 0",
     "lint:fix": "eslint . --ext .js --fix",
     "build": "next build",
-    "build:static": "npm run build && next export",
+    "build:static": "next build && next export",
     "start": "next build && next start",
     "postbuild": "node post-export.js",
     "start:watch": "nodemon --exec \"npm run start\"",
