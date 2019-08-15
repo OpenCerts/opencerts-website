@@ -2,9 +2,20 @@
 
 @media print {
   #header-ui,
+  #renderer-loader,
   #top-header-ui {
     display: none;
   }
+
+  .decentralised-renderer {
+    position: static !important;
+  }
+}
+
+.decentralised-renderer {
+  width: 100%;
+  border: 0;
+  position: relative;
 }
 
 :global(.frameless-tabs .react-tabs .d-lg-none.d-xl-none) {
