@@ -73,7 +73,7 @@ CertificateVerificationStatus.propTypes = {
   verificationStatus: PropTypes.array,
   storeStatus: PropTypes.object,
   hover: PropTypes.bool,
-  retrieveCertificateStatus: PropTypes.object
+  retrieveCertificateStatus: PropTypes.string
 };
 
 export default CertificateVerificationStatus;
