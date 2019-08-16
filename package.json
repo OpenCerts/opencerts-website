@@ -30,6 +30,7 @@
     "@govtechsg/opencerts-encryption": "^1.0.0",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-sass": "^1.0.1",
+    "clipboard-copy": "^3.1.0",
     "common-tags": "^1.8.0",
     "cross-env": "^5.2.0",
     "date-fns": "^1.29.0",

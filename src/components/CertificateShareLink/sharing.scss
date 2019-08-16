@@ -13,6 +13,17 @@
   margin: auto;
 }
 
+.copyBtn {
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.3rem 2rem;
+  background-color: $brand-dark;
+  border: none;
+  border-radius: 0 6px 6px 0;
+  color: #fff;
+}
+
 .renderer-loader {
   margin: 32px auto;
   width: auto;

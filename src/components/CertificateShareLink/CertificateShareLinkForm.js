@@ -8,7 +8,12 @@ import { getShareLinkState } from "../../reducers/certificate";
 
 class CertificateShareLinkForm extends Component {
   render() {
-    const { shareLink, shareLinkState } = this.props;
+    const {
+      shareLink,
+      shareLinkState,
+      copiedLink,
+      handleCopyLink
+    } = this.props;
     const certificateLink =
       shareLink && `${URL}/?documentId=${shareLink.id}#${shareLink.key}`;
     return (
@@ -26,18 +31,30 @@ class CertificateShareLinkForm extends Component {
                 regenerated.
               </small>
             </div>
-
             {shareLinkState === "INITIAL" ? (
               <Loader />
             ) : (
               <>
                 <div className="row my-4 d-flex justify-content-center">
                   <input
-                    className="w-100"
+                    className="w-75"
                     value={certificateLink}
                     placeholder="Certificate link"
                     disabled
                   />
+                  <button
+                    type="button"
+                    className={`pointer ${css.copyBtn} 2-25`}
+                    onClick={() => handleCopyLink(certificateLink)}
+                  >
+                    Copy
+                  </button>
+
+                  {copiedLink && (
+                    <small className="text-green">
+                      Successfully copied Share Link!
+                    </small>
+                  )}
                 </div>
                 <div className="row d-flex justify-content-center m-3">
                   <QRCode value={certificateLink} />
@@ -77,6 +94,8 @@ export default connect(
 )(CertificateShareLinkForm);
 
 CertificateShareLinkForm.propTypes = {
+  copiedLink: PropTypes.bool,
+  handleCopyLink: PropTypes.func,
   shareLink: PropTypes.object,
   shareLinkState: PropTypes.string,
   handleShareLinkToggle: PropTypes.func

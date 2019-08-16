@@ -127,7 +127,9 @@ const CertificateViewer = props => {
       <Modal show={props.showShareLink} toggle={props.handleShareLinkToggle}>
         <CertificateShareLinkForm
           shareLink={props.shareLink}
+          copiedLink={props.copiedLink}
           handleShareLinkToggle={props.handleShareLinkToggle}
+          handleCopyLink={props.handleCopyLink}
         />
       </Modal>
     </div>

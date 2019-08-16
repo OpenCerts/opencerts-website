@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Router from "next/router";
+import copy from "clipboard-copy";
 import { getData } from "@govtechsg/open-attestation";
 
 import {
@@ -29,13 +30,15 @@ class MainPageContainer extends Component {
 
     this.state = {
       showSharing: false,
-      detailedVerifyVisible: false
+      detailedVerifyVisible: false,
+      copiedLink: false
     };
     this.toggleDetailedView = this.toggleDetailedView.bind(this);
     this.handleCertificateChange = this.handleCertificateChange.bind(this);
     this.handleSharingToggle = this.handleSharingToggle.bind(this);
     this.handleShareLinkToggle = this.handleShareLinkToggle.bind(this);
     this.handleSendCertificate = this.handleSendCertificate.bind(this);
+    this.handleCopyLink = this.handleCopyLink.bind(this);
   }
 
   componentDidMount() {
@@ -55,6 +58,11 @@ class MainPageContainer extends Component {
       this.props.generateShareLink();
     }
     this.setState({ showShareLink: !this.state.showShareLink });
+  }
+
+  handleCopyLink(certificateLink) {
+    copy(certificateLink);
+    this.setState({ copiedLink: true });
   }
 
   toggleDetailedView() {
@@ -90,6 +98,8 @@ class MainPageContainer extends Component {
         handleSendCertificate={this.handleSendCertificate}
         handleSharingToggle={this.handleSharingToggle}
         handleShareLinkToggle={this.handleShareLinkToggle}
+        handleCopyLink={this.handleCopyLink}
+        copiedLink={this.state.copiedLink}
         emailSendingState={this.props.emailSendingState}
         toggleDetailedView={this.toggleDetailedView}
         detailedVerifyVisible={this.state.detailedVerifyVisible}
