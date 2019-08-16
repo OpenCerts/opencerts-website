@@ -57,7 +57,10 @@ class MainPageContainer extends Component {
     if (!this.state.showShareLink) {
       this.props.generateShareLink();
     }
-    this.setState({ showShareLink: !this.state.showShareLink });
+    this.setState({
+      showShareLink: !this.state.showShareLink,
+      copiedLink: false
+    });
   }
 
   handleCopyLink(certificateLink) {

@@ -43,5 +43,5 @@ export default View;
 
 View.propTypes = {
   verificationStatus: PropTypes.array,
-  retrieveCertificateStatus: PropTypes.object
+  retrieveCertificateStatus: PropTypes.string
 };
