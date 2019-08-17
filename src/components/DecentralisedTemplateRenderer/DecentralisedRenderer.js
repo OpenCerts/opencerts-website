@@ -13,6 +13,7 @@ import {
 } from "../../reducers/certificate";
 import { analyticsEvent } from "../Analytics";
 import { getAnalyticsStores } from "../../sagas/certificate";
+import styles from "../certificateViewer.scss";
 
 class DecentralisedRenderer extends Component {
   constructor(props) {
@@ -94,11 +95,11 @@ class DecentralisedRenderer extends Component {
       <iframe
         title="Decentralised Rendered Certificate"
         id="iframe"
+        className={styles["decentralised-renderer"]}
         ref={iframe => {
           this.iframe = iframe;
         }}
         src={this.props.source}
-        style={{ width: "100%", border: 0, position: "relative" }}
       />
     );
   }
