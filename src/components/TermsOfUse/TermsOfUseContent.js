@@ -483,6 +483,10 @@ const Schedule = () => (
         Third party software/services
         <ol>
           <li>
+            Open Source Dependencies Licenses (
+            <a href="/static/credits.pdf">Credits</a>)
+          </li>
+          <li>
             Google Analytics (
             <a href="https://www.google.com/policies/privacy/partners/">
               https://www.google.com/policies/privacy/partners/
