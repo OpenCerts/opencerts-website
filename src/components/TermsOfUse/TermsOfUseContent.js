@@ -484,7 +484,7 @@ const Schedule = () => (
         <ol>
           <li>
             Open Source Dependencies Licenses (
-            <a href="./static/credits.pdf">Credits</a>)
+            <a href="/static/credits.pdf">Credits</a>)
           </li>
           <li>
             Google Analytics (
