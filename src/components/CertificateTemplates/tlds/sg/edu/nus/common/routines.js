@@ -197,7 +197,8 @@ export const capitalizedText = inputString => {
     if (i === 0)
       txt =
         temptext.slice(0, 1).toUpperCase() + temptext.slice(1, temptext.length);
-    else if (temptext === "of") txt = `${txt} ${temptext}`;
+    else if (temptext === "of" || temptext === "and" || temptext === "in")
+      txt = `${txt} ${temptext}`;
     else if (temptext.slice(0, 1) === "(")
       txt = `${txt} ${temptext.slice(0, 2).toUpperCase()}${temptext.slice(
         2,
@@ -255,10 +256,10 @@ export const renderNUSTitle = (names, styles) => {
     const defaultStyle = {
       display: "block",
       fontSize: "26pt",
+      lineHeight: "30pt",
       textAlign: "center",
       fontFamily: "'Times New Roman', Serif",
       fontWeight: "bold",
-      color: "rgb(83, 86, 90)",
       marginLeft: "auto",
       marginRight: "auto"
     };

@@ -1,24 +1,22 @@
 import PropTypes from "prop-types";
 import MultiCertificateRenderer from "template-utils/MultiCertificateRenderer";
 import { storeAddresses } from "../common";
-import Degree from "./degree";
-import Transcript from "../NUSTS-GENERAL-2019/transcript";
+import Degree from "../NUS-K1-2019/degree";
 
 const templates = [
   {
     id: "degree",
     label: "Certificate",
     template: Degree
-  },
-  {
-    id: "transcript",
-    label: "Transcript",
-    template: Transcript
   }
 ];
 
-const Cert = () => (
-  <MultiCertificateRenderer templates={templates} whitelist={storeAddresses} />
+const Cert = props => (
+  <MultiCertificateRenderer
+    templates={templates}
+    whitelist={storeAddresses}
+    {...props}
+  />
 );
 
 Cert.propTypes = {

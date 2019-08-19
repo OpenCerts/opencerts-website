@@ -1,0 +1,619 @@
+{
+  "schema": "opencerts/v1.5",
+  "data": {
+    "id": "d4c00049-99dc-460c-9f1d-5bda5b13de14:string:NUS-A0056627Y-B061009-P10180997-1-20130630",
+    "$template": "7ec6935f-364a-4528-ab99-798ee7cedade:string:sg/edu/nus/NUS-K1-2019",
+    "issuedOn": "aea021ca-1ec1-45df-8799-a36a7da4e27b:string:2019-07-15T13:27:31+08:00",
+    "name": "2f31184f-b622-4708-879d-2070d88de3b6:string:NUS Degree",
+    "issuers": [
+      {
+        "name": "4668b651-82c5-4cfd-a88e-a7d0e35c9180:string:National University of Singapore",
+        "did": "feca60f6-3276-4b96-b900-7067062bb862:string:DID:SG-UEN:200604346E",
+        "url": "11ef4bd1-d862-40d5-a4aa-b2f71e7b8910:string:https://www.nus.edu.sg",
+        "email": "6e3b04da-2dc9-4edb-b00e-1e146ef25da3:string:registrar@nus.edu.sg",
+        "certificateStore": "4e827dd4-304d-4d97-8494-0a8bfb14f027:string:0xfEbB273495F5C2c4783E23424Fe9773691b57fcB"
+      }
+    ],
+    "recipient": {
+      "name": "177a8e0d-9f21-4cbd-a556-2d5b5c353464:string:A0056627Y, name",
+      "studentId": "f7affe91-e01a-419c-91b5-7f13a00015a3:string:A0056627Y",
+      "dateOfBirth": "f8cd908e-c5c5-4065-914a-626a79190e26:string:1905-01-01"
+    },
+    "transcript": [
+      {
+        "name": "2f558186-06a0-42d6-98f2-ac61b76dab8f:string:0910",
+        "term": "971b9dcc-3e4d-4385-b755-b1f3b1766735:string:2009/2010 Semester 1",
+        "formOfStudy": "c20b8ae0-331b-43d7-a775-ae7bac90e2f6:string:ENRL",
+        "fosPrintArea": "af4560b1-0f63-452e-9522-8a093d20bc9f:string:ND",
+        "creditTransfer": [
+          {
+            "sourceType": "9e284120-9d97-46c0-a04a-0f67400fb382:string:E",
+            "creditsNoGPA": "a1829c1f-0550-463e-ba1d-029fbc34d132:number:38",
+            "creditsGPA": "cb2f1861-acb1-4228-8464-41f02fa6fb94:number:0",
+            "orgId": "4c87a710-8fba-459d-bf5c-930766c31a5e:string:Singapore Polytechnic",
+            "orgName": "6411422d-2db9-48da-9fde-756bc71684ce:string:Singapore Polytechnic",
+            "details": [
+              {
+                "moduleCode": "9e6eade6-4728-4132-8a9a-266f07522f34:string:APC",
+                "moduleName": "76721eb3-520c-4f2b-ae7f-8ce6b753d8c8:string:",
+                "grade": "d756a925-fb8e-4399-aaf5-bd922272fe64:string:EXE",
+                "credits": "fb6819a1-0785-4882-a486-0888de32b245:number:4",
+                "status": "537b8927-f51b-48ed-ac8b-55ce8d66c41b:string:P",
+                "includeInGPA": "c279da65-2d24-41b3-a154-1487f10578e6:boolean:false"
+              },
+              {
+                "moduleCode": "14797017-2ab0-4559-8494-24bbae6d9747:string:APC",
+                "moduleName": "871d1b91-9835-458b-8fdb-a61e8fc11b03:string:",
+                "grade": "3a020792-7c33-4ea6-9fc6-24e730f6a10d:string:EXE",
+                "credits": "f4c7b7fe-9833-417a-88d7-e6fc46603e6c:number:3",
+                "status": "01077baa-82eb-4900-99c8-83f0750a2863:string:P",
+                "includeInGPA": "991ab8ae-0e15-44cb-a8d3-6039e6a63887:boolean:false"
+              },
+              {
+                "moduleCode": "e5c85d6e-34b8-4f34-99ba-a5f40db1071f:string:APC",
+                "moduleName": "cbbe2827-7131-4870-9a9a-697e4f2c8579:string:",
+                "grade": "4b9d82af-c934-4449-865c-3a6abe9638ea:string:EXE",
+                "credits": "0c38766c-5a00-45b5-968f-ce06437dd06e:number:4",
+                "status": "f050d88a-83ff-47de-9c07-3aca39da8bdb:string:P",
+                "includeInGPA": "0067ad38-6ed9-442a-9412-de15fe539931:boolean:false"
+              },
+              {
+                "moduleCode": "d2c9d729-cf0e-4f9b-a9d0-71ca90c1e14c:string:APC",
+                "moduleName": "691a28ca-967f-4171-9e9a-9e7b4e0d1e3c:string:",
+                "grade": "3b5d5b6f-8662-4f8e-86f6-920e2800d457:string:EXE",
+                "credits": "dc6fc568-e57f-4f80-b0c9-76c5c79e3334:number:4",
+                "status": "1e9f6fac-f1d3-428f-a004-570ad1138dd9:string:P",
+                "includeInGPA": "00901961-ea38-4893-b43e-c7e656647987:boolean:false"
+              },
+              {
+                "moduleCode": "9a49161c-6403-4f37-9680-f7fc7790d5e2:string:APC",
+                "moduleName": "757ff8de-2d7a-4c8c-ba20-1214d4c3e176:string:",
+                "grade": "1ce7754e-f375-4e09-9bc2-3566fb621792:string:EXE",
+                "credits": "0a7bd61a-7f1a-4163-8cb2-fb06ab6aebea:number:4",
+                "status": "b7322221-90db-4b20-90e4-f936f46129e0:string:P",
+                "includeInGPA": "fc2b82e6-5ec5-466b-bcb2-af5b47e78de2:boolean:false"
+              },
+              {
+                "moduleCode": "c9b12b6f-88fc-4d09-a027-d71b1394cb20:string:APC",
+                "moduleName": "c0d1ad83-032d-40ee-b1db-c9aa2197a8b8:string:",
+                "grade": "ddc0e3f1-a315-4fb0-be8c-9a22ba95b77b:string:EXE",
+                "credits": "33cb4e18-ff30-459b-ac32-0ee051868efa:number:3",
+                "status": "96821d69-f875-41e6-a6ec-88156f0aea05:string:P",
+                "includeInGPA": "8e4986cc-df2b-4baf-b003-cdbd79020a2e:boolean:false"
+              },
+              {
+                "moduleCode": "3b79374c-b911-449d-8636-2a35e3df31d9:string:APC",
+                "moduleName": "dd9e6baf-c3e9-4db8-9e59-7a239a8ce31a:string:",
+                "grade": "d6ca5e1b-0c69-4012-bc04-233be820ec40:string:EXE",
+                "credits": "daf3b7f4-e041-4898-a0f7-43360bac3553:number:4",
+                "status": "c946e17b-c915-46e8-bcff-a5a3fe10d800:string:P",
+                "includeInGPA": "3d70d1d1-3971-4e90-8862-d3c997289363:boolean:false"
+              },
+              {
+                "moduleCode": "deac9a6f-6b7f-4968-966f-d8d94355c009:string:APC",
+                "moduleName": "040fa8f6-9307-4633-a527-8b9463400326:string:",
+                "grade": "570469a2-4b2d-4214-8c8f-6e4bc2b11223:string:EXE",
+                "credits": "e5f9b337-804d-4923-aa1a-0d4990231f0f:number:4",
+                "status": "ac72402a-db8d-4714-9379-1beb4dae3305:string:P",
+                "includeInGPA": "8c74afd0-15a4-44d4-8248-0bf8939d0b1f:boolean:false"
+              },
+              {
+                "moduleCode": "f074d711-9bf1-49ba-9a4f-8924f70f50c5:string:APC",
+                "moduleName": "b0d1f93e-07aa-449b-83f3-6765a573a57a:string:",
+                "grade": "e54a192e-b5c8-466f-935d-69a40626c662:string:EXE",
+                "credits": "fe8c5f98-5129-40aa-9cb8-cbcd14e00157:number:4",
+                "status": "8feabeb3-5bf3-42ed-a942-790edde0815a:string:P",
+                "includeInGPA": "a9f72a83-9a55-4098-830b-0b46eb948511:boolean:false"
+              },
+              {
+                "moduleCode": "1581077f-0034-4019-90dd-18d25e49b2d6:string:APC",
+                "moduleName": "a19675db-ae39-4a42-a28e-f435e8e67e63:string:",
+                "grade": "11da3343-e63b-42ac-9349-102f7209778e:string:EXE",
+                "credits": "3e3e0486-8b7b-447c-bc95-257763e4beef:number:4",
+                "status": "debfb6de-acb6-4f44-b9f6-8505c4b0441f:string:P",
+                "includeInGPA": "2236b932-e80f-4609-93bf-c0cdfab01096:boolean:false"
+              }
+            ]
+          }
+        ],
+        "modules": [
+          {
+            "moduleCode": "7f8f2dd6-cf40-404e-9724-ad3073f1f90a:string:MA1301",
+            "moduleName": "1f859798-7329-47c8-add4-e6781c8c60fb:string:Introductory Mathematics",
+            "grade": "356ceea4-3263-4579-b032-0b3ec8c58433:string:B-",
+            "credits": "b44301f6-f8a4-443d-869f-0e63ca5ac4ef:number:4",
+            "gradingBasis": "c1c1067f-88ac-474a-b1fe-16a2de897cb5:string:GRD",
+            "includeInGPA": "adeed4e5-2ae4-4c3c-9765-a33f0c5d861f:boolean:true"
+          },
+          {
+            "moduleCode": "9290523a-489d-4efc-ba39-bcad3268a81c:string:ME2103",
+            "moduleName": "3eaf0f3f-ef86-4f3c-b0ac-c461f5e35afb:string:Engineering Visualization & Modeling",
+            "grade": "a78c69c0-220e-42cc-8503-1882ca1f5355:string:B+",
+            "credits": "3e7e9635-ae90-419a-9b51-7adb12fdc1e9:number:3",
+            "gradingBasis": "1f719d7c-5492-4314-ad0b-01821bc257ff:string:GRD",
+            "includeInGPA": "c20c5858-3eb5-48d7-8da1-e16d68a3304f:boolean:true"
+          },
+          {
+            "moduleCode": "09346a38-01fa-426f-813d-5df0851aab53:string:ME2113",
+            "moduleName": "12f8eccf-761f-4d39-9531-2a443a9b1791:string:Mechanics Of Materials I",
+            "grade": "9b7091f9-f6e4-4d6b-bf56-8a9bd0ed4a9f:string:D+",
+            "credits": "314077c2-d1da-4669-9ed2-bd12fe163396:number:3",
+            "gradingBasis": "2dfc32fa-d748-4191-9a27-d0dfaf283748:string:GRD",
+            "includeInGPA": "2cdeea2d-ee4f-412a-9eb3-41bcaab8ddd4:boolean:true"
+          },
+          {
+            "moduleCode": "26c01549-14d9-46ab-8c82-c18685f6def8:string:ME2134",
+            "moduleName": "03ea44dc-a662-451b-85fa-ffdf2be572df:string:Fluid Mechanics I",
+            "grade": "a7c5dc4c-a2f6-46ac-95c7-34f9ec285ca2:string:C+",
+            "credits": "635f600d-6d1f-4c9a-9464-f06b70c761a5:number:4",
+            "gradingBasis": "cf3811c8-5d42-4e19-ac16-79afce63edde:string:GRD",
+            "includeInGPA": "ac57d9e2-c1d6-4da6-8397-45ba17844024:boolean:true"
+          },
+          {
+            "moduleCode": "17486216-f1f3-4aa3-bbe4-f826dcdb8a43:string:PC1222",
+            "moduleName": "b24bcc6c-e236-49b8-b69a-61f7fd4b2fb6:string:Fundamentals of Physics II",
+            "grade": "4e1d10ef-404b-4a3a-a8c9-2d81727352b0:string:B-",
+            "credits": "7eb2c703-d859-4b58-9e2d-e68c43ef95a5:number:4",
+            "gradingBasis": "a0bf2494-1d22-46dd-b071-00e31c44a178:string:GRD",
+            "includeInGPA": "d92a1cb7-d0a3-4d86-b64f-3f6d19bb682d:boolean:true"
+          }
+        ],
+        "summary": [
+          {
+            "programName": "f44fe3c3-7c48-4567-bd83-e6a76425aa95:string:Bachelor of Engineering (Mechanical Engineering)",
+            "includeInGPA": "85d5c284-68f8-4d1a-8b17-69a6372796cd:boolean:true",
+            "GPAName": "ac08a37a-c1ab-43e4-b555-03d3ef2a2cce:string:Cumulative Average Point",
+            "GPA": "9a309eeb-930a-45c8-afd6-b8259be702c4:number:2.81"
+          }
+        ]
+      },
+      {
+        "name": "611e1a0b-ec70-4651-a76a-11e6745ca9e1:string:0920",
+        "term": "24785af1-3522-486d-84ee-337033deda29:string:2009/2010 Semester 2",
+        "formOfStudy": "f7204485-a644-4a2b-b31a-deef50cdc473:string:ENRL",
+        "fosPrintArea": "3176ff32-ab71-4936-a295-fb8b77299d81:string:ND",
+        "modules": [
+          {
+            "moduleCode": "b6c60bfd-eea0-49c7-a521-931a95707d99:string:MA1505",
+            "moduleName": "fcf4dd74-60dc-46d4-9873-0776c7817002:string:Mathematics I",
+            "grade": "fb026317-96e9-47a1-9f40-45ca90ad9543:string:F",
+            "credits": "2fbcc728-baec-441b-8378-4f3c73ca5406:number:4",
+            "gradingBasis": "d108caed-851e-486d-972b-4903d8d020c1:string:GRD",
+            "includeInGPA": "d992c401-a910-4400-a54b-a8e280e9660d:boolean:true"
+          },
+          {
+            "moduleCode": "878d841a-90a0-4809-814e-1259a5c4a619:string:ME2101",
+            "moduleName": "d14a71a5-c5ba-474d-8599-ef36a9f0d494:string:Fundamentals Of Mechanical Design",
+            "grade": "b5595590-1c3a-4550-b622-191302fab3b1:string:B",
+            "credits": "8829edb0-ab79-4046-a2c8-5004b69e2b6e:number:4",
+            "gradingBasis": "68f54f26-30c0-4dca-8764-8c52eec1065e:string:GRD",
+            "includeInGPA": "39fdb2bb-f9dc-4f48-9e92-1667ffc98710:boolean:true"
+          },
+          {
+            "moduleCode": "46fbbc2a-bef6-4dda-8584-0683d2a9c955:string:ME2135",
+            "moduleName": "42fb3f76-770f-46cc-852e-94adafdf1afe:string:Fluid Mechanics II",
+            "grade": "ca35648a-121d-45cd-bd44-1c4c29c2b0f4:string:F",
+            "credits": "7aeb4e89-702b-4cc6-9501-ea48bc79186f:number:4",
+            "gradingBasis": "3db7831e-e7bf-491d-ba90-245a4f112770:string:GRD",
+            "includeInGPA": "9e25fe66-7a5f-4b25-bdc6-fb4a3582aecc:boolean:true"
+          },
+          {
+            "moduleCode": "bcbb6eba-c3f8-45cf-a2b0-5ccdc08a31b5:string:MLE1101",
+            "moduleName": "729aea9f-50cf-4bb1-96a2-eb65af7a474f:string:Introductory Materials Science And Engineering",
+            "grade": "8a2a7f42-5d16-4c68-b3da-25fbb0c9277c:string:C",
+            "credits": "17486506-562f-4b9a-8e8e-e982be0cf75a:number:4",
+            "gradingBasis": "a38747ad-22bf-4bc7-ad78-95ddc68acdf7:string:GRD",
+            "includeInGPA": "02237064-7e53-4f70-af46-ea380066e498:boolean:true"
+          },
+          {
+            "moduleCode": "f463ec1f-5331-427e-a2b9-ae711a54cf3c:string:PC1431",
+            "moduleName": "34a72c6c-9d7d-47b8-b5f1-be5d0bc50e62:string:Physics IE",
+            "grade": "64654324-3253-4eb7-bb94-09b48ce67e7b:string:C",
+            "credits": "64e36a54-4b20-45d1-8d33-6217f3c40c69:number:4",
+            "gradingBasis": "973af5d2-a482-4bcd-bf7a-7ad7a85f486a:string:GRD",
+            "includeInGPA": "5984f727-4caf-4320-b569-4d93efa755e4:boolean:true"
+          }
+        ],
+        "summary": [
+          {
+            "programName": "caafe0be-950c-4c0a-922e-dc248d05a355:string:Bachelor of Engineering (Mechanical Engineering)",
+            "includeInGPA": "4354f481-2ae6-423c-abb2-06f33a57430f:boolean:true",
+            "GPAName": "cda4a7d5-e668-452f-9786-ce902e8d0be3:string:Cumulative Average Point",
+            "GPA": "7856397a-b9e2-4e3d-8749-98970630f96a:number:2.12"
+          }
+        ]
+      },
+      {
+        "name": "2306f538-4e6f-4903-ae19-25d9e7d10b29:string:1010",
+        "term": "2969bad5-ba23-4099-b2d2-53e2e39751ba:string:2010/2011 Semester 1",
+        "formOfStudy": "0c2e09ed-46d5-49a5-b587-8f79b92071b4:string:ENRL",
+        "fosPrintArea": "6581c059-2983-42a9-ab81-e5996bb7fea7:string:ND",
+        "modules": [
+          {
+            "moduleCode": "b87fd5cd-a8b7-4385-99b8-e52a99d823f4:string:MA1505",
+            "moduleName": "d3b84a94-6f0a-48d4-98e6-08cb730a36f0:string:Mathematics I",
+            "grade": "421a5a7d-0d74-490a-a986-5730f9fc4d96:string:F",
+            "credits": "1ca77c69-40b7-424f-9e8d-6e5978a05d39:number:4",
+            "gradingBasis": "aee39fe8-44b8-4deb-b3c0-4f95e50749c9:string:GRD",
+            "includeInGPA": "184f0898-b533-45ba-ba59-e51263bbc41c:boolean:true"
+          },
+          {
+            "moduleCode": "99ee883b-3459-4195-980c-b4e9264acab2:string:MA1506",
+            "moduleName": "6aac6a16-9608-431a-af3f-a499a8f3e048:string:Mathematics II",
+            "grade": "2bec7e95-a410-41bb-8078-f20d46f38ba7:string:C",
+            "credits": "d91903bd-5ec0-4226-9c65-eeddd2e82389:number:4",
+            "gradingBasis": "0b180db6-6218-4594-950f-d0882315ed69:string:GRD",
+            "includeInGPA": "523d733f-1639-4cf7-89ba-17ad26202d6a:boolean:true"
+          },
+          {
+            "moduleCode": "deb68b07-37c9-4bcd-960e-b201e9328998:string:ME2121",
+            "moduleName": "f9e0caac-c10a-4a1d-a056-a8536ed65e7a:string:Engineering Thermodynamics",
+            "grade": "245339d0-0b39-4042-9f98-ab970563e65b:string:F",
+            "credits": "9392cfa7-8128-4252-b95f-a58e39f10d42:number:3",
+            "gradingBasis": "1365655e-ee60-47f1-8f15-f0b34ed547da:string:GRD",
+            "includeInGPA": "b7c4f8e4-90bc-4245-ab9f-a36d8fa40e0e:boolean:true"
+          },
+          {
+            "moduleCode": "4d8e899d-2f29-4dfc-9e7b-f8ab80ed1193:string:ME2151",
+            "moduleName": "a93b55d0-5068-4f41-8f8d-ffdd5ba64184:string:Principles of Mechanical Eng. Materials",
+            "grade": "0dfe2c84-3199-4ff7-9db5-f92099762637:string:B-",
+            "credits": "010ba504-3879-4370-b9be-35c3d38eb253:number:4",
+            "gradingBasis": "b5429900-6349-4eb6-aa24-c14418adb5dc:string:GRD",
+            "includeInGPA": "0bc9a2ac-ae10-4856-bfc7-e1637b73d4d9:boolean:true"
+          },
+          {
+            "moduleCode": "2d704f12-7619-4116-9aee-477a250048b9:string:ME3101",
+            "moduleName": "6704704a-16e1-4fda-9dd7-e46ba28d293b:string:Mechanical Systems Design I",
+            "grade": "8fdd07c9-117a-4a62-92a4-c6d5a7fcaac0:string:B",
+            "credits": "e33ed6aa-0479-42bb-b720-4c14a98286c3:number:4",
+            "gradingBasis": "97765943-c903-4ebd-85f1-e29c3a939304:string:GRD",
+            "includeInGPA": "40124cf5-b2d4-40c5-9073-fbe69bca05fa:boolean:true"
+          },
+          {
+            "moduleCode": "7553243d-6b68-4efd-a4d6-343c708bcd44:string:ME3112",
+            "moduleName": "26040891-952b-431a-8e15-049ad7f9321a:string:Mechanics Of Machines",
+            "grade": "644adf05-0436-410d-9bdd-795f467ee6f5:string:C+",
+            "credits": "430f7e08-2f21-4105-aeaf-920f2a31626c:number:4",
+            "gradingBasis": "0cae5e10-75ca-45c0-8fa4-816be977ad4b:string:GRD",
+            "includeInGPA": "5bbd1f5e-0abf-4681-9fa8-a2634a88297f:boolean:true"
+          }
+        ],
+        "summary": [
+          {
+            "programName": "ce1133a9-f74f-4d7e-926d-3176f5095393:string:Bachelor of Engineering (Mechanical Engineering)",
+            "includeInGPA": "ad3d86c1-a711-446f-993a-bf20e5fbe445:boolean:true",
+            "GPAName": "927c8c50-e8d3-4d5a-9de6-b137b0414cca:string:Cumulative Average Point",
+            "GPA": "15d3f6d1-34a2-46c5-8c33-47778aba67c2:number:2.04"
+          }
+        ]
+      },
+      {
+        "name": "6026d09a-2a47-4b7b-a3f6-87c2571cf095:string:1020",
+        "term": "0ce7e3d3-bc93-4341-bd35-8e6e8e80e59f:string:2010/2011 Semester 2",
+        "formOfStudy": "4dcad458-0804-4a6f-a36c-a63b44b4f6e1:string:ENRL",
+        "fosPrintArea": "597d983b-bd63-4146-bbaf-942cd0c25b11:string:ND",
+        "modules": [
+          {
+            "moduleCode": "3c9d5665-2475-4ec3-9f14-66b2938907f9:string:ME2114",
+            "moduleName": "8cbf581d-d1b9-4115-95fe-9c77c1e1d810:string:Mechanics Of Materials II",
+            "grade": "c034dc0e-c684-4ecf-b6dd-7eae94442e50:string:D+",
+            "credits": "116e44c2-30df-4812-a11b-e8bacb419ea1:number:3",
+            "gradingBasis": "d2279465-da89-43a5-95e4-f969680028ff:string:GRD",
+            "includeInGPA": "04809eab-2889-4b05-9bb6-1c8fbaa837f5:boolean:true"
+          },
+          {
+            "moduleCode": "d8e966b9-f6e3-47e4-9999-f59d40e3e9c1:string:ME2135",
+            "moduleName": "cb181b46-5990-4885-960a-98f48f19e7c8:string:Fluid Mechanics II",
+            "grade": "10113606-9fcb-42d1-aacf-9886a26f5ace:string:F",
+            "credits": "ef3be603-604a-4b8e-8ca7-695292b063f6:number:4",
+            "gradingBasis": "bd3ea346-3b3b-4a78-b436-7cfffeb95758:string:GRD",
+            "includeInGPA": "92f7e4ba-131f-47b1-b781-bcaf08bf1c29:boolean:true"
+          },
+          {
+            "moduleCode": "1a4b3f1e-1c19-4861-bf9c-1bb82795e444:string:ME2142",
+            "moduleName": "f8ea56aa-33eb-48bc-bb82-61d197ba0d89:string:Feedback Control Systems",
+            "grade": "a2cc8da3-f600-40c5-9972-2e1cea037b69:string:C",
+            "credits": "27c5cd15-47d2-4af8-851d-bd4f3f32355e:number:4",
+            "gradingBasis": "395bc12d-3409-4da8-87ac-555dd6ead3cc:string:GRD",
+            "includeInGPA": "bfaa61dc-d6fb-4752-a3f2-87632b2fd40f:boolean:true"
+          },
+          {
+            "moduleCode": "975fffd0-c2bd-4797-9901-15d07eb959c6:string:ME2143",
+            "moduleName": "912f6a09-1104-4308-9769-b25bbad0dcaa:string:Sensors & Actuators",
+            "grade": "059a550f-5768-4010-82f8-66e4ede6ab84:string:D+",
+            "credits": "14ddbd30-f078-4941-9bfc-a2ca96bf5cc3:number:4",
+            "gradingBasis": "6899f457-4bf6-4a27-9920-839f762336ad:string:GRD",
+            "includeInGPA": "56861d4c-c502-494a-8cbb-0d3caa1348c1:boolean:true"
+          },
+          {
+            "moduleCode": "5a1d165b-f088-41be-baa6-4fc75152a273:string:ME3102",
+            "moduleName": "491b3239-caad-47fd-8866-06205e62720c:string:Mechanical Systems Design II",
+            "grade": "a565521c-73c9-47c2-b1ff-0dd5d3c32c98:string:B+",
+            "credits": "93f4fc0d-e8b6-4deb-8fad-8b53464f2629:number:4",
+            "gradingBasis": "40831e16-a639-429a-b43e-cdd761d2977a:string:GRD",
+            "includeInGPA": "0b517a6d-1058-4cb8-a640-a840c279e382:boolean:true"
+          },
+          {
+            "moduleCode": "0e3e7a53-59e0-4e7c-bfcd-88b235b66e96:string:ME3241",
+            "moduleName": "8036adaa-4433-4594-b9ec-52fb4edbdacd:string:Microprocessor Applications",
+            "grade": "cc039974-36ac-40cc-9a90-a6ae2d6c6796:string:C+",
+            "credits": "6d2f0a2d-263c-48ac-9995-42a1ccbd3d31:number:4",
+            "gradingBasis": "a4822c1c-4c11-4ff9-b50a-adf79cab8d5e:string:GRD",
+            "includeInGPA": "0851ac58-743b-49bd-9304-5823d027f3ad:boolean:true"
+          }
+        ],
+        "summary": [
+          {
+            "programName": "ec741226-d2f4-4095-9499-4877424e25ce:string:Bachelor of Engineering (Mechanical Engineering)",
+            "includeInGPA": "6053fe4f-cfba-4eb2-9b7c-6e100ba2e54e:boolean:true",
+            "GPAName": "7e7f32ab-f9ef-4673-be6b-3d4626ddf07b:string:Cumulative Average Point",
+            "GPA": "bd9fad7a-89d1-4c49-bb40-9ac3a2e4b817:number:2.01"
+          }
+        ]
+      },
+      {
+        "name": "e44d7732-11d6-414c-b936-77a410e6b309:string:1110",
+        "term": "98b5f7d8-5ba9-4a07-a399-5ce3bcf7617a:string:2011/2012 Semester 1",
+        "formOfStudy": "a8274203-4602-4f9b-bb02-10035e35f949:string:ENRL",
+        "fosPrintArea": "604ac0dd-1187-492b-b175-982ec38f8815:string:ND",
+        "modules": [
+          {
+            "moduleCode": "1c49b4f4-bbdf-4096-8d62-fecbd503a8f8:string:MA1505",
+            "moduleName": "4567a34c-7b44-4b0c-907c-c431d5e18391:string:Mathematics I",
+            "grade": "6e9b5d4f-4656-4818-b301-291b4e291a32:string:C",
+            "credits": "6f4a7e4f-9aac-4c27-a510-b97e3d550977:number:4",
+            "gradingBasis": "cfbec4b3-c096-4a0a-8275-76ebdbd4b620:string:GRD",
+            "includeInGPA": "0c677895-812c-4f1e-bacd-2151f2e7721c:boolean:true"
+          },
+          {
+            "moduleCode": "2652755b-1fcf-4fc5-8d5d-0b814a1218ab:string:ME2121",
+            "moduleName": "14d65628-59f6-4358-90b9-f61ca42c2a60:string:Engineering Thermodynamics",
+            "grade": "3446a5bc-965c-4732-be17-13608625c792:string:D",
+            "credits": "90a06cfb-1b12-4f10-be24-85a0b5bca4f2:number:3",
+            "gradingBasis": "b4373c03-17cb-4026-a26e-f47046c93825:string:GRD",
+            "includeInGPA": "8182f3ab-9ff8-4968-97f4-011cb5ed5c9f:boolean:true"
+          },
+          {
+            "moduleCode": "af5fb47e-2ab5-4b63-bc6b-0e874dce3e6b:string:ME3122",
+            "moduleName": "88e09c8a-59ce-4e4e-af66-266fe92cabbd:string:Heat Transfer",
+            "grade": "1e42d640-7ce2-48f8-95d0-a3bc33e80571:string:C+",
+            "credits": "f4388984-8801-485f-8969-d974b9e1cd2f:number:4",
+            "gradingBasis": "6e613b82-bcb9-4a6e-958c-1dbcf848544b:string:GRD",
+            "includeInGPA": "1cb752bc-5797-45cd-9309-0249f8f5e821:boolean:true"
+          },
+          {
+            "moduleCode": "f23ac36f-cc89-4db0-842e-d8f6fd26e423:string:ME3162",
+            "moduleName": "37374fe4-1c5c-4a93-89bb-edc63fd01e22:string:Manufacturing Processes",
+            "grade": "f368bb53-033a-4527-b9bc-7c845e7a1fe4:string:C",
+            "credits": "625103bb-0047-438f-b5e8-531082eb4908:number:4",
+            "gradingBasis": "665148ec-3b10-49d7-a82f-da78c3537906:string:GRD",
+            "includeInGPA": "5cb3a476-aa6a-418a-8fbc-6429a7b84ac8:boolean:true"
+          },
+          {
+            "moduleCode": "0b841a8d-f656-4b6c-b631-d4f77125dbcb:string:ME3242",
+            "moduleName": "5c2fa8bd-8243-4d53-aca5-75ad664f208f:string:Industrial Automation",
+            "grade": "c234ce0a-0537-422d-8c4a-368d662426f6:string:C+",
+            "credits": "14694661-3ccd-407d-b8b4-00cda7a367b6:number:4",
+            "gradingBasis": "f549e066-f10c-43a4-bc86-72d4f2e09b9e:string:GRD",
+            "includeInGPA": "6a03b2d5-ff8e-42bd-a520-2c1cb9405982:boolean:true"
+          }
+        ],
+        "summary": [
+          {
+            "programName": "103ebb97-83d2-4712-b356-c1d6ad92ba72:string:Bachelor of Engineering (Mechanical Engineering)",
+            "includeInGPA": "ee97065e-dd35-4ee9-bccc-f908ac2b7bd5:boolean:true",
+            "GPAName": "e98ae53f-9a79-40fc-94a7-70da8ff7c5bf:string:Cumulative Average Point",
+            "GPA": "f0350487-9218-4deb-a309-77f5ecb386eb:number:2.02"
+          }
+        ]
+      },
+      {
+        "name": "3b9a69c3-fb2a-4523-b4da-d3a89867eedc:string:1120",
+        "term": "38d5669a-8f78-480a-ab21-007c0e0b16ed:string:2011/2012 Semester 2",
+        "formOfStudy": "6a502a6f-df25-474c-9978-11acf0026a07:string:ENRL",
+        "fosPrintArea": "ac0c3f61-c687-41f1-99f2-a1a8a560382c:string:ND",
+        "modules": [
+          {
+            "moduleCode": "01f807e1-1417-40aa-a84b-c011135f61eb:string:EG2401",
+            "moduleName": "5b3217a0-e499-4293-98bb-df67a2088220:string:Engineering Professionalism",
+            "grade": "f77bcf4f-704d-46f6-bf6a-87847aa13891:string:C",
+            "credits": "c959f908-9019-49e4-85d6-5c1bc80af38f:number:3",
+            "gradingBasis": "92f8b27b-0074-4179-8d6b-ea6a2b965d7a:string:GRD",
+            "includeInGPA": "e7de5bf8-89a2-4a79-a7b5-8736b72905d3:boolean:true"
+          },
+          {
+            "moduleCode": "7bd8d303-8ecd-49e1-8f35-fda5a212fc9e:string:ME2135",
+            "moduleName": "50d79d6e-24d5-4805-81c4-a3021700db45:string:Fluid Mechanics II",
+            "grade": "6b2c195b-2fad-427b-891b-124c2c7f702b:string:F",
+            "credits": "70a95478-a234-43aa-8db7-f426c6c51750:number:4",
+            "gradingBasis": "70ec45fe-eaea-47fb-857f-2436b01dfa96:string:GRD",
+            "includeInGPA": "4d26f902-e9b1-4864-9f07-bd6a46fe45ca:boolean:true"
+          },
+          {
+            "moduleCode": "cee8d9d9-46cc-4f90-9324-e1e356f24620:string:ME3281",
+            "moduleName": "92a9007f-9e7c-426f-b983-378dfd521e05:string:Microsystems Design And Applications",
+            "grade": "e3d8f1fe-4309-46a5-ab85-5f108c184f3b:string:B",
+            "credits": "bb6c8dd6-ba2f-451e-9134-0276f77577b9:number:4",
+            "gradingBasis": "f8b1c5d0-d4d7-45c0-b5db-b766d41042db:string:GRD",
+            "includeInGPA": "e8d1f1fb-6734-4960-881c-38a73a739c1e:boolean:true"
+          },
+          {
+            "moduleCode": "d33c7d95-1454-4006-bc83-1a9055ba2911:string:ME4101A",
+            "moduleName": "00820bd4-e766-45cc-b53f-c15ee86e5d90:string:Bachelor Of Engineering Dissertation",
+            "grade": "65b0544c-6fcc-45bd-a787-de833bdeec51:string:IP",
+            "credits": "ecfee078-820f-4b89-a40c-11f9ecf17c11:number:8",
+            "gradingBasis": "df23f1dd-f027-492a-80f9-b343f3489529:string:GRD",
+            "includeInGPA": "dc5e032a-091d-4df8-83f3-06ec7ac62eb6:boolean:true"
+          },
+          {
+            "moduleCode": "9469b88e-4603-47cf-9d80-05c9af7c703a:string:ME4262",
+            "moduleName": "a6056842-607f-490e-b2a5-b4d05d41d24c:string:Automation In Manufacturing",
+            "grade": "583c8fa0-6918-4194-86d3-5cb932f41c72:string:F",
+            "credits": "6295e592-a131-4307-b4e7-2f48f442398a:number:4",
+            "gradingBasis": "531a2192-cdb3-4deb-8a07-6b4b64cfe205:string:GRD",
+            "includeInGPA": "3d311ea9-b314-4c80-af5e-7b54e4caed98:boolean:true"
+          },
+          {
+            "moduleCode": "1d171b9e-f2e9-48cd-a8e6-d03d6e3f02f0:string:ME4284",
+            "moduleName": "e57e328b-9a6d-4a17-965d-f54f80230274:string:Micro Sensors & Micro Actuators",
+            "grade": "f48231c5-a308-44c2-9a68-63c73316069e:string:B",
+            "credits": "b8cd8957-92a9-4001-8824-56caedc5d79c:number:4",
+            "gradingBasis": "6510335e-35b2-47aa-89ca-c50f1363081a:string:GRD",
+            "includeInGPA": "3786e468-3d79-4611-9e6e-df61eb08c740:boolean:true"
+          }
+        ],
+        "summary": [
+          {
+            "programName": "370a3fde-9930-44bd-8ea3-4e76484823c8:string:Bachelor of Engineering (Mechanical Engineering)",
+            "includeInGPA": "c3153172-df3d-4041-9ea7-2eaa9517e2ac:boolean:true",
+            "GPAName": "61aa3e07-774f-4e85-ae50-36ad3f026bc2:string:Cumulative Average Point",
+            "GPA": "23f75be4-a6ea-4b27-93d3-3c915287db3a:number:1.98"
+          }
+        ]
+      },
+      {
+        "name": "0400bda2-c82e-463b-96ad-46100dbac91a:string:1210",
+        "term": "38efb381-20c8-4f5c-9315-05d2b83738ef:string:2012/2013 Semester 1",
+        "formOfStudy": "dbeb9b73-a699-4546-bd99-e689b9097374:string:ENRL",
+        "fosPrintArea": "b73b2466-e8cf-419b-818e-a199ce054969:string:ND",
+        "modules": [
+          {
+            "moduleCode": "8fe648e4-9157-42b3-a645-bc688939bc2f:string:GEK1521",
+            "moduleName": "bec29072-5c91-4344-8e55-4f046b0982fd:string:Physics in the Life Sciences",
+            "grade": "702ba5bc-4a91-46f6-b030-46c129d56b8f:string:C",
+            "credits": "32e4dc6d-ae52-4d78-ae85-1a397e8cda50:number:4",
+            "gradingBasis": "1004bbf4-f97d-46b0-ab22-1ed74734bcdf:string:GRD",
+            "includeInGPA": "ca448e23-ab35-4b09-bc93-dbc0f46b9d50:boolean:true"
+          },
+          {
+            "moduleCode": "1611dd4d-0ded-4236-8b27-d725d462b374:string:ME3261",
+            "moduleName": "a35c04a2-67cb-4db4-b1f1-88aa1d8f55b8:string:Computer-Aided Design And Manufacturing",
+            "grade": "c85c4b0e-5fbc-4188-9e95-b351e4d5242b:string:D+",
+            "credits": "5116b659-2f81-4be0-be21-3cfbf2f70084:number:4",
+            "gradingBasis": "163c4343-0a75-4f73-8a98-23aa091d8546:string:GRD",
+            "includeInGPA": "746da7dc-3474-4dc9-a045-0e70307caff6:boolean:true"
+          },
+          {
+            "moduleCode": "9bc65a1f-0674-4db8-abe0-2be72219fb60:string:ME4101A",
+            "moduleName": "c0038554-fc68-4f9d-b938-e679fc281f1d:string:Bachelor Of Engineering Dissertation",
+            "grade": "428d139a-9dac-4c86-b9c3-93095e0019c4:string:B",
+            "credits": "2c7d4087-9d45-4287-af72-6a18a23076e5:number:8",
+            "gradingBasis": "366cd13d-9961-4674-a762-fe6acb48f4b6:string:GRD",
+            "includeInGPA": "582677c5-962c-4186-ab78-a42b54b8852a:boolean:true"
+          },
+          {
+            "moduleCode": "a5639841-02aa-4366-a501-59c074d03f69:string:SSA2204",
+            "moduleName": "68a1671e-7aad-442d-ae9d-12e14b94d83b:string:Nation-Building in Singapore",
+            "grade": "b6b9f55f-bbaa-406e-8bed-858d2a9ad463:string:C+",
+            "credits": "3cd0f010-bf16-4e7c-95d4-759af0eaa581:number:4",
+            "gradingBasis": "85b65b20-b1f5-4230-95db-43fb300040ee:string:GRD",
+            "includeInGPA": "1102f236-e59a-4cca-b7a3-897c8fb2ed96:boolean:true"
+          }
+        ],
+        "summary": [
+          {
+            "programName": "cc2eeec5-a2c5-444e-9e4d-3c798998b2ef:string:Bachelor of Engineering (Mechanical Engineering)",
+            "includeInGPA": "1a0d170b-3cc7-4933-8fc4-a22177b898fb:boolean:true",
+            "GPAName": "e5c2a6f3-5ec4-4801-b7da-3546ecb9bb8e:string:Cumulative Average Point",
+            "GPA": "486625c7-8592-44de-96a5-1011b0776625:number:2.07"
+          }
+        ]
+      },
+      {
+        "name": "66c0d032-daaa-4cab-a4df-fef71276065c:string:1220",
+        "term": "50f408ce-d13a-4f97-bef4-7b25b17a3df7:string:2012/2013 Semester 2",
+        "formOfStudy": "11d3ebf8-e428-4ed5-a3cc-540eb9cb45d6:string:ENRL",
+        "fosPrintArea": "4da9248a-863a-4764-b168-1de4606f0578:string:ND",
+        "modules": [
+          {
+            "moduleCode": "0c2dcdba-c753-4c78-b080-717521a6e501:string:LAK1201",
+            "moduleName": "1fa95b5f-eb3f-4435-ba06-a7afc89df832:string:Korean 1",
+            "grade": "7ecc3a37-5fc1-48a2-95c9-1f26a3d4b1a3:string:C",
+            "credits": "f035aff8-542a-4639-9e30-ff4ddee239b8:number:4",
+            "gradingBasis": "e9048e59-5532-4646-b531-f6e43cc8c937:string:GRD",
+            "includeInGPA": "3f15acba-7bdd-4eee-a5b5-02839a6545c3:boolean:true"
+          },
+          {
+            "moduleCode": "eae98ff0-c476-4161-ac41-c36f5b848bbe:string:ME2135",
+            "moduleName": "b1f0b1cf-e3c9-44dc-9d6d-2499d2ce3110:string:Fluid Mechanics II",
+            "grade": "7fa250fe-d4ce-4f81-9fd1-2c1174e79c2f:string:D",
+            "credits": "ca8006ea-fe08-4404-beeb-f1dd7d1c92bd:number:4",
+            "gradingBasis": "07b5b00c-6928-40dc-b913-4ff32312cd39:string:GRD",
+            "includeInGPA": "002ad0aa-5ab6-46c3-9efd-0136e9c58940:boolean:true"
+          },
+          {
+            "moduleCode": "a6482213-22bf-4e15-8cca-ed676b60e57b:string:ME4262",
+            "moduleName": "de6dc2ed-dd04-46be-a051-3dcab8a1d861:string:Automation In Manufacturing",
+            "grade": "b2961502-e062-4d1f-9c06-c866da471af4:string:D",
+            "credits": "9282cdb4-e6f0-41fd-b914-86d5b987a05a:number:4",
+            "gradingBasis": "428c7949-0d17-40eb-aad1-9bf03ee15a5f:string:GRD",
+            "includeInGPA": "b2a437b6-7f46-456f-b8aa-adffdbccf7b2:boolean:true"
+          }
+        ],
+        "summary": [
+          {
+            "programName": "cc9e3a5f-b6bd-487d-a058-b65f9517c9b4:string:Bachelor of Engineering (Mechanical Engineering)",
+            "includeInGPA": "acabcba9-3252-4991-949f-85006d5e41db:boolean:true",
+            "GPAName": "8dd4eb1a-667d-4bb0-af56-ba423b1ae69b:string:Cumulative Average Point",
+            "GPA": "df154c3b-d253-48f8-982a-eb4df44c36b2:number:2.01"
+          }
+        ]
+      }
+    ],
+    "additionalData": {
+      "degreeScroll": [
+        {
+          "degreeTitle": "15714537-378d-4abe-858f-e72e7ac977ef:string:Bachelor of Engineering (Mechanical Engineering)",
+          "dateConferred": "7ae60766-c863-48ca-a0e4-29c72f5fc5fb:string:2013-06-30",
+          "honours": "892ef11f-c65c-4452-a3b6-625e70bd6138:string:Pass",
+          "major": "b64270f5-d933-42a2-913d-30f557500bdb:string:MECHANICAL ENGINEERING (HONS)"
+        }
+      ],
+      "images": {
+        "PRESIDENT": {
+          "data": "1f377f95-69ee-4280-b1b0-b6750075bd73:string:data:image/png;base64,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",
+          "width": "3f3e53e0-a7c8-4fcf-8402-e42e64d2d2c9:number:2.5",
+          "height": "241d0c51-f72b-43b7-966a-10316bdb9dfb:number:1.48",
+          "unit": "2a7b20c9-b341-4686-a03f-c9acd22b001a:string:CM"
+        },
+        "TRUSTEES": {
+          "data": "46920b5e-2572-4c80-ab75-3c27b8336bf3:string:data:image/png;base64,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",
+          "width": "ef9aef0c-35a8-4f0f-b3cf-c457da55ca76:number:5.31",
+          "height": "3752136a-1a17-44da-b24e-0433e1c2c1ec:number:1.15",
+          "unit": "e483f1bf-796a-4274-b421-04d39e2b9b0c:string:CM"
+        }
+      },
+      "transcriptType": "de57a750-e623-486d-b47f-414785c7060c:string:UGOF",
+      "transcriptReq": "a5f16f3c-870b-4899-9e46-98f849b3fc84:string:001009275",
+      "programData": [
+        {
+          "programCode": "90278bc7-432b-45f7-a09e-08556d0e9e6f:string:B0610",
+          "programName": "e35c8898-241d-4df3-a8ae-9b261345f188:string:Bachelor of Engineering (Mechanical Engineering)",
+          "statusCode": "ec58e227-3956-450d-8cf1-ec83a332a9c7:string:CM",
+          "statusDescription": "01d8c087-cd34-4e0a-a880-409cb81e01ad:string:Completed Programme",
+          "effectiveDate": "84793106-066d-428b-8bbf-5a28f2ef0108:string:2013-06-25",
+          "admitTerm": "f129fd6f-68ab-4648-8a37-3aeed398d77e:string:0910"
+        }
+      ],
+      "degreeData": [
+        {
+          "degreeTitle": "02bfb0db-3bab-4e94-a76b-62ac621d822c:string:Bachelor of Engineering (Mechanical Engineering)",
+          "dateConferred": "3127c883-2326-4679-a510-734dcef62ae3:string:2013-06-30"
+        }
+      ]
+    }
+  },
+  "privacy": {},
+  "signature": {
+    "type": "SHA3MerkleProof",
+    "targetHash": "8c96dbf9f724c3dec534c4b907dc93ffd32478f020274631165f696a19a129ae",
+    "proof": [
+      "0fd4e8395457c42a6d328adddecddb7148db5353cb702940877a60358cf6141d",
+      "6481651306af831637bc7c0259c264fd14e825f485e3ddf7060515804c843756",
+      "e30cc628559de31c3085fbdd1b9e5ef9a4a43202e59e44c22b405a85e7629198",
+      "ded0489bf9a13e5a654225b10f74969bbcdd19222ff3889437151fe623019d52",
+      "3d3396ba7c49b5286144525d657d57aef380b640fd9b504ed1987391d4230867"
+    ],
+    "merkleRoot": "ab8f93c0b31fe10a9d34294ef246edc1886be02c746e801498ffc124db33eb23"
+  }
+}

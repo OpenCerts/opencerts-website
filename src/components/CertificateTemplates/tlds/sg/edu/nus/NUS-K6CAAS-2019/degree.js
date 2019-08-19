@@ -6,25 +6,31 @@ import {
   Degree,
   renderSmallNUSLogo
 } from "../common/degreeScrollFramework";
-import { renderNUSSeal, renderImage, renderVoid, JHU_LOGO } from "../common";
+import { renderNUSSeal, renderImage, renderVoid, CAAS_LOGO } from "../common";
 
 // custom logos
 const renderLogos = () => {
   const styleLogo = {
-    display: "float",
-    width: "3.2cm"
+    display: "block",
+    width: "8cm",
+    marginLeft: "auto",
+    marginRight: "auto",
+    textAlign: "center"
   };
   return (
     <table width="100%">
       <tbody>
         <tr>
-          <td>{renderVoid("1.2cm")}</td>
+          <td>{renderVoid("1.27cm")}</td>
         </tr>
         <tr>
-          <td width="50%">{renderSmallNUSLogo()}</td>
-          <td width="50%" align="center">
-            <img src={JHU_LOGO} style={styleLogo} />
+          <td width="45%">{renderSmallNUSLogo(1)}</td>
+          <td width="55%">
+            <img src={CAAS_LOGO} style={styleLogo} />
           </td>
+        </tr>
+        <tr>
+          <td>{renderVoid("1.27cm")}</td>
         </tr>
       </tbody>
     </table>
@@ -34,74 +40,81 @@ const renderLogos = () => {
 // custom signatures and seals
 const renderSigs = dataSource => {
   const styleSig = {
-    display: "float",
+    display: "block",
+    width: "100%"
+  };
+  const styleTitle = {
+    display: "block",
     width: "100%",
     fontSize: "12pt",
-    fontFamily: "'Century Schoolbook', Georgia, serif",
+    fontFamily: "'Times New Roman', Serif",
     fontStyle: "italic",
     textAlign: "left"
+  };
+  const styleSeal = {
+    display: "float",
+    width: "4.95cm",
+    marginLeft: "40px"
   };
   let sig1;
   let sig2;
   let sig3;
-  let sig4;
   if (dataSource.additionalData.images) {
     sig1 = renderImage(dataSource.additionalData.images.TRUSTEES);
     sig2 = renderImage(dataSource.additionalData.images.PRESIDENT);
-    sig3 = renderImage(dataSource.additionalData.images.JHU_TRUSTEES);
-    sig4 = renderImage(dataSource.additionalData.images.JHU_PRESIDENT);
+    sig3 = renderImage(dataSource.additionalData.images.CAAS_DIRECTOR);
   }
   const html = (
-    <table style={styleSig}>
+    <table width="100%">
       <tbody>
         <tr>
-          <td width="3%" />
-          <td width="60%">{sig1}</td>
-          <td>{sig3}</td>
+          <td align="center" width="33%">
+            {/* signature 1 - image */}
+            <div style={styleSig}>{sig1}</div>
+          </td>
+          <td align="center" width="33%">
+            {/* signature 2 - image */}
+            <div style={styleSig}>{sig2}</div>
+          </td>
+          <td align="center" width="34%">
+            {/* signature 3 - image */}
+            <div style={styleSig}>{sig3}</div>
+          </td>
         </tr>
         <tr>
+          <td align="center">
+            {/* signature 1 - text */}
+            <div style={styleTitle}>
+              Chair, Board of Trustees
+              <br />
+              National University of Singapore
+            </div>
+          </td>
+          <td align="center">
+            {/* signature 2 - text */}
+            <div style={styleTitle}>
+              President
+              <br />
+              National University of Singapore
+            </div>
+          </td>
+          <td align="center">
+            {/* signature 3 - text */}
+            <div style={styleTitle}>
+              Director General
+              <br />
+              Civil Aviation Authority of Singapore
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>{renderNUSSeal(null, styleSeal)}</td>
           <td />
-          <td>
-            Chair, Board of Trustees
-            <br />
-            National University of Singapore
-          </td>
-          <td>
-            Chair of the Board of Trustees
-            <br />
-            Johns Hopkins University
-          </td>
-        </tr>
-        <tr>
-          <td />
-          <td>{sig2}</td>
-          <td>{sig4}</td>
-        </tr>
-        <tr>
-          <td />
-          <td>
-            President
-            <br />
-            National University of Singapore
-          </td>
-          <td>
-            President
-            <br />
-            Johns Hopkins University
-          </td>
-        </tr>
-        <tr>
-          <td>{renderVoid("0.3cm")}</td>
-        </tr>
-        <tr>
-          <td colSpan="3" style={{ textAlign: "center" }}>
-            {renderNUSSeal()}
-          </td>
+          <td>{/* CAAS_SEAL here (if any) */}</td>
         </tr>
       </tbody>
     </table>
   );
-
   return html;
 };
 
@@ -111,19 +124,18 @@ const getDataFeeder = dataSource => {
   const dataFeeder = new DegreeScrollDataFeeder();
   dataFeeder.logo = renderLogos();
   dataFeeder.studentName = dataSource.recipient.name.toUpperCase();
-  dataFeeder.namePadding = "10px 0";
+  dataFeeder.namePadding = "20px 0";
   dataFeeder.postNameText =
-    "having fulfilled the requirements for\nthe Joint Degree Programme prescribed by\nthe Yong Siew Toh Conservatory of Music,\nNational University of Singapore, and\nThe Peabody Conservatory of Music of\nThe Johns Hopkins University,\nwas conferred the degree of";
+    "having completed the requirements prescribed\nfor the Joint Programme of the National\nUniversity of Singapore and the Civil Aviation\nAuthority of Singapore was awarded the";
   dataFeeder.degreeCode = dataSource.additionalData.degreeScroll[0].degreeCode;
   dataFeeder.degreeTitle =
     dataSource.additionalData.degreeScroll[0].degreeTitle;
   dataFeeder.honours = dataSource.additionalData.degreeScroll[0].honours;
   dataFeeder.major = dataSource.additionalData.degreeScroll[0].major;
-  dataFeeder.breakBeforeMajor = false;
   dataFeeder.heightTitleDisplay = "2cm";
   dataFeeder.conferDate =
     dataSource.additionalData.degreeScroll[0].dateConferred;
-  dataFeeder.spaceBeforeSig = ".5cm";
+  dataFeeder.spaceBeforeSig = "2cm";
   dataFeeder.sig = renderSigs(dataSource);
   return dataFeeder;
 };

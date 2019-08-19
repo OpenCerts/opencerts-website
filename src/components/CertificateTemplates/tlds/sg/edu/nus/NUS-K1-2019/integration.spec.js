@@ -24,9 +24,8 @@ test("NUS-K1-2019 degree scroll is rendered correctly", async t => {
   await validateTextContent(t, RenderedCertificate, [
     "NATIONAL UNIVERSITY",
     "OF SINGAPORE",
-    "BACHELOR OF ENGINEERING",
-    "PASS",
-    "MECHANICAL ENGINEERING (HONS)",
+    "Bachelor of Engineering",
+    "Mechanical Engineering",
     "30 June 2013",
     "Chair, Board of Trustees",
     "President"

@@ -6,20 +6,23 @@ import {
   Degree,
   renderSmallNUSLogo
 } from "../common/degreeScrollFramework";
-import {
-  renderNUSSeal,
-  renderImage,
-  renderVoid,
-  ICL_LOGO,
-  ICL_SEAL
-} from "../common";
+import { renderNUSSeal, renderImage, renderVoid, UM_LOGO } from "../common";
 
 // custom logos
 const renderLogos = () => {
+  const styleHeader = {
+    display: "block",
+    fontSize: "10pt",
+    textAlign: "center",
+    fontFamily: "'Times New Roman', Serif",
+    fontWeight: "bold"
+  };
   const styleLogo = {
     display: "block",
+    width: "4.2cm",
     marginLeft: "auto",
-    width: "10.5cm"
+    marginRight: "auto",
+    textAlign: "center"
   };
   return (
     <table width="100%">
@@ -28,63 +31,14 @@ const renderLogos = () => {
           <td>{renderVoid("1.27cm")}</td>
         </tr>
         <tr>
-          <td width="25%">{renderSmallNUSLogo()}</td>
-          <td>
-            <img src={ICL_LOGO} style={styleLogo} />
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  );
-};
-
-// custom name and text
-const renderNameAndText = name => {
-  const style1 = {
-    display: "block",
-    fontSize: "16pt",
-    lineHeight: "24pt",
-    fontFamily: "'Times New Roman', Serif",
-    fontWeight: "bold",
-    textAlign: "center"
-  };
-  const style2 = {
-    display: "block",
-    fontSize: "23pt",
-    fontFamily: "'Times New Roman', Serif",
-    fontStyle: "italic",
-    fontWeight: "bold",
-    textAlign: "center",
-    padding: "10px 0"
-  };
-  return (
-    <table width="100%">
-      <tbody>
-        <tr>
-          <td>
-            <div style={style1}>
-              National University of Singapore
+          <td width="50%">{renderSmallNUSLogo()}</td>
+          <td width="50%">
+            <div style={styleHeader}>
+              THE UNVERSITY
               <br />
-              And
-              <br />
-              Imperial College London
+              OF MELBOURNE
             </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            {renderVoid("0.2cm")}
-            <div style={style1}>have conferred on</div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div style={style2}>{name}</div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div style={style1}>the degree of</div>
+            <img src={UM_LOGO} style={styleLogo} />
           </td>
         </tr>
       </tbody>
@@ -113,9 +67,9 @@ const renderSigs = dataSource => {
   let sig4;
   if (dataSource.additionalData.images) {
     sig1 = renderImage(dataSource.additionalData.images.TRUSTEES);
-    sig2 = renderImage(dataSource.additionalData.images.ICL_PRESIDENT);
+    sig2 = renderImage(dataSource.additionalData.images.UM_VICE_CHANCELLOR);
     sig3 = renderImage(dataSource.additionalData.images.PRESIDENT);
-    sig4 = renderImage(dataSource.additionalData.images.ICL_REGISTRAR);
+    sig4 = renderImage(dataSource.additionalData.images.UM_SECRETARY);
   }
   const html = (
     <table width="100%">
@@ -142,9 +96,9 @@ const renderSigs = dataSource => {
           <td align="center">
             {/* signature 2 - text */}
             <div style={styleSig}>
-              &nbsp;&nbsp; President & Rector
+              &nbsp;&nbsp; Vice-Chancellor
               <br />
-              &nbsp;&nbsp; Imperial College London
+              &nbsp;&nbsp; The University of Melbourne
             </div>
           </td>
         </tr>
@@ -175,17 +129,15 @@ const renderSigs = dataSource => {
         <td align="center">
           {/* signature 4 - text */}
           <div style={styleSig}>
-            &nbsp;&nbsp; Academic Registrar
+            &nbsp;&nbsp; University Secretary
             <br />
-            &nbsp;&nbsp; Imperial College London
+            &nbsp;&nbsp; The University of Melbourne
           </div>
         </td>
         <tr />
         <tr>
           <td>{renderNUSSeal(null, styleSeal)}</td>
-          <td>
-            <img src={ICL_SEAL} style={styleSeal} />
-          </td>
+          <td>{/* UM_SEAL here (if any) */}</td>
         </tr>
       </tbody>
     </table>
@@ -198,9 +150,10 @@ const getDataFeeder = dataSource => {
   // data feeder
   const dataFeeder = new DegreeScrollDataFeeder();
   dataFeeder.logo = renderLogos();
-  dataFeeder.nameAndText = renderNameAndText(
-    dataSource.recipient.name.toUpperCase()
-  );
+  dataFeeder.studentName = dataSource.recipient.name.toUpperCase();
+  dataFeeder.namePadding = "20px 0";
+  dataFeeder.postNameText =
+    "having completed the requirements for\nthe Joint Degree Programme of the National\nUniversity of Singapore and The University\nof Melbourne was conferred the degree of";
   dataFeeder.degreeCode = dataSource.additionalData.degreeScroll[0].degreeCode;
   dataFeeder.degreeTitle =
     dataSource.additionalData.degreeScroll[0].degreeTitle;
@@ -209,7 +162,7 @@ const getDataFeeder = dataSource => {
   dataFeeder.heightTitleDisplay = "2cm";
   dataFeeder.conferDate =
     dataSource.additionalData.degreeScroll[0].dateConferred;
-  dataFeeder.spaceBeforeSig = ".5cm";
+  dataFeeder.spaceBeforeSig = ".2cm";
   dataFeeder.sig = renderSigs(dataSource);
   return dataFeeder;
 };

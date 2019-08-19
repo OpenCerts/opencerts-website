@@ -13,7 +13,7 @@ const getDataFeeder = dataSource => {
   // logo is default
   dataFeeder.studentName = dataSource.recipient.name.toUpperCase();
   dataFeeder.postNameText =
-    "having fulfilled the requirements prescribed\nby the University and the Duke-NUS Medical\nSchool Singapore, conferred the degree of";
+    "having completed the requirements\nfor the Joint Programme of the National\nUniversity of Singapore and the University\nof Basel was conferred the degree of";
   dataFeeder.degreeCode = dataSource.additionalData.degreeScroll[0].degreeCode;
   dataFeeder.degreeTitle =
     dataSource.additionalData.degreeScroll[0].degreeTitle;
@@ -26,6 +26,7 @@ const getDataFeeder = dataSource => {
       dataSource.additionalData.images.TRUSTEES,
       dataSource.additionalData.images.PRESIDENT
     );
+    dataFeeder.spaceBeforeSig = "2.5cm";
   }
   return dataFeeder;
 };

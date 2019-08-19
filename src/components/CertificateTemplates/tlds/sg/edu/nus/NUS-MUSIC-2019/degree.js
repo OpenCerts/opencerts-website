@@ -1,231 +1,43 @@
-import React, { Component, Fragment } from "react";
+/* eslint-disable class-methods-use-this */
+import React from "react";
 import PropTypes from "prop-types";
 import {
-  isoDateToLocalLong,
-  capitalizedText,
-  sassClassNames,
-  renderImage,
-  renderVoid,
-  renderNUSTitle,
-  renderNUSLogo,
-  renderNUSSeal
-} from "../common";
-import scss from "./degree.scss";
+  DegreeScrollDataFeeder,
+  Degree
+} from "../common/degreeScrollFramework";
 
-// construct class names
-const cls = names => sassClassNames(names, scss);
-
-class Degree extends Component {
-  constructor(props) {
-    super(props);
-    this.dataSource = this.props.dataSource;
+// data feeder
+const getDataFeeder = dataSource => {
+  // data feeder
+  const dataFeeder = new DegreeScrollDataFeeder();
+  // logo is default
+  dataFeeder.studentName = dataSource.recipient.name.toUpperCase();
+  dataFeeder.postNameText =
+    "having fulfilled the requirements prescribed\nby the Yong Siew Toh Conservatory of Music, National\nUniversity of Singapore, in collaboration with the\nPeabody Conservatory of Music of The Johns\nHopkins University, was conferred the degree of";
+  dataFeeder.degreeCode = dataSource.additionalData.degreeScroll[0].degreeCode;
+  dataFeeder.degreeTitle =
+    dataSource.additionalData.degreeScroll[0].degreeTitle;
+  dataFeeder.honours = dataSource.additionalData.degreeScroll[0].honours;
+  dataFeeder.major = dataSource.additionalData.degreeScroll[0].major;
+  dataFeeder.conferDate =
+    dataSource.additionalData.degreeScroll[0].dateConferred;
+  dataFeeder.spaceBeforeSig = "2.5cm";
+  if (dataSource.additionalData.images) {
+    dataFeeder.useDefaultSignature(
+      dataSource.additionalData.images.TRUSTEES,
+      dataSource.additionalData.images.PRESIDENT
+    );
   }
-
-  // render degree title
-  renderDegreeTitle = degreeData => {
-    const degreeTitleCase = capitalizedText(
-      degreeData.degreeTitle.toLowerCase()
-    );
-    const degreeMajor = capitalizedText(
-      degreeData.major ? degreeData.major.toLowerCase() : ""
-    );
-    const honorsTitle = capitalizedText(
-      degreeData.honours ? degreeData.honours : ""
-    );
-
-    const html = (
-      <div className={cls("cert-degree-title")}>
-        {degreeTitleCase}
-        {honorsTitle ? (
-          <Fragment>
-            <br />
-            <span>with Honours</span>
-          </Fragment>
-        ) : (
-          ""
-        )}
-        {degreeMajor ? (
-          <Fragment>
-            <br />
-            <span>in {degreeMajor}</span>
-          </Fragment>
-        ) : (
-          ""
-        )}
-      </div>
-    );
-    return html;
-  };
-
-  // render starting phrase before name
-  renderContent() {
-    const html = [];
-    const degreeData = this.dataSource.additionalData.degreeScroll[0];
-    const dateConferred = isoDateToLocalLong(degreeData.dateConferred);
-    const style1 = { lineHeight: "14pt" };
-
-    html.push(
-      <table className={cls("cert-content-table")}>
-        <tbody>
-          <tr>
-            <td width="12%" />
-            <td width="76%" className={cls("cert-content-beforename")}>
-              This is to certify that
-            </td>
-            <td width="12%" />
-          </tr>
-          <tr>
-            <td colSpan="3">{renderVoid("0.5cm")}</td>
-          </tr>
-          <tr>
-            <td />
-            <td className={cls("cert-content-name")}>
-              {this.dataSource.recipient.name.toLowerCase()}
-            </td>
-            <td />
-          </tr>
-          <tr>
-            <td colSpan="3">{renderVoid("0.5cm")}</td>
-          </tr>
-          <tr>
-            <td />
-            <td style={style1}>having fulfilled the requirements prescribed</td>
-            <td />
-          </tr>
-          <tr>
-            <td />
-            <td style={style1}>
-              by the Yong Siew Toh Conservatory of Music, National
-            </td>
-            <td />
-          </tr>
-          <tr>
-            <td />
-            <td style={style1}>
-              University of Singapore, in collaboration with the
-            </td>
-            <td />
-          </tr>
-          <tr>
-            <td />
-            <td style={style1}>Peabody Conservatory of Music of The Johns</td>
-            <td />
-          </tr>
-          <tr>
-            <td />
-            <td style={style1}>
-              Hopkins University, was conferred the degree of
-            </td>
-            <td />
-          </tr>
-          <tr>
-            <td colSpan="3">{renderVoid("0.4cm")}</td>
-          </tr>
-          <tr>
-            <td colSpan="3">{this.renderDegreeTitle(degreeData)}</td>
-          </tr>
-          <tr>
-            <td colSpan="3">{renderVoid("0.4cm")}</td>
-          </tr>
-          <tr>
-            <td colSpan="3" className={cls("cert-content-unjustified")}>
-              on
-            </td>
-          </tr>
-          <tr>
-            <td colSpan="3">{renderVoid("0.6cm")}</td>
-          </tr>
-          <tr>
-            <td colSpan="3" className={cls("cert-content-date")}>
-              {dateConferred}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    );
-
-    return html;
-  }
-
-  renderSigns = () => {
-    let sig1;
-    let sig2;
-    if (this.dataSource.additionalData.images) {
-      sig1 = renderImage(this.dataSource.additionalData.images.TRUSTEES);
-      sig2 = renderImage(this.dataSource.additionalData.images.PRESIDENT);
-    }
-
-    const html = [];
-    html.push(
-      <table className={cls("cert-sig")}>
-        <tbody>
-          <tr>
-            <td width="60%" rowSpan="4" style={{ textAlign: "center" }}>
-              {renderNUSSeal()}
-            </td>
-            <td>{sig1}</td>
-            <td width="12%" />
-          </tr>
-          <tr>
-            <td>Chair, Board of Trustees</td>
-          </tr>
-          <tr>
-            <td>{sig2}</td>
-          </tr>
-          <tr>
-            <td>President</td>
-          </tr>
-        </tbody>
-      </table>
-    );
-
-    return html;
-  };
-
-  // main render
-  render() {
-    const html = [];
-    html.push(
-      <div className={cls("nus-degree")}>
-        <div className={cls("a4-portrait")}>
-          <article>
-            <div style={{ border: "0px solid" }}>
-              {renderVoid("1.6cm")}
-              <table className={cls("cert-header-table")}>
-                <tbody>
-                  <tr>
-                    <td width="10%" />
-                    <td width="80%">{renderNUSTitle()}</td>
-                    <td width="10%" />
-                  </tr>
-                  <tr>
-                    <td>{renderVoid("0.6cm")}</td>
-                  </tr>
-                  <tr>
-                    <td />
-                    <td>{renderNUSLogo()}</td>
-                    <td />
-                  </tr>
-                </tbody>
-              </table>
-              {renderVoid("0.6cm")}
-              <div style={{ textAlign: "center" }}>{this.renderContent()}</div>
-              {renderVoid("1cm")}
-            </div>
-            <div style={{ border: "0px solid" }}>{this.renderSigns()}</div>
-          </article>
-        </div>
-      </div>
-    );
-    return html;
-  }
-}
-
-Degree.propTypes = {
-  dataSource: PropTypes.object.isRequired
+  return dataFeeder;
 };
 
 const Template = ({ certificate }) => {
+  // JSON data source
+  const jsonData = certificate;
+
+  // data feeder
+  const dataFeeder = getDataFeeder(jsonData);
+
   // 794px is width of A4 portrait (21cm)
   const ratio = (window.innerWidth - 30) / 794;
   const scale =
@@ -237,7 +49,7 @@ const Template = ({ certificate }) => {
       : null;
   const html = (
     <div style={scale}>
-      <Degree dataSource={certificate} />
+      <Degree dataFeeder={dataFeeder} />
     </div>
   );
   return html;

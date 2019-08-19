@@ -37,9 +37,10 @@ class Degree extends Component {
 
   // render degree title
   renderDegreeTitle = degreeData => {
-    const DegreeTitleCase = capitalizedText(
+    const degreeTitleCase = capitalizedText(
       degreeData.degreeTitle.toLowerCase()
     );
+    /* do not display hnours for Yale NUS
     let honorsTitle = degreeData.honours ? degreeData.honours : "";
 
     let html;
@@ -47,16 +48,19 @@ class Degree extends Component {
     if (honorsTitle) {
       honorsTitle = honorsTitle.replace(/1st/gi, "FIRST");
       honorsTitle = honorsTitle.replace(/2nd/gi, "SECOND");
-      const DegreeHonTitleCase = capitalizedText(honorsTitle.toLowerCase());
+      const degreeHonTitleCase = capitalizedText(honorsTitle.toLowerCase());
       html = (
         <div className={cls("cert-degree-title")}>
-          {DegreeTitleCase} with {DegreeHonTitleCase}
+          {degreeTitleCase} with {degreeHonTitleCase}
         </div>
       );
     } else {
-      html = <div className={cls("cert-degree-title")}>{DegreeTitleCase}</div>;
+      html = <div className={cls("cert-degree-title")}>{degreeTitleCase}</div>;
     }
-
+    */
+    const html = (
+      <div className={cls("cert-degree-title")}>{degreeTitleCase}</div>
+    );
     return html;
   };
 
@@ -115,19 +119,27 @@ class Degree extends Component {
     let sig1;
     let sig2;
     let sig3;
+    let sig4;
     if (this.dataSource.additionalData.images) {
       sig1 = renderImage(this.dataSource.additionalData.images.TRUSTEES);
-      sig2 = renderImage(this.dataSource.additionalData.images.YNC_GOVERNING);
-      sig3 = renderImage(this.dataSource.additionalData.images.YNC_PRESIDENT);
+      sig2 = renderImage(this.dataSource.additionalData.images.PRESIDENT);
+      sig3 = renderImage(this.dataSource.additionalData.images.YNC_GOVERNING);
+      sig4 = renderImage(this.dataSource.additionalData.images.YNC_PRESIDENT);
     }
 
     const html = (
       <table className={cls("cert-sig")}>
         <tbody>
           <tr>
-            <td width="33%">{sig1}</td>
+            <td width="33%">
+              {sig1}
+              {/* NUS trustees */}
+            </td>
             <td rowSpan="5">{renderNUSSeal()}</td>
-            <td>{sig2}</td>
+            <td>
+              {sig3}
+              {/* YNC gov board */}
+            </td>
           </tr>
           <tr>
             <td>
@@ -143,14 +155,22 @@ class Degree extends Component {
           </tr>
           <tr>
             <td>{renderVoid("0.3cm")}</td>
-            <td />
+            <td>
+              {sig2} {/* NUS president */}{" "}
+            </td>
           </tr>
           <tr>
             <td />
-            <td>{sig3}</td>
+            <td>
+              {sig4} {/* YNC president */}
+            </td>
           </tr>
           <tr>
-            <td />
+            <td>
+              President
+              <br />
+              National University Of Singapore
+            </td>
             <td>
               President
               <br />

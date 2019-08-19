@@ -36,7 +36,7 @@ $debug: false;
         text-align: center; 
         font-family: "Times New Roman", Serif; 
         font-weight: bold;
-        color: rgb(83, 86, 90);
+        /* color: rgb(83, 86, 90); */
         margin-left: auto;
         margin-right: auto;
     }
@@ -46,7 +46,7 @@ $debug: false;
         font-size: 16pt; 
         font-family: "Times New Roman", Serif; 
         font-weight: bold;
-        color: rgb(83, 86, 90);
+        /* color: rgb(83, 86, 90); */
         margin-left: auto;
         margin-right: auto;
     }
@@ -59,8 +59,8 @@ $debug: false;
         font-family: "Times New Roman", Serif; 
         font-style: italic;
         text-align: center;
-        color: rgb(83, 86, 90);
-        padding: 37px 0;
+        /* color: rgb(83, 86, 90); */
+        /* padding: 37px 0; */
         border: 0px solid;
     }
     
@@ -72,6 +72,7 @@ $debug: false;
         text-align: center;
         color: rgb(203, 92, 82);
         border: 0px solid;
+        font-variant: small-caps;
     }
     
     .cert-date {
@@ -80,7 +81,7 @@ $debug: false;
         font-family: "Time New Roman", Serif; 
         font-style: normal;
         text-align: center;
-        color: rgb(83, 86, 90);
+        /* color: rgb(83, 86, 90); */
         border: 0px solid;
     }
     
@@ -90,7 +91,7 @@ $debug: false;
         font-size: 12pt; 
         font-family: "Times New Roman", Serif; 
         font-style: italic;
-        color: rgb(83, 86, 90);
+        /* color: rgb(83, 86, 90); */
         text-align: right;
         border: 0px solid;
     }

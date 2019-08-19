@@ -1,306 +1,190 @@
-import React, { Component } from "react";
+/* eslint-disable class-methods-use-this */
+import React from "react";
 import PropTypes from "prop-types";
 import {
-  isoDateToLocalLong,
-  capitalizedText,
-  sassClassNames,
+  DegreeScrollDataFeeder,
+  Degree,
+  renderSmallNUSLogo
+} from "../common/degreeScrollFramework";
+import {
+  renderNUSSeal,
   renderImage,
   renderVoid,
-  renderNUSTitle,
-  renderNUSLogo,
-  renderNUSSeal,
   ANU_LOGO,
   ANU_SEAL
 } from "../common";
-import scss from "./degree.scss";
 
-// construct class names
-const cls = names => sassClassNames(names, scss);
+// custom logos
+const renderLogos = () => {
+  const styleHeader = {
+    display: "block",
+    fontSize: "10pt",
+    textAlign: "center",
+    fontFamily: "'Times New Roman', Serif",
+    fontWeight: "bold"
+  };
+  const styleLogo = {
+    display: "float",
+    width: "4.5cm"
+  };
+  return (
+    <table width="100%">
+      <tbody>
+        <tr>
+          <td>{renderVoid("1.2cm")}</td>
+        </tr>
+        <tr>
+          <td width="50%">{renderSmallNUSLogo()}</td>
+          <td width="50%" align="center">
+            <div style={styleHeader}>
+              THE AUSTRALIAN NATIONAL
+              <br />
+              UNIVERSITY
+            </div>
+            <img src={ANU_LOGO} style={styleLogo} />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  );
+};
 
-class Degree extends Component {
-  constructor(props) {
-    super(props);
-    this.dataSource = this.props.dataSource;
+// custom pre-name text
+const constructPreNameText = degreeTitle => {
+  if (degreeTitle.toUpperCase() === "Bachelor of Arts".toUpperCase())
+    return "This is to certify that following the completion of\nthe Bachelor of Philosophy (Honours) / Bachelor \nof Arts (Honours) Joint Degree Programme\nof The Australian National University \nand The National University of Singapore";
+  if (degreeTitle.toUpperCase() === "Bachelor of Science".toUpperCase())
+    return "This is to certify that following completion of\nthe Bachelor of Science (Honours) / Bachelor of\nPhilosophy (Honours) Joint Degree Programme\nof the National University of Singapore\nand The Australian National University";
+  return "This is to certify that";
+};
+
+// custom post-name text
+const constructPostNameText = degreeTitle => {
+  if (
+    degreeTitle.toUpperCase() === "Bachelor of Arts".toUpperCase() ||
+    degreeTitle.toUpperCase() === "Bachelor of Science".toUpperCase()
+  )
+    return "was conferred the degree of";
+  return "having completed the requirements for the\nJoint Degree Programme of the National\nUniversity of Singapore and The Australian\nNational University was conferred the degree of";
+};
+
+// custom signatures and seals
+const renderSigs = dataSource => {
+  const styleSig = {
+    display: "float",
+    width: "100%",
+    fontSize: "12pt",
+    fontFamily: "'Century Schoolbook', Georgia, serif",
+    fontStyle: "italic",
+    textAlign: "left"
+  };
+  const styleSeal = {
+    display: "float",
+    width: "4.95cm"
+  };
+  let sig1;
+  let sig2;
+  let sig3;
+  let sig4;
+  if (dataSource.additionalData.images) {
+    sig1 = renderImage(dataSource.additionalData.images.TRUSTEES);
+    sig2 = renderImage(dataSource.additionalData.images.PRESIDENT);
+    sig3 = renderImage(dataSource.additionalData.images.ANU_CHANCELLOR);
+    sig4 = renderImage(dataSource.additionalData.images.ANU_VICE_CHANCELLOR);
   }
-
-  // render cert title
-  renderANUTitle = () => (
-    <div className={cls("cert-header")}>
-      THE AUSTRALIAN NATIONAL
-      <br />
-      UNIVERSITY
-    </div>
+  const html = (
+    <table style={styleSig}>
+      <tbody>
+        <tr>
+          <td width="5%" />
+          <td width="55%">{sig1}</td>
+          <td>{sig3}</td>
+        </tr>
+        <tr>
+          <td />
+          <td>
+            Chair, Board of Trustees
+            <br />
+            National University of Singapore
+          </td>
+          <td>
+            Chancellor
+            <br />
+            The Australian National University
+          </td>
+        </tr>
+        <tr>
+          <td />
+          <td>{sig2}</td>
+          <td>{sig4}</td>
+        </tr>
+        <tr>
+          <td />
+          <td>
+            President
+            <br />
+            National University of Singapore
+          </td>
+          <td>
+            Vice-Chancellor
+            <br />
+            The Australian National University
+          </td>
+        </tr>
+        <tr>
+          <td>{renderVoid("0.3cm")}</td>
+        </tr>
+        <tr>
+          <td />
+          <td>{renderNUSSeal()}</td>
+          <td>
+            <img src={ANU_SEAL} style={styleSeal} />;
+          </td>
+        </tr>
+      </tbody>
+    </table>
   );
 
-  // render ANU logo
-  renderANULogo = () => <img src={ANU_LOGO} className={cls("cert-logo1")} />;
+  return html;
+};
 
-  // render degree and honours
-  renderDegree = degreeData => {
-    const DegreeTitleCase = capitalizedText(
-      degreeData.degreeTitle.toLowerCase()
+// data feeder
+const getDataFeeder = dataSource => {
+  // data feeder
+  const dataFeeder = new DegreeScrollDataFeeder();
+  dataFeeder.logo = renderLogos();
+  dataFeeder.studentName = dataSource.recipient.name.toUpperCase();
+  dataFeeder.namePadding = "10px 0";
+  dataFeeder.preNameText = constructPreNameText(
+    dataSource.additionalData.degreeScroll[0].degreeTitle
+  );
+  dataFeeder.postNameText = constructPostNameText(
+    dataSource.additionalData.degreeScroll[0].degreeTitle
+  );
+  dataFeeder.degreeCode = dataSource.additionalData.degreeScroll[0].degreeCode;
+  dataFeeder.degreeTitle =
+    dataSource.additionalData.degreeScroll[0].degreeTitle;
+  dataFeeder.honours = dataSource.additionalData.degreeScroll[0].honours;
+  if (dataSource.additionalData.degreeScroll[0].major)
+    dataFeeder.major = dataSource.additionalData.degreeScroll[0].major.replace(
+      /English Lit /gi,
+      "English Literature "
     );
-
-    const html = [];
-    html.push(<div className={cls("cert-degree")}>{DegreeTitleCase}</div>);
-    let honorsTitle = degreeData.honours ? degreeData.honours : "";
-    if (honorsTitle) {
-      honorsTitle = honorsTitle.replace(/1st/gi, "FIRST");
-      honorsTitle = honorsTitle.replace(/2nd/gi, "SECOND");
-      const DegreeHonTitleCase = capitalizedText(honorsTitle.toLowerCase());
-      html.push(
-        <div className={cls("cert-degree")}>
-          with&nbsp;
-          {DegreeHonTitleCase}
-        </div>
-      );
-    }
-    return html;
-  };
-
-  // render additional content
-  renderContAdd = degreeData => {
-    const style = {
-      width: "15.4cm",
-      height: ".5cm",
-      textAlign: "center",
-      border: "0px solid"
-    };
-    let html;
-    if (degreeData.degreeTitle.indexOf("ART") >= 0)
-      html = (
-        <div className={cls("cert-content cert-justify")} style={style}>
-          of Arts (Honours) Joint Degree Programme
-        </div>
-      );
-    else
-      html = (
-        <div className={cls("cert-content cert-justify")} style={style}>
-          of Science (Honours) Joint Degree Programme
-        </div>
-      );
-    return html;
-  };
-
-  // render content
-  renderContent() {
-    const style1 = {
-      width: "15.4cm",
-      height: ".5cm",
-      textAlign: "center",
-      border: "0px solid"
-    };
-    const degreeData = this.dataSource.additionalData.degreeScroll[0];
-    const dateConferred = isoDateToLocalLong(degreeData.dateConferred);
-    // let honorsTitle = "";
-    // if(degreeData.degreeTitle.indexOf("ART") !== -1)
-    //		honorsTitle = "Arts";
-    // else
-    //		honorsTitle = "Science";
-    const html = (
-      <table width="100%">
-        <tbody>
-          <tr>
-            <td>
-              {/* This is to certify that following the completion of */}
-              <div className={cls("cert-content cert-justify")} style={style1}>
-                This is to certify that following the completion of
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              {/* the Bachelor of Philosophy (Honours) / Bachelor  */}
-              <div className={cls("cert-content cert-justify")} style={style1}>
-                the Bachelor of Philosophy (Honours) / Bachelor
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              {/* of Arts (Honours) Joint Degree Programme */}
-              {this.renderContAdd(degreeData)}
-            </td>
-          </tr>
-          <tr>
-            <td>
-              {/* of The Australian Nat ional University */}
-              <div className={cls("cert-content1 cert-justify")} style={style1}>
-                of The Australian National University
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              {/* and The National University of Singapore */}
-              <div className={cls("cert-content1 cert-justify")} style={style1}>
-                and The National University of Singapore
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              {/* student name */}
-              <div className={cls("cert-name")}>
-                {this.dataSource.recipient.name.toUpperCase()}
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              {/* was conferred the degree of */}
-              <div className={cls("cert-content")} style={style1}>
-                was conferred the degree of
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>{renderVoid("0.32cm")}</td>
-          </tr>
-          <tr>
-            <td>
-              {/* degree & honours */}
-              {this.renderDegree(degreeData)}
-            </td>
-          </tr>
-          <tr>
-            <td>{renderVoid("0.2cm")}</td>
-          </tr>
-          <tr>
-            <td>
-              {/* on */}
-              <div className={cls("cert-content")} style={style1}>
-                on
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>{renderVoid("0.20cm")}</td>
-          </tr>
-          <tr>
-            <td className={cls("cert-date")}>
-              {/* issue date */}
-              {dateConferred}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    );
-    return html;
-  }
-
-  // render ANU seal
-  renderSealANU = () => <img src={ANU_SEAL} className={cls("cert-seal")} />;
-
-  // render signatures
-  renderSigs = () => {
-    let sig1;
-    let sig2;
-    let sig3;
-    let sig4;
-    if (this.dataSource.additionalData.images) {
-      sig1 = renderImage(this.dataSource.additionalData.images.TRUSTEES);
-      sig2 = renderImage(this.dataSource.additionalData.images.PRESIDENT);
-      sig3 = renderImage(this.dataSource.additionalData.images.ANU_CHANCELLOR);
-      sig4 = renderImage(
-        this.dataSource.additionalData.images.ANU_VICE_CHANCELLOR
-      );
-    }
-    const html = (
-      <table width="100%">
-        <tbody>
-          <tr>
-            <td align="center">
-              {/* signature 1 */}
-              <div className={cls("cert-sig")}>
-                &nbsp;&nbsp; {sig1}
-                <br />
-                &nbsp;&nbsp;Chair, Board of Trustees
-                <br />
-                &nbsp;&nbsp;National University of Singapore
-              </div>
-            </td>
-            <td align="center">
-              {/* signature 3 */}
-              <div className={cls("cert-sig")}>
-                &nbsp;&nbsp; {sig3}
-                <br />
-                &nbsp;&nbsp; Chancellor
-                <br />
-                &nbsp;&nbsp; The Australian National University
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td align="center">
-              {/* signature 2 */}
-              <div className={cls("cert-sig")}>
-                <br />
-                &nbsp;&nbsp;{sig2}
-                <br />
-                &nbsp;&nbsp; President
-                <br />
-                &nbsp;&nbsp; National University of Singapore
-              </div>
-            </td>
-            <td align="center">
-              {/* signature 4 */}
-              <div className={cls("cert-sig")}>
-                &nbsp;&nbsp; {sig4}
-                <br />
-                &nbsp;&nbsp; Vice-Chancellor
-                <br />
-                &nbsp;&nbsp; The Australian National University
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>{renderNUSSeal(cls("cert-seal"))}</td>
-            <td>{this.renderSealANU()}</td>
-          </tr>
-        </tbody>
-      </table>
-    );
-    return html;
-  };
-
-  // main render
-  render() {
-    const html = (
-      <div className={cls("nus-degree")}>
-        <div className={cls("a4-portrait")}>
-          <article>
-            <div style={{ height: "18.4cm", border: "0px solid" }}>
-              {renderVoid("1cm")}
-              <table width="100%">
-                <tbody>
-                  <tr>
-                    <td width="50%">{renderNUSTitle(cls("cert-header"))} </td>
-                    <td>{this.renderANUTitle()}</td>
-                  </tr>
-                  <tr>
-                    <td> {renderNUSLogo(cls("cert-logo"))} </td>
-                    <td>{this.renderANULogo()}</td>
-                  </tr>
-                </tbody>
-              </table>
-              {renderVoid("0.93cm")}
-              {this.renderContent()}
-            </div>
-            <div style={{ border: "0px solid" }}>{this.renderSigs()}</div>
-          </article>
-        </div>
-      </div>
-    );
-    return html;
-  }
-}
-
-Degree.propTypes = {
-  dataSource: PropTypes.object.isRequired
+  dataFeeder.heightTitleDisplay = "2cm";
+  dataFeeder.conferDate =
+    dataSource.additionalData.degreeScroll[0].dateConferred;
+  dataFeeder.spaceBeforeSig = "1cm";
+  dataFeeder.sig = renderSigs(dataSource);
+  return dataFeeder;
 };
 
 const Template = ({ certificate }) => {
+  // JSON data source
+  const jsonData = certificate;
+
+  // data feeder
+  const dataFeeder = getDataFeeder(jsonData);
+
   // 794px is width of A4 portrait (21cm)
   const ratio = (window.innerWidth - 30) / 794;
   const scale =
@@ -312,7 +196,7 @@ const Template = ({ certificate }) => {
       : null;
   const html = (
     <div style={scale}>
-      <Degree dataSource={certificate} />
+      <Degree dataFeeder={dataFeeder} />
     </div>
   );
   return html;
