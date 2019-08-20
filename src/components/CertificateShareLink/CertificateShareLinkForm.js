@@ -52,7 +52,7 @@ class CertificateShareLinkForm extends Component {
 
                   {copiedLink && (
                     <small className="text-green">
-                      Successfully copied Share Link!
+                      Successfully copied share link!
                     </small>
                   )}
                 </div>
