@@ -1,12 +1,13 @@
-import { Selector } from "testcafe";
+import { Selector, ClientFunction } from "testcafe";
 
 fixture("Registry Certificate Rendering").page`http://localhost:3000`;
 
 const Document = "../HomePageContent/Ropsten-Demo.json";
 const IframeBlock = Selector("#iframe");
 const TranscriptButton = Selector(".nav-item").withText("TRANSCRIPT");
-const SampleTemplate = Selector("#rendered-certificate");
+const MediaButton = Selector(".nav-item").withText("MEDIA");
 const StatusButton = Selector("#certificate-status");
+const SampleTemplate = Selector("#rendered-certificate");
 
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(
@@ -14,7 +15,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("Sample document is rendered correctly when single registry is verfied", async t => {
+test("Sample document is rendered correctly when single registry is verified", async t => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 
   await validateTextContent(t, StatusButton, ["Accredited by SSG"]);
@@ -39,4 +40,14 @@ test("Sample document is rendered correctly when single registry is verfied", as
     "Object Oriented Programming in Java",
     "ECON 3120"
   ]);
+
+  await t.switchToMainWindow();
+  await t.click(MediaButton);
+  await t.switchToIframe(IframeBlock);
+
+  const getTemplateHtml = ClientFunction(() => SampleTemplate().innerHTML, {
+    dependencies: { SampleTemplate }
+  });
+
+  await t.expect(getTemplateHtml()).contains('id="youtube-vid"');
 });
