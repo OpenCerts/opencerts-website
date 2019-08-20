@@ -33,6 +33,7 @@ const DraggableDemoCertificate = () => (
           <a
             href={`data:text/plain;,${JSON.stringify(DEMO_CERT, null, 2)}`}
             download="demo.opencert"
+            rel="noopener noreferrer"
           >
             <img
               style={{ cursor: "grabbing" }}
