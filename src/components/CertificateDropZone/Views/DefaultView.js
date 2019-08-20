@@ -45,6 +45,9 @@ const View = ({ hover, accept }) => (
         <button type="button" className={`pointer ${css.btn}`}>
           Select File
         </button>
+        <button type="button" className={`pointer ${css.btn}`}>
+          Scan QR Code
+        </button>
       </div>
     </div>
   </div>
