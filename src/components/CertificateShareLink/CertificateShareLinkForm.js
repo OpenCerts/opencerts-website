@@ -12,7 +12,9 @@ class CertificateShareLinkForm extends Component {
       shareLink,
       shareLinkState,
       copiedLink,
-      handleCopyLink
+      handleCopyLink,
+      handleShareLinkToggle,
+      generateShareLink
     } = this.props;
     const certificateLink =
       shareLink && `${URL}/?documentId=${shareLink.id}#${shareLink.key}`;
@@ -59,13 +61,22 @@ class CertificateShareLinkForm extends Component {
                 <div className="row d-flex justify-content-center m-3">
                   <QRCode value={certificateLink} />
                 </div>
+                <div className="row d-flex justify-content-center m-3">
+                  <button
+                    type="button"
+                    className={`pointer ${css.btn}`}
+                    onClick={generateShareLink}
+                  >
+                    Regenerate Link
+                  </button>
+                </div>
               </>
             )}
             <div className="row d-flex justify-content-center m-3">
               <button
                 type="button"
                 className={`pointer ${css.btn}`}
-                onClick={this.props.handleShareLinkToggle}
+                onClick={handleShareLinkToggle}
               >
                 Close
               </button>
