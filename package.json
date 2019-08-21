@@ -9,6 +9,7 @@
     "lint": "eslint . --ext .js --max-warnings 0",
     "lint:fix": "eslint . --ext .js --fix",
     "build": "next build",
+    "start:local": "LEGACY_RENDERER_URL=\"http://localhost:3000\" next start -p 3001",
     "build:static": "next build && npm run export",
     "export": "next export",
     "start": "next build && next start",
