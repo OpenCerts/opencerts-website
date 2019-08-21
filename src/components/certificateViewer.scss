@@ -7,6 +7,10 @@
     display: none;
   }
 
+  iframe {
+    height: 99vh; /* dont use 100vh otherwise a second blank page appear when printing */
+  }
+  
   .decentralised-renderer {
     position: static !important;
   }
