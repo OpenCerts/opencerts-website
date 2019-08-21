@@ -81,6 +81,15 @@
       "logo": "/static/images/RP_logo.svg",
       "id": "rp-registry"
     },
+    "0x96a7bEefb0A7fb6B9d2101B0A27a734fA97E7221": {
+      "name": "Singapore University of Technology and Design",
+      "displayCard": true,
+      "website": "https://sutd.edu.sg",
+      "email": "opencert@sutd.edu.sg",
+      "phone": "+65 6499 8922",
+      "logo": "/static/images/SUTD_logo.png",
+      "id": "sutd-registry"
+    },
     "0x5f007251c78cA92d3053492cCf0EDC161063624c": {
       "name": "ROPSTEN: Nanyang Polytechnic",
       "displayCard": false
@@ -131,6 +140,10 @@
     },
     "0x061aFcFF60b90E0F633F8ef157e01BaB9b2FfDD3": {
       "name": "ROPSTEN: Republic Polytechnic",
+      "displayCard": false
+    },
+    "0x2456FC81C1342fB79D7C58A4682F031208A44d7F": {
+      "name": "ROPSTEN: Singapore University of Technology and Design",
       "displayCard": false
     }
   }
