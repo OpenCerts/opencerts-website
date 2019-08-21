@@ -106,8 +106,9 @@ export default connect(
 
 CertificateShareLinkForm.propTypes = {
   copiedLink: PropTypes.bool,
-  handleCopyLink: PropTypes.func,
   shareLink: PropTypes.object,
   shareLinkState: PropTypes.string,
-  handleShareLinkToggle: PropTypes.func
+  handleCopyLink: PropTypes.func,
+  handleShareLinkToggle: PropTypes.func,
+  generateShareLink: PropTypes.func
 };
