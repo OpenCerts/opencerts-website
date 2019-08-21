@@ -86,6 +86,13 @@
     margin-right: 0.5rem;
 }
 
+.disable-btn {
+    position: absolute;
+    top: 80%;
+    left: 45%;
+    z-index: 999;
+}
+
 .secondary-links {
     width: 50%;
     display: flex;

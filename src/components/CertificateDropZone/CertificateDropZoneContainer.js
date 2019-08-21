@@ -17,6 +17,7 @@ import {
 } from "../../reducers/certificate";
 import { updateNetworkId } from "../../reducers/application";
 import CertificateDropZone from "./CertificateDropZone";
+import css from "./Views/viewerStyles.scss";
 import QrReader from "../QrReader";
 
 class CertificateDropZoneContainer extends Component {
@@ -64,7 +65,13 @@ class CertificateDropZoneContainer extends Component {
     return this.state.qrReaderVisible ? (
       <>
         <QrReader handleQrScanned={this.handleQrScanned} />
-        <div onClick={this.toggleQrReaderVisible}>Disable</div>
+        <button
+          type="button"
+          onClick={this.toggleQrReaderVisible}
+          className={`pointer ${css.btn} ${css["disable-btn"]}`}
+        >
+          Disable
+        </button>
       </>
     ) : (
       <>
@@ -81,8 +88,8 @@ class CertificateDropZoneContainer extends Component {
           verificationStatus={this.props.verificationStatus}
           resetData={this.resetData.bind(this)}
           storeStatus={this.props.storeStatus}
+          toggleQrReaderVisible={this.toggleQrReaderVisible}
         />
-        <div onClick={this.toggleQrReaderVisible}>Enable</div>
       </>
     );
   }

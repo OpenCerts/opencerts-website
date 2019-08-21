@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
+import Link from "next/link";
 import css from "./viewerStyles.scss";
 
-const View = ({ hover, accept }) => (
+const View = ({ hover, accept, toggleQrReaderVisible }) => (
   <div
     className={`${css["viewer-container"]} ${
       // eslint-disable-next-line no-nested-ternary
@@ -45,9 +46,15 @@ const View = ({ hover, accept }) => (
         <button type="button" className={`pointer ${css.btn}`}>
           Select File
         </button>
-        <button type="button" className={`pointer ${css.btn}`}>
-          Scan QR Code
-        </button>
+        <Link href="">
+          <button
+            type="button"
+            onClick={() => toggleQrReaderVisible()}
+            className={`pointer ${css.btn}`}
+          >
+            Scan QR Code
+          </button>
+        </Link>
       </div>
     </div>
   </div>
@@ -57,5 +64,6 @@ export default View;
 
 View.propTypes = {
   hover: PropTypes.bool,
-  accept: PropTypes.bool
+  accept: PropTypes.bool,
+  toggleQrReaderVisible: PropTypes.func
 };
