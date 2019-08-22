@@ -87,10 +87,18 @@ const renderSigs = dataSource => {
   let sig3;
   let sig4;
   if (dataSource.additionalData.images) {
-    sig1 = renderImage(dataSource.additionalData.images.TRUSTEES);
-    sig2 = renderImage(dataSource.additionalData.images.PRESIDENT);
-    sig3 = renderImage(dataSource.additionalData.images.ANU_CHANCELLOR);
-    sig4 = renderImage(dataSource.additionalData.images.ANU_VICE_CHANCELLOR);
+    sig1 = renderImage(dataSource.additionalData.images.TRUSTEES, 240, 90);
+    sig2 = renderImage(dataSource.additionalData.images.PRESIDENT, 240, 90);
+    sig3 = renderImage(
+      dataSource.additionalData.images.ANU_CHANCELLOR,
+      240,
+      90
+    );
+    sig4 = renderImage(
+      dataSource.additionalData.images.ANU_VICE_CHANCELLOR,
+      240,
+      90
+    );
   }
   const html = (
     <table style={styleSig}>
@@ -173,7 +181,7 @@ const getDataFeeder = dataSource => {
   dataFeeder.heightTitleDisplay = "2cm";
   dataFeeder.conferDate =
     dataSource.additionalData.degreeScroll[0].dateConferred;
-  dataFeeder.spaceBeforeSig = "1cm";
+  dataFeeder.spaceBeforeSig = ".5cm";
   dataFeeder.sig = renderSigs(dataSource);
   return dataFeeder;
 };

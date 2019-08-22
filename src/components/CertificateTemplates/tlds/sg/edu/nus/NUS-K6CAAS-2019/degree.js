@@ -60,9 +60,9 @@ const renderSigs = dataSource => {
   let sig2;
   let sig3;
   if (dataSource.additionalData.images) {
-    sig1 = renderImage(dataSource.additionalData.images.TRUSTEES);
-    sig2 = renderImage(dataSource.additionalData.images.PRESIDENT);
-    sig3 = renderImage(dataSource.additionalData.images.CAAS_DIRECTOR);
+    sig1 = renderImage(dataSource.additionalData.images.TRUSTEES, 240, 90);
+    sig2 = renderImage(dataSource.additionalData.images.PRESIDENT, 240, 90);
+    sig3 = renderImage(dataSource.additionalData.images.CAAS_DIRECTOR, 240, 90);
   }
   const html = (
     <table width="100%">

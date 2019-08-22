@@ -19,12 +19,33 @@ test("NUS-K7MPAS-2019 degree scroll is rendered correctly", async t => {
 
   // Certificate tabs rendered
   await t.expect(TemplateTabList.textContent).contains("Certificate");
+  await t.expect(TemplateTabList.textContent).contains("Transcript");
 
-  // Certificate tab content
+  // Certificate/Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
-    "NATIONAL UNIVERSITY",
+    "NATIONAL",
+    "UNIVERSITY",
     "OF SINGAPORE",
-    "Imperial College London",
-    "Doctor of Philosophy"
+    "A0005366L, NAME",
+    "Graduate",
+    "Diploma",
+    "in",
+    "Maritime",
+    "Port",
+    "Management",
+    "08 September 2006"
+  ]);
+  const transcriptTab = TemplateTabList.find(":nth-child(2)");
+  await t.click(transcriptTab);
+  await validateTextContent(t, RenderedCertificate, [
+    "A0005366L, name",
+    "A0005366L",
+    "01/01/1905",
+    "20/08/2019",
+    "GRADUATE DIPLOMA IN MARITIME AND PORT MANAGEMENT",
+    "COMPLETED PROGRAMME",
+    "2005/2006 SPECIAL TERM (PART1)",
+    "MPA5017",
+    "MARITIME MANAGEMENT & LAW"
   ]);
 });

@@ -164,11 +164,31 @@ class Degree extends Component {
     let sig4;
     let sig5;
     if (this.dataSource.additionalData.images) {
-      sig1 = renderImage(this.dataSource.additionalData.images.UNC_TRUSTEES);
-      sig2 = renderImage(this.dataSource.additionalData.images.UNC_CHANCELLOR);
-      sig3 = renderImage(this.dataSource.additionalData.images.UNC_DEAN);
-      sig4 = renderImage(this.dataSource.additionalData.images.TRUSTEES);
-      sig5 = renderImage(this.dataSource.additionalData.images.PRESIDENT);
+      sig1 = renderImage(
+        this.dataSource.additionalData.images.UNC_TRUSTEES,
+        240,
+        90
+      );
+      sig2 = renderImage(
+        this.dataSource.additionalData.images.UNC_CHANCELLOR,
+        240,
+        90
+      );
+      sig3 = renderImage(
+        this.dataSource.additionalData.images.UNC_DEAN,
+        240,
+        90
+      );
+      sig4 = renderImage(
+        this.dataSource.additionalData.images.TRUSTEES,
+        240,
+        90
+      );
+      sig5 = renderImage(
+        this.dataSource.additionalData.images.PRESIDENT,
+        240,
+        90
+      );
     }
     const html = (
       <table className={cls("cert-sig")}>

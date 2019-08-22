@@ -19,12 +19,47 @@ test("NUS-YALE-2019 degree scroll is rendered correctly", async t => {
 
   // Certificate tabs rendered
   await t.expect(TemplateTabList.textContent).contains("Certificate");
+  await t.expect(TemplateTabList.textContent).contains("Transcript");
 
-  // Certificate tab content
+  // Certificate/Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
-    "the National University of Singapore",
-    "the College",
-    "Bachelor of Arts With Honours",
-    "this thirtieth day of June two thousand and eighteen"
+    "National University of Singapore",
+    "A0121779X, name",
+    "Bachelor",
+    "Arts",
+    "Honours"
+  ]);
+  const transcriptTab = TemplateTabList.find(":nth-child(2)");
+  await t.click(transcriptTab);
+  await validateTextContent(t, RenderedCertificate, [
+    "A0121779X, name",
+    "A0121779X",
+    "01/01/1905",
+    "20/08/2019",
+    "BACHELOR OF ARTS WITH HONOURS",
+    "COMPLETED PROGRAMME",
+    "2014/2015 SEMESTER 1",
+    "YCC1111",
+    "Literature and Humanities 1",
+    "2014/2015 SEMESTER 2",
+    "YCC1112",
+    "Literature and Humanities 2",
+    "2014/2015 SPECIAL TERM (PART2)",
+    "2015/2016 SEMESTER 1",
+    "YCC2121",
+    "Modern Social Thought",
+    "2015/2016 SEMESTER 2",
+    "YCC2132",
+    "Foundations of Science 2",
+    "2016/2017 SEMESTER 1",
+    "YHU1202",
+    "History and Culture of Southeast Asia",
+    "2016/2017 SEMESTER 2",
+    "2017/2018 SEMESTER 1",
+    "EC3303",
+    "Econometrics I",
+    "2017/2018 SEMESTER 2",
+    "YHU4206",
+    "The History of History"
   ]);
 });

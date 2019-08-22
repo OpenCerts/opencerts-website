@@ -67,7 +67,7 @@ const getDataFeeder = dataSource => {
       dataSource.additionalData.images.PRESIDENT
     );
   }
-  dataFeeder.spaceBeforeSig = "3.5cm";
+  dataFeeder.spaceBeforeSig = "2cm";
   return dataFeeder;
 };
 

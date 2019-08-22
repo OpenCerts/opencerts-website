@@ -139,11 +139,19 @@ class Degree extends Component {
     let sig4;
     let sig5;
     if (dataSource.additionalData.images) {
-      sig1 = renderImage(dataSource.additionalData.images.DUKE_TRUSTEES);
-      sig2 = renderImage(dataSource.additionalData.images.DUKE_PRESIDENT);
-      sig3 = renderImage(dataSource.additionalData.images.DUKE_DEAN);
-      sig4 = renderImage(dataSource.additionalData.images.TRUSTEES);
-      sig5 = renderImage(dataSource.additionalData.images.PRESIDENT);
+      sig1 = renderImage(
+        dataSource.additionalData.images.DUKE_TRUSTEES,
+        240,
+        90
+      );
+      sig2 = renderImage(
+        dataSource.additionalData.images.DUKE_PRESIDENT,
+        240,
+        90
+      );
+      sig3 = renderImage(dataSource.additionalData.images.DUKE_DEAN, 240, 90);
+      sig4 = renderImage(dataSource.additionalData.images.TRUSTEES, 240, 90);
+      sig5 = renderImage(dataSource.additionalData.images.PRESIDENT, 240, 90);
     }
     const html = (
       <table width="100%">
@@ -152,16 +160,26 @@ class Degree extends Component {
             <td align="center" width="33%">
               {/* signature 1 - DUKE Trustees */}
               <div className={cls("cert-sig")}>{sig1}</div>
+            </td>
+            <td width="34%"> {/* blank */}</td>
+            <td align="center" width="34%">
+              {/* signature 4 - NUS Trustees */}
+              <div className={cls("cert-sig")}>{sig4}</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
               <div className={cls("cert-sig")}>
                 &nbsp;&nbsp;Chair, Board of Trustees
                 <br />
                 &nbsp;&nbsp;Duke University
               </div>
             </td>
-            <td width="34%"> {/* blank */}</td>
-            <td align="center" width="34%">
-              {/* signature 4 - NUS Trustees */}
-              <div className={cls("cert-sig")}>{sig4}</div>
+            <td rowSpan="2" valign="bottom">
+              {/* signature 3 - DUKE Dean */}
+              <div className={cls("cert-sig")}>{sig3}</div>
+            </td>
+            <td>
               <div className={cls("cert-sig")}>
                 &nbsp;&nbsp; Chair, Board of Trustees
                 <br />
@@ -173,24 +191,28 @@ class Degree extends Component {
             <td align="center">
               {/* signature 2 - DUKE President */}
               <div className={cls("cert-sig")}>{sig2}</div>
+            </td>
+            <td align="center">
+              {/* signature 5 - NUS President */}
+              <div className={cls("cert-sig")}>{sig5}</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
               <div className={cls("cert-sig")}>
                 &nbsp;&nbsp; President
                 <br />
                 &nbsp;&nbsp; Duke University
               </div>
             </td>
-            <td align="center">
-              {/* signature 3 - DUKE Dean */}
-              <div className={cls("cert-sig")}>{sig3}</div>
+            <td>
               <div className={cls("cert-sig")}>
                 &nbsp;&nbsp; Dean
                 <br />
                 &nbsp;&nbsp; DUKE-NUS Medical School
               </div>
             </td>
-            <td align="center">
-              {/* signature 5 - NUS President */}
-              <div className={cls("cert-sig")}>{sig5}</div>
+            <td>
               <div className={cls("cert-sig")}>
                 &nbsp;&nbsp; President
                 <br />
@@ -304,7 +326,7 @@ class Degree extends Component {
         <div className={cls("a4-portrait")}>
           <article>
             <div style={{ height: "auto", border: "0px solid" }}>
-              {renderVoid("0.93cm")}
+              {renderVoid("0.63cm")}
               {this.renderHeader()}
               {this.renderContent()}
             </div>

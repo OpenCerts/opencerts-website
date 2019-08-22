@@ -111,8 +111,8 @@ const renderNameAndText = (preNameText, name, postNameText, namePadding) => {
 
 // default NUS signatures
 const renderDefaultSigs = (trusteesSig, presidentSig) => {
-  const sig1 = renderImage(trusteesSig);
-  const sig2 = renderImage(presidentSig);
+  const sig1 = renderImage(trusteesSig, 240, 90);
+  const sig2 = renderImage(presidentSig, 240, 90);
   return (
     <table width="100%">
       <tbody>
@@ -475,7 +475,11 @@ export class DegreeScrollDataFeeder {
     if (lines.length > 1) {
       lastLine = lines[lines.length - 1];
       // specialisation is in degree title (in parenthesis), so not to print specialisation again
-      ignoreMajor = lastLine.endsWith(")");
+      ignoreMajor =
+        lastLine.endsWith(")") ||
+        this.dsDegreeTitle
+          .toUpperCase()
+          .startsWith("Bachelor of Business Administration".toUpperCase());
       if (!this.dsBreakBefHonours && honorsTitle) {
         lastLine = `${lastLine} ${honorsTitle}`;
         ignoreHonours = true;

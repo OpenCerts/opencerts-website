@@ -19,12 +19,32 @@ test("NUS-K6CAAS-2019 degree scroll is rendered correctly", async t => {
 
   // Certificate tabs rendered
   await t.expect(TemplateTabList.textContent).contains("Certificate");
+  await t.expect(TemplateTabList.textContent).contains("Transcript");
 
-  // Certificate tab content
+  // Certificate/Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
-    "NATIONAL UNIVERSITY",
+    "NATIONAL",
+    "UNIVERSITY",
     "OF SINGAPORE",
-    "Imperial College London",
-    "Doctor of Philosophy"
+    "A0006190U, NAME",
+    "Graduate",
+    "Diploma",
+    "in",
+    "Aviation",
+    "Management",
+    "26 November 2008"
+  ]);
+  const transcriptTab = TemplateTabList.find(":nth-child(2)");
+  await t.click(transcriptTab);
+  await validateTextContent(t, RenderedCertificate, [
+    "A0006190U, name",
+    "A0006190U",
+    "01/01/1905",
+    "20/08/2019",
+    "GRADUATE DIPLOMA IN AVIATION MANAGEMENT",
+    "COMPLETED PROGRAMME",
+    "2007/2008 SPECIAL TERM (PART1)",
+    "AM5011",
+    "AIRPORT ADMINISTRATION, FINANCE & LAW"
   ]);
 });

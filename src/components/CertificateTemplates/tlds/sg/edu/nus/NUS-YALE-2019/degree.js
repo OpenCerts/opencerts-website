@@ -121,10 +121,26 @@ class Degree extends Component {
     let sig3;
     let sig4;
     if (this.dataSource.additionalData.images) {
-      sig1 = renderImage(this.dataSource.additionalData.images.TRUSTEES);
-      sig2 = renderImage(this.dataSource.additionalData.images.PRESIDENT);
-      sig3 = renderImage(this.dataSource.additionalData.images.YNC_GOVERNING);
-      sig4 = renderImage(this.dataSource.additionalData.images.YNC_PRESIDENT);
+      sig1 = renderImage(
+        this.dataSource.additionalData.images.TRUSTEES,
+        240,
+        90
+      );
+      sig2 = renderImage(
+        this.dataSource.additionalData.images.PRESIDENT,
+        240,
+        90
+      );
+      sig3 = renderImage(
+        this.dataSource.additionalData.images.YNC_GOVERNING,
+        240,
+        90
+      );
+      sig4 = renderImage(
+        this.dataSource.additionalData.images.YNC_PRESIDENT,
+        240,
+        90
+      );
     }
 
     const html = (

@@ -1,606 +1,580 @@
 {
   "schema": "opencerts/v1.5",
   "data": {
-    "id": "db267724-b599-4de2-b655-3e69af4f62f6:string:NUS-A0117648X-B091000-P10180997-5-20170630",
-    "$template": "b0fd4610-92fe-44b4-adb5-d62cf9140983:string:sg/edu/nus/NUS-MUSIC-2019",
-    "issuedOn": "62ecba02-b4a0-4078-a047-2574fecf1502:string:2019-07-15T13:27:55+08:00",
-    "name": "f08c7791-b979-41b6-a4e5-18fae72b1256:string:NUS Degree",
+    "id": "860b4eab-426f-44d2-8731-efab6a00d331:string:NUS-A0117560L-B091000-P10182223-21-20180131",
+    "$template": "c4ff9504-7c99-4f0a-a96f-4246f7a77520:string:sg/edu/nus/NUS-MUSIC-2019",
+    "issuedOn": "34651b1a-4ab1-40fa-acaa-933e4aa2be45:string:2019-08-20T18:02:35+08:00",
+    "name": "7cc65e8d-9033-48ce-af0c-1f40685d7ee0:string:NUS Degree",
     "issuers": [
       {
-        "name": "88853aad-3ee3-46b2-9f73-fb0ec3c74d93:string:National University of Singapore",
-        "did": "f847a2ef-31a7-47e8-8495-cff0b33b6db5:string:DID:SG-UEN:200604346E",
-        "url": "7e72c4d4-3634-45d6-96ff-b9af98e05d8a:string:https://www.nus.edu.sg",
-        "email": "4a9c938c-0905-4995-9555-3571821660f7:string:registrar@nus.edu.sg",
-        "certificateStore": "5a7d6ead-f400-41cb-9844-322eee4ce64f:string:0xfEbB273495F5C2c4783E23424Fe9773691b57fcB"
+        "name": "e5e9f740-0a70-42c5-98b5-ed586e0c90ce:string:National University of Singapore",
+        "did": "43873a6d-c8fd-426a-8d15-f415eb055400:string:DID:SG-UEN:200604346E",
+        "url": "75a9f3b7-5bde-4048-b0ee-cd678fdf61a5:string:https://www.nus.edu.sg",
+        "email": "29e2e730-cd1a-4777-b39e-f68901534372:string:registrar@nus.edu.sg",
+        "certificateStore": "f55a4326-02be-4028-a5f4-e466aa8b730c:string:0xfEbB273495F5C2c4783E23424Fe9773691b57fcB"
       }
     ],
     "recipient": {
-      "name": "30785d9c-0549-4cc0-bd79-b14bc53ab1f0:string:A0117648X, name",
-      "studentId": "f8886231-9ff1-4234-a7e2-e674c605701f:string:A0117648X",
-      "dateOfBirth": "bafdbbdc-912a-48ad-9ec5-ddc2402e6654:string:1905-01-01"
+      "name": "5f41c84d-ed29-4953-b80e-425838492395:string:A0117560L, name",
+      "studentId": "9ae28f08-63b7-4ac9-b768-e73d62cfacc4:string:A0117560L",
+      "dateOfBirth": "c6dece04-b898-43bf-81bd-0322be766c45:string:1905-01-01"
     },
     "transcript": [
       {
-        "name": "4a6b68c5-f5de-4337-9fb0-e9cdc93ce417:string:1310",
-        "term": "64ca611d-3856-492e-a8f2-6378ba2d05ca:string:2013/2014 Semester 1",
-        "formOfStudy": "f4abda6e-04ef-4c17-b8db-afd53e62a8d3:string:ENRL",
-        "fosPrintArea": "3b5ad7f9-19f0-48e2-b307-909d57c0f4f0:string:ND",
+        "name": "09dd0f3d-7f26-4f55-94af-554d171229ff:string:1320",
+        "term": "1f38c751-4f87-4559-96b9-e0ef04e93abb:string:2013/2014 Semester 2",
+        "formOfStudy": "dfa6cf52-1e4d-4a9f-baa3-6d42ebe53ca2:string:ENRL",
+        "fosPrintArea": "3bce53a3-d790-4334-a687-38bb9028af35:string:ND",
+        "creditTransfer": [
+          {
+            "sourceType": "0a5ed454-c1f3-40d5-a630-5100eb80808a:string:I",
+            "creditsNoGPA": "1ea28914-6b89-4e3a-a9f9-b716213d3d38:number:0",
+            "creditsGPA": "2a1e61d5-1231-47a7-a54a-9002f3853167:number:15",
+            "orgId": "340e6edc-8b0f-485a-8c56-bcb79267da7f:string:National University of Singapore",
+            "sourceCareer, ": "094bd940-57bf-4f9b-a8ef-8968e5b67f1f:string:Non-Graduating",
+            "details": [
+              {
+                "moduleCode": "1ff5b751-8d4c-48d7-967a-6b9d70575982:string:MUA1161",
+                "moduleName": "35623bf9-ca8f-4276-85d6-0298dc454ecc:string:Major Study 1A",
+                "grade": "09cee318-1b52-47b5-b060-a02bcf465343:string:B-",
+                "credits": "e4de451b-59ff-428e-8164-27f9c7396405:number:5",
+                "status": "7a38a30c-3336-4bfd-9f20-00fb8142efd4:string:P",
+                "includeInGPA": "832f031e-aade-4b63-b850-02ba328dd39c:boolean:true"
+              },
+              {
+                "moduleCode": "661aaa56-ee50-4a67-a593-0af23c1080b7:string:MUT1121",
+                "moduleName": "868546e5-133a-43e5-9706-9af92df36b8a:string:Musical Concepts and Materials I",
+                "grade": "ef875113-2bcb-4fd8-8573-a282f0064345:string:B-",
+                "credits": "9a16428e-ac43-4a02-ae99-cf62035cc6f2:number:6",
+                "status": "73eb1a3c-ba93-4641-961b-ab17b1171c47:string:P",
+                "includeInGPA": "2b16c4b3-c41d-4685-8428-7e8195f2cde8:boolean:true"
+              },
+              {
+                "moduleCode": "7b02713b-6f27-4dde-8e01-930f8683f371:string:MUH1115",
+                "moduleName": "ad2ef905-d26b-4c63-8035-cd0fe896fb52:string:Communicating About Music I",
+                "grade": "60a5cfd4-cf8b-4774-9c14-a74c9d8972a4:string:B+",
+                "credits": "48420abe-7c8d-4ee4-961c-cb2f9897545b:number:2",
+                "status": "bdbc8a36-1309-44d3-8a5a-7b0581fded64:string:P",
+                "includeInGPA": "0bc1d8a9-2125-4f80-8c24-4e17bf576717:boolean:true"
+              },
+              {
+                "moduleCode": "b17d4c9d-9617-4a6e-a94c-a277530c035e:string:MUA1180",
+                "moduleName": "e07775de-405f-453f-a0d2-b0493ed7b56d:string:First Year Brass Class A",
+                "grade": "59404be0-699d-493b-bdc0-64910c93dfc9:string:B+",
+                "credits": "e0e8c37b-3655-44cf-b251-33515dce0340:number:2",
+                "status": "85ab0992-797a-49f1-bae8-6850bc842b53:string:P",
+                "includeInGPA": "993bc4fd-1b80-4296-8206-2f7e9d3b3130:boolean:true"
+              },
+              {
+                "moduleCode": "66c7572b-0487-4199-82ae-c9ec7eba8c97:string:MUA1153",
+                "moduleName": "d3cc04ce-3aec-4172-8816-91705e3de81c:string:Noon Recital Series 1A",
+                "grade": "35e3adcd-2740-4132-9995-b806ea4f0404:string:CS",
+                "credits": "55aafe30-49ba-4832-8f99-3f3da6f9ac4b:number:0",
+                "status": "69a0bd61-1aba-47ea-9310-f5e484c5fdba:string:P",
+                "includeInGPA": "345263d9-25a2-4c00-826f-8c2249cd154f:boolean:false"
+              }
+            ]
+          }
+        ],
         "modules": [
           {
-            "moduleCode": "c9e7bd9b-47ef-47f6-9fd1-2cb00ffe8b23:string:EM1002",
-            "moduleName": "89dcd21c-42ec-43da-8c14-d75f4e76f010:string:Foundation English Course 2",
-            "grade": "9100d5ee-1258-4049-a515-b31b5ab399e4:string:B-",
-            "credits": "3a8af7c2-501e-4ba8-8839-9db7ed7a93f9:number:0",
-            "gradingBasis": "14064e99-afda-48f0-91c5-fe79b8acbdd7:string:GRD",
-            "includeInGPA": "f82d21d1-1801-4beb-a8e1-ca475487eec9:boolean:true"
+            "moduleCode": "4e6713ba-8a39-4321-b4f7-3495aca5dfab:string:MUA1154",
+            "moduleName": "e02be2e2-ec7c-466a-9146-391c39d00345:string:Noon Recital Series 1B",
+            "grade": "6f87fb19-8fdd-46de-ac80-89c5a83d7646:string:CS",
+            "credits": "ade54797-1344-4622-bbef-8014bb8dd185:number:0",
+            "gradingBasis": "9a938342-9fec-43d1-854d-39b7af1779f8:string:CSU",
+            "includeInGPA": "ac30b104-bfb8-4115-b40e-dc4221711b6d:boolean:false"
           },
           {
-            "moduleCode": "0f527f47-c4ed-4338-ba7d-4fb3c368f128:string:MUA1107",
-            "moduleName": "bb0828e5-a971-45dd-8f14-29b50a6c232d:string:Large Ensembles 1A",
-            "grade": "b343166d-3985-4de0-ad6b-8a1b2cf5cd03:string:CS",
-            "credits": "f66ad32c-51c6-42fb-902a-7104b4269b0e:number:2",
-            "gradingBasis": "a1c807ad-b48c-45e0-88e5-d1e8a9277bd6:string:CSU",
-            "includeInGPA": "76c6ad11-4b11-489d-b91b-6c59a40f7476:boolean:false"
+            "moduleCode": "fb79e055-4f7a-447a-8df1-368cf52381b5:string:MUA1162",
+            "moduleName": "167efd66-84d6-45ce-b2a8-5be8aa132452:string:Major Study 1B",
+            "grade": "5c40b8fd-bab1-4420-a8d1-725aedede9a5:string:B",
+            "credits": "76860dab-164b-41e6-ad28-a7eece429554:number:6",
+            "gradingBasis": "7b6f51df-a696-4be0-8c79-cbb1735958ee:string:GRD",
+            "includeInGPA": "88f2f08e-66db-4c18-b7c2-465409ffb7f6:boolean:true"
           },
           {
-            "moduleCode": "4e7a580b-dba9-4b0a-ad1a-9929f6390ec9:string:MUA1153",
-            "moduleName": "4bae9b07-5977-4fbf-866f-2290364b5604:string:Noon Recital Series 1A",
-            "grade": "9815cc0a-56b8-4664-a007-8022fb958fb7:string:CS",
-            "credits": "624d301d-62b3-4847-85c2-9149f4b73ae3:number:0",
-            "gradingBasis": "b1cc0b9d-f279-4cf6-abec-e37e85269be1:string:CSU",
-            "includeInGPA": "cd324f50-221f-49bc-81d9-78a87854c654:boolean:false"
+            "moduleCode": "1bea4a56-3e6e-46ba-bced-1dd646d2b6d3:string:MUA1163",
+            "moduleName": "33ebd29f-b398-4419-a844-a3684e4a06ad:string:Introduction to Professional Development",
+            "grade": "3a0f8cc3-b10f-4143-b5f9-5e2d3b8044cc:string:B-",
+            "credits": "4d08a809-0166-4fbb-8bf4-6cc23e5778aa:number:2",
+            "gradingBasis": "9cd60f24-6be0-445f-af15-4aa7dc2230b2:string:GRD",
+            "includeInGPA": "dd12cee8-aa3a-46be-85f9-188d15b1461b:boolean:true"
           },
           {
-            "moduleCode": "611f1690-6b61-4d05-9ff9-8410ec9ebf2b:string:MUA1161",
-            "moduleName": "3d7f90a6-ceac-4915-be4c-6eb9b0820d73:string:Major Study 1A",
-            "grade": "9e07a38f-0eea-4cd5-ab30-07a0324c8bde:string:B-",
-            "credits": "67504849-0762-4f97-ab97-9108f319b258:number:5",
-            "gradingBasis": "124564c8-a0b7-4192-bedb-8dbb8fee7e20:string:GRD",
-            "includeInGPA": "67287e07-0de0-415c-af68-d5d63e411450:boolean:true"
+            "moduleCode": "72506368-fb5c-4ea3-9a04-14f510d8e78f:string:MUA1181",
+            "moduleName": "131c715d-9937-4026-8b9a-dbdb2ec2d227:string:First Year Brass Class B",
+            "grade": "9cdf07f9-e578-41ef-82e5-afefd9e502b9:string:B-",
+            "credits": "ab57ff14-fc3c-40d1-b5d9-0c8387b4a701:number:2",
+            "gradingBasis": "f1a04ba7-566a-4cf6-a056-21bb09526c77:string:GRD",
+            "includeInGPA": "5f4334e2-5c5a-42f6-a5ec-37a69ce0428c:boolean:true"
           },
           {
-            "moduleCode": "ec4b61e4-c7ec-408d-a9da-e61f68a274e1:string:MUA1163",
-            "moduleName": "5566b499-08c4-4bc4-b77b-69ed3af5216a:string:Introduction to Professional Development",
-            "grade": "2c977371-fc2b-43af-b523-54061cb88635:string:IP",
-            "credits": "3aaecea3-b30d-47a6-81e5-f36f691e4889:number:2",
-            "gradingBasis": "5aff423e-5519-47b7-8bb9-4fbf62e84963:string:GRD",
-            "includeInGPA": "bd4123e9-9f9b-43ab-8e0d-824d5b522bdb:boolean:true"
+            "moduleCode": "950303ef-298e-497e-b387-5bbd54896be7:string:MUH1116",
+            "moduleName": "5d9bf2c7-0bf8-4d49-acc2-f5a0f82859d5:string:Communicating About Music II",
+            "grade": "d115dfe6-7f03-41b6-8ed1-a484bc8b5738:string:B",
+            "credits": "2681eaec-636b-4f66-8096-52c03621723f:number:2",
+            "gradingBasis": "2a7dc55e-4281-4445-b61a-69f5f8eeef92:string:GRD",
+            "includeInGPA": "5c2d0b6e-3868-49bd-ba67-b04a850f9b09:boolean:true"
           },
           {
-            "moduleCode": "366ed1e1-8028-4c31-b1ac-a2d52fbb928f:string:MUH1115",
-            "moduleName": "b0db2ecd-190a-4ddc-9493-a9ea55a0193f:string:Communicating About Music I",
-            "grade": "904b8870-7010-4221-9197-01c6a5b815a9:string:B-",
-            "credits": "7e24eb33-38d5-4926-ba0c-dbfbe5a60fec:number:2",
-            "gradingBasis": "f8a36219-15d6-4aec-aafb-d80644cb0bb9:string:GRD",
-            "includeInGPA": "dbb95c68-2901-4300-8e9f-debb55083e8f:boolean:true"
-          },
-          {
-            "moduleCode": "d0ba1b9b-a718-41cf-b71b-a6612a7a115b:string:MUT1121",
-            "moduleName": "3d835521-05f5-4e4d-a334-a78ff57c2f7f:string:Musical Concepts and Materials I",
-            "grade": "3e0fe124-c8fb-4359-adc2-99b24de8adae:string:C",
-            "credits": "9ef3cbcc-7fee-4404-b127-3a4979254347:number:6",
-            "gradingBasis": "7a681d3b-94a3-44cd-bc05-70966789ddf3:string:GRD",
-            "includeInGPA": "b444bb93-bcab-4779-961a-f817141e1739:boolean:true"
+            "moduleCode": "572b2e89-1f0d-4772-aa6b-02a9d350bb5e:string:MUT1122",
+            "moduleName": "be2ef013-9f10-4542-8e15-5c5b86aebfc0:string:Musical Concepts and Materials II",
+            "grade": "11b3433d-c5a0-404d-8ca5-38d9c9373072:string:C+",
+            "credits": "4c2edd35-13c3-4ce9-a5ff-0a4cf49f9c2d:number:6",
+            "gradingBasis": "206c32ba-cb59-409f-b3da-b3dfae52b50b:string:GRD",
+            "includeInGPA": "90d605b5-ed7d-4d09-9eb8-be1d372b63a7:boolean:true"
           }
         ],
         "summary": [
           {
-            "programName": "dafaa358-ad49-4910-a06e-267dd13381fd:string:Bachelor of Music",
-            "includeInGPA": "ae177668-43df-4f7e-8d8e-bc202b1215f3:boolean:true",
-            "GPAName": "ad318e4c-caba-460d-8493-0ed873646ef5:string:Cumulative Average Point",
-            "GPA": "c75e9675-db73-4de3-9ce3-4fbeb7cf2f03:number:2.54"
+            "programName": "560099a5-008f-4ef4-bd4b-6cac4d96d81f:string:Bachelor of Music",
+            "includeInGPA": "b071bc96-45f2-4183-aed5-82305aba9fc4:boolean:true",
+            "GPAName": "ebe3ea46-9b34-4de4-a8a4-0a65e70ce57b:string:Cumulative Average Point",
+            "GPA": "c811b1b0-4a54-4026-90a2-eac38b83a51e:number:3.15"
           }
         ]
       },
       {
-        "name": "2f985b04-db7e-41df-9e13-e586b2447b8a:string:1320",
-        "term": "2a74c80b-9d06-4aa4-a5a1-d91b76102c3f:string:2013/2014 Semester 2",
-        "formOfStudy": "b27060bb-3c5a-4a00-bf82-a8e9ca39413d:string:ENRL",
-        "fosPrintArea": "96b5afe8-f143-4c23-a0cb-5e792c32304d:string:ND",
+        "name": "a82a1fc0-a114-4328-a456-43b24d912e98:string:1410",
+        "term": "121c2770-c64a-4462-8b8a-a51949c8c0f6:string:2014/2015 Semester 1",
+        "formOfStudy": "566d63de-f090-43fe-89f6-2617c8994d81:string:ENRL",
+        "fosPrintArea": "17af0089-2907-43d0-aba2-2950322b8d8a:string:ND",
         "modules": [
           {
-            "moduleCode": "fa3ce94e-c4d5-4f15-ac68-c87ef675de86:string:EM1201",
-            "moduleName": "43c25a50-f6d5-4784-9eca-839701512d10:string:English for Academic Purposes (Music) 1",
-            "grade": "4dbb1cd4-99b8-49f4-9ff9-2bcbb58dfd05:string:C+",
-            "credits": "12995ab9-24b6-44a2-82a7-166b9ceea841:number:0",
-            "gradingBasis": "78ed8268-3d57-4c69-af5d-bf7d1d77cc43:string:GRD",
-            "includeInGPA": "444420ac-27e7-4db4-b6c6-0eaa01fa05d2:boolean:true"
+            "moduleCode": "b77f15de-b8cf-499a-9a70-74e674794ad9:string:MUA1109",
+            "moduleName": "36aa3134-9a0a-45ad-8125-a3ea78003c6a:string:Chamber Ensemble 1A",
+            "grade": "799946b8-beab-4321-b28f-744a61c2bfcd:string:B",
+            "credits": "0450d7b9-a286-4012-861c-09718eed33c5:number:2",
+            "gradingBasis": "f3ba8728-161a-450e-b5c0-1bd5a1c10bd0:string:GRD",
+            "includeInGPA": "f20b8bd9-f184-4e0f-985f-6d9d36ee85b6:boolean:true"
           },
           {
-            "moduleCode": "a1c6d18b-63a1-4244-87c1-9c2d74256260:string:MUA1109",
-            "moduleName": "52fe379a-5205-4f35-b658-e7a9fb46eb38:string:Chamber Ensemble 1A",
-            "grade": "a121a56d-dc7e-419c-bf18-5c78c83050cd:string:B-",
-            "credits": "04134fb0-e124-4170-bec2-edd2198c94ec:number:2",
-            "gradingBasis": "b2d5c5db-721b-44dc-b5de-7fbfdab08139:string:GRD",
-            "includeInGPA": "73d783b3-3106-4d0c-86fa-23155b2535c3:boolean:true"
+            "moduleCode": "d8fb26ef-eeb6-4de0-9fd9-25e31dfb26c3:string:MUA2107",
+            "moduleName": "617834cb-8737-4d71-b982-ff96c7c98fe3:string:Large Ensembles 2A",
+            "grade": "2c835a46-4c57-477f-9b38-805bcb8d4406:string:CS",
+            "credits": "eefdfa79-9737-4876-bb58-d8edd2ee3561:number:2",
+            "gradingBasis": "eb386cca-4726-4cc1-bda0-1dc1ddbf1733:string:CSU",
+            "includeInGPA": "b891f9be-2ae6-43d6-bb68-1aefad7cf970:boolean:false"
           },
           {
-            "moduleCode": "b24fd22d-d33e-4aa9-a689-5419ea86a093:string:MUA1154",
-            "moduleName": "467ebc91-e9b8-4899-882b-a974d33c34d3:string:Noon Recital Series 1B",
-            "grade": "3cca1df9-4429-4cd5-bd84-104c23cc9578:string:CS",
-            "credits": "f5b23e6e-131f-430b-996e-44bdd26424fb:number:0",
-            "gradingBasis": "b1a00830-ff84-4a08-a93a-be467fd3925c:string:CSU",
-            "includeInGPA": "0e2e750a-b5f8-4323-9166-75b65cdbf596:boolean:false"
+            "moduleCode": "fb633cec-3768-46c5-9819-9ecbacf0aca9:string:MUA2153",
+            "moduleName": "1d87aac0-2f52-4c87-a85d-7220b3ce689c:string:Noon Recital Series 2A",
+            "grade": "b572c493-4630-4c14-ab36-567781108d71:string:CS",
+            "credits": "5d7dfe64-e661-46e3-bbc5-533fa0994654:number:0",
+            "gradingBasis": "b117113c-4596-4a49-8156-8066d48ca569:string:CSU",
+            "includeInGPA": "60f47085-8163-4ff5-b88a-cc738bf62a67:boolean:false"
           },
           {
-            "moduleCode": "e4683831-3484-4246-a7df-9e3d7d244bf3:string:MUA1162",
-            "moduleName": "dd718489-2ceb-4f44-b1ad-95af588790eb:string:Major Study 1B",
-            "grade": "a28bb0fc-6cfe-4eed-bad4-68971d96c1aa:string:C+",
-            "credits": "20138bc9-46b5-4146-8dd7-34de1cce15eb:number:6",
-            "gradingBasis": "dfb8b6a3-f991-4456-a441-4f2a865b9b73:string:GRD",
-            "includeInGPA": "34d19280-7701-412c-a270-f5de566ab7a9:boolean:true"
+            "moduleCode": "bd20ecbc-71b7-4621-8ee3-b0f77a73caf8:string:MUA2161",
+            "moduleName": "a0035517-edd0-467a-9af2-db207eb71234:string:Major Study 2A",
+            "grade": "a1be5af3-3742-4db5-91df-c5f953d261e9:string:B",
+            "credits": "37a60d50-8e06-49e2-92d2-dce8cc3c9da3:number:5",
+            "gradingBasis": "17fc93f3-7d20-4a79-b3ca-7beb8ada8b34:string:GRD",
+            "includeInGPA": "54acde89-ae01-4e3a-a264-eb8e07631cb4:boolean:true"
           },
           {
-            "moduleCode": "06860814-28b6-4b24-a14b-ed0480556190:string:MUA1163",
-            "moduleName": "2f9254de-76ba-4e09-95a6-813b6adfc293:string:Introduction to Professional Development",
-            "grade": "3aa23a5b-8b36-4d97-a56d-784d58595014:string:D+",
-            "credits": "ed8eee69-dfe5-4eaa-861f-d8571070dc36:number:2",
-            "gradingBasis": "14b4c6c7-e00e-42b8-8777-a1f0a03da646:string:GRD",
-            "includeInGPA": "0740dd63-e76b-4830-aea8-f7b6f87af400:boolean:true"
+            "moduleCode": "ef89d9ea-0849-467b-9958-91c9d710e174:string:MUA2180",
+            "moduleName": "6ebc5af2-f3f4-442f-8f3c-2b132c50c157:string:Orchestral Repertoire for Brass 2A",
+            "grade": "40a3e476-cde7-4373-8897-5277a3ad4109:string:B+",
+            "credits": "3bf4a50e-a3c7-4fc2-83fd-cf726df3136c:number:2",
+            "gradingBasis": "e260c0f3-e5d2-4965-b55d-0e6383b75286:string:GRD",
+            "includeInGPA": "9bb941d4-7568-4888-9aa2-c4fe60b1f0a4:boolean:true"
           },
           {
-            "moduleCode": "9331f908-bebc-4276-8258-377b9f7958f9:string:MUH1116",
-            "moduleName": "21ef2df9-6357-4105-8717-11cf6b46d8a3:string:Communicating About Music II",
-            "grade": "3e4a3570-2d40-455d-93fb-1cc3c6c0ede4:string:B-",
-            "credits": "25df7e0a-a517-4271-8501-042ba70ae95f:number:2",
-            "gradingBasis": "2fdc72ed-91e5-4951-930b-aa1da2457e41:string:GRD",
-            "includeInGPA": "922b6a32-4e67-4edf-af9c-b1edabbdf076:boolean:true"
+            "moduleCode": "7d75f0b6-8e65-4327-9e45-397fd189b9e7:string:MUH2115",
+            "moduleName": "4d402eac-e6a2-4357-83e5-88e77f89ede1:string:Music and Context: Before 1800",
+            "grade": "2fb0aef2-6371-4d3c-b04e-f72870d48dfb:string:C+",
+            "credits": "37441223-ff7d-44e1-8c87-da8bb9d703f1:number:4",
+            "gradingBasis": "d815d669-a3a2-41ea-bb8d-1ea809137363:string:GRD",
+            "includeInGPA": "b29e3d3c-85d8-4dc5-a0aa-b21b7787a7a9:boolean:true"
           },
           {
-            "moduleCode": "cabee9cf-eeb7-411b-8630-63a9ed2698ba:string:MUT1122",
-            "moduleName": "3c8ab55c-5d35-4470-9ee1-ebd63a0db2a6:string:Musical Concepts and Materials II",
-            "grade": "bf4c143f-7e21-47bc-8317-af4a62fc70cc:string:B",
-            "credits": "a5e63417-aa20-47e8-b76e-0d2a46965c77:number:6",
-            "gradingBasis": "eb78b083-1488-482e-a3a4-295d8a8d7198:string:GRD",
-            "includeInGPA": "99436452-8a98-4184-86ae-07e6b9170c4b:boolean:true"
+            "moduleCode": "237799a3-358c-47e0-ba99-395844c98283:string:MUL2101",
+            "moduleName": "89eb251f-0f1b-4007-894a-606d30cd9ca0:string:Critical Thinking for Musicians",
+            "grade": "f82b0cf8-2c1a-4b25-9556-e5e50f2bc203:string:B-",
+            "credits": "36d1dfd5-baf4-4a33-876f-52b05b344761:number:4",
+            "gradingBasis": "6983de3f-65f6-45c7-8762-9944eaae0cb3:string:GRD",
+            "includeInGPA": "1aa08b40-905a-4049-971b-fcc2f619aef1:boolean:true"
+          },
+          {
+            "moduleCode": "e3cfa9fc-4e5d-4849-9a64-7a7d85e16b3a:string:MUT2117",
+            "moduleName": "4951bf3c-46c1-475c-94ca-651ca313f2b8:string:Musical Concepts and Materials III",
+            "grade": "a650ea47-ba4c-4c29-8aaa-0b2d95a07948:string:D+",
+            "credits": "ab922e42-4e76-4c45-af4c-52fcb95a1264:number:4",
+            "gradingBasis": "46712e77-2ef3-45c0-9b6c-7d3dabebe0db:string:GRD",
+            "includeInGPA": "b1f25faf-a9f6-4480-9167-0559850ffc4f:boolean:true"
           }
         ],
         "summary": [
           {
-            "programName": "ad742d9c-5223-4d72-99d6-810eab4bad01:string:Bachelor of Music",
-            "includeInGPA": "937da1a9-3faa-4620-9ec2-197035eb0bab:boolean:true",
-            "GPAName": "81693947-e969-4d7a-9501-9d2ee56c72fc:string:Cumulative Average Point",
-            "GPA": "08684515-4894-499c-8649-a84fcdd85bdb:number:2.71"
+            "programName": "d12b8244-fe38-42a6-a8eb-ddd46b0aa009:string:Bachelor of Music",
+            "includeInGPA": "ec9cd234-56b4-48b0-a4eb-241b93528b3c:boolean:true",
+            "GPAName": "5285d928-5cab-4235-bb38-5a09ce74ea19:string:Cumulative Average Point",
+            "GPA": "a891f4f4-6c99-48a0-b344-7dd7afb75465:number:3.05"
           }
         ]
       },
       {
-        "name": "502b34b4-bbb1-4012-9b5e-5d83ac98a07b:string:1410",
-        "term": "5865edc5-84d8-4064-b435-6bcec4c4b7ee:string:2014/2015 Semester 1",
-        "formOfStudy": "e6493a35-7ebe-4d2e-a24f-f7143d1b37fa:string:ENRL",
-        "fosPrintArea": "fef1a01a-325f-4617-834a-762eaa5a430f:string:ND",
+        "name": "c5fbb263-892a-4004-aef5-08da704be8da:string:1420",
+        "term": "c5b85f97-fd9a-4533-aa34-1a542cf55bb8:string:2014/2015 Semester 2",
+        "formOfStudy": "e202b55c-fac1-45d2-9f4e-4c50459c62c2:string:ENRL",
+        "fosPrintArea": "5a378043-ffaf-4880-ace5-0113919edc8a:string:ND",
         "modules": [
           {
-            "moduleCode": "c31c8092-74db-47df-96c8-897b04cfb41f:string:EM1202",
-            "moduleName": "b35b6b41-fb91-4e53-b8f1-ce530e0ca4f3:string:English for Academic Purposes (Music) 2",
-            "grade": "7c2bd060-9ec4-4865-bc1c-63346f05ffa7:string:B-",
-            "credits": "5142206f-d110-49ea-a168-264216ed6203:number:0",
-            "gradingBasis": "6a20bee4-258d-4cfb-a7a3-9ae5ac963fcd:string:GRD",
-            "includeInGPA": "e5b8688c-f172-4557-9755-fdd7a3ec1252:boolean:true"
+            "moduleCode": "6414c3fe-8c73-442a-909f-4ea768e1d328:string:MUA1110",
+            "moduleName": "2638c1db-a012-4f62-a3e1-1d3c799df47c:string:Chamber Ensemble 1B",
+            "grade": "4a4518c8-6e7a-474a-aa5d-792026c9d7ce:string:A-",
+            "credits": "f86e87fd-3c9c-4817-9cd1-f97d8c1f1730:number:2",
+            "gradingBasis": "1525e4f6-3a75-4a50-be2a-125457ab6a3f:string:GRD",
+            "includeInGPA": "008904b7-90e6-475f-aa7c-f7753215f96e:boolean:true"
           },
           {
-            "moduleCode": "bfd99e35-ad58-4720-8988-4b243e00caae:string:GEK1053",
-            "moduleName": "bdaa1335-0157-4c06-980a-5a43a0de1147:string:Chinese Music, Language and Literature (in English)",
-            "grade": "7321c771-c20f-4b66-9df9-5d215b86135c:string:C+",
-            "credits": "20b5198d-3ed1-449e-9914-e6a3eebf6b7b:number:4",
-            "gradingBasis": "1291e6ed-b7db-494a-acff-933662770e23:string:GRD",
-            "includeInGPA": "dde14fb3-449f-4f5a-8dba-968e93f0127a:boolean:true"
+            "moduleCode": "ea2fdbe7-f718-4afc-821a-9a869c95990f:string:MUA2108",
+            "moduleName": "39ecd115-c762-4c11-baf3-874c21a8ecb1:string:Large Ensembles 2B",
+            "grade": "45fa68e5-51ea-4fdc-9545-6698140b3dec:string:CS",
+            "credits": "5425987c-f595-4813-84f2-609184667aca:number:2",
+            "gradingBasis": "4b408350-2dec-4d38-b066-5873650202e4:string:CSU",
+            "includeInGPA": "84fb745c-7bc2-4050-909f-2b6ca154217c:boolean:false"
           },
           {
-            "moduleCode": "1b7cd041-ad5f-4cf6-8c23-e9f6c279e7b5:string:MUA1110",
-            "moduleName": "b0a2e6a6-2b7a-4031-af06-122bfa3a4d52:string:Chamber Ensemble 1B",
-            "grade": "f3bc7360-0dd1-4b25-9ea6-d93a44cd7971:string:B",
-            "credits": "5b9aa954-2239-4add-9ae7-bcb8cdb6f60c:number:2",
-            "gradingBasis": "cef5185d-c506-487c-90fb-14fc2f2a27ca:string:GRD",
-            "includeInGPA": "dd0e45f9-57a5-427f-b5d2-7ad867a49ab9:boolean:true"
+            "moduleCode": "726821ef-b99b-4bf2-b131-574738d84207:string:MUA2154",
+            "moduleName": "4913bc8a-b84f-4f29-9bda-173e21618244:string:Noon Recital Series 2B",
+            "grade": "b3ee2a3c-4752-4f63-b92b-1a1107364c1b:string:CS",
+            "credits": "388497d7-512d-4f28-b71a-2bd4a7f0e99f:number:0",
+            "gradingBasis": "25c9b95d-214e-4dad-b766-2508866aad02:string:CSU",
+            "includeInGPA": "73ea6642-7d65-4576-a4f1-0481fd084984:boolean:false"
           },
           {
-            "moduleCode": "45e49ae7-73fb-4cf3-b0cd-344a4de3d202:string:MUA2107",
-            "moduleName": "046a61ed-9776-4fbb-9247-46c4dc514095:string:Large Ensembles 2A",
-            "grade": "c306e776-2625-4374-a766-69c895cb1e57:string:CS",
-            "credits": "9c70fe76-9911-43f3-aa82-2019dbf76de5:number:2",
-            "gradingBasis": "9cdf9157-d0cc-47bf-a729-b934e7664000:string:CSU",
-            "includeInGPA": "3a95be12-ab99-457d-b19d-db27aec15048:boolean:false"
+            "moduleCode": "9f2cccb8-d22f-4755-bff0-ed68457281c0:string:MUA2162",
+            "moduleName": "3592b679-ad41-42c7-ab0b-d4f990ec4eff:string:Major Study 2B",
+            "grade": "e571504e-14f1-4745-bd41-9df6f24b4624:string:B+",
+            "credits": "46431ed7-51af-4bb5-900b-eb96a850ea33:number:6",
+            "gradingBasis": "3ee0612f-452f-4d03-a61a-8650a92eddf9:string:GRD",
+            "includeInGPA": "83998a08-86ed-40d1-afb8-24d970d036d7:boolean:true"
           },
           {
-            "moduleCode": "de120f31-36ee-4001-981b-509fde355b23:string:MUA2153",
-            "moduleName": "85e28674-fdc0-4506-b132-e42a613fe070:string:Noon Recital Series 2A",
-            "grade": "9655d91c-0098-4e0f-8030-93cc2b960f97:string:CS",
-            "credits": "333583b7-9a80-4142-a751-46f04e63a46c:number:0",
-            "gradingBasis": "4b29fadd-e07e-4e2a-ba4e-849b06148264:string:CSU",
-            "includeInGPA": "d25bc3f3-baee-4ab3-aa27-96a324ad1489:boolean:false"
+            "moduleCode": "64e38ef5-d681-47c8-a509-41f26c8cc185:string:MUA2181",
+            "moduleName": "bfa2a7e5-0b8c-444b-84a5-33bbcc910e1e:string:Orchestral Repertoire for Brass 2B",
+            "grade": "e93325e3-480f-4c31-98f5-497be973fe79:string:A-",
+            "credits": "19de1c56-6bbe-4d01-8f8f-0e2933ca57a3:number:2",
+            "gradingBasis": "02321346-cf4c-4bfe-a324-ff0e2ff9f928:string:GRD",
+            "includeInGPA": "bf2b9206-e4f9-4da7-b471-7ed1c8b614bf:boolean:true"
           },
           {
-            "moduleCode": "1eec20ed-9612-4bcc-8fb4-0ef9160888e4:string:MUA2161",
-            "moduleName": "78fea6d1-d5e8-4411-8e15-96a2200ddda7:string:Major Study 2A",
-            "grade": "f8487ed5-7e35-4838-abd0-2ef7f0f4e3d8:string:B",
-            "credits": "a2c94135-aa5b-49da-ac71-5115f35325a0:number:5",
-            "gradingBasis": "1896966c-2ac9-48e8-a420-ac1683aeeea4:string:GRD",
-            "includeInGPA": "3ceeed89-fc26-448e-8426-7d8f3a257162:boolean:true"
+            "moduleCode": "3b4056bc-8ef2-4208-996a-1657cc189787:string:MUH2116",
+            "moduleName": "5136ce63-32f0-4470-a3e3-f19ac5f53514:string:Music and Context: After 1800",
+            "grade": "450e7230-6019-4817-bcad-a437e0c2843d:string:B-",
+            "credits": "e1e86c1e-00f8-4731-8fe8-14e3933d23cf:number:4",
+            "gradingBasis": "2849b637-bf8c-4eec-a3d5-856cd2727342:string:GRD",
+            "includeInGPA": "1dcdc5ba-a9bc-445d-9b60-e2cd4fb285b1:boolean:true"
           },
           {
-            "moduleCode": "6622255e-7fb5-4f73-b086-8385b4ac3c68:string:MUH2115",
-            "moduleName": "e5532c5b-cb50-4511-9aec-2024df205420:string:Music and Context: Before 1800",
-            "grade": "54438c88-f0ec-4224-a0c7-423a21fff20f:string:B-",
-            "credits": "4d4bb006-3c37-4985-9f53-cb975b8042a9:number:4",
-            "gradingBasis": "d3bf6e96-beb8-428f-a141-7e71d9425bf2:string:GRD",
-            "includeInGPA": "030bcbf3-05db-458a-a515-6ecc67c5afea:boolean:true"
+            "moduleCode": "955e3064-34e7-47f4-9420-88a6f4f5f483:string:MUT2118",
+            "moduleName": "2a2d3c2b-d257-4f91-ad21-ded93f1fdb33:string:Musical Concepts and Materials IV",
+            "grade": "a25c6f77-4ee4-45bc-b40b-fb6c021e3d73:string:D",
+            "credits": "ed67b6cf-cbff-44bf-ac46-e09f350e5df5:number:4",
+            "gradingBasis": "a070f1f9-e948-4e59-a5a1-5ad2c832fd9b:string:GRD",
+            "includeInGPA": "0d1dfe89-b2f1-462b-8e70-d59752b81ec6:boolean:true"
           },
           {
-            "moduleCode": "87805c36-ec39-4a3e-b524-4f131a50695f:string:MUL2101",
-            "moduleName": "5febb095-ed31-4055-8882-5cc586fafd6a:string:Critical Thinking for Musicians",
-            "grade": "e8e8165a-3cc6-4bd5-9aa4-bab9c84cf5d6:string:B-",
-            "credits": "4daa6efc-957d-42b5-ab1f-fcb6ec5b7610:number:4",
-            "gradingBasis": "2f549948-d7be-4909-8844-bef7d2de96ee:string:GRD",
-            "includeInGPA": "8966d105-69c8-4294-9e9e-88c26e9bc958:boolean:true"
-          },
-          {
-            "moduleCode": "39499a6d-c6db-46e2-9906-27a0bcce0627:string:MUT2117",
-            "moduleName": "6d77dc38-45af-4cee-871c-1c410faa0491:string:Musical Concepts and Materials III",
-            "grade": "619f38dc-e421-4610-ab28-4faa3b6d63d3:string:C+",
-            "credits": "69df5d4c-d41d-4e03-8c1f-5edeb521b011:number:4",
-            "gradingBasis": "9e255fb7-5d59-4ac3-ab4f-9ed732eb129e:string:GRD",
-            "includeInGPA": "a47c2292-1512-4951-aae4-86b4b85534c2:boolean:true"
+            "moduleCode": "bcb26e37-82e8-4e6c-a927-612ffaff4985:string:SSY2223",
+            "moduleName": "de4f7dca-0aa9-4dea-9ba2-8d6e5c673fab:string:Western Music within a Singaporean Context",
+            "grade": "19fc17f4-3e2b-451a-862d-914231b0802e:string:C",
+            "credits": "a86330c4-d6f8-4d52-a913-1cc83aeb9eac:number:4",
+            "gradingBasis": "440d22b4-7ca7-4a4b-acf4-a98f93b1d8e9:string:GRD",
+            "includeInGPA": "a7bc30a1-67d6-42ed-b467-eca35aacc466:boolean:true"
           }
         ],
         "summary": [
           {
-            "programName": "bdd91660-71cf-4ce6-91fb-2f0cc90c061b:string:Bachelor of Music",
-            "includeInGPA": "21f1840a-c214-4611-a1e3-a9342f4d2795:boolean:true",
-            "GPAName": "3023c9c8-40a9-421d-ba73-a37518926e2c:string:Cumulative Average Point",
-            "GPA": "74235715-6359-4517-9e4c-0e2cfb54fad3:number:2.82"
+            "programName": "610fe195-fe54-469a-820c-32c50908051d:string:Bachelor of Music",
+            "includeInGPA": "60fd097f-b5f6-42af-ba8a-1282f81f01a2:boolean:true",
+            "GPAName": "dba74363-9c83-4431-a5f5-d74be63a57da:string:Cumulative Average Point",
+            "GPA": "a20e6eb8-0383-4b8d-9f65-8cf7724a987e:number:3.03"
           }
         ]
       },
       {
-        "name": "7d05923c-67ce-4633-b113-ba3be57054a8:string:1420",
-        "term": "0e8063b7-c0c3-414b-875d-41be7783a1e1:string:2014/2015 Semester 2",
-        "formOfStudy": "09b3bfac-3c60-4f84-a247-f0277ceeee45:string:ENRL",
-        "fosPrintArea": "eb4b80ef-ac3d-400a-ad1c-f8f979389f7e:string:ND",
+        "name": "cbefa03e-76f7-4cb3-a6e0-57afcb8f803d:string:1510",
+        "term": "23edbf3d-5a12-46a8-9422-741223b7c3c9:string:2015/2016 Semester 1",
+        "formOfStudy": "97f20895-bf0e-4248-88a3-90458085e713:string:ENRL",
+        "fosPrintArea": "707aef01-3979-463e-96a7-d762d540203d:string:ND",
         "modules": [
           {
-            "moduleCode": "3eacfee0-6325-43ef-9cc0-a6a619e64c9a:string:MUA2108",
-            "moduleName": "43d794f1-b1b6-4072-8ccb-ebb8bd297f98:string:Large Ensembles 2B",
-            "grade": "4ed83e27-7944-4adc-9f16-864f4668ea88:string:CS",
-            "credits": "014cf5e0-00af-488d-9e9e-081aff57011c:number:2",
-            "gradingBasis": "bbf771bf-d3f5-4e6a-8dd6-b8fcd944b8b6:string:CSU",
-            "includeInGPA": "94f147ed-b6da-470d-b863-1535e9e6f1cf:boolean:false"
+            "moduleCode": "4ceca88a-65b7-4698-939a-5c1ad68f97a4:string:GEK1519",
+            "moduleName": "df23426f-8c27-4855-9062-336e9bf172c4:string:Science of Music",
+            "grade": "48ed248a-5671-4609-9b1b-3f8d17259663:string:S",
+            "credits": "43b3e898-264d-4de4-93e6-5aafaef6ed5b:number:4",
+            "gradingBasis": "bfd8aa06-3e26-4e69-b497-bbd3b9b2b7bd:string:SNU",
+            "includeInGPA": "5b075de0-ea62-47d9-bcc5-4e12bafc8f5a:boolean:false"
           },
           {
-            "moduleCode": "a7009b13-20ff-46c9-b893-ff01faa1785b:string:MUA2109",
-            "moduleName": "d3dd6a3d-63e3-4537-8aff-1fbd88df503a:string:Chamber Ensemble 2A",
-            "grade": "bb868d53-03f6-44cc-aee8-bb2430fd043f:string:B",
-            "credits": "449d294a-dbc3-43ca-95f6-cf5cd095aefc:number:2",
-            "gradingBasis": "f59e9bb8-9e19-4621-a59d-758945717246:string:GRD",
-            "includeInGPA": "1ee7da34-210f-4c74-ba94-eeda18168fed:boolean:true"
+            "moduleCode": "2fa8f263-1024-42f3-b921-9ac8240b2f26:string:MUA2109",
+            "moduleName": "4edd4473-d111-45a7-950d-ce08669404a9:string:Chamber Ensemble 2A",
+            "grade": "cf93d101-7893-46c4-98ba-60dfd175bef6:string:A",
+            "credits": "e608e860-fc27-4bcd-9e14-a5f1ff79b527:number:2",
+            "gradingBasis": "ebecc7b9-fece-45ee-8d31-bc84a237302c:string:GRD",
+            "includeInGPA": "a43c5fda-e1df-4a27-b12e-b408bd00db74:boolean:true"
           },
           {
-            "moduleCode": "e6dd637d-2029-47a3-88f6-7072a58cb8c5:string:MUA2154",
-            "moduleName": "d349f564-a189-4ae0-a0ae-8c8016d47de5:string:Noon Recital Series 2B",
-            "grade": "7032e2bd-012a-43f9-8537-93bd237dce89:string:CS",
-            "credits": "3a9cb94e-ef45-4607-86ff-6fc1e997738d:number:0",
-            "gradingBasis": "6e5570ef-ec3d-4660-be9c-facb0e39940b:string:CSU",
-            "includeInGPA": "b5fcb5bf-9447-4377-8a49-6774b24c0c8e:boolean:false"
+            "moduleCode": "350daaa3-396d-4ea9-9f0a-f328f12f4760:string:MUA3105",
+            "moduleName": "61dc44b0-641b-461d-b2a7-21ac56e9bed1:string:Conducting",
+            "grade": "21fa37d1-9ced-4fd8-b52e-9f9f49f40644:string:C+",
+            "credits": "2b6b7d4e-5d6d-4091-9ba8-f0b9eee7ba30:number:2",
+            "gradingBasis": "ddc82f03-bdff-4137-902b-80065a49520b:string:GRD",
+            "includeInGPA": "b1886a6f-76df-4a4b-a51e-45f9d39b79d8:boolean:true"
           },
           {
-            "moduleCode": "430724c5-c935-40ea-b860-ac9c3cdef3b2:string:MUA2162",
-            "moduleName": "918ea604-4a43-438e-81ec-f80275d3032d:string:Major Study 2B",
-            "grade": "487bb193-e095-447d-8063-9038341b625a:string:B-",
-            "credits": "804aab76-f394-45ab-94ef-e303aef731c1:number:6",
-            "gradingBasis": "a99881a4-0dbc-4e91-b33a-325e85e00510:string:GRD",
-            "includeInGPA": "28a35fbf-b373-4c37-ab18-8f620b611358:boolean:true"
+            "moduleCode": "3fe590fc-12fc-4258-9b60-4ab03f49ae1e:string:MUA3107",
+            "moduleName": "2d97fcc5-0764-4c6b-b992-21541482599e:string:Large Ensembles 3A",
+            "grade": "f43a734b-1409-4251-90ce-a3aef1880369:string:A",
+            "credits": "e9923122-a7cd-49f0-8548-2197a279fb8d:number:2",
+            "gradingBasis": "caeed3b5-6f18-4911-9c4c-5f3b0155d9c3:string:GRD",
+            "includeInGPA": "fef15b02-9dea-449b-833e-cdd89a09f86a:boolean:true"
           },
           {
-            "moduleCode": "5b696286-d047-4822-a2a4-8480fcc1bd7c:string:MUH2116",
-            "moduleName": "aa6ea252-f63c-4be1-926c-ce6d43586c6e:string:Music and Context: After 1800",
-            "grade": "51b758a6-67b6-4492-b29c-06454f56e989:string:B",
-            "credits": "9ffc1404-95ab-4bfc-8edf-2ac6e9d1a598:number:4",
-            "gradingBasis": "04697610-c3ac-4def-a093-1aab9ef1d7e3:string:GRD",
-            "includeInGPA": "1f8b6b9c-f91c-41f0-9d3f-bc8a11eccf9f:boolean:true"
+            "moduleCode": "26e9e39c-c424-493d-92f0-8f7a34ec34b4:string:MUA3153",
+            "moduleName": "22dd2bb4-a159-4858-b288-d8983995746d:string:Noon Recital Series 3A",
+            "grade": "4c61e6b6-4278-4878-9436-4dbcabb9e93f:string:CS",
+            "credits": "e6585874-67bc-40cb-b0df-dfb7d572b679:number:0",
+            "gradingBasis": "f507f6c0-003a-4395-80f2-5709c730bab7:string:CSU",
+            "includeInGPA": "ed166510-840a-46b8-b929-38a2243a4fea:boolean:false"
           },
           {
-            "moduleCode": "c444c647-6daf-4171-a5c8-978acf1e1f15:string:MUT2118",
-            "moduleName": "5eb29efc-65b9-458d-a0dc-f94ac556d50a:string:Musical Concepts and Materials IV",
-            "grade": "2ed5b6e5-9442-48dc-8a1e-5a9c8b284520:string:B+",
-            "credits": "1f255de2-84a3-481f-a665-7c5d0048831f:number:4",
-            "gradingBasis": "4a1e4e0f-6bc4-4829-8d18-7cbefc34b59b:string:GRD",
-            "includeInGPA": "170f9a22-cf4e-4349-9d70-1a7ce00f8ae3:boolean:true"
+            "moduleCode": "12bdb2d4-d250-4bff-b7e3-598253b23ec6:string:MUA3161",
+            "moduleName": "d2502d97-0752-45b0-b2a9-5d6dd12f4a0e:string:Major Study 3A",
+            "grade": "87a2000a-e85b-40a2-982e-03803ebca02d:string:A-",
+            "credits": "0f1c149a-cab4-4fb9-a4b1-e69901fb7d07:number:5",
+            "gradingBasis": "53065761-8521-4294-afd3-22d13e860216:string:GRD",
+            "includeInGPA": "38935710-ea66-4e55-a6c8-46a45b21f4cd:boolean:true"
           },
           {
-            "moduleCode": "81b0e81c-0d9d-41d4-be87-61916c784b33:string:SSY2223",
-            "moduleName": "591f29db-a23c-40ba-ac48-f7143c7aeb1b:string:Western Music within a Singaporean Context",
-            "grade": "6dfb2746-925a-4a14-bfc9-e218ef1b5e15:string:D+",
-            "credits": "3a125731-919a-43d9-a13b-3f8e12ea0631:number:4",
-            "gradingBasis": "28ecf2b3-e20d-4627-950b-88625fe9a062:string:GRD",
-            "includeInGPA": "bae305b4-18a6-450a-86b4-027526704092:boolean:true"
+            "moduleCode": "142e0e56-8b34-4362-93c6-93c22ba69c43:string:MUA3181",
+            "moduleName": "4f03c92e-88d6-42fb-8ce9-903b48d269a5:string:Advanced Concepts in Orchestral Repertoire I",
+            "grade": "932a3711-9d3a-45bf-9442-a08216af5133:string:A",
+            "credits": "c0e4a212-9ba3-4ba5-ac9a-9b6a84043105:number:2",
+            "gradingBasis": "84bfc2c3-a775-47e7-b855-5f1d14fb1d3e:string:GRD",
+            "includeInGPA": "16b371de-752d-40b8-aab8-ee638001bee7:boolean:true"
+          },
+          {
+            "moduleCode": "9cbeb7c3-fe78-4ed3-84e1-55dd955fcdaa:string:MUA3205",
+            "moduleName": "5166921c-a4ae-4e60-a9ae-58a56e01520c:string:Materials of Jazz Music 1",
+            "grade": "cb109783-3786-4a29-85a9-98206bc3195f:string:C",
+            "credits": "a53c731a-e2c5-4b67-8843-23ae6ab232e8:number:3",
+            "gradingBasis": "86212b34-5d87-4d1f-9ec0-3adedd56a305:string:GRD",
+            "includeInGPA": "7583f69f-cb8e-4122-97d9-6b65ed75b00a:boolean:true"
+          },
+          {
+            "moduleCode": "76d48241-4866-491b-8a35-83d90135d5ac:string:MUH3203",
+            "moduleName": "ba790c8b-f3f6-4fc4-8ebf-410e360e6962:string:History of Opera",
+            "grade": "e01055f6-b339-43c7-8251-39c63a56e56a:string:C",
+            "credits": "6a77830e-d8c3-43dd-8494-660eff2a01be:number:3",
+            "gradingBasis": "f6326cb4-b745-476c-b3b0-d3b38278bb65:string:GRD",
+            "includeInGPA": "6e0e7242-110d-48ba-980b-45ed0847e0b5:boolean:true"
           }
         ],
         "summary": [
           {
-            "programName": "aacac585-d365-41b9-bee7-adb1be95c12b:string:Bachelor of Music",
-            "includeInGPA": "f7bde8ab-19bb-450a-a4d1-36186cf4f6e1:boolean:true",
-            "GPAName": "a371f147-3651-456d-9cf3-1f451bbf15f4:string:Cumulative Average Point",
-            "GPA": "fadfdc0b-d2a5-42ca-a8be-94588f06b036:number:2.89"
+            "programName": "c4f6b87f-32f5-4868-bfd6-f790ce05f3bd:string:Bachelor of Music",
+            "includeInGPA": "93851b64-af46-45c0-85d1-c03434efc6b0:boolean:true",
+            "GPAName": "1f81ac92-7ffe-402d-b4ac-d254e76b802a:string:Cumulative Average Point",
+            "GPA": "939a079e-ed19-4f91-bfa2-a0ac31dcb141:number:3.16"
           }
         ]
       },
       {
-        "name": "c085d4ce-ee8d-4927-b680-94fd5d615011:string:1510",
-        "term": "247e262c-61f2-434e-895c-87b2e7342ac1:string:2015/2016 Semester 1",
-        "formOfStudy": "45c8a584-8771-4e63-ad23-0f6bda1e9a77:string:ENRL",
-        "fosPrintArea": "53b79468-a67d-4d30-950b-41c5c10ee030:string:ND",
+        "name": "461435d1-fc04-4742-b9e2-e3961d37523d:string:1520",
+        "term": "81e9fa7c-4db7-4fdb-9a04-bf4eb278c062:string:2015/2016 Semester 2",
+        "formOfStudy": "78c654fe-2564-4a7b-b801-38652d8564f4:string:ENRL",
+        "fosPrintArea": "1d2202f8-a252-4767-a00a-9708f5858a00:string:ND",
         "modules": [
           {
-            "moduleCode": "2a17a80c-80ab-4b12-b442-430ea30fdabf:string:LAF1201",
-            "moduleName": "6401972f-4cdd-446f-a8e2-3d7d875afd0d:string:French 1",
-            "grade": "b402ac51-c3aa-49de-bca9-4a9f1449e0fb:string:C",
-            "credits": "0099d47e-e8a4-451c-88bb-6552e0ab3cc8:number:4",
-            "gradingBasis": "3a326f57-ade4-4f71-b6ff-f0a3cb5d52f3:string:GRD",
-            "includeInGPA": "52175252-77de-4753-a209-a772a5e13ffc:boolean:true"
+            "moduleCode": "080b2bc6-5d1f-4d89-9d15-d2b251f758c4:string:LAG1201",
+            "moduleName": "0c72b55f-b048-4c8d-836a-79ad41e0ec50:string:German 1",
+            "grade": "8ced569b-6621-47b7-89ad-f8d6b938ca61:string:D+",
+            "credits": "f7bffcec-d554-4c6a-a4e4-e74ca35ea82c:number:4",
+            "gradingBasis": "184f80c6-f94c-4996-8136-515e435c9fc6:string:GRD",
+            "includeInGPA": "73977e01-ea36-4365-95dd-40bb1ba1f211:boolean:true"
           },
           {
-            "moduleCode": "6940ee22-b8ca-40f8-9c7d-1ba0c60c7270:string:MUA2110",
-            "moduleName": "0341801e-2579-44ba-ab7a-757ef845b696:string:Chamber Ensemble 2B",
-            "grade": "e90b50b9-5a55-437c-bf32-e6de21c2be7e:string:B+",
-            "credits": "721270b1-36fa-4365-b81e-84d2daa33048:number:2",
-            "gradingBasis": "cf4d9bb0-8b11-4c96-8967-b937d091e539:string:GRD",
-            "includeInGPA": "edbc3129-ca21-4f16-9b9b-aa9e1dab45d7:boolean:true"
+            "moduleCode": "9d6cae0d-7d0e-4b89-94e2-3d3c0acb5f9d:string:MUA2110",
+            "moduleName": "c9acb0c1-0e2d-46e0-b18d-4a92ed980a8e:string:Chamber Ensemble 2B",
+            "grade": "62de10b3-39c7-4a9c-9b24-7f364166cc2f:string:A",
+            "credits": "c72b25d6-636c-4b19-82e4-c1b0efe80011:number:2",
+            "gradingBasis": "6d48b982-ac68-45a8-9109-5e7ca37ca843:string:GRD",
+            "includeInGPA": "b26439f5-d479-4b0d-9a89-fb41aa91a911:boolean:true"
           },
           {
-            "moduleCode": "638b1118-1c48-4c83-b320-aadbdbc7b954:string:MUA3105",
-            "moduleName": "4630a5d5-6178-457b-8409-b9f507bb9c06:string:Conducting",
-            "grade": "f62c5917-6028-4782-a886-d90dc6aea96f:string:B-",
-            "credits": "b89818cd-0b62-4687-80f7-e6de06800d74:number:2",
-            "gradingBasis": "bed28546-f97f-448a-9b23-1135f7e91513:string:GRD",
-            "includeInGPA": "9efecfb2-b362-449b-9535-1db91e079f74:boolean:true"
+            "moduleCode": "f2058827-9493-45c5-af90-846d72b2a6d1:string:MUA3108",
+            "moduleName": "d60d5435-5bca-46c2-bdaa-16140246d6eb:string:Large Ensembles 3B",
+            "grade": "18de9b34-6a5a-43a6-9dc8-17f71b47d12e:string:B+",
+            "credits": "2c83bdff-ab95-4e08-89ba-814e2e05d8fa:number:2",
+            "gradingBasis": "92fe122c-8002-4e50-b578-e82e831bad9f:string:GRD",
+            "includeInGPA": "c17856ad-bb52-4f12-8599-d9c093528735:boolean:true"
           },
           {
-            "moduleCode": "7a77a667-a096-489d-b68e-abd3e7ab87f4:string:MUA3107",
-            "moduleName": "fd7caff1-0386-443b-b7c2-62f648d7aac9:string:Large Ensembles 3A",
-            "grade": "48cdc17f-542d-4efa-a87a-3b0a1cf82b5c:string:B+",
-            "credits": "f26466c8-e780-4587-8fb3-077686a66c21:number:2",
-            "gradingBasis": "3fd98835-58d9-4db0-a4a4-a7c8d55b84b0:string:GRD",
-            "includeInGPA": "e55ad179-b5ea-4357-82a5-ed94b9938fd7:boolean:true"
+            "moduleCode": "38330043-396e-47ea-9e93-830b9a943488:string:MUA3154",
+            "moduleName": "009ed9df-196b-4c1c-a020-5638cbff12df:string:Noon Recital Series 3B",
+            "grade": "3bf936d5-91fb-4ed9-9398-0915b02aad67:string:CS",
+            "credits": "a3d87884-954b-412c-a72d-1e005831e43a:number:0",
+            "gradingBasis": "f1e5d6e7-5365-47cb-9bdd-0e1fc58f2bab:string:CSU",
+            "includeInGPA": "cce59365-21b0-4bba-8609-fad458ab4670:boolean:false"
           },
           {
-            "moduleCode": "37170753-7111-403c-adf4-a08e7a6446d1:string:MUA3131",
-            "moduleName": "ea32414f-0957-4bf4-95ce-530506f73838:string:Orchestral Excerpts for Strings 3A",
-            "grade": "fea3e5cb-c41d-493a-ac99-7474e4638bb3:string:B",
-            "credits": "08b1bd71-8544-4636-ad65-ddc0b86f1a82:number:2",
-            "gradingBasis": "169f26eb-ca56-4e20-8df5-49e8d255e5f1:string:GRD",
-            "includeInGPA": "45dc1f05-4bfe-4316-9bfc-8499ef7bb221:boolean:true"
+            "moduleCode": "59b47797-2dc2-4810-be04-dcf1d8fe9d03:string:MUA3162",
+            "moduleName": "bf3a408f-b4f4-48e5-91e3-b3297395cb07:string:Major Study 3B",
+            "grade": "0548d19c-d260-405a-93ef-3d7621ad01ae:string:A-",
+            "credits": "86b36d91-427a-4abc-80e7-f124c9654c90:number:8",
+            "gradingBasis": "1820f7f0-c892-4884-853d-f228e1fae1bc:string:GRD",
+            "includeInGPA": "184445e6-3be9-417e-84a3-e439774b193e:boolean:true"
           },
           {
-            "moduleCode": "5a8d7776-a754-403c-8be5-1e186ee859f0:string:MUA3153",
-            "moduleName": "7d31aa80-702b-40ca-9f0d-4ae0bf1a83f7:string:Noon Recital Series 3A",
-            "grade": "c58be863-ff89-40b0-9bf2-f7132c4fd2cf:string:CS",
-            "credits": "f0b95c8e-7fe4-4903-be0e-1bd5b906c372:number:0",
-            "gradingBasis": "75ae0438-9e2c-400e-9a50-bb1055066ff2:string:CSU",
-            "includeInGPA": "6209fff8-ad74-4b00-a13c-576672120e9a:boolean:false"
-          },
-          {
-            "moduleCode": "db521add-84c8-41f5-89be-40554b19a259:string:MUA3161",
-            "moduleName": "e2be2eb2-cbcc-4596-9535-1a3598e0ce79:string:Major Study 3A",
-            "grade": "9792a3d9-0a67-4403-b6db-8a4ee573c58d:string:B",
-            "credits": "e6d1154f-ac41-4b44-9f00-762164ddc315:number:5",
-            "gradingBasis": "4c8c03cf-064c-4b89-8c00-e886bae9b52d:string:GRD",
-            "includeInGPA": "64da134d-e404-4e1c-8839-8f9b7d53a91b:boolean:true"
-          },
-          {
-            "moduleCode": "ecf3dda3-801e-4146-9600-594acb12de39:string:MUA3214",
-            "moduleName": "6d414567-d3fb-441c-8891-1ebcefa0518f:string:Introduction to Pedagogy",
-            "grade": "b5952a68-9327-45e7-a0e6-dd7cbc66c1e9:string:B+",
-            "credits": "bc7c91e9-7d7b-4ccb-b99c-e192552a4fd8:number:3",
-            "gradingBasis": "d2ecde19-004b-475e-ae4e-246cf57b4ea8:string:GRD",
-            "includeInGPA": "db82f80d-8443-4dbf-a76f-116a9fe20a7e:boolean:true"
-          },
-          {
-            "moduleCode": "9a0eb8c5-34a6-433f-b045-742b1145ec8d:string:MUA3215",
-            "moduleName": "86ebf840-9dea-464f-afa9-fe9eec00cae2:string:World Music for Creative Performance and Workshops",
-            "grade": "8aa7ea73-9a21-4119-a68e-c787e6fef1d9:string:B-",
-            "credits": "0a6760cd-c037-4434-a7bc-80f583028292:number:3",
-            "gradingBasis": "8f91e57d-7152-4903-a880-cc276d8180e6:string:GRD",
-            "includeInGPA": "fffd00f5-dd05-444e-8406-288dd1114c09:boolean:true"
-          },
-          {
-            "moduleCode": "055e56e0-61a4-44fb-877c-70ca16debc14:string:MUT3204",
-            "moduleName": "649e020a-b391-49c2-bb68-d4e9d221bea6:string:Intermediate Keyboard Studies",
-            "grade": "e4c720bc-4d01-48ac-875e-cb0aa6cd5ba3:string:C+",
-            "credits": "e9cf023c-54c2-4210-aec8-c1331a9c9597:number:3",
-            "gradingBasis": "cde323a4-d05c-46ae-9668-7d9a0c46d69b:string:GRD",
-            "includeInGPA": "e1d4558e-3df3-4a2c-a2b6-397cd31accda:boolean:true"
+            "moduleCode": "e426de60-4ead-4b72-a036-e6e183167e88:string:MUA3214",
+            "moduleName": "18cefe6a-83f0-4489-ab4e-aa7b77d0f911:string:Introduction to Pedagogy",
+            "grade": "0ff780d1-637f-4b95-9082-6dd39f0bf390:string:B",
+            "credits": "fa115294-3aaf-42b3-a5a2-3d7af2068871:number:3",
+            "gradingBasis": "856c41d7-e3e0-4ebb-b1f7-aa5853c1fe09:string:GRD",
+            "includeInGPA": "f951faf0-4e7e-4d80-84ad-93f379536da2:boolean:true"
           }
         ],
         "summary": [
           {
-            "programName": "6a680ac8-86b6-441a-9e86-f16e0048fd22:string:Bachelor of Music",
-            "includeInGPA": "1d70a492-4ac3-46a0-8868-ff4aab54fbc9:boolean:true",
-            "GPAName": "7a31a492-83da-4a0c-a3f8-726db7f237bb:string:Cumulative Average Point",
-            "GPA": "59d0b168-2696-4e19-a360-28ea67edb60c:number:2.97"
+            "programName": "571a5c5f-1efb-4d32-95ff-03f8ca708707:string:Bachelor of Music",
+            "includeInGPA": "24f974d4-07cb-4755-87ac-8d133fb36015:boolean:true",
+            "GPAName": "45f82598-8800-4ce0-a9eb-63a2146ecf8c:string:Cumulative Average Point",
+            "GPA": "01fb6772-bebe-4e14-9b6b-cc5681763de8:number:3.25"
           }
         ]
       },
       {
-        "name": "b3ed5aac-7ef7-433c-a62f-ccbeaddfa68f:string:1520",
-        "term": "23ceee88-32cc-43b6-9b2e-5a84dfa171b6:string:2015/2016 Semester 2",
-        "formOfStudy": "20997129-36dd-43ad-848e-55b53c66aa0c:string:ENRL",
-        "fosPrintArea": "a3d6dcb7-f97e-42e3-a843-e7c4485eb818:string:ND",
+        "name": "e7fbb019-6748-4860-9ff1-86fe43f6b154:string:1610",
+        "term": "2271e309-7db3-4ea4-86be-07f020439ebc:string:2016/2017 Semester 1",
+        "formOfStudy": "5f9310f9-347b-4d5a-af70-7dc64fafe4e7:string:ENRL",
+        "fosPrintArea": "6e0c2b5b-b703-437d-a2a5-3d79da9c6ede:string:ND",
         "modules": [
           {
-            "moduleCode": "590802f0-4b51-4e62-a7bc-c082f112e700:string:GEK2047",
-            "moduleName": "a050b72b-6215-4293-8237-604adbced8c0:string:Exploring Chinese Cinema: Shanghai-Hong Kong-Singapore",
-            "grade": "cde6e69b-6843-4429-9b63-e22ccdf90b20:string:W",
-            "credits": "805ded53-8388-4b9d-9810-2c43b91c2f5b:number:4",
-            "gradingBasis": "3de9a25d-b287-4c11-a51d-7da147ef491c:string:GRD",
-            "includeInGPA": "90b3e0c6-965e-4847-9df7-c0d4189279f1:boolean:true"
+            "moduleCode": "82521195-1b26-4828-8444-e1c1db46b224:string:GEK1054",
+            "moduleName": "11a0a4f6-b5d3-4706-be56-5664012c4809:string:Social and Cultural Studies through Music",
+            "grade": "0dc778fa-c74b-485b-95b9-b1a7b4ada21b:string:D+",
+            "credits": "848d7230-3bf9-4d57-b50b-9319ab45019a:number:4",
+            "gradingBasis": "fed6cce9-7939-455e-903a-a655b57ed403:string:GRD",
+            "includeInGPA": "f8a6fa97-188f-4846-8152-21826f864485:boolean:true"
           },
           {
-            "moduleCode": "dc64b3dd-5f93-4259-b654-6f26541475a8:string:LAG1201",
-            "moduleName": "ec93e2c5-a0bd-43e1-8ccb-fc795add59f2:string:German 1",
-            "grade": "4e58f972-4a52-40f2-b5bc-277dec2fa979:string:S",
-            "credits": "d623d37a-7726-4db0-9e06-21d86a5d7cdb:number:4",
-            "gradingBasis": "c96ecec8-fc6f-4aa3-a8e3-42d876f4ba38:string:SNU",
-            "includeInGPA": "de957857-a843-4f2a-bffa-974b66b8e604:boolean:false"
+            "moduleCode": "b122f656-a3d7-4fc6-96f0-7894cbbed6a9:string:GEM1003",
+            "moduleName": "7a3b69a5-bfcb-4729-96a4-75cf39583e1e:string:Introduction to Theatre and Performance",
+            "grade": "ae6c75ae-c46e-44f3-b2b0-f6372fab05e5:string:D",
+            "credits": "f54cef05-c47c-4e38-8770-42c98f21698c:number:4",
+            "gradingBasis": "0b760230-7da2-432d-828d-6fdc4052ee22:string:GRD",
+            "includeInGPA": "dddd9fa9-4cc6-48bc-8fd5-0c96c6b1c837:boolean:true"
           },
           {
-            "moduleCode": "18a4c422-5612-4713-9118-126c3720a975:string:MUA3108",
-            "moduleName": "65e13232-3790-40c2-b4c7-158bf25b3998:string:Large Ensembles 3B",
-            "grade": "4890cf2a-2efe-446b-aa9c-b6a85f0bdcf4:string:B+",
-            "credits": "3792bdfb-d51c-4439-bab1-c37372607db8:number:2",
-            "gradingBasis": "0d1da7d4-0cb9-409d-a442-b3a4e53bc87d:string:GRD",
-            "includeInGPA": "dc34cc7e-71a1-490b-83fd-8fa8783e99a2:boolean:true"
+            "moduleCode": "39e10454-23b6-43ae-9d17-19eaa95a8c55:string:MUA4162",
+            "moduleName": "ee919d98-caac-4c47-9cdb-a8ca520b2000:string:Major Study 4B",
+            "grade": "a9682bd2-c429-4ced-bae6-097d69c9c47b:string:A-",
+            "credits": "b7708633-1f83-4eef-8dd6-4d69bf7d577b:number:12",
+            "gradingBasis": "8f048b47-db1f-4b0f-8f01-fc65e6c53844:string:GRD",
+            "includeInGPA": "47300c09-ad07-412a-ba0b-d15ffd3b0880:boolean:true"
           },
           {
-            "moduleCode": "44d9fd72-28a9-4f91-8405-a457b563f30c:string:MUA3109",
-            "moduleName": "693cadbc-1f2c-40b9-a3d8-a95d04c3dbb0:string:Chamber Ensemble 3A",
-            "grade": "a1742f55-7f46-453b-907b-e0f21c70311b:string:B+",
-            "credits": "e43ed064-6cab-4c1e-9bb8-2b80832d53c7:number:2",
-            "gradingBasis": "64d28976-ac89-40bf-821d-752bc1e128e7:string:GRD",
-            "includeInGPA": "d09b1ac0-5254-4b9c-b407-26d439087aeb:boolean:true"
-          },
-          {
-            "moduleCode": "fe7a6a01-e9ea-4a77-96ce-6fdedeea81a6:string:MUA3132",
-            "moduleName": "4893023f-e082-4435-ac4b-d397686bcd79:string:Orchestral Excerpts for Strings 3B",
-            "grade": "f447113e-714d-4969-bd00-1009ef1f96c6:string:A-",
-            "credits": "0c231a8b-764d-42af-b7b1-13f7c641eafb:number:2",
-            "gradingBasis": "4b3e0f31-55c2-4883-9fab-f2d3ea05eb04:string:GRD",
-            "includeInGPA": "3b86b3ed-42b6-4247-94b3-6549779ff8b8:boolean:true"
-          },
-          {
-            "moduleCode": "13124754-2e1b-4876-b6d4-b7b89a7ae5cb:string:MUA3154",
-            "moduleName": "32d9826f-2dad-46c8-a063-07f77eb849da:string:Noon Recital Series 3B",
-            "grade": "5586132c-ba8d-4075-b2c5-58043b33d040:string:CS",
-            "credits": "44aa11e2-5be2-48ff-a279-2a16b5bc9f54:number:0",
-            "gradingBasis": "8d9ff331-e36e-451f-a748-fb723924913b:string:CSU",
-            "includeInGPA": "e3539b8d-a7e8-4765-a0b5-55d924a046ea:boolean:false"
-          },
-          {
-            "moduleCode": "c44b055d-3333-41cb-a091-a9ba38aa3e7c:string:MUA3162",
-            "moduleName": "6189a849-2202-4ec1-bbeb-351c48ecb965:string:Major Study 3B",
-            "grade": "d6f82900-cc8e-4f4e-98c9-d3705b6df6d3:string:A-",
-            "credits": "efcecfc2-c0cf-4abf-95bd-743c8b998bef:number:8",
-            "gradingBasis": "e441b09b-c135-458b-93dd-d3c62782ed7c:string:GRD",
-            "includeInGPA": "c6534009-df97-463c-9ad8-076a917d6b3c:boolean:true"
-          },
-          {
-            "moduleCode": "199e4b51-db2c-46a9-bdd3-e645f89d4f1a:string:MUL3203",
-            "moduleName": "7ff1bf99-326f-49f4-9675-e80fa637912e:string:The Art of Rituals and Recreation",
-            "grade": "5046619c-cc8e-44db-aaac-70555ccca94f:string:B-",
-            "credits": "84350c9c-d082-4fbb-a062-8a5f25de3214:number:4",
-            "gradingBasis": "ca505f8f-c384-4db2-b72e-21f0b6fa8ff5:string:GRD",
-            "includeInGPA": "6359e776-db38-4fde-9e8b-3042919a7d0b:boolean:true"
+            "moduleCode": "fbe2137a-c5a2-46ad-89a0-38f1ded45e1e:string:MUA4219",
+            "moduleName": "2cad2159-fb25-4627-898b-b7cc69b2dbe6:string:Advanced Chamber Ensemble",
+            "grade": "f60b386f-841e-45ca-9b2d-57c44e626ee7:string:A",
+            "credits": "a30e10e3-5e25-4005-9412-2bde32f43ade:number:2",
+            "gradingBasis": "d7798068-6817-47a6-a8b3-5f574b8b333a:string:GRD",
+            "includeInGPA": "2ce18fa7-cb05-4a20-a06b-594401a7341d:boolean:true"
           }
         ],
         "summary": [
           {
-            "programName": "e6093e08-91b4-4209-bab4-1d59b682b8a2:string:Bachelor of Music",
-            "includeInGPA": "4a7bdd72-8b65-4948-9b86-5919cdd32cf2:boolean:true",
-            "GPAName": "d0849f88-c305-4de9-b78d-a949a488802c:string:Cumulative Average Point",
-            "GPA": "c737c0cd-51ea-469c-b408-a331a3a45f85:number:3.13"
+            "programName": "9f0324f0-e4d5-4794-8d90-865cc8a4161c:string:Bachelor of Music",
+            "includeInGPA": "0aff047d-c70e-480e-a2e2-a1c765cf8520:boolean:true",
+            "GPAName": "bcb0adc3-9dc6-401f-a996-9dee10e8c04e:string:Cumulative Average Point",
+            "GPA": "e3601631-4846-42f2-af93-5dd4322da307:number:3.27"
           }
         ]
       },
       {
-        "name": "5b53a4dd-6d50-4b0b-889b-0a27f8a7d358:string:1610",
-        "term": "f827ba1a-8410-4434-859d-70544c5b1a09:string:2016/2017 Semester 1",
-        "formOfStudy": "37ff65d5-3192-4afc-9443-1033587f5a38:string:ENRL",
-        "fosPrintArea": "be63ed83-eb13-4684-af67-998638ca30ce:string:ND",
-        "modules": [
+        "name": "b227a1d8-a9fe-476b-b028-18ad6e1422e8:string:1620",
+        "term": "423a4280-3063-4c98-8b3b-490f3bfe7556:string:2016/2017 Semester 2",
+        "formOfStudy": "1161d3f7-7c7a-4403-833c-59dd8155d984:string:SEP",
+        "fosDescription": "ff10096e-3b99-4422-9ca9-85285e9bbdbf:string:Participated in a Student Exchange Programme at",
+        "organization": "48ec5905-b031-4c29-8a3f-718905398fe6:string:Royal Conservatory of The Hague",
+        "fosPrintArea": "b308a613-6de0-4c47-8098-0ec5f5f93899:string:EH",
+        "creditTransfer": [
           {
-            "moduleCode": "22a8149d-ca4b-48cf-83bf-1e3848da2883:string:GEK1519",
-            "moduleName": "48febcaa-bf3b-4317-aafc-ccf236cbf56d:string:Science of Music",
-            "grade": "6ed0ec1e-d913-4b05-b32a-85c91a1d69b4:string:B-",
-            "credits": "b0dc52d2-fc8d-4a65-afb4-87fb1554fe38:number:4",
-            "gradingBasis": "40da3090-501a-4ea1-bec3-0cd01f517ee7:string:GRD",
-            "includeInGPA": "4a06464c-fadb-4425-bf67-12475d624c25:boolean:true"
-          },
-          {
-            "moduleCode": "352e025f-aaef-4836-9094-dd8c290afbaf:string:MUA3110",
-            "moduleName": "5179ad75-811e-4cdd-8d14-f4c16b6155c0:string:Chamber Ensemble 3B",
-            "grade": "051d2ec7-6b24-493e-bc1b-204ece179eca:string:B",
-            "credits": "8d0e2134-4c4b-498f-8d0b-642fbb2d3f1e:number:2",
-            "gradingBasis": "1489750d-7b3d-4a81-b2b7-6702796c9727:string:GRD",
-            "includeInGPA": "d622b371-6f1e-48ef-b0e8-b9eb80b922de:boolean:true"
-          },
-          {
-            "moduleCode": "e7c21317-e7d0-4789-946f-5c5f6291b176:string:MUA3205",
-            "moduleName": "0702a5b9-201b-43ce-bd44-2cf66e32ed2a:string:Materials of Jazz Music 1",
-            "grade": "23fd8e52-ddb2-4073-932f-caef2d5e51e6:string:C+",
-            "credits": "f0ef3f9f-2bee-42bb-b01e-eaa867962690:number:3",
-            "gradingBasis": "81c81735-456d-4c31-b11c-fad70bfb74ec:string:GRD",
-            "includeInGPA": "c7af7501-2cb0-4c32-891b-6fb4f0669452:boolean:true"
-          },
-          {
-            "moduleCode": "b1095430-135c-45f0-a47d-9bb55bef7f27:string:MUA4107",
-            "moduleName": "a3364f1a-cc56-49c2-a4d1-85727d324c8c:string:Large Ensembles 4A",
-            "grade": "98fc7fb5-0dab-4e68-8d3a-645832db7b3f:string:B+",
-            "credits": "914a67c2-84e3-4a49-b22e-9e38c970a0af:number:2",
-            "gradingBasis": "17c7865a-0932-43ba-be5c-95e66fef09a8:string:GRD",
-            "includeInGPA": "4c84e057-4dea-4b3b-9d41-c55809e92184:boolean:true"
-          },
-          {
-            "moduleCode": "fcfb2600-b9f2-40e1-a0a5-fe4a738d8b27:string:MUA4161",
-            "moduleName": "4cd8f5e4-8c5c-4222-8b26-c3b57c0399a6:string:Major Study 4A",
-            "grade": "b646ae9f-109f-4992-afcb-4dd9bc21fcdd:string:B+",
-            "credits": "7ec8a148-515f-4adf-aa3e-2c117c253d77:number:5",
-            "gradingBasis": "bd446d6e-f06e-466c-b71c-c3e801c7d09e:string:GRD",
-            "includeInGPA": "d3a18832-0b64-471f-a9f2-dbb5ab567a99:boolean:true"
-          },
-          {
-            "moduleCode": "4f417396-1387-40cc-bcd2-e34875e1a866:string:MUA4231",
-            "moduleName": "cc821d0f-0a58-4af3-92eb-2fe9bc0c41e7:string:Orchestral Excerpts for Strings 4A",
-            "grade": "041c8999-5ca7-4067-9a49-00dd4d48b681:string:B+",
-            "credits": "b0f94bfe-4d76-4de2-9abf-bd603767295b:number:2",
-            "gradingBasis": "cdb09732-1d18-419f-9e03-dafc0cac2048:string:GRD",
-            "includeInGPA": "b7f5d53b-0e3c-4fd0-abab-fa23360b901a:boolean:true"
+            "sourceType": "b148e9d6-5d30-4c52-90e8-66253d621a3b:string:E",
+            "creditsNoGPA": "166f5b60-4f2d-41a5-9d35-08e3c2add97e:number:16",
+            "creditsGPA": "1db755a8-2cd2-40c4-97e3-6c74a9c96b36:number:0",
+            "orgId": "2598cdea-d242-43e7-bd53-078ef8c7267a:string:Royal Conservatory of The Hague",
+            "orgName": "c8bfcf41-a7ce-4ef3-900c-bab35b2a3a3e:string:Royal Conservatory of The Hague",
+            "details": [
+              {
+                "moduleCode": "f3bb89dd-fe64-4854-ad2e-97db638a8a93:string:KC-KI-BTB4",
+                "moduleName": "e0768eee-5b25-4589-9aa7-9bd6e08b63b8:string:Main Subject Classical Trombone 4",
+                "grade": "de4f0825-5bbc-4336-a53a-40bb8e4ac990:string:OVS",
+                "credits": "397b6908-3c5a-42dd-a758-d54a3842585b:number:5",
+                "status": "abdd5db7-6bc3-4450-85a3-23e534a4f488:string:P",
+                "includeInGPA": "5117fd94-faef-4064-bcfd-642120a0aadc:boolean:false"
+              },
+              {
+                "moduleCode": "bf785091-f871-428c-8108-1b59c238552b:string:KC-KI-GLBTB4-15",
+                "moduleName": "b1a81f9e-ab46-440c-b901-ae8f57c6d49c:string:Group Lesson Bass Trombone 4",
+                "grade": "b678cbfa-4034-4b4d-94e2-ecdcc6ca4ea1:string:",
+                "credits": "40b44e33-4677-46cb-8f77-ba7965494a22:number:0",
+                "status": "86c5d26b-8572-496c-8d71-ec3959da1381:string:P",
+                "includeInGPA": "42866309-d050-45a8-9ae7-fe97fe02f046:boolean:false"
+              },
+              {
+                "moduleCode": "bf43e2cd-94c4-455d-aa32-5e79e239e92a:string:KC-AL-COR4-11",
+                "moduleName": "19082972-717f-41ec-ac1e-01b7e0a5fe8a:string:Coach Pianist 4",
+                "grade": "00e3aa68-9627-4b19-b92f-79d56ff5b7f7:string:OVS",
+                "credits": "c3ddc464-4791-434c-b80e-408d374406fc:number:2",
+                "status": "53f558d8-8247-4253-b368-80f35bcfc68b:string:P",
+                "includeInGPA": "e3a0b079-540d-4a54-94fc-ed79625e9678:boolean:false"
+              },
+              {
+                "moduleCode": "53fe815b-e57e-496c-a662-9e5f02507b07:string:KC-AL-VBP-16",
+                "moduleName": "cd82d776-1ac3-4b3a-9624-1fe680ff4261:string:Preparation for Professional Practice",
+                "grade": "a4f44308-6a7d-4b8d-be03-066cd70cd003:string:OVS",
+                "credits": "70074e2d-bd97-4148-a875-5e04089d1728:number:3",
+                "status": "d95439f8-fc8f-4ffc-ac3b-de3f8105d678:string:P",
+                "includeInGPA": "99a69ce1-76d7-4236-8d73-f4d9afe76a31:boolean:false"
+              },
+              {
+                "moduleCode": "b140c941-07d8-4e0c-88a6-de1729c0ddb2:string:KC-KI-KK2-12",
+                "moduleName": "2f923fad-9c2b-4dc9-912b-d0a896b0c222:string:Brass Class 2",
+                "grade": "b5873106-d5f6-410d-9773-80ff1b38c847:string:OVS",
+                "credits": "cf7f0c12-75f2-4e36-99c1-a61f5061b880:number:2",
+                "status": "227e3bc4-e5c7-4cfa-9aad-3589191db5b8:string:P",
+                "includeInGPA": "9aba904a-f177-4283-b7a4-ea876a51cfc9:boolean:false"
+              },
+              {
+                "moduleCode": "67931599-c9cc-437d-a104-1f96ea806192:string:CDO1",
+                "moduleName": "eef99cb6-6439-473e-bfc7-7a008c0df651:string:CDO1: Slide Factory Trombone Festival",
+                "grade": "03141afc-8a25-4b67-8055-35771523d40d:string:OVS",
+                "credits": "6672f118-9197-4e59-a999-4d8a69dc08c7:number:2",
+                "status": "333de17e-c06e-40a9-a340-fee4851cb5ee:string:P",
+                "includeInGPA": "663cd243-df2c-4bde-b36d-b5b966d5f589:boolean:false"
+              },
+              {
+                "moduleCode": "92d5523d-64db-4959-b841-36efd2ba13d1:string:KC-KI-TROS4",
+                "moduleName": "508986a3-6733-4d8b-8c9c-0f569620e0b8:string:Training Orkestpartijen 2",
+                "grade": "e5e4f284-3894-47f8-9132-b89b23d18a12:string:OVS",
+                "credits": "3436d9ef-22cd-4bf5-a363-01fbeb239b34:number:2",
+                "status": "ea13a55d-b694-4128-9cd4-36e967184c79:string:P",
+                "includeInGPA": "b3f47472-8272-43b6-88d9-304c3cb4e2fe:boolean:false"
+              }
+            ]
           }
         ],
         "summary": [
           {
-            "programName": "1603b30d-652b-468e-84a2-e335b8806c18:string:Bachelor of Music",
-            "includeInGPA": "a62ec20e-9c50-4119-846d-39e75d8f76c7:boolean:true",
-            "GPAName": "7abd8b19-2a00-44bf-9252-8804e24c8995:string:Cumulative Average Point",
-            "GPA": "35ef9998-e04b-4636-a090-7827bd5f2dec:number:3.18"
-          }
-        ]
-      },
-      {
-        "name": "ac8f3546-7607-4069-b2e2-a83f87582283:string:1620",
-        "term": "8f560017-c013-41e0-88ab-43c208da40e3:string:2016/2017 Semester 2",
-        "formOfStudy": "3ab86d73-2ab6-4f51-bb1e-6313123c03fa:string:ENRL",
-        "fosPrintArea": "9bef94a0-58bd-4abe-b1b3-6089aa24119e:string:ND",
-        "modules": [
-          {
-            "moduleCode": "d1710dba-5ee6-411f-98f8-83a20e6b55e2:string:MUA4162",
-            "moduleName": "2fa86d24-4901-4fe8-af83-cc2e6a4fb1da:string:Major Study 4B",
-            "grade": "21df1bb8-f16d-4c44-b8e2-27542aabb7bf:string:B+",
-            "credits": "991c594e-6731-4b17-b0d1-beb764c89e27:number:12",
-            "gradingBasis": "07fe8053-2df9-47fd-850b-e4748ca01532:string:GRD",
-            "includeInGPA": "e4653940-52f5-4023-a514-f455c4388187:boolean:true"
-          },
-          {
-            "moduleCode": "47f8deb9-5d1e-45a1-a2f4-6f5a28e443f7:string:MUA4219",
-            "moduleName": "53d77c1d-81fd-4fde-b691-beeea5076761:string:Advanced Chamber Ensemble",
-            "grade": "b2c50d34-7bd9-4bfa-ae40-19bf8d7b5e63:string:A-",
-            "credits": "c6855803-3b23-4227-b0d6-706b563ed350:number:2",
-            "gradingBasis": "d3f53aef-0122-4ec6-9b8d-4766bbea701a:string:GRD",
-            "includeInGPA": "733ce4fd-6f49-461b-8451-d8751d9752cb:boolean:true"
-          },
-          {
-            "moduleCode": "f8013adc-b264-4770-9aa3-e217c4a1ee5b:string:MUA4232",
-            "moduleName": "805a43c6-802c-4503-9211-7bae47eec42c:string:Orchestral Excerpts for Strings 4B",
-            "grade": "adb71e2b-be4c-4516-b7b6-d698b5214d79:string:B+",
-            "credits": "38081418-587f-435f-8619-40f67d470349:number:2",
-            "gradingBasis": "5ed0766b-b437-40a9-90b6-4327712b8a5c:string:GRD",
-            "includeInGPA": "4d8961ed-b71a-4f0a-932d-d8b69ec3cd02:boolean:true"
-          }
-        ],
-        "summary": [
-          {
-            "programName": "47a7d436-6e6d-4141-ae41-16a2c144d8a7:string:Bachelor of Music",
-            "includeInGPA": "29ffff82-9db3-492c-a9f6-d683d02e48be:boolean:true",
-            "GPAName": "71b0abfd-b4e1-4823-8aa3-43a5cb881361:string:Cumulative Average Point",
-            "GPA": "14055d01-954b-4f67-a76c-a01aa8d5e566:number:3.27"
+            "programName": "1c82e8c6-914b-45f6-8923-74a5fae45928:string:Bachelor of Music",
+            "includeInGPA": "bb2e753c-2058-4407-a8b6-efbb8dc27748:boolean:true",
+            "GPAName": "f4ad5d69-6bc6-4d38-b730-1d2c30b9df49:string:Cumulative Average Point",
+            "GPA": "5c8d35f8-971e-4b53-9f96-f229f8f2fc38:number:3.27"
           }
         ]
       }
@@ -608,49 +582,51 @@
     "additionalData": {
       "degreeScroll": [
         {
-          "degreeTitle": "5efc4f02-11cc-4101-a9bc-e30de7b6384c:string:Bachelor of Music",
-          "dateConferred": "f262773f-73fb-4b75-a344-971273c9ee6d:string:2017-06-30",
-          "honours": "34ce338e-6722-4f83-98ab-afc26dc95db5:string:Honours",
-          "major": "b7748b7e-4882-4b8a-829f-4eab056bf638:string:VIOLA PERFORMANCE (HONS)"
+          "degreeTitle": "d7f4a933-e690-42e2-8c91-a848cc49ee39:string:Bachelor of Music",
+          "dateConferred": "399200ee-b925-43ca-a1f7-9905911ed237:string:2018-01-31",
+          "honours": "3ac56734-785f-421f-af6a-5694e93b03d6:string:Honours",
+          "major": "474d7a51-3beb-4d96-afdb-c35bffe916bb:string:TROMBONE PERFORMANCE (HONS)",
+          "degreeCode": "31d8a4bf-621e-4e8a-b56a-615e254344fa:string:B091000"
         }
       ],
+      "type": "61e69345-d5fc-44ab-8579-f5ef1e087d06:string:Bachelor of Music",
       "images": {
         "PRESIDENT": {
-          "data": "4d1bcd23-51f7-4021-b42d-ab936edf76da:string:data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASgAAACvCAMAAAEOHINpAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAL9UExURf////b29/T19fX29ru9wFVWWFFRU1NTVb/Bw/39/X1/giMfIDY0NcbIyvLy83R1eHR2eOTl5uXm53BxdF5fYdzd3ry+wKmsrqutsK+xtIKEhz8+QEBAQZGTlfDx8dfY2rCytHl6fXd4eyYjJGRlZ7K0ttbX2fP09Ofo6EVFRjMxMy4sLaqsr72/wW1vcSwpKisoKXZ3evHx8pSWmYqMjltcXyckJZWXmvr7+9PU1mlrbSQgITEvMConKDg3ODw7PE1NT7K0t7W3uSUiIlxdX9TV15eZnNLT1X+Ag1laXLa4u8zO0M/Q0tHT1M3P0MvNz9TW19rc3crMzt7f4NDS03J0dkZGR3Fzdfn5+pGTlpCSlZ2foe3t7mBhZFtcXunq6/Pz85qdny0qLIiKjKSmqfj4+evs7GxtcJKUl62vsVBQUlRVVzo5O0pKTGVnaba4uvz8/OLj5Hp7fnV3ee/w8IGDhWNkZmJjZePk5d7g4YuNj1ZXWe3u7yglJl9gYu7v8LO1uFNUVsTGyJudoMrLzaiqrYOFiHBydI2Pkdna23x9gHh6fDAtLldYWm9wc8DCxGZnaru9v36AgkdHSEhHSVJSVN3e32doa5eZm7m7vZyeoWtsb4WHiezt7eDh4t/g4aKkp7S2uISGiI6Qkvf3+EhISkJCQ0tLTWlqbL7Awqaoq3t9f6CipZianT49P56go+rr7Obn6Le5vFhZWzk4OcHDxT08PqmrrY+RlI6Qk1pbXdXX2LGztaWnqTQzNH+BhExMTpaYm3N0d8fJy09PUWhpa9jZ2tnb3IWHik5OUMLExuHi45qcnoyOkejo6a2wsqWoqomLjsXGyJ6gol1eYLi6vDc1N4aIi8jKzENDRHp8f2prbp+hpM7P0c/R05mbnrq8vqeprIKDhklJS0RERdvc3qOlqG5wcsPFx5SWmJOVmGxucIuNkGRmaK6wszIwMayusKGjpaGkpmFiZcnLzIeJi8XHyUFBQujp6nd5e3x+gYiKjWBhY4CChQAAAJrvV40AAAD/dFJOU///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AGb8ilkAAAAJcEhZcwAADsQAAA7EAZUrDhsAAB8fSURBVHhe7V29bio716aMZImOjpIudSQkKxeCNDRvS5qIG0ARErcAW7kPCiQqriKR0oQySpGKBul7nmXPjO2x5weSnfO9533O2WFmmPF4lte/l4ded2i1V3bTQgX7wJF/8sMv2MD/2u4G2PLPRPVmPOO+uCiHtCRQJ/kr/4KzNvbT9kRN+LdyP3uR2pmPgXz0zUeJzHwse3s1L5sIuyXgpeiLyq/pj82nB2njFv/wgIJYU3LMfDGXv1r31AMO2JaJjN8fNvJs5mQ0jY+1OWAgd8PBvexxv0IGadw0wH/lBlFQA0de+XfFP9h54UFDOXsXwFxWXGw38yEzZ9lvnZPs9rv87fVINHvbL/Nh8CF/8+tUSYlnrzGBd6EgOGXKPzlRSuDper032azBjf38NijtPI4gZ44S/gPoY28pDODDHhFK6y9DmbMccpBLh+79kYEfyFVP/OMgH7WzGRdpcl2ltCCXM/tR8IOFvQgfmryTnxXAOax6o3w3PM1+b79R5k6f8tcBD4/wr+gRcdubKQ2lcZA9wHZFgU4Cipo5Zi4w+JAdtGj54nWwsLRxzpJ+FFx3bz8F5Vk4aQU2JtvtcJQd9O5ESENWFwnMpmhFwEi7ZVzb7RJWF3iP4FHQ0w2uLrWfBmZPZMEDJNM/EZD+uhB2qwxbiLynl+DRfibReHdgppZmI3buUhGvvQ9oXXsoCeUIjrZtCuZaGRKC6eU2FVL58C4uzlbm8F7B+hhLpTAM9U0Fff4Y9jYlSfRR+kOM0cxtzllRBPeZKUeZPFnhEwzBi8FtfWw9lZxB4ymlhbe/1NG7FKpQ1Q6x1ykzjLweFMo3c6hs9mA34yibOpOswGF2VrQ0ULAD90bDY+3jlfcVY0r0pR3Ba0FyQsZiime3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",
-          "width": "6f841fcc-485a-44d4-89e6-0973bb2c4417:number:2.5",
-          "height": "2dc1b9f3-617c-4314-90c7-acfce09abef2:number:1.48",
-          "unit": "e16d2a31-787a-43f2-b4e3-f76750743582:string:CM"
+          "data": "72f6c370-8d9b-4e25-9072-2545ba945ce3:string:data:image/png;base64,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",
+          "width": "f9ec0dda-6140-48e3-a660-f9fd9706b166:number:2.5",
+          "height": "b808ad41-da4f-4b1c-9193-08e2cb120abe:number:1.48",
+          "unit": "a597d912-b71b-4d45-8e05-ba8768c216ca:string:CM"
         },
         "TRUSTEES": {
-          "data": "34c165ed-6e04-434f-b86f-4745fd55ad39:string:data:image/png;base64,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",
-          "width": "f1a12582-2357-4022-9ce3-68aa8f94159e:number:5.31",
-          "height": "d617054f-f25a-4edc-bdef-9dce9f90a0f9:number:1.15",
-          "unit": "bfa6139c-27c9-4323-bcb9-b60c114aac02:string:CM"
+          "data": "b63cbaf3-6929-435b-8c7f-c12d3bd57c30:string:data:image/png;base64,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",
+          "width": "fe3aacc9-bdb9-4899-9d68-23f7c28783ea:number:5.31",
+          "height": "226a8030-7d4e-4013-8ef3-b6a9670d8906:number:1.15",
+          "unit": "688309b4-ddee-445f-a14c-ee423190d027:string:CM"
         }
       },
-      "transcriptType": "c44ce3ed-882f-486b-b721-ceb20c4745e4:string:UGOF",
-      "transcriptReq": "80dc58b9-d983-488d-9abe-3d83b8f36779:string:001009279",
+      "transcriptType": "72e7b8cc-872f-4a9b-ad40-0ccb0e3c92f0:string:UGOF",
+      "transcriptReq": "fd235f96-3083-4f94-bf49-7b6caa1e63de:string:001009498",
       "programData": [
         {
-          "programCode": "5df36304-a8f1-48af-9035-410363f5a8a8:string:B0910",
-          "programName": "88a91d15-70e8-459a-9bb4-1016bbd9e69a:string:Bachelor of Music",
-          "statusCode": "af909137-2e89-4441-b070-0056ba4db42e:string:CM",
-          "statusDescription": "bf50ce34-60bb-4e0e-b034-722113883bcc:string:Completed Programme",
-          "effectiveDate": "7fa5b671-91cb-46e5-a564-a00fa5e7378a:string:2017-06-24",
-          "admitTerm": "3b2ba5eb-4d4b-40c9-9050-c6a6edbfcd49:string:1310"
+          "programCode": "31412015-5fd4-4662-bf02-fa753c5d3d3f:string:B0910",
+          "programName": "4420ddb0-f7a6-49c9-93f0-7d49d3feae19:string:Bachelor of Music",
+          "statusCode": "3d113013-d5f9-4a49-a406-8d0979bf259f:string:CM",
+          "statusDescription": "12e61150-af78-4988-be6a-923baa234632:string:Completed Programme",
+          "effectiveDate": "780d5d2c-ceb7-41fe-a1cd-85b7b2a4fc22:string:2018-01-31",
+          "admitTerm": "f7dafbc6-9aa1-429a-8b19-22718a7fc515:string:1320"
         }
       ],
       "degreeData": [
         {
-          "degreeTitle": "d482d58d-70e0-45b0-987c-b533e681747b:string:Bachelor of Music",
-          "dateConferred": "3ec1a6d3-59bb-43e9-9765-45f26bbc27cd:string:2017-06-30",
-          "honours": "9d9f5704-df70-4ad2-9679-07f5c2b31b7d:string:Honours",
+          "degreeTitle": "aad07b1a-e874-42d0-80f5-b2a22a700b6b:string:Bachelor of Music",
+          "dateConferred": "4ca11ff5-0732-4432-bbf3-e5052240c486:string:2018-01-31",
+          "honours": "570e82ee-309b-4b50-a1a3-570f15e42ade:string:Honours",
           "plans": [
             {
-              "specialProgram": "b1326798-0488-4579-86e0-0acc3a8d7d07:boolean:false",
-              "type": "e609d6d7-8c07-468b-be63-2c83ea48180d:string:HON",
-              "typeName": "faeaadc1-c149-4cdb-b5a1-3bac8f9dcfda:string:Honors",
-              "transcriptDescr": "464c4f08-89ac-4c2e-9bef-7959df4d7a59:string:Viola Performance"
+              "specialProgram": "31e19546-c929-4a7f-9446-61b9038effc2:boolean:false",
+              "type": "b60d7245-2a52-4129-a941-3a60626e5508:string:HON",
+              "typeName": "d3ba7535-bc08-4173-882c-3215327e5ef8:string:Honors",
+              "transcriptDescr": "1ef94c0f-61f3-4ec8-97a2-a971b4c9677f:string:Trombone Performance"
             }
           ]
         }
@@ -660,14 +636,15 @@
   "privacy": {},
   "signature": {
     "type": "SHA3MerkleProof",
-    "targetHash": "d6cd29b3ac28d64e25a247c47835c3094efc60e134ee39d8028f93f35b1fd5e4",
+    "targetHash": "025c138d23a75d66b8c04f9a5efdd50c9a49577743a03a8b6551b1b05d6c311f",
     "proof": [
-      "97fad0e20d29a3923b16db14bfd088def40f92f591ceba25f57bb3d4bc957000",
-      "4d6d364973887d15152e4d42162a10135867232b86c4efc4bda24e52217cdcdf",
-      "6cbe05f8a6f3c98c57abb75a932300297a72032bd1290d6d8d93bb3a1b31ea91",
-      "f1a2f942d1c218a8a6e90154a451f56e2e191beb85da157fa635e5d0e0f61c5d",
-      "ebf9e77751718979b468ae416441971b6b4bd9761286e6b44bff4f0551e267a5"
+      "952e102f75081ab983554a5976e795a498d6f0d82a013e598746411bc6ee189c",
+      "765d63f874eacea50cc6b2db1c5b96ae41c7dd760180f8389eca3ab5a010f791",
+      "0b7ae750b6d35f82865bb3cda16eb6b043bf050bc41c01027fba32501bbff6ce",
+      "8643c6ff4247e5381577e76ea1b6e49d6913ccbe35166679f5c43d6043459ee4",
+      "96c50abebf92956b80c631fc9daa81dedfc464682c136f7c33f80d499b9701b8",
+      "6dcf497f2799a15799e48d2af482234d37459c045fb14643e864744153281982"
     ],
-    "merkleRoot": "ab8f93c0b31fe10a9d34294ef246edc1886be02c746e801498ffc124db33eb23"
+    "merkleRoot": "f92d27326c33d7f2ba6f8261ab73184bcf02a173dbd505c8a6d0bbc793218ba1"
   }
 }

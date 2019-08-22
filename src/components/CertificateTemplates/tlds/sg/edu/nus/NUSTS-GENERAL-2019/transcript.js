@@ -54,7 +54,7 @@ class TranscriptProgram {
     this.dataFeeder.push(
       "ts-prog",
       <td colSpan="4">
-        <div className={cls("prog-row ts-title")}>
+        <div className={cls("prog-row1 ts-title")}>
           <div className={cls("prog-key prog-col0")}>PROGRAMME:</div>
           <div className={cls("prog-col1")}>
             {data.programName.toUpperCase()}
@@ -67,7 +67,7 @@ class TranscriptProgram {
       this.dataFeeder.push(
         "ts-prog",
         <td colSpan="4">
-          <div className={cls("prog-row ts-title")}>
+          <div className={cls("prog-row2 ts-title")}>
             <div className={cls("prog-key prog-col0")} />
             <div className={cls("prog-col1")}>DUKE-NUS MEDICAL SCHOOL</div>
           </div>
@@ -77,7 +77,7 @@ class TranscriptProgram {
     this.dataFeeder.push(
       "ts-prog",
       <td colSpan="4">
-        <div className={cls("prog-row ts-title")}>
+        <div className={cls("prog-row2 ts-title")}>
           <div className={cls("prog-key prog-col0")}>PROGRAMME STATUS:</div>
           <div className={cls("prog-col1")}>
             {data.statusDescription.toUpperCase()}

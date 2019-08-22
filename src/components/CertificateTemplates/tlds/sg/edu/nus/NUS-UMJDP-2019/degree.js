@@ -66,10 +66,14 @@ const renderSigs = dataSource => {
   let sig3;
   let sig4;
   if (dataSource.additionalData.images) {
-    sig1 = renderImage(dataSource.additionalData.images.TRUSTEES);
-    sig2 = renderImage(dataSource.additionalData.images.UM_VICE_CHANCELLOR);
-    sig3 = renderImage(dataSource.additionalData.images.PRESIDENT);
-    sig4 = renderImage(dataSource.additionalData.images.UM_SECRETARY);
+    sig1 = renderImage(dataSource.additionalData.images.TRUSTEES, 240, 75);
+    sig2 = renderImage(
+      dataSource.additionalData.images.UM_VICE_CHANCELLOR,
+      240,
+      75
+    );
+    sig3 = renderImage(dataSource.additionalData.images.PRESIDENT, 240, 75);
+    sig4 = renderImage(dataSource.additionalData.images.UM_SECRETARY, 240, 75);
   }
   const html = (
     <table width="100%">

@@ -19,15 +19,34 @@ test("NUS-UBASJDP-2019 degree scroll is rendered correctly", async t => {
 
   // Certificate tabs rendered
   await t.expect(TemplateTabList.textContent).contains("Certificate");
+  await t.expect(TemplateTabList.textContent).contains("Transcript");
 
-  // Certificate tab content
+  // Certificate/Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
-    "NATIONAL UNIVERSITY",
+    "NATIONAL",
+    "UNIVERSITY",
     "OF SINGAPORE",
-    "Bachelor of Engineering",
-    "Mechanical Engineering",
-    "30 June 2013",
-    "Chair, Board of Trustees",
-    "President"
+    "A0119893N, NAME",
+    "Master",
+    "Science",
+    "30 September 2015"
+  ]);
+  const transcriptTab = TemplateTabList.find(":nth-child(2)");
+  await t.click(transcriptTab);
+  await validateTextContent(t, RenderedCertificate, [
+    "A0119893N, name",
+    "A0119893N",
+    "01/01/1905",
+    "20/08/2019",
+    "MASTER OF SCIENCE",
+    "COMPLETED PROGRAMME",
+    "DOCTOR OF PHILOSOPHY",
+    "ACTIVE IN PROGRAMME",
+    "2014/2015 SEMESTER 1",
+    "MDG5211",
+    "ANTI-INFECTIVE DRUG DISCOVERY",
+    "2018/2019 SEMESTER 1",
+    "MDG5108",
+    "BIOSTATISTICS FOR BASIC RESEARCH"
   ]);
 });

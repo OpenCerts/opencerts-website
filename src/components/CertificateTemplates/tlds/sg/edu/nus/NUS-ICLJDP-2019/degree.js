@@ -112,10 +112,10 @@ const renderSigs = dataSource => {
   let sig3;
   let sig4;
   if (dataSource.additionalData.images) {
-    sig1 = renderImage(dataSource.additionalData.images.TRUSTEES);
-    sig2 = renderImage(dataSource.additionalData.images.ICL_PRESIDENT);
-    sig3 = renderImage(dataSource.additionalData.images.PRESIDENT);
-    sig4 = renderImage(dataSource.additionalData.images.ICL_REGISTRAR);
+    sig1 = renderImage(dataSource.additionalData.images.TRUSTEES, 240, 90);
+    sig2 = renderImage(dataSource.additionalData.images.ICL_PRESIDENT, 240, 90);
+    sig3 = renderImage(dataSource.additionalData.images.PRESIDENT, 240, 90);
+    sig4 = renderImage(dataSource.additionalData.images.ICL_REGISTRAR, 240, 90);
   }
   const html = (
     <table width="100%">

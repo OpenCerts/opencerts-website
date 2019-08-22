@@ -20,14 +20,15 @@ test("NUS-K1NOTS-2019 degree scroll is rendered correctly", async t => {
   // Certificate tabs rendered
   await t.expect(TemplateTabList.textContent).contains("Certificate");
 
-  // Certificate tab content
+  // Certificate/Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
-    "NATIONAL UNIVERSITY",
+    "NATIONAL",
+    "UNIVERSITY",
     "OF SINGAPORE",
-    "Bachelor of Engineering",
-    "Mechanical Engineering",
-    "30 June 2013",
-    "Chair, Board of Trustees",
-    "President"
+    "A0057179U, NAME",
+    "Master",
+    "Medicine",
+    "(Surgery)",
+    "30 April 2017"
   ]);
 });

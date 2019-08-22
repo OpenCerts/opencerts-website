@@ -21,6 +21,7 @@ const getDataFeeder = dataSource => {
   dataFeeder.major = dataSource.additionalData.degreeScroll[0].major;
   dataFeeder.conferDate =
     dataSource.additionalData.degreeScroll[0].dateConferred;
+  dataFeeder.spaceBeforeSig = "2cm";
   if (dataSource.additionalData.images) {
     dataFeeder.useDefaultSignature(
       dataSource.additionalData.images.TRUSTEES,

@@ -19,12 +19,43 @@ test("NUS-K3MBBS-2019 degree scroll is rendered correctly", async t => {
 
   // Certificate tabs rendered
   await t.expect(TemplateTabList.textContent).contains("Certificate");
+  await t.expect(TemplateTabList.textContent).contains("Transcript");
 
-  // Certificate tab content
+  // Certificate/Transcript tab content
   await validateTextContent(t, RenderedCertificate, [
-    "NATIONAL UNIVERSITY",
+    "NATIONAL",
+    "UNIVERSITY",
     "OF SINGAPORE",
-    "Bachelor of Medicine",
-    "Bachelor of Surgery"
+    "A0110113L, NAME",
+    "Bachelor",
+    "Medicine",
+    "Bachelor",
+    "Surgery",
+    "30 April 2018"
+  ]);
+  const transcriptTab = TemplateTabList.find(":nth-child(2)");
+  await t.click(transcriptTab);
+  await validateTextContent(t, RenderedCertificate, [
+    "A0110113L, name",
+    "A0110113L",
+    "01/01/1905",
+    "20/08/2019",
+    "BACHELOR OF MEDICINE AND BACHELOR OF SURGERY",
+    "COMPLETED PROGRAMME",
+    "2013/2014",
+    "MD1140",
+    "Normal Structure and Function",
+    "2014/2015",
+    "MD2140",
+    "Abnormal Structure and Function",
+    "2015/2016",
+    "MD3140",
+    "Core Clinical Practice",
+    "2016/2017",
+    "MD4140",
+    "Acute and Specialty Clinical Practice",
+    "2017/2018",
+    "MD4150",
+    "Community Health Posting"
   ]);
 });
