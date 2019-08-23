@@ -24,7 +24,8 @@ module.exports = withBundleAnalyzer(
     },
     // Variables passed to both server and client
     publicRuntimeConfig: {
-      network: process.env.NET
+      network: process.env.NET,
+      legacyRendererUrl: process.env.LEGACY_RENDERER_URL
     }
   })
 );
