@@ -12,8 +12,7 @@ import { DEFAULT_SEO } from "../src/config";
 const VerifierPage = props => {
   const getCertificate = () => {
     const hash = window.location.hash.substring(1);
-    const { router } = props;
-    const { documentId } = router.query;
+    const { documentId } = props;
     if (documentId) {
       const payload = {
         id: documentId,
@@ -49,6 +48,7 @@ export default connect(
 
 VerifierPage.propTypes = {
   router: PropTypes.object,
+  documentId: PropTypes.string,
   encryptedCertificateStatus: PropTypes.string,
   retrieveCertificateByLink: PropTypes.func
 };
