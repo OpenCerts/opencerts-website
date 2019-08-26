@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import QRCode from "qrcode.react";
 import css from "./sharing.scss";
-import { URL } from "../../config";
 import { getShareLinkState } from "../../reducers/certificate";
 
 class CertificateShareLinkForm extends Component {
@@ -16,8 +15,10 @@ class CertificateShareLinkForm extends Component {
       handleShareLinkToggle,
       generateShareLink
     } = this.props;
+
     const certificateLink =
-      shareLink && `${URL}/?documentId=${shareLink.id}#${shareLink.key}`;
+      shareLink &&
+      `${window.location.origin}/?documentId=${shareLink.id}#${shareLink.key}`;
     return (
       <div className="container">
         <div className="row">
