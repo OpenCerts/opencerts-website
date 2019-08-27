@@ -171,12 +171,12 @@ class Degree extends Component {
           </tr>
           <tr>
             <td>{renderVoid("0.3cm")}</td>
-            <td>
-              {sig2} {/* NUS president */}{" "}
-            </td>
+            <td />
           </tr>
           <tr>
-            <td />
+            <td>
+              {sig2} {/* NUS president */}
+            </td>
             <td>
               {sig4} {/* YNC president */}
             </td>

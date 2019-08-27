@@ -131,7 +131,7 @@ $debug: false;
         font-family: "Old English Text MT Std", "Old English Text MT", Serif; 
         font-weight: bold;
         text-align: center;
-        padding: 5px 0;
+        padding: 3px 0;
         border: 0px solid;
     }
     
@@ -142,9 +142,9 @@ $debug: false;
         font-feature-settings: smcp;
         text-align: center; 
         text-shadow: 1px 0 #888888; 
-        line-height:40px; 
+        line-height: 30px; 
         font-weight: bold; 
-        padding: 10px 0;
+        padding: 10px 0 3px 0;
     }
     
     .cert-date {
