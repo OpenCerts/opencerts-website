@@ -117,5 +117,4 @@ test("NUSTS-GENERAL-2019 degree scroll is rendered correctly", async t => {
     "ME4262",
     "Automation In Manufacturing"
   ]);
-
 });

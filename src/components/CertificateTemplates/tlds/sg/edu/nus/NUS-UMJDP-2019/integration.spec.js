@@ -102,5 +102,4 @@ test("NUS-UMJDP-2019 degree scroll is rendered correctly", async t => {
     "HR2002",
     "Human Capital in Organizations"
   ]);
-
 });

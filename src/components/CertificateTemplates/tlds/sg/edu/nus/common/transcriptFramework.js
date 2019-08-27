@@ -459,12 +459,7 @@ export class Transcript extends Component {
           );
           this.dataIdx -= 1; // re-render the row
         }
-        try {
-          ReactDOM.render(dataRow, node);
-        }
-        catch (e) {
-          console.log(`Error: ${this.page}, ${this.col}, ${this.row}`);
-        }
+        ReactDOM.render(dataRow, node);
       } else {
         // state is {nextCol: false}, continue to render to current column
         this.dataIdx += 1;
@@ -496,12 +491,7 @@ export class Transcript extends Component {
             />
           );
         }
-        try {
-          ReactDOM.render(dataRow, node);
-        }
-        catch(e) {
-          console.log(`Error: ${this.page}, ${this.col}, ${this.row}`);
-        }
+        ReactDOM.render(dataRow, node);
       }
     });
     // record content bottom for each page

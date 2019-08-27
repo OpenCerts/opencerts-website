@@ -66,5 +66,4 @@ test("NUS-DTUJDP-2019 degree scroll is rendered correctly", async t => {
     "2013/2014 SEMESTER 1",
     "2013/2014 SEMESTER 2"
   ]);
-
 });

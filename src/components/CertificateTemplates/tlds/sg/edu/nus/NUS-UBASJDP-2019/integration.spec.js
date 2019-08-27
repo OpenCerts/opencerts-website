@@ -51,5 +51,4 @@ test("NUS-UBASJDP-2019 degree scroll is rendered correctly", async t => {
     "MDG5771",
     "Graduate Research Seminar and Workshop"
   ]);
-
 });

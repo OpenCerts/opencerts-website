@@ -134,5 +134,4 @@ test("NUS-DUKENUS-2019 degree scroll is rendered correctly", async t => {
     "GMS9902",
     "Transfer Credit (Elective)"
   ]);
-
 });

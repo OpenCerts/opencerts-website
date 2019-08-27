@@ -62,5 +62,4 @@ test("NUS-ANUJDP-BA-2019 degree scroll is rendered correctly", async t => {
     "RESEARCH PROJECT",
     "2015/2016 SPECIAL TERM(PART 2)"
   ]);
-
 });

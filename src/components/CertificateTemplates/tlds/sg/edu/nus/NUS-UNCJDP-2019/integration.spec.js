@@ -100,5 +100,4 @@ test("NUS-UNCJDP-2019 degree scroll is rendered correctly", async t => {
     "UTC3100",
     "Third Year Experience Workshops: “Exploring Possibilities”"
   ]);
-
 });

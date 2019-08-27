@@ -57,5 +57,4 @@ test("NUS-ICLJDP-2019 degree scroll is rendered correctly", async t => {
     "2015/2016 SEMESTER 1",
     "2015/2016 SEMESTER 2"
   ]);
-
 });

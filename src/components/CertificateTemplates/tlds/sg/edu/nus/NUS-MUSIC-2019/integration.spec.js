@@ -130,5 +130,4 @@ test("NUS-MUSIC-2019 degree scroll is rendered correctly", async t => {
     "Advanced Chamber Ensemble",
     "2016/2017 SEMESTER 2"
   ]);
-
 });

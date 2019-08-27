@@ -57,5 +57,4 @@ test("NUS-K7MPAS-2019 degree scroll is rendered correctly", async t => {
     "MPA5029",
     "PORT ECONOMICS"
   ]);
-
 });

@@ -113,5 +113,4 @@ test("NUS-YALE-2019 degree scroll is rendered correctly", async t => {
     "YSS4238",
     "Micro-Finance and Sustainable Development in Asia"
   ]);
-
 });

@@ -70,5 +70,4 @@ test("NUS-K4MBACN-2019 degree scroll is rendered correctly", async t => {
     "BMC5012",
     "ADVANCED STUDY PROJECT"
   ]);
-
 });

@@ -109,5 +109,4 @@ test("NUS-JHUJDP-MUSIC-2019 degree scroll is rendered correctly", async t => {
     "MUH4202",
     "Musical Intertextuality:Mozart to Tippett"
   ]);
-
 });

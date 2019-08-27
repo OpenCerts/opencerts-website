@@ -112,5 +112,4 @@ test("NUS-DUKEPHD-2019 degree scroll is rendered correctly", async t => {
     "GMS6991",
     "Thesis"
   ]);
-
 });

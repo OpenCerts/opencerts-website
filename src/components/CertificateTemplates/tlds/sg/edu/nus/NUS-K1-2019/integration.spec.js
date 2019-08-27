@@ -129,5 +129,4 @@ test("NUS-K1-2019 degree scroll is rendered correctly", async t => {
     "SSA1206",
     "Representing Singapore"
   ]);
-
 });

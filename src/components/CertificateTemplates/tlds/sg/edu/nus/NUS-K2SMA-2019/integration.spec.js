@@ -66,5 +66,4 @@ test("NUS-K2SMA-2019 degree scroll is rendered correctly", async t => {
     "SMA5199",
     "Internship Project"
   ]);
-
 });

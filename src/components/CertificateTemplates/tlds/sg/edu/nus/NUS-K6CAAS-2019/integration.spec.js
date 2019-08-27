@@ -56,5 +56,4 @@ test("NUS-K6CAAS-2019 degree scroll is rendered correctly", async t => {
     "AM5023",
     "MANAGEMENT IN TRANSPORTATION"
   ]);
-
 });

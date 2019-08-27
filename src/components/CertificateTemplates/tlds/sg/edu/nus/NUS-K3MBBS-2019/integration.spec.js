@@ -68,5 +68,4 @@ test("NUS-K3MBBS-2019 degree scroll is rendered correctly", async t => {
     "MD5160",
     "Electives"
   ]);
-
 });
