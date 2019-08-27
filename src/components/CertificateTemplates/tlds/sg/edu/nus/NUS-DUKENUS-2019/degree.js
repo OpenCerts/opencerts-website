@@ -141,17 +141,17 @@ class Degree extends Component {
     if (dataSource.additionalData.images) {
       sig1 = renderImage(
         dataSource.additionalData.images.DUKE_TRUSTEES,
-        240,
-        90
+        180,
+        60
       );
       sig2 = renderImage(
         dataSource.additionalData.images.DUKE_PRESIDENT,
-        240,
-        90
+        180,
+        60
       );
-      sig3 = renderImage(dataSource.additionalData.images.DUKE_DEAN, 240, 90);
-      sig4 = renderImage(dataSource.additionalData.images.TRUSTEES, 240, 90);
-      sig5 = renderImage(dataSource.additionalData.images.PRESIDENT, 240, 90);
+      sig3 = renderImage(dataSource.additionalData.images.DUKE_DEAN, 180, 60);
+      sig4 = renderImage(dataSource.additionalData.images.TRUSTEES, 180, 60);
+      sig5 = renderImage(dataSource.additionalData.images.PRESIDENT, 180, 60);
     }
     const html = (
       <table width="100%">

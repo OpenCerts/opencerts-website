@@ -26,7 +26,7 @@ test("NUS-K2SMA-2019 degree scroll is rendered correctly", async t => {
     "NATIONAL",
     "UNIVERSITY",
     "OF SINGAPORE",
-    "A0010255Y, NAME",
+    "A0027642J, NAME",
     "Master",
     "Science",
     "(Advanced",
@@ -35,26 +35,36 @@ test("NUS-K2SMA-2019 degree scroll is rendered correctly", async t => {
     "Micro-",
     "Nano-",
     "Systems)",
-    "13 March 2007"
+    "28 February 2011"
   ]);
   const transcriptTab = TemplateTabList.find(":nth-child(2)");
   await t.click(transcriptTab);
   await validateTextContent(t, RenderedCertificate, [
-    "A0010255Y, name",
-    "A0010255Y",
+    "A0027642J, name",
+    "A0027642J",
     "01/01/1905",
-    "20/08/2019",
+    "27/08/2019",
     "MASTER OF SCIENCE (ADVANCED MATERIALS FOR MICRO- AND NANO- SYSTEMS)",
     "COMPLETED PROGRAMME",
-    "2005/2006 SEMESTER 1",
-    "SMA5120",
+    "2009/2010 SMA SEMESTER 1",
+    "AMN5120",
     "FUNDAMENTALS OF SEMICONDUCTOR DEVICE PHYSICS",
-    "2005/2006 SEMESTER 2",
-    "2005/2006 SEMESTER 3",
-    "EE5202",
-    "NANOMETER SCALE INFORMATION STORAGE",
-    "2006/2007 SMA SEMESTER 2",
-    "EE5514",
-    "IC YIELD, RELIABILITY & FAILURE ANALYSIS"
+    "2009/2010 SMA SEMESTER 2",
+    "2009/2010 SMA SEMESTER 3",
+    "AMN5121",
+    "YIELD, RELIABILITY & FAILURE ANALYSIS OF MICROSYSTEMS",
+    "AMN5122",
+    "COMPOUND SEMICONDUCTORS AND DEVICES",
+    "2010/2011 SMA SEMESTER 1",
+    "AMN5122",
+    "COMPOUND SEMICONDUCTORS AND DEVICES",
+    "2010/2011 SMA SEMESTER 2",
+    "EE5517",
+    "Optical Engineering",
+    "IE5203",
+    "Decision Analysis",
+    "SMA5199",
+    "Internship Project"
   ]);
+
 });

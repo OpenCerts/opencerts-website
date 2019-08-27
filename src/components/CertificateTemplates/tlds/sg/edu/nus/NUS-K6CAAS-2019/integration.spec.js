@@ -29,7 +29,6 @@ test("NUS-K6CAAS-2019 degree scroll is rendered correctly", async t => {
     "A0006190U, NAME",
     "Graduate",
     "Diploma",
-    "in",
     "Aviation",
     "Management",
     "26 November 2008"
@@ -40,11 +39,22 @@ test("NUS-K6CAAS-2019 degree scroll is rendered correctly", async t => {
     "A0006190U, name",
     "A0006190U",
     "01/01/1905",
-    "20/08/2019",
+    "27/08/2019",
     "GRADUATE DIPLOMA IN AVIATION MANAGEMENT",
     "COMPLETED PROGRAMME",
     "2007/2008 SPECIAL TERM (PART1)",
     "AM5011",
-    "AIRPORT ADMINISTRATION, FINANCE & LAW"
+    "AIRPORT ADMINISTRATION, FINANCE & LAW",
+    "AM5012",
+    "AIRPORT OPERATIONS",
+    "AM5013",
+    "AIRPORT PLANNING, DESIGN & ENGINEERING",
+    "AM5021",
+    "TRANSPORTATION ECONOMICS",
+    "AM5022",
+    "TRANSPORTATION & DEVELOPMENT",
+    "AM5023",
+    "MANAGEMENT IN TRANSPORTATION"
   ]);
+
 });

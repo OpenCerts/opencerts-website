@@ -29,7 +29,6 @@ test("NUS-K7MPAS-2019 degree scroll is rendered correctly", async t => {
     "A0005366L, NAME",
     "Graduate",
     "Diploma",
-    "in",
     "Maritime",
     "Port",
     "Management",
@@ -41,11 +40,22 @@ test("NUS-K7MPAS-2019 degree scroll is rendered correctly", async t => {
     "A0005366L, name",
     "A0005366L",
     "01/01/1905",
-    "20/08/2019",
+    "27/08/2019",
     "GRADUATE DIPLOMA IN MARITIME AND PORT MANAGEMENT",
     "COMPLETED PROGRAMME",
     "2005/2006 SPECIAL TERM (PART1)",
     "MPA5017",
-    "MARITIME MANAGEMENT & LAW"
+    "MARITIME MANAGEMENT & LAW",
+    "MPA5018",
+    "PORT TERMINAL MANAGEMENT",
+    "MPA5019",
+    "PORT PLANNING AND MARINE OPERATIONS MANAGAMENT",
+    "MPA5027",
+    "SHIPPING, PORTS AND DEVELOPMENT",
+    "MPA5028",
+    "PORT MANAGEMENT AND OPERATIONS",
+    "MPA5029",
+    "PORT ECONOMICS"
   ]);
+
 });

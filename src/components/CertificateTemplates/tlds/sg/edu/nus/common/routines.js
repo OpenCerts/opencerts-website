@@ -140,39 +140,23 @@ export const renderNUSTitle = (names, styles = defaultTitleStyle) => (
   </div>
 );
 
+const defaultLogoStyle = {
+  display: "block",
+  marginLeft: "auto",
+  marginRight: "auto",
+  width: "2.8cm",
+  height: "3.56cm"
+};
 // render NUS logo
-export const renderNUSLogo = (names, styles) => {
-  let html;
-  if (names && styles)
-    html = <img src={NUS_LOGO} className={names} style={styles} />;
-  else if (names) html = <img src={NUS_LOGO} className={names} />;
-  else if (styles) html = <img src={NUS_LOGO} style={styles} />;
-  else {
-    const defaultStyle = {
-      display: "block",
-      marginLeft: "auto",
-      marginRight: "auto",
-      width: "2.8cm",
-      height: "3.56cm"
-    };
-    html = <img src={NUS_LOGO} style={defaultStyle} />;
-  }
-  return html;
-};
+export const renderNUSLogo = (names, styles = defaultLogoStyle) => (
+  <img src={NUS_LOGO} className={names} style={styles} />
+);
 
-// render NUS seal
-export const renderNUSSeal = (names, styles) => {
-  let html;
-  if (names && styles)
-    html = <img src={NUS_SEAL} className={names} style={styles} />;
-  else if (names) html = <img src={NUS_SEAL} className={names} />;
-  else if (styles) html = <img src={NUS_SEAL} style={styles} />;
-  else {
-    const defaultStyle = {
-      display: "float",
-      width: "4.95cm"
-    };
-    html = <img src={NUS_SEAL} style={defaultStyle} />;
-  }
-  return html;
+const defaultSealStyle = {
+  display: "float",
+  width: "4.95cm"
 };
+// render NUS seal
+export const renderNUSSeal = (names, styles = defaultSealStyle) => (
+  <img src={NUS_SEAL} className={names} style={styles} />
+);

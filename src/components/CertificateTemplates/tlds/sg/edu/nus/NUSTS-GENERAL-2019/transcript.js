@@ -1,4 +1,7 @@
 /* eslint-disable class-methods-use-this */
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-param-reassign */
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import {
@@ -718,7 +721,85 @@ class TranscriptTermRemarks {
   }
 }
 
-// transcript term data
+// translate module information
+const translateModule = module => {
+  const translated = {};
+  for (const key in module) {
+    switch (key) {
+      case "name":
+        if (
+          module.name.startsWith("(") &&
+          module.name.endsWith(")") &&
+          module.transferSeq
+        )
+          translated.moduleName = "";
+        else translated.moduleName = module.name;
+        break;
+      case "grade":
+        translated.grade = module[key];
+        break;
+      case "courseCredit":
+        translated.credits = module[key];
+        break;
+      case "courseCode":
+        translated.moduleCode = module[key];
+        break;
+      default:
+        translated[key] = module[key];
+        break;
+    }
+  }
+  return translated;
+};
+
+// traverse transcript data to retrieve matched credit transfer details
+const getCreditTransferDetails = (transcriptData, semester, seq) => {
+  const details = [];
+  transcriptData.forEach(module => {
+    if (
+      module.semester === semester &&
+      module.transferSeq &&
+      module.transferSeq === seq
+    )
+      details.push(translateModule(module));
+  });
+  return details;
+};
+
+// traverse transcript data to retrieve enrolment modules
+const getEnrolmentModules = (transcriptData, semester) => {
+  const modules = [];
+  transcriptData.forEach(module => {
+    if (module.semester === semester && !module.transferSeq)
+      modules.push(translateModule(module));
+  });
+  return modules;
+};
+
+// construct a JSON of transcript data with nested structure.
+// The returned JSON will be the data source of TranscriptTermData
+const translateTranscriptTermData = dataSource => {
+  if (!dataSource.transcriptRaw)
+    dataSource.transcriptRaw = dataSource.transcript;
+  dataSource.additionalData.transcriptGroup.forEach(term => {
+    if (term.creditTransfer)
+      term.creditTransfer.forEach(transfer => {
+        transfer.details = getCreditTransferDetails(
+          dataSource.transcriptRaw,
+          term.name,
+          transfer.transferSeq
+        );
+      });
+    const enrolmentModules = getEnrolmentModules(
+      dataSource.transcriptRaw,
+      term.name
+    );
+    if (enrolmentModules) term.modules = enrolmentModules;
+  });
+  dataSource.transcript = dataSource.additionalData.transcriptGroup;
+};
+
+// transcript term data - nested structure
 class TranscriptTermData {
   // constructor
   constructor(termData, termIdx, dataFeeder) {
@@ -1167,6 +1248,9 @@ class TranscriptData {
 const Template = ({ certificate }) => {
   // JSON data source
   const jsonData = certificate;
+  // translate
+  if (jsonData.additionalData.transcriptGroup)
+    translateTranscriptTermData(jsonData);
   // to be used in rendering
   isDuke = jsonData.additionalData.transcriptType.startsWith("DK");
   isCDP = jsonData.additionalData.transcriptType.startsWith("CDP");

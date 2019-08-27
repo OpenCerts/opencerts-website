@@ -1,475 +1,494 @@
 {
   "schema": "opencerts/v1.5",
   "data": {
-    "id": "f778c33a-e102-4429-a17e-e8c439977261:string:NUS-A0090502U-D136000-P10182223-30-20180731",
-    "$template": "1f92d8a7-1fc2-4058-a902-695e93b4c4bc:string:sg/edu/nus/NUS-DUKEPHD-2019",
-    "issuedOn": "89083884-1359-4f8b-9536-248cc40adaaf:string:2019-08-20T18:03:02+08:00",
-    "name": "35ec3836-fab7-4a41-a496-4fe832157086:string:NUS Degree",
+    "id": "8b570844-4f67-42f8-98a3-7d4e5cb3ec4f:string:NUS-A0090502U-D136000-P10182357-30-20180731",
+    "$template": "4e7a5490-793f-4b7f-b163-afd69e25839e:string:sg/edu/nus/NUS-DUKEPHD-2019",
+    "issuedOn": "2e9734b1-219f-4e08-8cc0-277d97f8e205:string:2019-08-27T10:10:28+08:00",
+    "name": "68117070-9bbe-4c7e-8d24-42c3da8e322f:string:NUS Degree",
     "issuers": [
       {
-        "name": "5c75a5e8-7a26-45fe-a770-15cbd333376e:string:National University of Singapore",
-        "did": "c7efebf9-6593-48af-bd55-b800fee3b403:string:DID:SG-UEN:200604346E",
-        "url": "9604df94-e856-4ea2-8513-45765600ef99:string:https://www.nus.edu.sg",
-        "email": "051c19fe-9827-4d9f-b327-87ba4b6db894:string:registrar@nus.edu.sg",
-        "certificateStore": "6d250115-1ba4-4df8-9da2-ea6dff16b1db:string:0xfEbB273495F5C2c4783E23424Fe9773691b57fcB"
+        "name": "30ece99b-21ef-4c06-bd7e-6d0f4445827c:string:National University of Singapore",
+        "did": "314f35cd-e2f6-4b77-b752-af6336e0a5b4:string:DID:SG-UEN:200604346E",
+        "url": "e5004b32-08ab-4efa-adb6-f0c03a76e0c6:string:https://www.nus.edu.sg",
+        "email": "e37d4d7b-8a5e-4aa7-8958-7ceb8fd1e827:string:registrar@nus.edu.sg",
+        "certificateStore": "f07e97c9-6617-4f0d-9c08-887fc6c2e656:string:0xfEbB273495F5C2c4783E23424Fe9773691b57fcB"
       }
     ],
     "recipient": {
-      "name": "531d7ea0-3694-4a8a-89db-9d821466d822:string:A0090502U, name",
-      "studentId": "fc1f5990-ff04-47c1-8338-07675a8e8b25:string:A0090502U",
-      "dateOfBirth": "34edd6f8-d64d-451e-b74a-fa12977abde5:string:1905-01-01"
+      "name": "b14ba782-c707-4ad4-b5cd-e9d3a2ef1860:string:A0090502U, name",
+      "studentId": "5c769a22-31f7-4b9c-bfc2-8aa4f1d45eed:string:A0090502U",
+      "dateOfBirth": "1b9e4701-6395-4e96-860f-1a75bd721a72:string:1905-01-01"
     },
     "transcript": [
       {
-        "name": "899b0e5f-7e88-4b61-b514-ebeaa1f116ad:string:1100",
-        "term": "7a55b672-daca-4efb-95a7-01f3da2ed6ad:string:2011/2012",
-        "formOfStudy": "49673a19-d1c9-461b-88db-2a984eed8734:string:ENRL",
-        "fosPrintArea": "a2a1ea24-0325-41c2-805f-9cd04c9f8623:string:ND",
-        "modules": [
-          {
-            "moduleCode": "497278d5-cd70-44e2-999b-d01d861799e9:string:GMS6100",
-            "moduleName": "7c170cb9-3876-439a-90f0-4b006ec278ad:string:Foundations Course",
-            "grade": "b92ddec5-b27a-4c3e-aadb-df4f845969e8:string:P",
-            "credits": "65a343df-bd42-47cd-a2f1-06c2ce11dd25:number:3",
-            "gradingBasis": "c04c79d4-98b3-4452-bd56-2116e50228ba:string:GRD",
-            "includeInGPA": "7630e29c-1d0b-44fb-b8ca-658a8434be41:boolean:true"
-          },
-          {
-            "moduleCode": "decb85b5-4f86-45bf-9163-4a44c9d286e7:string:GMS6101",
-            "moduleName": "3a669dd1-0d06-47ab-9534-4e2b860c4c14:string:Molecules & Cells",
-            "grade": "910e2df5-e506-4a76-91fe-49c1e3e02207:string:P",
-            "credits": "fd2e6f7a-c597-4998-ab86-6bd35a59a54b:number:6",
-            "gradingBasis": "e3a32a3c-ecc3-4676-bd61-91f2986c1059:string:GRD",
-            "includeInGPA": "2a4b546c-9297-4a67-afa6-fd5b769eb29a:boolean:true"
-          },
-          {
-            "moduleCode": "5c9fda2c-c6f1-48a2-a111-350b9c5fd81e:string:GMS6102",
-            "moduleName": "b73b9c74-b77c-48cb-87b0-60b28bf9ad3b:string:Normal Body",
-            "grade": "cce84427-95d7-4505-97ee-cd37f4ec7d4e:string:P",
-            "credits": "b4af6f9b-e6ff-4198-b21f-15c0be2a3d02:number:12",
-            "gradingBasis": "cb81182d-25e4-41f7-b0a7-618ce34863c2:string:GRD",
-            "includeInGPA": "7e13f17b-f562-49d8-aa12-2371b662e45c:boolean:true"
-          },
-          {
-            "moduleCode": "82356bd1-d0b2-46d2-a279-e55031c776ca:string:GMS6103",
-            "moduleName": "882de57d-623c-4918-a1cc-76ac64263c8a:string:Brain & Behavior",
-            "grade": "033002f5-db85-4493-bdb6-83aafb25edd7:string:P",
-            "credits": "2a447493-f439-4b92-beec-55160c8def77:number:4",
-            "gradingBasis": "db85f262-e2e6-4089-ac46-93e0512d0e5d:string:GRD",
-            "includeInGPA": "6f7340b6-3210-40f6-ae48-234678ca9fef:boolean:true"
-          },
-          {
-            "moduleCode": "86ac1642-db9b-4dbe-b36c-b3e5af5f1641:string:GMS6104",
-            "moduleName": "d9a0b1c4-2b73-4511-a0a7-332df892c13e:string:Body & Disease",
-            "grade": "20a25132-b252-4af4-a19d-89a6a69ceabb:string:P",
-            "credits": "489f7cff-b1c8-4100-a017-209597f7d8f3:number:20",
-            "gradingBasis": "e6dce92d-b1bc-4102-aec4-7ce1ee34c98c:string:GRD",
-            "includeInGPA": "3918bf91-8115-4143-b6b6-1f28b7bef286:boolean:true"
-          },
-          {
-            "moduleCode": "446784d6-1cbd-42ff-aec7-f94570cd8448:string:GMS6105",
-            "moduleName": "c2f6f037-b593-4e0c-8a63-714d49ced956:string:Practice Course 1",
-            "grade": "28f25fc7-c690-4ad4-87dd-61468ab238e5:string:P",
-            "credits": "8a450523-4b23-4dbb-9ca2-198a9922f6e4:number:6",
-            "gradingBasis": "9f083c7b-f449-40fe-9636-f4bfcf16b078:string:GRD",
-            "includeInGPA": "d7c9eb9a-6791-4d21-ab49-3e7488e8e6fe:boolean:true"
-          },
-          {
-            "moduleCode": "5d4079e8-ed77-43ea-b03b-a06cfcbf6018:string:GMS6106",
-            "moduleName": "2dee239f-8c57-40fa-b8c4-c1efdf13e254:string:Investigative Methods & Tools",
-            "grade": "cbf3edd0-e92e-49e9-90ae-2af34ca87c22:string:P",
-            "credits": "64542df0-9342-46ce-8b49-1ac9dec58ad7:number:1",
-            "gradingBasis": "35cb9122-90a3-4d95-9e9d-960b62858797:string:GRD",
-            "includeInGPA": "d6fdd546-e417-456b-b382-67d623784717:boolean:true"
-          }
-        ],
-        "summary": [
-          {
-            "programName": "85f06a56-448d-4684-8209-b21939effef5:string:Doctor of Medicine",
-            "GPAName": "71062473-877f-48be-b45e-b20c91e39a08:string:Cumulative Credits",
-            "GPA": "43e0d48f-3634-44b2-98a0-27ff4588a3ae:number:52"
-          }
-        ]
+        "name": "20838004-ce4d-4837-b9c2-ac2034df63bf:string:Foundations Course",
+        "courseCode": "72b11b92-111e-46cb-bd00-aeea2eca88fd:string:GMS6100",
+        "grade": "5b5f41b1-d0ee-4131-8831-f9bf228289c6:string:P",
+        "courseCredit": "5a863377-9977-4295-923a-ec2fe5a6b280:number:3",
+        "gradingBasis": "8d372eca-a902-48b5-a1f6-495169c67cd2:string:GRD",
+        "includeInGPA": "5173a630-7691-4c55-8e24-4188fbc462a4:boolean:true",
+        "semester": "59d48ba6-2074-43fe-bec3-b27e91cbe3dd:string:1100"
       },
       {
-        "name": "e9a037a2-a5a7-43c0-92f9-54008116c872:string:1200",
-        "term": "749b9f07-f1b4-4978-ab86-3e997c350397:string:2012/2013",
-        "formOfStudy": "b75338a6-543f-4775-8df0-27881b148def:string:ENRL",
-        "fosPrintArea": "a717d7de-4834-496e-8a5f-8253e775bdd1:string:ND",
-        "modules": [
-          {
-            "moduleCode": "fe850f1f-19cf-4c8b-9a54-fa3958300111:string:GMS6200",
-            "moduleName": "5e1ec62b-f82d-421d-8cae-94b7f303a00c:string:Orientation to Clinical Year",
-            "grade": "0f3f9c92-c9d2-4b48-9a6d-9c9535e76563:string:P",
-            "credits": "d2d6d94b-45ae-4f75-9aad-e78315f72b59:number:1",
-            "gradingBasis": "9ace8fe6-b7a4-47ca-8256-d4022dffc257:string:GRD",
-            "includeInGPA": "ad9408a0-7b6e-4287-9a7d-d85afef01600:boolean:true"
-          },
-          {
-            "moduleCode": "437f3f4e-8a07-4045-a556-d914c92eb557:string:GMS6201",
-            "moduleName": "82ba8243-7e61-4987-b456-6c10a2166808:string:Medicine Clerkship",
-            "grade": "1b72d36c-b71e-4377-9deb-035b518a53f2:string:HP",
-            "credits": "ee744efd-0bbf-4cd2-b800-ecda50159f5c:number:8",
-            "gradingBasis": "5ca82c24-17b7-41ed-aa32-472c1b1c0cb8:string:GRD",
-            "includeInGPA": "b8dd91b9-759e-4149-9c4d-a68559fbdbef:boolean:true"
-          },
-          {
-            "moduleCode": "e33c61d5-aa19-4bda-8da9-5d879f69872a:string:GMS6202",
-            "moduleName": "94119397-afff-40e0-bd2d-1e494f6f6cc4:string:Surgery Clerkship",
-            "grade": "11f76657-e8fa-4a34-8e67-8687f7d7d69c:string:HP",
-            "credits": "99493b68-d971-47e6-a917-7a432fdab721:number:8",
-            "gradingBasis": "f13a73a4-b540-4cd6-a847-91fe8f1d6d1b:string:GRD",
-            "includeInGPA": "648aecb0-5bdd-4a36-adf4-9b6b63d111da:boolean:true"
-          },
-          {
-            "moduleCode": "f34b3b7a-df43-4fa2-a19d-0e3fbe3e50ab:string:GMS6204",
-            "moduleName": "a4554e93-fa1e-4a4b-9552-436b286439b8:string:Pediatrics Clerkship",
-            "grade": "a9d8604e-1e9c-4344-9475-ea4a905263e1:string:P",
-            "credits": "90da4203-e328-4b60-9b79-5fd072bea286:number:8",
-            "gradingBasis": "d51ee59c-c0c1-432e-a9bf-c0d8619f5c77:string:GRD",
-            "includeInGPA": "f6507c5e-51f6-4889-8238-68811831e886:boolean:true"
-          },
-          {
-            "moduleCode": "06066d2d-1555-4c96-9049-ce51e4ce3197:string:GMS6205",
-            "moduleName": "da7a4c27-4653-4caf-97e2-fce920dbd388:string:Psychiatry Clerkship",
-            "grade": "721a05ea-470d-4632-86d3-c8bcb604ef70:string:HP",
-            "credits": "cbcfab6b-ad55-494c-876c-1ddbd1b4c647:number:4",
-            "gradingBasis": "0ef7ceff-bff7-4c77-87e0-4323881e627e:string:GRD",
-            "includeInGPA": "b4a33233-b9e4-46f2-a394-5fc51785b11e:boolean:true"
-          },
-          {
-            "moduleCode": "a0522150-9cb7-4901-b6cc-5ee5107d3816:string:GMS6206",
-            "moduleName": "746defe6-0471-40df-8248-ef04b548e537:string:Neurology Clerkship",
-            "grade": "95be227f-a90a-491a-99e2-2b9a5870128c:string:HP",
-            "credits": "2d01544c-0fae-40a2-a9da-c47e874caea8:number:4",
-            "gradingBasis": "13f58a8d-a6b2-49f0-b6c0-f720d7945605:string:GRD",
-            "includeInGPA": "3ac12219-34ba-49ac-b206-30dc00e9bcb2:boolean:true"
-          },
-          {
-            "moduleCode": "f920e313-b44e-4089-9f3a-d31ec6f60f11:string:GMS6207",
-            "moduleName": "e1c75ee5-afa3-41c3-b397-1950a6f23d0e:string:Clinical Core 1",
-            "grade": "4bb43de0-ec7e-4f86-b020-1cf5edce506f:string:P",
-            "credits": "98c78df0-09cb-4bb9-b856-f4caf6816d5a:number:1",
-            "gradingBasis": "5e8f51bf-9409-4921-b1aa-b236ae23cabb:string:GRD",
-            "includeInGPA": "f987fb0b-1557-4049-ad7b-566df0b9fe53:boolean:true"
-          },
-          {
-            "moduleCode": "96681fd3-8b1e-4db5-8356-5b3e166085f3:string:GMS6208",
-            "moduleName": "51e74309-93f4-43c8-8d9c-526d00bc43e6:string:Clinical Core 2",
-            "grade": "923a7ef8-3738-4b88-981d-191aa96f1400:string:P",
-            "credits": "4f107807-c71d-4f93-8725-90ecd8e2b824:number:1",
-            "gradingBasis": "71f94f33-b1f4-4eda-8b1c-965033cbe873:string:GRD",
-            "includeInGPA": "83dcdb87-d882-49b4-90cf-d3e8ad6d4ff4:boolean:true"
-          },
-          {
-            "moduleCode": "e36800da-cea8-40fe-ac70-0888ffc0f350:string:GMS6209",
-            "moduleName": "c3c53494-fa82-4784-a4a4-818341e0eb1b:string:Clinical Core 3",
-            "grade": "46a5522b-c995-403f-aad5-917b71c1a5b4:string:P",
-            "credits": "b5ee160e-5b63-442f-afe1-16f21abd164e:number:1",
-            "gradingBasis": "8642d199-3519-4abe-9c48-f658e45b21ee:string:GRD",
-            "includeInGPA": "6620a5a4-83e1-4d82-b1e8-f4e8990d71d7:boolean:true"
-          },
-          {
-            "moduleCode": "06067df0-4406-4c3b-a238-c996f566d4ca:string:GMS6210",
-            "moduleName": "505e1b1c-8a3b-48e6-bbd3-ac6fa69cc92a:string:Clinical Core 4",
-            "grade": "48cdae32-04d4-4957-b03e-7a06dc7af78d:string:P",
-            "credits": "57742279-71a7-43f8-9ee3-12adb700e498:number:1",
-            "gradingBasis": "6b2f61fe-ed55-4edf-b9ac-2c837cabe73b:string:GRD",
-            "includeInGPA": "039394f2-00f8-4225-a4f4-d0df8aaf183c:boolean:true"
-          },
-          {
-            "moduleCode": "610203c6-77b4-42a6-b230-e26d159d368c:string:GMS6211",
-            "moduleName": "99323f87-7cb6-4ef3-90a2-044778b6a28f:string:Clinical Core 5",
-            "grade": "8409404b-77df-4e70-b5c1-c76c662abb98:string:P",
-            "credits": "605989cd-dbe9-4380-9383-b6fe07d15eb1:number:1",
-            "gradingBasis": "70f46b41-4e70-457b-936a-d23fdfe3d834:string:GRD",
-            "includeInGPA": "6851ebff-f633-4f8b-be0e-74cac98a3650:boolean:true"
-          },
-          {
-            "moduleCode": "35a8eea5-ecc4-484d-a1e3-147757bd3ed2:string:GMS6212",
-            "moduleName": "f807dc5e-f6a8-4590-b87e-f2c2c73e894b:string:Practice Course 2",
-            "grade": "eeadeb79-41b4-420d-88a4-1545e2bd3573:string:P",
-            "credits": "010cea92-0e36-42e8-aefb-47340cd49ffa:number:4",
-            "gradingBasis": "9b759019-b17d-4b0b-b189-fab196ceb727:string:GRD",
-            "includeInGPA": "b2b24338-9758-483c-b924-41d0e89834e9:boolean:true"
-          },
-          {
-            "moduleCode": "6068350b-1627-4f84-8fad-4d9ab55a5cf8:string:GMS6215",
-            "moduleName": "470f3ab5-51c0-450a-8c5d-0a28ae481771:string:Integrated Anesthesia Program",
-            "grade": "82219e51-dbf2-47ba-a417-0578781fa0a1:string:HP",
-            "credits": "e62ed66c-3fd2-4869-a589-3c88f4f80085:number:2",
-            "gradingBasis": "d1327860-d40c-4e11-9ad1-d55a314620b0:string:GRD",
-            "includeInGPA": "c5784fe7-9985-44c2-8feb-3df3f99d2044:boolean:true"
-          },
-          {
-            "moduleCode": "3d2076d2-6bcb-43de-9b16-7a71413ffd26:string:GMS6216",
-            "moduleName": "c35caf21-0cb8-474f-9250-9f0ca4e3a715:string:Obstetrics & Gynecology Clerkship",
-            "grade": "4dc0bdba-affe-4f6e-99ba-ae4c563c96ec:string:P",
-            "credits": "64de6311-fe85-4bca-8c52-465a7cf877b3:number:6",
-            "gradingBasis": "295b7b3a-8e77-469d-b251-5a0742822401:string:GRD",
-            "includeInGPA": "1dd7232d-102f-4a17-8c55-d344003edaa4:boolean:true"
-          }
-        ],
-        "summary": [
-          {
-            "programName": "421e66b3-ed23-4286-b413-4a2591a9ddc2:string:Doctor of Medicine",
-            "GPAName": "ac80f1fd-5998-417d-a057-2406021f21bc:string:Cumulative Credits",
-            "GPA": "016fd888-5117-41dc-8660-4e1034d6b055:number:102"
-          }
-        ]
+        "name": "1764c202-7c4c-4353-9787-b017db44ff8f:string:Molecules & Cells",
+        "courseCode": "4d7bf8d7-8b51-436b-a62f-6b7266d8b56e:string:GMS6101",
+        "grade": "0de43e66-a1fa-4b5a-a070-799c75179c7c:string:P",
+        "courseCredit": "ee795897-e860-4649-9e6d-93f1ce071b50:number:6",
+        "gradingBasis": "d321c8da-cc55-433c-9d15-b0dbd9fa3586:string:GRD",
+        "includeInGPA": "74c18197-ace5-4629-94d3-6f723b7ad5f6:boolean:true",
+        "semester": "3d6cda9c-2b0c-4ade-9d16-7af88de059b3:string:1100"
       },
       {
-        "name": "e1e7817d-06b0-43f2-81e7-db8d26698060:string:1300",
-        "term": "915b06ee-a400-4e2b-9546-a90a538abb23:string:2013/2014",
-        "formOfStudy": "09551e2f-9ded-4fc1-8131-00b471ffa57a:string:ENRL",
-        "fosPrintArea": "a7dc2ae4-5d7e-4150-9cb2-a4b1ca4532ff:string:ND",
-        "modules": [
-          {
-            "moduleCode": "1f6f083a-01f9-48fb-b955-15abb4c29f9e:string:GMS6900",
-            "moduleName": "adfb962c-7548-47ab-88de-7bde17ca82fb:string:Student Research Seminars",
-            "grade": "50586fd9-b752-42ff-9bad-7cd151961f5f:string:IP",
-            "credits": "d06adc0a-2b76-47ef-b461-96cf26972b29:number:3",
-            "gradingBasis": "6ad1c00d-67c0-4391-99e5-0d4878476d2a:string:GRD",
-            "includeInGPA": "1958109f-d265-43ea-88d7-8ccb4de4f42a:boolean:true"
-          },
-          {
-            "moduleCode": "5c347d27-c83e-4d5b-81b7-61490d167171:string:GMS6901",
-            "moduleName": "6c1321b2-1819-45cf-ab83-acb2a0b65888:string:Molecules to Medicines",
-            "grade": "57378fc3-04bf-4777-aab6-a40d746ef6ba:string:P",
-            "credits": "dc8f0ad7-d3b0-42a2-ab6d-0b51c5e37bb0:number:4",
-            "gradingBasis": "a3332e52-b713-4729-9e73-3f8229574744:string:GRD",
-            "includeInGPA": "353d6435-b1d8-4791-8868-0aca0da3f6c4:boolean:true"
-          },
-          {
-            "moduleCode": "ae93c062-9253-4c28-beb2-8b18d7835da1:string:GMS6902",
-            "moduleName": "72b61031-8ef4-4474-99e9-beee16fc8e2e:string:Laboratory Rotation 1",
-            "grade": "a6af758d-dbda-4b70-9c4f-5e05cca2631c:string:P",
-            "credits": "5fb51c79-d2ed-41a1-acbc-e0c197cf307c:number:3",
-            "gradingBasis": "f188f604-3315-4e72-907c-dc971640ab78:string:GRD",
-            "includeInGPA": "d205f90c-b5f3-49e7-ac4a-2bc527b2aefd:boolean:true"
-          },
-          {
-            "moduleCode": "ed5944a3-e707-447b-b7a5-27da86963d5e:string:GMS6903",
-            "moduleName": "48aa077f-c623-4131-a309-8ff277fcfbe1:string:Laboratory Rotation 2",
-            "grade": "ad7a7a22-e7ff-4237-a81f-f6cb59c05a69:string:P",
-            "credits": "a22a5a55-d033-4cbf-a090-6fe3878a4c59:number:3",
-            "gradingBasis": "e65308d4-e54f-4035-9390-ca5fdbc62574:string:GRD",
-            "includeInGPA": "12dcedf7-2390-492a-8e94-1031350c589e:boolean:true"
-          },
-          {
-            "moduleCode": "12b82ee0-21d0-4ad8-907c-9ef03ab73bcf:string:GMS6904",
-            "moduleName": "69bb1200-5e2e-4498-bc56-73282b7b2192:string:Principles of Infectious Diseases",
-            "grade": "891b893b-50a9-4c1b-93e3-7cf684ae59e4:string:B",
-            "credits": "8b3810f9-13f7-4b70-8b9c-b6564c300de1:number:4",
-            "gradingBasis": "904e3cad-9806-4ebe-ab22-f6b972601cd5:string:GRD",
-            "includeInGPA": "709e7c56-25ac-44dd-9da8-976aa30039c3:boolean:true"
-          }
-        ],
-        "summary": [
-          {
-            "programName": "0d64bb94-ea99-4ac8-a4cc-f1e481bd635a:string:Doctor of Medicine",
-            "GPAName": "678493bf-db36-4181-a680-4f74a224bb7a:string:Cumulative Credits",
-            "GPA": "4099b165-4c1e-4381-8a6d-82dca2f33708:number:102"
-          },
-          {
-            "programName": "3f240016-e0ed-409c-a5f2-ad13e8496f57:string:Doctor of Philosophy",
-            "GPAName": "e42439b3-de6c-4dc3-928c-55a23e4d82ca:string:Cumulative Credits",
-            "GPA": "663dcee3-dfc0-471a-b7c9-99cc8a17104c:number:14"
-          }
-        ]
+        "name": "a807a823-d5ce-4c94-b71f-d76b26ab8e35:string:Normal Body",
+        "courseCode": "d6c67fe5-5730-4dc7-97fa-727973e38555:string:GMS6102",
+        "grade": "453dc720-fa72-4b07-aab2-6c4f71dec00e:string:P",
+        "courseCredit": "06d4b713-29f4-4e55-ba2e-30f6f9a86537:number:12",
+        "gradingBasis": "1d1bf7ea-52d7-465d-b56c-73dd3c43f19b:string:GRD",
+        "includeInGPA": "b525387c-4356-43c4-adb1-62bd8ec2c6df:boolean:true",
+        "semester": "cde1ca71-b999-4d76-94ac-ffdc781d215f:string:1100"
       },
       {
-        "name": "d3b28c52-ea1f-4684-b007-a4f0f4b4dd94:string:1400",
-        "term": "b45d217c-0dc7-4b65-8aa7-82ffb131f9a8:string:2014/2015",
-        "formOfStudy": "c18b18ce-8543-4804-829b-dbdc05848514:string:ENRL",
-        "fosPrintArea": "14d2827f-8127-4b20-a63b-ff9d7a019217:string:ND",
-        "modules": [
-          {
-            "moduleCode": "f32731ce-29dc-4136-971c-f845b268e0bc:string:GMS6900",
-            "moduleName": "c57b1e3a-b377-4e4b-9b80-28319449fa70:string:Student Research Seminars",
-            "grade": "702c159a-03a3-4e62-92fb-669291eac700:string:IP",
-            "credits": "e4a972d1-997a-4098-a8f9-001659027192:number:3",
-            "gradingBasis": "fb2985d0-d1c4-4660-9566-66229283ec2f:string:GRD",
-            "includeInGPA": "aeba0e28-d047-4cde-a156-f944763c8c59:boolean:true"
-          },
-          {
-            "moduleCode": "27c5e02d-3399-41f5-bf33-6d214e2ed08a:string:GMS6910",
-            "moduleName": "568110e5-7624-40e8-9c2e-7950060512c5:string:Evolutionary Genetics",
-            "grade": "68a98b93-bd6f-4ea4-817b-72a43f66096b:string:A+",
-            "credits": "faed19a9-705a-4e10-b89d-227659d8ca7d:number:4",
-            "gradingBasis": "d1192061-3abc-4f47-880d-4874aaa89920:string:GRD",
-            "includeInGPA": "5c4ce4b7-436d-4678-9ce5-bc1bc98d3ff4:boolean:true"
-          }
-        ],
-        "summary": [
-          {
-            "programName": "9827d043-c3d3-4f84-95be-d77316ac4aa6:string:Doctor of Medicine",
-            "GPAName": "9e78b34c-b8bb-4475-bc76-9cc239886a0a:string:Cumulative Credits",
-            "GPA": "b4c2a2c4-e958-4782-9824-1dee7b485ecd:number:102"
-          },
-          {
-            "programName": "2f2dfef3-9428-4157-b178-be6c06959fad:string:Doctor of Philosophy",
-            "GPAName": "40eb5bd6-e4ac-4a43-9327-cca1433081fd:string:Cumulative Credits",
-            "GPA": "d870d105-3734-4930-9a8b-27fb9889f5d2:number:18"
-          }
-        ]
+        "name": "dc59d714-7e92-4419-b97b-223a91a4b147:string:Brain & Behavior",
+        "courseCode": "14cac0df-86c0-44dc-916e-a7a5fa8be28d:string:GMS6103",
+        "grade": "874586bf-029d-4c24-81f9-6c6425c4b866:string:P",
+        "courseCredit": "f165b01a-a987-4ed6-8fd7-e3473be24b1c:number:4",
+        "gradingBasis": "a3768543-e135-4bb3-903d-33974af4630d:string:GRD",
+        "includeInGPA": "b5cd344a-5c6d-4bd2-872e-67ef7c4410ee:boolean:true",
+        "semester": "774b6f82-aee0-4f9c-948e-b379fb46f3a8:string:1100"
       },
       {
-        "name": "72446003-b47a-43e0-8451-30bb0e4124ba:string:1500",
-        "term": "0c921020-c5cd-437c-85b3-eac17fb5fe44:string:2015/2016",
-        "formOfStudy": "b53066aa-b738-40ca-9a72-bbf8a8150ae2:string:ENRL",
-        "fosPrintArea": "06ebe683-8646-4ce6-974e-3f07a25b639c:string:ND",
-        "modules": [
-          {
-            "moduleCode": "21f834bf-3809-46fb-a9d1-91604e2596dd:string:GMS6900",
-            "moduleName": "50ae94ed-bca2-4d37-b829-432e396b5c15:string:Student Research Seminars",
-            "grade": "58856bf0-9e21-469a-a910-2dcd83c59906:string:IP",
-            "credits": "3353e1ed-3eff-463d-87d1-b3ab368b3e5a:number:3",
-            "gradingBasis": "6cd6ed14-71f4-4d0d-9b22-0cc496861c99:string:GRD",
-            "includeInGPA": "c4cb2d93-7b2b-478a-9849-21b190911ffc:boolean:true"
-          }
-        ],
-        "summary": [
-          {
-            "programName": "b70a9371-35d8-44f9-8b60-a8ae35a253bf:string:Doctor of Medicine",
-            "GPAName": "5ee8aaa6-741f-4182-b85b-7bc6ca177db9:string:Cumulative Credits",
-            "GPA": "38dbd84b-7ec4-4f30-8289-bad1674c20f3:number:102"
-          },
-          {
-            "programName": "db78fda2-ac2d-4068-be36-6845a6353034:string:Doctor of Philosophy",
-            "GPAName": "04d1653a-b942-425c-b43d-69f11457c61c:string:Cumulative Credits",
-            "GPA": "021ea80e-5558-4ad0-808f-9d01738b91d9:number:18"
-          }
-        ]
+        "name": "4f442e3d-75de-4bd6-b169-6fed0ac90488:string:Body & Disease",
+        "courseCode": "cc44e3a4-c17a-47ec-8aad-4e3e89951016:string:GMS6104",
+        "grade": "8c130c58-402a-4f42-b66c-bcedb8bc94be:string:P",
+        "courseCredit": "59d5c38e-2730-4477-9771-d3b89801838c:number:20",
+        "gradingBasis": "a6af6e6f-18a3-43cb-b621-a380b2fa7505:string:GRD",
+        "includeInGPA": "17299abd-db98-43d0-8cbb-42c07f8c7f26:boolean:true",
+        "semester": "95a36c49-cb09-4331-9e82-d6f8419ef011:string:1100"
       },
       {
-        "name": "3896e02e-9fbf-42c1-9d51-3fab40958682:string:1610",
-        "term": "338234e1-5c8a-4764-a820-3a6f8f62005c:string:2016/2017 Semester 1",
-        "formOfStudy": "72e1a457-cf85-4f7e-8496-bc6d4bb8a6de:string:ENRL",
-        "fosPrintArea": "94900913-2e85-4f83-861f-f3cec30cbd95:string:ND",
-        "modules": [
-          {
-            "moduleCode": "12b4dfe5-e8af-4e48-ae17-d4efce8f7b82:string:GMS6900",
-            "moduleName": "402c450c-737d-4135-9bcb-9d1ae41a4052:string:Student Research Seminars",
-            "grade": "c2c05a12-3fea-44ff-a742-be0ecf931068:string:P",
-            "credits": "af62f9f9-f66e-4616-9566-38d3ad9516e4:number:3",
-            "gradingBasis": "dfae3895-7fa5-47b2-8993-f237fc0f5610:string:GRD",
-            "includeInGPA": "1195e881-9523-4789-816a-f0fa49f60da1:boolean:true"
-          }
-        ],
-        "summary": [
-          {
-            "programName": "6dbbc849-de68-4a65-8d27-0df271d4ca5a:string:Doctor of Medicine",
-            "GPAName": "cfca58ef-b437-43da-a321-1427190c2a19:string:Cumulative Credits",
-            "GPA": "694ccc9f-4caa-4a08-8ce7-498e1a5b9699:number:102"
-          },
-          {
-            "programName": "41c62245-28ff-4fb2-b91e-21ee14eb1bb4:string:Doctor of Philosophy",
-            "GPAName": "12005cfd-7cce-4c1a-bb23-9b041961bfd6:string:Cumulative Credits",
-            "GPA": "ebe476f5-7fa7-4872-a546-48cf6a55aa23:number:21"
-          }
-        ]
+        "name": "1a727807-e97b-4676-bae2-5f88f6d46d27:string:Practice Course 1",
+        "courseCode": "f33b4163-b6dd-42b2-9d30-4310d4a0f784:string:GMS6105",
+        "grade": "79a612e3-1918-4ca8-a361-e0f57a3ba1fe:string:P",
+        "courseCredit": "07178d54-7003-48d9-8908-451439ca955d:number:6",
+        "gradingBasis": "9d0f8551-369f-4ecc-8c2d-b00b29f8b8dc:string:GRD",
+        "includeInGPA": "cfd2f1b5-7fde-4adf-af2c-f054aa329b07:boolean:true",
+        "semester": "caded043-d5e6-4237-83e3-8aef539ac7b9:string:1100"
       },
       {
-        "name": "abb2be67-6dde-4441-aeed-0859859698fc:string:1720",
-        "term": "10e674f5-bf9a-48af-9ded-396a9b1be5ac:string:2017/2018 Semester 2",
-        "formOfStudy": "630403d9-99b7-4a6a-be46-0798c81b10ca:string:ENRL",
-        "fosPrintArea": "395934f7-3cee-4923-be6d-7bd535897895:string:ND",
-        "modules": [
-          {
-            "moduleCode": "c440c610-af10-41c9-8103-8926e52daa59:string:GMS6991",
-            "moduleName": "ec04630f-dbd0-47b3-8a85-36498fe16cff:string:Thesis",
-            "grade": "7975905f-483c-457f-85bd-b6a1088e04f5:string:P",
-            "credits": "def7e181-1830-4f11-bfeb-5d5f3531f45a:number:40",
-            "gradingBasis": "731a297d-785d-4d64-a5d4-df58dfc6d5b6:string:GRD",
-            "includeInGPA": "a393f9cd-831d-4b6a-990a-8d0e7dfaa371:boolean:true"
-          }
-        ],
-        "summary": [
-          {
-            "programName": "6a76afe9-45f0-4393-bb50-f137bef1a93f:string:Doctor of Medicine",
-            "GPAName": "f764ba8f-3191-4cff-9e87-aa05a6b7b052:string:Cumulative Credits",
-            "GPA": "a4457d99-f48b-4387-b51b-f7f40817a1bc:number:102"
-          },
-          {
-            "programName": "f058cd16-df78-4361-a945-0caa79e3b379:string:Doctor of Philosophy",
-            "GPAName": "c0498548-e75c-4c1f-a5a0-d1a2b5e1d280:string:Cumulative Credits",
-            "GPA": "b118013f-a4ce-4fae-9f38-bdfa43889bc6:number:61"
-          }
-        ]
+        "name": "a28b69fe-3060-4c74-bbb6-24c87f597c3b:string:Investigative Methods & Tools",
+        "courseCode": "d6c270c9-eb70-4aab-9ebb-286e5a472acd:string:GMS6106",
+        "grade": "896b9131-b50f-4f11-aa6f-05c866c8ff9b:string:P",
+        "courseCredit": "40374d03-8315-4abc-856a-fab3e793d55c:number:1",
+        "gradingBasis": "e9db4549-912e-402c-a26b-38d129ecad4c:string:GRD",
+        "includeInGPA": "6728b4e7-1355-443e-a823-6f57d77786da:boolean:true",
+        "semester": "1927e28c-2096-4843-a3aa-7a47da613421:string:1100"
+      },
+      {
+        "name": "28da8954-acd7-4c40-9ee3-9201e3395138:string:Orientation to Clinical Year",
+        "courseCode": "7642bb62-d9d1-4107-a49b-f01403c8787c:string:GMS6200",
+        "grade": "49702b21-24f4-4e12-96fb-564e3ad55e89:string:P",
+        "courseCredit": "49a885f4-c5d4-40dd-b6e4-4550affc8c66:number:1",
+        "gradingBasis": "28dec9a0-d414-4f17-adae-e421afabffa8:string:GRD",
+        "includeInGPA": "71a4c94c-3229-4be4-a36a-e494ef72d375:boolean:true",
+        "semester": "f5e7e716-7ed4-43bc-82e9-cc46ec3f938f:string:1200"
+      },
+      {
+        "name": "9bde62bb-afdd-46c2-b641-e07865296e83:string:Medicine Clerkship",
+        "courseCode": "f8e13cf1-856f-463b-a969-62b539cf7ef2:string:GMS6201",
+        "grade": "133a756e-ca6e-4d45-938a-ec9b8c6c471e:string:HP",
+        "courseCredit": "40aa2023-8407-4d5d-b577-c712d94cbbae:number:8",
+        "gradingBasis": "7adb0ccd-5d35-411b-bfaf-e48a47275a6b:string:GRD",
+        "includeInGPA": "1a46a2bc-fa08-421d-a0d4-542f10d90f3b:boolean:true",
+        "semester": "4fbb17f5-8328-4497-8005-2e4b1e3979db:string:1200"
+      },
+      {
+        "name": "e06fa89e-bac8-4347-b034-94bcfc762c60:string:Surgery Clerkship",
+        "courseCode": "61ebb7ed-e1d3-4aed-8aac-4d58d12d82c1:string:GMS6202",
+        "grade": "9041d7e0-b267-472f-bbab-a21f70276310:string:HP",
+        "courseCredit": "760fc38a-dcd5-4833-8367-7b55ff81d4cb:number:8",
+        "gradingBasis": "5a67426c-8563-48d2-a860-f7d89acf87d4:string:GRD",
+        "includeInGPA": "d5111358-037e-4de6-a8a3-ae0818e5d70e:boolean:true",
+        "semester": "76c96ace-eb1b-4a8d-9983-4fd2901fb532:string:1200"
+      },
+      {
+        "name": "9fbb8f4b-261c-4616-8269-8713c434fe6a:string:Pediatrics Clerkship",
+        "courseCode": "4a8cd7d3-650d-4df9-bb01-5c83b11d33d8:string:GMS6204",
+        "grade": "afad8dd3-6d54-40e3-9459-82d0f128ecdf:string:P",
+        "courseCredit": "942f1544-4441-4d3d-b926-33e23d94560e:number:8",
+        "gradingBasis": "d44de6ee-fcdf-49f7-87ef-19c690e72f12:string:GRD",
+        "includeInGPA": "04e84910-27b5-43f3-841e-0e2180d36359:boolean:true",
+        "semester": "9963744b-32e0-4ee8-97c8-cf233f3cfcea:string:1200"
+      },
+      {
+        "name": "1f222111-a715-414d-9708-37abf19f61b4:string:Psychiatry Clerkship",
+        "courseCode": "f026bf94-7710-4873-bc4c-0a1bdc76f321:string:GMS6205",
+        "grade": "d2d21d73-d0c0-4190-ad03-5cc9ac3557f1:string:HP",
+        "courseCredit": "c4dde715-0058-4888-8e78-b90437607f46:number:4",
+        "gradingBasis": "928bceea-8402-4699-be8c-3c4ba27b5206:string:GRD",
+        "includeInGPA": "4bafe785-b16a-4e28-a057-0378a8f44dcb:boolean:true",
+        "semester": "9fd091a9-638e-4bb7-a48b-01771d46fbb4:string:1200"
+      },
+      {
+        "name": "4e086a93-311b-4e27-a04d-2cbd4c892f85:string:Neurology Clerkship",
+        "courseCode": "dc1f486e-5ecc-42e5-8054-217bd7ce2004:string:GMS6206",
+        "grade": "0fad44c8-8935-46a0-8674-41b9a3e82e72:string:HP",
+        "courseCredit": "eef7a2d6-3ba2-499e-b4c1-2cb0be38f971:number:4",
+        "gradingBasis": "f212fbda-ae5a-462f-bbb2-381c40d987f5:string:GRD",
+        "includeInGPA": "4efc1622-093a-4d91-b481-15375fede1d6:boolean:true",
+        "semester": "d82cd206-ef12-45fe-8a9a-8909faeb55c4:string:1200"
+      },
+      {
+        "name": "609fd5f0-63d8-42a1-8a30-ded628d98d59:string:Clinical Core 1",
+        "courseCode": "1b818f7c-fe3b-4476-b541-3d95fc310224:string:GMS6207",
+        "grade": "f10d43b5-d945-4615-980d-87511401cb1a:string:P",
+        "courseCredit": "178f0e82-7e4f-4415-87ba-0c126a715c7c:number:1",
+        "gradingBasis": "f548a254-fbd5-4e1e-a4c5-7e6715b7e3a2:string:GRD",
+        "includeInGPA": "96b109a0-c535-4cfb-89f3-4e27cf8f17c9:boolean:true",
+        "semester": "092716ca-22af-4a5c-a690-8b6a6ab4ac3b:string:1200"
+      },
+      {
+        "name": "ef89f790-2ee8-4a12-a57e-95d3f0f3a634:string:Clinical Core 2",
+        "courseCode": "5713c8d8-eab0-4ea6-9774-18739745f311:string:GMS6208",
+        "grade": "075cadd4-3d1d-4785-ad14-6b15b5530e18:string:P",
+        "courseCredit": "fff651dd-4b9d-4b97-89aa-a86caeb4f559:number:1",
+        "gradingBasis": "2e899deb-62aa-4896-8250-e518662c5974:string:GRD",
+        "includeInGPA": "cd5a9aad-ecd1-4122-8ed6-5696b9a1cfde:boolean:true",
+        "semester": "7d8c2027-e448-4893-927c-f8fa1ab9b398:string:1200"
+      },
+      {
+        "name": "82d1044d-4560-4c40-9086-9b3e16e9ed72:string:Clinical Core 3",
+        "courseCode": "e11b97ae-c2d0-4c23-b42c-bfd143b7d1c4:string:GMS6209",
+        "grade": "a4c5cd86-cf4c-49cb-bbac-b7f6b8f803af:string:P",
+        "courseCredit": "0918c3dd-e7cc-46ed-97ed-c0d854fdf5e3:number:1",
+        "gradingBasis": "958e5fe0-3e6b-442f-b8b3-cf7ae67002b8:string:GRD",
+        "includeInGPA": "5af64d5a-3143-4f5d-92b4-be07144413c3:boolean:true",
+        "semester": "edf10fed-0849-4892-808b-e871658e9b9d:string:1200"
+      },
+      {
+        "name": "fdcccbdb-f7ba-4245-8fc6-198276d246af:string:Clinical Core 4",
+        "courseCode": "14c907f8-5e65-4962-b47a-97ad598f9959:string:GMS6210",
+        "grade": "b3fea51c-3467-42aa-903b-a65d6d494785:string:P",
+        "courseCredit": "ae195ba8-ba9c-4127-b6c3-128f93114b55:number:1",
+        "gradingBasis": "e01ec280-34a8-4f40-96b5-34a009f1abf4:string:GRD",
+        "includeInGPA": "803d413e-4cf4-4534-8416-0000902f64fa:boolean:true",
+        "semester": "132d6efe-1d5f-4a2a-9087-3825d6de1d07:string:1200"
+      },
+      {
+        "name": "845b3e14-44e7-4f99-a70f-f9ee08d80866:string:Clinical Core 5",
+        "courseCode": "225d0904-b489-4e03-a1b2-ef281273f72b:string:GMS6211",
+        "grade": "24e7bce1-5553-4bd0-ad3b-636d8ca70465:string:P",
+        "courseCredit": "e4bf6abd-209e-426e-9a40-78a7f91f8a82:number:1",
+        "gradingBasis": "123e0d59-b6ac-4ab5-9669-3b33ed81b25e:string:GRD",
+        "includeInGPA": "03d43ebb-cd91-4143-a7b0-b107dd1f554b:boolean:true",
+        "semester": "9949deed-b055-4d29-9ab5-b0e7274fad5e:string:1200"
+      },
+      {
+        "name": "d5720cef-fdeb-4c2b-a038-b2e5ea171529:string:Practice Course 2",
+        "courseCode": "eecfb407-b4ac-46ab-bc9d-ec7a86795da1:string:GMS6212",
+        "grade": "1845ba4c-9eb5-4735-8621-f153ea8b9847:string:P",
+        "courseCredit": "455238b0-8360-46d3-8af5-6d9cfbbe9e92:number:4",
+        "gradingBasis": "8e3476d8-83f5-4c89-aec2-332a3e6f36e7:string:GRD",
+        "includeInGPA": "50869de2-21bb-4567-974e-d631672236fc:boolean:true",
+        "semester": "3b0092cf-8e96-42e0-b7be-2fc6d33d51e1:string:1200"
+      },
+      {
+        "name": "94b10a8f-1fdc-4993-ab2c-35dbd153a6c5:string:Integrated Anesthesia Program",
+        "courseCode": "e5ccc488-842c-427a-b5d1-87bf2ffde963:string:GMS6215",
+        "grade": "061c276a-0286-4e43-912a-53eace530e57:string:HP",
+        "courseCredit": "df8332fb-8faa-404f-8e7b-f28ca38789d8:number:2",
+        "gradingBasis": "120d7f96-c52b-496a-8292-22f754d66ef3:string:GRD",
+        "includeInGPA": "e6d105d3-46aa-46a5-93d0-4bbfde63aba9:boolean:true",
+        "semester": "2888f36f-1e38-48a1-bfea-1e2dc94008a2:string:1200"
+      },
+      {
+        "name": "d1591353-0c69-4c28-b2fe-9984d63f6eff:string:Obstetrics & Gynecology Clerkship",
+        "courseCode": "bea5f70b-140e-4345-8b45-b6d20d9a65d5:string:GMS6216",
+        "grade": "a5e405c5-46ef-4be6-be88-54a35bd05271:string:P",
+        "courseCredit": "9673cd24-4cd4-4841-bb5e-f2c31978c746:number:6",
+        "gradingBasis": "5ad9ff62-bfb0-4733-bb03-654582300dbc:string:GRD",
+        "includeInGPA": "a4520e00-9be0-4b8a-9ea1-2868a4ca87f6:boolean:true",
+        "semester": "1f1db2ba-3338-462f-9481-c69b3f55bba8:string:1200"
+      },
+      {
+        "name": "0153bf06-554d-4a31-acff-714d34239ee0:string:Student Research Seminars",
+        "courseCode": "f60768c2-2689-4108-b0d5-b7d14ba69d4b:string:GMS6900",
+        "grade": "57c961ac-4603-42df-9430-01ee51b339fa:string:IP",
+        "courseCredit": "1c015d01-e53f-4dc7-ad19-72ec4f599b2a:number:3",
+        "gradingBasis": "6fe5b60e-34ce-4d53-aea2-7a346dc6f7a3:string:GRD",
+        "includeInGPA": "2ce1c452-e242-44e6-a541-69e70686059c:boolean:true",
+        "semester": "930bfa8f-b9cd-4b48-8c89-5e8148537f9a:string:1300"
+      },
+      {
+        "name": "a0b4bcab-99db-498e-bafc-5ad0084fff22:string:Molecules to Medicines",
+        "courseCode": "d59ab74b-eebf-4378-bcc8-908ae3bd86b9:string:GMS6901",
+        "grade": "dec6a148-fa7e-4204-a664-6074eb91a0e1:string:P",
+        "courseCredit": "b470b0fb-2964-42c9-af1f-6a72e4b8f71a:number:4",
+        "gradingBasis": "9565e806-df56-4289-8dfe-fe251f7bd9d8:string:GRD",
+        "includeInGPA": "e13825d0-6a08-4acc-998e-2b00de72d404:boolean:true",
+        "semester": "8aa6f7cb-0418-4701-8c2d-d0db4c64e077:string:1300"
+      },
+      {
+        "name": "d8e3dce1-6c0e-4bcb-a9af-9176e69d6564:string:Laboratory Rotation 1",
+        "courseCode": "ae9d4818-0f76-49ff-9502-560185128116:string:GMS6902",
+        "grade": "3a53be60-0bcf-424d-920c-2233da86e938:string:P",
+        "courseCredit": "7cb12c3a-8674-4579-9562-5b906ec5d6d3:number:3",
+        "gradingBasis": "e5085a29-afd3-40ba-923c-aaf93fdf11b0:string:GRD",
+        "includeInGPA": "71f7896d-8c00-4893-be13-e319993e4fb8:boolean:true",
+        "semester": "f8cb137e-ba40-41a5-acea-8c12763dc8ac:string:1300"
+      },
+      {
+        "name": "a63ff439-ab60-4f10-a86f-e5dc1fc09206:string:Laboratory Rotation 2",
+        "courseCode": "9d0123f1-ed76-408e-9672-07bdce22c745:string:GMS6903",
+        "grade": "1660a5c5-e4a5-4f6b-bcef-a2815116257e:string:P",
+        "courseCredit": "4c1a2fcb-011f-407b-a502-898fceb61b7a:number:3",
+        "gradingBasis": "ec5a8536-1cbf-4fbe-a73d-38e941fc9c67:string:GRD",
+        "includeInGPA": "29dad0ed-9afc-4b3b-bff1-63d83071c5e8:boolean:true",
+        "semester": "78028ee9-ef5b-4833-b4cb-60e51573b310:string:1300"
+      },
+      {
+        "name": "e9cae990-2750-4da9-9e4e-a4fa3f096ad3:string:Principles of Infectious Diseases",
+        "courseCode": "e1db2958-d8cf-48aa-b7ae-fd59b84b9ab2:string:GMS6904",
+        "grade": "090855ae-c5b4-475d-8bbd-6c17d3f9f36f:string:B",
+        "courseCredit": "09a7a9cb-e3a5-40e4-b8b1-e2ac965952ca:number:4",
+        "gradingBasis": "9db53a21-d0ad-481d-96e0-f58ff653be0a:string:GRD",
+        "includeInGPA": "de88bc96-78c1-474a-a845-d860fb7b5397:boolean:true",
+        "semester": "1dde6c4e-9d12-459f-8771-4f1f494817dd:string:1300"
+      },
+      {
+        "name": "329f2223-e76b-4a55-a62f-5f4156b47b2f:string:Student Research Seminars",
+        "courseCode": "d10bf835-c095-4bd0-8f6a-46b7973459a5:string:GMS6900",
+        "grade": "e4ece9c4-7af3-4b67-a94d-1cd3c74703ad:string:IP",
+        "courseCredit": "09d2afb8-b114-4696-ad5e-600683a780a9:number:3",
+        "gradingBasis": "50728b20-07c2-4768-ba64-3ca6c95908c5:string:GRD",
+        "includeInGPA": "863dbd44-8260-4994-8f0d-54ad08984170:boolean:true",
+        "semester": "b180e741-1a92-4f6a-8f2c-1ed2a113dd4f:string:1400"
+      },
+      {
+        "name": "7151937b-690f-4aa0-8035-69f6d973921d:string:Evolutionary Genetics",
+        "courseCode": "c5aee414-edc5-4da6-9786-3620aba535f4:string:GMS6910",
+        "grade": "50e1e7f4-c76f-430d-a019-8f499ce9b53a:string:A+",
+        "courseCredit": "5f4d6c57-64e6-4ba8-9cf4-e6e00f7647df:number:4",
+        "gradingBasis": "33f41e4e-2f5e-4adc-8280-7dc6bc07b60c:string:GRD",
+        "includeInGPA": "b96019f9-019d-40c4-a263-aeb9570d285e:boolean:true",
+        "semester": "eb5d141d-2c6d-4915-b032-00a9fac0782d:string:1400"
+      },
+      {
+        "name": "9e5029d1-5b82-45e4-8d4c-a68a284478e7:string:Student Research Seminars",
+        "courseCode": "32e1e7ff-9a58-45b5-a441-d3a502604ab9:string:GMS6900",
+        "grade": "a3506e75-235e-4530-947c-2a653093159c:string:IP",
+        "courseCredit": "1efdbe12-9b7a-4ee3-b32a-553ce756bd84:number:3",
+        "gradingBasis": "8b93b4c6-0b38-496b-a226-2e553a638e1b:string:GRD",
+        "includeInGPA": "cbbf656a-b15c-404e-a958-9a883f5e87e6:boolean:true",
+        "semester": "b06ab623-ac24-4fc9-8280-6c7d142dbf66:string:1500"
+      },
+      {
+        "name": "701a85ab-95c4-4fc9-80ff-de0537f87e67:string:Student Research Seminars",
+        "courseCode": "0d06bb50-e495-47b2-a436-827a62c780df:string:GMS6900",
+        "grade": "93696e06-4cb8-484d-bc5d-4e21ba8f23ef:string:P",
+        "courseCredit": "c46a4b1b-ef03-46e0-bf67-fe4caed7a3f2:number:3",
+        "gradingBasis": "bf6ae7d3-5816-47fd-b1aa-f2e19e7273da:string:GRD",
+        "includeInGPA": "d14b2c8f-0322-4739-b8e5-1753bd37896a:boolean:true",
+        "semester": "dcfcfc62-08d5-4a23-b071-b65906e9401c:string:1610"
+      },
+      {
+        "name": "6a9daa55-c628-4d14-9561-31e15d6fadcf:string:Thesis",
+        "courseCode": "c84fd7f1-48b6-4faa-b6f2-ebb962933bff:string:GMS6991",
+        "grade": "751deb9d-8a02-417d-98f2-54bb7db2e668:string:P",
+        "courseCredit": "937f6cab-a65d-4329-bbb6-d411de362f31:number:40",
+        "gradingBasis": "e6c12e87-0912-484a-9aa4-4290a6d543b4:string:GRD",
+        "includeInGPA": "bc0765c1-e721-4ec7-bde5-445fd1caff72:boolean:true",
+        "semester": "a8ded85c-e6c3-4aa5-8e1c-1380b81da4ca:string:1720"
       }
     ],
     "additionalData": {
       "degreeScroll": [
         {
-          "degreeTitle": "db016d7d-96a1-4080-a77c-bea951e9ebc7:string:Doctor of Philosophy",
-          "dateConferred": "c9e230d5-d69c-4fbd-8eff-839cf987daff:string:2018-07-31",
-          "degreeCode": "aa5ba16b-0266-484b-b183-318c0bb8a9f2:string:D136000"
+          "degreeTitle": "2abf4550-ad12-47e5-8cf2-fbcbd0255eae:string:Doctor of Philosophy",
+          "dateConferred": "89204237-15c8-492a-8f8e-f670f9e24272:string:2018-07-31",
+          "degreeCode": "82ee3a82-a9ca-4ecb-8043-56a221b475c0:string:D136000",
+          "type": "d3db7dfe-222e-4efd-ae2d-24c5e2dbbd8e:string:DUKE-PHD"
         }
       ],
-      "type": "007e42d3-06d0-440a-bcc4-938c3beff4e1:string:DUKE-PHD",
       "images": {
         "PRESIDENT": {
-          "data": "a91900a0-846b-4db7-a663-4e766d355a70:string:data:image/png;base64,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",
-          "width": "6e349e97-689b-4777-bac4-01fe46269129:number:2.5",
-          "height": "6b043101-5350-45af-b3b5-6546c038a494:number:1.48",
-          "unit": "9d75029b-3f75-4a0e-b12c-d81037c42703:string:CM"
+          "data": "10846149-05da-43fb-896e-dc90631c1413:string:data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAABaCAIAAAAJsExNAAAEy0lEQVR42u2aPVbrOhRGnY4RQE9BB9TMgA6YBTOAir8KZsAsgI4ZUAMdBT3p6NLx/J7e0jpIsqw4tuP73b2LLIhtRTralo5kz25vbxeLRQUgwezq6ur8/Hzd1QDogXp0/lfoy8vLddcEoAeur68RGnRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEBikQGqRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEHpvHx8fX11f398XFxWw2W3eNpOgi9NfX1/39ffz9/v7+9vb27u7uX9tJPz8/7+/vn5+fXtk4Jgg9KH0K7Tk5Odnb21t308bm7e3t4eGh6aiPydSEttUWmKgHEbr6b2Q6Pj5ed+vGI29zNeGbHKF/CX16erq1tRV/X024C3unzjRubm78v2dnZxsbG+7vxWLx/PxcD8mTjQZCNwpdRV3rp1Q/z9qR25bjJQjOTJ7jLami26bz5bbmwfRSn393d5dsb2tAfAkfHx9xymHD7vJvO8zX1fBnlsQn+Gn3o5mEPugsiwtLea8Fd0XyNrZhd2UeHh76O78vehY6aJs/2k3o+tO3359Wd1IwuduorXJ5U3ZrW5TMeq3x1e8ROiYpdMatpeKTDEWM65eBhK6vtX/HsbX0npr2L7TtXV/dDkIvRTwVdLi8aSSuY5SPfpMZdXfu7OwEcieFbq12eXwKy6ybXH8OIXS+nKOjo0yoV6d/oZNzdzeh3ZeBLvGo3+Plsbs29JmhN78otFGKhW4a4LvFx97bwY6hrWRTtmCr3U3oOPPxrbPzW7Lw1Zmu0PbMZDIwxOVxdlG+Zspv/iQnX1dgkw3lDUya6vpiPp/X5dhMOtPkXoQOCmk6NNBidLopR1OHdRC6/HJ7N7qm+TG7cGaMl2Ie99N5oe0YVt7ApdKAzGlDCF2SBPa4H9+/0Mmjf4rQQQn1Mjw5XRaSzCXGEdp+U08OLvFIpk8IvdK2nW3wNIUOZpiSPK8uqv5Mjt/xT+eFtjVZReikYZ2Fbu21DinHQIz0YCW5lHl6emrdZ23SYqn+XkroyiwNPfmdOF9UHY3NzU0/2AQjtAtybImtid8HqBpELxQ6ueRtXRQGzSzvtYy1wQDhW1eZrfcJ5dBNBENa65PhSQkd13aV5aAjubvii41voaXikx+h8wUmK+8Go/JC8sNw+Vbj6oz0clJyp7bkSZg7OrLQQW1bn1q3BiS/bVdSwrJClz+pSZ7pmlzea615Rd7piQqdf33UzlZu6pnP5xPMoeMOKFmyuA2yl5cX2211HQ4ODmwSUjUIXf1+MuzWo9/f376GHV4iCNID95QnuacenFmZO7Cw10oS5eDRd1N8VoQX/BNk3usYsw5WMjqoEIROkHnuNRD5lGOcOmiA0AnsEm2cyGSE/tveLF8RhA4JHkmM8xJznF9Wg71gqQ1CgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1S/C/0uqsB0Bv/AEwL5dNeBrk9AAAAAElFTkSuQmCC",
+          "width": "ee6c323d-98ef-4d76-9c97-872e9ce97d99:number:240",
+          "height": "bc18e5f6-28f2-4ea5-a9ca-bcb47dcc03a4:number:90",
+          "unit": "8c121eac-182f-4741-9b61-fc72024b779a:string:px"
         },
         "TRUSTEES": {
-          "data": "bc5a9c44-e437-4246-b9c9-dc5b2dfd89af:string:data:image/png;base64,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",
-          "width": "94c8b89b-11fa-4a8c-96d2-91f35ff21613:number:5.31",
-          "height": "07dde076-b3cc-4208-89aa-ea51d763642e:number:1.15",
-          "unit": "06896ea6-e3cf-4e45-a3c5-a24dfa4eacb2:string:CM"
+          "data": "41668ae7-d49a-47b6-bb7c-e2604566eb13:string:data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAABaCAIAAAAJsExNAAAEy0lEQVR42u2aPVbrOhRGnY4RQE9BB9TMgA6YBTOAir8KZsAsgI4ZUAMdBT3p6NLx/J7e0jpIsqw4tuP73b2LLIhtRTralo5kz25vbxeLRQUgwezq6ur8/Hzd1QDogXp0/lfoy8vLddcEoAeur68RGnRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEBikQGqRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEHpvHx8fX11f398XFxWw2W3eNpOgi9NfX1/39ffz9/v7+9vb27u7uX9tJPz8/7+/vn5+fXtk4Jgg9KH0K7Tk5Odnb21t308bm7e3t4eGh6aiPydSEttUWmKgHEbr6b2Q6Pj5ed+vGI29zNeGbHKF/CX16erq1tRV/X024C3unzjRubm78v2dnZxsbG+7vxWLx/PxcD8mTjQZCNwpdRV3rp1Q/z9qR25bjJQjOTJ7jLami26bz5bbmwfRSn393d5dsb2tAfAkfHx9xymHD7vJvO8zX1fBnlsQn+Gn3o5mEPugsiwtLea8Fd0XyNrZhd2UeHh76O78vehY6aJs/2k3o+tO3359Wd1IwuduorXJ5U3ZrW5TMeq3x1e8ROiYpdMatpeKTDEWM65eBhK6vtX/HsbX0npr2L7TtXV/dDkIvRTwVdLi8aSSuY5SPfpMZdXfu7OwEcieFbq12eXwKy6ybXH8OIXS+nKOjo0yoV6d/oZNzdzeh3ZeBLvGo3+Plsbs29JmhN78otFGKhW4a4LvFx97bwY6hrWRTtmCr3U3oOPPxrbPzW7Lw1Zmu0PbMZDIwxOVxdlG+Zspv/iQnX1dgkw3lDUya6vpiPp/X5dhMOtPkXoQOCmk6NNBidLopR1OHdRC6/HJ7N7qm+TG7cGaMl2Ie99N5oe0YVt7ApdKAzGlDCF2SBPa4H9+/0Mmjf4rQQQn1Mjw5XRaSzCXGEdp+U08OLvFIpk8IvdK2nW3wNIUOZpiSPK8uqv5Mjt/xT+eFtjVZReikYZ2Fbu21DinHQIz0YCW5lHl6emrdZ23SYqn+XkroyiwNPfmdOF9UHY3NzU0/2AQjtAtybImtid8HqBpELxQ6ueRtXRQGzSzvtYy1wQDhW1eZrfcJ5dBNBENa65PhSQkd13aV5aAjubvii41voaXikx+h8wUmK+8Go/JC8sNw+Vbj6oz0clJyp7bkSZg7OrLQQW1bn1q3BiS/bVdSwrJClz+pSZ7pmlzea615Rd7piQqdf33UzlZu6pnP5xPMoeMOKFmyuA2yl5cX2211HQ4ODmwSUjUIXf1+MuzWo9/f376GHV4iCNID95QnuacenFmZO7Cw10oS5eDRd1N8VoQX/BNk3usYsw5WMjqoEIROkHnuNRD5lGOcOmiA0AnsEm2cyGSE/tveLF8RhA4JHkmM8xJznF9Wg71gqQ1CgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1S/C/0uqsB0Bv/AEwL5dNeBrk9AAAAAElFTkSuQmCC",
+          "width": "3dc8e4c2-43d9-4660-844c-4ea974d1060c:number:240",
+          "height": "f844076b-7d63-4d47-ac07-3969b208d0c2:number:90",
+          "unit": "d26b2d35-be6e-4ee6-96c5-862c80d34f21:string:px"
         }
       },
-      "transcriptType": "e0c15d0b-1d0f-464e-ba73-7f2e1990cfd6:string:DKOF",
-      "transcriptReq": "bebf4ee2-58a9-44b0-b113-1398492433c1:string:001009507",
-      "programData": [
+      "transcriptType": "e1bb1707-5782-4f01-b7f8-e69f58075d74:string:DKOF",
+      "transcriptReq": "6489da99-6781-4672-be38-76c9ad25a6d2:string:001009550",
+      "transcriptGroup": [
         {
-          "programCode": "ef4f6521-f8ca-408b-86cf-658fc2a378ce:string:D1310",
-          "programName": "f9a8086b-acb1-4da0-8acf-cfd535d84244:string:Doctor of Medicine",
-          "statusCode": "00d617f3-d7c5-4f69-8ceb-33f416501dc2:string:AC",
-          "statusDescription": "4dd11b9c-dbd8-4434-a467-ed12da5a4e5b:string:Active in Programme",
-          "effectiveDate": "89dd824b-ccb9-4b3c-9b1d-105d230de006:string:2019-08-12",
-          "admitTerm": "33a127a1-bfd4-4056-bab4-fa691341338a:string:1100"
+          "name": "f305f3e9-a32f-4e5c-8fb7-ed0ed13f66dd:string:1100",
+          "term": "41f62c6c-8dc0-4bc0-b06c-472780183c83:string:2011/2012",
+          "formOfStudy": "5da27cb8-0813-408a-8bc3-1019b5888d1b:string:ENRL",
+          "fosPrintArea": "9e886416-f8f7-4383-8882-c0245dd594c4:string:ND",
+          "summary": [
+            {
+              "programName": "6fc6575f-ef63-4e50-b161-60bd12fcf5f2:string:Doctor of Medicine",
+              "GPAName": "726bd399-918d-4e5d-a01c-b738396e57e7:string:Cumulative Credits",
+              "GPA": "8b32a8bf-2951-44f0-9f07-9628e4c4d2db:number:52"
+            }
+          ]
         },
         {
-          "programCode": "f5944408-d102-4d2b-a018-1f391e85ce31:string:D1360",
-          "programName": "3765a0fd-eb17-4712-a5b0-3da422080c3f:string:Doctor of Philosophy",
-          "statusCode": "bddfbf1f-09d5-45ae-b33e-1a16ef6eb69d:string:CM",
-          "statusDescription": "dca17702-bbf7-4b3f-ba34-f85d4e383c3d:string:Completed Programme",
-          "effectiveDate": "498a750d-e78d-455c-9b73-a0f24bc818c0:string:2018-07-31",
-          "admitTerm": "33c8399f-2541-4593-88ce-9c896e5f2256:string:1300"
+          "name": "5dd2d39e-9964-42ce-b2cf-e7920da211a3:string:1200",
+          "term": "dde14eeb-7b90-440b-9b00-30a4fc5d2f51:string:2012/2013",
+          "formOfStudy": "95fc721d-ce42-4348-9306-4701006ad200:string:ENRL",
+          "fosPrintArea": "ee25c79b-d1c8-4389-948b-bfcfbeeea171:string:ND",
+          "summary": [
+            {
+              "programName": "3a70c7c2-8d04-4f0c-b603-9978ffc3cc1a:string:Doctor of Medicine",
+              "GPAName": "35309df9-0e0e-4660-94c0-c9108fe3fb85:string:Cumulative Credits",
+              "GPA": "9b8843e4-5ca2-4996-8f4e-4fb9845a1882:number:102"
+            }
+          ]
+        },
+        {
+          "name": "bf1a899b-bd43-46ee-bfd9-9a156e49c22e:string:1300",
+          "term": "092228ac-423a-4b35-b87d-b4cfca31a430:string:2013/2014",
+          "formOfStudy": "6cfb0cee-a2a6-4790-aa26-91b4d456c726:string:ENRL",
+          "fosPrintArea": "55ba15ed-a785-452b-9fcf-a5972d9f20ca:string:ND",
+          "summary": [
+            {
+              "programName": "c0985679-12d5-41e8-b839-2a06a8954cf1:string:Doctor of Medicine",
+              "GPAName": "0bbf8298-50cf-4e2c-aab1-b4233510618b:string:Cumulative Credits",
+              "GPA": "5dfb19c7-e6e0-4bd8-86a0-a0fa8e995915:number:102"
+            },
+            {
+              "programName": "dddad613-c028-4dfa-9804-329c8e58a8db:string:Doctor of Philosophy",
+              "GPAName": "3763737f-819b-4fc5-9661-3d01462bc4d3:string:Cumulative Credits",
+              "GPA": "caa10a91-5e10-4bba-af3a-96baf7ba82cb:number:14"
+            }
+          ]
+        },
+        {
+          "name": "86124a16-63f1-49f4-8839-11ee3e1cc234:string:1400",
+          "term": "010b8f5b-f809-4ee3-841c-8969c7eb0b07:string:2014/2015",
+          "formOfStudy": "bbb41775-8f49-4eb5-bbfb-6b7dbb63e653:string:ENRL",
+          "fosPrintArea": "b80c12a4-5552-4c91-b8e1-07bbea36f812:string:ND",
+          "summary": [
+            {
+              "programName": "774f57b9-2fbe-43fa-b113-0c71bd2d970b:string:Doctor of Medicine",
+              "GPAName": "31f883eb-2058-4eda-a9d8-3df190760e32:string:Cumulative Credits",
+              "GPA": "d0a2e380-6768-4545-a4fb-28158fad8e46:number:102"
+            },
+            {
+              "programName": "15065a03-4667-4cbb-a243-cff0e73aa55c:string:Doctor of Philosophy",
+              "GPAName": "f7c2a521-dc95-4c37-aead-f62bb9ba1eb6:string:Cumulative Credits",
+              "GPA": "2e2acab6-88da-4071-be54-6c95867b6972:number:18"
+            }
+          ]
+        },
+        {
+          "name": "436cf0a7-49d4-455f-aba7-91008eb24c91:string:1500",
+          "term": "9d8fad4a-2771-447f-abec-0f26e7d0d5f4:string:2015/2016",
+          "formOfStudy": "303f67a1-b169-4605-9b42-f9d86f7558f8:string:ENRL",
+          "fosPrintArea": "fefc6993-e01c-4a53-9eed-2f2fecb4a488:string:ND",
+          "summary": [
+            {
+              "programName": "1133d650-8fda-459c-afc4-2b8d2ab61875:string:Doctor of Medicine",
+              "GPAName": "136edf89-0413-420e-b848-d729ebfbf63e:string:Cumulative Credits",
+              "GPA": "8c559f3d-4226-480f-a2a7-d0126c6e95dd:number:102"
+            },
+            {
+              "programName": "bd9746b3-ba31-4b14-ab1c-790f354960a4:string:Doctor of Philosophy",
+              "GPAName": "0f393e75-8f6a-4ad8-a880-ea08e596082e:string:Cumulative Credits",
+              "GPA": "f02b042b-2235-4c12-81aa-af9f0a213904:number:18"
+            }
+          ]
+        },
+        {
+          "name": "afa1ddc5-a707-453c-a7f7-abaa4f66a448:string:1610",
+          "term": "ce698e51-0a5a-42cb-b11c-0503034ecbde:string:2016/2017 Semester 1",
+          "formOfStudy": "be058064-24d7-46d4-9487-564d1cc050d9:string:ENRL",
+          "fosPrintArea": "3c1956c1-41a3-4fb2-a16d-bb89901640ea:string:ND",
+          "summary": [
+            {
+              "programName": "e97fc0c5-dbb2-4f0e-868b-df97fc7c98f9:string:Doctor of Medicine",
+              "GPAName": "a8f9a79b-6a91-4b00-9329-beb5aacb33e6:string:Cumulative Credits",
+              "GPA": "e29d0f32-7ecc-498e-abf4-50f6248b50ee:number:102"
+            },
+            {
+              "programName": "72572c88-1214-4665-945b-2c4f9a5d6ddf:string:Doctor of Philosophy",
+              "GPAName": "a080997c-e9de-42c4-b7b4-813b3e4b0e69:string:Cumulative Credits",
+              "GPA": "838b401f-0d66-473c-a070-dbcd790ee979:number:21"
+            }
+          ]
+        },
+        {
+          "name": "d60a1210-577e-411f-b593-16be8947ae08:string:1720",
+          "term": "1ea973bd-4416-4f22-90a0-269266166eb4:string:2017/2018 Semester 2",
+          "formOfStudy": "fa32275c-88be-484e-926e-a776f19112eb:string:ENRL",
+          "fosPrintArea": "4fa1e08d-7bcc-4660-9d68-6b0d8bcf523c:string:ND",
+          "summary": [
+            {
+              "programName": "7163987c-49a6-40b1-902a-31971ffbe9a0:string:Doctor of Medicine",
+              "GPAName": "fa5fc669-1d87-43c4-a967-f4416a4b04e2:string:Cumulative Credits",
+              "GPA": "a8bbd340-7067-4f52-be3b-7fbb82f92861:number:102"
+            },
+            {
+              "programName": "ec4be85b-2673-4a0f-b412-d3cbeec3950b:string:Doctor of Philosophy",
+              "GPAName": "4e601af4-b29b-487d-a804-47874ab14aff:string:Cumulative Credits",
+              "GPA": "4c4b043c-bf34-44c5-b453-2ce9dbee00fe:number:61"
+            }
+          ]
+        }
+      ],
+      "programData": [
+        {
+          "programCode": "9a87ef95-918b-4bee-ad69-fbed0e5258c1:string:D1310",
+          "programName": "a448597c-4bec-4929-9dd9-9e94cd53c1ff:string:Doctor of Medicine",
+          "statusCode": "99aa1854-35f7-465a-ade8-3a3a2ba8d966:string:AC",
+          "statusDescription": "04247ac1-4eda-4348-ad55-e78c8596382b:string:Active in Programme",
+          "effectiveDate": "960e41ac-0048-49be-9135-4d35d3bd5321:string:2019-08-12",
+          "admitTerm": "69aa2a4e-b9c9-4c4e-81d3-22a9d29f72d6:string:1100"
+        },
+        {
+          "programCode": "19b59c23-229a-4c73-a5e6-7fff9569102a:string:D1360",
+          "programName": "bdef8baa-238a-48d2-9694-526c4e71914a:string:Doctor of Philosophy",
+          "statusCode": "85231ca1-fffc-49be-b3bc-a8f6084bac6c:string:CM",
+          "statusDescription": "05e8a241-1b7d-4d30-9055-9f6682c644b4:string:Completed Programme",
+          "effectiveDate": "3d353d90-d7aa-47af-8be3-4ad63392ffd0:string:2018-07-31",
+          "admitTerm": "80550f5a-9f8c-4e12-b2c2-bec4e8bbbe7e:string:1300"
         }
       ],
       "degreeData": [
         {
-          "degreeTitle": "69be9c22-e6ad-4653-91ce-580ee00ab448:string:Doctor of Philosophy",
-          "dateConferred": "41cb52ce-7d0d-46a6-a133-09dfc112752e:string:2018-07-31",
+          "degreeTitle": "a88d1a3f-425b-4bb5-815f-e2539eccf6b4:string:Doctor of Philosophy",
+          "dateConferred": "4f1863e1-e12e-436b-a0a7-8ac7f55bec3b:string:2018-07-31",
           "plans": [
             {
-              "specialProgram": "6aaad185-1694-495e-90d3-88b9e3b36a73:boolean:false",
-              "type": "52e59438-ec9b-46f0-bdee-48f7e41d6675:string:GDR",
-              "typeName": "8e98b738-5209-48ce-813c-47bafa2c7dba:string:Area of Study",
-              "transcriptDescr": "d016537a-c2de-4336-b5e1-8924e4b04c85:string:Integrated Biology and Medicine"
+              "specialProgram": "7b5b1e13-43f3-4626-b4e7-191e5f645788:boolean:false",
+              "type": "9ceded44-a7dc-4231-801c-f963f406763d:string:GDR",
+              "typeName": "6e7c163a-5ccf-4ef8-80e8-df68f4459adb:string:Area of Study",
+              "transcriptDescr": "6332e413-3393-4ed1-a4fa-bdb6cace6b08:string:Integrated Biology and Medicine"
             }
           ]
         }
       ],
       "milestoneData": [
         {
-          "milestoneTitle": "d539756e-fabe-47b0-9858-686eb5c73986:string:THESIS TITLE:",
-          "thesisTitle": "839e04c3-86b0-4c57-b100-6c3fff8f51ca:string:SUPPRESSION OF INFLAMMASOME ACTIVATION IN BATS"
+          "milestoneTitle": "2c81ec7f-90a9-4ddb-b1fc-0fab3dd8f4ec:string:THESIS TITLE:",
+          "thesisTitle": "aabe4473-88ea-48cb-9ec5-a20c9b21660d:string:SUPPRESSION OF INFLAMMASOME ACTIVATION IN BATS"
         }
       ],
       "leaveData": [
         {
-          "from": "9159784b-e5cf-4577-a8c0-43d5099a10c5:string:2013-08-05",
-          "to": "9549ef2a-1e9b-454e-a10d-76693c2b605f:string:2017-08-13"
+          "from": "348c700c-c8e9-4762-bd3f-9e38c2f419e0:string:2013-08-05",
+          "to": "af1d987c-d2f0-41d5-bcc3-d3921fbbb049:string:2017-08-13"
         },
         {
-          "from": "9793c029-9d9c-4f2d-8528-f4c029ce901a:string:2018-07-13",
-          "to": "a0a36edb-c7d4-439c-9b3c-0ffefb011de8:string:2019-08-11"
+          "from": "3944d474-1c2f-46fb-bb64-d1252a6f0f8f:string:2018-07-13",
+          "to": "a8fc6b9a-655c-4ca4-a3d7-cea830549c45:string:2019-08-11"
         }
       ]
     }
@@ -477,15 +496,15 @@
   "privacy": {},
   "signature": {
     "type": "SHA3MerkleProof",
-    "targetHash": "e863c553f4a943c0f5ed4c8cb29d1eead69b24e1a366a007341f9a014d7e98dc",
+    "targetHash": "c1a7e629af61b7a07b55450c1b653740b82326c37aefbeeecde7711393487e98",
     "proof": [
-      "1a34b7f948fe3616b8ee3f3549d45f5e737276f09e51994d0cc662a5eddf7512",
-      "13af7c44c16ce9856d5e5daeb2059b5b7870c6168757c2ffb58cb1840980addd",
-      "ff8f589800e99e7c993efb5cd70b94eee28a1a38c46eadeb821893cc97032086",
-      "1f8709f74def6d888a945c8e189fa12479a7baaad31739efd8e285381b940a60",
-      "96c50abebf92956b80c631fc9daa81dedfc464682c136f7c33f80d499b9701b8",
-      "6dcf497f2799a15799e48d2af482234d37459c045fb14643e864744153281982"
+      "b3e0586d9468a86cf26fe2d9560b0b411e64d80469c90962e65353e1322f8435",
+      "7e38d4c744859bb0467a19ad0ca52090f373470b5aa19498ef786a6e6f4769b2",
+      "189fe2148ab647fb4fd5b4a1531f712007f6cbbb80814c02cc335ed94b11a84f",
+      "3dc0e5edad6b8f73584c1582b9f26d938589db787699429e6deb8a1f570fd31a",
+      "06998e34a5ae1d76bf2b909e46d524a6dce23dd59fba46b852802dc3af320fed",
+      "227fc50be016b3dd61cd428a63e2f930cd41422d327c9e6a66e87107b4b9a783"
     ],
-    "merkleRoot": "f92d27326c33d7f2ba6f8261ab73184bcf02a173dbd505c8a6d0bbc793218ba1"
+    "merkleRoot": "fc4d413665bef3ad14eb8934319f16a32a4711df60bed1ffd4519441b716629f"
   }
 }

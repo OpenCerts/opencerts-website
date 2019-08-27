@@ -1,628 +1,551 @@
 {
   "schema": "opencerts/v1.5",
   "data": {
-    "id": "42b53942-8829-40bf-b326-961cb48666b7:string:NUS-A0121779X-B171100-P10182223-43-20180630",
-    "$template": "c14b46d6-0480-4d52-9b0e-83e589ce84a1:string:sg/edu/nus/NUS-YALE-2019",
-    "issuedOn": "9ba73789-af18-4be4-90f9-a9d081c7e9cc:string:2019-08-20T18:03:43+08:00",
-    "name": "52827304-2639-43b3-b744-43b97ed584fa:string:NUS Degree",
+    "id": "d57f3c64-ee21-4d93-809c-ae727f2578ec:string:NUS-A0132190U-B171100-P10182357-39-20180630",
+    "$template": "fe242096-0098-4601-ad54-a82afdb7fcf3:string:sg/edu/nus/NUS-YALE-2019",
+    "issuedOn": "8df29e8a-dd49-4e15-b0ee-056affddb476:string:2019-08-27T10:12:32+08:00",
+    "name": "0b440c29-fed1-4e62-9543-1ef562970e56:string:NUS Degree",
     "issuers": [
       {
-        "name": "7f459375-639a-4526-9ccc-482c6ef74393:string:National University of Singapore",
-        "did": "f925d40e-fc13-456b-8dd2-63e4ef91168d:string:DID:SG-UEN:200604346E",
-        "url": "27b43407-b23a-4860-95cd-9c3a8627168a:string:https://www.nus.edu.sg",
-        "email": "690840fe-4ef8-4ae4-a355-4d741e19e578:string:registrar@nus.edu.sg",
-        "certificateStore": "b027774d-7ec4-44ef-9ce3-f969082111c4:string:0xfEbB273495F5C2c4783E23424Fe9773691b57fcB"
+        "name": "608766b9-6947-4062-928d-4445d0a54b74:string:National University of Singapore",
+        "did": "234b09b2-3811-4024-a5ab-f4e5a73c0026:string:DID:SG-UEN:200604346E",
+        "url": "6ce97af0-6bff-4b43-80ff-baef006fef71:string:https://www.nus.edu.sg",
+        "email": "6449ced0-930f-45db-9876-50f7f3455598:string:registrar@nus.edu.sg",
+        "certificateStore": "92417575-bd84-4e38-8eab-58059637862f:string:0xfEbB273495F5C2c4783E23424Fe9773691b57fcB"
       }
     ],
     "recipient": {
-      "name": "ce74f207-d1d4-4c88-8d06-8f6dd291e344:string:A0121779X, name",
-      "studentId": "641e5758-cae0-4003-9ec6-84d622a64b86:string:A0121779X",
-      "dateOfBirth": "ab746c1c-332b-4c5d-a26b-e15786f26bc9:string:1905-01-01"
+      "name": "301af4c0-172e-4d1e-a392-a5ec6954bf2d:string:A0132190U, name",
+      "studentId": "d37d5cd4-59b4-4ae2-acdf-5040e1afd155:string:A0132190U",
+      "dateOfBirth": "597df888-744d-4500-af85-1eccdf5ec98a:string:1905-01-01"
     },
     "transcript": [
       {
-        "name": "d440134b-f813-4714-972a-3dc9877004e5:string:1410",
-        "term": "5c9c3e8d-d436-45ed-820a-1da07db0137f:string:2014/2015 Semester 1",
-        "formOfStudy": "bb82aead-ca89-4a85-b2bb-731decdb2f9d:string:ENRL",
-        "fosPrintArea": "1f512458-b7c5-4e01-a559-4aca7e1848e3:string:ND",
-        "modules": [
-          {
-            "moduleCode": "40f57738-9c21-4693-8d9d-ff27b73ecd53:string:YCC1111",
-            "moduleName": "02235f8b-f3bb-44b9-bacc-ce7fac9ea8a2:string:Literature and Humanities 1",
-            "grade": "92787305-9d36-46e8-93a9-84d717b501c0:string:CS",
-            "credits": "85a9c8ac-dae2-449a-9bac-2d2eb3f0d89c:number:5",
-            "gradingBasis": "61a2f5d5-ae0a-4e52-b851-ef257d20232c:string:CSU",
-            "includeInGPA": "47637046-3634-4b36-85f1-2ae38a4a193d:boolean:false"
-          },
-          {
-            "moduleCode": "ca8e80e3-d82c-4a26-9740-dd7687f52997:string:YCC1113",
-            "moduleName": "e0493d90-32a8-4da4-a28d-c516a7877554:string:Philosophy and  Political Thought 1",
-            "grade": "a7d95d9d-abd6-48c0-b285-41c4c79ede64:string:CS",
-            "credits": "6b9859ad-19c5-4364-a8ab-f918450a5efe:number:5",
-            "gradingBasis": "14606d44-cbe8-4da8-8580-e000013c05d1:string:CSU",
-            "includeInGPA": "46e23dc7-8425-4c09-a7b9-8db2e151b057:boolean:false"
-          },
-          {
-            "moduleCode": "5b830aed-3020-4d04-bc9c-b0e29cc8468a:string:YCC1121",
-            "moduleName": "c211c399-09bd-49f7-9f63-032ad84c568e:string:Comparative Social Institutions",
-            "grade": "79cba86c-d8c1-402f-af62-4b2f1eb6c0c7:string:CS",
-            "credits": "0a508c71-cde7-4bd8-9819-86995c0c8307:number:5",
-            "gradingBasis": "55ee032b-6257-4cd6-9b09-4a9304ab4bb7:string:CSU",
-            "includeInGPA": "4447d4a9-b54c-4e00-9820-50eed64903e1:boolean:false"
-          },
-          {
-            "moduleCode": "fcf6fb2c-b974-4c4e-a347-2f397a12df12:string:YCC1131",
-            "moduleName": "3b9833bf-dc1b-4bec-ae82-c5c49bbc48e4:string:Scientific Inquiry",
-            "grade": "3825b062-bea1-4d81-a55e-62a486d9283d:string:CS",
-            "credits": "472d46b7-775b-4a48-a21f-e566a73a2713:number:5",
-            "gradingBasis": "37ea23c9-7af4-4f5b-ab61-ba2a8031d3f3:string:CSU",
-            "includeInGPA": "54176071-a8af-4ec9-b46a-2024e68c65fd:boolean:false"
-          }
-        ],
-        "summary": [
-          {
-            "programName": "3d91e466-762d-471c-9435-c0ccba1a287b:string:Yale-NUS Bachelor's Program",
-            "includeInGPA": "e7162dfd-6890-4222-9a83-e1ec5bef7d7a:boolean:true",
-            "GPAName": "b46a67be-88b1-44f6-80b2-df352a4cbcd4:string:Cumulative Average Point",
-            "GPA": "a640918a-a278-44f6-b89b-e564dca22da2:number:0"
-          }
-        ]
+        "name": "35af90f4-20d6-446b-aa4e-2a49e33f3bbf:string:Literature and Humanities 1",
+        "courseCode": "90cb078d-452d-424d-98dc-4f045366e1cd:string:YCC1111",
+        "grade": "90b12be1-548b-4aef-9311-fbb5b0cbf6fd:string:CS",
+        "courseCredit": "8a6b4363-a7d1-4b90-8576-393b16277b25:number:5",
+        "gradingBasis": "ab9651b8-3dda-4f05-a528-224b8ed4985b:string:CSU",
+        "includeInGPA": "42400611-8604-4ebe-bc2d-d2a887ff985a:boolean:false",
+        "semester": "b6170de1-2d2d-4956-abab-e23dc69a9595:string:1410"
       },
       {
-        "name": "2c31241b-d18b-4541-9c96-6fa280afb0cb:string:1420",
-        "term": "db03a290-1d9e-4a1b-aae3-50109976d625:string:2014/2015 Semester 2",
-        "formOfStudy": "2133b3e2-49ff-47d5-afec-7207deaa8d5d:string:ENRL",
-        "fosPrintArea": "f7ae0336-5cbd-4073-a7ef-4584ee978dea:string:ND",
-        "modules": [
-          {
-            "moduleCode": "a8e2330b-4359-43e3-8b28-f1ca11f12c06:string:YCC1112",
-            "moduleName": "5641a5a3-3ff2-443f-903b-b706645e63ad:string:Literature and Humanities 2",
-            "grade": "56c7cb06-3c19-4f19-81b5-8d9ed519e5d7:string:A-",
-            "credits": "7a9b27ab-8264-4a01-85c1-8e193fd2063c:number:5",
-            "gradingBasis": "b4f1ddf4-a0d3-41f1-bcae-dafa2cd1432a:string:GRD",
-            "includeInGPA": "d1d7bb8b-32a7-4236-9c86-bd6e4ccf9739:boolean:true"
-          },
-          {
-            "moduleCode": "66dd4846-b170-42cb-9efb-0086d7883db8:string:YCC1114",
-            "moduleName": "f73aec4c-07ab-499e-8bcb-2dba460eb3bc:string:Philosophy and  Political Thought 2",
-            "grade": "eb1390bf-3037-41e9-89b6-ae13a8395b5d:string:A-",
-            "credits": "1c8a8c84-7985-4100-ae01-0fa21b35ef0e:number:5",
-            "gradingBasis": "5e7310a2-6c82-4f75-973e-019b5dd9efcc:string:GRD",
-            "includeInGPA": "2e54cfa1-c821-4742-b1a7-5399a8b1a689:boolean:true"
-          },
-          {
-            "moduleCode": "0a3fe59e-acc1-465f-8e75-bfa14ffac43e:string:YCC1122",
-            "moduleName": "ff8215d7-f1ab-4be6-9524-a92c1a362546:string:Quantitative Reasoning",
-            "grade": "ac0f9aab-b2fb-48ab-8fc9-d07af9669700:string:B+",
-            "credits": "17688adc-e342-4c5a-b01f-da4f7985ff56:number:5",
-            "gradingBasis": "cadb743a-a7c9-4133-bbe5-ecc0ae1cb1a4:string:GRD",
-            "includeInGPA": "82323641-d665-4192-a21a-5f53318aff0b:boolean:true"
-          },
-          {
-            "moduleCode": "fd9c2497-2103-4ada-b7dc-e1edbbdee8fd:string:YSC2209",
-            "moduleName": "5b1e5f48-9c76-401d-a669-1223046e0028:string:Proof",
-            "grade": "a3e5af1a-7d31-476f-ae4f-0e7e4835fb3a:string:B+",
-            "credits": "b5500432-869d-40e7-aa78-26d16cabaf59:number:5",
-            "gradingBasis": "c98238ee-3226-41af-b5f5-4da14c9a44e0:string:GRD",
-            "includeInGPA": "26319d75-abc2-4a62-b697-ebcba3fa3087:boolean:true"
-          },
-          {
-            "moduleCode": "1a03bd6c-24b4-4181-b572-f3857c881d3c:string:YSS2206",
-            "moduleName": "57bf6232-b332-4781-b06f-c6be4be5fc6d:string:Nineteenth-Century British Political Thought",
-            "grade": "a60b4f18-b584-4ecf-8972-87eccaf52ff2:string:A",
-            "credits": "67da5591-2f28-4127-94fb-afaf9d391a94:number:5",
-            "gradingBasis": "2b53efae-8cf8-47be-96de-2dfc70e3ad79:string:GRD",
-            "includeInGPA": "6f2441a9-731f-43c6-a009-0de508a638b9:boolean:true"
-          }
-        ],
-        "summary": [
-          {
-            "programName": "e53a89bf-b049-4e1b-8c36-5dd3b796b826:string:Yale-NUS Bachelor's Program",
-            "includeInGPA": "a0521778-526f-4e82-9433-e65a18c9ada9:boolean:true",
-            "GPAName": "1b8ba399-f170-4431-a803-9c481b027418:string:Cumulative Average Point",
-            "GPA": "5d1c29fc-59b6-4ede-9cb4-5091374f2e06:number:4.4"
-          }
-        ]
+        "name": "7d77c2d8-c142-446e-9fdf-c7bebd168c71:string:Philosophy and  Political Thought 1",
+        "courseCode": "d0a5e740-632e-487d-9216-35d3e0bcb544:string:YCC1113",
+        "grade": "55cbc65f-7493-44e3-b1db-80236b84a029:string:CS",
+        "courseCredit": "11a6a763-ba4c-47cb-a5dc-38817e339db1:number:5",
+        "gradingBasis": "89c846eb-c8f6-44dd-8345-af5f451ebd88:string:CSU",
+        "includeInGPA": "23ffc2bc-b3ef-49ba-9fe6-a47d0a1770e4:boolean:false",
+        "semester": "be85a61b-8802-4868-bd60-8cf78c09e5ba:string:1410"
       },
       {
-        "name": "314fbc5a-6d86-4eed-927e-758fb17d7a38:string:1440",
-        "term": "e847b6cc-01f9-483c-b2c8-9fc0423206f4:string:2014/2015 Special Term (Part2)",
-        "formOfStudy": "f97b692d-0c69-42dd-9894-c17985498cfd:string:SWE",
-        "fosDescription": "2521f81b-53ad-48e6-a2b8-11b48ed4bcfc:string:Participated in a Summer/Winter Programme at",
-        "organization": "32ec873a-3220-483f-a943-826a8aa95261:string:Yale University",
-        "fosPrintArea": "c008118f-7707-47cb-965a-dd31a02c1f2a:string:EH",
-        "creditTransfer": [
-          {
-            "sourceType": "ac54827a-57dd-46af-a0e7-167a509c87ee:string:E",
-            "creditsNoGPA": "0416bf6d-8971-4954-841a-d909cf478716:number:10",
-            "creditsGPA": "b0e21392-0899-40d4-8a40-835d4b569b21:number:0",
-            "orgId": "699bad5c-c6ed-4888-af9a-8fe8a78f9d6c:string:Yale University",
-            "orgName": "606f7998-bba5-403c-9b1a-f8fd2ddf7cc1:string:Yale University",
-            "details": [
-              {
-                "moduleCode": "46f4df74-0cd2-47d3-b3d0-fae97b9f5045:string:PLSCS391",
-                "moduleName": "4eac95d5-11bf-4a4a-9d35-26396c706a69:string:War and Constitutions",
-                "grade": "e3562195-7256-4769-beab-dde487ba9466:string:OVS",
-                "credits": "ad8d3df6-c2a6-420c-99bf-2c1d77e2e566:number:5",
-                "status": "3b25bd18-7a8f-4442-bb0e-47d1eabac0db:string:P",
-                "includeInGPA": "99c8a2f3-0b5f-42fd-8649-f20f2ea3d5c9:boolean:false"
-              },
-              {
-                "moduleCode": "58f986c9-41e7-47e1-b286-fc72dce2f48b:string:PLSCS126",
-                "moduleName": "56a1d0d5-58c4-4707-8169-d0693bd2090e:string:Balance of Power",
-                "grade": "eb28f509-1dfa-4f84-b4da-1c49c1c6b831:string:OVS",
-                "credits": "fc23ff0a-8ecf-49a2-a0a0-3eec0f992a9e:number:5",
-                "status": "9b8c009f-0b58-4343-9bd2-c48ec65a3401:string:P",
-                "includeInGPA": "9fdc4859-ab20-40af-b086-ad51cb0bc26d:boolean:false"
-              }
-            ]
-          }
-        ],
-        "summary": [
-          {
-            "programName": "7763d0d0-6cac-40e7-b688-3401b28adb32:string:Yale-NUS Bachelor's Program",
-            "includeInGPA": "7fc55c0a-a16c-4782-91dc-7042ecfa20b8:boolean:true",
-            "GPAName": "fce6f1b3-bcac-4b3d-ad7d-3d95dc40c95d:string:Cumulative Average Point",
-            "GPA": "8fbe33aa-6d87-4036-be2d-04318a49b4bd:number:4.4"
-          }
-        ]
+        "name": "f1bdbeea-3e39-4539-b743-c9bd90844cef:string:Comparative Social Institutions",
+        "courseCode": "d4350466-3a8f-42ab-ac77-cebb062c8e9e:string:YCC1121",
+        "grade": "9c42dd5b-5d3e-4dcd-881c-1c5da748d3e6:string:CS",
+        "courseCredit": "2fdc85d7-49dd-4f75-909f-aa5dd6128065:number:5",
+        "gradingBasis": "923ced9f-0e62-49d9-bf36-17cc9838ad1e:string:CSU",
+        "includeInGPA": "eaf20f6f-cc46-4a24-9fa1-e118cd45be81:boolean:false",
+        "semester": "7d8a1ad1-be5f-4f72-8ba5-18603df66aae:string:1410"
       },
       {
-        "name": "7477398c-69d5-47c2-aa6e-b5eb83a5ef09:string:1510",
-        "term": "01af421e-bbe9-4764-925f-93d8c3d8c0ce:string:2015/2016 Semester 1",
-        "formOfStudy": "f65e46e6-9d0f-41e0-b2f6-2bc333fb77ec:string:ENRL",
-        "fosPrintArea": "dcc88d97-ae1a-4d82-9e72-c5e3cc747215:string:ND",
-        "modules": [
-          {
-            "moduleCode": "e5f57613-b267-4a25-bfea-64c19a89ee45:string:YCC2121",
-            "moduleName": "fe5f42c4-a538-4964-b669-cd54b4b2db5a:string:Modern Social Thought",
-            "grade": "b758fbc0-858e-46cc-a7ca-66e5910c0d5d:string:A",
-            "credits": "d35e1109-6b4a-4135-bdd8-b49024ade07f:number:5",
-            "gradingBasis": "6951135a-9a49-4d3d-b070-3498616a9321:string:GRD",
-            "includeInGPA": "72798041-24f2-4d15-9f87-4f56ed3fa181:boolean:true"
-          },
-          {
-            "moduleCode": "627e5e73-e849-47ba-958a-00be7f268ed7:string:YCC2131",
-            "moduleName": "1ca06eea-7fac-4b4f-bb84-77e371eaa388:string:Foundations of Science 1",
-            "grade": "3e31b827-0319-4a0d-ad6f-7ab7c918c0ee:string:B+",
-            "credits": "65368c10-eed1-4ecd-83da-af2f55356ac6:number:5",
-            "gradingBasis": "8ae09058-c103-43fd-85ab-ea683862c1f6:string:GRD",
-            "includeInGPA": "77ae8f0e-2368-4964-aedf-8b7c68e12cd9:boolean:true"
-          },
-          {
-            "moduleCode": "fa928bfa-ffa5-4bc6-b780-007316eab007:string:YSC1206",
-            "moduleName": "f8fb8ef0-ec2f-4d79-a2f9-6f2e445d1d20:string:Conceptual Calculus",
-            "grade": "d66b8195-6fd5-41e0-bc2d-3857b3e5b045:string:A",
-            "credits": "79b55a11-df7e-453d-82ac-2bb1cc503339:number:2",
-            "gradingBasis": "a576d435-93da-4acb-a684-0fd67a53ce51:string:GRD",
-            "includeInGPA": "08e84b4f-40e5-40dd-af1f-68673953f5b0:boolean:true"
-          },
-          {
-            "moduleCode": "b9f06f4d-6e37-4f1a-b69d-aa155ad7e4b7:string:YSC2201",
-            "moduleName": "c8888a5f-8534-4f40-b6f5-92c717ed6907:string:Number Theory",
-            "grade": "b45f72a9-a62d-4238-a389-4df9dfbe8483:string:A-",
-            "credits": "5a6e287a-bfda-4dc0-af2a-d92f4797f8d3:number:5",
-            "gradingBasis": "63153d11-b523-4cf7-a95f-91abfb338d31:string:GRD",
-            "includeInGPA": "e6930731-7ec0-46e2-be1f-1a53307bf177:boolean:true"
-          },
-          {
-            "moduleCode": "668e3284-31d7-4884-a910-abc904f7f703:string:YSH2409",
-            "moduleName": "f604b759-a40e-4d31-8984-c2a69660791a:string:Short Course: Democracy and Justice",
-            "grade": "193163e8-fdbf-42a7-95f7-fdc4f2e0ceda:string:CS",
-            "credits": "4329e5a5-48c8-45f2-a0d6-9452ba7d43c0:number:1",
-            "gradingBasis": "83597f56-b0ec-4d50-b36c-969a1f1774e2:string:CSU",
-            "includeInGPA": "7a9bdda2-7963-41a1-a964-50997879a0df:boolean:false"
-          },
-          {
-            "moduleCode": "5c962e0f-3960-4580-84f1-1c3b1a13eeb6:string:YSS2201",
-            "moduleName": "dda0e57e-da7f-44e9-ace8-cd55a976d3f7:string:Understanding Behaviour and Cognition",
-            "grade": "868d2db9-acfd-4162-a8f7-27cc4dbf6fc2:string:S",
-            "credits": "21fb920d-ca00-46a3-87b5-72544d29ae38:number:5",
-            "gradingBasis": "7b012e3e-82b5-48f7-a16c-6db2732dddee:string:SNU",
-            "includeInGPA": "edc79424-2032-4064-809c-f0ed0faf25bb:boolean:false"
-          },
-          {
-            "moduleCode": "bc13a21a-26d7-4bcd-9a7d-cc63a6321e20:string:YSS2203",
-            "moduleName": "6298b87d-276e-4498-b67f-ddaffad6e0f4:string:Intermediate Microeconomics",
-            "grade": "e732f40f-098c-49ea-9a5a-cf12a03ae929:string:A+",
-            "credits": "48de380a-a8b9-4076-bb8f-884ef4c0cca5:number:5",
-            "gradingBasis": "aef8fe8c-7a6e-48dc-9616-7c9dbefd5221:string:GRD",
-            "includeInGPA": "9eebb40b-904e-4a28-80d2-01967bce5bd8:boolean:true"
-          }
-        ],
-        "summary": [
-          {
-            "programName": "4adcf29d-35fa-493f-b011-46231b164901:string:Yale-NUS Bachelor's Program",
-            "includeInGPA": "6be2011e-8874-4c27-888d-45c6fb12049a:boolean:true",
-            "GPAName": "e1ad18d1-3574-4c4c-b119-ecb5653db202:string:Cumulative Average Point",
-            "GPA": "1ceb22e4-1004-4b39-b83c-41420107d179:number:4.52"
-          }
-        ]
+        "name": "505e2e24-e1f6-442e-ad7e-4b635826c528:string:Scientific Inquiry",
+        "courseCode": "3691cf8f-c56b-4298-9352-7091d762d06d:string:YCC1131",
+        "grade": "f507e7b5-a9e5-439f-9e85-a415b93de816:string:CS",
+        "courseCredit": "fa845598-0ee7-4f7c-812a-8d18b71315cd:number:5",
+        "gradingBasis": "b40dbb74-a6aa-45ed-b947-20431479cdac:string:CSU",
+        "includeInGPA": "88c2923c-5fef-4f94-9b7b-3b3c1bf8a66e:boolean:false",
+        "semester": "2172d175-a5ab-4370-89ad-d8f4d80ca684:string:1410"
       },
       {
-        "name": "ac995fcc-b278-4f1c-a456-3bf435678d5e:string:1520",
-        "term": "7a45df3e-9369-413c-8aa6-f19abdf7ad68:string:2015/2016 Semester 2",
-        "formOfStudy": "f9e8b932-2db2-483b-b376-8817e1be29ef:string:ENRL",
-        "fosPrintArea": "c22b792e-a217-43c0-b933-e04a4afd8f32:string:ND",
-        "modules": [
-          {
-            "moduleCode": "77d46bee-4857-4b75-8429-7e8596f44dc2:string:YCC2132",
-            "moduleName": "838de78c-153d-4f5c-ac87-fea2c901525a:string:Foundations of Science 2",
-            "grade": "b1203a10-830f-4287-9809-d379ab00114f:string:B+",
-            "credits": "84d590d5-b0c7-4618-9ae0-4f4121c38915:number:5",
-            "gradingBasis": "cf1bbb87-6de0-4059-9820-f304c4a93e1b:string:GRD",
-            "includeInGPA": "fda56f55-e2ad-465f-b596-fecc27c60f5f:boolean:true"
-          },
-          {
-            "moduleCode": "ce282711-4543-4aaa-8406-badcfb472420:string:YHU2206",
-            "moduleName": "97a10fe4-6708-4dd2-8703-bee48f3029b3:string:Introduction to Mathematical Logic",
-            "grade": "cbfca4f6-2b16-4db6-a9b0-181026746822:string:A",
-            "credits": "694933e9-bfe6-4289-b57a-15ec01eeebe2:number:5",
-            "gradingBasis": "9052e10a-549d-4ba2-b656-124228dd4be3:string:GRD",
-            "includeInGPA": "804f60a8-92ad-4bcc-b54e-277310662427:boolean:true"
-          },
-          {
-            "moduleCode": "efbc2dd4-b3cd-4596-8271-d7da1d83a236:string:YHU2245",
-            "moduleName": "3d27e039-6fdb-4a03-90a0-60de2cc2422d:string:Democratic Theory",
-            "grade": "1f67efef-8fbf-413e-bfd9-d5fc2a618334:string:A-",
-            "credits": "5d13f0e2-ad24-4906-9a8c-4eaf0165f798:number:5",
-            "gradingBasis": "13ebbce2-2bec-4b92-915a-1e36837f63ca:string:GRD",
-            "includeInGPA": "992dbaa6-f59c-42d8-8c3c-74abda3c76c0:boolean:true"
-          },
-          {
-            "moduleCode": "87b33f1b-5df0-4546-ad18-be52a7fe1584:string:YID1201",
-            "moduleName": "71c1c7eb-9be3-4afb-b0ea-42d8fbb993cc:string:Introduction to Environmental Studies",
-            "grade": "925e439d-b7c0-4804-a6fd-65dfb419348a:string:A",
-            "credits": "21624ff3-873b-42a4-b96a-d73789cc313e:number:5",
-            "gradingBasis": "0855cde7-d609-4c47-b49a-e7cfa372bba1:string:GRD",
-            "includeInGPA": "544cd229-aead-487d-8fae-959034baaa97:boolean:true"
-          },
-          {
-            "moduleCode": "400bc9aa-7b2a-4bf3-8dc4-47b6980fee9b:string:YSS2202",
-            "moduleName": "678144a1-3f04-4153-83e1-3632dcb039ae:string:International Relations",
-            "grade": "faca35c8-1439-4202-a7ae-c745ecae942c:string:A+",
-            "credits": "9cb56f25-3e04-42b1-94dc-ba295b748a4d:number:5",
-            "gradingBasis": "d5140de8-3869-473d-a06f-9d21b67f51b1:string:GRD",
-            "includeInGPA": "0d12a142-c320-4309-88c3-c40934b0a16d:boolean:true"
-          },
-          {
-            "moduleCode": "6644f7a6-a4f1-4c14-ad9a-ed009713af34:string:YSS2208",
-            "moduleName": "cdd4ff01-f113-42c3-a3e2-b33c953d2bad:string:Ancient Greek Political Philosophy",
-            "grade": "c39a9db1-910d-4f0e-b8b8-54da2b714d71:string:S",
-            "credits": "5fad336f-52f9-4e01-a65b-d8aa86643182:number:5",
-            "gradingBasis": "ae77093c-732d-42f5-b895-8d5e25f43121:string:SNU",
-            "includeInGPA": "39bc0907-7f1f-4f58-8c21-af7ec8c6386e:boolean:false"
-          }
-        ],
-        "summary": [
-          {
-            "programName": "7624d4e6-4d5a-47f8-a48a-47186486005c:string:Yale-NUS Bachelor's Program",
-            "includeInGPA": "e11398d1-2be5-448c-8bf9-876bc2b407e8:boolean:true",
-            "GPAName": "dc158e29-359e-4fd3-bacb-20679f2c5702:string:Cumulative Average Point",
-            "GPA": "e8771d27-83a6-4290-bbe2-fdadcb622df1:number:4.58"
-          }
-        ]
+        "name": "e7bab37e-f3af-435d-9ac6-6db2de729fb3:string:Literature and Humanities 2",
+        "courseCode": "a77ce8ee-63c7-4042-9f8d-2c483bccea8a:string:YCC1112",
+        "grade": "da039a69-2c85-4a9e-9054-d268f6ae6740:string:B+",
+        "courseCredit": "84b9c491-6d04-4c5a-850c-ff41343710de:number:5",
+        "gradingBasis": "2a819b1f-9729-4132-9235-1325692eefea:string:GRD",
+        "includeInGPA": "8f5f67f2-795b-4c8a-be54-e60d969d4009:boolean:true",
+        "semester": "a7b5a7c4-1e53-4f39-b1b0-d545798922c8:string:1420"
       },
       {
-        "name": "774cea4e-818f-429d-8297-8d1134a9d220:string:1610",
-        "term": "b6db5298-d6a2-444f-90ab-345de76ef75d:string:2016/2017 Semester 1",
-        "formOfStudy": "06139ab6-dc6d-4921-9e97-54091fac6809:string:ENRL",
-        "fosPrintArea": "c6c95bef-496b-4314-bbce-ce9f220d1208:string:ND",
-        "modules": [
-          {
-            "moduleCode": "89a65eb5-d1dd-49bf-b34b-faaadc665047:string:YHU1202",
-            "moduleName": "dc5b586c-bf79-4c6e-97de-3b0eb6c4e83d:string:History and Culture of Southeast Asia",
-            "grade": "be165eec-d0ae-4593-a069-e79e4d4a0d8c:string:A-",
-            "credits": "fbac2db6-e436-415a-b273-a906cfe20172:number:5",
-            "gradingBasis": "74ec8287-9e15-4151-8489-baa151853467:string:GRD",
-            "includeInGPA": "1ceb2569-6fdf-4371-8830-9d81f55c968d:boolean:true"
-          },
-          {
-            "moduleCode": "f129f57b-47d2-4770-a57b-dcf70a36bb3f:string:YHU2217",
-            "moduleName": "02964c21-7f85-4a03-9702-633a20efe10c:string:The Historian’s Craft",
-            "grade": "00fd17f5-d346-402d-b286-692cc230c5a4:string:A-",
-            "credits": "4961f1ca-890c-4483-b2b7-5781ad3b0466:number:5",
-            "gradingBasis": "8dec9104-88df-4604-8c55-83c9763f37d9:string:GRD",
-            "includeInGPA": "9518f51e-76d1-44b8-9940-39b198dcae8b:boolean:true"
-          },
-          {
-            "moduleCode": "2d4c0a7c-394f-4188-b06d-55cafc8c3915:string:YHU2253",
-            "moduleName": "e0b9b10c-8899-49f2-9055-6323375523ff:string:Asian Religions",
-            "grade": "cb902a3d-b080-45e1-a525-cc071452e21c:string:A",
-            "credits": "5e8244d3-909b-4691-ae83-eef40585bbcd:number:5",
-            "gradingBasis": "409cfbc7-124a-4d73-aa8b-e89be568dd92:string:GRD",
-            "includeInGPA": "29c42f5a-e9c4-47f0-91c0-f291dc28ffef:boolean:true"
-          },
-          {
-            "moduleCode": "e27e177b-474f-42d2-8124-a53d15acfb9f:string:YLC2202",
-            "moduleName": "96d5b7c4-9402-42d4-a396-e8ebd85f260a:string:Intermediate Chinese 2",
-            "grade": "ee0736c2-95ad-422a-9e08-afaa27feaa1e:string:A+",
-            "credits": "3503e18d-aa57-42e6-b5e4-6b9b75bed504:number:5",
-            "gradingBasis": "18e35504-b940-4cc8-bff1-d9f3a815cb47:string:GRD",
-            "includeInGPA": "da2af481-4793-4239-8b49-8ae1a5851b9c:boolean:true"
-          },
-          {
-            "moduleCode": "f2dc8fd5-ee85-4ec4-a4ae-a2b0f5f2a4d4:string:YSH2425",
-            "moduleName": "4462e432-4367-4ab2-b542-f408e19b535e:string:The Globalization of Food, 1000 to the Present",
-            "grade": "29cbc3a0-5c6c-47bd-939a-f43855069f14:string:CS",
-            "credits": "d0e4d54e-47ed-4d9d-9f4c-d6908daf45ac:number:1",
-            "gradingBasis": "063aa299-7059-4d67-815c-6cba451ca692:string:CSU",
-            "includeInGPA": "e825dd40-20c4-4579-89b4-13be0eff85e9:boolean:false"
-          },
-          {
-            "moduleCode": "f0984191-20be-46c5-82c3-b187d2ef4f6f:string:YSS2214",
-            "moduleName": "53688156-f091-4aac-913e-dff464be9561:string:Intermediate Macroeconomics",
-            "grade": "70f38a5d-ce43-4eeb-8d0d-c8d79f8eea9b:string:A",
-            "credits": "da9c53f3-1b6e-43af-812d-06b2048a34f2:number:5",
-            "gradingBasis": "4d3ac698-742e-43da-a6c0-e82338f165f0:string:GRD",
-            "includeInGPA": "6d0b5950-0090-417d-9375-a7edf814e3f9:boolean:true"
-          }
-        ],
-        "summary": [
-          {
-            "programName": "767165f8-9450-4952-8bfc-6b7f1f75d467:string:Bachelor of Arts with Honours",
-            "includeInGPA": "a42f72fd-17fc-481d-9999-95ccd8b74cf5:boolean:true",
-            "GPAName": "1303b984-fcd5-462e-b85c-c269daaf03f7:string:Cumulative Average Point",
-            "GPA": "72d64738-6e68-4924-b448-b780c02be11b:number:4.64"
-          }
-        ]
+        "name": "a875d652-c154-4ecc-ad60-b9e3227edab4:string:Philosophy and  Political Thought 2",
+        "courseCode": "b90fa563-532b-4e79-bf3b-408d395f3079:string:YCC1114",
+        "grade": "1a0df79c-5342-416a-9867-238ca1bd8bf4:string:B+",
+        "courseCredit": "80fc85d0-4b91-4c68-bca5-7d50e0a28c72:number:5",
+        "gradingBasis": "256664c1-b500-47de-be46-3de80da5f9f2:string:GRD",
+        "includeInGPA": "b9b9b7b1-63ed-41fa-9d21-896419cc2b2a:boolean:true",
+        "semester": "525ed6a5-0501-4c27-afe3-c35eb1399fa4:string:1420"
       },
       {
-        "name": "1d6ee085-ee40-44db-963f-872fb9737a69:string:1620",
-        "term": "1e654e1e-b8ab-43ba-b1e1-7a1c8b24fbd8:string:2016/2017 Semester 2",
-        "formOfStudy": "d7135f1f-b7c9-45d0-87ec-08ea84f58fc0:string:SEP",
-        "fosDescription": "35123963-761a-463a-bec9-d17f33090452:string:Participated in a Student Exchange Programme at",
-        "organization": "921bfe99-6f6e-431d-8303-c7e487a3ae56:string:Yale University",
-        "fosPrintArea": "515ee5b3-fda5-4e5c-8cc4-91c76ecf4dc1:string:EH",
-        "creditTransfer": [
-          {
-            "sourceType": "d95de427-e504-4535-85e1-3d233e53a83c:string:E",
-            "creditsNoGPA": "6b8a290d-3c4a-40cf-b3bb-1bfe664d8989:number:20",
-            "creditsGPA": "7ae82400-540e-4377-8386-7ca952591afb:number:0",
-            "orgId": "96734be3-771a-4dbe-a759-25366d2403a2:string:Yale University",
-            "orgName": "44e8ea94-b0d7-452f-a75b-c4122d4c1272:string:Yale University",
-            "details": [
-              {
-                "moduleCode": "a5e12ec1-d5de-46eb-905c-99a1a3b836e5:string:HIST264",
-                "moduleName": "e3cafc6c-3440-4b85-981c-623c0b46c51b:string:Eastern Europe since 1914",
-                "grade": "71341a6c-67eb-4deb-89ee-24606232c9e6:string:OVS",
-                "credits": "f3b60de9-946a-4f4b-8d4b-1165cdf04fb7:number:5",
-                "status": "3a8b1021-a814-416d-9f96-900c1ca6ae2b:string:P",
-                "includeInGPA": "acfff562-c7f5-470b-9d07-3aaba14a158d:boolean:false"
-              },
-              {
-                "moduleCode": "8daa027c-f195-4403-b32c-2bd815f8faa9:string:HIST271",
-                "moduleName": "33e67b00-c42e-4cd5-a73e-b0fee14eba4f:string:IntellectHistrySinceNietzsche",
-                "grade": "dfd5ef86-477c-4287-9945-b21f9795e128:string:OVS",
-                "credits": "c952a0e7-9699-450b-bff3-433bfe356e25:number:5",
-                "status": "99aac8ee-c502-4c0a-8471-474f7472b13e:string:P",
-                "includeInGPA": "b770b9f0-4fc4-4e7e-895f-f1c6f4cb17e7:boolean:false"
-              },
-              {
-                "moduleCode": "671fed3c-b3dc-461b-b4fd-2dfda05900de:string:PLSC118",
-                "moduleName": "639f3260-fb78-4b4b-9100-9012a77fc382:string:Moral Foundations of Politics",
-                "grade": "a0dd565a-de8b-4c31-a552-36f00b868264:string:OVS",
-                "credits": "34321eab-155b-49db-ac51-803b91f9e1c8:number:5",
-                "status": "63e8cc8a-aaad-4d2f-9a16-92bc107127dc:string:P",
-                "includeInGPA": "3c87397e-0632-4c5d-bdc6-1cd6044609b5:boolean:false"
-              },
-              {
-                "moduleCode": "e5098ff2-1d00-4e2f-8062-57149c925d70:string:PLSC398",
-                "moduleName": "aa968ea1-b4a7-4c79-a2e9-dee6ea26e3e9:string:Comparative Political Economy",
-                "grade": "d578c4e0-de6c-4fe1-9bbd-baaab11db880:string:OVS",
-                "credits": "c33bdf77-65f5-4e43-ab16-ba30355e2183:number:5",
-                "status": "1fd48f93-04a6-4fac-92b3-ad17692c8c6a:string:P",
-                "includeInGPA": "6736050a-56ca-46ad-8ac3-48d8a42c0d8d:boolean:false"
-              }
-            ]
-          }
-        ],
-        "summary": [
-          {
-            "programName": "69724b49-6c11-481b-8df2-7a809f941a56:string:Bachelor of Arts with Honours",
-            "includeInGPA": "ab790a3e-03ff-4371-9f42-bcb911ee76cf:boolean:true",
-            "GPAName": "06fd9b46-c3fc-42d6-8b80-122e038353cb:string:Cumulative Average Point",
-            "GPA": "7a63a73c-9317-4f37-b0d0-b9fb8138e871:number:4.64"
-          }
-        ]
+        "name": "8b8deb14-f3a7-4c22-891d-bde4c6ebf0ab:string:Quantitative Reasoning",
+        "courseCode": "1dc775de-0571-4800-ba0a-8e479db25bdf:string:YCC1122",
+        "grade": "c826a1f7-b521-4fce-b295-072d27412ba5:string:B-",
+        "courseCredit": "3dd92b14-17c5-4acc-8a00-0717dbfd0985:number:5",
+        "gradingBasis": "1ac91b3d-547d-44bb-b27a-d091df26c932:string:GRD",
+        "includeInGPA": "c9517ce5-d443-45e4-b213-19b5e5f1d517:boolean:true",
+        "semester": "1e752f7d-ff25-4819-b0a3-b7bed3d28cc5:string:1420"
       },
       {
-        "name": "123ccdf8-29f0-4562-884b-6cb710b40d66:string:1710",
-        "term": "07ca4631-906f-4667-8a10-60e898252563:string:2017/2018 Semester 1",
-        "formOfStudy": "54f4f04b-4771-444a-9cc3-5e2c7cc2e06d:string:ENRL",
-        "fosPrintArea": "46210527-b5a6-4377-a01c-27907f549fa8:string:ND",
-        "modules": [
-          {
-            "moduleCode": "04caac5e-7833-405e-ab6a-676be29b1dca:string:EC3303",
-            "moduleName": "d40eaf0d-adb8-4955-8311-e9b493e6ba2c:string:Econometrics I",
-            "grade": "1c89b972-e151-4649-9150-eb9a19f2c6f3:string:S",
-            "credits": "20cd6a22-644d-43a6-91b4-7b57ca5fd08a:number:4",
-            "gradingBasis": "6a41e076-020b-49c9-98ab-ff593f6da6be:string:SNU",
-            "includeInGPA": "159032a3-5332-41f5-a230-86d2fcdeb787:boolean:false"
-          },
-          {
-            "moduleCode": "f1473968-1042-48a0-8192-1a24faf7519d:string:YHU3205",
-            "moduleName": "e468ea14-3cf2-476e-962d-f61fe02cb179:string:Ming Imperial Voyages",
-            "grade": "93e89611-9800-45dd-bb4c-d0bda8455079:string:A-",
-            "credits": "642e3178-ded0-49d7-b647-271d6f9f6a1d:number:5",
-            "gradingBasis": "caf1bab1-aaa5-47c3-ac56-26be8169698f:string:GRD",
-            "includeInGPA": "0ed9d28f-cb6c-4cfc-b967-52b581ac9a89:boolean:true"
-          },
-          {
-            "moduleCode": "84d09271-e3fd-4631-9649-f438d87fd347:string:YHU3268",
-            "moduleName": "1341ce07-643f-4c41-a962-eaac0c041743:string:The Japanese Empire in Global History",
-            "grade": "394df697-5254-48e3-a6c7-ef422b48f7fb:string:A-",
-            "credits": "06a834f6-63ec-4233-9f24-d25cee50543e:number:5",
-            "gradingBasis": "67e040d4-18fe-483e-a8c8-0e4aca488dd2:string:GRD",
-            "includeInGPA": "53e3506e-f918-4200-9e6e-081616653cf6:boolean:true"
-          },
-          {
-            "moduleCode": "a3095f36-0024-4d8a-aaee-511b7412b6ad:string:YIR4311",
-            "moduleName": "7670daf0-6fd7-4424-9332-c8cd2d8e6a1e:string:Independent Reading and Research (Sem 1)",
-            "grade": "43a2c4a7-0cd0-4add-b01a-7c397fdd9ec8:string:CS",
-            "credits": "b36bb949-a82b-414a-876b-ad9da10d0629:number:2",
-            "gradingBasis": "5b74ec4f-0b12-400f-8446-ba087de2c208:string:CSU",
-            "includeInGPA": "9d1d04ed-eb01-48d1-a61b-78700f4fae97:boolean:false"
-          },
-          {
-            "moduleCode": "b100bfbb-1e85-4176-8928-e328eb61757f:string:YSS3226",
-            "moduleName": "8f8cc21c-d520-4e65-bad2-2762e17c5486:string:Conflict and Cooperation in East Asia",
-            "grade": "8d27cfb0-54d5-44a8-9ad0-a54b46d36491:string:A",
-            "credits": "675ee031-93cc-4645-948a-1485ee0dae3d:number:5",
-            "gradingBasis": "eb5f6adc-de32-4d87-a6cf-805d2bd81dfd:string:GRD",
-            "includeInGPA": "9a8807c0-da01-4ca5-9b10-df558a9e265e:boolean:true"
-          },
-          {
-            "moduleCode": "bbf0763a-112c-4a1c-a8ab-1bb7a5a9adc1:string:YSS3241",
-            "moduleName": "7de05a78-c7b8-4528-b3e9-2a4adf9e95af:string:Chinese Political Philosophy: Confucianism & its Rivals",
-            "grade": "ee14dd74-3fd9-4426-8b43-b22b8eb8fc72:string:S",
-            "credits": "f16e7e27-3b41-4b17-bed9-01879b9c3a39:number:5",
-            "gradingBasis": "3a63b6cb-e046-43f8-9345-6fda1c881b29:string:SNU",
-            "includeInGPA": "8974d3cb-207b-4a65-9ea2-503ee62efe3d:boolean:false"
-          },
-          {
-            "moduleCode": "858fb707-ccad-4db0-9687-54c1794f2cfc:string:YSS4106",
-            "moduleName": "de15cfca-249b-46ee-a014-c5612e5e6c74:string:Politics, Philosophy and Economics Capstone Project",
-            "grade": "e3babc09-818e-470d-8339-596065d06534:string:IP",
-            "credits": "2822d80b-6dd7-4a7f-9132-8b2ee737a5b7:number:10",
-            "gradingBasis": "c5977810-0e8a-4b29-8cb3-1c7b8de40bb1:string:GRD",
-            "includeInGPA": "7cc9e3b7-2092-44d7-af9b-3e111bd712ab:boolean:true"
-          }
-        ],
-        "summary": [
-          {
-            "programName": "b44f4487-2f10-475b-8450-08543e79af59:string:Bachelor of Arts with Honours",
-            "includeInGPA": "44a451d3-8672-486b-b205-092c82145323:boolean:true",
-            "GPAName": "5d861472-c161-4cb9-b166-0e1bb62dd543:string:Cumulative Average Point",
-            "GPA": "36ec09a4-524f-4cc8-8260-7a82d24cb010:number:4.64"
-          }
-        ]
+        "name": "5b0f23fe-b93a-40d2-a78f-e420924a5a87:string:Principles of Economics",
+        "courseCode": "b9a7fcc0-df9b-4373-9f44-2a50aa5316c8:string:YSS1203",
+        "grade": "11fbab2b-1a82-45cf-b628-08ff2360b16a:string:B",
+        "courseCredit": "4ddfcd5f-d87f-4e00-80a0-60a5ac09087f:number:5",
+        "gradingBasis": "fd1f312d-9674-45f0-aada-839d8cdef4c1:string:GRD",
+        "includeInGPA": "570d1a94-c2bd-4e7e-ba34-5ba16f0f0a5a:boolean:true",
+        "semester": "02d6db6d-6cbc-4401-a63b-15fb29fd1442:string:1420"
       },
       {
-        "name": "8d5e97ba-356a-4719-9813-5b0238fabc04:string:1720",
-        "term": "150184cf-2a0a-42a3-8803-c68a062e1b59:string:2017/2018 Semester 2",
-        "formOfStudy": "97da132f-1512-435c-a5ab-ca3c69e16c00:string:ENRL",
-        "fosPrintArea": "18b97bfa-8cdf-4136-95e1-5fd51385e2f0:string:ND",
-        "modules": [
-          {
-            "moduleCode": "8544f9f3-7812-47cd-bb20-765c949e7a13:string:YHU4206",
-            "moduleName": "62b6b1b0-ca22-4d57-82c5-1a1b0c95788f:string:The History of History",
-            "grade": "9cd20d8e-7bd7-4715-8f60-7a70f0fa521b:string:A-",
-            "credits": "d8ec47f9-b1cf-4828-b38a-4103eec838de:number:5",
-            "gradingBasis": "c7a6fbe1-c7d5-405d-bf18-bed967e2c13b:string:GRD",
-            "includeInGPA": "0989ffc4-4a5a-434d-9152-07ad20a131ba:boolean:true"
-          },
-          {
-            "moduleCode": "4ff90a53-d9a1-4b58-a136-d7a8fb0a917a:string:YSS2210",
-            "moduleName": "48b6bda8-bc79-4e65-875e-820d07aef3d7:string:Contemporary Social Theory",
-            "grade": "d3ecc709-50ec-40e2-9bbd-f95e1d6282a8:string:A",
-            "credits": "b420bef3-9b89-4e3d-a6bd-830966d351ba:number:5",
-            "gradingBasis": "dca2f339-c573-4de1-8ee9-ef1c3637d527:string:GRD",
-            "includeInGPA": "869ca441-3896-4e37-a7a5-1833e7e2c62f:boolean:true"
-          },
-          {
-            "moduleCode": "5fffb37d-edbc-409b-9516-2cbaf78232fa:string:YSS4106",
-            "moduleName": "6dd84dac-3f33-4d74-a589-dceab4550737:string:Politics, Philosophy and Economics Capstone Project",
-            "grade": "17604371-f1de-4203-b002-950a47dbb805:string:A",
-            "credits": "ea8532d7-dcf2-4d66-a466-f3820474106f:number:10",
-            "gradingBasis": "0680399b-1106-48e8-8140-9690623d2298:string:GRD",
-            "includeInGPA": "0131ce0b-aa12-4539-8c1d-28f9a24c9d1d:boolean:true"
-          },
-          {
-            "moduleCode": "4d94b481-464f-4fc0-81cd-2efed9c3d090:string:YSS4224",
-            "moduleName": "f670f4ae-9ff3-4641-b702-ca3ffca7b5a3:string:Political Order and One-Party Rule",
-            "grade": "bbf2afdc-bd01-4d5e-b0cc-761393deda70:string:A",
-            "credits": "db4406de-694b-49fc-ac6e-88c84b5cfd65:number:5",
-            "gradingBasis": "b278c2fa-17b8-4a90-850d-661a75967478:string:GRD",
-            "includeInGPA": "74fe71f2-8783-4651-ae2a-d1b2b8d0f574:boolean:true"
-          }
-        ],
-        "summary": [
-          {
-            "programName": "35809cdb-5692-4033-902c-13b0b1edc5fa:string:Bachelor of Arts with Honours",
-            "includeInGPA": "b618a3c8-4132-457b-8de0-e9b0c66edb83:boolean:true",
-            "GPAName": "c458b26c-4289-45b9-9e05-893445002f5f:string:Cumulative Average Point",
-            "GPA": "ffa85063-c533-4e48-ae05-dd8b7abb7158:number:4.69"
-          }
-        ]
+        "name": "2af21caf-a030-40c5-992b-b35bb6b857e1:string:Introduction to Game Theory",
+        "courseCode": "9c1e6fb9-9a51-4f8d-bbcd-1b2a79df9957:string:YSS1205",
+        "grade": "8b957c3d-0537-46b3-bf35-426c66acb2d5:string:A-",
+        "courseCredit": "5bafab7c-2c5c-4684-ad90-e87649d99105:number:5",
+        "gradingBasis": "2f80f4a3-dbad-451d-a60f-48bc093f3f9f:string:GRD",
+        "includeInGPA": "bbadc393-9344-489f-aacd-7579d6fe0aa1:boolean:true",
+        "semester": "0dc44452-df83-49ca-9f7b-36744a15e9a0:string:1420"
+      },
+      {
+        "name": "ea425075-e446-4c79-a6b6-d58ae6cc726f:string:Modern Social Thought",
+        "courseCode": "418cf23e-304f-4a00-ac06-25184570e8c3:string:YCC2121",
+        "grade": "5c08f2ed-9327-47ae-8e2b-115e182841fd:string:B",
+        "courseCredit": "30a43964-6f45-4768-b87f-bd9d58af7899:number:5",
+        "gradingBasis": "e0420262-611e-440d-b323-ea4d32129e5b:string:GRD",
+        "includeInGPA": "135722c4-74f0-4c68-8f2f-fbddbaac814b:boolean:true",
+        "semester": "b41de904-9c99-4f9b-a7de-64689ae0ed2b:string:1510"
+      },
+      {
+        "name": "fd4f098c-5102-46a8-83ef-28205c415ad4:string:Foundations of Science 1",
+        "courseCode": "1c365b72-9c19-4ba5-86f1-5dbe730cf5e5:string:YCC2131",
+        "grade": "521e8d7b-bd7e-4181-84d8-b72306c73979:string:B+",
+        "courseCredit": "22b89584-04f7-46c6-bdc3-20eb25711e20:number:5",
+        "gradingBasis": "c2ed862f-57c7-4537-a43b-cecbd7162ca0:string:GRD",
+        "includeInGPA": "cb4c3d36-f676-4f7a-b602-ccf2cbdfee02:boolean:true",
+        "semester": "9de5550e-bcf1-46f9-9deb-3aacfde5cc82:string:1510"
+      },
+      {
+        "name": "7dce38f9-bf9b-4eab-abe0-749f4a07b7f4:string:Conceptual Calculus",
+        "courseCode": "8975345d-133e-4c1d-8aa2-1190ac5701d1:string:YSC1206",
+        "grade": "ef2dcb8c-a622-4f8e-8bab-4b16226e209e:string:A-",
+        "courseCredit": "506d1a74-2f8a-41ae-9fc4-4153c2e0d2f2:number:2",
+        "gradingBasis": "637dc307-7ca9-4532-b5eb-5a6e55a16420:string:GRD",
+        "includeInGPA": "39901f6e-9f4a-4ea8-992f-40a00622fd11:boolean:true",
+        "semester": "c8609666-d1c5-4c1b-9120-b389343761fb:string:1510"
+      },
+      {
+        "name": "240657c0-464c-4135-8dae-0e6dab5343bd:string:Short Course: International Law",
+        "courseCode": "612c8ae4-96b3-4f20-9132-a482fd65a1b4:string:YSH2416",
+        "grade": "874fd87e-d866-437d-8581-3b8e9591892f:string:CS",
+        "courseCredit": "6d0d61a7-a4f4-4f1f-a292-4f6e30de7316:number:1",
+        "gradingBasis": "ab161b46-f3b5-436e-96e2-984531580142:string:CSU",
+        "includeInGPA": "dd06026b-dc03-4c29-b594-65b67c50d4bb:boolean:false",
+        "semester": "d1d2d43d-f03c-439b-abdc-6c6729aee4f4:string:1510"
+      },
+      {
+        "name": "99eaebaa-8f8e-4980-ab39-96c2039fd122:string:Understanding Behaviour and Cognition",
+        "courseCode": "da2668fc-02a3-4c8b-a344-537c5cc9ed84:string:YSS2201",
+        "grade": "fd57eb9b-ebb4-40be-83f1-4eb0cc57772f:string:S",
+        "courseCredit": "90517acc-1577-4122-9199-acf7282388a4:number:5",
+        "gradingBasis": "768cd2b5-4cbe-4b2c-8413-53ccfa0eb907:string:SNU",
+        "includeInGPA": "26bdd3bd-964b-419e-8c24-80a7569c20a6:boolean:false",
+        "semester": "2c8ec13e-b1c6-4689-9ee9-89e8917ed62e:string:1510"
+      },
+      {
+        "name": "7d05e165-8ae6-4c7a-a1ba-4ced1ef195b3:string:Intermediate Microeconomics",
+        "courseCode": "6fa0bdcc-745d-40d4-9cfd-ed6eeb4f8297:string:YSS2203",
+        "grade": "71025686-9403-4a73-8dfa-4eae18783d75:string:B-",
+        "courseCredit": "88c98701-e508-4f44-b02b-077e010af543:number:5",
+        "gradingBasis": "b1f8c7b2-b871-4605-8c57-bccf863510b2:string:GRD",
+        "includeInGPA": "93513c68-ad93-4f8e-a1c8-1332a5c6a733:boolean:true",
+        "semester": "29cc2f9d-b3c0-4b5a-a93b-9b4f8aa69389:string:1510"
+      },
+      {
+        "name": "9b0007f4-0be0-49d6-a2d5-feb5d67097cb:string:Foundations of Science 2",
+        "courseCode": "a97ae534-7510-4384-9929-a31bb79075b0:string:YCC2132",
+        "grade": "8ff47e44-cf17-4bd5-841c-b91c12ed7ff4:string:B",
+        "courseCredit": "1a316590-629e-466d-9205-0fcbc9fbe5d3:number:5",
+        "gradingBasis": "5563c4e6-9aef-4493-bbdb-0cefeb5f02d5:string:GRD",
+        "includeInGPA": "f0a56b99-5c98-4757-8465-f6340ed09f0f:boolean:true",
+        "semester": "5a651a80-2235-4763-a207-b1525ed3c53f:string:1520"
+      },
+      {
+        "name": "001bec35-3fef-43d2-809a-114f0240ad39:string:Introduction to Mathematical Logic",
+        "courseCode": "21672391-f3a0-4733-81b9-b19fef7cc88a:string:YHU2206",
+        "grade": "38423787-26a5-412c-b882-32ba97707651:string:B+",
+        "courseCredit": "52ef06e4-21ed-41a2-98ab-5c3b14273472:number:5",
+        "gradingBasis": "123341dc-7b4e-47ca-830b-9261c54da6e1:string:GRD",
+        "includeInGPA": "0d962179-3b90-4281-b34c-6648f363fd32:boolean:true",
+        "semester": "edf2a025-9c45-4ac7-92c7-ec60efcc28f1:string:1520"
+      },
+      {
+        "name": "775e2ef5-9a61-43ea-88cb-9e38b5b4f4e5:string:Independent Reading and Research (Sem 2)",
+        "courseCode": "2cabb844-3ba6-4610-b094-dcc67d63ad0b:string:YIR2321",
+        "grade": "d3b53e7b-89d4-4784-9ef7-82ef66c7be23:string:CS",
+        "courseCredit": "1b2291b9-dd29-4200-be71-11ba8782dba2:number:2",
+        "gradingBasis": "2bd8c3ae-c7b4-4194-a6e1-03bb3d07864b:string:CSU",
+        "includeInGPA": "b9da2f75-a08b-4d0e-8247-526d13655c5b:boolean:false",
+        "semester": "4055b8fa-3871-4708-9061-7ceab6804d21:string:1520"
+      },
+      {
+        "name": "bf9dc1b5-6ced-4c22-a645-ae14bab01350:string:Econometrics",
+        "courseCode": "96ee1750-f6b5-4a89-92ef-8fc6d9ea9661:string:YSS2211",
+        "grade": "23165d15-204a-4b2c-a656-875ee03f013f:string:B-",
+        "courseCredit": "ad9d4518-6879-4904-9c83-0ff03e2fd990:number:5",
+        "gradingBasis": "aa6fa77a-c1a3-4360-9571-9021ecd5a052:string:GRD",
+        "includeInGPA": "ac9fb065-2c0c-4b71-9e58-666c5cc4d613:boolean:true",
+        "semester": "089928dd-0637-4536-b093-6d47491bb4fd:string:1520"
+      },
+      {
+        "name": "72d6b24a-ab8b-44c6-9066-4cbda8a3ffda:string:Intermediate Macroeconomics",
+        "courseCode": "1353e061-df31-4b1a-9c4c-c657d32db51d:string:YSS2214",
+        "grade": "958706de-53e3-4309-a50c-8c9813f06ef0:string:C",
+        "courseCredit": "bf266b5e-b140-4c71-94ab-2d889e55594d:number:5",
+        "gradingBasis": "e479105c-4c16-4554-ae8c-f73a1edfab19:string:GRD",
+        "includeInGPA": "788407f7-7ab1-4a33-98b9-3fb41882f78d:boolean:true",
+        "semester": "c9dfe40b-f943-493a-98ee-d4077389115d:string:1520"
+      },
+      {
+        "name": "b95f931a-f65f-4c83-a13c-3425ec097dd5:string:Financial Accounting",
+        "courseCode": "2d428ac9-f431-47f9-8dc8-f7b683db5a22:string:ACC1002X",
+        "grade": "4f0d6faa-f942-4ee3-894b-a16f69d76307:string:S",
+        "courseCredit": "d6b1a086-04a0-4f63-83b5-5d0be07bcf4f:number:4",
+        "gradingBasis": "fa8e0f87-51c6-414c-936f-9fceac7583d3:string:SNU",
+        "includeInGPA": "5219e9c5-2578-42e3-9260-d14de984e55a:boolean:false",
+        "semester": "341a20eb-a2ca-497e-a40b-fd9c0d880d0b:string:1610"
+      },
+      {
+        "name": "78020495-e9f0-4ff4-938c-28dba3afcaab:string:Documentary Photography",
+        "courseCode": "1d0476ab-b585-48fe-a2ea-d2b3ed051ce4:string:YHU2223",
+        "grade": "9d7970d8-4eea-4afb-a17c-ed1f5547051b:string:B+",
+        "courseCredit": "a013d82d-0d90-4fcc-9f47-538abf007c4f:number:5",
+        "gradingBasis": "383e9378-30fe-4c8c-89ae-d560aa91c421:string:GRD",
+        "includeInGPA": "29fa1a37-ce88-4acb-acf3-0395bacf793d:boolean:true",
+        "semester": "60be7412-c99e-4c4b-b056-6ae151974350:string:1610"
+      },
+      {
+        "name": "bc371b25-71f5-46e8-9e28-6b7acf35bbc8:string:Introduction to Financial Markets 1",
+        "courseCode": "e787b0a4-6c4f-4508-9e96-62119501bacd:string:YSH2438",
+        "grade": "5e2750b3-6229-4c09-ae88-f22e396533d2:string:CS",
+        "courseCredit": "e801505d-5843-4509-ad16-9e8040e24c0f:number:1",
+        "gradingBasis": "7eb8ee5b-7515-4c60-aad0-7d03d67ca208:string:CSU",
+        "includeInGPA": "648f3779-25d9-423e-95e4-487f6ff5b338:boolean:false",
+        "semester": "b8dbafda-daa9-424b-86c8-4e56affffa2a:string:1610"
+      },
+      {
+        "name": "874ec859-fa4a-4cf0-8c7e-7fb6973812b7:string:Public Economics",
+        "courseCode": "634b79ae-8cd3-4682-8b7a-3726ad0860ed:string:YSS3243",
+        "grade": "167591cf-6a12-4010-88dc-4d8cdaa42118:string:S",
+        "courseCredit": "908ec90c-6ad7-4b81-b9b8-1485ce8537f4:number:5",
+        "gradingBasis": "79dca769-3d29-48b0-bcde-01175aa45e9f:string:SNU",
+        "includeInGPA": "2dd40a11-2b9f-48ed-9ec8-c30cf602d09f:boolean:false",
+        "semester": "0467aab0-f390-4aa1-b689-63ad62c69812:string:1610"
+      },
+      {
+        "name": "a42e3f07-5632-4014-8b8d-bd7ccc3f6716:string:Colonialism: Economic, Political and Social Effects",
+        "courseCode": "fcaa3b81-c86a-41a0-b24b-bc5b2f64c71a:string:YSS4204",
+        "grade": "cabb402f-4188-4024-bebe-18ac073d0af4:string:B-",
+        "courseCredit": "d3847f85-1354-4f6c-a2e0-fce44b665bca:number:5",
+        "gradingBasis": "2f198922-1d9c-4f39-8bc8-728cd6eb3e0e:string:GRD",
+        "includeInGPA": "e48f4e5b-8e12-41e7-81d5-f64f395d5e85:boolean:true",
+        "semester": "76cda8eb-fc8f-4e9e-9b0e-d5c0d0de82e9:string:1610"
+      },
+      {
+        "name": "5acb7af8-dc68-488e-9fee-3e3764801a5c:string:Development Economics",
+        "courseCode": "d37c8904-49c8-483f-89ad-396b5368bbbc:string:ECON273",
+        "grade": "d7379e10-ddc3-4fbc-b653-85dbc96175e1:string:OVS",
+        "courseCredit": "acdef974-3627-49f8-a1e5-e16f6d95b208:number:5",
+        "status": "66cc30c3-db99-46f0-acc9-dff234822b25:string:P",
+        "includeInGPA": "2c2e90f4-5118-4c53-a2a2-889eca34678d:boolean:false",
+        "semester": "be64a688-7389-4e75-a98a-46d04fce27ff:string:1620",
+        "transferSeq": "d43c3db7-afe3-4e78-9732-64d544f38fe5:number:1"
+      },
+      {
+        "name": "41589dd1-8982-4b41-96c4-a95fd0b5ecb2:string:The Economics of Immigration",
+        "courseCode": "35a4f32b-83e0-4a51-b0fc-e6e31f9897b9:string:ECON386",
+        "grade": "f2a83014-fc21-4b32-8d89-071ba4cdf5d0:string:OVS",
+        "courseCredit": "ad9e3afa-52ee-4e68-b875-1506aac51d64:number:5",
+        "status": "d7a390a1-213f-4a3a-8100-45738902045c:string:P",
+        "includeInGPA": "cb662468-b24c-4a31-9278-cdd934a26a64:boolean:false",
+        "semester": "0a1108ae-e8b0-4067-9f16-7ab853a75b60:string:1620",
+        "transferSeq": "9f5ef586-5895-479e-894c-2bae8d3e8f2b:number:1"
+      },
+      {
+        "name": "d1fd2ba5-f822-4246-82ec-cb301400acd4:string:Issues/Contemporary Educ",
+        "courseCode": "b9ad980b-f039-463f-b498-76eff39f9565:string:EDUC235",
+        "grade": "e65ea8f6-4030-4392-a2e6-bb375c26a983:string:OVS",
+        "courseCredit": "d5f26a48-bd66-4504-b36b-ceb5234113a6:number:5",
+        "status": "33255060-5f86-4279-9fda-47bd825af69b:string:P",
+        "includeInGPA": "72324cd9-547b-473c-94f7-37f80e263b6a:boolean:false",
+        "semester": "11d1425c-4698-467e-8090-1d85e7a57162:string:1620",
+        "transferSeq": "69b359e4-3103-4c0a-b54a-9b79914a5249:number:1"
+      },
+      {
+        "name": "33dfda4e-a003-4afc-bad6-67cb121b9712:string:Multivariable Calculus",
+        "courseCode": "036e31ac-7bc4-4660-8e76-0ef271deaf76:string:MATH220",
+        "grade": "58954f45-c7c5-48b7-8abf-90149cde97b6:string:OVS",
+        "courseCredit": "c725bb1b-2596-4868-83f7-a31967044bee:number:5",
+        "status": "adc050f3-d1d1-40c4-be6a-a9df71f6e1c1:string:P",
+        "includeInGPA": "0c50abf4-d9eb-42d4-943e-7633716d02b3:boolean:false",
+        "semester": "70718874-93d5-496b-b9dd-ec6679f9068b:string:1620",
+        "transferSeq": "e34080fb-93cc-4237-a4af-550f6c6163a1:number:1"
+      },
+      {
+        "name": "93e79f30-1c52-46e8-aa3d-b2f3994277ae:string:Behavioral Economics",
+        "courseCode": "31edc903-c5d5-4c2f-81ce-176c29ec3285:string:YSS3203",
+        "grade": "0470d5f7-29c5-47b8-925f-2e3d9b54530c:string:S",
+        "courseCredit": "76a12762-e67b-4f58-873d-dd33b1e64358:number:5",
+        "gradingBasis": "7580553b-22a4-4e9f-b607-3b00700e4ac0:string:SNU",
+        "includeInGPA": "6b724ac8-4ad0-4c88-8307-f5c42b565a34:boolean:false",
+        "semester": "5a1131e8-c013-456c-a8d4-dc27b61b0050:string:1710"
+      },
+      {
+        "name": "a437d1ba-098b-4ba7-8849-131956fb846b:string:Advanced Econometrics",
+        "courseCode": "bbcb96c2-5736-40c2-b4e6-3dd8e05ac981:string:YSS3207",
+        "grade": "ffa4af33-c3c2-4337-92cc-de3aae9a1b06:string:B+",
+        "courseCredit": "fe3886cb-558d-4c15-a1c5-ad6ba9ebcc48:number:5",
+        "gradingBasis": "253e6f11-f0b6-429d-9dc5-50290aa61710:string:GRD",
+        "includeInGPA": "589bfd2a-5d99-4a01-b17d-fb2ee52d43b1:boolean:true",
+        "semester": "41399673-f84c-407c-8690-8be62c086d6f:string:1710"
+      },
+      {
+        "name": "052a9350-469c-4999-9f79-b7aada4f6bbe:string:Labour Economics",
+        "courseCode": "379025fa-3784-40d2-baeb-5896127971ec:string:YSS3244",
+        "grade": "6d9181bc-afa4-47d4-82e3-029b464aa2fc:string:B+",
+        "courseCredit": "ba062fc9-167d-4e70-aa0a-582377940fa2:number:5",
+        "gradingBasis": "8e800206-e1f5-49c8-b1fd-68b494bb6d8d:string:GRD",
+        "includeInGPA": "7ea6d278-61ad-4f00-aa0e-c18402a94500:boolean:true",
+        "semester": "07e853ac-96c0-4bbb-a4e5-2e17ac28899b:string:1710"
+      },
+      {
+        "name": "e551ed5c-2319-4557-af8e-763e7380a513:string:Economics Capstone Project",
+        "courseCode": "f6f7bef2-080b-4281-8e52-ddee526ad0e7:string:YSS4104",
+        "grade": "68d583e3-38a6-4e27-ae38-9df9465ca0d0:string:IP",
+        "courseCredit": "de14763d-3a0c-4fbc-afcd-fd5d72ba62ab:number:10",
+        "gradingBasis": "1fec946e-2b52-4e4f-884e-c68e5b1f6376:string:GRD",
+        "includeInGPA": "fad8153a-099a-4478-86dd-36d90bd75f79:boolean:true",
+        "semester": "b8374cca-e7f8-474b-87c3-ce4fc0540954:string:1710"
+      },
+      {
+        "name": "b0f5bcea-c30f-4eac-9a61-298f0b89feb7:string:Pompeii: Art, Urban Life & Culture in the Roman Empire",
+        "courseCode": "3ebc494a-cd52-4f6b-848a-1d1ef2fed705:string:YHU3225",
+        "grade": "8f71d954-f604-44f6-8855-3072d7d8ea53:string:B",
+        "courseCredit": "9ff11803-d5cb-4ad6-9bc7-c99e973ae7fa:number:5",
+        "gradingBasis": "6effbbb6-b574-48fe-9d2b-28a5fcead614:string:GRD",
+        "includeInGPA": "6fb3904c-b0e3-46bc-8981-3e7922d80ee6:boolean:true",
+        "semester": "bd96a37c-b91e-460b-b21c-108f918849e8:string:1720"
+      },
+      {
+        "name": "75dd1bff-1a23-4cb8-acf7-fc51ab50359e:string:Tobacco: A Social Policy Perspective",
+        "courseCode": "3a310262-6403-41db-a038-f35a4bde9f32:string:YSC3222",
+        "grade": "1ee47b34-6269-46fb-8e66-50928bb8555a:string:B",
+        "courseCredit": "dca7c749-afe1-404e-b9f6-8485cd758753:number:5",
+        "gradingBasis": "cd8ec76e-3f18-4e02-a0cb-abb359fabb77:string:GRD",
+        "includeInGPA": "eec65a45-d0ba-48f9-a1fc-045e0c54e101:boolean:true",
+        "semester": "f0e5d87b-67c3-45df-aad2-1e838047e26f:string:1720"
+      },
+      {
+        "name": "cc8a9795-3dad-4594-87d4-014835743ea4:string:Economics Capstone Project",
+        "courseCode": "7b7bc22f-8b27-4a1d-911f-69b4a2382b9e:string:YSS4104",
+        "grade": "111d5c4e-78aa-42c0-9125-3999f3ad31d5:string:C",
+        "courseCredit": "1eb3ec20-7717-414d-a132-f743084b1958:number:10",
+        "gradingBasis": "2f2370de-f3c0-458c-9e39-33b71334a55f:string:GRD",
+        "includeInGPA": "732c0497-0538-45ff-b5c1-d70c191ff45d:boolean:true",
+        "semester": "44f13626-f9d9-4829-b295-029cf954efe9:string:1720"
+      },
+      {
+        "name": "86063e19-d9d4-4f4f-a113-89113972e79a:string:Micro-Finance and Sustainable Development in Asia",
+        "courseCode": "e812edd8-38db-4686-bab3-cb6183696878:string:YSS4238",
+        "grade": "b8a0c032-172a-4ea0-af14-949e76800b1c:string:B+",
+        "courseCredit": "9417e590-23fd-4d0d-b108-c575acee8d2c:number:5",
+        "gradingBasis": "cc3ee0f4-b422-41eb-9afb-114bd7b06f32:string:GRD",
+        "includeInGPA": "c8270721-cc80-4d69-aa5b-8f47b0266ffd:boolean:true",
+        "semester": "52c9881c-a2ee-4e08-9757-ecbb9ed75b6f:string:1720"
       }
     ],
     "additionalData": {
       "degreeScroll": [
         {
-          "degreeTitle": "404b6952-1cae-4ba7-b468-4f14cc51b0f9:string:Bachelor of Arts with Honours",
-          "dateConferred": "95f9ab21-b209-46c5-8702-99d0c8dab055:string:2018-06-30",
-          "honours": "981391b2-0314-4a25-a4ef-6ce59731f081:string:Magna Cum Laude",
-          "major": "09ab5745-8ff1-4e29-9272-dd6ee18d04b5:string:PHILO, POLITICS &ECONS (HONS)",
-          "degreeCode": "c0752910-7bb9-4489-9397-c4173130bc4a:string:B171100"
+          "degreeTitle": "f3451ca3-82d6-48d2-9231-92a7aa29bdff:string:Bachelor of Arts with Honours",
+          "dateConferred": "b1a67feb-cfec-463a-9ed6-d49de10864b0:string:2018-06-30",
+          "honours": "c2fc6f37-230b-4362-ac75-a39ae6138e10:string:Pass",
+          "major": "c27c73e4-d23d-44bb-b486-a3c3261bab02:string:ECONOMICS (HONS)",
+          "degreeCode": "9ff20141-ab19-4dcb-8847-29a20d87b907:string:B171100",
+          "type": "d6b7df5a-5009-43a7-9585-b428dd1b7d66:string:NUS-Yale"
         }
       ],
-      "type": "d936f7d7-f792-4327-9ac0-6d31fae221c1:string:NUS-Yale",
       "images": {
         "PRESIDENT": {
-          "data": "4da2be96-94b6-402c-b935-4327752df513:string:data:image/png;base64,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",
-          "width": "49864012-6cb8-44f1-8019-fd75d45893e0:number:2.5",
-          "height": "007f1359-3a74-4ee9-81f2-6e66f4560c6e:number:1.48",
-          "unit": "0359a959-5e89-4c9b-89ab-cf8051b9d191:string:CM"
+          "data": "93a5f495-2ee5-40c6-a52a-333d3d2c6966:string:data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAABaCAIAAAAJsExNAAAEy0lEQVR42u2aPVbrOhRGnY4RQE9BB9TMgA6YBTOAir8KZsAsgI4ZUAMdBT3p6NLx/J7e0jpIsqw4tuP73b2LLIhtRTralo5kz25vbxeLRQUgwezq6ur8/Hzd1QDogXp0/lfoy8vLddcEoAeur68RGnRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEBikQGqRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEHpvHx8fX11f398XFxWw2W3eNpOgi9NfX1/39ffz9/v7+9vb27u7uX9tJPz8/7+/vn5+fXtk4Jgg9KH0K7Tk5Odnb21t308bm7e3t4eGh6aiPydSEttUWmKgHEbr6b2Q6Pj5ed+vGI29zNeGbHKF/CX16erq1tRV/X024C3unzjRubm78v2dnZxsbG+7vxWLx/PxcD8mTjQZCNwpdRV3rp1Q/z9qR25bjJQjOTJ7jLami26bz5bbmwfRSn393d5dsb2tAfAkfHx9xymHD7vJvO8zX1fBnlsQn+Gn3o5mEPugsiwtLea8Fd0XyNrZhd2UeHh76O78vehY6aJs/2k3o+tO3359Wd1IwuduorXJ5U3ZrW5TMeq3x1e8ROiYpdMatpeKTDEWM65eBhK6vtX/HsbX0npr2L7TtXV/dDkIvRTwVdLi8aSSuY5SPfpMZdXfu7OwEcieFbq12eXwKy6ybXH8OIXS+nKOjo0yoV6d/oZNzdzeh3ZeBLvGo3+Plsbs29JmhN78otFGKhW4a4LvFx97bwY6hrWRTtmCr3U3oOPPxrbPzW7Lw1Zmu0PbMZDIwxOVxdlG+Zspv/iQnX1dgkw3lDUya6vpiPp/X5dhMOtPkXoQOCmk6NNBidLopR1OHdRC6/HJ7N7qm+TG7cGaMl2Ie99N5oe0YVt7ApdKAzGlDCF2SBPa4H9+/0Mmjf4rQQQn1Mjw5XRaSzCXGEdp+U08OLvFIpk8IvdK2nW3wNIUOZpiSPK8uqv5Mjt/xT+eFtjVZReikYZ2Fbu21DinHQIz0YCW5lHl6emrdZ23SYqn+XkroyiwNPfmdOF9UHY3NzU0/2AQjtAtybImtid8HqBpELxQ6ueRtXRQGzSzvtYy1wQDhW1eZrfcJ5dBNBENa65PhSQkd13aV5aAjubvii41voaXikx+h8wUmK+8Go/JC8sNw+Vbj6oz0clJyp7bkSZg7OrLQQW1bn1q3BiS/bVdSwrJClz+pSZ7pmlzea615Rd7piQqdf33UzlZu6pnP5xPMoeMOKFmyuA2yl5cX2211HQ4ODmwSUjUIXf1+MuzWo9/f376GHV4iCNID95QnuacenFmZO7Cw10oS5eDRd1N8VoQX/BNk3usYsw5WMjqoEIROkHnuNRD5lGOcOmiA0AnsEm2cyGSE/tveLF8RhA4JHkmM8xJznF9Wg71gqQ1CgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1S/C/0uqsB0Bv/AEwL5dNeBrk9AAAAAElFTkSuQmCC",
+          "width": "4603059c-5557-4749-8e58-e34714c6c3b2:number:240",
+          "height": "b87b7c90-c749-4136-840f-594696ee6b84:number:90",
+          "unit": "78ba93f0-d842-465d-8143-f7735aed840c:string:px"
         },
         "TRUSTEES": {
-          "data": "61bc9e40-ec02-49dd-9893-2ad2b8dff744:string:data:image/png;base64,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",
-          "width": "39f8bb94-433e-49fe-afe0-e2e1851e43f4:number:5.31",
-          "height": "bda8256e-7256-49c2-994b-14fed2f1f9f7:number:1.15",
-          "unit": "d6b53a8d-2c6c-4c68-b88d-867109b79383:string:CM"
+          "data": "85805280-ec10-4a76-920a-8b5788fcbac1:string:data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAABaCAIAAAAJsExNAAAEy0lEQVR42u2aPVbrOhRGnY4RQE9BB9TMgA6YBTOAir8KZsAsgI4ZUAMdBT3p6NLx/J7e0jpIsqw4tuP73b2LLIhtRTralo5kz25vbxeLRQUgwezq6ur8/Hzd1QDogXp0/lfoy8vLddcEoAeur68RGnRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEBikQGqRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEHpvHx8fX11f398XFxWw2W3eNpOgi9NfX1/39ffz9/v7+9vb27u7uX9tJPz8/7+/vn5+fXtk4Jgg9KH0K7Tk5Odnb21t308bm7e3t4eGh6aiPydSEttUWmKgHEbr6b2Q6Pj5ed+vGI29zNeGbHKF/CX16erq1tRV/X024C3unzjRubm78v2dnZxsbG+7vxWLx/PxcD8mTjQZCNwpdRV3rp1Q/z9qR25bjJQjOTJ7jLami26bz5bbmwfRSn393d5dsb2tAfAkfHx9xymHD7vJvO8zX1fBnlsQn+Gn3o5mEPugsiwtLea8Fd0XyNrZhd2UeHh76O78vehY6aJs/2k3o+tO3359Wd1IwuduorXJ5U3ZrW5TMeq3x1e8ROiYpdMatpeKTDEWM65eBhK6vtX/HsbX0npr2L7TtXV/dDkIvRTwVdLi8aSSuY5SPfpMZdXfu7OwEcieFbq12eXwKy6ybXH8OIXS+nKOjo0yoV6d/oZNzdzeh3ZeBLvGo3+Plsbs29JmhN78otFGKhW4a4LvFx97bwY6hrWRTtmCr3U3oOPPxrbPzW7Lw1Zmu0PbMZDIwxOVxdlG+Zspv/iQnX1dgkw3lDUya6vpiPp/X5dhMOtPkXoQOCmk6NNBidLopR1OHdRC6/HJ7N7qm+TG7cGaMl2Ie99N5oe0YVt7ApdKAzGlDCF2SBPa4H9+/0Mmjf4rQQQn1Mjw5XRaSzCXGEdp+U08OLvFIpk8IvdK2nW3wNIUOZpiSPK8uqv5Mjt/xT+eFtjVZReikYZ2Fbu21DinHQIz0YCW5lHl6emrdZ23SYqn+XkroyiwNPfmdOF9UHY3NzU0/2AQjtAtybImtid8HqBpELxQ6ueRtXRQGzSzvtYy1wQDhW1eZrfcJ5dBNBENa65PhSQkd13aV5aAjubvii41voaXikx+h8wUmK+8Go/JC8sNw+Vbj6oz0clJyp7bkSZg7OrLQQW1bn1q3BiS/bVdSwrJClz+pSZ7pmlzea615Rd7piQqdf33UzlZu6pnP5xPMoeMOKFmyuA2yl5cX2211HQ4ODmwSUjUIXf1+MuzWo9/f376GHV4iCNID95QnuacenFmZO7Cw10oS5eDRd1N8VoQX/BNk3usYsw5WMjqoEIROkHnuNRD5lGOcOmiA0AnsEm2cyGSE/tveLF8RhA4JHkmM8xJznF9Wg71gqQ1CgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1S/C/0uqsB0Bv/AEwL5dNeBrk9AAAAAElFTkSuQmCC",
+          "width": "16c06840-6ba1-4f23-949a-1d104162bdb2:number:240",
+          "height": "904c8fc4-3255-4bcb-b37c-a3726178bafe:number:90",
+          "unit": "08a458f6-85d0-4681-a118-d8d4413462e2:string:px"
         },
         "YNC_GOVERNING": {
-          "data": "6b8230a3-1212-45f4-bc73-23b442cca87a:string:data:image/png;base64,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",
-          "width": "1aee7b63-7240-4cbf-b9c3-8ede95dd13e4:number:483",
-          "height": "7ec6eda6-3184-4fa6-b757-a0b1e251545c:number:159",
-          "unit": "907fae45-258c-461a-85da-349eb198621e:string:PX"
+          "data": "1ec0ac63-8808-4d38-8780-a07c725491e0:string:data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAABaCAIAAAAJsExNAAAEy0lEQVR42u2aPVbrOhRGnY4RQE9BB9TMgA6YBTOAir8KZsAsgI4ZUAMdBT3p6NLx/J7e0jpIsqw4tuP73b2LLIhtRTralo5kz25vbxeLRQUgwezq6ur8/Hzd1QDogXp0/lfoy8vLddcEoAeur68RGnRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEBikQGqRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEHpvHx8fX11f398XFxWw2W3eNpOgi9NfX1/39ffz9/v7+9vb27u7uX9tJPz8/7+/vn5+fXtk4Jgg9KH0K7Tk5Odnb21t308bm7e3t4eGh6aiPydSEttUWmKgHEbr6b2Q6Pj5ed+vGI29zNeGbHKF/CX16erq1tRV/X024C3unzjRubm78v2dnZxsbG+7vxWLx/PxcD8mTjQZCNwpdRV3rp1Q/z9qR25bjJQjOTJ7jLami26bz5bbmwfRSn393d5dsb2tAfAkfHx9xymHD7vJvO8zX1fBnlsQn+Gn3o5mEPugsiwtLea8Fd0XyNrZhd2UeHh76O78vehY6aJs/2k3o+tO3359Wd1IwuduorXJ5U3ZrW5TMeq3x1e8ROiYpdMatpeKTDEWM65eBhK6vtX/HsbX0npr2L7TtXV/dDkIvRTwVdLi8aSSuY5SPfpMZdXfu7OwEcieFbq12eXwKy6ybXH8OIXS+nKOjo0yoV6d/oZNzdzeh3ZeBLvGo3+Plsbs29JmhN78otFGKhW4a4LvFx97bwY6hrWRTtmCr3U3oOPPxrbPzW7Lw1Zmu0PbMZDIwxOVxdlG+Zspv/iQnX1dgkw3lDUya6vpiPp/X5dhMOtPkXoQOCmk6NNBidLopR1OHdRC6/HJ7N7qm+TG7cGaMl2Ie99N5oe0YVt7ApdKAzGlDCF2SBPa4H9+/0Mmjf4rQQQn1Mjw5XRaSzCXGEdp+U08OLvFIpk8IvdK2nW3wNIUOZpiSPK8uqv5Mjt/xT+eFtjVZReikYZ2Fbu21DinHQIz0YCW5lHl6emrdZ23SYqn+XkroyiwNPfmdOF9UHY3NzU0/2AQjtAtybImtid8HqBpELxQ6ueRtXRQGzSzvtYy1wQDhW1eZrfcJ5dBNBENa65PhSQkd13aV5aAjubvii41voaXikx+h8wUmK+8Go/JC8sNw+Vbj6oz0clJyp7bkSZg7OrLQQW1bn1q3BiS/bVdSwrJClz+pSZ7pmlzea615Rd7piQqdf33UzlZu6pnP5xPMoeMOKFmyuA2yl5cX2211HQ4ODmwSUjUIXf1+MuzWo9/f376GHV4iCNID95QnuacenFmZO7Cw10oS5eDRd1N8VoQX/BNk3usYsw5WMjqoEIROkHnuNRD5lGOcOmiA0AnsEm2cyGSE/tveLF8RhA4JHkmM8xJznF9Wg71gqQ1CgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1S/C/0uqsB0Bv/AEwL5dNeBrk9AAAAAElFTkSuQmCC",
+          "width": "445742e9-3aa2-4a26-bf43-7b3d820df2ce:number:240",
+          "height": "13b17abd-984b-49dc-80d2-fded8ce8d2df:number:90",
+          "unit": "485c1713-9557-4b61-ba36-9c444e7602f2:string:px"
         },
         "YNC_PRESIDENT": {
-          "data": "5d01d7e3-2186-42c0-8f20-b35268819b8e:string:data:image/png;base64,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",
-          "width": "cf8a832d-382a-4676-adea-ce56bb1665f0:number:602",
-          "height": "8ff809fc-ec83-4fff-8a4a-b0412fc68551:number:150",
-          "unit": "5d82c3f1-96d5-4050-b959-530523b662e3:string:PX"
+          "data": "b11cb962-1647-486f-bf02-9d92c889ae2a:string:data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAABaCAIAAAAJsExNAAAEy0lEQVR42u2aPVbrOhRGnY4RQE9BB9TMgA6YBTOAir8KZsAsgI4ZUAMdBT3p6NLx/J7e0jpIsqw4tuP73b2LLIhtRTralo5kz25vbxeLRQUgwezq6ur8/Hzd1QDogXp0/lfoy8vLddcEoAeur68RGnRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEBikQGqRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEHpvHx8fX11f398XFxWw2W3eNpOgi9NfX1/39ffz9/v7+9vb27u7uX9tJPz8/7+/vn5+fXtk4Jgg9KH0K7Tk5Odnb21t308bm7e3t4eGh6aiPydSEttUWmKgHEbr6b2Q6Pj5ed+vGI29zNeGbHKF/CX16erq1tRV/X024C3unzjRubm78v2dnZxsbG+7vxWLx/PxcD8mTjQZCNwpdRV3rp1Q/z9qR25bjJQjOTJ7jLami26bz5bbmwfRSn393d5dsb2tAfAkfHx9xymHD7vJvO8zX1fBnlsQn+Gn3o5mEPugsiwtLea8Fd0XyNrZhd2UeHh76O78vehY6aJs/2k3o+tO3359Wd1IwuduorXJ5U3ZrW5TMeq3x1e8ROiYpdMatpeKTDEWM65eBhK6vtX/HsbX0npr2L7TtXV/dDkIvRTwVdLi8aSSuY5SPfpMZdXfu7OwEcieFbq12eXwKy6ybXH8OIXS+nKOjo0yoV6d/oZNzdzeh3ZeBLvGo3+Plsbs29JmhN78otFGKhW4a4LvFx97bwY6hrWRTtmCr3U3oOPPxrbPzW7Lw1Zmu0PbMZDIwxOVxdlG+Zspv/iQnX1dgkw3lDUya6vpiPp/X5dhMOtPkXoQOCmk6NNBidLopR1OHdRC6/HJ7N7qm+TG7cGaMl2Ie99N5oe0YVt7ApdKAzGlDCF2SBPa4H9+/0Mmjf4rQQQn1Mjw5XRaSzCXGEdp+U08OLvFIpk8IvdK2nW3wNIUOZpiSPK8uqv5Mjt/xT+eFtjVZReikYZ2Fbu21DinHQIz0YCW5lHl6emrdZ23SYqn+XkroyiwNPfmdOF9UHY3NzU0/2AQjtAtybImtid8HqBpELxQ6ueRtXRQGzSzvtYy1wQDhW1eZrfcJ5dBNBENa65PhSQkd13aV5aAjubvii41voaXikx+h8wUmK+8Go/JC8sNw+Vbj6oz0clJyp7bkSZg7OrLQQW1bn1q3BiS/bVdSwrJClz+pSZ7pmlzea615Rd7piQqdf33UzlZu6pnP5xPMoeMOKFmyuA2yl5cX2211HQ4ODmwSUjUIXf1+MuzWo9/f376GHV4iCNID95QnuacenFmZO7Cw10oS5eDRd1N8VoQX/BNk3usYsw5WMjqoEIROkHnuNRD5lGOcOmiA0AnsEm2cyGSE/tveLF8RhA4JHkmM8xJznF9Wg71gqQ1CgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1S/C/0uqsB0Bv/AEwL5dNeBrk9AAAAAElFTkSuQmCC",
+          "width": "48c71260-712c-4e96-97ac-022da74463fc:number:240",
+          "height": "a98b2c47-abde-4502-8767-92c5da978fea:number:90",
+          "unit": "e92a7812-e0ee-445b-8632-1316909b92ae:string:px"
         }
       },
-      "transcriptType": "94d41c34-a384-4d8e-9159-6520970fab6e:string:UGOF",
-      "transcriptReq": "c7d839ad-2ea8-46fe-97c9-7ff16c5ce1d7:string:001009520",
-      "programData": [
+      "transcriptType": "d52639f9-1128-4a3e-8049-1b2d18e8e2f6:string:UGOF",
+      "transcriptReq": "c07375f3-8314-449b-9d03-b73654d22d82:string:001009559",
+      "transcriptGroup": [
         {
-          "programCode": "3ad2e412-6330-4bdd-8bc7-877f94a63266:string:B1711",
-          "programName": "a4f90d0c-d08d-4645-a79c-39219b04de1c:string:Bachelor of Arts with Honours",
-          "statusCode": "a8926e76-f90e-4bc9-8d0f-1d42232c3c39:string:CM",
-          "statusDescription": "207a1b77-5036-4987-8d63-7792935ca18f:string:Completed Programme",
-          "effectiveDate": "578773ff-c67b-40b3-ab84-e4e0dc443251:string:2018-06-24",
-          "admitTerm": "5071b579-a904-46d1-b462-7da0b1e2f494:string:1410"
-        }
-      ],
-      "degreeData": [
+          "name": "650efe99-d9bd-4e87-9c89-e79bf5816e52:string:1410",
+          "term": "a1376ae1-ee42-4274-9adf-9b94cf5f7622:string:2014/2015 Semester 1",
+          "formOfStudy": "4a5f0527-f2cf-4f64-92b8-35a1cc1b4658:string:ENRL",
+          "fosPrintArea": "131b2a67-3d3a-499f-aaeb-24ac6ef52244:string:ND",
+          "summary": [
+            {
+              "programName": "86bc1773-af2d-4774-8dde-929018e172de:string:Yale-NUS Bachelor's Program",
+              "includeInGPA": "1fef9a1b-bad6-45a9-abfa-5694fdaf5005:boolean:true",
+              "GPAName": "70bc9e09-656a-4dd2-b913-d4f1c36c7ffc:string:Cumulative Average Point",
+              "GPA": "35dd4c00-c25a-47ad-8995-d23e7419870e:number:0"
+            }
+          ]
+        },
         {
-          "degreeTitle": "5670e7b7-37a7-4b92-9880-1be81c79f28a:string:Bachelor of Arts with Honours",
-          "isYNC": "a6c96481-f974-4aaa-b6a8-42380fc36848:boolean:true",
-          "dateConferred": "9a1ac472-e7aa-4a1e-b383-01045712497e:string:2018-06-30",
-          "honours": "6e6e977f-8919-44d3-989f-a58531025bc5:string:Magna Cum Laude",
-          "plans": [
+          "name": "57a32716-9fbb-40d2-ab2f-e61c6dc7bbbd:string:1420",
+          "term": "ad331571-f032-42b4-a204-fc859f04a933:string:2014/2015 Semester 2",
+          "formOfStudy": "e74a0043-8473-49c6-b9ca-5c6c09e6713b:string:ENRL",
+          "fosPrintArea": "6200c742-df9e-40fe-ad5f-ede11975a593:string:ND",
+          "summary": [
             {
-              "specialProgram": "f5aab34d-fe2a-4f60-ba00-90db2acf549c:boolean:false",
-              "type": "707d253c-28c8-4fb6-9cb0-1bc616fb5a89:string:HON",
-              "typeName": "9500a717-9f6a-4c2f-b509-bc04dca366c3:string:Honors",
-              "transcriptDescr": "0b416198-b7e0-48d1-8c2e-ef6e2214c0b7:string:Philosophy, Politics and Economics"
-            },
+              "programName": "05f57bac-fd85-4662-895a-6744bc4fe350:string:Yale-NUS Bachelor's Program",
+              "includeInGPA": "b3e8e926-9b00-400f-8cb7-0b9217e757f7:boolean:true",
+              "GPAName": "96ed2039-0015-49f3-ac97-56a9f433c0ea:string:Cumulative Average Point",
+              "GPA": "07f65c7d-dd85-4949-b271-a9c02393a9db:number:3.8"
+            }
+          ]
+        },
+        {
+          "name": "c9ceea6c-0858-4ee1-97ca-40e8767efbc9:string:1510",
+          "term": "44d78752-3204-49a4-8cd1-42195ab0ad25:string:2015/2016 Semester 1",
+          "formOfStudy": "5305cb16-8372-4c7e-a48c-5802d155ccd8:string:ENRL",
+          "fosPrintArea": "452937a4-fac7-4b12-b66e-66833b9ccff2:string:ND",
+          "summary": [
             {
-              "specialProgram": "91c35317-7b84-4cd0-98cf-81003cc4e86c:boolean:false",
-              "type": "3088ebb0-c4a1-465e-b61a-730972a27065:string:MIN",
-              "typeName": "4d31a6f2-481c-499f-ac81-b082e739672f:string:Minor",
-              "transcriptDescr": "1d0849da-40f0-4afe-95e6-45a83467a63b:string:History"
+              "programName": "04409bc6-2ef4-4fae-a94a-29ba50db7df2:string:Yale-NUS Bachelor's Program",
+              "includeInGPA": "85688c68-6a15-42cd-ac0f-fbf369c6a701:boolean:true",
+              "GPAName": "eb25e48b-e78f-4a38-934c-442cc596247c:string:Cumulative Average Point",
+              "GPA": "530a8266-cd75-4bd6-b425-96a8f497f269:number:3.73"
+            }
+          ]
+        },
+        {
+          "name": "e86a8c34-9c20-4be7-a186-5117989239d1:string:1520",
+          "term": "dcf53039-fe1b-4ab8-b7fa-1dfe818f826c:string:2015/2016 Semester 2",
+          "formOfStudy": "ea012ee6-524e-436d-b10d-34c2deff71c7:string:ENRL",
+          "fosPrintArea": "8aa3b2b1-0036-465d-ba33-610175110f58:string:ND",
+          "summary": [
+            {
+              "programName": "fe2ff929-1ed1-44d8-83a7-bb1fc7c5990c:string:Yale-NUS Bachelor's Program",
+              "includeInGPA": "694b04c4-fb8c-4808-b100-0ceee0c045da:boolean:true",
+              "GPAName": "86fb5064-4bfb-41bf-9dd1-a4e80d9ffa5d:string:Cumulative Average Point",
+              "GPA": "5be79284-49a1-49fb-98ae-928f0db076c3:number:3.53"
+            }
+          ]
+        },
+        {
+          "name": "f358b11e-840b-4c86-a876-6d749c93c2fe:string:1610",
+          "term": "baf17102-b92e-4995-bf4f-aebfc244451f:string:2016/2017 Semester 1",
+          "formOfStudy": "dd69c6ee-0755-4c8b-8d09-b1c2322f1bdc:string:ENRL",
+          "fosPrintArea": "b7183103-11ad-4614-a570-d105b3ba9a8c:string:ND",
+          "summary": [
+            {
+              "programName": "b6d687a2-6334-4293-8507-e77e6c6ea6d5:string:Bachelor of Arts with Honours",
+              "includeInGPA": "4d438e92-1a19-4193-b14b-86bf4645a45f:boolean:true",
+              "GPAName": "f9f39a5e-77ff-436a-b440-0d68bc7614fa:string:Cumulative Average Point",
+              "GPA": "73617430-f7e1-4dc2-9a2c-9721602c24e4:number:3.53"
+            }
+          ]
+        },
+        {
+          "name": "4141f038-fce8-4227-8ff1-d6f58ab8230b:string:1620",
+          "term": "5e587f3f-bfbd-4042-9c94-e131272a741e:string:2016/2017 Semester 2",
+          "formOfStudy": "e83cec7c-82be-407d-bfab-05192cdacab1:string:SEP",
+          "fosDescription": "68a8d044-a6fc-4172-a88b-f86c86641b28:string:Participated in a Student Exchange Programme at",
+          "organization": "2cc04d85-a614-4fcd-86ce-2339f272361d:string:Vassar College",
+          "fosPrintArea": "8b3bf022-1245-442d-b722-bc1d4cbbe570:string:EH",
+          "creditTransfer": [
+            {
+              "sourceType": "462f06b0-91a8-41f4-8ecc-ec93603932b5:string:E",
+              "creditsNoGPA": "8555e039-53ad-4a15-a21f-3af67637647a:number:20",
+              "creditsGPA": "19050117-0814-4570-a0a0-8f56c0f46574:number:0",
+              "orgId": "cf33762a-f617-4287-9f7b-76ee6e3463f1:string:Vassar College",
+              "orgName": "27dedc57-041a-4db2-be9b-4032ad92b84e:string:Vassar College",
+              "transferSeq": "e98078cb-ef91-4657-b871-15c1767c5bf9:number:1"
+            }
+          ],
+          "summary": [
+            {
+              "programName": "cbb07e27-d581-4189-80b8-6af2a84fca28:string:Bachelor of Arts with Honours",
+              "includeInGPA": "47cc5d9a-2e8d-403a-bd0e-3cc4a9d218c9:boolean:true",
+              "GPAName": "15ee8fa8-ef6b-4d24-97ce-4432f4c4ce07:string:Cumulative Average Point",
+              "GPA": "0d8d8b6f-7add-43b7-a15b-8530dfb177fd:number:3.53"
+            }
+          ]
+        },
+        {
+          "name": "ea261f59-853f-41d1-afe6-c62833eedded:string:1710",
+          "term": "ae7b3d0d-da83-4a9e-8c93-3f9b3c3710ac:string:2017/2018 Semester 1",
+          "formOfStudy": "352d6ef0-2147-4945-a88e-d05f784a166c:string:ENRL",
+          "fosPrintArea": "7305e34c-18cc-40b6-9572-c41fe1189e54:string:ND",
+          "summary": [
+            {
+              "programName": "f5ca7adc-701c-4102-86d3-3e1745627208:string:Bachelor of Arts with Honours",
+              "includeInGPA": "d0d20d01-f1e0-4b2d-8b5e-b50171b031f8:boolean:true",
+              "GPAName": "587ba6da-e7ec-4f67-8619-cea1c84bd7a3:string:Cumulative Average Point",
+              "GPA": "89813903-73b5-47b4-8d61-7341cd241377:number:3.59"
+            }
+          ]
+        },
+        {
+          "name": "c3914e4f-4b14-46c8-814d-d8ef5acda18d:string:1720",
+          "term": "1c471a49-bf79-405e-9e0a-f952a6ac8b09:string:2017/2018 Semester 2",
+          "formOfStudy": "912d946a-a44b-49cf-a604-41ed6139d8eb:string:ENRL",
+          "fosPrintArea": "a1a78c90-af31-4822-a056-d50dea336c82:string:ND",
+          "summary": [
+            {
+              "programName": "b0a0d5b7-157e-4584-819d-be8aa2241693:string:Bachelor of Arts with Honours",
+              "includeInGPA": "79a77f6c-93ae-4346-ad52-6bd3656c4038:boolean:true",
+              "GPAName": "b821f58a-21b9-433a-9438-c37cdd01097f:string:Cumulative Average Point",
+              "GPA": "a4beda89-e1e1-45dc-9884-6dd7a0c71799:number:3.45"
             }
           ]
         }
       ],
-      "awardData": [
+      "programData": [
         {
-          "year": "6d5671a0-722d-4e56-b730-3fceb7840db6:string:Academic Year 2017",
-          "name": "eb3d00b2-8aef-488e-8d92-d3be0f896d21:string:Outstanding Capstone Project in Philosophy, Politics and Economics",
-          "basis": "5adc3c11-bfe7-4e4e-b2ee-e9879b79960f:string:Outstanding capstone project in Philosophy, Politics and Economics based on scholarly merit, originality and contribution to the field"
+          "programCode": "d96ebf24-1807-4838-bb4a-31a5d3c58afb:string:B1711",
+          "programName": "f6fc6075-9cda-4462-a5c5-a3203e2a91bd:string:Bachelor of Arts with Honours",
+          "statusCode": "00890c81-ff01-4d88-a21c-3ef45c96b502:string:CM",
+          "statusDescription": "f2e0aa80-ee05-4ecf-a365-cc118d2c3d9d:string:Completed Programme",
+          "effectiveDate": "21181e27-3e30-4e83-aa30-379f73ff51a4:string:2018-06-24",
+          "admitTerm": "ed0a9207-f344-4375-99a1-88a2ac6685b5:string:1410"
+        }
+      ],
+      "degreeData": [
+        {
+          "degreeTitle": "117a9f74-1660-4615-add3-7508be6dc42c:string:Bachelor of Arts with Honours",
+          "isYNC": "05b50e9a-9e44-47e5-a772-03d56918b793:boolean:true",
+          "dateConferred": "6de0e582-df51-4c5d-846c-1d3b9382eab3:string:2018-06-30",
+          "plans": [
+            {
+              "specialProgram": "030f4e2e-45dc-4171-a533-7d949c611b00:boolean:false",
+              "type": "0dd0bead-59d4-4c85-99fd-30720dc2224f:string:HON",
+              "typeName": "ee25dabb-2eb7-47c5-b306-2bd40b962451:string:Honors",
+              "transcriptDescr": "94a7ea41-3668-4b79-bd6d-b8ae91833357:string:Economics"
+            }
+          ]
         }
       ]
     }
@@ -630,15 +553,14 @@
   "privacy": {},
   "signature": {
     "type": "SHA3MerkleProof",
-    "targetHash": "02d543067c7aad1c8d7c932fb938f55d3f2a82263b66cf423b214fb32fa454b8",
+    "targetHash": "5c5c0a89861437ef78379bc061a67618d0b1f70860161acc7d42bc5cf74c1b46",
     "proof": [
-      "a17b190f109124c8dd36ba351f61c42166ba0ec1e17715b8a91eddfcd752b640",
-      "2b874f1fa81c79c8ccd96e4c29d00a0270b9c1aa59e9214bd6d8de705de0fe08",
-      "817d9f8531560efb746f51cebbc64adcff49b7da0ccf27d3d62509b3e2e6d56b",
-      "8643c6ff4247e5381577e76ea1b6e49d6913ccbe35166679f5c43d6043459ee4",
-      "96c50abebf92956b80c631fc9daa81dedfc464682c136f7c33f80d499b9701b8",
-      "6dcf497f2799a15799e48d2af482234d37459c045fb14643e864744153281982"
+      "a6a29db2eecb638292277e82d2c78356d050919b4eb54463baf9a20894e32ecf",
+      "c15fb8b9f04ce0de1448de64da4c8a806d010836deb89cbb67430e0a4e0acc05",
+      "d2aca152648bf10878b13bf323d2528ecdbe2bfec8cab183e3bc9a11b87dfc7b",
+      "5b0fcb7cc9b6bdf2ce112ac397d5af149439ac7bcc4e44e66b09274bd53e13dc",
+      "e3902d5e6e7274d16ee78992b41d1c2539d007316798f37ad036a577aa16c452"
     ],
-    "merkleRoot": "f92d27326c33d7f2ba6f8261ab73184bcf02a173dbd505c8a6d0bbc793218ba1"
+    "merkleRoot": "fc4d413665bef3ad14eb8934319f16a32a4711df60bed1ffd4519441b716629f"
   }
 }

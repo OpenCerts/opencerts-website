@@ -31,4 +31,5 @@ test("NUS-K1NOTS-2019 degree scroll is rendered correctly", async t => {
     "(Surgery)",
     "30 April 2017"
   ]);
+
 });

@@ -26,25 +26,41 @@ test("NUS-ANUJDP-BA-2019 degree scroll is rendered correctly", async t => {
     "NATIONAL",
     "UNIVERSITY",
     "OF SINGAPORE",
-    "A0000932X, NAME",
-    "Doctor",
-    "Philosophy",
-    "30 September 2009"
+    "A0036825A, NAME",
+    "Master",
+    "Arts",
+    "(Southeast",
+    "Asian",
+    "Studies)",
+    "31 August 2016"
   ]);
   const transcriptTab = TemplateTabList.find(":nth-child(2)");
   await t.click(transcriptTab);
   await validateTextContent(t, RenderedCertificate, [
-    "A0000932X, name",
-    "A0000932X",
+    "A0036825A, name",
+    "A0036825A",
     "01/01/1905",
-    "20/08/2019",
-    "DOCTOR OF PHILOSOPHY",
+    "27/08/2019",
+    "MASTER OF ARTS (SOUTHEAST ASIAN STUDIES)",
     "COMPLETED PROGRAMME",
-    "2005/2006 SEMESTER 1",
-    "CZ5103",
-    "MODELING AND SIMULATION",
-    "2005/2006 SEMESTER 2",
-    "PC5198",
-    "GRADUATE SEMINAR MODULE IN PHYSICS"
+    "2015/2016 SEMESTER 1",
+    "SE4218",
+    "Majorities and Minorities in SE Asia",
+    "SE4227",
+    "Nationalism in Southeast Asia",
+    "SE5151",
+    "APPROACHES TO THE STUDY OF SOUTHEAST ASIA",
+    "SE5213",
+    "REVOLT AND REVOLUTION IN SOUTHEAST ASIA",
+    "SE5242",
+    "Country Studies: Thailand",
+    "2015/2016 SEMESTER 2",
+    "SE5101",
+    "RESEARCH PROJECT",
+    "2015/2016 SPECIAL TERM(PART 1)",
+    "SE5101",
+    "RESEARCH PROJECT",
+    "2015/2016 SPECIAL TERM(PART 2)"
   ]);
+
 });

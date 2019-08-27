@@ -37,12 +37,16 @@ test("NUS-ICLJDP-2019 degree scroll is rendered correctly", async t => {
     "A0107691A, name",
     "A0107691A",
     "01/01/1905",
-    "20/08/2019",
+    "27/08/2019",
     "DOCTOR OF PHILOSOPHY",
     "COMPLETED PROGRAMME",
     "2012/2013 SEMESTER 2",
     "BL5198",
     "GRADUATE SEMINAR MODULE IN BIOLOGICAL SCIENCES",
+    "BL5233",
+    "Modeling in Environmental Biology with R",
+    "GE5216",
+    "GEOGRAPHY AND SOCIAL THEORY",
     "2012/2013 SPECIAL TERM (PART2)",
     "BL5212",
     "Critical Thinking in Biological Sciences",
@@ -53,4 +57,5 @@ test("NUS-ICLJDP-2019 degree scroll is rendered correctly", async t => {
     "2015/2016 SEMESTER 1",
     "2015/2016 SEMESTER 2"
   ]);
+
 });

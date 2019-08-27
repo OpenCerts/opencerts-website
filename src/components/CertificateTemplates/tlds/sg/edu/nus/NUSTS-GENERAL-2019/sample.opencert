@@ -1,581 +1,626 @@
 {
   "schema": "opencerts/v1.5",
   "data": {
-    "id": "bb8adcec-0f1b-43b9-9442-f9954fdce4ac:string:NUSTS-A0056627Y-UGRD-0-R001009264-1-P10180798-20190711",
-    "$template": "d3a9fe13-a375-4b5e-bb21-6fbd82aa1d26:string:sg/edu/nus/NUSTS-GENERAL-2019",
-    "issuedOn": "eaa73c99-c8f4-4e5b-9d64-0abb81773ebc:string:2019-07-11T09:55:01+08:00",
-    "name": "0129c1b1-5c41-4a4a-9680-89505f3ec95e:string:Undergraduate Official Transcript",
+    "id": "d2551d6b-bf71-4e56-aa55-93e6be51d940:string:NUSTS-A0056627Y-UGRD-0-R001009264-1-P10182358-20190711",
+    "$template": "7be43d71-ff34-4add-b45e-e4de16bbf487:string:sg/edu/nus/NUSTS-GENERAL-2019",
+    "issuedOn": "c4cf3957-673e-47a7-bca7-f534c21d6e4e:string:2019-08-27T11:18:56+08:00",
+    "name": "39935ebf-8ceb-43f4-8a3d-c19dedf9d563:string:Undergraduate Official Transcript",
     "issuers": [
       {
-        "name": "2d80bd3c-721f-449f-b14a-4f192f5206eb:string:National University of Singapore",
-        "did": "1b76dbbf-7f58-4288-9e86-5e4f023554bb:string:DID:SG-UEN:200604346E",
-        "url": "e77abe5d-5b06-44ad-9e2c-e4f57ec70d99:string:https://www.nus.edu.sg",
-        "email": "95b5b655-50b3-43a6-a465-93d4a5077625:string:registrar@nus.edu.sg",
-        "certificateStore": "95338665-49f8-4de9-bfb7-f12aa19a2d53:string:0xfEbB273495F5C2c4783E23424Fe9773691b57fcB"
+        "name": "70ac20b5-9a66-4e23-91e3-9e5bb83c67eb:string:National University of Singapore",
+        "did": "dd8c1714-fe59-4319-8850-1f8ef90b64cf:string:DID:SG-UEN:200604346E",
+        "url": "a991ea35-4f09-404c-af5b-c694a5a5ffc0:string:https://www.nus.edu.sg",
+        "email": "43aefe1e-d85c-4964-ae2d-99fc138c97f0:string:registrar@nus.edu.sg",
+        "certificateStore": "92e6d42e-7a0a-4ac2-a7fa-6b224ac029f0:string:0xfEbB273495F5C2c4783E23424Fe9773691b57fcB"
       }
     ],
     "recipient": {
-      "name": "545ba138-5e0a-4986-b72b-ab4f17f23b31:string:A0056627Y, NAME",
-      "studentId": "3c8f607e-afcf-4ba3-a1fe-7a94aeb8f594:string:A0056627Y",
-      "dateOfBirth": "3d6c4d8b-061b-4340-acea-b56844d89bfe:string:1905-01-01"
+      "name": "c53801fc-a16d-4df3-81b0-a3421808dadb:string:A0056627Y, NAME",
+      "studentId": "ab8b3e7c-267e-4c54-8ca2-1eeac77ceb4c:string:A0056627Y",
+      "dateOfBirth": "d586a080-e4bc-42b4-8639-a175402aa936:string:1905-01-01"
     },
     "transcript": [
       {
-        "name": "35aa6056-842a-4b07-964f-653b4201991b:string:0910",
-        "term": "def5ae5d-b821-4f8a-b26e-1a185524ab36:string:2009/2010 Semester 1",
-        "formOfStudy": "d4a5475c-5e62-4a70-90b8-e85c662358ed:string:ENRL",
-        "fosPrintArea": "429ab102-b10a-416c-95aa-f7d67eda4764:string:ND",
-        "creditTransfer": [
-          {
-            "sourceType": "b4a9a47b-6389-4c44-92d7-27ea4f546f50:string:E",
-            "creditsNoGPA": "4073b01f-ee8c-4d7c-b65f-873b2e6aa928:number:38",
-            "creditsGPA": "05057375-1676-49ae-99cb-540b7bb0523f:number:0",
-            "orgId": "eb5f1f16-3f60-409f-8bf7-ab04d0884614:string:Singapore Polytechnic",
-            "orgName": "c9acb856-e1b3-40a7-8b11-c6e0a6e5e9e8:string:Singapore Polytechnic",
-            "details": [
-              {
-                "moduleCode": "b1245f5e-7763-408e-90f1-f28b6243bae6:string:APC",
-                "moduleName": "78102003-6a5f-4cf1-8a69-c4be5d28ae67:string:",
-                "grade": "c2cf72f5-542a-4bc4-bcd9-c994d3b17ca0:string:EXE",
-                "credits": "bf2239c8-cc21-4115-ad1e-6d0d7ac6765d:number:4",
-                "status": "13d05d1c-f46a-423d-afce-d4d5b45c1342:string:P",
-                "includeInGPA": "9eece8b9-2664-4063-b4db-fc110d281c48:boolean:false"
-              },
-              {
-                "moduleCode": "f5862fd1-9348-4fc8-8f57-a12a5a4d994e:string:APC",
-                "moduleName": "5a262d4e-e7a1-4e0f-bdfa-2a380b5e1b3b:string:",
-                "grade": "b4d87b85-74d1-4eb2-bfc6-688f122a9b3e:string:EXE",
-                "credits": "4204d471-bc39-4ca5-87d5-ca9e5b4f68d3:number:3",
-                "status": "feef9cd8-aad4-4d01-ad08-fdcb92e32d30:string:P",
-                "includeInGPA": "9c11f203-a4e8-4147-9ae7-6f8ade66d8bd:boolean:false"
-              },
-              {
-                "moduleCode": "c62f8f5f-4095-48bc-acad-6ce0cb6ebfd9:string:APC",
-                "moduleName": "956f67c8-0118-4b17-bfa8-8abeebb424a2:string:",
-                "grade": "bb7ea877-b9da-4994-8b31-0d467a7b2280:string:EXE",
-                "credits": "f277dc79-ac79-41e1-ba75-93116c6a5fda:number:4",
-                "status": "23c542fb-a055-4010-87c9-d098fe63ce88:string:P",
-                "includeInGPA": "731c8271-39be-4073-a262-823bf0cbdf4d:boolean:false"
-              },
-              {
-                "moduleCode": "468ca4f6-8ce9-473e-a8bc-bc583cd78995:string:APC",
-                "moduleName": "373ae8ee-11b8-4e55-961c-eac1d6cb65d2:string:",
-                "grade": "6dbb051e-98b0-4fdd-88bc-9ba774051268:string:EXE",
-                "credits": "4a490982-cf4d-4a39-b012-b3f7f52574ee:number:4",
-                "status": "0f362c41-fec1-4502-a957-53a188e52133:string:P",
-                "includeInGPA": "97c5bc8b-51fc-45d1-8c7e-f82379efe53c:boolean:false"
-              },
-              {
-                "moduleCode": "0eddb54a-1246-4560-97b3-04313a56f1bf:string:APC",
-                "moduleName": "8616c825-2251-4fdb-801e-296f54cf41ea:string:",
-                "grade": "34e5c4d0-7665-495c-b3ec-1f3b04f229c5:string:EXE",
-                "credits": "4cc96374-ff61-4c8b-a9a7-fd6f0d624c80:number:4",
-                "status": "b3b38c13-d35c-49c7-b117-ce32e0162f26:string:P",
-                "includeInGPA": "022309b8-2d98-4025-bc61-f4f01e1d025b:boolean:false"
-              },
-              {
-                "moduleCode": "8a1e321b-1b01-49a2-b646-6c31e0269b7b:string:APC",
-                "moduleName": "3191b491-d48f-468f-8da6-fd628bacf0d9:string:",
-                "grade": "b919259b-e35f-46f9-8565-865ad09eb01a:string:EXE",
-                "credits": "1e90042f-7bb0-4da6-9863-571b87cd695d:number:3",
-                "status": "0c9123f1-2ea2-4ad6-8b9c-b4873b512ccf:string:P",
-                "includeInGPA": "4501ec44-02bf-4d4a-8faf-3d47cc1217f0:boolean:false"
-              },
-              {
-                "moduleCode": "8ce11180-a2ee-4eff-9f09-5a43c8b38f7d:string:APC",
-                "moduleName": "c104110f-1b51-4402-bd29-9ed678d8d7b7:string:",
-                "grade": "26c73a7c-2f43-43fe-8e18-3212d6d9ca91:string:EXE",
-                "credits": "f3631aeb-0dfa-4ee1-92b5-4b599d4520ac:number:4",
-                "status": "963951e2-623e-41fb-9534-b43f4c325255:string:P",
-                "includeInGPA": "9e57b88c-4946-470f-911a-97d8b14aa4c4:boolean:false"
-              },
-              {
-                "moduleCode": "9e6f421f-3d08-4063-85da-fa9e2878bbda:string:APC",
-                "moduleName": "cead5c0e-6b32-44c0-ba2a-fb5bce25137d:string:",
-                "grade": "2fe2199f-ed3d-4f27-887b-1293cf7cd7d5:string:EXE",
-                "credits": "110ee087-3fee-4dd4-8713-3bd34eb0150e:number:4",
-                "status": "1c541473-f958-42dd-929f-59ac7f382049:string:P",
-                "includeInGPA": "00b32a11-f20d-4a53-9278-b1f24e28d911:boolean:false"
-              },
-              {
-                "moduleCode": "5f32948b-342b-4224-b2e6-d86172fe43b3:string:APC",
-                "moduleName": "09c43f1c-fbda-4599-a0b1-e55adecdfd1e:string:",
-                "grade": "e40ed162-65bd-4fc5-96e1-70f5310251df:string:EXE",
-                "credits": "7d7b9e60-ba78-4752-bba2-1a5690399ad1:number:4",
-                "status": "9069cb1a-1cab-4e09-bc46-19f95ac678e5:string:P",
-                "includeInGPA": "4eb3be74-5f59-4086-b124-c01ecbd3886f:boolean:false"
-              },
-              {
-                "moduleCode": "7e08660d-22d5-4f13-80d4-3646b3592ed6:string:APC",
-                "moduleName": "7d74d6b4-bd69-4622-99c7-0d6128008484:string:",
-                "grade": "3fd9e6fc-f60b-434f-96ee-a3e2f6907957:string:EXE",
-                "credits": "1a60bf10-b49e-491a-8a9f-f2c3bebfa448:number:4",
-                "status": "86455a15-cbe0-4a56-aba5-eadb36d3c1cc:string:P",
-                "includeInGPA": "7bc5ba44-3bda-4f5d-a8c0-c82e60754a52:boolean:false"
-              }
-            ]
-          }
-        ],
-        "modules": [
-          {
-            "moduleCode": "ab91197b-66f6-4f2f-ba10-bac19290e69e:string:MA1301",
-            "moduleName": "763847aa-57ca-4b5d-951e-e52392fbdd71:string:Introductory Mathematics",
-            "grade": "509247d9-6f8e-426e-9559-d529a78f2471:string:B-",
-            "credits": "8c8be734-341b-426f-b460-8dc9739c35c5:number:4",
-            "gradingBasis": "0f3650a6-0513-414a-a857-0e7538771eeb:string:GRD",
-            "includeInGPA": "caf7d467-eb63-44ac-a2ee-4c4bd7e0e198:boolean:true"
-          },
-          {
-            "moduleCode": "53e9d6f0-138c-4341-b5fb-90ed3a92bf2d:string:ME2103",
-            "moduleName": "46de865a-fce3-4ec3-85bc-cd3a8d8e5c59:string:Engineering Visualization & Modeling",
-            "grade": "860e67c6-0818-4c37-8b38-891a0f40b661:string:B+",
-            "credits": "dc300935-0eaa-498d-885b-f59e1b266985:number:3",
-            "gradingBasis": "df959ed1-60c0-421b-8bf9-2d55c7dc2024:string:GRD",
-            "includeInGPA": "1b8a0f24-6e2c-455f-9fc4-8b188cbee8b3:boolean:true"
-          },
-          {
-            "moduleCode": "c51db84c-78b0-4cbc-8844-fbebcf20fbf1:string:ME2113",
-            "moduleName": "3facb18a-bfdf-47ed-a0c7-95f836dc8bce:string:Mechanics Of Materials I",
-            "grade": "bb6328c8-b796-4c5f-863f-446a435537e5:string:D+",
-            "credits": "48f9e994-ebbb-4a28-a502-26948af491ea:number:3",
-            "gradingBasis": "b5658c08-30a9-48b2-83bf-a8614b08a965:string:GRD",
-            "includeInGPA": "b229773f-4472-4795-bdfa-46e220fc05fc:boolean:true"
-          },
-          {
-            "moduleCode": "1a4e14d9-d29d-44c0-a70d-a3097f872fb7:string:ME2134",
-            "moduleName": "a1e1ad60-85ae-4e1e-aca7-ae5d609e6088:string:Fluid Mechanics I",
-            "grade": "7c83a67b-9116-4996-b72c-8ac3071db02b:string:C+",
-            "credits": "e6183070-efe8-4e13-9dc9-54ae476a415f:number:4",
-            "gradingBasis": "9438d8a6-d309-4cd4-b005-fae46cbd9430:string:GRD",
-            "includeInGPA": "916e2363-6126-4da1-a7da-d856da10acd4:boolean:true"
-          },
-          {
-            "moduleCode": "8adc61fc-a978-4088-b23b-db504a87c383:string:PC1222",
-            "moduleName": "43b6ced8-10e4-4f15-9382-e56bf8c4ca18:string:Fundamentals of Physics II",
-            "grade": "dc75cb7f-0e7e-448a-a444-3003aaf9ccc5:string:B-",
-            "credits": "ef19748b-39b5-4157-b9b8-b7b1e7ff3cf7:number:4",
-            "gradingBasis": "16d388a6-9af6-43df-8afa-fc5c684c65bc:string:GRD",
-            "includeInGPA": "d8e9e32b-c228-4c45-934e-287dd5009afa:boolean:true"
-          }
-        ],
-        "summary": [
-          {
-            "programName": "33d340d8-1a72-4cc0-bf26-0b2474d6e80b:string:Bachelor of Engineering (Mechanical Engineering)",
-            "includeInGPA": "679622ba-ba83-413f-8b9f-7940a0408c5b:boolean:true",
-            "GPAName": "93e879d9-ac9f-46f8-8181-baa3b95f1f02:string:Cumulative Average Point",
-            "GPA": "53e9e9cd-d6cd-4dcd-9b01-380bf2dbb18c:number:2.81"
-          }
-        ]
+        "name": "63f853c1-cff2-40ef-9e44-45687bc17330:string:(APC)",
+        "courseCode": "f61240c9-0eb7-4dca-8270-21b4e10dabd7:string:APC",
+        "grade": "3ef24932-c2bc-439c-9158-f42e3ce6800a:string:EXE",
+        "courseCredit": "76f1a2ea-0a33-464b-8b5d-f5157c6b165a:number:4",
+        "status": "5546cfb9-d810-41a6-a4e2-86b3c5099b30:string:P",
+        "includeInGPA": "6da68c8d-8bd2-4c40-b70e-d8688f102450:boolean:false",
+        "semester": "4e04eb16-0ca1-4e90-a877-8c3b6b82c542:string:0910",
+        "transferSeq": "ff3d35ea-5e51-4bb9-b8e9-f3097ea7b092:number:1"
       },
       {
-        "name": "6dba1f2c-eda5-449a-94c1-e00cb65d6c36:string:0920",
-        "term": "74926af8-7f78-409a-bb2d-912fdfa7203e:string:2009/2010 Semester 2",
-        "formOfStudy": "c689498b-2b02-4603-ba31-72bc571fff53:string:ENRL",
-        "fosPrintArea": "2aed4af3-aa9c-4f5a-89ad-70c50d16bfb5:string:ND",
-        "modules": [
-          {
-            "moduleCode": "9576731f-6497-4bee-a102-86a2c9abda0a:string:MA1505",
-            "moduleName": "c4871e38-6aee-420b-92b7-dd6585b595b9:string:Mathematics I",
-            "grade": "ba4d8982-4fcb-40ec-9d99-5d5d41c4623b:string:F",
-            "credits": "40cb1888-8a5e-4339-90a1-dbe05f9b39c6:number:4",
-            "gradingBasis": "7632257d-2b79-4d4e-9d6a-5b3cdcbef467:string:GRD",
-            "includeInGPA": "bb88e73c-33ec-4998-bfde-aed71ae6b543:boolean:true"
-          },
-          {
-            "moduleCode": "cd33e981-b14a-4be6-b3d5-6f2c2ea96269:string:ME2101",
-            "moduleName": "bd11b777-d22d-4471-b9a8-3047195711e3:string:Fundamentals Of Mechanical Design",
-            "grade": "0b9bde22-47f8-408b-be38-9feeaef366cf:string:B",
-            "credits": "7cdb79d0-96f5-47e0-97db-a35dd90ef92c:number:4",
-            "gradingBasis": "9228e111-af06-4fc9-af20-b0551a6ee3cb:string:GRD",
-            "includeInGPA": "d418f36f-a4d8-49b0-a08e-783db4e27add:boolean:true"
-          },
-          {
-            "moduleCode": "00ea595d-c3ed-4516-9516-651d70761443:string:ME2135",
-            "moduleName": "9aeb2cfa-0527-4709-ae28-6e5b8537a677:string:Fluid Mechanics II",
-            "grade": "f7c7188d-38e9-4449-b705-8032515d1113:string:F",
-            "credits": "6c24b63b-5240-4d47-85e6-2ec2b21244c1:number:4",
-            "gradingBasis": "6f1e5805-94ce-49c6-8f68-3073aa6adf66:string:GRD",
-            "includeInGPA": "3281209e-18c4-4f23-934d-69075613f5f1:boolean:true"
-          },
-          {
-            "moduleCode": "24615dbc-c1e8-40e8-b640-280b3f4970a8:string:MLE1101",
-            "moduleName": "52875c17-6569-4945-a96a-65ed4788dc4e:string:Introductory Materials Science And Engineering",
-            "grade": "07850579-f428-445a-a3f1-b26cbb11271d:string:C",
-            "credits": "17c93be7-2ab4-4f70-9299-1f294a7b8d53:number:4",
-            "gradingBasis": "fe962e9b-1f94-44c8-be59-21b0a01f7398:string:GRD",
-            "includeInGPA": "5d287b23-bf30-445d-84a7-66d581d56328:boolean:true"
-          },
-          {
-            "moduleCode": "2dec41eb-85ad-46af-a5cc-e564ee490730:string:PC1431",
-            "moduleName": "d9dde122-9e78-4610-bcbd-49b9d041da68:string:Physics IE",
-            "grade": "69a06f3e-776f-466e-95ef-7436d67c819f:string:C",
-            "credits": "8484da29-a346-48dc-abb8-f5e8c88efe04:number:4",
-            "gradingBasis": "161066c6-7d9d-4b75-8473-00b67594324c:string:GRD",
-            "includeInGPA": "3e0ce5c7-993d-4c32-a94d-fddc3edcb3a4:boolean:true"
-          }
-        ],
-        "summary": [
-          {
-            "programName": "7f5f8fe8-ad70-4994-895d-b36aa812e1ff:string:Bachelor of Engineering (Mechanical Engineering)",
-            "includeInGPA": "d5f332d8-fb0d-4be4-936a-eaac89069793:boolean:true",
-            "GPAName": "11b328b5-1d24-4498-88da-df88741ea99d:string:Cumulative Average Point",
-            "GPA": "f588df6a-3ded-4bb9-aa71-4f111ed53e6d:number:2.12"
-          }
-        ]
+        "name": "4207b3f1-da86-4ec4-9ba4-c9816c2692f7:string:(APC)",
+        "courseCode": "1077b6ef-6681-41c7-a934-02f13dd6e796:string:APC",
+        "grade": "a1077a08-5098-4032-880b-f098dce71a9a:string:EXE",
+        "courseCredit": "b103bfc2-41cf-4fa2-8244-c0f8728e0ce1:number:3",
+        "status": "5f8b3b4c-5bc4-40e6-a1e9-01a85fea7f9d:string:P",
+        "includeInGPA": "679576e6-780b-4b1b-9c02-95ad85af324b:boolean:false",
+        "semester": "ca5c0f55-8674-441c-8248-ae4a2dc71c66:string:0910",
+        "transferSeq": "e97e02d1-09bb-4102-bbf4-03f354e8226b:number:1"
       },
       {
-        "name": "b6d56d9b-e396-42ce-98cc-0a3a619b3023:string:1010",
-        "term": "bf52fb1c-026d-419d-b283-b5db6a9a1d75:string:2010/2011 Semester 1",
-        "formOfStudy": "05c5614f-3a92-4e7e-97b4-bf9279cb8b5e:string:ENRL",
-        "fosPrintArea": "459c8061-3207-4d2a-a9b7-1626c33fc17b:string:ND",
-        "modules": [
-          {
-            "moduleCode": "7499d97b-acce-4eb1-acd3-7a2e2febd8f9:string:MA1505",
-            "moduleName": "8a581eaf-aaa8-4770-91f3-c420570f7c4f:string:Mathematics I",
-            "grade": "b61ec364-ada3-4352-9444-ec63c0ec574e:string:F",
-            "credits": "a917df57-c809-46c0-be14-baefd4ac5346:number:4",
-            "gradingBasis": "9efb7fa3-6f48-4b8c-809d-78628089003f:string:GRD",
-            "includeInGPA": "04f93e8f-62a9-43bf-ab6a-b291de99dbb5:boolean:true"
-          },
-          {
-            "moduleCode": "6b881e4e-a641-410f-90f0-487b7d015a11:string:MA1506",
-            "moduleName": "98078f3b-e859-4ca8-9626-40894f4ca3b1:string:Mathematics II",
-            "grade": "f8557292-b691-4aa6-ba7b-53b44a9511d6:string:C",
-            "credits": "c619eee7-a9a4-4124-baa8-99385cde09dd:number:4",
-            "gradingBasis": "eb00a87f-0b5d-4da3-98b5-01a511ccde80:string:GRD",
-            "includeInGPA": "b7418ea9-d733-4060-b0cd-303c34850674:boolean:true"
-          },
-          {
-            "moduleCode": "9d415874-2f5a-4967-9122-6661d27b068d:string:ME2121",
-            "moduleName": "4484eec4-bed3-4ebe-b4c2-5e68ef3fc041:string:Engineering Thermodynamics",
-            "grade": "50576b4d-1642-4d18-a4b8-dcb4fb76cfd8:string:F",
-            "credits": "346d2547-2555-4506-a1e3-4d2cf1851381:number:3",
-            "gradingBasis": "314654a1-9f09-499d-b188-4be9ef5bb67f:string:GRD",
-            "includeInGPA": "6aa9b3ca-9b30-4406-b445-1e901fe80ae3:boolean:true"
-          },
-          {
-            "moduleCode": "7a78cb74-14bb-40ae-ae4b-627ae286b835:string:ME2151",
-            "moduleName": "aecab013-e571-4684-96ee-33f4a8751e74:string:Principles of Mechanical Eng. Materials",
-            "grade": "3bc34140-11e4-4c78-80af-95fc69a8e926:string:B-",
-            "credits": "bb8a91c1-151c-4449-abc5-3ca2bcb9d892:number:4",
-            "gradingBasis": "4a0441dd-ac2f-48dc-a003-b8debca5fdf6:string:GRD",
-            "includeInGPA": "08393a92-f536-424f-a2aa-7b38aff42275:boolean:true"
-          },
-          {
-            "moduleCode": "19fb6706-a160-485b-9a2d-6f5e8f0bb627:string:ME3101",
-            "moduleName": "db708575-f711-4c25-bf0c-33a32f53b4b6:string:Mechanical Systems Design I",
-            "grade": "d8d73511-bc67-4481-a1b9-36a62ef3eec1:string:B",
-            "credits": "bf7b0139-e3ed-49f6-a77f-95cea544fe08:number:4",
-            "gradingBasis": "d930f35b-415a-42c9-a1ca-ed5446f6134e:string:GRD",
-            "includeInGPA": "9e764290-5740-44ca-9788-d12857d0d695:boolean:true"
-          },
-          {
-            "moduleCode": "cfc1f035-585d-423d-8dcb-e6dbd7f9079b:string:ME3112",
-            "moduleName": "7c0a375a-812c-4ec5-9d6c-04f61f8fa8f3:string:Mechanics Of Machines",
-            "grade": "3b0b1b72-b8c3-4c4f-9133-b2ebfeb5a4b5:string:C+",
-            "credits": "9a739f0c-7b29-4fc8-8bda-d672106922b4:number:4",
-            "gradingBasis": "0c7d634b-7e87-4d49-9eb0-931ec7c6b723:string:GRD",
-            "includeInGPA": "5b2926e2-f67f-4f05-ab0c-59beffdb1877:boolean:true"
-          }
-        ],
-        "summary": [
-          {
-            "programName": "c3697ad3-029f-4c9e-84f6-0ff50c0ebd7b:string:Bachelor of Engineering (Mechanical Engineering)",
-            "includeInGPA": "dd54bbed-8636-4e14-ad08-1d47bee68969:boolean:true",
-            "GPAName": "c5bb74d8-748f-4414-ae0f-b6d0b743166f:string:Cumulative Average Point",
-            "GPA": "c6f82214-c015-45f2-8f02-cd1a5bef9373:number:2.04"
-          }
-        ]
+        "name": "7f3ff1bc-26b2-46b6-b720-0a87412689a4:string:(APC)",
+        "courseCode": "d2cf66a0-53ca-477a-a124-5e196c15e4c8:string:APC",
+        "grade": "384df398-3cd7-4541-80b4-47c97758d173:string:EXE",
+        "courseCredit": "4162c71c-edad-4f11-8cd4-f01694dfad80:number:4",
+        "status": "30860554-9d8c-44f4-a618-64515661e31d:string:P",
+        "includeInGPA": "9937269f-f2b1-4988-9a55-ab62471b56ad:boolean:false",
+        "semester": "267a8511-c39b-483d-8142-669ebe5eacd1:string:0910",
+        "transferSeq": "92d81d3d-47c9-4c66-b18f-08ebb2a2b871:number:1"
       },
       {
-        "name": "643f8821-4fd7-4e69-b236-1a7c8f8cf0dc:string:1020",
-        "term": "9175c620-fe30-44c0-9de3-5bab00e3e811:string:2010/2011 Semester 2",
-        "formOfStudy": "a7066c31-852d-4946-9e5c-1841baeabc58:string:ENRL",
-        "fosPrintArea": "d6defb61-df7f-4958-b5fc-aabeca4cdb67:string:ND",
-        "modules": [
-          {
-            "moduleCode": "451ffefe-c626-428d-9f4d-bb5d7f3f392e:string:ME2114",
-            "moduleName": "3d28500b-d0f5-4963-82b5-d175b2cf6661:string:Mechanics Of Materials II",
-            "grade": "71eede2a-1bad-4519-8314-92b7966b9b31:string:D+",
-            "credits": "abfa9132-ae64-434e-9e81-fca4a24bb469:number:3",
-            "gradingBasis": "ef9234ad-aab8-4cb2-987f-12008fb1d8ea:string:GRD",
-            "includeInGPA": "94553a0b-d794-4bcd-b1b7-305e9db0a545:boolean:true"
-          },
-          {
-            "moduleCode": "df25f86f-c840-484c-a584-b782a8182c47:string:ME2135",
-            "moduleName": "f3418b0a-32ea-472e-8e9a-7f2f29cb242a:string:Fluid Mechanics II",
-            "grade": "6103ea04-ba09-4fdd-9c34-298655ef9548:string:F",
-            "credits": "bb1e1a0c-3588-4e66-b504-5c80e5a60afd:number:4",
-            "gradingBasis": "4a7b51f2-9500-469e-a79a-f798d6c7206c:string:GRD",
-            "includeInGPA": "70c0a846-c81d-4484-8597-581cbdea78b6:boolean:true"
-          },
-          {
-            "moduleCode": "f416730b-3892-46ea-b4ec-7d29d94d1832:string:ME2142",
-            "moduleName": "e58a4917-56f6-42e0-b58a-2889e9523cc8:string:Feedback Control Systems",
-            "grade": "d1fd931c-b4ac-47de-ad47-708ac42dfd30:string:C",
-            "credits": "b923c1f5-24a4-4879-9c09-6665321cc716:number:4",
-            "gradingBasis": "cda66609-c195-4b72-98a7-abab6cb35027:string:GRD",
-            "includeInGPA": "f46a85a9-e50b-4f21-826e-9bdc07eb239c:boolean:true"
-          },
-          {
-            "moduleCode": "ecc80bc9-4236-4c65-9740-40382f5c495a:string:ME2143",
-            "moduleName": "443b18cb-9971-47d3-a5c6-7c6b6622fcef:string:Sensors & Actuators",
-            "grade": "a4771273-32f4-41a8-b0c9-9f226c32e6ec:string:D+",
-            "credits": "889affe6-7039-40cb-ac79-71974d17fa58:number:4",
-            "gradingBasis": "a354029e-a060-43c5-9088-b65e46198a71:string:GRD",
-            "includeInGPA": "21edb822-7580-4a0c-90a7-4d4cc5013376:boolean:true"
-          },
-          {
-            "moduleCode": "937c959e-e4a1-4a0e-8bc3-fb83a6cdd17f:string:ME3102",
-            "moduleName": "ea04eb55-7b52-4000-8034-bfc1620cfed7:string:Mechanical Systems Design II",
-            "grade": "65e6e786-3641-4c7a-98ac-c3efab088109:string:B+",
-            "credits": "2b72275e-ff91-44f9-93b2-19eef5588159:number:4",
-            "gradingBasis": "52554eb1-0377-4168-9260-a044b09e1f4d:string:GRD",
-            "includeInGPA": "ef4565c8-df03-4f96-87f5-7ae5fae36beb:boolean:true"
-          },
-          {
-            "moduleCode": "0c328bcc-5031-4167-9258-a0b4db10e263:string:ME3241",
-            "moduleName": "abf6c66c-7d0a-4ec0-bcc8-94986007ed06:string:Microprocessor Applications",
-            "grade": "d1f22c50-e8b9-4515-b8a2-8852d554d36d:string:C+",
-            "credits": "2fad3bf5-bea3-4af6-ab67-2a7a233b26f8:number:4",
-            "gradingBasis": "816f8447-f785-49a4-9c05-07c06fcae6f3:string:GRD",
-            "includeInGPA": "71d1bb27-7778-459e-8649-dce4f2c31d9f:boolean:true"
-          }
-        ],
-        "summary": [
-          {
-            "programName": "b7773eba-dccb-4033-b7bb-677cc877a673:string:Bachelor of Engineering (Mechanical Engineering)",
-            "includeInGPA": "e71c7fef-6925-4523-9db9-feb1f8bb467c:boolean:true",
-            "GPAName": "018bbc14-ada2-44f2-bb41-ca7cdc7bbdbf:string:Cumulative Average Point",
-            "GPA": "5b1e3180-e02d-4360-b894-7ff655b8373e:number:2.01"
-          }
-        ]
+        "name": "2adb5984-07d3-4986-b42b-362b907babca:string:(APC)",
+        "courseCode": "2e3becfc-f445-4901-bcd2-b9988b2821f2:string:APC",
+        "grade": "e00d8505-0f76-488b-8852-ee9fab038cd8:string:EXE",
+        "courseCredit": "b2d1e49d-6e4b-469f-80a5-7c3fad52d108:number:4",
+        "status": "f8e96c27-d0d6-45e9-8135-7d5673df3da8:string:P",
+        "includeInGPA": "7756a187-fb46-484a-8143-99610d5b5f6b:boolean:false",
+        "semester": "1c0cb64a-cf7e-434d-9c6d-54dcefd053d8:string:0910",
+        "transferSeq": "e64c8c52-2c16-41fb-a849-72fd065acd10:number:1"
       },
       {
-        "name": "cb5c53e3-73b2-4eae-8a0b-bcb49f80f9e4:string:1110",
-        "term": "e1a58a3a-9250-4913-8a10-f25374370c16:string:2011/2012 Semester 1",
-        "formOfStudy": "ef8a5d09-afa3-45fe-a8de-ade6950de2a0:string:ENRL",
-        "fosPrintArea": "dc7405c8-e3fb-4ee8-8081-ad96649c4aa0:string:ND",
-        "modules": [
-          {
-            "moduleCode": "76b97aa8-35d9-4aa5-be43-7d476b6f5f74:string:MA1505",
-            "moduleName": "ac2ac9e3-2b6b-4cc5-a7b0-7774c4c1e0e8:string:Mathematics I",
-            "grade": "9109d3dc-4517-48f9-a44c-115690f79386:string:C",
-            "credits": "f85e1958-5dc1-4435-896c-25797d9a6192:number:4",
-            "gradingBasis": "dea463ac-b287-4402-a917-85a0881f067d:string:GRD",
-            "includeInGPA": "2a2446fb-5e6c-4c6b-8449-367e13e7ad25:boolean:true"
-          },
-          {
-            "moduleCode": "ac5df6ec-0259-471a-b2d8-90b675bd775a:string:ME2121",
-            "moduleName": "2b34b942-881b-4add-bae4-895f3a979f47:string:Engineering Thermodynamics",
-            "grade": "5ed9783c-f717-4080-adc6-221916ff5398:string:D",
-            "credits": "08934b18-06ae-4f80-935d-6cb36bb4a0ea:number:3",
-            "gradingBasis": "39493701-7cd0-466b-8a0d-247ee384549a:string:GRD",
-            "includeInGPA": "feb10ef6-e14c-423f-b95d-92b8c673945c:boolean:true"
-          },
-          {
-            "moduleCode": "014c7db6-019e-4123-b0a0-e780d39f6157:string:ME3122",
-            "moduleName": "0154a61c-33ea-4b0c-ad6e-bce10b20c334:string:Heat Transfer",
-            "grade": "5ac6df56-76cb-4848-8d59-10a9a9b6615d:string:C+",
-            "credits": "a832dd5b-ee0a-4b39-be6b-f93ceaf9599f:number:4",
-            "gradingBasis": "2803267a-4da7-4d59-bf77-e7fa355b13d6:string:GRD",
-            "includeInGPA": "54cd3228-7d83-48c9-94db-286338ce5fce:boolean:true"
-          },
-          {
-            "moduleCode": "96d492b5-0aea-4aa6-b950-d5cfea6948be:string:ME3162",
-            "moduleName": "a1109bff-c987-41c9-8f15-070cf17b651a:string:Manufacturing Processes",
-            "grade": "a907d406-483e-4706-be9d-ef6479d9c74e:string:C",
-            "credits": "64825e38-e683-434d-a4fe-1ad1e3384dc9:number:4",
-            "gradingBasis": "94289bb8-bb96-429e-8ccf-8f7d8e384754:string:GRD",
-            "includeInGPA": "371f3534-0e3b-4717-90dd-ec08242bbcb0:boolean:true"
-          },
-          {
-            "moduleCode": "001d5e92-6e18-4194-a2f8-036583277fe5:string:ME3242",
-            "moduleName": "3e718d86-9fc4-40ac-93ef-561f331b80c8:string:Industrial Automation",
-            "grade": "a75cdc0b-c50e-48b0-9237-29057bcb1780:string:C+",
-            "credits": "4a8ab57a-ab55-431a-8095-46c50483f6f0:number:4",
-            "gradingBasis": "d4d1b515-7eae-4290-9742-114e019172da:string:GRD",
-            "includeInGPA": "7bda374e-1e26-4e97-91a5-bae810664c93:boolean:true"
-          }
-        ],
-        "summary": [
-          {
-            "programName": "e2f7d393-7332-4483-862e-f72fc6ba52fd:string:Bachelor of Engineering (Mechanical Engineering)",
-            "includeInGPA": "10420bdd-48a5-4774-a59f-847d4c4c2653:boolean:true",
-            "GPAName": "76a49249-6634-4753-8deb-8ae76a40a587:string:Cumulative Average Point",
-            "GPA": "51e3504a-69e0-44d5-884b-93805735ec8d:number:2.02"
-          }
-        ]
+        "name": "ea6071b6-deea-4c9b-b3f3-c50a69f275d0:string:(APC)",
+        "courseCode": "2f2805dd-0630-4ba8-9674-839a45e1e96e:string:APC",
+        "grade": "b3f45d77-1a01-4d8f-874e-66db57eb2683:string:EXE",
+        "courseCredit": "64784568-9d18-4802-862c-3a2999405a90:number:4",
+        "status": "6ad1f191-2b50-479e-9bd1-27edf4b1e5e1:string:P",
+        "includeInGPA": "797aac33-fb34-468c-8d9a-38d0399fe353:boolean:false",
+        "semester": "27c34eb9-3c80-4d08-8ce9-b9daed3ecafd:string:0910",
+        "transferSeq": "cc9dc013-d072-4e80-85aa-e4f19a069389:number:1"
       },
       {
-        "name": "8c3d1cb8-942b-43b0-be76-a614d7ac4c57:string:1120",
-        "term": "29bb0c2a-5062-48bc-985c-a45bae305dfa:string:2011/2012 Semester 2",
-        "formOfStudy": "3abce825-c820-4186-b724-a8036a57674f:string:ENRL",
-        "fosPrintArea": "9486df4e-70e0-409a-aed6-56687cdc9964:string:ND",
-        "modules": [
-          {
-            "moduleCode": "43b71662-f64b-4760-b695-db3338669d4d:string:EG2401",
-            "moduleName": "2c2aecf8-c57e-4fa1-bb5a-f01a09494259:string:Engineering Professionalism",
-            "grade": "42a2cb64-8d81-4c69-846d-aad0f8ead265:string:C",
-            "credits": "1dab77d9-85c8-44fa-88d7-35382ea5c1bc:number:3",
-            "gradingBasis": "44b6dee7-0607-4d07-8991-2ab275c09a4d:string:GRD",
-            "includeInGPA": "368f78ea-b167-4d14-bd7f-a7ccc24eafb3:boolean:true"
-          },
-          {
-            "moduleCode": "28498be2-ee80-4286-a69c-94052e2b8a63:string:ME2135",
-            "moduleName": "6150e4a6-a5f7-4a03-a057-549570f2fbb8:string:Fluid Mechanics II",
-            "grade": "f7a7fcfb-f202-4bbd-819d-1fb623fb54fc:string:F",
-            "credits": "96f6547b-4731-4ee6-951c-e4d46a75a6c6:number:4",
-            "gradingBasis": "52478c0b-3933-4440-959d-8e984784b82a:string:GRD",
-            "includeInGPA": "49f50d0c-fa5d-4507-aad5-912354dba4e1:boolean:true"
-          },
-          {
-            "moduleCode": "04024a91-5200-49a0-975c-8a8845e76840:string:ME3281",
-            "moduleName": "50e2b115-5277-4315-bed8-dea85db36e94:string:Microsystems Design And Applications",
-            "grade": "1250b6bc-0421-4962-9cab-50851a2f4dc6:string:B",
-            "credits": "fee6659a-91dc-4939-89d8-4cb3f3b3bb30:number:4",
-            "gradingBasis": "f3c3aaf4-1b3e-4423-89a2-4fc21bd190ee:string:GRD",
-            "includeInGPA": "3a26986f-2879-49c9-b018-7e9a2e717361:boolean:true"
-          },
-          {
-            "moduleCode": "26e97413-f359-4d3f-8f00-5857421afea9:string:ME4101A",
-            "moduleName": "1de705cb-65d5-474b-8dae-aeb1d7681a0c:string:Bachelor Of Engineering Dissertation",
-            "grade": "ebc1f0ed-402a-4af4-9cde-62e7a74d2ddf:string:IP",
-            "credits": "42b7d173-0e47-4914-a801-4e9e2a677001:number:8",
-            "gradingBasis": "feb4fa3c-9341-441c-9861-f824166bb95f:string:GRD",
-            "includeInGPA": "0d8c77a4-5e9c-428a-bce1-930198a3e927:boolean:true"
-          },
-          {
-            "moduleCode": "d351c296-62ca-4f4a-bfd7-9c225955947f:string:ME4262",
-            "moduleName": "2352bf48-5eca-4118-a9cc-7c93cd7269e8:string:Automation In Manufacturing",
-            "grade": "e28e35e8-dca0-46d9-98ac-f2a1e2d77a88:string:F",
-            "credits": "50dbcc04-d34d-402b-8dd4-dedb55d73ebe:number:4",
-            "gradingBasis": "53d20baf-8df9-4609-9027-300b5b536048:string:GRD",
-            "includeInGPA": "577756d7-0a54-4faf-b704-e503cefcf4d2:boolean:true"
-          },
-          {
-            "moduleCode": "652ebc9a-a3c6-48b2-aa8e-a12b38910960:string:ME4284",
-            "moduleName": "805d60f8-105d-4e41-99d4-e3df197c4e9c:string:Micro Sensors & Micro Actuators",
-            "grade": "15ecf2f9-6c2d-429b-85cb-677cd3c0ef88:string:B",
-            "credits": "538e583a-b0d4-4c52-a953-7653e6fb81ef:number:4",
-            "gradingBasis": "cbab2236-aedd-4214-835c-01a9c852b294:string:GRD",
-            "includeInGPA": "46c01a45-6a5c-43bf-a7fb-1f7e197c9a2b:boolean:true"
-          }
-        ],
-        "summary": [
-          {
-            "programName": "a2df0e29-a04f-487b-bb81-0ac2a54c537c:string:Bachelor of Engineering (Mechanical Engineering)",
-            "includeInGPA": "54c38d71-aabb-4d48-98b4-df795fb125f7:boolean:true",
-            "GPAName": "67a1d948-26fe-4bfd-974d-a259fe9b521a:string:Cumulative Average Point",
-            "GPA": "92ec0f85-1bb2-437f-bd9a-af230d11570d:number:1.98"
-          }
-        ]
+        "name": "913f13cf-32ab-4906-b2f7-3987fe04f36b:string:(APC)",
+        "courseCode": "90020bf1-98f5-4af7-bc88-8aa5f33bda11:string:APC",
+        "grade": "57ea3880-959e-4004-aecf-2ef784cc226f:string:EXE",
+        "courseCredit": "b631211e-4c0d-4df6-be8c-6be3a1719d85:number:3",
+        "status": "b12db9cd-4b00-44e5-ad52-a1ca7b45e6f9:string:P",
+        "includeInGPA": "eb1b0bb5-ce41-40c2-aa69-db919682a1df:boolean:false",
+        "semester": "412768bf-7849-4483-9e43-9a234212dc2e:string:0910",
+        "transferSeq": "71e77d2e-daa5-49cc-bcef-abad5ea9e21f:number:1"
       },
       {
-        "name": "1a4ddeec-fac5-46c0-b1bd-379511983ef7:string:1210",
-        "term": "313b9c8f-bc32-499c-8a48-b02bdcd66d69:string:2012/2013 Semester 1",
-        "formOfStudy": "0bcb142b-794c-4e12-8251-23326c2af4ec:string:ENRL",
-        "fosPrintArea": "daf8be1a-63d3-430c-a117-d220ca7dc4e5:string:ND",
-        "modules": [
-          {
-            "moduleCode": "41d02201-d187-4767-93d8-fcc9ceba932e:string:GEK1521",
-            "moduleName": "7b80290e-d243-4dcb-8d13-5f2cd9d52c71:string:Physics in the Life Sciences",
-            "grade": "8d44d456-076e-486f-84ea-3d6b55eb9fc3:string:C",
-            "credits": "c255cd9c-e737-416f-8760-5925bd1f9ac1:number:4",
-            "gradingBasis": "2dfa322d-26df-4b61-888b-5ee65cbc452b:string:GRD",
-            "includeInGPA": "69792b46-7441-4933-83c9-95fd90bfd467:boolean:true"
-          },
-          {
-            "moduleCode": "e232f71f-993c-46ef-9e1b-d2251ff5fe2a:string:ME3261",
-            "moduleName": "d0bb3e1c-82ae-4253-873b-b71215f277ac:string:Computer-Aided Design And Manufacturing",
-            "grade": "5290029d-e24c-4304-a2dd-63db4eec5a96:string:D+",
-            "credits": "b74a2979-b15e-49ab-a92e-6f6533e33f39:number:4",
-            "gradingBasis": "75d3242f-b7ca-49f6-bdfd-21d43a42ea5a:string:GRD",
-            "includeInGPA": "689739ee-d38d-4849-974d-53b6ff9c747d:boolean:true"
-          },
-          {
-            "moduleCode": "142b47b1-6cdb-48a6-825d-69d7cc6c966f:string:ME4101A",
-            "moduleName": "d8f8e22c-162d-4abc-8bbf-ef1c6096afa2:string:Bachelor Of Engineering Dissertation",
-            "grade": "fc3706cd-3e0f-4798-9c8c-11a6355ec27e:string:B",
-            "credits": "58695d3f-6cf2-439e-9fa5-bba1f2fed269:number:8",
-            "gradingBasis": "83b417cc-af11-4b53-9712-00a3375e5342:string:GRD",
-            "includeInGPA": "dc7e1bbe-184e-4b54-9232-25b6cd7aa35a:boolean:true"
-          },
-          {
-            "moduleCode": "2bf911ca-1fcf-4745-9984-e3b591320053:string:SSA2204",
-            "moduleName": "ce86cdd7-7f55-4adb-a419-fe0bb8624700:string:Nation-Building in Singapore",
-            "grade": "f301fd07-0491-46ee-a647-00722d110cf1:string:C+",
-            "credits": "42f7d319-bec3-496d-8a66-7601974c1efd:number:4",
-            "gradingBasis": "4ba2c7f4-7309-4826-a4b3-13375ec8e90b:string:GRD",
-            "includeInGPA": "75cb40c6-c347-4c19-89c3-e9bb6e605afb:boolean:true"
-          }
-        ],
-        "summary": [
-          {
-            "programName": "9d6d4ddb-97cb-4518-94d2-4375b32017d6:string:Bachelor of Engineering (Mechanical Engineering)",
-            "includeInGPA": "fa29d619-2e2a-4336-8784-04b595aa8b60:boolean:true",
-            "GPAName": "523e9dea-21ac-4118-953b-c30b40b3fd66:string:Cumulative Average Point",
-            "GPA": "a00c3af3-c99d-4324-9bd6-eabb074841d4:number:2.07"
-          }
-        ]
+        "name": "7242eadb-ca6d-4429-85ed-3d2cb9b88ba5:string:(APC)",
+        "courseCode": "4e7eeade-968e-4df8-ae28-ccef175a4d9b:string:APC",
+        "grade": "1f0f7afe-b87e-4a22-bf8f-71b68c0a221b:string:EXE",
+        "courseCredit": "88008a0d-798d-4d4e-8039-c2186f6953e1:number:4",
+        "status": "065f1ae5-5157-4cc4-8eb5-cd0905bb3366:string:P",
+        "includeInGPA": "c8fd2bd7-8f46-4e5e-8ae2-2ec7729aa9d3:boolean:false",
+        "semester": "1dcc3129-a601-4572-b686-1961ebae72e6:string:0910",
+        "transferSeq": "2dbc1798-40e2-4221-b22b-996cdeac957d:number:1"
       },
       {
-        "name": "2dde1cf6-247d-4032-8649-9f20352766d5:string:1220",
-        "term": "5fd44d38-e09f-42ae-8b85-e64dd1474d3a:string:2012/2013 Semester 2",
-        "formOfStudy": "a1e5549a-498f-4dd2-9290-3346c93ca36a:string:ENRL",
-        "fosPrintArea": "fd11cd9e-7220-478b-a638-092869f5a6c7:string:ND",
-        "modules": [
-          {
-            "moduleCode": "f9370c64-8541-4003-a69c-a38b621ec618:string:LAK1201",
-            "moduleName": "dbeabb7c-7ad6-4454-90ea-8f300376530f:string:Korean 1",
-            "grade": "5a11edf3-0da4-4eb7-b388-ba5778c7d827:string:C",
-            "credits": "7375be91-d267-4f24-842b-ea919b9ad743:number:4",
-            "gradingBasis": "8139f940-eec8-4f9f-8e3c-6ba7cc5a128a:string:GRD",
-            "includeInGPA": "add44f1f-1079-4c99-89e4-a79bd4d94189:boolean:true"
-          },
-          {
-            "moduleCode": "6b5b28b3-758b-4789-8d65-1775b87c476f:string:ME2135",
-            "moduleName": "333853af-684b-44f2-8230-4ed03c282ca6:string:Fluid Mechanics II",
-            "grade": "26c4b174-9456-4b5f-99ee-deffeb207c90:string:D",
-            "credits": "4fa14b13-a3b5-4869-9515-b5e13e15bf20:number:4",
-            "gradingBasis": "b7a5eb76-1b84-4ea4-a754-8300b77b6146:string:GRD",
-            "includeInGPA": "0d326f04-ade4-4f37-8856-68577117b395:boolean:true"
-          },
-          {
-            "moduleCode": "6f04a1e6-68f2-4270-9674-fc965b42fba5:string:ME4262",
-            "moduleName": "edb513ae-9af4-49b9-8a88-97a0f6176d05:string:Automation In Manufacturing",
-            "grade": "d8a24eef-5fd0-4be2-966e-d8bd9ca99ae3:string:D",
-            "credits": "8a99997c-575a-4aab-b0f7-b02fb0922378:number:4",
-            "gradingBasis": "64426eb9-46bd-412e-81bd-eaae7207a813:string:GRD",
-            "includeInGPA": "83e527c3-70fe-4060-8a61-1f7029f6ffaf:boolean:true"
-          }
-        ],
-        "summary": [
-          {
-            "programName": "d552265f-7c6b-44bd-8343-fd4d4e600307:string:Bachelor of Engineering (Mechanical Engineering)",
-            "includeInGPA": "993de891-a497-43e4-bfce-b4eb735a73cc:boolean:true",
-            "GPAName": "25489c3b-3eea-4bd7-ae1d-3cd0fa78b591:string:Cumulative Average Point",
-            "GPA": "17479eb0-4663-4ea0-bffe-07639e4b2154:number:2.01"
-          }
-        ]
+        "name": "be9783b9-d7b6-44ec-8e18-8cfda7f78300:string:(APC)",
+        "courseCode": "81e913ee-5d67-4d20-af66-456bd73e9f06:string:APC",
+        "grade": "e8b19b2a-01b9-4f92-9033-8a2d086b11eb:string:EXE",
+        "courseCredit": "3c86b1ec-dad3-4a8d-a94c-545abd4b4a5b:number:4",
+        "status": "2841687a-5fbe-4710-a5c3-ba770233794c:string:P",
+        "includeInGPA": "c8eb2849-adcf-4b4a-80b5-e24252774fad:boolean:false",
+        "semester": "8ee5a5a7-d83a-48e6-a70b-76cc5a318c48:string:0910",
+        "transferSeq": "dbbdb613-3fcc-4eab-baf2-2594f018c539:number:1"
+      },
+      {
+        "name": "ad31e591-d095-42e2-8fbb-1f6b8714c925:string:(APC)",
+        "courseCode": "2c04f0d6-3cda-4b11-a249-441590831cd4:string:APC",
+        "grade": "7f18ff74-a203-4280-ba46-521d2baec3e9:string:EXE",
+        "courseCredit": "0725ef85-c099-41da-b192-68dadf68e99e:number:4",
+        "status": "e577dbf4-169d-46dc-823c-02505989ea1c:string:P",
+        "includeInGPA": "a56c8db1-40a8-4e6f-942b-77962393edc7:boolean:false",
+        "semester": "880a4784-2ae8-45d0-bb37-c7b57995042f:string:0910",
+        "transferSeq": "8ad8cc81-fd4f-407f-9006-41839f0e3607:number:1"
+      },
+      {
+        "name": "28986307-c68c-4d2f-8651-3c01c30a8583:string:(APC)",
+        "courseCode": "85f417ea-3697-46e3-91dd-8c2062b3f2ff:string:APC",
+        "grade": "05fe3ac9-8997-4b65-a666-387976e0149d:string:EXE",
+        "courseCredit": "ea89dcf0-32a5-4435-b2bf-88da4e5ba143:number:4",
+        "status": "1456498f-f8e1-4fa7-96f5-0e6c86168511:string:P",
+        "includeInGPA": "3fadb856-4c14-41ce-977b-71658d59d2bf:boolean:false",
+        "semester": "889881ef-a861-418f-a28b-1c176fca32a5:string:0910",
+        "transferSeq": "63afcdd9-7a1f-411a-b8bc-509f809a4ee1:number:1"
+      },
+      {
+        "name": "0a153ee7-e530-4bee-a829-20644987419e:string:Introductory Mathematics",
+        "courseCode": "d993d6be-950a-46e0-92ab-8f32c2e8c81e:string:MA1301",
+        "grade": "eecf12b7-a6d9-4e0e-bc0f-96dc50816a92:string:B-",
+        "courseCredit": "a2636a0b-7f8a-4e10-bffe-6ff325cce261:number:4",
+        "gradingBasis": "96bee6e6-b53c-472e-9559-e6518fab8e3d:string:GRD",
+        "includeInGPA": "94bde6a1-8711-408e-86f2-ad93e542015f:boolean:true",
+        "semester": "470051c1-ad8b-479a-b2ba-547c1de3af33:string:0910"
+      },
+      {
+        "name": "064716e5-d64d-49d2-8817-43a92ec0ae60:string:Engineering Visualization & Modeling",
+        "courseCode": "dbfc2bd5-e5c1-49cf-9ada-ad329c434f75:string:ME2103",
+        "grade": "13b50982-9039-401d-9040-7f5625385046:string:B+",
+        "courseCredit": "c0bd2ce4-cb58-4084-87fe-1c95218a75c8:number:3",
+        "gradingBasis": "5eb8fe4c-8f64-480c-b347-7c19406212eb:string:GRD",
+        "includeInGPA": "2f2d04fc-fd6d-4cb6-af8d-91af7f435d8b:boolean:true",
+        "semester": "0c099187-988f-48cb-877b-b688f51e95ab:string:0910"
+      },
+      {
+        "name": "4352f342-ad5d-417b-90a3-0e4efe43eeee:string:Mechanics Of Materials I",
+        "courseCode": "9db88267-cbf8-4b50-ae58-0e596aff2280:string:ME2113",
+        "grade": "dfbc73f7-4e88-4f3b-92b1-04cb3c0c5fef:string:D+",
+        "courseCredit": "de9ae1ab-e391-411f-a8f0-73221b0c53cc:number:3",
+        "gradingBasis": "69eab795-b6df-4159-8ea6-9ecce5f434f4:string:GRD",
+        "includeInGPA": "879b2f37-db07-41e1-b67c-150052fa73f9:boolean:true",
+        "semester": "439aa176-fbab-4520-83c0-b8a21812dd6f:string:0910"
+      },
+      {
+        "name": "c3149388-9942-485f-938e-8a48b8a34518:string:Fluid Mechanics I",
+        "courseCode": "88876912-5d9e-458c-a1ad-d1ff200b318d:string:ME2134",
+        "grade": "860310b9-df83-460d-8f45-d04942e36d33:string:C+",
+        "courseCredit": "7a59ed1b-1cee-49e3-8a84-1dfb9287b218:number:4",
+        "gradingBasis": "e74c88e1-d6e0-4e9c-92db-c75f5fd7bf69:string:GRD",
+        "includeInGPA": "72b1a182-dbe2-47d3-91c7-35a2f67c1034:boolean:true",
+        "semester": "c2df400c-b109-4626-a0a1-7a31a4c7a7b5:string:0910"
+      },
+      {
+        "name": "7d3e0f38-11e2-4873-839c-fc88c3490c67:string:Fundamentals of Physics II",
+        "courseCode": "007b20ff-abe1-4d18-aeeb-4c41ec06f891:string:PC1222",
+        "grade": "368a933c-8df9-4682-89dc-106723bc7359:string:B-",
+        "courseCredit": "8717c192-aa32-4f14-b962-882b77ed2bfc:number:4",
+        "gradingBasis": "ad173a92-4e73-4a4a-8501-dff5853ca667:string:GRD",
+        "includeInGPA": "a176ba90-d8ed-4c14-8212-e0ec2e35c271:boolean:true",
+        "semester": "84812fdc-caff-4e24-92f2-6b19c3b6f0c6:string:0910"
+      },
+      {
+        "name": "dd071b12-4359-458e-a935-ee6fe80134c7:string:Mathematics I",
+        "courseCode": "2f1aaa53-e367-47e9-a988-5e987cfdb64d:string:MA1505",
+        "grade": "c3b3a9b9-a753-41c0-a912-63ab216fa221:string:F",
+        "courseCredit": "f20e0e38-d1e4-44f8-a176-e6b849759257:number:4",
+        "gradingBasis": "c1098930-800d-44b7-a045-583ea098db8b:string:GRD",
+        "includeInGPA": "03763438-4c34-4e5c-8612-9c6253f51b83:boolean:true",
+        "semester": "a4e38998-7146-45fe-b6aa-f17ab03389ab:string:0920"
+      },
+      {
+        "name": "e55c9fcd-c723-4ff1-b2b0-27fa080b459f:string:Fundamentals Of Mechanical Design",
+        "courseCode": "092a8063-d0ba-4511-8287-d3c205e4bada:string:ME2101",
+        "grade": "bb80dc59-c0d3-413c-a7b1-608178776fe1:string:B",
+        "courseCredit": "17a490f3-a3a1-4fd5-85bd-7f8fc913bb67:number:4",
+        "gradingBasis": "6a140a47-5734-4c7c-a3e1-be8bd2827c2d:string:GRD",
+        "includeInGPA": "a787c4f8-7204-4d5c-beb0-d00617e3c198:boolean:true",
+        "semester": "7b82acbd-e3e7-4f13-8dcd-bcf4247243c7:string:0920"
+      },
+      {
+        "name": "87cf57d7-088a-48e5-bef6-f71a6b9a157c:string:Fluid Mechanics II",
+        "courseCode": "4dc9931b-288f-4fd8-a8f7-565cbba9c24d:string:ME2135",
+        "grade": "fb0b7b00-029d-400a-9ff4-eba51c832dc7:string:F",
+        "courseCredit": "f8fab978-d231-41be-a288-5d191b930618:number:4",
+        "gradingBasis": "d67fe4d8-1fb2-4df4-93e5-1a133da8f15a:string:GRD",
+        "includeInGPA": "cbdb8dbd-a3ed-41df-b619-5c53803557ff:boolean:true",
+        "semester": "1d97bad1-8df3-4f5d-9a4c-967ed31186ac:string:0920"
+      },
+      {
+        "name": "b10a0d3c-933f-4e99-b164-f8e943dbad3a:string:Introductory Materials Science And Engineering",
+        "courseCode": "fbd97366-55b7-4c29-a1c5-69cc17e10d94:string:MLE1101",
+        "grade": "c39741f5-436f-4ac5-ae5e-6ee154d3699a:string:C",
+        "courseCredit": "3dce909d-084a-404e-8bf7-a97b54ecb637:number:4",
+        "gradingBasis": "d6d0db4d-f4ed-4f8c-b720-349ba78a39d6:string:GRD",
+        "includeInGPA": "7be56cfc-6498-4983-b8cc-356ed5a3971b:boolean:true",
+        "semester": "1c9bb0a3-58a8-44a0-ae95-2933355fd741:string:0920"
+      },
+      {
+        "name": "ea8e2af2-7674-4b5d-a063-abecc41c13bc:string:Physics IE",
+        "courseCode": "e78e4c7f-7224-4c3d-a6df-6302122dbd39:string:PC1431",
+        "grade": "03c239c7-8739-43d9-ad08-e05eab4bd31d:string:C",
+        "courseCredit": "a6eba906-72a8-4bf9-81fb-c2c330b1f83e:number:4",
+        "gradingBasis": "cccfc0fa-7e1a-46db-bb6c-73e1cbf7e1b7:string:GRD",
+        "includeInGPA": "aea3c394-4170-454e-82ea-df660788d288:boolean:true",
+        "semester": "1481299f-d0af-4cc7-a381-46022b71bc9b:string:0920"
+      },
+      {
+        "name": "d43ff047-787c-4e78-badb-90f2bfd3652f:string:Mathematics I",
+        "courseCode": "de1891ff-725f-4af8-ba9f-a42291ac251d:string:MA1505",
+        "grade": "be97e3f8-622f-4999-a905-0ebc2af55740:string:F",
+        "courseCredit": "0c732730-aeab-4b4f-b2d6-61e425352080:number:4",
+        "gradingBasis": "218e88e0-39cf-4692-a49c-a0ec021abf53:string:GRD",
+        "includeInGPA": "b88c0b7d-3bb2-42bd-a693-4a8150348e52:boolean:true",
+        "semester": "6a48810f-34db-417e-897d-12cd2eb8bbba:string:1010"
+      },
+      {
+        "name": "54303341-7de2-4746-a330-065fe9f13a6e:string:Mathematics II",
+        "courseCode": "943f9b17-0a5a-4cc9-81ea-3f56945c0e2f:string:MA1506",
+        "grade": "20e08fbd-d14d-4e5f-9d8e-917c6de89ddb:string:C",
+        "courseCredit": "ffcdb1f9-eb3c-493e-a287-781a6e956b81:number:4",
+        "gradingBasis": "91bbe185-7b6e-43d9-87c2-eb96c71b75d6:string:GRD",
+        "includeInGPA": "e56fa4a8-8fc3-4389-b399-856912e269a3:boolean:true",
+        "semester": "899419b1-0632-4521-9f29-8599ab5ffa42:string:1010"
+      },
+      {
+        "name": "a203c156-31d4-45a3-9946-968f4f371b9f:string:Engineering Thermodynamics",
+        "courseCode": "9dfcc4be-2aa4-4720-a61a-ec5fe9b86e43:string:ME2121",
+        "grade": "85278802-fa91-4007-933e-a625ea8a2753:string:F",
+        "courseCredit": "df2bc0e0-4b3a-41b0-97ca-dfd139544448:number:3",
+        "gradingBasis": "22582c32-d20b-404d-8fef-964eed6d6224:string:GRD",
+        "includeInGPA": "d14879a6-31cd-4e1a-8950-c311d568c5e7:boolean:true",
+        "semester": "3e1201d1-1659-4d44-b463-756845972312:string:1010"
+      },
+      {
+        "name": "483c6a67-e366-4240-9bd7-85d9686fb6b8:string:Principles of Mechanical Eng. Materials",
+        "courseCode": "6848add8-e39f-4945-bcd1-b191bd6249a7:string:ME2151",
+        "grade": "4fceae8b-a489-4a56-a52e-7f163d04c64b:string:B-",
+        "courseCredit": "4ca6acc3-d20f-4eae-b4a9-dda7b96442cd:number:4",
+        "gradingBasis": "282701d7-b93f-4922-8c37-5fd81b7f71b8:string:GRD",
+        "includeInGPA": "36012dfa-9389-4c64-a358-dec5010433f0:boolean:true",
+        "semester": "e5dac9a0-7050-44a8-8466-7198ca38c9a5:string:1010"
+      },
+      {
+        "name": "45d99178-7e93-4521-8b93-7d7002c21ce9:string:Mechanical Systems Design I",
+        "courseCode": "d02afb15-1caa-4bfa-85e9-57a0a8f2f48b:string:ME3101",
+        "grade": "41f81525-b0a1-4fb6-b53d-9583ed7a1782:string:B",
+        "courseCredit": "3e0bd1a8-8113-4882-83d4-294be488209c:number:4",
+        "gradingBasis": "cb8fcb2c-12d0-4842-a066-c5b8c52dd0f1:string:GRD",
+        "includeInGPA": "88e01606-c77a-430b-9bd3-2b4b7b6a9e9e:boolean:true",
+        "semester": "efe94e03-8c55-48bb-9bff-705ce878f2e9:string:1010"
+      },
+      {
+        "name": "03445607-8252-49d1-b234-3a48186092dc:string:Mechanics Of Machines",
+        "courseCode": "39fa28b6-67c8-455a-aefb-c0c6cd9c3fb7:string:ME3112",
+        "grade": "6c15328f-4c0a-415a-be41-cee3ff4e3547:string:C+",
+        "courseCredit": "d31badeb-ec69-4a19-a366-110c6ed5e3d5:number:4",
+        "gradingBasis": "0c6bd3f6-266e-421e-baf6-638da406d4f3:string:GRD",
+        "includeInGPA": "f2dfede2-1053-465e-af0f-948078de0476:boolean:true",
+        "semester": "1fa0a62f-5ac7-4693-96f4-96a2ef634001:string:1010"
+      },
+      {
+        "name": "3f22fe71-bafd-4c9f-8c68-6c7d32c13dc0:string:Mechanics Of Materials II",
+        "courseCode": "2be06cd9-16bd-4786-9ded-c6f4de972166:string:ME2114",
+        "grade": "65724104-fef0-41e3-b07d-8775cf19de2a:string:D+",
+        "courseCredit": "04b91da1-7026-456f-8162-4151ebd74d1d:number:3",
+        "gradingBasis": "cfd381d7-ea61-4875-b95a-3b2b6d8b9870:string:GRD",
+        "includeInGPA": "ca6a946b-00b6-4053-a950-9abe188195c8:boolean:true",
+        "semester": "c8233918-1638-4424-9a64-6b37174b0f96:string:1020"
+      },
+      {
+        "name": "3a642ade-5791-46b2-94e5-0b2957f46289:string:Fluid Mechanics II",
+        "courseCode": "95856756-10c9-4d0d-a289-1d6d16c0a696:string:ME2135",
+        "grade": "03d489fb-81f7-4a4e-ba48-ae793b15db06:string:F",
+        "courseCredit": "373a77eb-58a2-4fc4-9273-8f6be69b5a21:number:4",
+        "gradingBasis": "607b846a-0d77-47f3-a20d-e5cccef5cb5d:string:GRD",
+        "includeInGPA": "f0bd50f6-5624-4ef2-bc63-14df4f25eead:boolean:true",
+        "semester": "6ed9c390-38b6-4c8d-8952-2612790878f2:string:1020"
+      },
+      {
+        "name": "05e53575-68b6-46ca-986d-03a838d8e11a:string:Feedback Control Systems",
+        "courseCode": "2dc8b587-14ee-43bb-9c05-7174a7c30f16:string:ME2142",
+        "grade": "4fb587e9-8c5d-4837-a652-fbe7c74f8911:string:C",
+        "courseCredit": "f91ab18a-ab91-42d9-91a3-27c54807acef:number:4",
+        "gradingBasis": "6cbd1949-475f-486d-ae80-2230776cea65:string:GRD",
+        "includeInGPA": "0a48e296-f88f-43f4-9537-8ae942b6a3a9:boolean:true",
+        "semester": "e1fc3497-e4ef-4b01-b938-7165c2c2b1a8:string:1020"
+      },
+      {
+        "name": "83caacf7-525b-4c99-aeb2-1a07e64ae373:string:Sensors & Actuators",
+        "courseCode": "5d74ddd2-0869-43ad-bd4c-6375ff006218:string:ME2143",
+        "grade": "388e6152-8e37-4124-86c9-8352ef33b8f4:string:D+",
+        "courseCredit": "4985f163-2a38-4f84-83ea-c3480cee1d81:number:4",
+        "gradingBasis": "3b340151-b696-4559-a71b-41cbfb3f9927:string:GRD",
+        "includeInGPA": "ee1d4deb-da40-4e9e-827b-a718b188ba7b:boolean:true",
+        "semester": "e201f698-7e9b-4802-8ab9-438d4d410347:string:1020"
+      },
+      {
+        "name": "7466b2d1-24c1-49d3-8d8b-d4219e5dc423:string:Mechanical Systems Design II",
+        "courseCode": "831ad0fe-8572-4af2-9a48-7562c0eb4107:string:ME3102",
+        "grade": "b999fc1d-b3ba-4720-8e1d-ad4b20580358:string:B+",
+        "courseCredit": "e7cb1b22-454b-4f3b-9409-1067f815e60d:number:4",
+        "gradingBasis": "e360174f-2dfc-4728-a819-1b21e3c0a2aa:string:GRD",
+        "includeInGPA": "18268b06-50cd-4bd0-bf5f-ec9557db8eb2:boolean:true",
+        "semester": "a3f9fe63-b70d-4d80-81f2-febb811c8f71:string:1020"
+      },
+      {
+        "name": "12c1ff1a-0c65-4d2a-bb64-5aaa523a383b:string:Microprocessor Applications",
+        "courseCode": "57eec305-a586-47a2-858c-48ed66411917:string:ME3241",
+        "grade": "7c92090e-1192-4962-8888-6702cb4f01b2:string:C+",
+        "courseCredit": "0427f805-2202-49a0-a036-18bd6033ed90:number:4",
+        "gradingBasis": "16625891-b6bc-4b40-ac17-89e6475f9a15:string:GRD",
+        "includeInGPA": "7d0a2395-0441-4f23-b73c-3c1aa4e1f6d9:boolean:true",
+        "semester": "590b2362-34a9-461a-b392-ede6ef1afe98:string:1020"
+      },
+      {
+        "name": "64aa486e-25a8-4360-8352-120b1d1b3352:string:Mathematics I",
+        "courseCode": "18ee65f7-8156-406a-ba4b-2b26b4725dc8:string:MA1505",
+        "grade": "eb2d969a-ee74-420f-b113-fa4ad5564ac0:string:C",
+        "courseCredit": "a808c0ba-cd89-4492-bf66-3d53a8ff0080:number:4",
+        "gradingBasis": "cac3ae0c-ad74-492a-a0f8-0cb0fbc8fd4a:string:GRD",
+        "includeInGPA": "ad284aa1-6a2c-43d5-9ac7-8cbe235eb71e:boolean:true",
+        "semester": "52e22c96-becb-411e-a5a0-e9407ba2e062:string:1110"
+      },
+      {
+        "name": "c43604cd-d2de-4fbb-ade2-b8500f3314be:string:Engineering Thermodynamics",
+        "courseCode": "b99c3f0f-776d-46f3-96c6-c096fff0c748:string:ME2121",
+        "grade": "eeed3a1b-8343-44a5-a556-eb05b4722475:string:D",
+        "courseCredit": "37152f29-987c-48bb-8550-9abcf32645c7:number:3",
+        "gradingBasis": "7192f074-fe28-4587-9aab-529357776cd1:string:GRD",
+        "includeInGPA": "afc0df04-c29a-43da-b865-5824c790b631:boolean:true",
+        "semester": "2c231247-04b9-4b75-bf3b-6504a104eba8:string:1110"
+      },
+      {
+        "name": "536fe1fe-1785-4355-8429-5e3e28305806:string:Heat Transfer",
+        "courseCode": "c49b670e-2b53-4015-834a-3ab4bb653780:string:ME3122",
+        "grade": "69368ad2-a72f-451f-896a-b45209acc7b7:string:C+",
+        "courseCredit": "f1166ac7-1f04-4131-8032-55d0e2078be1:number:4",
+        "gradingBasis": "e8ee0b43-9164-48a2-ae33-488a837336c9:string:GRD",
+        "includeInGPA": "fe198a3e-311b-4c8f-b0d6-db090b109835:boolean:true",
+        "semester": "717efa5e-9cc7-4b14-b5bc-4d278bb8ba9f:string:1110"
+      },
+      {
+        "name": "680fe70f-9d20-4424-a6a3-9a6fde2af6c0:string:Manufacturing Processes",
+        "courseCode": "9813c838-1918-44d3-ab05-04e0b7de6c99:string:ME3162",
+        "grade": "1fd8e239-71ca-4e6a-8294-4879684d8b30:string:C",
+        "courseCredit": "829f6999-c077-48cb-b5c7-7c961c031b82:number:4",
+        "gradingBasis": "ebb14641-2336-49bc-8acb-94ea5e184c82:string:GRD",
+        "includeInGPA": "85240a2e-4a07-4950-be00-bfeeaf277d7e:boolean:true",
+        "semester": "9dd4dcdb-6742-42fa-ae1c-5d624ad9e157:string:1110"
+      },
+      {
+        "name": "a218d94e-a27f-4a1c-aa0f-e813c35f86d9:string:Industrial Automation",
+        "courseCode": "3a0603b9-b267-49eb-8634-bb09ec47bd45:string:ME3242",
+        "grade": "34b3d2fd-1296-4c1d-be45-e4a5bd28c8df:string:C+",
+        "courseCredit": "d289c437-bc15-4d4a-a5ba-19b49a8f7076:number:4",
+        "gradingBasis": "a945ebc6-a1da-4fb7-96ae-0027747c3280:string:GRD",
+        "includeInGPA": "99073a21-1785-45ae-885d-ac221cef320a:boolean:true",
+        "semester": "636a1147-b4be-432f-9fee-3c770e17816e:string:1110"
+      },
+      {
+        "name": "15e7bd1f-2421-4e99-a7ed-472bdd5f8bde:string:Engineering Professionalism",
+        "courseCode": "f03923b8-1ce3-4af7-af6b-cf9d97a54473:string:EG2401",
+        "grade": "86b41f35-1eb8-4ffc-970d-c846a15c4a0c:string:C",
+        "courseCredit": "3dcdae33-9059-4420-8286-01ee9474dd51:number:3",
+        "gradingBasis": "abcb20a0-2b55-4c47-bea7-b3cd4c8e5dbf:string:GRD",
+        "includeInGPA": "cdca6573-f571-4079-8d37-bc5c33239df7:boolean:true",
+        "semester": "4e133157-e8a5-4a13-8a4e-759ec647d41e:string:1120"
+      },
+      {
+        "name": "9f7a7c81-3cbd-4318-b386-d58792223830:string:Fluid Mechanics II",
+        "courseCode": "85b55e5e-307a-44f9-b339-c5e51c9538d6:string:ME2135",
+        "grade": "c93746d7-a2e7-45fc-bf8b-8976ad3c8e58:string:F",
+        "courseCredit": "18c727d9-21b4-429b-aaff-e41aee92e15f:number:4",
+        "gradingBasis": "e3221163-4779-438f-b540-7581392a4cb7:string:GRD",
+        "includeInGPA": "7597aea0-9f9c-47ff-8895-66f51b3e015b:boolean:true",
+        "semester": "e6488d04-cc94-4a17-9252-1826f6ef4ee9:string:1120"
+      },
+      {
+        "name": "040845cc-e63b-43a7-8897-7dc3927349aa:string:Microsystems Design And Applications",
+        "courseCode": "a1d496c4-f36b-4b76-9f64-e40da4081ddc:string:ME3281",
+        "grade": "d1d1059e-5ccb-445e-ab29-7274b0d3aaa2:string:B",
+        "courseCredit": "bd86d67c-ff8f-4653-bf82-090324ef9b36:number:4",
+        "gradingBasis": "0bac73ff-c658-4100-a197-e527b50ce7a5:string:GRD",
+        "includeInGPA": "b0443860-5fdf-4684-9177-2a99d1f16f20:boolean:true",
+        "semester": "6a6672a5-ba08-4242-8ef8-d9541c67fbf8:string:1120"
+      },
+      {
+        "name": "fa6c9838-5c42-433d-8316-0070d9c7da32:string:Bachelor Of Engineering Dissertation",
+        "courseCode": "d76efc16-1710-4413-bd14-e410be49048c:string:ME4101A",
+        "grade": "5ff3660d-e484-4f45-b0cc-90b855f07b6b:string:IP",
+        "courseCredit": "a3e0f33a-9d75-49e3-a300-273eff53a6d8:number:8",
+        "gradingBasis": "fe1b566c-b895-421a-9029-a1b56c7d4991:string:GRD",
+        "includeInGPA": "21e61328-9b64-499c-945a-5e701afb83d2:boolean:true",
+        "semester": "03cdde42-45c5-4d4a-905a-4b4e95b5f2b5:string:1120"
+      },
+      {
+        "name": "45221ce5-5450-4808-afa2-a8cf378e267b:string:Automation In Manufacturing",
+        "courseCode": "ca4619a7-2b35-4c66-8aab-119e19dd0774:string:ME4262",
+        "grade": "c3253c5d-e884-4638-a291-bfdd347bd925:string:F",
+        "courseCredit": "58019415-16d1-4d95-aebe-341872a9cd08:number:4",
+        "gradingBasis": "496d148f-17ec-46f1-90d4-46c01248ca83:string:GRD",
+        "includeInGPA": "3bf646f6-2778-4ddc-8d2f-c147860f772c:boolean:true",
+        "semester": "17288930-e544-43c1-8cc8-934484fd4452:string:1120"
+      },
+      {
+        "name": "f6f2c8c9-3b48-44c9-aeef-e118af7531bd:string:Micro Sensors & Micro Actuators",
+        "courseCode": "c1f266f8-6947-48ad-bee6-970253b93527:string:ME4284",
+        "grade": "82ae98b5-9300-4d96-aa13-795f19d49c61:string:B",
+        "courseCredit": "e70c2585-98a1-4cff-955e-f31be60d3d9f:number:4",
+        "gradingBasis": "2b42b4fb-2ed8-4433-ad57-df5c1313811e:string:GRD",
+        "includeInGPA": "8d06290d-eee8-4c2b-bb0d-79e301638c64:boolean:true",
+        "semester": "ced4fa53-e802-4a2a-be48-3965be3acc83:string:1120"
+      },
+      {
+        "name": "09789ec0-05ab-40c8-85f0-bb7c1d73cfd4:string:Physics in the Life Sciences",
+        "courseCode": "13687a96-7323-479b-a728-0fe8e900618e:string:GEK1521",
+        "grade": "61071e2c-1f7f-4568-a0c6-6406a35968ee:string:C",
+        "courseCredit": "55b217ae-9099-46bb-8395-5af210d679ca:number:4",
+        "gradingBasis": "c350dc73-5f03-4f7a-803c-d1df88fcc45a:string:GRD",
+        "includeInGPA": "ea810911-722b-4d32-9247-823807c2b5ff:boolean:true",
+        "semester": "a5f4ea81-86e2-4308-afbc-6e19214fe855:string:1210"
+      },
+      {
+        "name": "d3f309b7-0528-49e1-9c59-349349a040c8:string:Computer-Aided Design And Manufacturing",
+        "courseCode": "3be2924c-c0bc-4080-a7ba-831268388519:string:ME3261",
+        "grade": "a21d9c05-e601-48e6-9792-1fcff61eba9d:string:D+",
+        "courseCredit": "e053ef69-34b2-4cc4-9aac-7585184e53fb:number:4",
+        "gradingBasis": "1162e567-060f-4878-8719-dd129d3695bc:string:GRD",
+        "includeInGPA": "2ac6b4d0-9c16-4ceb-bdb8-f96a755f249d:boolean:true",
+        "semester": "efd3977f-2ea1-4c60-abd1-ad1cceb6adb7:string:1210"
+      },
+      {
+        "name": "19653c20-f89f-4c0d-b4c9-92054abc694f:string:Bachelor Of Engineering Dissertation",
+        "courseCode": "9acbc489-f07f-4ebd-b33d-71d3fd3c942a:string:ME4101A",
+        "grade": "241de276-2472-4cb6-a6f3-0bbb820c041c:string:B",
+        "courseCredit": "a7d8c0d0-76e5-4184-b014-20e92dfc7037:number:8",
+        "gradingBasis": "6f6b4e0f-c318-4e45-93d6-2330b4a3dc5a:string:GRD",
+        "includeInGPA": "a3388c0f-b455-49c8-bbb4-0fc190427242:boolean:true",
+        "semester": "7b0bfe61-064d-4310-93cb-4523ee95d60c:string:1210"
+      },
+      {
+        "name": "1cc0c771-fe16-4bd5-9362-783c5add9818:string:Nation-Building in Singapore",
+        "courseCode": "97eebab8-d39b-410c-8146-c2898d874023:string:SSA2204",
+        "grade": "1857235d-3b69-49c3-8d32-2013db0c6fe9:string:C+",
+        "courseCredit": "6a3f2ed4-1428-4489-8a58-eecce480341a:number:4",
+        "gradingBasis": "865bf980-41a6-4985-b9b3-3a7be2a6b0ae:string:GRD",
+        "includeInGPA": "241e26b3-f75d-4288-ad79-2853935f0417:boolean:true",
+        "semester": "7a872bb9-6798-4bef-989f-0a9e31150281:string:1210"
+      },
+      {
+        "name": "8418f5de-7870-459a-89be-4001a028cb59:string:Korean 1",
+        "courseCode": "4f6023f7-b2da-443c-95e9-4561d543b638:string:LAK1201",
+        "grade": "a341b49a-d828-4abc-ae4b-3cf2270dce08:string:C",
+        "courseCredit": "d232490b-03ba-4dab-8870-5adb950d15d2:number:4",
+        "gradingBasis": "1287f93c-772a-4d26-8d36-6bf43aed86cf:string:GRD",
+        "includeInGPA": "e6945a02-9e0c-4742-9984-3ccb4842c7d8:boolean:true",
+        "semester": "9741ef1d-bcb5-4814-b647-84cbd6a14cc4:string:1220"
+      },
+      {
+        "name": "d63dc5d4-a1b2-470f-8134-4db6202ea99b:string:Fluid Mechanics II",
+        "courseCode": "c9de5046-3cb0-48d9-ad58-f2829e1aeef4:string:ME2135",
+        "grade": "11743010-0c98-41f3-aa72-34512e0631e6:string:D",
+        "courseCredit": "52e9888f-582b-481f-89ff-a371817b5ec2:number:4",
+        "gradingBasis": "d022ae74-4fae-48ad-9964-676003872c99:string:GRD",
+        "includeInGPA": "a3e6fb57-4048-4e4e-97a6-e67441022958:boolean:true",
+        "semester": "2124faef-4ff4-4f51-8e2b-2e22a9981e6c:string:1220"
+      },
+      {
+        "name": "30c155f0-2a36-4ff5-8885-179c7c52eda8:string:Automation In Manufacturing",
+        "courseCode": "5b393236-90d1-4109-ab14-a8bc72b02a8b:string:ME4262",
+        "grade": "798960c6-7e5f-4409-9a6f-bcd4175f86be:string:D",
+        "courseCredit": "e3b09adc-4309-4ec9-90fd-749141416c51:number:4",
+        "gradingBasis": "8ccd3a3e-73c7-465a-b89f-dd323b9d5534:string:GRD",
+        "includeInGPA": "0a1d54dc-af9e-428a-91c8-3e4087d902f8:boolean:true",
+        "semester": "7838dcbf-ead8-466c-a2fa-9288186e4ab7:string:1220"
       }
     ],
     "additionalData": {
-      "transcriptType": "514eac3a-7769-49c3-af23-195574cb4f55:string:UGOF",
+      "transcriptType": "ae4a14dd-3b4e-4874-9ec2-c67265bfb6f5:string:UGOF",
+      "transcriptGroup": [
+        {
+          "name": "d34a686e-561b-452c-99b1-99b9d4b3be92:string:0910",
+          "term": "d644c916-a545-4fde-a534-865a2c07d89c:string:2009/2010 Semester 1",
+          "formOfStudy": "89c4e14d-7c75-473d-b913-1bf268c34769:string:ENRL",
+          "fosPrintArea": "bd43c736-1820-4e51-859a-691c60428aad:string:ND",
+          "creditTransfer": [
+            {
+              "sourceType": "4614e015-a83f-42f8-bbb5-fe7e1a3d1c05:string:E",
+              "creditsNoGPA": "eba9be29-2acb-4c19-8a06-9ccd35723bc6:number:38",
+              "creditsGPA": "230def5e-8d95-4fb7-8f6d-fcad05e7d5cb:number:0",
+              "orgId": "251f8e55-e818-414f-80c8-e19d69721371:string:Singapore Polytechnic",
+              "orgName": "000ebc86-99ec-4c9f-af46-fd3562a55322:string:Singapore Polytechnic",
+              "transferSeq": "e7e90829-e3a2-4763-9852-814237aae596:number:1"
+            }
+          ],
+          "summary": [
+            {
+              "programName": "a61dee2d-4ff3-4c10-a148-1739d4dfa192:string:Bachelor of Engineering (Mechanical Engineering)",
+              "includeInGPA": "ab2e30aa-d427-4093-98e7-ab35f3e30e40:boolean:true",
+              "GPAName": "86d017e3-356c-4976-b6f8-ce1f82a28b50:string:Cumulative Average Point",
+              "GPA": "77556762-5222-4432-b658-77fda7e86f41:number:2.81"
+            }
+          ]
+        },
+        {
+          "name": "0f69d61e-0580-429c-9ee1-88a8f083a05c:string:0920",
+          "term": "030c7538-ce70-4ced-89bd-144074201614:string:2009/2010 Semester 2",
+          "formOfStudy": "21b0b748-78e2-4c2a-aa0f-a4f932217825:string:ENRL",
+          "fosPrintArea": "32e25df6-0006-4d77-9502-59829633778a:string:ND",
+          "summary": [
+            {
+              "programName": "8c7a1233-eb6c-45ff-87fd-41a94fc606a8:string:Bachelor of Engineering (Mechanical Engineering)",
+              "includeInGPA": "7f94220d-ca86-4f29-8b83-10249e70725b:boolean:true",
+              "GPAName": "a7380b65-cc7c-4975-adac-58a693debb26:string:Cumulative Average Point",
+              "GPA": "68e41e32-7222-4adc-b3bb-c1c50cbcfa92:number:2.12"
+            }
+          ]
+        },
+        {
+          "name": "d57470ec-3835-4db4-9e6d-bae67bc41072:string:1010",
+          "term": "1fae6da7-b0da-4053-88dd-b1bd77131dd6:string:2010/2011 Semester 1",
+          "formOfStudy": "74d5d97f-55a4-4788-a932-dd00e544a1aa:string:ENRL",
+          "fosPrintArea": "521b93de-53ea-4365-90e9-d95130e11df3:string:ND",
+          "summary": [
+            {
+              "programName": "bc73648d-e289-4e41-8374-34f27744b5e8:string:Bachelor of Engineering (Mechanical Engineering)",
+              "includeInGPA": "e7c88907-049e-4180-bb5e-8c9d16343523:boolean:true",
+              "GPAName": "c4442ca2-f708-444f-b20a-168a48ffd0c6:string:Cumulative Average Point",
+              "GPA": "ce3a6237-3bc7-4766-976e-ab3ec2e98331:number:2.04"
+            }
+          ]
+        },
+        {
+          "name": "784ae954-ad39-4b35-9920-9860ee37b290:string:1020",
+          "term": "cf1ef1c4-391e-4504-b958-e7279e41fadc:string:2010/2011 Semester 2",
+          "formOfStudy": "d1af1ab7-b95e-4cf9-9a19-cc77f618e497:string:ENRL",
+          "fosPrintArea": "e888976f-2c8c-412e-b009-5da258c0b1ac:string:ND",
+          "summary": [
+            {
+              "programName": "0f7401d4-4362-46be-a48a-d28a51b5f555:string:Bachelor of Engineering (Mechanical Engineering)",
+              "includeInGPA": "3fb704e7-1686-4bc1-9bd7-758ca78981a4:boolean:true",
+              "GPAName": "b50db9a4-220a-4e74-a6d6-7e59c297c4d2:string:Cumulative Average Point",
+              "GPA": "32155c8a-3fcd-42d2-9fd1-72bc37113327:number:2.01"
+            }
+          ]
+        },
+        {
+          "name": "79db59b8-bee0-435f-8765-3c3abaa129e0:string:1110",
+          "term": "3936a116-8250-4aab-9f1f-db61d6fc6732:string:2011/2012 Semester 1",
+          "formOfStudy": "ba99fcbc-35c6-453b-be5f-acffeb7b5234:string:ENRL",
+          "fosPrintArea": "d5b3b76f-d958-44ef-bf9b-6a7b2be43762:string:ND",
+          "summary": [
+            {
+              "programName": "ed09dc98-2b80-4b2b-93c0-905b457d8c20:string:Bachelor of Engineering (Mechanical Engineering)",
+              "includeInGPA": "8d22fd17-8554-435b-b1d2-fffd7e01b307:boolean:true",
+              "GPAName": "ba243dc7-d30c-4386-8b26-37f976c7145a:string:Cumulative Average Point",
+              "GPA": "215e57c9-6222-4a2b-8cfd-6c881a8cd5d2:number:2.02"
+            }
+          ]
+        },
+        {
+          "name": "2117bf40-82b5-4ad0-adbd-2b90d2cb4d7c:string:1120",
+          "term": "68bf1095-3931-4d8e-a298-0441abcc94c4:string:2011/2012 Semester 2",
+          "formOfStudy": "433754e9-e169-4ba4-bded-bbc4c7699356:string:ENRL",
+          "fosPrintArea": "f831ebd0-ef10-4049-a3b3-c448dc40fbf3:string:ND",
+          "summary": [
+            {
+              "programName": "265029bd-8287-40f2-be31-a4daa8e00f60:string:Bachelor of Engineering (Mechanical Engineering)",
+              "includeInGPA": "3258ac78-1d38-4857-a4f3-9bad98f9a976:boolean:true",
+              "GPAName": "06ccce6f-1d8e-4c9f-aac6-26e2e65ba183:string:Cumulative Average Point",
+              "GPA": "0abdbd3d-04f6-45d0-ab7b-b09dbbc74ed9:number:1.98"
+            }
+          ]
+        },
+        {
+          "name": "48d5f59c-d63e-4d35-8f9b-9c61075012bf:string:1210",
+          "term": "36daa2ac-c6fe-40ee-8c79-0ab4f2a85413:string:2012/2013 Semester 1",
+          "formOfStudy": "8cc66357-f2bc-4ddf-ae76-7bbf7841afb3:string:ENRL",
+          "fosPrintArea": "4869eae6-cdcf-4f33-838f-1ab9ebcfb2b4:string:ND",
+          "summary": [
+            {
+              "programName": "466f7467-bdab-4c7e-bb31-30d3e8c4595d:string:Bachelor of Engineering (Mechanical Engineering)",
+              "includeInGPA": "2e52b818-0f05-4e79-b7dd-c263b3136cfb:boolean:true",
+              "GPAName": "18856cb9-85fb-4f47-90d6-e027991966bd:string:Cumulative Average Point",
+              "GPA": "31e029e8-744a-44f4-9d4a-9a5d24f6f9c6:number:2.07"
+            }
+          ]
+        },
+        {
+          "name": "3cee7656-315d-4cff-976f-a1d9b56e0a3e:string:1220",
+          "term": "fa15c272-d628-41b3-a85c-d5a7aa0d2580:string:2012/2013 Semester 2",
+          "formOfStudy": "71c83b13-131c-4a63-98a1-13e706c2f324:string:ENRL",
+          "fosPrintArea": "00590516-3a3a-4e7f-8bad-287cdd25126c:string:ND",
+          "summary": [
+            {
+              "programName": "3aa27a11-d121-4175-b4b4-3f40de91695f:string:Bachelor of Engineering (Mechanical Engineering)",
+              "includeInGPA": "f5b743d7-874e-494d-9951-eab3a50d3196:boolean:true",
+              "GPAName": "5df140fb-1d12-4fb1-8a21-02325748652b:string:Cumulative Average Point",
+              "GPA": "f48873f8-649d-46ae-9f32-7d0ab04fb8e9:number:2.01"
+            }
+          ]
+        }
+      ],
       "programData": [
         {
-          "programCode": "54ada4df-10ab-434b-be52-f6e9b75334ae:string:B0610",
-          "programName": "76ca951f-a7b8-44ef-876d-d76d6659ed0b:string:Bachelor of Engineering (Mechanical Engineering)",
-          "statusCode": "e8f26d98-4823-4dc2-a4d3-5fa46ccd4e7c:string:CM",
-          "statusDescription": "3bc5ed8f-e7b0-4cd4-a02d-032cf6bb9b5a:string:Completed Programme",
-          "effectiveDate": "b174013f-0d05-472e-aac2-c31aaad0c264:string:2013-06-25",
-          "admitTerm": "1443e438-ccb3-43b7-8d85-b694ad1be2fe:string:0910"
+          "programCode": "228543c7-531e-44be-9b59-053aae2b6595:string:B0610",
+          "programName": "d68a8e3c-a3ea-433d-b0c0-1bdc8920593a:string:Bachelor of Engineering (Mechanical Engineering)",
+          "statusCode": "bb0d8cbc-5185-4d29-9eb9-168112fe7c90:string:CM",
+          "statusDescription": "2dccc56d-c955-4280-a832-a34094b3f4b1:string:Completed Programme",
+          "effectiveDate": "ebf6f2dd-62cb-4075-ab1a-64ecbdcf9121:string:2013-06-25",
+          "admitTerm": "93111bdb-1f26-45cf-b084-31e28a8c147d:string:0910"
         }
       ],
       "degreeData": [
         {
-          "degreeTitle": "2af758ac-6472-4770-b487-480b28af58c9:string:Bachelor of Engineering (Mechanical Engineering)",
-          "dateConferred": "b34a336b-c6be-46f4-945a-4b4dba6e9dd5:string:2013-06-30"
+          "degreeTitle": "33161e7b-2d1a-4ca8-9943-4d30e463f4f0:string:Bachelor of Engineering (Mechanical Engineering)",
+          "dateConferred": "2d54c456-88b0-47cc-972b-36167255c8d8:string:2013-06-30"
         }
       ]
     }
@@ -583,11 +628,14 @@
   "privacy": {},
   "signature": {
     "type": "SHA3MerkleProof",
-    "targetHash": "b0e9bfcca9866074deec42929714e0dd96256a89c0684b2ed4ac77311a9d3f3f",
+    "targetHash": "dceb6007cfa139c288bfee9aec1bc7ae887ddaf7353c2d50c8a0a20395638df0",
     "proof": [
-      "17eb915eb8f25aacd6e51182eca071785aac1177c7d6f7820c5588f3be948f6a",
-      "2ba31bfd81020b02c63b5204e63c94b4002c177152cc16484be6adaa2ee46a05"
+      "500bed9bfc891e2c36a3c44819635178276535883de2a822b3e2d09b185b1812",
+      "f17256ded424a7ab927d9b9e3d3e43c4d71d84701b1fccbe84e9724d158f4378",
+      "d2aca152648bf10878b13bf323d2528ecdbe2bfec8cab183e3bc9a11b87dfc7b",
+      "5b0fcb7cc9b6bdf2ce112ac397d5af149439ac7bcc4e44e66b09274bd53e13dc",
+      "e3902d5e6e7274d16ee78992b41d1c2539d007316798f37ad036a577aa16c452"
     ],
-    "merkleRoot": "8702763c43ebfa0baa04d33320835b771e82942ad004080c2311a1bdfadee2fc"
+    "merkleRoot": "fc4d413665bef3ad14eb8934319f16a32a4711df60bed1ffd4519441b716629f"
   }
 }

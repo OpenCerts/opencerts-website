@@ -26,7 +26,7 @@ test("NUS-K3MBBS-2019 degree scroll is rendered correctly", async t => {
     "NATIONAL",
     "UNIVERSITY",
     "OF SINGAPORE",
-    "A0110113L, NAME",
+    "A0119114R, NAME",
     "Bachelor",
     "Medicine",
     "Bachelor",
@@ -36,10 +36,10 @@ test("NUS-K3MBBS-2019 degree scroll is rendered correctly", async t => {
   const transcriptTab = TemplateTabList.find(":nth-child(2)");
   await t.click(transcriptTab);
   await validateTextContent(t, RenderedCertificate, [
-    "A0110113L, name",
-    "A0110113L",
+    "A0119114R, name",
+    "A0119114R",
     "01/01/1905",
-    "20/08/2019",
+    "27/08/2019",
     "BACHELOR OF MEDICINE AND BACHELOR OF SURGERY",
     "COMPLETED PROGRAMME",
     "2013/2014",
@@ -48,14 +48,25 @@ test("NUS-K3MBBS-2019 degree scroll is rendered correctly", async t => {
     "2014/2015",
     "MD2140",
     "Abnormal Structure and Function",
+    "MD2150",
+    "Clinical Skills Foundation Programme",
     "2015/2016",
     "MD3140",
     "Core Clinical Practice",
     "2016/2017",
     "MD4140",
     "Acute and Specialty Clinical Practice",
+    "MD4150",
+    "Community Health Posting",
     "2017/2018",
     "MD4150",
-    "Community Health Posting"
+    "Community Health Posting",
+    "MD5140",
+    "Medicine",
+    "MD5150",
+    "Surgery",
+    "MD5160",
+    "Electives"
   ]);
+
 });

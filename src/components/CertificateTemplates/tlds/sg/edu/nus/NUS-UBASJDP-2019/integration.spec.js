@@ -37,7 +37,7 @@ test("NUS-UBASJDP-2019 degree scroll is rendered correctly", async t => {
     "A0119893N, name",
     "A0119893N",
     "01/01/1905",
-    "20/08/2019",
+    "27/08/2019",
     "MASTER OF SCIENCE",
     "COMPLETED PROGRAMME",
     "DOCTOR OF PHILOSOPHY",
@@ -47,6 +47,9 @@ test("NUS-UBASJDP-2019 degree scroll is rendered correctly", async t => {
     "ANTI-INFECTIVE DRUG DISCOVERY",
     "2018/2019 SEMESTER 1",
     "MDG5108",
-    "BIOSTATISTICS FOR BASIC RESEARCH"
+    "BIOSTATISTICS FOR BASIC RESEARCH",
+    "MDG5771",
+    "Graduate Research Seminar and Workshop"
   ]);
+
 });
