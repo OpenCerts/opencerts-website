@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import QRCode from "qrcode.react";
+import { QRCode } from "react-qr-svg";
 import css from "./sharing.scss";
 import { getShareLinkState } from "../../reducers/certificate";
 
