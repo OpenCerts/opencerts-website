@@ -20,71 +20,88 @@ class CertificateShareLinkForm extends Component {
       shareLink && `${window.location.origin}/${shareLink.id}#${shareLink.key}`;
     return (
       <div className="container">
-        <div className="row">
-          <div className="offset-2 col-8">
-            <div className="row d-flex justify-content-center">
-              <h4>Share your certificate</h4>
-            </div>
-            <div className="row justify-content-center">
-              Share this certificate by copying the link below.
-              <small>
-                * Note: This link will automatically expire in <b>14 days</b>.
-              </small>
-            </div>
-            {shareLinkState === "INITIAL" ? (
-              <Loader />
-            ) : (
-              <>
-                <div className="row mt-4 d-flex justify-content-center">
-                  <input
-                    className="w-75"
-                    value={certificateLink}
-                    onClick={() => handleCopyLink(certificateLink)}
-                    placeholder="Certificate link"
-                    readOnly
-                  />
-                  <button
-                    type="button"
-                    className={`pointer ${css.copyBtn} w-25`}
-                    onClick={() => handleCopyLink(certificateLink)}
-                  >
-                    Copy
-                  </button>
-                </div>
-                {copiedLink && (
+        <div className="col-12 justify-content-center">
+          <div className="row d-flex justify-content-center">
+            <h4>Share your certificate</h4>
+          </div>
+
+          {shareLinkState === "INITIAL" ? (
+            <Loader />
+          ) : (
+            <>
+              {shareLink.id && shareLink.key !== undefined ? (
+                <div className="offset-2 col-8">
                   <div className="row justify-content-center">
-                    <small className="text-green">
-                      Successfully copied share link!
+                    Share this certificate by copying the link below.
+                    <small>
+                      * Note: This link will automatically expire in{" "}
+                      <b>14 days</b>.
                     </small>
                   </div>
-                )}
-                <div className="row d-flex justify-content-center m-3 mt4">
-                  <QRCode
-                    level="H"
-                    style={{ width: 180 }}
-                    value={certificateLink}
-                  />
+                  <div className="row mt-4 d-flex justify-content-center">
+                    <input
+                      className="w-75"
+                      value={certificateLink}
+                      onClick={() => handleCopyLink(certificateLink)}
+                      placeholder="Certificate link"
+                      readOnly
+                    />
+                    <button
+                      type="button"
+                      className={`pointer ${css.copyBtn} w-25`}
+                      onClick={() => handleCopyLink(certificateLink)}
+                    >
+                      Copy
+                    </button>
+                  </div>
+                  {copiedLink && (
+                    <div className="row justify-content-center">
+                      <small className="text-green">
+                        Successfully copied share link!
+                      </small>
+                    </div>
+                  )}
+                  <div className="row d-flex justify-content-center m-3 mt4">
+                    <QRCode
+                      level="H"
+                      style={{ width: 180 }}
+                      value={certificateLink}
+                    />
+                  </div>
                 </div>
-                <div className="row d-flex justify-content-center m-3">
-                  <button
-                    type="button"
-                    className={`pointer ${css.btn}`}
-                    onClick={generateShareLink}
-                  >
-                    Regenerate Link
-                  </button>
+              ) : (
+                <div
+                  id="error-message"
+                  className="row justify-content-center my-5 text-red"
+                >
+                  <i
+                    id="verify-invalid"
+                    className="fas fa-times-circle fa-2x"
+                  />{" "}
+                  <p className="align-middle ml-2 mt-1">
+                    Could not generate sharing link.
+                  </p>
                 </div>
-              </>
-            )}
-            <div className="row d-flex justify-content-center m-3">
-              <button
-                type="button"
-                className={`pointer ${css.btn}`}
-                onClick={handleShareLinkToggle}
-              >
-                Close
-              </button>
-            </div>
+              )}
+              <div className="row d-flex justify-content-center m-3">
+                <button
+                  type="button"
+                  className={`pointer ${css.btn}`}
+                  onClick={generateShareLink}
+                >
+                  Regenerate Link
+                </button>
+              </div>
+            </>
+          )}
+          <div className="row d-flex justify-content-center m-0">
+            <button
+              type="button"
+              className={`pointer ${css.btn}`}
+              onClick={handleShareLinkToggle}
+            >
+              Close
+            </button>
           </div>
         </div>
       </div>
@@ -94,7 +111,7 @@ class CertificateShareLinkForm extends Component {
 
 const Loader = () => (
   <div className={css["renderer-loader"]}>
-    <i className="fas fa-spinner fa-pulse fa-2x" />
+    <i className="fas fa-spinner fa-pulse fa-2x  mt8" />
     <div className="m-3">Generating Share Link ...</div>
   </div>
 );
