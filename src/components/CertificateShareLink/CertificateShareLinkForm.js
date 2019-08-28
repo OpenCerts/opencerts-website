@@ -37,28 +37,30 @@ class CertificateShareLinkForm extends Component {
               <Loader />
             ) : (
               <>
-                <div className="row my-4 d-flex justify-content-center">
+                <div className="row mt-4 d-flex justify-content-center">
                   <input
                     className="w-75"
                     value={certificateLink}
+                    onClick={() => handleCopyLink(certificateLink)}
                     placeholder="Certificate link"
-                    disabled
+                    readOnly
                   />
                   <button
                     type="button"
-                    className={`pointer ${css.copyBtn} 2-25`}
+                    className={`pointer ${css.copyBtn} w-25`}
                     onClick={() => handleCopyLink(certificateLink)}
                   >
                     Copy
                   </button>
-
-                  {copiedLink && (
+                </div>
+                {copiedLink && (
+                  <div className="row justify-content-center">
                     <small className="text-green">
                       Successfully copied share link!
                     </small>
-                  )}
-                </div>
-                <div className="row d-flex justify-content-center m-3">
+                  </div>
+                )}
+                <div className="row d-flex justify-content-center m-3 mt4">
                   <QRCode value={certificateLink} />
                 </div>
                 <div className="row d-flex justify-content-center m-3">
