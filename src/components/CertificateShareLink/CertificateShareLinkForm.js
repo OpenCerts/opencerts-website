@@ -21,16 +21,14 @@ class CertificateShareLinkForm extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-2" />
-          <div className="col-8">
+          <div className="offset-2 col-8">
             <div className="row d-flex justify-content-center">
               <h4>Share your certificate</h4>
             </div>
-            <div className="row text-center">
+            <div className="row justify-content-center">
               Share this certificate by copying the link below.
               <small>
-                * Note: This link can only be used once and it will be
-                regenerated.
+                * Note: This link will automatically expire in <b>14 days</b>.
               </small>
             </div>
             {shareLinkState === "INITIAL" ? (
@@ -61,7 +59,11 @@ class CertificateShareLinkForm extends Component {
                   </div>
                 )}
                 <div className="row d-flex justify-content-center m-3 mt4">
-                  <QRCode value={certificateLink} />
+                  <QRCode
+                    level="H"
+                    style={{ width: 180 }}
+                    value={certificateLink}
+                  />
                 </div>
                 <div className="row d-flex justify-content-center m-3">
                   <button
