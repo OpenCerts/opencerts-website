@@ -17,7 +17,8 @@ class CertificateShareLinkForm extends Component {
     } = this.props;
 
     const certificateLink =
-      shareLink && `${window.location.origin}/${shareLink.id}#${shareLink.key}`;
+      shareLink &&
+      `${window.location.origin}/?documentId=${shareLink.id}#${shareLink.key}`;
     return (
       <div className="container">
         <div className="col-12 justify-content-center">
