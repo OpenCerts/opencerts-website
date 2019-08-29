@@ -31,7 +31,7 @@ class CertificateShareLinkForm extends Component {
           ) : (
             <>
               {shareLink.id && shareLink.key !== undefined ? (
-                <div className="offset-2 col-8">
+                <div className="offset-1 col-10 offset-l-2 col-l-8">
                   <div className="row justify-content-center">
                     Share this certificate by copying the link below.
                     <small>
