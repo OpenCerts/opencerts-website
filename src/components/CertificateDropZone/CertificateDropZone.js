@@ -28,7 +28,7 @@ const renderDropzoneContent = props => {
   if (isDragReject || fileError) {
     return (
       <DefaultView
-        hover={true}
+        fileDropped={true}
         accept={false}
         toggleQrReaderVisible={toggleQrReaderVisible}
       />
@@ -37,7 +37,7 @@ const renderDropzoneContent = props => {
   if (isDragAccept) {
     return (
       <DefaultView
-        hover={true}
+        fileDropped={true}
         accept={true}
         toggleQrReaderVisible={toggleQrReaderVisible}
       />
@@ -68,7 +68,7 @@ const renderDropzoneContent = props => {
   }
   return (
     <DefaultView
-      hover={false}
+      fileDropped={false}
       accept={true}
       toggleQrReaderVisible={toggleQrReaderVisible}
     />

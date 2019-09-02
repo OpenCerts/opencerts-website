@@ -4,6 +4,7 @@ import css from "./viewerStyles.scss";
 
 const View = ({ hover, accept, toggleQrReaderVisible }) => (
   <div
+    data-id="viewer-container"
     className={`${css["viewer-container"]} ${
       // eslint-disable-next-line no-nested-ternary
       hover ? (accept ? css.accept : css.invalid) : css.default
@@ -48,8 +49,9 @@ const View = ({ hover, accept, toggleQrReaderVisible }) => (
         </button>
         <Link href="">
           <button
+            data-id="scan-qr-button"
             type="button"
-            onClick={() => toggleQrReaderVisible()}
+            onClick={toggleQrReaderVisible}
             className={`pointer ${css.btn}`}
           >
             Scan QR Code
