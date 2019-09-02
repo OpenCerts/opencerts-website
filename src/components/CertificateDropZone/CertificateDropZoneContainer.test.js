@@ -45,4 +45,32 @@ describe("CertificateDropZoneContainer", () => {
     expect(wrapper.find(QrReader).length).toBe(0);
     expect(wrapper.find(CertificateDropZone).length).toBe(1);
   });
+
+  it("dispatches processQr and set turn off QrReader when a code is scanned", () => {
+    const processQr = jest.fn();
+    const wrapper = shallow(
+      <CertificateDropZoneContainer
+        updateNetworkId={() => {}}
+        processQr={processQr}
+      />
+    );
+    wrapper.instance().toggleQrReaderVisible();
+    wrapper.instance().handleQrScanned("SOME_QR_DATA");
+    expect(processQr.mock.calls).toEqual([["SOME_QR_DATA"]]);
+    expect(wrapper.state().qrReaderVisible).toBe(false);
+  });
+
+  it("dispatches updateCertificate and unset fileError when new certificate is presented", () => {
+    const updateCertificate = jest.fn();
+    const wrapper = shallow(
+      <CertificateDropZoneContainer
+        updateNetworkId={() => {}}
+        updateCertificate={updateCertificate}
+      />
+    );
+    wrapper.setState({ fileError: true });
+    wrapper.instance().handleCertificateChange("SOME_DOCUMENT_DATA");
+    expect(updateCertificate.mock.calls).toEqual([["SOME_DOCUMENT_DATA"]]);
+    expect(wrapper.state().fileError).toBe(false);
+  });
 });
