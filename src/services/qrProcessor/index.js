@@ -1,7 +1,7 @@
 import { get } from "axios";
 
 export const decodeQrCode = qrCode => {
-  const ttRegex = /tt:\/\/(.*)/;
+  const ttRegex = /tradetrust:\/\/(.*)/;
   if (!ttRegex.test(qrCode))
     throw new Error("QR Code is not formatted to TradeTrust specifications");
   const [, encodedPayload] = ttRegex.exec(qrCode);
@@ -10,7 +10,7 @@ export const decodeQrCode = qrCode => {
 };
 
 export const encodeQrCode = payload =>
-  `tt://${encodeURIComponent(JSON.stringify(payload))}`;
+  `tradetrust://${encodeURIComponent(JSON.stringify(payload))}`;
 
 export const processQrCode = async qrCode => {
   const { uri } = decodeQrCode(qrCode);
