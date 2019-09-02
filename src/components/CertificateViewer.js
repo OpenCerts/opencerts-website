@@ -142,3 +142,7 @@ CertificateViewer.propTypes = {
 
 renderVerifyBlock.propTypes = CertificateViewer.propTypes;
 renderHeaderBlock.propTypes = CertificateViewer.propTypes;
+
+ErrorBoundary.propTypes = {
+  children: PropTypes.node
+}
