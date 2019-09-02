@@ -20,7 +20,7 @@ import CertificateDropZone from "./CertificateDropZone";
 import css from "./Views/viewerStyles.scss";
 import QrReader from "../QrReader";
 
-class CertificateDropZoneContainer extends Component {
+export class CertificateDropZoneContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -115,10 +115,12 @@ const mapDispatchToProps = dispatch => ({
   processQr: payload => dispatch(processQrCode(payload))
 });
 
-export default connect(
+const ConnectedCertificateDropZoneContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(CertificateDropZoneContainer);
+
+export default ConnectedCertificateDropZoneContainer;
 
 CertificateDropZoneContainer.propTypes = {
   updateNetworkId: PropTypes.func,
