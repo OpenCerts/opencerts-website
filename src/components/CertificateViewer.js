@@ -145,4 +145,4 @@ renderHeaderBlock.propTypes = CertificateViewer.propTypes;
 
 ErrorBoundary.propTypes = {
   children: PropTypes.node
-}
+};
