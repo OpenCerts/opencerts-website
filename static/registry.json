@@ -92,8 +92,10 @@
     },
     "0x16E949FcDC655765959Ac085CA7B1aE353D6Ca35": {
       "name": "Nanyang Technological University",
-      "displayCard": false,
+      "displayCard": true,
       "website": "https://www.ntu.edu.sg",
+      "email": " deg_verify@ntu.edu.sg",
+      "phone": "+65 6592 2448",
       "logo": "/static/images/NTU_logo.png",
       "id": "ntu-registry"
     },
