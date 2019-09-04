@@ -74,23 +74,21 @@ export class CertificateDropZoneContainer extends Component {
         </button>
       </>
     ) : (
-      <>
-        <CertificateDropZone
-          document={this.props.document}
-          fileError={this.state.fileError}
-          handleCertificateChange={this.handleCertificateChange}
-          handleFileError={this.handleFileError}
-          verifying={this.props.verifying}
-          issuerIdentityStatus={this.props.issuerIdentityStatus}
-          hashStatus={this.props.hashStatus}
-          issuedStatus={this.props.issuedStatus}
-          notRevokedStatus={this.props.notRevokedStatus}
-          verificationStatus={this.props.verificationStatus}
-          resetData={this.resetData.bind(this)}
-          storeStatus={this.props.storeStatus}
-          toggleQrReaderVisible={this.toggleQrReaderVisible}
-        />
-      </>
+      <CertificateDropZone
+        document={this.props.document}
+        fileError={this.state.fileError}
+        handleCertificateChange={this.handleCertificateChange}
+        handleFileError={this.handleFileError}
+        verifying={this.props.verifying}
+        issuerIdentityStatus={this.props.issuerIdentityStatus}
+        hashStatus={this.props.hashStatus}
+        issuedStatus={this.props.issuedStatus}
+        notRevokedStatus={this.props.notRevokedStatus}
+        verificationStatus={this.props.verificationStatus}
+        resetData={this.resetData.bind(this)}
+        storeStatus={this.props.storeStatus}
+        toggleQrReaderVisible={this.toggleQrReaderVisible}
+      />
     );
   }
 }
