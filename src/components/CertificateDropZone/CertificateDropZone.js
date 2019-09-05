@@ -19,16 +19,29 @@ const renderDropzoneContent = props => {
     notRevokedStatus,
     document,
     verificationStatus,
-    storeStatus
+    storeStatus,
+    toggleQrReaderVisible
   } = props;
   // isDragReject is checking for mimetype (but we skipped it)
   // fileError is when the file is not in JSON format and threw when deserilising
   // valid JSON files will be handled by handleCertificateChange()
   if (isDragReject || fileError) {
-    return <DefaultView hover={true} accept={false} />;
+    return (
+      <DefaultView
+        fileDropped={true}
+        accept={false}
+        toggleQrReaderVisible={toggleQrReaderVisible}
+      />
+    );
   }
   if (isDragAccept) {
-    return <DefaultView hover={true} accept={true} />;
+    return (
+      <DefaultView
+        fileDropped={true}
+        accept={true}
+        toggleQrReaderVisible={toggleQrReaderVisible}
+      />
+    );
   }
   if (verifying) {
     return <VerifyingView verificationStatus={verificationStatus} />;
@@ -53,7 +66,13 @@ const renderDropzoneContent = props => {
       />
     );
   }
-  return <DefaultView hover={false} accept={true} />;
+  return (
+    <DefaultView
+      fileDropped={false}
+      accept={true}
+      toggleQrReaderVisible={toggleQrReaderVisible}
+    />
+  );
 };
 
 // Injects additional props on top of isDragReject, isDragActive, acceptedFiles & rejectedFiles
@@ -95,7 +114,8 @@ const CertificateDropzone = ({
   notRevokedStatus,
   document,
   verificationStatus,
-  storeStatus
+  storeStatus,
+  toggleQrReaderVisible
 }) => (
   <Dropzone
     id="certificate-dropzone"
@@ -116,7 +136,8 @@ const CertificateDropzone = ({
       notRevokedStatus,
       document,
       verificationStatus,
-      storeStatus
+      storeStatus,
+      toggleQrReaderVisible
     })}
   </Dropzone>
 );
@@ -135,7 +156,8 @@ CertificateDropzone.propTypes = {
   issuedStatus: PropTypes.object,
   notRevokedStatus: PropTypes.object,
   verificationStatus: PropTypes.array,
-  storeStatus: PropTypes.object
+  storeStatus: PropTypes.object,
+  toggleQrReaderVisible: PropTypes.func
 };
 
 renderDropzoneContent.propTypes = {
@@ -151,7 +173,8 @@ renderDropzoneContent.propTypes = {
   issuedStatus: PropTypes.object,
   notRevokedStatus: PropTypes.object,
   verificationStatus: PropTypes.array,
-  storeStatus: PropTypes.object
+  storeStatus: PropTypes.object,
+  toggleQrReaderVisible: PropTypes.func
 };
 
 export default CertificateDropzone;

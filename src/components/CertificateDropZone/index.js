@@ -1,3 +1,3 @@
-import CertificateDropZoneContainer from "./CertificateDropZoneContainer";
+import ConnectedCertificateDropZoneContainer from "./CertificateDropZoneContainer";
 
-export default CertificateDropZoneContainer;
+export default ConnectedCertificateDropZoneContainer;

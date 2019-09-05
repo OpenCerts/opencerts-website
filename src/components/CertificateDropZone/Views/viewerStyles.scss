@@ -82,6 +82,15 @@
     @include btn($brand-blue);
     background-color: #fff;
     margin: 0 auto;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.disable-btn {
+    position: absolute;
+    top: 80%;
+    left: 45%;
+    z-index: 999;
 }
 
 .secondary-links {

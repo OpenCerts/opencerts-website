@@ -24,6 +24,7 @@ import DocumentStoreDefinition from "../services/contracts/DocumentStore.json";
 import { combinedHash } from "../utils";
 import { ensResolveAddress } from "../services/ens";
 import sendEmail from "../services/email";
+import { processQrCode } from "../services/qrProcessor";
 import { analyticsEvent } from "../components/Analytics";
 
 import { getSelectedWeb3 } from "./application";
@@ -421,7 +422,16 @@ export function* analyticsStoreFail({ certificate }) {
   });
 }
 
+export function* handleQrScanned({ payload: qrCode }) {
+  const document = yield processQrCode(qrCode);
+  yield put({
+    type: types.UPDATE_CERTIFICATE,
+    payload: document
+  });
+}
+
 export default [
+  takeEvery(types.CERTIFICATE_PROCESS_QR_CODE, handleQrScanned),
   takeEvery(types.UPDATE_CERTIFICATE, verifyCertificate),
   takeEvery(types.SENDING_CERTIFICATE, sendCertificate),
   takeEvery(applicationTypes.UPDATE_WEB3, networkReset),
