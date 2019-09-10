@@ -137,8 +137,7 @@ export function* verifyCertificateStore({ certificate }) {
     error(e);
     yield put(
       verifyingCertificateStoreFailure({
-        error: e.message,
-        certificate: getData(certificate)
+        error: e.message
       })
     );
     return false;
@@ -150,12 +149,14 @@ export function* verifyCertificateHash({ certificate }) {
 
   if (verified) {
     yield put(verifyingCertificateHashSuccess());
+
     return true;
   }
+  const hashError = new Error("Certificate data does not match target hash");
+  error(hashError);
   yield put(
     verifyingCertificateHashFailure({
-      error: "Certificate data does not match target hash",
-      certificate: getData(certificate)
+      error: hashError.message
     })
   );
   return false;
@@ -175,9 +176,9 @@ export function* verifyCertificateIssued({ certificate, certificateStores }) {
     yield put(verifyingCertificateIssuedSuccess());
     return true;
   } catch (e) {
+    error(e);
     yield put(
       verifyingCertificateIssuedFailure({
-        certificate: getData(certificate),
         error: e.message
       })
     );
@@ -227,9 +228,9 @@ export function* verifyCertificateNotRevoked({
     yield put(verifyingCertificateRevocationSuccess());
     return true;
   } catch (e) {
+    error(e);
     yield put(
       verifyingCertificateRevocationFailure({
-        certificate: getData(certificate),
         error: e.message
       })
     );
@@ -363,8 +364,8 @@ export function* getDetailedIssuerStatus({ issuer }) {
 }
 
 export function* verifyCertificateIssuer({ certificate }) {
-  const data = getData(certificate);
   try {
+    const data = getData(certificate);
     const issuers = get(data, "issuers", []);
     // verificationStatuses: [{dns: "abc.com", registry:"Govtech", documentStore: "0xabc"}]
     const verificationStatuses = yield all(
@@ -381,10 +382,10 @@ export function* verifyCertificateIssuer({ certificate }) {
     );
     return true;
   } catch (e) {
+    error(e);
     yield put(
       verifyingCertificateIssuerFailure({
-        error: e.message,
-        certificate: data
+        error: e.message
       })
     );
     return false;
@@ -397,6 +398,7 @@ export function* verifyCertificate({ payload }) {
   });
   const certificateStores = yield call(loadCertificateContracts, { payload });
   const args = { certificateStores, certificate: payload };
+
   const verificationStatuses = yield all({
     certificateIssued: call(verifyCertificateIssued, args),
     certificateHashValid: call(verifyCertificateHash, args),
@@ -447,55 +449,94 @@ export function* networkReset() {
   });
 }
 
-export function getAnalyticsStores(certificate) {
-  return get(certificate, "issuers", [])
-    .map(issuer => getDocumentStore(issuer))
-    .toString();
+export function* getAnalyticsStores() {
+  try {
+    const rawCertificate = yield select(getCertificate);
+    const certificate = getData(rawCertificate);
+
+    return get(certificate, "issuers", [])
+      .map(issuer => getDocumentStore(issuer))
+      .toString();
+  } catch (e) {
+    return null;
+  }
 }
 
-export function* analyticsIssuerFail({ certificate }) {
-  yield analyticsEvent(window, {
-    category: "CERTIFICATE_ERROR",
-    action: getAnalyticsStores(certificate),
-    label: get(certificate, "id"),
-    value: ANALYTICS_VERIFICATION_ERROR_CODE.ISSUER_IDENTITY
-  });
+export function* getCertificateId() {
+  try {
+    const rawCertificate = yield select(getCertificate);
+    const certificate = getData(rawCertificate);
+
+    return get(certificate, "id");
+  } catch (e) {
+    return null;
+  }
 }
 
-export function* analyticsHashFail({ certificate }) {
-  yield analyticsEvent(window, {
-    category: "CERTIFICATE_ERROR",
-    action: getAnalyticsStores(certificate),
-    label: get(certificate, "id"),
-    value: ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_HASH
-  });
+export function* analyticsIssuerFail() {
+  const storeAddresses = yield call(getAnalyticsStores);
+  const certificateId = yield call(getCertificateId);
+
+  if (storeAddresses && certificateId)
+    yield analyticsEvent(window, {
+      category: "CERTIFICATE_ERROR",
+      action: storeAddresses,
+      label: certificateId,
+      value: ANALYTICS_VERIFICATION_ERROR_CODE.ISSUER_IDENTITY
+    });
 }
 
-export function* analyticsIssuedFail({ certificate }) {
-  yield analyticsEvent(window, {
-    category: "CERTIFICATE_ERROR",
-    action: getAnalyticsStores(certificate),
-    label: get(certificate, "id"),
-    value: ANALYTICS_VERIFICATION_ERROR_CODE.UNISSUED_CERTIFICATE
-  });
+export function* analyticsHashFail() {
+  const storeAddresses = yield call(getAnalyticsStores);
+  const certificateId = yield call(getCertificateId);
+
+  if (storeAddresses && certificateId) {
+    yield analyticsEvent(window, {
+      category: "CERTIFICATE_ERROR",
+      action: storeAddresses,
+      label: certificateId,
+      value: ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_HASH
+    });
+  }
 }
 
-export function* analyticsRevocationFail({ certificate }) {
-  yield analyticsEvent(window, {
-    category: "CERTIFICATE_ERROR",
-    action: getAnalyticsStores(certificate),
-    label: get(certificate, "id"),
-    value: ANALYTICS_VERIFICATION_ERROR_CODE.REVOKED_CERTIFICATE
-  });
+export function* analyticsIssuedFail() {
+  const storeAddresses = yield call(getAnalyticsStores);
+  const certificateId = yield call(getCertificateId);
+
+  if (storeAddresses && certificateId)
+    yield analyticsEvent(window, {
+      category: "CERTIFICATE_ERROR",
+      action: storeAddresses,
+      label: certificateId,
+      value: ANALYTICS_VERIFICATION_ERROR_CODE.UNISSUED_CERTIFICATE
+    });
 }
 
-export function* analyticsStoreFail({ certificate }) {
-  yield analyticsEvent(window, {
-    category: "CERTIFICATE_ERROR",
-    action: getAnalyticsStores(certificate),
-    label: get(certificate, "id"),
-    value: ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_STORE
-  });
+export function* analyticsRevocationFail() {
+  const storeAddresses = yield call(getAnalyticsStores);
+  const certificateId = yield call(getCertificateId);
+
+  if (storeAddresses && certificateId)
+    yield analyticsEvent(window, {
+      category: "CERTIFICATE_ERROR",
+      action: storeAddresses,
+      label: certificateId,
+      value: ANALYTICS_VERIFICATION_ERROR_CODE.REVOKED_CERTIFICATE
+    });
+}
+
+export function* analyticsStoreFail() {
+  const storeAddresses = yield call(getAnalyticsStores);
+  const certificateId = yield call(getCertificateId);
+
+  if (storeAddresses && certificateId)
+    yield analyticsEvent(window, {
+      category: "CERTIFICATE_ERROR",
+      action: storeAddresses,
+      label: certificateId,
+      value: ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_STORE
+    });
 }
 
 export default [
