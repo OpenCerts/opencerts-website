@@ -242,7 +242,7 @@ class TranscriptCreditTransfer {
       const isAPC = transferData.orgId === "E0000002430";
       if (
         transferData.sourceType === "I" &&
-        (!isCDP || (!isNUSAPCTest && !isAPC))
+        (!isCDP || (isCDP && isNUSAPCTest && isAPC))
       ) {
         let title;
         if (transferData.sourceCareer) {
@@ -753,11 +753,12 @@ const translateModule = module => {
 };
 
 // traverse transcript data to retrieve matched credit transfer details
-const getCreditTransferDetails = (transcriptData, semester, seq) => {
+const getCreditTransferDetails = (transcriptData, semester, reportNo, seq) => {
   const details = [];
   transcriptData.forEach(module => {
     if (
       module.semester === semester &&
+      module.reportNo === reportNo &&
       module.transferSeq &&
       module.transferSeq === seq
     )
@@ -767,13 +768,18 @@ const getCreditTransferDetails = (transcriptData, semester, seq) => {
 };
 
 // traverse transcript data to retrieve enrolment modules
-const getEnrolmentModules = (transcriptData, semester) => {
+const getEnrolmentModules = (transcriptData, semester, reportNo) => {
   const modules = [];
   transcriptData.forEach(module => {
-    if (module.semester === semester && !module.transferSeq)
+    if (
+      module.semester === semester &&
+      module.reportNo === reportNo &&
+      !module.transferSeq
+    )
       modules.push(translateModule(module));
   });
-  return modules;
+  if (modules.length > 0) return modules;
+  return null;
 };
 
 // construct a JSON of transcript data with nested structure.
@@ -787,12 +793,14 @@ const translateTranscriptTermData = dataSource => {
         transfer.details = getCreditTransferDetails(
           dataSource.transcriptRaw,
           term.name,
+          term.reportNo,
           transfer.transferSeq
         );
       });
     const enrolmentModules = getEnrolmentModules(
       dataSource.transcriptRaw,
-      term.name
+      term.name,
+      term.reportNo
     );
     if (enrolmentModules) term.modules = enrolmentModules;
   });

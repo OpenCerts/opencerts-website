@@ -37,7 +37,7 @@ test("NUS-ICLJDP-2019 degree scroll is rendered correctly", async t => {
     "A0107691A, name",
     "A0107691A",
     "01/01/1905",
-    "27/08/2019",
+    "11/09/2019",
     "DOCTOR OF PHILOSOPHY",
     "COMPLETED PROGRAMME",
     "2012/2013 SEMESTER 2",

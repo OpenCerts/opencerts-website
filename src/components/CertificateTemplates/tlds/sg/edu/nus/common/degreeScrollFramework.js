@@ -316,9 +316,13 @@ const preprocHonours = (honours, degreeTitle) => {
   return text;
 };
 
-// pre-process major
+// pre-process major - removal of trailing (Hons) or Hons, and capitalization
 const preprocMajor = major =>
-  major ? `in ${capitalizedText(major.toLowerCase())}` : "";
+  major
+    ? `in ${capitalizedText(
+        major.replace(/( \(HONS\)| HONS)$/i, "").toLowerCase()
+      )}`
+    : "";
 
 // degree scroll data feeder class
 export class DegreeScrollDataFeeder {

@@ -1,601 +1,661 @@
 {
   "schema": "opencerts/v1.5",
   "data": {
-    "id": "9004e66a-e234-4587-9014-43a1af289968:string:NUS-A0130104H-J011000-P10182357-42-20180630",
-    "$template": "4836e678-41ce-4837-9a80-bd14b9d13af1:string:sg/edu/nus/NUS-UNCJDP-2019",
-    "issuedOn": "188d1c10-bd33-4112-85eb-da2b6b2920cb:string:2019-08-27T10:12:43+08:00",
-    "name": "ba2bdfb1-6ae1-478f-a6ab-789dad2a6f87:string:NUS Degree",
+    "id": "3746aff7-e171-43a6-a91f-12402b37e02f:string:NUS-A0130104H-J011000-P10182678-42-20180630",
+    "$template": "204c8f35-50a0-4251-bf60-e1f55dd58bb8:string:sg/edu/nus/NUS-UNCJDP-2019",
+    "issuedOn": "f379a88d-c47c-4c70-96dc-707a4690d90a:string:2019-09-11T17:21:45+08:00",
+    "name": "8404aa3a-e179-4d03-a841-c641361b0f75:string:NUS Degree",
     "issuers": [
       {
-        "name": "e9f8ee2e-2a9b-4c0c-80cd-ad4075f4ea9e:string:National University of Singapore",
-        "did": "923a31e4-a4a7-4086-923b-006779ffb70c:string:DID:SG-UEN:200604346E",
-        "url": "c346875c-7880-4214-9cc0-63386970e89f:string:https://www.nus.edu.sg",
-        "email": "49ff690a-f731-4088-a92c-0bb09983984f:string:registrar@nus.edu.sg",
-        "certificateStore": "34b999c1-1c55-42f9-b034-7af5b823bda2:string:0xfEbB273495F5C2c4783E23424Fe9773691b57fcB"
+        "name": "9ce8ac55-8540-4b72-b3c5-a19bc37026cc:string:National University of Singapore",
+        "uen": "889edb4c-04a5-4aef-814e-b4e855dc1156:string:200604346E",
+        "url": "2ae6276e-e35d-40ab-a311-11db80205e83:string:https://www.nus.edu.sg",
+        "email": "8a30bfba-0e56-421a-8765-f8e2fd2a411b:string:transcript@nus.edu.sg",
+        "certificateStore": "04e08ba7-88d4-4abb-ad0d-4d2f20f764db:string:0xfEbB273495F5C2c4783E23424Fe9773691b57fcB"
       }
     ],
     "recipient": {
-      "name": "cb7b2c5e-fb93-4224-aff3-d76ab3e0723e:string:A0130104H, name",
-      "studentId": "b02e9789-490c-4c83-a0e6-15b3f3e56209:string:A0130104H",
-      "dateOfBirth": "bdc36577-351f-4a94-8eb7-7ac187f30a49:string:1905-01-01"
+      "name": "4aea7e00-2a07-4b17-92e5-348225b3e6a9:string:A0130104H, name",
+      "studentId": "a5ef6d7b-ccc0-452c-9a92-81cc212c9505:string:A0130104H",
+      "dateOfBirth": "96d64fe7-65f4-4635-90b4-073897f10bb5:string:1905-01-01"
     },
     "transcript": [
       {
-        "name": "2ff12157-4cc0-47dd-b6db-f1bbd3ef92bc:string:The Nature of Language",
-        "courseCode": "c42267a3-2b36-46a0-94bb-b4b4678e4e45:string:EL1101E",
-        "grade": "a8fda2dc-c0dd-4ee7-8f4a-899ab93944a7:string:A+",
-        "courseCredit": "ad1f2ffa-eedd-445c-95b8-92abed437c8c:number:4",
-        "gradingBasis": "d4f64a3e-71ed-47d4-9841-7ea3fc5aafd2:string:GRD",
-        "includeInGPA": "1f88c654-77f4-46c0-a328-a641c54f36e4:boolean:true",
-        "semester": "ad428cf8-3549-4518-967a-996fde9a126b:string:1410"
+        "name": "ca243091-ba66-435f-8348-ca9323714e7e:string:The Nature of Language",
+        "courseCode": "a371bbad-f65a-484c-9382-ffbaaae9ed54:string:EL1101E",
+        "grade": "d7b22092-e913-4c05-b7c2-767454133455:string:A+",
+        "courseCredit": "c5a0227b-b91a-4e46-85ac-f2b259b4741a:number:4",
+        "gradingBasis": "c7f78e68-393b-4436-8129-9f220bb313e1:string:GRD",
+        "includeInGPA": "e98e648c-41d1-4ce2-83ef-abb38aebeb83:boolean:true",
+        "reportNo": "46974fdf-8287-4dfb-86c6-abdf9c80517a:number:1",
+        "semester": "aaa4915f-913d-4e1f-8993-e1a80f4e57c9:string:1410"
       },
       {
-        "name": "aca536be-ac63-4e7c-bb53-19d5d158a9b2:string:Geographical Journeys: Exploring World Environments",
-        "courseCode": "30e1507e-adbd-4f1d-86f8-de9a5227fadc:string:GE1101E",
-        "grade": "a4b7f3bf-70d7-4c2b-b235-9f00b14fc21c:string:A",
-        "courseCredit": "06c2af77-67aa-4745-a4e7-7270fb55fa55:number:4",
-        "gradingBasis": "e138d2d4-4fb9-4167-8c62-5e03ac52f67d:string:GRD",
-        "includeInGPA": "a7467d38-f2d7-4631-b6bd-5beb7ff999ea:boolean:true",
-        "semester": "7f15edc3-7837-4e59-ba4e-018fb8be2a9d:string:1410"
+        "name": "d3166746-2db8-4498-af8f-6ca75ef02c1e:string:Geographical Journeys: Exploring World Environments",
+        "courseCode": "351739bc-be88-4651-853f-776b12a980f6:string:GE1101E",
+        "grade": "ba3cb629-4683-452b-8e1a-4dd1aaf233ce:string:A",
+        "courseCredit": "d57792c5-d8d4-4ba5-b577-d118a10c781d:number:4",
+        "gradingBasis": "707d99e2-1676-423b-9a28-16dfa22222de:string:GRD",
+        "includeInGPA": "db373871-4b73-46bb-b929-fa6172403073:boolean:true",
+        "reportNo": "709ed634-09cc-4738-9b4c-1e2472ae126e:number:1",
+        "semester": "f9d117cf-278f-42cf-af93-f3eb9d0b10b4:string:1410"
       },
       {
-        "name": "e3c1d1ec-35d6-4568-a78a-b931cc813d00:string:Eating Right(s): The Politics of Food",
-        "courseCode": "733a3a7b-0bca-4302-9ecf-dc01bffeff50:string:IEM1201H",
-        "grade": "2029df96-ed25-459c-9d3d-104bf4f9f66f:string:A-",
-        "courseCredit": "ca35516c-0b6e-410f-8700-8cf258079154:number:4",
-        "gradingBasis": "d08a440c-e4fa-447c-968b-a951c5e14d11:string:GRD",
-        "includeInGPA": "16f5bfc0-3c3b-4e6a-920b-db3e2b088207:boolean:true",
-        "semester": "eac042be-a668-4da6-9c40-6c5d128bf1d9:string:1410"
+        "name": "a3d63e76-8b64-4692-a2d1-410f21229c2c:string:Eating Right(s): The Politics of Food",
+        "courseCode": "5ba8cc4a-8d14-4f14-ac1a-4fff06b90bf1:string:IEM1201H",
+        "grade": "942a143c-9497-480e-8225-3bd1fc55a4ab:string:A-",
+        "courseCredit": "0d5bddfb-6635-46ab-8a39-658efa388c34:number:4",
+        "gradingBasis": "857a24ee-dd38-45a7-a2e0-7f333a788ed9:string:GRD",
+        "includeInGPA": "1ddc8846-342d-488d-98df-3ff2e06499a1:boolean:true",
+        "reportNo": "d4c848f6-0e87-4934-8522-d7d3dfdfb436:number:1",
+        "semester": "95164d98-4d8c-47f7-a980-718509f59119:string:1410"
       },
       {
-        "name": "01be5288-5ae9-4983-a662-6cf48bdc5593:string:Making Sense of Society",
-        "courseCode": "777c67fa-24d2-4bd3-90cf-f7425d3c420f:string:SC1101E",
-        "grade": "774d2a8e-14be-4066-bdb6-71bf73e1e748:string:A",
-        "courseCredit": "5d401a73-cec9-4fde-a6fb-33b5450a0388:number:4",
-        "gradingBasis": "5a39aef6-44c1-4705-b4f7-dbcbe8dc10d4:string:GRD",
-        "includeInGPA": "56a150b1-773b-43ab-8a03-d7ffc9b4d261:boolean:true",
-        "semester": "fbcb28c7-fc54-4498-b803-f3b64a546a6c:string:1410"
+        "name": "1ba0bab8-c43f-401e-b598-df2c5b3a0037:string:Making Sense of Society",
+        "courseCode": "0ea0fab9-9bd2-4227-8412-bca965e93e07:string:SC1101E",
+        "grade": "a76bade7-776a-4382-8f04-2acdec96e50a:string:A",
+        "courseCredit": "e40822e1-2f69-49a0-b05a-6ed2106f328c:number:4",
+        "gradingBasis": "51e448dd-dd16-4192-9164-21f78219083d:string:GRD",
+        "includeInGPA": "134fe32b-d9b8-4000-9b81-a83c0044a10c:boolean:true",
+        "reportNo": "d2c7eef2-bfae-4475-b244-aad10c9d75de:number:1",
+        "semester": "a01ce859-4cc2-4f35-80aa-5a69cf767b73:string:1410"
       },
       {
-        "name": "2d334b3e-abc3-4e9b-bbfc-f1afefa8a36e:string:Southeast Asia: A Changing Region",
-        "courseCode": "b62f729a-bb76-4029-a0a3-bd7a318453ff:string:SE1101E",
-        "grade": "65a3d6ec-c5f9-4306-90fa-a4cbfdc883f4:string:S",
-        "courseCredit": "a14c08a9-d2c1-469b-bec0-4e7c49e01359:number:4",
-        "gradingBasis": "89908a30-7717-48de-93cb-2b3108720fc0:string:SNU",
-        "includeInGPA": "20e5dca7-7375-489f-ad86-a4e181d3c11a:boolean:false",
-        "semester": "c4e7c0d3-cc71-4550-85c3-c66996fb131c:string:1410"
+        "name": "e70217d2-9fed-4e77-bf1c-687fbd77578f:string:Southeast Asia: A Changing Region",
+        "courseCode": "6752da23-2bc1-465d-ac83-cf7d6ffb6a57:string:SE1101E",
+        "grade": "a0f27f21-81ff-4de7-9ad1-674e325c1054:string:S",
+        "courseCredit": "ca8e8775-0d4d-4833-a192-71e153aeabb4:number:4",
+        "gradingBasis": "76f03be2-8c31-463c-bc5a-6f703ec41406:string:SNU",
+        "includeInGPA": "16d3809d-daf7-43e3-a67c-b4b51c6772db:boolean:false",
+        "reportNo": "0385b99f-7a75-431c-940f-dfc06ba45204:number:1",
+        "semester": "82ef96a0-3f44-44f5-9b58-cf7931a1716a:string:1410"
       },
       {
-        "name": "072c2216-c419-4a61-892a-cb017b6ab70f:string:Methods and Practices in Geography",
-        "courseCode": "d19dc052-0531-4bc8-acde-8f02b8746e29:string:GE2101",
-        "grade": "202913e1-09b7-45a4-9787-a5a9df42dc34:string:A+",
-        "courseCredit": "ae572d6b-39e9-4dc6-b2bb-4c082a2b331d:number:4",
-        "gradingBasis": "a45aeb17-3ace-4fed-b572-2cf251328d80:string:GRD",
-        "includeInGPA": "6dff5261-f018-4602-a25a-dca115ae13fa:boolean:true",
-        "semester": "d0d7bfde-5cdf-42b8-b761-2aac5ce5ea5e:string:1420"
+        "name": "d7f2aaf8-d2ca-4a31-adf4-61da714e5423:string:Methods and Practices in Geography",
+        "courseCode": "36f0fc66-69e6-4ef4-b74f-65886c54b65e:string:GE2101",
+        "grade": "88c7de1d-a120-4e87-9067-7bbc47861543:string:A+",
+        "courseCredit": "9a017831-4959-4861-9f5f-f54f90b57668:number:4",
+        "gradingBasis": "aca1d07e-73e3-4bb8-8a6a-279ec48484e2:string:GRD",
+        "includeInGPA": "65374e22-82af-4027-a7e2-ad140c570875:boolean:true",
+        "reportNo": "ed064676-c12b-4f4e-a9f6-058f5c705f10:number:1",
+        "semester": "a2f19f0f-95fd-469b-aebe-566af44426ad:string:1420"
       },
       {
-        "name": "90c1b227-b1fa-4ffe-b8a8-cfb7351f5303:string:Cities in Transition",
-        "courseCode": "b087d74a-bc2b-44e1-b1a1-36e81c79546b:string:GE2204",
-        "grade": "d01d8459-99e3-455d-8037-59be435b2162:string:B+",
-        "courseCredit": "7c326ebe-9b27-44f1-85f9-a6af52a81887:number:4",
-        "gradingBasis": "52865b63-9291-4571-9651-65f1040f6684:string:GRD",
-        "includeInGPA": "a420d80d-abb6-43a3-9b99-1d7e2916b2b6:boolean:true",
-        "semester": "deba48d1-d072-42af-bccb-0b808dbb1870:string:1420"
+        "name": "3c2d3bfc-e1fe-496f-bfa1-b34551f7356c:string:Cities in Transition",
+        "courseCode": "1897fb31-a8dd-485f-aef0-aa2b8f70cf39:string:GE2204",
+        "grade": "a9175efc-2754-4d4f-8c00-bd5c3664c79c:string:B+",
+        "courseCredit": "1f9428ba-152e-4d4e-9924-9e91f68ea20b:number:4",
+        "gradingBasis": "96bf27f4-d44b-49f3-92a5-8449ebb22894:string:GRD",
+        "includeInGPA": "457a64b6-8cea-4754-b16d-f8505346d04c:boolean:true",
+        "reportNo": "dc79328c-e7a0-46a8-b204-8af01b104c9e:number:1",
+        "semester": "8d857c2b-5179-439e-8170-93bf0eba5c83:string:1420"
       },
       {
-        "name": "c07a75a1-277a-41f0-9852-5fc5f78524ea:string:Leisure, Recreation and Tourism",
-        "courseCode": "221ec63a-a138-4bc1-809a-1e22059e377e:string:GE2218",
-        "grade": "a39c454d-18fa-47bd-ab14-b382a376d410:string:B",
-        "courseCredit": "7343db57-0c72-4e9a-9c55-78b4a126f4e7:number:4",
-        "gradingBasis": "9c4f2c4e-73cf-4417-829f-61bf557eac96:string:GRD",
-        "includeInGPA": "dabb1e04-5591-494f-b074-bc22b8fdfa7c:boolean:true",
-        "semester": "9d6c07c2-a652-4107-a94b-9fd12901d8b2:string:1420"
+        "name": "edc5d88d-d852-4c8a-8638-1e7eca4370f5:string:Leisure, Recreation and Tourism",
+        "courseCode": "b885db10-8a32-459d-89c9-0e4baeb5f6fe:string:GE2218",
+        "grade": "c8abd9ba-278e-43b7-a433-361cec95aa39:string:B",
+        "courseCredit": "e02c8a06-e66e-4840-8a71-9bac35cfc0e5:number:4",
+        "gradingBasis": "5f22c7e8-9cbb-4e5b-a81b-712136db2844:string:GRD",
+        "includeInGPA": "9420aee7-87c2-49d7-b69d-82f4b3786246:boolean:true",
+        "reportNo": "2523feaf-4622-404c-b1ce-ea4ba9aaa24c:number:1",
+        "semester": "5045360b-9aa2-4f18-ad3f-18e8a10edca1:string:1420"
       },
       {
-        "name": "cee8faa1-e845-47fe-8d2a-e0471651d929:string:Special Topics Junior Seminar: Science Fiction Movies in the East and West",
-        "courseCode": "b2d19960-67c0-489b-b63d-5846e419683f:string:GEM1912F",
-        "grade": "a86f5e1e-d448-469e-82a1-d7b5d5027b8f:string:CS",
-        "courseCredit": "9b0b10b5-82ef-4819-b76f-f401d8353fa9:number:4",
-        "gradingBasis": "426f7554-4f98-4885-aba4-c23ad7c77000:string:CSU",
-        "includeInGPA": "27ce6ca0-b16e-4aa8-bb22-02e82c69d2d9:boolean:false",
-        "semester": "2740e52a-936c-49a0-a812-69faf860d8a4:string:1420"
+        "name": "83c39ed4-d93c-48e8-a725-ad7d46fb9f8d:string:Special Topics Junior Seminar: Science Fiction Movies in the East and West",
+        "courseCode": "f3a00a65-a8bd-4b75-8cac-4364fdc54788:string:GEM1912F",
+        "grade": "937e7170-9ebd-4f89-b2e0-f20494a458bc:string:CS",
+        "courseCredit": "5102b032-063c-4941-95e1-45e5b86eee7e:number:4",
+        "gradingBasis": "91d1e5a7-ec7d-4f7c-82b2-3ab5206b1916:string:CSU",
+        "includeInGPA": "22d33eec-0219-4bc5-9b05-dca2eb296b94:boolean:false",
+        "reportNo": "fc9bae77-3dbf-4e86-842e-a4a2a361db78:number:1",
+        "semester": "b7889418-4e6a-4fe6-ab87-c7605bab3401:string:1420"
       },
       {
-        "name": "7c10e5fc-e6cc-4495-a204-8aba42ec36b5:string:Sociology of Tourism",
-        "courseCode": "fdb222e3-6fad-42ef-86da-dfcc1c4e7db7:string:SC2217",
-        "grade": "fce924b6-8262-49d5-9a14-0c94beac084b:string:A",
-        "courseCredit": "f5296f57-5631-453e-96a9-4b68845ad1a2:number:4",
-        "gradingBasis": "11a0e86e-ef81-49b3-88ae-663a30c55598:string:GRD",
-        "includeInGPA": "00f83c78-67a9-47f9-8635-ae42392c7c1c:boolean:true",
-        "semester": "e8f540af-c72d-4c94-8edf-be161d42856e:string:1420"
+        "name": "62655ee8-9938-4199-bee1-31c8107ec3e7:string:Sociology of Tourism",
+        "courseCode": "eb3fb417-cd91-4559-b762-4b1b2aa85c12:string:SC2217",
+        "grade": "2c8fdc67-5599-4f11-a2b8-6d1da2ea3c71:string:A",
+        "courseCredit": "ee39c957-7f10-4804-a455-a3e1167ddf4d:number:4",
+        "gradingBasis": "eca3c8eb-3e75-457a-800f-0efc67d50d15:string:GRD",
+        "includeInGPA": "09e84bc0-5a55-4358-a777-97ea7c343e0e:boolean:true",
+        "reportNo": "efc29304-8aaa-442a-8c28-359e14e3d146:number:1",
+        "semester": "99593824-ef08-441c-81c1-12df2de62589:string:1420"
       },
       {
-        "name": "c976e86b-7e33-491c-a2e0-fc6451b9c57f:string:INTRODUCTION TO FICTION",
-        "courseCode": "74bf9305-8f1a-4808-af14-cd8bd0a9bbbe:string:ENGL123",
-        "grade": "0c3dc0f3-c6e6-46ec-a9f2-a19100a3cf94:string:A",
-        "courseCredit": "c85e6876-3356-4ea0-9dc2-a51ae91fe94b:number:4",
-        "status": "08d92cf8-0d82-4a32-8e4d-fc22bdd1fb52:string:P",
-        "includeInGPA": "308f1b46-2b12-47c8-8713-619cf3f1b0da:boolean:true",
-        "semester": "fb39a06e-f53e-4206-9013-ced94f2f7026:string:1510",
-        "transferSeq": "c60f7935-509e-473b-bc04-e43ec3ac1458:number:1"
+        "name": "8fb53fe4-e72a-4415-bd4f-f0165327546f:string:INTRODUCTION TO FICTION",
+        "courseCode": "a966ee00-c027-4825-9665-2365af53ac91:string:ENGL123",
+        "grade": "cbcc3277-5965-4e57-8cab-16d4819f591b:string:A",
+        "courseCredit": "03e5a5f8-2268-48aa-8965-99fbc5a2ee9f:number:4",
+        "status": "942e877a-7056-432d-b42b-c5f803912265:string:P",
+        "includeInGPA": "3950d4c5-b8dc-4d61-b778-c11d41550756:boolean:true",
+        "reportNo": "c0ee33c8-4216-4330-a530-6eb1a4e8e20d:string:1",
+        "semester": "b5002fba-895a-4d36-85b1-628cd5f3770c:string:1510",
+        "transferSeq": "775153cd-8a20-4092-97f2-29273c999d1b:number:1"
       },
       {
-        "name": "7f0445f7-f77a-4b6d-9ec5-182689b9082d:string:SPACE, PLACE AND DIFFERENCES",
-        "courseCode": "f5188d94-b849-4c3a-8d44-dc43dc5c8992:string:GEOG225",
-        "grade": "3d0591bd-4130-4fdc-8cc0-caecf42f673f:string:A",
-        "courseCredit": "b92f5aa2-7023-435d-8c99-952354842dfe:number:4",
-        "status": "45537f52-76cc-4128-a8ea-a44d5ebb9dc8:string:P",
-        "includeInGPA": "29da562a-02c1-4bdd-81a9-3805fe2a0dd9:boolean:true",
-        "semester": "47cb636a-3bdd-47f8-9115-ff1c5bceea5e:string:1510",
-        "transferSeq": "4fa5d186-00c3-4064-a418-6e702b66a80e:number:1"
+        "name": "2db1bfee-f17d-474f-b9ff-32738e83581b:string:SPACE, PLACE AND DIFFERENCES",
+        "courseCode": "4540d094-f3fd-4141-bcd4-c67932bf4c6f:string:GEOG225",
+        "grade": "5ea4ff3e-a33d-4f8c-84b0-1a82e7077a52:string:A",
+        "courseCredit": "c6fa7b96-4238-4bdc-8950-ee391cee49e0:number:4",
+        "status": "b18a57ca-b2b2-48d1-aa82-b805ab436d22:string:P",
+        "includeInGPA": "1b985b86-e43a-4f3f-9458-e66a8918fe94:boolean:true",
+        "reportNo": "01cd69c7-fda3-4bd2-b236-0c66ccc0a214:string:1",
+        "semester": "23633900-9ebc-4612-b174-ed3ab9c72636:string:1510",
+        "transferSeq": "4ae97564-3b3b-448d-aaba-449ce6007ab7:number:1"
       },
       {
-        "name": "d7326f6d-f591-4cc8-abda-9b624e42f7b2:string:AMERICAN LANDSCAPES",
-        "courseCode": "f8e56198-b3f1-4eb2-abb8-592ba6047783:string:GEOG260",
-        "grade": "5fa109f3-5d1f-4777-b978-47e76c98f7ee:string:A",
-        "courseCredit": "2729db2b-dc77-43c5-92e3-806ca7cd3402:number:4",
-        "status": "3ba8bd24-ed39-4e0a-a4e7-3a4aa52007d9:string:P",
-        "includeInGPA": "b5fe164d-27ab-4065-9cdc-9c48864e093f:boolean:true",
-        "semester": "ca2463c5-0e03-414d-9317-1a5b0b0145a8:string:1510",
-        "transferSeq": "8390917b-ba82-495c-9f7e-129c137274d9:number:1"
+        "name": "73f27a5e-824c-4b19-8011-895247a7b370:string:AMERICAN LANDSCAPES",
+        "courseCode": "60c1e2c3-67a5-473d-9302-969a0f3bfb55:string:GEOG260",
+        "grade": "a5d84353-283b-48f7-8b69-e711ca9c723f:string:A",
+        "courseCredit": "207afe61-5841-4934-aab5-fcdf5bb49a48:number:4",
+        "status": "b4c519f0-e6dd-45e8-a1eb-c7511e77d5fb:string:P",
+        "includeInGPA": "a64f54ca-f508-4e4e-9534-2eeef1b02b58:boolean:true",
+        "reportNo": "f4c80ca7-1d13-477d-8ff5-85f1218aff75:string:1",
+        "semester": "36fca3b3-feab-48b8-a97b-d6b8001f6558:string:1510",
+        "transferSeq": "5f56265b-ffc2-4b2e-a0e1-faa64aef9430:number:1"
       },
       {
-        "name": "5453195a-eaa3-4ba6-85eb-d62575c0173a:string:GEOGRAPHIES OF RELIGION",
-        "courseCode": "4e8bacb3-97ec-4436-9fb9-e7c90f6921f1:string:GEOG424",
-        "grade": "269c4fc6-5132-4346-9bf6-49780cc15645:string:A",
-        "courseCredit": "1e39eece-361f-46ea-925a-c016a313026e:number:5",
-        "status": "11ae2793-2abc-4d7d-9a47-aac8c7d289ff:string:P",
-        "includeInGPA": "1c8aa795-0252-419b-bff5-d91b410a3afb:boolean:true",
-        "semester": "322e4faa-ba1a-4835-ae58-2d62d1cf1bb1:string:1510",
-        "transferSeq": "c8de0d19-c4ba-4489-86b7-2c37dc6ec014:number:1"
+        "name": "0e0c422c-062c-4867-bd18-5b0258a7c3c0:string:GEOGRAPHIES OF RELIGION",
+        "courseCode": "6fd692a1-dc4f-463b-8ed9-76fc1ff75cfd:string:GEOG424",
+        "grade": "800ad7a0-26dd-44ff-9d9d-49cd1f869a4a:string:A",
+        "courseCredit": "29c82ccb-2eed-4ca1-b1b5-2a138314e395:number:5",
+        "status": "10eb79ce-f1f2-4390-b85c-faa0ee2c59c3:string:P",
+        "includeInGPA": "3b386255-ca88-471f-8c00-6f9f4e7c1efa:boolean:true",
+        "reportNo": "114034b4-d089-4857-915e-69ac3ef67c07:string:1",
+        "semester": "f96ea189-fc75-4091-87ad-f6837b1fb653:string:1510",
+        "transferSeq": "45861b38-15fa-4642-adc4-2bfc0abe751d:number:1"
       },
       {
-        "name": "3875da52-30a1-40f2-8378-ad3299450c0e:string:SOCIAL THEORY",
-        "courseCode": "eb2f5df3-f819-4b77-910e-f30ba1331ebd:string:SOCI250",
-        "grade": "4bae649d-40a6-4194-86df-ba7ec56d6fcc:string:A",
-        "courseCredit": "efc9109e-58aa-4c0b-b2f4-87425f7fa7ff:number:4",
-        "status": "72102c86-2cec-46e4-abe4-2e27e35c1060:string:P",
-        "includeInGPA": "bdc3bed7-d239-4f21-b019-fbc659c7c8bb:boolean:true",
-        "semester": "1b4ad98b-5751-46e0-88d6-9e5dcfb62165:string:1510",
-        "transferSeq": "ff41f408-e60d-48f4-ae53-2cf986bfa761:number:1"
+        "name": "bcbeadf7-2902-48c1-873a-62f09530726a:string:SOCIAL THEORY",
+        "courseCode": "d3622401-3a47-4595-8753-2d849c992490:string:SOCI250",
+        "grade": "805a384b-7598-45c0-a6f6-0806c8a7c4c7:string:A",
+        "courseCredit": "ecd188d1-c3ec-45db-98a5-2449d288c1ca:number:4",
+        "status": "ba0e11fe-53c6-4f9c-817b-be7b16f753a9:string:P",
+        "includeInGPA": "d8e41e96-d603-4472-8609-65529f4ceb46:boolean:true",
+        "reportNo": "d74265dd-bf41-4969-911b-21ff471897e4:string:1",
+        "semester": "008b367e-5cb3-4382-add3-a122542e5385:string:1510",
+        "transferSeq": "871dcaf5-4d38-4908-b2d3-50f14cc5a5ef:number:1"
       },
       {
-        "name": "e8184cde-0121-41c7-b160-313a28873dea:string:Human Evolution and Adaptation",
-        "courseCode": "0d8410fe-ae81-4075-a70f-0b0fe5905c84:string:ANTH143",
-        "grade": "3739055e-3a90-4551-af5a-e32311cd745b:string:A",
-        "courseCredit": "d94357bf-56a2-4618-b754-889ed2762159:number:4",
-        "status": "f9f55aff-5cf9-4dd8-95b1-f02ca5d9660c:string:P",
-        "includeInGPA": "841c614b-4a42-48f0-bd36-89675e236bbf:boolean:true",
-        "semester": "1e7b6e75-eb08-42a4-93a6-ebc26dfcc252:string:1520",
-        "transferSeq": "39cc830c-ada7-4085-8d1d-23fa6b8ae4c0:number:1"
+        "name": "ab80393f-1319-41c5-bc47-ee0f8af00bef:string:Human Evolution and Adaptation",
+        "courseCode": "52203c3a-32dd-4126-b44d-6e3b161d9ff6:string:ANTH143",
+        "grade": "3b805a89-166a-46b4-97cf-d0bd6b49006f:string:A",
+        "courseCredit": "09c88483-fc30-4296-bffa-2f3463e0f403:number:4",
+        "status": "db06facd-367f-4c93-8a3d-ef824062cb3c:string:P",
+        "includeInGPA": "358069c7-6bd8-48fe-88c9-2a96de3790f0:boolean:true",
+        "reportNo": "a971d3af-d609-421c-97f1-8313d9b4d45f:string:1",
+        "semester": "3657e5fe-bb7d-4e1c-b63b-c15cddf3e39a:string:1520",
+        "transferSeq": "eb2421c6-39a7-4f17-97ff-7ed32e2c925b:number:1"
       },
       {
-        "name": "1e028f9a-1ad5-4b1f-a5f6-1f3d457beb1c:string:The Archaeology of the Ancient Near East",
-        "courseCode": "5c60171d-3398-44f6-abeb-4815d63316dd:string:CLAR241",
-        "grade": "96041735-7492-4b65-b3e6-4a63fdb510f1:string:A",
-        "courseCredit": "7b87ee7c-baec-4041-9f45-50ed9c0dbad8:number:4",
-        "status": "aaed86d3-eb32-4eea-ae77-940760fb0b31:string:P",
-        "includeInGPA": "c7de7f53-9a23-4b72-b7d2-80f3b81b5c97:boolean:true",
-        "semester": "75e8955f-e234-4851-97fb-faf55f618af5:string:1520",
-        "transferSeq": "e032412b-d46f-4934-9cf6-110ef1dea69d:number:1"
+        "name": "25cf3c74-9725-48fc-b488-5bb70b781617:string:The Archaeology of the Ancient Near East",
+        "courseCode": "4efc7c3a-3971-4438-adbc-3ebff66a496c:string:CLAR241",
+        "grade": "bc891e92-00dd-48fc-b335-41f5a02d30eb:string:A",
+        "courseCredit": "bb5f6bbd-8e77-4dd6-b7e2-40f28efa428a:number:4",
+        "status": "620d54ce-641e-4222-81e0-382e86e1a93f:string:P",
+        "includeInGPA": "9efd1a53-41d1-4ff1-bd5c-0a035e7f7158:boolean:true",
+        "reportNo": "d604e56b-f922-4799-9b25-38070b81a033:string:1",
+        "semester": "563b36ea-729c-4f34-9f6e-71237561a78e:string:1520",
+        "transferSeq": "c5f2f976-f381-4c2e-ad61-fdedac339ce3:number:1"
       },
       {
-        "name": "c340aa49-201f-4b6d-8a43-d6655a313296:string:English Comprehension and Rhetoric",
-        "courseCode": "93e5d2da-ab3d-4ebc-a066-d78ace96ed7e:string:ENGL105",
-        "grade": "b54aad1a-bcf8-43d7-a90f-2235ab556196:string:A",
-        "courseCredit": "d01e9ec2-f9cc-4cf3-b2a8-0edc1f3e499f:number:4",
-        "status": "a1dc7a94-3e46-4ea7-b051-3ee92d37cc74:string:P",
-        "includeInGPA": "673f2305-84fa-4182-aeac-ba23e208dabb:boolean:true",
-        "semester": "ba9c9b62-3d10-4bf4-85ee-46bc0c747eac:string:1520",
-        "transferSeq": "f45be37b-b316-4905-8d4f-8a96f2d247de:number:1"
+        "name": "0bc3973d-e5fa-44ae-bbb8-c756c491f079:string:English Comprehension and Rhetoric",
+        "courseCode": "3f3dcde3-7a85-443b-b219-7887c4e3fc81:string:ENGL105",
+        "grade": "b78d3c09-c3ae-4773-99a5-233632f71db1:string:A",
+        "courseCredit": "7a465ba1-3872-4d68-88cd-504bce29584a:number:4",
+        "status": "9d1493bd-7335-4be5-b064-00c15c6c7b2b:string:P",
+        "includeInGPA": "a3f517af-4b95-4834-ad54-f25b2b455b7e:boolean:true",
+        "reportNo": "085d6a2f-74a8-44db-8cab-357fb555bbaa:string:1",
+        "semester": "08faf849-c4bd-4887-991b-85845b158b04:string:1520",
+        "transferSeq": "11ce075b-74f8-49b2-8a8a-d71745379add:number:1"
       },
       {
-        "name": "0d943975-3896-4049-8424-d658fdbc0e2a:string:World Regional�Geography",
-        "courseCode": "9d32d213-1c71-4478-bf91-1be6c6be55e8:string:GEOG120",
-        "grade": "0d5ffc9d-3198-46a3-892d-aca35fd9b22d:string:A",
-        "courseCredit": "73b51b4c-943f-402e-839d-9420b4d97eb9:number:4",
-        "status": "ac1f994d-7f41-42ce-b6f0-1db16af558c5:string:P",
-        "includeInGPA": "64ed5b9b-2fe3-4134-a260-7f3d1920e3d9:boolean:true",
-        "semester": "7ec3d50b-49de-465c-8c0e-f42ae5e6b6f4:string:1520",
-        "transferSeq": "357d0154-b2b4-49d1-946c-9cf94f034753:number:1"
+        "name": "7dbd0d4b-d157-467d-923a-13aa408643a0:string:World Regional�Geography",
+        "courseCode": "61dfa7cc-a045-43b3-aa98-59fa1f2a572e:string:GEOG120",
+        "grade": "2f0d6ed7-0b30-4f75-9519-bad197d1e947:string:A",
+        "courseCredit": "cccfad4a-77de-4f3b-8583-b56475608d7d:number:4",
+        "status": "fa869ea2-245a-42ea-88ed-e628cd95d3ea:string:P",
+        "includeInGPA": "8204b3b1-b26b-4098-b2f0-d2891d03638c:boolean:true",
+        "reportNo": "53f55cac-c6fa-481b-8b04-b81107d55b17:string:1",
+        "semester": "4d15cc8b-daa1-4cf2-8b2a-54ff6f392bbd:string:1520",
+        "transferSeq": "f97b2416-c771-462e-b481-420cef48cd20:number:1"
       },
       {
-        "name": "602b840f-b19e-4970-bb9c-5c18eea37f81:string:Political Geography",
-        "courseCode": "c3ee07f7-9efa-4562-b051-9ad0f275ad9e:string:GEOG453",
-        "grade": "71162d7a-559e-4b62-9616-9bef05c66ca8:string:A",
-        "courseCredit": "f0ab6231-13af-47f5-affa-94555bc64148:number:4",
-        "status": "19b5b228-65d2-4129-8717-42286690abac:string:P",
-        "includeInGPA": "22361ec2-1354-4dc2-b244-c968ddc82293:boolean:true",
-        "semester": "63dce019-7407-4f69-97b1-8afd76e520c1:string:1520",
-        "transferSeq": "5632c235-4b1b-4706-9b1d-56f0b64f83dc:number:1"
+        "name": "964dfe13-461f-4cbe-8f25-5240591f69a3:string:Political Geography",
+        "courseCode": "61244b69-4606-47a7-bd21-b5d0b8817abd:string:GEOG453",
+        "grade": "cc2895e1-2ac1-427f-bd91-09dbd2a60b03:string:A",
+        "courseCredit": "d9a31cce-ee22-4f4f-b596-31fcbf8a68ec:number:4",
+        "status": "48815f8e-057f-4c99-909c-a4aac9fabc34:string:P",
+        "includeInGPA": "2ac29985-3e88-4909-a3d2-e92bf353368e:boolean:true",
+        "reportNo": "ea118c38-acef-46fd-90b4-bb3b3a5fe133:string:1",
+        "semester": "6e262753-4205-42c0-9c6a-b8bfd9fc5f56:string:1520",
+        "transferSeq": "fa38ff49-3c94-4354-a607-85b307b07f75:number:1"
       },
       {
-        "name": "b3890e97-2d3f-42f5-993d-f66b57b09bf9:string:Intuitive Calculus",
-        "courseCode": "16a7a956-2ac9-46b8-9497-2932b2368842:string:MATH116",
-        "grade": "5633d1fb-ee7b-49ee-84e8-76d3485504c3:string:A",
-        "courseCredit": "9d725fd1-209e-4040-97ff-48a54f05aac4:number:4",
-        "status": "ddbae25f-e723-47ca-a375-016249237072:string:P",
-        "includeInGPA": "cd0f79d6-3f9d-41bb-9ad7-838fcee1cae4:boolean:true",
-        "semester": "37829749-2295-4833-85da-670bfa880f8a:string:1520",
-        "transferSeq": "10493484-f599-4f12-bd45-eb950854450f:number:1"
+        "name": "16d71161-41d7-4a21-a644-61e38ae61d61:string:Intuitive Calculus",
+        "courseCode": "8d7fc288-9d3c-48fc-8c80-1dc9e90f28ef:string:MATH116",
+        "grade": "3a0786e6-cd62-4351-808e-a2b60a12a931:string:A",
+        "courseCredit": "033b16a0-c76e-4b20-9d15-94624cb56f84:number:4",
+        "status": "f3a604c1-06ae-47b8-9b7f-c33d92ec9415:string:P",
+        "includeInGPA": "2f43737b-c8bb-4daf-8438-dcf39655e69e:boolean:true",
+        "reportNo": "52cac8dc-c37b-4437-a774-0614f46cf703:string:1",
+        "semester": "803bc3e4-200e-4967-823b-2f6e0fc94551:string:1520",
+        "transferSeq": "7e798bce-a984-4b45-91b8-fc0bbb00d447:number:1"
       },
       {
-        "name": "2f295715-2272-4bf8-bb3e-5837634f0dfb:string:Introduction to GIS & Remote Sensing",
-        "courseCode": "80c9ad3f-da6a-4de3-848f-cfc848683d82:string:GE2215",
-        "grade": "48a81b34-f6b4-4d87-8941-31e2173e0faa:string:A+",
-        "courseCredit": "ca6934df-df0f-4bda-857d-449573be08db:number:4",
-        "gradingBasis": "51c2a751-93a4-4a17-99b8-d00baab5baa9:string:GRD",
-        "includeInGPA": "0e3409b2-d8b9-4694-846f-1d9295e407cb:boolean:true",
-        "semester": "22946ddb-d20e-4cb4-914f-301ed99ab114:string:1610"
+        "name": "c762733a-c338-47e1-93f3-52f039439701:string:Introduction to GIS & Remote Sensing",
+        "courseCode": "27d70c3f-ec2e-4f6f-9dbd-bf26a4ebe2f8:string:GE2215",
+        "grade": "d3b274e9-cd8b-49f8-9d7f-8f3634769d93:string:A+",
+        "courseCredit": "bbcc3339-49e9-4507-a3f2-a45237653a21:number:4",
+        "gradingBasis": "47098979-ea3e-4e9f-a975-618fd3fb75e9:string:GRD",
+        "includeInGPA": "fb7eb33b-2e9e-43ec-b0b1-f734ca9dd7e3:boolean:true",
+        "reportNo": "0091d872-b344-4cad-b67d-c00afe9e2f6e:number:1",
+        "semester": "6e9ac2de-6257-4619-a201-51a7593b2241:string:1610"
       },
       {
-        "name": "1fcbaa5e-89cf-425c-93ec-803caec34937:string:Cities and Regions: Planning for Change",
-        "courseCode": "bc94219d-462f-41f6-8236-5a5180da789b:string:GE3204",
-        "grade": "475e766a-3cb0-4b2d-9950-e3eaba483bf0:string:A",
-        "courseCredit": "eb2fc676-13a8-494a-ba6c-ae1a3cfeeed5:number:4",
-        "gradingBasis": "61e436c5-16fa-4485-8715-676d876be4e6:string:GRD",
-        "includeInGPA": "b96ab88b-efc5-4ff7-a69a-53242621c70c:boolean:true",
-        "semester": "d44c4ec9-6e9d-4adc-a417-e53b6afa057a:string:1610"
+        "name": "35785559-2888-48a1-b584-989573122397:string:Cities and Regions: Planning for Change",
+        "courseCode": "5f2c160a-1234-47be-9265-9af7afa0dfe5:string:GE3204",
+        "grade": "04f1ebc0-8110-4c82-852c-2448a46e609e:string:A",
+        "courseCredit": "9bda401f-32d3-4962-bd3f-15909aa380f2:number:4",
+        "gradingBasis": "83c2a80c-5a76-440a-95ea-a1e461536134:string:GRD",
+        "includeInGPA": "f5aaa8e9-7b51-463c-83f4-6a1b2e205a7e:boolean:true",
+        "reportNo": "b8ee6bec-9afc-4d71-ae89-fa209db29484:number:1",
+        "semester": "1676f13d-7ec8-4bca-90a7-af61b351fd75:string:1610"
       },
       {
-        "name": "28938ca6-ab0d-4b05-8c45-c757d20ace1d:string:Globalisation and the Asian Cities",
-        "courseCode": "ea980ee7-d566-489c-b4d9-54057968e059:string:GE3219",
-        "grade": "0481f0c0-ff98-4e5e-b425-7308d4473993:string:A-",
-        "courseCredit": "588a72dd-23b6-46d5-8ac4-c3e2c354671d:number:4",
-        "gradingBasis": "a23ed652-74dd-43ba-8a91-ba8000dca243:string:GRD",
-        "includeInGPA": "aeefb41b-a805-4930-ab7c-352111181c19:boolean:true",
-        "semester": "41317e4c-4d6d-49c5-abc7-7b85d05800e0:string:1610"
+        "name": "71f9b8af-ce2a-4d4e-bb49-947344094fb4:string:Globalisation and the Asian Cities",
+        "courseCode": "b8ee9af0-8ac6-4df7-a806-6fcac2f2794c:string:GE3219",
+        "grade": "77ed454a-4732-4847-bee8-51bdaba49999:string:A-",
+        "courseCredit": "0aab86eb-a71a-4af0-8273-37b42a76311b:number:4",
+        "gradingBasis": "3e56f789-bd53-47b3-b903-254bb2bdedd8:string:GRD",
+        "includeInGPA": "b15d7334-3358-40fa-b592-8e8d7f0dd98f:boolean:true",
+        "reportNo": "1ce53632-cea0-4644-9c6a-5f800403b2c3:number:1",
+        "semester": "570a7121-893d-4dbd-bf48-23706eaf3fa8:string:1610"
       },
       {
-        "name": "861b8647-2203-4d55-977f-977303903243:string:Singapore as ‘Model’ City?",
-        "courseCode": "f4a3ed80-2fc6-403f-8f1a-da8381cfb91c:string:GEM2905X",
-        "grade": "e543a732-bff6-4719-98c1-b44f7bab5026:string:A-",
-        "courseCredit": "1b0bfa4d-8dbb-403c-bf51-aab35e1e72f0:number:4",
-        "gradingBasis": "206b01d4-dae5-42af-8627-623974006427:string:GRD",
-        "includeInGPA": "a2cbcace-155b-410f-85b7-3b3c7d369eb2:boolean:true",
-        "semester": "b49b6220-218f-42cd-b6d2-475897960c6f:string:1610"
+        "name": "3840e5f4-c697-46f0-9865-03c996a4e978:string:Singapore as ‘Model’ City?",
+        "courseCode": "6e981822-25c8-4fc8-8628-57b17a30d772:string:GEM2905X",
+        "grade": "939a90f0-8da5-4fb8-b2d2-053eef4026de:string:A-",
+        "courseCredit": "2ad8b464-cf9d-470d-8ee1-530e3d6eb018:number:4",
+        "gradingBasis": "d6d0f759-df8f-4267-b42b-780b5ebb7c00:string:GRD",
+        "includeInGPA": "14d2ede8-501d-4596-9e50-5b7ac68ff39b:boolean:true",
+        "reportNo": "b80f855b-f252-40da-a84e-f76acdf22b44:number:1",
+        "semester": "9e143cd5-583b-429b-8907-ee9ae6b62516:string:1610"
       },
       {
-        "name": "5786f250-a992-4328-9b81-f10994f719b8:string:Blood, Death and Desire, Interpreting the Vampire",
-        "courseCode": "d722fe41-c9b2-4519-839d-e3fb6f5e80ee:string:UTW2001J",
-        "grade": "abfbe9e4-de32-43c2-a2e6-10e3a9c3ce36:string:A-",
-        "courseCredit": "9bf9d3ea-577c-4313-82a4-6e88af4becda:number:4",
-        "gradingBasis": "79eeb519-00e4-4e46-a591-adc5c345ab76:string:GRD",
-        "includeInGPA": "6b9c29d3-0b0d-442e-a1ab-ab5055d79f20:boolean:true",
-        "semester": "f0c4f31a-fdd1-496a-917d-7933d2278c41:string:1610"
+        "name": "44efbbec-60f5-490b-aaea-bf06ee0c771f:string:Blood, Death and Desire, Interpreting the Vampire",
+        "courseCode": "89c422b7-ac76-4872-8061-bd6373b72b73:string:UTW2001J",
+        "grade": "0b10648a-889a-43fa-b815-af2f546b2dc8:string:A-",
+        "courseCredit": "999ae3fb-3f2a-418b-a021-6d0795218a12:number:4",
+        "gradingBasis": "ef59e1bf-05fe-4b7c-87f7-ed46819bd003:string:GRD",
+        "includeInGPA": "4511f9ae-95cc-48e7-be24-6560c94f25d9:boolean:true",
+        "reportNo": "024aa6a7-22de-4bd6-899b-c721c0027038:number:1",
+        "semester": "16b247fa-a371-4605-8b90-aef0900a0aad:string:1610"
       },
       {
-        "name": "d4c76075-7b8d-4bc2-9142-13b152243922:string:Geographical Research: Developing Ideas",
-        "courseCode": "fc481912-7ee4-4f0a-a0bb-12f5715946aa:string:GE3240",
-        "grade": "6114365c-7e82-4adb-8f9d-522f89f30ea7:string:A",
-        "courseCredit": "3f687166-7438-486f-8a66-058936b87ed2:number:4",
-        "gradingBasis": "4145ce71-2ce6-4c24-95de-b65f5ddacb2f:string:GRD",
-        "includeInGPA": "69128713-4a68-4a30-a699-1dbc5d73f2e6:boolean:true",
-        "semester": "1de14fa6-04c7-4f00-9cc0-afdbc3b4639c:string:1620"
+        "name": "7c111f4f-c208-4fb3-abbc-968bf27321e6:string:Geographical Research: Developing Ideas",
+        "courseCode": "621b4394-fb2b-4b32-86e9-3cdc05a2232d:string:GE3240",
+        "grade": "fe58f3b0-e088-48aa-8e8f-7b42eaffe76c:string:A",
+        "courseCredit": "b9b3cada-5426-4492-a1ea-a1b4746c37eb:number:4",
+        "gradingBasis": "3580d3c5-8bea-4efc-8293-3f788250b96a:string:GRD",
+        "includeInGPA": "264482da-144e-4218-822e-a02cf3356314:boolean:true",
+        "reportNo": "718c8794-6692-4214-a1e1-0e22a6dc4257:number:1",
+        "semester": "e435d77a-55a6-4d19-8076-7418516bdd97:string:1620"
       },
       {
-        "name": "9fa9c5a9-6807-4347-8575-02d38dcd69d4:string:Living with Mathematics",
-        "courseCode": "19f82894-3e9d-4eef-9999-7577498b3ba0:string:GEK1505",
-        "grade": "e22d5fc6-452e-4a56-bc04-4b754a4122fe:string:S",
-        "courseCredit": "5e327681-b076-4497-91a7-ac678c93f1a1:number:4",
-        "gradingBasis": "79291080-6ef5-4079-a0fb-5a3a30aa4819:string:SNU",
-        "includeInGPA": "83693ed2-bccc-400c-8994-99dfc83fe421:boolean:false",
-        "semester": "be557d96-bc9d-49e3-9061-605127ba8075:string:1620"
+        "name": "3ffa3c7b-7249-4725-90e5-0cbe574faa65:string:Living with Mathematics",
+        "courseCode": "c4f9379f-11d6-4c93-80b9-7a9147dde218:string:GEK1505",
+        "grade": "e83e5e3a-1305-4b4b-8e0a-d5466e323e32:string:S",
+        "courseCredit": "0fa93dfe-80bb-4368-a385-3a9631185ed5:number:4",
+        "gradingBasis": "77ac5164-fd1c-4f73-8af6-ed9bc2a8a54f:string:SNU",
+        "includeInGPA": "920b30ea-e006-4017-96fd-a4857b1b1b04:boolean:false",
+        "reportNo": "5a1e576b-9981-4fa4-bf5e-87b646ab082d:number:1",
+        "semester": "5a7d5604-9551-4acf-894b-874c6e0ff47b:string:1620"
       },
       {
-        "name": "53593470-ee30-49f7-b2af-799afb2a62e9:string:Urban Sociology",
-        "courseCode": "956a934b-8b59-4f9b-89c8-98fa08838feb:string:SC3206",
-        "grade": "3086fc8e-5c66-4a2c-a154-772850ab6272:string:A",
-        "courseCredit": "d4435d06-0de5-48a4-b2a7-de7c938062cf:number:4",
-        "gradingBasis": "90d464c1-4763-4d0d-8aaa-328ab428eaa5:string:GRD",
-        "includeInGPA": "5db199ff-e126-43a5-afbf-2d0b16b0247f:boolean:true",
-        "semester": "11cc9e35-0f96-4b4f-b9c2-7a5dc1d868dc:string:1620"
+        "name": "92d16d6a-cfb2-49f1-b193-44b495210051:string:Urban Sociology",
+        "courseCode": "7c34a29f-71a5-4850-87df-c95e8ba6f940:string:SC3206",
+        "grade": "77d1a4f3-d6f8-49a5-83e1-80e717b28ce1:string:A",
+        "courseCredit": "3ba426b0-ad22-4d9e-ac9d-842ad73b199c:number:4",
+        "gradingBasis": "a953b63c-b49d-4978-963b-9c5d4fc541e5:string:GRD",
+        "includeInGPA": "b3d5e718-459e-4f46-8339-3f3986fa236e:boolean:true",
+        "reportNo": "250c5d05-7f35-4ef7-8eb2-f5984fc1bb11:number:1",
+        "semester": "a8ef844f-4284-4f79-bd86-adecee6e51ac:string:1620"
       },
       {
-        "name": "3fb8a730-811c-4387-8d6c-a459d4568864:string:Biomedicine and Singapore Society",
-        "courseCode": "4692dfd3-6f6d-4c35-b1e8-66a6137a93f0:string:UTS2101",
-        "grade": "4a70eca2-9e09-4828-8ebd-b1d42a7c3cda:string:A-",
-        "courseCredit": "93177b42-e0b2-4742-abcf-1fb1e468fcc2:number:4",
-        "gradingBasis": "e607cc82-0a75-4b3f-878d-300d0da786cd:string:GRD",
-        "includeInGPA": "db4aba3a-58c1-4a51-bec5-fc53c29c96c6:boolean:true",
-        "semester": "116f6332-d157-46f4-a9e4-59c0b59485e2:string:1620"
+        "name": "0ad07595-29fd-4010-821b-3b0da7c681ee:string:Biomedicine and Singapore Society",
+        "courseCode": "2eb4d90a-5396-4856-830b-e45cd054b34c:string:UTS2101",
+        "grade": "f8e41206-6b93-49d0-957e-af1e95ac5ed8:string:A-",
+        "courseCredit": "860b9058-aec1-4d04-bf36-2a7e1206f1d7:number:4",
+        "gradingBasis": "b4e8a963-301e-400b-9bbb-26a61f3954f2:string:GRD",
+        "includeInGPA": "c07e0371-d06f-4a51-9fe4-257c6a3794ee:boolean:true",
+        "reportNo": "f417aa19-802c-4c85-be9d-4a0749c7369a:number:1",
+        "semester": "6c50e21d-5205-455c-b81c-70c54c08aa04:string:1620"
       },
       {
-        "name": "44972b9a-108a-4c98-bb55-3cbfecfae81c:string:Urban Space:Critical Perspectives",
-        "courseCode": "f1d2208a-185f-473f-98fb-08562818b1a5:string:GE4204",
-        "grade": "8202fade-ff05-4b71-8977-eea4794ac9b1:string:A",
-        "courseCredit": "c6364d71-8218-48fe-a971-a422d1ead8d0:number:5",
-        "gradingBasis": "a519f2a9-574d-4417-ba75-f9972d70e170:string:GRD",
-        "includeInGPA": "0ba623d9-0f2d-4cab-a9cf-752fe4007b8f:boolean:true",
-        "semester": "21552c3c-5a41-4dc6-97dc-1015e8f611ea:string:1710"
+        "name": "3553a988-36ec-4e01-91aa-afb52f643c7d:string:Urban Space:Critical Perspectives",
+        "courseCode": "21f0831a-1748-4127-9ef0-ec04e43ab0b5:string:GE4204",
+        "grade": "f1ca2d21-0537-4269-8bb7-6949a3639000:string:A",
+        "courseCredit": "7660c7fa-a87e-4630-8428-f0cb27987947:number:5",
+        "gradingBasis": "7109b354-e559-4df7-8bfd-bb1588cf65fc:string:GRD",
+        "includeInGPA": "9e2a1e28-8bca-49f3-98d4-3b10005b38e9:boolean:true",
+        "reportNo": "f2990759-1b3a-4cb4-bf03-4d2cd924aacb:number:1",
+        "semester": "f8d50617-4d63-4695-91c4-d6b0851287a0:string:1710"
       },
       {
-        "name": "b06524b7-cc10-4984-afc2-81d3eb0ac793:string:Mobile Spaces: Making Social Worlds",
-        "courseCode": "23005fa0-9196-4625-896c-44b7382e91c9:string:GE4226",
-        "grade": "2e8212d7-522d-44e4-8047-2683466a891a:string:A",
-        "courseCredit": "eae6cbe9-7fe1-402b-9d02-509d9294a33a:number:5",
-        "gradingBasis": "ffd1ee23-8db6-42fd-8dc3-44675b06de25:string:GRD",
-        "includeInGPA": "e9e58fac-f00d-45f8-970e-f68fa8e4714f:boolean:true",
-        "semester": "5878e53e-7430-40c9-a460-d24892280217:string:1710"
+        "name": "e985785f-ecb4-4065-a692-3c619dd6226f:string:Mobile Spaces: Making Social Worlds",
+        "courseCode": "22e66c02-6468-4ad0-9073-05742091818b:string:GE4226",
+        "grade": "da43288b-06c0-4c1d-9651-1f3318fc98db:string:A",
+        "courseCredit": "a4b71d8f-a2bf-46d9-a807-4c1baff66925:number:5",
+        "gradingBasis": "196d3535-f2b9-474f-a6a2-873246aee678:string:GRD",
+        "includeInGPA": "4c3d8c5e-8a32-4838-9a87-4e465541f696:boolean:true",
+        "reportNo": "bf8e9257-9aa7-438b-aad1-e45b563f8b2c:number:1",
+        "semester": "bf11a2d6-c9a5-457c-b74d-cf3362f59de9:string:1710"
       },
       {
-        "name": "477101f3-9602-4fce-ba78-9521a9f454ae:string:Geography in the Contemporary World",
-        "courseCode": "e484e289-4683-4e54-8e12-2e8c3e53723f:string:GE4102",
-        "grade": "518dc863-6cd3-4eb2-ba6f-4a9bd9d6629b:string:A+",
-        "courseCredit": "5ba41eec-8b7f-40af-a3c1-18614d59b0d8:number:5",
-        "gradingBasis": "1c943c53-de5f-4a94-a8c6-ba64d94bcdaa:string:GRD",
-        "includeInGPA": "49dd1877-ef6b-491e-b83c-5b92b4a7c620:boolean:true",
-        "semester": "80ee8e0d-3b86-4559-badc-1bb36961200a:string:1720"
+        "name": "428680f7-6ad0-46dd-9385-414b7040cdae:string:Geography in the Contemporary World",
+        "courseCode": "aec723d1-7729-47df-9238-db556af370bc:string:GE4102",
+        "grade": "18d8a6f8-9876-4ebe-ae18-430bdd9dfe46:string:A+",
+        "courseCredit": "7425209c-d3d2-41b1-a434-cc12016b816c:number:5",
+        "gradingBasis": "ca3615c8-7f4b-4725-8407-40282ab0d77c:string:GRD",
+        "includeInGPA": "8d7a4082-82b5-4462-b93f-6e2245e98461:boolean:true",
+        "reportNo": "f88d167f-fd0d-46ae-afcd-a2cfe20e0502:number:1",
+        "semester": "3ebcd4ee-6a05-4c2b-ab76-996a1e90d634:string:1720"
       },
       {
-        "name": "d9ed93ed-0b45-4a93-8aa9-82f8d2d9524f:string:Honours Thesis",
-        "courseCode": "d257556f-9dbd-4e82-8606-960ccd3c2eea:string:GE4401",
-        "grade": "efc4b96c-048b-4a93-a207-ddefb85b7aa8:string:A+",
-        "courseCredit": "7177952c-64ca-4e0d-8cc7-4e7e0c2ca2e8:number:15",
-        "gradingBasis": "638e1337-766e-4fba-9b90-e4441f21f828:string:GRD",
-        "includeInGPA": "9378b3f5-fa90-4043-8ce4-247805808837:boolean:true",
-        "semester": "ecc16d60-5f40-4dcf-b05c-4e87011099bf:string:1720"
+        "name": "81cc455e-9041-49f8-920c-adb28f463aa2:string:Honours Thesis",
+        "courseCode": "edc765af-7b32-4d5c-bbe1-1707fec582be:string:GE4401",
+        "grade": "4d027a9f-59fd-4b69-8c14-3458e062886e:string:A+",
+        "courseCredit": "75155539-b24e-469c-8ef3-eb1118692d35:number:15",
+        "gradingBasis": "d4a9a7df-178b-4034-a6bc-b3a98dfd0291:string:GRD",
+        "includeInGPA": "5190e4d8-b0f8-4fdd-8b50-a12ff530948c:boolean:true",
+        "reportNo": "ac8e3e36-ceea-48ce-8aba-6f3206beba8e:number:1",
+        "semester": "22f87fa1-c89b-48fe-9374-218bb25bbec5:string:1720"
       },
       {
-        "name": "b661c461-ae54-48ab-91e1-bcd10b0dd17f:string:General Biology",
-        "courseCode": "7d8de5a8-96e6-40c3-bcca-0d84061052e4:string:LSM1301",
-        "grade": "1849776d-76d4-4592-a474-b1bfbf0e17df:string:S",
-        "courseCredit": "593e554e-bff6-406c-b632-cde25fee2a60:number:4",
-        "gradingBasis": "ee77370d-2b77-4af8-827f-106d0fd08593:string:SNU",
-        "includeInGPA": "390254e4-cc51-4a2e-a47b-427b46b136a7:boolean:false",
-        "semester": "efd7fb4f-0405-4384-912c-0bac354452fc:string:1720"
+        "name": "dea9ca4a-81dc-4f41-87cf-8edcf4f2601a:string:General Biology",
+        "courseCode": "d8cd54d1-6d25-4c00-bb48-97ee8879dd91:string:LSM1301",
+        "grade": "5cf5b98b-229d-4250-aab0-c65872847c8c:string:S",
+        "courseCredit": "8558fe7e-a584-4cd8-82c3-ddc83c921115:number:4",
+        "gradingBasis": "0fcaea4f-e78a-40f4-8174-7f0506e16dcb:string:SNU",
+        "includeInGPA": "108db673-e756-4cbb-ab0d-38b0a6a140e5:boolean:false",
+        "reportNo": "72772674-decd-4ff9-9230-592b84e7aebd:number:1",
+        "semester": "1184d7b5-c0b3-449e-882f-114292a02ef7:string:1720"
       },
       {
-        "name": "4504c970-f381-46ba-be35-041b1f37cfc5:string:Modern Western Political Thought",
-        "courseCode": "6e4f6816-edd9-4ad7-a3c3-fdfd2a0bd850:string:PS2204",
-        "grade": "eb956100-7dae-40c9-942a-1e3d1c6162d3:string:A",
-        "courseCredit": "0d6bb8a9-f72b-4a49-ac73-b9929f0d0783:number:4",
-        "gradingBasis": "48e98bf4-ba9c-4250-87af-af7274c40609:string:GRD",
-        "includeInGPA": "57c5ee23-5932-44cd-b90b-51512c9eaa55:boolean:true",
-        "semester": "d23b1268-3892-4a8c-b6cd-499410888b88:string:1720"
+        "name": "488ff266-14f8-4f77-a0b5-37b5eb4f0720:string:Modern Western Political Thought",
+        "courseCode": "a0b7821a-9d72-4296-82aa-32417ee812b2:string:PS2204",
+        "grade": "107d84d1-baaa-49fa-8570-67f68da60230:string:A",
+        "courseCredit": "cda90b6a-d6e7-4958-b0fd-d96d1e111c3e:number:4",
+        "gradingBasis": "db91fe14-139b-40e7-b22a-9c4c558bd56c:string:GRD",
+        "includeInGPA": "e894d388-b667-421a-9955-cc77db793674:boolean:true",
+        "reportNo": "9318a798-a2fc-4eb5-817a-e4cfade37452:number:1",
+        "semester": "82fafe5e-87a8-4a3a-919d-524aec79129d:string:1720"
       },
       {
-        "name": "832808c8-33cf-4727-9925-b6caa71d544e:string:Cities and Urban Life in Southeast Asia",
-        "courseCode": "7b49bee8-00d1-4daa-a1a9-8103845a26b4:string:SE2212",
-        "grade": "acde54d7-4bd0-4523-83e2-3f42f691a1d1:string:S",
-        "courseCredit": "371119fd-ed0c-434d-976f-05cde4fb1b9d:number:4",
-        "gradingBasis": "93dfe174-d630-4ef0-a819-c739d2a3c7d8:string:SNU",
-        "includeInGPA": "3b4f1625-26e1-45de-9db4-046bc223ed15:boolean:false",
-        "semester": "4c8bbf3b-5432-4a0a-ab77-40ddbb6f593a:string:1720"
+        "name": "2e7fe06b-82fa-4705-be13-79279d8c53d8:string:Cities and Urban Life in Southeast Asia",
+        "courseCode": "1adb3d91-885d-4ddc-ac6e-77e2e19c5e18:string:SE2212",
+        "grade": "caa51b2c-24f2-413c-a376-b546a77c30bf:string:S",
+        "courseCredit": "31a015a3-b0bc-43f1-a6c6-38f1e1612e79:number:4",
+        "gradingBasis": "f8c4d094-52e6-4122-aad3-01669c8ac047:string:SNU",
+        "includeInGPA": "151ec0ed-b6aa-46fb-9672-cadda0f96373:boolean:false",
+        "reportNo": "38fb74c3-8a7f-4cab-90a3-e42455af02a7:number:1",
+        "semester": "f6e6db6b-ca2c-4491-89b0-e41fadd0dea4:string:1720"
       },
       {
-        "name": "f05dea3f-428c-4448-a608-54c4549b8a00:string:Third Year Experience Workshops: “Exploring Possibilities”",
-        "courseCode": "6df3762d-ac13-462e-9f76-080d04bbd0f9:string:UTC3100",
-        "grade": "31bd25ec-8c7e-4c84-9908-32810aa61fc5:string:CS",
-        "courseCredit": "7872a794-efd1-4011-9db1-7e55ee35da73:number:0",
-        "gradingBasis": "415b32eb-fdc4-47b4-900c-35d775d5ad49:string:CSU",
-        "includeInGPA": "c3097359-a089-4941-a26a-8cfb76b1cd97:boolean:false",
-        "semester": "405d6650-1644-4162-b780-883c06b6f07b:string:1720"
+        "name": "3c7cdcf0-2795-4a6a-8ae4-5b5d75939d80:string:Third Year Experience Workshops: “Exploring Possibilities”",
+        "courseCode": "fff3a188-2539-4263-88f7-e98bc4176bd3:string:UTC3100",
+        "grade": "d98e50ed-db85-4a18-8e50-81c66fdf2726:string:CS",
+        "courseCredit": "00a00235-33d3-4f2d-b096-b6443d31c2b1:number:0",
+        "gradingBasis": "88e65785-70a1-4f29-b4ba-1c5e46f39090:string:CSU",
+        "includeInGPA": "4ca53e01-7a1b-405d-8a96-9f8f5e5ba46b:boolean:false",
+        "reportNo": "2ea316c3-a42e-4fb7-9ed7-38f82e21c739:number:1",
+        "semester": "f33cf6ae-17bc-427e-8795-388f13892b81:string:1720"
       }
     ],
     "additionalData": {
       "degreeScroll": [
         {
-          "degreeTitle": "430a8003-dd0c-46d9-9acd-e89e0b80661b:string:Bachelor of Arts",
-          "dateConferred": "b4006a72-590b-4ac6-b348-30191c0bd285:string:2018-06-30",
-          "honours": "249dca08-6ccc-4480-9ac4-cdce61d0d823:string:Honours (Highest Distinction)",
-          "degreeCode": "cef79c86-b0f2-419e-ba9b-e46e7eb8156b:string:J011000",
-          "type": "677fa5a3-5eab-461c-afd4-589c1b814594:string:NUS-UNC JDP"
+          "degreeTitle": "0cabaf17-ac87-41ae-a99d-f66159b38877:string:Bachelor of Arts",
+          "dateConferred": "27e32df5-02a2-431a-9a8a-a4fc58db5c10:string:2018-06-30",
+          "honours": "1fad0cfa-dd3d-4632-a5a4-b82853a07be2:string:Honours (Highest Distinction)",
+          "degreeCode": "43d1e220-6bfa-4220-82cd-d00491581e5d:string:J011000",
+          "type": "7f451e1b-e6ad-46a3-a73d-31f349610a9c:string:K27 NUS-UNC"
         }
       ],
       "images": {
         "PRESIDENT": {
-          "data": "c735f559-1b53-4631-9073-0b2e5a490f20:string:data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAABaCAIAAAAJsExNAAAEy0lEQVR42u2aPVbrOhRGnY4RQE9BB9TMgA6YBTOAir8KZsAsgI4ZUAMdBT3p6NLx/J7e0jpIsqw4tuP73b2LLIhtRTralo5kz25vbxeLRQUgwezq6ur8/Hzd1QDogXp0/lfoy8vLddcEoAeur68RGnRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEBikQGqRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEHpvHx8fX11f398XFxWw2W3eNpOgi9NfX1/39ffz9/v7+9vb27u7uX9tJPz8/7+/vn5+fXtk4Jgg9KH0K7Tk5Odnb21t308bm7e3t4eGh6aiPydSEttUWmKgHEbr6b2Q6Pj5ed+vGI29zNeGbHKF/CX16erq1tRV/X024C3unzjRubm78v2dnZxsbG+7vxWLx/PxcD8mTjQZCNwpdRV3rp1Q/z9qR25bjJQjOTJ7jLami26bz5bbmwfRSn393d5dsb2tAfAkfHx9xymHD7vJvO8zX1fBnlsQn+Gn3o5mEPugsiwtLea8Fd0XyNrZhd2UeHh76O78vehY6aJs/2k3o+tO3359Wd1IwuduorXJ5U3ZrW5TMeq3x1e8ROiYpdMatpeKTDEWM65eBhK6vtX/HsbX0npr2L7TtXV/dDkIvRTwVdLi8aSSuY5SPfpMZdXfu7OwEcieFbq12eXwKy6ybXH8OIXS+nKOjo0yoV6d/oZNzdzeh3ZeBLvGo3+Plsbs29JmhN78otFGKhW4a4LvFx97bwY6hrWRTtmCr3U3oOPPxrbPzW7Lw1Zmu0PbMZDIwxOVxdlG+Zspv/iQnX1dgkw3lDUya6vpiPp/X5dhMOtPkXoQOCmk6NNBidLopR1OHdRC6/HJ7N7qm+TG7cGaMl2Ie99N5oe0YVt7ApdKAzGlDCF2SBPa4H9+/0Mmjf4rQQQn1Mjw5XRaSzCXGEdp+U08OLvFIpk8IvdK2nW3wNIUOZpiSPK8uqv5Mjt/xT+eFtjVZReikYZ2Fbu21DinHQIz0YCW5lHl6emrdZ23SYqn+XkroyiwNPfmdOF9UHY3NzU0/2AQjtAtybImtid8HqBpELxQ6ueRtXRQGzSzvtYy1wQDhW1eZrfcJ5dBNBENa65PhSQkd13aV5aAjubvii41voaXikx+h8wUmK+8Go/JC8sNw+Vbj6oz0clJyp7bkSZg7OrLQQW1bn1q3BiS/bVdSwrJClz+pSZ7pmlzea615Rd7piQqdf33UzlZu6pnP5xPMoeMOKFmyuA2yl5cX2211HQ4ODmwSUjUIXf1+MuzWo9/f376GHV4iCNID95QnuacenFmZO7Cw10oS5eDRd1N8VoQX/BNk3usYsw5WMjqoEIROkHnuNRD5lGOcOmiA0AnsEm2cyGSE/tveLF8RhA4JHkmM8xJznF9Wg71gqQ1CgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1S/C/0uqsB0Bv/AEwL5dNeBrk9AAAAAElFTkSuQmCC",
-          "width": "09f94752-938a-46b7-9f4d-b12fa3bc8827:number:240",
-          "height": "10333413-e19c-4647-807c-c7b68c0d27eb:number:90",
-          "unit": "7dfb42a0-44ba-4311-9730-aef3a6b52b25:string:px"
+          "data": "11636da1-cfa1-41cb-a53a-ddd08325d3bd:string:data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAABaCAIAAAAJsExNAAAEy0lEQVR42u2aPVbrOhRGnY4RQE9BB9TMgA6YBTOAir8KZsAsgI4ZUAMdBT3p6NLx/J7e0jpIsqw4tuP73b2LLIhtRTralo5kz25vbxeLRQUgwezq6ur8/Hzd1QDogXp0/lfoy8vLddcEoAeur68RGnRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEBikQGqRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEHpvHx8fX11f398XFxWw2W3eNpOgi9NfX1/39ffz9/v7+9vb27u7uX9tJPz8/7+/vn5+fXtk4Jgg9KH0K7Tk5Odnb21t308bm7e3t4eGh6aiPydSEttUWmKgHEbr6b2Q6Pj5ed+vGI29zNeGbHKF/CX16erq1tRV/X024C3unzjRubm78v2dnZxsbG+7vxWLx/PxcD8mTjQZCNwpdRV3rp1Q/z9qR25bjJQjOTJ7jLami26bz5bbmwfRSn393d5dsb2tAfAkfHx9xymHD7vJvO8zX1fBnlsQn+Gn3o5mEPugsiwtLea8Fd0XyNrZhd2UeHh76O78vehY6aJs/2k3o+tO3359Wd1IwuduorXJ5U3ZrW5TMeq3x1e8ROiYpdMatpeKTDEWM65eBhK6vtX/HsbX0npr2L7TtXV/dDkIvRTwVdLi8aSSuY5SPfpMZdXfu7OwEcieFbq12eXwKy6ybXH8OIXS+nKOjo0yoV6d/oZNzdzeh3ZeBLvGo3+Plsbs29JmhN78otFGKhW4a4LvFx97bwY6hrWRTtmCr3U3oOPPxrbPzW7Lw1Zmu0PbMZDIwxOVxdlG+Zspv/iQnX1dgkw3lDUya6vpiPp/X5dhMOtPkXoQOCmk6NNBidLopR1OHdRC6/HJ7N7qm+TG7cGaMl2Ie99N5oe0YVt7ApdKAzGlDCF2SBPa4H9+/0Mmjf4rQQQn1Mjw5XRaSzCXGEdp+U08OLvFIpk8IvdK2nW3wNIUOZpiSPK8uqv5Mjt/xT+eFtjVZReikYZ2Fbu21DinHQIz0YCW5lHl6emrdZ23SYqn+XkroyiwNPfmdOF9UHY3NzU0/2AQjtAtybImtid8HqBpELxQ6ueRtXRQGzSzvtYy1wQDhW1eZrfcJ5dBNBENa65PhSQkd13aV5aAjubvii41voaXikx+h8wUmK+8Go/JC8sNw+Vbj6oz0clJyp7bkSZg7OrLQQW1bn1q3BiS/bVdSwrJClz+pSZ7pmlzea615Rd7piQqdf33UzlZu6pnP5xPMoeMOKFmyuA2yl5cX2211HQ4ODmwSUjUIXf1+MuzWo9/f376GHV4iCNID95QnuacenFmZO7Cw10oS5eDRd1N8VoQX/BNk3usYsw5WMjqoEIROkHnuNRD5lGOcOmiA0AnsEm2cyGSE/tveLF8RhA4JHkmM8xJznF9Wg71gqQ1CgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1S/C/0uqsB0Bv/AEwL5dNeBrk9AAAAAElFTkSuQmCC",
+          "width": "364a02df-e816-4569-8c9b-a5b66de6371a:number:240",
+          "height": "47375251-4867-486e-a4f4-e1583427c5d0:number:90",
+          "unit": "c11372d0-7db1-41d8-bb68-b94d481f5fd5:string:px"
         },
         "TRUSTEES": {
-          "data": "188d2708-db3d-4c01-b577-9e6212d0cf34:string:data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAABaCAIAAAAJsExNAAAEy0lEQVR42u2aPVbrOhRGnY4RQE9BB9TMgA6YBTOAir8KZsAsgI4ZUAMdBT3p6NLx/J7e0jpIsqw4tuP73b2LLIhtRTralo5kz25vbxeLRQUgwezq6ur8/Hzd1QDogXp0/lfoy8vLddcEoAeur68RGnRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEBikQGqRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEHpvHx8fX11f398XFxWw2W3eNpOgi9NfX1/39ffz9/v7+9vb27u7uX9tJPz8/7+/vn5+fXtk4Jgg9KH0K7Tk5Odnb21t308bm7e3t4eGh6aiPydSEttUWmKgHEbr6b2Q6Pj5ed+vGI29zNeGbHKF/CX16erq1tRV/X024C3unzjRubm78v2dnZxsbG+7vxWLx/PxcD8mTjQZCNwpdRV3rp1Q/z9qR25bjJQjOTJ7jLami26bz5bbmwfRSn393d5dsb2tAfAkfHx9xymHD7vJvO8zX1fBnlsQn+Gn3o5mEPugsiwtLea8Fd0XyNrZhd2UeHh76O78vehY6aJs/2k3o+tO3359Wd1IwuduorXJ5U3ZrW5TMeq3x1e8ROiYpdMatpeKTDEWM65eBhK6vtX/HsbX0npr2L7TtXV/dDkIvRTwVdLi8aSSuY5SPfpMZdXfu7OwEcieFbq12eXwKy6ybXH8OIXS+nKOjo0yoV6d/oZNzdzeh3ZeBLvGo3+Plsbs29JmhN78otFGKhW4a4LvFx97bwY6hrWRTtmCr3U3oOPPxrbPzW7Lw1Zmu0PbMZDIwxOVxdlG+Zspv/iQnX1dgkw3lDUya6vpiPp/X5dhMOtPkXoQOCmk6NNBidLopR1OHdRC6/HJ7N7qm+TG7cGaMl2Ie99N5oe0YVt7ApdKAzGlDCF2SBPa4H9+/0Mmjf4rQQQn1Mjw5XRaSzCXGEdp+U08OLvFIpk8IvdK2nW3wNIUOZpiSPK8uqv5Mjt/xT+eFtjVZReikYZ2Fbu21DinHQIz0YCW5lHl6emrdZ23SYqn+XkroyiwNPfmdOF9UHY3NzU0/2AQjtAtybImtid8HqBpELxQ6ueRtXRQGzSzvtYy1wQDhW1eZrfcJ5dBNBENa65PhSQkd13aV5aAjubvii41voaXikx+h8wUmK+8Go/JC8sNw+Vbj6oz0clJyp7bkSZg7OrLQQW1bn1q3BiS/bVdSwrJClz+pSZ7pmlzea615Rd7piQqdf33UzlZu6pnP5xPMoeMOKFmyuA2yl5cX2211HQ4ODmwSUjUIXf1+MuzWo9/f376GHV4iCNID95QnuacenFmZO7Cw10oS5eDRd1N8VoQX/BNk3usYsw5WMjqoEIROkHnuNRD5lGOcOmiA0AnsEm2cyGSE/tveLF8RhA4JHkmM8xJznF9Wg71gqQ1CgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1S/C/0uqsB0Bv/AEwL5dNeBrk9AAAAAElFTkSuQmCC",
-          "width": "145e7f07-1ac1-4eea-9b37-b782a5392f9b:number:240",
-          "height": "fe4ddfc6-7fde-4c6e-a9c8-66580ae5fc7c:number:90",
-          "unit": "b990e136-5a7d-4274-b22d-7e3648fef230:string:px"
+          "data": "37261581-4130-44a4-bb92-52734b6ed447:string:data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAABaCAIAAAAJsExNAAAEy0lEQVR42u2aPVbrOhRGnY4RQE9BB9TMgA6YBTOAir8KZsAsgI4ZUAMdBT3p6NLx/J7e0jpIsqw4tuP73b2LLIhtRTralo5kz25vbxeLRQUgwezq6ur8/Hzd1QDogXp0/lfoy8vLddcEoAeur68RGnRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEBikQGqRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEHpvHx8fX11f398XFxWw2W3eNpOgi9NfX1/39ffz9/v7+9vb27u7uX9tJPz8/7+/vn5+fXtk4Jgg9KH0K7Tk5Odnb21t308bm7e3t4eGh6aiPydSEttUWmKgHEbr6b2Q6Pj5ed+vGI29zNeGbHKF/CX16erq1tRV/X024C3unzjRubm78v2dnZxsbG+7vxWLx/PxcD8mTjQZCNwpdRV3rp1Q/z9qR25bjJQjOTJ7jLami26bz5bbmwfRSn393d5dsb2tAfAkfHx9xymHD7vJvO8zX1fBnlsQn+Gn3o5mEPugsiwtLea8Fd0XyNrZhd2UeHh76O78vehY6aJs/2k3o+tO3359Wd1IwuduorXJ5U3ZrW5TMeq3x1e8ROiYpdMatpeKTDEWM65eBhK6vtX/HsbX0npr2L7TtXV/dDkIvRTwVdLi8aSSuY5SPfpMZdXfu7OwEcieFbq12eXwKy6ybXH8OIXS+nKOjo0yoV6d/oZNzdzeh3ZeBLvGo3+Plsbs29JmhN78otFGKhW4a4LvFx97bwY6hrWRTtmCr3U3oOPPxrbPzW7Lw1Zmu0PbMZDIwxOVxdlG+Zspv/iQnX1dgkw3lDUya6vpiPp/X5dhMOtPkXoQOCmk6NNBidLopR1OHdRC6/HJ7N7qm+TG7cGaMl2Ie99N5oe0YVt7ApdKAzGlDCF2SBPa4H9+/0Mmjf4rQQQn1Mjw5XRaSzCXGEdp+U08OLvFIpk8IvdK2nW3wNIUOZpiSPK8uqv5Mjt/xT+eFtjVZReikYZ2Fbu21DinHQIz0YCW5lHl6emrdZ23SYqn+XkroyiwNPfmdOF9UHY3NzU0/2AQjtAtybImtid8HqBpELxQ6ueRtXRQGzSzvtYy1wQDhW1eZrfcJ5dBNBENa65PhSQkd13aV5aAjubvii41voaXikx+h8wUmK+8Go/JC8sNw+Vbj6oz0clJyp7bkSZg7OrLQQW1bn1q3BiS/bVdSwrJClz+pSZ7pmlzea615Rd7piQqdf33UzlZu6pnP5xPMoeMOKFmyuA2yl5cX2211HQ4ODmwSUjUIXf1+MuzWo9/f376GHV4iCNID95QnuacenFmZO7Cw10oS5eDRd1N8VoQX/BNk3usYsw5WMjqoEIROkHnuNRD5lGOcOmiA0AnsEm2cyGSE/tveLF8RhA4JHkmM8xJznF9Wg71gqQ1CgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1S/C/0uqsB0Bv/AEwL5dNeBrk9AAAAAElFTkSuQmCC",
+          "width": "889ed0c6-e600-43c6-937d-c06f28ee86ba:number:240",
+          "height": "55caca88-f25d-4ae2-a3e0-8ff916f4113e:number:90",
+          "unit": "9e253665-b833-4ac0-8add-7d58597a52d3:string:px"
         },
         "UNC_CHANCELLOR": {
-          "data": "ee97c6e0-0529-4993-9fa5-3ef7225a0c0d:string:data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAABaCAIAAAAJsExNAAAEy0lEQVR42u2aPVbrOhRGnY4RQE9BB9TMgA6YBTOAir8KZsAsgI4ZUAMdBT3p6NLx/J7e0jpIsqw4tuP73b2LLIhtRTralo5kz25vbxeLRQUgwezq6ur8/Hzd1QDogXp0/lfoy8vLddcEoAeur68RGnRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEBikQGqRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEHpvHx8fX11f398XFxWw2W3eNpOgi9NfX1/39ffz9/v7+9vb27u7uX9tJPz8/7+/vn5+fXtk4Jgg9KH0K7Tk5Odnb21t308bm7e3t4eGh6aiPydSEttUWmKgHEbr6b2Q6Pj5ed+vGI29zNeGbHKF/CX16erq1tRV/X024C3unzjRubm78v2dnZxsbG+7vxWLx/PxcD8mTjQZCNwpdRV3rp1Q/z9qR25bjJQjOTJ7jLami26bz5bbmwfRSn393d5dsb2tAfAkfHx9xymHD7vJvO8zX1fBnlsQn+Gn3o5mEPugsiwtLea8Fd0XyNrZhd2UeHh76O78vehY6aJs/2k3o+tO3359Wd1IwuduorXJ5U3ZrW5TMeq3x1e8ROiYpdMatpeKTDEWM65eBhK6vtX/HsbX0npr2L7TtXV/dDkIvRTwVdLi8aSSuY5SPfpMZdXfu7OwEcieFbq12eXwKy6ybXH8OIXS+nKOjo0yoV6d/oZNzdzeh3ZeBLvGo3+Plsbs29JmhN78otFGKhW4a4LvFx97bwY6hrWRTtmCr3U3oOPPxrbPzW7Lw1Zmu0PbMZDIwxOVxdlG+Zspv/iQnX1dgkw3lDUya6vpiPp/X5dhMOtPkXoQOCmk6NNBidLopR1OHdRC6/HJ7N7qm+TG7cGaMl2Ie99N5oe0YVt7ApdKAzGlDCF2SBPa4H9+/0Mmjf4rQQQn1Mjw5XRaSzCXGEdp+U08OLvFIpk8IvdK2nW3wNIUOZpiSPK8uqv5Mjt/xT+eFtjVZReikYZ2Fbu21DinHQIz0YCW5lHl6emrdZ23SYqn+XkroyiwNPfmdOF9UHY3NzU0/2AQjtAtybImtid8HqBpELxQ6ueRtXRQGzSzvtYy1wQDhW1eZrfcJ5dBNBENa65PhSQkd13aV5aAjubvii41voaXikx+h8wUmK+8Go/JC8sNw+Vbj6oz0clJyp7bkSZg7OrLQQW1bn1q3BiS/bVdSwrJClz+pSZ7pmlzea615Rd7piQqdf33UzlZu6pnP5xPMoeMOKFmyuA2yl5cX2211HQ4ODmwSUjUIXf1+MuzWo9/f376GHV4iCNID95QnuacenFmZO7Cw10oS5eDRd1N8VoQX/BNk3usYsw5WMjqoEIROkHnuNRD5lGOcOmiA0AnsEm2cyGSE/tveLF8RhA4JHkmM8xJznF9Wg71gqQ1CgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1S/C/0uqsB0Bv/AEwL5dNeBrk9AAAAAElFTkSuQmCC",
-          "width": "578db5e9-d56e-423d-870f-d4e5055d5c13:number:240",
-          "height": "ce650cdb-6cf0-4e78-a4e8-bcbaec60d88c:number:90",
-          "unit": "1a76fa5b-9d4e-4480-a412-5e2e642ac06a:string:px"
+          "data": "8648912c-8897-468e-a50f-fc9b0379eadd:string:data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAABaCAIAAAAJsExNAAAEy0lEQVR42u2aPVbrOhRGnY4RQE9BB9TMgA6YBTOAir8KZsAsgI4ZUAMdBT3p6NLx/J7e0jpIsqw4tuP73b2LLIhtRTralo5kz25vbxeLRQUgwezq6ur8/Hzd1QDogXp0/lfoy8vLddcEoAeur68RGnRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEBikQGqRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEHpvHx8fX11f398XFxWw2W3eNpOgi9NfX1/39ffz9/v7+9vb27u7uX9tJPz8/7+/vn5+fXtk4Jgg9KH0K7Tk5Odnb21t308bm7e3t4eGh6aiPydSEttUWmKgHEbr6b2Q6Pj5ed+vGI29zNeGbHKF/CX16erq1tRV/X024C3unzjRubm78v2dnZxsbG+7vxWLx/PxcD8mTjQZCNwpdRV3rp1Q/z9qR25bjJQjOTJ7jLami26bz5bbmwfRSn393d5dsb2tAfAkfHx9xymHD7vJvO8zX1fBnlsQn+Gn3o5mEPugsiwtLea8Fd0XyNrZhd2UeHh76O78vehY6aJs/2k3o+tO3359Wd1IwuduorXJ5U3ZrW5TMeq3x1e8ROiYpdMatpeKTDEWM65eBhK6vtX/HsbX0npr2L7TtXV/dDkIvRTwVdLi8aSSuY5SPfpMZdXfu7OwEcieFbq12eXwKy6ybXH8OIXS+nKOjo0yoV6d/oZNzdzeh3ZeBLvGo3+Plsbs29JmhN78otFGKhW4a4LvFx97bwY6hrWRTtmCr3U3oOPPxrbPzW7Lw1Zmu0PbMZDIwxOVxdlG+Zspv/iQnX1dgkw3lDUya6vpiPp/X5dhMOtPkXoQOCmk6NNBidLopR1OHdRC6/HJ7N7qm+TG7cGaMl2Ie99N5oe0YVt7ApdKAzGlDCF2SBPa4H9+/0Mmjf4rQQQn1Mjw5XRaSzCXGEdp+U08OLvFIpk8IvdK2nW3wNIUOZpiSPK8uqv5Mjt/xT+eFtjVZReikYZ2Fbu21DinHQIz0YCW5lHl6emrdZ23SYqn+XkroyiwNPfmdOF9UHY3NzU0/2AQjtAtybImtid8HqBpELxQ6ueRtXRQGzSzvtYy1wQDhW1eZrfcJ5dBNBENa65PhSQkd13aV5aAjubvii41voaXikx+h8wUmK+8Go/JC8sNw+Vbj6oz0clJyp7bkSZg7OrLQQW1bn1q3BiS/bVdSwrJClz+pSZ7pmlzea615Rd7piQqdf33UzlZu6pnP5xPMoeMOKFmyuA2yl5cX2211HQ4ODmwSUjUIXf1+MuzWo9/f376GHV4iCNID95QnuacenFmZO7Cw10oS5eDRd1N8VoQX/BNk3usYsw5WMjqoEIROkHnuNRD5lGOcOmiA0AnsEm2cyGSE/tveLF8RhA4JHkmM8xJznF9Wg71gqQ1CgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1S/C/0uqsB0Bv/AEwL5dNeBrk9AAAAAElFTkSuQmCC",
+          "width": "0497fd89-a4c5-414e-96be-587befb31fa2:number:240",
+          "height": "40e51aeb-f079-4e6f-8e7e-213e0366f027:number:90",
+          "unit": "459de587-3aea-4aee-b3ef-37d2431af1e3:string:px"
         },
         "UNC_DEAN": {
-          "data": "c729e91d-25f4-4631-b890-72fe978dbd3a:string:data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAABaCAIAAAAJsExNAAAEy0lEQVR42u2aPVbrOhRGnY4RQE9BB9TMgA6YBTOAir8KZsAsgI4ZUAMdBT3p6NLx/J7e0jpIsqw4tuP73b2LLIhtRTralo5kz25vbxeLRQUgwezq6ur8/Hzd1QDogXp0/lfoy8vLddcEoAeur68RGnRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEBikQGqRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEHpvHx8fX11f398XFxWw2W3eNpOgi9NfX1/39ffz9/v7+9vb27u7uX9tJPz8/7+/vn5+fXtk4Jgg9KH0K7Tk5Odnb21t308bm7e3t4eGh6aiPydSEttUWmKgHEbr6b2Q6Pj5ed+vGI29zNeGbHKF/CX16erq1tRV/X024C3unzjRubm78v2dnZxsbG+7vxWLx/PxcD8mTjQZCNwpdRV3rp1Q/z9qR25bjJQjOTJ7jLami26bz5bbmwfRSn393d5dsb2tAfAkfHx9xymHD7vJvO8zX1fBnlsQn+Gn3o5mEPugsiwtLea8Fd0XyNrZhd2UeHh76O78vehY6aJs/2k3o+tO3359Wd1IwuduorXJ5U3ZrW5TMeq3x1e8ROiYpdMatpeKTDEWM65eBhK6vtX/HsbX0npr2L7TtXV/dDkIvRTwVdLi8aSSuY5SPfpMZdXfu7OwEcieFbq12eXwKy6ybXH8OIXS+nKOjo0yoV6d/oZNzdzeh3ZeBLvGo3+Plsbs29JmhN78otFGKhW4a4LvFx97bwY6hrWRTtmCr3U3oOPPxrbPzW7Lw1Zmu0PbMZDIwxOVxdlG+Zspv/iQnX1dgkw3lDUya6vpiPp/X5dhMOtPkXoQOCmk6NNBidLopR1OHdRC6/HJ7N7qm+TG7cGaMl2Ie99N5oe0YVt7ApdKAzGlDCF2SBPa4H9+/0Mmjf4rQQQn1Mjw5XRaSzCXGEdp+U08OLvFIpk8IvdK2nW3wNIUOZpiSPK8uqv5Mjt/xT+eFtjVZReikYZ2Fbu21DinHQIz0YCW5lHl6emrdZ23SYqn+XkroyiwNPfmdOF9UHY3NzU0/2AQjtAtybImtid8HqBpELxQ6ueRtXRQGzSzvtYy1wQDhW1eZrfcJ5dBNBENa65PhSQkd13aV5aAjubvii41voaXikx+h8wUmK+8Go/JC8sNw+Vbj6oz0clJyp7bkSZg7OrLQQW1bn1q3BiS/bVdSwrJClz+pSZ7pmlzea615Rd7piQqdf33UzlZu6pnP5xPMoeMOKFmyuA2yl5cX2211HQ4ODmwSUjUIXf1+MuzWo9/f376GHV4iCNID95QnuacenFmZO7Cw10oS5eDRd1N8VoQX/BNk3usYsw5WMjqoEIROkHnuNRD5lGOcOmiA0AnsEm2cyGSE/tveLF8RhA4JHkmM8xJznF9Wg71gqQ1CgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1S/C/0uqsB0Bv/AEwL5dNeBrk9AAAAAElFTkSuQmCC",
-          "width": "70648d7b-be96-4401-9f5f-992958620a68:number:240",
-          "height": "f727eb78-db91-4cca-bdf2-cba2ab405f10:number:90",
-          "unit": "53b99352-1bf3-46a7-a893-8460aafe5ec4:string:px"
+          "data": "ebb905d0-bf69-41a0-9b85-83ab7d8a6206:string:data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAABaCAIAAAAJsExNAAAEy0lEQVR42u2aPVbrOhRGnY4RQE9BB9TMgA6YBTOAir8KZsAsgI4ZUAMdBT3p6NLx/J7e0jpIsqw4tuP73b2LLIhtRTralo5kz25vbxeLRQUgwezq6ur8/Hzd1QDogXp0/lfoy8vLddcEoAeur68RGnRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEBikQGqRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEHpvHx8fX11f398XFxWw2W3eNpOgi9NfX1/39ffz9/v7+9vb27u7uX9tJPz8/7+/vn5+fXtk4Jgg9KH0K7Tk5Odnb21t308bm7e3t4eGh6aiPydSEttUWmKgHEbr6b2Q6Pj5ed+vGI29zNeGbHKF/CX16erq1tRV/X024C3unzjRubm78v2dnZxsbG+7vxWLx/PxcD8mTjQZCNwpdRV3rp1Q/z9qR25bjJQjOTJ7jLami26bz5bbmwfRSn393d5dsb2tAfAkfHx9xymHD7vJvO8zX1fBnlsQn+Gn3o5mEPugsiwtLea8Fd0XyNrZhd2UeHh76O78vehY6aJs/2k3o+tO3359Wd1IwuduorXJ5U3ZrW5TMeq3x1e8ROiYpdMatpeKTDEWM65eBhK6vtX/HsbX0npr2L7TtXV/dDkIvRTwVdLi8aSSuY5SPfpMZdXfu7OwEcieFbq12eXwKy6ybXH8OIXS+nKOjo0yoV6d/oZNzdzeh3ZeBLvGo3+Plsbs29JmhN78otFGKhW4a4LvFx97bwY6hrWRTtmCr3U3oOPPxrbPzW7Lw1Zmu0PbMZDIwxOVxdlG+Zspv/iQnX1dgkw3lDUya6vpiPp/X5dhMOtPkXoQOCmk6NNBidLopR1OHdRC6/HJ7N7qm+TG7cGaMl2Ie99N5oe0YVt7ApdKAzGlDCF2SBPa4H9+/0Mmjf4rQQQn1Mjw5XRaSzCXGEdp+U08OLvFIpk8IvdK2nW3wNIUOZpiSPK8uqv5Mjt/xT+eFtjVZReikYZ2Fbu21DinHQIz0YCW5lHl6emrdZ23SYqn+XkroyiwNPfmdOF9UHY3NzU0/2AQjtAtybImtid8HqBpELxQ6ueRtXRQGzSzvtYy1wQDhW1eZrfcJ5dBNBENa65PhSQkd13aV5aAjubvii41voaXikx+h8wUmK+8Go/JC8sNw+Vbj6oz0clJyp7bkSZg7OrLQQW1bn1q3BiS/bVdSwrJClz+pSZ7pmlzea615Rd7piQqdf33UzlZu6pnP5xPMoeMOKFmyuA2yl5cX2211HQ4ODmwSUjUIXf1+MuzWo9/f376GHV4iCNID95QnuacenFmZO7Cw10oS5eDRd1N8VoQX/BNk3usYsw5WMjqoEIROkHnuNRD5lGOcOmiA0AnsEm2cyGSE/tveLF8RhA4JHkmM8xJznF9Wg71gqQ1CgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1S/C/0uqsB0Bv/AEwL5dNeBrk9AAAAAElFTkSuQmCC",
+          "width": "08f404ad-2bdf-42f2-9faa-db37742df795:number:240",
+          "height": "a4d0531f-be96-4c0c-b5e3-d0352fcc41a8:number:90",
+          "unit": "db876eb1-1131-4cee-a3c0-47190c73fc00:string:px"
         },
         "UNC_TRUSTEES": {
-          "data": "87badd61-6c9d-433f-847d-dabeaa64c4d4:string:data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAABaCAIAAAAJsExNAAAEy0lEQVR42u2aPVbrOhRGnY4RQE9BB9TMgA6YBTOAir8KZsAsgI4ZUAMdBT3p6NLx/J7e0jpIsqw4tuP73b2LLIhtRTralo5kz25vbxeLRQUgwezq6ur8/Hzd1QDogXp0/lfoy8vLddcEoAeur68RGnRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEBikQGqRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEHpvHx8fX11f398XFxWw2W3eNpOgi9NfX1/39ffz9/v7+9vb27u7uX9tJPz8/7+/vn5+fXtk4Jgg9KH0K7Tk5Odnb21t308bm7e3t4eGh6aiPydSEttUWmKgHEbr6b2Q6Pj5ed+vGI29zNeGbHKF/CX16erq1tRV/X024C3unzjRubm78v2dnZxsbG+7vxWLx/PxcD8mTjQZCNwpdRV3rp1Q/z9qR25bjJQjOTJ7jLami26bz5bbmwfRSn393d5dsb2tAfAkfHx9xymHD7vJvO8zX1fBnlsQn+Gn3o5mEPugsiwtLea8Fd0XyNrZhd2UeHh76O78vehY6aJs/2k3o+tO3359Wd1IwuduorXJ5U3ZrW5TMeq3x1e8ROiYpdMatpeKTDEWM65eBhK6vtX/HsbX0npr2L7TtXV/dDkIvRTwVdLi8aSSuY5SPfpMZdXfu7OwEcieFbq12eXwKy6ybXH8OIXS+nKOjo0yoV6d/oZNzdzeh3ZeBLvGo3+Plsbs29JmhN78otFGKhW4a4LvFx97bwY6hrWRTtmCr3U3oOPPxrbPzW7Lw1Zmu0PbMZDIwxOVxdlG+Zspv/iQnX1dgkw3lDUya6vpiPp/X5dhMOtPkXoQOCmk6NNBidLopR1OHdRC6/HJ7N7qm+TG7cGaMl2Ie99N5oe0YVt7ApdKAzGlDCF2SBPa4H9+/0Mmjf4rQQQn1Mjw5XRaSzCXGEdp+U08OLvFIpk8IvdK2nW3wNIUOZpiSPK8uqv5Mjt/xT+eFtjVZReikYZ2Fbu21DinHQIz0YCW5lHl6emrdZ23SYqn+XkroyiwNPfmdOF9UHY3NzU0/2AQjtAtybImtid8HqBpELxQ6ueRtXRQGzSzvtYy1wQDhW1eZrfcJ5dBNBENa65PhSQkd13aV5aAjubvii41voaXikx+h8wUmK+8Go/JC8sNw+Vbj6oz0clJyp7bkSZg7OrLQQW1bn1q3BiS/bVdSwrJClz+pSZ7pmlzea615Rd7piQqdf33UzlZu6pnP5xPMoeMOKFmyuA2yl5cX2211HQ4ODmwSUjUIXf1+MuzWo9/f376GHV4iCNID95QnuacenFmZO7Cw10oS5eDRd1N8VoQX/BNk3usYsw5WMjqoEIROkHnuNRD5lGOcOmiA0AnsEm2cyGSE/tveLF8RhA4JHkmM8xJznF9Wg71gqQ1CgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1S/C/0uqsB0Bv/AEwL5dNeBrk9AAAAAElFTkSuQmCC",
-          "width": "9764c8c6-e51c-483a-b5a6-775565f2e6d7:number:240",
-          "height": "f10a608a-d6b3-4695-b45f-470d349e0859:number:90",
-          "unit": "4df11f6a-a5b3-43f8-ba8d-6abce1ddd35b:string:px"
+          "data": "123bd843-f52f-48fb-ad41-0ebef4aaa29f:string:data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAABaCAIAAAAJsExNAAAEy0lEQVR42u2aPVbrOhRGnY4RQE9BB9TMgA6YBTOAir8KZsAsgI4ZUAMdBT3p6NLx/J7e0jpIsqw4tuP73b2LLIhtRTralo5kz25vbxeLRQUgwezq6ur8/Hzd1QDogXp0/lfoy8vLddcEoAeur68RGnRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEBikQGqRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEHpvHx8fX11f398XFxWw2W3eNpOgi9NfX1/39ffz9/v7+9vb27u7uX9tJPz8/7+/vn5+fXtk4Jgg9KH0K7Tk5Odnb21t308bm7e3t4eGh6aiPydSEttUWmKgHEbr6b2Q6Pj5ed+vGI29zNeGbHKF/CX16erq1tRV/X024C3unzjRubm78v2dnZxsbG+7vxWLx/PxcD8mTjQZCNwpdRV3rp1Q/z9qR25bjJQjOTJ7jLami26bz5bbmwfRSn393d5dsb2tAfAkfHx9xymHD7vJvO8zX1fBnlsQn+Gn3o5mEPugsiwtLea8Fd0XyNrZhd2UeHh76O78vehY6aJs/2k3o+tO3359Wd1IwuduorXJ5U3ZrW5TMeq3x1e8ROiYpdMatpeKTDEWM65eBhK6vtX/HsbX0npr2L7TtXV/dDkIvRTwVdLi8aSSuY5SPfpMZdXfu7OwEcieFbq12eXwKy6ybXH8OIXS+nKOjo0yoV6d/oZNzdzeh3ZeBLvGo3+Plsbs29JmhN78otFGKhW4a4LvFx97bwY6hrWRTtmCr3U3oOPPxrbPzW7Lw1Zmu0PbMZDIwxOVxdlG+Zspv/iQnX1dgkw3lDUya6vpiPp/X5dhMOtPkXoQOCmk6NNBidLopR1OHdRC6/HJ7N7qm+TG7cGaMl2Ie99N5oe0YVt7ApdKAzGlDCF2SBPa4H9+/0Mmjf4rQQQn1Mjw5XRaSzCXGEdp+U08OLvFIpk8IvdK2nW3wNIUOZpiSPK8uqv5Mjt/xT+eFtjVZReikYZ2Fbu21DinHQIz0YCW5lHl6emrdZ23SYqn+XkroyiwNPfmdOF9UHY3NzU0/2AQjtAtybImtid8HqBpELxQ6ueRtXRQGzSzvtYy1wQDhW1eZrfcJ5dBNBENa65PhSQkd13aV5aAjubvii41voaXikx+h8wUmK+8Go/JC8sNw+Vbj6oz0clJyp7bkSZg7OrLQQW1bn1q3BiS/bVdSwrJClz+pSZ7pmlzea615Rd7piQqdf33UzlZu6pnP5xPMoeMOKFmyuA2yl5cX2211HQ4ODmwSUjUIXf1+MuzWo9/f376GHV4iCNID95QnuacenFmZO7Cw10oS5eDRd1N8VoQX/BNk3usYsw5WMjqoEIROkHnuNRD5lGOcOmiA0AnsEm2cyGSE/tveLF8RhA4JHkmM8xJznF9Wg71gqQ1CgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1S/C/0uqsB0Bv/AEwL5dNeBrk9AAAAAElFTkSuQmCC",
+          "width": "7fac63cb-0efb-40f0-afde-20131b875713:number:240",
+          "height": "a5f71cf2-4cbf-4731-b51b-0b363d0a6eae:number:90",
+          "unit": "4c2e6b22-7789-4843-8756-f9ab82b6887b:string:px"
         }
       },
-      "transcriptType": "80fc4b5e-e53d-4216-93d1-2385f2bdcf44:string:UGOF",
-      "transcriptReq": "6fe32d1e-0332-4b04-9740-f10dab41532c:string:001009562",
+      "transcriptType": "ce8da0d4-30b3-4747-9a0b-e04e2eb46748:string:UGOF",
+      "transcriptReq": "222f58b1-17b4-49eb-a785-34ea25181f08:string:001009885",
       "transcriptGroup": [
         {
-          "name": "1a444348-d5f5-4c46-b7a6-32734c1bf8c7:string:1410",
-          "term": "f153efad-2c43-452c-a0e0-62816f810c0a:string:2014/2015 Semester 1",
-          "formOfStudy": "eff01e9a-8172-4ebd-8fb4-b5a920991623:string:ENRL",
-          "fosPrintArea": "d9fe5c64-e2b7-4570-bddc-5d898c15be50:string:ND",
+          "name": "ef759d88-515c-4ec1-add5-f223ae769d80:string:1410",
+          "term": "5b654398-bd66-4f59-af35-5ddd3e596e69:string:2014/2015 Semester 1",
+          "formOfStudy": "483b2763-84f4-45b8-a764-9331f16713a1:string:ENRL",
+          "fosPrintArea": "e4478259-9318-4285-9f99-986d34c90f0b:string:ND",
           "summary": [
             {
-              "programName": "7fc36c3d-dd68-4c49-8130-a03097032957:string:Bachelor of Arts",
-              "includeInGPA": "2e6b81f0-9191-48fa-b9fc-e208894be939:boolean:true",
-              "GPAName": "1a40875d-5140-4090-968f-cb67022f6d53:string:Cumulative Average Point",
-              "GPA": "97fb5c9d-4d9a-4bea-8232-cb6efb10daba:number:4.88"
+              "programName": "1e28eba6-0aa2-4625-8a97-39ac5ef12067:string:Bachelor of Arts",
+              "includeInGPA": "6e8eb612-3473-402e-9814-bf553abea66c:boolean:true",
+              "GPAName": "d83b90d5-ded7-47a0-8714-e37d82f1b481:string:Cumulative Average Point",
+              "GPA": "bc80df30-3d17-4de3-a029-7f7329f42e81:number:4.88",
+              "reportNo": "01534abb-904d-4546-9534-2165c20bcb71:number:1"
             }
-          ]
+          ],
+          "reportNo": "e21c6b1c-75bc-4367-a5ed-eca8673358f9:number:1"
         },
         {
-          "name": "512ecb9d-4bd4-47d0-aa3a-94aea123952b:string:1420",
-          "term": "4946a7a9-5b70-415c-94ce-6f33acb51567:string:2014/2015 Semester 2",
-          "formOfStudy": "626d0607-10cb-4203-ad54-d8fa83720821:string:ENRL",
-          "fosPrintArea": "a0beb19a-d5d6-4ee9-855b-65945cd2080f:string:ND",
+          "name": "982404ec-a47b-41ba-89be-92e6bc27d3f7:string:1420",
+          "term": "a2d2a7a2-7939-4a09-a57c-7c43e9fea8bb:string:2014/2015 Semester 2",
+          "formOfStudy": "7f5eed8f-fbfd-47fd-b797-38b31e613f68:string:ENRL",
+          "fosPrintArea": "cd527f87-e755-46ac-86f2-56dcac160de5:string:ND",
           "summary": [
             {
-              "programName": "f11cdd12-20e1-4e1c-8f87-106c40444e95:string:Bachelor of Arts",
-              "includeInGPA": "50d69114-4b38-4a18-ba23-92bfbee2cb5e:boolean:true",
-              "GPAName": "f5f3c7e9-54ec-49dc-b668-c260b0256167:string:Cumulative Average Point",
-              "GPA": "ac6b6f15-b77f-48e7-9687-5bbf6c8e6277:number:4.63"
+              "programName": "3f352dc6-1e34-4bb0-9ef5-480e5d8d19a5:string:Bachelor of Arts",
+              "includeInGPA": "54d6dc92-08dd-42ba-8f77-bd3f484d0e74:boolean:true",
+              "GPAName": "d28ba8c0-19df-45f6-8652-85e85ce4e0ca:string:Cumulative Average Point",
+              "GPA": "d36ce8d5-3f0e-483e-9455-ba8ca41c7dca:number:4.63",
+              "reportNo": "40e60916-49fd-4380-a286-d974d3c3e069:number:1"
             }
-          ]
+          ],
+          "reportNo": "ef9e3283-28ff-4925-8cbb-a0ca67bb1607:number:1"
         },
         {
-          "name": "2c774b89-f8f2-4e48-b5cf-6e4fa6537e0e:string:1510",
-          "term": "c2c67c0a-61a7-44b3-8966-81255846a61e:string:2015/2016 Semester 1",
-          "formOfStudy": "2f42584b-86a1-44ae-9d54-bab6e878337c:string:JDA",
-          "fosDescription": "d0a7c491-5156-4234-91d5-861c3440b8fb:string:Participated in a Joint Degree Programme at",
-          "organization": "e32ad278-b7cc-4ed0-816e-630dcba63f12:string:University of North Carolina, Chapel Hill",
-          "fosPrintArea": "d25aeb3b-513e-4fcb-b387-6011ddec0fbf:string:EH",
+          "name": "c601048c-c126-4c2e-998f-4c3aa8e16b40:string:1510",
+          "term": "696bd274-1740-43a5-a0cb-d357041540ca:string:2015/2016 Semester 1",
+          "formOfStudy": "a2ee6540-01a4-46ad-9cbe-82e15358d006:string:JDA",
+          "fosDescription": "8f8a632a-c1ac-4ef5-961c-41d61513a151:string:Participated in a Joint Degree Programme at",
+          "organization": "b899186d-e0f6-4a16-ae6b-e22b33c03909:string:University of North Carolina, Chapel Hill",
+          "fosPrintArea": "2768e7ef-2e07-4bac-a946-aa6728af1063:string:EH",
           "creditTransfer": [
             {
-              "sourceType": "9b86ebe4-240f-4af4-9cfc-c2778384422d:string:E",
-              "creditsNoGPA": "f66d6c41-429f-4ebd-b544-b7e0e32fb0d7:number:0",
-              "creditsGPA": "62651bce-16ad-467b-983a-fd398370d35f:number:21",
-              "orgId": "2f65ee43-9499-4bb0-a647-d2220e462016:string:University of North Carolina, Chapel Hill",
-              "orgName": "bc98b1df-eefd-4aa6-a2c0-946e70cdbb81:string:University of North Carolina, Chapel Hill",
-              "transferSeq": "c8735aea-fa81-44a5-9807-0ca31a4f79b2:number:1"
+              "sourceType": "2a19f249-fab4-436c-9385-49ba94156de1:string:E",
+              "creditsNoGPA": "153caac5-6bdd-46c8-83a3-82ea74cd5b7c:number:0",
+              "creditsGPA": "48d48cff-9596-4c3f-9aa3-f08d38876bc6:number:21",
+              "orgId": "dd047a50-63fb-40ed-b070-17ae71b12c61:string:University of North Carolina, Chapel Hill",
+              "orgName": "9033790e-12a4-4579-a935-24c19f9c7382:string:University of North Carolina, Chapel Hill",
+              "reportNo": "c88d3054-a9d8-453c-9acc-272970d426b9:number:1",
+              "transferSeq": "54946276-6e31-4a36-b839-b374a11cf984:number:1"
             }
           ],
           "summary": [
             {
-              "programName": "68e255d3-2ce1-4743-a362-91a9448e93f7:string:Bachelor of Arts",
-              "includeInGPA": "303d3812-99e1-4d07-a5cc-088978e2266c:boolean:true",
-              "GPAName": "5ea9d722-daaf-4182-8a69-edb630432a7e:string:Cumulative Average Point",
-              "GPA": "39743401-30c8-4c92-a6d2-e83f8ca5aa2d:number:4.77"
+              "programName": "9796f426-029a-4602-a965-3c26eda8b00a:string:Bachelor of Arts",
+              "includeInGPA": "3d5a6a5d-8003-4257-936e-8df21be36f1d:boolean:true",
+              "GPAName": "e8657bf9-5b3a-4990-88b9-46210d7e1fc3:string:Cumulative Average Point",
+              "GPA": "7bc037f0-a0c6-4d90-8a0f-7ee2cc59987f:number:4.77",
+              "reportNo": "dc434ec0-6789-4443-adbd-aaf143061210:number:1"
             }
-          ]
+          ],
+          "reportNo": "3763a128-dc38-4823-a4ed-2ed8d3f4b4b4:number:1"
         },
         {
-          "name": "16b6231a-2c89-40c4-80ba-8a3c8458c3ee:string:1520",
-          "term": "1263898b-731f-43cd-8df5-60c6abec5ca3:string:2015/2016 Semester 2",
-          "formOfStudy": "4ce9539d-5cfd-4796-a142-dc3d265fd47f:string:JDA",
-          "fosDescription": "493e3cfb-2449-40a2-992e-e693c9912e74:string:Participated in a Joint Degree Programme at",
-          "organization": "e19a3966-23b8-4364-b1dc-487018b249f7:string:University of North Carolina, Chapel Hill",
-          "fosPrintArea": "1157e5fc-8872-4dc9-9b59-e8e3c67a8691:string:EH",
+          "name": "e0572dcc-44c2-48eb-af7c-68d61e23bf0c:string:1520",
+          "term": "627ddb71-b04f-419b-a366-78122829d303:string:2015/2016 Semester 2",
+          "formOfStudy": "e28e8bde-2d8b-42b0-9a95-1f96b1f68419:string:JDA",
+          "fosDescription": "a549f685-2f72-4869-8663-4a1b6a8a1fde:string:Participated in a Joint Degree Programme at",
+          "organization": "94d0c5f6-51eb-47f8-9d66-f6f303d8e0cb:string:University of North Carolina, Chapel Hill",
+          "fosPrintArea": "5e7dd414-70c3-483b-9072-b915bc5258a8:string:EH",
           "creditTransfer": [
             {
-              "sourceType": "125faabe-6d03-45a0-a41f-0bed89bcb37d:string:E",
-              "creditsNoGPA": "7e28c6b7-dd91-4e8a-813d-078afdb887b4:number:0",
-              "creditsGPA": "30a9cf20-7cff-4ec0-89a4-3e75f130e17d:number:24",
-              "orgId": "10c2e3da-1d0d-44c5-8652-977e85d1d3cf:string:University of North Carolina, Chapel Hill",
-              "orgName": "243ce239-1b9c-4c97-b4fb-674ed083543d:string:University of North Carolina, Chapel Hill",
-              "transferSeq": "e0aafb5d-2e8f-4566-8056-9d161b014826:number:1"
+              "sourceType": "cfec7681-bedd-4914-9f74-8d8050c012e6:string:E",
+              "creditsNoGPA": "6f173a0c-be4f-46e2-a961-cfa22ca9c5ed:number:0",
+              "creditsGPA": "69b9b180-a293-4e48-9f37-cb2adba8df5f:number:24",
+              "orgId": "918b1d82-90bc-4f9f-919a-d82fc223d34f:string:University of North Carolina, Chapel Hill",
+              "orgName": "590f0035-676f-4655-a77f-46d7cb3652d6:string:University of North Carolina, Chapel Hill",
+              "reportNo": "ea55406f-021c-4ba4-ae88-3334f2150998:number:1",
+              "transferSeq": "8576a0ff-3d7b-45bd-b4e7-1355459de7c9:number:1"
             }
           ],
           "summary": [
             {
-              "programName": "0bbbea47-31f9-4d8c-8958-6f714d3d3e40:string:Bachelor of Arts",
-              "includeInGPA": "616ffa42-86e1-4062-828e-6a86a43bbbe7:boolean:true",
-              "GPAName": "b75f7948-632d-476a-b144-972f7219aaf3:string:Cumulative Average Point",
-              "GPA": "79c5f9d0-e9e6-427f-939e-f20596b8d6c2:number:4.84"
+              "programName": "db123cd5-3507-4a21-8788-4f07b1a721a7:string:Bachelor of Arts",
+              "includeInGPA": "a3677c3e-e9cb-43cb-80ee-0bd26790bf73:boolean:true",
+              "GPAName": "4a76d37b-a06b-44c2-8460-77cd5d9ec8ce:string:Cumulative Average Point",
+              "GPA": "c7281328-5d31-4c85-9d20-af58dbb7cd28:number:4.84",
+              "reportNo": "61c2fbe0-0451-45a0-8e6a-804668e1ea56:number:1"
             }
-          ]
+          ],
+          "reportNo": "eca038b7-f7c5-4ab7-8582-d220ed9fe390:number:1"
         },
         {
-          "name": "85317684-fc08-4da2-b862-c1962f55f4e1:string:1610",
-          "term": "ee1de26c-168e-4a9f-8056-24b47e548f13:string:2016/2017 Semester 1",
-          "formOfStudy": "365640cc-d0fe-4297-a2a7-d7ca3fb1e037:string:ENRL",
-          "fosPrintArea": "45617a9e-62cd-4183-80a8-258630e2ef38:string:ND",
+          "name": "c87d164c-2a27-47c1-bd39-01fbdde24a67:string:1610",
+          "term": "1d1e2dd3-95b8-409f-be6f-dab171a83b7b:string:2016/2017 Semester 1",
+          "formOfStudy": "db1fa26f-12ca-4d41-b2fd-4f5ebeaf9e9f:string:ENRL",
+          "fosPrintArea": "c9de98b7-f5e2-4657-b0e1-326b558bbd20:string:ND",
           "summary": [
             {
-              "programName": "409155bf-3f29-4d19-94a7-b8b2a83210c1:string:Bachelor of Arts",
-              "includeInGPA": "7b35d40c-47ac-47df-81c4-0a40edfda55c:boolean:true",
-              "GPAName": "52d36273-0799-4716-8540-7ff1e6085478:string:Cumulative Average Point",
-              "GPA": "d9162fce-2cf8-4469-8b24-16a9dea82f7d:number:4.81"
+              "programName": "4a9078e0-b88d-4387-b00f-a1a0108824ae:string:Bachelor of Arts",
+              "includeInGPA": "10debe85-270b-4098-b36e-f82ab6a83bf0:boolean:true",
+              "GPAName": "e549fcac-80aa-4d67-919b-bb3ecebf500c:string:Cumulative Average Point",
+              "GPA": "aa7ddc56-8c0f-4607-b6cc-46ac27147161:number:4.81",
+              "reportNo": "cb581fd8-9f12-40ca-99f9-01a623bdec69:number:1"
             }
-          ]
+          ],
+          "reportNo": "27159f7c-6162-437e-8120-f4351357a09d:number:1"
         },
         {
-          "name": "f4c9b1d5-ccd6-4508-873c-acda84951886:string:1620",
-          "term": "004f17ba-9029-42d8-a711-4815de1cd7fd:string:2016/2017 Semester 2",
-          "formOfStudy": "7ba71f87-7047-4097-a63d-3943f61dfe7d:string:ENRL",
-          "fosPrintArea": "f56f8b25-a34a-4df2-850e-1992a49a6556:string:ND",
+          "name": "e8cc0d18-93e7-4248-b410-10f53d16fa98:string:1620",
+          "term": "2ca6e78f-8a3b-4a1f-9d3d-bfc32601fc4b:string:2016/2017 Semester 2",
+          "formOfStudy": "887d948a-6d2d-462f-90ed-fcb2c79bf384:string:ENRL",
+          "fosPrintArea": "a014d7ef-5221-4422-b9c8-f0021c7c47a1:string:ND",
           "summary": [
             {
-              "programName": "136b21ed-acfc-4857-b205-1bf67b732d96:string:Bachelor of Arts",
-              "includeInGPA": "7ea84595-f68d-4af8-90f0-a825541af5b2:boolean:true",
-              "GPAName": "54fa3480-7abb-42ec-9d0e-13997ce1b274:string:Cumulative Average Point",
-              "GPA": "47c2e51f-70a6-48d1-b2b3-8d2c4b78a88d:number:4.82"
+              "programName": "6b509a51-4185-4563-a94a-e09ff35c35c9:string:Bachelor of Arts",
+              "includeInGPA": "170c5b5f-8cff-464d-8f2f-ce0ecf511bc3:boolean:true",
+              "GPAName": "6ae329f1-1588-4dd1-8b9e-8ae3228158b4:string:Cumulative Average Point",
+              "GPA": "09448106-4ac4-4851-bae4-94f694987dcd:number:4.82",
+              "reportNo": "2a35f61a-3e3e-4c28-9d10-dd34bd7c0eb7:number:1"
             }
-          ]
+          ],
+          "reportNo": "fafb99f8-9780-46b4-8f1e-1087535b0410:number:1"
         },
         {
-          "name": "3a5a1830-fbbb-43e7-9b68-bec157ed4790:string:1710",
-          "term": "149ceb89-429f-425e-bbe4-24e406f8df8b:string:2017/2018 Semester 1",
-          "formOfStudy": "f93ecf2e-cb81-43f1-beaa-a95ddd441422:string:ENRL",
-          "fosPrintArea": "44b2622a-0a20-4420-b13e-b7faee8c7c2b:string:ND",
+          "name": "0167ca71-5f83-4902-b2f6-31517e3346e1:string:1710",
+          "term": "a6dd3198-f8cd-4623-81cc-47123141d32b:string:2017/2018 Semester 1",
+          "formOfStudy": "4f1b4636-04bc-4a5b-95f4-b480b3b16d28:string:ENRL",
+          "fosPrintArea": "83e7ee3e-4c18-41da-b542-bee88d4ab09c:string:ND",
           "summary": [
             {
-              "programName": "75ad18ec-f7cd-47f3-8e0a-15a5e96bb944:string:Bachelor of Arts",
-              "includeInGPA": "033e7110-afa1-4a40-9016-e1a6a5e2fb51:boolean:true",
-              "GPAName": "2997b25d-5e39-462f-a88f-1995d049d9e2:string:Cumulative Average Point",
-              "GPA": "004001ea-25dd-4994-8ca4-001a7d16c34f:number:4.83"
+              "programName": "4997d81b-9702-4fbe-aaf6-8a134b829d71:string:Bachelor of Arts",
+              "includeInGPA": "4a4afadd-1f44-426e-818d-5011d6cd73ca:boolean:true",
+              "GPAName": "5d415674-45d9-4bb6-8c69-744134559d52:string:Cumulative Average Point",
+              "GPA": "54247b2f-f6ab-421d-9473-7c0ca62788dc:number:4.83",
+              "reportNo": "533a2414-78c0-42ac-b38a-2aa8dabcb58f:number:1"
             }
-          ]
+          ],
+          "reportNo": "c87d372d-40bf-47ab-90d8-f2d778ac2fcd:number:1"
         },
         {
-          "name": "e98e7898-7203-44ba-b8e5-c4e1feb18ea3:string:1720",
-          "term": "06719d6b-6c7d-4da4-9b66-8036744061f2:string:2017/2018 Semester 2",
-          "formOfStudy": "5c9515d7-04db-4886-a509-646a5e692fe7:string:ENRL",
-          "fosPrintArea": "1fb4fc31-acb8-4073-baa6-eb03d048569d:string:ND",
+          "name": "b11cb419-2b07-47cc-83a6-d5434bdb900f:string:1720",
+          "term": "049ce324-83b3-4bb8-bcf7-d2ad031e8bea:string:2017/2018 Semester 2",
+          "formOfStudy": "396fbb6c-f1f8-4874-9dce-e48634754b80:string:ENRL",
+          "fosPrintArea": "fb4cb66c-a18d-4ad9-851f-d4841243e5b1:string:ND",
           "summary": [
             {
-              "programName": "6da9f028-67c7-42cc-9664-0f5275519f1a:string:Bachelor of Arts",
-              "includeInGPA": "bba834a1-2e98-4a52-bcf9-ff1dffbeb0e0:boolean:true",
-              "GPAName": "c4280d44-bc0c-4b52-a14a-5afba7209d52:string:Cumulative Average Point",
-              "GPA": "6794b01f-48b4-4651-89ec-a3c3aac1edc9:number:4.86",
+              "programName": "973b4539-b9c9-4baa-b0a3-2eb07b3e9812:string:Bachelor of Arts",
+              "includeInGPA": "a34ee0d0-2005-4077-b604-c6902785e58a:boolean:true",
+              "GPAName": "48cdbaac-d53a-482f-814f-cca08eb82007:string:Cumulative Average Point",
+              "GPA": "f6b4cfc3-fdc8-4cd5-9711-30afab21c343:number:4.86",
               "awards": [
                 {
-                  "awardCode": "f6504685-25c7-4b13-b8ef-3f96eda23b52:string:DEANSL",
-                  "awardName": "8f4f9ad1-5a93-4db9-b5d9-3e1bce1fc8ad:string:Dean’s Scholars List"
+                  "awardCode": "05fd7fb9-dce8-405a-9eb2-bfd34a212857:string:DEANSL",
+                  "awardName": "f2ca46f1-4bfc-4f20-b62a-487d4abe7ada:string:Dean’s Scholars List",
+                  "reportNo": "7197f8e2-5cef-4fd7-b0f8-6db2c23a10d7:string:1"
                 },
                 {
-                  "awardCode": "7a563450-5d45-42ae-bdab-b741701bff8e:string:DEANL",
-                  "awardName": "9e684072-76a3-486a-b6c2-9e07aac18a79:string:Dean's List"
+                  "awardCode": "48de93fe-6b34-4df2-b7fb-2137ed554fe6:string:DEANL",
+                  "awardName": "531e5473-59a0-4390-a9c0-8d1287ef096f:string:Dean's List",
+                  "reportNo": "9d414822-caba-45bc-b412-d01539df7b3d:string:1"
                 }
-              ]
+              ],
+              "reportNo": "f770776e-6458-4ab5-a986-e8ca42b5f8fd:number:1"
             }
-          ]
+          ],
+          "reportNo": "c8af4ae3-74b4-4975-b308-bb0ca900e15f:number:1"
         }
       ],
       "programData": [
         {
-          "programCode": "7340b22b-149e-4b97-9979-e2c927681855:string:B0110",
-          "programName": "05aa019a-a45d-48ef-8175-de5fcdd73f55:string:Bachelor of Arts",
-          "statusCode": "dbac8cdc-6e76-4b24-b4b7-6e68e99630b0:string:CM",
-          "statusDescription": "e8814eae-7c38-4933-b163-e865e00b1205:string:Completed Programme",
-          "effectiveDate": "5741f786-7cb9-4a36-8df1-f0d3fb2ceb24:string:2018-06-24",
-          "admitTerm": "a09bcad6-cba9-46cf-91c6-93f15417ef5a:string:1410"
+          "programCode": "b63b8505-c2f5-4ed4-81cd-c3cfb2131d21:string:B0110",
+          "programName": "810e928e-e704-49c9-b26a-25b8468adbe8:string:Bachelor of Arts",
+          "statusCode": "33815451-9b5a-4973-adee-fde7069535bf:string:CM",
+          "statusDescription": "827e433d-5ab0-41db-90b0-05cef3b8ca37:string:Completed Programme",
+          "effectiveDate": "1c854130-8330-4a4b-aba2-196b3a137ffa:string:2018-06-24",
+          "admitTerm": "85263d3c-34cb-4a18-a7fb-4e504fbfd2ce:string:1410",
+          "reportNo": "6b03983d-9991-43a7-a8dd-78af87df2eea:string:1"
         }
       ],
       "degreeData": [
         {
-          "degreeTitle": "cc4098ec-6be4-4d0f-8e8d-f83d0f8d9048:string:Bachelor of Arts",
-          "dateConferred": "6b953ccd-99dc-4094-8c67-af1ff24137f2:string:2018-06-30",
-          "honours": "5fc842cb-6c51-43c8-ae45-ee2f8b9fd95c:string:Honours (Highest Distinction)",
+          "degreeTitle": "319460ee-8a92-4010-9c44-892df70e14d8:string:Bachelor of Arts",
+          "dateConferred": "0211d7db-05e5-477d-9ac5-59351f7e5c82:string:2018-06-30",
+          "honours": "80fa3196-f6ed-4443-a394-df2aa8c9ae59:string:Honours (Highest Distinction)",
           "plans": [
             {
-              "specialProgram": "191cffb4-1614-47d6-9619-44f6f117026b:boolean:true",
-              "type": "b04fa759-3421-427a-a71c-8cbb7ed1124c:string:JDP",
-              "typeName": "6df4dcb1-6a68-4c5d-9153-24e90333093d:string:Joint Degree Programme",
-              "transcriptDescr": "78a4afe7-0ae9-4fc6-a51b-5b88d047d76a:string:Completed a Joint Degree Programme in Geography with",
-              "planDescr": "51ea8291-d351-4990-80f2-2db8f5e7da18:string:University of North Carolina, Chapel Hill"
+              "specialProgram": "700b8105-9cb7-41d3-a14b-2db23346aa10:boolean:true",
+              "type": "218c5c54-71de-48cd-9f53-822b29dc61f7:string:JDP",
+              "typeName": "e9f94af5-cbd5-4f62-ba9c-2a35f0f58618:string:Joint Degree Programme",
+              "transcriptDescr": "188b4838-3008-4713-9517-207a94016965:string:Completed a Joint Degree Programme in Geography with",
+              "planDescr": "bc3a4ce8-d4af-4d46-8064-c7413732c934:string:University of North Carolina, Chapel Hill"
             },
             {
-              "specialProgram": "b771854f-b9c7-405e-84f2-ce1d27781410:boolean:true",
-              "type": "5471f55b-a2a5-46cc-a471-413d4ccd5708:string:SPL",
-              "typeName": "643e2ebc-f787-4477-b3ce-353018189021:string:Special Plan",
-              "transcriptDescr": "ae02ebbb-cbd1-467f-a80c-24375ad0d7d8:string:Completed the University Town College Programme at the Tembusu College"
+              "specialProgram": "38326b19-adca-496e-957a-01e96a81b4f3:boolean:true",
+              "type": "59e29dfe-59e8-41d7-9068-dd5ccf078ed3:string:SPL",
+              "typeName": "ac60a6be-8aff-4e42-b69c-e1d078770e18:string:Special Plan",
+              "transcriptDescr": "c019f447-30af-4304-b87c-6b7e6218d8fe:string:Completed the University Town College Programme at the Tembusu College"
             }
-          ]
+          ],
+          "reportNo": "49467a85-0e13-4a27-9c81-e20c20c6757a:number:1"
         }
       ]
     }
@@ -603,14 +663,15 @@
   "privacy": {},
   "signature": {
     "type": "SHA3MerkleProof",
-    "targetHash": "0e577e6cf07f9f1aa5eac567c41cce4dd9ad8c9facb5ab973f8da7f7d2d84e02",
+    "targetHash": "7e1408f79a151f51d456008207044d8c88c1aec14dcc3ba815b06e9b58a0a3f4",
     "proof": [
-      "1c73d4bb5d54b22ef9d0c08fce5d1500dac53eeba04d5d003c05c407f2e87de1",
-      "aa0da31a8b0b5d75b61a47c8eaa9785df5b26d79dca41c3f049797f21e6b2e9c",
-      "2172ad189eea60dcf6a5aaf61da2c7cd6c599ccb1b040fd2a26243a700dc5b7f",
-      "74767743159453a74f9dc4289af82f33fb0d6956074b21e193e47e06b15dcdad",
-      "e3902d5e6e7274d16ee78992b41d1c2539d007316798f37ad036a577aa16c452"
+      "c2272445796856bcb0d627a25619c04dacc71ef7055fa30a2521a808ba2f0c18",
+      "3a500f780780abaf589a3a417fddfb4e65906789234a90e44bf8cf3c692c1ea6",
+      "ca2c7c01ce88da76baecd8fd44e151a0c2b59503ed4edf877fd8447c64a38533",
+      "8b1d40f50be2eb496a872b232ed088fdff2f73937e9951a87a2794b4e9ba6c1d",
+      "2e52e2e8d34cc0127b4557fe9727f55e642bcf21219bf6d06c71932af4dc4926",
+      "7bfc29748a38d23ae9ca8d2c7225873287bd0baa0630ada5963b9e61ac9c3806"
     ],
-    "merkleRoot": "fc4d413665bef3ad14eb8934319f16a32a4711df60bed1ffd4519441b716629f"
+    "merkleRoot": "3862426f819b735c661f7981bfaed07eff1984a447b0406d831c1b15ec75e7c9"
   }
 }

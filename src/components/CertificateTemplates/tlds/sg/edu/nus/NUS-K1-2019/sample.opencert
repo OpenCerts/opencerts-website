@@ -1,611 +1,676 @@
 {
   "schema": "opencerts/v1.5",
   "data": {
-    "id": "0dffcd2c-e2fa-430b-bac6-00664af9ede4:string:NUS-A0127136L-B021000-P10182357-1-20180630",
-    "$template": "1c2be247-03bb-4be7-bdc8-6d8e8b83d100:string:sg/edu/nus/NUS-K1-2019",
-    "issuedOn": "84b9c5dc-f432-4579-b1b9-6b9a8be1cf2f:string:2019-08-27T10:03:17+08:00",
-    "name": "cca84721-5985-4153-a710-7d7683f5a83f:string:NUS Degree",
+    "id": "78c5a69b-49d3-4474-a4e0-01895d89f58c:string:NUS-A0127136L-B021000-P10182678-1-20180630",
+    "$template": "2e7a493b-5af1-4df9-a13e-9acc8e7f1bee:string:sg/edu/nus/NUS-K1-2019",
+    "issuedOn": "948d3d5c-7202-480e-b3bb-04d4a6eb9382:string:2019-09-11T17:20:00+08:00",
+    "name": "80861d63-53c9-40c9-96a4-1a18be6dd7f0:string:NUS Degree",
     "issuers": [
       {
-        "name": "e4caaa03-eb14-45b1-9f9e-c71eeeac3150:string:National University of Singapore",
-        "did": "2ef3c376-66b5-40cd-b0c7-be2c586fa406:string:DID:SG-UEN:200604346E",
-        "url": "099db67c-3823-4e45-ad77-adbf91b4266f:string:https://www.nus.edu.sg",
-        "email": "ed0c5c4d-16c4-4fd1-9ffb-f7d4013905ac:string:registrar@nus.edu.sg",
-        "certificateStore": "9c83e80b-2cb8-4e74-a09a-7168b8bf84af:string:0xfEbB273495F5C2c4783E23424Fe9773691b57fcB"
+        "name": "157fe067-5303-4c39-8a1a-87c44ae6b0c1:string:National University of Singapore",
+        "uen": "241fa71c-2166-4752-b00c-facdc50bb513:string:200604346E",
+        "url": "0dbcc424-67de-4d90-a9c0-a09a87b494a9:string:https://www.nus.edu.sg",
+        "email": "62ef2951-0030-47fb-b376-21415321cd17:string:transcript@nus.edu.sg",
+        "certificateStore": "819dfb39-dcd1-4e0d-8038-386b37975c52:string:0xfEbB273495F5C2c4783E23424Fe9773691b57fcB"
       }
     ],
     "recipient": {
-      "name": "30f87719-8436-4a5e-9287-d32b69d344e6:string:A0127136L, name",
-      "studentId": "c33e4cdc-dd17-40ca-b82d-576936f8afd0:string:A0127136L",
-      "dateOfBirth": "90b33463-66a4-4d5e-8b5a-26fff978ac99:string:1905-01-01"
+      "name": "fba7df17-c7c6-4fd0-afa3-fd6aba6e3a81:string:A0127136L, name",
+      "studentId": "76ce6ba0-f60d-4067-a9bc-bd1069ace4db:string:A0127136L",
+      "dateOfBirth": "c30a35bd-ee20-49c7-93e5-b2545bd33cfc:string:1905-01-01"
     },
     "transcript": [
       {
-        "name": "a0718555-332b-4011-bc1c-1dcface61e5e:string:Personal Development & Career Management",
-        "courseCode": "f1146b41-c978-49e9-970d-bec0d53deb84:string:BFS1001",
-        "grade": "62dfa559-924b-4f1d-8419-5fd12c540a96:string:CS",
-        "courseCredit": "99dbd4ff-10be-47d9-916b-17f495194071:number:0",
-        "gradingBasis": "b33f9fb0-708a-428f-b016-b8b9592b20f4:string:CSU",
-        "includeInGPA": "73f68231-303e-43fc-9443-87be6f26a52f:boolean:false",
-        "semester": "23c8a92f-5911-4558-b4c8-024f64d47ba8:string:1410"
+        "name": "bfe1b09d-7914-433e-bb5a-596b205975c6:string:Personal Development & Career Management",
+        "courseCode": "6b8f2d17-5318-4a0e-9477-fa72094d4144:string:BFS1001",
+        "grade": "14bbff25-3d4d-4fab-9fb7-1693bc26c640:string:CS",
+        "courseCredit": "2ca6a577-87a2-4f7f-9d1b-d1949fc168f6:number:0",
+        "gradingBasis": "b8cc1a8e-a3ef-4d28-8afa-5d1d930376d0:string:CSU",
+        "includeInGPA": "5f5a128d-913d-436c-9461-d031bae72238:boolean:false",
+        "reportNo": "bcce58fe-7318-4275-b335-161475e1a875:number:1",
+        "semester": "30fd9009-3245-4a13-9dfc-72e951c325df:string:1410"
       },
       {
-        "name": "82edc141-1faf-472d-96b7-c11c60f44ae9:string:Managerial Economics",
-        "courseCode": "7332460e-0abe-45e0-9dec-33fa05df68d6:string:BSP1005",
-        "grade": "10f8ce46-e636-404c-b6e7-2befe2246d0a:string:S",
-        "courseCredit": "401da59e-699a-4efc-aa90-001c2255b55f:number:4",
-        "gradingBasis": "c053ba5c-c695-4cd6-9c1b-fe7c9e743d2d:string:SNU",
-        "includeInGPA": "0e682992-ed90-4628-94d8-489c691ee3f2:boolean:false",
-        "semester": "63c22e36-83cd-49de-ae4a-a910f289bdeb:string:1410"
+        "name": "1d66ec49-e4eb-4335-b0e4-87a42b48a6e9:string:Managerial Economics",
+        "courseCode": "39dccd80-745b-4c5c-9a0a-a3751955fd27:string:BSP1005",
+        "grade": "10565ce8-6259-45cf-a397-807ce9e25132:string:S",
+        "courseCredit": "30ab2149-5344-4eab-a7c6-b402d956d7dc:number:4",
+        "gradingBasis": "8a7c6995-7a9f-48bb-afef-36202a895c3e:string:SNU",
+        "includeInGPA": "d4eaae5d-61e2-445a-b946-0c9d4a1be110:boolean:false",
+        "reportNo": "04f0201b-57e9-456c-8191-14f14cf491a9:number:1",
+        "semester": "0f2485b3-47fc-4fa3-a2da-4bcd04f20ddf:string:1410"
       },
       {
-        "name": "a9c697e2-6168-46b4-8233-582d82ad7dc2:string:Business Analytics - Models & Decisions",
-        "courseCode": "902a2d29-c075-49a9-ab3b-05905f461ebe:string:DSC1007",
-        "grade": "9ecd4e65-6f89-47b5-9a1e-c428235bd474:string:S",
-        "courseCredit": "44e6563c-a778-4740-9254-ec275c33346d:number:4",
-        "gradingBasis": "4d7864e8-4391-4a00-b500-c9a75b12f807:string:SNU",
-        "includeInGPA": "7936706c-bd99-480e-ad3f-475aefe347f3:boolean:false",
-        "semester": "2b3fc46b-dc6e-457b-8599-85b22fb4dfe7:string:1410"
+        "name": "0be3cbe9-762b-47b7-8189-4d19bff9db70:string:Business Analytics - Models & Decisions",
+        "courseCode": "39e98ab1-a09c-4fbf-97fa-80f48f9be245:string:DSC1007",
+        "grade": "ed4657e5-acdf-45f9-b6b7-5e9e8bfea14f:string:S",
+        "courseCredit": "f384d4c5-754a-4d67-85e4-9e1ea8180ad7:number:4",
+        "gradingBasis": "03d59263-6d8e-42a5-8130-2e10d2012c23:string:SNU",
+        "includeInGPA": "91f2c912-08cc-4be4-8efd-2d43719dae38:boolean:false",
+        "reportNo": "5f1b807e-a13c-4516-852d-25dc4197c699:number:1",
+        "semester": "8e5bbe5e-e81d-4d83-b03e-2f6dedd51fe0:string:1410"
       },
       {
-        "name": "924f6b2c-704c-4eae-a2b1-4ca64b7ded5d:string:Business Communication",
-        "courseCode": "e928230f-39e3-412b-933e-d459e23e6415:string:ES2002",
-        "grade": "6f48c16c-53f7-4442-97dc-5bd80ae45e15:string:B",
-        "courseCredit": "6cf13987-2c92-4ad9-b577-d17ad3a4362b:number:4",
-        "gradingBasis": "13787338-1f7a-447d-a304-63db95a948e8:string:GRD",
-        "includeInGPA": "56cb9a43-0624-4847-b824-6e8d9db27990:boolean:true",
-        "semester": "a9ccc092-f417-4ffb-9a75-dc6c685a7e68:string:1410"
+        "name": "597799b3-fbe1-427a-b8ba-1bc4376380fe:string:Business Communication",
+        "courseCode": "352d8ca2-19d3-4a90-9508-bd2a3fac3280:string:ES2002",
+        "grade": "70377dc5-a83a-44cf-bed3-96f10333384f:string:B",
+        "courseCredit": "0be43359-7129-4a87-8585-0e8676a51b70:number:4",
+        "gradingBasis": "49a7a6d9-8cc3-42a7-86a2-01a1acce4b2b:string:GRD",
+        "includeInGPA": "1682a279-5b1f-455e-9348-532f3248192d:boolean:true",
+        "reportNo": "7019e97c-cc2e-485e-95a7-23f9ab1bebf8:number:1",
+        "semester": "da96ee03-0fc8-4bf1-937b-4fc7390f18c3:string:1410"
       },
       {
-        "name": "670a796f-b739-4ff2-9582-f4756f91774b:string:Modern Technology in Medicine and Health",
-        "courseCode": "5fa407d9-ff53-4855-b8f9-2f4d9f1bf9a8:string:GEK1540",
-        "grade": "81a3fff2-46e3-4a20-a7aa-1d785d78add0:string:S",
-        "courseCredit": "2a310255-a554-43e5-ae09-e17e3b21184d:number:4",
-        "gradingBasis": "3724189b-3827-4670-8e1d-dea660e6367e:string:SNU",
-        "includeInGPA": "3df3c6a0-26cf-4e05-8b72-db4632a41497:boolean:false",
-        "semester": "2cc389a1-b0ef-42fd-b229-d4e63ba3d916:string:1410"
+        "name": "1d6babac-648a-43cf-8c16-bc1a2f3f7b09:string:Modern Technology in Medicine and Health",
+        "courseCode": "7c4c7285-c466-4cce-aa2c-c2579652f510:string:GEK1540",
+        "grade": "8f6726a8-17cf-4d13-9cf7-0bd6acfbc65d:string:S",
+        "courseCredit": "7835dcda-fa23-4c34-a2f7-3815b6fa6d4c:number:4",
+        "gradingBasis": "e26a3672-1a39-445e-ada0-971c431ee174:string:SNU",
+        "includeInGPA": "9d6c317f-37c9-4215-82e5-87731eba833d:boolean:false",
+        "reportNo": "7304d907-6846-4d83-b8e7-2f88599f83dc:number:1",
+        "semester": "a7e2ee28-ef77-45da-b879-3294750f4b45:string:1410"
       },
       {
-        "name": "ca5aed27-5aa6-45ca-88d3-54edd56efded:string:Marketing",
-        "courseCode": "c0444aab-d8b6-4018-8268-c1541dfb5f18:string:MKT1003",
-        "grade": "9b1b56ec-9073-4024-8dbe-a55ac64ece44:string:S",
-        "courseCredit": "2214c5d7-eb1c-4dcb-9373-42e43c48e3a6:number:4",
-        "gradingBasis": "980ed754-0dfb-46e4-8e71-580c9e51d208:string:SNU",
-        "includeInGPA": "80bc0787-0557-47e8-ae48-66e7a018982b:boolean:false",
-        "semester": "91aa3ba2-510c-46fa-b551-61fa8dbf1597:string:1410"
+        "name": "fb266425-116a-45b2-812b-cab88999bbe8:string:Marketing",
+        "courseCode": "e307bcdb-f6e7-4c4d-9d09-8afa8392bc2f:string:MKT1003",
+        "grade": "54e4dcda-c9f8-4dbe-8d41-2be0c85762e4:string:S",
+        "courseCredit": "e41e8639-fe22-4abe-846d-149034d60cde:number:4",
+        "gradingBasis": "3c9d3e4c-e7c7-40d1-900e-9b9e720053e2:string:SNU",
+        "includeInGPA": "a714cf48-d5af-435b-8d44-2fb70e85d6f9:boolean:false",
+        "reportNo": "a619936b-89a8-4077-a1cc-6e0c60ee823b:number:1",
+        "semester": "2ac33c62-8378-443b-9ead-5110ee3c117e:string:1410"
       },
       {
-        "name": "a4fa26f8-0d28-4de9-b804-dc20f0691d8f:string:Financial Accounting",
-        "courseCode": "f70876a2-fc8a-4a16-82c6-14be1a6daad7:string:ACC1002",
-        "grade": "976dd68f-2898-4b41-8372-a9a1a865d0b6:string:C+",
-        "courseCredit": "a387da11-963f-469f-b347-aa691b26fa5f:number:4",
-        "gradingBasis": "edcd767e-13e5-49b6-993a-227ae0833501:string:GRD",
-        "includeInGPA": "ebddb354-df2f-400f-8fe5-9159412dd1d8:boolean:true",
-        "semester": "8d7d49a2-feea-413c-9ef6-dbfa78a5fd5e:string:1420"
+        "name": "79fa5d52-2cfa-4202-86f6-386110d3c451:string:Financial Accounting",
+        "courseCode": "4caad20a-429d-4d77-a8d7-cdcd124c1b34:string:ACC1002",
+        "grade": "5a85ddb1-ba0d-4d95-b789-ad38d6fd5601:string:C+",
+        "courseCredit": "60d1a794-d788-4df0-8c84-ab13277651ad:number:4",
+        "gradingBasis": "71434c5a-38c7-41d5-878e-b11823754ff0:string:GRD",
+        "includeInGPA": "1c972314-b452-4c4f-b094-22c3be4bbc11:boolean:true",
+        "reportNo": "62af4403-2c69-4269-a2a0-d5b665581f43:number:1",
+        "semester": "2deacad7-59be-4850-873b-d7c0bf010b26:string:1420"
       },
       {
-        "name": "42d4b349-46ed-4b58-a368-53b647395870:string:Legal Environment Of Business",
-        "courseCode": "84a9e614-00d9-49ad-bf7e-b481b643b71b:string:BSP1004",
-        "grade": "a6563bad-1f37-4760-aa6d-4543e9c1a79f:string:B-",
-        "courseCredit": "2e393d50-5519-4986-bc18-9b65f1d97f60:number:4",
-        "gradingBasis": "730994e4-eea8-4b10-a23c-f6db997d533d:string:GRD",
-        "includeInGPA": "7a448da8-6ad3-475a-ba71-ec69088ca5d7:boolean:true",
-        "semester": "e2f1b675-542f-4e50-b213-99bbaad0f0e4:string:1420"
+        "name": "ffb05e19-4187-4958-a67c-aca2e244372e:string:Legal Environment Of Business",
+        "courseCode": "39f72382-7034-4221-95f7-6a9aac4f7248:string:BSP1004",
+        "grade": "430df967-df4f-43c1-81e3-5223e37c61c9:string:B-",
+        "courseCredit": "0cd9550f-5afc-4f37-b9f5-7696fc5769d1:number:4",
+        "gradingBasis": "9f671281-7f42-479a-b810-49ab3a1e3127:string:GRD",
+        "includeInGPA": "84f36930-f38e-46ac-ae31-dddabb21b25c:boolean:true",
+        "reportNo": "2d1a5d02-9976-4b63-8e30-b097f7849e52:number:1",
+        "semester": "8d40058f-d4a4-4882-aaad-f2073b818b1b:string:1420"
       },
       {
-        "name": "52e7be5a-d498-4e6c-875e-bed7adcfffb5:string:Operations Management",
-        "courseCode": "85c47c1e-b0a2-4190-8176-217208d2b821:string:DSC2006",
-        "grade": "6afa3056-00cf-411b-b0c8-953608505cde:string:S",
-        "courseCredit": "36fc9b52-0be6-45ff-b9ff-0fa00772f383:number:4",
-        "gradingBasis": "21b9233b-c504-485f-ac34-7be136fe2720:string:SNU",
-        "includeInGPA": "26bec5a0-25c2-4c61-ad9e-010aed1a874b:boolean:false",
-        "semester": "253bc3a8-035a-4ad7-bd77-6b5a844a065a:string:1420"
+        "name": "12c63ad7-11f7-48ed-a1b4-d44554ccd139:string:Operations Management",
+        "courseCode": "1ccd71b2-b62f-4725-a451-3db2974d0d52:string:DSC2006",
+        "grade": "09b6cd18-efd1-4847-8970-2eba91bb9f4d:string:S",
+        "courseCredit": "a7d7b3ff-6016-4bb1-bacd-7e9d8cffa052:number:4",
+        "gradingBasis": "856bfd4e-d0e4-4e4d-a864-b8e16640e06b:string:SNU",
+        "includeInGPA": "58cf41bf-1468-47af-83ff-e1c093ab95c9:boolean:false",
+        "reportNo": "a84d2262-e166-4ce9-a797-f0be949cff2c:number:1",
+        "semester": "052a2862-bd40-4a7f-b374-2859bc51c9aa:string:1420"
       },
       {
-        "name": "f33780ed-5ef2-4dfc-88ec-fc66b52eb53a:string:The Theatre Experience",
-        "courseCode": "50a16b7f-8480-4d57-82e1-2d2720a6e107:string:GEK1055",
-        "grade": "0909c4f2-ea7f-410f-ab3a-7ba41308a218:string:B+",
-        "courseCredit": "271aa976-5c3a-4cf8-b6aa-cb2263ed9884:number:4",
-        "gradingBasis": "8a74120a-0c59-4b8c-8249-e715efae92aa:string:GRD",
-        "includeInGPA": "02a779ee-e0dc-4769-bf6f-4443d201c678:boolean:true",
-        "semester": "8b2da5dd-0e6c-4164-b61a-84c6df40daa2:string:1420"
+        "name": "4c0520c1-c711-4b38-a8d0-d481f3efa66d:string:The Theatre Experience",
+        "courseCode": "500a31a0-fb5d-41fa-a12c-36dc6f99fc09:string:GEK1055",
+        "grade": "79df4211-b045-4450-880b-174886dcf1db:string:B+",
+        "courseCredit": "f81c932d-488d-4d21-803a-36d66f60fb3f:number:4",
+        "gradingBasis": "54765a73-d0d8-496e-b398-2bfb4e52d827:string:GRD",
+        "includeInGPA": "3c0f5f7e-1f06-41dd-a415-ef6ac242309a:boolean:true",
+        "reportNo": "bc6ee78e-9be5-4842-bc88-e07e81184a24:number:1",
+        "semester": "163537ba-5784-461a-9fca-2c0dd82ae313:string:1420"
       },
       {
-        "name": "497dc154-9809-412b-a6e9-ef95f22467b9:string:Management And Organisation",
-        "courseCode": "93b4db96-edf6-4c16-b4a5-72048c977a1b:string:MNO1001",
-        "grade": "d05ef936-4654-44c2-a916-5eed1d54fe30:string:C+",
-        "courseCredit": "5ed2e7f7-5440-4690-9df8-e27e542ad1f0:number:4",
-        "gradingBasis": "3970aa8f-eabe-45a2-b434-15ef2cf075b5:string:GRD",
-        "includeInGPA": "ccf4e974-4171-4935-a830-c077730af665:boolean:true",
-        "semester": "e9a21237-60a8-4ce1-9b4c-f0bc3e23bf18:string:1420"
+        "name": "56c0ff9f-e338-4327-b5e3-6bc2f465f32d:string:Management And Organisation",
+        "courseCode": "9a777adb-772e-4ff5-bcf2-48cc1ceb99bb:string:MNO1001",
+        "grade": "6b8ce82d-eb40-4ce0-bc91-4beff38f74ff:string:C+",
+        "courseCredit": "3abdb004-c0bf-469b-b93a-9d14b2e19f49:number:4",
+        "gradingBasis": "21482393-4034-44ce-8368-a2b81715fcd4:string:GRD",
+        "includeInGPA": "205b2222-0ee1-4427-991b-47e5c3f7fb9f:boolean:true",
+        "reportNo": "eecf6666-8d15-41ed-a82a-0334a8c7683b:number:1",
+        "semester": "c63cba88-f57f-47b7-bc27-2ba9d1570f10:string:1420"
       },
       {
-        "name": "89b73dee-afaf-4027-9288-5ae177fea66a:string:Managerial Accounting",
-        "courseCode": "c3ea36fb-7203-4b47-8d4d-f131f1eb5762:string:ACC2002",
-        "grade": "be4a1b63-8875-474b-a2a7-3a0d53d2609b:string:C+",
-        "courseCredit": "7f0eb9a7-3e70-4d3f-9c64-5eff2e0d11cc:number:4",
-        "gradingBasis": "5a2e569b-9fcb-408f-9930-f4a857e353b6:string:GRD",
-        "includeInGPA": "96fda7fd-8294-4d62-8906-1de7901223f0:boolean:true",
-        "semester": "4467f73f-3517-4cfb-b819-a3b1c2569355:string:1510"
+        "name": "72d81bd6-f6d7-41d8-a498-72dcd7d0d638:string:Managerial Accounting",
+        "courseCode": "4b864e9f-2032-4f22-b4aa-702cb04f506f:string:ACC2002",
+        "grade": "53d79633-00b0-4e1d-8794-7a071acb4734:string:C+",
+        "courseCredit": "55c71cd6-f643-4842-bc59-0c204df640e7:number:4",
+        "gradingBasis": "7ca97b3b-39f3-4925-bda9-a6a33ab7dde1:string:GRD",
+        "includeInGPA": "0abb29ae-3446-4cd0-af09-086c64c89e58:boolean:true",
+        "reportNo": "6fafe59a-b013-43dd-b836-7c1546ef61e3:number:1",
+        "semester": "552066d2-4dac-443f-8761-3ba60b8c0ee5:string:1510"
       },
       {
-        "name": "43ccf245-f977-4448-9fe6-ac7f45955c7b:string:Business Analytics - Data & Decisions",
-        "courseCode": "cd5ac46d-60ea-4621-be3a-202d169f9a6b:string:DSC2008",
-        "grade": "29406a63-97ed-4761-9154-fbbd27c9a98c:string:B-",
-        "courseCredit": "260078b8-1f60-427e-9ec5-4db2c8f6bd0c:number:4",
-        "gradingBasis": "fd6e1458-4da4-4633-83c0-16c201538dfc:string:GRD",
-        "includeInGPA": "a5c27e25-b8d3-4aa0-b131-1012c1f29fde:boolean:true",
-        "semester": "baf2b011-6e56-4dc8-99b5-2c7f9f0a33b2:string:1510"
+        "name": "157d50df-f162-4540-b241-3b218df64a68:string:Business Analytics - Data & Decisions",
+        "courseCode": "32943971-62ee-43dd-b3b9-87a0dd1a3ed1:string:DSC2008",
+        "grade": "81151273-8f61-4e56-aed4-307a94a6d9c9:string:B-",
+        "courseCredit": "ee0b868e-d54e-48df-b7fd-d4305ed374d6:number:4",
+        "gradingBasis": "b3b554ff-1745-4ff1-9012-63db959efab0:string:GRD",
+        "includeInGPA": "79470fc4-06c5-4aa7-a5b2-59e7c7d691db:boolean:true",
+        "reportNo": "7a8c2182-1bf8-4dff-945e-4f7c73f3be63:number:1",
+        "semester": "1ede93cd-38b7-4cf8-88df-08737f87b8e2:string:1510"
       },
       {
-        "name": "a63181b2-a536-42c7-9dfb-a724a0cd5a71:string:Asia and the Modern World",
-        "courseCode": "5ea9190a-907f-4ad1-9a62-558281ca4500:string:HY1101E",
-        "grade": "232815b7-b5b8-414a-9434-461667d956c2:string:B",
-        "courseCredit": "b2115e52-401f-4e07-aba9-46b5f7756736:number:4",
-        "gradingBasis": "b1e8359e-7ef6-40b3-b867-6db1c1565553:string:GRD",
-        "includeInGPA": "ac06fd76-72f5-4c94-ab5a-7d9b15a4025a:boolean:true",
-        "semester": "36f0a8e0-d496-42a5-83ff-54c9794982e3:string:1510"
+        "name": "9106e48a-b6cb-4092-a5d2-f06f7d68446e:string:Asia and the Modern World",
+        "courseCode": "72b43dbe-0ee8-4938-b473-93a83c9ea05c:string:HY1101E",
+        "grade": "78f92c64-dca2-450f-8adc-70d3ba38e93d:string:B",
+        "courseCredit": "3ac1e253-4382-4f67-922d-e3e115388482:number:4",
+        "gradingBasis": "facf2cc4-9d67-4c1a-8093-88595910911e:string:GRD",
+        "includeInGPA": "ce109a64-5877-4e17-9fbe-1a54ff45dae5:boolean:true",
+        "reportNo": "91f97ed3-7962-4bcf-8b8b-71a84f1b7ec7:number:1",
+        "semester": "b2315711-0392-45da-8b09-6c9602d36d54:string:1510"
       },
       {
-        "name": "4da81b25-b1bb-4d12-83f9-23bebb238542:string:Leadership and Ethics",
-        "courseCode": "913663a4-7537-4f17-b553-2f1b401bae67:string:MNO2007",
-        "grade": "d0b4ada9-a7e1-4402-b7e1-b33c45093112:string:C+",
-        "courseCredit": "da6c05aa-d16a-4562-b40a-2dbf7168dbaa:number:4",
-        "gradingBasis": "717aa09c-09c5-40f0-a94f-4a26cc836ba5:string:GRD",
-        "includeInGPA": "1fab9ef4-4c70-4c1b-9b44-ac8ca767bd3b:boolean:true",
-        "semester": "ded543c0-4adc-4fdc-982a-ae845b1e093f:string:1510"
+        "name": "7a4c7821-a28b-4933-9f4f-a13c862b2c4b:string:Leadership and Ethics",
+        "courseCode": "cf8e651d-92c7-49e9-a993-e5431b39a409:string:MNO2007",
+        "grade": "1990d3d4-fe6c-4eb5-9858-ae0c9895c2ed:string:C+",
+        "courseCredit": "59b0fdc8-4544-47d2-bc40-d0618df1cf1f:number:4",
+        "gradingBasis": "aafcb483-6b7a-477a-b699-be85cf60a701:string:GRD",
+        "includeInGPA": "ef2b7bd6-d4dd-4c74-82d9-b2ab01aa0354:boolean:true",
+        "reportNo": "3bfaaf4f-ee40-4468-a18e-9b6d1986f169:number:1",
+        "semester": "7c7cdf91-8bb5-41b3-8326-b1f0616217fb:string:1510"
       },
       {
-        "name": "06473d73-658f-4f01-a83f-99d1335fd7b5:string:Communications, New Media and Society",
-        "courseCode": "c73b9926-3ae1-48d7-bea8-e3bd9f50c601:string:NM1101E",
-        "grade": "abb451e0-ede0-4618-aa3f-1004db0559ce:string:B+",
-        "courseCredit": "bf6218d4-df1f-41f6-a70c-5f46fad11db7:number:4",
-        "gradingBasis": "651def22-ac07-4154-9f87-308305960474:string:GRD",
-        "includeInGPA": "35e201db-7f1a-4591-aae3-8a1873b995b1:boolean:true",
-        "semester": "36369553-7c82-43dc-9d76-0b3a74a0b623:string:1510"
+        "name": "aa2376fe-b4d7-4d74-ac89-09d953883ea8:string:Communications, New Media and Society",
+        "courseCode": "97e88308-63c2-4037-a629-8c5aa1f3ef40:string:NM1101E",
+        "grade": "a374badf-adcd-41e0-85c6-a1635671ef31:string:B+",
+        "courseCredit": "cfab41d2-1408-4ca0-87b3-018c7d08139c:number:4",
+        "gradingBasis": "2923a006-d76a-46b1-9e3e-dabd08ee1495:string:GRD",
+        "includeInGPA": "311bbe44-9e23-4541-987b-6f2e394f16f9:boolean:true",
+        "reportNo": "8763d388-0280-4a05-8bac-cb7585ec6574:number:1",
+        "semester": "dfa6f8b6-2929-4a25-a9c5-74ce727b92ef:string:1510"
       },
       {
-        "name": "0966611b-339a-462c-88da-2d658029a4be:string:Introduction to Psychology",
-        "courseCode": "42b35380-fa75-429e-961e-992433f285db:string:PL1101E",
-        "grade": "d571dd97-fa65-4a14-a3f7-548625f8e426:string:S",
-        "courseCredit": "881b5d05-2559-4689-a07d-7c6a61fa640c:number:4",
-        "gradingBasis": "275b064c-bfb3-4463-9f65-51dcbc578b07:string:SNU",
-        "includeInGPA": "c6df135a-33d9-4792-8c60-13953e639fe0:boolean:false",
-        "semester": "314a4e87-3300-4331-acf2-e01de126881d:string:1510"
+        "name": "33debbfd-e2fd-48bf-b62f-90677b63f9c2:string:Introduction to Psychology",
+        "courseCode": "70c0e8c3-97b3-4b58-afa2-3e8415de1392:string:PL1101E",
+        "grade": "6198b9be-6ee5-49a3-9f04-163103f8e352:string:S",
+        "courseCredit": "6b27c25d-8c46-4511-ba92-7aa28d36a8be:number:4",
+        "gradingBasis": "e574a667-26dd-45ef-b9a3-23333fd4e85f:string:SNU",
+        "includeInGPA": "b2fc3177-714b-48c9-b297-af6ff85614d7:boolean:false",
+        "reportNo": "0cbe869a-655b-44e0-abca-90f14b69ca47:number:1",
+        "semester": "f19d59b1-4141-4191-b863-e7ba77724ef3:string:1510"
       },
       {
-        "name": "733138d9-f5d4-4aa6-9982-31fc814862b6:string:Personal Development and Career Management II",
-        "courseCode": "f9d3faad-d340-4d5b-a109-9c45f08b0b5f:string:BFS2001",
-        "grade": "a4f600ea-36a9-41e6-ae9f-7b27f116e736:string:CS",
-        "courseCredit": "8665b1a1-361c-424f-b81c-c1ac2f10c1dd:number:0",
-        "gradingBasis": "ff67da42-a715-44f2-83cd-40395c20995b:string:CSU",
-        "includeInGPA": "e01d9c30-3ab9-4825-8cac-e1477f042972:boolean:false",
-        "semester": "8012cc48-a3e0-4544-9c7c-1317b7e82aa9:string:1520"
+        "name": "9bf23009-8491-4c7e-9512-6b691f862221:string:Personal Development and Career Management II",
+        "courseCode": "6dcb4857-11bf-4147-9e77-e00072c902c5:string:BFS2001",
+        "grade": "029f7663-f2da-4728-bdbc-52d58bd6d66f:string:CS",
+        "courseCredit": "7f0cb857-f8c1-48a3-8bd3-feb55ed48439:number:0",
+        "gradingBasis": "524442b0-b222-40c7-a572-b80c178e8fa7:string:CSU",
+        "includeInGPA": "54cc1494-e5e8-4602-9d68-0b229d1344e3:boolean:false",
+        "reportNo": "12b5851b-3e1f-4b32-a7c4-7f964d8a8e3c:number:1",
+        "semester": "5a84a6e3-18a2-4759-b87f-5a2a0674b1a2:string:1520"
       },
       {
-        "name": "7b841247-a7e0-4543-9807-e288b7db6725:string:Macro And International Economics",
-        "courseCode": "6976e08b-ba78-449f-9b54-13ff18e46bf0:string:BSP2001",
-        "grade": "8d5cf7bd-251b-4c3f-ba28-fd47d84d7bc4:string:B",
-        "courseCredit": "78078cd2-b491-495f-8db1-b0644d6a0e53:number:4",
-        "gradingBasis": "bfd05a80-d102-469e-9435-faeb32386ab3:string:GRD",
-        "includeInGPA": "9065241b-3789-4294-88a0-e5f758b77791:boolean:true",
-        "semester": "77b772c2-c84e-4d56-9d2c-b0852eac3f47:string:1520"
+        "name": "9158e740-f3fb-4034-958a-8d49921c2ae4:string:Macro And International Economics",
+        "courseCode": "4d49b2b1-e3b7-4cf2-ac84-d41e45e8d6f7:string:BSP2001",
+        "grade": "78879896-d955-4819-af4a-0645a32d0a0e:string:B",
+        "courseCredit": "02a0b3cb-d272-44bf-b471-63d4c2b4195c:number:4",
+        "gradingBasis": "c6e75257-860a-4f47-8621-a74e7c8a3c47:string:GRD",
+        "includeInGPA": "88b14f1b-5174-4091-b4b1-c44f7bcc251e:boolean:true",
+        "reportNo": "3003af1f-ed7d-48b8-887d-8d86e28983ba:number:1",
+        "semester": "4dc4ec64-1705-4590-a282-ed47ecaddff5:string:1520"
       },
       {
-        "name": "1cecda70-d1c9-4877-8b06-4ecd178f4d51:string:Introduction to Chinese Art (taught in English)",
-        "courseCode": "084ac0e1-4a6c-45d1-ad83-4afebbd1cc7c:string:CH2293",
-        "grade": "686cd8c5-43d3-42da-b9c9-80271511b8d8:string:B+",
-        "courseCredit": "18c24b15-9b25-40f1-a115-e9a9830d9402:number:4",
-        "gradingBasis": "28a67c68-9ccf-4dde-97a1-418d1cacff7a:string:GRD",
-        "includeInGPA": "79b92efa-53c5-4b7a-8f8e-79a7a5db499e:boolean:true",
-        "semester": "d36bb939-79ee-455d-8f58-dcc4f7c6c00b:string:1520"
+        "name": "910c9910-43f2-470c-b2af-b1b15f22d3f3:string:Introduction to Chinese Art (taught in English)",
+        "courseCode": "8746933d-fcd6-4757-9532-6aa7c0d793c7:string:CH2293",
+        "grade": "68628c66-e894-4f50-89ac-e3d3670b1473:string:B+",
+        "courseCredit": "382c4883-3dd7-4e2b-a080-771ff6ec42b5:number:4",
+        "gradingBasis": "d0a508de-461b-4097-84c6-be2ee83d700e:string:GRD",
+        "includeInGPA": "704a5859-bafe-4c66-93f7-1ee84d88dfe4:boolean:true",
+        "reportNo": "c898b822-c3f8-4273-a295-401abcfd67a8:number:1",
+        "semester": "6814f008-b95f-4137-b5f2-c58f79a9b422:string:1520"
       },
       {
-        "name": "972e6d4e-3bee-4de4-bc50-4d765dabc4e5:string:Finance",
-        "courseCode": "f61da159-543f-4720-963c-4554cb9c6a73:string:FIN2004",
-        "grade": "152063fc-e77e-493e-a44e-b7ac1fc7438e:string:B-",
-        "courseCredit": "1062e9f1-4f5f-4c67-bfd0-924fa7b87a19:number:4",
-        "gradingBasis": "50b49e90-676f-4122-97ad-56aff7442ca8:string:GRD",
-        "includeInGPA": "20dca429-89e1-4476-a1df-4e950e66c165:boolean:true",
-        "semester": "7c0318e2-666e-46c6-9789-210edf8eb4ba:string:1520"
+        "name": "d9c85865-bd5d-48ee-aafd-2bc1f466deb7:string:Finance",
+        "courseCode": "0b963e2e-476a-4c4a-96e8-6b9e51f4f2a3:string:FIN2004",
+        "grade": "0d599b97-0cae-4f15-ac6c-ee1b962b9ab8:string:B-",
+        "courseCredit": "4df7abf2-8579-4db3-b728-c717c6712b66:number:4",
+        "gradingBasis": "e612943c-97b6-42d2-a1b8-8aad4f2bcc8b:string:GRD",
+        "includeInGPA": "3a97a8f3-185a-455c-a38f-d39a8c88e38f:boolean:true",
+        "reportNo": "a63adc13-99bd-4f2e-81e9-b0c9a14ee655:number:1",
+        "semester": "7b842b16-fdcd-4492-b833-087b14dcf122:string:1520"
       },
       {
-        "name": "c1016fbc-b31f-4cf8-82c3-3d888855356d:string:Asian Markets And Marketing Management",
-        "courseCode": "d1b7812f-410a-4f1b-84df-59bb47a2cfd4:string:MKT2401B",
-        "grade": "03ce36d2-cee5-4554-98ed-49a8d77dbb5d:string:B",
-        "courseCredit": "eb3d910e-3a97-4672-9b63-20662400cbb2:number:4",
-        "gradingBasis": "5447d7cc-598b-4e68-9f6b-25ab56398643:string:GRD",
-        "includeInGPA": "26ba1978-45cf-4857-a298-6a371ce77f3c:boolean:true",
-        "semester": "60e9b332-2061-4b09-bf2e-fd20273e7893:string:1520"
+        "name": "60f317b0-3bc0-4b42-a0c3-d13a31c47aba:string:Asian Markets And Marketing Management",
+        "courseCode": "68d0d6de-b36e-4c98-800e-1b45f7fc2f4e:string:MKT2401B",
+        "grade": "fff522a7-cb8e-4ef5-a6c1-c658aa94fefb:string:B",
+        "courseCredit": "5228df6e-eff1-4713-a94b-03277ad2470d:number:4",
+        "gradingBasis": "3aedf0a8-d790-4118-ac2e-f97c85e43bc9:string:GRD",
+        "includeInGPA": "4b9e645f-fe61-41eb-adbe-6a1db9a15f41:boolean:true",
+        "reportNo": "6bf404de-833a-4ac3-ad97-0ae60492454d:number:1",
+        "semester": "8295a1e3-62fa-473e-84c6-31c24fc00a82:string:1520"
       },
       {
-        "name": "a9f8d45c-841f-49f1-8a92-ce61e1fa9381:string:Entrepreneurship",
-        "courseCode": "d5ca6957-f875-4bbe-953e-2004d31e36f5:string:MNO2009",
-        "grade": "69661fd9-317d-4cea-a9ec-a50c61c9360b:string:C+",
-        "courseCredit": "c4438998-4528-4cde-91fe-a9f9e914d664:number:4",
-        "gradingBasis": "6f002480-e9a8-41ab-84a7-902b57a91c05:string:GRD",
-        "includeInGPA": "9deb4ab1-a639-4346-a8df-a1fabf65eb26:boolean:true",
-        "semester": "12b88e56-4d4c-458e-b556-c826b7ef3bfe:string:1520"
+        "name": "6b6b7f03-8226-47a1-8aa2-3d74c873b780:string:Entrepreneurship",
+        "courseCode": "f636d28f-4a63-49ed-b558-70219c8c643f:string:MNO2009",
+        "grade": "0833d80b-3c0d-4318-8390-9840ff609cb4:string:C+",
+        "courseCredit": "a85ed108-089c-4406-ab9a-05481168a56c:number:4",
+        "gradingBasis": "38369760-daa3-468e-bb9b-28d209ae3176:string:GRD",
+        "includeInGPA": "230a0f8c-d6ab-4469-a213-bdc19c197b8a:boolean:true",
+        "reportNo": "d6abb2c6-4b28-4fd5-b34d-be73d54c4033:number:1",
+        "semester": "03245986-8998-4c64-bfd8-5916c62d3a80:string:1520"
       },
       {
-        "name": "924780c8-a425-4298-bd8e-a7f2beb8453f:string:Asian Business Environments",
-        "courseCode": "b1d1e0f4-b417-4fcd-a960-83da348c2950:string:BSP2005",
-        "grade": "83479a4c-58e7-43f2-b597-cbd7fcbba6c7:string:B-",
-        "courseCredit": "26ebd00b-92c6-4f0e-b57b-dd87ebd620d4:number:4",
-        "gradingBasis": "6ad2c949-6fb3-4e18-a089-38e30e83883d:string:GRD",
-        "includeInGPA": "b02df792-7abd-4cf6-af63-8fb713cec227:boolean:true",
-        "semester": "3db0c3d7-a304-4773-bad1-3a4fa2585521:string:1610"
+        "name": "e22049ba-b526-47c1-93c5-7ea9e43949b9:string:Asian Business Environments",
+        "courseCode": "28a35f2c-bc76-4594-9f28-289125037daa:string:BSP2005",
+        "grade": "83a17689-869d-470a-92a8-e0c9dd3b67a9:string:B-",
+        "courseCredit": "86c58ad3-5aa6-415d-b2a8-9be4f003e023:number:4",
+        "gradingBasis": "d41b66d7-9712-4192-9050-f52277e89ebc:string:GRD",
+        "includeInGPA": "2e320e3b-a517-43e8-b0f4-951bfd6145ae:boolean:true",
+        "reportNo": "ac2187a1-2ae2-4fd3-b2b7-4a74edb108e7:number:1",
+        "semester": "4b156e45-1cc0-4db3-9f3b-8c792a5e2363:string:1610"
       },
       {
-        "name": "5ce55181-543a-4bc5-9204-175be5b357ce:string:Chinese Tradition (taught in English)",
-        "courseCode": "90cc7dff-46ee-44a5-982a-6f17806f9e68:string:CH2291",
-        "grade": "24867a07-9540-450e-b79c-9b6ad65d3bbb:string:D+",
-        "courseCredit": "0e563ae5-1f2f-4ab1-93f8-f2d3b0529ac4:number:4",
-        "gradingBasis": "1309f85b-4c65-42df-8cb0-5893d656f84f:string:GRD",
-        "includeInGPA": "ddc05c4d-e181-4ae9-9d27-4f8edeb4fe36:boolean:true",
-        "semester": "cf1dd084-216e-4d9a-b168-f91a73fccb44:string:1610"
+        "name": "49668912-9ea3-4ec3-a02b-644572a6f21f:string:Chinese Tradition (taught in English)",
+        "courseCode": "b9b74884-ea32-4b29-a1ad-eac561bf5386:string:CH2291",
+        "grade": "0ce604c1-253c-46b1-962b-247c72d305f4:string:D+",
+        "courseCredit": "e02ff382-79de-4484-ac64-6be73185a6ed:number:4",
+        "gradingBasis": "8eb56f62-6279-4032-bf77-e60ed03505b3:string:GRD",
+        "includeInGPA": "50aa51b1-51e3-4ac3-b478-3cfa9a8272ad:boolean:true",
+        "reportNo": "51011411-fb32-4d29-b508-f5faea6979f3:number:1",
+        "semester": "057c3898-cb8f-4174-b717-743f0f3d333e:string:1610"
       },
       {
-        "name": "ce3fd397-8219-4cc7-a6a7-bfe160afc679:string:Global Marketing",
-        "courseCode": "ce9dcd53-06ec-4fcc-8c8f-3d1b9f994b4a:string:MKT2412",
-        "grade": "8c94e480-f985-4b86-afc4-d1bf6c2468f0:string:B",
-        "courseCredit": "5d0e7da6-608a-48a4-9707-eef595499d85:number:4",
-        "gradingBasis": "3836d422-064f-4758-9059-67fbc7fa8297:string:GRD",
-        "includeInGPA": "40be55e3-56df-42c8-9d7e-d9b1303bda51:boolean:true",
-        "semester": "bb741ba7-445c-4075-a816-ac75b7b70486:string:1610"
+        "name": "ef54584a-0f9c-4577-8231-8b9452aad79c:string:Global Marketing",
+        "courseCode": "070dbd56-8a29-4fc8-8cf4-c8e793aa9fd2:string:MKT2412",
+        "grade": "b3bc380e-0161-4d00-91a3-30e914fa6e94:string:B",
+        "courseCredit": "f48cee9a-3b5a-4850-8964-533eaccb1ec1:number:4",
+        "gradingBasis": "b31ffa40-1ddf-4530-a9f1-b7e68af6a91d:string:GRD",
+        "includeInGPA": "726fa633-3287-4521-b1b5-0ea9983fb062:boolean:true",
+        "reportNo": "ab31bd29-10f2-4a1e-9324-c5e743811bd7:number:1",
+        "semester": "7cb95b4d-34bc-43c2-a915-ab212b24ece8:string:1610"
       },
       {
-        "name": "efe4d3c6-101f-47fd-aef5-b0a291bb3e79:string:Consumer Behaviour",
-        "courseCode": "f6a0d6ba-6b92-497c-a6e6-ed4d5c84aaea:string:MKT3402A",
-        "grade": "6dbb1aae-41b0-4614-b44f-87cc79bf6c2d:string:B",
-        "courseCredit": "903ee789-077e-430c-a8b8-d5ff0e957fdc:number:4",
-        "gradingBasis": "cce8a795-b137-467e-a4e2-8921e4954acc:string:GRD",
-        "includeInGPA": "7fc22cb0-e5cf-4ece-8ab5-c78e2940cab4:boolean:true",
-        "semester": "48379968-0428-4999-83dd-76406dd5ae74:string:1610"
+        "name": "b09abd6e-5053-4d2f-a785-5e7179fc59bb:string:Consumer Behaviour",
+        "courseCode": "67516dae-d7c9-4cda-a4c4-a007535cfcd8:string:MKT3402A",
+        "grade": "9fb296f6-7125-4185-a17b-34da3c254244:string:B",
+        "courseCredit": "a86c20ec-776d-4b09-b80e-a8c3a7721c29:number:4",
+        "gradingBasis": "c005d144-95d0-4f09-a9d6-cbaf8c0e1ee9:string:GRD",
+        "includeInGPA": "37c94c01-b1e8-453c-a863-c923cbbf4f98:boolean:true",
+        "reportNo": "c5547396-875e-4dbb-bc05-32e21352dc9b:number:1",
+        "semester": "aa35dbc1-8e4b-4e26-967d-10167a51aa84:string:1610"
       },
       {
-        "name": "29c871f6-ad43-4f5d-bddb-d6c5d5dec448:string:Introduction to Asian Theatre",
-        "courseCode": "87e1851d-7b7c-47da-9d3e-29cfd3d9460e:string:TS2232",
-        "grade": "73e493aa-b50b-42ec-906f-803f1e165873:string:B+",
-        "courseCredit": "b87e30bd-013b-467c-94df-bf20beb0138f:number:4",
-        "gradingBasis": "08203959-dba1-44cc-8298-ce9ae6cd7aaa:string:GRD",
-        "includeInGPA": "1c089bf4-30bf-48d2-9eee-f9c4d0e17d32:boolean:true",
-        "semester": "9cb8af45-2088-43ae-8d3f-eb937ef9becf:string:1610"
+        "name": "8c8d271f-d125-42c4-ae02-405f5c0125c9:string:Introduction to Asian Theatre",
+        "courseCode": "16cc99ac-186d-4987-9d9e-0af01566fde1:string:TS2232",
+        "grade": "47d261f3-451c-4883-b55e-51ca6059d4bb:string:B+",
+        "courseCredit": "1c44ce89-d3f5-497d-a120-251a91890118:number:4",
+        "gradingBasis": "5f68403b-9904-423d-8730-9f046b922c71:string:GRD",
+        "includeInGPA": "12f1dc0c-3774-4eec-a84b-6d6a97729501:boolean:true",
+        "reportNo": "d1d04eec-199b-455d-badc-5d0e90086ce7:number:1",
+        "semester": "25364a0b-d36e-48d8-abd0-6548a48f5346:string:1610"
       },
       {
-        "name": "61bfeb39-2168-4140-b440-fe331806429d:string:Strategic Marketing",
-        "courseCode": "656385f0-e55a-491f-8176-1a961648fc49:string:PU001",
-        "grade": "3fe7a10a-68a0-4cd3-aa69-b94125d490f2:string:OVS",
-        "courseCredit": "f2364bd3-6ef2-4500-9f7c-d1a95458f7ec:number:4",
-        "status": "04d9814e-bbb7-4ffe-a9ae-e84e52ac240a:string:P",
-        "includeInGPA": "74732498-638d-4735-ad2d-475d5f825542:boolean:false",
-        "semester": "a665bf67-1e79-4973-afd0-1dedb59ead68:string:1640",
-        "transferSeq": "e7c653ef-b7a3-42d6-a4be-d871fbfeea5e:number:1"
+        "name": "47641ac0-1881-4f4e-bec2-fce0891bf8cf:string:Strategic Marketing",
+        "courseCode": "f3376662-b6cf-47f8-ac2d-71f1317997ce:string:PU001",
+        "grade": "29339297-cde3-4064-9e3d-a316495f8952:string:OVS",
+        "courseCredit": "dcd9695a-d7f6-4bbc-a978-c674bd6e64f3:number:4",
+        "status": "5a82d615-1d83-4bde-b608-62ccfbc0c863:string:P",
+        "includeInGPA": "a4a5c04d-3d0e-453b-922e-3b760b42ec6d:boolean:false",
+        "reportNo": "fd4fb0a8-390c-4d48-9610-73f1ff78a337:string:1",
+        "semester": "0c6b858a-1296-4ec2-80a8-642f8f4bc968:string:1640",
+        "transferSeq": "af81dbad-e109-49fd-9e14-3c67dcfe5c14:number:1"
       },
       {
-        "name": "5e38d2e6-79bb-4c46-b105-2df2b9aad7bf:string:Introduction to Game Theory",
-        "courseCode": "bb6cc9cb-ac69-474e-b5e7-41c08a684510:string:ISC230",
-        "grade": "a315656d-3906-4a83-92bd-cca702227248:string:OVS",
-        "courseCredit": "da3d2903-213d-4f35-89b9-49456080e244:number:4",
-        "status": "397322c8-dfdf-4c14-9a21-b6b12a8f2555:string:P",
-        "includeInGPA": "22d064e8-4761-45e1-8a96-1cd7537bfce5:boolean:false",
-        "semester": "f3a98a01-fbc6-47c2-806d-27a4e4eb3464:string:1640",
-        "transferSeq": "81fc0aa6-0f28-4720-89df-e3d033140b1d:number:2"
+        "name": "a9a30686-1ae0-47a3-b4f6-7c775b53df8e:string:Introduction to Game Theory",
+        "courseCode": "6094a166-3720-41f9-a8b7-a3faaf0e820d:string:ISC230",
+        "grade": "ad313e0a-6769-46ca-9b89-93b16bb603b2:string:OVS",
+        "courseCredit": "688e26a7-8df7-4f95-af98-b359efd43c87:number:4",
+        "status": "a25e35c2-d015-4fd8-89cc-8697f3f61ab5:string:P",
+        "includeInGPA": "01fcbc44-e7b4-4e57-80c1-f18dfd36b97d:boolean:false",
+        "reportNo": "6ef92883-9041-425b-926f-598ef4b5ff31:string:1",
+        "semester": "b926628d-5d4f-46e9-8fca-853c2406c368:string:1640",
+        "transferSeq": "edf11ca9-b0a8-48a2-a93d-e2dfd0d254b6:number:2"
       },
       {
-        "name": "f91da7df-ea15-4173-a4e6-04f0d1e19b22:string:Business Strategy",
-        "courseCode": "ecfe2b8c-2e2c-4572-9a8b-492dd9bc989a:string:ISC129",
-        "grade": "1072fe96-67c0-40cd-940d-277fb826a007:string:OVS",
-        "courseCredit": "4a606d93-1b93-4fd1-9d6b-dd9bfeae982d:number:4",
-        "status": "9de9a3f4-a008-4b20-9035-15dba518e895:string:P",
-        "includeInGPA": "1e5fc90e-fba7-4ca3-9d85-1e3909e87aa6:boolean:false",
-        "semester": "d59ec75d-97c1-43a0-805e-d89303ccefde:string:1640",
-        "transferSeq": "74972a37-03da-4832-b08d-4be37cbe1c44:number:2"
+        "name": "22c50b9b-c077-4b67-847d-f50ed9e86e37:string:Business Strategy",
+        "courseCode": "3b9a765e-4e3a-49ec-9473-2b46c2914ed3:string:ISC129",
+        "grade": "b845c349-f65d-4f09-9e88-819b37e19d6b:string:OVS",
+        "courseCredit": "c20f0a50-8fc7-4a71-bbd6-0ed31407017e:number:4",
+        "status": "0eeb2e1d-41c8-4c5a-9d44-2a1ed43c5585:string:P",
+        "includeInGPA": "b6ca57b0-6197-490d-b7d9-88708d653ccc:boolean:false",
+        "reportNo": "f013d862-151a-4759-9674-e77752aa803d:string:1",
+        "semester": "825b29bc-9cfd-426a-9059-b93f2fe08983:string:1640",
+        "transferSeq": "deeb6aeb-db0e-4436-af72-9b742125ec1f:number:2"
       },
       {
-        "name": "e007dbe3-eb78-4200-b200-a4ccab22b353:string:Chinese Heritage: History and Literature",
-        "courseCode": "30845026-1994-4069-b243-2102c8d88182:string:GEK1007",
-        "grade": "c4423e55-e3a2-4467-8fb2-96cc082c22b6:string:B",
-        "courseCredit": "3d3cb2ef-437b-4eb0-b171-42fc1fbf0e1b:number:4",
-        "gradingBasis": "91b1769d-fa5b-4bdf-9d24-0746d2aa049b:string:GRD",
-        "includeInGPA": "73d56c97-c70a-4e48-9088-6c101d9c1a68:boolean:true",
-        "semester": "5e889fcb-77db-45c0-a0fb-6e25ddc2ce3a:string:1710"
+        "name": "f84bc22f-5757-435f-a6ce-4a14ae89e766:string:Chinese Heritage: History and Literature",
+        "courseCode": "9743c3eb-4f62-4e6a-9fea-2c640e3f0cc7:string:GEK1007",
+        "grade": "cb5115c7-ed7b-42de-9ce0-c04c176e7b2f:string:B",
+        "courseCredit": "27439f14-e535-4d41-97a3-0c5bfa3e1841:number:4",
+        "gradingBasis": "925828c2-59a6-4706-b52d-5f61c12ce5e6:string:GRD",
+        "includeInGPA": "f7f26d3b-0e95-4313-b1c4-c22cf7b84d8f:boolean:true",
+        "reportNo": "0d33600c-99d8-44c9-a94a-3e32e4bf62fc:number:1",
+        "semester": "dfdd7398-e818-4e7b-9a4d-568b30e564e1:string:1710"
       },
       {
-        "name": "cc9e6ad8-d937-496b-8032-7519b3958ffa:string:Japanese 1",
-        "courseCode": "98207701-8535-4ded-9499-cdd8ead47993:string:LAJ1201",
-        "grade": "6615d949-92e3-4d97-ac3c-8c83de0d832b:string:B+",
-        "courseCredit": "105817ee-cb50-493f-b022-a5f824fa06b4:number:4",
-        "gradingBasis": "daa270ec-c8d5-424f-b5db-f1500b80daad:string:GRD",
-        "includeInGPA": "9441bc05-e4ca-4528-92a0-389bb195ffd1:boolean:true",
-        "semester": "eec4a752-43cd-4d41-86b4-053f55861fce:string:1710"
+        "name": "a5b7a038-ca83-45cc-8e61-06064e0dc61c:string:Japanese 1",
+        "courseCode": "df9e2863-122b-4e83-9a31-75d7b602c893:string:LAJ1201",
+        "grade": "6bcb564d-80b5-425d-857c-a3c4876e2070:string:B+",
+        "courseCredit": "1b652e9e-8591-4f82-897d-ebdca27f0254:number:4",
+        "gradingBasis": "abfb5d3d-623f-4e0d-8efc-e49a2b4fcd3c:string:GRD",
+        "includeInGPA": "99e88e0c-2eef-4d7c-9a82-06e51add5b5d:boolean:true",
+        "reportNo": "e07bb022-4a9b-47a5-9d91-667385917c72:number:1",
+        "semester": "c8ba7fac-a1c7-4501-8496-8bb9a202577f:string:1710"
       },
       {
-        "name": "c9ed3ded-9423-433d-afc8-fcb4b25c932c:string:Wealth Management Marketing",
-        "courseCode": "56e47699-17f1-4b4d-aac2-1d193ce957d9:string:MKT3428",
-        "grade": "ab64c442-d9ed-414f-b1b3-fb3b66c21936:string:B-",
-        "courseCredit": "c55e8aee-0186-4ad9-a92b-3f44a079aa7c:number:4",
-        "gradingBasis": "066ca321-a911-47a0-8ca7-dead911ee6bf:string:GRD",
-        "includeInGPA": "3cc580ff-fd39-4c6c-8cef-80e9a5be3840:boolean:true",
-        "semester": "d7e88dbd-34eb-472b-9581-693a6bbf1188:string:1710"
+        "name": "fd025052-c77a-4d95-af4c-494dfea4fc23:string:Wealth Management Marketing",
+        "courseCode": "79c6b371-737e-4b28-b382-f623de8f2033:string:MKT3428",
+        "grade": "8ae34bfa-cdaa-440d-96ad-485a1b3cf621:string:B-",
+        "courseCredit": "ca06d58c-a90f-476a-aa6b-e6744f991787:number:4",
+        "gradingBasis": "69734573-2f45-4e0f-951d-4fdfc7597a35:string:GRD",
+        "includeInGPA": "05ea7058-7726-4e80-a377-160bee008224:boolean:true",
+        "reportNo": "bff49485-7725-44e0-9cf5-0cf9c6278122:number:1",
+        "semester": "5ec180c1-4d42-454c-9498-47dc522b485e:string:1710"
       },
       {
-        "name": "587a3c51-61bf-42ae-8e89-a4edb2bb8232:string:Marketing Theory: Cultivating Critical Thinking",
-        "courseCode": "ba1b92e4-a0c6-43da-8477-28808c7e96a3:string:MKT4412",
-        "grade": "6d2570b5-92c2-4c50-82e9-fbdbbe44afff:string:B",
-        "courseCredit": "97a4d2d5-43a2-438f-94e6-0cfc7b1cf050:number:4",
-        "gradingBasis": "f56afc6b-77cd-4e0b-a983-d1f744500a4b:string:GRD",
-        "includeInGPA": "1e4bf7d6-7639-48db-b91b-9521419d1f16:boolean:true",
-        "semester": "b8efcb5e-d0ec-4f6b-9eec-398e6a7ef43e:string:1710"
+        "name": "99b73101-1bc3-4644-83bb-c098275d81ee:string:Marketing Theory: Cultivating Critical Thinking",
+        "courseCode": "103ecb2b-530d-4241-891d-94e77f4ac97c:string:MKT4412",
+        "grade": "efdafcdf-9f9b-4943-9488-a6f8c82b0832:string:B",
+        "courseCredit": "1ff48c64-c2dc-47b9-8e23-40551a754698:number:4",
+        "gradingBasis": "bd0e9a37-74d1-4dee-8d34-bb3cbf6d257e:string:GRD",
+        "includeInGPA": "a8ed9e1d-f5dd-487b-84ae-56aee58d30e0:boolean:true",
+        "reportNo": "4e615bb0-59f5-4e89-91f4-30b2f9c2a7e1:number:1",
+        "semester": "782d43fb-69ae-4523-a5d8-07bcf45d4809:string:1710"
       },
       {
-        "name": "c31e058b-f649-4c2b-b559-f5d68d2143d1:string:Marketing Analytics",
-        "courseCode": "a84abf41-8434-4468-a7fc-3ec2143e1e77:string:MKT4420",
-        "grade": "de4c36c8-067a-4776-9aba-faeddf091453:string:B",
-        "courseCredit": "8fd57875-8d19-45ce-8249-19047dc5892c:number:4",
-        "gradingBasis": "6d7264ff-cb02-4c47-8cc9-817de981daab:string:GRD",
-        "includeInGPA": "05d31f86-e4c2-40e1-a557-871d2c54bb7f:boolean:true",
-        "semester": "63b4d37b-1435-4ef3-9122-9a3bf5cb11c7:string:1710"
+        "name": "a4a27815-dbf0-4097-8d01-7bab712b1af9:string:Marketing Analytics",
+        "courseCode": "0ef7fc7c-428f-46d1-967b-2ac2477cde78:string:MKT4420",
+        "grade": "6dcaa7ed-bd9a-4e22-9e9d-dbbc4d8c9c71:string:B",
+        "courseCredit": "14f79ee7-0b8a-4963-b7d5-18e240b013c4:number:4",
+        "gradingBasis": "f3cffbc4-e271-4649-8a5c-d26726a131b1:string:GRD",
+        "includeInGPA": "34a48916-be87-4cf3-993e-198d1492fd5b:boolean:true",
+        "reportNo": "e8a5400a-6273-4ad7-a8a5-95b06612ac1b:number:1",
+        "semester": "aa8f9b80-c58f-4e49-8306-bff13a303ac4:string:1710"
       },
       {
-        "name": "4fef6065-33ee-42af-9f15-d51f41b8b656:string:Music of the Church and State",
-        "courseCode": "d19d626c-49d0-4e9e-816e-2539123bb51d:string:MUH2203",
-        "grade": "90dcb4ec-fcd6-4ba6-89b8-600a6fcf465b:string:A-",
-        "courseCredit": "5b603b6a-956c-4a26-b333-f9214105411e:number:4",
-        "gradingBasis": "de4aedc4-8f14-44c8-826d-c0369cca7abf:string:GRD",
-        "includeInGPA": "3948778f-ffdc-4e3d-97d7-7d0901c22d51:boolean:true",
-        "semester": "642ab422-f1c2-4575-b2f5-6389ab9ae57a:string:1710"
+        "name": "93b8c8b9-695f-46d0-9d5f-9416e3faec42:string:Music of the Church and State",
+        "courseCode": "62aadfd2-def3-42ca-8849-eab2420ad099:string:MUH2203",
+        "grade": "51565b90-3771-41c3-bd2a-a0b2cb541403:string:A-",
+        "courseCredit": "abee3426-dce2-4894-8f16-e1259ba80ab4:number:4",
+        "gradingBasis": "2dfc2826-db24-4946-accd-acccef3d5b05:string:GRD",
+        "includeInGPA": "cd9a1b7f-71df-473b-8913-7c8a24644e90:boolean:true",
+        "reportNo": "025c4759-85ed-453e-ad32-f5467ae6a6eb:number:1",
+        "semester": "136b8429-37b3-4f1c-b483-7cfc855fe35c:string:1710"
       },
       {
-        "name": "f93417a5-b70a-4465-a465-41d0767fed30:string:Field Service Project",
-        "courseCode": "98769748-d58d-4308-ada6-fc8da07a826d:string:FSP4003",
-        "grade": "a8f2e71a-3351-4c96-8af8-862231cc8d73:string:A+",
-        "courseCredit": "089441a2-cd9c-4702-b114-41bff4c1b28a:number:8",
-        "gradingBasis": "47c8afbf-160b-472a-b87d-e956431b6b73:string:GRD",
-        "includeInGPA": "716988e9-a538-4ba1-b8f3-e69e7afe183e:boolean:true",
-        "semester": "e793b9de-cc8a-4841-bd0c-98acc55a0ec2:string:1720"
+        "name": "914d6139-30f7-44d1-8b87-ccb1f85594bb:string:Field Service Project",
+        "courseCode": "6e27a5ef-9820-4211-8bc4-46e116d59979:string:FSP4003",
+        "grade": "4cb303fb-8ab7-4a8b-b841-dff7f5f262aa:string:A+",
+        "courseCredit": "eb9785ea-e47c-4df8-b888-1036c43507e1:number:8",
+        "gradingBasis": "69626f3b-4240-4314-8b35-4802a2c5b37e:string:GRD",
+        "includeInGPA": "f174e99d-6130-4c95-8b12-fb9b9cb0b4a4:boolean:true",
+        "reportNo": "d1cfc42a-7d86-44f4-b388-7550b96dfee2:number:1",
+        "semester": "d76c88d1-c5ba-4aad-ab8b-5a03f49937cc:string:1720"
       },
       {
-        "name": "e2b1bd40-cc5b-47c3-a040-2e514ac3d292:string:Economic Issues in the Developing World",
-        "courseCode": "0cf31f86-d707-4d24-9d88-0be8d6b463af:string:GEK1018",
-        "grade": "7067121d-1ed7-4c5e-8d8c-1ac78e90c385:string:B",
-        "courseCredit": "86a05ede-4a62-4b48-ad94-4b6ec861343b:number:4",
-        "gradingBasis": "8f515dee-c057-4b06-bd31-f94884f3417c:string:GRD",
-        "includeInGPA": "f7566195-d9ff-4558-8995-aca8449bfee3:boolean:true",
-        "semester": "91826c3f-5530-487d-a062-7278cad393dc:string:1720"
+        "name": "e0cf6b6c-ced7-40c1-9e44-af5300b4bd67:string:Economic Issues in the Developing World",
+        "courseCode": "d675abd6-5234-4676-bcd2-9b97bcaf4068:string:GEK1018",
+        "grade": "96ef0a9a-7b90-4964-990a-c709967a3e3c:string:B",
+        "courseCredit": "ce8b670f-4139-4b1c-95cb-4944fd75256e:number:4",
+        "gradingBasis": "a5535d06-13f3-4aea-8b6c-558795b820f9:string:GRD",
+        "includeInGPA": "b4ecf53d-190c-4a72-8b2d-966a8692ebf8:boolean:true",
+        "reportNo": "e5e1d2cf-68ba-47c9-b611-6a2e535b4571:number:1",
+        "semester": "c7702d99-b9ee-4b25-b4af-3bbcfcd3c307:string:1720"
       },
       {
-        "name": "c6effe1f-6210-4f8c-a5fe-428d9baa5971:string:Public Health in Action",
-        "courseCode": "52fe1d8d-97fb-4b3d-863f-d384573c7983:string:GEK1900",
-        "grade": "af669eae-927d-4ec6-8661-f19fe8b4b858:string:A-",
-        "courseCredit": "b65c872b-7514-4f0e-83ac-5aeb5243b18c:number:4",
-        "gradingBasis": "81b6c957-1ef2-44bc-b65d-190ed3fb06e1:string:GRD",
-        "includeInGPA": "c6fedba2-7543-48de-b1ff-dad37449d49f:boolean:true",
-        "semester": "1a586db3-8c68-4afa-852a-f35de7e51f4b:string:1720"
+        "name": "fbed63c3-eb33-448c-b12a-87178abdf367:string:Public Health in Action",
+        "courseCode": "7e0eda70-5c82-4d11-b04d-8aeab390a640:string:GEK1900",
+        "grade": "c3325fc0-9546-47a1-a307-951149b6f4a2:string:A-",
+        "courseCredit": "753b5f6f-1a2e-414b-a322-bdefff4f900e:number:4",
+        "gradingBasis": "4d4142ed-2be8-464b-96c7-998492abbd29:string:GRD",
+        "includeInGPA": "6287e3c9-5f7d-45c1-aa07-ee888359445b:boolean:true",
+        "reportNo": "50adc44c-1113-4d36-bcc4-c9592cf253f0:number:1",
+        "semester": "388ff9aa-bede-4872-bba1-355feae19415:string:1720"
       },
       {
-        "name": "96e8d202-5a48-4a84-bfb5-015847e84c26:string:Pricing Strategy",
-        "courseCode": "c2cb3625-feae-4481-9800-4374e7b72a3a:string:MKT4413",
-        "grade": "ba6cd421-3643-4df5-97be-20bcc5b601eb:string:B+",
-        "courseCredit": "ed98aeab-1a8b-4781-8b8c-c51dd6d097b2:number:4",
-        "gradingBasis": "ae3f7b92-8f29-442c-a343-65018a298dcc:string:GRD",
-        "includeInGPA": "aa188d2c-5f55-42b8-9a8d-373198e84459:boolean:true",
-        "semester": "99ac1670-168a-44dc-9c85-1a2e98f6d9d1:string:1720"
+        "name": "909380d7-0068-48ed-8a15-3a9cfc3d9c9e:string:Pricing Strategy",
+        "courseCode": "9aecb030-763b-49bd-9456-c561b516532c:string:MKT4413",
+        "grade": "bbe47d32-4291-44cc-a9af-fc1529605d7a:string:B+",
+        "courseCredit": "424348e9-a980-4b56-9c35-608437a6c78e:number:4",
+        "gradingBasis": "d30f0768-ce80-4cb8-9cb5-e404160845b9:string:GRD",
+        "includeInGPA": "d75cbf15-afe2-462d-962b-081bb8b6f893:boolean:true",
+        "reportNo": "6a5e97d8-d02d-4bb7-88e6-39e5b2a598cf:number:1",
+        "semester": "e1330b57-d6dd-4933-b632-39ba4c971b8a:string:1720"
       },
       {
-        "name": "90254168-e0d6-4872-8592-5f7104a70274:string:Representing Singapore",
-        "courseCode": "c022ab04-9b95-4f96-a0f8-2f262f01cb62:string:SSA1206",
-        "grade": "f3eaf56c-f7e9-44ea-bc5d-a22a2df9712d:string:B+",
-        "courseCredit": "4e078cf3-47d0-4660-a384-aa84d7c1d3ff:number:4",
-        "gradingBasis": "ee100044-f0d9-4e27-8a9f-85760f6caff9:string:GRD",
-        "includeInGPA": "f9522253-7ff3-4489-b927-9737cd58d887:boolean:true",
-        "semester": "512674f6-8181-470b-a4ea-8e1ab9e19978:string:1720"
+        "name": "e1be3866-c962-4793-947a-51e56e37e684:string:Representing Singapore",
+        "courseCode": "ec99578e-7d1f-4862-a4be-bad4e7567eb7:string:SSA1206",
+        "grade": "94b607e3-a8ed-4199-8d14-0c4ef33902b8:string:B+",
+        "courseCredit": "96d4cb0e-15f0-47fa-9e01-f011733598bd:number:4",
+        "gradingBasis": "63450c09-d45a-4787-84fd-9c2f4a756a06:string:GRD",
+        "includeInGPA": "a4f0dbb3-c91a-4358-bb23-049911f31b10:boolean:true",
+        "reportNo": "b617fc84-3f2d-4d7f-8a0a-3e93a92fd03c:number:1",
+        "semester": "7f0f0661-2808-4349-9370-2cba747b279d:string:1720"
       }
     ],
     "additionalData": {
       "degreeScroll": [
         {
-          "degreeTitle": "0140ede1-7700-4176-96d2-6df02ae332b4:string:Bachelor of Business Administration",
-          "dateConferred": "64f3fcf8-be3c-48ca-9621-e2c49da1484e:string:2018-06-30",
-          "honours": "7277bb87-32ff-4a1a-86b7-92f19662d8eb:string:Honours",
-          "major": "eb64101b-6ccd-464b-b4d3-a5c36fb948f1:string:BBA (HONS)",
-          "degreeCode": "6d92b03b-c40f-4990-84c7-ba8e01a5a668:string:B021000",
-          "type": "bc54d378-c9bc-4ed5-9ee4-afc788b1f7c6:string:K1"
+          "degreeTitle": "c97e69b9-8811-4d79-8fa7-b90a2818cc55:string:Bachelor of Business Administration",
+          "dateConferred": "3f0a0506-b45c-40bf-97a0-e7d850c54e34:string:2018-06-30",
+          "honours": "f8db2e53-9c2a-4a62-9d1e-7801c64529d1:string:Honours",
+          "major": "8922e0b7-12db-4720-aead-855cc77b6df5:string:BBA (HONS)",
+          "degreeCode": "6487b3ec-2eba-4d2f-aab7-5d4779e22f9e:string:B021000",
+          "type": "e4ad55d8-261f-4e3d-a7ab-2269d70bbffa:string:K1A (GENERAL)"
         }
       ],
       "images": {
         "PRESIDENT": {
-          "data": "4ccbfd15-1f1a-44bb-9094-31dbf83eb3ac:string:data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAABaCAIAAAAJsExNAAAEy0lEQVR42u2aPVbrOhRGnY4RQE9BB9TMgA6YBTOAir8KZsAsgI4ZUAMdBT3p6NLx/J7e0jpIsqw4tuP73b2LLIhtRTralo5kz25vbxeLRQUgwezq6ur8/Hzd1QDogXp0/lfoy8vLddcEoAeur68RGnRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEBikQGqRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEHpvHx8fX11f398XFxWw2W3eNpOgi9NfX1/39ffz9/v7+9vb27u7uX9tJPz8/7+/vn5+fXtk4Jgg9KH0K7Tk5Odnb21t308bm7e3t4eGh6aiPydSEttUWmKgHEbr6b2Q6Pj5ed+vGI29zNeGbHKF/CX16erq1tRV/X024C3unzjRubm78v2dnZxsbG+7vxWLx/PxcD8mTjQZCNwpdRV3rp1Q/z9qR25bjJQjOTJ7jLami26bz5bbmwfRSn393d5dsb2tAfAkfHx9xymHD7vJvO8zX1fBnlsQn+Gn3o5mEPugsiwtLea8Fd0XyNrZhd2UeHh76O78vehY6aJs/2k3o+tO3359Wd1IwuduorXJ5U3ZrW5TMeq3x1e8ROiYpdMatpeKTDEWM65eBhK6vtX/HsbX0npr2L7TtXV/dDkIvRTwVdLi8aSSuY5SPfpMZdXfu7OwEcieFbq12eXwKy6ybXH8OIXS+nKOjo0yoV6d/oZNzdzeh3ZeBLvGo3+Plsbs29JmhN78otFGKhW4a4LvFx97bwY6hrWRTtmCr3U3oOPPxrbPzW7Lw1Zmu0PbMZDIwxOVxdlG+Zspv/iQnX1dgkw3lDUya6vpiPp/X5dhMOtPkXoQOCmk6NNBidLopR1OHdRC6/HJ7N7qm+TG7cGaMl2Ie99N5oe0YVt7ApdKAzGlDCF2SBPa4H9+/0Mmjf4rQQQn1Mjw5XRaSzCXGEdp+U08OLvFIpk8IvdK2nW3wNIUOZpiSPK8uqv5Mjt/xT+eFtjVZReikYZ2Fbu21DinHQIz0YCW5lHl6emrdZ23SYqn+XkroyiwNPfmdOF9UHY3NzU0/2AQjtAtybImtid8HqBpELxQ6ueRtXRQGzSzvtYy1wQDhW1eZrfcJ5dBNBENa65PhSQkd13aV5aAjubvii41voaXikx+h8wUmK+8Go/JC8sNw+Vbj6oz0clJyp7bkSZg7OrLQQW1bn1q3BiS/bVdSwrJClz+pSZ7pmlzea615Rd7piQqdf33UzlZu6pnP5xPMoeMOKFmyuA2yl5cX2211HQ4ODmwSUjUIXf1+MuzWo9/f376GHV4iCNID95QnuacenFmZO7Cw10oS5eDRd1N8VoQX/BNk3usYsw5WMjqoEIROkHnuNRD5lGOcOmiA0AnsEm2cyGSE/tveLF8RhA4JHkmM8xJznF9Wg71gqQ1CgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1S/C/0uqsB0Bv/AEwL5dNeBrk9AAAAAElFTkSuQmCC",
-          "width": "e4bff9cd-1c6b-48c5-9609-92a0bffe11b6:number:240",
-          "height": "14413d30-ec1a-4ad1-a826-98aa980200f9:number:90",
-          "unit": "d68302ba-9800-4635-869d-e9f6e69fea05:string:px"
+          "data": "32676717-f463-4880-b00a-40a550a62d6f:string:data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAABaCAIAAAAJsExNAAAEy0lEQVR42u2aPVbrOhRGnY4RQE9BB9TMgA6YBTOAir8KZsAsgI4ZUAMdBT3p6NLx/J7e0jpIsqw4tuP73b2LLIhtRTralo5kz25vbxeLRQUgwezq6ur8/Hzd1QDogXp0/lfoy8vLddcEoAeur68RGnRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEBikQGqRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEHpvHx8fX11f398XFxWw2W3eNpOgi9NfX1/39ffz9/v7+9vb27u7uX9tJPz8/7+/vn5+fXtk4Jgg9KH0K7Tk5Odnb21t308bm7e3t4eGh6aiPydSEttUWmKgHEbr6b2Q6Pj5ed+vGI29zNeGbHKF/CX16erq1tRV/X024C3unzjRubm78v2dnZxsbG+7vxWLx/PxcD8mTjQZCNwpdRV3rp1Q/z9qR25bjJQjOTJ7jLami26bz5bbmwfRSn393d5dsb2tAfAkfHx9xymHD7vJvO8zX1fBnlsQn+Gn3o5mEPugsiwtLea8Fd0XyNrZhd2UeHh76O78vehY6aJs/2k3o+tO3359Wd1IwuduorXJ5U3ZrW5TMeq3x1e8ROiYpdMatpeKTDEWM65eBhK6vtX/HsbX0npr2L7TtXV/dDkIvRTwVdLi8aSSuY5SPfpMZdXfu7OwEcieFbq12eXwKy6ybXH8OIXS+nKOjo0yoV6d/oZNzdzeh3ZeBLvGo3+Plsbs29JmhN78otFGKhW4a4LvFx97bwY6hrWRTtmCr3U3oOPPxrbPzW7Lw1Zmu0PbMZDIwxOVxdlG+Zspv/iQnX1dgkw3lDUya6vpiPp/X5dhMOtPkXoQOCmk6NNBidLopR1OHdRC6/HJ7N7qm+TG7cGaMl2Ie99N5oe0YVt7ApdKAzGlDCF2SBPa4H9+/0Mmjf4rQQQn1Mjw5XRaSzCXGEdp+U08OLvFIpk8IvdK2nW3wNIUOZpiSPK8uqv5Mjt/xT+eFtjVZReikYZ2Fbu21DinHQIz0YCW5lHl6emrdZ23SYqn+XkroyiwNPfmdOF9UHY3NzU0/2AQjtAtybImtid8HqBpELxQ6ueRtXRQGzSzvtYy1wQDhW1eZrfcJ5dBNBENa65PhSQkd13aV5aAjubvii41voaXikx+h8wUmK+8Go/JC8sNw+Vbj6oz0clJyp7bkSZg7OrLQQW1bn1q3BiS/bVdSwrJClz+pSZ7pmlzea615Rd7piQqdf33UzlZu6pnP5xPMoeMOKFmyuA2yl5cX2211HQ4ODmwSUjUIXf1+MuzWo9/f376GHV4iCNID95QnuacenFmZO7Cw10oS5eDRd1N8VoQX/BNk3usYsw5WMjqoEIROkHnuNRD5lGOcOmiA0AnsEm2cyGSE/tveLF8RhA4JHkmM8xJznF9Wg71gqQ1CgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1S/C/0uqsB0Bv/AEwL5dNeBrk9AAAAAElFTkSuQmCC",
+          "width": "28f7c85e-ad4c-46fa-8358-827524f92b79:number:240",
+          "height": "b0927a64-24ce-4728-9314-a34f75f14360:number:90",
+          "unit": "f67066e9-a8fb-4c2c-8fb2-af4e7aad8b2d:string:px"
         },
         "TRUSTEES": {
-          "data": "ee14ee67-5f3a-49c7-b56f-13533fcd78a9:string:data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAABaCAIAAAAJsExNAAAEy0lEQVR42u2aPVbrOhRGnY4RQE9BB9TMgA6YBTOAir8KZsAsgI4ZUAMdBT3p6NLx/J7e0jpIsqw4tuP73b2LLIhtRTralo5kz25vbxeLRQUgwezq6ur8/Hzd1QDogXp0/lfoy8vLddcEoAeur68RGnRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEBikQGqRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEHpvHx8fX11f398XFxWw2W3eNpOgi9NfX1/39ffz9/v7+9vb27u7uX9tJPz8/7+/vn5+fXtk4Jgg9KH0K7Tk5Odnb21t308bm7e3t4eGh6aiPydSEttUWmKgHEbr6b2Q6Pj5ed+vGI29zNeGbHKF/CX16erq1tRV/X024C3unzjRubm78v2dnZxsbG+7vxWLx/PxcD8mTjQZCNwpdRV3rp1Q/z9qR25bjJQjOTJ7jLami26bz5bbmwfRSn393d5dsb2tAfAkfHx9xymHD7vJvO8zX1fBnlsQn+Gn3o5mEPugsiwtLea8Fd0XyNrZhd2UeHh76O78vehY6aJs/2k3o+tO3359Wd1IwuduorXJ5U3ZrW5TMeq3x1e8ROiYpdMatpeKTDEWM65eBhK6vtX/HsbX0npr2L7TtXV/dDkIvRTwVdLi8aSSuY5SPfpMZdXfu7OwEcieFbq12eXwKy6ybXH8OIXS+nKOjo0yoV6d/oZNzdzeh3ZeBLvGo3+Plsbs29JmhN78otFGKhW4a4LvFx97bwY6hrWRTtmCr3U3oOPPxrbPzW7Lw1Zmu0PbMZDIwxOVxdlG+Zspv/iQnX1dgkw3lDUya6vpiPp/X5dhMOtPkXoQOCmk6NNBidLopR1OHdRC6/HJ7N7qm+TG7cGaMl2Ie99N5oe0YVt7ApdKAzGlDCF2SBPa4H9+/0Mmjf4rQQQn1Mjw5XRaSzCXGEdp+U08OLvFIpk8IvdK2nW3wNIUOZpiSPK8uqv5Mjt/xT+eFtjVZReikYZ2Fbu21DinHQIz0YCW5lHl6emrdZ23SYqn+XkroyiwNPfmdOF9UHY3NzU0/2AQjtAtybImtid8HqBpELxQ6ueRtXRQGzSzvtYy1wQDhW1eZrfcJ5dBNBENa65PhSQkd13aV5aAjubvii41voaXikx+h8wUmK+8Go/JC8sNw+Vbj6oz0clJyp7bkSZg7OrLQQW1bn1q3BiS/bVdSwrJClz+pSZ7pmlzea615Rd7piQqdf33UzlZu6pnP5xPMoeMOKFmyuA2yl5cX2211HQ4ODmwSUjUIXf1+MuzWo9/f376GHV4iCNID95QnuacenFmZO7Cw10oS5eDRd1N8VoQX/BNk3usYsw5WMjqoEIROkHnuNRD5lGOcOmiA0AnsEm2cyGSE/tveLF8RhA4JHkmM8xJznF9Wg71gqQ1CgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1S/C/0uqsB0Bv/AEwL5dNeBrk9AAAAAElFTkSuQmCC",
-          "width": "8d47c16f-7c35-4ee2-ab85-df00953f2b5b:number:240",
-          "height": "d2aa1b07-acf5-400a-87ca-8ad844b63421:number:90",
-          "unit": "a787b113-778b-452a-a125-1a849e11b86a:string:px"
+          "data": "912c4227-2cff-4236-b399-5157037d0ccb:string:data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAABaCAIAAAAJsExNAAAEy0lEQVR42u2aPVbrOhRGnY4RQE9BB9TMgA6YBTOAir8KZsAsgI4ZUAMdBT3p6NLx/J7e0jpIsqw4tuP73b2LLIhtRTralo5kz25vbxeLRQUgwezq6ur8/Hzd1QDogXp0/lfoy8vLddcEoAeur68RGnRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEBikQGqRAaJACoUEKhAYpEBqkQGiQAqFBCoQGKRAapEBokAKhQQqEHpvHx8fX11f398XFxWw2W3eNpOgi9NfX1/39ffz9/v7+9vb27u7uX9tJPz8/7+/vn5+fXtk4Jgg9KH0K7Tk5Odnb21t308bm7e3t4eGh6aiPydSEttUWmKgHEbr6b2Q6Pj5ed+vGI29zNeGbHKF/CX16erq1tRV/X024C3unzjRubm78v2dnZxsbG+7vxWLx/PxcD8mTjQZCNwpdRV3rp1Q/z9qR25bjJQjOTJ7jLami26bz5bbmwfRSn393d5dsb2tAfAkfHx9xymHD7vJvO8zX1fBnlsQn+Gn3o5mEPugsiwtLea8Fd0XyNrZhd2UeHh76O78vehY6aJs/2k3o+tO3359Wd1IwuduorXJ5U3ZrW5TMeq3x1e8ROiYpdMatpeKTDEWM65eBhK6vtX/HsbX0npr2L7TtXV/dDkIvRTwVdLi8aSSuY5SPfpMZdXfu7OwEcieFbq12eXwKy6ybXH8OIXS+nKOjo0yoV6d/oZNzdzeh3ZeBLvGo3+Plsbs29JmhN78otFGKhW4a4LvFx97bwY6hrWRTtmCr3U3oOPPxrbPzW7Lw1Zmu0PbMZDIwxOVxdlG+Zspv/iQnX1dgkw3lDUya6vpiPp/X5dhMOtPkXoQOCmk6NNBidLopR1OHdRC6/HJ7N7qm+TG7cGaMl2Ie99N5oe0YVt7ApdKAzGlDCF2SBPa4H9+/0Mmjf4rQQQn1Mjw5XRaSzCXGEdp+U08OLvFIpk8IvdK2nW3wNIUOZpiSPK8uqv5Mjt/xT+eFtjVZReikYZ2Fbu21DinHQIz0YCW5lHl6emrdZ23SYqn+XkroyiwNPfmdOF9UHY3NzU0/2AQjtAtybImtid8HqBpELxQ6ueRtXRQGzSzvtYy1wQDhW1eZrfcJ5dBNBENa65PhSQkd13aV5aAjubvii41voaXikx+h8wUmK+8Go/JC8sNw+Vbj6oz0clJyp7bkSZg7OrLQQW1bn1q3BiS/bVdSwrJClz+pSZ7pmlzea615Rd7piQqdf33UzlZu6pnP5xPMoeMOKFmyuA2yl5cX2211HQ4ODmwSUjUIXf1+MuzWo9/f376GHV4iCNID95QnuacenFmZO7Cw10oS5eDRd1N8VoQX/BNk3usYsw5WMjqoEIROkHnuNRD5lGOcOmiA0AnsEm2cyGSE/tveLF8RhA4JHkmM8xJznF9Wg71gqQ1CgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1SIDRIgdAgBUKDFAgNUiA0SIHQIAVCgxQIDVIgNEiB0CAFQoMUCA1S/C/0uqsB0Bv/AEwL5dNeBrk9AAAAAElFTkSuQmCC",
+          "width": "6af09837-7e93-46e4-8488-9296479cb525:number:240",
+          "height": "5d58e697-26d2-403d-9207-5f6b9fc8573a:number:90",
+          "unit": "38d312e1-34d7-4d58-9910-2bcf952e9acc:string:px"
         }
       },
-      "transcriptType": "cafd94d8-ead8-4dc5-a43a-44d40e5f97f0:string:UGOF",
-      "transcriptReq": "64c9de51-ef33-46f1-8801-10aaca559132:string:001009522",
+      "transcriptType": "2f2ae853-6603-4c60-8cae-5994d8ceda31:string:UGOF",
+      "transcriptReq": "6b5b4dd1-2fb8-413f-91ee-a8b0002ad02b:string:001009846",
       "transcriptGroup": [
         {
-          "name": "9fe9de39-721e-4bc7-b7f9-0b7be56b31dc:string:1410",
-          "term": "0b3ac6c7-20d8-4db6-9fa1-b05f315a77cd:string:2014/2015 Semester 1",
-          "formOfStudy": "f5973d66-0bb3-4537-b37b-2587c9b26676:string:ENRL",
-          "fosPrintArea": "116b6521-10cc-4584-b1e2-c1364db8cad2:string:ND",
+          "name": "e858a231-a24e-4ef9-a5fe-ca4faa8ce827:string:1410",
+          "term": "5ee548ba-c238-42c2-ac3e-5e43214518d0:string:2014/2015 Semester 1",
+          "formOfStudy": "cf4a47ce-eab4-4749-a491-bd60dd8a3531:string:ENRL",
+          "fosPrintArea": "923cd581-6097-46f5-b549-ac68c004ad6c:string:ND",
           "summary": [
             {
-              "programName": "7fb6965c-3698-421d-ad1b-2ac1cc525563:string:Bachelor of Business Administration",
-              "includeInGPA": "353b9d8e-b53d-45cf-b463-38091eb6eb5b:boolean:true",
-              "GPAName": "f4e8917b-efa1-4cf7-9306-6362dc8c2b05:string:Cumulative Average Point",
-              "GPA": "e065b250-f47c-4241-88f1-4fd9678323e6:number:3.5"
+              "programName": "ca10ce74-ef6c-4f70-91f1-0e26c5bba968:string:Bachelor of Business Administration",
+              "includeInGPA": "0b96aa5f-2a52-4f3c-9024-865b0aec4405:boolean:true",
+              "GPAName": "8c931e38-629c-4d9a-a85d-38ddd0411867:string:Cumulative Average Point",
+              "GPA": "1971bac2-9a91-4f2f-b8f1-ef3337746932:number:3.5",
+              "reportNo": "6e94edfd-3d40-47e2-98a1-b4ab44893be7:number:1"
             }
-          ]
+          ],
+          "reportNo": "0f436c6c-948a-4c8b-8ddd-4ec424f6e1b5:number:1"
         },
         {
-          "name": "1ec88862-e1eb-46a7-a379-58e33d31b287:string:1420",
-          "term": "f180574c-ce61-4b01-98ce-ca2a6df57988:string:2014/2015 Semester 2",
-          "formOfStudy": "51aa47f2-b79d-4b78-9bfc-fb8f46afff86:string:ENRL",
-          "fosPrintArea": "394fe5dd-2b7c-4e81-bcd6-0013cdf58628:string:ND",
+          "name": "7605fe76-770f-4ffa-920f-6efa3ea4ea4b:string:1420",
+          "term": "92dfc7f8-ee5e-4125-9e16-41cc8f49c2d0:string:2014/2015 Semester 2",
+          "formOfStudy": "f076f62a-7106-4a3e-b3f6-a382ab0084b7:string:ENRL",
+          "fosPrintArea": "997083cb-fb15-49b9-8113-97d1062208c2:string:ND",
           "summary": [
             {
-              "programName": "8315a009-2d74-4825-960d-6b4b8479a1ca:string:Bachelor of Business Administration",
-              "includeInGPA": "7d1f5621-2fab-4c73-80ae-d0c1192c78a6:boolean:true",
-              "GPAName": "dcad8088-8781-4817-926a-938c6e28cda8:string:Cumulative Average Point",
-              "GPA": "b34eff59-ba50-4a22-b0c0-ad470f990df5:number:3.1"
+              "programName": "f4e966ab-f37a-4bd4-9312-71ec642ee312:string:Bachelor of Business Administration",
+              "includeInGPA": "06453c79-1aff-425a-874e-2864764e69b6:boolean:true",
+              "GPAName": "a99702c4-8230-41bb-b7ba-a1b55fc030a6:string:Cumulative Average Point",
+              "GPA": "ca4bbfeb-56ac-4c25-a235-1f4412997ca6:number:3.1",
+              "reportNo": "cde197df-4371-40cb-ba11-8974dbaaa676:number:1"
             }
-          ]
+          ],
+          "reportNo": "e3e0037c-636a-452b-9348-f4a5b36b16ec:number:1"
         },
         {
-          "name": "3415b301-3779-4d15-a223-c3d5e921aa75:string:1510",
-          "term": "773c4b24-3794-49cf-9438-7df591222e83:string:2015/2016 Semester 1",
-          "formOfStudy": "b6049bfe-df28-4e75-b784-d2ae4e490ced:string:ENRL",
-          "fosPrintArea": "cc8943d9-2216-4176-b429-d800afbbc13b:string:ND",
+          "name": "6bcfd867-54aa-4ea2-a0ac-bb8e2b18d58f:string:1510",
+          "term": "416a0ee5-8b39-45dd-8369-8c4606159015:string:2015/2016 Semester 1",
+          "formOfStudy": "d17ec93f-f98a-4b3a-8de0-74f4ef5c055d:string:ENRL",
+          "fosPrintArea": "10454190-7c06-4544-8d10-22803fd15279:string:ND",
           "summary": [
             {
-              "programName": "3aca2448-5ae1-4d83-bf39-2c8f922f72dd:string:Bachelor of Business Administration",
-              "includeInGPA": "73b2f7b9-92b9-48a4-88d5-3f0370b298e8:boolean:true",
-              "GPAName": "4d5b7691-c017-45a3-86c7-5d8c1d4eaa1a:string:Cumulative Average Point",
-              "GPA": "c96d175c-f70c-497d-8904-fa63860b0fc8:number:3.1"
+              "programName": "fa15ce49-1dda-4f65-a97e-404972a8fc59:string:Bachelor of Business Administration",
+              "includeInGPA": "4e53ca3f-b7e6-4849-8adb-8ff517a7a452:boolean:true",
+              "GPAName": "612d2fe8-0ae5-4033-b5a9-b29bc4f56638:string:Cumulative Average Point",
+              "GPA": "90a66505-af6c-4427-8e34-fc1e88ab708f:number:3.1",
+              "reportNo": "8a12994f-8469-418b-94b0-4db91b204788:number:1"
             }
-          ]
+          ],
+          "reportNo": "bebab572-40c1-44cb-9e1a-f2d1905cd54f:number:1"
         },
         {
-          "name": "9e14d355-253b-45b7-ab88-f646320a07bd:string:1520",
-          "term": "60c909eb-051f-40ca-83b5-93059aeae096:string:2015/2016 Semester 2",
-          "formOfStudy": "c1845a40-74bf-4440-8345-713f109e3e2e:string:ENRL",
-          "fosPrintArea": "32098f26-a273-4eb8-b067-6b199f7b5ca8:string:ND",
+          "name": "62bcba55-4081-428f-b5d8-f172652ce172:string:1520",
+          "term": "62f446d3-749f-4edf-9f23-6e84edfa8ff8:string:2015/2016 Semester 2",
+          "formOfStudy": "1ad166ab-d248-464f-95e9-ce0fa3e12e7b:string:ENRL",
+          "fosPrintArea": "2c994645-77ba-4728-9088-896e98462920:string:ND",
           "summary": [
             {
-              "programName": "476eff72-3308-4e07-b904-b7f45d5918a5:string:Bachelor of Business Administration",
-              "includeInGPA": "acb38725-14b2-4f53-bffc-6a91fc271acb:boolean:true",
-              "GPAName": "57348a0d-92ad-48cc-8ff2-f7c7b3cea1e5:string:Cumulative Average Point",
-              "GPA": "d1407047-f6dd-447f-a4dc-0a9004299152:number:3.17"
+              "programName": "c1f88964-5fe7-4354-b8e8-406ef98d830f:string:Bachelor of Business Administration",
+              "includeInGPA": "352121ac-d6e8-4b1e-a329-451dfaba6e8d:boolean:true",
+              "GPAName": "0cecf36f-750f-4fa2-bfc0-5e06608845d6:string:Cumulative Average Point",
+              "GPA": "faade3ff-7d41-4445-a807-1a575cdeda1c:number:3.17",
+              "reportNo": "fccb8bc5-adee-4830-8ead-6af98ed4f5cc:number:1"
             }
-          ]
+          ],
+          "reportNo": "1f6049b7-c598-404a-ae79-fb41941749f1:number:1"
         },
         {
-          "name": "746d8063-fa77-4477-95b9-1b482fb421cc:string:1540",
-          "term": "00e0fab0-3978-4c95-8a5e-cebc610ebc6f:string:2015/2016 Special Term(Part 2)",
-          "formOfStudy": "91f430ab-9a37-4c9c-aadb-8b8b83ca3e4f:string:SWE",
-          "fosDescription": "e54299e6-99f5-4835-9801-d19c06708326:string:Participated in a Summer/Winter Programme at",
-          "organization": "bf269cd8-b0f6-4542-b9e7-9ed638329480:string:Imperial College London",
-          "fosPrintArea": "e83891af-8046-41bd-826a-b95ff702dcad:string:EH",
+          "name": "05c6dbce-f1b2-4c00-b86f-0e0efba37744:string:1540",
+          "term": "41deb554-b217-4b90-830d-066af613d5a9:string:2015/2016 Special Term(Part 2)",
+          "formOfStudy": "d83b0815-652f-4fcb-a5a1-471b520c222a:string:SWE",
+          "fosDescription": "2d39ac60-6bfa-439a-a889-eea5e4758fec:string:Participated in a Summer/Winter Programme at",
+          "organization": "49027866-5d35-4d10-90ec-10319c6a9ea0:string:Imperial College London",
+          "fosPrintArea": "43ec876e-0a15-4d2f-93cd-604c649b446f:string:EH",
           "summary": [
             {
-              "programName": "1ee8d005-edc2-43ad-ad7b-c3aa6973c18a:string:Bachelor of Business Administration",
-              "includeInGPA": "cf264b15-bb1d-4580-8d67-b1b58388d0eb:boolean:true",
-              "GPAName": "3e144dd0-e7b6-4084-b34d-3d6b02aa1214:string:Cumulative Average Point",
-              "GPA": "ac1b9ccc-5451-4c4d-a10b-ceaa44e002a5:number:3.17"
+              "programName": "85b4194b-1a7f-440b-8571-fa35ac4bc36b:string:Bachelor of Business Administration",
+              "includeInGPA": "8afa89b2-f2bc-4e94-8c51-0b6447d50d56:boolean:true",
+              "GPAName": "9db37aa9-21c6-4dbb-82e2-8f979c0e9da2:string:Cumulative Average Point",
+              "GPA": "e227df72-2e09-494e-9f18-04bae7e48601:number:3.17",
+              "reportNo": "9fd33735-9113-4706-90eb-80ad1de1f915:number:1"
             }
-          ]
+          ],
+          "reportNo": "84de5d65-9669-4b27-818c-7bf6505290f7:number:1"
         },
         {
-          "name": "4554b184-69d8-4aab-9d97-044a943521cd:string:1610",
-          "term": "da69a672-8f27-4f0d-a36d-40ba656321eb:string:2016/2017 Semester 1",
-          "formOfStudy": "085b6402-e3c9-48f4-a049-fb42d5a5c3a0:string:ENRL",
-          "fosPrintArea": "aabe63cf-c910-4333-8def-bffb344e60be:string:ND",
+          "name": "24483eec-a390-44c4-9f10-d0f321fe9834:string:1610",
+          "term": "ee419eee-146a-47d3-a533-609d7884ee8a:string:2016/2017 Semester 1",
+          "formOfStudy": "163d88da-8f2b-4bf0-98a0-af2ac92fd4e6:string:ENRL",
+          "fosPrintArea": "df91e836-2396-45d9-9c4e-ab4674bdd8ee:string:ND",
           "summary": [
             {
-              "programName": "9937f29e-3a8c-4077-a69a-c29cc7918a49:string:Bachelor of Business Administration",
-              "includeInGPA": "d6e9a3ea-9ec1-4ecc-8a37-0b012b1620db:boolean:true",
-              "GPAName": "8dd7b2b8-0645-404f-8603-a78d0e1ff45a:string:Cumulative Average Point",
-              "GPA": "d9328d06-f12f-442a-899a-44a074b18b39:number:3.15"
+              "programName": "eb480cf6-7872-4ed5-b842-36df35a49923:string:Bachelor of Business Administration",
+              "includeInGPA": "3360c607-5708-4eac-88ce-397017dcc18c:boolean:true",
+              "GPAName": "94d5e859-dc4a-455f-b202-493c8443d808:string:Cumulative Average Point",
+              "GPA": "12192285-64f8-4191-8586-e59393b11ad2:number:3.15",
+              "reportNo": "eae8dff2-463c-4d99-b252-b4f95dd28086:number:1"
             }
-          ]
+          ],
+          "reportNo": "afd22d08-0652-403f-9780-279e59993166:number:1"
         },
         {
-          "name": "aa3b94bb-c887-4688-9a48-dba93500efbb:string:1640",
-          "term": "b24ff063-f9ed-4900-9449-d194920dccd9:string:2016/2017 Special Term(Part 2)",
-          "formOfStudy": "b4016782-da2a-4c4c-b93d-95257976a2c1:string:SWE",
-          "fosDescription": "5fa61324-3faa-4c6d-b66d-cab3c1020341:string:Participated in a Summer/Winter Programme at",
-          "organization": "b4a8def0-383c-422c-86ec-09ec1bfcab16:string:Imperial College Business School",
-          "fosPrintArea": "5db58be1-4aea-4b30-8946-2f1104705e26:string:EH",
+          "name": "a8f43488-8a62-4b3f-8440-d9f97f65439e:string:1640",
+          "term": "d6c5fe3a-6c5a-44d4-9318-1eb5790db62f:string:2016/2017 Special Term(Part 2)",
+          "formOfStudy": "828dbea2-db7f-408e-9a1b-34deb55ebb5c:string:SWE",
+          "fosDescription": "4556a6e6-dd6b-459d-a2a0-e0a69965622a:string:Participated in a Summer/Winter Programme at",
+          "organization": "819a336b-85f7-43bf-865e-8567f079ab70:string:Imperial College Business School",
+          "fosPrintArea": "4e28aec3-68cc-496d-8d7b-a7c32c1ca61c:string:EH",
           "creditTransfer": [
             {
-              "sourceType": "cae63a2f-4e42-411b-b3b1-bcbb07baa7fc:string:E",
-              "creditsNoGPA": "eb8ab83c-6130-4d8c-bb6f-91c55dde7542:number:4",
-              "creditsGPA": "c07f37c3-bd1a-4c91-95c2-473f1796f679:number:0",
-              "orgId": "453a02e0-44eb-4ded-a9d0-4566a7ec9ed5:string:Imperial College Business School",
-              "orgName": "8f3d599e-51b9-4279-993f-24cf4069b65f:string:Imperial College Business School",
-              "transferSeq": "cb8a2070-e596-446d-83c1-e632077c63d4:number:1"
+              "sourceType": "1ea7baab-dec0-4e2e-8a4f-d6e39f04c35b:string:E",
+              "creditsNoGPA": "3b48fe3e-7f31-461f-bfbd-9cdb31110ab8:number:4",
+              "creditsGPA": "4c51c784-bab0-46d7-b6eb-aa391b63ee5e:number:0",
+              "orgId": "0905d10d-e80a-45e4-a6aa-512ddddffe97:string:Imperial College Business School",
+              "orgName": "ee0f0637-3180-4c2b-ba3d-47612a538450:string:Imperial College Business School",
+              "reportNo": "630bb091-1552-4cd6-9802-47152d4672dc:number:1",
+              "transferSeq": "70c9ca3e-0b9c-49d9-ade7-d987e23887cc:number:1"
             },
             {
-              "sourceType": "1edd6c56-685f-4ce0-83fc-2d8e4d1a6cc5:string:E",
-              "creditsNoGPA": "c0aa9d73-7823-4f6d-8d55-8f25e4a0f3f6:number:8",
-              "creditsGPA": "6200566d-3bb6-4d64-81ef-e313379019fe:number:0",
-              "orgId": "69ce2bb7-3d06-4cf1-a290-cb83b8024eb7:string:Korea University",
-              "orgName": "8315b055-f267-4ad7-b71c-947328c76705:string:Korea University",
-              "transferSeq": "a5aff156-21a4-4d4a-8844-d4ed448322cd:number:2"
+              "sourceType": "c5b014e7-1d8c-48cf-99e6-9335d56f7a87:string:E",
+              "creditsNoGPA": "74c5d28e-46d0-4a45-a66d-5ff633b944fe:number:8",
+              "creditsGPA": "cf7333ba-524f-48ee-85a2-73e4ce7ca8af:number:0",
+              "orgId": "726c6144-2242-470f-9add-9b67208257d0:string:Korea University",
+              "orgName": "b01cb54f-3c08-4b43-9294-86315fc4ae10:string:Korea University",
+              "reportNo": "75ce790b-6293-4dc8-bb3d-318a24f67725:number:1",
+              "transferSeq": "f14ae0e9-8e4f-4394-ace5-ad626ab93e5f:number:2"
             }
           ],
           "summary": [
             {
-              "programName": "54a2dcaa-233f-4b8e-a0c4-3b70afdfa0a4:string:Bachelor of Business Administration",
-              "includeInGPA": "0bd4b156-8f53-4e73-9cdd-dd3460882bb1:boolean:true",
-              "GPAName": "ba6d7734-a688-4fc0-aa8d-a01b4abe5c85:string:Cumulative Average Point",
-              "GPA": "210261d2-f341-44ed-b514-c01f899fe571:number:3.15"
+              "programName": "cc37a6e7-9dc6-42b6-a605-cdba407a1298:string:Bachelor of Business Administration",
+              "includeInGPA": "040a1cfa-e29e-4cbd-b2d9-6af42ae1f2b7:boolean:true",
+              "GPAName": "2e2d2472-03db-4fa1-a1ae-68bf4785c922:string:Cumulative Average Point",
+              "GPA": "59528a60-e114-4680-ae34-4fa51eef55f8:number:3.15",
+              "reportNo": "d7f847f3-2ae7-48c0-8d82-718a081b4d11:number:1"
             }
-          ]
+          ],
+          "reportNo": "e9fc2ba9-db1a-48a7-8792-8b4099390039:number:1"
         },
         {
-          "name": "0d6b283b-a5cc-43e2-b61e-37633116245a:string:1710",
-          "term": "8cfd3e64-161f-4cfa-8520-ed5815972973:string:2017/2018 Semester 1",
-          "formOfStudy": "edd46ac6-01a7-456b-bdf0-7fd9642c803c:string:ENRL",
-          "fosPrintArea": "2cd70c83-34b5-41fd-9b35-bb01f958509b:string:ND",
+          "name": "b8c5d411-33b8-458a-bd82-3b3b65491e04:string:1710",
+          "term": "5762be82-7aa4-4773-864d-b7440b621d74:string:2017/2018 Semester 1",
+          "formOfStudy": "472574b9-10b1-4e10-977a-229dea9d3d59:string:ENRL",
+          "fosPrintArea": "e3389210-7b01-41d0-8068-76738352dd58:string:ND",
           "summary": [
             {
-              "programName": "59ba8125-a042-45f5-8635-a6a13a8ada1e:string:Bachelor of Business Administration",
-              "includeInGPA": "cbe4245c-0266-4eea-a954-1111255ef0e7:boolean:true",
-              "GPAName": "84c277a3-c6d3-453a-82bf-75c853cbc7fc:string:Cumulative Average Point",
-              "GPA": "af9d9891-799a-47b2-99b4-acaa5ada9d7c:number:3.27"
+              "programName": "24e0c31d-6a07-4431-b321-96f887f038bb:string:Bachelor of Business Administration",
+              "includeInGPA": "c0597fca-6e82-4615-bbab-dd859ea0a1dd:boolean:true",
+              "GPAName": "2e14a8c1-9b1f-461e-a4cb-25650dc8dfb7:string:Cumulative Average Point",
+              "GPA": "73ff7c1a-2c66-4278-8f4c-7ac458942d59:number:3.27",
+              "reportNo": "14454978-df15-469f-ac3f-b7ca4017a050:number:1"
             }
-          ]
+          ],
+          "reportNo": "2c2933a8-6143-4891-9882-437d049134de:number:1"
         },
         {
-          "name": "26fbd808-5ccd-4764-a4ce-293d8bfcdb2c:string:1720",
-          "term": "8ff277a4-4c26-491d-b82e-5423be8f66f2:string:2017/2018 Semester 2",
-          "formOfStudy": "b1e9e70d-085a-4cb6-9eb5-27a3a6da2ec3:string:ENRL",
-          "fosPrintArea": "7c67654d-cd7c-42f5-9a2a-d2ef64516ce5:string:ND",
+          "name": "b1b59991-aabc-43e2-aa9b-04c6dcb07da9:string:1720",
+          "term": "267ae59f-7cab-4847-8dbe-a3951ea8ea09:string:2017/2018 Semester 2",
+          "formOfStudy": "2f4d9d0a-2cd4-4766-942f-7e8d52619dac:string:ENRL",
+          "fosPrintArea": "6bf92d00-bf31-491e-ba43-b050c2cbdb0f:string:ND",
           "summary": [
             {
-              "programName": "1fb67724-94c5-4db0-95ca-04d010177b40:string:Bachelor of Business Administration",
-              "includeInGPA": "9f447b9e-e60e-4b2e-a7df-6fb36d10572a:boolean:true",
-              "GPAName": "c4660c05-528a-4b15-a6f0-427685a5de73:string:Cumulative Average Point",
-              "GPA": "9c1aaede-9d6f-4c1d-a9da-bb1faddb4ccc:number:3.47"
+              "programName": "a368eb66-cd9d-4390-8501-0d197f5c0b87:string:Bachelor of Business Administration",
+              "includeInGPA": "8021e44e-bb30-49c2-92f5-403288a23d23:boolean:true",
+              "GPAName": "88d9740f-33f4-4848-9351-0d3fa32c56d5:string:Cumulative Average Point",
+              "GPA": "ef64910a-3721-4a54-96bd-011422f97852:number:3.47",
+              "reportNo": "9335d039-eee9-4dfb-aa2a-a4bbb6958843:number:1"
             }
-          ]
+          ],
+          "reportNo": "aaa497c0-92a0-4394-8455-51355203dde9:number:1"
         }
       ],
       "programData": [
         {
-          "programCode": "051d8355-aeda-4251-9f0b-1b3f5e53b9a9:string:B0210",
-          "programName": "0b80190f-07bf-4261-8473-ec079e32923f:string:Bachelor of Business Administration",
-          "statusCode": "b8770638-04a9-4b79-8b4c-dbd82a523c6e:string:CM",
-          "statusDescription": "cee9e286-16f2-421e-a8bf-cc5b175ead52:string:Completed Programme",
-          "effectiveDate": "1624adec-0f78-443b-a135-589252fb36ed:string:2018-06-24",
-          "admitTerm": "16b8c9a1-ec02-43ea-b9a7-5077f51ead86:string:1410"
+          "programCode": "6d51b7ab-a07e-451d-9059-d68a2b44cffc:string:B0210",
+          "programName": "12eebdb7-7ffb-4611-adb2-38dad538cbf6:string:Bachelor of Business Administration",
+          "statusCode": "d75043e9-6420-465a-aad8-2df1be5234ff:string:CM",
+          "statusDescription": "1d11be33-7d5a-4e2e-b33d-c45a8c491473:string:Completed Programme",
+          "effectiveDate": "580569bd-d8a8-40da-9d37-977e0d53da89:string:2018-06-24",
+          "admitTerm": "0a459760-940e-493a-94db-fe10c8d3fb30:string:1410",
+          "reportNo": "58675e05-760b-41a6-a452-1a87e8d19ad6:string:1"
         }
       ],
       "degreeData": [
         {
-          "degreeTitle": "28047818-d0d8-4adf-96d2-fb0efda8ab0a:string:Bachelor of Business Administration",
-          "dateConferred": "8821dace-d528-482f-b48b-e1e22512244f:string:2018-06-30",
-          "honours": "10c4ae4c-526a-46cd-a7dd-817789dfcd7d:string:Honours",
+          "degreeTitle": "cc194c49-5354-4e46-a10c-da1f3c0b0fb3:string:Bachelor of Business Administration",
+          "dateConferred": "f1353cb5-c2d9-41a5-b562-edd61d3613f5:string:2018-06-30",
+          "honours": "e36c056e-c78c-447a-9d5f-7385a82a4e52:string:Honours",
           "specializations": [
             {
-              "typeName": "1fb4b245-f92d-4371-b6ec-b31e7f5259ed:string:Specialisation",
-              "transcriptDescr": "2d52c0bb-9c9a-4c3a-9399-50b7159651e9:string:Marketing"
+              "typeName": "f493e99d-5186-4d8c-a66f-ec460a938aa3:string:Specialisation",
+              "transcriptDescr": "b6024377-7172-4ceb-b61a-62a742e98e7d:string:Marketing"
             }
-          ]
+          ],
+          "reportNo": "81892641-3e25-4e3c-93b6-195aa4a27f87:number:1"
         }
       ],
       "leaveData": [
         {
-          "from": "5906ccb1-14f0-42dc-8b33-03ea18b554ac:string:2017-01-09",
-          "to": "57401fde-a287-4c51-b77c-00089521fe54:string:2017-05-07"
+          "from": "bf98d74a-377b-4538-b02e-929a641bba4a:string:2017-01-09",
+          "to": "a114594a-9816-42b5-afb4-3361e0a5cf5f:string:2017-05-07",
+          "reportNo": "917094af-dc62-4a79-ad80-2910e89ae95c:string:1"
         }
       ]
     }
@@ -613,15 +678,15 @@
   "privacy": {},
   "signature": {
     "type": "SHA3MerkleProof",
-    "targetHash": "81a9d7ea9b6be777087e97cb74ea0dc00ae1d9a68c7bff6a4fa96ab5e8b5cdb7",
+    "targetHash": "127338bae1d2fbe79a5ec4cc6ff204cebbff404e9bd81e69dcbe242d202db118",
     "proof": [
-      "27429b9ef8f8f1763fd9c63e7c75fd67d8e98026e0ee1c2254913e140dc9b448",
-      "af62ad6bb25672dd80875fccc3ddf2438d3cc169c0de23c7ed3d08ba0f2e4663",
-      "c9c8859403b8471408301b5b0419600703fcd573537714c682607db5aa6b7dde",
-      "3dc0e5edad6b8f73584c1582b9f26d938589db787699429e6deb8a1f570fd31a",
-      "06998e34a5ae1d76bf2b909e46d524a6dce23dd59fba46b852802dc3af320fed",
-      "227fc50be016b3dd61cd428a63e2f930cd41422d327c9e6a66e87107b4b9a783"
+      "a9a7220a545f1be97de0d7fa15689e28c4f918695ed9c95dda9011b858d18477",
+      "c0d917de4860b9079b192c69a25b4faefba91d76aa6ff85c7ca49b94427489ea",
+      "c4f5bd1c1bca3f0e84894ea00ccfa168c036163808113840ece0debbd2097d70",
+      "ca2569416b5b4ef1476285adb8206009240f33141d1f30ad33496a1e11b21ac7",
+      "cff34b7906af4ba56465df60278cd2ab34642e6294b0492249b9bae34d336523",
+      "7bfc29748a38d23ae9ca8d2c7225873287bd0baa0630ada5963b9e61ac9c3806"
     ],
-    "merkleRoot": "fc4d413665bef3ad14eb8934319f16a32a4711df60bed1ffd4519441b716629f"
+    "merkleRoot": "3862426f819b735c661f7981bfaed07eff1984a447b0406d831c1b15ec75e7c9"
   }
 }

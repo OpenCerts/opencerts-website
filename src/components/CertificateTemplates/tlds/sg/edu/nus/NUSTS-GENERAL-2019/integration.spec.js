@@ -25,7 +25,7 @@ test("NUSTS-GENERAL-2019 degree scroll is rendered correctly", async t => {
     "A0056627Y, NAME",
     "A0056627Y",
     "01/01/1905",
-    "27/08/2019",
+    "11/09/2019",
     "BACHELOR OF ENGINEERING (MECHANICAL ENGINEERING)",
     "COMPLETED PROGRAMME",
     "2009/2010 SEMESTER 1",

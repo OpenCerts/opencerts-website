@@ -39,7 +39,7 @@ test("NUS-UMJDP-2019 degree scroll is rendered correctly", async t => {
     "A0045456A, name",
     "A0045456A",
     "01/01/1905",
-    "27/08/2019",
+    "11/09/2019",
     "BACHELOR OF ENGINEERING (CIVIL ENGINEERING)",
     "COMPLETED PROGRAMME",
     "2008/2009 SEMESTER 1",

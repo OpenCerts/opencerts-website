@@ -37,7 +37,7 @@ test("NUS-DTUJDP-2019 degree scroll is rendered correctly", async t => {
     "A0080715J, name",
     "A0080715J",
     "01/01/1905",
-    "27/08/2019",
+    "11/09/2019",
     "DOCTOR OF PHILOSOPHY",
     "COMPLETED PROGRAMME",
     "2010/2011 SEMESTER 2",
