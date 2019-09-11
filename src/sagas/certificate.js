@@ -26,7 +26,10 @@ import { combinedHash } from "../utils";
 import { ensResolveAddress, getText } from "../services/ens";
 import sendEmail from "../services/email";
 import { analyticsEvent } from "../components/Analytics";
-
+import {
+  getDocumentStore,
+  getDocumentIssuerStores
+} from "../utils/certificate";
 import { getSelectedWeb3 } from "./application";
 import { IS_MAINNET } from "../config";
 
@@ -39,10 +42,6 @@ const ANALYTICS_VERIFICATION_ERROR_CODE = {
   REVOKED_CERTIFICATE: 3,
   CERTIFICATE_STORE: 4
 };
-
-function getDocumentStore(issuer) {
-  return issuer.certificateStore || issuer.documentStore;
-}
 
 export function* loadCertificateContracts({ payload }) {
   try {
@@ -454,9 +453,7 @@ export function* getAnalyticsDetails() {
     const rawCertificate = yield select(getCertificate);
     const certificate = getData(rawCertificate);
 
-    const storeAddresses = get(certificate, "issuers", [])
-      .map(issuer => getDocumentStore(issuer))
-      .toString();
+    const storeAddresses = getDocumentIssuerStores(certificate);
     const id = get(certificate, "id");
     return { storeAddresses, id };
   } catch (e) {
@@ -464,65 +461,51 @@ export function* getAnalyticsDetails() {
   }
 }
 
-export function* analyticsIssuerFail() {
+export function* triggerAnalytics(errorCode) {
   const { storeAddresses, id } = yield call(getAnalyticsDetails);
-
-  if (storeAddresses && id)
-    yield analyticsEvent(window, {
-      category: "CERTIFICATE_ERROR",
-      action: storeAddresses,
-      label: id,
-      value: ANALYTICS_VERIFICATION_ERROR_CODE.ISSUER_IDENTITY
-    });
-}
-
-export function* analyticsHashFail() {
-  const { storeAddresses, id } = yield call(getAnalyticsDetails);
-
   if (storeAddresses && id) {
-    yield analyticsEvent(window, {
+    analyticsEvent(window, {
       category: "CERTIFICATE_ERROR",
       action: storeAddresses,
       label: id,
-      value: ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_HASH
+      value: errorCode
     });
   }
 }
 
-export function* analyticsIssuedFail() {
-  const { storeAddresses, id } = yield call(getAnalyticsDetails);
+export function* analyticsIssuerFail() {
+  yield call(
+    triggerAnalytics,
+    ANALYTICS_VERIFICATION_ERROR_CODE.ISSUER_IDENTITY
+  );
+}
 
-  if (storeAddresses && id)
-    yield analyticsEvent(window, {
-      category: "CERTIFICATE_ERROR",
-      action: storeAddresses,
-      label: id,
-      value: ANALYTICS_VERIFICATION_ERROR_CODE.UNISSUED_CERTIFICATE
-    });
+export function* analyticsHashFail() {
+  yield call(
+    triggerAnalytics,
+    ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_HASH
+  );
+}
+
+export function* analyticsIssuedFail() {
+  yield call(
+    triggerAnalytics,
+    ANALYTICS_VERIFICATION_ERROR_CODE.UNISSUED_CERTIFICATE
+  );
 }
 
 export function* analyticsRevocationFail() {
-  const { storeAddresses, id } = yield call(getAnalyticsDetails);
-
-  if (storeAddresses && id)
-    yield analyticsEvent(window, {
-      category: "CERTIFICATE_ERROR",
-      action: storeAddresses,
-      label: id,
-      value: ANALYTICS_VERIFICATION_ERROR_CODE.REVOKED_CERTIFICATE
-    });
+  yield call(
+    triggerAnalytics,
+    ANALYTICS_VERIFICATION_ERROR_CODE.REVOKED_CERTIFICATE
+  );
 }
 
 export function* analyticsStoreFail() {
-  const { storeAddresses, id } = yield call(getAnalyticsDetails);
-
-  if (storeAddresses && id)
-    yield analyticsEvent(window, {
-      category: "CERTIFICATE_ERROR",
-      action: storeAddresses,
-      label: id,
-      value: ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_STORE
-    });
+  yield call(
+    triggerAnalytics,
+    ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_STORE
+  );
 }
 
 export default [

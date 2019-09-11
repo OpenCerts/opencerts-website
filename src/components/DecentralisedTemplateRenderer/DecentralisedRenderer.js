@@ -13,10 +13,7 @@ import {
 } from "../../reducers/certificate";
 import { analyticsEvent } from "../Analytics";
 import styles from "../certificateViewer.scss";
-
-function getDocumentStore(issuer) {
-  return issuer.certificateStore || issuer.documentStore;
-}
+import { getDocumentIssuerStores } from "../../utils/certificate";
 
 class DecentralisedRenderer extends Component {
   constructor(props) {
@@ -86,12 +83,11 @@ class DecentralisedRenderer extends Component {
       frame.renderDocument(getData(this.props.certificate))
     );
 
+    const certificateData = getData(this.props.certificate);
     analyticsEvent(window, {
       category: "CERTIFICATE_VIEWED",
-      action: get(getData(this.props.certificate), "issuers", [])
-        .map(issuer => getDocumentStore(issuer))
-        .toString(),
-      label: get(getData(this.props.certificate), "id")
+      action: getDocumentIssuerStores(certificateData),
+      label: get(certificateData, "id")
     });
   }
 

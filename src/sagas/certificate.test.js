@@ -20,7 +20,8 @@ import {
   verifyCertificateRegistryIssuer,
   verifyCertificateDnsIssuer,
   getDetailedIssuerStatus,
-  getAnalyticsDetails
+  getAnalyticsDetails,
+  triggerAnalytics
 } from "./certificate";
 import {
   getCertificate,
@@ -728,15 +729,13 @@ describe("sagas/certificate", () => {
       global.window.ga = undefined;
     });
 
-    test("analyticsIssuerFail should report to GA with errorType = 0", () => {
-      const { ethereumAddresses } = whenThereIsOneEthereumAddressIssuer();
-      const saga = analyticsIssuerFail();
+    test("triggerAnalytics should get details and fire the analytics event with correct error code", () => {
+      const analyticsGenerator = triggerAnalytics(1337);
 
-      const callGetAnalyticsDetails = saga.next();
+      const callGetAnalyticsDetails = analyticsGenerator.next();
       expect(callGetAnalyticsDetails.value).toEqual(call(getAnalyticsDetails));
-
-      saga.next({
-        storeAddresses: "0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4F",
+      analyticsGenerator.next({
+        storeAddresses: "storeAdd1,storeAdd2",
         id: "certificate-id"
       });
 
@@ -744,76 +743,38 @@ describe("sagas/certificate", () => {
         "send",
         "event",
         "CERTIFICATE_ERROR",
-        ethereumAddresses[0],
+        "storeAdd1,storeAdd2",
         "certificate-id",
-        0
+        1337
       ]);
+    });
+
+    test("analyticsIssuerFail should report to GA with errorType = 0", () => {
+      const analyticsGenerator = analyticsIssuerFail();
+
+      const callGetAnalyticsDetails = analyticsGenerator.next();
+      expect(callGetAnalyticsDetails.value).toEqual(call(triggerAnalytics, 0));
     });
 
     test("analyticsHashFail should report to GA with errorType = 1", () => {
-      const { ethereumAddresses } = whenThereIsOneEthereumAddressIssuer();
-      const saga = analyticsHashFail();
+      const analyticsGenerator = analyticsHashFail();
 
-      const callGetAnalyticsDetails = saga.next();
-      expect(callGetAnalyticsDetails.value).toEqual(call(getAnalyticsDetails));
-
-      saga.next({
-        storeAddresses: "0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4F",
-        id: "certificate-id"
-      });
-
-      expect(global.window.ga.args[0]).toEqual([
-        "send",
-        "event",
-        "CERTIFICATE_ERROR",
-        ethereumAddresses[0],
-        "certificate-id",
-        1
-      ]);
+      const callGetAnalyticsDetails = analyticsGenerator.next();
+      expect(callGetAnalyticsDetails.value).toEqual(call(triggerAnalytics, 1));
     });
 
     test("analyticsIssuedFail should report to GA with errorType = 2", () => {
-      const { ethereumAddresses } = whenThereIsOneEthereumAddressIssuer();
-      const saga = analyticsIssuedFail();
+      const analyticsGenerator = analyticsIssuedFail();
 
-      const callGetAnalyticsDetails = saga.next();
-      expect(callGetAnalyticsDetails.value).toEqual(call(getAnalyticsDetails));
-
-      saga.next({
-        storeAddresses: "0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4F",
-        id: "certificate-id"
-      });
-
-      expect(global.window.ga.args[0]).toEqual([
-        "send",
-        "event",
-        "CERTIFICATE_ERROR",
-        ethereumAddresses[0],
-        "certificate-id",
-        2
-      ]);
+      const callGetAnalyticsDetails = analyticsGenerator.next();
+      expect(callGetAnalyticsDetails.value).toEqual(call(triggerAnalytics, 2));
     });
 
     test("analyticsRevocationFail should report to GA with errorType = 3", () => {
-      const { ethereumAddresses } = whenThereIsOneEthereumAddressIssuer();
-      const saga = analyticsRevocationFail();
+      const analyticsGenerator = analyticsRevocationFail();
 
-      const callGetAnalyticsDetails = saga.next();
-      expect(callGetAnalyticsDetails.value).toEqual(call(getAnalyticsDetails));
-
-      saga.next({
-        storeAddresses: "0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4F",
-        id: "certificate-id"
-      });
-
-      expect(global.window.ga.args[0]).toEqual([
-        "send",
-        "event",
-        "CERTIFICATE_ERROR",
-        ethereumAddresses[0],
-        "certificate-id",
-        3
-      ]);
+      const callGetAnalyticsDetails = analyticsGenerator.next();
+      expect(callGetAnalyticsDetails.value).toEqual(call(triggerAnalytics, 3));
     });
   });
 
