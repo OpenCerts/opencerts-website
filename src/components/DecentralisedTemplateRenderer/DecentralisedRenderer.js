@@ -12,8 +12,11 @@ import {
   selectTemplateTab as selectTemplateTabAction
 } from "../../reducers/certificate";
 import { analyticsEvent } from "../Analytics";
-import { getAnalyticsStores } from "../../sagas/certificate";
 import styles from "../certificateViewer.scss";
+
+function getDocumentStore(issuer) {
+  return issuer.certificateStore || issuer.documentStore;
+}
 
 class DecentralisedRenderer extends Component {
   constructor(props) {
@@ -85,7 +88,9 @@ class DecentralisedRenderer extends Component {
 
     analyticsEvent(window, {
       category: "CERTIFICATE_VIEWED",
-      action: getAnalyticsStores(getData(this.props.certificate)),
+      action: get(getData(this.props.certificate), "issuers", [])
+        .map(issuer => getDocumentStore(issuer))
+        .toString(),
       label: get(getData(this.props.certificate), "id")
     });
   }
