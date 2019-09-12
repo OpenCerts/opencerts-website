@@ -30,11 +30,11 @@ const CertificateVerificationStatus = props => {
   }
   if (
     document &&
-    (!hashStatus.verified ||
-      !issuedStatus.verified ||
-      !notRevokedStatus.verified ||
-      !issuerIdentityStatus.verified ||
-      !storeStatus.verified)
+    hashStatus.verified &&
+    issuedStatus.verified &&
+    notRevokedStatus.verified &&
+    issuerIdentityStatus.verified &&
+    storeStatus.verified
   ) {
     return (
       <UnverifiedView
