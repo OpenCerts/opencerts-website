@@ -19,7 +19,9 @@ import {
   verifyCertificateStore,
   verifyCertificateRegistryIssuer,
   verifyCertificateDnsIssuer,
-  getDetailedIssuerStatus
+  getDetailedIssuerStatus,
+  getAnalyticsDetails,
+  triggerAnalytics
 } from "./certificate";
 import {
   getCertificate,
@@ -343,7 +345,6 @@ describe("sagas/certificate", () => {
       describe("should put a verifying certificate store failure when:", () => {
         test("the certificate issuer's document store has an invalid ethereum address and is not an ens address", () => {
           const { invalidCert } = whenThereIsOneInvalidCertStoreAddress();
-          const certData = getData(invalidCert);
           const errorMsg = "Invalid ENS";
 
           const verificationSaga = verifyCertificateStore({
@@ -354,8 +355,7 @@ describe("sagas/certificate", () => {
           expect(verificationSaga.throw(new Error(errorMsg)).value).toEqual(
             put(
               verifyingCertificateStoreFailure({
-                error: errorMsg,
-                certificate: certData
+                error: errorMsg
               })
             )
           );
@@ -365,7 +365,6 @@ describe("sagas/certificate", () => {
 
         test("the certificate issuer's document store address has the wrong smart contract", () => {
           const { invalidCert } = whenThereIsWrongSmartContract();
-          const certData = getData(invalidCert);
           const errorMsg = "Invalid Smart Contract";
 
           const verificationSaga = verifyCertificateStore({
@@ -377,8 +376,7 @@ describe("sagas/certificate", () => {
           expect(verificationSaga.throw(new Error(errorMsg)).value).toEqual(
             put(
               verifyingCertificateStoreFailure({
-                error: errorMsg,
-                certificate: certData
+                error: errorMsg
               })
             )
           );
@@ -421,7 +419,6 @@ describe("sagas/certificate", () => {
           invalidCert,
           ensName
         } = whenThereIsOneInvalidEnsNameAndOneValidEthereumAddress();
-        const certData = getData(invalidCert);
         const errorMsg = "Invalid ENS";
 
         const verificationSaga = verifyCertificateStore({
@@ -434,8 +431,7 @@ describe("sagas/certificate", () => {
         expect(verificationSaga.throw(new Error(errorMsg)).value).toEqual(
           put(
             verifyingCertificateStoreFailure({
-              error: errorMsg,
-              certificate: certData
+              error: errorMsg
             })
           )
         );
@@ -447,7 +443,6 @@ describe("sagas/certificate", () => {
           ensName,
           ethereumAddress
         } = whenThereIsOneInvalidEthereumAddressAndOneValidENS();
-        const certData = getData(invalidCert);
         const errorMsg = "Invalid ENS";
 
         const verificationSaga = verifyCertificateStore({
@@ -461,8 +456,7 @@ describe("sagas/certificate", () => {
         expect(verificationSaga.throw(new Error(errorMsg)).value).toEqual(
           put(
             verifyingCertificateStoreFailure({
-              error: errorMsg,
-              certificate: certData
+              error: errorMsg
             })
           )
         );
@@ -475,7 +469,6 @@ describe("sagas/certificate", () => {
           ensName,
           ethereumAddress
         } = whenThereAreInvalidEnsNameAndEthereumAddress();
-        const certData = getData(invalidCert);
         const errorMsg = "Invalid ENS";
 
         const verificationSaga = verifyCertificateStore({
@@ -489,8 +482,7 @@ describe("sagas/certificate", () => {
         expect(verificationSaga.throw(new Error(errorMsg)).value).toEqual(
           put(
             verifyingCertificateStoreFailure({
-              error: errorMsg,
-              certificate: certData
+              error: errorMsg
             })
           )
         );
@@ -596,7 +588,6 @@ describe("sagas/certificate", () => {
       expect(resolvedPut).toEqual(
         put(
           verifyingCertificateIssuerFailure({
-            certificate: certData,
             error: errorMsg
           })
         )
@@ -719,8 +710,7 @@ describe("sagas/certificate", () => {
       expect(resolvedPut).toEqual(
         put(
           verifyingCertificateIssuerFailure({
-            error: "Issuer identity cannot be verified: 0xabc",
-            certificate: certData
+            error: "Issuer identity cannot be verified: 0xabc"
           })
         )
       );
@@ -739,74 +729,52 @@ describe("sagas/certificate", () => {
       global.window.ga = undefined;
     });
 
-    test("analyticsIssuerFail should report to GA with errorType = 0", () => {
-      const {
-        testCert,
-        ethereumAddresses
-      } = whenThereIsOneEthereumAddressIssuer();
-      analyticsIssuerFail({ certificate: getData(testCert) }).next();
+    test("triggerAnalytics should get details and fire the analytics event with correct error code", () => {
+      const analyticsGenerator = triggerAnalytics(1337);
+
+      const callGetAnalyticsDetails = analyticsGenerator.next();
+      expect(callGetAnalyticsDetails.value).toEqual(call(getAnalyticsDetails));
+      analyticsGenerator.next({
+        storeAddresses: "storeAdd1,storeAdd2",
+        id: "certificate-id"
+      });
 
       expect(global.window.ga.args[0]).toEqual([
         "send",
         "event",
         "CERTIFICATE_ERROR",
-        ethereumAddresses[0],
+        "storeAdd1,storeAdd2",
         "certificate-id",
-        0
+        1337
       ]);
+    });
+
+    test("analyticsIssuerFail should report to GA with errorType = 0", () => {
+      const analyticsGenerator = analyticsIssuerFail();
+
+      const callGetAnalyticsDetails = analyticsGenerator.next();
+      expect(callGetAnalyticsDetails.value).toEqual(call(triggerAnalytics, 0));
     });
 
     test("analyticsHashFail should report to GA with errorType = 1", () => {
-      const {
-        testCert,
-        ethereumAddresses
-      } = whenThereIsOneEthereumAddressIssuer();
-      analyticsHashFail({ certificate: getData(testCert) }).next();
+      const analyticsGenerator = analyticsHashFail();
 
-      expect(global.window.ga.args[0]).toEqual([
-        "send",
-        "event",
-        "CERTIFICATE_ERROR",
-        ethereumAddresses[0],
-        "certificate-id",
-        1
-      ]);
+      const callGetAnalyticsDetails = analyticsGenerator.next();
+      expect(callGetAnalyticsDetails.value).toEqual(call(triggerAnalytics, 1));
     });
 
     test("analyticsIssuedFail should report to GA with errorType = 2", () => {
-      const {
-        testCert,
-        ethereumAddresses
-      } = whenThereIsOneEthereumAddressIssuer();
-      analyticsIssuedFail({ certificate: getData(testCert) }).next();
+      const analyticsGenerator = analyticsIssuedFail();
 
-      expect(global.window.ga.args[0]).toEqual([
-        "send",
-        "event",
-        "CERTIFICATE_ERROR",
-        ethereumAddresses[0],
-        "certificate-id",
-        2
-      ]);
+      const callGetAnalyticsDetails = analyticsGenerator.next();
+      expect(callGetAnalyticsDetails.value).toEqual(call(triggerAnalytics, 2));
     });
 
     test("analyticsRevocationFail should report to GA with errorType = 3", () => {
-      const {
-        testCert,
-        ethereumAddresses
-      } = whenThereIsOneEthereumAddressIssuer();
-      analyticsRevocationFail({
-        certificate: getData(testCert)
-      }).next();
+      const analyticsGenerator = analyticsRevocationFail();
 
-      expect(global.window.ga.args[0]).toEqual([
-        "send",
-        "event",
-        "CERTIFICATE_ERROR",
-        ethereumAddresses[0],
-        "certificate-id",
-        3
-      ]);
+      const callGetAnalyticsDetails = analyticsGenerator.next();
+      expect(callGetAnalyticsDetails.value).toEqual(call(triggerAnalytics, 3));
     });
   });
 
@@ -894,7 +862,6 @@ describe("sagas/certificate", () => {
       expect(doneWithVerification.value).toEqual(
         put(
           verifyingCertificateRevocationFailure({
-            certificate: getData(certificate),
             error:
               "Certificate has been revoked, revoked hash: 0xfcfce0e79adc002c1fd78a2a02c768c0fdc00e5b96f1da8ef80bed02876e18d1"
           })
@@ -930,7 +897,6 @@ describe("sagas/certificate", () => {
       expect(generator.next().value).toEqual(
         put(
           verifyingCertificateHashFailure({
-            certificate: getData(testCert),
             error: "Certificate data does not match target hash"
           })
         )
@@ -972,7 +938,6 @@ describe("sagas/certificate", () => {
       expect(generator.next([true, false]).value).toEqual(
         put(
           verifyingCertificateIssuedFailure({
-            certificate: getData(certificate),
             error: "Certificate has not been issued"
           })
         )

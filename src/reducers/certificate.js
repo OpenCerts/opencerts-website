@@ -370,11 +370,10 @@ export function verifyingCertificateIssuerSuccess({ issuerIdentities }) {
   };
 }
 
-export function verifyingCertificateIssuerFailure({ error, certificate }) {
+export function verifyingCertificateIssuerFailure({ error }) {
   return {
     type: types.VERIFYING_CERTIFICATE_ISSUER_FAILURE,
-    error,
-    certificate
+    error
   };
 }
 
@@ -384,11 +383,10 @@ export function verifyingCertificateStoreSuccess() {
   };
 }
 
-export function verifyingCertificateStoreFailure({ error, certificate }) {
+export function verifyingCertificateStoreFailure({ error }) {
   return {
     type: types.VERIFYING_CERTIFICATE_STORE_FAILURE,
-    error,
-    certificate
+    error
   };
 }
 
@@ -398,11 +396,10 @@ export function verifyingCertificateRevocationSuccess() {
   };
 }
 
-export function verifyingCertificateRevocationFailure({ error, certificate }) {
+export function verifyingCertificateRevocationFailure({ error }) {
   return {
     type: types.VERIFYING_CERTIFICATE_REVOCATION_FAILURE,
-    error,
-    certificate
+    error
   };
 }
 
@@ -412,11 +409,10 @@ export function verifyingCertificateIssuedSuccess() {
   };
 }
 
-export function verifyingCertificateIssuedFailure({ error, certificate }) {
+export function verifyingCertificateIssuedFailure({ error }) {
   return {
     type: types.VERIFYING_CERTIFICATE_ISSUED_FAILURE,
-    error,
-    certificate
+    error
   };
 }
 
@@ -426,11 +422,10 @@ export function verifyingCertificateHashSuccess() {
   };
 }
 
-export function verifyingCertificateHashFailure({ error, certificate }) {
+export function verifyingCertificateHashFailure({ error }) {
   return {
     type: types.VERIFYING_CERTIFICATE_HASH_FAILURE,
-    error,
-    certificate
+    error
   };
 }
 
