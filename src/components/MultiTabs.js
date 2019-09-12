@@ -31,11 +31,11 @@ const MultiTabs = ({ activeTab, templates, selectTemplateTab }) => (
               </li>
             ))
           : null}
-          <Link href="/">
-        <a id="btn-view-another" className={styles["view-another"]}>
-          View another
-        </a>
-          </Link>
+        <Link href="/">
+          <a id="btn-view-another" className={styles["view-another"]}>
+            View another
+          </a>
+        </Link>
       </div>
     </div>
     <div className="d-lg-none d-xl-none">
