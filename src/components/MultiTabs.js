@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import Link from "next/link";
 import React from "react";
 import styles from "./certificateViewer.scss";
 import { getTemplates, getActiveTemplateTab } from "../reducers/certificate";
@@ -30,9 +31,11 @@ const MultiTabs = ({ activeTab, templates, selectTemplateTab }) => (
               </li>
             ))
           : null}
-        <a id="btn-view-another" href=" " className={styles["view-another"]}>
+          <Link href="/">
+        <a id="btn-view-another" className={styles["view-another"]}>
           View another
         </a>
+          </Link>
       </div>
     </div>
     <div className="d-lg-none d-xl-none">
