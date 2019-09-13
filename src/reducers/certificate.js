@@ -235,7 +235,7 @@ export default function reducer(state = initialState, action) {
         verificationStatus: [
           ...state.verificationStatus,
           {
-            message: "Unknown certificate issuer",
+            message: "Known certificate issuer",
             warning: false,
             error: false
           }
