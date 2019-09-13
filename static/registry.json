@@ -90,6 +90,19 @@
       "logo": "/static/images/SUTD_logo.png",
       "id": "sutd-registry"
     },
+    "0x16E949FcDC655765959Ac085CA7B1aE353D6Ca35": {
+      "name": "Nanyang Technological University",
+      "displayCard": true,
+      "website": "https://www.ntu.edu.sg",
+      "email": "deg_verify@ntu.edu.sg",
+      "phone": "+65 6592 2448",
+      "logo": "/static/images/NTU_logo.png",
+      "id": "ntu-registry"
+    },
+    "0x3FFB6b913E9874c7ddabD564d85676Bc5cAd16d4": {
+      "name": "ROPSTEN: Nanyang Technological University",
+      "displayCard": false
+    },
     "0x5f007251c78cA92d3053492cCf0EDC161063624c": {
       "name": "ROPSTEN: Nanyang Polytechnic",
       "displayCard": false
@@ -144,6 +157,10 @@
     },
     "0x2456FC81C1342fB79D7C58A4682F031208A44d7F": {
       "name": "ROPSTEN: Singapore University of Technology and Design",
+      "displayCard": false
+    },
+    "0x46cf931c320ce7277753dbb15567dD684404e36C": {
+      "name": "ROPSTEN: Singapore University of Social Sciences",
       "displayCard": false
     }
   }

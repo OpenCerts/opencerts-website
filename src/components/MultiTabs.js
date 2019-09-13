@@ -1,11 +1,16 @@
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import Link from "next/link";
 import React from "react";
 import styles from "./certificateViewer.scss";
-import { getTemplates, getActiveTemplateTab } from "../reducers/certificate";
+import {
+  getTemplates,
+  getActiveTemplateTab,
+  resetCertificateState
+} from "../reducers/certificate";
 import Drawer from "./UI/Drawer";
 
-const MultiTabs = ({ activeTab, templates, selectTemplateTab }) => (
+const MultiTabs = ({ resetData, activeTab, templates, selectTemplateTab }) => (
   <div id={styles["header-ui"]}>
     <div
       className={`${styles["header-container"]} d-none d-lg-block d-xl-block`}
@@ -30,9 +35,15 @@ const MultiTabs = ({ activeTab, templates, selectTemplateTab }) => (
               </li>
             ))
           : null}
-        <a id="btn-view-another" href=" " className={styles["view-another"]}>
-          View another
-        </a>
+        <Link href="/">
+          <a
+            id="btn-view-another"
+            onClick={() => resetData()}
+            className={styles["view-another"]}
+          >
+            View another
+          </a>
+        </Link>
       </div>
     </div>
     <div className="d-lg-none d-xl-none">
@@ -50,12 +61,17 @@ const mapStateToProps = store => ({
   activeTab: getActiveTemplateTab(store)
 });
 
+const mapDispatchToProps = dispatch => ({
+  resetData: () => dispatch(resetCertificateState())
+});
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(MultiTabs);
 
 MultiTabs.propTypes = {
+  resetData: PropTypes.func,
   document: PropTypes.object,
   templates: PropTypes.array,
   selectTemplateTab: PropTypes.func,
