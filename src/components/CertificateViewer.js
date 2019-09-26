@@ -11,6 +11,7 @@ import MultiTabs from "./MultiTabs";
 import { selectTemplateTab as selectTemplateTabAction } from "../reducers/certificate";
 import { LEGACY_OPENCERTS_RENDERER } from "../config";
 import CertificateShareLinkForm from "./CertificateShareLink/CertificateShareLinkForm";
+import { FeatureFlagContainer } from "./FeatureFlag";
 
 const CertificateSharingForm = dynamic(
   import("./CertificateSharing/CertificateSharingForm")
@@ -55,11 +56,19 @@ const renderHeaderBlock = props => {
             </div>
           </div>
           <div />
-          <div className="ml-2" onClick={() => props.handleShareLinkToggle()}>
-            <div id="btn-link" className={styles["send-btn"]}>
-              <i className="fas fa-link" style={{ fontSize: "1.5rem" }} />
-            </div>
-          </div>
+          <FeatureFlagContainer
+            name="SHARE_LINK"
+            render={() => (
+              <div
+                className="ml-2"
+                onClick={() => props.handleShareLinkToggle()}
+              >
+                <div id="btn-link" className={styles["send-btn"]}>
+                  <i className="fas fa-link" style={{ fontSize: "1.5rem" }} />
+                </div>
+              </div>
+            )}
+          />
           <div className="ml-2" onClick={() => props.handleSharingToggle()}>
             <div id="btn-email" className={styles["send-btn"]}>
               <i className="fas fa-envelope" style={{ fontSize: "1.5rem" }} />

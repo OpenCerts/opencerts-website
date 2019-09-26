@@ -38,6 +38,8 @@ export const SHARE_LINK_TTL = 1209600;
 export const INFURA_PROJECT_ID = "1f1ff2b3fca04f8d99f67d465c59e4ef";
 export const LEGACY_OPENCERTS_RENDERER =
   publicRuntimeConfig.legacyRendererUrl || "https://legacy.opencerts.io/";
+export const ENVIRONMENT =
+  publicRuntimeConfig.context === "production" ? "production" : "development";
 
 export const DEFAULT_SEO = {
   title: "An easy way to check and verify your certificates",
