@@ -130,7 +130,6 @@ const CertificateViewer = props => {
           copiedLink={props.copiedLink}
           handleShareLinkToggle={props.handleShareLinkToggle}
           handleCopyLink={props.handleCopyLink}
-          generateShareLink={props.generateShareLink}
         />
       </Modal>
     </div>
@@ -167,8 +166,7 @@ CertificateViewer.propTypes = {
   handleSendCertificate: PropTypes.func,
   handleShareLinkToggle: PropTypes.func,
 
-  selectTemplateTab: PropTypes.func,
-  generateShareLink: PropTypes.func
+  selectTemplateTab: PropTypes.func
 };
 
 renderVerifyBlock.propTypes = CertificateViewer.propTypes;

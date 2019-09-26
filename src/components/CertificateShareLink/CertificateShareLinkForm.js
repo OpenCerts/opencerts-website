@@ -12,8 +12,7 @@ class CertificateShareLinkForm extends Component {
       shareLinkState,
       copiedLink,
       handleCopyLink,
-      handleShareLinkToggle,
-      generateShareLink
+      handleShareLinkToggle
     } = this.props;
 
     const certificateLink =
@@ -84,15 +83,6 @@ class CertificateShareLinkForm extends Component {
                   </p>
                 </div>
               )}
-              <div className="row d-flex justify-content-center m-3">
-                <button
-                  type="button"
-                  className={`pointer ${css.btn}`}
-                  onClick={generateShareLink}
-                >
-                  Regenerate Link
-                </button>
-              </div>
             </>
           )}
           <div className="row d-flex justify-content-center m-0">
@@ -131,6 +121,5 @@ CertificateShareLinkForm.propTypes = {
   shareLink: PropTypes.object,
   shareLinkState: PropTypes.string,
   handleCopyLink: PropTypes.func,
-  handleShareLinkToggle: PropTypes.func,
-  generateShareLink: PropTypes.func
+  handleShareLinkToggle: PropTypes.func
 };

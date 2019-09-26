@@ -97,11 +97,9 @@ class MainPageContainer extends Component {
         showSharing={this.state.showSharing}
         showShareLink={this.state.showShareLink}
         shareLink={this.props.shareLink}
-        emailAddress={this.state.emailAddress}
         handleSendCertificate={this.handleSendCertificate}
         handleSharingToggle={this.handleSharingToggle}
         handleShareLinkToggle={this.handleShareLinkToggle}
-        generateShareLink={this.props.generateShareLink}
         handleCopyLink={this.handleCopyLink}
         copiedLink={this.state.copiedLink}
         emailSendingState={this.props.emailSendingState}
