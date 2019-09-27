@@ -54,6 +54,8 @@ export const DEFAULT_SEO = {
     cardType: "summary_large_image"
   }
 };
+export const NETWORK_ID = IS_MAINNET ? "1" : "3";
+export const NETWORK_NAME = IS_MAINNET ? "homestead" : "ropsten";
 
 trace(`DEFAULT_NETWORK: ${DEFAULT_NETWORK}`);
 trace(`CAPTCHA_CLIENT_KEY: ${CAPTCHA_CLIENT_KEY}`);

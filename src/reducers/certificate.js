@@ -69,6 +69,9 @@ export const types = {
   VERIFYING_CERTIFICATE_STORE_SUCCESS: "VERIFYING_CERTIFICATE_STORE_SUCCESS",
   VERIFYING_CERTIFICATE_STORE_FAILURE: "VERIFYING_CERTIFICATE_STORE_FAILURE",
 
+  VERIFYING_CERTIFICATE_SUCCESS: "VERIFYING_CERTIFICATE_SUCCESS",
+  VERIFYING_CERTIFICATE_FAILURE: "VERIFYING_CERTIFICATE_FAILURE",
+
   SENDING_CERTIFICATE: "SENDING_CERTIFICATE",
   SENDING_CERTIFICATE_SUCCESS: "SENDING_CERTIFICATE_SUCCESS",
   SENDING_CERTIFICATE_FAILURE: "SENDING_CERTIFICATE_FAILURE",
@@ -86,6 +89,8 @@ export const types = {
 // Reducers
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    // Leaving this here for the moment
+    case types.VERIFYING_CERTIFICATE_FAILURE:
     case types.RESET_CERTIFICATE:
     case types.NETWORK_RESET:
       return {
@@ -128,6 +133,30 @@ export default function reducer(state = initialState, action) {
         certificateNotRevokedVerifying: true,
         certificateIssuerVerifying: true,
         certificateStoreVerifying: true,
+
+        certificateHashError: null,
+        certificateIssuedError: null,
+        certificateNotRevokedError: null,
+        certificateIssuerError: null,
+        certificateStoreError: null,
+
+        verificationStatus: []
+      };
+    case types.VERIFYING_CERTIFICATE_SUCCESS:
+      return {
+        ...state,
+        issuerIdentities: null,
+        certificateHash: true,
+        certificateIssued: true,
+        certificateNotRevoked: true,
+        certificateIssuer: true,
+        certificateStore: true,
+
+        certificateHashVerifying: false,
+        certificateIssuedVerifying: false,
+        certificateNotRevokedVerifying: false,
+        certificateIssuerVerifying: false,
+        certificateStoreVerifying: false,
 
         certificateHashError: null,
         certificateIssuedError: null,
@@ -479,6 +508,14 @@ export function selectTemplateTab(payload) {
 export const processQrCode = payload => ({
   type: types.CERTIFICATE_PROCESS_QR_CODE,
   payload
+});
+
+export const verifyingCertificateSuccess = () => ({
+  type: types.VERIFYING_CERTIFICATE_SUCCESS
+});
+
+export const verifyingCertificateFailure = () => ({
+  type: types.VERIFYING_CERTIFICATE_FAILURE
 });
 
 // Selectors

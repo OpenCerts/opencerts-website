@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@govtechsg/dnsprove": "^2.0.3",
+    "@govtechsg/oa-verify": "^1.0.15",
     "@govtechsg/open-attestation": "^1.1.30",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-sass": "^1.0.1",
