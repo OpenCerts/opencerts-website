@@ -143,7 +143,7 @@ const CertificateVerifyBlock = props => {
       id="certificate-verify-block"
       className={`align-items-start flex-nowrap ${css["d-flex"]} ${
         css.verifyBlocksContainer
-      } mb-md-0 mb-3`}
+      } mb-md-0`}
     >
       <SimpleVerifyBlock {...props} />
       {props.detailedVerifyVisible ? (

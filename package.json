@@ -27,8 +27,10 @@
   "dependencies": {
     "@govtechsg/dnsprove": "^2.0.3",
     "@govtechsg/open-attestation": "^1.1.30",
+    "@govtechsg/opencerts-encryption": "1.0.0",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-sass": "^1.0.1",
+    "clipboard-copy": "^3.1.0",
     "common-tags": "^1.8.0",
     "cross-env": "^5.2.0",
     "date-fns": "^1.29.0",
@@ -47,6 +49,7 @@
     "number-to-words": "^1.2.4",
     "penpal": "^4.0.0",
     "prop-types": "^15.6.1",
+    "query-string": "^6.8.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-dropzone": "^7.0.1",

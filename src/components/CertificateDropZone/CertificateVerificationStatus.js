@@ -17,7 +17,8 @@ const CertificateVerificationStatus = props => {
     document,
     verificationStatus,
     storeStatus,
-    hover
+    hover,
+    retrieveCertificateStatus
   } = props;
   if (hover) {
     return <DefaultView hover={true} accept={true} />;
@@ -25,8 +26,13 @@ const CertificateVerificationStatus = props => {
   if (fileError) {
     return <DefaultView hover={true} accept={false} />;
   }
-  if (verifying) {
-    return <VerifyingView verificationStatus={verificationStatus} />;
+  if (verifying || retrieveCertificateStatus === "PENDING") {
+    return (
+      <VerifyingView
+        verificationStatus={verificationStatus}
+        retrieveCertificateStatus={retrieveCertificateStatus}
+      />
+    );
   }
   if (
     document &&
@@ -66,7 +72,8 @@ CertificateVerificationStatus.propTypes = {
   notRevokedStatus: PropTypes.object,
   verificationStatus: PropTypes.array,
   storeStatus: PropTypes.object,
-  hover: PropTypes.bool
+  hover: PropTypes.bool,
+  retrieveCertificateStatus: PropTypes.string
 };
 
 export default CertificateVerificationStatus;

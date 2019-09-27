@@ -13,6 +13,7 @@ import {
   getNotRevokedStatus,
   getVerificationStatus,
   resetCertificateState,
+  getEncryptedCertificateStatus,
   getStoreStatus
 } from "../../reducers/certificate";
 import { updateNetworkId } from "../../reducers/application";
@@ -84,6 +85,7 @@ class CertificateDropZoneContainer extends Component {
         {props => (
           <CertificateVerificationStatus
             document={this.props.document}
+            retrieveCertificateStatus={this.props.encryptedCertificateStatus}
             fileError={this.state.fileError}
             handleCertificateChange={this.handleCertificateChange}
             handleFileError={this.handleFileError}
@@ -107,6 +109,7 @@ const mapStateToProps = store => ({
   document: getCertificate(store),
 
   // Verification statuses used in verifier block
+  encryptedCertificateStatus: getEncryptedCertificateStatus(store),
   verifying: getVerifying(store),
   issuerIdentityStatus: getIssuerIdentityStatus(store),
   hashStatus: getHashStatus(store),
@@ -130,6 +133,7 @@ export default connect(
 CertificateDropZoneContainer.propTypes = {
   updateNetworkId: PropTypes.func,
   document: PropTypes.object,
+  encryptedCertificateStatus: PropTypes.string,
   handleCertificateChange: PropTypes.func,
   updateCertificate: PropTypes.func,
   resetData: PropTypes.func,
