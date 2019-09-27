@@ -468,7 +468,7 @@ export function* generateShareLink() {
   }
 }
 
-export function* retrieveCertificateByLink({ payload }) {
+export function* retrieveCertificateFromStore({ payload }) {
   try {
     yield put({
       type: types.GET_CERTIFICATE_BY_ID_PENDING
@@ -573,7 +573,7 @@ export default [
   takeEvery(types.UPDATE_CERTIFICATE, verifyCertificate),
   takeEvery(types.SENDING_CERTIFICATE, sendCertificate),
   takeEvery(types.GENERATE_SHARE_LINK, generateShareLink),
-  takeEvery(types.GET_CERTIFICATE_BY_ID, retrieveCertificateByLink),
+  takeEvery(types.GET_CERTIFICATE_BY_ID, retrieveCertificateFromStore),
   takeEvery(applicationTypes.UPDATE_WEB3, networkReset),
 
   takeEvery(types.VERIFYING_CERTIFICATE_ISSUER_FAILURE, analyticsIssuerFail),
