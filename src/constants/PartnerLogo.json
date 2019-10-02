@@ -106,5 +106,11 @@
     "name": "Government Technology Agency",
     "value": "/static/images/GOVTECH_logo.png",
     "link": "https://www.tech.gov.sg/"
+  },
+  {
+    "key": "blg",
+    "name": "Blockchain Learning Group",
+    "value": "/static/images/blg.png",
+    "link": "https://blockchainlearninggroup.com"
   }
 ]
