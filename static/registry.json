@@ -171,6 +171,10 @@
     "0x46cf931c320ce7277753dbb15567dD684404e36C": {
       "name": "ROPSTEN: Singapore University of Social Sciences",
       "displayCard": false
+    },
+    "0x7e09d935E322d370480bFCe8789fA0E291883fD8": {
+      "name": "ROPSTEN: Blockchain Learning Group",
+      "displayCard": false
     }
   }
 }
