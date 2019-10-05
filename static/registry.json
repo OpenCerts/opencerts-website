@@ -99,6 +99,15 @@
       "logo": "/static/images/NTU_logo.png",
       "id": "ntu-registry"
     },
+    "0x7d7565aF2e098076AFbEFc8b2D77b54d8E886d3C": {
+      "name": "Singapore Institute of Management Pvt Ltd",
+      "displayCard": true,
+      "website": "https://www.sim.edu.sg",
+      "email": "simopencerts@sim.edu.sg",
+      "phone": "+65 62480069",
+      "logo": "/static/images/SIM_logo.png",
+      "id": "sim-registry"
+    },
     "0x3FFB6b913E9874c7ddabD564d85676Bc5cAd16d4": {
       "name": "ROPSTEN: Nanyang Technological University",
       "displayCard": false
