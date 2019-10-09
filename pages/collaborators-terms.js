@@ -20,7 +20,7 @@ const PAGE_SEO = {
 const CollaboratorsTermsPage = () => (
   <>
     <NextSeo config={merge(DEFAULT_SEO, PAGE_SEO)} />
-    <NavigationBar active="collaborate" />
+    <NavigationBar />
     <CollaboratorsTerms />
     <FooterBar />
   </>
