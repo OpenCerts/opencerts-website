@@ -16,37 +16,41 @@ const TermsOfUse = () => (
   <div className={styles["content-container"]}>
     <ol>
       <li>
-        General
+        <b>General</b>
         <ol>
           <li>
             These Terms of Use govern your access to and use of our services,
             including the application (whether as software or as a website or
             otherwise), its contents, push notifications and all other
             accompanying materials as identified in the Schedule below
-            (collectively, the &#34;Service&#34;).
+            (collectively, the <b>&#34;Service&#34;</b>).
           </li>
           <li>
             This Service is provided to you by the Government Technology Agency
-            (&#34;GovTech&#34;). GovTech’s office is located at 10 Pasir Panjang
-            Road, #10-01, Mapletree Business City, Singapore 117438.
+            (<b>&#34;GovTech&#34;</b>). GovTech’s office is located at 10 Pasir
+            Panjang Road, #10-01, Mapletree Business City, Singapore 117438.
           </li>
           <li>
             By accessing or using any part of this Service, you unconditionally
             agree and accept to be legally bound by these Terms of Use and any
             amendments thereto from time to time. GovTech reserves the right to
             change these Terms of Use at its sole discretion and at any time.
-            You should read the Terms of Use carefully each time you access or
-            use any part of this Service as such access or use will constitute
-            your agreement to the Terms of Use and any amendments to it.
+            <b>
+              You should read the Terms of Use carefully each time you access or
+              use any part of this Service as such access or use will constitute
+              your agreement to the Terms of Use and any amendments to it.
+            </b>
           </li>
           <li>
-            If you do not agree to these Terms of Use, please do not use this
-            Service or any part of this Service.
+            <b>
+              If you do not agree to these Terms of Use, please do not use this
+              Service or any part of this Service.
+            </b>
           </li>
         </ol>
       </li>
       <li>
-        Nature of this Service
+        <b>Nature of this Service</b>
         <ol>
           <li>
             Please see the Schedule for more information and terms concerning
@@ -55,7 +59,7 @@ const TermsOfUse = () => (
         </ol>
       </li>
       <li>
-        Licence Terms and Restrictions
+        <b>Licence Terms and Restrictions</b>
         <ol>
           <li>
             The Service, including the materials made available on or through
@@ -101,22 +105,23 @@ const TermsOfUse = () => (
         </ol>
       </li>
       <li>
-        Third Party Materials
+        <b>Third Party Materials</b>
         <ol>
           <li>
             The Service may require, enable or facilitate access to or use of
-            software or services of a third party (&#34;Third Party&#34;). In
-            such an event, there may be terms of use of the third party software
-            or service (the &#34;Third Party Terms&#34;). GovTech may be
-            required under or as a result of the Third Party Terms to notify you
-            of certain terms that apply to you (either directly as an end user,
-            or as a party whose acts or omissions could cause GovTech to breach
-            the Third Party Terms) when you use the Services. An example of
-            Third Party Terms may be open source software terms or standard form
-            terms of the distribution platform from which you obtain any part of
-            the Service (e.g. Google Play Store or Apple App Store terms) which
-            bind GovTech as a developer or user of the distribution platform
-            (the &#34;Distribution Terms&#34;). Information on the Third Party
+            software or services of a third party (<b>&#34;Third Party&#34;</b>
+            ). In such an event, there may be terms of use of the third party
+            software or service (the <b>&#34;Third Party Terms&#34;</b>).
+            GovTech may be required under or as a result of the Third Party
+            Terms to notify you of certain terms that apply to you (either
+            directly as an end user, or as a party whose acts or omissions could
+            cause GovTech to breach the Third Party Terms) when you use the
+            Services. An example of Third Party Terms may be open source
+            software terms or standard form terms of the distribution platform
+            from which you obtain any part of the Service (e.g. Google Play
+            Store or Apple App Store terms) which bind GovTech as a developer or
+            user of the distribution platform (the{" "}
+            <b>&#34;Distribution Terms&#34;</b>). Information on the Third Party
             Terms are embedded in the Service, already accounted for in these
             Terms of Use, publicly available (e.g the Distribution Terms) or
             otherwise listed in the Schedule herein. For the avoidance of doubt,
@@ -160,12 +165,12 @@ const TermsOfUse = () => (
             incorporate certain terms in these Terms of Use (inclusive of terms
             which impose any minimum or maximum standards herein, and/or terms
             described in Clause 4.5 below), such terms are deemed to have been
-            so incorporated (the &#34;Incorporated Terms&#34;). Examples of
-            Incorporated Terms include provisions which require GovTech to give
-            you notice of certain rights and liabilities or require GovTech to
-            ensure that you acknowledge certain matters. Similarly, if the Third
-            Party Terms expressly or impliedly require these Terms of Use to be
-            altered such that the Third Party Terms are complied with, the
+            so incorporated (the <b>&#34;Incorporated Terms&#34;</b>). Examples
+            of Incorporated Terms include provisions which require GovTech to
+            give you notice of certain rights and liabilities or require GovTech
+            to ensure that you acknowledge certain matters. Similarly, if the
+            Third Party Terms expressly or impliedly require these Terms of Use
+            to be altered such that the Third Party Terms are complied with, the
             parties herein agree that the Terms of Use shall be deemed to be so
             altered but only to the extent necessary for compliance.
           </li>
@@ -187,7 +192,7 @@ const TermsOfUse = () => (
         </ol>
       </li>
       <li>
-        Your Consent to Access Functions of Your Device
+        <b>Your Consent to Access Functions of Your Device</b>
         <ol>
           <li>
             Use of the Service may require you to allow access by the Service to
@@ -201,7 +206,7 @@ const TermsOfUse = () => (
         </ol>
       </li>
       <li>
-        Disclaimers and Indemnity
+        <b>Disclaimers and Indemnity</b>
         <ol>
           <li>
             The Service is provided on an &#34;as is&#34; and &#34;as
@@ -291,7 +296,7 @@ const TermsOfUse = () => (
         </ol>
       </li>
       <li>
-        Hyperlinks
+        <b>Hyperlinks</b>
         <ol>
           <li>
             Insofar as the Service provides a hyperlink to material not
@@ -337,7 +342,7 @@ const TermsOfUse = () => (
         </ol>
       </li>
       <li>
-        Privacy Policy
+        <b>Privacy Policy</b>
         <ol>
           <li>
             You also agree to the terms of the Privacy Policy for this Service
@@ -347,7 +352,7 @@ const TermsOfUse = () => (
         </ol>
       </li>
       <li>
-        Rights of Third Parties
+        <b>Rights of Third Parties</b>
         <ol>
           <li>
             Subject to the rights of the Third Party set out in Clause 4.5, a
@@ -358,7 +363,7 @@ const TermsOfUse = () => (
         </ol>
       </li>
       <li>
-        Assignment
+        <b>Assignment</b>
         <ol>
           <li>
             You may not assign or sub-contract this Terms of Use without the
@@ -374,7 +379,7 @@ const TermsOfUse = () => (
         </ol>
       </li>
       <li>
-        Governing Law and Dispute Resolution
+        <b>Governing Law and Dispute Resolution</b>
         <ol>
           <li>
             These Terms of Use shall be governed and construed in accordance
@@ -391,10 +396,11 @@ const TermsOfUse = () => (
           <li>
             GovTech may, at its sole discretion, refer any dispute referred to
             in clause 11.2 above to arbitration administered by the Singapore
-            International Arbitration Centre (&#34;SIAC&#34;) in Singapore in
-            accordance with the Arbitration Rules of the SIAC (&#34;SIAC
-            Rules&#34;) for the time being in force, which rules are deemed to
-            be incorporated by reference in this clause. Further:
+            International Arbitration Centre (<b>&#34;SIAC&#34;</b>) in
+            Singapore in accordance with the Arbitration Rules of the SIAC (
+            <b>&#34;SIAC Rules&#34;</b>) for the time being in force, which
+            rules are deemed to be incorporated by reference in this clause.
+            Further:
             <ol>
               <li>The seat of the arbitration shall be Singapore.</li>
               <li>The tribunal shall consist of one (1) arbitrator.</li>
@@ -422,39 +428,47 @@ const TermsOfUse = () => (
 const Schedule = () => (
   <div className={styles["content-container"]}>
     <ol>
-      <li>Name of Service: OpenCerts</li>
       <li>
-        Nature of Service and Special Terms
+        <b>Name of Service</b>: OpenCerts
+      </li>
+      <li>
+        <b>Nature of Service and Special Terms</b>
         <ol>
           <li>
             This Service facilitates the issuance, verification and revocation
             of certificates and documents.
           </li>
           <li>
-            To use the Service, you may first install a web browser (such as the
-            Google Chrome web browser) and have the MetaMask electronic wallet
-            or a Ledger hardware wallet. MetaMask and other electronic wallets
-            allow you to purchase, store, and engage in transactions using
-            Ethereum cryptocurrency. You will not be able to engage in any
-            transactions on the Service other than through MetaMask, or Ledger
-            hardware wallet.
-          </li>
-          <li>
-            Transactions that take place on this Service are managed and
-            confirmed via the Ethereum blockchain. You understand that your
-            Ethereum public address will be made publicly visible whenever you
-            engage in a transaction on the App.
+            If you are a certificate/document issuer or an entity acting on its
+            behalf:
+            <ol>
+              <li>
+                To use the Service, you must first install a web browser (such
+                as the Google Chrome web browser) and have the MetaMask
+                electronic wallet or a Ledger hardware wallet. MetaMask and
+                other electronic wallets allow you to purchase, store, and
+                engage in transactions using Ethereum cryptocurrency. You will
+                not be able to engage in any transactions on the Service other
+                than through MetaMask, or Ledger hardware wallet.
+              </li>
+              <li>
+                Transactions that take place on this Service are managed and
+                confirmed via the Ethereum blockchain. You understand that your
+                Ethereum public address will be made publicly visible whenever
+                you engage in a transaction on the Service.
+              </li>
+            </ol>
           </li>
           <li>
             We neither own nor control MetaMask, Google Chrome, the Ethereum
             network, or any other third party site, product, or service that you
             might access, visit, or use for the purpose of enabling you to use
-            the various features of the App. We further do not endorse any third
-            party collaborators listed herein, and the use of the services of
-            such collaborators are similarly entirely at your risk. We will not
-            be liable for the acts or omissions of any such third parties, nor
-            will we be liable for any damage(s) that you may suffer as a result
-            of your transactions or any other interaction with such third
+            the various features of the Service. We further do not endorse any
+            third party collaborators listed herein, and the use of the services
+            of such collaborators are similarly entirely at your risk. We will
+            not be liable for the acts or omissions of any such third parties,
+            nor will we be liable for any damage(s) that you may suffer as a
+            result of your transactions or any other interaction with such third
             parties. Separate terms (and not these Terms of Use) govern the
             relationship between you and those third parties, including your
             certificate/document issuer, or any person accessing a copy of the
@@ -471,21 +485,27 @@ const Schedule = () => (
             are unable to agree to the terms at any time, GovTech shall have the
             discretion to remove you as a collaborator without liability to you
             whatsoever. GovTech is not obliged to provide any reasons for any
-            rejection of your application to be a collaborator.
+            rejection of your application to be a collaborator. The Collaborator
+            Terms and Conditions are found{" "}
+            <a href="/collaborators-terms">here</a>.
           </li>
           <li>
-            GovTech is NOT responsible for the fulfilment and quality of
+            GovTech is <b>NOT</b> responsible for the fulfilment and quality of
             Ethereum transactions.
+          </li>
+          <li>
+            If you are a Singapore public sector entity, please contact GovTech
+            at{" "}
+            <a href="mailto:OpenAttestation_Support@tech.gov.sg">
+              OpenAttestation_Support@tech.gov.sg
+            </a>{" "}
+            before accessing or using the Service.
           </li>
         </ol>
       </li>
       <li>
-        Third party software/services
+        <b>Third party software/services</b>
         <ol>
-          <li>
-            Open Source Dependencies Licenses (
-            <a href="/static/credits.pdf">Credits</a>)
-          </li>
           <li>
             Google Analytics (
             <a href="https://www.google.com/policies/privacy/partners/">
@@ -498,7 +518,7 @@ const Schedule = () => (
             <a href="https://infura.io/terms">https://infura.io/terms</a>)
           </li>
           <li>
-            AWS Lambda (
+            Terms relating to AWS Lambda (
             <a href="https://aws.amazon.com/service-terms/">
               https://aws.amazon.com/service-terms/
             </a>
@@ -510,6 +530,9 @@ const Schedule = () => (
               https://www.netlify.com/tos/
             </a>
             )
+          </li>
+          <li>
+            List of <a href="/static/credits.pdf"> open source software</a>
           </li>
         </ol>
       </li>
