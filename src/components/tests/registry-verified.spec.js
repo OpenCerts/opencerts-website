@@ -8,6 +8,7 @@ const TranscriptButton = Selector(".nav-item").withText("TRANSCRIPT");
 const MediaButton = Selector(".nav-item").withText("MEDIA");
 const StatusButton = Selector("#certificate-status");
 const SampleTemplate = Selector("#rendered-certificate");
+const CertificateStatusBanner = Selector("#status-banner-container");
 
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(
@@ -18,7 +19,13 @@ const validateTextContent = async (t, component, texts) =>
 test("Sample document is rendered correctly when single registry is verified", async t => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 
-  await validateTextContent(t, StatusButton, ["Accredited by SSG"]);
+  await validateTextContent(t, StatusButton, [
+    "Certificate issued by ROPSTEN: Government Technology Agency of Singapore (GovTech)"
+  ]);
+
+  await validateTextContent(t, CertificateStatusBanner, [
+    "Certificate issuer is in the SkillsFuture Singapore registry for Opencerts"
+  ]);
 
   await t.switchToIframe(IframeBlock);
 

@@ -7,6 +7,7 @@ const Document = "./fixture/sample-multidns-verified.json";
 const IframeBlock = Selector("#iframe");
 const SampleTemplate = Selector("#rendered-certificate");
 const StatusButton = Selector("#certificate-status");
+const CertificateStatusBanner = Selector("#status-banner-container");
 
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(
@@ -14,11 +15,15 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("Sample document is rendered correctly when multiple dns is verfied", async t => {
+test("Sample document is rendered correctly when multiple dns is verified", async t => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 
   await validateTextContent(t, StatusButton, [
-    "Issued by EXAMPLE.OPENATTESTATION.COM"
+    "Certificate issued by EXAMPLE.OPENATTESTATION.COM"
+  ]);
+
+  await validateTextContent(t, CertificateStatusBanner, [
+    "Certificate issuer is not in the SkillsFuture Singapore registry for Opencerts"
   ]);
 
   await t.switchToIframe(IframeBlock);

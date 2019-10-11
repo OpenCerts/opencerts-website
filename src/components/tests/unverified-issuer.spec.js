@@ -13,7 +13,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("Error view rendered when certificate issuers are unverfied", async t => {
+test("Error view rendered when certificate issuers are unverified", async t => {
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
   await InvalidMessage.with({ visibilityCheck: true })();
