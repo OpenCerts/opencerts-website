@@ -35,6 +35,13 @@ describe("Certificate verify block getIdentityVerificationText", () => {
         "Certificate issued by demo"
       );
     });
+
+    test("should return Certificate issued by Unknown when registry and dns don't resolve any value", () => {
+      const testValue = [{ registry: false, dns: false }];
+      expect(getIdentityVerificationText(testValue)).toEqual(
+        "Certificate issued by Unknown"
+      );
+    });
   });
 
   describe("should return appropriate display text when dns is verified", () => {
