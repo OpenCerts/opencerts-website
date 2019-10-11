@@ -2,18 +2,21 @@
 
 .verifyBlocksContainer {
   position: relative;
+  max-width: 485px;
 }
 
 .simple-verify-block {
   width: 100%;
+  font-weight: bold;
   min-width: 320px;
-  color: white;
+  color: #38761d;
   height: 100%;
   box-shadow: 2px 2px 4px 0 $grey-blue;
   div {
     padding: 2px 0;
     height: 100%;
     margin: auto 0;
+    align-items: center;
   }
 }
 @mixin block-color($color) {
@@ -45,7 +48,22 @@
 }
 
 .valid {
-  @include block-color($success-color);
+  background-color: white;
+  border: 1px solid $success-color;
+  #circle {
+    fill: $success-color;
+    color: white;
+  }
+  #check {
+    fill: #fff;
+  }
+
+  &:hover {
+    box-shadow: 2px 2px 6px 0 #a7afb7;
+  }
+  svg > polyline {
+    stroke: $success-color;
+  }
 }
 
 .warning {

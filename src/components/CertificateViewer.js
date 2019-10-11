@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 import dynamic from "next/dynamic";
 import { connect } from "react-redux";
 import { getData } from "@govtechsg/open-attestation";
+import Link from "next/link";
+import { get, some } from "lodash";
 import CertificateVerifyBlock from "./CertificateVerifyBlock";
 import styles from "./certificateViewer.scss";
 import Modal from "./Modal";
@@ -101,15 +103,44 @@ const renderHeaderBlock = props => {
   );
 };
 
-const CertificateViewer = props => {
+export const StatelessCertificateViewer = props => {
   const { document, selectTemplateTab } = props;
 
   const certificate = getData(document);
 
   const renderedHeaderBlock = renderHeaderBlock(props);
+  const identity = get(props, "issuerIdentityStatus.identities", []);
+  const isInRegistry = some(identity, ({ registry }) => !!registry);
 
   const validCertificateContent = (
     <div>
+      {isInRegistry ? (
+        <div
+          id="status-banner-container"
+          className={`${styles["status-banner-container"]} ${styles.valid}`}
+        >
+          <div className={`${styles["status-banner"]}`}>
+            Certificate issuer is in the SkillsFuture Singapore registry for
+            Opencerts
+          </div>
+        </div>
+      ) : (
+        <div
+          id="status-banner-container"
+          className={`${styles["status-banner-container"]} ${styles.invalid}`}
+        >
+          <div className={`${styles["status-banner"]}`}>
+            Certificate issuer is <b>not</b> in the SkillsFuture Singapore
+            registry for Opencerts
+            <br />
+            <Link href="/faq">
+              <a>
+                <small>What does this mean ?</small>
+              </a>
+            </Link>
+          </div>
+        </div>
+      )}
       <div id={styles["top-header-ui"]}>
         <div className={styles["header-container"]}>{renderedHeaderBlock}</div>
       </div>
@@ -153,9 +184,9 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   null,
   mapDispatchToProps
-)(CertificateViewer);
+)(StatelessCertificateViewer);
 
-CertificateViewer.propTypes = {
+StatelessCertificateViewer.propTypes = {
   toggleDetailedView: PropTypes.func,
   detailedVerifyVisible: PropTypes.bool,
   document: PropTypes.object,
@@ -177,5 +208,5 @@ CertificateViewer.propTypes = {
   selectTemplateTab: PropTypes.func
 };
 
-renderVerifyBlock.propTypes = CertificateViewer.propTypes;
-renderHeaderBlock.propTypes = CertificateViewer.propTypes;
+renderVerifyBlock.propTypes = StatelessCertificateViewer.propTypes;
+renderHeaderBlock.propTypes = StatelessCertificateViewer.propTypes;
