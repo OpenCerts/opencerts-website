@@ -49,7 +49,8 @@ class DecentralisedRenderer extends Component {
   async renderDocument(certificate) {
     const { childFrameConnection } = this.state;
     const child = await childFrameConnection;
-    await child.renderDocument(certificate);
+    const rawDocument = this.props.certificate;
+    await child.renderDocument(certificate, rawDocument);
   }
 
   // Do not re-render component if only activeTab changes
@@ -69,6 +70,7 @@ class DecentralisedRenderer extends Component {
     const updateHeight = this.updateHeight.bind(this);
     const updateTemplates = this.updateTemplates.bind(this);
     const handleObfuscation = this.handleObfuscation.bind(this);
+    const rawDocument = this.props.certificate;
     const childFrameConnection = connectToChild({
       iframe,
       methods: {
@@ -80,10 +82,10 @@ class DecentralisedRenderer extends Component {
     this.setState({ childFrameConnection });
 
     childFrameConnection.then(frame =>
-      frame.renderDocument(getData(this.props.certificate))
+      frame.renderDocument(getData(rawDocument), rawDocument)
     );
 
-    const certificateData = getData(this.props.certificate);
+    const certificateData = getData(rawDocument);
     analyticsEvent(window, {
       category: "CERTIFICATE_VIEWED",
       action: getDocumentIssuerStores(certificateData),
