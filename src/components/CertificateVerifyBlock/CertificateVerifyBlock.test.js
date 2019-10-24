@@ -4,15 +4,15 @@ describe("Certificate verify block getIdentityVerificationText", () => {
   describe("When registry is verified", () => {
     test("should return appropriate display text when singular registry is verified", () => {
       const testValue = [{ registry: "Govtech", dns: "abc.com" }];
-      expect(getIdentityVerificationText(testValue)).toEqual(
-        "Certificate issued by Govtech"
+      expect(getIdentityVerificationText(testValue)).toStrictEqual(
+        "Certificate issued by GOVTECH"
       );
     });
 
     test("should return appropriate display text when registry is verified but dns is unverified", () => {
       const testValue = [{ registry: "Demo", dns: "false" }];
-      expect(getIdentityVerificationText(testValue)).toEqual(
-        "Certificate issued by Demo"
+      expect(getIdentityVerificationText(testValue)).toStrictEqual(
+        "Certificate issued by DEMO"
       );
     });
 
@@ -21,8 +21,8 @@ describe("Certificate verify block getIdentityVerificationText", () => {
         { registry: "govtech", dns: "abc.com" },
         { registry: "demo", dns: "demo.com" }
       ];
-      expect(getIdentityVerificationText(testValue)).toEqual(
-        "Certificate issued by govtech"
+      expect(getIdentityVerificationText(testValue)).toStrictEqual(
+        "Certificate issued by GOVTECH"
       );
     });
 
@@ -31,14 +31,14 @@ describe("Certificate verify block getIdentityVerificationText", () => {
         { registry: false, dns: "abc.com" },
         { registry: "demo", dns: false }
       ];
-      expect(getIdentityVerificationText(testValue)).toEqual(
-        "Certificate issued by demo"
+      expect(getIdentityVerificationText(testValue)).toStrictEqual(
+        "Certificate issued by DEMO"
       );
     });
 
     test("should return Certificate issued by Unknown when registry and dns don't resolve any value", () => {
       const testValue = [{ registry: false, dns: false }];
-      expect(getIdentityVerificationText(testValue)).toEqual(
+      expect(getIdentityVerificationText(testValue)).toStrictEqual(
         "Certificate issued by Unknown"
       );
     });
@@ -47,7 +47,7 @@ describe("Certificate verify block getIdentityVerificationText", () => {
   describe("should return appropriate display text when dns is verified", () => {
     test("when registry is unverified but dns is verified", () => {
       const testValue = [{ registry: false, dns: "abc.com" }];
-      expect(getIdentityVerificationText(testValue)).toEqual(
+      expect(getIdentityVerificationText(testValue)).toStrictEqual(
         "Certificate issued by ABC.COM"
       );
     });
@@ -57,7 +57,7 @@ describe("Certificate verify block getIdentityVerificationText", () => {
         { registry: false, dns: "xyz.com" },
         { registry: false, dns: "demo.com" }
       ];
-      expect(getIdentityVerificationText(testValue)).toEqual(
+      expect(getIdentityVerificationText(testValue)).toStrictEqual(
         "Certificate issued by DEMO.COM"
       );
     });

@@ -19,7 +19,7 @@ test("Sample doc is rendered correctly when any one of dns or registry is verifi
   await t.setFilesToUpload("input[type=file]", [Document]);
 
   await validateTextContent(t, StatusButton, [
-    "Certificate issued by ROPSTEN: Government Technology Agency of Singapore (GovTech)"
+    "Certificate issued by ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"
   ]);
 
   await validateTextContent(t, CertificateStatusBanner, [

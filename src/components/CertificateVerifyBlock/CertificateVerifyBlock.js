@@ -64,14 +64,14 @@ const renderIcon = status => {
 export const getIdentityVerificationText = identityStatus => {
   const identity = find(identityStatus, ({ registry }) => !!registry);
   if (identity) {
-    return `Certificate issued by ${identity.registry}`;
+    return `Certificate issued by ${identity.registry.toUpperCase()}`;
   }
   // note filter Boolean is to remove empty values
   const dnsNames = sortBy(identityStatus, ["dns"])
     .map(({ dns }) => (dns ? dns.toUpperCase() : null))
     .filter(Boolean);
   return `Certificate issued by ${
-    dnsNames.length > 0 ? dnsNames[0] : "Unknown"
+    dnsNames.length > 0 ? dnsNames[0].toUpperCase() : "Unknown"
   }`;
 };
 
