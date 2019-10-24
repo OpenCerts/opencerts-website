@@ -133,7 +133,7 @@ export const StatelessCertificateViewer = props => {
             Certificate issuer is <b>not</b> in the SkillsFuture Singapore
             registry for Opencerts
             <br />
-            <Link href="/faq">
+            <Link href="/faq#verifications-issuers-not-in-registry-meaning">
               <a>
                 <small>What does this mean ?</small>
               </a>
