@@ -172,7 +172,7 @@ export const switchOperatorFunction = certificate => {
     case "SOA-MF-01":
       return " Generic Manufacturing Skills WSQ Framework";
 
-    case "SOA_SVCF_001":
+    case "SOA-SVCF-001":
       return " Service Excellence Competency Framework";
 
     default:
@@ -303,7 +303,7 @@ export const renderSignatureSOAIT = certificate => (
 
 export const switchRewardFunction = certificate => {
   switch (get(certificate, "additionalData.certCode")) {
-    case "SOA_SV_001":
+    case "SOA-SVCF-001":
       return [
         {
           name: "Provide Go-the-Extra-Mile Service",
