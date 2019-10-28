@@ -1,0 +1,26 @@
+@media print {
+  #renderer-loader {
+    display: none;
+  }
+
+  .decentralised-renderer {
+    position: static !important;
+  }
+}
+
+.decentralised-renderer {
+  width: 100%;
+  border: 0;
+  position: relative;
+  min-height: 100px;
+}
+
+#renderer-loader {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: auto;
+  height: auto;
+  text-align: center;
+}

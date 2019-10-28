@@ -42,10 +42,7 @@ export const initialState = {
 
   encryptedCertificate: {},
   encryptedCertificateState: states.INITIAL,
-  encryptedCertificateError: null,
-
-  templates: null,
-  activeTemplateTab: 0
+  encryptedCertificateError: null
 };
 
 // Actions
@@ -93,10 +90,7 @@ export const types = {
   GET_CERTIFICATE_BY_ID_FAILURE: "GET_CERTIFICATE_BY_ID_FAILURE",
 
   CERTIFICATE_OBFUSCATE_RESET: "CERTIFICATE_OBFUSCATE_RESET",
-  CERTIFICATE_OBFUSCATE_UPDATE: "CERTIFICATE_OBFUSCATE_UPDATE",
-
-  CERTIFICATE_TEMPLATE_REGISTER: "CERTIFICATE_TEMPLATE_REGISTER",
-  CERTIFICATE_TEMPLATE_SELECT_TAB: "CERTIFICATE_TEMPLATE_SELECT_TAB"
+  CERTIFICATE_OBFUSCATE_UPDATE: "CERTIFICATE_OBFUSCATE_UPDATE"
 };
 
 // Reducers
@@ -374,16 +368,6 @@ export default function reducer(state = initialState, action) {
         ...state,
         rawModified: action.payload
       };
-    case types.CERTIFICATE_TEMPLATE_REGISTER:
-      return {
-        ...state,
-        templates: action.payload
-      };
-    case types.CERTIFICATE_TEMPLATE_SELECT_TAB:
-      return {
-        ...state,
-        activeTemplateTab: action.payload
-      };
     default:
       return state;
   }
@@ -399,20 +383,6 @@ export function resetCertificateState() {
 export function updateCertificate(payload) {
   return {
     type: types.UPDATE_CERTIFICATE,
-    payload
-  };
-}
-
-export function verifyCertificate(payload) {
-  return {
-    type: types.VERIFYING_CERTIFICATE,
-    payload
-  };
-}
-
-export function updateFilteredCertificate(payload) {
-  return {
-    type: types.UPDATE_FILTERED_CERTIFICATE,
     payload
   };
 }
@@ -509,29 +479,9 @@ export function retrieveCertificateByLink(payload) {
   };
 }
 
-export function resetCertificateObfuscation() {
-  return {
-    type: types.CERTIFICATE_OBFUSCATE_RESET
-  };
-}
-
 export function updateObfuscatedCertificate(payload) {
   return {
     type: types.CERTIFICATE_OBFUSCATE_UPDATE,
-    payload
-  };
-}
-
-export function registerTemplates(payload) {
-  return {
-    type: types.CERTIFICATE_TEMPLATE_REGISTER,
-    payload
-  };
-}
-
-export function selectTemplateTab(payload) {
-  return {
-    type: types.CERTIFICATE_TEMPLATE_SELECT_TAB,
     payload
   };
 }
@@ -651,18 +601,6 @@ export function getShareLinkState(store) {
   return store.certificate.shareLinkState;
 }
 
-export function getEncryptedCertificate(store) {
-  return store.certificate.encryptedCertificate;
-}
-
 export function getEncryptedCertificateStatus(store) {
   return store.certificate.encryptedCertificateState;
-}
-
-export function getActiveTemplateTab(store) {
-  return store.certificate.activeTemplateTab;
-}
-
-export function getTemplates(store) {
-  return store.certificate.templates;
 }

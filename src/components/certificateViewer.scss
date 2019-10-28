@@ -11,12 +11,7 @@
   iframe {
     height: 99vh; /* dont use 100vh otherwise a second blank page appear when printing */
   }
-
-  .decentralised-renderer {
-    position: static !important;
-  }
 }
-
 .status-banner-container.valid {
   color: #38761d;
   background-color: #d9ead3;
@@ -39,6 +34,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .status-banner {
   text-align: center;
   // keep at least 25px of margin
@@ -53,12 +49,6 @@
     margin-left: 25px;
     margin-right: 25px;
   }
-}
-
-.decentralised-renderer {
-  width: 100%;
-  border: 0;
-  position: relative;
 }
 
 :global(.frameless-tabs .react-tabs .d-lg-none.d-xl-none) {
@@ -191,14 +181,4 @@
   .container > :global(.row) {
     justify-content: space-between;
   }
-}
-
-#renderer-loader {
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  width: auto;
-  height: auto;
-  text-align: center;
 }

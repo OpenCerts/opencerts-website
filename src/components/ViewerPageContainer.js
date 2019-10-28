@@ -22,7 +22,7 @@ import {
   getShareLinkState,
   updateObfuscatedCertificate
 } from "../reducers/certificate";
-import CertificateViewer from "./CertificateViewer";
+import { CertificateViewer } from "./CertificateViewer";
 
 class MainPageContainer extends Component {
   constructor(props) {
