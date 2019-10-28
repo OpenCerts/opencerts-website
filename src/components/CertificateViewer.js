@@ -1,22 +1,20 @@
 import PropTypes from "prop-types";
 import dynamic from "next/dynamic";
-import { connect } from "react-redux";
-import { getData } from "@govtechsg/open-attestation";
 import Link from "next/link";
 import { get, some } from "lodash";
 import CertificateVerifyBlock from "./CertificateVerifyBlock";
 import styles from "./certificateViewer.scss";
 import Modal from "./Modal";
 import ErrorBoundary from "./ErrorBoundary";
-import DecentralisedRenderer from "./DecentralisedTemplateRenderer/DecentralisedRenderer";
-import MultiTabs from "./MultiTabs";
-import { selectTemplateTab as selectTemplateTabAction } from "../reducers/certificate";
-import { LEGACY_OPENCERTS_RENDERER } from "../config";
 import CertificateShareLinkForm from "./CertificateShareLink/CertificateShareLinkForm";
 import { FeatureFlagContainer } from "./FeatureFlag";
 
 const CertificateSharingForm = dynamic(
   import("./CertificateSharing/CertificateSharingForm")
+);
+const DecentralisedRenderer = dynamic(
+  () => import("./DecentralisedTemplateRenderer/DecentralisedRenderer"),
+  { ssr: false }
 );
 
 const renderVerifyBlock = props => (
@@ -30,15 +28,6 @@ const renderVerifyBlock = props => (
     toggleDetailedView={props.toggleDetailedView}
     detailedVerifyVisible={props.detailedVerifyVisible}
   />
-);
-
-const LoadingIframe = () => (
-  <div id={styles["renderer-loader"]} className="text-blue">
-    <i className="fas fa-spinner fa-pulse fa-3x" />
-    <div className="m-3" style={{ fontSize: "1.5rem" }}>
-      Loading Renderer...
-    </div>
-  </div>
 );
 
 const renderHeaderBlock = props => {
@@ -103,10 +92,8 @@ const renderHeaderBlock = props => {
   );
 };
 
-export const StatelessCertificateViewer = props => {
-  const { document, selectTemplateTab } = props;
-
-  const certificate = getData(document);
+export const CertificateViewer = props => {
+  const { document } = props;
 
   const renderedHeaderBlock = renderHeaderBlock(props);
   const identity = get(props, "issuerIdentityStatus.identities", []);
@@ -144,18 +131,7 @@ export const StatelessCertificateViewer = props => {
       <div id={styles["top-header-ui"]}>
         <div className={styles["header-container"]}>{renderedHeaderBlock}</div>
       </div>
-      <MultiTabs selectTemplateTab={selectTemplateTab} />
-      <div>
-        <LoadingIframe />
-        <DecentralisedRenderer
-          certificate={document}
-          source={`${
-            typeof document.data.$template === "object"
-              ? certificate.$template.url
-              : LEGACY_OPENCERTS_RENDERER
-          }`}
-        />
-      </div>
+      <DecentralisedRenderer rawDocument={document} />
       <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
         <CertificateSharingForm
           emailSendingState={props.emailSendingState}
@@ -177,16 +153,7 @@ export const StatelessCertificateViewer = props => {
   return <ErrorBoundary>{validCertificateContent} </ErrorBoundary>;
 };
 
-const mapDispatchToProps = dispatch => ({
-  selectTemplateTab: tabIndex => dispatch(selectTemplateTabAction(tabIndex))
-});
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(StatelessCertificateViewer);
-
-StatelessCertificateViewer.propTypes = {
+CertificateViewer.propTypes = {
   toggleDetailedView: PropTypes.func,
   detailedVerifyVisible: PropTypes.bool,
   document: PropTypes.object,
@@ -203,10 +170,8 @@ StatelessCertificateViewer.propTypes = {
   emailSendingState: PropTypes.string,
   handleSharingToggle: PropTypes.func,
   handleSendCertificate: PropTypes.func,
-  handleShareLinkToggle: PropTypes.func,
-
-  selectTemplateTab: PropTypes.func
+  handleShareLinkToggle: PropTypes.func
 };
 
-renderVerifyBlock.propTypes = StatelessCertificateViewer.propTypes;
-renderHeaderBlock.propTypes = StatelessCertificateViewer.propTypes;
+renderVerifyBlock.propTypes = CertificateViewer.propTypes;
+renderHeaderBlock.propTypes = CertificateViewer.propTypes;
