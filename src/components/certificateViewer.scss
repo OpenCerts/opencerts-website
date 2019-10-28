@@ -3,8 +3,9 @@
 @media print {
   #header-ui,
   #renderer-loader,
+  .status-banner-container,
   #top-header-ui {
-    display: none;
+    display: none !important;
   }
 
   iframe {
