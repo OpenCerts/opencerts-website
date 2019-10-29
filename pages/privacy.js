@@ -10,11 +10,11 @@ import { URL, DEFAULT_SEO } from "../src/config";
 const PAGE_SEO = {
   title: "Privacy Policy",
   description:
-    "This is a Government Agency digital service that may use “cookies”, where a small data file is sent to your browser to store and track information about you when you enter our websites.",
+    "This Privacy Policy must be read in conjunction with the Terms of Use that accompany the applicable service you are requesting from us (the “Service”). In this Privacy Policy, “Public Sector Entities” means the Government (including its ministries, departments and organs of state) and public authorities (such as statutory boards).",
   openGraph: {
     title: "OpenCerts - Privacy Policy",
     description:
-      "This is a Government Agency digital service that may use “cookies”, where a small data file is sent to your browser to store and track information about you when you enter our websites.",
+      "This Privacy Policy must be read in conjunction with the Terms of Use that accompany the applicable service you are requesting from us (the “Service”). In this Privacy Policy, “Public Sector Entities” means the Government (including its ministries, departments and organs of state) and public authorities (such as statutory boards).",
     url: `${URL}/privacy`
   }
 };

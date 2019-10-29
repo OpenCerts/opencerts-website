@@ -13,26 +13,36 @@ export const initialState = {
   storeLoading: false,
 
   issuerIdentities: null,
-
   certificateHash: false,
   certificateIssued: false,
   certificateNotRevoked: false,
   certificateIssuer: false,
+  certificateStore: false,
 
   certificateHashVerifying: false,
   certificateIssuedVerifying: false,
   certificateNotRevokedVerifying: false,
   certificateIssuerVerifying: false,
+  certificateStoreVerifying: false,
 
   certificateHashError: null,
   certificateIssuedError: null,
   certificateNotRevokedError: null,
   certificateIssuerError: null,
+  certificateStoreError: null,
 
   verificationStatus: [],
 
   emailState: states.INITIAL,
   emailError: null,
+
+  shareLink: {},
+  shareLinkState: states.INITIAL,
+  shareLinkError: null,
+
+  encryptedCertificate: {},
+  encryptedCertificateState: states.INITIAL,
+  encryptedCertificateError: null,
 
   templates: null,
   activeTemplateTab: 0
@@ -64,10 +74,23 @@ export const types = {
   VERIFYING_CERTIFICATE_ISSUER_SUCCESS: "VERIFYING_CERTIFICATE_ISSUER_SUCCESS",
   VERIFYING_CERTIFICATE_ISSUER_FAILURE: "VERIFYING_CERTIFICATE_ISSUER_FAILURE",
 
+  VERIFYING_CERTIFICATE_STORE_SUCCESS: "VERIFYING_CERTIFICATE_STORE_SUCCESS",
+  VERIFYING_CERTIFICATE_STORE_FAILURE: "VERIFYING_CERTIFICATE_STORE_FAILURE",
+
   SENDING_CERTIFICATE: "SENDING_CERTIFICATE",
   SENDING_CERTIFICATE_SUCCESS: "SENDING_CERTIFICATE_SUCCESS",
   SENDING_CERTIFICATE_FAILURE: "SENDING_CERTIFICATE_FAILURE",
   SENDING_CERTIFICATE_RESET: "SENDING_CERTIFICATE_RESET",
+
+  GENERATE_SHARE_LINK: "GENERATE_SHARE_LINK",
+  GENERATE_SHARE_LINK_SUCCESS: "GENERATE_SHARE_LINK_SUCCESS",
+  GENERATE_SHARE_LINK_FAILURE: "GENERATE_SHARE_LINK_FAILURE",
+  GENERATE_SHARE_LINK_RESET: "GENERATE_SHARE_LINK_RESET",
+
+  GET_CERTIFICATE_BY_ID: "GET_CERTIFICATE_BY_ID",
+  GET_CERTIFICATE_BY_ID_PENDING: "GET_CERTIFICATE_BY_ID_PENDING",
+  GET_CERTIFICATE_BY_ID_SUCCESS: "GET_CERTIFICATE_BY_ID_SUCCESS",
+  GET_CERTIFICATE_BY_ID_FAILURE: "GET_CERTIFICATE_BY_ID_FAILURE",
 
   CERTIFICATE_OBFUSCATE_RESET: "CERTIFICATE_OBFUSCATE_RESET",
   CERTIFICATE_OBFUSCATE_UPDATE: "CERTIFICATE_OBFUSCATE_UPDATE",
@@ -110,21 +133,23 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         issuerIdentities: null,
-
         certificateHash: false,
         certificateIssued: false,
         certificateNotRevoked: false,
         certificateIssuer: false,
+        certificateStore: false,
 
         certificateHashVerifying: true,
         certificateIssuedVerifying: true,
         certificateNotRevokedVerifying: true,
         certificateIssuerVerifying: true,
+        certificateStoreVerifying: true,
 
         certificateHashError: null,
         certificateIssuedError: null,
         certificateNotRevokedError: null,
         certificateIssuerError: null,
+        certificateStoreError: null,
 
         verificationStatus: []
       };
@@ -218,21 +243,6 @@ export default function reducer(state = initialState, action) {
           }
         ]
       };
-    case types.VERIFYING_CERTIFICATE_ISSUER_FAILURE:
-      return {
-        ...state,
-        certificateIssuer: false,
-        certificateIssuerVerifying: false,
-        certificateIssuerError: action.payload,
-        verificationStatus: [
-          ...state.verificationStatus,
-          {
-            message: "Certificate issuer is registered",
-            warning: false,
-            error: false
-          }
-        ]
-      };
     case types.VERIFYING_CERTIFICATE_ISSUER_SUCCESS:
       return {
         ...state,
@@ -243,9 +253,54 @@ export default function reducer(state = initialState, action) {
         verificationStatus: [
           ...state.verificationStatus,
           {
+            message: "Known certificate issuer",
+            warning: false,
+            error: false
+          }
+        ]
+      };
+    case types.VERIFYING_CERTIFICATE_ISSUER_FAILURE:
+      return {
+        ...state,
+        certificateIssuer: false,
+        certificateIssuerVerifying: false,
+        certificateIssuerError: action.payload,
+        verificationStatus: [
+          ...state.verificationStatus,
+          {
             message: "Unknown certificate issuer",
             warning: false,
             error: false
+          }
+        ]
+      };
+    case types.VERIFYING_CERTIFICATE_STORE_SUCCESS:
+      return {
+        ...state,
+        certificateStore: true,
+        certificateStoreError: null,
+        certificateStoreVerifying: false,
+        verificationStatus: [
+          ...state.verificationStatus,
+          {
+            message: "Certificate store checked",
+            warning: false,
+            error: false
+          }
+        ]
+      };
+    case types.VERIFYING_CERTIFICATE_STORE_FAILURE:
+      return {
+        ...state,
+        certificateStore: false,
+        certificateStoreError: action.payload,
+        certificateStoreVerifying: false,
+        verificationStatus: [
+          ...state.verificationStatus,
+          {
+            message: "Certificate store does not exist",
+            warning: false,
+            error: true
           }
         ]
       };
@@ -273,6 +328,42 @@ export default function reducer(state = initialState, action) {
         emailState: states.FAILURE,
         emailError: action.payload
       };
+    case types.GENERATE_SHARE_LINK_SUCCESS:
+      return {
+        ...state,
+        shareLink: action.payload,
+        shareLinkState: states.SUCCESS
+      };
+    case types.GENERATE_SHARE_LINK_FAILURE:
+      return {
+        ...state,
+        shareLink: {},
+        shareLinkState: states.FAILURE
+      };
+    case types.GENERATE_SHARE_LINK_RESET:
+      return {
+        ...state,
+        shareLink: {},
+        shareLinkState: states.INITIAL
+      };
+    case types.GET_CERTIFICATE_BY_ID_PENDING:
+      return {
+        ...state,
+        encryptedCertificateState: states.PENDING
+      };
+    case types.GET_CERTIFICATE_BY_ID_SUCCESS:
+      return {
+        ...state,
+        encryptedCertificate: action.payload,
+        encryptedCertificateState: states.SUCCESS
+      };
+    case types.GET_CERTIFICATE_BY_ID_FAILURE:
+      return {
+        ...state,
+        encryptedCertificate: {},
+        encryptedCertificateState: states.FAILURE,
+        encryptedCertificateError: action.payload
+      };
     case types.CERTIFICATE_OBFUSCATE_RESET:
       return {
         ...initialState,
@@ -286,8 +377,7 @@ export default function reducer(state = initialState, action) {
     case types.CERTIFICATE_TEMPLATE_REGISTER:
       return {
         ...state,
-        templates: action.payload,
-        activeTemplateTab: 0
+        templates: action.payload
       };
     case types.CERTIFICATE_TEMPLATE_SELECT_TAB:
       return {
@@ -327,18 +417,30 @@ export function updateFilteredCertificate(payload) {
   };
 }
 
-export function verifyingCertificateIssuerSuccess(payload) {
+export function verifyingCertificateIssuerSuccess({ issuerIdentities }) {
   return {
     type: types.VERIFYING_CERTIFICATE_ISSUER_SUCCESS,
-    payload
+    payload: issuerIdentities
   };
 }
 
-export function verifyingCertificateIssuerFailure({ error, certificate }) {
+export function verifyingCertificateIssuerFailure({ error }) {
   return {
     type: types.VERIFYING_CERTIFICATE_ISSUER_FAILURE,
-    error,
-    certificate
+    error
+  };
+}
+
+export function verifyingCertificateStoreSuccess() {
+  return {
+    type: types.VERIFYING_CERTIFICATE_STORE_SUCCESS
+  };
+}
+
+export function verifyingCertificateStoreFailure({ error }) {
+  return {
+    type: types.VERIFYING_CERTIFICATE_STORE_FAILURE,
+    error
   };
 }
 
@@ -348,11 +450,10 @@ export function verifyingCertificateRevocationSuccess() {
   };
 }
 
-export function verifyingCertificateRevocationFailure({ error, certificate }) {
+export function verifyingCertificateRevocationFailure({ error }) {
   return {
     type: types.VERIFYING_CERTIFICATE_REVOCATION_FAILURE,
-    error,
-    certificate
+    error
   };
 }
 
@@ -362,11 +463,10 @@ export function verifyingCertificateIssuedSuccess() {
   };
 }
 
-export function verifyingCertificateIssuedFailure({ error, certificate }) {
+export function verifyingCertificateIssuedFailure({ error }) {
   return {
     type: types.VERIFYING_CERTIFICATE_ISSUED_FAILURE,
-    error,
-    certificate
+    error
   };
 }
 
@@ -376,11 +476,10 @@ export function verifyingCertificateHashSuccess() {
   };
 }
 
-export function verifyingCertificateHashFailure({ error, certificate }) {
+export function verifyingCertificateHashFailure({ error }) {
   return {
     type: types.VERIFYING_CERTIFICATE_HASH_FAILURE,
-    error,
-    certificate
+    error
   };
 }
 
@@ -394,6 +493,19 @@ export function sendCertificate(payload) {
 export function sendCertificateReset() {
   return {
     type: types.SENDING_CERTIFICATE_RESET
+  };
+}
+
+export function generateShareLink() {
+  return {
+    type: types.GENERATE_SHARE_LINK
+  };
+}
+
+export function retrieveCertificateByLink(payload) {
+  return {
+    type: types.GET_CERTIFICATE_BY_ID,
+    payload
   };
 }
 
@@ -453,6 +565,19 @@ export function getHashStatus(store) {
   };
 }
 
+export function getStoreStatus(store) {
+  const {
+    certificateStore,
+    certificateStoreError,
+    certificateStoreVerifying
+  } = store.certificate;
+  return {
+    verified: certificateStore,
+    verifying: certificateStoreVerifying,
+    error: certificateStoreError
+  };
+}
+
 export function getIssuedStatus(store) {
   const {
     certificateIssued,
@@ -488,13 +613,15 @@ export function getVerifying(store) {
     certificateIssuerVerifying,
     certificateHashVerifying,
     certificateIssuedVerifying,
-    certificateNotRevokedVerifying
+    certificateNotRevokedVerifying,
+    certificateStoreVerifying
   } = store.certificate;
   return (
     certificateIssuerVerifying ||
     certificateHashVerifying ||
     certificateIssuedVerifying ||
-    certificateNotRevokedVerifying
+    certificateNotRevokedVerifying ||
+    certificateStoreVerifying
   );
 }
 
@@ -503,8 +630,9 @@ export function getVerified(store) {
   const issued = getIssuedStatus(store).verified;
   const notRevoked = getNotRevokedStatus(store).verified;
   const identity = getIssuerIdentityStatus(store).verified;
+  const storeStatus = getStoreStatus(store).verified;
 
-  return hash && issued && notRevoked && identity;
+  return hash && issued && notRevoked && identity && storeStatus;
 }
 
 export function getVerificationStatus(store) {
@@ -513,6 +641,22 @@ export function getVerificationStatus(store) {
 
 export function getEmailSendingState(store) {
   return store.certificate.emailState;
+}
+
+export function getShareLink(store) {
+  return store.certificate.shareLink;
+}
+
+export function getShareLinkState(store) {
+  return store.certificate.shareLinkState;
+}
+
+export function getEncryptedCertificate(store) {
+  return store.certificate.encryptedCertificate;
+}
+
+export function getEncryptedCertificateStatus(store) {
+  return store.certificate.encryptedCertificateState;
 }
 
 export function getActiveTemplateTab(store) {

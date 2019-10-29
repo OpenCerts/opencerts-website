@@ -1,0 +1,44 @@
+@import "../../styles/variables.scss";
+
+.header-container {
+  padding: 3rem;
+
+  h1 {
+    color: $brand-dark;
+  }
+}
+
+.title {
+  text-align: center;
+}
+
+.content-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem 0;
+  font-size: 1.125rem;
+
+  h4 {
+    padding: 0;
+    font-weight: 600;
+    color: $brand-orange;
+    margin-bottom: 0;
+  }
+  ol {
+    counter-reset: item;
+    padding-inline-start: 20px;
+  }
+
+  li {
+    display: block;
+    list-style-position: outside;
+    position: relative;
+  }
+
+  li:before {
+    content: counters(item, ".") ". ";
+    position: absolute;
+    left: -3em;
+    counter-increment: item;
+  }
+}

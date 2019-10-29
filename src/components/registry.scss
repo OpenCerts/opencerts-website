@@ -1,60 +1,21 @@
 @import "../styles/variables.scss";
 
-.r-section { 
-    font-weight: 100;
-    padding: 1rem 0rem !important; 
-}
-
-.logo {
-    width: 50%;
-    display: block;
-    margin: 15px auto;
-}
-
-.partner-block {
-    padding: 25px;
-    background: #EFF2F2;
-    height: 100%;
-    border-radius: 10px;
-    h4 {
-        padding: 10px 0;
-    }
-
-    div {
-        line-height: 1.7;
-        a {
-            color: #53615E;
-            font-weight: 600;
-        }
-    }
-}
-
-#np {
-    width: 40%;
+.r-section {
+  font-weight: 100;
+  padding: 1rem 0rem !important;
 }
 
 .section-width {
-    margin: auto !important;
-    max-width: 1280px !important;
-}
-
-.mb-3 {
-    margin-bottom: 0 !important;
+  margin: auto !important;
+  max-width: 1280px !important;
 }
 
 @media only screen and (max-width: 550px) {
-    .r-section { 
-        font-weight: 100;
-        padding: 1rem 1.1rem !important; 
-    }
-    .m-pd-0 {
-        padding: 0px !important;
-    }
-    .partner-block {
-        padding: 10px;
-    }
-    .mb-3 {
-        margin-bottom: 1rem!important;
-    }
+  .r-section {
+    font-weight: 100;
+    padding: 1rem 1.1rem !important;
+  }
+  .m-pd-0 {
+    padding: 0px !important;
+  }
 }
-

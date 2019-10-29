@@ -1,95 +1,45 @@
 import React from "react";
-import renderer from "react-test-renderer";
+import { mount } from "enzyme";
+import DetailedCertificateVerifyBlock from "./DetailedCertificateVerifyBlock";
 import { LOG_LEVEL } from "./constants";
 
-import CertificateVerifyBlock from "./DetailedCertificateVerifyBlock";
-
-it("renders correctly when the certificate verfied", () => {
-  const tree = renderer
-    .create(
-      <CertificateVerifyBlock
+describe("DetailedCertificateVerifyBlock", () => {
+  it("displays that the certificate has been tampered with when hashStatus is false", () => {
+    const wrapper = mount(
+      <DetailedCertificateVerifyBlock
+        statusSummary={LOG_LEVEL.VALID}
+        hashStatus={{ verified: false }}
+        notRevokedStatus={{ verified: true }}
+      />
+    );
+    expect(wrapper.find(".text-danger")).toHaveLength(1);
+    expect(wrapper.text()).toContain("Certificate has been tampered with");
+    expect(wrapper.find(".text-success")).toHaveLength(1);
+    expect(wrapper.text()).toContain("Certificate has not been revoked");
+  });
+  it("displays that the certificate has been revoked when notRevokedStatus is false", () => {
+    const wrapper = mount(
+      <DetailedCertificateVerifyBlock
         statusSummary={LOG_LEVEL.VALID}
         hashStatus={{ verified: true }}
-        issuedStatus={{ verified: true }}
-        notRevokedStatus={{ verified: true }}
-        issuerIdentityStatus={{ verified: true }}
-      />
-    )
-    .toJSON();
-  expect(tree).toMatchSnapshot();
-});
-
-it("renders correctly when the certificate`s hash status not verified", () => {
-  const tree = renderer
-    .create(
-      <CertificateVerifyBlock
-        statusSummary={LOG_LEVEL.INVALID}
-        hashStatus={{ verified: false }}
-        issuedStatus={{ verified: true }}
-        notRevokedStatus={{ verified: true }}
-        issuerIdentityStatus={{ verified: true }}
-      />
-    )
-    .toJSON();
-  expect(tree).toMatchSnapshot();
-});
-
-it("renders correctly when the certificate`s issue status not verified", () => {
-  const tree = renderer
-    .create(
-      <CertificateVerifyBlock
-        statusSummary={LOG_LEVEL.INVALID}
-        hashStatus={{ verified: true }}
-        issuedStatus={{ verified: false }}
-        notRevokedStatus={{ verified: true }}
-        issuerIdentityStatus={{ verified: true }}
-      />
-    )
-    .toJSON();
-  expect(tree).toMatchSnapshot();
-});
-
-it("renders correctly when the certificate has been revoked", () => {
-  const tree = renderer
-    .create(
-      <CertificateVerifyBlock
-        statusSummary={LOG_LEVEL.INVALID}
-        hashStatus={{ verified: true }}
-        issuedStatus={{ verified: true }}
         notRevokedStatus={{ verified: false }}
-        issuerIdentityStatus={{ verified: true }}
       />
-    )
-    .toJSON();
-  expect(tree).toMatchSnapshot();
-});
-
-it("renders correctly when the certificate`s issuer not identified", () => {
-  const tree = renderer
-    .create(
-      <CertificateVerifyBlock
-        statusSummary={LOG_LEVEL.WARNING}
+    );
+    expect(wrapper.find(".text-warning")).toHaveLength(1);
+    expect(wrapper.text()).toContain("Certificate has been revoked");
+    expect(wrapper.find(".text-success")).toHaveLength(1);
+    expect(wrapper.text()).toContain("Certificate has not been tampered with");
+  });
+  it("displays all statuses as success when all status are true", () => {
+    const wrapper = mount(
+      <DetailedCertificateVerifyBlock
+        statusSummary={LOG_LEVEL.VALID}
         hashStatus={{ verified: true }}
-        issuedStatus={{ verified: true }}
         notRevokedStatus={{ verified: true }}
-        issuerIdentityStatus={{ verified: false }}
       />
-    )
-    .toJSON();
-  expect(tree).toMatchSnapshot();
-});
-
-it("renders correctly when the certificate is invalid and hash, isseud, notRevoked, issuerIdentity status are not verified", () => {
-  const tree = renderer
-    .create(
-      <CertificateVerifyBlock
-        statusSummary={LOG_LEVEL.INVALID}
-        hashStatus={{ verified: false }}
-        issuedStatus={{ verified: false }}
-        notRevokedStatus={{ verified: false }}
-        issuerIdentityStatus={{ verified: false }}
-      />
-    )
-    .toJSON();
-  expect(tree).toMatchSnapshot();
+    );
+    expect(wrapper.find(".text-success")).toHaveLength(2);
+    expect(wrapper.text()).toContain("Certificate has not been revoked");
+    expect(wrapper.text()).toContain("Certificate has not been tampered with");
+  });
 });

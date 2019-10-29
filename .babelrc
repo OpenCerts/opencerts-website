@@ -14,11 +14,7 @@
     [
       "module-resolver",
       {
-        "root": ["./"],
-        "alias": {
-          "template-utils": "./src/components/CertificateTemplates/utils",
-          "template-commons": "./src/components/TemplateCommon"
-        }
+        "root": ["./"]
       }
     ]
   ]

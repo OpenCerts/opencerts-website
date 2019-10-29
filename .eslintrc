@@ -5,7 +5,12 @@
       "babel-module": {}
     }
   },
-  "extends": ["plugin:react/recommended", "airbnb-base", "prettier", "plugin:testcafe/recommended"],
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb-base",
+    "prettier",
+    "plugin:testcafe/recommended"
+  ],
   "env": {
     "mocha": true,
     "jest": true
@@ -17,7 +22,14 @@
       "jsx": true
     }
   },
-  "plugins": ["react", "prettier", "chai-friendly", "chai-expect", "mocha", "testcafe"],
+  "plugins": [
+    "react",
+    "prettier",
+    "chai-friendly",
+    "chai-expect",
+    "mocha",
+    "testcafe"
+  ],
   "globals": {
     "artifacts": false,
     "contract": false,
@@ -38,10 +50,14 @@
     "prettier/prettier": "error",
     "no-unused-expressions": "off",
     "mocha/no-exclusive-tests": "error",
-    "chai-friendly/no-unused-expressions": [ "error", {"allowTaggedTemplates": true } ],
+    "chai-friendly/no-unused-expressions": [
+      "error",
+      { "allowTaggedTemplates": true }
+    ],
     "chai-expect/no-inner-compare": "error",
     "chai-expect/missing-assertion": "error",
     "chai-expect/terminating-properties": "error",
-    "prefer-destructuring": "off"
-    }
+    "prefer-destructuring": "off",
+    "import/prefer-default-export": "off"
+  }
 }
