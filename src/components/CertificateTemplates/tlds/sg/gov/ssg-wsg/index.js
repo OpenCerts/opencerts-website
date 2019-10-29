@@ -134,6 +134,7 @@ const templates = {
   SOA_SV_001: SOASV001,
   SF_SOA_SV_001: SOASV001,
   "SOA-ES-001": SOAES01,
+  "SOA-SVCF-001": SOASV001,
   Trans: Transcript,
   Trans_Reprint: Transcript
 };
