@@ -6,8 +6,8 @@ import css from "./dropZoneSection.scss";
 import { updateCertificate } from "../../reducers/certificate";
 import { trace } from "../../utils/logger";
 import { IS_MAINNET } from "../../config";
-import MAIN from "../CertificateTemplates/tlds/sg/gov/tech/Govtech-Demo-Cert/Main-Demo";
-import ROPSTEN from "../CertificateTemplates/tlds/sg/gov/tech/Govtech-Demo-Cert/Ropsten-Demo";
+import MAIN from "./Main-Demo";
+import ROPSTEN from "./Ropsten-Demo";
 import { analyticsEvent } from "../Analytics/index";
 
 const DEMO_CERT = IS_MAINNET ? MAIN : ROPSTEN;
@@ -33,6 +33,7 @@ const DraggableDemoCertificate = () => (
           <a
             href={`data:text/plain;,${JSON.stringify(DEMO_CERT, null, 2)}`}
             download="demo.opencert"
+            rel="noindex nofollow"
           >
             <img
               style={{ cursor: "grabbing" }}
@@ -44,7 +45,20 @@ const DraggableDemoCertificate = () => (
       </div>
       <div className="col">
         <img
-          src="/static/images/dropzone/arrow3.png"
+          src="/static/images/dropzone/arrow.png"
+          width="100%"
+          draggable="false"
+        />
+        <span
+          style={{
+            textAlign: "justify",
+            color: "#ff9933"
+          }}
+        >
+          Drag me over here to see a demo certificate and other features
+        </span>
+        <img
+          src="/static/images/opencertslogo.svg"
           width="100%"
           draggable="false"
         />

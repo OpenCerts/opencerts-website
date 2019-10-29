@@ -7,3 +7,5 @@ out
 bundles/
 yarn.lock
 .scannerwork
+*.iml
+.idea

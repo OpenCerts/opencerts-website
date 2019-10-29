@@ -66,7 +66,7 @@
     "0x0CE38eBEa3B943Ee6DA24163710b25Ef8654f39E": {
       "name": "Institute of Technical Education",
       "displayCard": true,
-      "website": "https://ite.edu.sg",
+      "website": "https://www.ite.edu.sg",
       "email": "training@ite.edu.sg",
       "phone": "1800-2222 111",
       "logo": "/static/images/ITE_logo.png",
@@ -80,6 +80,41 @@
       "phone": "+65 6510 3000",
       "logo": "/static/images/RP_logo.svg",
       "id": "rp-registry"
+    },
+    "0x96a7bEefb0A7fb6B9d2101B0A27a734fA97E7221": {
+      "name": "Singapore University of Technology and Design",
+      "displayCard": true,
+      "website": "https://sutd.edu.sg",
+      "email": "opencert@sutd.edu.sg",
+      "phone": "+65 6499 8922",
+      "logo": "/static/images/SUTD_logo.png",
+      "id": "sutd-registry"
+    },
+    "0x16E949FcDC655765959Ac085CA7B1aE353D6Ca35": {
+      "name": "Nanyang Technological University",
+      "displayCard": true,
+      "website": "https://www.ntu.edu.sg",
+      "email": "deg_verify@ntu.edu.sg",
+      "phone": "+65 6592 2448",
+      "logo": "/static/images/NTU_logo.png",
+      "id": "ntu-registry"
+    },
+    "0xCFa2B7Fc3FdD5CA55715581e34420268CCcd3039": {
+      "name": "Singapore Management University",
+      "displayCard": true,
+      "website": "https://www.smu.edu.sg",
+      "email": "digitalcert@smu.edu.sg",
+      "phone": "+65 6828 0204",
+      "logo": "/static/images/SMU_logo.png",
+      "id": "smu-registry"
+    },
+    "0xb3c1404732585ddEB837Af28eBdAec504ed8Ba04": {
+      "name": "ROPSTEN: Singapore Management University",
+      "displayCard": false
+    },
+    "0x3FFB6b913E9874c7ddabD564d85676Bc5cAd16d4": {
+      "name": "ROPSTEN: Nanyang Technological University",
+      "displayCard": false
     },
     "0x5f007251c78cA92d3053492cCf0EDC161063624c": {
       "name": "ROPSTEN: Nanyang Polytechnic",
@@ -125,8 +160,20 @@
       "name": "ROPSTEN: Government Technology Agency of Singapore (GovTech)",
       "displayCard": false
     },
+    "0x532C9Ff853CA54370D7492cD84040F9f8099f11B": {
+      "name": "ROPSTEN: Government Technology Agency of Singapore (GovTech)",
+      "displayCard": false
+    },
     "0x061aFcFF60b90E0F633F8ef157e01BaB9b2FfDD3": {
-      "name:": "ROPSTEN: Republic Polytechnic",
+      "name": "ROPSTEN: Republic Polytechnic",
+      "displayCard": false
+    },
+    "0x2456FC81C1342fB79D7C58A4682F031208A44d7F": {
+      "name": "ROPSTEN: Singapore University of Technology and Design",
+      "displayCard": false
+    },
+    "0x46cf931c320ce7277753dbb15567dD684404e36C": {
+      "name": "ROPSTEN: Singapore University of Social Sciences",
       "displayCard": false
     }
   }

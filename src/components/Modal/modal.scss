@@ -14,13 +14,17 @@
 .modal-content {
   position: relative;
   z-index: 15;
-  min-width: 300px;
-  min-height: 300px;
+  min-width: 500px;
+  min-height: auto;
   top: 10%;
   background-color: white;
   border-radius: 5px;
 }
 
 .modal-cross {
-  float:right;
+  float: right;
+}
+
+#error-message {
+  font-size: 1.25rem;
 }

@@ -11,12 +11,6 @@ export default class Drawer extends Component {
     };
   }
 
-  componentDidMount() {
-    if (window.location.pathname === "/frameless-viewer") {
-      this.setState({ showAbsHeader: true });
-    }
-  }
-
   toggleDrawer() {
     this.setState({ visible: !this.state.visible });
   }
