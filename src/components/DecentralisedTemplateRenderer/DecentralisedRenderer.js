@@ -9,7 +9,7 @@ import MultiTabs from "../MultiTabs";
 import { updateObfuscatedCertificate as updateObfuscatedCertificateAction } from "../../reducers/certificate";
 import { analyticsEvent } from "../Analytics";
 import { getDocumentIssuerStores } from "../../utils/certificate";
-
+// stupid github
 export const DecentralisedRenderer = ({
   rawDocument,
   updateObfuscatedCertificate
