@@ -25,7 +25,7 @@
     "integration:watch": "nodemon --exec \"npm run integration\" --watch src"
   },
   "dependencies": {
-    "@govtechsg/decentralized-renderer-react-components": "1.1.8",
+    "@govtechsg/decentralized-renderer-react-components": "1.2.1",
     "@govtechsg/dnsprove": "^2.0.3",
     "@govtechsg/open-attestation": "^1.1.30",
     "@govtechsg/opencerts-encryption": "1.0.0",

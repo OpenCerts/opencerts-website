@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import React from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { get, some } from "lodash";
@@ -12,10 +13,17 @@ import { FeatureFlagContainer } from "./FeatureFlag";
 const CertificateSharingForm = dynamic(
   import("./CertificateSharing/CertificateSharingForm")
 );
+
 const DecentralisedRenderer = dynamic(
   () => import("./DecentralisedTemplateRenderer/DecentralisedRenderer"),
   { ssr: false }
 );
+
+// https://github.com/zeit/next.js/issues/4957#issuecomment-413841689
+// eslint-disable-next-line react/display-name
+const ForwardedRefDecentralisedRenderer = React.forwardRef((props, ref) => (
+  <DecentralisedRenderer {...props} forwardedRef={ref} />
+));
 
 const renderVerifyBlock = props => (
   <CertificateVerifyBlock
@@ -30,7 +38,7 @@ const renderVerifyBlock = props => (
   />
 );
 
-const renderHeaderBlock = props => {
+const renderHeaderBlock = (props, childRef) => {
   const renderedVerifyBlock = renderVerifyBlock(props);
   return (
     <div className={`container-fluid ${styles["pd-0"]} ${styles.container}`}>
@@ -41,7 +49,9 @@ const renderHeaderBlock = props => {
             <div
               id="btn-print"
               className={styles["print-btn"]}
-              onClick={() => window.print()}
+              onClick={() => {
+                childRef.current.print();
+              }}
             >
               <i className="fas fa-print" style={{ fontSize: "1.5rem" }} />
             </div>
@@ -94,8 +104,9 @@ const renderHeaderBlock = props => {
 
 export const CertificateViewer = props => {
   const { document } = props;
+  const childRef = React.useRef();
 
-  const renderedHeaderBlock = renderHeaderBlock(props);
+  const renderedHeaderBlock = renderHeaderBlock(props, childRef);
   const identity = get(props, "issuerIdentityStatus.identities", []);
   const isInRegistry = some(identity, ({ registry }) => !!registry);
 
@@ -131,7 +142,10 @@ export const CertificateViewer = props => {
       <div id={styles["top-header-ui"]}>
         <div className={styles["header-container"]}>{renderedHeaderBlock}</div>
       </div>
-      <DecentralisedRenderer rawDocument={document} />
+      <ForwardedRefDecentralisedRenderer
+        rawDocument={document}
+        ref={childRef}
+      />
       <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
         <CertificateSharingForm
           emailSendingState={props.emailSendingState}
