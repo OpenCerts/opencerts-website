@@ -29,10 +29,8 @@ test("Sample document is rendered correctly when dns and registry is verified", 
   await t.switchToIframe(IframeBlock);
 
   await validateTextContent(t, SampleTemplate, [
-    "Rendered with custom template",
-    "Master of Blockchain",
-    "CUSTOM_TEMPLATE",
-    "Blockchain Academy",
-    "Bitcoin"
+    "OpenCerts Demo",
+    "Mr Blockchain",
+    "has successfully completed the"
   ]);
 });
