@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useState, useRef } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useState,
+  useRef
+} from "react";
 import { FrameConnector } from "@govtechsg/decentralized-renderer-react-components";
 import { getData, obfuscateDocument } from "@govtechsg/open-attestation";
 import PropTypes from "prop-types";
@@ -12,13 +18,24 @@ import { getDocumentIssuerStores } from "../../utils/certificate";
 
 export const DecentralisedRenderer = ({
   rawDocument,
-  updateObfuscatedCertificate
+  updateObfuscatedCertificate,
+  forwardedRef
 }) => {
   const toFrame = useRef();
   const documentRef = useRef(rawDocument);
   const [height, setHeight] = useState(0);
   const [templates, setTemplates] = useState([]);
   const document = getData(rawDocument);
+
+  useImperativeHandle(forwardedRef, () => ({
+    print() {
+      const hasPrintedFromFrame =
+        toFrame.current.print && toFrame.current.print();
+      if (!hasPrintedFromFrame) {
+        window.print();
+      }
+    }
+  }));
 
   // actions
   const updateHeight = h => {
@@ -97,5 +114,6 @@ export default connect(
 
 DecentralisedRenderer.propTypes = {
   rawDocument: PropTypes.object,
-  updateObfuscatedCertificate: PropTypes.func
+  updateObfuscatedCertificate: PropTypes.func,
+  forwardedRef: PropTypes.any
 };
