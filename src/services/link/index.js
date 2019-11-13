@@ -3,7 +3,7 @@ import { SHARE_LINK_API_URL, SHARE_LINK_TTL } from "../../config";
 
 export function generateLink(certificate) {
   return window
-    .fetch(`${SHARE_LINK_API_URL}/create`, {
+    .fetch(`${SHARE_LINK_API_URL}/`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -19,7 +19,7 @@ export function generateLink(certificate) {
 
 export function getCertificateById(certificateId) {
   return window
-    .fetch(`${SHARE_LINK_API_URL}/get/${certificateId}`, {
+    .fetch(`${SHARE_LINK_API_URL}/${certificateId}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
