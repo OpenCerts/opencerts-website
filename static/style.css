@@ -19,6 +19,10 @@ html {
   height: 100%;
 }
 
+#__next {
+  position: relative;
+}
+
 .navbar-toggler {
   position: absolute;
   right: 30px;

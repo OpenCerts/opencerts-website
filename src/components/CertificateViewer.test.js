@@ -1,12 +1,10 @@
 import { mount } from "enzyme";
 import React from "react";
-import { StatelessCertificateViewer } from "./CertificateViewer";
+import { CertificateViewer } from "./CertificateViewer";
 
-jest.mock("next/dynamic", () => () => "");
+jest.mock("next/dynamic", () => () => () => "");
 jest.mock("@govtechsg/open-attestation");
-jest.mock("./DecentralisedTemplateRenderer/DecentralisedRenderer");
 jest.mock("./FeatureFlag");
-jest.mock("./MultiTabs");
 
 describe("CertificateViewer", () => {
   const sharedProps = {
@@ -22,7 +20,7 @@ describe("CertificateViewer", () => {
   };
   it("should show that the issuer is not in the registry when identities is not defined ", () => {
     const wrapper = mount(
-      <StatelessCertificateViewer
+      <CertificateViewer
         {...sharedProps}
         issuerIdentityStatus={{ identities: null, verified: true }}
       />
@@ -37,7 +35,7 @@ describe("CertificateViewer", () => {
   });
   it("should show that the issuer is not in the registry when identities is an empty array ", () => {
     const wrapper = mount(
-      <StatelessCertificateViewer
+      <CertificateViewer
         {...sharedProps}
         issuerIdentityStatus={{ identities: [], verified: true }}
       />
@@ -52,7 +50,7 @@ describe("CertificateViewer", () => {
   });
   it("should show that the issuer is not in the registry when identities is an array with one element that is not resolved", () => {
     const wrapper = mount(
-      <StatelessCertificateViewer
+      <CertificateViewer
         {...sharedProps}
         issuerIdentityStatus={{
           identities: [{ registry: false }],
@@ -70,7 +68,7 @@ describe("CertificateViewer", () => {
   });
   it("should show that the issuer is in the registry when identities is array with one element that is not resolved", () => {
     const wrapper = mount(
-      <StatelessCertificateViewer
+      <CertificateViewer
         {...sharedProps}
         issuerIdentityStatus={{
           identities: [{ registry: "foo" }],
@@ -85,7 +83,7 @@ describe("CertificateViewer", () => {
   });
   it("should show that the issuer is in the registry when identities is array with two elements and one is resolved", () => {
     const wrapper = mount(
-      <StatelessCertificateViewer
+      <CertificateViewer
         {...sharedProps}
         issuerIdentityStatus={{
           identities: [{ registry: false }, { registry: "foo" }],
