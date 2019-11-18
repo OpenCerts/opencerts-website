@@ -1,15 +1,24 @@
-@import '../../styles/variables.scss';
+@import "../../styles/variables.scss";
 
 .btn {
-    font-weight: 400;
-    text-align: center;
-    vertical-align: middle;
-    padding: 0.375rem 2rem;
-    background-color: $brand-dark;
-    border: none;
-    border-radius: 6px;
-    min-width: 120px;
-    color: #fff;
-    margin: auto;
-    
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.375rem 2rem;
+  background-color: $brand-dark;
+  border: none;
+  border-radius: 6px;
+  min-width: 120px;
+  color: #fff;
+  margin: auto;
+}
+
+.renderer-loader {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: auto;
+  height: auto;
+  text-align: center;
 }

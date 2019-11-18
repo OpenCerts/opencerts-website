@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Convergence.tech",
+    "description": "Provides a Self-Sovereign Identity (SSI) powered digital credential solution supporting the OpenCerts schema as well as W3C DID and Verifiable Credential standards and the developing DIDComms protocols.",
+    "website": "https://convergence.tech",
+    "key": "convergence",
+    "logo": "/static/images/collaborate/CONVERGENCE_logo.png"
+  },
+  {
+    "name": "NextID Pte Ltd",
+    "description": "Our hosted NextCert service produces digitally-signed, tamper-proof academic and professional certificates which support the OpenCerts schema and Verifiable Credentials standards.",
+    "website": "https://nextid.com",
+    "key": "nextid",
+    "logo": "/static/images/collaborate/NEXTID_logo.png"
+  },
+  {
+    "name": "Edufied",
+    "description": "Edufied provides a  secured and decentralized system for Certificate Issuers, Individuals and Employers to store & verify certifications and credentials using Blockchain Technology.",
+    "website": "https://edufied.network",
+    "key": "edufied",
+    "logo": "/static/images/collaborate/EDUFIED_logo.png"
+  },
+  {
+    "name": "Accredify",
+    "description": "Enables institutions to issue tamper-proof digital certificates using the OpenCerts Schema.",
+    "website": "https://www.accredify.io",
+    "key": "accredify",
+    "logo": "/static/images/collaborate/ACCREDIFY_logo.png"
+  }
+]

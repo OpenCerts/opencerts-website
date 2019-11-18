@@ -1,19 +1,29 @@
 import PropTypes from "prop-types";
+import React from "react";
 import dynamic from "next/dynamic";
-import { get } from "lodash";
+import Link from "next/link";
+import { get, some } from "lodash";
 import CertificateVerifyBlock from "./CertificateVerifyBlock";
 import styles from "./certificateViewer.scss";
 import Modal from "./Modal";
-
-import { getLogger } from "../utils/logger";
-import templates from "./CertificateTemplates";
 import ErrorBoundary from "./ErrorBoundary";
-
-const { trace } = getLogger("components:CertificateViewer");
+import CertificateShareLinkForm from "./CertificateShareLink/CertificateShareLinkForm";
+import { FeatureFlagContainer } from "./FeatureFlag";
 
 const CertificateSharingForm = dynamic(
   import("./CertificateSharing/CertificateSharingForm")
 );
+
+const DecentralisedRenderer = dynamic(
+  () => import("./DecentralisedTemplateRenderer/DecentralisedRenderer"),
+  { ssr: false }
+);
+
+// https://github.com/zeit/next.js/issues/4957#issuecomment-413841689
+// eslint-disable-next-line react/display-name
+const ForwardedRefDecentralisedRenderer = React.forwardRef((props, ref) => (
+  <DecentralisedRenderer {...props} forwardedRef={ref} />
+));
 
 const renderVerifyBlock = props => (
   <CertificateVerifyBlock
@@ -28,23 +38,37 @@ const renderVerifyBlock = props => (
   />
 );
 
-const renderHeaderBlock = props => {
+const renderHeaderBlock = (props, childRef) => {
   const renderedVerifyBlock = renderVerifyBlock(props);
   return (
-    <div className={`container-fluid ${styles["pd-0"]}`}>
+    <div className={`container-fluid ${styles["pd-0"]} ${styles.container}`}>
       <div className="row">
-        <div className="col-sm-7 col-xs-12">{renderedVerifyBlock}</div>
-        <div className={`row col-sm-5 col-xs-12 ${styles["pd-0"]}`}>
-          <div className="ml-auto">
+        <div>{renderedVerifyBlock}</div>
+        <div className={`row flex-nowrap`}>
+          <div className="">
             <div
               id="btn-print"
               className={styles["print-btn"]}
-              onClick={() => window.print()}
+              onClick={() => {
+                childRef.current.print();
+              }}
             >
               <i className="fas fa-print" style={{ fontSize: "1.5rem" }} />
             </div>
           </div>
-          <div />
+          <FeatureFlagContainer
+            name="SHARE_LINK"
+            render={() => (
+              <div
+                className="ml-2"
+                onClick={() => props.handleShareLinkToggle()}
+              >
+                <div id="btn-link" className={styles["send-btn"]}>
+                  <i className="fas fa-link" style={{ fontSize: "1.5rem" }} />
+                </div>
+              </div>
+            )}
+          />
           <div className="ml-2" onClick={() => props.handleSharingToggle()}>
             <div id="btn-email" className={styles["send-btn"]}>
               <i className="fas fa-envelope" style={{ fontSize: "1.5rem" }} />
@@ -78,28 +102,63 @@ const renderHeaderBlock = props => {
   );
 };
 
-const CertificateViewer = props => {
-  const { certificate } = props;
+export const CertificateViewer = props => {
+  const { document } = props;
+  const childRef = React.useRef();
 
-  const renderedHeaderBlock = renderHeaderBlock(props);
-  const selectedTemplateName = get(certificate, "$template", "default");
-  const SelectedTemplate = templates[selectedTemplateName] || templates.default;
-
-  trace(`Templates Mapping: %o`, templates);
-  trace(`Selected template: ${selectedTemplateName}`);
-  trace(`Certificate content: %o`, certificate);
+  const renderedHeaderBlock = renderHeaderBlock(props, childRef);
+  const identity = get(props, "issuerIdentityStatus.identities", []);
+  const isInRegistry = some(identity, ({ registry }) => !!registry);
 
   const validCertificateContent = (
     <div>
+      {isInRegistry ? (
+        <div
+          id="status-banner-container"
+          className={`${styles["status-banner-container"]} ${styles.valid}`}
+        >
+          <div className={`${styles["status-banner"]}`}>
+            Certificate issuer is in the SkillsFuture Singapore registry for
+            Opencerts
+          </div>
+        </div>
+      ) : (
+        <div
+          id="status-banner-container"
+          className={`${styles["status-banner-container"]} ${styles.invalid}`}
+        >
+          <div className={`${styles["status-banner"]}`}>
+            Certificate issuer is <b>not</b> in the SkillsFuture Singapore
+            registry for Opencerts
+            <br />
+            <Link href="/faq#verifications-issuers-not-in-registry-meaning">
+              <a>
+                <small>What does this mean ?</small>
+              </a>
+            </Link>
+          </div>
+        </div>
+      )}
       <div id={styles["top-header-ui"]}>
         <div className={styles["header-container"]}>{renderedHeaderBlock}</div>
       </div>
-      <SelectedTemplate />
+      <ForwardedRefDecentralisedRenderer
+        rawDocument={document}
+        ref={childRef}
+      />
       <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
         <CertificateSharingForm
           emailSendingState={props.emailSendingState}
           handleSendCertificate={props.handleSendCertificate}
           handleSharingToggle={props.handleSharingToggle}
+        />
+      </Modal>
+      <Modal show={props.showShareLink} toggle={props.handleShareLinkToggle}>
+        <CertificateShareLinkForm
+          shareLink={props.shareLink}
+          copiedLink={props.copiedLink}
+          handleShareLinkToggle={props.handleShareLinkToggle}
+          handleCopyLink={props.handleCopyLink}
         />
       </Modal>
     </div>
@@ -109,24 +168,24 @@ const CertificateViewer = props => {
 };
 
 CertificateViewer.propTypes = {
-  handleCertificateChange: PropTypes.func,
   toggleDetailedView: PropTypes.func,
   detailedVerifyVisible: PropTypes.bool,
   document: PropTypes.object,
   certificate: PropTypes.object,
   verifying: PropTypes.bool,
+  shareLink: PropTypes.object,
 
   hashStatus: PropTypes.object,
   issuedStatus: PropTypes.object,
   notRevokedStatus: PropTypes.object,
   issuerIdentityStatus: PropTypes.object,
   showSharing: PropTypes.bool,
+  showShareLink: PropTypes.bool,
   emailSendingState: PropTypes.string,
   handleSharingToggle: PropTypes.func,
-  handleSendCertificate: PropTypes.func
+  handleSendCertificate: PropTypes.func,
+  handleShareLinkToggle: PropTypes.func
 };
 
 renderVerifyBlock.propTypes = CertificateViewer.propTypes;
 renderHeaderBlock.propTypes = CertificateViewer.propTypes;
-
-export default CertificateViewer;

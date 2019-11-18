@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`default card matches snapshot 1`] = `
+<div
+  className="col-lg-4 col-md-6 col-sm-12 undefined undefined"
+  id="Test Id"
+  style={
+    Object {
+      "paddingBottom": "36px",
+      "wordWrap": "break-word",
+    }
+  }
+>
+  <a
+    href="Test Website"
+    rel="noopener noreferrer nofollow"
+    style={
+      Object {
+        "color": "#000",
+        "textDecoration": "none",
+      }
+    }
+    target="_blank"
+  >
+    <div>
+      <img
+        className="undefined"
+        src="Test Logo"
+      />
+      <h4
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        Test Name
+      </h4>
+      
+      
+      <div>
+        Email: 
+        <a
+          href="mailto:Test Email"
+        >
+          Test Email
+        </a>
+      </div>
+      <div>
+        Phone: 
+        <a
+          href="tel:Test Phone"
+        >
+          Test Phone
+        </a>
+      </div>
+      <div>
+        Test Description
+      </div>
+    </div>
+  </a>
+</div>
+`;

@@ -42,18 +42,6 @@ const CHECKS = {
     failure: "Certificate has been tampered with",
     failureStatusIcon: FailureIcon
   },
-  ISSUED: {
-    id: "issuedStatus",
-    success: "Certificate has been issued",
-    failure: "Certificate has not been issued",
-    failureStatusIcon: FailureIcon
-  },
-  ISSUER_IDENTITY: {
-    id: "issuerIdentityStatus",
-    success: "Certificate from institution in our registry",
-    failure: "Institution not in our registry",
-    failureStatusIcon: WarningIcon
-  },
   NOT_REVOKED: {
     id: "notRevokedStatus",
     success: "Certificate has not been revoked",
@@ -65,23 +53,15 @@ const CHECKS = {
 const renderVerifiedStatuses = props => (
   <div>
     {renderStatus(props, CHECKS.HASH)}
-    {renderStatus(props, CHECKS.ISSUED)}
-    {renderStatus(props, CHECKS.ISSUER_IDENTITY)}
     {renderStatus(props, CHECKS.NOT_REVOKED)}
   </div>
 );
 
 const renderUnverifiedStatuses = props => {
-  const show =
-    !props.hashStatus.verified ||
-    !props.issuedStatus.verified ||
-    !props.issuerIdentityStatus.verified ||
-    !props.notRevokedStatus.verified;
+  const show = !props.hashStatus.verified || !props.notRevokedStatus.verified;
   return show ? (
     <div>
       {renderStatus(props, CHECKS.HASH, false)}
-      {renderStatus(props, CHECKS.ISSUED, false)}
-      {renderStatus(props, CHECKS.ISSUER_IDENTITY, false)}
       {renderStatus(props, CHECKS.NOT_REVOKED, false)}
       <hr />
     </div>
@@ -107,7 +87,7 @@ const CertificateVerifyBlock = props => {
     <div
       className={`${css["detailed-certificate-block"]} ${
         css[borderColor]
-      } bg-white p-3 col-12`}
+      } bg-white p-3`}
     >
       <div className="mb-3">
         <h5>Details</h5>
@@ -121,16 +101,14 @@ const CertificateVerifyBlock = props => {
 CertificateVerifyBlock.propTypes = {
   statusSummary: PropTypes.string,
   hashStatus: PropTypes.object,
-  issuedStatus: PropTypes.object,
-  notRevokedStatus: PropTypes.object,
-  issuerIdentityStatus: PropTypes.object,
-  detailedVerifyVisible: PropTypes.bool
+  notRevokedStatus: PropTypes.object
 };
 
 CheckStatusRow.propTypes = {
   message: PropTypes.string,
   icon: PropTypes.element
 };
+
 renderUnverifiedStatuses.propTypes = CertificateVerifyBlock.propTypes;
 
 export default CertificateVerifyBlock;

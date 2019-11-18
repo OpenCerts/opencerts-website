@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Router from "next/router";
+import Dropzone from "react-dropzone";
 import { connect } from "react-redux";
 import {
   updateCertificate,
@@ -11,11 +12,34 @@ import {
   getIssuedStatus,
   getNotRevokedStatus,
   getVerificationStatus,
-  resetCertificateState
+  resetCertificateState,
+  getEncryptedCertificateStatus,
+  getStoreStatus
 } from "../../reducers/certificate";
 import { updateNetworkId } from "../../reducers/application";
-import CertificateDropZone from "./CertificateDropZone";
+import CertificateVerificationStatus from "./CertificateVerificationStatus";
 
+const onFileDrop = (
+  acceptedFiles,
+  handleCertificateChange,
+  handleFileError
+) => {
+  // eslint-disable-next-line no-undef
+  const reader = new FileReader();
+  if (reader.error) {
+    handleFileError(reader.error);
+  }
+  reader.onload = () => {
+    try {
+      const json = JSON.parse(reader.result);
+      handleCertificateChange(json);
+    } catch (e) {
+      handleFileError(e);
+    }
+  };
+  if (acceptedFiles && acceptedFiles.length && acceptedFiles.length > 0)
+    acceptedFiles.map(f => reader.readAsText(f));
+};
 class CertificateDropZoneContainer extends Component {
   constructor(props) {
     super(props);
@@ -47,19 +71,36 @@ class CertificateDropZoneContainer extends Component {
 
   render() {
     return (
-      <CertificateDropZone
-        document={this.props.document}
-        fileError={this.state.fileError}
-        handleCertificateChange={this.handleCertificateChange}
-        handleFileError={this.handleFileError}
-        verifying={this.props.verifying}
-        issuerIdentityStatus={this.props.issuerIdentityStatus}
-        hashStatus={this.props.hashStatus}
-        issuedStatus={this.props.issuedStatus}
-        notRevokedStatus={this.props.notRevokedStatus}
-        verificationStatus={this.props.verificationStatus}
-        resetData={this.resetData.bind(this)}
-      />
+      <Dropzone
+        id="certificate-dropzone"
+        onDrop={acceptedFiles =>
+          onFileDrop(
+            acceptedFiles,
+            this.handleCertificateChange,
+            this.handleFileError
+          )
+        }
+        className="h-100"
+      >
+        {props => (
+          <CertificateVerificationStatus
+            document={this.props.document}
+            retrieveCertificateStatus={this.props.encryptedCertificateStatus}
+            fileError={this.state.fileError}
+            handleCertificateChange={this.handleCertificateChange}
+            handleFileError={this.handleFileError}
+            verifying={this.props.verifying}
+            issuerIdentityStatus={this.props.issuerIdentityStatus}
+            hashStatus={this.props.hashStatus}
+            issuedStatus={this.props.issuedStatus}
+            notRevokedStatus={this.props.notRevokedStatus}
+            verificationStatus={this.props.verificationStatus}
+            resetData={this.resetData.bind(this)}
+            storeStatus={this.props.storeStatus}
+            hover={props.isDragAccept}
+          />
+        )}
+      </Dropzone>
     );
   }
 }
@@ -68,12 +109,14 @@ const mapStateToProps = store => ({
   document: getCertificate(store),
 
   // Verification statuses used in verifier block
+  encryptedCertificateStatus: getEncryptedCertificateStatus(store),
   verifying: getVerifying(store),
   issuerIdentityStatus: getIssuerIdentityStatus(store),
   hashStatus: getHashStatus(store),
   issuedStatus: getIssuedStatus(store),
   notRevokedStatus: getNotRevokedStatus(store),
-  verificationStatus: getVerificationStatus(store)
+  verificationStatus: getVerificationStatus(store),
+  storeStatus: getStoreStatus(store)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -90,6 +133,7 @@ export default connect(
 CertificateDropZoneContainer.propTypes = {
   updateNetworkId: PropTypes.func,
   document: PropTypes.object,
+  encryptedCertificateStatus: PropTypes.string,
   handleCertificateChange: PropTypes.func,
   updateCertificate: PropTypes.func,
   resetData: PropTypes.func,
@@ -98,5 +142,6 @@ CertificateDropZoneContainer.propTypes = {
   hashStatus: PropTypes.object,
   issuedStatus: PropTypes.object,
   notRevokedStatus: PropTypes.object,
-  verificationStatus: PropTypes.array
+  verificationStatus: PropTypes.array,
+  storeStatus: PropTypes.object
 };
