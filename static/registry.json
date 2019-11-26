@@ -99,6 +99,28 @@
       "logo": "/static/images/NTU_logo.png",
       "id": "ntu-registry"
     },
+    "0xCFa2B7Fc3FdD5CA55715581e34420268CCcd3039": {
+      "name": "Singapore Management University",
+      "displayCard": true,
+      "website": "https://www.smu.edu.sg",
+      "email": "digitalcert@smu.edu.sg",
+      "phone": "+65 6828 0204",
+      "logo": "/static/images/SMU_logo.png",
+      "id": "smu-registry"
+    },
+    "0x51964385265eff73875a226aBf6fa20b0aAE4a6f": {
+      "name": "National University of Singapore",
+      "displayCard": true,
+      "website": "https://www.nus.edu.sg/",
+      "email": "transcript@nus.edu.sg",
+      "phone": "+65 6516 2304",
+      "logo": "/static/images/NUS_logo.png",
+      "id": "nus-registry"
+    },
+    "0xb3c1404732585ddEB837Af28eBdAec504ed8Ba04": {
+      "name": "ROPSTEN: Singapore Management University",
+      "displayCard": false
+    },
     "0x3FFB6b913E9874c7ddabD564d85676Bc5cAd16d4": {
       "name": "ROPSTEN: Nanyang Technological University",
       "displayCard": false

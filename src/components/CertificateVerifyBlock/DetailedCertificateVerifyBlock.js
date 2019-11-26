@@ -42,18 +42,6 @@ const CHECKS = {
     failure: "Certificate has been tampered with",
     failureStatusIcon: FailureIcon
   },
-  ISSUED: {
-    id: "issuedStatus",
-    success: "Certificate has been issued",
-    failure: "Certificate has not been issued",
-    failureStatusIcon: FailureIcon
-  },
-  ISSUER_IDENTITY: {
-    id: "issuerIdentityStatus",
-    success: "Certificate Verified",
-    failure: "Institution identity can not be verified by registry or dns",
-    failureStatusIcon: WarningIcon
-  },
   NOT_REVOKED: {
     id: "notRevokedStatus",
     success: "Certificate has not been revoked",
@@ -65,23 +53,15 @@ const CHECKS = {
 const renderVerifiedStatuses = props => (
   <div>
     {renderStatus(props, CHECKS.HASH)}
-    {renderStatus(props, CHECKS.ISSUED)}
-    {renderStatus(props, CHECKS.ISSUER_IDENTITY)}
     {renderStatus(props, CHECKS.NOT_REVOKED)}
   </div>
 );
 
 const renderUnverifiedStatuses = props => {
-  const show =
-    !props.hashStatus.verified ||
-    !props.issuedStatus.verified ||
-    !props.issuerIdentityStatus.verified ||
-    !props.notRevokedStatus.verified;
+  const show = !props.hashStatus.verified || !props.notRevokedStatus.verified;
   return show ? (
     <div>
       {renderStatus(props, CHECKS.HASH, false)}
-      {renderStatus(props, CHECKS.ISSUED, false)}
-      {renderStatus(props, CHECKS.ISSUER_IDENTITY, false)}
       {renderStatus(props, CHECKS.NOT_REVOKED, false)}
       <hr />
     </div>
@@ -121,10 +101,7 @@ const CertificateVerifyBlock = props => {
 CertificateVerifyBlock.propTypes = {
   statusSummary: PropTypes.string,
   hashStatus: PropTypes.object,
-  issuedStatus: PropTypes.object,
-  notRevokedStatus: PropTypes.object,
-  issuerIdentityStatus: PropTypes.object,
-  detailedVerifyVisible: PropTypes.bool
+  notRevokedStatus: PropTypes.object
 };
 
 CheckStatusRow.propTypes = {

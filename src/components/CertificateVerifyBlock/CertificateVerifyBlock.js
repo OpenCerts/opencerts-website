@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { get, some, sortBy } from "lodash";
+import { get, find, sortBy } from "lodash";
 import DetailedCertificateVerifyBlock from "./DetailedCertificateVerifyBlock";
 import { LOG_LEVEL } from "./constants";
 import css from "./certificateVerifyBlock.scss";
@@ -62,14 +62,17 @@ const renderIcon = status => {
 };
 
 export const getIdentityVerificationText = identityStatus => {
-  if (some(identityStatus, ({ registry }) => !!registry)) {
-    return "Accredited by SSG";
+  const identity = find(identityStatus, ({ registry }) => !!registry);
+  if (identity) {
+    return `Certificate issued by ${identity.registry.toUpperCase()}`;
   }
   // note filter Boolean is to remove empty values
   const dnsNames = sortBy(identityStatus, ["dns"])
     .map(({ dns }) => (dns ? dns.toUpperCase() : null))
     .filter(Boolean);
-  return `Issued by ${dnsNames.length > 0 ? dnsNames[0] : "Unknown"}`;
+  return `Certificate issued by ${
+    dnsNames.length > 0 ? dnsNames[0].toUpperCase() : "Unknown"
+  }`;
 };
 
 const renderText = (status, props) => {
@@ -120,7 +123,7 @@ const SimpleVerifyBlock = props => {
       onClick={props.toggleDetailedView}
       id="certificate-status"
     >
-      <div className="row" style={{ flexWrap: "inherit" }}>
+      <div className="row justify-center" style={{ flexWrap: "inherit" }}>
         {renderedIcon}
         {renderedText}
         <span
@@ -143,7 +146,7 @@ const CertificateVerifyBlock = props => {
       id="certificate-verify-block"
       className={`align-items-start flex-nowrap ${css["d-flex"]} ${
         css.verifyBlocksContainer
-      } mb-md-0 mb-3`}
+      } mb-md-0`}
     >
       <SimpleVerifyBlock {...props} />
       {props.detailedVerifyVisible ? (

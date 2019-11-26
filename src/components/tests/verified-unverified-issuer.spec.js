@@ -7,6 +7,7 @@ const Document = "./fixture/verified-unverified-issuer.json";
 const IframeBlock = Selector("#iframe");
 const SampleTemplate = Selector("#rendered-certificate");
 const StatusButton = Selector("#certificate-status");
+const CertificateStatusBanner = Selector("#status-banner-container");
 
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(
@@ -14,18 +15,22 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("Sample doc is rendered correctly when any one of dns or registry is verfied and doc store mismatch in domain", async t => {
+test("Sample doc is rendered correctly when any one of dns or registry is verified and doc store mismatch in domain", async t => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 
-  await validateTextContent(t, StatusButton, ["Accredited by SSG"]);
+  await validateTextContent(t, StatusButton, [
+    "Certificate issued by ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"
+  ]);
+
+  await validateTextContent(t, CertificateStatusBanner, [
+    "Certificate issuer is in the SkillsFuture Singapore registry for Opencerts"
+  ]);
 
   await t.switchToIframe(IframeBlock);
 
   await validateTextContent(t, SampleTemplate, [
-    "Rendered with custom template",
-    "Master of Blockchain",
-    "CUSTOM_TEMPLATE",
+    "OpenCerts Demo",
     "Mr Blockchain",
-    "Bitcoin"
+    "has successfully completed the"
   ]);
 });

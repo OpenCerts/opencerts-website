@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Router from "next/router";
+import copy from "clipboard-copy";
 import { getData } from "@govtechsg/open-attestation";
 
 import {
   updateCertificate,
   sendCertificate,
   sendCertificateReset,
+  generateShareLink,
   getCertificate,
   getVerifying,
   getIssuerIdentityStatus,
@@ -16,9 +18,11 @@ import {
   getNotRevokedStatus,
   getVerified,
   getEmailSendingState,
+  getShareLink,
+  getShareLinkState,
   updateObfuscatedCertificate
 } from "../reducers/certificate";
-import CertificateViewer from "./CertificateViewer";
+import { CertificateViewer } from "./CertificateViewer";
 
 class MainPageContainer extends Component {
   constructor(props) {
@@ -26,12 +30,15 @@ class MainPageContainer extends Component {
 
     this.state = {
       showSharing: false,
-      detailedVerifyVisible: false
+      detailedVerifyVisible: false,
+      copiedLink: false
     };
     this.toggleDetailedView = this.toggleDetailedView.bind(this);
     this.handleCertificateChange = this.handleCertificateChange.bind(this);
     this.handleSharingToggle = this.handleSharingToggle.bind(this);
+    this.handleShareLinkToggle = this.handleShareLinkToggle.bind(this);
     this.handleSendCertificate = this.handleSendCertificate.bind(this);
+    this.handleCopyLink = this.handleCopyLink.bind(this);
   }
 
   componentDidMount() {
@@ -44,6 +51,21 @@ class MainPageContainer extends Component {
   handleSharingToggle() {
     this.props.sendCertificateReset();
     this.setState({ showSharing: !this.state.showSharing });
+  }
+
+  handleShareLinkToggle() {
+    if (!this.state.showShareLink) {
+      this.props.generateShareLink();
+    }
+    this.setState({
+      showShareLink: !this.state.showShareLink,
+      copiedLink: false
+    });
+  }
+
+  handleCopyLink(certificateLink) {
+    copy(certificateLink);
+    this.setState({ copiedLink: true });
   }
 
   toggleDetailedView() {
@@ -73,9 +95,13 @@ class MainPageContainer extends Component {
         issuerIdentityStatus={this.props.issuerIdentityStatus}
         handleCertificateChange={this.handleCertificateChange}
         showSharing={this.state.showSharing}
-        emailAddress={this.state.emailAddress}
+        showShareLink={this.state.showShareLink}
+        shareLink={this.props.shareLink}
         handleSendCertificate={this.handleSendCertificate}
         handleSharingToggle={this.handleSharingToggle}
+        handleShareLinkToggle={this.handleShareLinkToggle}
+        handleCopyLink={this.handleCopyLink}
+        copiedLink={this.state.copiedLink}
         emailSendingState={this.props.emailSendingState}
         toggleDetailedView={this.toggleDetailedView}
         detailedVerifyVisible={this.state.detailedVerifyVisible}
@@ -89,12 +115,13 @@ const mapStateToProps = store => ({
 
   // Verification statuses used in verifier block
   emailSendingState: getEmailSendingState(store),
+  shareLink: getShareLink(store),
+  shareLinkState: getShareLinkState(store),
   verifying: getVerifying(store),
   issuerIdentityStatus: getIssuerIdentityStatus(store),
   hashStatus: getHashStatus(store),
   issuedStatus: getIssuedStatus(store),
   notRevokedStatus: getNotRevokedStatus(store),
-
   verified: getVerified(store)
 });
 
@@ -102,6 +129,7 @@ const mapDispatchToProps = dispatch => ({
   updateCertificate: payload => dispatch(updateCertificate(payload)),
   sendCertificate: payload => dispatch(sendCertificate(payload)),
   sendCertificateReset: () => dispatch(sendCertificateReset()),
+  generateShareLink: () => dispatch(generateShareLink()),
   updateObfuscatedCertificate: updatedDoc =>
     dispatch(updateObfuscatedCertificate(updatedDoc))
 });
@@ -124,5 +152,7 @@ MainPageContainer.propTypes = {
   emailSendingState: PropTypes.string,
   sendCertificate: PropTypes.func,
   sendCertificateReset: PropTypes.func,
+  generateShareLink: PropTypes.func,
+  shareLink: PropTypes.object,
   updateObfuscatedCertificate: PropTypes.func
 };

@@ -3,23 +3,52 @@
 @media print {
   #header-ui,
   #renderer-loader,
+  .status-banner-container,
   #top-header-ui {
-    display: none;
+    display: none !important;
   }
 
   iframe {
     height: 99vh; /* dont use 100vh otherwise a second blank page appear when printing */
   }
-  
-  .decentralised-renderer {
-    position: static !important;
+}
+.status-banner-container.valid {
+  color: #38761d;
+  background-color: #d9ead3;
+}
+.status-banner-container.invalid {
+  color: #6b6b6b;
+  background-color: #d9d9d9;
+  a {
+    color: #6b6b6b;
+    text-decoration: underline;
   }
 }
 
-.decentralised-renderer {
-  width: 100%;
-  border: 0;
-  position: relative;
+.status-banner-container {
+  min-height: 60px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-banner {
+  text-align: center;
+  // keep at least 25px of margin
+  @media only screen and (min-width: 535px) and (max-width: 750px) {
+    text-align: left;
+    min-width: 485px;
+    margin-left: calc((100% - 485px) / 2);
+    margin-right: calc((100% - 485px) / 2);
+  }
+  @media only screen and (max-width: 535px) {
+    text-align: left;
+    margin-left: 25px;
+    margin-right: 25px;
+  }
 }
 
 :global(.frameless-tabs .react-tabs .d-lg-none.d-xl-none) {
@@ -133,12 +162,23 @@
   }
 }
 
-#renderer-loader {
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  width: auto;
-  height: auto;
-  text-align: center;
+.container > :global(.row) {
+  margin-left: 0;
+  margin-right: 0;
+  align-items: center;
+}
+
+@media only screen and (max-width: 849px) {
+  .container > :global(.row) {
+    flex-direction: column;
+  }
+  .container > :global(.row) > :not(:first-child) {
+    margin-top: 10px;
+  }
+}
+
+@media only screen and (min-width: 850px) {
+  .container > :global(.row) {
+    justify-content: space-between;
+  }
 }

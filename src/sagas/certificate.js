@@ -4,6 +4,7 @@ import { getData, verifySignature } from "@govtechsg/open-attestation";
 import { isValidAddress as isEthereumAddress } from "ethereumjs-util";
 import Router from "next/router";
 import { getDocumentStoreRecords } from "@govtechsg/dnsprove";
+import { decryptString } from "@govtechsg/opencerts-encryption";
 import { getLogger } from "../utils/logger";
 import {
   types,
@@ -25,8 +26,12 @@ import fetchIssuers from "../services/issuers";
 import { combinedHash } from "../utils";
 import { ensResolveAddress, getText } from "../services/ens";
 import sendEmail from "../services/email";
+import { generateLink, getCertificateById } from "../services/link";
 import { analyticsEvent } from "../components/Analytics";
-
+import {
+  getDocumentStore,
+  getDocumentIssuerStores
+} from "../utils/certificate";
 import { getSelectedWeb3 } from "./application";
 import { IS_MAINNET } from "../config";
 
@@ -39,10 +44,6 @@ const ANALYTICS_VERIFICATION_ERROR_CODE = {
   REVOKED_CERTIFICATE: 3,
   CERTIFICATE_STORE: 4
 };
-
-function getDocumentStore(issuer) {
-  return issuer.certificateStore || issuer.documentStore;
-}
 
 export function* loadCertificateContracts({ payload }) {
   try {
@@ -137,8 +138,7 @@ export function* verifyCertificateStore({ certificate }) {
     error(e);
     yield put(
       verifyingCertificateStoreFailure({
-        error: e.message,
-        certificate: getData(certificate)
+        error: e.message
       })
     );
     return false;
@@ -150,12 +150,14 @@ export function* verifyCertificateHash({ certificate }) {
 
   if (verified) {
     yield put(verifyingCertificateHashSuccess());
+
     return true;
   }
+  const hashError = new Error("Certificate data does not match target hash");
+  error(hashError);
   yield put(
     verifyingCertificateHashFailure({
-      error: "Certificate data does not match target hash",
-      certificate: getData(certificate)
+      error: hashError.message
     })
   );
   return false;
@@ -175,9 +177,9 @@ export function* verifyCertificateIssued({ certificate, certificateStores }) {
     yield put(verifyingCertificateIssuedSuccess());
     return true;
   } catch (e) {
+    error(e);
     yield put(
       verifyingCertificateIssuedFailure({
-        certificate: getData(certificate),
         error: e.message
       })
     );
@@ -227,9 +229,9 @@ export function* verifyCertificateNotRevoked({
     yield put(verifyingCertificateRevocationSuccess());
     return true;
   } catch (e) {
+    error(e);
     yield put(
       verifyingCertificateRevocationFailure({
-        certificate: getData(certificate),
         error: e.message
       })
     );
@@ -363,8 +365,8 @@ export function* getDetailedIssuerStatus({ issuer }) {
 }
 
 export function* verifyCertificateIssuer({ certificate }) {
-  const data = getData(certificate);
   try {
+    const data = getData(certificate);
     const issuers = get(data, "issuers", []);
     // verificationStatuses: [{dns: "abc.com", registry:"Govtech", documentStore: "0xabc"}]
     const verificationStatuses = yield all(
@@ -381,10 +383,10 @@ export function* verifyCertificateIssuer({ certificate }) {
     );
     return true;
   } catch (e) {
+    error(e);
     yield put(
       verifyingCertificateIssuerFailure({
-        error: e.message,
-        certificate: data
+        error: e.message
       })
     );
     return false;
@@ -397,6 +399,7 @@ export function* verifyCertificate({ payload }) {
   });
   const certificateStores = yield call(loadCertificateContracts, { payload });
   const args = { certificateStores, certificate: payload };
+
   const verificationStatuses = yield all({
     certificateIssued: call(verifyCertificateIssued, args),
     certificateHashValid: call(verifyCertificateHash, args),
@@ -441,66 +444,136 @@ export function* sendCertificate({ payload }) {
   }
 }
 
+export function* generateShareLink() {
+  try {
+    yield put({
+      type: types.GENERATE_SHARE_LINK_RESET
+    });
+    const certificate = yield select(getCertificate);
+    const success = yield generateLink(certificate);
+
+    if (!success) {
+      throw new Error("Fail to generate certificate share link");
+    }
+
+    yield put({
+      type: types.GENERATE_SHARE_LINK_SUCCESS,
+      payload: success
+    });
+  } catch (e) {
+    yield put({
+      type: types.GENERATE_SHARE_LINK_FAILURE,
+      payload: e.message
+    });
+  }
+}
+
+export function* retrieveCertificateFromStore({ payload }) {
+  try {
+    yield put({
+      type: types.GET_CERTIFICATE_BY_ID_PENDING
+    });
+    const encryptedCertificate = yield getCertificateById(payload.id);
+    const certificate = JSON.parse(
+      decryptString({
+        tag: encryptedCertificate.document.tag,
+        cipherText: encryptedCertificate.document.cipherText,
+        iv: encryptedCertificate.document.iv,
+        key: payload.encryptionKey,
+        type: "OPEN-ATTESTATION-TYPE-1"
+      })
+    );
+
+    if (!encryptedCertificate) {
+      throw new Error("Fail to retrieve certificate by id");
+    }
+
+    yield put({
+      type: types.UPDATE_CERTIFICATE,
+      payload: certificate
+    });
+    yield put({
+      type: types.GET_CERTIFICATE_BY_ID_SUCCESS
+    });
+  } catch (e) {
+    yield put({
+      type: types.GET_CERTIFICATE_BY_ID_FAILURE,
+      payload: e.message
+    });
+  }
+}
+
 export function* networkReset() {
   yield put({
     type: types.NETWORK_RESET
   });
 }
 
-export function getAnalyticsStores(certificate) {
-  return get(certificate, "issuers", [])
-    .map(issuer => getDocumentStore(issuer))
-    .toString();
+export function* getAnalyticsDetails() {
+  try {
+    const rawCertificate = yield select(getCertificate);
+    const certificate = getData(rawCertificate);
+
+    const storeAddresses = getDocumentIssuerStores(certificate);
+    const id = get(certificate, "id");
+    return { storeAddresses, id };
+  } catch (e) {
+    return {};
+  }
 }
 
-export function* analyticsIssuerFail({ certificate }) {
-  yield analyticsEvent(window, {
-    category: "CERTIFICATE_ERROR",
-    action: getAnalyticsStores(certificate),
-    label: get(certificate, "id"),
-    value: ANALYTICS_VERIFICATION_ERROR_CODE.ISSUER_IDENTITY
-  });
+export function* triggerAnalytics(errorCode) {
+  const { storeAddresses, id } = yield call(getAnalyticsDetails);
+  if (storeAddresses && id) {
+    analyticsEvent(window, {
+      category: "CERTIFICATE_ERROR",
+      action: storeAddresses,
+      label: id,
+      value: errorCode
+    });
+  }
 }
 
-export function* analyticsHashFail({ certificate }) {
-  yield analyticsEvent(window, {
-    category: "CERTIFICATE_ERROR",
-    action: getAnalyticsStores(certificate),
-    label: get(certificate, "id"),
-    value: ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_HASH
-  });
+export function* analyticsIssuerFail() {
+  yield call(
+    triggerAnalytics,
+    ANALYTICS_VERIFICATION_ERROR_CODE.ISSUER_IDENTITY
+  );
 }
 
-export function* analyticsIssuedFail({ certificate }) {
-  yield analyticsEvent(window, {
-    category: "CERTIFICATE_ERROR",
-    action: getAnalyticsStores(certificate),
-    label: get(certificate, "id"),
-    value: ANALYTICS_VERIFICATION_ERROR_CODE.UNISSUED_CERTIFICATE
-  });
+export function* analyticsHashFail() {
+  yield call(
+    triggerAnalytics,
+    ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_HASH
+  );
 }
 
-export function* analyticsRevocationFail({ certificate }) {
-  yield analyticsEvent(window, {
-    category: "CERTIFICATE_ERROR",
-    action: getAnalyticsStores(certificate),
-    label: get(certificate, "id"),
-    value: ANALYTICS_VERIFICATION_ERROR_CODE.REVOKED_CERTIFICATE
-  });
+export function* analyticsIssuedFail() {
+  yield call(
+    triggerAnalytics,
+    ANALYTICS_VERIFICATION_ERROR_CODE.UNISSUED_CERTIFICATE
+  );
 }
 
-export function* analyticsStoreFail({ certificate }) {
-  yield analyticsEvent(window, {
-    category: "CERTIFICATE_ERROR",
-    action: getAnalyticsStores(certificate),
-    label: get(certificate, "id"),
-    value: ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_STORE
-  });
+export function* analyticsRevocationFail() {
+  yield call(
+    triggerAnalytics,
+    ANALYTICS_VERIFICATION_ERROR_CODE.REVOKED_CERTIFICATE
+  );
+}
+
+export function* analyticsStoreFail() {
+  yield call(
+    triggerAnalytics,
+    ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_STORE
+  );
 }
 
 export default [
   takeEvery(types.UPDATE_CERTIFICATE, verifyCertificate),
   takeEvery(types.SENDING_CERTIFICATE, sendCertificate),
+  takeEvery(types.GENERATE_SHARE_LINK, generateShareLink),
+  takeEvery(types.GET_CERTIFICATE_BY_ID, retrieveCertificateFromStore),
   takeEvery(applicationTypes.UPDATE_WEB3, networkReset),
 
   takeEvery(types.VERIFYING_CERTIFICATE_ISSUER_FAILURE, analyticsIssuerFail),

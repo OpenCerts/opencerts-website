@@ -36,8 +36,13 @@ export const initialState = {
   emailState: states.INITIAL,
   emailError: null,
 
-  templates: null,
-  activeTemplateTab: 0
+  shareLink: {},
+  shareLinkState: states.INITIAL,
+  shareLinkError: null,
+
+  encryptedCertificate: {},
+  encryptedCertificateState: states.INITIAL,
+  encryptedCertificateError: null
 };
 
 // Actions
@@ -74,11 +79,18 @@ export const types = {
   SENDING_CERTIFICATE_FAILURE: "SENDING_CERTIFICATE_FAILURE",
   SENDING_CERTIFICATE_RESET: "SENDING_CERTIFICATE_RESET",
 
-  CERTIFICATE_OBFUSCATE_RESET: "CERTIFICATE_OBFUSCATE_RESET",
-  CERTIFICATE_OBFUSCATE_UPDATE: "CERTIFICATE_OBFUSCATE_UPDATE",
+  GENERATE_SHARE_LINK: "GENERATE_SHARE_LINK",
+  GENERATE_SHARE_LINK_SUCCESS: "GENERATE_SHARE_LINK_SUCCESS",
+  GENERATE_SHARE_LINK_FAILURE: "GENERATE_SHARE_LINK_FAILURE",
+  GENERATE_SHARE_LINK_RESET: "GENERATE_SHARE_LINK_RESET",
 
-  CERTIFICATE_TEMPLATE_REGISTER: "CERTIFICATE_TEMPLATE_REGISTER",
-  CERTIFICATE_TEMPLATE_SELECT_TAB: "CERTIFICATE_TEMPLATE_SELECT_TAB"
+  GET_CERTIFICATE_BY_ID: "GET_CERTIFICATE_BY_ID",
+  GET_CERTIFICATE_BY_ID_PENDING: "GET_CERTIFICATE_BY_ID_PENDING",
+  GET_CERTIFICATE_BY_ID_SUCCESS: "GET_CERTIFICATE_BY_ID_SUCCESS",
+  GET_CERTIFICATE_BY_ID_FAILURE: "GET_CERTIFICATE_BY_ID_FAILURE",
+
+  CERTIFICATE_OBFUSCATE_RESET: "CERTIFICATE_OBFUSCATE_RESET",
+  CERTIFICATE_OBFUSCATE_UPDATE: "CERTIFICATE_OBFUSCATE_UPDATE"
 };
 
 // Reducers
@@ -235,7 +247,7 @@ export default function reducer(state = initialState, action) {
         verificationStatus: [
           ...state.verificationStatus,
           {
-            message: "Unknown certificate issuer",
+            message: "Known certificate issuer",
             warning: false,
             error: false
           }
@@ -310,6 +322,42 @@ export default function reducer(state = initialState, action) {
         emailState: states.FAILURE,
         emailError: action.payload
       };
+    case types.GENERATE_SHARE_LINK_SUCCESS:
+      return {
+        ...state,
+        shareLink: action.payload,
+        shareLinkState: states.SUCCESS
+      };
+    case types.GENERATE_SHARE_LINK_FAILURE:
+      return {
+        ...state,
+        shareLink: {},
+        shareLinkState: states.FAILURE
+      };
+    case types.GENERATE_SHARE_LINK_RESET:
+      return {
+        ...state,
+        shareLink: {},
+        shareLinkState: states.INITIAL
+      };
+    case types.GET_CERTIFICATE_BY_ID_PENDING:
+      return {
+        ...state,
+        encryptedCertificateState: states.PENDING
+      };
+    case types.GET_CERTIFICATE_BY_ID_SUCCESS:
+      return {
+        ...state,
+        encryptedCertificate: action.payload,
+        encryptedCertificateState: states.SUCCESS
+      };
+    case types.GET_CERTIFICATE_BY_ID_FAILURE:
+      return {
+        ...state,
+        encryptedCertificate: {},
+        encryptedCertificateState: states.FAILURE,
+        encryptedCertificateError: action.payload
+      };
     case types.CERTIFICATE_OBFUSCATE_RESET:
       return {
         ...initialState,
@@ -319,16 +367,6 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         rawModified: action.payload
-      };
-    case types.CERTIFICATE_TEMPLATE_REGISTER:
-      return {
-        ...state,
-        templates: action.payload
-      };
-    case types.CERTIFICATE_TEMPLATE_SELECT_TAB:
-      return {
-        ...state,
-        activeTemplateTab: action.payload
       };
     default:
       return state;
@@ -349,20 +387,6 @@ export function updateCertificate(payload) {
   };
 }
 
-export function verifyCertificate(payload) {
-  return {
-    type: types.VERIFYING_CERTIFICATE,
-    payload
-  };
-}
-
-export function updateFilteredCertificate(payload) {
-  return {
-    type: types.UPDATE_FILTERED_CERTIFICATE,
-    payload
-  };
-}
-
 export function verifyingCertificateIssuerSuccess({ issuerIdentities }) {
   return {
     type: types.VERIFYING_CERTIFICATE_ISSUER_SUCCESS,
@@ -370,11 +394,10 @@ export function verifyingCertificateIssuerSuccess({ issuerIdentities }) {
   };
 }
 
-export function verifyingCertificateIssuerFailure({ error, certificate }) {
+export function verifyingCertificateIssuerFailure({ error }) {
   return {
     type: types.VERIFYING_CERTIFICATE_ISSUER_FAILURE,
-    error,
-    certificate
+    error
   };
 }
 
@@ -384,11 +407,10 @@ export function verifyingCertificateStoreSuccess() {
   };
 }
 
-export function verifyingCertificateStoreFailure({ error, certificate }) {
+export function verifyingCertificateStoreFailure({ error }) {
   return {
     type: types.VERIFYING_CERTIFICATE_STORE_FAILURE,
-    error,
-    certificate
+    error
   };
 }
 
@@ -398,11 +420,10 @@ export function verifyingCertificateRevocationSuccess() {
   };
 }
 
-export function verifyingCertificateRevocationFailure({ error, certificate }) {
+export function verifyingCertificateRevocationFailure({ error }) {
   return {
     type: types.VERIFYING_CERTIFICATE_REVOCATION_FAILURE,
-    error,
-    certificate
+    error
   };
 }
 
@@ -412,11 +433,10 @@ export function verifyingCertificateIssuedSuccess() {
   };
 }
 
-export function verifyingCertificateIssuedFailure({ error, certificate }) {
+export function verifyingCertificateIssuedFailure({ error }) {
   return {
     type: types.VERIFYING_CERTIFICATE_ISSUED_FAILURE,
-    error,
-    certificate
+    error
   };
 }
 
@@ -426,11 +446,10 @@ export function verifyingCertificateHashSuccess() {
   };
 }
 
-export function verifyingCertificateHashFailure({ error, certificate }) {
+export function verifyingCertificateHashFailure({ error }) {
   return {
     type: types.VERIFYING_CERTIFICATE_HASH_FAILURE,
-    error,
-    certificate
+    error
   };
 }
 
@@ -447,29 +466,22 @@ export function sendCertificateReset() {
   };
 }
 
-export function resetCertificateObfuscation() {
+export function generateShareLink() {
   return {
-    type: types.CERTIFICATE_OBFUSCATE_RESET
+    type: types.GENERATE_SHARE_LINK
+  };
+}
+
+export function retrieveCertificateByLink(payload) {
+  return {
+    type: types.GET_CERTIFICATE_BY_ID,
+    payload
   };
 }
 
 export function updateObfuscatedCertificate(payload) {
   return {
     type: types.CERTIFICATE_OBFUSCATE_UPDATE,
-    payload
-  };
-}
-
-export function registerTemplates(payload) {
-  return {
-    type: types.CERTIFICATE_TEMPLATE_REGISTER,
-    payload
-  };
-}
-
-export function selectTemplateTab(payload) {
-  return {
-    type: types.CERTIFICATE_TEMPLATE_SELECT_TAB,
     payload
   };
 }
@@ -581,10 +593,14 @@ export function getEmailSendingState(store) {
   return store.certificate.emailState;
 }
 
-export function getActiveTemplateTab(store) {
-  return store.certificate.activeTemplateTab;
+export function getShareLink(store) {
+  return store.certificate.shareLink;
 }
 
-export function getTemplates(store) {
-  return store.certificate.templates;
+export function getShareLinkState(store) {
+  return store.certificate.shareLinkState;
+}
+
+export function getEncryptedCertificateStatus(store) {
+  return store.certificate.encryptedCertificateState;
 }
