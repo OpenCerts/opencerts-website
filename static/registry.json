@@ -126,6 +126,15 @@
       "logo": "/static/images/SP_logo.svg",
       "id": "sp-registry"
     },
+	  "0x45b04D7EFdfA1B25296e5BC9eC88E3ae3C53CE9f": {
+      "name": "Singapore University of Social Sciences",
+      "displayCard": true,
+      "website": "https://www.suss.edu.sg/",
+      "email": "alumni@suss.edu.sg",
+      "phone": "+65 6248 9215",
+      "logo": "/static/images/SUSS_logo.png",
+      "id": "suss-registry"
+    },
     "0xb3c1404732585ddEB837Af28eBdAec504ed8Ba04": {
       "name": "ROPSTEN: Singapore Management University",
       "displayCard": false
