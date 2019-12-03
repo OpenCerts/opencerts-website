@@ -111,7 +111,7 @@
     "0x51964385265eff73875a226aBf6fa20b0aAE4a6f": {
       "name": "National University of Singapore",
       "displayCard": true,
-      "website": "https://www.nus.edu.sg/",
+      "website": "http://www.nus.edu.sg/",
       "email": "transcript@nus.edu.sg",
       "phone": "+65 6516 2304",
       "logo": "/static/images/NUS_logo.png",
