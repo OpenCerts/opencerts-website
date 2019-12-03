@@ -108,6 +108,33 @@
       "logo": "/static/images/SMU_logo.png",
       "id": "smu-registry"
     },
+    "0x51964385265eff73875a226aBf6fa20b0aAE4a6f": {
+      "name": "National University of Singapore",
+      "displayCard": true,
+      "website": "http://www.nus.edu.sg/",
+      "email": "transcript@nus.edu.sg",
+      "phone": "+65 6516 2304",
+      "logo": "/static/images/NUS_logo.png",
+      "id": "nus-registry"
+    },
+    "0x69Ec8cA1A2A19566128F4157Dca6249d89046F1F": {
+      "name": "Singapore Polytechnic",
+      "displayCard": true,
+      "website": "https://www.sp.edu.sg",
+      "email": "contactus@sp.edu.sg",
+      "phone": "+65 6775 1133",
+      "logo": "/static/images/SP_logo.svg",
+      "id": "sp-registry"
+    },
+	  "0x45b04D7EFdfA1B25296e5BC9eC88E3ae3C53CE9f": {
+      "name": "Singapore University of Social Sciences",
+      "displayCard": true,
+      "website": "https://www.suss.edu.sg/",
+      "email": "alumni@suss.edu.sg",
+      "phone": "+65 6248 9215",
+      "logo": "/static/images/SUSS_logo.png",
+      "id": "suss-registry"
+    },
     "0xb3c1404732585ddEB837Af28eBdAec504ed8Ba04": {
       "name": "ROPSTEN: Singapore Management University",
       "displayCard": false
