@@ -7,6 +7,13 @@
     "logo": "/static/images/collaborate/CONVERGENCE_logo.png"
   },
   {
+    "name": "C-LOG",
+    "description": "Provides a trusted universal industry standard for ID and credentials through a blockchain-enabled decentralised identifier.",
+    "website": "https://c-log.io",
+    "key": "clog",
+    "logo": "/static/images/collaborate/CLOG_logo.png"
+  },
+  {
     "name": "NextID Pte Ltd",
     "description": "Our hosted NextCert service produces digitally-signed, tamper-proof academic and professional certificates which support the OpenCerts schema and Verifiable Credentials standards.",
     "website": "https://nextid.com",
