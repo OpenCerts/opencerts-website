@@ -8,7 +8,6 @@ const PrintWatermark = () => (
       backgroundImage: 'url("/static/images/watermark.svg")',
       backgroundRepeat: "repeat"
     }}
-    className="print-only"
   />
 );
 
