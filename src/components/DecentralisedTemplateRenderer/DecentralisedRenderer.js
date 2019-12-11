@@ -80,6 +80,10 @@ export const DecentralisedRenderer = ({
         onSelectTemplate={index => toFrame.current.selectTemplateTab(index)}
       />
       <div>
+        <h2 className="print-only exact-print text-center center m-4 mb-3 mt-5 alert alert-warning">
+          If you want to print the certificate, please click on the highlighted
+          button above.
+        </h2>
         <div id={styles["renderer-loader"]} className="text-blue">
           <i className="fas fa-spinner fa-pulse fa-3x" />
           <div className="m-3" style={{ fontSize: "1.5rem" }}>
