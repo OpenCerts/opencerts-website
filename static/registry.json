@@ -135,6 +135,15 @@
       "logo": "/static/images/SUSS_logo.png",
       "id": "suss-registry"
     },
+    "0x9cf976dc45bb5a9336238759e89051E7b09e016b": {
+      "name": "National Institute of Early Childhood Development",
+      "displayCard": true,    
+      "website": "https://www.niec.edu.sg/",
+      "email": "",
+      "phone": "+65 6332 0668",
+      "logo": "/static/images/NIEC_logo.png",
+      "id": "niec-registry"
+    },
     "0xb3c1404732585ddEB837Af28eBdAec504ed8Ba04": {
       "name": "ROPSTEN: Singapore Management University",
       "displayCard": false
