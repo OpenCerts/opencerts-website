@@ -51,6 +51,7 @@ const MultiTabs = ({ resetData, templates, onSelectTemplate }) => {
           activeIdx={selectedTemplate}
           toggle={idx => {
             setSelectedTemplate(idx);
+            onSelectTemplate(idx);
           }}
         />
       </div>
