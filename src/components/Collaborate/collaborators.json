@@ -33,5 +33,12 @@
     "website": "https://www.accredify.io",
     "key": "accredify",
     "logo": "/static/images/collaborate/ACCREDIFY_logo.png"
+  },
+  {
+    "name": "Knowledge Catalyst Pte. Ltd.",
+    "description": "Knowledge Catalyst helps education institutions to issue tampered-proof credentials based on Opencerts framework.",
+    "website": "https://knowledgecatalyst.io",
+    "key": "knowledge catalyst",
+    "logo": "/static/images/collaborate/KC_logo.png"
   }
 ]
