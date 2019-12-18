@@ -135,11 +135,24 @@
   text-decoration: none !important;
 }
 
+.share-buttons {
+  position: fixed;
+  z-index: 1;
+  bottom: 6vh;
+  right: 10vw;
+  box-shadow: 0 5px 10px rgba($black, 0.2);
+  background-color: $white;
+  border-radius: 4px;
+  padding: 10px 20px;
+}
+
 .print-btn,
 .send-btn {
   @include round-btn;
-  padding: 0.75rem;
-  margin-left: 1rem;
+
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 50px;
 
   i {
     color: #343a40;
@@ -149,6 +162,13 @@
     padding: 4px;
     height: 100%;
     width: 100%;
+  }
+
+  @include media-breakpoint-custom($max: 767px) {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 1rem;
   }
 }
 .print-btn {
