@@ -70,7 +70,10 @@ const renderHeaderBlock = (props, childRef) => {
                 </div>
               )}
             />
-            <div className="col-auto" onClick={() => props.handleSharingToggle()}>
+            <div
+              className="col-auto"
+              onClick={() => props.handleSharingToggle()}
+            >
               <div id="btn-email" className={styles["send-btn"]}>
                 <i className="fas fa-envelope" />
               </div>
