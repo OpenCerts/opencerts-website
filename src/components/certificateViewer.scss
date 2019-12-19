@@ -138,8 +138,27 @@
 .share-buttons {
   position: fixed;
   z-index: 1;
-  bottom: 6vh;
-  right: 10vw;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 2rem;
+  bottom: 40px;
+
+  @media only screen and (max-width: 767px) {
+    bottom: 20px;
+  }
+}
+
+.share-buttons-wrap {
+  position: relative;
+  max-width: $max-width;
+  margin: auto;
+}
+
+.share-buttons-content {
+  position: absolute;
+  bottom: 0;
+  right: 0;
   box-shadow: 0 5px 10px rgba($black, 0.2);
   background-color: $white;
   border-radius: 4px;
@@ -149,10 +168,12 @@
 .print-btn,
 .send-btn {
   @include round-btn;
-
   text-align: center;
-  font-size: 1.5rem;
-  line-height: 50px;
+
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 1.3rem;
 
   i {
     color: #343a40;
@@ -164,7 +185,7 @@
     width: 100%;
   }
 
-  @include media-breakpoint-custom($max: 767px) {
+  @media only screen and (max-width: 767px) {
     width: 30px;
     height: 30px;
     line-height: 30px;

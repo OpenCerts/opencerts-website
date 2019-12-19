@@ -45,57 +45,62 @@ const renderHeaderBlock = (props, childRef) => {
       <div className="row">
         <div>{renderedVerifyBlock}</div>
         <div className={`${styles["share-buttons"]}`}>
-          <div className={`row flex-nowrap`}>
-            <div className="col-auto">
-              <div
-                id="btn-print"
-                className={styles["print-btn"]}
-                onClick={() => {
-                  childRef.current.print();
-                }}
-              >
-                <i className="fas fa-print" />
-              </div>
-            </div>
-            <FeatureFlagContainer
-              name="SHARE_LINK"
-              render={() => (
-                <div
-                  className="col-auto"
-                  onClick={() => props.handleShareLinkToggle()}
-                >
-                  <div id="btn-link" className={styles["send-btn"]}>
-                    <i className="fas fa-link" />
+          <div className={`${styles["share-buttons-wrap"]}`}>
+            <div className={`${styles["share-buttons-content"]}`}>
+              <div className={`row flex-nowrap`}>
+                <div className="col-auto">
+                  <div
+                    id="btn-print"
+                    className={styles["print-btn"]}
+                    onClick={() => {
+                      childRef.current.print();
+                    }}
+                  >
+                    <i className="fas fa-print" />
                   </div>
                 </div>
-              )}
-            />
-            <div
-              className="col-auto"
-              onClick={() => props.handleSharingToggle()}
-            >
-              <div id="btn-email" className={styles["send-btn"]}>
-                <i className="fas fa-envelope" />
-              </div>
-            </div>
-            <div className="col-auto">
-              <a
-                download={`${props.certificate.id}.opencert`}
-                target="_black"
-                href={`data:text/plain;,${JSON.stringify(
-                  props.document,
-                  null,
-                  2
-                )}`}
-              >
-                <button
-                  id="btn-download"
-                  className={styles["send-btn"]}
-                  title="Download"
+                <FeatureFlagContainer
+                  name="SHARE_LINK"
+                  render={() => (
+                    <div
+                      className="col-auto"
+                      onClick={() => props.handleShareLinkToggle()}
+                    >
+                      <div id="btn-link" className={styles["send-btn"]}>
+                        <i className="fas fa-link" />
+                      </div>
+                    </div>
+                  )}
+                />
+                <div
+                  className="col-auto"
+                  onClick={() => props.handleSharingToggle()}
                 >
-                  <i className="fas fa-file-download" />
-                </button>
-              </a>
+                  <div id="btn-email" className={styles["send-btn"]}>
+                    <i className="fas fa-envelope" />
+                  </div>
+                </div>
+                <div className="col-auto">
+                  <a
+                    download={`${props.certificate.id}.opencert`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={`data:text/plain;,${JSON.stringify(
+                      props.document,
+                      null,
+                      2
+                    )}`}
+                  >
+                    <button
+                      id="btn-download"
+                      className={styles["send-btn"]}
+                      title="Download"
+                    >
+                      <i className="fas fa-file-download" />
+                    </button>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
