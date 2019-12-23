@@ -51,7 +51,7 @@ const renderHeaderBlock = (props, childRef) => {
                 <div className="col-auto">
                   <div
                     id="btn-print"
-                    className={styles["print-btn"]}
+                    className={`${styles["print-btn"]} ${styles.deadcenter}`}
                     onClick={() => {
                       childRef.current.print();
                     }}
@@ -66,7 +66,10 @@ const renderHeaderBlock = (props, childRef) => {
                       className="col-auto"
                       onClick={() => props.handleShareLinkToggle()}
                     >
-                      <div id="btn-link" className={styles["send-btn"]}>
+                      <div
+                        id="btn-link"
+                        className={`${styles["send-btn"]} ${styles.deadcenter}`}
+                      >
                         <i className="fas fa-link" />
                       </div>
                     </div>
@@ -76,7 +79,10 @@ const renderHeaderBlock = (props, childRef) => {
                   className="col-auto"
                   onClick={() => props.handleSharingToggle()}
                 >
-                  <div id="btn-email" className={styles["send-btn"]}>
+                  <div
+                    id="btn-email"
+                    className={`${styles["send-btn"]} ${styles.deadcenter}`}
+                  >
                     <i className="fas fa-envelope" />
                   </div>
                 </div>
@@ -93,7 +99,7 @@ const renderHeaderBlock = (props, childRef) => {
                   >
                     <button
                       id="btn-download"
-                      className={styles["send-btn"]}
+                      className={`${styles["send-btn"]} ${styles.deadcenter}`}
                       title="Download"
                     >
                       <i className="fas fa-file-download" />
