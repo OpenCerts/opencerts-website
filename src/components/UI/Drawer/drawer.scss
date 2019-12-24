@@ -11,12 +11,15 @@
   overflow-x: hidden;
   padding-top: 60px;
   transition: 0.5s;
+
   .tabs {
     border-bottom: 0.1px solid #7a7e81;
+
     &.active {
       color: #bcc3c7;
     }
   }
+
   a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
@@ -24,10 +27,12 @@
     color: #ffffff;
     display: block;
     transition: 0.3s;
+
     &:hover {
       color: #bcc3c7;
     }
   }
+
   .closebtn {
     position: absolute;
     top: -5px;
@@ -67,6 +72,7 @@
 @media screen and (max-height: 450px) {
   .sidenav {
     padding-top: 15px;
+
     a {
       font-size: 18px;
     }
@@ -75,7 +81,7 @@
 
 @media screen and (min-width: 450px) and (max-width: 992px) {
   .togglebtn {
-    padding-right: 0px !important;
+    padding-right: 0 !important;
   }
 }
 

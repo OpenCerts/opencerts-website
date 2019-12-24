@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import "../../styles/main.scss";
 
 h3 {
   color: #fff;
@@ -12,6 +12,7 @@ h3 {
 
 .description {
   padding: 3rem 4rem 3rem 0;
+
   p {
     padding: 1.5rem 0;
     font-size: 1.1rem;
@@ -28,6 +29,7 @@ h5 {
   .main {
     display: block;
   }
+
   .description {
     padding: 3rem 5rem;
     text-align: center;
@@ -54,9 +56,11 @@ h5 {
   0% {
     -webkit-transform: scale(1);
   }
+
   50% {
     -webkit-transform: scale(1.1);
   }
+
   100% {
     -webkit-transform: scale(1);
   }
@@ -66,9 +70,11 @@ h5 {
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.1);
   }
+
   100% {
     transform: scale(1);
   }
