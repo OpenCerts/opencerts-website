@@ -152,8 +152,11 @@ export const faqContent = [
       {
         question:
           "How can I add my institute to the list of recognised issuers?",
-        answer:
-          'Please see our <a href="https://docs.opencerts.io/identity_registry.html">documentation</a>'
+        answer: (
+          <>
+            Please see our <a href="https://docs.opencerts.io/identity_registry.html" target="_blank" rel="noopener">documentation</a>.
+          </>
+        )
       },
       {
         question:
