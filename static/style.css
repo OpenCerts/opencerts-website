@@ -8,6 +8,7 @@
 .btn {
   font-family: source sans pro;
 }
+
 body {
   background: white;
   font-family: "Source Sans Pro", sans-serif;
@@ -15,6 +16,7 @@ body {
   margin: 0px;
   min-height: 100%;
 }
+
 html {
   height: 100%;
 }

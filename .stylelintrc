@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "stylelint-config-recommended",
+    "stylelint-config-standard"
+  ],
+  "rules": {
+    "declaration-no-important": null,
+    "at-rule-no-unknown": null,
+    "block-no-empty": null,
+    "no-descending-specificity": null,
+    "color-hex-length": null,
+    "no-empty-source": null,
+    "declaration-empty-line-before": null,
+    "selector-pseudo-class-no-unknown": null
+  }
+}

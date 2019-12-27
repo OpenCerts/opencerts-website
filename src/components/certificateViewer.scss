@@ -1,4 +1,4 @@
-@import "../styles/variables.scss";
+@import "../styles/main.scss";
 
 @media print {
   #header-ui,
@@ -12,13 +12,16 @@
     height: 99vh; /* dont use 100vh otherwise a second blank page appear when printing */
   }
 }
+
 .status-banner-container.valid {
   color: #38761d;
   background-color: #d9ead3;
 }
+
 .status-banner-container.invalid {
   color: #6b6b6b;
   background-color: #d9d9d9;
+
   a {
     color: #6b6b6b;
     text-decoration: underline;
@@ -44,6 +47,7 @@
     margin-left: calc((100% - 485px) / 2);
     margin-right: calc((100% - 485px) / 2);
   }
+
   @media only screen and (max-width: 535px) {
     text-align: left;
     margin-left: 25px;
@@ -115,6 +119,7 @@
     display: none;
   }
 }
+
 .pd-0 {
   padding-right: 0 !important;
   padding-left: 0 !important;
@@ -135,9 +140,11 @@
   @include round-btn;
   padding: 0.75rem;
   margin-left: 1rem;
+
   i {
     color: #343a40;
   }
+
   svg {
     padding: 4px;
     height: 100%;
@@ -156,6 +163,7 @@
   #top-header-ui {
     padding: 1rem 0.5rem;
   }
+
   .pd-0 {
     padding-right: 15px !important;
     padding-left: 15px !important;
@@ -172,6 +180,7 @@
   .container > :global(.row) {
     flex-direction: column;
   }
+
   .container > :global(.row) > :not(:first-child) {
     margin-top: 10px;
   }

@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import "../../styles/main.scss";
 
 .verifyBlocksContainer {
   position: relative;
@@ -12,6 +12,7 @@
   color: #38761d;
   height: 100%;
   box-shadow: 2px 2px 4px 0 $grey-blue;
+
   div {
     padding: 2px 0;
     height: 100%;
@@ -19,6 +20,7 @@
     align-items: center;
   }
 }
+
 @mixin block-color($color) {
   background-color: $color;
   border: 1px solid $color;
@@ -30,12 +32,15 @@
   &.active {
     color: $color;
     background-color: #fff;
+
     #circle {
       fill: $color;
     }
+
     #check {
       fill: #fff;
     }
+
     svg > polyline {
       stroke: $color;
     }
@@ -50,10 +55,12 @@
 .valid {
   background-color: white;
   border: 1px solid $success-color;
+
   #circle {
     fill: $success-color;
     color: white;
   }
+
   #check {
     fill: #fff;
   }
@@ -61,6 +68,7 @@
   &:hover {
     box-shadow: 2px 2px 6px 0 #a7afb7;
   }
+
   svg > polyline {
     stroke: $success-color;
   }
@@ -86,6 +94,7 @@
   .verifyBlocksContainer {
     position: relative;
   }
+
   .d-flex {
     display: block !important;
   }
@@ -95,6 +104,7 @@
   .verifyBlocksContainer {
     display: block !important;
   }
+
   .d-flex {
     display: block !important;
   }
@@ -111,6 +121,7 @@
   .simple-verify-block {
     border-radius: 5px;
   }
+
   .simple-verify-block.active {
     border-radius: 5px 5px 0 0;
   }
@@ -120,6 +131,7 @@
   .simple-verify-block {
     border-radius: 5px;
   }
+
   .simple-verify-block.active {
     border-radius: 5px 0 0 5px;
     border-right-color: white;

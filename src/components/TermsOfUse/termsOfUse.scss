@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import "../../styles/main.scss";
 
 .main {
   max-width: 1280px;
@@ -33,6 +33,7 @@
     color: $brand-orange;
     margin-bottom: 0;
   }
+
   ol {
     counter-reset: item;
     padding-inline-start: 20px;
@@ -44,7 +45,7 @@
     position: relative;
   }
 
-  li:before {
+  li::before {
     content: counters(item, '.') '. ';
     position: absolute;
     left: -3em;

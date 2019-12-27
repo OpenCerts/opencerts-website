@@ -1,8 +1,8 @@
-@import "../styles/variables.scss";
+@import "../styles/main.scss";
 
 .r-section {
   font-weight: 100;
-  padding: 1rem 0rem !important;
+  padding: 1rem 0 !important;
 }
 
 .section-width {
@@ -15,7 +15,8 @@
     font-weight: 100;
     padding: 1rem 1.1rem !important;
   }
+
   .m-pd-0 {
-    padding: 0px !important;
+    padding: 0 !important;
   }
 }

@@ -21,6 +21,7 @@
   text-align: center;
   height: auto;
   line-height: 1.4;
+
   h2 {
     font-family: "Cabin", sans-serif;
     font-weight: 700;
@@ -34,18 +35,23 @@
     @media (max-width: 200px) {
       font-size: 1.5em;
     }
+
     @media (min-width: 599px) {
       font-size: 2em;
     }
+
     @media (min-width: 600px) {
       font-size: 2.5em;
     }
+
     @media (min-width: 900px) {
       font-size: 3em;
     }
+
     @media (min-width: 1200px) {
       font-size: 3.5em;
     }
+
     @media (min-width: 1800px) {
       font-size: 4em;
     }
@@ -61,18 +67,23 @@
     @media (max-width: 200px) {
       font-size: 0.5em;
     }
+
     @media (min-width: 599px) {
       font-size: 0.75em;
     }
+
     @media (min-width: 600px) {
       font-size: 1em;
     }
+
     @media (min-width: 900px) {
       font-size: 1.25em;
     }
+
     @media (min-width: 1200px) {
       font-size: 1.5em;
     }
+
     @media (min-width: 1800px) {
       font-size: 1.75em;
     }
@@ -96,18 +107,23 @@
     @media (max-width: 200px) {
       font-size: 0.5em;
     }
+
     @media (min-width: 599px) {
       font-size: 0.75em;
     }
+
     @media (min-width: 600px) {
       font-size: 1em;
     }
+
     @media (min-width: 900px) {
       font-size: 1.25em;
     }
+
     @media (min-width: 1200px) {
       font-size: 1.5em;
     }
+
     @media (min-width: 1800px) {
       font-size: 1.75em;
     }
@@ -128,18 +144,23 @@
   @media (max-width: 200px) {
     font-size: 4em;
   }
+
   @media (min-width: 599px) {
     font-size: 4.5em;
   }
+
   @media (min-width: 600px) {
     font-size: 5em;
   }
+
   @media (min-width: 900px) {
     font-size: 5.5em;
   }
+
   @media (min-width: 1200px) {
     font-size: 6em;
   }
+
   @media (min-width: 1800px) {
     font-size: 6.5em;
   }
