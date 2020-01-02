@@ -139,7 +139,7 @@
       "name": "National Institute of Early Childhood Development",
       "displayCard": true,    
       "website": "https://www.niec.edu.sg/",
-      "email": "",
+      "email": "aa@niec.edu.sg",
       "phone": "+65 6332 0668",
       "logo": "/static/images/NIEC_logo.png",
       "id": "niec-registry"
@@ -212,7 +212,7 @@
       "name": "ROPSTEN: Singapore University of Social Sciences",
       "displayCard": false
     },
-    "0x92b2350E3617e002ADEfDd1AFb7B5a9d69a7a026": {
+    "0x146d1e1938dc0f5fbb2179727c2fa61522cd1834": {
       "name": "ROPSTEN: National Institute of Early Childhood Development",
       "displayCard": false
     }
