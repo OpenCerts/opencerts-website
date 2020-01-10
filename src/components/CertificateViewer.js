@@ -115,7 +115,9 @@ export const CertificateViewer = props => {
       {isInRegistry ? (
         <div
           id="status-banner-container"
-          className={`${styles["status-banner-container"]} ${styles.valid}`}
+          className={`${styles["status-banner-container"]} ${
+            styles.valid
+          } exact-print`}
         >
           <div className={`${styles["status-banner"]}`}>
             Certificate issuer is in the SkillsFuture Singapore registry for

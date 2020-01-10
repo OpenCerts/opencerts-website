@@ -12,15 +12,11 @@
 }
 
 .navbar {
-  display: block;
-  justify-content: flex-start;
-  margin: 0 auto;
-  background-color: $brand-dark;
-  padding: 1rem 2rem;
-
-  @media print {
-    display: none;
-  }
+    display: block;
+    justify-content: flex-start;
+    margin: 0 auto;
+    background-color: $brand-dark;
+    padding: 1rem 2rem;
 }
 
 .nav-item {
