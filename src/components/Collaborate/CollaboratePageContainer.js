@@ -25,7 +25,11 @@ const CollaboratePage = () => (
         <div className={css["section-width"]}>
           <div className={`col-lg-6 col-md-12 my-3 ${css["m-pd-0"]}`}>
             <p>
-				If you are from an institution and need help issuing certificates on OpenCerts, here are some companies you may want to contact. Do note that being on this list implies that these companies have demonstrated knowledge of implementing OpenCerts, but does not imply endorsement by GovTech.
+              If you are from an institution and need help issuing certificates
+              on OpenCerts, here are some companies you may want to contact. Do
+              note that being on this list implies that these companies have
+              demonstrated knowledge of implementing OpenCerts, but does not
+              imply endorsement by GovTech.
             </p>
             <p>
               If you are from a company that can help to issue certificates and
