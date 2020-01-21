@@ -13,7 +13,8 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
-test("Invalid Store certificate's error message is correct'", async t => {
+// TODO to remove skip, waiting for oa-verify
+test.skip("Invalid Store certificate's error message is correct'", async t => {
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
   await InvalidMessage.with({ visibilityCheck: true })();

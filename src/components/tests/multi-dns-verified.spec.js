@@ -15,6 +15,7 @@ const validateTextContent = async (t, component, texts) =>
     Promise.resolve()
   );
 
+// TODO to remove skip, update document to use documentStore instead of certificate store
 test("Sample document is rendered correctly when multiple dns is verified", async t => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 

@@ -10,6 +10,7 @@ module.exports = withBundleAnalyzer(
         reportFilename: "../bundles/client.html"
       }
     },
+
     cssModules: true,
     exportPathMap: function exportMap() {
       return {

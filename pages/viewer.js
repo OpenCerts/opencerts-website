@@ -4,20 +4,20 @@ import NextSeo from "next-seo";
 import { connect } from "react-redux";
 import NavigationBar from "../src/components/Layout/NavigationBar";
 import FooterBar from "../src/components/Layout/FooterBar";
-import ViewerPageContainer from "../src/components/ViewerPageContainer";
+import { ViewerContainer } from "../src/components/ViewerPageContainer";
 import { DEFAULT_SEO } from "../src/config";
 
-const VerifierPage = props => (
+const ViewerPage = props => (
   <>
     <NextSeo config={DEFAULT_SEO} />
     <NavigationBar />
-    <ViewerPageContainer document={props.document} />
+    <ViewerContainer document={props.document} />
     <FooterBar />
   </>
 );
 
-export default connect()(VerifierPage);
+export default connect()(ViewerPage);
 
-VerifierPage.propTypes = {
+ViewerPage.propTypes = {
   document: PropTypes.object
 };

@@ -22,15 +22,16 @@
     "analyze": "BUNDLE_ANALYZE=browser npm run start",
     "dev-cli": "node -r esm ./scripts/cli.js",
     "serve-static": "http-server out -s -p 3000",
-    "integration": "testcafe chrome src/**/*.spec.js",
+    "integration": "testcafe chrome src/components/tests/multi-dns-verified.spec.js",
     "integration:headless": "testcafe chrome:headless src/**/*.spec.js",
     "integration:watch": "nodemon --exec \"npm run integration\" --watch src"
   },
   "dependencies": {
     "@govtechsg/decentralized-renderer-react-components": "1.2.1",
     "@govtechsg/dnsprove": "^2.0.3",
-    "@govtechsg/open-attestation": "^1.1.30",
+    "@govtechsg/open-attestation": "^1.1.42",
     "@govtechsg/oa-encryption": "^1.3.1",
+    "@govtechsg/opencerts-verify": "^1.0.1",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-sass": "^1.0.1",
     "clipboard-copy": "^3.1.0",
