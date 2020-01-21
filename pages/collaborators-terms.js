@@ -8,7 +8,7 @@ import { CollaboratorsTerms } from "../src/components/Collaborate/CollaboratorsT
 const PAGE_SEO = {
   title: "Terms of use for collaborators",
   description:
-    "These Terms of Use govern your way of collaborating on opencers",
+    "These Terms of Use govern your way of collaborating on opencerts",
   openGraph: {
     title: "OpenCerts - Collaborators terms of use",
     description:
