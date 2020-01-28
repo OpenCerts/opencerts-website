@@ -52,10 +52,13 @@ export const DecentralisedRenderer = ({
       documentRef.current
     );
   };
-  const onConnected = useCallback(frame => {
-    toFrame.current = frame;
-    toFrame.current.renderDocument(document, rawDocument);
-  }, []);
+  const onConnected = useCallback(
+    frame => {
+      toFrame.current = frame;
+      toFrame.current.renderDocument(document, rawDocument);
+    },
+    [document, rawDocument]
+  );
 
   // effects
   // update document after every changes
@@ -71,7 +74,7 @@ export const DecentralisedRenderer = ({
       action: getDocumentIssuerStores(certificateData),
       label: certificateData ? certificateData.id : null
     });
-  }, []);
+  }, [rawDocument]);
 
   return (
     <>

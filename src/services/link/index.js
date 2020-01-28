@@ -16,15 +16,3 @@ export function generateLink(certificate) {
     })
     .then(res => res.json());
 }
-
-export function getCertificateById(certificateId) {
-  return window
-    .fetch(`${SHARE_LINK_API_URL}/${certificateId}`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-    .then(res => res.json());
-}

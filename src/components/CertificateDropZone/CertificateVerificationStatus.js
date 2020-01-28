@@ -18,7 +18,8 @@ const CertificateVerificationStatus = props => {
     verificationStatus,
     storeStatus,
     hover,
-    retrieveCertificateStatus
+    retrieveCertificateStatus,
+    retrieveCertificateByActionError
   } = props;
   if (hover) {
     return <DefaultView hover={true} accept={true} />;
@@ -35,12 +36,13 @@ const CertificateVerificationStatus = props => {
     );
   }
   if (
-    document &&
-    (!hashStatus.verified ||
-      !issuedStatus.verified ||
-      !notRevokedStatus.verified ||
-      !issuerIdentityStatus.verified ||
-      !storeStatus.verified)
+    (document &&
+      (!hashStatus.verified ||
+        !issuedStatus.verified ||
+        !notRevokedStatus.verified ||
+        !issuerIdentityStatus.verified ||
+        !storeStatus.verified)) ||
+    retrieveCertificateByActionError
   ) {
     return (
       <UnverifiedView
@@ -51,6 +53,7 @@ const CertificateVerificationStatus = props => {
         notRevokedStatus={notRevokedStatus}
         issuerIdentityStatus={issuerIdentityStatus}
         storeStatus={storeStatus}
+        retrieveCertificateByActionError={retrieveCertificateByActionError}
       />
     );
   }
@@ -73,7 +76,8 @@ CertificateVerificationStatus.propTypes = {
   verificationStatus: PropTypes.array,
   storeStatus: PropTypes.object,
   hover: PropTypes.bool,
-  retrieveCertificateStatus: PropTypes.string
+  retrieveCertificateStatus: PropTypes.string,
+  retrieveCertificateByActionError: PropTypes.string
 };
 
 export default CertificateVerificationStatus;

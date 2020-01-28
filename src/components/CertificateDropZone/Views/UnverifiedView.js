@@ -8,12 +8,13 @@ const View = ({
   hashStatus,
   issuedStatus,
   issuerIdentityStatus,
-  notRevokedStatus
+  notRevokedStatus,
+  retrieveCertificateByActionError
 }) => {
-  /* Array of error messages with priority of error messages determined by a stack. 
+  /* Array of error messages with priority of error messages determined by a stack.
   Error messages are first placed into the stack and the error message with the highest priority is popped off the stack
   and displayed.
-  
+
   The priority of error messages are as follows:
   1. Invalid store
   2. Tampered
@@ -48,6 +49,11 @@ const View = ({
       message:
         "Please check that you have a valid smart contract with us and a correct certificate store address before proceeding.",
       error: !storeStatus.verified
+    },
+    {
+      title: "Unable to load certificate with the provided parameters",
+      message: retrieveCertificateByActionError,
+      error: !!retrieveCertificateByActionError
     }
   ];
 
@@ -81,8 +87,11 @@ const View = ({
           className={`${isWarning ? "warning" : "invalid"} m-3`}
           style={{ fontSize: "1.5rem" }}
         >
+          {/* eslint-disable-next-line no-nested-ternary */}
           {isWarning
             ? "Certificate from unregistered institution"
+            : retrieveCertificateByActionError
+            ? "The certificate can't be loaded"
             : "This certificate is not valid"}
         </span>
       </span>
@@ -145,7 +154,8 @@ View.propTypes = {
   issuedStatus: PropTypes.object,
   notRevokedStatus: PropTypes.object,
   issuerIdentityStatus: PropTypes.object,
-  storeStatus: PropTypes.object
+  storeStatus: PropTypes.object,
+  retrieveCertificateByActionError: PropTypes.string
 };
 
 export default View;

@@ -4,7 +4,8 @@ import { getData, verifySignature } from "@govtechsg/open-attestation";
 import { isValidAddress as isEthereumAddress } from "ethereumjs-util";
 import Router from "next/router";
 import { getDocumentStoreRecords } from "@govtechsg/dnsprove";
-import { decryptString } from "@govtechsg/opencerts-encryption";
+import { decryptString } from "@govtechsg/oa-encryption";
+import "isomorphic-fetch";
 import { getLogger } from "../utils/logger";
 import {
   types,
@@ -26,7 +27,7 @@ import fetchIssuers from "../services/issuers";
 import { combinedHash } from "../utils";
 import { ensResolveAddress, getText } from "../services/ens";
 import sendEmail from "../services/email";
-import { generateLink, getCertificateById } from "../services/link";
+import { generateLink } from "../services/link";
 import { analyticsEvent } from "../components/Analytics";
 import {
   getDocumentStore,
@@ -468,24 +469,41 @@ export function* generateShareLink() {
   }
 }
 
-export function* retrieveCertificateFromStore({ payload }) {
+export function* retrieveCertificateByAction({ payload: { uri, key } }) {
   try {
     yield put({
-      type: types.GET_CERTIFICATE_BY_ID_PENDING
+      type: types.RETRIEVE_CERTIFICATE_BY_ACTION_PENDING
     });
-    const encryptedCertificate = yield getCertificateById(payload.id);
-    const certificate = JSON.parse(
-      decryptString({
-        tag: encryptedCertificate.document.tag,
-        cipherText: encryptedCertificate.document.cipherText,
-        iv: encryptedCertificate.document.iv,
-        key: payload.encryptionKey,
-        type: "OPEN-ATTESTATION-TYPE-1"
-      })
-    );
 
-    if (!encryptedCertificate) {
-      throw new Error("Fail to retrieve certificate by id");
+    // if a key has been provided, let's assume
+    let certificate = yield window.fetch(uri).then(response => {
+      if (response.status >= 400 && response.status < 600) {
+        throw new Error(`Unable to load the certificate from ${uri}`);
+      }
+      return response.json();
+    });
+    certificate = certificate.document || certificate; // opencerts-function returns the document in a nested document object
+
+    if (!certificate) {
+      throw new Error(`Certificate at address ${uri} is empty`);
+    }
+    // if there is a key and the type is "OPEN-ATTESTATION-TYPE-1", let's use oa-encryption
+    if (key && certificate.type === "OPEN-ATTESTATION-TYPE-1") {
+      certificate = JSON.parse(
+        decryptString({
+          tag: certificate.tag,
+          cipherText: certificate.cipherText,
+          iv: certificate.iv,
+          key,
+          type: certificate.type
+        })
+      );
+    } else if (key || certificate.type) {
+      throw new Error(
+        `Unable to decrypt certificate with key=${key} and type=${
+          certificate.type
+        }`
+      );
     }
 
     yield put({
@@ -493,11 +511,11 @@ export function* retrieveCertificateFromStore({ payload }) {
       payload: certificate
     });
     yield put({
-      type: types.GET_CERTIFICATE_BY_ID_SUCCESS
+      type: types.RETRIEVE_CERTIFICATE_BY_ACTION_SUCCESS
     });
   } catch (e) {
     yield put({
-      type: types.GET_CERTIFICATE_BY_ID_FAILURE,
+      type: types.RETRIEVE_CERTIFICATE_BY_ACTION_FAILURE,
       payload: e.message
     });
   }
@@ -573,7 +591,7 @@ export default [
   takeEvery(types.UPDATE_CERTIFICATE, verifyCertificate),
   takeEvery(types.SENDING_CERTIFICATE, sendCertificate),
   takeEvery(types.GENERATE_SHARE_LINK, generateShareLink),
-  takeEvery(types.GET_CERTIFICATE_BY_ID, retrieveCertificateFromStore),
+  takeEvery(types.RETRIEVE_CERTIFICATE_BY_ACTION, retrieveCertificateByAction),
   takeEvery(applicationTypes.UPDATE_WEB3, networkReset),
 
   takeEvery(types.VERIFYING_CERTIFICATE_ISSUER_FAILURE, analyticsIssuerFail),

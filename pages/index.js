@@ -1,32 +1,33 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import NextSeo from "next-seo";
-import QueryString from "query-string";
 import { connect } from "react-redux";
-import { withRouter } from "next/router";
-import { retrieveCertificateByLink } from "../src/reducers/certificate";
+import { useRouter } from "next/router";
+import {
+  resetCertificateState,
+  retrieveCertificateByAction,
+  retrieveCertificateByActionFailure
+} from "../src/reducers/certificate";
 import NavigationBar from "../src/components/Layout/NavigationBar";
 import FooterBar from "../src/components/Layout/FooterBar";
 import MainPageContainer from "../src/components/MainPageContainer";
 import { DEFAULT_SEO } from "../src/config";
 
-const VerifierPage = props => {
-  const getCertificate = () => {
-    const encryptionKey = window.location.hash.substring(1);
-    // using window.location.search because react router has issue getting the query on NextJS
-    const documentId = QueryString.parse(window.location.search).documentId;
-    if (documentId) {
-      const payload = {
-        id: documentId,
-        encryptionKey
-      };
-      props.retrieveCertificateByLink(payload);
-    }
-  };
-
+const HomePage = props => {
+  const router = useRouter();
   useEffect(() => {
-    getCertificate();
-  }, []);
+    if (router.query.action) {
+      props.resetCertificateState();
+      const action = JSON.parse(window.decodeURI(router.query.action));
+      if (action.type === "DOCUMENT") {
+        props.retrieveCertificateByAction(action.payload);
+      } else {
+        props.retrieveCertificateByActionFailure(
+          `The type ${action.type} provided from the action is not supported`
+        );
+      }
+    }
+  }, [props, router]);
 
   return (
     <>
@@ -39,18 +40,20 @@ const VerifierPage = props => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  retrieveCertificateByLink: payload =>
-    dispatch(retrieveCertificateByLink(payload))
+  retrieveCertificateByAction: payload =>
+    dispatch(retrieveCertificateByAction(payload)),
+  retrieveCertificateByActionFailure: payload =>
+    dispatch(retrieveCertificateByActionFailure(payload)),
+  resetCertificateState: () => dispatch(resetCertificateState())
 });
 
 export default connect(
   null,
   mapDispatchToProps
-)(withRouter(VerifierPage));
+)(HomePage);
 
-VerifierPage.propTypes = {
-  router: PropTypes.object,
-  documentId: PropTypes.string,
-  encryptedCertificateStatus: PropTypes.string,
-  retrieveCertificateByLink: PropTypes.func
+HomePage.propTypes = {
+  retrieveCertificateByAction: PropTypes.func,
+  resetCertificateState: PropTypes.func,
+  retrieveCertificateByActionFailure: PropTypes.func
 };

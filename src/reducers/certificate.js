@@ -40,9 +40,8 @@ export const initialState = {
   shareLinkState: states.INITIAL,
   shareLinkError: null,
 
-  encryptedCertificate: {},
-  encryptedCertificateState: states.INITIAL,
-  encryptedCertificateError: null
+  retrieveCertificateByActionState: states.INITIAL,
+  retrieveCertificateByActionStateError: null
 };
 
 // Actions
@@ -84,10 +83,13 @@ export const types = {
   GENERATE_SHARE_LINK_FAILURE: "GENERATE_SHARE_LINK_FAILURE",
   GENERATE_SHARE_LINK_RESET: "GENERATE_SHARE_LINK_RESET",
 
-  GET_CERTIFICATE_BY_ID: "GET_CERTIFICATE_BY_ID",
-  GET_CERTIFICATE_BY_ID_PENDING: "GET_CERTIFICATE_BY_ID_PENDING",
-  GET_CERTIFICATE_BY_ID_SUCCESS: "GET_CERTIFICATE_BY_ID_SUCCESS",
-  GET_CERTIFICATE_BY_ID_FAILURE: "GET_CERTIFICATE_BY_ID_FAILURE",
+  RETRIEVE_CERTIFICATE_BY_ACTION: "RETRIEVE_CERTIFICATE_BY_ACTION",
+  RETRIEVE_CERTIFICATE_BY_ACTION_PENDING:
+    "RETRIEVE_CERTIFICATE_BY_ACTION_PENDING",
+  RETRIEVE_CERTIFICATE_BY_ACTION_SUCCESS:
+    "RETRIEVE_CERTIFICATE_BY_ACTION_SUCCESS",
+  RETRIEVE_CERTIFICATE_BY_ACTION_FAILURE:
+    "RETRIEVE_CERTIFICATE_BY_ACTION_FAILURE",
 
   CERTIFICATE_OBFUSCATE_RESET: "CERTIFICATE_OBFUSCATE_RESET",
   CERTIFICATE_OBFUSCATE_UPDATE: "CERTIFICATE_OBFUSCATE_UPDATE"
@@ -340,23 +342,21 @@ export default function reducer(state = initialState, action) {
         shareLink: {},
         shareLinkState: states.INITIAL
       };
-    case types.GET_CERTIFICATE_BY_ID_PENDING:
+    case types.RETRIEVE_CERTIFICATE_BY_ACTION_PENDING:
       return {
         ...state,
-        encryptedCertificateState: states.PENDING
+        retrieveCertificateByActionState: states.PENDING
       };
-    case types.GET_CERTIFICATE_BY_ID_SUCCESS:
+    case types.RETRIEVE_CERTIFICATE_BY_ACTION_SUCCESS:
       return {
         ...state,
-        encryptedCertificate: action.payload,
-        encryptedCertificateState: states.SUCCESS
+        retrieveCertificateByActionState: states.SUCCESS
       };
-    case types.GET_CERTIFICATE_BY_ID_FAILURE:
+    case types.RETRIEVE_CERTIFICATE_BY_ACTION_FAILURE:
       return {
         ...state,
-        encryptedCertificate: {},
-        encryptedCertificateState: states.FAILURE,
-        encryptedCertificateError: action.payload
+        retrieveCertificateByActionState: states.FAILURE,
+        retrieveCertificateByActionError: action.payload
       };
     case types.CERTIFICATE_OBFUSCATE_RESET:
       return {
@@ -472,9 +472,16 @@ export function generateShareLink() {
   };
 }
 
-export function retrieveCertificateByLink(payload) {
+export function retrieveCertificateByAction(payload) {
   return {
-    type: types.GET_CERTIFICATE_BY_ID,
+    type: types.RETRIEVE_CERTIFICATE_BY_ACTION,
+    payload
+  };
+}
+
+export function retrieveCertificateByActionFailure(payload) {
+  return {
+    type: types.RETRIEVE_CERTIFICATE_BY_ACTION_FAILURE,
     payload
   };
 }
@@ -564,14 +571,16 @@ export function getVerifying(store) {
     certificateHashVerifying,
     certificateIssuedVerifying,
     certificateNotRevokedVerifying,
-    certificateStoreVerifying
+    certificateStoreVerifying,
+    retrieveCertificateByActionState
   } = store.certificate;
   return (
     certificateIssuerVerifying ||
     certificateHashVerifying ||
     certificateIssuedVerifying ||
     certificateNotRevokedVerifying ||
-    certificateStoreVerifying
+    certificateStoreVerifying ||
+    retrieveCertificateByActionState === states.PENDING
   );
 }
 
@@ -601,6 +610,6 @@ export function getShareLinkState(store) {
   return store.certificate.shareLinkState;
 }
 
-export function getEncryptedCertificateStatus(store) {
-  return store.certificate.encryptedCertificateState;
+export function getCertificateByActionError(store) {
+  return store.certificate.retrieveCertificateByActionError;
 }
