@@ -4,17 +4,17 @@ import Router from "next/router";
 import Dropzone from "react-dropzone";
 import { connect } from "react-redux";
 import {
-  updateCertificate,
   getCertificate,
-  getVerifying,
-  getIssuerIdentityStatus,
+  getCertificateByActionError,
   getHashStatus,
   getIssuedStatus,
+  getIssuerIdentityStatus,
   getNotRevokedStatus,
+  getStoreStatus,
   getVerificationStatus,
+  getVerifying,
   resetCertificateState,
-  getEncryptedCertificateStatus,
-  getStoreStatus
+  updateCertificate
 } from "../../reducers/certificate";
 import { updateNetworkId } from "../../reducers/application";
 import CertificateVerificationStatus from "./CertificateVerificationStatus";
@@ -95,6 +95,9 @@ class CertificateDropZoneContainer extends Component {
             issuedStatus={this.props.issuedStatus}
             notRevokedStatus={this.props.notRevokedStatus}
             verificationStatus={this.props.verificationStatus}
+            retrieveCertificateByActionError={
+              this.props.retrieveCertificateByActionError
+            }
             resetData={this.resetData.bind(this)}
             storeStatus={this.props.storeStatus}
             hover={props.isDragAccept}
@@ -109,7 +112,7 @@ const mapStateToProps = store => ({
   document: getCertificate(store),
 
   // Verification statuses used in verifier block
-  encryptedCertificateStatus: getEncryptedCertificateStatus(store),
+  retrieveCertificateByActionError: getCertificateByActionError(store),
   verifying: getVerifying(store),
   issuerIdentityStatus: getIssuerIdentityStatus(store),
   hashStatus: getHashStatus(store),
@@ -143,5 +146,6 @@ CertificateDropZoneContainer.propTypes = {
   issuedStatus: PropTypes.object,
   notRevokedStatus: PropTypes.object,
   verificationStatus: PropTypes.array,
-  storeStatus: PropTypes.object
+  storeStatus: PropTypes.object,
+  retrieveCertificateByActionError: PropTypes.string
 };

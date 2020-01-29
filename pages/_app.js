@@ -1,5 +1,5 @@
 import withRedux from "next-redux-wrapper";
-import App, { Container } from "next/app";
+import App from "next/app";
 import Router from "next/router";
 import withGA from "next-ga";
 import React from "react";
@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import fetch from "isomorphic-fetch";
 import { mapValues } from "lodash";
 import initStore from "../src/store";
-import { GA_ID, ENVIRONMENT } from "../src/config";
+import { ENVIRONMENT, GA_ID } from "../src/config";
 import { types } from "../src/reducers/featureToggle";
 
 const FeatureFlagLoader = ({ dispatch, children }) => {
@@ -23,7 +23,7 @@ const FeatureFlagLoader = ({ dispatch, children }) => {
       });
     };
     run();
-  }, []);
+  }, [dispatch]);
   return children;
 };
 
@@ -41,13 +41,11 @@ class MyApp extends App {
   render() {
     const { Component, pageProps, store } = this.props;
     return (
-      <Container>
-        <Provider store={store}>
-          <FeatureFlagLoader dispatch={store.dispatch}>
-            <Component {...pageProps} />
-          </FeatureFlagLoader>
-        </Provider>
-      </Container>
+      <Provider store={store}>
+        <FeatureFlagLoader dispatch={store.dispatch}>
+          <Component {...pageProps} />
+        </FeatureFlagLoader>
+      </Provider>
     );
   }
 }
