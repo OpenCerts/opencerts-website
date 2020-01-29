@@ -16,9 +16,9 @@ import { DEFAULT_SEO } from "../src/config";
 const HomePage = props => {
   const router = useRouter();
   useEffect(() => {
-    if (router.query.action) {
+    if (router.query.q) {
       props.resetCertificateState();
-      const action = JSON.parse(window.decodeURI(router.query.action));
+      const action = JSON.parse(window.decodeURI(router.query.q));
       if (action.type === "DOCUMENT") {
         props.retrieveCertificateByAction(action.payload);
       } else {

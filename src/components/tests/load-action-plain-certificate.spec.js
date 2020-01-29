@@ -20,12 +20,12 @@ test("Load document from action should work when url is valid", async t => {
     type: "DOCUMENT",
     payload: {
       uri: `https://gist.githubusercontent.com/Nebulis/dc32c107fc5112ecf863b1dfa25995a9/raw/9aed3bfbbddaaa23d453cfbb9ee42d9efffaf2b8/opencerts-ropsten-demo.json`,
-      redirect: "https://tradetrust.io/"
+      redirect: "https://opencerts.io/"
     }
   };
 
   await t.navigateTo(
-    `http://localhost:3000/?action=${encodeURI(JSON.stringify(action))}`
+    `http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}`
   );
   await validateTextContent(t, StatusButton, [
     "Certificate issued by ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"
@@ -49,12 +49,12 @@ test("Load document from action should fail when url is invalid", async t => {
     type: "DOCUMENT",
     payload: {
       uri: `https://gist.githubusercontent.com/Nebulis/dc32c107fc5112ecf863b1dfa25995a9/raw/9aed3bfbbdd2b8/opencerts-ropsten-demo.json`,
-      redirect: "https://tradetrust.io/"
+      redirect: "https://opencerts.io/"
     }
   };
 
   await t.navigateTo(
-    `http://localhost:3000/?action=${encodeURI(JSON.stringify(action))}`
+    `http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}`
   );
   await validateTextContent(t, CertificateDropzone, [
     "The certificate can't be loaded",
