@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { isValid } from "@govtechsg/opencerts-verify";
 import css from "./detailedCertificateBlock.scss";
 import { MESSAGES, TYPES } from "../../constants/VerificationErrorMessages";
+import { getRevokeFragment } from "../../services/fragment";
 
 const SuccessIcon = () => <i className="fas fa-check text-success mr-2" />;
 const FailureIcon = () => <i className="fas fa-times text-danger mr-2" />;
@@ -23,10 +24,7 @@ const renderStatusCheckRow = (valid, messageSet) => (
 );
 
 const renderStatuses = verificationStatus => {
-  const revokeFragmentName = "OpenAttestationEthereumDocumentStoreRevoked";
-  const revokeFragment = verificationStatus.filter(
-    status => status.name === revokeFragmentName
-  );
+  const revokeFragment = [getRevokeFragment(verificationStatus)];
   return (
     <div id="detailed-error">
       {renderStatusCheckRow(

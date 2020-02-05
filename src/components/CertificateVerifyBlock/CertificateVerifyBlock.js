@@ -40,7 +40,6 @@ export const getIdentityVerificationText = verificationStatus => {
       .concat(dnsFragment.data)
       .sort((obj1, obj2) => obj1.location.localeCompare(obj2.location))
       .find(({ status }) => status === "VALID");
-  console.log({ dnsIdentity });
   if (dnsIdentity) {
     return `Certificate issued by ${dnsIdentity.location.toUpperCase()}`;
   }

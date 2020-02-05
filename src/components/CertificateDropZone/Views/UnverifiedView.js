@@ -3,19 +3,19 @@ import Link from "next/link";
 import { isValid } from "@govtechsg/opencerts-verify";
 import { TYPES, MESSAGES } from "../../../constants/VerificationErrorMessages";
 import css from "./viewerStyles.scss";
+import {
+  addressInvalid,
+  getAllButRevokeFragment,
+  getRevokeFragment
+} from "../../../services/fragment";
 
 const DetailedErrors = ({
   verificationStatus,
   retrieveCertificateByActionError
 }) => {
   const errors = [];
-  const revokeFragmentName = "OpenAttestationEthereumDocumentStoreRevoked";
-  const fragmentsWithoutRevoke = verificationStatus.filter(
-    status => status.name !== revokeFragmentName
-  );
-  const revokeFragment = verificationStatus.filter(
-    status => status.name === revokeFragmentName
-  );
+  const fragmentsWithoutRevoke = getAllButRevokeFragment(verificationStatus);
+  const revokeFragment = [getRevokeFragment(verificationStatus)];
   if (!isValid(verificationStatus, ["DOCUMENT_INTEGRITY"])) {
     errors.push(TYPES.HASH);
   }
@@ -33,6 +33,14 @@ const DetailedErrors = ({
       failureTitle: "Unable to load certificate with the provided parameters",
       failureMessage: retrieveCertificateByActionError
     });
+  }
+  // if the error is because the address is invalid, then get rid of all errors and only keep this one
+  if (
+    !isValid(verificationStatus, ["DOCUMENT_STATUS"]) &&
+    addressInvalid(verificationStatus)
+  ) {
+    errors.splice(0, errors.length);
+    errors.push(TYPES.ADDRESS_INVALID);
   }
   const renderedError = errors.map((errorType, index) => (
     <div key={index}>

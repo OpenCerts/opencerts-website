@@ -3,7 +3,7 @@ import { call, put, select, takeEvery } from "redux-saga/effects";
 import { getData } from "@govtechsg/open-attestation";
 import Router from "next/router";
 import { decryptString } from "@govtechsg/oa-encryption";
-import { verify, isValid } from "@govtechsg/opencerts-verify";
+import { isValid, verify } from "@govtechsg/opencerts-verify";
 import "isomorphic-fetch";
 import { getLogger } from "../utils/logger";
 import {
@@ -17,6 +17,11 @@ import sendEmail from "../services/email";
 import { generateLink } from "../services/link";
 import { analyticsEvent } from "../components/Analytics";
 import { getDocumentIssuerStores } from "../utils/certificate";
+import {
+  certificateNotIssued,
+  getAllButRevokeFragment,
+  getRevokeFragment
+} from "../services/fragment";
 
 const { trace } = getLogger("saga:certificate");
 
@@ -27,6 +32,70 @@ const ANALYTICS_VERIFICATION_ERROR_CODE = {
   REVOKED_CERTIFICATE: 3,
   CERTIFICATE_STORE: 4
 };
+export function* getAnalyticsDetails() {
+  try {
+    const rawCertificate = yield select(getCertificate);
+    const certificate = getData(rawCertificate);
+
+    const storeAddresses = getDocumentIssuerStores(certificate);
+    const id = get(certificate, "id");
+    return { storeAddresses, id };
+  } catch (e) {
+    return {};
+  }
+}
+
+export function* triggerAnalytics(errorCode) {
+  const { storeAddresses, id } = yield call(getAnalyticsDetails);
+  if (storeAddresses && id) {
+    analyticsEvent(window, {
+      category: "CERTIFICATE_ERROR",
+      action: storeAddresses,
+      label: id,
+      value: errorCode
+    });
+  }
+}
+
+// to run if any of the issuer is not valid
+export function* analyticsIssuerFail() {
+  yield call(
+    triggerAnalytics,
+    ANALYTICS_VERIFICATION_ERROR_CODE.ISSUER_IDENTITY
+  );
+}
+
+// to run if certificate has been tampered
+export function* analyticsHashFail() {
+  yield call(
+    triggerAnalytics,
+    ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_HASH
+  );
+}
+
+// to run if certificate has not been issued
+export function* analyticsIssuedFail() {
+  yield call(
+    triggerAnalytics,
+    ANALYTICS_VERIFICATION_ERROR_CODE.UNISSUED_CERTIFICATE
+  );
+}
+
+// to run if certificate has been revoked
+export function* analyticsRevocationFail() {
+  yield call(
+    triggerAnalytics,
+    ANALYTICS_VERIFICATION_ERROR_CODE.REVOKED_CERTIFICATE
+  );
+}
+
+// to run if store is not valid
+export function* analyticsStoreFail() {
+  yield call(
+    triggerAnalytics,
+    ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_STORE
+  );
+}
 
 export function* verifyCertificate({ payload: certificate }) {
   try {
@@ -36,10 +105,34 @@ export function* verifyCertificate({ payload: certificate }) {
     const fragments = yield call(verify, certificate, { network: "ropsten" });
     trace(`Verification Status: ${JSON.stringify(fragments)}`);
 
-    // TODO handle analytics MF
     yield put(verifyingCertificateSuccess(fragments));
     if (isValid(fragments)) {
       Router.push("/viewer");
+    } else {
+      const fragmentsWithoutRevoke = getAllButRevokeFragment(fragments);
+      const revokeFragment = [getRevokeFragment(fragments)];
+
+      if (!isValid(fragments, ["DOCUMENT_INTEGRITY"])) {
+        yield call(analyticsHashFail);
+      }
+      if (
+        !isValid(fragmentsWithoutRevoke, ["DOCUMENT_STATUS"]) &&
+        certificateNotIssued(fragments)
+      ) {
+        yield call(analyticsIssuedFail);
+      }
+      if (
+        !isValid(fragments, ["DOCUMENT_STATUS"]) &&
+        !certificateNotIssued(fragments)
+      ) {
+        yield call(analyticsStoreFail);
+      }
+      if (!isValid(revokeFragment, ["DOCUMENT_STATUS"])) {
+        yield call(analyticsRevocationFail);
+      }
+      if (!isValid(fragments, ["ISSUER_IDENTITY"])) {
+        yield call(analyticsIssuedFail);
+      }
     }
   } catch (e) {
     yield put(verifyingCertificateFailure(e.message));
@@ -151,71 +244,6 @@ export function* networkReset() {
   yield put({
     type: types.NETWORK_RESET
   });
-}
-
-export function* getAnalyticsDetails() {
-  try {
-    const rawCertificate = yield select(getCertificate);
-    const certificate = getData(rawCertificate);
-
-    const storeAddresses = getDocumentIssuerStores(certificate);
-    const id = get(certificate, "id");
-    return { storeAddresses, id };
-  } catch (e) {
-    return {};
-  }
-}
-
-export function* triggerAnalytics(errorCode) {
-  const { storeAddresses, id } = yield call(getAnalyticsDetails);
-  if (storeAddresses && id) {
-    analyticsEvent(window, {
-      category: "CERTIFICATE_ERROR",
-      action: storeAddresses,
-      label: id,
-      value: errorCode
-    });
-  }
-}
-
-// to run if any of the issuer is not valid
-export function* analyticsIssuerFail() {
-  yield call(
-    triggerAnalytics,
-    ANALYTICS_VERIFICATION_ERROR_CODE.ISSUER_IDENTITY
-  );
-}
-
-// to run if certificate has been tampered
-export function* analyticsHashFail() {
-  yield call(
-    triggerAnalytics,
-    ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_HASH
-  );
-}
-
-// to run if certificate has not been issued
-export function* analyticsIssuedFail() {
-  yield call(
-    triggerAnalytics,
-    ANALYTICS_VERIFICATION_ERROR_CODE.UNISSUED_CERTIFICATE
-  );
-}
-
-// to run if certificate has been revoked
-export function* analyticsRevocationFail() {
-  yield call(
-    triggerAnalytics,
-    ANALYTICS_VERIFICATION_ERROR_CODE.REVOKED_CERTIFICATE
-  );
-}
-
-// to run if store is not valid
-export function* analyticsStoreFail() {
-  yield call(
-    triggerAnalytics,
-    ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_STORE
-  );
 }
 
 export default [

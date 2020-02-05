@@ -2,7 +2,8 @@ export const TYPES = {
   REVOKED: "REVOKED",
   ISSUED: "ISSUED",
   HASH: "HASH",
-  IDENTITY: "IDENTITY"
+  IDENTITY: "IDENTITY",
+  ADDRESS_INVALID: "ADDRESS_INVALID"
 };
 
 export const MESSAGES = {
@@ -28,5 +29,10 @@ export const MESSAGES = {
     failureTitle: "Certificate issuer identity is invalid",
     successTitle: "Certificate issuer has been identified",
     failureMessage: "This certificate was issued by an invalid issuer."
+  },
+  [TYPES.ADDRESS_INVALID]: {
+    failureTitle: "Certificate store address is invalid",
+    failureMessage:
+      "Please check that you have a valid smart contract with us and a correct certificate store address before proceeding."
   }
 };
