@@ -1,7 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
 import DetailedCertificateVerifyBlock from "./DetailedCertificateVerifyBlock";
-import { LOG_LEVEL } from "./constants";
 
 describe("DetailedCertificateVerifyBlock", () => {
   it("displays that the certificate has been tampered with when hashStatus is false", () => {
