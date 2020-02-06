@@ -1,5 +1,3 @@
-import { get } from "lodash";
-
 export const states = {
   INITIAL: "INITIAL",
   PENDING: "PENDING",
@@ -327,10 +325,6 @@ export function getVerifying(store) {
     store.certificate.verificationPending ||
     store.certificate.retrieveCertificateByActionState === states.PENDING
   );
-}
-
-export function getVerified(store) {
-  return get(store, "certificate.verificationStatus.valid", false);
 }
 
 export function getVerificationStatus(store) {

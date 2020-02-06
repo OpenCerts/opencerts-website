@@ -9,10 +9,7 @@ import {
   getRevokeFragment
 } from "../../../services/fragment";
 
-const DetailedErrors = ({
-  verificationStatus,
-  retrieveCertificateByActionError
-}) => {
+const DetailedErrors = ({ verificationStatus }) => {
   const errors = [];
   const fragmentsWithoutRevoke = getAllButRevokeFragment(verificationStatus);
   const revokeFragment = [getRevokeFragment(verificationStatus)];
@@ -27,12 +24,6 @@ const DetailedErrors = ({
   }
   if (!isValid(verificationStatus, ["ISSUER_IDENTITY"])) {
     errors.push(TYPES.IDENTITY);
-  }
-  if (retrieveCertificateByActionError) {
-    errors.push({
-      failureTitle: "Unable to load certificate with the provided parameters",
-      failureMessage: retrieveCertificateByActionError
-    });
   }
   // if the error is because the address is invalid, then get rid of all errors and only keep this one
   if (
@@ -56,8 +47,7 @@ const DetailedErrors = ({
 };
 
 DetailedErrors.propTypes = {
-  verificationStatus: PropTypes.array,
-  retrieveCertificateByActionError: PropTypes.string
+  verificationStatus: PropTypes.array
 };
 
 export const UnverifiedView = ({
@@ -81,10 +71,19 @@ export const UnverifiedView = ({
       </span>
     </span>
 
-    <DetailedErrors
-      verificationStatus={verificationStatus}
-      retrieveCertificateByActionError={retrieveCertificateByActionError}
-    />
+    {retrieveCertificateByActionError ? (
+      <div>
+        <p className={css.messages}>
+          Unable to load certificate with the provided parameters
+        </p>
+        <p>{retrieveCertificateByActionError}</p>
+      </div>
+    ) : (
+      <DetailedErrors
+        verificationStatus={verificationStatus}
+        retrieveCertificateByActionError={retrieveCertificateByActionError}
+      />
+    )}
 
     <Link href="/faq">
       <div className={css["unverified-btn"]}>What should I do?</div>
