@@ -25,7 +25,10 @@ const CertificateVerificationStatus = props => {
   if (verifying || retrieveCertificateStatus === "PENDING") {
     return <VerifyingView />;
   }
-  if ((verificationStatus && !isValid(verificationStatus)) || retrieveCertificateByActionError) {
+  if (
+    (verificationStatus && !isValid(verificationStatus)) ||
+    retrieveCertificateByActionError
+  ) {
     return (
       <UnverifiedView
         resetData={() => resetData()}

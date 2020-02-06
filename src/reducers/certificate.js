@@ -323,7 +323,10 @@ export function getCertificate(store) {
 }
 
 export function getVerifying(store) {
-  return store.certificate.verificationPending || store.certificate.retrieveCertificateByActionState ===states.PENDING;
+  return (
+    store.certificate.verificationPending ||
+    store.certificate.retrieveCertificateByActionState === states.PENDING
+  );
 }
 
 export function getVerified(store) {

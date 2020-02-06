@@ -4,7 +4,7 @@ import Router from "next/router";
 import Dropzone from "react-dropzone";
 import { connect } from "react-redux";
 import {
-  getEncryptedCertificateStatus,
+  getCertificateByActionError,
   getVerificationStatus,
   getVerifying,
   resetCertificateState,
@@ -78,7 +78,6 @@ class CertificateDropZoneContainer extends Component {
       >
         {props => (
           <CertificateVerificationStatus
-            retrieveCertificateStatus={this.props.encryptedCertificateStatus}
             fileError={this.state.fileError}
             handleCertificateChange={this.handleCertificateChange}
             handleFileError={this.handleFileError}
@@ -97,8 +96,6 @@ class CertificateDropZoneContainer extends Component {
 }
 
 const mapStateToProps = store => ({
-  encryptedCertificateStatus: getEncryptedCertificateStatus(store),
-  // Verification statuses used in verifier block
   retrieveCertificateByActionError: getCertificateByActionError(store),
   verifying: getVerifying(store),
   verificationStatus: getVerificationStatus(store)

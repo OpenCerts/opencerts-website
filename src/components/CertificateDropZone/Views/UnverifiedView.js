@@ -56,7 +56,8 @@ const DetailedErrors = ({
 };
 
 DetailedErrors.propTypes = {
-  verificationStatus: PropTypes.array
+  verificationStatus: PropTypes.array,
+  retrieveCertificateByActionError: PropTypes.string
 };
 
 export const UnverifiedView = ({
