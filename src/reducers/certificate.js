@@ -39,8 +39,8 @@ export const types = {
 
   VERIFYING_CERTIFICATE: "VERIFYING_CERTIFICATE",
 
-  VERIFYING_CERTIFICATE_SUCCESS: "VERIFYING_CERTIFICATE_SUCCESS",
-  VERIFYING_CERTIFICATE_FAILURE: "VERIFYING_CERTIFICATE_FAILURE",
+  VERIFYING_CERTIFICATE_COMPLETED: "VERIFYING_CERTIFICATE_COMPLETED", // completed
+  VERIFYING_CERTIFICATE_ERRORED: "VERIFYING_CERTIFICATE_ERRORED", // errored
 
   SENDING_CERTIFICATE: "SENDING_CERTIFICATE",
   SENDING_CERTIFICATE_SUCCESS: "SENDING_CERTIFICATE_SUCCESS",
@@ -100,13 +100,13 @@ export default function reducer(state = initialState, action) {
         verificationPending: true,
         verificationStatus: null
       };
-    case types.VERIFYING_CERTIFICATE_SUCCESS:
+    case types.VERIFYING_CERTIFICATE_COMPLETED:
       return {
         ...state,
         verificationPending: false,
         verificationStatus: action.payload
       };
-    case types.VERIFYING_CERTIFICATE_FAILURE:
+    case types.VERIFYING_CERTIFICATE_ERRORED:
       return {
         ...state,
         verificationPending: false,
@@ -198,13 +198,13 @@ export function updateCertificate(payload) {
     payload
   };
 }
-export const verifyingCertificateSuccess = payload => ({
-  type: types.VERIFYING_CERTIFICATE_SUCCESS,
+export const verifyingCertificateCompleted = payload => ({
+  type: types.VERIFYING_CERTIFICATE_COMPLETED,
   payload
 });
 
-export const verifyingCertificateFailure = payload => ({
-  type: types.VERIFYING_CERTIFICATE_FAILURE,
+export const verifyingCertificateErrored = payload => ({
+  type: types.VERIFYING_CERTIFICATE_ERRORED,
   payload
 });
 

@@ -9,8 +9,8 @@ import { getLogger } from "../utils/logger";
 import {
   getCertificate,
   types,
-  verifyingCertificateFailure,
-  verifyingCertificateSuccess
+  verifyingCertificateErrored,
+  verifyingCertificateCompleted
 } from "../reducers/certificate";
 import { types as applicationTypes } from "../reducers/application";
 import sendEmail from "../services/email";
@@ -22,8 +22,9 @@ import {
   getAllButRevokeFragment,
   getRevokeFragment
 } from "../services/fragment";
+import { NETWORK_NAME } from "../config";
 
-const { trace } = getLogger("saga:certificate");
+const { trace, error } = getLogger("saga:certificate");
 
 const ANALYTICS_VERIFICATION_ERROR_CODE = {
   ISSUER_IDENTITY: 0,
@@ -41,6 +42,7 @@ export function* getAnalyticsDetails() {
     const id = get(certificate, "id");
     return { storeAddresses, id };
   } catch (e) {
+    error(e.message);
     return {};
   }
 }
@@ -102,10 +104,12 @@ export function* verifyCertificate({ payload: certificate }) {
     yield put({
       type: types.VERIFYING_CERTIFICATE
     });
-    const fragments = yield call(verify, certificate, { network: "ropsten" });
+    const fragments = yield call(verify, certificate, {
+      network: NETWORK_NAME
+    });
     trace(`Verification Status: ${JSON.stringify(fragments)}`);
 
-    yield put(verifyingCertificateSuccess(fragments));
+    yield put(verifyingCertificateCompleted(fragments));
     if (isValid(fragments)) {
       Router.push("/viewer");
     } else {
@@ -135,7 +139,7 @@ export function* verifyCertificate({ payload: certificate }) {
       }
     }
   } catch (e) {
-    yield put(verifyingCertificateFailure(e.message));
+    yield put(verifyingCertificateErrored(e.message));
   }
 }
 

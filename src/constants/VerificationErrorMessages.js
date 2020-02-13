@@ -33,6 +33,6 @@ export const MESSAGES = {
   [TYPES.ADDRESS_INVALID]: {
     failureTitle: "Certificate store address is invalid",
     failureMessage:
-      "Please check that you have a valid smart contract with us and a correct certificate store address before proceeding."
+      "Please inform the issuer of this certificate that they have misconfigured their certificate store address."
   }
 };
