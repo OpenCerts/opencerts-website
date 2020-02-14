@@ -20,6 +20,7 @@ const GA_PRODUCTION_ID = "UA-130492260-1";
 const GA_DEVELOPMENT_ID = "UA-130492260-2";
 
 export const IS_MAINNET = publicRuntimeConfig.network === "mainnet";
+export const NETWORK_NAME = IS_MAINNET ? "homestead" : "ropsten"; // expected by ethers
 
 export const DEFAULT_NETWORK = IS_MAINNET
   ? NETWORK_TYPES.INFURA_MAINNET

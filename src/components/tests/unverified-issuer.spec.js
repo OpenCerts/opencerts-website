@@ -1,6 +1,6 @@
 import { Selector } from "testcafe";
 
-fixture("Unverified Ceritifcate Rendering").page`http://localhost:3000`;
+fixture("Unverified Certificate Rendering").page`http://localhost:3000`;
 
 const Certificate = "./fixture/unverified-issuer.json";
 
@@ -19,7 +19,7 @@ test("Error view rendered when certificate issuers are unverified", async t => {
   await InvalidMessage.with({ visibilityCheck: true })();
 
   await validateTextContent(t, RenderedCertificate, [
-    "Certificate issuer identity invalid",
+    "Certificate issuer identity is invalid",
     "This certificate was issued by an invalid issuer."
   ]);
 });

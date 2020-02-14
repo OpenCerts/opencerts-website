@@ -1,133 +1,73 @@
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { get, find, sortBy } from "lodash";
 import DetailedCertificateVerifyBlock from "./DetailedCertificateVerifyBlock";
-import { LOG_LEVEL } from "./constants";
 import css from "./certificateVerifyBlock.scss";
 import icons from "../ViewerPageImages";
 
-const statusSummary = ({
-  verifying,
-  hashStatus,
-  issuedStatus,
-  notRevokedStatus,
-  issuerIdentityStatus
-}) => {
-  if (verifying) return LOG_LEVEL.VERIFYING;
-  if (
-    !verifying &&
-    hashStatus.verified &&
-    issuedStatus.verified &&
-    notRevokedStatus.verified &&
-    issuerIdentityStatus.verified
-  )
-    return LOG_LEVEL.VALID;
-  if (
-    !verifying &&
-    hashStatus.verified &&
-    issuedStatus.verified &&
-    notRevokedStatus.verified &&
-    !issuerIdentityStatus.verified
-  )
-    return LOG_LEVEL.WARNING;
-  return LOG_LEVEL.INVALID;
-};
+const renderIcon = () => (
+  <div
+    className={`d-flex justify-content-center align-items-center ${
+      css["verified-icon"]
+    }`}
+  >
+    {icons.checkCircle()}
+  </div>
+);
 
-const renderIcon = status => {
-  let icon;
-  switch (status) {
-    case LOG_LEVEL.CONNECTING:
-    case LOG_LEVEL.VERIFYING:
-      icon = <i id="verify-spinner" className="fa fa-spinner fa-spin fa-2x" />;
-      break;
-    case LOG_LEVEL.VALID:
-      icon = icons.checkCircle();
-      break;
-    case LOG_LEVEL.WARNING:
-      icon = (
-        <i id="verify-warning" className="fas fa-exclamation-triangle fa-2x" />
-      );
-      break;
-    default:
-      icon = <i id="verify-invalid" className="fas fa-times-circle fa-2x" />;
-  }
-  return (
-    <div
-      className={`d-flex justify-content-center align-items-center ${
-        css["verified-icon"]
-      }`}
-    >
-      {icon}
-    </div>
+export const getIdentityVerificationText = verificationStatus => {
+  const registryFragmentName = "OpencertsRegistryVerifier";
+  const registryFragment = verificationStatus.find(
+    status => status.name === registryFragmentName
   );
+  // using concat to handle arrays and single element
+  const registryIdentity =
+    registryFragment &&
+    registryFragment.data &&
+    [].concat(registryFragment.data).find(({ status }) => status === "VALID");
+  if (registryIdentity) {
+    return `Certificate issued by ${registryIdentity.name.toUpperCase()}`;
+  }
+
+  const dnsFragmentName = "OpenAttestationDnsTxt";
+  const dnsFragment = verificationStatus.find(
+    status => status.name === dnsFragmentName
+  );
+  // using concat to handle arrays and single element
+  const dnsIdentity =
+    dnsFragment &&
+    dnsFragment.data &&
+    []
+      .concat(dnsFragment.data)
+      .sort((obj1, obj2) => obj1.location.localeCompare(obj2.location))
+      .find(({ status }) => status === "VALID");
+  if (dnsIdentity) {
+    return `Certificate issued by ${dnsIdentity.location.toUpperCase()}`;
+  }
+  return "Certificate issued by Unknown";
 };
 
-export const getIdentityVerificationText = identityStatus => {
-  const identity = find(identityStatus, ({ registry }) => !!registry);
-  if (identity) {
-    return `Certificate issued by ${identity.registry.toUpperCase()}`;
-  }
-  // note filter Boolean is to remove empty values
-  const dnsNames = sortBy(identityStatus, ["dns"])
-    .map(({ dns }) => (dns ? dns.toUpperCase() : null))
-    .filter(Boolean);
-  return `Certificate issued by ${
-    dnsNames.length > 0 ? dnsNames[0].toUpperCase() : "Unknown"
-  }`;
-};
-
-const renderText = (status, props) => {
-  let text;
-  switch (status) {
-    case LOG_LEVEL.CONNECTING:
-      text = "Connecting ...";
-      break;
-    case LOG_LEVEL.VERIFYING:
-      text = "Verifying Certificate ...";
-      break;
-    case LOG_LEVEL.VALID: {
-      const identity = get(props, "issuerIdentityStatus.identities", []);
-      text = getIdentityVerificationText(identity);
-      break;
-    }
-    case LOG_LEVEL.WARNING:
-      text = "Institution identity not verified";
-      break;
-    default:
-      text = "Invalid Certificate";
-  }
-  return <div className={css["verification-text"]}>{text}</div>;
-};
+const renderText = identityDetails => (
+  <div className={css["verification-text"]}>
+    {getIdentityVerificationText(identityDetails)}
+  </div>
+);
 
 const SimpleVerifyBlock = props => {
-  const status = statusSummary(props);
-  const renderedIcon = renderIcon(status);
-  const renderedText = renderText(status, props);
-
-  let stateStyle;
-  switch (status) {
-    case LOG_LEVEL.VALID:
-      stateStyle = "valid";
-      break;
-    case LOG_LEVEL.WARNING:
-      stateStyle = "warning";
-      break;
-    case LOG_LEVEL.INVALID:
-    default:
-      stateStyle = "invalid";
-  }
+  const { verificationStatus } = props;
+  const renderedIcon = renderIcon();
+  const renderedText = renderText(verificationStatus);
   return (
     <div
-      className={`p-2 pointer ${css["simple-verify-block"]} ${
-        css[stateStyle]
-      } ${props.detailedVerifyVisible ? css.active : ""}`}
-      onClick={props.toggleDetailedView}
+      className={`p-2 pointer ${css["simple-verify-block"]} ${css.valid} ${
+        props.detailedViewVisible ? css.active : ""
+      }`}
+      onClick={props.toggleDetailedViewVisible}
       id="certificate-status"
     >
       <div className="row justify-center" style={{ flexWrap: "inherit" }}>
         {renderedIcon}
         {renderedText}
         <span
-          // eslint-disable-next-line prettier/prettier
           className={`d-flex justify-content-center align-items-center ${
             css.arrow
           }`}
@@ -140,7 +80,11 @@ const SimpleVerifyBlock = props => {
 };
 
 const CertificateVerifyBlock = props => {
-  const status = statusSummary(props);
+  const [detailedViewVisible, setDetailedViewVisible] = useState(false);
+  const toggleDetailedViewVisible = () =>
+    setDetailedViewVisible(!detailedViewVisible);
+
+  const { verificationStatus } = props;
   return (
     <div
       id="certificate-verify-block"
@@ -148,14 +92,14 @@ const CertificateVerifyBlock = props => {
         css.verifyBlocksContainer
       } mb-md-0`}
     >
-      <SimpleVerifyBlock {...props} />
-      {props.detailedVerifyVisible ? (
+      <SimpleVerifyBlock
+        verificationStatus={verificationStatus}
+        toggleDetailedViewVisible={toggleDetailedViewVisible}
+        detailedViewVisible={detailedViewVisible}
+      />
+      {detailedViewVisible ? (
         <DetailedCertificateVerifyBlock
-          statusSummary={status}
-          hashStatus={props.hashStatus}
-          issuedStatus={props.issuedStatus}
-          notRevokedStatus={props.notRevokedStatus}
-          issuerIdentityStatus={props.issuerIdentityStatus}
+          verificationStatus={verificationStatus}
         />
       ) : (
         ""
@@ -165,17 +109,13 @@ const CertificateVerifyBlock = props => {
 };
 
 CertificateVerifyBlock.propTypes = {
-  verifyTriggered: PropTypes.bool,
-  verifying: PropTypes.bool,
-
-  hashStatus: PropTypes.object,
-  issuedStatus: PropTypes.object,
-  notRevokedStatus: PropTypes.object,
-  issuerIdentityStatus: PropTypes.object,
-  toggleDetailedView: PropTypes.func,
-  detailedVerifyVisible: PropTypes.bool
+  verificationStatus: PropTypes.array
 };
 
-SimpleVerifyBlock.propTypes = CertificateVerifyBlock.propTypes;
+SimpleVerifyBlock.propTypes = {
+  detailedViewVisible: PropTypes.bool,
+  verificationStatus: PropTypes.array,
+  toggleDetailedViewVisible: PropTypes.func
+};
 
 export default CertificateVerifyBlock;

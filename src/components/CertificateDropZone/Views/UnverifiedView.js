@@ -1,161 +1,114 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
+import { isValid } from "@govtechsg/opencerts-verify";
+import { TYPES, MESSAGES } from "../../../constants/VerificationErrorMessages";
 import css from "./viewerStyles.scss";
+import {
+  addressInvalid,
+  getAllButRevokeFragment,
+  getRevokeFragment
+} from "../../../services/fragment";
 
-const View = ({
-  resetData,
-  storeStatus,
-  hashStatus,
-  issuedStatus,
-  issuerIdentityStatus,
-  notRevokedStatus,
-  retrieveCertificateByActionError
-}) => {
-  /* Array of error messages with priority of error messages determined by a stack.
-  Error messages are first placed into the stack and the error message with the highest priority is popped off the stack
-  and displayed.
-
-  The priority of error messages are as follows:
-  1. Invalid store
-  2. Tampered
-  3. Not issued
-  4. Revoked */
-  const errorMessages = [
-    {
-      title: "Certificate revoked",
-      message:
-        "This certificate has been revoked by your issuing institution. Please contact your issuing institution for more details.",
-      error: !notRevokedStatus.verified
-    },
-    {
-      title: "Certificate not issued",
-      message:
-        "This certificate cannot be found. Please contact your issuing institution for help or issue the certificate before trying again.",
-      error: !issuedStatus.verified
-    },
-    {
-      title: "Certificate has been tampered with",
-      message:
-        "The contents of this certificate are inaccurate and have been tampered with.",
-      error: !hashStatus.verified
-    },
-    {
-      title: "Certificate issuer identity invalid",
-      message: "This certificate was issued by an invalid issuer.",
-      error: !issuerIdentityStatus.verified
-    },
-    {
-      title: "Certificate store address is invalid",
-      message:
-        "Please check that you have a valid smart contract with us and a correct certificate store address before proceeding.",
-      error: !storeStatus.verified
-    },
-    {
-      title: "Unable to load certificate with the provided parameters",
-      message: retrieveCertificateByActionError,
-      error: !!retrieveCertificateByActionError
-    }
-  ];
-
-  const stack = errorMessages.filter(
-    errorMessage => errorMessage.error === true
-  );
-  const error = stack.pop();
-
-  const isWarning =
-    hashStatus.verified &&
-    issuedStatus.verified &&
-    notRevokedStatus.verified &&
-    issuerIdentityStatus.verified;
+const DetailedErrors = ({ verificationStatus }) => {
+  const errors = [];
+  const fragmentsWithoutRevoke = getAllButRevokeFragment(verificationStatus);
+  const revokeFragment = [getRevokeFragment(verificationStatus)];
+  if (!isValid(verificationStatus, ["DOCUMENT_INTEGRITY"])) {
+    errors.push(TYPES.HASH);
+  }
+  if (!isValid(fragmentsWithoutRevoke, ["DOCUMENT_STATUS"])) {
+    errors.push(TYPES.ISSUED);
+  }
+  if (!isValid(revokeFragment, ["DOCUMENT_STATUS"])) {
+    errors.push(TYPES.REVOKED);
+  }
+  if (!isValid(verificationStatus, ["ISSUER_IDENTITY"])) {
+    errors.push(TYPES.IDENTITY);
+  }
+  // if the error is because the address is invalid, then get rid of all errors and only keep this one
+  if (
+    !isValid(verificationStatus, ["DOCUMENT_STATUS"]) &&
+    addressInvalid(verificationStatus)
+  ) {
+    errors.splice(0, errors.length);
+    errors.push(TYPES.ADDRESS_INVALID);
+  }
+  const renderedError = errors.map((errorType, index) => (
+    <div key={index}>
+      <p className={css.messages}>{MESSAGES[errorType].failureTitle}</p>
+      <p>{MESSAGES[errorType].failureMessage}</p>
+    </div>
+  ));
   return (
-    <div
-      className={`${css["viewer-container"]} ${
-        isWarning ? css.warning : css.invalid
-      }`}
-      style={{
-        backgroundColor: isWarning ? "#fbf6e9" : "#fbeae9",
-        borderRadius: 10
-      }}
-    >
-      <span className={css["message-container"]}>
-        {isWarning ? (
-          <img src="/static/images/dropzone/warning.svg" />
-        ) : (
-          <img src="/static/images/dropzone/invalid.svg" />
-        )}
-        <span
-          className={`${isWarning ? "warning" : "invalid"} m-3`}
-          style={{ fontSize: "1.5rem" }}
-        >
-          {/* eslint-disable-next-line no-nested-ternary */}
-          {isWarning
-            ? "Certificate from unregistered institution"
-            : retrieveCertificateByActionError
-            ? "The certificate can't be loaded"
-            : "This certificate is not valid"}
-        </span>
-      </span>
-
-      <div className={css.verifications}>
-        {error !== undefined ? (
-          <div>
-            <p className={css.messages}>{error.title}</p>
-            <p>{error.message}</p>
-          </div>
-        ) : null}
-      </div>
-
-      <Link href="/faq">
-        <div className={css["unverified-btn"]}>What should I do?</div>
-      </Link>
-
-      <div className={css["secondary-links"]}>
-        <span>
-          <Link href=" ">
-            <a
-              onClick={e => {
-                e.preventDefault();
-                resetData();
-              }}
-              className={css["text-link"]}
-            >
-              Try another
-            </a>
-          </Link>
-        </span>
-        {isWarning ? (
-          <span
-            onClick={e => {
-              e.preventDefault();
-              e.stopPropagation();
-              e.nativeEvent.stopImmediatePropagation();
-            }}
-          >
-            <Link href="/viewer">
-              <a id="certificate-view-anyway" className={css["text-link"]}>
-                View certificate anyway
-              </a>
-            </Link>
-          </span>
-        ) : (
-          ""
-        )}
-      </div>
+    <div id="error-tab" className={css.verifications}>
+      {renderedError}
     </div>
   );
 };
 
-View.propTypes = {
-  handleRenderOverwrite: PropTypes.func,
-  resetData: PropTypes.func,
-  document: PropTypes.object,
-
-  hashStatus: PropTypes.object,
-  issuedStatus: PropTypes.object,
-  notRevokedStatus: PropTypes.object,
-  issuerIdentityStatus: PropTypes.object,
-  storeStatus: PropTypes.object,
-  retrieveCertificateByActionError: PropTypes.string
+DetailedErrors.propTypes = {
+  verificationStatus: PropTypes.array
 };
 
-export default View;
+export const UnverifiedView = ({
+  resetData,
+  verificationStatus,
+  retrieveCertificateByActionError
+}) => (
+  <div
+    className={`${css["viewer-container"]} ${css.invalid}`}
+    style={{
+      backgroundColor: "#fbeae9",
+      borderRadius: 10
+    }}
+  >
+    <span className={css["message-container"]}>
+      <img src="/static/images/dropzone/invalid.svg" />
+      <span className="invalid m-3" style={{ fontSize: "1.5rem" }}>
+        {retrieveCertificateByActionError
+          ? "The certificate can't be loaded"
+          : "This certificate is not valid"}
+      </span>
+    </span>
+
+    {retrieveCertificateByActionError ? (
+      <div>
+        <p className={css.messages}>
+          Unable to load certificate with the provided parameters
+        </p>
+        <p>{retrieveCertificateByActionError}</p>
+      </div>
+    ) : (
+      <DetailedErrors
+        verificationStatus={verificationStatus}
+        retrieveCertificateByActionError={retrieveCertificateByActionError}
+      />
+    )}
+
+    <Link href="/faq">
+      <div className={css["unverified-btn"]}>What should I do?</div>
+    </Link>
+
+    <div className={css["secondary-links"]}>
+      <span>
+        <Link href=" ">
+          <a
+            onClick={e => {
+              e.preventDefault();
+              resetData();
+            }}
+            className={css["text-link"]}
+          >
+            Try another
+          </a>
+        </Link>
+      </span>
+    </div>
+  </div>
+);
+
+UnverifiedView.propTypes = {
+  resetData: PropTypes.func,
+  verificationStatus: PropTypes.array,
+  retrieveCertificateByActionError: PropTypes.string
+};

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import css from "./viewerStyles.scss";
 
-const View = ({ hover, accept }) => (
+export const DefaultView = ({ hover, accept }) => (
   <div
     className={`${css["viewer-container"]} ${
       // eslint-disable-next-line no-nested-ternary
@@ -49,9 +49,7 @@ const View = ({ hover, accept }) => (
   </div>
 );
 
-export default View;
-
-View.propTypes = {
+DefaultView.propTypes = {
   hover: PropTypes.bool,
   accept: PropTypes.bool
 };
