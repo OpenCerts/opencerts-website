@@ -1,6 +1,6 @@
 import { get } from "lodash";
 import { call, put, select, takeEvery } from "redux-saga/effects";
-import { getData } from "@govtechsg/open-attestation";
+import { getData, utils } from "@govtechsg/open-attestation";
 import Router from "next/router";
 import { decryptString } from "@govtechsg/oa-encryption";
 import { isValid, verify } from "@govtechsg/opencerts-verify";
@@ -16,7 +16,6 @@ import { types as applicationTypes } from "../reducers/application";
 import sendEmail from "../services/email";
 import { generateLink } from "../services/link";
 import { analyticsEvent } from "../components/Analytics";
-import { getDocumentIssuerStores } from "../utils/certificate";
 import {
   certificateNotIssued,
   getAllButRevokeFragment,
@@ -38,7 +37,7 @@ export function* getAnalyticsDetails() {
     const rawCertificate = yield select(getCertificate);
     const certificate = getData(rawCertificate);
 
-    const storeAddresses = getDocumentIssuerStores(certificate);
+    const storeAddresses = utils.getIssuerAddress(rawCertificate);
     const id = get(certificate, "id");
     return { storeAddresses, id };
   } catch (e) {

@@ -2,11 +2,11 @@ import React, {
   useCallback,
   useEffect,
   useImperativeHandle,
-  useState,
-  useRef
+  useRef,
+  useState
 } from "react";
 import { FrameConnector } from "@govtechsg/decentralized-renderer-react-components";
-import { getData, obfuscateDocument } from "@govtechsg/open-attestation";
+import { getData, obfuscateDocument, utils } from "@govtechsg/open-attestation";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { LEGACY_OPENCERTS_RENDERER } from "../../config";
@@ -14,7 +14,6 @@ import styles from "./decentralisedRenderer.scss";
 import MultiTabs from "../MultiTabs";
 import { updateObfuscatedCertificate as updateObfuscatedCertificateAction } from "../../reducers/certificate";
 import { analyticsEvent } from "../Analytics";
-import { getDocumentIssuerStores } from "../../utils/certificate";
 
 export const DecentralisedRenderer = ({
   rawDocument,
@@ -71,7 +70,7 @@ export const DecentralisedRenderer = ({
     const certificateData = getData(rawDocument);
     analyticsEvent(window, {
       category: "CERTIFICATE_VIEWED",
-      action: getDocumentIssuerStores(certificateData),
+      action: utils.getIssuerAddress(rawDocument),
       label: certificateData ? certificateData.id : null
     });
   }, [rawDocument]);
