@@ -27,6 +27,15 @@
       "logo": "/static/images/NP_logo.svg",
       "id": "np-registry"
     },
+    "0x828dB5254a44e8630068107A2536219e0C84cacA": {
+      "name": "Ngee Ann Polytechnic CET Academy",
+      "displayCard": true,
+      "website": "https://www.np.edu.sg",
+      "email": "asknp@np.edu.sg",
+      "phone": "+65 6466 6555",
+      "logo": "/static/images/NP_logo.svg",
+      "id": "np-registry"
+    },
     "0xE4a94Ef9C26904A02Cd6735F7D4De1D840146a0f": {
       "name": "Singapore Examinations and Assessment Board",
       "displayCard": true,
@@ -137,7 +146,7 @@
     },
     "0x9cf976dc45bb5a9336238759e89051E7b09e016b": {
       "name": "National Institute of Early Childhood Development",
-      "displayCard": true,    
+      "displayCard": true,
       "website": "https://www.niec.edu.sg/",
       "email": "aa@niec.edu.sg",
       "phone": "+65 6332 0668",
