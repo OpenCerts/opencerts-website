@@ -224,6 +224,14 @@
     "0x146d1e1938dc0f5fbb2179727c2fa61522cd1834": {
       "name": "ROPSTEN: National Institute of Early Childhood Development",
       "displayCard": false
+    },
+	"0xb02bcBb4865d0301F6e4A5f46043498f7c348E03": {
+      "name": "ROPSTEN: Lasalle College of the Arts",
+      "displayCard": false
+    },
+	"0x5af87c7C799FdD24418f436ccc5d0ef00a1D755B": {
+      "name": "ROPSTEN: Nanyang Academy of Fine Arts",
+      "displayCard": false
     }
   }
 }
