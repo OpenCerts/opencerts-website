@@ -162,6 +162,15 @@
       "logo": "/static/images/NIEC_logo.png",
       "id": "niec-registry"
     },
+	"0xa53C84A422D9cCc5C4aDA9fa65B03e2Bb25E2D03": {
+      "name": "Lasalle College of the Arts",
+      "displayCard": true,
+      "website": "https://www.lasalle.edu.sg/",
+      "email": "academic.admin@lasalle.edu.sg",
+      "phone": "+65 6496 5200",
+      "logo": "/static/images/LASALLE_logo.png",
+      "id": "lasalle-registry"
+    },
     "0xb3c1404732585ddEB837Af28eBdAec504ed8Ba04": {
       "name": "ROPSTEN: Singapore Management University",
       "displayCard": false
