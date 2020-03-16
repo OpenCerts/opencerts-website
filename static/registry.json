@@ -117,15 +117,6 @@
       "logo": "/static/images/SMU_logo.png",
       "id": "smu-registry"
     },
-	"0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404": {
-      "name": "Singapore Management University Academy",
-      "displayCard": true,
-      "website": "https://academy.smu.edu.sg",
-      "email": "academy@smu.edu.sg",
-      "phone": "+65 6828 9688",
-      "logo": "/static/images/SMU_Academy_logo.png",
-      "id": "smu-registry"
-    },
     "0xA204F16717fbF580d6A0535b58063fB4fce969fF": {
       "name": "National University of Singapore",
       "displayCard": true,
@@ -173,10 +164,6 @@
     },
     "0xb3c1404732585ddEB837Af28eBdAec504ed8Ba04": {
       "name": "ROPSTEN: Singapore Management University",
-      "displayCard": false
-    },
-	"0xD17D5E44971f108C5433314aCd522f1dBb506431": {
-      "name": "ROPSTEN: Singapore Management University Academy",
       "displayCard": false
     },
     "0x3FFB6b913E9874c7ddabD564d85676Bc5cAd16d4": {
@@ -251,9 +238,5 @@
       "name": "ROPSTEN: Lasalle College of the Arts",
       "displayCard": false
     },
-	"0x5af87c7C799FdD24418f436ccc5d0ef00a1D755B": {
-      "name": "ROPSTEN: Nanyang Academy of Fine Arts",
-      "displayCard": false
-    }
   }
 }
