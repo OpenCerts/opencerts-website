@@ -27,6 +27,15 @@
       "logo": "/static/images/NP_logo.svg",
       "id": "np-registry"
     },
+    "0x828dB5254a44e8630068107A2536219e0C84cacA": {
+      "name": "Ngee Ann Polytechnic CET Academy",
+      "displayCard": true,
+      "website": "https://www.np.edu.sg",
+      "email": "asknp@np.edu.sg",
+      "phone": "+65 6466 6555",
+      "logo": "/static/images/NP_logo.svg",
+      "id": "np-registry"
+    },
     "0xE4a94Ef9C26904A02Cd6735F7D4De1D840146a0f": {
       "name": "Singapore Examinations and Assessment Board",
       "displayCard": true,
@@ -137,12 +146,21 @@
     },
     "0x9cf976dc45bb5a9336238759e89051E7b09e016b": {
       "name": "National Institute of Early Childhood Development",
-      "displayCard": true,    
+      "displayCard": true,
       "website": "https://www.niec.edu.sg/",
       "email": "aa@niec.edu.sg",
       "phone": "+65 6332 0668",
       "logo": "/static/images/NIEC_logo.png",
       "id": "niec-registry"
+    },
+	"0xa53C84A422D9cCc5C4aDA9fa65B03e2Bb25E2D03": {
+      "name": "Lasalle College of the Arts",
+      "displayCard": true,
+      "website": "https://www.lasalle.edu.sg/",
+      "email": "academic.admin@lasalle.edu.sg",
+      "phone": "+65 6496 5200",
+      "logo": "/static/images/LASALLE_logo.png",
+      "id": "lasalle-registry"
     },
     "0xb3c1404732585ddEB837Af28eBdAec504ed8Ba04": {
       "name": "ROPSTEN: Singapore Management University",
@@ -151,8 +169,8 @@
     "0x3FFB6b913E9874c7ddabD564d85676Bc5cAd16d4": {
       "name": "ROPSTEN: Nanyang Technological University",
       "displayCard": false
-    },
-    "0x5f007251c78cA92d3053492cCf0EDC161063624c": {
+	},
+    "0xdcb5bce006f5f369579854ec32ec6fa53ba915be": {
       "name": "ROPSTEN: Nanyang Polytechnic",
       "displayCard": false
     },
@@ -214,6 +232,10 @@
     },
     "0x146d1e1938dc0f5fbb2179727c2fa61522cd1834": {
       "name": "ROPSTEN: National Institute of Early Childhood Development",
+      "displayCard": false
+    },
+	"0xb02bcBb4865d0301F6e4A5f46043498f7c348E03": {
+      "name": "ROPSTEN: Lasalle College of the Arts",
       "displayCard": false
     }
   }

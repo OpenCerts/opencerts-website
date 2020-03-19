@@ -6,12 +6,11 @@ import css from "./dropZoneSection.scss";
 import { updateCertificate } from "../../reducers/certificate";
 import { trace } from "../../utils/logger";
 import { IS_MAINNET } from "../../config";
-import MAIN from "./Main-Demo";
-import ROPSTEN from "./Ropsten-Demo";
 import { analyticsEvent } from "../Analytics/index";
 
-const DEMO_CERT = IS_MAINNET ? MAIN : ROPSTEN;
-const DEMO_CONTENT_KEY = "DEMO_CONTENT";
+const DEMO_CERT = IS_MAINNET
+  ? "/static/demo/mainnet.opencerts"
+  : "/static/demo/ropsten.opencerts";
 
 function demoCount() {
   analyticsEvent(window, {
@@ -27,14 +26,10 @@ const DraggableDemoCertificate = () => (
         <div
           className={css.pulse}
           draggable="true"
-          onDragStart={e => e.dataTransfer.setData(DEMO_CONTENT_KEY, true)}
+          onDragStart={e => e.dataTransfer.setData(DEMO_CERT, true)}
           onDragEnd={demoCount}
         >
-          <a
-            href={`data:text/plain;,${JSON.stringify(DEMO_CERT, null, 2)}`}
-            download="demo.opencert"
-            rel="noindex nofollow"
-          >
+          <a href={DEMO_CERT} download rel="noindex nofollow">
             <img
               style={{ cursor: "grabbing" }}
               src="/static/images/dropzone/cert.png"
@@ -89,12 +84,22 @@ const MobileDemoCertificate = () => (
 class DropZoneSection extends Component {
   componentDidMount() {
     document.getElementById("demoDrop").addEventListener("drop", e => {
-      if (e.dataTransfer.getData(DEMO_CONTENT_KEY)) {
-        this.props.updateCertificate(DEMO_CERT);
+      if (e.dataTransfer.getData(DEMO_CERT)) {
+        window
+          .fetch(DEMO_CERT)
+          .then(res => res.json())
+          .then(res => {
+            this.props.updateCertificate(res);
+          });
       }
     });
     document.getElementById("demoClick").addEventListener("click", () => {
-      this.props.updateCertificate(DEMO_CERT);
+      window
+        .fetch(DEMO_CERT)
+        .then(res => res.json())
+        .then(res => {
+          this.props.updateCertificate(res);
+        });
     });
   }
 

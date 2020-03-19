@@ -2,7 +2,7 @@ import { Selector, ClientFunction } from "testcafe";
 
 fixture("Registry Certificate Rendering").page`http://localhost:3000`;
 
-const Document = "../HomePageContent/Ropsten-Demo.json";
+const Document = "./fixture/registry-verified.json";
 const IframeBlock = Selector("#iframe");
 const TranscriptButton = Selector(".nav-item").withText("TRANSCRIPT");
 const MediaButton = Selector(".nav-item").withText("MEDIA");
