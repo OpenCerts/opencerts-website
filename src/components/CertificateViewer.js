@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import React from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { get, some } from "lodash";
 import CertificateVerifyBlock from "./CertificateVerifyBlock";
 import styles from "./certificateViewer.scss";
 import Modal from "./Modal";
@@ -26,16 +25,7 @@ const ForwardedRefDecentralisedRenderer = React.forwardRef((props, ref) => (
 ));
 
 const renderVerifyBlock = props => (
-  <CertificateVerifyBlock
-    verifyTriggered={props.verifyTriggered}
-    verifying={props.verifying}
-    hashStatus={props.hashStatus}
-    issuedStatus={props.issuedStatus}
-    notRevokedStatus={props.notRevokedStatus}
-    issuerIdentityStatus={props.issuerIdentityStatus}
-    toggleDetailedView={props.toggleDetailedView}
-    detailedVerifyVisible={props.detailedVerifyVisible}
-  />
+  <CertificateVerifyBlock verificationStatus={props.verificationStatus} />
 );
 
 const renderHeaderBlock = (props, childRef) => {
@@ -106,81 +96,88 @@ export const CertificateViewer = props => {
   const { document } = props;
   const childRef = React.useRef();
 
-  const renderedHeaderBlock = renderHeaderBlock(props, childRef);
-  const identity = get(props, "issuerIdentityStatus.identities", []);
-  const isInRegistry = some(identity, ({ registry }) => !!registry);
-
-  const validCertificateContent = (
-    <div>
-      {isInRegistry ? (
-        <div
-          id="status-banner-container"
-          className={`${styles["status-banner-container"]} ${
-            styles.valid
-          } exact-print`}
-        >
-          <div className={`${styles["status-banner"]}`}>
-            Certificate issuer is in the SkillsFuture Singapore registry for
-            Opencerts
-          </div>
-        </div>
-      ) : (
-        <div
-          id="status-banner-container"
-          className={`${styles["status-banner-container"]} ${styles.invalid}`}
-        >
-          <div className={`${styles["status-banner"]}`}>
-            Certificate issuer is <b>not</b> in the SkillsFuture Singapore
-            registry for Opencerts
-            <br />
-            <Link href="/faq#verifications-issuers-not-in-registry-meaning">
-              <a>
-                <small>What does this mean ?</small>
-              </a>
-            </Link>
-          </div>
-        </div>
-      )}
-      <div id={styles["top-header-ui"]}>
-        <div className={styles["header-container"]}>{renderedHeaderBlock}</div>
-      </div>
-      <ForwardedRefDecentralisedRenderer
-        rawDocument={document}
-        ref={childRef}
-      />
-      <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
-        <CertificateSharingForm
-          emailSendingState={props.emailSendingState}
-          handleSendCertificate={props.handleSendCertificate}
-          handleSharingToggle={props.handleSharingToggle}
-        />
-      </Modal>
-      <Modal show={props.showShareLink} toggle={props.handleShareLinkToggle}>
-        <CertificateShareLinkForm
-          shareLink={props.shareLink}
-          copiedLink={props.copiedLink}
-          handleShareLinkToggle={props.handleShareLinkToggle}
-          handleCopyLink={props.handleCopyLink}
-        />
-      </Modal>
-    </div>
+  const registryFragmentName = "OpencertsRegistryVerifier";
+  const registryFragment = props.verificationStatus.find(
+    status => status.name === registryFragmentName
   );
+  const renderedHeaderBlock = renderHeaderBlock(props, childRef);
+  const isInRegistry = registryFragment && registryFragment.status === "VALID";
 
-  return <ErrorBoundary>{validCertificateContent} </ErrorBoundary>;
+  return (
+    <ErrorBoundary>
+      {
+        <div>
+          {isInRegistry ? (
+            <div
+              id="status-banner-container"
+              className={`${styles["status-banner-container"]} ${
+                styles.valid
+              } exact-print`}
+            >
+              <div className={`${styles["status-banner"]}`}>
+                Certificate issuer is in the SkillsFuture Singapore registry for
+                Opencerts
+              </div>
+            </div>
+          ) : (
+            <div
+              id="status-banner-container"
+              className={`${styles["status-banner-container"]} ${
+                styles.invalid
+              }`}
+            >
+              <div className={`${styles["status-banner"]}`}>
+                Certificate issuer is <b>not</b> in the SkillsFuture Singapore
+                registry for Opencerts
+                <br />
+                <Link href="/faq#verifications-issuers-not-in-registry-meaning">
+                  <a>
+                    <small>What does this mean ?</small>
+                  </a>
+                </Link>
+              </div>
+            </div>
+          )}
+          <div id={styles["top-header-ui"]}>
+            <div className={styles["header-container"]}>
+              {renderedHeaderBlock}
+            </div>
+          </div>
+          <ForwardedRefDecentralisedRenderer
+            rawDocument={document}
+            ref={childRef}
+          />
+          <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
+            <CertificateSharingForm
+              emailSendingState={props.emailSendingState}
+              handleSendCertificate={props.handleSendCertificate}
+              handleSharingToggle={props.handleSharingToggle}
+            />
+          </Modal>
+          <Modal
+            show={props.showShareLink}
+            toggle={props.handleShareLinkToggle}
+          >
+            <CertificateShareLinkForm
+              shareLink={props.shareLink}
+              copiedLink={props.copiedLink}
+              handleShareLinkToggle={props.handleShareLinkToggle}
+              handleCopyLink={props.handleCopyLink}
+            />
+          </Modal>
+        </div>
+      }{" "}
+    </ErrorBoundary>
+  );
 };
 
 CertificateViewer.propTypes = {
-  toggleDetailedView: PropTypes.func,
-  detailedVerifyVisible: PropTypes.bool,
   document: PropTypes.object,
   certificate: PropTypes.object,
   verifying: PropTypes.bool,
   shareLink: PropTypes.object,
 
-  hashStatus: PropTypes.object,
-  issuedStatus: PropTypes.object,
-  notRevokedStatus: PropTypes.object,
-  issuerIdentityStatus: PropTypes.object,
+  verificationStatus: PropTypes.array,
   showSharing: PropTypes.bool,
   showShareLink: PropTypes.bool,
   emailSendingState: PropTypes.string,

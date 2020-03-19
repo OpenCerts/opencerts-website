@@ -12,28 +12,22 @@ import {
   generateShareLink,
   getCertificate,
   getVerifying,
-  getIssuerIdentityStatus,
-  getHashStatus,
-  getIssuedStatus,
-  getNotRevokedStatus,
-  getVerified,
   getEmailSendingState,
+  getVerificationStatus,
   getShareLink,
   getShareLinkState,
   updateObfuscatedCertificate
 } from "../reducers/certificate";
 import { CertificateViewer } from "./CertificateViewer";
 
-class MainPageContainer extends Component {
+class Viewer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       showSharing: false,
-      detailedVerifyVisible: false,
       copiedLink: false
     };
-    this.toggleDetailedView = this.toggleDetailedView.bind(this);
     this.handleCertificateChange = this.handleCertificateChange.bind(this);
     this.handleSharingToggle = this.handleSharingToggle.bind(this);
     this.handleShareLinkToggle = this.handleShareLinkToggle.bind(this);
@@ -68,12 +62,6 @@ class MainPageContainer extends Component {
     this.setState({ copiedLink: true });
   }
 
-  toggleDetailedView() {
-    this.setState({
-      detailedVerifyVisible: !this.state.detailedVerifyVisible
-    });
-  }
-
   handleCertificateChange(certificate) {
     this.props.updateCertificate(certificate);
   }
@@ -89,10 +77,6 @@ class MainPageContainer extends Component {
         document={this.props.document}
         certificate={getData(this.props.document)}
         verifying={this.props.verifying}
-        hashStatus={this.props.hashStatus}
-        issuedStatus={this.props.issuedStatus}
-        notRevokedStatus={this.props.notRevokedStatus}
-        issuerIdentityStatus={this.props.issuerIdentityStatus}
         handleCertificateChange={this.handleCertificateChange}
         showSharing={this.state.showSharing}
         showShareLink={this.state.showShareLink}
@@ -103,8 +87,7 @@ class MainPageContainer extends Component {
         handleCopyLink={this.handleCopyLink}
         copiedLink={this.state.copiedLink}
         emailSendingState={this.props.emailSendingState}
-        toggleDetailedView={this.toggleDetailedView}
-        detailedVerifyVisible={this.state.detailedVerifyVisible}
+        verificationStatus={this.props.verificationStatus}
       />
     );
   }
@@ -118,11 +101,7 @@ const mapStateToProps = store => ({
   shareLink: getShareLink(store),
   shareLinkState: getShareLinkState(store),
   verifying: getVerifying(store),
-  issuerIdentityStatus: getIssuerIdentityStatus(store),
-  hashStatus: getHashStatus(store),
-  issuedStatus: getIssuedStatus(store),
-  notRevokedStatus: getNotRevokedStatus(store),
-  verified: getVerified(store)
+  verificationStatus: getVerificationStatus(store)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -134,21 +113,17 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateObfuscatedCertificate(updatedDoc))
 });
 
-export default connect(
+export const ViewerContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(MainPageContainer);
+)(Viewer);
 
-MainPageContainer.propTypes = {
+Viewer.propTypes = {
   updateCertificate: PropTypes.func,
   document: PropTypes.object,
   certificate: PropTypes.object,
   verifying: PropTypes.bool,
-  hashStatus: PropTypes.object,
-  issuedStatus: PropTypes.object,
-  notRevokedStatus: PropTypes.object,
-  issuerIdentityStatus: PropTypes.object,
-  verified: PropTypes.bool,
+  verificationStatus: PropTypes.array,
   emailSendingState: PropTypes.string,
   sendCertificate: PropTypes.func,
   sendCertificateReset: PropTypes.func,

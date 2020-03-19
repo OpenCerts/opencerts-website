@@ -12,32 +12,31 @@ describe("CertificateViewer", () => {
     document: { data: {} },
     verifyTriggered: true,
     verifying: true,
-    hashStatus: { verified: true },
-    issuedStatus: { verified: true },
-    notRevokedStatus: { verified: true },
-    toggleDetailedView: () => null,
     detailedVerifyVisible: true
   };
-  it("should show that the issuer is not in the registry when identities is not defined ", () => {
-    const wrapper = mount(
-      <CertificateViewer
-        {...sharedProps}
-        issuerIdentityStatus={{ identities: null, verified: true }}
-      />
-    );
-    expect(wrapper.find("#status-banner-container")).toHaveLength(1);
-    expect(wrapper.find("#status-banner-container").text()).toContain(
-      "Certificate issuer is not in the SkillsFuture Singapore registry for Opencerts"
-    );
-    expect(wrapper.find("#status-banner-container").text()).toContain(
-      "What does this mean ?"
-    );
-  });
   it("should show that the issuer is not in the registry when identities is an empty array ", () => {
     const wrapper = mount(
+      <CertificateViewer {...sharedProps} verificationStatus={[]} />
+    );
+    expect(wrapper.find("#status-banner-container")).toHaveLength(1);
+    expect(wrapper.find("#status-banner-container").text()).toContain(
+      "Certificate issuer is not in the SkillsFuture Singapore registry for Opencerts"
+    );
+    expect(wrapper.find("#status-banner-container").text()).toContain(
+      "What does this mean ?"
+    );
+  });
+  it("should show that the issuer is not in the registry when registry identity is invalid", () => {
+    const wrapper = mount(
       <CertificateViewer
         {...sharedProps}
-        issuerIdentityStatus={{ identities: [], verified: true }}
+        verificationStatus={[
+          {
+            name: "OpencertsRegistryVerifier",
+            status: "INVALID",
+            type: "ISSUER_IDENTITY"
+          }
+        ]}
       />
     );
     expect(wrapper.find("#status-banner-container")).toHaveLength(1);
@@ -48,47 +47,17 @@ describe("CertificateViewer", () => {
       "What does this mean ?"
     );
   });
-  it("should show that the issuer is not in the registry when identities is an array with one element that is not resolved", () => {
+  it("should show that the issuer is in the registry when registry identity is valid", () => {
     const wrapper = mount(
       <CertificateViewer
         {...sharedProps}
-        issuerIdentityStatus={{
-          identities: [{ registry: false }],
-          verified: true
-        }}
-      />
-    );
-    expect(wrapper.find("#status-banner-container")).toHaveLength(1);
-    expect(wrapper.find("#status-banner-container").text()).toContain(
-      "Certificate issuer is not in the SkillsFuture Singapore registry for Opencerts"
-    );
-    expect(wrapper.find("#status-banner-container").text()).toContain(
-      "What does this mean ?"
-    );
-  });
-  it("should show that the issuer is in the registry when identities is array with one element that is not resolved", () => {
-    const wrapper = mount(
-      <CertificateViewer
-        {...sharedProps}
-        issuerIdentityStatus={{
-          identities: [{ registry: "foo" }],
-          verified: true
-        }}
-      />
-    );
-    expect(wrapper.find("#status-banner-container")).toHaveLength(1);
-    expect(wrapper.find("#status-banner-container").text()).toContain(
-      "Certificate issuer is in the SkillsFuture Singapore registry for Opencerts"
-    );
-  });
-  it("should show that the issuer is in the registry when identities is array with two elements and one is resolved", () => {
-    const wrapper = mount(
-      <CertificateViewer
-        {...sharedProps}
-        issuerIdentityStatus={{
-          identities: [{ registry: false }, { registry: "foo" }],
-          verified: true
-        }}
+        verificationStatus={[
+          {
+            name: "OpencertsRegistryVerifier",
+            status: "VALID",
+            type: "ISSUER_IDENTITY"
+          }
+        ]}
       />
     );
     expect(wrapper.find("#status-banner-container")).toHaveLength(1);

@@ -19,7 +19,7 @@ test("Unissued certificate's error message is correct'", async t => {
   await InvalidMessage.with({ visibilityCheck: true })();
 
   await validateTextContent(t, RenderedCertificate, [
-    "Certificate issuer identity invalid",
-    "This certificate was issued by an invalid issuer."
+    "This certificate is not valid",
+    "Certificate not issued"
   ]);
 });
