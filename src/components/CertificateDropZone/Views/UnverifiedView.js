@@ -50,11 +50,7 @@ DetailedErrors.propTypes = {
   verificationStatus: PropTypes.array
 };
 
-export const UnverifiedView = ({
-  resetData,
-  verificationStatus,
-  retrieveCertificateByActionError
-}) => (
+export const UnverifiedView = ({ resetData, verificationStatus }) => (
   <div
     className={`${css["viewer-container"]} ${css.invalid}`}
     style={{
@@ -65,25 +61,11 @@ export const UnverifiedView = ({
     <span className={css["message-container"]}>
       <img src="/static/images/dropzone/invalid.svg" />
       <span className="invalid m-3" style={{ fontSize: "1.5rem" }}>
-        {retrieveCertificateByActionError
-          ? "The certificate can't be loaded"
-          : "This certificate is not valid"}
+        {"This certificate is not valid"}
       </span>
     </span>
 
-    {retrieveCertificateByActionError ? (
-      <div>
-        <p className={css.messages}>
-          Unable to load certificate with the provided parameters
-        </p>
-        <p>{retrieveCertificateByActionError}</p>
-      </div>
-    ) : (
-      <DetailedErrors
-        verificationStatus={verificationStatus}
-        retrieveCertificateByActionError={retrieveCertificateByActionError}
-      />
-    )}
+    {<DetailedErrors verificationStatus={verificationStatus} />}
 
     <Link href="/faq">
       <div className={css["unverified-btn"]}>What should I do?</div>
@@ -109,6 +91,5 @@ export const UnverifiedView = ({
 
 UnverifiedView.propTypes = {
   resetData: PropTypes.func,
-  verificationStatus: PropTypes.array,
-  retrieveCertificateByActionError: PropTypes.string
+  verificationStatus: PropTypes.array
 };

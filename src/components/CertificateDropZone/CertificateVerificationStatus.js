@@ -5,6 +5,7 @@ import { isValid } from "@govtechsg/opencerts-verify";
 import { DefaultView } from "./Views/DefaultView";
 import { VerifyingView } from "./Views/VerifyingView";
 import { UnverifiedView } from "./Views/UnverifiedView";
+import { RetrievalErrorView } from "./Views/RetrievalErrorView";
 
 const CertificateVerificationStatus = props => {
   const {
@@ -25,15 +26,19 @@ const CertificateVerificationStatus = props => {
   if (verifying || retrieveCertificateStatus === "PENDING") {
     return <VerifyingView />;
   }
-  if (
-    (verificationStatus && !isValid(verificationStatus)) ||
-    retrieveCertificateByActionError
-  ) {
+  if (retrieveCertificateByActionError) {
+    return (
+      <RetrievalErrorView
+        resetData={() => resetData()}
+        retrieveCertificateByActionError={retrieveCertificateByActionError}
+      />
+    );
+  }
+  if (verificationStatus && !isValid(verificationStatus)) {
     return (
       <UnverifiedView
         resetData={() => resetData()}
         verificationStatus={verificationStatus}
-        retrieveCertificateByActionError={retrieveCertificateByActionError}
       />
     );
   }
