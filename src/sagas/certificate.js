@@ -12,7 +12,6 @@ import {
   verifyingCertificateErrored,
   verifyingCertificateCompleted
 } from "../reducers/certificate";
-import { types as applicationTypes } from "../reducers/application";
 import sendEmail from "../services/email";
 import { generateLink } from "../services/link";
 import { analyticsEvent } from "../components/Analytics";
@@ -243,16 +242,9 @@ export function* retrieveCertificateByAction({ payload: { uri, key } }) {
   }
 }
 
-export function* networkReset() {
-  yield put({
-    type: types.NETWORK_RESET
-  });
-}
-
 export default [
   takeEvery(types.RETRIEVE_CERTIFICATE_BY_ACTION, retrieveCertificateByAction),
   takeEvery(types.UPDATE_CERTIFICATE, verifyCertificate),
   takeEvery(types.SENDING_CERTIFICATE, sendCertificate),
-  takeEvery(types.GENERATE_SHARE_LINK, generateShareLink),
-  takeEvery(applicationTypes.UPDATE_WEB3, networkReset)
+  takeEvery(types.GENERATE_SHARE_LINK, generateShareLink)
 ];
