@@ -10,7 +10,6 @@ import {
   resetCertificateState,
   updateCertificate
 } from "../../reducers/certificate";
-import { updateNetworkId } from "../../reducers/application";
 import CertificateVerificationStatus from "./CertificateVerificationStatus";
 
 const onFileDrop = (
@@ -46,7 +45,6 @@ class CertificateDropZoneContainer extends Component {
   }
 
   componentDidMount() {
-    this.props.updateNetworkId();
     Router.prefetch("/viewer");
   }
 
@@ -102,7 +100,6 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateNetworkId: () => dispatch(updateNetworkId()),
   updateCertificate: payload => dispatch(updateCertificate(payload)),
   resetData: () => dispatch(resetCertificateState())
 });
@@ -113,7 +110,6 @@ export default connect(
 )(CertificateDropZoneContainer);
 
 CertificateDropZoneContainer.propTypes = {
-  updateNetworkId: PropTypes.func,
   document: PropTypes.object,
   encryptedCertificateStatus: PropTypes.string,
   handleCertificateChange: PropTypes.func,

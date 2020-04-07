@@ -39,7 +39,6 @@
     "cross-env": "^5.2.0",
     "date-fns": "^1.29.0",
     "debug": "^4.1.0",
-    "ethereumjs-util": "^6.0.0",
     "fs-extra": "^7.0.1",
     "inquirer": "^6.2.2",
     "isomorphic-fetch": "^2.2.1",
@@ -62,9 +61,7 @@
     "react-tabs": "^2.3.0",
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.7",
-    "redux-saga": "^0.16.0",
-    "web3": "^1.0.0-beta.52",
-    "web3-provider-engine": "14.0.6"
+    "redux-saga": "^0.16.0"
   },
   "license": "ISC",
   "devDependencies": {
