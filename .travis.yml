@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - 10.14.2
+  - 12.16.1
 cache: npm install
 addons:
   sonarqube: true
