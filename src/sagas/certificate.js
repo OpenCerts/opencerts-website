@@ -38,7 +38,12 @@ export function* getAnalyticsDetails() {
 
     const storeAddresses = utils.getIssuerAddress(rawCertificate);
     const id = get(certificate, "id");
-    return { storeAddresses, id };
+    return {
+      storeAddresses: Array.isArray(storeAddresses)
+        ? storeAddresses.join(",")
+        : storeAddresses,
+      id
+    };
   } catch (e) {
     error(e.message);
     return {};

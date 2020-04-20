@@ -68,9 +68,12 @@ export const DecentralisedRenderer = ({
   // send analytics on which document has been displayed
   useEffect(() => {
     const certificateData = getData(rawDocument);
+    const storeAddresses = utils.getIssuerAddress(rawDocument);
     analyticsEvent(window, {
       category: "CERTIFICATE_VIEWED",
-      action: utils.getIssuerAddress(rawDocument),
+      action: Array.isArray(storeAddresses)
+        ? storeAddresses.join(",")
+        : storeAddresses,
       label: certificateData ? certificateData.id : null
     });
   }, [rawDocument]);
