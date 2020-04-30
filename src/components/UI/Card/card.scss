@@ -34,6 +34,10 @@
   }
 }
 
+.partner-info:not(:first-of-type) {
+  margin-top: 20px;
+}
+
 .section-width {
   margin: auto !important;
   max-width: 1280px !important;

@@ -25,7 +25,8 @@
       "email": "asknp@np.edu.sg",
       "phone": "+65 6466 6555",
       "logo": "/static/images/NP_logo.svg",
-      "id": "np-registry"
+      "id": "np-registry",
+      "group": "np-registry"
     },
     "0x828dB5254a44e8630068107A2536219e0C84cacA": {
       "name": "Ngee Ann Polytechnic CET Academy",
@@ -34,7 +35,8 @@
       "email": "asknp@np.edu.sg",
       "phone": "+65 6466 6555",
       "logo": "/static/images/NP_logo.svg",
-      "id": "np-registry"
+      "id": "np-registry-academy",
+      "group": "np-registry"
     },
     "0xE4a94Ef9C26904A02Cd6735F7D4De1D840146a0f": {
       "name": "Singapore Examinations and Assessment Board",
