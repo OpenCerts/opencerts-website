@@ -154,7 +154,15 @@ export const faqContent = [
           "How can I add my institute to the list of recognised issuers?",
         answer: (
           <>
-            Please see our <a href="https://docs.opencerts.io/identity_registry.html" target="_blank" rel="noopener">documentation</a>.
+            Please see our{" "}
+            <a
+              href="https://docs.opencerts.io/docs/registry#application-to-skillsfuture-singapore"
+              target="_blank"
+              rel="noopener"
+            >
+              documentation
+            </a>
+            .
           </>
         )
       },
