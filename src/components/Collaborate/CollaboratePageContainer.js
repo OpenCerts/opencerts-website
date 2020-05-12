@@ -4,7 +4,7 @@ import Card from "../UI/Card/card";
 
 const renderMembers = () =>
   collaborators.map((collaborator, index) => (
-    <Card key={index} info={collaborator} />
+    <Card key={index} info={[collaborator]} />
   ));
 
 const CollaboratePage = () => (

@@ -11,22 +11,17 @@ exports[`default card matches snapshot 1`] = `
     }
   }
 >
-  <a
-    href="Test Website"
-    rel="noopener noreferrer nofollow"
+  <span
+    onClick={[Function]}
     style={
       Object {
         "color": "#000",
+        "cursor": "pointer",
         "textDecoration": "none",
       }
     }
-    target="_blank"
   >
     <div>
-      <img
-        className="undefined"
-        src="Test Logo"
-      />
       <h4
         style={
           Object {
@@ -36,28 +31,34 @@ exports[`default card matches snapshot 1`] = `
       >
         Test Name
       </h4>
-      
-      
+      <img
+        className="undefined"
+        src="Test Logo"
+      />
       <div>
-        Email: 
-        <a
-          href="mailto:Test Email"
-        >
-          Test Email
-        </a>
-      </div>
-      <div>
-        Phone: 
-        <a
-          href="tel:Test Phone"
-        >
-          Test Phone
-        </a>
-      </div>
-      <div>
-        Test Description
+        
+        
+        <div>
+          Email: 
+          <a
+            href="mailto:Test Email"
+          >
+            Test Email
+          </a>
+        </div>
+        <div>
+          Phone: 
+          <a
+            href="tel:Test Phone"
+          >
+            Test Phone
+          </a>
+        </div>
+        <div>
+          Test Description
+        </div>
       </div>
     </div>
-  </a>
+  </span>
 </div>
 `;

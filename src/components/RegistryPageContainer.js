@@ -1,17 +1,21 @@
-import { filter } from "lodash";
+import { groupBy } from "lodash";
 import css from "./registry.scss";
 import registry from "../../static/registry.json";
 import Card from "./UI/Card/card";
 
-const members = Object.keys(registry.issuers).map(k => ({
-  ...registry.issuers[k],
-  address: k
-}));
+const partners = Object.keys(registry.issuers)
+  .map(k => ({
+    ...registry.issuers[k],
+    address: k
+  }))
+  .filter(partner => partner.displayCard);
 
-const partners = filter(members, "displayCard");
-
-const renderMembers = () =>
-  partners.map((partner, index) => <Card key={index} info={partner} />);
+const renderMembers = () => {
+  const groups = groupBy(partners, partner => partner.group || partner.id);
+  return Object.keys(groups).map((group, index) => (
+    <Card key={index} info={groups[group]} />
+  ));
+};
 
 const RegistryPage = () => (
   <>
