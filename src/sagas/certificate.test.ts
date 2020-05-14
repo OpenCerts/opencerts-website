@@ -143,7 +143,8 @@ describe("sagas/certificate", () => {
         "CERTIFICATE_ERROR",
         "storeAdd1,storeAdd2",
         "certificate-id",
-        1337
+        1337,
+        undefined
       );
     });
 
