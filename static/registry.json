@@ -115,7 +115,7 @@
       "displayCard": true,
       "website": "https://www.smu.edu.sg",
       "email": "digitalcert@smu.edu.sg",
-      "phone": "+65 6828 0204",
+      "phone": "+65 6828 0583 / +65 6808 5264 / +65 6808 5138",
       "logo": "/static/images/SMU_logo.png",
       "id": "smu-registry"
     },
@@ -163,6 +163,15 @@
       "phone": "+65 6496 5200",
       "logo": "/static/images/LASALLE_logo.png",
       "id": "lasalle-registry"
+    },
+	"0x5af87c7C799FdD24418f436ccc5d0ef00a1D755B": {
+      "name": "Nanyang Academy of Fine Arts",
+      "displayCard": true,
+      "website": "https://www.nafa.edu.sg/",
+      "email": "nafacerts@nafa.edu.sg",
+      "phone": "+65 6512 4000",
+      "logo": "/static/images/NAFA_Arts_logo.png",
+      "id": "nanyang-art-registry"
     },
     "0xb3c1404732585ddEB837Af28eBdAec504ed8Ba04": {
       "name": "ROPSTEN: Singapore Management University",
