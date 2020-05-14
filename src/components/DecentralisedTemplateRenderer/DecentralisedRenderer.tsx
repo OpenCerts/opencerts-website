@@ -1,8 +1,8 @@
 import { FrameConnector, LegacyHostActions } from "@govtechsg/decentralized-renderer-react-components";
-import { getData, obfuscateDocument, utils, WrappedDocument } from "@govtechsg/open-attestation";
+import { getData, obfuscateDocument, utils, WrappedDocument, v2 } from "@govtechsg/open-attestation";
 import React, { Ref, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { LEGACY_OPENCERTS_RENDERER } from "../../config";
-import { analyticsEvent } from "../Analytics";
+import { analyticsEvent, sendEventCertificateViewedDetailed } from "../Analytics";
 import MultiTabs from "../MultiTabs";
 import styles from "./decentralisedRenderer.module.scss";
 
@@ -69,6 +69,10 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
       category: "CERTIFICATE_VIEWED",
       action: Array.isArray(storeAddresses) ? storeAddresses.join(",") : storeAddresses,
       label: certificateData ? certificateData.id : null,
+    });
+
+    certificateData.issuers.forEach((issuer: v2.Issuer) => {
+      sendEventCertificateViewedDetailed({ issuer, certificateData });
     });
   }, [rawDocument]);
 
