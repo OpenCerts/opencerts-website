@@ -1,5 +1,5 @@
 import css from "../registry.scss";
-import collaborators from "./collaborators";
+import collaborators from "./collaborators.json";
 import Card from "../UI/Card/card";
 
 const renderMembers = () =>
