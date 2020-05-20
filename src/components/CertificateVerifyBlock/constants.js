@@ -3,7 +3,7 @@ export const LOG_LEVEL = {
   VERIFYING: "VERIFYING",
   VALID: "VALID",
   INVALID: "INVALID",
-  WARNING: "WARNING"
+  WARNING: "WARNING",
 };
 
 export default { LOG_LEVEL };

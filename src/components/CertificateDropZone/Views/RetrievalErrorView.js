@@ -2,15 +2,12 @@ import PropTypes from "prop-types";
 import Link from "next/link";
 import css from "./viewerStyles.scss";
 
-export const RetrievalErrorView = ({
-  resetData,
-  retrieveCertificateByActionError
-}) => (
+export const RetrievalErrorView = ({ resetData, retrieveCertificateByActionError }) => (
   <div
     className={`${css["viewer-container"]} ${css.invalid}`}
     style={{
       backgroundColor: "#fbeae9",
-      borderRadius: 10
+      borderRadius: 10,
     }}
   >
     <span className={css["message-container"]}>
@@ -21,9 +18,7 @@ export const RetrievalErrorView = ({
     </span>
 
     <div>
-      <p className={css.messages}>
-        Unable to load certificate with the provided parameters
-      </p>
+      <p className={css.messages}>Unable to load certificate with the provided parameters</p>
       <p>{retrieveCertificateByActionError}</p>
     </div>
     <Link href="/faq">
@@ -34,7 +29,7 @@ export const RetrievalErrorView = ({
       <span>
         <Link href=" ">
           <a
-            onClick={e => {
+            onClick={(e) => {
               e.preventDefault();
               resetData();
             }}
@@ -50,5 +45,5 @@ export const RetrievalErrorView = ({
 
 RetrievalErrorView.propTypes = {
   resetData: PropTypes.func,
-  retrieveCertificateByActionError: PropTypes.string
+  retrieveCertificateByActionError: PropTypes.string,
 };

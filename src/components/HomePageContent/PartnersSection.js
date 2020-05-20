@@ -5,13 +5,7 @@ const CarouselSection = () => {
   const items = Partners.map((item, i) => (
     <div className={css["logo-container"]} key={i}>
       <a href={item.link} target="_blank" rel="noopener noreferrer">
-        <img
-          className="mx-auto"
-          src={item.value}
-          title={item.name}
-          alt={item.name}
-          id={css[item.key]}
-        />
+        <img className="mx-auto" src={item.value} title={item.name} alt={item.name} id={css[item.key]} />
       </a>
     </div>
   ));

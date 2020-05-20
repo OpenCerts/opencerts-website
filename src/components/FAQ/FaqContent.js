@@ -42,12 +42,12 @@ export default FaqContent;
 
 renderSection.propTypes = {
   category: PropTypes.string,
-  faq: PropTypes.array
+  faq: PropTypes.array,
 };
 
 renderQuestion.propTypes = {
   question: PropTypes.string,
   answer: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   id: PropTypes.string,
-  url: PropTypes.string
+  url: PropTypes.string,
 };

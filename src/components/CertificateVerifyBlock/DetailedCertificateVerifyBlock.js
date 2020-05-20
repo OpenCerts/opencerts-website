@@ -23,32 +23,20 @@ const renderStatusCheckRow = (valid, messageSet) => (
   />
 );
 
-const renderStatuses = verificationStatus => {
+const renderStatuses = (verificationStatus) => {
   const revokeFragment = [getRevokeFragment(verificationStatus)];
   return (
     <div id="detailed-error">
-      {renderStatusCheckRow(
-        isValid(verificationStatus, ["DOCUMENT_INTEGRITY"]),
-        MESSAGES[TYPES.HASH]
-      )}
-      {renderStatusCheckRow(
-        isValid(revokeFragment, ["DOCUMENT_STATUS"]),
-        MESSAGES[TYPES.REVOKED]
-      )}
+      {renderStatusCheckRow(isValid(verificationStatus, ["DOCUMENT_INTEGRITY"]), MESSAGES[TYPES.HASH])}
+      {renderStatusCheckRow(isValid(revokeFragment, ["DOCUMENT_STATUS"]), MESSAGES[TYPES.REVOKED])}
     </div>
   );
 };
 
-const DetailedCertificateVerifyBlock = props => {
-  const borderColor = isValid(props.verificationStatus)
-    ? "valid-border-color"
-    : "invalid-border-color";
+const DetailedCertificateVerifyBlock = (props) => {
+  const borderColor = isValid(props.verificationStatus) ? "valid-border-color" : "invalid-border-color";
   return (
-    <div
-      className={`${css["detailed-certificate-block"]} ${
-        css[borderColor]
-      } bg-white p-3`}
-    >
+    <div className={`${css["detailed-certificate-block"]} ${css[borderColor]} bg-white p-3`}>
       <div className="mb-3">
         <h5>Details</h5>
       </div>
@@ -58,11 +46,11 @@ const DetailedCertificateVerifyBlock = props => {
 };
 
 DetailedCertificateVerifyBlock.propTypes = {
-  verificationStatus: PropTypes.array
+  verificationStatus: PropTypes.array,
 };
 CheckStatusRow.propTypes = {
   message: PropTypes.string,
-  icon: PropTypes.element
+  icon: PropTypes.element,
 };
 
 export default DetailedCertificateVerifyBlock;

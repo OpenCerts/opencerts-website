@@ -1,22 +1,33 @@
+import Link from "next/link";
 import css from "./footer.scss";
 
 const NavigationBar = () => (
   <div className="bg-brand-dark" id={css["footer-print"]}>
     <div className={css.footer}>
       <div>
-        <a href="/collaborate">Collaborate</a>
+        <Link href="/collaborate">
+          <a>Collaborate</a>
+        </Link>
       </div>
       <div>
-        <a href="/faq">FAQ</a>
+        <Link href="/faq">
+          <a>FAQ</a>
+        </Link>
       </div>
       <div>
-        <a href="/registry">Registry</a>
+        <Link href="/registry">
+          <a>Registry</a>
+        </Link>
       </div>
       <div>
-        <a href="/privacy">Privacy Policy</a>
+        <Link href="/privacy">
+          <a>Privacy Policy</a>
+        </Link>
       </div>
       <div>
-        <a href="/terms">Terms of Use</a>
+        <Link href="/terms">
+          <a>Terms of Use</a>
+        </Link>
       </div>
       <div>
         <a href="https://github.com/OpenCerts">Github</a>

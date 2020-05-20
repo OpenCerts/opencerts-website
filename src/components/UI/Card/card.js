@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import css from "./card.scss";
 
-const Card = props => (
+const Card = (props) => (
   <div
     id={props.info[0].id}
     className={`col-lg-4 col-md-6 col-sm-12 ${css["mb-3"]} ${css["m-pd-0"]}`}
@@ -22,10 +22,7 @@ const Card = props => (
               <div>
                 {index > 0 && `${info.name} `}
                 Certificate Store:{" "}
-                <a
-                  href={`https://etherscan.io/address/${info.address}`}
-                  onClick={event => event.stopPropagation()}
-                >
+                <a href={`https://etherscan.io/address/${info.address}`} onClick={(event) => event.stopPropagation()}>
                   {info.address}
                 </a>
               </div>
@@ -35,11 +32,7 @@ const Card = props => (
             {info.address && info.website ? (
               <div>
                 Website:{" "}
-                <a
-                  href={info.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href={info.website} target="_blank" rel="noopener noreferrer">
                   {info.website}
                 </a>
               </div>
@@ -71,5 +64,5 @@ const Card = props => (
 export default Card;
 
 Card.propTypes = {
-  info: PropTypes.array
+  info: PropTypes.array,
 };

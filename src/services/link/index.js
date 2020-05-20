@@ -7,12 +7,12 @@ export function generateLink(certificate) {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         ttl: SHARE_LINK_TTL,
-        document: certificate
-      })
+        document: certificate,
+      }),
     })
-    .then(res => res.json());
+    .then((res) => res.json());
 }

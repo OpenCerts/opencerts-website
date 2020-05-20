@@ -8,20 +8,13 @@ import {
   getVerificationStatus,
   getVerifying,
   resetCertificateState,
-  updateCertificate
+  updateCertificate,
 } from "../../reducers/certificate";
 import CertificateVerificationStatus from "./CertificateVerificationStatus";
 
-const onFileDrop = (
-  acceptedFiles,
-  handleCertificateChange,
-  handleFileError
-) => {
+const onFileDrop = (acceptedFiles, handleCertificateChange, handleFileError) => {
   // eslint-disable-next-line no-undef
   const reader = new FileReader();
-  if (reader.error) {
-    handleFileError(reader.error);
-  }
   reader.onload = () => {
     try {
       const json = JSON.parse(reader.result);
@@ -30,15 +23,14 @@ const onFileDrop = (
       handleFileError(e);
     }
   };
-  if (acceptedFiles && acceptedFiles.length && acceptedFiles.length > 0)
-    acceptedFiles.map(f => reader.readAsText(f));
+  if (acceptedFiles && acceptedFiles.length && acceptedFiles.length > 0) acceptedFiles.map((f) => reader.readAsText(f));
 };
 class CertificateDropZoneContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      fileError: false
+      fileError: false,
     };
     this.handleCertificateChange = this.handleCertificateChange.bind(this);
     this.handleFileError = this.handleFileError.bind(this);
@@ -65,50 +57,40 @@ class CertificateDropZoneContainer extends Component {
   render() {
     return (
       <Dropzone
-        id="certificate-dropzone"
-        onDrop={acceptedFiles =>
-          onFileDrop(
-            acceptedFiles,
-            this.handleCertificateChange,
-            this.handleFileError
-          )
-        }
-        className="h-100"
+        onDrop={(acceptedFiles) => onFileDrop(acceptedFiles, this.handleCertificateChange, this.handleFileError)}
       >
-        {props => (
-          <CertificateVerificationStatus
-            fileError={this.state.fileError}
-            handleCertificateChange={this.handleCertificateChange}
-            handleFileError={this.handleFileError}
-            verifying={this.props.verifying}
-            verificationStatus={this.props.verificationStatus}
-            retrieveCertificateByActionError={
-              this.props.retrieveCertificateByActionError
-            }
-            resetData={this.resetData.bind(this)}
-            hover={props.isDragAccept}
-          />
+        {({ getRootProps, getInputProps, isDragAccept }) => (
+          <div {...getRootProps()} className="h-100" id="certificate-dropzone">
+            <input {...getInputProps()} />
+            <CertificateVerificationStatus
+              fileError={this.state.fileError}
+              handleCertificateChange={this.handleCertificateChange}
+              handleFileError={this.handleFileError}
+              verifying={this.props.verifying}
+              verificationStatus={this.props.verificationStatus}
+              retrieveCertificateByActionError={this.props.retrieveCertificateByActionError}
+              resetData={this.resetData.bind(this)}
+              hover={isDragAccept}
+            />
+          </div>
         )}
       </Dropzone>
     );
   }
 }
 
-const mapStateToProps = store => ({
+const mapStateToProps = (store) => ({
   retrieveCertificateByActionError: getCertificateByActionError(store),
   verifying: getVerifying(store),
-  verificationStatus: getVerificationStatus(store)
+  verificationStatus: getVerificationStatus(store),
 });
 
-const mapDispatchToProps = dispatch => ({
-  updateCertificate: payload => dispatch(updateCertificate(payload)),
-  resetData: () => dispatch(resetCertificateState())
+const mapDispatchToProps = (dispatch) => ({
+  updateCertificate: (payload) => dispatch(updateCertificate(payload)),
+  resetData: () => dispatch(resetCertificateState()),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CertificateDropZoneContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(CertificateDropZoneContainer);
 
 CertificateDropZoneContainer.propTypes = {
   document: PropTypes.object,
@@ -118,5 +100,5 @@ CertificateDropZoneContainer.propTypes = {
   resetData: PropTypes.func,
   verifying: PropTypes.bool,
   verificationStatus: PropTypes.array,
-  retrieveCertificateByActionError: PropTypes.string
+  retrieveCertificateByActionError: PropTypes.string,
 };

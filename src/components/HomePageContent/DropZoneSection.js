@@ -8,14 +8,12 @@ import { trace } from "../../utils/logger";
 import { IS_MAINNET } from "../../config";
 import { analyticsEvent } from "../Analytics/index";
 
-const DEMO_CERT = IS_MAINNET
-  ? "/static/demo/mainnet.opencerts"
-  : "/static/demo/ropsten.opencerts";
+const DEMO_CERT = IS_MAINNET ? "/static/demo/mainnet.opencerts" : "/static/demo/ropsten.opencerts";
 
 function demoCount() {
   analyticsEvent(window, {
     category: "USER_INTERACTION",
-    action: "DEMO_CERTIFICATE_VIEWED"
+    action: "DEMO_CERTIFICATE_VIEWED",
   });
 }
 
@@ -26,37 +24,25 @@ const DraggableDemoCertificate = () => (
         <div
           className={css.pulse}
           draggable="true"
-          onDragStart={e => e.dataTransfer.setData(DEMO_CERT, true)}
+          onDragStart={(e) => e.dataTransfer.setData(DEMO_CERT, true)}
           onDragEnd={demoCount}
         >
           <a href={DEMO_CERT} download rel="noindex nofollow">
-            <img
-              style={{ cursor: "grabbing" }}
-              src="/static/images/dropzone/cert.png"
-              width="100%"
-            />
+            <img style={{ cursor: "grabbing" }} src="/static/images/dropzone/cert.png" width="100%" />
           </a>
         </div>
       </div>
       <div className="col">
-        <img
-          src="/static/images/dropzone/arrow.png"
-          width="100%"
-          draggable="false"
-        />
+        <img src="/static/images/dropzone/arrow.png" width="100%" draggable="false" />
         <span
           style={{
             textAlign: "justify",
-            color: "#ff9933"
+            color: "#ff9933",
           }}
         >
           Drag me over here to see a demo certificate and other features
         </span>
-        <img
-          src="/static/images/opencertslogo.svg"
-          width="100%"
-          draggable="false"
-        />
+        <img src="/static/images/opencertslogo.svg" width="100%" draggable="false" />
       </div>
     </div>
   </div>
@@ -72,7 +58,7 @@ const MobileDemoCertificate = () => (
       style={{
         background: "#28a745",
         border: "none",
-        cursor: "pointer"
+        cursor: "pointer",
       }}
       onClick={demoCount}
     >
@@ -83,12 +69,12 @@ const MobileDemoCertificate = () => (
 
 class DropZoneSection extends Component {
   componentDidMount() {
-    document.getElementById("demoDrop").addEventListener("drop", e => {
+    document.getElementById("demoDrop").addEventListener("drop", (e) => {
       if (e.dataTransfer.getData(DEMO_CERT)) {
         window
           .fetch(DEMO_CERT)
-          .then(res => res.json())
-          .then(res => {
+          .then((res) => res.json())
+          .then((res) => {
             this.props.updateCertificate(res);
           });
       }
@@ -96,17 +82,15 @@ class DropZoneSection extends Component {
     document.getElementById("demoClick").addEventListener("click", () => {
       window
         .fetch(DEMO_CERT)
-        .then(res => res.json())
-        .then(res => {
+        .then((res) => res.json())
+        .then((res) => {
           this.props.updateCertificate(res);
         });
     });
   }
 
   componentWillUnmount() {
-    document
-      .getElementById("demoDrop", "demoClick")
-      .removeEventListener("drop", () => this.removeListener());
+    document.getElementById("demoDrop", "demoClick").removeEventListener("drop", () => this.removeListener());
   }
 
   removeListener = () => trace("drop listener removed");
@@ -120,9 +104,8 @@ class DropZoneSection extends Component {
             <div className={css.description}>
               <h1>An easy way to check and verify your certificates</h1>
               <p>
-                Whether you&#39;re a student or an employer, OpenCerts lets you
-                verify the certificates you have of anyone from any institution.
-                All in one place.
+                Whether you&#39;re a student or an employer, OpenCerts lets you verify the certificates you have of
+                anyone from any institution. All in one place.
               </p>
               <DraggableDemoCertificate />
               <MobileDemoCertificate />
@@ -137,15 +120,12 @@ class DropZoneSection extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  updateCertificate: payload => dispatch(updateCertificate(payload))
+const mapDispatchToProps = (dispatch) => ({
+  updateCertificate: (payload) => dispatch(updateCertificate(payload)),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(DropZoneSection);
+export default connect(null, mapDispatchToProps)(DropZoneSection);
 
 DropZoneSection.propTypes = {
-  updateCertificate: PropTypes.func
+  updateCertificate: PropTypes.func,
 };

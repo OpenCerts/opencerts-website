@@ -16,9 +16,9 @@ import {
   getVerificationStatus,
   getShareLink,
   getShareLinkState,
-  updateObfuscatedCertificate
+  updateObfuscatedCertificate,
 } from "../reducers/certificate";
-import { CertificateViewer } from "./CertificateViewer";
+import { CertificateViewerContainer } from "./CertificateViewer";
 
 class Viewer extends Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class Viewer extends Component {
 
     this.state = {
       showSharing: false,
-      copiedLink: false
+      copiedLink: false,
     };
     this.handleCertificateChange = this.handleCertificateChange.bind(this);
     this.handleSharingToggle = this.handleSharingToggle.bind(this);
@@ -53,7 +53,7 @@ class Viewer extends Component {
     }
     this.setState({
       showShareLink: !this.state.showShareLink,
-      copiedLink: false
+      copiedLink: false,
     });
   }
 
@@ -73,7 +73,7 @@ class Viewer extends Component {
   render() {
     if (!this.props.document) return null;
     return (
-      <CertificateViewer
+      <CertificateViewerContainer
         document={this.props.document}
         certificate={getData(this.props.document)}
         verifying={this.props.verifying}
@@ -93,7 +93,7 @@ class Viewer extends Component {
   }
 }
 
-const mapStateToProps = store => ({
+const mapStateToProps = (store) => ({
   document: getCertificate(store),
 
   // Verification statuses used in verifier block
@@ -101,22 +101,18 @@ const mapStateToProps = store => ({
   shareLink: getShareLink(store),
   shareLinkState: getShareLinkState(store),
   verifying: getVerifying(store),
-  verificationStatus: getVerificationStatus(store)
+  verificationStatus: getVerificationStatus(store),
 });
 
-const mapDispatchToProps = dispatch => ({
-  updateCertificate: payload => dispatch(updateCertificate(payload)),
-  sendCertificate: payload => dispatch(sendCertificate(payload)),
+const mapDispatchToProps = (dispatch) => ({
+  updateCertificate: (payload) => dispatch(updateCertificate(payload)),
+  sendCertificate: (payload) => dispatch(sendCertificate(payload)),
   sendCertificateReset: () => dispatch(sendCertificateReset()),
   generateShareLink: () => dispatch(generateShareLink()),
-  updateObfuscatedCertificate: updatedDoc =>
-    dispatch(updateObfuscatedCertificate(updatedDoc))
+  updateObfuscatedCertificate: (updatedDoc) => dispatch(updateObfuscatedCertificate(updatedDoc)),
 });
 
-export const ViewerContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Viewer);
+export const ViewerContainer = connect(mapStateToProps, mapDispatchToProps)(Viewer);
 
 Viewer.propTypes = {
   updateCertificate: PropTypes.func,
@@ -129,5 +125,5 @@ Viewer.propTypes = {
   sendCertificateReset: PropTypes.func,
   generateShareLink: PropTypes.func,
   shareLink: PropTypes.object,
-  updateObfuscatedCertificate: PropTypes.func
+  updateObfuscatedCertificate: PropTypes.func,
 };

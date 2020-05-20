@@ -55,14 +55,6 @@
   }
 }
 
-:global(.frameless-tabs .react-tabs .d-lg-none.d-xl-none) {
-  display: none;
-}
-
-:global(.frameless-tabs .react-tabs .d-none.d-lg-block.d-xl-block) {
-  display: none !important;
-}
-
 #top-header-ui,
 #header-ui {
   background-color: $header-ui-bg;

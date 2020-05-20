@@ -10,7 +10,7 @@ export default class ErrorBoundary extends Component {
 
   componentDidCatch() {
     this.setState({
-      hasError: true
+      hasError: true,
     });
   }
 
@@ -21,15 +21,9 @@ export default class ErrorBoundary extends Component {
           <div id="error">
             <div className={`${css.error}`}>
               <br />
-              <img
-                src="/static/images/errorpage/error.png"
-                style={{ height: "15vh" }}
-              />
+              <img src="/static/images/errorpage/error.png" style={{ height: "15vh" }} />
               <h2>Something went wrong!</h2>
-              <p>
-                There is an error with this certificate, please contact your
-                issuing institution.
-              </p>
+              <p>There is an error with this certificate, please contact your issuing institution.</p>
               <a href="/">Go Back</a>
             </div>
           </div>
@@ -42,5 +36,5 @@ export default class ErrorBoundary extends Component {
 }
 
 ErrorBoundary.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };

@@ -1,5 +1,5 @@
 export const types = {
-  UPDATE_FEATURE_TOGGLES: "UPDATE_FEATURE_TOGGLES"
+  UPDATE_FEATURE_TOGGLES: "UPDATE_FEATURE_TOGGLES",
 };
 const initialState = {};
 

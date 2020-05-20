@@ -3,11 +3,7 @@ import Link from "next/link";
 import { isValid } from "@govtechsg/opencerts-verify";
 import { TYPES, MESSAGES } from "../../../constants/VerificationErrorMessages";
 import css from "./viewerStyles.scss";
-import {
-  addressInvalid,
-  getAllButRevokeFragment,
-  getRevokeFragment
-} from "../../../services/fragment";
+import { addressInvalid, getAllButRevokeFragment, getRevokeFragment } from "../../../services/fragment";
 
 const DetailedErrors = ({ verificationStatus }) => {
   const errors = [];
@@ -26,10 +22,7 @@ const DetailedErrors = ({ verificationStatus }) => {
     errors.push(TYPES.IDENTITY);
   }
   // if the error is because the address is invalid, then get rid of all errors and only keep this one
-  if (
-    !isValid(verificationStatus, ["DOCUMENT_STATUS"]) &&
-    addressInvalid(verificationStatus)
-  ) {
+  if (!isValid(verificationStatus, ["DOCUMENT_STATUS"]) && addressInvalid(verificationStatus)) {
     errors.splice(0, errors.length);
     errors.push(TYPES.ADDRESS_INVALID);
   }
@@ -47,7 +40,7 @@ const DetailedErrors = ({ verificationStatus }) => {
 };
 
 DetailedErrors.propTypes = {
-  verificationStatus: PropTypes.array
+  verificationStatus: PropTypes.array,
 };
 
 export const UnverifiedView = ({ resetData, verificationStatus }) => (
@@ -55,7 +48,7 @@ export const UnverifiedView = ({ resetData, verificationStatus }) => (
     className={`${css["viewer-container"]} ${css.invalid}`}
     style={{
       backgroundColor: "#fbeae9",
-      borderRadius: 10
+      borderRadius: 10,
     }}
   >
     <span className={css["message-container"]}>
@@ -75,7 +68,7 @@ export const UnverifiedView = ({ resetData, verificationStatus }) => (
       <span>
         <Link href=" ">
           <a
-            onClick={e => {
+            onClick={(e) => {
               e.preventDefault();
               resetData();
             }}
@@ -91,5 +84,5 @@ export const UnverifiedView = ({ resetData, verificationStatus }) => (
 
 UnverifiedView.propTypes = {
   resetData: PropTypes.func,
-  verificationStatus: PropTypes.array
+  verificationStatus: PropTypes.array,
 };

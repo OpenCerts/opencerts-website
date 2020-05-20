@@ -5,21 +5,9 @@ import verifyStyle from "./CertificateVerifyBlock/certificateVerifyBlock.scss";
 const viewerImages = {
   print: () => (
     <i>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="56.81"
-        height="50.77"
-        viewBox="0 0 56.81 50.77"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" width="56.81" height="50.77" viewBox="0 0 56.81 50.77">
         <defs>
-          <linearGradient
-            id="a"
-            x1="29.18"
-            y1="34.39"
-            x2="29.18"
-            y2="18.05"
-            gradientUnits="userSpaceOnUse"
-          >
+          <linearGradient id="a" x1="29.18" y1="34.39" x2="29.18" y2="18.05" gradientUnits="userSpaceOnUse">
             <stop offset="0" stopColor="#faa94e" />
             <stop offset="1" stopColor="#f47d4d" />
           </linearGradient>
@@ -37,12 +25,7 @@ const viewerImages = {
   ),
   send: () => (
     <i>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="59.6"
-        height="44.2"
-        viewBox="0 0 59.6 44.2"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" width="59.6" height="44.2" viewBox="0 0 59.6 44.2">
         <defs>
           <linearGradient
             id="a"
@@ -100,36 +83,15 @@ const viewerImages = {
             strokeWidth="4"
             stroke="url(#b)"
           />
-          <line
-            x1="12.6"
-            y1="36.3"
-            x2="26.6"
-            y2="23.3"
-            fill="none"
-            strokeWidth="4"
-            stroke="url(#c)"
-          />
-          <line
-            x1="46.5"
-            y1="36.2"
-            x2="33.1"
-            y2="23.3"
-            fill="none"
-            strokeWidth="4"
-            stroke="url(#d)"
-          />
+          <line x1="12.6" y1="36.3" x2="26.6" y2="23.3" fill="none" strokeWidth="4" stroke="url(#c)" />
+          <line x1="46.5" y1="36.2" x2="33.1" y2="23.3" fill="none" strokeWidth="4" stroke="url(#d)" />
         </g>
       </svg>
     </i>
   ),
   check: () => (
     <i>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="17.32"
-        height="11.83"
-        viewBox="0 0 17.32 11.83"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" width="17.32" height="11.83" viewBox="0 0 17.32 11.83">
         <title>check</title>
         <path
           d="M17.86,2.34,8.08,12.11a1,1,0,0,1-1.45,0L1.14,6.62A1,1,0,1,1,2.59,5.17L7.36,9.94,16.41.88a1,1,0,0,1,1.45,0A1,1,0,0,1,17.86,2.34Z"
@@ -141,12 +103,7 @@ const viewerImages = {
   ),
   checkCircle: () => (
     <i>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="35"
-        height="35"
-        viewBox="0 0 35 35"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35">
         <title>check-circle</title>
         <path
           id={verifyStyle.circle}
@@ -164,22 +121,12 @@ const viewerImages = {
 
   arrow: () => (
     <i>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="8.1"
-        height="14.36"
-        viewBox="0 0 8.1 14.36"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" width="8.1" height="14.36" viewBox="0 0 8.1 14.36">
         <title>arrow</title>
-        <polyline
-          points="0.74 0.68 6.74 7.13 0.74 13.68"
-          fill="none"
-          stroke="#fff"
-          strokeWidth="2"
-        />
+        <polyline points="0.74 0.68 6.74 7.13 0.74 13.68" fill="none" stroke="#fff" strokeWidth="2" />
       </svg>
     </i>
-  )
+  ),
 };
 
 export default viewerImages;
