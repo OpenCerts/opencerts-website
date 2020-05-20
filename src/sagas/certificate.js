@@ -1,11 +1,12 @@
-import { get } from "lodash";
-import { call, put, select, takeEvery } from "redux-saga/effects";
-import { getData, utils } from "@govtechsg/open-attestation";
-import Router from "next/router";
 import { decryptString } from "@govtechsg/oa-encryption";
+import { getData, utils } from "@govtechsg/open-attestation";
 import { isValid, verify } from "@govtechsg/opencerts-verify";
+import { get } from "lodash";
+import Router from "next/router";
+import { call, put, select, takeEvery } from "redux-saga/effects";
 import "isomorphic-fetch";
-import { getLogger } from "../utils/logger";
+import { analyticsEvent } from "../components/Analytics";
+import { NETWORK_NAME } from "../config";
 import {
   getCertificate,
   types,
@@ -13,10 +14,9 @@ import {
   verifyingCertificateCompleted,
 } from "../reducers/certificate";
 import sendEmail from "../services/email";
-import { generateLink } from "../services/link";
-import { analyticsEvent } from "../components/Analytics";
 import { certificateNotIssued, getAllButRevokeFragment, getRevokeFragment } from "../services/fragment";
-import { NETWORK_NAME } from "../config";
+import { generateLink } from "../services/link";
+import { getLogger } from "../utils/logger";
 
 const { trace, error } = getLogger("saga:certificate");
 

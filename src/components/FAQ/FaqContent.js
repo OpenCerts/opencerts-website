@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
-import styles from "./faq.scss";
+import React from "react";
 import { faqContent } from "./content";
+import styles from "./faq.scss";
 
 const FaqHeader = () => (
   <div className={styles["header-container"]}>

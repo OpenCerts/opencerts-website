@@ -1,8 +1,9 @@
-import PropTypes from "prop-types";
 import { isValid } from "@govtechsg/opencerts-verify";
-import css from "./detailedCertificateBlock.scss";
+import PropTypes from "prop-types";
+import React from "react";
 import { MESSAGES, TYPES } from "../../constants/VerificationErrorMessages";
 import { getRevokeFragment } from "../../services/fragment";
+import css from "./detailedCertificateBlock.scss";
 
 const SuccessIcon = () => <i className="fas fa-check text-success mr-2" />;
 const FailureIcon = () => <i className="fas fa-times text-danger mr-2" />;

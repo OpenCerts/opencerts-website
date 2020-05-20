@@ -1,15 +1,15 @@
-import PropTypes from "prop-types";
-import React from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import PropTypes from "prop-types";
+import React from "react";
 import { connect } from "react-redux";
-import CertificateVerifyBlock from "./CertificateVerifyBlock";
-import styles from "./certificateViewer.scss";
-import Modal from "./Modal";
-import ErrorBoundary from "./ErrorBoundary";
-import CertificateShareLinkForm from "./CertificateShareLink/CertificateShareLinkForm";
-import { FeatureFlagContainer } from "./FeatureFlag";
 import { updateObfuscatedCertificate as updateObfuscatedCertificateAction } from "../reducers/certificate";
+import CertificateShareLinkForm from "./CertificateShareLink/CertificateShareLinkForm";
+import CertificateVerifyBlock from "./CertificateVerifyBlock";
+import ErrorBoundary from "./ErrorBoundary";
+import { FeatureFlagContainer } from "./FeatureFlag";
+import Modal from "./Modal";
+import styles from "./certificateViewer.scss";
 
 const CertificateSharingForm = dynamic(import("./CertificateSharing/CertificateSharingForm"));
 

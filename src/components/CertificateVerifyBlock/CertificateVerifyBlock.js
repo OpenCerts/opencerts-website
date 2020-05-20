@@ -1,8 +1,8 @@
-import React, { useState } from "react";
 import PropTypes from "prop-types";
+import React, { useState } from "react";
+import icons from "../ViewerPageImages";
 import DetailedCertificateVerifyBlock from "./DetailedCertificateVerifyBlock";
 import css from "./certificateVerifyBlock.scss";
-import icons from "../ViewerPageImages";
 
 const renderIcon = () => (
   <div className={`d-flex justify-content-center align-items-center ${css["verified-icon"]}`}>

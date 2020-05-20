@@ -1,15 +1,15 @@
-import withRedux from "next-redux-wrapper";
-import App from "next/app";
-import Router from "next/router";
-import withGA from "next-ga";
-import React from "react";
-import { Provider } from "react-redux";
 import fetch from "isomorphic-fetch";
 import { mapValues } from "lodash";
+import withGA from "next-ga";
+import withRedux from "next-redux-wrapper";
 import { DefaultSeo } from "next-seo";
-import initStore from "../src/store";
+import App from "next/app";
+import Router from "next/router";
+import React from "react";
+import { Provider } from "react-redux";
 import { DEFAULT_SEO, ENVIRONMENT, GA_ID } from "../src/config";
 import { types } from "../src/reducers/featureToggle";
+import initStore from "../src/store";
 
 const FeatureFlagLoader = ({ dispatch, children }) => {
   React.useEffect(() => {

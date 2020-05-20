@@ -1,7 +1,8 @@
 import { groupBy } from "lodash";
-import css from "./registry.scss";
+import React from "react";
 import registry from "../../static/registry.json";
 import Card from "./UI/Card/card";
+import css from "./registry.scss";
 
 const partners = Object.keys(registry.issuers)
   .map((k) => ({

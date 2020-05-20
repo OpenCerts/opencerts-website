@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { useRouter } from "next/router";
+import PropTypes from "prop-types";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import FooterBar from "../src/components/Layout/FooterBar";
+import NavigationBar from "../src/components/Layout/NavigationBar";
+import MainPageContainer from "../src/components/MainPageContainer";
 import {
   resetCertificateState,
   retrieveCertificateByAction,
   retrieveCertificateByActionFailure,
 } from "../src/reducers/certificate";
-import NavigationBar from "../src/components/Layout/NavigationBar";
-import FooterBar from "../src/components/Layout/FooterBar";
-import MainPageContainer from "../src/components/MainPageContainer";
 
 const HomePage = (props) => {
   const router = useRouter();

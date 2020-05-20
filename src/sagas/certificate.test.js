@@ -1,5 +1,7 @@
 import { call, put, select } from "redux-saga/effects";
 import sinon from "sinon";
+import { getCertificate } from "../reducers/certificate";
+import * as sendEmail from "../services/email";
 import {
   analyticsHashFail,
   analyticsIssuedFail,
@@ -9,9 +11,7 @@ import {
   sendCertificate,
   triggerAnalytics,
 } from "./certificate";
-import { getCertificate } from "../reducers/certificate";
 import { MakeCertUtil } from "./testutils";
-import * as sendEmail from "../services/email";
 
 jest.mock("@govtechsg/open-attestation", () => {
   // Require the original module to not be mocked...

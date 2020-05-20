@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import Router from "next/router";
-import copy from "clipboard-copy";
 import { getData } from "@govtechsg/open-attestation";
+import copy from "clipboard-copy";
+import Router from "next/router";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import {
   updateCertificate,

@@ -1,5 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import Document, { Head, Main, NextScript } from "next/document";
+import React from "react";
 import { BootstrapCss, BootstrapJs } from "../src/components/Layout/Bootstrap";
 
 export default class MyDocument extends Document {

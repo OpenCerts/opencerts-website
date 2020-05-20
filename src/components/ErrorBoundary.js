@@ -1,5 +1,5 @@
-import React, { Component } from "react";
 import PropTypes from "prop-types";
+import React, { Component } from "react";
 import css from "./error.scss";
 
 export default class ErrorBoundary extends Component {

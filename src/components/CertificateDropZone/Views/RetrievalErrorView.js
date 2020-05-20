@@ -1,5 +1,6 @@
-import PropTypes from "prop-types";
 import Link from "next/link";
+import PropTypes from "prop-types";
+import React from "react";
 import css from "./viewerStyles.scss";
 
 export const RetrievalErrorView = ({ resetData, retrieveCertificateByActionError }) => (

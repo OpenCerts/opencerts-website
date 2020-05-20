@@ -1,6 +1,7 @@
+import React from "react";
+import Card from "../UI/Card/card";
 import css from "../registry.scss";
 import collaborators from "./collaborators.json";
-import Card from "../UI/Card/card";
 
 const renderMembers = () => collaborators.map((collaborator, index) => <Card key={index} info={[collaborator]} />);
 
