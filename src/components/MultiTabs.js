@@ -1,10 +1,10 @@
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import Link from "next/link";
+import PropTypes from "prop-types";
 import React, { useState } from "react";
-import styles from "./certificateViewer.scss";
+import { connect } from "react-redux";
 import { resetCertificateState } from "../reducers/certificate";
 import Drawer from "./UI/Drawer";
+import styles from "./certificateViewer.scss";
 
 const MultiTabs = ({ resetData, templates, onSelectTemplate }) => {
   const [selectedTemplate, setSelectedTemplate] = useState(0);

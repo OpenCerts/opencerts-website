@@ -1,8 +1,8 @@
-import React from "react";
 import { NextSeo } from "next-seo";
+import React from "react";
 import { connect } from "react-redux";
-import NavigationBar from "../src/components/Layout/NavigationBar";
 import FooterBar from "../src/components/Layout/FooterBar";
+import NavigationBar from "../src/components/Layout/NavigationBar";
 import PrivacyContent from "../src/components/Privacy";
 import { URL } from "../src/config";
 

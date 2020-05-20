@@ -1,12 +1,12 @@
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import CertificateDropzone from "../CertificateDropZone";
-import css from "./dropZoneSection.scss";
+import { IS_MAINNET } from "../../config";
 import { updateCertificate } from "../../reducers/certificate";
 import { trace } from "../../utils/logger";
-import { IS_MAINNET } from "../../config";
 import { analyticsEvent } from "../Analytics/index";
+import CertificateDropzone from "../CertificateDropZone";
+import css from "./dropZoneSection.scss";
 
 const DEMO_CERT = IS_MAINNET ? "/static/demo/mainnet.opencerts" : "/static/demo/ropsten.opencerts";
 

@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { FrameConnector } from "@govtechsg/decentralized-renderer-react-components";
 import { getData, obfuscateDocument, utils } from "@govtechsg/open-attestation";
 import PropTypes from "prop-types";
+import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { LEGACY_OPENCERTS_RENDERER } from "../../config";
-import styles from "./decentralisedRenderer.scss";
-import MultiTabs from "../MultiTabs";
 import { analyticsEvent } from "../Analytics";
+import MultiTabs from "../MultiTabs";
+import styles from "./decentralisedRenderer.scss";
 
 const DecentralisedRenderer = ({ rawDocument, updateObfuscatedCertificate, forwardedRef }) => {
   const toFrame = useRef();

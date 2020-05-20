@@ -1,9 +1,9 @@
-import React, { Component } from "react";
 import PropTypes from "prop-types";
+import React, { Component } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { CAPTCHA_CLIENT_KEY } from "../../config";
-import css from "./sharing.scss";
 import { states } from "../../reducers/certificate";
+import css from "./sharing.scss";
 
 class CertificateSharingForm extends Component {
   constructor(props) {

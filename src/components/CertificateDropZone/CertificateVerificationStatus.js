@@ -1,11 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
-
 import { isValid } from "@govtechsg/opencerts-verify";
+import PropTypes from "prop-types";
+import React from "react";
+
 import { DefaultView } from "./Views/DefaultView";
-import { VerifyingView } from "./Views/VerifyingView";
-import { UnverifiedView } from "./Views/UnverifiedView";
 import { RetrievalErrorView } from "./Views/RetrievalErrorView";
+import { UnverifiedView } from "./Views/UnverifiedView";
+import { VerifyingView } from "./Views/VerifyingView";
 
 const CertificateVerificationStatus = (props) => {
   const {

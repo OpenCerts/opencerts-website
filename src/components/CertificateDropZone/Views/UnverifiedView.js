@@ -1,9 +1,10 @@
-import PropTypes from "prop-types";
-import Link from "next/link";
 import { isValid } from "@govtechsg/opencerts-verify";
+import Link from "next/link";
+import PropTypes from "prop-types";
+import React from "react";
 import { TYPES, MESSAGES } from "../../../constants/VerificationErrorMessages";
-import css from "./viewerStyles.scss";
 import { addressInvalid, getAllButRevokeFragment, getRevokeFragment } from "../../../services/fragment";
+import css from "./viewerStyles.scss";
 
 const DetailedErrors = ({ verificationStatus }) => {
   const errors = [];

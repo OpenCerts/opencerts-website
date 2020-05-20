@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import React from "react";
 import css from "./modal.scss";
 
 const modal = ({ show, toggle, children }) =>

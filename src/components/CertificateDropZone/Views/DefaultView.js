@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import React from "react";
 import css from "./viewerStyles.scss";
 
 export const DefaultView = ({ hover, accept }) => (

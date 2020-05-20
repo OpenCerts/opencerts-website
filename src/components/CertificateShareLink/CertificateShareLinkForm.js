@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import React, { Component } from "react";
 import { QRCode } from "react-qr-svg";
-import css from "./sharing.scss";
+import { connect } from "react-redux";
 import { getShareLinkState } from "../../reducers/certificate";
+import css from "./sharing.scss";
 
 class CertificateShareLinkForm extends Component {
   render() {

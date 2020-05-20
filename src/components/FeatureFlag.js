@@ -1,6 +1,6 @@
-// eslint-disable-next-line no-unused-vars
-import React from "react";
 import PropTypes from "prop-types";
+// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+import React from "react";
 import { connect } from "react-redux";
 
 export const FeatureFlag = ({ name, render, fallback, state }) => {

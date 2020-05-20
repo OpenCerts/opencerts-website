@@ -1,6 +1,6 @@
 import sinon from "sinon";
-import * as sendEmail from "./index";
 import { EMAIL_API_URL } from "../../config";
+import * as sendEmail from "./index";
 
 describe("sagas/certificate", () => {
   const email = "admin@opencerts.io";

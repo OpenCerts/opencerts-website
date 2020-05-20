@@ -1,5 +1,6 @@
-import css from "./aboutSection.scss";
+import React from "react";
 import images from "./AboutImages";
+import css from "./aboutSection.scss";
 
 const BenefitsSection = () => (
   <div className={css.section}>

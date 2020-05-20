@@ -1,3 +1,4 @@
+import React from "react";
 import AboutSection from "./HomePageContent/AboutSection";
 import DropZoneSection from "./HomePageContent/DropZoneSection";
 import PartnerSection from "./HomePageContent/PartnersSection";

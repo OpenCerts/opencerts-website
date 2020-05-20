@@ -1,4 +1,5 @@
 import { mount } from "enzyme";
+import React from "react";
 import ErrorBoundary from "./ErrorBoundary";
 
 const ProblemChild = () => {
@@ -8,6 +9,7 @@ const ProblemChild = () => {
 // disabled lint for the overridden console to not show the error from the problem child.
 const pauseErrorLogging = (codeToRun) => {
   const logger = console.error;
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   console.error = () => {};
 
   codeToRun();
