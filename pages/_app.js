@@ -6,8 +6,9 @@ import React from "react";
 import { Provider } from "react-redux";
 import fetch from "isomorphic-fetch";
 import { mapValues } from "lodash";
+import { DefaultSeo } from "next-seo";
 import initStore from "../src/store";
-import { ENVIRONMENT, GA_ID } from "../src/config";
+import { DEFAULT_SEO, ENVIRONMENT, GA_ID } from "../src/config";
 import { types } from "../src/reducers/featureToggle";
 
 const FeatureFlagLoader = ({ dispatch, children }) => {
@@ -43,6 +44,7 @@ class MyApp extends App {
     return (
       <Provider store={store}>
         <FeatureFlagLoader dispatch={store.dispatch}>
+          <DefaultSeo {...DEFAULT_SEO} />
           <Component {...pageProps} />
         </FeatureFlagLoader>
       </Provider>

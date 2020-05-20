@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import NextSeo from "next-seo";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import {
@@ -11,7 +10,6 @@ import {
 import NavigationBar from "../src/components/Layout/NavigationBar";
 import FooterBar from "../src/components/Layout/FooterBar";
 import MainPageContainer from "../src/components/MainPageContainer";
-import { DEFAULT_SEO } from "../src/config";
 
 const HomePage = props => {
   const router = useRouter();
@@ -31,7 +29,6 @@ const HomePage = props => {
 
   return (
     <>
-      <NextSeo config={DEFAULT_SEO} />
       <NavigationBar active="home" />
       <MainPageContainer />
       <FooterBar />

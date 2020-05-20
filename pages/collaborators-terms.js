@@ -1,8 +1,7 @@
-import NextSeo from "next-seo";
-import { merge } from "lodash/fp";
+import { NextSeo } from "next-seo";
 import NavigationBar from "../src/components/Layout/NavigationBar";
 import FooterBar from "../src/components/Layout/FooterBar";
-import { DEFAULT_SEO, URL } from "../src/config";
+import { URL } from "../src/config";
 import { CollaboratorsTerms } from "../src/components/Collaborate/CollaboratorsTerms";
 
 const PAGE_SEO = {
@@ -19,7 +18,7 @@ const PAGE_SEO = {
 
 const CollaboratorsTermsPage = () => (
   <>
-    <NextSeo config={merge(DEFAULT_SEO, PAGE_SEO)} />
+    <NextSeo {...PAGE_SEO} />
     <NavigationBar />
     <CollaboratorsTerms />
     <FooterBar />

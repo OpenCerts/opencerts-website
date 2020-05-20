@@ -1,11 +1,10 @@
 import React from "react";
-import NextSeo from "next-seo";
-import { merge } from "lodash/fp";
+import { NextSeo } from "next-seo";
 import { connect } from "react-redux";
 import NavigationBar from "../src/components/Layout/NavigationBar";
 import FooterBar from "../src/components/Layout/FooterBar";
 import TermsOfUse from "../src/components/TermsOfUse";
-import { URL, DEFAULT_SEO } from "../src/config";
+import { URL } from "../src/config";
 
 const PAGE_SEO = {
   title: "Terms of use",
@@ -21,7 +20,7 @@ const PAGE_SEO = {
 
 const PrivacyPage = () => (
   <>
-    <NextSeo config={merge(DEFAULT_SEO, PAGE_SEO)} />
+    <NextSeo {...PAGE_SEO} />
     <NavigationBar active="tou" />
     <TermsOfUse />
     <FooterBar />

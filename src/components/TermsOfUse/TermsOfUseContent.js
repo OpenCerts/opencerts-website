@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./termsOfUse.scss";
 
 const HeaderTermsOfUse = () => (
@@ -487,7 +488,10 @@ const Schedule = () => (
             whatsoever. GovTech is not obliged to provide any reasons for any
             rejection of your application to be a collaborator. The Collaborator
             Terms and Conditions are found{" "}
-            <a href="/collaborators-terms">here</a>.
+            <Link href="/collaborators-terms">
+              <a>here</a>
+            </Link>
+            .
           </li>
           <li>
             GovTech is <b>NOT</b> responsible for the fulfilment and quality of
