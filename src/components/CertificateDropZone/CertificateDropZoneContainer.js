@@ -19,9 +19,6 @@ const onFileDrop = (
 ) => {
   // eslint-disable-next-line no-undef
   const reader = new FileReader();
-  if (reader.error) {
-    handleFileError(reader.error);
-  }
   reader.onload = () => {
     try {
       const json = JSON.parse(reader.result);
@@ -65,7 +62,6 @@ class CertificateDropZoneContainer extends Component {
   render() {
     return (
       <Dropzone
-        id="certificate-dropzone"
         onDrop={acceptedFiles =>
           onFileDrop(
             acceptedFiles,
@@ -73,21 +69,28 @@ class CertificateDropZoneContainer extends Component {
             this.handleFileError
           )
         }
-        className="h-100"
       >
-        {props => (
-          <CertificateVerificationStatus
-            fileError={this.state.fileError}
-            handleCertificateChange={this.handleCertificateChange}
-            handleFileError={this.handleFileError}
-            verifying={this.props.verifying}
-            verificationStatus={this.props.verificationStatus}
-            retrieveCertificateByActionError={
-              this.props.retrieveCertificateByActionError
-            }
-            resetData={this.resetData.bind(this)}
-            hover={props.isDragAccept}
-          />
+        {({ getRootProps, getInputProps, isDragAccept }) => (
+          <div
+            {...getRootProps()}
+            className="h-100"
+            id="certificate-dropzone"
+            style={{ border: "2px solid red" }}
+          >
+            <input {...getInputProps()} />
+            <CertificateVerificationStatus
+              fileError={this.state.fileError}
+              handleCertificateChange={this.handleCertificateChange}
+              handleFileError={this.handleFileError}
+              verifying={this.props.verifying}
+              verificationStatus={this.props.verificationStatus}
+              retrieveCertificateByActionError={
+                this.props.retrieveCertificateByActionError
+              }
+              resetData={this.resetData.bind(this)}
+              hover={isDragAccept}
+            />
+          </div>
         )}
       </Dropzone>
     );
