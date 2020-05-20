@@ -8,14 +8,12 @@ import React, {
 import { FrameConnector } from "@govtechsg/decentralized-renderer-react-components";
 import { getData, obfuscateDocument, utils } from "@govtechsg/open-attestation";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { LEGACY_OPENCERTS_RENDERER } from "../../config";
 import styles from "./decentralisedRenderer.scss";
 import MultiTabs from "../MultiTabs";
-import { updateObfuscatedCertificate as updateObfuscatedCertificateAction } from "../../reducers/certificate";
 import { analyticsEvent } from "../Analytics";
 
-export const DecentralisedRenderer = ({
+const DecentralisedRenderer = ({
   rawDocument,
   updateObfuscatedCertificate,
   forwardedRef
@@ -111,18 +109,10 @@ export const DecentralisedRenderer = ({
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  updateObfuscatedCertificate: updatedDoc =>
-    dispatch(updateObfuscatedCertificateAction(updatedDoc))
-});
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(DecentralisedRenderer);
-
 DecentralisedRenderer.propTypes = {
   rawDocument: PropTypes.object,
   updateObfuscatedCertificate: PropTypes.func,
   forwardedRef: PropTypes.any
 };
+
+export default DecentralisedRenderer;

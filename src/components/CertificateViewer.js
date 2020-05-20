@@ -2,12 +2,14 @@ import PropTypes from "prop-types";
 import React from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { connect } from "react-redux";
 import CertificateVerifyBlock from "./CertificateVerifyBlock";
 import styles from "./certificateViewer.scss";
 import Modal from "./Modal";
 import ErrorBoundary from "./ErrorBoundary";
 import CertificateShareLinkForm from "./CertificateShareLink/CertificateShareLinkForm";
 import { FeatureFlagContainer } from "./FeatureFlag";
+import { updateObfuscatedCertificate as updateObfuscatedCertificateAction } from "../reducers/certificate";
 
 const CertificateSharingForm = dynamic(
   import("./CertificateSharing/CertificateSharingForm")
@@ -144,6 +146,7 @@ export const CertificateViewer = props => {
             </div>
           </div>
           <ForwardedRefDecentralisedRenderer
+            updateObfuscatedCertificate={props.updateObfuscatedCertificate}
             rawDocument={document}
             ref={childRef}
           />
@@ -170,6 +173,14 @@ export const CertificateViewer = props => {
     </ErrorBoundary>
   );
 };
+
+export const CertificateViewerContainer = connect(
+  null,
+  dispatch => ({
+    updateObfuscatedCertificate: updatedDoc =>
+      dispatch(updateObfuscatedCertificateAction(updatedDoc))
+  })
+)(CertificateViewer);
 
 CertificateViewer.propTypes = {
   document: PropTypes.object,

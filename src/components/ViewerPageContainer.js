@@ -18,7 +18,7 @@ import {
   getShareLinkState,
   updateObfuscatedCertificate
 } from "../reducers/certificate";
-import { CertificateViewer } from "./CertificateViewer";
+import { CertificateViewerContainer } from "./CertificateViewer";
 
 class Viewer extends Component {
   constructor(props) {
@@ -73,7 +73,7 @@ class Viewer extends Component {
   render() {
     if (!this.props.document) return null;
     return (
-      <CertificateViewer
+      <CertificateViewerContainer
         document={this.props.document}
         certificate={getData(this.props.document)}
         verifying={this.props.verifying}
