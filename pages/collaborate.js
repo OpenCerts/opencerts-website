@@ -13,8 +13,8 @@ const PAGE_SEO = {
     title: "OpenCerts - Collaborate",
     description:
       "If you are from an institution and would like to get started on OpenCerts, here are some companies that can help to issue your certificates.",
-    url: `${URL}/collaborate`
-  }
+    url: `${URL}/collaborate`,
+  },
 };
 
 const CollaboratePage = () => (

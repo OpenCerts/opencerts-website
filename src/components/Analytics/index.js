@@ -6,8 +6,7 @@ const { trace: traceDev } = getLogger("components:Analytics(Inactive):");
 export const validateEvent = ({ category, action, value }) => {
   if (!category) throw new Error("Category is required");
   if (!action) throw new Error("Action is required");
-  if (value && typeof value !== "number")
-    throw new Error("Value must be a number");
+  if (value && typeof value !== "number") throw new Error("Value must be a number");
 };
 
 export const stringifyEvent = ({ category, action, label, value }) =>

@@ -4,7 +4,7 @@ import { initialState } from "./certificate";
 
 export const types = {
   PRELOAD_TEMPLATE_CHUNK: "PRELOAD_TEMPLATE_CHUNK",
-  TEMPLATE_CHUNK_LOADED: "TEMPLATE_CHUNK_LOADED"
+  TEMPLATE_CHUNK_LOADED: "TEMPLATE_CHUNK_LOADED",
 };
 
 // Reducers
@@ -14,7 +14,7 @@ export default function reducer(state = initialState, action) {
     case types.PRELOAD_TEMPLATE_CHUNK:
       return {
         ...initialState,
-        loadingTemplate: action.payload
+        loadingTemplate: action.payload,
       };
     default:
       return state;

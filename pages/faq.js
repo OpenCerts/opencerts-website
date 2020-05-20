@@ -14,8 +14,8 @@ const PAGE_SEO = {
     title: "OpenCerts - Frequently Asked Questions",
     description:
       "Have some questions in mind? Here are a list of collated questions and answers that might answer your questions.",
-    url: `${URL}/faq`
-  }
+    url: `${URL}/faq`,
+  },
 };
 
 const FaqPage = () => (

@@ -7,7 +7,7 @@ import { VerifyingView } from "./Views/VerifyingView";
 import { UnverifiedView } from "./Views/UnverifiedView";
 import { RetrievalErrorView } from "./Views/RetrievalErrorView";
 
-const CertificateVerificationStatus = props => {
+const CertificateVerificationStatus = (props) => {
   const {
     resetData,
     verifying,
@@ -15,7 +15,7 @@ const CertificateVerificationStatus = props => {
     verificationStatus,
     hover,
     retrieveCertificateStatus,
-    retrieveCertificateByActionError
+    retrieveCertificateByActionError,
   } = props;
   if (hover) {
     return <DefaultView hover={true} accept={true} />;
@@ -35,12 +35,7 @@ const CertificateVerificationStatus = props => {
     );
   }
   if (verificationStatus && !isValid(verificationStatus)) {
-    return (
-      <UnverifiedView
-        resetData={() => resetData()}
-        verificationStatus={verificationStatus}
-      />
-    );
+    return <UnverifiedView resetData={() => resetData()} verificationStatus={verificationStatus} />;
   }
   return <DefaultView hover={false} accept={true} />;
 };
@@ -52,7 +47,7 @@ CertificateVerificationStatus.propTypes = {
   hover: PropTypes.bool,
   retrieveCertificateStatus: PropTypes.string,
   verificationStatus: PropTypes.array,
-  retrieveCertificateByActionError: PropTypes.string
+  retrieveCertificateByActionError: PropTypes.string,
 };
 
 export default CertificateVerificationStatus;

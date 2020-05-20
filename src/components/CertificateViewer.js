@@ -11,14 +11,11 @@ import CertificateShareLinkForm from "./CertificateShareLink/CertificateShareLin
 import { FeatureFlagContainer } from "./FeatureFlag";
 import { updateObfuscatedCertificate as updateObfuscatedCertificateAction } from "../reducers/certificate";
 
-const CertificateSharingForm = dynamic(
-  import("./CertificateSharing/CertificateSharingForm")
-);
+const CertificateSharingForm = dynamic(import("./CertificateSharing/CertificateSharingForm"));
 
-const DecentralisedRenderer = dynamic(
-  () => import("./DecentralisedTemplateRenderer/DecentralisedRenderer"),
-  { ssr: false }
-);
+const DecentralisedRenderer = dynamic(() => import("./DecentralisedTemplateRenderer/DecentralisedRenderer"), {
+  ssr: false,
+});
 
 // https://github.com/zeit/next.js/issues/4957#issuecomment-413841689
 // eslint-disable-next-line react/display-name
@@ -26,9 +23,7 @@ const ForwardedRefDecentralisedRenderer = React.forwardRef((props, ref) => (
   <DecentralisedRenderer {...props} forwardedRef={ref} />
 ));
 
-const renderVerifyBlock = props => (
-  <CertificateVerifyBlock verificationStatus={props.verificationStatus} />
-);
+const renderVerifyBlock = (props) => <CertificateVerifyBlock verificationStatus={props.verificationStatus} />;
 
 const renderHeaderBlock = (props, childRef) => {
   const renderedVerifyBlock = renderVerifyBlock(props);
@@ -51,10 +46,7 @@ const renderHeaderBlock = (props, childRef) => {
           <FeatureFlagContainer
             name="SHARE_LINK"
             render={() => (
-              <div
-                className="ml-2"
-                onClick={() => props.handleShareLinkToggle()}
-              >
+              <div className="ml-2" onClick={() => props.handleShareLinkToggle()}>
                 <div id="btn-link" className={styles["send-btn"]}>
                   <i className="fas fa-link" style={{ fontSize: "1.5rem" }} />
                 </div>
@@ -70,21 +62,10 @@ const renderHeaderBlock = (props, childRef) => {
             <a
               download={`${props.certificate.id}.opencert`}
               target="_black"
-              href={`data:text/plain;,${JSON.stringify(
-                props.document,
-                null,
-                2
-              )}`}
+              href={`data:text/plain;,${JSON.stringify(props.document, null, 2)}`}
             >
-              <button
-                id="btn-download"
-                className={styles["send-btn"]}
-                title="Download"
-              >
-                <i
-                  className="fas fa-file-download"
-                  style={{ fontSize: "1.5rem" }}
-                />
+              <button id="btn-download" className={styles["send-btn"]} title="Download">
+                <i className="fas fa-file-download" style={{ fontSize: "1.5rem" }} />
               </button>
             </a>
           </div>
@@ -94,14 +75,12 @@ const renderHeaderBlock = (props, childRef) => {
   );
 };
 
-export const CertificateViewer = props => {
+export const CertificateViewer = (props) => {
   const { document } = props;
   const childRef = React.useRef();
 
   const registryFragmentName = "OpencertsRegistryVerifier";
-  const registryFragment = props.verificationStatus.find(
-    status => status.name === registryFragmentName
-  );
+  const registryFragment = props.verificationStatus.find((status) => status.name === registryFragmentName);
   const renderedHeaderBlock = renderHeaderBlock(props, childRef);
   const isInRegistry = registryFragment && registryFragment.status === "VALID";
 
@@ -112,25 +91,16 @@ export const CertificateViewer = props => {
           {isInRegistry ? (
             <div
               id="status-banner-container"
-              className={`${styles["status-banner-container"]} ${
-                styles.valid
-              } exact-print`}
+              className={`${styles["status-banner-container"]} ${styles.valid} exact-print`}
             >
               <div className={`${styles["status-banner"]}`}>
-                Certificate issuer is in the SkillsFuture Singapore registry for
-                Opencerts
+                Certificate issuer is in the SkillsFuture Singapore registry for Opencerts
               </div>
             </div>
           ) : (
-            <div
-              id="status-banner-container"
-              className={`${styles["status-banner-container"]} ${
-                styles.invalid
-              }`}
-            >
+            <div id="status-banner-container" className={`${styles["status-banner-container"]} ${styles.invalid}`}>
               <div className={`${styles["status-banner"]}`}>
-                Certificate issuer is <b>not</b> in the SkillsFuture Singapore
-                registry for Opencerts
+                Certificate issuer is <b>not</b> in the SkillsFuture Singapore registry for Opencerts
                 <br />
                 <Link href="/faq#verifications-issuers-not-in-registry-meaning">
                   <a>
@@ -141,9 +111,7 @@ export const CertificateViewer = props => {
             </div>
           )}
           <div id={styles["top-header-ui"]}>
-            <div className={styles["header-container"]}>
-              {renderedHeaderBlock}
-            </div>
+            <div className={styles["header-container"]}>{renderedHeaderBlock}</div>
           </div>
           <ForwardedRefDecentralisedRenderer
             updateObfuscatedCertificate={props.updateObfuscatedCertificate}
@@ -157,10 +125,7 @@ export const CertificateViewer = props => {
               handleSharingToggle={props.handleSharingToggle}
             />
           </Modal>
-          <Modal
-            show={props.showShareLink}
-            toggle={props.handleShareLinkToggle}
-          >
+          <Modal show={props.showShareLink} toggle={props.handleShareLinkToggle}>
             <CertificateShareLinkForm
               shareLink={props.shareLink}
               copiedLink={props.copiedLink}
@@ -174,13 +139,9 @@ export const CertificateViewer = props => {
   );
 };
 
-export const CertificateViewerContainer = connect(
-  null,
-  dispatch => ({
-    updateObfuscatedCertificate: updatedDoc =>
-      dispatch(updateObfuscatedCertificateAction(updatedDoc))
-  })
-)(CertificateViewer);
+export const CertificateViewerContainer = connect(null, (dispatch) => ({
+  updateObfuscatedCertificate: (updatedDoc) => dispatch(updateObfuscatedCertificateAction(updatedDoc)),
+}))(CertificateViewer);
 
 CertificateViewer.propTypes = {
   document: PropTypes.object,
@@ -194,7 +155,7 @@ CertificateViewer.propTypes = {
   emailSendingState: PropTypes.string,
   handleSharingToggle: PropTypes.func,
   handleSendCertificate: PropTypes.func,
-  handleShareLinkToggle: PropTypes.func
+  handleShareLinkToggle: PropTypes.func,
 };
 
 renderVerifyBlock.propTypes = CertificateViewer.propTypes;

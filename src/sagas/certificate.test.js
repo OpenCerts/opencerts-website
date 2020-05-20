@@ -7,7 +7,7 @@ import {
   analyticsRevocationFail,
   getAnalyticsDetails,
   sendCertificate,
-  triggerAnalytics
+  triggerAnalytics,
 } from "./certificate";
 import { getCertificate } from "../reducers/certificate";
 import { MakeCertUtil } from "./testutils";
@@ -20,7 +20,7 @@ jest.mock("@govtechsg/open-attestation", () => {
   return {
     __esModule: true,
     ...originalModule,
-    verifySignature: jest.fn()
+    verifySignature: jest.fn(),
   };
 });
 function whenThereIsOneEthereumAddressIssuer() {
@@ -49,12 +49,12 @@ describe("sagas/certificate", () => {
         emailStub({
           certificate: testCert,
           email,
-          captcha
+          captcha,
         })
       );
       expect(saga.next(true).value).toEqual(
         put({
-          type: "SENDING_CERTIFICATE_SUCCESS"
+          type: "SENDING_CERTIFICATE_SUCCESS",
         })
       );
       expect(saga.next().done).toBe(true);
@@ -71,13 +71,13 @@ describe("sagas/certificate", () => {
         emailStub({
           certificate: testCert,
           email,
-          captcha
+          captcha,
         })
       );
       expect(saga.next(false).value).toEqual(
         put({
           type: "SENDING_CERTIFICATE_FAILURE",
-          payload: "Fail to send certificate"
+          payload: "Fail to send certificate",
         })
       );
       expect(saga.next().done).toBe(true);
@@ -95,13 +95,13 @@ describe("sagas/certificate", () => {
         emailStub({
           certificate: testCert,
           email,
-          captcha
+          captcha,
         })
       );
       expect(saga.throw(new Error(errorMsg)).value).toEqual(
         put({
           type: "SENDING_CERTIFICATE_FAILURE",
-          payload: errorMsg
+          payload: errorMsg,
         })
       );
       expect(saga.next().done).toBe(true);
@@ -124,7 +124,7 @@ describe("sagas/certificate", () => {
       expect(callGetAnalyticsDetails.value).toEqual(call(getAnalyticsDetails));
       analyticsGenerator.next({
         storeAddresses: "storeAdd1,storeAdd2",
-        id: "certificate-id"
+        id: "certificate-id",
       });
 
       expect(global.window.ga.args[0]).toEqual([
@@ -133,7 +133,7 @@ describe("sagas/certificate", () => {
         "CERTIFICATE_ERROR",
         "storeAdd1,storeAdd2",
         "certificate-id",
-        1337
+        1337,
       ]);
     });
 

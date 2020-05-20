@@ -2,7 +2,7 @@ export const states = {
   INITIAL: "INITIAL",
   PENDING: "PENDING",
   SUCCESS: "SUCCESS",
-  FAILURE: "FAILURE"
+  FAILURE: "FAILURE",
 };
 
 export const initialState = {
@@ -24,7 +24,7 @@ export const initialState = {
   shareLinkError: null,
 
   retrieveCertificateByActionState: states.INITIAL,
-  retrieveCertificateByActionStateError: null
+  retrieveCertificateByActionStateError: null,
 };
 
 // Actions
@@ -53,15 +53,12 @@ export const types = {
   GENERATE_SHARE_LINK_RESET: "GENERATE_SHARE_LINK_RESET",
 
   RETRIEVE_CERTIFICATE_BY_ACTION: "RETRIEVE_CERTIFICATE_BY_ACTION",
-  RETRIEVE_CERTIFICATE_BY_ACTION_PENDING:
-    "RETRIEVE_CERTIFICATE_BY_ACTION_PENDING",
-  RETRIEVE_CERTIFICATE_BY_ACTION_SUCCESS:
-    "RETRIEVE_CERTIFICATE_BY_ACTION_SUCCESS",
-  RETRIEVE_CERTIFICATE_BY_ACTION_FAILURE:
-    "RETRIEVE_CERTIFICATE_BY_ACTION_FAILURE",
+  RETRIEVE_CERTIFICATE_BY_ACTION_PENDING: "RETRIEVE_CERTIFICATE_BY_ACTION_PENDING",
+  RETRIEVE_CERTIFICATE_BY_ACTION_SUCCESS: "RETRIEVE_CERTIFICATE_BY_ACTION_SUCCESS",
+  RETRIEVE_CERTIFICATE_BY_ACTION_FAILURE: "RETRIEVE_CERTIFICATE_BY_ACTION_FAILURE",
 
   CERTIFICATE_OBFUSCATE_RESET: "CERTIFICATE_OBFUSCATE_RESET",
-  CERTIFICATE_OBFUSCATE_UPDATE: "CERTIFICATE_OBFUSCATE_UPDATE"
+  CERTIFICATE_OBFUSCATE_UPDATE: "CERTIFICATE_OBFUSCATE_UPDATE",
 };
 
 // Reducers
@@ -70,7 +67,7 @@ export default function reducer(state = initialState, action) {
     case types.RESET_CERTIFICATE:
     case types.NETWORK_RESET:
       return {
-        ...initialState
+        ...initialState,
       };
     case types.UPDATE_CERTIFICATE:
       return {
@@ -79,106 +76,106 @@ export default function reducer(state = initialState, action) {
         rawModified: action.payload,
         store: null,
         storeError: null,
-        storeLoading: true
+        storeLoading: true,
       };
     case types.LOADING_STORE_SUCCESS:
       return {
         ...state,
         store: action.payload,
         storeError: null,
-        storeLoading: false
+        storeLoading: false,
       };
     case types.LOADING_STORE_FAILURE:
       return {
         ...state,
         storeError: action.payload,
-        storeLoading: false
+        storeLoading: false,
       };
     case types.VERIFYING_CERTIFICATE:
       return {
         ...state,
         verificationPending: true,
-        verificationStatus: null
+        verificationStatus: null,
       };
     case types.VERIFYING_CERTIFICATE_COMPLETED:
       return {
         ...state,
         verificationPending: false,
-        verificationStatus: action.payload
+        verificationStatus: action.payload,
       };
     case types.VERIFYING_CERTIFICATE_ERRORED:
       return {
         ...state,
         verificationPending: false,
-        verificationError: action.payload
+        verificationError: action.payload,
       };
     case types.SENDING_CERTIFICATE:
       return {
         ...state,
         emailState: states.PENDING,
-        emailError: null
+        emailError: null,
       };
     case types.SENDING_CERTIFICATE_RESET:
       return {
         ...state,
         emailState: states.INITIAL,
-        emailError: null
+        emailError: null,
       };
     case types.SENDING_CERTIFICATE_SUCCESS:
       return {
         ...state,
         emailState: states.SUCCESS,
-        emailError: null
+        emailError: null,
       };
     case types.SENDING_CERTIFICATE_FAILURE:
       return {
         ...state,
         emailState: states.FAILURE,
-        emailError: action.payload
+        emailError: action.payload,
       };
     case types.GENERATE_SHARE_LINK_SUCCESS:
       return {
         ...state,
         shareLink: action.payload,
-        shareLinkState: states.SUCCESS
+        shareLinkState: states.SUCCESS,
       };
     case types.GENERATE_SHARE_LINK_FAILURE:
       return {
         ...state,
         shareLink: {},
-        shareLinkState: states.FAILURE
+        shareLinkState: states.FAILURE,
       };
     case types.GENERATE_SHARE_LINK_RESET:
       return {
         ...state,
         shareLink: {},
-        shareLinkState: states.INITIAL
+        shareLinkState: states.INITIAL,
       };
     case types.RETRIEVE_CERTIFICATE_BY_ACTION_PENDING:
       return {
         ...state,
-        retrieveCertificateByActionState: states.PENDING
+        retrieveCertificateByActionState: states.PENDING,
       };
     case types.RETRIEVE_CERTIFICATE_BY_ACTION_SUCCESS:
       return {
         ...state,
-        retrieveCertificateByActionState: states.SUCCESS
+        retrieveCertificateByActionState: states.SUCCESS,
       };
     case types.RETRIEVE_CERTIFICATE_BY_ACTION_FAILURE:
       return {
         ...state,
         retrieveCertificateByActionState: states.FAILURE,
-        retrieveCertificateByActionError: action.payload
+        retrieveCertificateByActionError: action.payload,
       };
     case types.CERTIFICATE_OBFUSCATE_RESET:
       return {
         ...initialState,
-        rawModified: state.raw
+        rawModified: state.raw,
       };
     case types.CERTIFICATE_OBFUSCATE_UPDATE:
       return {
         ...state,
-        rawModified: action.payload
+        rawModified: action.payload,
       };
     default:
       return state;
@@ -188,131 +185,110 @@ export default function reducer(state = initialState, action) {
 // Action Creators
 export function resetCertificateState() {
   return {
-    type: types.RESET_CERTIFICATE
+    type: types.RESET_CERTIFICATE,
   };
 }
 
 export function updateCertificate(payload) {
   return {
     type: types.UPDATE_CERTIFICATE,
-    payload
+    payload,
   };
 }
-export const verifyingCertificateCompleted = payload => ({
+export const verifyingCertificateCompleted = (payload) => ({
   type: types.VERIFYING_CERTIFICATE_COMPLETED,
-  payload
+  payload,
 });
 
-export const verifyingCertificateErrored = payload => ({
+export const verifyingCertificateErrored = (payload) => ({
   type: types.VERIFYING_CERTIFICATE_ERRORED,
-  payload
+  payload,
 });
 
 export function sendCertificate(payload) {
   return {
     type: types.SENDING_CERTIFICATE,
-    payload
+    payload,
   };
 }
 
 export function sendCertificateReset() {
   return {
-    type: types.SENDING_CERTIFICATE_RESET
+    type: types.SENDING_CERTIFICATE_RESET,
   };
 }
 
 export function generateShareLink() {
   return {
-    type: types.GENERATE_SHARE_LINK
+    type: types.GENERATE_SHARE_LINK,
   };
 }
 
 export function retrieveCertificateByAction(payload) {
   return {
     type: types.RETRIEVE_CERTIFICATE_BY_ACTION,
-    payload
+    payload,
   };
 }
 
 export function retrieveCertificateByActionFailure(payload) {
   return {
     type: types.RETRIEVE_CERTIFICATE_BY_ACTION_FAILURE,
-    payload
+    payload,
   };
 }
 
 export function updateObfuscatedCertificate(payload) {
   return {
     type: types.CERTIFICATE_OBFUSCATE_UPDATE,
-    payload
+    payload,
   };
 }
 
 // Selectors
 export function getIssuerIdentityStatus(store) {
-  const {
-    issuerIdentities,
-    certificateIssuerVerifying,
-    certificateIssuerError,
-    certificateIssuer
-  } = store.certificate;
+  const { issuerIdentities, certificateIssuerVerifying, certificateIssuerError, certificateIssuer } = store.certificate;
   return {
     identities: issuerIdentities,
     verified: certificateIssuer,
     verifying: certificateIssuerVerifying,
-    error: certificateIssuerError
+    error: certificateIssuerError,
   };
 }
 
 export function getHashStatus(store) {
-  const {
-    certificateHash,
-    certificateHashError,
-    certificateHashVerifying
-  } = store.certificate;
+  const { certificateHash, certificateHashError, certificateHashVerifying } = store.certificate;
   return {
     verified: certificateHash,
     verifying: certificateHashVerifying,
-    error: certificateHashError
+    error: certificateHashError,
   };
 }
 
 export function getStoreStatus(store) {
-  const {
-    certificateStore,
-    certificateStoreError,
-    certificateStoreVerifying
-  } = store.certificate;
+  const { certificateStore, certificateStoreError, certificateStoreVerifying } = store.certificate;
   return {
     verified: certificateStore,
     verifying: certificateStoreVerifying,
-    error: certificateStoreError
+    error: certificateStoreError,
   };
 }
 
 export function getIssuedStatus(store) {
-  const {
-    certificateIssued,
-    certificateIssuedError,
-    certificateIssuedVerifying
-  } = store.certificate;
+  const { certificateIssued, certificateIssuedError, certificateIssuedVerifying } = store.certificate;
   return {
     verified: certificateIssued,
     verifying: certificateIssuedVerifying,
-    error: certificateIssuedError
+    error: certificateIssuedError,
   };
 }
 
 export function getNotRevokedStatus(store) {
-  const {
-    certificateNotRevoked,
-    certificateNotRevokedError,
-    certificateNotRevokedVerifying
-  } = store.certificate;
+  const { certificateNotRevoked, certificateNotRevokedError, certificateNotRevokedVerifying } = store.certificate;
   return {
     verified: certificateNotRevoked,
     verifying: certificateNotRevokedVerifying,
-    error: certificateNotRevokedError
+    error: certificateNotRevokedError,
   };
 }
 
@@ -321,10 +297,7 @@ export function getCertificate(store) {
 }
 
 export function getVerifying(store) {
-  return (
-    store.certificate.verificationPending ||
-    store.certificate.retrieveCertificateByActionState === states.PENDING
-  );
+  return store.certificate.verificationPending || store.certificate.retrieveCertificateByActionState === states.PENDING;
 }
 
 export function getVerificationStatus(store) {

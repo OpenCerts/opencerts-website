@@ -11,9 +11,9 @@ describe("Certificate verify block getIdentityVerificationText", () => {
           data: [
             {
               name: "Govtech",
-              status: "VALID"
-            }
-          ]
+              status: "VALID",
+            },
+          ],
         },
         {
           name: "OpenAttestationDnsTxt",
@@ -22,14 +22,12 @@ describe("Certificate verify block getIdentityVerificationText", () => {
           data: [
             {
               status: "VALID",
-              location: "abc.com"
-            }
-          ]
-        }
+              location: "abc.com",
+            },
+          ],
+        },
       ];
-      expect(getIdentityVerificationText(fragments)).toStrictEqual(
-        "Certificate issued by GOVTECH"
-      );
+      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by GOVTECH");
     });
 
     test("should return appropriate display text when registry is verified but dns is unverified", () => {
@@ -41,9 +39,9 @@ describe("Certificate verify block getIdentityVerificationText", () => {
           data: [
             {
               name: "Demo",
-              status: "VALID"
-            }
-          ]
+              status: "VALID",
+            },
+          ],
         },
         {
           name: "OpenAttestationDnsTxt",
@@ -52,14 +50,12 @@ describe("Certificate verify block getIdentityVerificationText", () => {
           data: [
             {
               status: "INVALID",
-              location: "abc.com"
-            }
-          ]
-        }
+              location: "abc.com",
+            },
+          ],
+        },
       ];
-      expect(getIdentityVerificationText(fragments)).toStrictEqual(
-        "Certificate issued by DEMO"
-      );
+      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by DEMO");
     });
 
     test("should return appropriate display text when multiple registry is verified", () => {
@@ -71,13 +67,13 @@ describe("Certificate verify block getIdentityVerificationText", () => {
           data: [
             {
               name: "Govtech",
-              status: "VALID"
+              status: "VALID",
             },
             {
               name: "Demo",
-              status: "VALID"
-            }
-          ]
+              status: "VALID",
+            },
+          ],
         },
         {
           name: "OpenAttestationDnsTxt",
@@ -86,18 +82,16 @@ describe("Certificate verify block getIdentityVerificationText", () => {
           data: [
             {
               status: "VALID",
-              location: "abc.com"
+              location: "abc.com",
             },
             {
               status: "VALID",
-              location: "demo.com"
-            }
-          ]
-        }
+              location: "demo.com",
+            },
+          ],
+        },
       ];
-      expect(getIdentityVerificationText(fragments)).toStrictEqual(
-        "Certificate issued by GOVTECH"
-      );
+      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by GOVTECH");
     });
 
     test("should return appropriate display text when one of each registry and dns verified", () => {
@@ -109,13 +103,13 @@ describe("Certificate verify block getIdentityVerificationText", () => {
           data: [
             {
               name: "Govtech",
-              status: "INVALID"
+              status: "INVALID",
             },
             {
               name: "Demo",
-              status: "VALID"
-            }
-          ]
+              status: "VALID",
+            },
+          ],
         },
         {
           name: "OpenAttestationDnsTxt",
@@ -124,19 +118,17 @@ describe("Certificate verify block getIdentityVerificationText", () => {
           data: [
             {
               status: "VALID",
-              location: "abc.com"
+              location: "abc.com",
             },
             {
               status: "INVALID",
-              location: "demo.com"
-            }
-          ]
-        }
+              location: "demo.com",
+            },
+          ],
+        },
       ];
 
-      expect(getIdentityVerificationText(fragments)).toStrictEqual(
-        "Certificate issued by DEMO"
-      );
+      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by DEMO");
     });
 
     test("should return Certificate issued by Unknown when registry and dns don't resolve any value", () => {
@@ -148,9 +140,9 @@ describe("Certificate verify block getIdentityVerificationText", () => {
           data: [
             {
               name: "Govtech",
-              status: "INVALID"
-            }
-          ]
+              status: "INVALID",
+            },
+          ],
         },
         {
           name: "OpenAttestationDnsTxt",
@@ -159,15 +151,13 @@ describe("Certificate verify block getIdentityVerificationText", () => {
           data: [
             {
               status: "INVALID",
-              location: "abc.com"
-            }
-          ]
-        }
+              location: "abc.com",
+            },
+          ],
+        },
       ];
 
-      expect(getIdentityVerificationText(fragments)).toStrictEqual(
-        "Certificate issued by Unknown"
-      );
+      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by Unknown");
     });
   });
 
@@ -181,9 +171,9 @@ describe("Certificate verify block getIdentityVerificationText", () => {
           data: [
             {
               name: "Govtech",
-              status: "INVALID"
-            }
-          ]
+              status: "INVALID",
+            },
+          ],
         },
         {
           name: "OpenAttestationDnsTxt",
@@ -192,14 +182,12 @@ describe("Certificate verify block getIdentityVerificationText", () => {
           data: [
             {
               status: "VALID",
-              location: "abc.com"
-            }
-          ]
-        }
+              location: "abc.com",
+            },
+          ],
+        },
       ];
-      expect(getIdentityVerificationText(fragments)).toStrictEqual(
-        "Certificate issued by ABC.COM"
-      );
+      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by ABC.COM");
     });
 
     test("should return appropriate display text when multiple dns is verified", () => {
@@ -211,13 +199,13 @@ describe("Certificate verify block getIdentityVerificationText", () => {
           data: [
             {
               name: "Govtech",
-              status: "INVALID"
+              status: "INVALID",
             },
             {
               name: "Demo",
-              status: "INVALID"
-            }
-          ]
+              status: "INVALID",
+            },
+          ],
         },
         {
           name: "OpenAttestationDnsTxt",
@@ -226,18 +214,16 @@ describe("Certificate verify block getIdentityVerificationText", () => {
           data: [
             {
               status: "VALID",
-              location: "xyz.com"
+              location: "xyz.com",
             },
             {
               status: "VALID",
-              location: "demo.com"
-            }
-          ]
-        }
+              location: "demo.com",
+            },
+          ],
+        },
       ];
-      expect(getIdentityVerificationText(fragments)).toStrictEqual(
-        "Certificate issued by DEMO.COM"
-      );
+      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by DEMO.COM");
     });
   });
 });

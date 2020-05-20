@@ -4,12 +4,7 @@ import React from "react";
 const aboutImages = {
   valid: () => (
     <i aria-hidden="true">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="73.4"
-        height="83.2"
-        viewBox="0 0 73.4 83.2"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" width="73.4" height="83.2" viewBox="0 0 73.4 83.2">
         <title>View</title>
         <path
           d="M69.29,65.81a9.25,9.25,0,0,0,4.11-7.13V23.47l-.06-.22s-.52-1.18-.69-1.55l-.08-.15c-.08-.17-.15-.31-.22-.44-.16-.28-.33-.56-.51-.83l-.08-.11c-.08-.12-.16-.24-.25-.35l-.14-.18-.14-.17c-.09-.1-.17-.2-.26-.29L70.79,19a3.19,3.19,0,0,0-.26-.26l-.08-.08-.31-.26-.08-.07c-.11-.09-.22-.18-.34-.26L69.65,18c-.14-.09-.25-.17-.36-.23L40.08,1a9.23,9.23,0,0,0-8.23,0L4.11,17.42A9.25,9.25,0,0,0,0,24.55V58.69c0,2.52,1.78,5,3.74,6.41.14.1.26.17.36.23L33.32,82.27a9.3,9.3,0,0,0,8.23,0Z"
@@ -49,12 +44,7 @@ const aboutImages = {
   ),
   genuine: () => (
     <i aria-hidden="true">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="73.41"
-        height="83.2"
-        viewBox="0 0 73.41 83.2"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" width="73.41" height="83.2" viewBox="0 0 73.41 83.2">
         <title>Check</title>
         <g>
           <path
@@ -95,32 +85,13 @@ const aboutImages = {
   ),
   institution: () => (
     <i aria-hidden="true">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="73.4"
-        height="83.15"
-        viewBox="0 0 73.4 83.15"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" width="73.4" height="83.15" viewBox="0 0 73.4 83.15">
         <defs>
-          <linearGradient
-            id="a"
-            x1="36.7"
-            y1="83.18"
-            x2="36.7"
-            y2="0.03"
-            gradientUnits="userSpaceOnUse"
-          >
+          <linearGradient id="a" x1="36.7" y1="83.18" x2="36.7" y2="0.03" gradientUnits="userSpaceOnUse">
             <stop offset="0" stopColor="#faa94e" />
             <stop offset="1" stopColor="#f47d4d" />
           </linearGradient>
-          <linearGradient
-            id="b"
-            x1="39.02"
-            y1="59"
-            x2="39.02"
-            y2="28.81"
-            gradientUnits="userSpaceOnUse"
-          >
+          <linearGradient id="b" x1="39.02" y1="59" x2="39.02" y2="28.81" gradientUnits="userSpaceOnUse">
             <stop offset="0" stopColor="#00a8d4" />
             <stop offset="1" stopColor="#007aa9" />
           </linearGradient>
@@ -166,12 +137,7 @@ const aboutImages = {
   ),
   one: () => (
     <i aria-hidden="true">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="89"
-        height="98.6"
-        viewBox="0 0 89 98.6"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" width="89" height="98.6" viewBox="0 0 89 98.6">
         <defs>
           <linearGradient
             id="onea"
@@ -244,12 +210,7 @@ const aboutImages = {
   ),
   two: () => (
     <i aria-hidden="true">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="129"
-        height="137"
-        viewBox="0 0 129 137"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" width="129" height="137" viewBox="0 0 129 137">
         <defs>
           <linearGradient
             id="twoa"
@@ -292,10 +253,7 @@ const aboutImages = {
               strokeWidth="3.2"
               stroke="url(#twoa)"
             />
-            <path
-              d="M51.67,48.33H85.38v3H51.67Zm0,12.81H85.38v3H51.67Z"
-              fill="url(#twob)"
-            />
+            <path d="M51.67,48.33H85.38v3H51.67Zm0,12.81H85.38v3H51.67Z" fill="url(#twob)" />
           </g>
           {/* <path d="M87.27,121.78H44.72a3.34,3.34,0,0,1-3.06-3.43V40.28a3.34,3.34,0,0,1,3.06-3.43h55.59a3.34,3.34,0,0,1,3,3.43v66.43" opacity="0.15" fill="url(#twoc)"/> */}
           <path
@@ -320,11 +278,7 @@ const aboutImages = {
           />
         </g>
         <g>
-          <text
-            transform="translate(60.89 21.81)"
-            fontSize="12.8"
-            fill="#324353"
-          >
+          <text transform="translate(60.89 21.81)" fontSize="12.8" fill="#324353">
             blockchain
           </text>
         </g>
@@ -333,12 +287,7 @@ const aboutImages = {
   ),
   three: () => (
     <i aria-hidden="true">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="246.6"
-        height="91.6"
-        viewBox="0 0 246.6 91.6"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" width="246.6" height="91.6" viewBox="0 0 246.6 91.6">
         <defs>
           <linearGradient
             id="threea"
@@ -655,12 +604,7 @@ const aboutImages = {
   ),
   four: () => (
     <i aria-hidden="true">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="89.6"
-        height="109.6"
-        viewBox="0 0 89.6 109.6"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" width="89.6" height="109.6" viewBox="0 0 89.6 109.6">
         <title>Validated</title>
         <g>
           <path
@@ -702,12 +646,7 @@ const aboutImages = {
   ),
   onetwo: () => (
     <i>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="224.84"
-        height="115.35"
-        viewBox="0 0 224.84 115.35"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" width="224.84" height="115.35" viewBox="0 0 224.84 115.35">
         <defs>
           <linearGradient
             id="onetwoa"
@@ -861,44 +800,15 @@ const aboutImages = {
         <g>
           <line x1="18.87" y1="82.44" x2="187.1" y2="82.39" fill="#fff" />
           <g>
-            <line
-              x1="18.87"
-              y1="82.44"
-              x2="20.87"
-              y2="82.44"
-              fill="none"
-              stroke="#324353"
-            />
-            <line
-              x1="24.87"
-              y1="82.44"
-              x2="183.1"
-              y2="82.4"
-              fill="none"
-              stroke="#324353"
-              strokeDasharray="4.01 4.01"
-            />
-            <line
-              x1="185.1"
-              y1="82.4"
-              x2="187.1"
-              y2="82.39"
-              fill="none"
-              stroke="#324353"
-            />
+            <line x1="18.87" y1="82.44" x2="20.87" y2="82.44" fill="none" stroke="#324353" />
+            <line x1="24.87" y1="82.44" x2="183.1" y2="82.4" fill="none" stroke="#324353" strokeDasharray="4.01 4.01" />
+            <line x1="185.1" y1="82.4" x2="187.1" y2="82.39" fill="none" stroke="#324353" />
           </g>
         </g>
         <g>
           <line x1="75.18" y1="29.81" x2="144.33" y2="29.81" fill="#fff" />
           <g>
-            <line
-              x1="75.18"
-              y1="29.81"
-              x2="77.18"
-              y2="29.81"
-              fill="none"
-              stroke="#324353"
-            />
+            <line x1="75.18" y1="29.81" x2="77.18" y2="29.81" fill="none" stroke="#324353" />
             <line
               x1="81.02"
               y1="29.81"
@@ -908,19 +818,12 @@ const aboutImages = {
               stroke="#324353"
               strokeDasharray="3.83 3.83"
             />
-            <line
-              x1="142.33"
-              y1="29.81"
-              x2="144.33"
-              y2="29.81"
-              fill="none"
-              stroke="#324353"
-            />
+            <line x1="142.33" y1="29.81" x2="144.33" y2="29.81" fill="none" stroke="#324353" />
           </g>
         </g>
       </svg>
     </i>
-  )
+  ),
 };
 
 export default aboutImages;

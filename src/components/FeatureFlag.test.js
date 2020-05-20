@@ -6,8 +6,8 @@ describe("FeatureFlag", () => {
   const state = {
     featureToggle: {
       SHARE_LINK: true,
-      OTHER: false
-    }
+      OTHER: false,
+    },
   };
   test("should render component when SHARE_LINK feature flag is set to true", () => {
     const wrapper = mount(

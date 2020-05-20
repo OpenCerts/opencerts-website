@@ -10,9 +10,7 @@ const MultiTabs = ({ resetData, templates, onSelectTemplate }) => {
   const [selectedTemplate, setSelectedTemplate] = useState(0);
   return (
     <div id={styles["header-ui"]}>
-      <div
-        className={`${styles["header-container"]} d-none d-lg-block d-xl-block`}
-      >
+      <div className={`${styles["header-container"]} d-none d-lg-block d-xl-block`}>
         <div id="template-tabs-list" className="nav nav-tabs">
           {templates && templates.length > 0
             ? templates.map((t, idx) => (
@@ -35,11 +33,7 @@ const MultiTabs = ({ resetData, templates, onSelectTemplate }) => {
               ))
             : null}
           <Link href="/">
-            <a
-              id="btn-view-another"
-              onClick={() => resetData()}
-              className={styles["view-another"]}
-            >
+            <a id="btn-view-another" onClick={() => resetData()} className={styles["view-another"]}>
               View another
             </a>
           </Link>
@@ -49,7 +43,7 @@ const MultiTabs = ({ resetData, templates, onSelectTemplate }) => {
         <Drawer
           tabs={templates}
           activeIdx={selectedTemplate}
-          toggle={idx => {
+          toggle={(idx) => {
             setSelectedTemplate(idx);
             onSelectTemplate(idx);
           }}
@@ -59,19 +53,16 @@ const MultiTabs = ({ resetData, templates, onSelectTemplate }) => {
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  resetData: () => dispatch(resetCertificateState())
+const mapDispatchToProps = (dispatch) => ({
+  resetData: () => dispatch(resetCertificateState()),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(MultiTabs);
+export default connect(null, mapDispatchToProps)(MultiTabs);
 
 MultiTabs.propTypes = {
   resetData: PropTypes.func,
   document: PropTypes.object,
   templates: PropTypes.array,
   onSelectTemplate: PropTypes.func,
-  activeTab: PropTypes.number
+  activeTab: PropTypes.number,
 };

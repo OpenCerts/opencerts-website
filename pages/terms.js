@@ -14,8 +14,8 @@ const PAGE_SEO = {
     title: "OpenCerts - Terms of use",
     description:
       'These Terms of Use govern your access to and use of our services, including the application (whether as software or as a website or otherwise), its contents, push notifications and all other accompanying materials as identified in the Schedule below (collectively, the "Service").',
-    url: `${URL}/tou`
-  }
+    url: `${URL}/tou`,
+  },
 };
 
 const PrivacyPage = () => (

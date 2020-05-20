@@ -11,21 +11,11 @@ export const DefaultView = ({ hover, accept }) => (
   >
     <div className={css["image-container"]}>
       <i>
-        <img
-          alt=".opencert Dropzone"
-          src="/static/images/dropzone/dropzone_illustration.svg"
-        />
+        <img alt=".opencert Dropzone" src="/static/images/dropzone/dropzone_illustration.svg" />
       </i>
     </div>
-    {accept ? null : (
-      <div>
-        File cannot be read. Please check that you have a valid .opencert file
-      </div>
-    )}
-    <div
-      className="text-brand-dark"
-      style={{ fontSize: "1.375rem", fontWeight: 500 }}
-    >
+    {accept ? null : <div>File cannot be read. Please check that you have a valid .opencert file</div>}
+    <div className="text-brand-dark" style={{ fontSize: "1.375rem", fontWeight: 500 }}>
       Drag and drop your opencert file
     </div>
     <div className="text-muted">to view its contents</div>
@@ -51,5 +41,5 @@ export const DefaultView = ({ hover, accept }) => (
 
 DefaultView.propTypes = {
   hover: PropTypes.bool,
-  accept: PropTypes.bool
+  accept: PropTypes.bool,
 };

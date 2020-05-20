@@ -10,13 +10,13 @@ describe("DetailedCertificateVerifyBlock", () => {
           {
             name: "OpenAttestationHash",
             status: "INVALID",
-            type: "DOCUMENT_INTEGRITY"
+            type: "DOCUMENT_INTEGRITY",
           },
           {
             name: "OpenAttestationEthereumDocumentStoreRevoked",
             status: "VALID",
-            type: "DOCUMENT_STATUS"
-          }
+            type: "DOCUMENT_STATUS",
+          },
         ]}
       />
     );
@@ -32,13 +32,13 @@ describe("DetailedCertificateVerifyBlock", () => {
           {
             name: "OpenAttestationHash",
             status: "VALID",
-            type: "DOCUMENT_INTEGRITY"
+            type: "DOCUMENT_INTEGRITY",
           },
           {
             name: "OpenAttestationEthereumDocumentStoreRevoked",
             status: "INVALID",
-            type: "DOCUMENT_STATUS"
-          }
+            type: "DOCUMENT_STATUS",
+          },
         ]}
       />
     );
@@ -54,13 +54,13 @@ describe("DetailedCertificateVerifyBlock", () => {
           {
             name: "OpenAttestationHash",
             status: "VALID",
-            type: "DOCUMENT_INTEGRITY"
+            type: "DOCUMENT_INTEGRITY",
           },
           {
             name: "OpenAttestationEthereumDocumentStoreRevoked",
             status: "VALID",
-            type: "DOCUMENT_STATUS"
-          }
+            type: "DOCUMENT_STATUS",
+          },
         ]}
       />
     );

@@ -10,16 +10,12 @@ import {
   getCertificate,
   types,
   verifyingCertificateErrored,
-  verifyingCertificateCompleted
+  verifyingCertificateCompleted,
 } from "../reducers/certificate";
 import sendEmail from "../services/email";
 import { generateLink } from "../services/link";
 import { analyticsEvent } from "../components/Analytics";
-import {
-  certificateNotIssued,
-  getAllButRevokeFragment,
-  getRevokeFragment
-} from "../services/fragment";
+import { certificateNotIssued, getAllButRevokeFragment, getRevokeFragment } from "../services/fragment";
 import { NETWORK_NAME } from "../config";
 
 const { trace, error } = getLogger("saga:certificate");
@@ -29,7 +25,7 @@ const ANALYTICS_VERIFICATION_ERROR_CODE = {
   CERTIFICATE_HASH: 1,
   UNISSUED_CERTIFICATE: 2,
   REVOKED_CERTIFICATE: 3,
-  CERTIFICATE_STORE: 4
+  CERTIFICATE_STORE: 4,
 };
 export function* getAnalyticsDetails() {
   try {
@@ -39,10 +35,8 @@ export function* getAnalyticsDetails() {
     const storeAddresses = utils.getIssuerAddress(rawCertificate);
     const id = get(certificate, "id");
     return {
-      storeAddresses: Array.isArray(storeAddresses)
-        ? storeAddresses.join(",")
-        : storeAddresses,
-      id
+      storeAddresses: Array.isArray(storeAddresses) ? storeAddresses.join(",") : storeAddresses,
+      id,
     };
   } catch (e) {
     error(e.message);
@@ -57,58 +51,43 @@ export function* triggerAnalytics(errorCode) {
       category: "CERTIFICATE_ERROR",
       action: storeAddresses,
       label: id,
-      value: errorCode
+      value: errorCode,
     });
   }
 }
 
 // to run if any of the issuer is not valid
 export function* analyticsIssuerFail() {
-  yield call(
-    triggerAnalytics,
-    ANALYTICS_VERIFICATION_ERROR_CODE.ISSUER_IDENTITY
-  );
+  yield call(triggerAnalytics, ANALYTICS_VERIFICATION_ERROR_CODE.ISSUER_IDENTITY);
 }
 
 // to run if certificate has been tampered
 export function* analyticsHashFail() {
-  yield call(
-    triggerAnalytics,
-    ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_HASH
-  );
+  yield call(triggerAnalytics, ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_HASH);
 }
 
 // to run if certificate has not been issued
 export function* analyticsIssuedFail() {
-  yield call(
-    triggerAnalytics,
-    ANALYTICS_VERIFICATION_ERROR_CODE.UNISSUED_CERTIFICATE
-  );
+  yield call(triggerAnalytics, ANALYTICS_VERIFICATION_ERROR_CODE.UNISSUED_CERTIFICATE);
 }
 
 // to run if certificate has been revoked
 export function* analyticsRevocationFail() {
-  yield call(
-    triggerAnalytics,
-    ANALYTICS_VERIFICATION_ERROR_CODE.REVOKED_CERTIFICATE
-  );
+  yield call(triggerAnalytics, ANALYTICS_VERIFICATION_ERROR_CODE.REVOKED_CERTIFICATE);
 }
 
 // to run if store is not valid
 export function* analyticsStoreFail() {
-  yield call(
-    triggerAnalytics,
-    ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_STORE
-  );
+  yield call(triggerAnalytics, ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_STORE);
 }
 
 export function* verifyCertificate({ payload: certificate }) {
   try {
     yield put({
-      type: types.VERIFYING_CERTIFICATE
+      type: types.VERIFYING_CERTIFICATE,
     });
     const fragments = yield call(verify, certificate, {
-      network: NETWORK_NAME
+      network: NETWORK_NAME,
     });
     trace(`Verification Status: ${JSON.stringify(fragments)}`);
 
@@ -122,16 +101,10 @@ export function* verifyCertificate({ payload: certificate }) {
       if (!isValid(fragments, ["DOCUMENT_INTEGRITY"])) {
         yield call(analyticsHashFail);
       }
-      if (
-        !isValid(fragmentsWithoutRevoke, ["DOCUMENT_STATUS"]) &&
-        certificateNotIssued(fragments)
-      ) {
+      if (!isValid(fragmentsWithoutRevoke, ["DOCUMENT_STATUS"]) && certificateNotIssued(fragments)) {
         yield call(analyticsIssuedFail);
       }
-      if (
-        !isValid(fragments, ["DOCUMENT_STATUS"]) &&
-        !certificateNotIssued(fragments)
-      ) {
+      if (!isValid(fragments, ["DOCUMENT_STATUS"]) && !certificateNotIssued(fragments)) {
         yield call(analyticsStoreFail);
       }
       if (!isValid(revokeFragment, ["DOCUMENT_STATUS"])) {
@@ -153,7 +126,7 @@ export function* sendCertificate({ payload }) {
     const success = yield sendEmail({
       certificate,
       email,
-      captcha
+      captcha,
     });
 
     if (!success) {
@@ -161,12 +134,12 @@ export function* sendCertificate({ payload }) {
     }
 
     yield put({
-      type: types.SENDING_CERTIFICATE_SUCCESS
+      type: types.SENDING_CERTIFICATE_SUCCESS,
     });
   } catch (e) {
     yield put({
       type: types.SENDING_CERTIFICATE_FAILURE,
-      payload: e.message
+      payload: e.message,
     });
   }
 }
@@ -174,7 +147,7 @@ export function* sendCertificate({ payload }) {
 export function* generateShareLink() {
   try {
     yield put({
-      type: types.GENERATE_SHARE_LINK_RESET
+      type: types.GENERATE_SHARE_LINK_RESET,
     });
     const certificate = yield select(getCertificate);
     const success = yield generateLink(certificate);
@@ -185,12 +158,12 @@ export function* generateShareLink() {
 
     yield put({
       type: types.GENERATE_SHARE_LINK_SUCCESS,
-      payload: success
+      payload: success,
     });
   } catch (e) {
     yield put({
       type: types.GENERATE_SHARE_LINK_FAILURE,
-      payload: e.message
+      payload: e.message,
     });
   }
 }
@@ -198,11 +171,11 @@ export function* generateShareLink() {
 export function* retrieveCertificateByAction({ payload: { uri, key } }) {
   try {
     yield put({
-      type: types.RETRIEVE_CERTIFICATE_BY_ACTION_PENDING
+      type: types.RETRIEVE_CERTIFICATE_BY_ACTION_PENDING,
     });
 
     // if a key has been provided, let's assume
-    let certificate = yield window.fetch(uri).then(response => {
+    let certificate = yield window.fetch(uri).then((response) => {
       if (response.status >= 400 && response.status < 600) {
         throw new Error(`Unable to load the certificate from ${uri}`);
       }
@@ -221,28 +194,24 @@ export function* retrieveCertificateByAction({ payload: { uri, key } }) {
           cipherText: certificate.cipherText,
           iv: certificate.iv,
           key,
-          type: certificate.type
+          type: certificate.type,
         })
       );
     } else if (key || certificate.type) {
-      throw new Error(
-        `Unable to decrypt certificate with key=${key} and type=${
-          certificate.type
-        }`
-      );
+      throw new Error(`Unable to decrypt certificate with key=${key} and type=${certificate.type}`);
     }
 
     yield put({
       type: types.UPDATE_CERTIFICATE,
-      payload: certificate
+      payload: certificate,
     });
     yield put({
-      type: types.RETRIEVE_CERTIFICATE_BY_ACTION_SUCCESS
+      type: types.RETRIEVE_CERTIFICATE_BY_ACTION_SUCCESS,
     });
   } catch (e) {
     yield put({
       type: types.RETRIEVE_CERTIFICATE_BY_ACTION_FAILURE,
-      payload: e.message
+      payload: e.message,
     });
   }
 }
@@ -251,5 +220,5 @@ export default [
   takeEvery(types.RETRIEVE_CERTIFICATE_BY_ACTION, retrieveCertificateByAction),
   takeEvery(types.UPDATE_CERTIFICATE, verifyCertificate),
   takeEvery(types.SENDING_CERTIFICATE, sendCertificate),
-  takeEvery(types.GENERATE_SHARE_LINK, generateShareLink)
+  takeEvery(types.GENERATE_SHARE_LINK, generateShareLink),
 ];

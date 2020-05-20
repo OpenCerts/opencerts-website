@@ -5,13 +5,13 @@ import { useRouter } from "next/router";
 import {
   resetCertificateState,
   retrieveCertificateByAction,
-  retrieveCertificateByActionFailure
+  retrieveCertificateByActionFailure,
 } from "../src/reducers/certificate";
 import NavigationBar from "../src/components/Layout/NavigationBar";
 import FooterBar from "../src/components/Layout/FooterBar";
 import MainPageContainer from "../src/components/MainPageContainer";
 
-const HomePage = props => {
+const HomePage = (props) => {
   const router = useRouter();
   useEffect(() => {
     if (router.query.q) {
@@ -20,9 +20,7 @@ const HomePage = props => {
       if (action.type === "DOCUMENT") {
         props.retrieveCertificateByAction(action.payload);
       } else {
-        props.retrieveCertificateByActionFailure(
-          `The type ${action.type} provided from the action is not supported`
-        );
+        props.retrieveCertificateByActionFailure(`The type ${action.type} provided from the action is not supported`);
       }
     }
   }, [props, router]);
@@ -36,21 +34,16 @@ const HomePage = props => {
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  retrieveCertificateByAction: payload =>
-    dispatch(retrieveCertificateByAction(payload)),
-  retrieveCertificateByActionFailure: payload =>
-    dispatch(retrieveCertificateByActionFailure(payload)),
-  resetCertificateState: () => dispatch(resetCertificateState())
+const mapDispatchToProps = (dispatch) => ({
+  retrieveCertificateByAction: (payload) => dispatch(retrieveCertificateByAction(payload)),
+  retrieveCertificateByActionFailure: (payload) => dispatch(retrieveCertificateByActionFailure(payload)),
+  resetCertificateState: () => dispatch(resetCertificateState()),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(HomePage);
+export default connect(null, mapDispatchToProps)(HomePage);
 
 HomePage.propTypes = {
   retrieveCertificateByAction: PropTypes.func,
   resetCertificateState: PropTypes.func,
-  retrieveCertificateByActionFailure: PropTypes.func
+  retrieveCertificateByActionFailure: PropTypes.func,
 };

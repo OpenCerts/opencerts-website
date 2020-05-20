@@ -14,10 +14,10 @@ export const FeatureFlag = ({ name, render, fallback, state }) => {
   return null;
 };
 
-export const FeatureFlagContainer = connect(state => ({ state }))(FeatureFlag);
+export const FeatureFlagContainer = connect((state) => ({ state }))(FeatureFlag);
 
 FeatureFlag.propTypes = {
   name: PropTypes.string,
   render: PropTypes.func,
-  fallback: PropTypes.func
+  fallback: PropTypes.func,
 };

@@ -5,5 +5,5 @@ import featureToggle from "./featureToggle";
 
 export default combineReducers({
   certificate,
-  featureToggle
+  featureToggle,
 });

@@ -6,14 +6,12 @@ import { CollaboratorsTerms } from "../src/components/Collaborate/CollaboratorsT
 
 const PAGE_SEO = {
   title: "Terms of use for collaborators",
-  description:
-    "These Terms of Use govern your way of collaborating on opencerts",
+  description: "These Terms of Use govern your way of collaborating on opencerts",
   openGraph: {
     title: "OpenCerts - Collaborators terms of use",
-    description:
-      "These Terms of Use govern your way of collaborating on opencerts",
-    url: `${URL}/collaborators-terms`
-  }
+    description: "These Terms of Use govern your way of collaborating on opencerts",
+    url: `${URL}/collaborators-terms`,
+  },
 };
 
 const CollaboratorsTermsPage = () => (

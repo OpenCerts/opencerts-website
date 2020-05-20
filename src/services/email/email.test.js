@@ -17,13 +17,13 @@ describe("sagas/certificate", () => {
         method: "POST",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           data: certificate,
           to: email,
-          captcha
-        })
+          captcha,
+        }),
       })
     ).toBe(true);
     fetchStub.restore();
