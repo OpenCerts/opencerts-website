@@ -23,19 +23,6 @@ jest.mock("@govtechsg/open-attestation", () => {
     verifySignature: jest.fn()
   };
 });
-jest.mock("@govtechsg/dnsprove", () => {
-  const originalModule = jest.requireActual("@govtechsg/dnsprove");
-
-  return {
-    __esModule: true,
-    ...originalModule,
-    getDocumentStoreRecords: jest.fn().mockReturnValue([
-      {
-        addr: "0x0c9d5E6C766030cc6f0f49951D275Ad0701F81E2"
-      }
-    ])
-  };
-});
 function whenThereIsOneEthereumAddressIssuer() {
   const ethereumAddresses = ["0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4F"];
   const testCert = new MakeCertUtil().addIssuer(ethereumAddresses[0]).finish();
