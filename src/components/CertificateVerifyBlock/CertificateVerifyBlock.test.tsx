@@ -1,9 +1,10 @@
+import { VerificationFragment } from "@govtechsg/oa-verify";
 import { getIdentityVerificationText } from "./CertificateVerifyBlock";
 
-describe("Certificate verify block getIdentityVerificationText", () => {
-  describe("When registry is verified", () => {
-    test("should return appropriate display text when singular registry is verified", () => {
-      const fragments = [
+describe("certificate verify block getIdentityVerificationText", () => {
+  describe("wWhen registry is verified", () => {
+    it("should return appropriate display text when singular registry is verified", () => {
+      const fragments: VerificationFragment[] = [
         {
           name: "OpencertsRegistryVerifier",
           type: "ISSUER_IDENTITY",
@@ -30,8 +31,8 @@ describe("Certificate verify block getIdentityVerificationText", () => {
       expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by GOVTECH");
     });
 
-    test("should return appropriate display text when registry is verified but dns is unverified", () => {
-      const fragments = [
+    it("should return appropriate display text when registry is verified but dns is unverified", () => {
+      const fragments: VerificationFragment[] = [
         {
           name: "OpencertsRegistryVerifier",
           type: "ISSUER_IDENTITY",
@@ -58,8 +59,8 @@ describe("Certificate verify block getIdentityVerificationText", () => {
       expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by DEMO");
     });
 
-    test("should return appropriate display text when multiple registry is verified", () => {
-      const fragments = [
+    it("should return appropriate display text when multiple registry is verified", () => {
+      const fragments: VerificationFragment[] = [
         {
           name: "OpencertsRegistryVerifier",
           type: "ISSUER_IDENTITY",
@@ -94,8 +95,8 @@ describe("Certificate verify block getIdentityVerificationText", () => {
       expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by GOVTECH");
     });
 
-    test("should return appropriate display text when one of each registry and dns verified", () => {
-      const fragments = [
+    it("should return appropriate display text when one of each registry and dns verified", () => {
+      const fragments: VerificationFragment[] = [
         {
           name: "OpencertsRegistryVerifier",
           type: "ISSUER_IDENTITY",
@@ -131,8 +132,8 @@ describe("Certificate verify block getIdentityVerificationText", () => {
       expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by DEMO");
     });
 
-    test("should return Certificate issued by Unknown when registry and dns don't resolve any value", () => {
-      const fragments = [
+    it("should return Certificate issued by Unknown when registry and dns don't resolve any value", () => {
+      const fragments: VerificationFragment[] = [
         {
           name: "OpencertsRegistryVerifier",
           type: "ISSUER_IDENTITY",
@@ -162,8 +163,8 @@ describe("Certificate verify block getIdentityVerificationText", () => {
   });
 
   describe("should return appropriate display text when dns is verified", () => {
-    test("when registry is unverified but dns is verified", () => {
-      const fragments = [
+    it("when registry is unverified but dns is verified", () => {
+      const fragments: VerificationFragment[] = [
         {
           name: "OpencertsRegistryVerifier",
           type: "ISSUER_IDENTITY",
@@ -190,8 +191,8 @@ describe("Certificate verify block getIdentityVerificationText", () => {
       expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by ABC.COM");
     });
 
-    test("should return appropriate display text when multiple dns is verified", () => {
-      const fragments = [
+    it("should return appropriate display text when multiple dns is verified", () => {
+      const fragments: VerificationFragment[] = [
         {
           name: "OpencertsRegistryVerifier",
           type: "ISSUER_IDENTITY",
