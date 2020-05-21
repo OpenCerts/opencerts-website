@@ -1,5 +1,5 @@
 import React from "react";
-const PrintWatermark = () => (
+const PrintWatermark: React.FunctionComponent = () => (
   <div
     style={{
       position: "absolute",

@@ -1,12 +1,16 @@
 import Link from "next/link";
-import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { resetCertificateState } from "../reducers/certificate";
 import Drawer from "./UI/Drawer";
 import styles from "./certificateViewer.scss";
 
-const MultiTabs = ({ resetData, templates, onSelectTemplate }) => {
+interface MultiTabsProps {
+  resetData: () => void;
+  templates: { id: string; label: string }[];
+  onSelectTemplate: (index: number) => void;
+}
+const MultiTabs: React.FunctionComponent<MultiTabsProps> = ({ resetData, templates, onSelectTemplate }) => {
   const [selectedTemplate, setSelectedTemplate] = useState(0);
   return (
     <div id={styles["header-ui"]}>
@@ -53,16 +57,6 @@ const MultiTabs = ({ resetData, templates, onSelectTemplate }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
+export default connect(null, (dispatch) => ({
   resetData: () => dispatch(resetCertificateState()),
-});
-
-export default connect(null, mapDispatchToProps)(MultiTabs);
-
-MultiTabs.propTypes = {
-  resetData: PropTypes.func,
-  document: PropTypes.object,
-  templates: PropTypes.array,
-  onSelectTemplate: PropTypes.func,
-  activeTab: PropTypes.number,
-};
+}))(MultiTabs);

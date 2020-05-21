@@ -1,20 +1,22 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import React, { Component, ReactNode } from "react";
 import css from "./error.scss";
 
-export default class ErrorBoundary extends Component {
-  constructor(props) {
+interface ErrorBoundaryState {
+  hasError: boolean;
+}
+export default class ErrorBoundary extends Component<{}, ErrorBoundaryState> {
+  constructor(props: {}) {
     super(props);
     this.state = { hasError: false };
   }
 
-  componentDidCatch() {
+  componentDidCatch(): void {
     this.setState({
       hasError: true,
     });
   }
 
-  render() {
+  render(): ReactNode {
     if (this.state.hasError) {
       return (
         <div className={`${css.box}`}>
@@ -34,7 +36,3 @@ export default class ErrorBoundary extends Component {
     return this.props.children;
   }
 }
-
-ErrorBoundary.propTypes = {
-  children: PropTypes.node,
-};

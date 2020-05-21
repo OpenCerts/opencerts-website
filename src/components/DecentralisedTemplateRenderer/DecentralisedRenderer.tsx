@@ -1,44 +1,56 @@
-import { FrameConnector } from "@govtechsg/decentralized-renderer-react-components";
-import { getData, obfuscateDocument, utils } from "@govtechsg/open-attestation";
-import PropTypes from "prop-types";
-import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
+import { FrameConnector, LegacyHostActions } from "@govtechsg/decentralized-renderer-react-components";
+import { getData, obfuscateDocument, utils, WrappedDocument } from "@govtechsg/open-attestation";
+import React, { Ref, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { LEGACY_OPENCERTS_RENDERER } from "../../config";
 import { analyticsEvent } from "../Analytics";
 import MultiTabs from "../MultiTabs";
 import styles from "./decentralisedRenderer.scss";
 
-const DecentralisedRenderer = ({ rawDocument, updateObfuscatedCertificate, forwardedRef }) => {
-  const toFrame = useRef();
+interface DecentralisedRendererProps {
+  rawDocument: WrappedDocument;
+  updateObfuscatedCertificate: (certificate: WrappedDocument) => void;
+  forwardedRef: Ref<{ print: () => void } | undefined>;
+}
+const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps> = ({
+  rawDocument,
+  updateObfuscatedCertificate,
+  forwardedRef,
+}) => {
+  const toFrame = useRef<LegacyHostActions>();
   const documentRef = useRef(rawDocument);
   const [height, setHeight] = useState(0);
-  const [templates, setTemplates] = useState([]);
+  const [templates, setTemplates] = useState<{ id: string; label: string }[]>([]);
   const document = getData(rawDocument);
 
   useImperativeHandle(forwardedRef, () => ({
     print() {
-      const hasPrintedFromFrame = toFrame.current.print && toFrame.current.print();
-      if (!hasPrintedFromFrame) {
-        window.print();
+      if (toFrame.current) {
+        const hasPrintedFromFrame = toFrame.current.print && toFrame.current.print();
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // @ts-ignore yup the typing is not correct, to fix =)
+        if (!hasPrintedFromFrame) {
+          window.print();
+        }
       }
     },
   }));
 
   // actions
-  const updateHeight = (h) => {
+  const updateHeight = (h: number): void => {
     setHeight(h);
   };
-  const updateTemplates = (t) => {
+  const updateTemplates = (t: { id: string; label: string }[]): void => {
     setTemplates(t);
   };
-  const handleObfuscation = (field) => {
+  const handleObfuscation = (field: string): void => {
     const updatedDocument = obfuscateDocument(documentRef.current, field);
     updateObfuscatedCertificate(updatedDocument);
-    toFrame.current.renderDocument(getData(updatedDocument), documentRef.current);
+    if (toFrame.current) toFrame.current.renderDocument(getData(updatedDocument), documentRef.current);
   };
   const onConnected = useCallback(
     (frame) => {
       toFrame.current = frame;
-      toFrame.current.renderDocument(document, rawDocument);
+      if (toFrame.current) toFrame.current.renderDocument(document, rawDocument);
     },
     [document, rawDocument]
   );
@@ -62,7 +74,12 @@ const DecentralisedRenderer = ({ rawDocument, updateObfuscatedCertificate, forwa
 
   return (
     <>
-      <MultiTabs templates={templates} onSelectTemplate={(index) => toFrame.current.selectTemplateTab(index)} />
+      <MultiTabs
+        templates={templates}
+        onSelectTemplate={(index) => {
+          if (toFrame.current) toFrame.current.selectTemplateTab(index);
+        }}
+      />
       <div>
         <h2 className="print-only exact-print text-center center m-4 mb-3 mt-5 alert alert-warning">
           If you want to print the certificate, please click on the highlighted button above.
@@ -85,12 +102,6 @@ const DecentralisedRenderer = ({ rawDocument, updateObfuscatedCertificate, forwa
       </div>
     </>
   );
-};
-
-DecentralisedRenderer.propTypes = {
-  rawDocument: PropTypes.object,
-  updateObfuscatedCertificate: PropTypes.func,
-  forwardedRef: PropTypes.any,
 };
 
 export default DecentralisedRenderer;

@@ -15,6 +15,7 @@ interface CertificateShareLinkFormProps {
   handleShareLinkToggle: () => void;
 }
 
+// TODO refactor completely this component
 class CertificateShareLinkForm extends Component<CertificateShareLinkFormProps> {
   render(): ReactNode {
     const { shareLink, shareLinkState, copiedLink, handleCopyLink, handleShareLinkToggle } = this.props;
@@ -89,10 +90,9 @@ const Loader: FunctionComponent = () => (
     <div className="m-3">Generating Share Link ...</div>
   </div>
 );
-
 export default connect(
   (store) => ({
     shareLinkState: getShareLinkState(store),
   }),
-  null
+  () => ({}) // added this back otherwise there is a type issue in CertificateViewer
 )(CertificateShareLinkForm);
