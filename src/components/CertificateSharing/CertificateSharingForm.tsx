@@ -1,12 +1,19 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import React, { ChangeEvent, Component, ReactNode } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { CAPTCHA_CLIENT_KEY } from "../../config";
 import { states } from "../../reducers/certificate";
 import css from "./sharing.scss";
-
-class CertificateSharingForm extends Component {
-  constructor(props) {
+interface CertificateSharingFormProps {
+  emailSendingState: string;
+  handleSendCertificate: (event: { captcha: string; email: string }) => void;
+  handleSharingToggle: () => void;
+}
+interface CertificateSharingFormState {
+  captcha: string;
+  email: string;
+}
+class CertificateSharingForm extends Component<CertificateSharingFormProps, CertificateSharingFormState> {
+  constructor(props: CertificateSharingFormProps) {
     super(props);
 
     this.state = {
@@ -19,15 +26,15 @@ class CertificateSharingForm extends Component {
     this.handleSend = this.handleSend.bind(this);
   }
 
-  handleCaptchaChange(value) {
-    this.setState({ captcha: value });
+  handleCaptchaChange(value: string | null): void {
+    if (value) this.setState({ captcha: value });
   }
 
-  handleEmailChange(event) {
+  handleEmailChange(event: ChangeEvent<HTMLInputElement>): void {
     this.setState({ email: event.target.value });
   }
 
-  handleSend() {
+  handleSend(): void {
     const { handleSendCertificate, emailSendingState } = this.props;
     if (emailSendingState !== states.PENDING) {
       handleSendCertificate({
@@ -37,7 +44,7 @@ class CertificateSharingForm extends Component {
     }
   }
 
-  render() {
+  render(): ReactNode {
     const { emailSendingState } = this.props;
     return (
       <div className="container">
@@ -53,7 +60,7 @@ class CertificateSharingForm extends Component {
             <div className="row my-4 d-flex justify-content-center">
               <input
                 className="w-100"
-                value={this.state.emailAddress}
+                value={this.state.email}
                 onChange={this.handleEmailChange}
                 placeholder="Enter recipient's email"
               />
@@ -85,11 +92,4 @@ class CertificateSharingForm extends Component {
     );
   }
 }
-
-CertificateSharingForm.propTypes = {
-  emailSendingState: PropTypes.string,
-  handleSendCertificate: PropTypes.func,
-  handleSharingToggle: PropTypes.func,
-};
-
 export default CertificateSharingForm;
