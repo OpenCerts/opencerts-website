@@ -1,9 +1,15 @@
 import Link from "next/link";
-import PropTypes from "prop-types";
 import React from "react";
 import css from "./viewerStyles.scss";
 
-export const RetrievalErrorView = ({ resetData, retrieveCertificateByActionError }) => (
+interface RetrievalErrorViewProps {
+  resetData: () => void;
+  retrieveCertificateByActionError: () => void;
+}
+export const RetrievalErrorView: React.FunctionComponent<RetrievalErrorViewProps> = ({
+  resetData,
+  retrieveCertificateByActionError,
+}) => (
   <div
     className={`${css["viewer-container"]} ${css.invalid}`}
     style={{
@@ -43,8 +49,3 @@ export const RetrievalErrorView = ({ resetData, retrieveCertificateByActionError
     </div>
   </div>
 );
-
-RetrievalErrorView.propTypes = {
-  resetData: PropTypes.func,
-  retrieveCertificateByActionError: PropTypes.string,
-};

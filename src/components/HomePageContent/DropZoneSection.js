@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { IS_MAINNET } from "../../config";
 import { updateCertificate } from "../../reducers/certificate";
 import { trace } from "../../utils/logger";
-import { analyticsEvent } from "../Analytics/index";
+import { analyticsEvent } from "../Analytics";
 import CertificateDropzone from "../CertificateDropZone";
 import css from "./dropZoneSection.scss";
 

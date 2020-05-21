@@ -1,8 +1,12 @@
-import PropTypes from "prop-types";
 import React from "react";
 import css from "./viewerStyles.scss";
 
-export const DefaultView = ({ hover, accept }) => (
+interface DefaultViewProps {
+  hover: boolean;
+  accept: boolean;
+}
+
+export const DefaultView: React.FunctionComponent<DefaultViewProps> = ({ hover, accept }) => (
   <div
     className={`${css["viewer-container"]} ${
       // eslint-disable-next-line no-nested-ternary
@@ -39,8 +43,3 @@ export const DefaultView = ({ hover, accept }) => (
     </div>
   </div>
 );
-
-DefaultView.propTypes = {
-  hover: PropTypes.bool,
-  accept: PropTypes.bool,
-};

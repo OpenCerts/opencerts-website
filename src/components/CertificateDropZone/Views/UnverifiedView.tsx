@@ -1,12 +1,14 @@
+import { VerificationFragment } from "@govtechsg/oa-verify";
 import { isValid } from "@govtechsg/opencerts-verify";
 import Link from "next/link";
-import PropTypes from "prop-types";
 import React from "react";
 import { TYPES, MESSAGES } from "../../../constants/VerificationErrorMessages";
 import { addressInvalid, getAllButRevokeFragment, getRevokeFragment } from "../../../services/fragment";
 import css from "./viewerStyles.scss";
-
-const DetailedErrors = ({ verificationStatus }) => {
+interface DetailedErrorsProps {
+  verificationStatus: VerificationFragment[];
+}
+const DetailedErrors: React.FunctionComponent<DetailedErrorsProps> = ({ verificationStatus }) => {
   const errors = [];
   const fragmentsWithoutRevoke = getAllButRevokeFragment(verificationStatus);
   const revokeFragment = [getRevokeFragment(verificationStatus)];
@@ -40,11 +42,11 @@ const DetailedErrors = ({ verificationStatus }) => {
   );
 };
 
-DetailedErrors.propTypes = {
-  verificationStatus: PropTypes.array,
-};
-
-export const UnverifiedView = ({ resetData, verificationStatus }) => (
+interface UnverifiedViewProps {
+  resetData: () => void;
+  verificationStatus: VerificationFragment[];
+}
+export const UnverifiedView: React.FunctionComponent<UnverifiedViewProps> = ({ resetData, verificationStatus }) => (
   <div
     className={`${css["viewer-container"]} ${css.invalid}`}
     style={{
@@ -82,8 +84,3 @@ export const UnverifiedView = ({ resetData, verificationStatus }) => (
     </div>
   </div>
 );
-
-UnverifiedView.propTypes = {
-  resetData: PropTypes.func,
-  verificationStatus: PropTypes.array,
-};

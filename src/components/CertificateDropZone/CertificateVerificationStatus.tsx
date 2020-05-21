@@ -1,29 +1,29 @@
+import { VerificationFragment } from "@govtechsg/oa-verify";
 import { isValid } from "@govtechsg/opencerts-verify";
-import PropTypes from "prop-types";
 import React from "react";
-
 import { DefaultView } from "./Views/DefaultView";
 import { RetrievalErrorView } from "./Views/RetrievalErrorView";
 import { UnverifiedView } from "./Views/UnverifiedView";
 import { VerifyingView } from "./Views/VerifyingView";
 
-const CertificateVerificationStatus = (props) => {
-  const {
-    resetData,
-    verifying,
-    fileError,
-    verificationStatus,
-    hover,
-    retrieveCertificateStatus,
-    retrieveCertificateByActionError,
-  } = props;
+interface CertificateVerificationStatusProps {
+  resetData: () => void;
+  fileError: boolean;
+  verifying: boolean;
+  hover: boolean;
+  verificationStatus: VerificationFragment[];
+  retrieveCertificateByActionError: () => void;
+}
+
+const CertificateVerificationStatus: React.FunctionComponent<CertificateVerificationStatusProps> = (props) => {
+  const { resetData, verifying, fileError, verificationStatus, hover, retrieveCertificateByActionError } = props;
   if (hover) {
     return <DefaultView hover={true} accept={true} />;
   }
   if (fileError) {
     return <DefaultView hover={true} accept={false} />;
   }
-  if (verifying || retrieveCertificateStatus === "PENDING") {
+  if (verifying) {
     return <VerifyingView />;
   }
   if (retrieveCertificateByActionError) {
@@ -38,16 +38,6 @@ const CertificateVerificationStatus = (props) => {
     return <UnverifiedView resetData={() => resetData()} verificationStatus={verificationStatus} />;
   }
   return <DefaultView hover={false} accept={true} />;
-};
-
-CertificateVerificationStatus.propTypes = {
-  resetData: PropTypes.func,
-  fileError: PropTypes.bool,
-  verifying: PropTypes.bool,
-  hover: PropTypes.bool,
-  retrieveCertificateStatus: PropTypes.string,
-  verificationStatus: PropTypes.array,
-  retrieveCertificateByActionError: PropTypes.string,
 };
 
 export default CertificateVerificationStatus;

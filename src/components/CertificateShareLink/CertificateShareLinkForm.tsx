@@ -1,12 +1,22 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import React, { Component, FunctionComponent, ReactNode } from "react";
 import { QRCode } from "react-qr-svg";
 import { connect } from "react-redux";
 import { getShareLinkState } from "../../reducers/certificate";
 import css from "./sharing.scss";
 
-class CertificateShareLinkForm extends Component {
-  render() {
+interface CertificateShareLinkFormProps {
+  copiedLink: boolean;
+  shareLink: {
+    id: string;
+    key: string;
+  };
+  shareLinkState: string;
+  handleCopyLink: (link: string) => void;
+  handleShareLinkToggle: () => void;
+}
+
+class CertificateShareLinkForm extends Component<CertificateShareLinkFormProps> {
+  render(): ReactNode {
     const { shareLink, shareLinkState, copiedLink, handleCopyLink, handleShareLinkToggle } = this.props;
 
     const certificateLink = shareLink && `${window.location.origin}/?documentId=${shareLink.id}#${shareLink.key}`;
@@ -73,23 +83,16 @@ class CertificateShareLinkForm extends Component {
   }
 }
 
-const Loader = () => (
+const Loader: FunctionComponent = () => (
   <div className={css["renderer-loader"]}>
     <i className="fas fa-spinner fa-pulse fa-2x  mt8" />
     <div className="m-3">Generating Share Link ...</div>
   </div>
 );
 
-const mapStateToProps = (store) => ({
-  shareLinkState: getShareLinkState(store),
-});
-
-export default connect(mapStateToProps, null)(CertificateShareLinkForm);
-
-CertificateShareLinkForm.propTypes = {
-  copiedLink: PropTypes.bool,
-  shareLink: PropTypes.object,
-  shareLinkState: PropTypes.string,
-  handleCopyLink: PropTypes.func,
-  handleShareLinkToggle: PropTypes.func,
-};
+export default connect(
+  (store) => ({
+    shareLinkState: getShareLinkState(store),
+  }),
+  null
+)(CertificateShareLinkForm);
