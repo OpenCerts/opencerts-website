@@ -6,8 +6,8 @@ const { trace: traceDev } = getLogger("components:Analytics(Inactive):");
 interface Event {
   category: string;
   action: string;
-  value: string | number;
-  label: string;
+  value?: string | number;
+  label?: string;
 }
 
 export const validateEvent = ({ category, action, value }: Event): void => {
