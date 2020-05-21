@@ -1,5 +1,5 @@
 import React from "react";
-export const BootstrapCss = () => (
+export const BootstrapCss: React.FunctionComponent = () => (
   <link
     rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -8,7 +8,7 @@ export const BootstrapCss = () => (
   />
 );
 
-export const BootstrapJs = () => (
+export const BootstrapJs: React.FunctionComponent = () => (
   <>
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

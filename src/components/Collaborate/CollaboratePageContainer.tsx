@@ -3,9 +3,7 @@ import Card from "../UI/Card/card";
 import css from "../registry.scss";
 import collaborators from "./collaborators.json";
 
-const renderMembers = () => collaborators.map((collaborator, index) => <Card key={index} info={[collaborator]} />);
-
-const CollaboratePage = () => (
+const CollaboratePage: React.FunctionComponent = () => (
   <>
     <div className="container-fluid" style={{ backgroundColor: "#324353" }}>
       <div className={`container bg-brand-dark text-white ${css["r-section"]}`}>
@@ -32,7 +30,11 @@ const CollaboratePage = () => (
         </div>
       </div>
     </div>
-    <div className={`row ${css["r-section"]} ${css["section-width"]}`}>{renderMembers()}</div>
+    <div className={`row ${css["r-section"]} ${css["section-width"]}`}>
+      {collaborators.map((collaborator, index) => (
+        <Card key={index} info={[collaborator]} />
+      ))}
+    </div>
   </>
 );
 

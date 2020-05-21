@@ -2,7 +2,7 @@ import React from "react";
 import images from "./AboutImages";
 import css from "./aboutSection.scss";
 
-const BenefitsSection = () => (
+const BenefitsSection: React.FunctionComponent = () => (
   <div className={css.section}>
     <h3>What we can help you do</h3>
     <div className={css.container}>
@@ -37,8 +37,8 @@ const BenefitsSection = () => (
   </div>
 );
 
-const HowItWorks = () => {
-  const sections = [
+const HowItWorks: React.FunctionComponent = () => {
+  const sections: { key: keyof typeof images; text: string }[] = [
     {
       key: "onetwo",
       text:
@@ -70,7 +70,7 @@ const HowItWorks = () => {
   );
 };
 
-const AboutSection = () => (
+const AboutSection: React.FunctionComponent = () => (
   <div>
     <div className="row bg-light" id={css.benefits}>
       <div className={css.main}>

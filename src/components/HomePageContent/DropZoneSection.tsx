@@ -1,30 +1,29 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import { WrappedDocument } from "@govtechsg/open-attestation";
+import React, { Component, ReactNode } from "react";
 import { connect } from "react-redux";
 import { IS_MAINNET } from "../../config";
 import { updateCertificate } from "../../reducers/certificate";
-import { trace } from "../../utils/logger";
 import { analyticsEvent } from "../Analytics";
 import CertificateDropzone from "../CertificateDropZone";
 import css from "./dropZoneSection.scss";
 
 const DEMO_CERT = IS_MAINNET ? "/static/demo/mainnet.opencerts" : "/static/demo/ropsten.opencerts";
 
-function demoCount() {
+function demoCount(): void {
   analyticsEvent(window, {
     category: "USER_INTERACTION",
     action: "DEMO_CERTIFICATE_VIEWED",
   });
 }
 
-const DraggableDemoCertificate = () => (
+const DraggableDemoCertificate: React.FunctionComponent = () => (
   <div className="d-none d-lg-block">
     <div className="row">
       <div className="col">
         <div
           className={css.pulse}
           draggable="true"
-          onDragStart={(e) => e.dataTransfer.setData(DEMO_CERT, true)}
+          onDragStart={(e) => e.dataTransfer.setData(DEMO_CERT, "true")}
           onDragEnd={demoCount}
         >
           <a href={DEMO_CERT} download rel="noindex nofollow">
@@ -48,7 +47,7 @@ const DraggableDemoCertificate = () => (
   </div>
 );
 
-const MobileDemoCertificate = () => (
+const MobileDemoCertificate: React.FunctionComponent = () => (
   <div className="d-block d-lg-none d-xl-none">
     <a
       className="btn btn-primary btn-lg"
@@ -67,36 +66,56 @@ const MobileDemoCertificate = () => (
   </div>
 );
 
-class DropZoneSection extends Component {
-  componentDidMount() {
-    document.getElementById("demoDrop").addEventListener("drop", (e) => {
-      if (e.dataTransfer.getData(DEMO_CERT)) {
-        window
-          .fetch(DEMO_CERT)
-          .then((res) => res.json())
-          .then((res) => {
-            this.props.updateCertificate(res);
-          });
-      }
-    });
-    document.getElementById("demoClick").addEventListener("click", () => {
+interface DropZoneSectionProps {
+  updateCertificate: (certificate: WrappedDocument) => void;
+}
+class DropZoneSection extends Component<DropZoneSectionProps> {
+  constructor(props: DropZoneSectionProps) {
+    super(props);
+    this.handleDrop = this.handleDrop.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+  componentDidMount(): void {
+    const elementDrop = document.getElementById("demoDrop");
+    if (elementDrop) {
+      elementDrop.addEventListener("drop", this.handleDrop);
+    }
+    const elementClick = document.getElementById("demoClick");
+    if (elementClick) {
+      elementClick.addEventListener("click", this.handleClick);
+    }
+  }
+  handleDrop(event: DragEvent): void {
+    if (event.dataTransfer && event.dataTransfer.getData(DEMO_CERT)) {
       window
         .fetch(DEMO_CERT)
         .then((res) => res.json())
         .then((res) => {
           this.props.updateCertificate(res);
         });
-    });
+    }
+  }
+  handleClick(): void {
+    window
+      .fetch(DEMO_CERT)
+      .then((res) => res.json())
+      .then((res) => {
+        this.props.updateCertificate(res);
+      });
   }
 
-  componentWillUnmount() {
-    document.getElementById("demoDrop", "demoClick").removeEventListener("drop", () => this.removeListener());
+  componentWillUnmount(): void {
+    const elementDrop = document.getElementById("demoDrop");
+    if (elementDrop) {
+      elementDrop.removeEventListener("drop", this.handleDrop);
+    }
+    const elementClick = document.getElementById("demoClick");
+    if (elementClick) {
+      elementClick.removeEventListener("click", this.handleClick);
+    }
   }
 
-  removeListener = () => trace("drop listener removed");
-
-  // eslint-disable-next-line class-methods-use-this
-  render() {
+  render(): ReactNode {
     return (
       <div className="row p-5 bg-brand-dark text-white">
         <div className={css.main}>
@@ -120,12 +139,6 @@ class DropZoneSection extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  updateCertificate: (payload) => dispatch(updateCertificate(payload)),
-});
-
-export default connect(null, mapDispatchToProps)(DropZoneSection);
-
-DropZoneSection.propTypes = {
-  updateCertificate: PropTypes.func,
-};
+export default connect(null, (dispatch) => ({
+  updateCertificate: (payload: WrappedDocument) => dispatch(updateCertificate(payload)),
+}))(DropZoneSection);

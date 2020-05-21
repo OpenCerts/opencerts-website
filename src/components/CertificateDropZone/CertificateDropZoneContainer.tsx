@@ -14,9 +14,6 @@ import {
 import CertificateVerificationStatus from "./CertificateVerificationStatus";
 
 interface CertificateDropZoneContainerProps {
-  document: WrappedDocument;
-  encryptedCertificateStatus: string;
-  handleCertificateChange: () => void;
   updateCertificate: (certificate: WrappedDocument) => void;
   resetData: () => void;
   verifying: boolean;

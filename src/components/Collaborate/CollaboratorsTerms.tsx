@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./CollaboratorsTerms.scss";
 
-export const CollaboratorsTerms = () => (
+export const CollaboratorsTerms: React.FunctionComponent = () => (
   <>
     <div className={styles["header-container"]}>
       <h1 className={styles.title}>Collaborator terms and conditions</h1>
