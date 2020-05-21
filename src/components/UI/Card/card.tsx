@@ -1,8 +1,19 @@
-import PropTypes from "prop-types";
 import React from "react";
 import css from "./card.scss";
 
-const Card = (props) => (
+interface CardProps {
+  info: {
+    id: string;
+    website: string;
+    name: string;
+    address?: string;
+    logo: string;
+    email?: string;
+    phone?: string;
+    description: string;
+  }[];
+}
+const Card: React.FunctionComponent<CardProps> = (props) => (
   <div
     id={props.info[0].id}
     className={`col-lg-4 col-md-6 col-sm-12 ${css["mb-3"]} ${css["m-pd-0"]}`}
@@ -63,7 +74,3 @@ const Card = (props) => (
 );
 
 export default Card;
-
-Card.propTypes = {
-  info: PropTypes.array,
-};

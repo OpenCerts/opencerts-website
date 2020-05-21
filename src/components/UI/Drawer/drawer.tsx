@@ -1,9 +1,21 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import React, { Component, ReactNode } from "react";
 import css from "./drawer.scss";
 
-export default class Drawer extends Component {
-  constructor(props) {
+interface Tab {
+  label: string;
+}
+interface DrawerProps {
+  toggle: (index: number) => void;
+  tabs: Tab[];
+  activeIdx: number;
+}
+interface DrawerState {
+  visible: boolean;
+  showAbsHeader: boolean;
+}
+
+export default class Drawer extends Component<DrawerProps, DrawerState> {
+  constructor(props: DrawerProps) {
     super(props);
     this.state = {
       visible: false,
@@ -11,11 +23,11 @@ export default class Drawer extends Component {
     };
   }
 
-  toggleDrawer() {
+  toggleDrawer(): void {
     this.setState({ visible: !this.state.visible });
   }
 
-  createTabs(tabs) {
+  createTabs(tabs: Tab[]): ReactNode {
     const { activeIdx } = this.props;
     return tabs.map((tab, idx) => (
       <a
@@ -32,12 +44,12 @@ export default class Drawer extends Component {
     ));
   }
 
-  renderContent(idx) {
+  renderContent(idx: number): void {
     this.props.toggle(idx);
     this.toggleDrawer();
   }
 
-  render() {
+  render(): ReactNode {
     const { tabs, children } = this.props;
     const { visible, showAbsHeader } = this.state;
 
@@ -69,10 +81,3 @@ export default class Drawer extends Component {
     );
   }
 }
-
-Drawer.propTypes = {
-  toggle: PropTypes.func,
-  children: PropTypes.object,
-  tabs: PropTypes.array,
-  activeIdx: PropTypes.number,
-};

@@ -2,12 +2,12 @@ import { mount } from "enzyme";
 import React from "react";
 import ErrorBoundary from "./ErrorBoundary";
 
-const ProblemChild = () => {
+const ProblemChild: React.FunctionComponent = () => {
   throw new Error("Error thrown from problem child");
 };
 /* eslint-disable no-console */
 // disabled lint for the overridden console to not show the error from the problem child.
-const pauseErrorLogging = (codeToRun) => {
+const pauseErrorLogging = (codeToRun: () => void): void => {
   const logger = console.error;
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   console.error = () => {};
@@ -26,7 +26,7 @@ describe("<ErrorBoundary />", () => {
           <ProblemChild />
         </ErrorBoundary>
       );
-      expect(ErrorBoundary.prototype.componentDidCatch).toHaveBeenCalled();
+      expect(ErrorBoundary.prototype.componentDidCatch).toHaveBeenCalledTimes(1);
     });
   });
 });
