@@ -11,8 +11,8 @@ interface CertificateVerificationStatusProps {
   fileError: boolean;
   verifying: boolean;
   hover: boolean;
-  verificationStatus: VerificationFragment[];
-  retrieveCertificateByActionError: () => void;
+  verificationStatus: VerificationFragment[] | null;
+  retrieveCertificateByActionError: string | null;
 }
 
 const CertificateVerificationStatus: React.FunctionComponent<CertificateVerificationStatusProps> = (props) => {

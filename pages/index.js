@@ -7,9 +7,9 @@ import NavigationBar from "../src/components/Layout/NavigationBar";
 import MainPageContainer from "../src/components/MainPageContainer";
 import {
   resetCertificateState,
-  retrieveCertificateByAction,
   retrieveCertificateByActionFailure,
-} from "../src/reducers/certificate";
+  retrieveCertificateByAction,
+} from "../src/reducers/certificate.actions";
 
 const HomePage = (props) => {
   const router = useRouter();
@@ -34,13 +34,11 @@ const HomePage = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  retrieveCertificateByAction: (payload) => dispatch(retrieveCertificateByAction(payload)),
-  retrieveCertificateByActionFailure: (payload) => dispatch(retrieveCertificateByActionFailure(payload)),
-  resetCertificateState: () => dispatch(resetCertificateState()),
-});
-
-export default connect(null, mapDispatchToProps)(HomePage);
+export default connect(null, {
+  retrieveCertificateByAction,
+  retrieveCertificateByActionFailure,
+  resetCertificateState,
+})(HomePage);
 
 HomePage.propTypes = {
   retrieveCertificateByAction: PropTypes.func,

@@ -1,5 +1,5 @@
 import { decryptString } from "@govtechsg/oa-encryption";
-import { getData, utils } from "@govtechsg/open-attestation";
+import { getData, utils, v2, WrappedDocument } from "@govtechsg/open-attestation";
 import { isValid, verify } from "@govtechsg/opencerts-verify";
 import { get } from "lodash";
 import Router from "next/router";
@@ -8,11 +8,24 @@ import "isomorphic-fetch";
 import { analyticsEvent } from "../components/Analytics";
 import { NETWORK_NAME } from "../config";
 import {
-  getCertificate,
-  types,
-  verifyingCertificateErrored,
+  GENERATE_SHARE_LINK,
+  generateShareLinkFailure,
+  generateShareLinkReset,
+  generateShareLinkSuccess,
+  RETRIEVE_CERTIFICATE_BY_ACTION,
+  retrieveCertificateByActionFailure,
+  retrieveCertificateByActionPending,
+  retrieveCertificateByActionSuccess,
+  sendCertificateFailure,
+  sendCertificateSuccess,
+  SENDING_CERTIFICATE,
+  UPDATE_CERTIFICATE,
+  updateCertificate,
+  verifyingCertificate,
   verifyingCertificateCompleted,
-} from "../reducers/certificate";
+  verifyingCertificateErrored,
+} from "../reducers/certificate.actions";
+import { getCertificate } from "../reducers/certificate.selectors";
 import sendEmail from "../services/email";
 import { certificateNotIssued, getAllButRevokeFragment, getRevokeFragment } from "../services/fragment";
 import { generateLink } from "../services/link";
@@ -27,6 +40,7 @@ const ANALYTICS_VERIFICATION_ERROR_CODE = {
   REVOKED_CERTIFICATE: 3,
   CERTIFICATE_STORE: 4,
 };
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function* getAnalyticsDetails() {
   try {
     const rawCertificate = yield select(getCertificate);
@@ -44,7 +58,8 @@ export function* getAnalyticsDetails() {
   }
 }
 
-export function* triggerAnalytics(errorCode) {
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export function* triggerAnalytics(errorCode: number) {
   const { storeAddresses, id } = yield call(getAnalyticsDetails);
   if (storeAddresses && id) {
     analyticsEvent(window, {
@@ -57,35 +72,39 @@ export function* triggerAnalytics(errorCode) {
 }
 
 // to run if any of the issuer is not valid
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function* analyticsIssuerFail() {
   yield call(triggerAnalytics, ANALYTICS_VERIFICATION_ERROR_CODE.ISSUER_IDENTITY);
 }
 
 // to run if certificate has been tampered
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function* analyticsHashFail() {
   yield call(triggerAnalytics, ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_HASH);
 }
 
 // to run if certificate has not been issued
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function* analyticsIssuedFail() {
   yield call(triggerAnalytics, ANALYTICS_VERIFICATION_ERROR_CODE.UNISSUED_CERTIFICATE);
 }
 
 // to run if certificate has been revoked
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function* analyticsRevocationFail() {
   yield call(triggerAnalytics, ANALYTICS_VERIFICATION_ERROR_CODE.REVOKED_CERTIFICATE);
 }
 
 // to run if store is not valid
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function* analyticsStoreFail() {
   yield call(triggerAnalytics, ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_STORE);
 }
 
-export function* verifyCertificate({ payload: certificate }) {
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export function* verifyCertificate({ payload: certificate }: { payload: WrappedDocument<v2.OpenAttestationDocument> }) {
   try {
-    yield put({
-      type: types.VERIFYING_CERTIFICATE,
-    });
+    yield put(verifyingCertificate());
     const fragments = yield call(verify, certificate, {
       network: NETWORK_NAME,
     });
@@ -119,7 +138,8 @@ export function* verifyCertificate({ payload: certificate }) {
   }
 }
 
-export function* sendCertificate({ payload }) {
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export function* sendCertificate({ payload }: { payload: { email: string; captcha: string } }) {
   try {
     const certificate = yield select(getCertificate);
     const { email, captcha } = payload;
@@ -133,22 +153,16 @@ export function* sendCertificate({ payload }) {
       throw new Error("Fail to send certificate");
     }
 
-    yield put({
-      type: types.SENDING_CERTIFICATE_SUCCESS,
-    });
+    yield put(sendCertificateSuccess());
   } catch (e) {
-    yield put({
-      type: types.SENDING_CERTIFICATE_FAILURE,
-      payload: e.message,
-    });
+    yield put(sendCertificateFailure(e.message));
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function* generateShareLink() {
   try {
-    yield put({
-      type: types.GENERATE_SHARE_LINK_RESET,
-    });
+    yield put(generateShareLinkReset());
     const certificate = yield select(getCertificate);
     const success = yield generateLink(certificate);
 
@@ -156,23 +170,16 @@ export function* generateShareLink() {
       throw new Error("Fail to generate certificate share link");
     }
 
-    yield put({
-      type: types.GENERATE_SHARE_LINK_SUCCESS,
-      payload: success,
-    });
+    yield put(generateShareLinkSuccess(success));
   } catch (e) {
-    yield put({
-      type: types.GENERATE_SHARE_LINK_FAILURE,
-      payload: e.message,
-    });
+    yield put(generateShareLinkFailure(e.message));
   }
 }
 
-export function* retrieveCertificateByAction({ payload: { uri, key } }) {
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export function* retrieveCertificateByAction({ payload: { uri, key } }: { payload: { uri: string; key?: string } }) {
   try {
-    yield put({
-      type: types.RETRIEVE_CERTIFICATE_BY_ACTION_PENDING,
-    });
+    yield put(retrieveCertificateByActionPending());
 
     // if a key has been provided, let's assume
     let certificate = yield window.fetch(uri).then((response) => {
@@ -201,24 +208,23 @@ export function* retrieveCertificateByAction({ payload: { uri, key } }) {
       throw new Error(`Unable to decrypt certificate with key=${key} and type=${certificate.type}`);
     }
 
-    yield put({
-      type: types.UPDATE_CERTIFICATE,
-      payload: certificate,
-    });
-    yield put({
-      type: types.RETRIEVE_CERTIFICATE_BY_ACTION_SUCCESS,
-    });
+    yield put(updateCertificate(certificate));
+    yield put(retrieveCertificateByActionSuccess());
   } catch (e) {
-    yield put({
-      type: types.RETRIEVE_CERTIFICATE_BY_ACTION_FAILURE,
-      payload: e.message,
-    });
+    yield put(retrieveCertificateByActionFailure(e.message));
   }
 }
 
+// TODO https://github.com/redux-saga/redux-saga/issues/1883
 export default [
-  takeEvery(types.RETRIEVE_CERTIFICATE_BY_ACTION, retrieveCertificateByAction),
-  takeEvery(types.UPDATE_CERTIFICATE, verifyCertificate),
-  takeEvery(types.SENDING_CERTIFICATE, sendCertificate),
-  takeEvery(types.GENERATE_SHARE_LINK, generateShareLink),
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore
+  takeEvery(RETRIEVE_CERTIFICATE_BY_ACTION, retrieveCertificateByAction),
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore
+  takeEvery(UPDATE_CERTIFICATE, verifyCertificate),
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore
+  takeEvery(SENDING_CERTIFICATE, sendCertificate),
+  takeEvery(GENERATE_SHARE_LINK, generateShareLink),
 ];

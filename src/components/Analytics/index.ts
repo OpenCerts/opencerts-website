@@ -19,7 +19,7 @@ export const validateEvent = ({ category, action, value }: Event): void => {
 export const stringifyEvent = ({ category, action, label, value }: Event): string =>
   `Category*: ${category}, Action*: ${action}, Label: ${label}, Value: ${value}`;
 
-export const analyticsEvent = (window: Window, event: Event): void => {
+export const analyticsEvent = (window: Partial<Window> | undefined, event: Event): void => {
   validateEvent(event);
   if (typeof window !== "undefined" && typeof window.ga !== "undefined") {
     const { category, action, label, value } = event;

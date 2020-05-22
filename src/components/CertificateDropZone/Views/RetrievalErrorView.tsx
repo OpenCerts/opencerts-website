@@ -4,7 +4,7 @@ import css from "./viewerStyles.scss";
 
 interface RetrievalErrorViewProps {
   resetData: () => void;
-  retrieveCertificateByActionError: () => void;
+  retrieveCertificateByActionError: string;
 }
 export const RetrievalErrorView: React.FunctionComponent<RetrievalErrorViewProps> = ({
   resetData,

@@ -8,8 +8,12 @@ describe("sagas/certificate", () => {
   const certificate = { some: "data" };
 
   it("calls window.fetch with right args", async () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     const fetchStub = sinon.stub(window, "fetch").resolves({ status: 200 });
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     await sendEmail.default({ certificate, captcha, email });
 
     expect(
@@ -30,14 +34,22 @@ describe("sagas/certificate", () => {
   });
 
   it("resolves when 200 is returned", async () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     const fetchStub = sinon.stub(window, "fetch").resolves({ status: 200 });
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     const res = await sendEmail.default({ certificate, captcha, email });
     expect(res).toBe(true);
     fetchStub.restore();
   });
 
   it("rejects when non-200 code is returned", async () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     const fetchStub = sinon.stub(window, "fetch").resolves({ status: 400 });
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     const res = await sendEmail.default({ certificate, captcha, email });
     expect(res).toBe(false);
     fetchStub.restore();

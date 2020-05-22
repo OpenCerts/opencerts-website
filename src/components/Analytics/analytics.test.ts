@@ -1,4 +1,3 @@
-import { stub } from "sinon";
 import { analyticsEvent, stringifyEvent, validateEvent } from "./index";
 
 const evt = {
@@ -20,9 +19,9 @@ describe("stringifyEvent", () => {
 describe("validateEvent", () => {
   it("throws if category is missing", () => {
     expect(() =>
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore we expect this error to be thrown
       validateEvent({
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-        // @ts-ignore we expect this error to be thrown
         label: "LABEL",
       })
     ).toThrow("Category is required");
@@ -71,14 +70,18 @@ describe("event", () => {
   });
 
   it("sends and log ga event if window.ga is present", () => {
-    const win = { ga: stub() };
+    const win = { ga: jest.fn() };
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     analyticsEvent(win, evt);
-    expect(win.ga.args[0]).toStrictEqual(["send", "event", "TEST_CATEGORY", "TEST_ACTION", "TEST_LABEL", 2]);
+    expect(win.ga).toHaveBeenCalledWith("send", "event", "TEST_CATEGORY", "TEST_ACTION", "TEST_LABEL", 2);
   });
 
   it("throws if there is a validation error", () => {
-    const win = { ga: stub() };
+    const win = { ga: jest.fn() };
     const errEvt = { ...evt, value: "STRING" };
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     expect(() => analyticsEvent(win, errEvt)).toThrow("Value must be a number");
   });
 });

@@ -8,7 +8,7 @@ import Router from "next/router";
 import React from "react";
 import { Provider } from "react-redux";
 import { DEFAULT_SEO, ENVIRONMENT, GA_ID } from "../src/config";
-import { types } from "../src/reducers/featureToggle";
+import { updateFeatureToggles } from "../src/reducers/featureToggle.actions";
 import initStore from "../src/store";
 
 const FeatureFlagLoader = ({ dispatch, children }) => {
@@ -17,10 +17,7 @@ const FeatureFlagLoader = ({ dispatch, children }) => {
       const featureToggle = await fetch("https://s3-ap-southeast-1.amazonaws.com/opencerts.io/feature-toggle.json", {
         METHOD: "GET",
       }).then((response) => response.json());
-      dispatch({
-        type: types.UPDATE_FEATURE_TOGGLES,
-        payload: mapValues(featureToggle, ENVIRONMENT),
-      });
+      dispatch(updateFeatureToggles(mapValues(featureToggle, ENVIRONMENT)));
     };
     run();
   }, [dispatch]);

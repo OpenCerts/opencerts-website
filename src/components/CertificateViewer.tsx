@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import React from "react";
 import { connect } from "react-redux";
-import { updateObfuscatedCertificate as updateObfuscatedCertificateAction } from "../reducers/certificate";
+import { updateObfuscatedCertificate as updateObfuscatedCertificateAction } from "../reducers/certificate.actions";
 import CertificateShareLinkForm from "./CertificateShareLink/CertificateShareLinkForm";
 import CertificateVerifyBlock from "./CertificateVerifyBlock";
 import ErrorBoundary from "./ErrorBoundary";
@@ -29,9 +29,9 @@ export interface CertificateViewerProps {
   document: WrappedDocument;
   certificate: WrappedDocument & { id: string };
   verifying: boolean;
-  shareLink: { id: string; key: string };
+  shareLink: { id?: string; key?: string };
   copiedLink: boolean;
-  verificationStatus: VerificationFragment[];
+  verificationStatus: VerificationFragment[] | null;
   showSharing: boolean;
   showShareLink: boolean;
   emailSendingState: string;
@@ -42,6 +42,7 @@ export interface CertificateViewerProps {
   handleCopyLink: (certificateLink: string) => void;
 }
 export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> = (props) => {
+  if (!props.verificationStatus) throw new Error("Verification status can't be null");
   const { document } = props;
   const childRef = React.useRef<{ print: () => void }>();
 

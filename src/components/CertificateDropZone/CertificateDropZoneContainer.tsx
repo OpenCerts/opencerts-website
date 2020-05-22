@@ -4,21 +4,17 @@ import Router from "next/router";
 import React, { Component, ReactNode } from "react";
 import Dropzone from "react-dropzone";
 import { connect } from "react-redux";
-import {
-  getCertificateByActionError,
-  getVerificationStatus,
-  getVerifying,
-  resetCertificateState,
-  updateCertificate,
-} from "../../reducers/certificate";
+import { RootState } from "../../reducers";
+import { resetCertificateState, updateCertificate } from "../../reducers/certificate.actions";
+import { getCertificateByActionError, getVerificationStatus, getVerifying } from "../../reducers/certificate.selectors";
 import CertificateVerificationStatus from "./CertificateVerificationStatus";
 
 interface CertificateDropZoneContainerProps {
   updateCertificate: (certificate: WrappedDocument) => void;
   resetData: () => void;
   verifying: boolean;
-  verificationStatus: VerificationFragment[];
-  retrieveCertificateByActionError: () => void;
+  verificationStatus: VerificationFragment[] | null;
+  retrieveCertificateByActionError: string | null;
 }
 interface CertificateDropZoneContainerState {
   fileError: boolean;
@@ -94,7 +90,7 @@ class CertificateDropZoneContainer extends Component<
 }
 
 export default connect(
-  (store) => ({
+  (store: RootState) => ({
     retrieveCertificateByActionError: getCertificateByActionError(store),
     verifying: getVerifying(store),
     verificationStatus: getVerificationStatus(store),

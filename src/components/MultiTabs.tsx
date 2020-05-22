@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { resetCertificateState } from "../reducers/certificate";
+import { resetCertificateState } from "../reducers/certificate.actions";
 import Drawer from "./UI/Drawer";
 import styles from "./certificateViewer.scss";
 
