@@ -1,7 +1,5 @@
 import { call, put, select } from "redux-saga/effects";
-import sinon, { SinonStub } from "sinon";
 import { getCertificate } from "../reducers/certificate.selectors";
-import * as sendEmail from "../services/email";
 import {
   analyticsHashFail,
   analyticsIssuedFail,
@@ -47,30 +45,24 @@ function whenThereIsOneEthereumAddressIssuer() {
 
 describe("sagas/certificate", () => {
   describe("sendCertificate", () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let emailStub: SinonStub<any>;
+    let fetchStub: jest.SpyInstance;
     // eslint-disable-next-line jest/no-hooks
     beforeEach(() => {
-      emailStub = sinon.stub(sendEmail, "default");
+      fetchStub = jest.spyOn(window, "fetch");
     });
     // eslint-disable-next-line jest/no-hooks
     afterEach(() => {
-      emailStub.restore();
+      fetchStub.mockRestore();
     });
     it("should put SENDING_CERTIFICATE_SUCCESS on success", () => {
       const { testCert } = whenThereIsOneEthereumAddressIssuer();
       const email = "admin@opencerts.io";
       const captcha = "ABCD";
       const saga = sendCertificate({ payload: { email, captcha } });
+      fetchStub.mockResolvedValue({ status: 200 });
 
       expect(saga.next().value).toStrictEqual(select(getCertificate));
-      expect(saga.next(testCert).value).toStrictEqual(
-        emailStub({
-          certificate: testCert,
-          email,
-          captcha,
-        })
-      );
+      saga.next(testCert);
       expect(saga.next(true).value).toStrictEqual(
         put({
           type: "SENDING_CERTIFICATE_SUCCESS",
@@ -84,15 +76,10 @@ describe("sagas/certificate", () => {
       const email = "admin@opencerts.io";
       const captcha = "ABCD";
       const saga = sendCertificate({ payload: { email, captcha } });
+      fetchStub.mockResolvedValue({ status: 200 });
 
       expect(saga.next().value).toStrictEqual(select(getCertificate));
-      expect(saga.next(testCert).value).toStrictEqual(
-        emailStub({
-          certificate: testCert,
-          email,
-          captcha,
-        })
-      );
+      saga.next(testCert);
       expect(saga.next(false).value).toStrictEqual(
         put({
           type: "SENDING_CERTIFICATE_FAILURE",
@@ -108,15 +95,10 @@ describe("sagas/certificate", () => {
       const captcha = "ABCD";
       const errorMsg = "Some unknown error has occured";
       const saga = sendCertificate({ payload: { email, captcha } });
+      fetchStub.mockResolvedValue({ status: 200 });
 
       expect(saga.next().value).toStrictEqual(select(getCertificate));
-      expect(saga.next(testCert).value).toStrictEqual(
-        emailStub({
-          certificate: testCert,
-          email,
-          captcha,
-        })
-      );
+      saga.next(testCert);
       expect(saga.throw(new Error(errorMsg)).value).toStrictEqual(
         put({
           type: "SENDING_CERTIFICATE_FAILURE",
@@ -132,14 +114,15 @@ describe("sagas/certificate", () => {
     beforeEach(() => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
-      global.window.ga = sinon.stub();
+      // eslint-disable-next-line jest/prefer-spy-on
+      window.ga = jest.fn();
     });
-
     // eslint-disable-next-line jest/no-hooks
     afterEach(() => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
-      global.window.ga = undefined;
+      // eslint-disable-next-line jest/prefer-spy-on
+      window.ga = undefined;
     });
 
     it("triggerAnalytics should get details and fire the analytics event with correct error code", () => {
@@ -154,14 +137,14 @@ describe("sagas/certificate", () => {
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
-      expect(global.window.ga.args[0]).toStrictEqual([
+      expect(window.ga).toHaveBeenCalledWith(
         "send",
         "event",
         "CERTIFICATE_ERROR",
         "storeAdd1,storeAdd2",
         "certificate-id",
-        1337,
-      ]);
+        1337
+      );
     });
 
     it("analyticsIssuerFail should report to GA with errorType = 0", () => {
