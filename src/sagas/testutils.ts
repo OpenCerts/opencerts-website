@@ -1,4 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
+import { SchemaId, WrappedDocument } from "@govtechsg/open-attestation";
 import sinon from "sinon";
 
 export const targetHash = "f7432b3219b2aa4122e289f44901830fa32f224ee9dfce28565677f1d279b2c7";
@@ -11,10 +12,10 @@ export const mockStore = () => {
   const stubbedFn = sinon.stub();
   return {
     methods: {
-      isRevoked: (h) => ({
+      isRevoked: (h: string) => ({
         call: () => stubbedFn(h),
       }),
-      isIssued: (h) => ({
+      isIssued: (h: string) => ({
         call: () => stubbedFn(h),
       }),
     },
@@ -23,8 +24,10 @@ export const mockStore = () => {
 };
 
 export class MakeCertUtil {
+  cert: WrappedDocument;
   constructor() {
     this.cert = {
+      version: SchemaId.v2,
       schema: "opencerts/v1.4",
       data: {
         id: "71f10d54-d483-489b-b06f-fa2bed75ce16:string:certificate-id",
@@ -33,6 +36,8 @@ export class MakeCertUtil {
       signature: {
         targetHash,
         proof: [proof0, proof1],
+        type: "SHA3MerkleProof",
+        merkleRoot: targetHash,
       },
     };
     return this;
@@ -42,20 +47,22 @@ export class MakeCertUtil {
     return "aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaaa";
   }
 
-  addTemplateTag(tag) {
+  addTemplateTag(tag: string) {
     this.cert.data.$template = `${MakeCertUtil.makeFakeUUID()}:string:${tag}`;
     return this;
   }
 
-  addDataField(field, value) {
+  addDataField(field: string, value: string) {
     this.cert.data[field] = value;
     return this;
   }
 
-  addIssuer(issuerString) {
+  addIssuer(issuerString: string) {
     const newIssuerObj = {
       certificateStore: `71f10d54-d483-489b-b06f-fa2bed75ce16:string:${issuerString}`,
     };
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     this.cert.data.issuers.push(newIssuerObj);
     return this;
   }

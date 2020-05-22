@@ -1,7 +1,7 @@
 import React, { ChangeEvent, Component, ReactNode } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { CAPTCHA_CLIENT_KEY } from "../../config";
-import { states } from "../../reducers/certificate";
+import { states } from "../../reducers/shared";
 import css from "./sharing.scss";
 interface CertificateSharingFormProps {
   emailSendingState: string;

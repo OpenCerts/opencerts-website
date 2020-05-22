@@ -2,7 +2,7 @@ import { WrappedDocument } from "@govtechsg/open-attestation";
 import React, { Component, ReactNode } from "react";
 import { connect } from "react-redux";
 import { IS_MAINNET } from "../../config";
-import { updateCertificate } from "../../reducers/certificate";
+import { updateCertificate } from "../../reducers/certificate.actions";
 import { analyticsEvent } from "../Analytics";
 import CertificateDropzone from "../CertificateDropZone";
 import css from "./dropZoneSection.scss";

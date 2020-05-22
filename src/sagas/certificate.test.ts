@@ -1,6 +1,6 @@
 import { call, put, select } from "redux-saga/effects";
-import sinon from "sinon";
-import { getCertificate } from "../reducers/certificate";
+import sinon, { SinonStub } from "sinon";
+import { getCertificate } from "../reducers/certificate.selectors";
 import * as sendEmail from "../services/email";
 import {
   analyticsHashFail,
@@ -23,6 +23,22 @@ jest.mock("@govtechsg/open-attestation", () => {
     verifySignature: jest.fn(),
   };
 });
+
+interface Window {
+  ga: UniversalAnalytics.ga;
+}
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace NodeJS {
+    interface Global {
+      document: Document;
+      window: Window;
+      navigator: Navigator;
+    }
+  }
+}
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function whenThereIsOneEthereumAddressIssuer() {
   const ethereumAddresses = ["0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4F"];
   const testCert = new MakeCertUtil().addIssuer(ethereumAddresses[0]).finish();
@@ -31,28 +47,31 @@ function whenThereIsOneEthereumAddressIssuer() {
 
 describe("sagas/certificate", () => {
   describe("sendCertificate", () => {
-    let emailStub;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let emailStub: SinonStub<any>;
+    // eslint-disable-next-line jest/no-hooks
     beforeEach(() => {
       emailStub = sinon.stub(sendEmail, "default");
     });
+    // eslint-disable-next-line jest/no-hooks
     afterEach(() => {
       emailStub.restore();
     });
-    test("should put SENDING_CERTIFICATE_SUCCESS on success", () => {
+    it("should put SENDING_CERTIFICATE_SUCCESS on success", () => {
       const { testCert } = whenThereIsOneEthereumAddressIssuer();
       const email = "admin@opencerts.io";
       const captcha = "ABCD";
       const saga = sendCertificate({ payload: { email, captcha } });
 
-      expect(saga.next().value).toEqual(select(getCertificate));
-      expect(saga.next(testCert).value).toEqual(
+      expect(saga.next().value).toStrictEqual(select(getCertificate));
+      expect(saga.next(testCert).value).toStrictEqual(
         emailStub({
           certificate: testCert,
           email,
           captcha,
         })
       );
-      expect(saga.next(true).value).toEqual(
+      expect(saga.next(true).value).toStrictEqual(
         put({
           type: "SENDING_CERTIFICATE_SUCCESS",
         })
@@ -60,21 +79,21 @@ describe("sagas/certificate", () => {
       expect(saga.next().done).toBe(true);
     });
 
-    test("should put SENDING_CERTIFICATE_SUCCESS on failure", () => {
+    it("should put SENDING_CERTIFICATE_SUCCESS on failure", () => {
       const { testCert } = whenThereIsOneEthereumAddressIssuer();
       const email = "admin@opencerts.io";
       const captcha = "ABCD";
       const saga = sendCertificate({ payload: { email, captcha } });
 
-      expect(saga.next().value).toEqual(select(getCertificate));
-      expect(saga.next(testCert).value).toEqual(
+      expect(saga.next().value).toStrictEqual(select(getCertificate));
+      expect(saga.next(testCert).value).toStrictEqual(
         emailStub({
           certificate: testCert,
           email,
           captcha,
         })
       );
-      expect(saga.next(false).value).toEqual(
+      expect(saga.next(false).value).toStrictEqual(
         put({
           type: "SENDING_CERTIFICATE_FAILURE",
           payload: "Fail to send certificate",
@@ -83,22 +102,22 @@ describe("sagas/certificate", () => {
       expect(saga.next().done).toBe(true);
     });
 
-    test("should put SENDING_CERTIFICATE_SUCCESS on error", () => {
+    it("should put SENDING_CERTIFICATE_SUCCESS on error", () => {
       const { testCert } = whenThereIsOneEthereumAddressIssuer();
       const email = "admin@opencerts.io";
       const captcha = "ABCD";
       const errorMsg = "Some unknown error has occured";
       const saga = sendCertificate({ payload: { email, captcha } });
 
-      expect(saga.next().value).toEqual(select(getCertificate));
-      expect(saga.next(testCert).value).toEqual(
+      expect(saga.next().value).toStrictEqual(select(getCertificate));
+      expect(saga.next(testCert).value).toStrictEqual(
         emailStub({
           certificate: testCert,
           email,
           captcha,
         })
       );
-      expect(saga.throw(new Error(errorMsg)).value).toEqual(
+      expect(saga.throw(new Error(errorMsg)).value).toStrictEqual(
         put({
           type: "SENDING_CERTIFICATE_FAILURE",
           payload: errorMsg,
@@ -109,25 +128,33 @@ describe("sagas/certificate", () => {
   });
 
   describe("analytics*", () => {
+    // eslint-disable-next-line jest/no-hooks
     beforeEach(() => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
       global.window.ga = sinon.stub();
     });
 
+    // eslint-disable-next-line jest/no-hooks
     afterEach(() => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
       global.window.ga = undefined;
     });
 
-    test("triggerAnalytics should get details and fire the analytics event with correct error code", () => {
+    it("triggerAnalytics should get details and fire the analytics event with correct error code", () => {
       const analyticsGenerator = triggerAnalytics(1337);
 
       const callGetAnalyticsDetails = analyticsGenerator.next();
-      expect(callGetAnalyticsDetails.value).toEqual(call(getAnalyticsDetails));
+      expect(callGetAnalyticsDetails.value).toStrictEqual(call(getAnalyticsDetails));
       analyticsGenerator.next({
         storeAddresses: "storeAdd1,storeAdd2",
         id: "certificate-id",
       });
 
-      expect(global.window.ga.args[0]).toEqual([
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
+      expect(global.window.ga.args[0]).toStrictEqual([
         "send",
         "event",
         "CERTIFICATE_ERROR",
@@ -137,32 +164,32 @@ describe("sagas/certificate", () => {
       ]);
     });
 
-    test("analyticsIssuerFail should report to GA with errorType = 0", () => {
+    it("analyticsIssuerFail should report to GA with errorType = 0", () => {
       const analyticsGenerator = analyticsIssuerFail();
 
       const callGetAnalyticsDetails = analyticsGenerator.next();
-      expect(callGetAnalyticsDetails.value).toEqual(call(triggerAnalytics, 0));
+      expect(callGetAnalyticsDetails.value).toStrictEqual(call(triggerAnalytics, 0));
     });
 
-    test("analyticsHashFail should report to GA with errorType = 1", () => {
+    it("analyticsHashFail should report to GA with errorType = 1", () => {
       const analyticsGenerator = analyticsHashFail();
 
       const callGetAnalyticsDetails = analyticsGenerator.next();
-      expect(callGetAnalyticsDetails.value).toEqual(call(triggerAnalytics, 1));
+      expect(callGetAnalyticsDetails.value).toStrictEqual(call(triggerAnalytics, 1));
     });
 
-    test("analyticsIssuedFail should report to GA with errorType = 2", () => {
+    it("analyticsIssuedFail should report to GA with errorType = 2", () => {
       const analyticsGenerator = analyticsIssuedFail();
 
       const callGetAnalyticsDetails = analyticsGenerator.next();
-      expect(callGetAnalyticsDetails.value).toEqual(call(triggerAnalytics, 2));
+      expect(callGetAnalyticsDetails.value).toStrictEqual(call(triggerAnalytics, 2));
     });
 
-    test("analyticsRevocationFail should report to GA with errorType = 3", () => {
+    it("analyticsRevocationFail should report to GA with errorType = 3", () => {
       const analyticsGenerator = analyticsRevocationFail();
 
       const callGetAnalyticsDetails = analyticsGenerator.next();
-      expect(callGetAnalyticsDetails.value).toEqual(call(triggerAnalytics, 3));
+      expect(callGetAnalyticsDetails.value).toStrictEqual(call(triggerAnalytics, 3));
     });
   });
 });

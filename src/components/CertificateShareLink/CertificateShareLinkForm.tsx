@@ -1,14 +1,15 @@
 import React, { Component, FunctionComponent, ReactNode } from "react";
 import { QRCode } from "react-qr-svg";
 import { connect } from "react-redux";
-import { getShareLinkState } from "../../reducers/certificate";
+import { RootState } from "../../reducers";
+import { getShareLinkState } from "../../reducers/certificate.selectors";
 import css from "./sharing.scss";
 
 interface CertificateShareLinkFormProps {
   copiedLink: boolean;
   shareLink: {
-    id: string;
-    key: string;
+    id?: string;
+    key?: string;
   };
   shareLinkState: string;
   handleCopyLink: (link: string) => void;
@@ -20,7 +21,7 @@ class CertificateShareLinkForm extends Component<CertificateShareLinkFormProps> 
   render(): ReactNode {
     const { shareLink, shareLinkState, copiedLink, handleCopyLink, handleShareLinkToggle } = this.props;
 
-    const certificateLink = shareLink && `${window.location.origin}/?documentId=${shareLink.id}#${shareLink.key}`;
+    const certificateLink = shareLink && `${window.location.origin}/?documentId=${shareLink.id || ""}#${shareLink.key}`;
     return (
       <div className="container">
         <div className="col-12 justify-content-center">
@@ -91,7 +92,7 @@ const Loader: FunctionComponent = () => (
   </div>
 );
 export default connect(
-  (store) => ({
+  (store: RootState) => ({
     shareLinkState: getShareLinkState(store),
   }),
   () => ({}) // added this back otherwise there is a type issue in CertificateViewer

@@ -1,7 +1,16 @@
 import "isomorphic-fetch";
+import { WrappedDocument } from "@govtechsg/open-attestation";
 import { EMAIL_API_URL } from "../../config";
 
-export default function sendEmail({ certificate, email, captcha }) {
+export default function sendEmail({
+  certificate,
+  email,
+  captcha,
+}: {
+  certificate: WrappedDocument;
+  email: string;
+  captcha: string;
+}): Promise<boolean> {
   return window
     .fetch(EMAIL_API_URL, {
       method: "POST",

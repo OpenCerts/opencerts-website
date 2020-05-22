@@ -4,33 +4,35 @@ import copy from "clipboard-copy";
 import Router from "next/router";
 import React, { Component, ReactNode } from "react";
 import { connect } from "react-redux";
-
+import { RootState } from "../reducers";
 import {
   generateShareLink,
+  sendCertificate,
+  sendCertificateReset,
+  updateCertificate,
+  updateObfuscatedCertificate,
+} from "../reducers/certificate.actions";
+import {
   getCertificate,
   getEmailSendingState,
   getShareLink,
   getShareLinkState,
   getVerificationStatus,
   getVerifying,
-  sendCertificate,
-  sendCertificateReset,
-  updateCertificate,
-  updateObfuscatedCertificate,
-} from "../reducers/certificate";
+} from "../reducers/certificate.selectors";
 import { CertificateViewerContainer } from "./CertificateViewer";
 
 interface ViewerProps {
   updateCertificate: (certificate: WrappedDocument) => void;
-  document: WrappedDocument;
+  document: WrappedDocument | null;
   certificate: WrappedDocument;
   verifying: boolean;
-  verificationStatus: VerificationFragment[];
+  verificationStatus: VerificationFragment[] | null;
   emailSendingState: string;
   sendCertificate: (event: { email: string; captcha: string }) => void;
   sendCertificateReset: () => void;
   generateShareLink: () => void;
-  shareLink: { id: string; key: string };
+  shareLink: { id?: string; key?: string };
   updateObfuscatedCertificate: (updatedDoc: WrappedDocument) => void;
 }
 
@@ -113,7 +115,7 @@ class Viewer extends Component<ViewerProps, ViewerState> {
 }
 
 export const ViewerContainer = connect(
-  (store) => ({
+  (store: RootState) => ({
     document: getCertificate(store),
 
     // Verification statuses used in verifier block
@@ -125,7 +127,7 @@ export const ViewerContainer = connect(
   }),
   (dispatch) => ({
     updateCertificate: (payload: WrappedDocument) => dispatch(updateCertificate(payload)),
-    sendCertificate: (payload: {}) => dispatch(sendCertificate(payload)),
+    sendCertificate: (payload: { email: string; captcha: string }) => dispatch(sendCertificate(payload)),
     sendCertificateReset: () => dispatch(sendCertificateReset()),
     generateShareLink: () => dispatch(generateShareLink()),
     updateObfuscatedCertificate: (updatedDoc: WrappedDocument) => dispatch(updateObfuscatedCertificate(updatedDoc)),
