@@ -19,7 +19,7 @@ const navItems: { id: string; label: string; path: string }[] = [
   },
 ];
 interface NavigationBarProps {
-  active: string;
+  active?: string;
 }
 
 // TODO use next-link

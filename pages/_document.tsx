@@ -4,7 +4,7 @@ import React from "react";
 import { BootstrapCss, BootstrapJs } from "../src/components/Layout/Bootstrap";
 
 export default class MyDocument extends Document {
-  render() {
+  render(): JSX.Element {
     return (
       <html>
         <Head>
