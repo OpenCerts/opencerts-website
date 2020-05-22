@@ -18,7 +18,7 @@ const PAGE_SEO = {
   },
 };
 
-const RegistryPage = () => (
+const RegistryPage: React.FunctionComponent = () => (
   <>
     <NextSeo {...PAGE_SEO} />
     <NavigationBar active="registry" />

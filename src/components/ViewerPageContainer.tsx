@@ -25,7 +25,6 @@ import { CertificateViewerContainer } from "./CertificateViewer";
 interface ViewerProps {
   updateCertificate: (certificate: WrappedDocument) => void;
   document: WrappedDocument | null;
-  certificate: WrappedDocument;
   verifying: boolean;
   verificationStatus: VerificationFragment[] | null;
   emailSendingState: string;

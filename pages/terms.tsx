@@ -18,7 +18,7 @@ const PAGE_SEO = {
   },
 };
 
-const PrivacyPage = () => (
+const PrivacyPage: React.FunctionComponent = () => (
   <>
     <NextSeo {...PAGE_SEO} />
     <NavigationBar active="tou" />

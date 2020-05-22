@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import FooterBar from "../src/components/Layout/FooterBar";
@@ -11,12 +10,17 @@ import {
   retrieveCertificateByAction,
 } from "../src/reducers/certificate.actions";
 
-const HomePage = (props) => {
+interface HomePageProps {
+  resetCertificateState: () => void;
+  retrieveCertificateByAction: (payload: { uri: string; key?: string }) => void;
+  retrieveCertificateByActionFailure: (message: string) => void;
+}
+const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
   const router = useRouter();
   useEffect(() => {
     if (router.query.q) {
       props.resetCertificateState();
-      const action = JSON.parse(window.decodeURI(router.query.q));
+      const action = JSON.parse(window.decodeURI(router.query.q as string));
       if (action.type === "DOCUMENT") {
         props.retrieveCertificateByAction(action.payload);
       } else {
@@ -35,13 +39,7 @@ const HomePage = (props) => {
 };
 
 export default connect(null, {
+  resetCertificateState,
   retrieveCertificateByAction,
   retrieveCertificateByActionFailure,
-  resetCertificateState,
 })(HomePage);
-
-HomePage.propTypes = {
-  retrieveCertificateByAction: PropTypes.func,
-  resetCertificateState: PropTypes.func,
-  retrieveCertificateByActionFailure: PropTypes.func,
-};

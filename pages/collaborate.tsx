@@ -18,7 +18,7 @@ const PAGE_SEO = {
   },
 };
 
-const CollaboratePage = () => (
+const CollaboratePage: React.FunctionComponent = () => (
   <>
     <NextSeo {...PAGE_SEO} />
     <NavigationBar active="collaborate" />

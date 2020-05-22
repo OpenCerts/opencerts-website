@@ -15,7 +15,7 @@ const PAGE_SEO = {
   },
 };
 
-const CollaboratorsTermsPage = () => (
+const CollaboratorsTermsPage: React.FunctionComponent = () => (
   <>
     <NextSeo {...PAGE_SEO} />
     <NavigationBar />
