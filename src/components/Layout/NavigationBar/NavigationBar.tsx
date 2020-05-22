@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import css from "./navBar.scss";
 
@@ -26,9 +27,11 @@ interface NavigationBarProps {
 const NavigationBar: React.FunctionComponent<NavigationBarProps> = ({ active }) => (
   <nav className={`${css.navbar} ${"navbar-expand-md navbar-dark bg-brand-dark"}`}>
     <div className={css.innerbar}>
-      <a className="navbar-brand" href="/">
-        <img src="/static/images/opencertslogo.svg" alt="OpenCerts" />
-      </a>
+      <Link href="/">
+        <a className="navbar-brand">
+          <img src="/static/images/opencertslogo.svg" alt="OpenCerts" />
+        </a>
+      </Link>
       <button
         className={`${css["navbar-toggler"]} d-none`}
         type="button"
@@ -45,7 +48,9 @@ const NavigationBar: React.FunctionComponent<NavigationBarProps> = ({ active }) 
         <ul className="navbar-nav ml-auto d-none d-lg-flex d-xl-flex">
           {navItems.map((n, i) => (
             <li className={`${css["nav-item"]} ${n.id === active ? css.active : ""}`} key={i}>
-              <a href={n.path}>{n.label}</a>
+              <Link href={n.path}>
+                <a>{n.label}</a>
+              </Link>
             </li>
           ))}
         </ul>

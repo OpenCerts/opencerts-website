@@ -18,8 +18,8 @@ interface HomePageProps {
 const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
   const router = useRouter();
   useEffect(() => {
+    props.resetCertificateState();
     if (router.query.q) {
-      props.resetCertificateState();
       const action = JSON.parse(window.decodeURI(router.query.q as string));
       if (action.type === "DOCUMENT") {
         props.retrieveCertificateByAction(action.payload);
