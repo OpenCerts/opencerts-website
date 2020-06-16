@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "../UI/Card/card";
-import css from "../registry.scss";
+import css from "../registry.module.scss";
 import collaborators from "./collaborators.json";
 
 const CollaboratePage: React.FunctionComponent = () => (

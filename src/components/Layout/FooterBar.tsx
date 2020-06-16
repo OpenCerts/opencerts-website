@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import css from "./footer.scss";
+import css from "./footer.module.scss";
 
 const NavigationBar: React.FunctionComponent = () => (
   <div className="bg-brand-dark" id={css["footer-print"]}>

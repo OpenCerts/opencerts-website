@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./privacy.scss";
+import styles from "./privacy.module.scss";
 
 const Content: React.FunctionComponent = () => (
   <div className={styles.main}>

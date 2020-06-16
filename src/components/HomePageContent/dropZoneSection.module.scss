@@ -1,9 +1,5 @@
 @import "../../styles/main.scss";
 
-h3 {
-  color: #fff;
-}
-
 .main {
   max-width: 1280px;
   display: flex;
@@ -20,10 +16,6 @@ h3 {
   }
 }
 
-h5 {
-  font-weight: 700;
-  padding-bottom: 1rem;
-}
 
 @media (max-width: 992px) {
   .main {

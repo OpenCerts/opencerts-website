@@ -10,7 +10,7 @@ import CertificateVerifyBlock from "./CertificateVerifyBlock";
 import ErrorBoundary from "./ErrorBoundary";
 import { FeatureFlagContainer } from "./FeatureFlag";
 import Modal from "./Modal";
-import styles from "./certificateViewer.scss";
+import styles from "./certificateViewer.module.scss";
 
 const CertificateSharingForm = dynamic(import("./CertificateSharing/CertificateSharingForm"));
 

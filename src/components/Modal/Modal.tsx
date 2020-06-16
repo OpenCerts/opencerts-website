@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import css from "./modal.scss";
+import css from "./modal.module.scss";
 
 interface ModalProps {
   show: boolean;

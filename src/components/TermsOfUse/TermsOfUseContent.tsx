@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import styles from "./termsOfUse.scss";
+import styles from "./termsOfUse.module.scss";
 
 const Content: React.FunctionComponent = () => (
   <div className={styles.main}>

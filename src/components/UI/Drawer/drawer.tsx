@@ -1,5 +1,5 @@
 import React, { Component, ReactNode } from "react";
-import css from "./drawer.scss";
+import css from "./drawer.module.scss";
 
 interface Tab {
   label: string;

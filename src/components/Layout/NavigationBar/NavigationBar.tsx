@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import css from "./navBar.scss";
+import css from "./navBar.module.scss";
 
 const navItems: { id: string; label: string; path: string }[] = [
   {

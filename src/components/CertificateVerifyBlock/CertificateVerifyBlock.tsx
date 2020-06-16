@@ -3,7 +3,7 @@ import { OpencertsRegistryVerificationFragmentData } from "@govtechsg/opencerts-
 import React, { useState } from "react";
 import icons from "../ViewerPageImages";
 import DetailedCertificateVerifyBlock from "./DetailedCertificateVerifyBlock";
-import css from "./certificateVerifyBlock.scss";
+import css from "./certificateVerifyBlock.module.scss";
 
 export const getIdentityVerificationText = (verificationStatus: VerificationFragment[]): string => {
   const registryFragmentName = "OpencertsRegistryVerifier";

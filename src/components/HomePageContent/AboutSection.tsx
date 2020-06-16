@@ -1,6 +1,6 @@
 import React from "react";
 import images from "./AboutImages";
-import css from "./aboutSection.scss";
+import css from "./aboutSection.module.scss";
 
 const BenefitsSection: React.FunctionComponent = () => (
   <div className={css.section}>

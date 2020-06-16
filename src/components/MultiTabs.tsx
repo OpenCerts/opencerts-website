@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { resetCertificateState } from "../reducers/certificate.actions";
 import Drawer from "./UI/Drawer";
-import styles from "./certificateViewer.scss";
+import styles from "./certificateViewer.module.scss";
 
 interface MultiTabsProps {
   resetData: () => void;

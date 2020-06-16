@@ -4,7 +4,7 @@ import React, { Ref, useCallback, useEffect, useImperativeHandle, useRef, useSta
 import { LEGACY_OPENCERTS_RENDERER } from "../../config";
 import { analyticsEvent } from "../Analytics";
 import MultiTabs from "../MultiTabs";
-import styles from "./decentralisedRenderer.scss";
+import styles from "./decentralisedRenderer.module.scss";
 
 interface DecentralisedRendererProps {
   rawDocument: WrappedDocument;
