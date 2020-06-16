@@ -5,7 +5,7 @@ import { IS_MAINNET } from "../../config";
 import { updateCertificate } from "../../reducers/certificate.actions";
 import { analyticsEvent } from "../Analytics";
 import CertificateDropzone from "../CertificateDropZone";
-import css from "./dropZoneSection.scss";
+import css from "./dropZoneSection.module.scss";
 
 const DEMO_CERT = IS_MAINNET ? "/static/demo/mainnet.opencerts" : "/static/demo/ropsten.opencerts";
 

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import css from "./viewerStyles.scss";
+import css from "./viewerStyles.module.scss";
 
 interface RetrievalErrorViewProps {
   resetData: () => void;

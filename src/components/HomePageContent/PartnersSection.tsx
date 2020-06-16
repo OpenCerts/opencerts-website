@@ -1,6 +1,6 @@
 import React from "react";
 import Partners from "../../constants/PartnerLogo.json";
-import css from "./partnersPage.scss";
+import css from "./partnersPage.module.scss";
 
 const CarouselSection: React.FunctionComponent = () => {
   const items = Partners.map((item, i) => (

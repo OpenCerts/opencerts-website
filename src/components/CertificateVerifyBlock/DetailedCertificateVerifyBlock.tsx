@@ -3,7 +3,7 @@ import { isValid } from "@govtechsg/opencerts-verify";
 import React, { ReactElement } from "react";
 import { MESSAGES, TYPES } from "../../constants/VerificationErrorMessages";
 import { getRevokeFragment } from "../../services/fragment";
-import css from "./detailedCertificateBlock.scss";
+import css from "./detailedCertificateBlock.module.scss";
 
 interface CheckStatusRowProps {
   message?: string;

@@ -35,7 +35,6 @@
     "@types/google.analytics": "0.0.40",
     "@types/react-google-recaptcha": "^1.1.2",
     "@zeit/next-bundle-analyzer": "^0.1.2",
-    "@zeit/next-sass": "^1.0.1",
     "clipboard-copy": "^3.1.0",
     "debug": "^4.1.1",
     "isomorphic-fetch": "^2.2.1",
@@ -44,7 +43,6 @@
     "next-ga": "^2.3.4",
     "next-redux-wrapper": "^5.0.0",
     "next-seo": "^4.5.0",
-    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-dropzone": "^11.0.1",
@@ -86,6 +84,7 @@
     "jest-sonar-reporter": "^2.0.0",
     "nodemon": "^2.0.4",
     "prettier": "^2.0.5",
+    "sass": "^1.26.8",
     "stylelint-config-recommended": "^3.0.0",
     "stylelint-config-standard": "^20.0.0",
     "testcafe": "^1.8.5"

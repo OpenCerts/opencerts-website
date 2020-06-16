@@ -3,7 +3,7 @@ import { QRCode } from "react-qr-svg";
 import { connect } from "react-redux";
 import { RootState } from "../../reducers";
 import { getShareLinkState } from "../../reducers/certificate.selectors";
-import css from "./sharing.scss";
+import css from "./sharing.module.scss";
 
 interface CertificateShareLinkFormProps {
   copiedLink: boolean;

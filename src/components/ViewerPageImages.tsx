@@ -1,6 +1,6 @@
 /* eslint react/display-name: 0 */
 import React from "react";
-import verifyStyle from "./CertificateVerifyBlock/certificateVerifyBlock.scss";
+import verifyStyle from "./CertificateVerifyBlock/certificateVerifyBlock.module.scss";
 
 const viewerImages = {
   print: () => (

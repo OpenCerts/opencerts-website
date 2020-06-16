@@ -5,8 +5,6 @@ import withGA from "next-ga";
 import withRedux from "next-redux-wrapper";
 import { DefaultSeo } from "next-seo";
 import App from "next/app";
-import { AppInitialProps } from "next/dist/next-server/lib/utils";
-import { AppContext } from "next/dist/pages/_app";
 import Router from "next/router";
 import React from "react";
 import { Provider } from "react-redux";
@@ -38,16 +36,6 @@ interface MyAppProps {
   store: Store<RootState>;
 }
 class MyApp extends App<MyAppProps> {
-  static async getInitialProps({ Component, ctx }: AppContext): Promise<AppInitialProps> {
-    let pageProps = {};
-
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
-    }
-
-    return { pageProps };
-  }
-
   render(): JSX.Element {
     const { Component, pageProps, store } = this.props;
     return (

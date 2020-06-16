@@ -1,6 +1,6 @@
 import React from "react";
 import { faqContent } from "./content";
-import styles from "./faq.scss";
+import styles from "./faq.module.scss";
 
 const FaqContent: React.FunctionComponent = () => (
   <div className={styles.main}>

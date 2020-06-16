@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./CollaboratorsTerms.scss";
+import styles from "./CollaboratorsTerms.module.scss";
 
 export const CollaboratorsTerms: React.FunctionComponent = () => (
   <>

@@ -4,7 +4,7 @@ import Link from "next/link";
 import React from "react";
 import { TYPES, MESSAGES } from "../../../constants/VerificationErrorMessages";
 import { addressInvalid, getAllButRevokeFragment, getRevokeFragment } from "../../../services/fragment";
-import css from "./viewerStyles.scss";
+import css from "./viewerStyles.module.scss";
 interface DetailedErrorsProps {
   verificationStatus: VerificationFragment[];
 }
