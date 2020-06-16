@@ -115,7 +115,6 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
                         download={`${props.certificate.id}.opencert`}
                         target="_black"
                         href={`data:text/plain;,${encodeURIComponent(JSON.stringify(props.document, null, 2))}`}
-                        id="download-link"
                       >
                         <button id="btn-download" className={styles["send-btn"]} title="Download">
                           <i className="fas fa-file-download" style={{ fontSize: "1.5rem" }} />
