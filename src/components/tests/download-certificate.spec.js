@@ -1,8 +1,8 @@
 import { existsSync, readFileSync, unlinkSync } from "fs";
 import downloadsFolder from "downloads-folder";
 import { Selector } from "testcafe";
-import TestDocument1 from "./fixture/sample-dns-verified.json";
 import TestDocument2 from "./fixture/sample-dns-verified-special-characters.json";
+import TestDocument1 from "./fixture/sample-dns-verified.json";
 
 fixture("Download Certificate").page`http://localhost:3000`;
 
@@ -15,6 +15,16 @@ const DownloadButton = Selector("#btn-download");
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(async (_prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());
 
+// From https://stackoverflow.com/a/57624660/950462
+const waitForFileDownload = async (t, filePath) => {
+  // Timeout after 10 seconds
+  for (let i = 0; i < 100; i++) {
+    if (existsSync(filePath)) return true;
+    await t.wait(100);
+  }
+  return existsSync(filePath);
+};
+
 test("Sample document is downloaded correctly", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Document1]);
 
@@ -24,8 +34,7 @@ test("Sample document is downloaded correctly", async (t) => {
   const fileName = await DownloadLink.getAttribute("download");
   const filePath = `${downloadsFolder()}\\${fileName}`;
   await t.click(DownloadButton);
-  await t.wait(5000);
-  await t.expect(existsSync(filePath)).eql(true);
+  await t.expect(await waitForFileDownload(t, filePath)).eql(true);
 
   // We expect the contents of the input to match the downloaded file
   await t.expect(JSON.parse(readFileSync(filePath, "utf8"))).eql(TestDocument1);
@@ -43,8 +52,7 @@ test("Sample document with special characters is downloaded correctly", async (t
   const fileName = await DownloadLink.getAttribute("download");
   const filePath = `${downloadsFolder()}\\${fileName}`;
   await t.click(DownloadButton);
-  await t.wait(5000);
-  await t.expect(existsSync(filePath)).eql(true);
+  await t.expect(await waitForFileDownload(t, filePath)).eql(true);
 
   // We expect the contents of the input to match the downloaded file
   await t.expect(JSON.parse(readFileSync(filePath, "utf8"))).eql(TestDocument2);
