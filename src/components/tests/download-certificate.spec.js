@@ -31,7 +31,7 @@ test("Sample document is downloaded correctly", async (t) => {
 
   // Simulate an OpenCert file download
   const fileName = await DownloadLink.getAttribute("download");
-  const filePath = `${process.env.HOME}/${fileName}`; // Only works for *nix
+  const filePath = `${process.env.HOME}/Downloads/${fileName}`; // Only works for *nix
   await t.click(DownloadButton);
   await t.expect(await waitForFileDownload(t, filePath)).eql(true);
 
@@ -49,7 +49,7 @@ test("Sample document with special characters is downloaded correctly", async (t
 
   // Simulate an OpenCert file download
   const fileName = await DownloadLink.getAttribute("download");
-  const filePath = `${process.env.HOME}/${fileName}`; // Only works for *nix
+  const filePath = `${process.env.HOME}/Downloads/${fileName}`; // Only works for *nix
   await t.click(DownloadButton);
   await t.expect(await waitForFileDownload(t, filePath)).eql(true);
 
