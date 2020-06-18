@@ -5,9 +5,6 @@ jobs:
       - image: "circleci/node:lts-browsers"
     steps:
       - checkout
-      - add_ssh_keys:
-          fingerprints:
-            - "68:96:1e:f3:1b:10:ab:e7:52:c9:8d:11:44:00:ca:7b"
       - run:
           name: install
           command: npm ci
