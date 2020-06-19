@@ -18,6 +18,7 @@ const validateTextContent = async (t, component, texts) =>
 // From https://stackoverflow.com/a/57624660/950462
 const waitForFileDownload = async (t, filePath) => {
   // Timeout after 10 seconds
+  console.log("filePath is now", filePath);
   for (let i = 0; i < 100; i++) {
     if (existsSync(filePath)) return true;
     await t.wait(100);
@@ -32,8 +33,8 @@ test("Sample document is downloaded correctly", async (t) => {
 
   // Simulate an OpenCert file download
   const fileName = await DownloadLink.getAttribute("download");
-  const filePath = `${downloadsFolder()}/${fileName}`;
   await t.click(DownloadButton);
+  const filePath = `${downloadsFolder()}/${fileName}`;
   await t.expect(await waitForFileDownload(t, filePath)).eql(true);
 
   // We expect the contents of the input to match the downloaded file
@@ -50,8 +51,8 @@ test("Sample document with special characters is downloaded correctly", async (t
 
   // Simulate an OpenCert file download
   const fileName = await DownloadLink.getAttribute("download");
-  const filePath = `${downloadsFolder()}/${fileName}`;
   await t.click(DownloadButton);
+  const filePath = `${downloadsFolder()}/${fileName}`;
   await t.expect(await waitForFileDownload(t, filePath)).eql(true);
 
   // We expect the contents of the input to match the downloaded file
