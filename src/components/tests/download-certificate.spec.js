@@ -18,7 +18,6 @@ const validateTextContent = async (t, component, texts) =>
 // From https://stackoverflow.com/a/57624660/950462
 const waitForFileDownload = async (t, filePath) => {
   // Timeout after 10 seconds
-  console.log("filePath is now", filePath);
   for (let i = 0; i < 100; i++) {
     if (existsSync(filePath)) return true;
     await t.wait(100);
