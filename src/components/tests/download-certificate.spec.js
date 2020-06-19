@@ -1,8 +1,38 @@
-import { existsSync, readFileSync, unlinkSync } from "fs";
+import { existsSync, readFileSync, unlinkSync, statSync } from "fs";
 import { Selector } from "testcafe";
 import TestDocument2 from "./fixture/sample-dns-verified-special-characters.json";
 import TestDocument1 from "./fixture/sample-dns-verified.json";
 
+const execSync = require("child_process").execSync;
+
+function unix() {
+  console.log("go unix go");
+  let dir;
+  try {
+    dir = execSync("xdg-user-dir DOWNLOAD");
+  } catch (_) {
+    console.log("caught xdg :(");
+  }
+
+  console.log("got dir", { dir });
+  if (dir) return dir;
+
+  let stat;
+  const homeDownloads = `${process.env.HOME}/Downloads`;
+  try {
+    stat = statSync(homeDownloads);
+  } catch (_) {
+    console.log("caught stat sync");
+  }
+
+  console.log("got home dl", { homeDownloads });
+  if (stat) return homeDownloads;
+
+  console.log("return tmp");
+  return "/tmp/";
+}
+
+console.log(unix());
 fixture("Download Certificate").page`http://localhost:3000`;
 
 const Document1 = "./fixture/sample-dns-verified.json";
