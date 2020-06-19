@@ -1,5 +1,6 @@
 import { existsSync, readFileSync, unlinkSync } from "fs";
 import { Selector } from "testcafe";
+import downloadsFolder from "downloads-folder";
 import TestDocument2 from "./fixture/sample-dns-verified-special-characters.json";
 import TestDocument1 from "./fixture/sample-dns-verified.json";
 
@@ -31,7 +32,8 @@ test("Sample document is downloaded correctly", async (t) => {
 
   // Simulate an OpenCert file download
   const fileName = await DownloadLink.getAttribute("download");
-  const filePath = `${process.env.HOME}/Downloads/${fileName}`; // Only works for *nix
+  const filePath = `${downloadsFolder()}/${fileName}`;
+  console.log(filePath);
   await t.click(DownloadButton);
   await t.expect(await waitForFileDownload(t, filePath)).eql(true);
 
@@ -49,7 +51,7 @@ test("Sample document with special characters is downloaded correctly", async (t
 
   // Simulate an OpenCert file download
   const fileName = await DownloadLink.getAttribute("download");
-  const filePath = `${process.env.HOME}/Downloads/${fileName}`; // Only works for *nix
+  const filePath = `${downloadsFolder()}/${fileName}`;
   await t.click(DownloadButton);
   await t.expect(await waitForFileDownload(t, filePath)).eql(true);
 
