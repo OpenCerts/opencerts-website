@@ -1,6 +1,6 @@
 import { existsSync, readFileSync, unlinkSync } from "fs";
-import { Selector } from "testcafe";
 import downloadsFolder from "downloads-folder";
+import { Selector } from "testcafe";
 import TestDocument2 from "./fixture/sample-dns-verified-special-characters.json";
 import TestDocument1 from "./fixture/sample-dns-verified.json";
 
@@ -33,7 +33,6 @@ test("Sample document is downloaded correctly", async (t) => {
   // Simulate an OpenCert file download
   const fileName = await DownloadLink.getAttribute("download");
   const filePath = `${downloadsFolder()}/${fileName}`;
-  console.log(filePath);
   await t.click(DownloadButton);
   await t.expect(await waitForFileDownload(t, filePath)).eql(true);
 
