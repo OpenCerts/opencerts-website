@@ -43,10 +43,10 @@ export const sendEventCertificateViewedDetailed = ({
   let issuerName = "";
 
   const separator = ";";
-  const store = issuer.certificateStore || issuer.documentStore || issuer.tokenRegistry;
-  const id = certificateData ? certificateData.id : "";
-  const name = certificateData ? certificateData.name : "";
-  const issuedOn = certificateData ? certificateData.issuedOn : "";
+  const store = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? "";
+  const id = certificateData?.id ?? "";
+  const name = certificateData?.name ?? "";
+  const issuedOn = certificateData?.issuedOn ?? "";
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore ignoring because typescript complain the key cant be undefined and there is no match between string type and keyof typeof registry.issuers
   const registryIssuer = registry.issuers[store];
@@ -54,11 +54,13 @@ export const sendEventCertificateViewedDetailed = ({
   if (registryIssuer) {
     issuerName = registryIssuer.name;
     label = `"store":"${store}"${separator}"document_id":"${id}"${separator}"name":"${name}"${separator}"issued_on":"${issuedOn}"${separator}"issuer_name":"${
-      registryIssuer.name || ""
-    }"${separator}"issuer_id":"${registryIssuer.id || ""}"`;
+      issuerName ?? ""
+    }"${separator}"issuer_id":"${registryIssuer.id ?? ""}"`;
   } else if (issuer.identityProof) {
     issuerName = issuer.identityProof.location;
-    label = `"store":"${store}"${separator}"document_id":"${id}"${separator}"name":"${name}"${separator}"issued_on":"${issuedOn}"${separator}"issuer_name":"${issuer.identityProof.location}"`;
+    label = `"store":"${store}"${separator}"document_id":"${id}"${separator}"name":"${name}"${separator}"issued_on":"${issuedOn}"${separator}"issuer_name":"${
+      issuerName ?? ""
+    }"`;
   } else {
     label = "Something went wrong, please check the analytics code of sendEventCertificateViewedDetailed";
   }
@@ -68,10 +70,10 @@ export const sendEventCertificateViewedDetailed = ({
     label,
     options: {
       nonInteraction: true,
-      dimension1: store ?? "",
-      dimension2: id ?? "",
-      dimension3: name ?? "",
-      dimension4: issuedOn ?? "",
+      dimension1: store,
+      dimension2: id,
+      dimension3: name,
+      dimension4: issuedOn,
       dimension5: issuerName ?? "",
       dimension6: registryIssuer?.id ?? "",
     },
