@@ -8,7 +8,7 @@
     "dev": "next",
     "stylelint": "stylelint 'src/**/*.scss'; exit 0",
     "stylelint:fix": "stylelint 'src/**/*.scss' --syntax scss --fix",
-    "lint": "eslint . --ext .js,.tsx --max-warnings 0",
+    "lint": "eslint . --ext .js,.tsx,.ts --max-warnings 0",
     "lint:fix": "npm run lint -- --fix",
     "build": "next build",
     "start:local": "npm run build && cross-env LEGACY_RENDERER_URL=\"http://localhost:3000\" next start -p 3001",

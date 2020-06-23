@@ -1,7 +1,7 @@
 import { all } from "redux-saga/effects";
 import certificateSaga from "./certificate";
 
-function* rootSaga() {
+function* rootSaga(): Generator {
   yield all([...certificateSaga]);
 }
 
