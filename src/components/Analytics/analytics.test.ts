@@ -216,7 +216,7 @@ describe("sendEventCertificateViewedDetailed", () => {
           dimension3: "cert name",
           dimension4: "a date",
           dimension5: "aa.com",
-          dimension6: "",
+          dimension6: "(not set)",
         });
       });
     });
