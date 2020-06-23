@@ -1,10 +1,14 @@
 import { existsSync, readFileSync, unlinkSync } from "fs";
 import downloadsFolder from "downloads-folder";
-import { Selector } from "testcafe";
+import { Selector, t } from "testcafe";
 import TestDocument2 from "./fixture/sample-dns-verified-special-characters.json";
 import TestDocument1 from "./fixture/sample-dns-verified.json";
 
-fixture("Download Certificate").page`http://localhost:3000`;
+fixture("Download Certificate").page`http://localhost:3000`.afterEach(async (t) => {
+  // Clean up files after each test
+  const filePath = t.ctx.filePath;
+  await unlinkSync(filePath);
+});
 
 const Document1 = "./fixture/sample-dns-verified.json";
 const Document2 = "./fixture/sample-dns-verified-special-characters.json";
@@ -34,13 +38,11 @@ test("Sample document is downloaded correctly", async (t) => {
   const fileName = await DownloadLink.getAttribute("download");
   await t.click(DownloadButton);
   const filePath = `${downloadsFolder()}/${fileName}`;
+  t.ctx.filePath = filePath;
   await t.expect(await waitForFileDownload(t, filePath)).eql(true);
 
   // We expect the contents of the input to match the downloaded file
   await t.expect(JSON.parse(readFileSync(filePath, "utf8"))).eql(TestDocument1);
-
-  // Clean up
-  await unlinkSync(filePath);
 });
 
 test("Sample document with special characters is downloaded correctly", async (t) => {
@@ -52,11 +54,9 @@ test("Sample document with special characters is downloaded correctly", async (t
   const fileName = await DownloadLink.getAttribute("download");
   await t.click(DownloadButton);
   const filePath = `${downloadsFolder()}/${fileName}`;
+  t.ctx.filePath = filePath;
   await t.expect(await waitForFileDownload(t, filePath)).eql(true);
 
   // We expect the contents of the input to match the downloaded file
   await t.expect(JSON.parse(readFileSync(filePath, "utf8"))).eql(TestDocument2);
-
-  // Clean up
-  await unlinkSync(filePath);
 });
