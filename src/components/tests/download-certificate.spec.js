@@ -1,6 +1,6 @@
 import { existsSync, readFileSync, unlinkSync } from "fs";
 import downloadsFolder from "downloads-folder";
-import { Selector, t } from "testcafe";
+import { Selector } from "testcafe";
 import TestDocument2 from "./fixture/sample-dns-verified-special-characters.json";
 import TestDocument1 from "./fixture/sample-dns-verified.json";
 
@@ -54,7 +54,7 @@ test("Sample document with special characters is downloaded correctly", async (t
   const fileName = await DownloadLink.getAttribute("download");
   await t.click(DownloadButton);
   const filePath = `${downloadsFolder()}/${fileName}`;
-  t.ctx.filePath = filePath;
+  t.ctx.filePath = filePath; // For use in cleanup
   await t.expect(await waitForFileDownload(t, filePath)).eql(true);
 
   // We expect the contents of the input to match the downloaded file
