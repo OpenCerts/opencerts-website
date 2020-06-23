@@ -1,13 +1,13 @@
 import { WrappedDocument } from "@govtechsg/open-attestation";
 import React, { Component, ReactNode } from "react";
 import { connect } from "react-redux";
-import { IS_MAINNET } from "../../config";
+import { NETWORK_NAME } from "../../config";
 import { updateCertificate } from "../../reducers/certificate.actions";
 import { analyticsEvent } from "../Analytics";
 import CertificateDropzone from "../CertificateDropZone";
 import css from "./dropZoneSection.module.scss";
 
-const DEMO_CERT = IS_MAINNET ? "/static/demo/mainnet.opencerts" : "/static/demo/ropsten.opencerts";
+const DEMO_CERT = `/static/demo/${NETWORK_NAME}.opencert`;
 
 function demoCount(): void {
   analyticsEvent(window, {
@@ -26,7 +26,7 @@ const DraggableDemoCertificate: React.FunctionComponent = () => (
           onDragStart={(e) => e.dataTransfer.setData(DEMO_CERT, "true")}
           onDragEnd={demoCount}
         >
-          <a href={DEMO_CERT} download rel="noindex nofollow">
+          <a href={DEMO_CERT} download="demo.opencert" rel="noindex nofollow">
             <img style={{ cursor: "grabbing" }} src="/static/images/dropzone/cert.png" width="100%" />
           </a>
         </div>

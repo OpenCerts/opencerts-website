@@ -137,7 +137,7 @@
       "logo": "/static/images/SP_logo.svg",
       "id": "sp-registry"
     },
-	  "0x45b04D7EFdfA1B25296e5BC9eC88E3ae3C53CE9f": {
+    "0x45b04D7EFdfA1B25296e5BC9eC88E3ae3C53CE9f": {
       "name": "Singapore University of Social Sciences",
       "displayCard": true,
       "website": "https://www.suss.edu.sg/",
@@ -155,7 +155,7 @@
       "logo": "/static/images/NIEC_logo.png",
       "id": "niec-registry"
     },
-	"0xa53C84A422D9cCc5C4aDA9fa65B03e2Bb25E2D03": {
+    "0xa53C84A422D9cCc5C4aDA9fa65B03e2Bb25E2D03": {
       "name": "Lasalle College of the Arts",
       "displayCard": true,
       "website": "https://www.lasalle.edu.sg/",
@@ -164,7 +164,7 @@
       "logo": "/static/images/LASALLE_logo.png",
       "id": "lasalle-registry"
     },
-	"0x5af87c7C799FdD24418f436ccc5d0ef00a1D755B": {
+    "0x5af87c7C799FdD24418f436ccc5d0ef00a1D755B": {
       "name": "Nanyang Academy of Fine Arts",
       "displayCard": true,
       "website": "https://www.nafa.edu.sg/",
@@ -180,7 +180,7 @@
     "0x3FFB6b913E9874c7ddabD564d85676Bc5cAd16d4": {
       "name": "ROPSTEN: Nanyang Technological University",
       "displayCard": false
-	},
+    },
     "0xdcb5bce006f5f369579854ec32ec6fa53ba915be": {
       "name": "ROPSTEN: Nanyang Polytechnic",
       "displayCard": false
@@ -245,8 +245,12 @@
       "name": "ROPSTEN: National Institute of Early Childhood Development",
       "displayCard": false
     },
-	"0xb02bcBb4865d0301F6e4A5f46043498f7c348E03": {
+    "0xb02bcBb4865d0301F6e4A5f46043498f7c348E03": {
       "name": "ROPSTEN: Lasalle College of the Arts",
+      "displayCard": false
+    },
+    "0x7Ee2B9a0043Bda975398477695ba5c2361acC50C": {
+      "name": "RINKEBY: Government Technology Agency of Singapore (GovTech)",
       "displayCard": false
     }
   }
