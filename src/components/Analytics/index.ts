@@ -68,12 +68,12 @@ export const sendEventCertificateViewedDetailed = ({
     label,
     options: {
       nonInteraction: true,
-      dimension1: store,
-      dimension2: id,
-      dimension3: name,
-      dimension4: issuedOn,
-      dimension5: issuerName,
-      dimension6: registryIssuer?.id ?? null,
+      dimension1: store ?? "",
+      dimension2: id ?? "",
+      dimension3: name ?? "",
+      dimension4: issuedOn ?? "",
+      dimension5: issuerName ?? "",
+      dimension6: registryIssuer?.id ?? "",
     },
   });
 };
