@@ -4,30 +4,27 @@ import { getLogger } from "../utils/logger";
 const { trace } = getLogger("config");
 const { publicRuntimeConfig } = getConfig();
 
-export const NETWORK_TYPES = {
-  INFURA_MAINNET: "INFURA_MAINNET",
-  INFURA_ROPSTEN: "INFURA_ROPSTEN",
-  INJECTED: "INJECTED",
-  CUSTOM: "CUSTOM",
-  MOCK: "MOCK",
-};
-
 export const URL = "https://opencerts.io";
-export const API_MAIN_URL = "https://api.opencerts.io";
-export const API_ROPSTEN_URL = "https://api-ropsten.opencerts.io";
+const API_MAIN_URL = "https://api.opencerts.io";
+const API_ROPSTEN_URL = "https://api-ropsten.opencerts.io";
+const API_RINKEBY_URL = "https://api-rinkeby.opencerts.io";
 
 const GA_PRODUCTION_ID = "UA-130492260-1";
 const GA_DEVELOPMENT_ID = "UA-130492260-2";
 
 export const IS_MAINNET = publicRuntimeConfig.network === "mainnet";
-export const NETWORK_NAME = IS_MAINNET ? "homestead" : "ropsten"; // expected by ethers
+export const NETWORK_NAME = (IS_MAINNET ? "homestead" : publicRuntimeConfig.network) ?? "ropsten"; // expected by ethers
 
-export const DEFAULT_NETWORK = IS_MAINNET ? NETWORK_TYPES.INFURA_MAINNET : NETWORK_TYPES.INFURA_ROPSTEN;
 export const GA_ID = IS_MAINNET ? GA_PRODUCTION_ID : GA_DEVELOPMENT_ID;
 export const CAPTCHA_CLIENT_KEY = "6LfiL3EUAAAAAHrfLvl2KhRAcXpanNXDqu6M0CCS";
 
-export const EMAIL_API_URL = IS_MAINNET ? `${API_MAIN_URL}/email` : `${API_ROPSTEN_URL}/email`;
-export const SHARE_LINK_API_URL = IS_MAINNET ? `${API_MAIN_URL}/storage` : `${API_ROPSTEN_URL}/storage`;
+const getApiUrl = (networkName: string): string => {
+  if (networkName === "homestead") return API_MAIN_URL;
+  else if (networkName === "rinkeby") return API_RINKEBY_URL;
+  return API_ROPSTEN_URL;
+};
+export const EMAIL_API_URL = `${getApiUrl(NETWORK_NAME)}/email`;
+export const SHARE_LINK_API_URL = `${getApiUrl(NETWORK_NAME)}/storage`;
 export const SHARE_LINK_TTL = 1209600;
 
 export const LEGACY_OPENCERTS_RENDERER = publicRuntimeConfig.legacyRendererUrl || "https://legacy.opencerts.io/";
@@ -58,6 +55,6 @@ export const DEFAULT_SEO = {
   },
 };
 
-trace(`DEFAULT_NETWORK: ${DEFAULT_NETWORK}`);
+trace(`NETWORK: ${NETWORK_NAME}`);
 trace(`CAPTCHA_CLIENT_KEY: ${CAPTCHA_CLIENT_KEY}`);
 trace(`EMAIL_API_URL: ${EMAIL_API_URL}`);
