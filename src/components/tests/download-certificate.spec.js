@@ -38,7 +38,7 @@ test("Sample document is downloaded correctly", async (t) => {
   const fileName = await DownloadLink.getAttribute("download");
   await t.click(DownloadButton);
   const filePath = `${downloadsFolder()}/${fileName}`;
-  t.ctx.filePath = filePath;
+  t.ctx.filePath = filePath; // For use in cleanup
   await t.expect(await waitForFileDownload(t, filePath)).eql(true);
 
   // We expect the contents of the input to match the downloaded file
