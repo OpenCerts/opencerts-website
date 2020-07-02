@@ -1,6 +1,6 @@
 import { FrameConnector, LegacyHostActions } from "@govtechsg/decentralized-renderer-react-components";
 import { getData, obfuscateDocument, utils, WrappedDocument, v2 } from "@govtechsg/open-attestation";
-import React, { Ref, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
+import React, { Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 import { LEGACY_OPENCERTS_RENDERER } from "../../config";
 import { analyticsEvent, sendEventCertificateViewedDetailed } from "../Analytics";
 import MultiTabs from "../MultiTabs";
@@ -18,9 +18,9 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
 }) => {
   const toFrame = useRef<LegacyHostActions>();
   const documentRef = useRef(rawDocument);
+  const document = useMemo(() => getData(rawDocument), [rawDocument]);
   const [height, setHeight] = useState(0);
   const [templates, setTemplates] = useState<{ id: string; label: string }[]>([]);
-  const document = getData(rawDocument);
 
   useImperativeHandle(forwardedRef, () => ({
     print() {
