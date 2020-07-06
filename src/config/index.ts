@@ -14,6 +14,7 @@ const GA_DEVELOPMENT_ID = "UA-130492260-2";
 
 export const IS_MAINNET = publicRuntimeConfig.network === "mainnet";
 export const NETWORK_NAME = (IS_MAINNET ? "homestead" : publicRuntimeConfig.network) ?? "ropsten"; // expected by ethers
+export const GOOGLE_API_KEY = publicRuntimeConfig.googleApiKey;
 
 export const GA_ID = IS_MAINNET ? GA_PRODUCTION_ID : GA_DEVELOPMENT_ID;
 export const CAPTCHA_CLIENT_KEY = "6LfiL3EUAAAAAHrfLvl2KhRAcXpanNXDqu6M0CCS";
