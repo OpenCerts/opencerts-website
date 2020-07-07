@@ -22,6 +22,9 @@ module.exports = withBundleAnalyzer({
       "/faq": { page: "/faq" },
     };
   },
+  env: {
+    ETHEREUM_PROVIDER: process.env.ETHEREUM_PROVIDER || "infura",
+  },
   // Variables passed to both server and client
   publicRuntimeConfig: {
     network: process.env.NET,
