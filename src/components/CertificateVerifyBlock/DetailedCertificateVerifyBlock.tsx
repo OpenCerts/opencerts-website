@@ -21,7 +21,7 @@ const CheckStatusRow: React.FunctionComponent<CheckStatusRowProps> = ({ message,
 interface DetailedCertificateVerifyBlockProps {
   verificationStatus: VerificationFragment[];
 }
-const DetailedCertificateVerifyBlock: React.FunctionComponent<DetailedCertificateVerifyBlockProps> = (props) => {
+export const DetailedCertificateVerifyBlock: React.FunctionComponent<DetailedCertificateVerifyBlockProps> = (props) => {
   const borderColor = isValid(props.verificationStatus) ? "valid-border-color" : "invalid-border-color";
   const revokeFragment = [getRevokeFragment(props.verificationStatus)];
   return (
@@ -62,5 +62,3 @@ const DetailedCertificateVerifyBlock: React.FunctionComponent<DetailedCertificat
     </div>
   );
 };
-
-export default DetailedCertificateVerifyBlock;

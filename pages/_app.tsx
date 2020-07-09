@@ -12,7 +12,7 @@ import { Store } from "redux";
 import { DEFAULT_SEO, ENVIRONMENT, GA_ID } from "../src/config";
 import { RootState } from "../src/reducers";
 import { updateFeatureToggles } from "../src/reducers/featureToggle.actions";
-import initStore from "../src/store";
+import { initStore } from "../src/store";
 
 interface FeatureFlagLoaderProps {
   dispatch: Store<RootState>["dispatch"];

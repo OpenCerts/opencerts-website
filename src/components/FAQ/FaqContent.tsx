@@ -2,7 +2,7 @@ import React from "react";
 import { faqContent } from "./content";
 import styles from "./faq.module.scss";
 
-const FaqContent: React.FunctionComponent = () => (
+export const FaqContent: React.FunctionComponent = () => (
   <div className={styles.main}>
     <div className={styles["header-container"]}>
       <h1 className={styles.title}>Frequently Asked Questions</h1>
@@ -26,5 +26,3 @@ const FaqContent: React.FunctionComponent = () => (
     ))}
   </div>
 );
-
-export default FaqContent;

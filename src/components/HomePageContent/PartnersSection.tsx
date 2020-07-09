@@ -13,12 +13,10 @@ const CarouselSection: React.FunctionComponent = () => {
   return <div className="d-flex flex-wrap">{items}</div>;
 };
 
-const PartnerSection: React.FunctionComponent = () => (
+export const PartnerSection: React.FunctionComponent = () => (
   <div className="row" id={css.partners}>
     <div className={css.main}>
       <CarouselSection />
     </div>
   </div>
 );
-
-export default PartnerSection;

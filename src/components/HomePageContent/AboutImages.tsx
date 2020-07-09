@@ -1,7 +1,7 @@
 /* eslint react/display-name: 0 */
 import React from "react";
 
-const aboutImages = {
+export const aboutImages = {
   valid: () => (
     <i aria-hidden="true">
       <svg xmlns="http://www.w3.org/2000/svg" width="73.4" height="83.2" viewBox="0 0 73.4 83.2">
@@ -825,5 +825,3 @@ const aboutImages = {
     </i>
   ),
 };
-
-export default aboutImages;

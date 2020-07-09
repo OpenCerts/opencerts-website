@@ -92,4 +92,6 @@ class CertificateSharingForm extends Component<CertificateSharingFormProps, Cert
     );
   }
 }
+// looks needed for dynamic import
+// eslint-disable-next-line import/no-default-export
 export default CertificateSharingForm;

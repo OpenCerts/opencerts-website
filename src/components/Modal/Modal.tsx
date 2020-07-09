@@ -6,7 +6,7 @@ interface ModalProps {
   toggle: () => void;
   children: ReactNode;
 }
-const Modal: React.FunctionComponent<ModalProps> = ({ show, toggle, children }) =>
+export const Modal: React.FunctionComponent<ModalProps> = ({ show, toggle, children }) =>
   show ? (
     <div className={css.modal}>
       <div className={`${css["modal-content"]} p-3`}>
@@ -18,5 +18,3 @@ const Modal: React.FunctionComponent<ModalProps> = ({ show, toggle, children }) 
       <div style={{ position: "fixed", zIndex: 10 }} className="modal-backdrop fade show" onClick={() => toggle()} />
     </div>
   ) : null;
-
-export default Modal;

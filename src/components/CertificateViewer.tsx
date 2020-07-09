@@ -5,11 +5,11 @@ import Link from "next/link";
 import React from "react";
 import { connect } from "react-redux";
 import { updateObfuscatedCertificate as updateObfuscatedCertificateAction } from "../reducers/certificate.actions";
-import CertificateShareLinkForm from "./CertificateShareLink/CertificateShareLinkForm";
-import CertificateVerifyBlock from "./CertificateVerifyBlock";
-import ErrorBoundary from "./ErrorBoundary";
+import { CertificateShareLinkFormContainer } from "./CertificateShareLink/CertificateShareLinkForm";
+import { CertificateVerifyBlock } from "./CertificateVerifyBlock";
+import { ErrorBoundary } from "./ErrorBoundary";
 import { FeatureFlagContainer } from "./FeatureFlag";
-import Modal from "./Modal";
+import { Modal } from "./Modal";
 import styles from "./certificateViewer.module.scss";
 
 const CertificateSharingForm = dynamic(import("./CertificateSharing/CertificateSharingForm"));
@@ -139,7 +139,7 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
             />
           </Modal>
           <Modal show={props.showShareLink} toggle={props.handleShareLinkToggle}>
-            <CertificateShareLinkForm
+            <CertificateShareLinkFormContainer
               shareLink={props.shareLink}
               copiedLink={props.copiedLink}
               handleShareLinkToggle={props.handleShareLinkToggle}

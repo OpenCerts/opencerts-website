@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import styles from "./termsOfUse.module.scss";
 
-const Content: React.FunctionComponent = () => (
+export const TermsOfUseContent: React.FunctionComponent = () => (
   <div className={styles.main}>
     <div className={styles["header-container"]}>
       <h1 className={styles.title}>Terms of Use</h1>
@@ -416,5 +416,3 @@ const Content: React.FunctionComponent = () => (
     </div>
   </div>
 );
-
-export default Content;

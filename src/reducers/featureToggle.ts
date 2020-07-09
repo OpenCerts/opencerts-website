@@ -5,7 +5,7 @@ interface FeatureToggleState {
 }
 const initialState: FeatureToggleState = {};
 
-export default function reducer(state = initialState, action: FeatureTogglesTypes): FeatureToggleState {
+export function reducer(state = initialState, action: FeatureTogglesTypes): FeatureToggleState {
   switch (action.type) {
     case "UPDATE_FEATURE_TOGGLES":
       return action.payload;

@@ -14,7 +14,7 @@ interface DrawerState {
   showAbsHeader: boolean;
 }
 
-export default class Drawer extends Component<DrawerProps, DrawerState> {
+export class Drawer extends Component<DrawerProps, DrawerState> {
   constructor(props: DrawerProps) {
     super(props);
     this.state = {

@@ -1,6 +1,6 @@
 import { mount } from "enzyme";
 import React from "react";
-import DetailedCertificateVerifyBlock from "./DetailedCertificateVerifyBlock";
+import { DetailedCertificateVerifyBlock } from "./DetailedCertificateVerifyBlock";
 
 describe("detailedCertificateVerifyBlock", () => {
   it("displays that the certificate has been tampered with when hashStatus is false", () => {

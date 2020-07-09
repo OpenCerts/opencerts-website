@@ -1,3 +1,1 @@
-import CertificateDropZoneContainer from "./CertificateDropZoneContainer";
-
-export default CertificateDropZoneContainer;
+export * from "./CertificateDropZoneContainer";

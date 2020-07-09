@@ -1,3 +1,1 @@
-import PrivacyContent from "./PrivacyContent";
-
-export default PrivacyContent;
+export * from "./PrivacyContent";

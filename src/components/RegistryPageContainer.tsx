@@ -1,7 +1,7 @@
 import { groupBy } from "lodash";
 import React from "react";
 import registry from "../../public/static/registry.json";
-import Card from "./UI/Card/card";
+import { Card } from "./UI/Card/card";
 import css from "./registry.module.scss";
 
 const partners = Object.keys(registry.issuers)
@@ -13,7 +13,7 @@ const partners = Object.keys(registry.issuers)
   }))
   .filter((partner) => partner.displayCard);
 
-const RegistryPage: React.FunctionComponent = () => {
+export const RegistryPage: React.FunctionComponent = () => {
   const groups = groupBy(partners, (partner) => partner.group || partner.id);
   return (
     <>
@@ -44,5 +44,3 @@ const RegistryPage: React.FunctionComponent = () => {
     </>
   );
 };
-
-export default RegistryPage;

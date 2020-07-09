@@ -5,5 +5,3 @@ export const LOG_LEVEL = {
   INVALID: "INVALID",
   WARNING: "WARNING",
 };
-
-export default { LOG_LEVEL };

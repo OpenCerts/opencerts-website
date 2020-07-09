@@ -1,14 +1,12 @@
 import React from "react";
-import AboutSection from "./HomePageContent/AboutSection";
-import DropZoneSection from "./HomePageContent/DropZoneSection";
-import PartnerSection from "./HomePageContent/PartnersSection";
+import { AboutSection } from "./HomePageContent/AboutSection";
+import { DropZoneSectionContainer } from "./HomePageContent/DropZoneSection";
+import { PartnerSection } from "./HomePageContent/PartnersSection";
 
-const MainPageContainer: React.FunctionComponent = () => (
+export const MainPageContainer: React.FunctionComponent = () => (
   <div className="container-fluid">
-    <DropZoneSection />
+    <DropZoneSectionContainer />
     <PartnerSection />
     <AboutSection />
   </div>
 );
-
-export default MainPageContainer;

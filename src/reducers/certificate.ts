@@ -60,7 +60,7 @@ export const initialState: CertificateState = {
 };
 
 // Reducers
-export default function reducer(state = initialState, action: CertificateActionTypes): CertificateState {
+export function reducer(state = initialState, action: CertificateActionTypes): CertificateState {
   switch (action.type) {
     case RESET_CERTIFICATE:
       return {

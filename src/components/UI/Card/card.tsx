@@ -13,7 +13,7 @@ interface CardProps {
     description: string;
   }[];
 }
-const Card: React.FunctionComponent<CardProps> = (props) => (
+export const Card: React.FunctionComponent<CardProps> = (props) => (
   <div
     id={props.info[0].id}
     className={`col-lg-4 col-md-6 col-sm-12 ${css["mb-3"]} ${css["m-pd-0"]}`}
@@ -72,5 +72,3 @@ const Card: React.FunctionComponent<CardProps> = (props) => (
     </span>
   </div>
 );
-
-export default Card;

@@ -4,7 +4,7 @@ import css from "./error.module.scss";
 interface ErrorBoundaryState {
   hasError: boolean;
 }
-export default class ErrorBoundary extends Component<{}, ErrorBoundaryState> {
+export class ErrorBoundary extends Component<{}, ErrorBoundaryState> {
   constructor(props: {}) {
     super(props);
     this.state = { hasError: false };

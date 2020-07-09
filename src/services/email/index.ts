@@ -2,7 +2,7 @@ import "isomorphic-fetch";
 import { WrappedDocument } from "@govtechsg/open-attestation";
 import { EMAIL_API_URL } from "../../config";
 
-export default function sendEmail({
+export function sendEmail({
   certificate,
   email,
   captcha,
