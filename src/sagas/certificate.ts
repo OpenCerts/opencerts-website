@@ -26,7 +26,7 @@ import {
   verifyingCertificateErrored,
 } from "../reducers/certificate.actions";
 import { getCertificate } from "../reducers/certificate.selectors";
-import sendEmail from "../services/email";
+import { sendEmail } from "../services/email";
 import { certificateNotIssued, getAllButRevokeFragment, getRevokeFragment } from "../services/fragment";
 import { generateLink } from "../services/link";
 import { getLogger } from "../utils/logger";
@@ -216,7 +216,7 @@ export function* retrieveCertificateByAction({ payload: { uri, key } }: { payloa
 }
 
 // TODO https://github.com/redux-saga/redux-saga/issues/1883
-export default [
+export const sagas = [
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
   takeEvery(RETRIEVE_CERTIFICATE_BY_ACTION, retrieveCertificateByAction),

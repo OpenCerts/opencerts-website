@@ -3,7 +3,7 @@ import { getData, obfuscateDocument, utils, WrappedDocument, v2 } from "@govtech
 import React, { Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 import { LEGACY_OPENCERTS_RENDERER } from "../../config";
 import { analyticsEvent, sendEventCertificateViewedDetailed } from "../Analytics";
-import MultiTabs from "../MultiTabs";
+import { MutiTabsContainer } from "../MultiTabs";
 import styles from "./decentralisedRenderer.module.scss";
 
 interface DecentralisedRendererProps {
@@ -78,7 +78,7 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
 
   return (
     <>
-      <MultiTabs
+      <MutiTabsContainer
         templates={templates}
         onSelectTemplate={(index) => {
           if (toFrame.current) toFrame.current.selectTemplateTab(index);
@@ -108,4 +108,6 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
   );
 };
 
+// looks needed for dynamic import
+// eslint-disable-next-line import/no-default-export
 export default DecentralisedRenderer;

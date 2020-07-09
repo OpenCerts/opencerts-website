@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import css from "./footer.module.scss";
 
-const NavigationBar: React.FunctionComponent = () => (
+export const FooterBar: React.FunctionComponent = () => (
   <div className="bg-brand-dark" id={css["footer-print"]}>
     <div className={css.footer}>
       <div>
@@ -36,5 +36,3 @@ const NavigationBar: React.FunctionComponent = () => (
     </div>
   </div>
 );
-
-export default NavigationBar;

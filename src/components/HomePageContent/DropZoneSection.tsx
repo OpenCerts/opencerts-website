@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { NETWORK_NAME } from "../../config";
 import { updateCertificate } from "../../reducers/certificate.actions";
 import { analyticsEvent } from "../Analytics";
-import CertificateDropzone from "../CertificateDropZone";
+import { CertificateDropZoneContainer } from "../CertificateDropZone";
 import css from "./dropZoneSection.module.scss";
 
 const DEMO_CERT = `/static/demo/${NETWORK_NAME}.opencert`;
@@ -131,7 +131,7 @@ class DropZoneSection extends Component<DropZoneSectionProps> {
             </div>
           </div>
           <div className="col-lg-7 col-md-12 col-sm-12" id="demoDrop">
-            <CertificateDropzone />
+            <CertificateDropZoneContainer />
           </div>
         </div>
       </div>
@@ -139,6 +139,6 @@ class DropZoneSection extends Component<DropZoneSectionProps> {
   }
 }
 
-export default connect(null, (dispatch) => ({
+export const DropZoneSectionContainer = connect(null, (dispatch) => ({
   updateCertificate: (payload: WrappedDocument) => dispatch(updateCertificate(payload)),
 }))(DropZoneSection);

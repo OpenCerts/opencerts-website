@@ -15,7 +15,7 @@ interface CertificateVerificationStatusProps {
   retrieveCertificateByActionError: string | null;
 }
 
-const CertificateVerificationStatus: React.FunctionComponent<CertificateVerificationStatusProps> = (props) => {
+export const CertificateVerificationStatus: React.FunctionComponent<CertificateVerificationStatusProps> = (props) => {
   const { resetData, verifying, fileError, verificationStatus, hover, retrieveCertificateByActionError } = props;
   if (hover) {
     return <DefaultView hover={true} accept={true} />;
@@ -39,5 +39,3 @@ const CertificateVerificationStatus: React.FunctionComponent<CertificateVerifica
   }
   return <DefaultView hover={false} accept={true} />;
 };
-
-export default CertificateVerificationStatus;

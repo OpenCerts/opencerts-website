@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./privacy.module.scss";
 
-const Content: React.FunctionComponent = () => (
+export const PrivacyContent: React.FunctionComponent = () => (
   <div className={styles.main}>
     <div className={styles["header-container"]}>
       <h1 className={styles.title}>Privacy Policy</h1>
@@ -113,5 +113,3 @@ const Content: React.FunctionComponent = () => (
     </div>
   </div>
 );
-
-export default Content;

@@ -1,3 +1,1 @@
-import TermsOfUseContent from "./TermsOfUseContent";
-
-export default TermsOfUseContent;
+export * from "./TermsOfUseContent";

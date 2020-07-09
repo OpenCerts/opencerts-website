@@ -1,9 +1,9 @@
 import React from "react";
-import Card from "../UI/Card/card";
+import { Card } from "../UI/Card/card";
 import css from "../registry.module.scss";
 import collaborators from "./collaborators.json";
 
-const CollaboratePage: React.FunctionComponent = () => (
+export const CollaboratePage: React.FunctionComponent = () => (
   <>
     <div className="container-fluid" style={{ backgroundColor: "#324353" }}>
       <div className={`container bg-brand-dark text-white ${css["r-section"]}`}>
@@ -37,5 +37,3 @@ const CollaboratePage: React.FunctionComponent = () => (
     </div>
   </>
 );
-
-export default CollaboratePage;

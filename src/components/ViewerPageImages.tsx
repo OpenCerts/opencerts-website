@@ -2,7 +2,7 @@
 import React from "react";
 import verifyStyle from "./CertificateVerifyBlock/certificateVerifyBlock.module.scss";
 
-const viewerImages = {
+export const icons = {
   print: () => (
     <i>
       <svg xmlns="http://www.w3.org/2000/svg" width="56.81" height="50.77" viewBox="0 0 56.81 50.77">
@@ -128,5 +128,3 @@ const viewerImages = {
     </i>
   ),
 };
-
-export default viewerImages;

@@ -2,7 +2,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { resetCertificateState } from "../reducers/certificate.actions";
-import Drawer from "./UI/Drawer";
+import { Drawer } from "./UI/Drawer";
 import styles from "./certificateViewer.module.scss";
 
 interface MultiTabsProps {
@@ -57,6 +57,6 @@ const MultiTabs: React.FunctionComponent<MultiTabsProps> = ({ resetData, templat
   );
 };
 
-export default connect(null, (dispatch) => ({
+export const MutiTabsContainer = connect(null, (dispatch) => ({
   resetData: () => dispatch(resetCertificateState()),
 }))(MultiTabs);

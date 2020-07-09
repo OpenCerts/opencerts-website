@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { RootState } from "../../reducers";
 import { resetCertificateState, updateCertificate } from "../../reducers/certificate.actions";
 import { getCertificateByActionError, getVerificationStatus, getVerifying } from "../../reducers/certificate.selectors";
-import CertificateVerificationStatus from "./CertificateVerificationStatus";
+import { CertificateVerificationStatus } from "./CertificateVerificationStatus";
 
 interface CertificateDropZoneContainerProps {
   updateCertificate: (certificate: WrappedDocument) => void;
@@ -20,10 +20,7 @@ interface CertificateDropZoneContainerState {
   fileError: boolean;
 }
 
-class CertificateDropZoneContainer extends Component<
-  CertificateDropZoneContainerProps,
-  CertificateDropZoneContainerState
-> {
+class CertificateDropZone extends Component<CertificateDropZoneContainerProps, CertificateDropZoneContainerState> {
   constructor(props: CertificateDropZoneContainerProps) {
     super(props);
 
@@ -89,7 +86,7 @@ class CertificateDropZoneContainer extends Component<
   }
 }
 
-export default connect(
+export const CertificateDropZoneContainer = connect(
   (store: RootState) => ({
     retrieveCertificateByActionError: getCertificateByActionError(store),
     verifying: getVerifying(store),
@@ -99,4 +96,4 @@ export default connect(
     updateCertificate: (payload: WrappedDocument) => dispatch(updateCertificate(payload)),
     resetData: () => dispatch(resetCertificateState()),
   })
-)(CertificateDropZoneContainer);
+)(CertificateDropZone);

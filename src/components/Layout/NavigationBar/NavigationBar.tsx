@@ -24,7 +24,7 @@ interface NavigationBarProps {
 }
 
 // TODO use next-link
-const NavigationBar: React.FunctionComponent<NavigationBarProps> = ({ active }) => (
+export const NavigationBar: React.FunctionComponent<NavigationBarProps> = ({ active }) => (
   <nav className={`${css.navbar} ${"navbar-expand-md navbar-dark bg-brand-dark"}`}>
     <div className={css.innerbar}>
       <Link href="/">
@@ -58,5 +58,3 @@ const NavigationBar: React.FunctionComponent<NavigationBarProps> = ({ active }) 
     </div>
   </nav>
 );
-
-export default NavigationBar;

@@ -1,6 +1,6 @@
 import { mount } from "enzyme";
 import React from "react";
-import ErrorBoundary from "./ErrorBoundary";
+import { ErrorBoundary } from "./ErrorBoundary";
 
 const ProblemChild: React.FunctionComponent = () => {
   throw new Error("Error thrown from problem child");

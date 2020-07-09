@@ -1,8 +1,8 @@
 import { VerificationFragment } from "@govtechsg/oa-verify";
 import { OpencertsRegistryVerificationFragmentData } from "@govtechsg/opencerts-verify";
 import React, { useState } from "react";
-import icons from "../ViewerPageImages";
-import DetailedCertificateVerifyBlock from "./DetailedCertificateVerifyBlock";
+import { icons } from "../ViewerPageImages";
+import { DetailedCertificateVerifyBlock } from "./DetailedCertificateVerifyBlock";
 import css from "./certificateVerifyBlock.module.scss";
 
 export const getIdentityVerificationText = (verificationStatus: VerificationFragment[]): string => {
@@ -69,7 +69,7 @@ const SimpleVerifyBlock: React.FunctionComponent<SimpleVerifyBlockProps> = (prop
 interface CertificateVerifyBlockProps {
   verificationStatus: VerificationFragment[];
 }
-const CertificateVerifyBlock: React.FunctionComponent<CertificateVerifyBlockProps> = (props) => {
+export const CertificateVerifyBlock: React.FunctionComponent<CertificateVerifyBlockProps> = (props) => {
   const [detailedViewVisible, setDetailedViewVisible] = useState(false);
   const toggleDetailedViewVisible = (): void => setDetailedViewVisible(!detailedViewVisible);
 
@@ -88,5 +88,3 @@ const CertificateVerifyBlock: React.FunctionComponent<CertificateVerifyBlockProp
     </div>
   );
 };
-
-export default CertificateVerifyBlock;

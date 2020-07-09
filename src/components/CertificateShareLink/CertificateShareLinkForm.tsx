@@ -91,7 +91,7 @@ const Loader: FunctionComponent = () => (
     <div className="m-3">Generating Share Link ...</div>
   </div>
 );
-export default connect(
+export const CertificateShareLinkFormContainer = connect(
   (store: RootState) => ({
     shareLinkState: getShareLinkState(store),
   }),

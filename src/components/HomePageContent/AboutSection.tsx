@@ -1,5 +1,5 @@
 import React from "react";
-import images from "./AboutImages";
+import { aboutImages } from "./AboutImages";
 import css from "./aboutSection.module.scss";
 
 const BenefitsSection: React.FunctionComponent = () => (
@@ -8,7 +8,7 @@ const BenefitsSection: React.FunctionComponent = () => (
     <div className={css.container}>
       <div className="col-lg-4 col-sm-12">
         <div className={css.benefits}>
-          {images.valid()}
+          {aboutImages.valid()}
           <div className={css["benefit-text"]}>
             <h4 className={css["benefit-header"]}>View</h4>
             <p>Easy way to view your certificate</p>
@@ -17,7 +17,7 @@ const BenefitsSection: React.FunctionComponent = () => (
       </div>
       <div className="col-lg-4 col-sm-12">
         <div className={css.benefits}>
-          {images.genuine()}
+          {aboutImages.genuine()}
           <div className={css["benefit-text"]}>
             <h4 className={css["benefit-header"]}>Check</h4>
             <p>Make sure it has not been tampered with</p>
@@ -26,7 +26,7 @@ const BenefitsSection: React.FunctionComponent = () => (
       </div>
       <div className="col-lg-4 col-sm-12">
         <div className={css.benefits}>
-          {images.institution()}
+          {aboutImages.institution()}
           <div className={css["benefit-text"]}>
             <h4 className={css["benefit-header"]}>Verify</h4>
             <p>Find out if it is from a recognised institution</p>
@@ -38,7 +38,7 @@ const BenefitsSection: React.FunctionComponent = () => (
 );
 
 const HowItWorks: React.FunctionComponent = () => {
-  const sections: { key: keyof typeof images; text: string }[] = [
+  const sections: { key: keyof typeof aboutImages; text: string }[] = [
     {
       key: "onetwo",
       text:
@@ -58,7 +58,7 @@ const HowItWorks: React.FunctionComponent = () => {
 
   const section = sections.map((item, i) => (
     <div key={i} id={css[item.key]}>
-      {images[item.key]()}
+      {aboutImages[item.key]()}
       <p>{item.text}</p>
     </div>
   ));
@@ -70,7 +70,7 @@ const HowItWorks: React.FunctionComponent = () => {
   );
 };
 
-const AboutSection: React.FunctionComponent = () => (
+export const AboutSection: React.FunctionComponent = () => (
   <div>
     <div className="row bg-light" id={css.benefits}>
       <div className={css.main}>
@@ -87,5 +87,3 @@ const AboutSection: React.FunctionComponent = () => (
     </div>
   </div>
 );
-
-export default AboutSection;
