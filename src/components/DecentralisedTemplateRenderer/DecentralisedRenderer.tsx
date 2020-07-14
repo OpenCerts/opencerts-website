@@ -1,5 +1,5 @@
-import { FrameConnector, LegacyHostActions } from "@govtechsg/decentralized-renderer-react-components";
-import { getData, obfuscateDocument, utils, WrappedDocument, v2 } from "@govtechsg/open-attestation";
+import { FrameActions, FrameConnector, LegacyHostActions } from "@govtechsg/decentralized-renderer-react-components";
+import { getData, obfuscateDocument, utils, v2, WrappedDocument } from "@govtechsg/open-attestation";
 import React, { Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 import { LEGACY_OPENCERTS_RENDERER } from "../../config";
 import { analyticsEvent, sendEventCertificateViewedDetailed } from "../Analytics";
@@ -55,6 +55,16 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
     [document, rawDocument]
   );
 
+  const dispatch = (action: FrameActions): void => {
+    if (action.type === "UPDATE_HEIGHT") {
+      updateHeight(action.payload);
+    } else if (action.type === "OBFUSCATE") {
+      handleObfuscation(action.payload);
+    } else if (action.type === "UPDATE_TEMPLATES") {
+      updateTemplates(action.payload);
+    }
+  };
+
   // effects
   // update document after every changes
   useEffect(() => {
@@ -94,12 +104,16 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
             Loading Renderer...
           </div>
         </div>
+        {/*
+        https://github.com/microsoft/TypeScript/issues/27552
+        // @ts-ignore */}
         <FrameConnector
           className={styles["decentralised-renderer"]}
           style={{ height: `${height}px` }}
           source={`${
             typeof rawDocument.data.$template === "object" ? document.$template.url : LEGACY_OPENCERTS_RENDERER
           }`}
+          dispatch={dispatch}
           methods={{ updateHeight, updateTemplates, handleObfuscation }}
           onConnected={onConnected}
         />
