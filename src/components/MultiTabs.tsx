@@ -8,7 +8,7 @@ import styles from "./certificateViewer.module.scss";
 interface MultiTabsProps {
   resetData: () => void;
   templates: { id: string; label: string }[];
-  onSelectTemplate: (index: number) => void;
+  onSelectTemplate: (label: string) => void;
 }
 const MultiTabs: React.FunctionComponent<MultiTabsProps> = ({ resetData, templates, onSelectTemplate }) => {
   const [selectedTemplate, setSelectedTemplate] = useState(0);
@@ -17,21 +17,21 @@ const MultiTabs: React.FunctionComponent<MultiTabsProps> = ({ resetData, templat
       <div className={`${styles["header-container"]} d-none d-lg-block d-xl-block`}>
         <div id="template-tabs-list" className="nav nav-tabs">
           {templates && templates.length > 0
-            ? templates.map((t, idx) => (
+            ? templates.map((template, idx) => (
                 <li key={idx} className="nav-item">
                   <a
                     className={`${styles.tab}
                     ${idx === selectedTemplate ? styles.active : ""}`}
-                    id={t.id}
+                    id={template.id}
                     onClick={() => {
                       setSelectedTemplate(idx);
-                      onSelectTemplate(idx);
+                      onSelectTemplate(template.id);
                     }}
                     role="tab"
                     aria-controls="home"
                     aria-selected="true"
                   >
-                    {t.label}
+                    {template.label}
                   </a>
                 </li>
               ))
@@ -47,9 +47,9 @@ const MultiTabs: React.FunctionComponent<MultiTabsProps> = ({ resetData, templat
         <Drawer
           tabs={templates}
           activeIdx={selectedTemplate}
-          toggle={(idx) => {
-            setSelectedTemplate(idx);
-            onSelectTemplate(idx);
+          toggle={(index, id) => {
+            setSelectedTemplate(index);
+            onSelectTemplate(id);
           }}
         />
       </div>

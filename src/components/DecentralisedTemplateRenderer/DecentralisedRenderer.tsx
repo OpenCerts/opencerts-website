@@ -1,4 +1,11 @@
-import { FrameActions, FrameConnector, LegacyHostActions } from "@govtechsg/decentralized-renderer-react-components";
+import {
+  FrameActions,
+  FrameConnector,
+  HostActions,
+  renderDocument,
+  selectTemplate,
+  print,
+} from "@govtechsg/decentralized-renderer-react-components";
 import { getData, obfuscateDocument, utils, v2, WrappedDocument } from "@govtechsg/open-attestation";
 import React, { Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 import { LEGACY_OPENCERTS_RENDERER } from "../../config";
@@ -11,12 +18,17 @@ interface DecentralisedRendererProps {
   updateObfuscatedCertificate: (certificate: WrappedDocument) => void;
   forwardedRef: Ref<{ print: () => void } | undefined>;
 }
+
+type Dispatch = (action: HostActions) => void;
+// giving scrollbar a default width as there are no perfect ways to get it
+const SCROLLBAR_WIDTH = 20;
+
 const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps> = ({
   rawDocument,
   updateObfuscatedCertificate,
   forwardedRef,
 }) => {
-  const toFrame = useRef<LegacyHostActions>();
+  const toFrame = useRef<Dispatch>();
   const documentRef = useRef(rawDocument);
   const document = useMemo(() => getData(rawDocument), [rawDocument]);
   const [height, setHeight] = useState(0);
@@ -25,43 +37,36 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
   useImperativeHandle(forwardedRef, () => ({
     print() {
       if (toFrame.current) {
-        const hasPrintedFromFrame = toFrame.current.print && toFrame.current.print();
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-        // @ts-ignore yup the typing is not correct, to fix =)
-        if (!hasPrintedFromFrame) {
-          window.print();
-        }
+        toFrame.current(print());
       }
     },
   }));
 
-  // actions
-  const updateHeight = (h: number): void => {
-    setHeight(h);
-  };
-  const updateTemplates = (t: { id: string; label: string }[]): void => {
-    setTemplates(t);
-  };
-  const handleObfuscation = (field: string): void => {
-    const updatedDocument = obfuscateDocument(documentRef.current, field);
-    updateObfuscatedCertificate(updatedDocument);
-    if (toFrame.current) toFrame.current.renderDocument(getData(updatedDocument), documentRef.current);
-  };
   const onConnected = useCallback(
     (frame) => {
       toFrame.current = frame;
-      if (toFrame.current) toFrame.current.renderDocument(document, rawDocument);
+      if (toFrame.current) {
+        toFrame.current(renderDocument({ document, rawDocument }));
+      }
     },
     [document, rawDocument]
   );
 
   const dispatch = (action: FrameActions): void => {
     if (action.type === "UPDATE_HEIGHT") {
-      updateHeight(action.payload);
+      // adding SCROLLBAR_WIDTH in case the frame content overflow horizontally, which will cause scrollbars to appear
+      setHeight(action.payload + SCROLLBAR_WIDTH);
     } else if (action.type === "OBFUSCATE") {
-      handleObfuscation(action.payload);
+      const field = action.payload;
+      const updatedDocument = obfuscateDocument(documentRef.current, field);
+      updateObfuscatedCertificate(updatedDocument);
+      const newDocument = getData(updatedDocument);
+
+      if (toFrame.current) {
+        toFrame.current(renderDocument({ document: newDocument, rawDocument: documentRef.current }));
+      }
     } else if (action.type === "UPDATE_TEMPLATES") {
-      updateTemplates(action.payload);
+      setTemplates(action.payload);
     }
   };
 
@@ -90,23 +95,24 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
     <>
       <MutiTabsContainer
         templates={templates}
-        onSelectTemplate={(index) => {
-          if (toFrame.current) toFrame.current.selectTemplateTab(index);
+        onSelectTemplate={(label) => {
+          if (toFrame.current) {
+            toFrame.current(selectTemplate(label));
+          }
         }}
       />
       <div>
         <h2 className="print-only exact-print text-center center m-4 mb-3 mt-5 alert alert-warning">
           If you want to print the certificate, please click on the highlighted button above.
         </h2>
-        <div id={styles["renderer-loader"]} className="text-blue">
-          <i className="fas fa-spinner fa-pulse fa-3x" />
-          <div className="m-3" style={{ fontSize: "1.5rem" }}>
-            Loading Renderer...
+        {!toFrame.current && (
+          <div id={styles["renderer-loader"]} className="text-blue">
+            <i className="fas fa-spinner fa-pulse fa-3x" />
+            <div className="m-3" style={{ fontSize: "1.5rem" }}>
+              Loading Renderer...
+            </div>
           </div>
-        </div>
-        {/*
-        https://github.com/microsoft/TypeScript/issues/27552
-        // @ts-ignore */}
+        )}
         <FrameConnector
           className={styles["decentralised-renderer"]}
           style={{ height: `${height}px` }}
@@ -114,7 +120,6 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
             typeof rawDocument.data.$template === "object" ? document.$template.url : LEGACY_OPENCERTS_RENDERER
           }`}
           dispatch={dispatch}
-          methods={{ updateHeight, updateTemplates, handleObfuscation }}
           onConnected={onConnected}
         />
       </div>
