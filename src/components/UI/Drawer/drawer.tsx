@@ -2,10 +2,11 @@ import React, { Component, ReactNode } from "react";
 import css from "./drawer.module.scss";
 
 interface Tab {
+  id: string;
   label: string;
 }
 interface DrawerProps {
-  toggle: (index: number) => void;
+  toggle: (index: number, id: string) => void;
   tabs: Tab[];
   activeIdx: number;
 }
@@ -29,14 +30,14 @@ export class Drawer extends Component<DrawerProps, DrawerState> {
 
   createTabs(tabs: Tab[]): ReactNode {
     const { activeIdx } = this.props;
-    return tabs.map((tab, idx) => (
+    return tabs.map((tab, index) => (
       <a
         href=""
-        className={`${css.tabs} ${activeIdx === idx ? css.active : ""} `}
-        key={idx}
+        className={`${css.tabs} ${activeIdx === index ? css.active : ""} `}
+        key={index}
         onClick={(e) => {
           e.preventDefault();
-          this.renderContent(idx);
+          this.renderContent(index, tab.id);
         }}
       >
         {tab.label}
@@ -44,8 +45,8 @@ export class Drawer extends Component<DrawerProps, DrawerState> {
     ));
   }
 
-  renderContent(idx: number): void {
-    this.props.toggle(idx);
+  renderContent(index: number, id: string): void {
+    this.props.toggle(index, id);
     this.toggleDrawer();
   }
 
