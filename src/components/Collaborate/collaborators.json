@@ -50,7 +50,7 @@
   {
     "id": "3dcerts",
     "name": "R3D Singapore Pte Ltd",
-    "description": "3DCerts protocol is designed to create and added level of protection for certificates issuers (institutions or corporations), owners (students or users) and employers.",
+    "description": "3DCerts protocol is designed to create an added level of protection for certificate issuers (institutions or corporations), owners (students or users) and employers.",
     "website": "https://www.3dcerts.com",
     "key": "3d certs",
     "logo": "/static/images/collaborate/3dcerts_logo.svg"
