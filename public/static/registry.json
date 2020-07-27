@@ -117,7 +117,28 @@
       "email": "digitalcert@smu.edu.sg",
       "phone": "+65 6828 0583 / +65 6808 5264 / +65 6808 5138",
       "logo": "/static/images/SMU_logo.png",
-      "id": "smu-registry"
+      "id": "smu-registry",
+      "group": "smu-registry"
+    },
+    "0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404": {
+      "name": "Singapore Management University Academy",
+      "displayCard": true,
+      "website": "https://academy.smu.edu.sg",
+      "email": "academy@smu.edu.sg",
+      "phone": "+65 6828 9688",
+      "logo": "/static/images/SMU_logo.png",
+      "id": "smu-registry-academy",
+      "group": "smu-registry"
+    },
+    "0x5b3e03ec154629c67ad5d32e34048aac3fb0ddbe": {
+      "name": "Singapore Management University Institute of Service Excellence",
+      "displayCard": true,
+      "website": "https://ise.smu.edu.sg",
+      "email": "ise@smu.edu.sg",
+      "phone": "+65 6828 0111",
+      "logo": "/static/images/SMU_logo.png",
+      "id": "smu-registry-excellence",
+      "group": "smu-registry"
     },
     "0xA204F16717fbF580d6A0535b58063fB4fce969fF": {
       "name": "National University of Singapore",
