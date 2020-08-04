@@ -36,7 +36,9 @@ export const FooterBar: React.FunctionComponent = () => (
         </Link>
       </div>
       <div>
-        <a href="https://github.com/OpenCerts" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://github.com/OpenCerts" target="_blank" rel="noopener noreferrer">
+          GitHub
+        </a>
       </div>
     </div>
   </div>
