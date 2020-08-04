@@ -12,12 +12,12 @@ fixture("Download Certificate").page`http://localhost:3000`.afterEach(async (t) 
 
 const Document1 = "./fixture/sample-dns-verified.json";
 const Document2 = "./fixture/sample-dns-verified-special-characters.json";
-const StatusButton = Selector("#certificate-status");
+// const StatusButton = Selector("#certificate-status");
 const DownloadLink = Selector("a").withAttribute("download");
 const DownloadButton = Selector("#btn-download");
 
-const validateTextContent = async (t, component, texts) =>
-  texts.reduce(async (_prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());
+// const validateTextContent = async (t, component, texts) =>
+//   texts.reduce(async (_prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());
 
 // From https://stackoverflow.com/a/57624660/950462
 const waitForFileDownload = async (t, filePath) => {
