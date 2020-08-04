@@ -6,7 +6,7 @@ import Router from "next/router";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import "isomorphic-fetch";
 import { analyticsEvent } from "../components/Analytics";
-import { NETWORK_NAME } from "../config";
+import { GOOGLE_API_KEY, NETWORK_NAME } from "../config";
 import {
   GENERATE_SHARE_LINK,
   generateShareLinkFailure,
@@ -107,6 +107,7 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedD
     yield put(verifyingCertificate());
     const fragments = yield call(verify, certificate, {
       network: NETWORK_NAME,
+      googleApiKey: GOOGLE_API_KEY,
     });
     trace(`Verification Status: ${JSON.stringify(fragments)}`);
 
