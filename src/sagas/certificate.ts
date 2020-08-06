@@ -5,7 +5,6 @@ import { get } from "lodash";
 import Router from "next/router";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import "isomorphic-fetch";
-import registry from "../../public/static/registry.json";
 import { analyticsEvent } from "../components/Analytics";
 import { NETWORK_NAME } from "../config";
 
