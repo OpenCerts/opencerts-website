@@ -100,7 +100,7 @@ export function* triggerAnalyticsErrorV2(value: string) {
         dimension3: name || "(not set)",
         dimension4: issuedOn || "(not set)",
         dimension5: issuerName || "(not set)",
-        // dimension6: registryIssuer?.id || "(not set)",
+        dimension6: "(not set)", // dimension6: registryIssuer?.id || "(not set)",
         dimension7: errors,
       },
     });
