@@ -5,6 +5,7 @@ import { get } from "lodash";
 import Router from "next/router";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import "isomorphic-fetch";
+import registry from "../../public/static/registry.json";
 import { analyticsEvent } from "../components/Analytics";
 import { NETWORK_NAME } from "../config";
 
@@ -77,18 +78,25 @@ export function* triggerAnalyticsErrorV2(value: string) {
   const rawCertificate: WrappedDocument = yield select(getCertificate);
   const certificate = getData(rawCertificate);
 
-  // If there are multiple issuers in a certificate, we send multiple events!
-  // const storeAddresses = utils.getIssuerAddress(rawCertificate);
   const id = get(certificate, "id") ?? ""; // Use get or certificate?.id?
   const name = get(certificate, "name") ?? "";
   const issuedOn = get(certificate, "issuedOn") ?? "";
   const errors = value ?? "";
 
+  // If there are multiple issuers in a certificate, we send multiple events!
   certificate.issuers.forEach((issuer: v2.Issuer) => {
     const store = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? "";
-    const issuerName = issuer.name;
-    // const registryIssuer = registry.issuers[store];
-    console.log(store, id, name, issuedOn, issuerName);
+    let issuerName = issuer?.name;
+    // eslint-dis able-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore ignoring because typescript complain the key cant be undefined and there is no match between string type and keyof typeof registry.issuers
+    const registryIssuer = registry.issuers[store];
+
+    if (registryIssuer) {
+      issuerName = registryIssuer.name;
+    } else if (issuer.identityProof) {
+      issuerName = issuer.identityProof.location;
+    }
+
     analyticsEvent(window, {
       category: "CERTIFICATE_ERROR",
       action: `ERROR - ${issuerName}`,
@@ -100,32 +108,11 @@ export function* triggerAnalyticsErrorV2(value: string) {
         dimension3: name || "(not set)",
         dimension4: issuedOn || "(not set)",
         dimension5: issuerName || "(not set)",
-        dimension6: "(not set)", // dimension6: registryIssuer?.id || "(not set)",
+        dimension6: registryIssuer?.id || "(not set)",
         dimension7: errors,
       },
     });
   });
-
-  // const id = certificateData?.id ?? "";
-  // const name = certificateData?.name ?? "";
-  // const issuedOn = certificateData?.issuedOn ?? "";
-  // // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-  // // @ts-ignore ignoring because typescript complain the key cant be undefined and there is no match between string type and keyof typeof registry.issuers
-  // const registryIssuer = registry.issuers[store];
-
-  // if (registryIssuer) {
-  //   issuerName = registryIssuer.name;
-  //   label = `"store":"${store}"${separator}"document_id":"${id}"${separator}"name":"${name}"${separator}"issued_on":"${issuedOn}"${separator}"issuer_name":"${
-  //     issuerName ?? ""
-  //   }"${separator}"issuer_id":"${registryIssuer.id ?? ""}"`;
-  // } else if (issuer.identityProof) {
-  //   issuerName = issuer.identityProof.location;
-  //   label = `"store":"${store}"${separator}"document_id":"${id}"${separator}"name":"${name}"${separator}"issued_on":"${issuedOn}"${separator}"issuer_name":"${
-  //     issuerName ?? ""
-  //   }"`;
-  // } else {
-  //   label = "Something went wrong, please check the analytics code of sendEventCertificateViewedDetailed";
-  // }
 }
 
 // to run if any of the issuer is not valid
@@ -194,9 +181,9 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedD
         yield call(analyticsIssuedFail);
         errors.push("ISSUER_IDENTITY");
       }
+
       if (errors) {
-        console.log(errors.join(","));
-        yield call(triggerAnalyticsErrorV2, errors.join(","));
+        yield call(triggerAnalyticsErrorV2, errors.join(",")); // CSV list of all the certificate errors
       }
     }
   } catch (e) {
