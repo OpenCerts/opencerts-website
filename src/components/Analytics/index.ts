@@ -1,6 +1,7 @@
 import { v2 } from "@govtechsg/open-attestation";
 import registry from "../../../public/static/registry.json";
 import { getLogger } from "../../utils/logger";
+import { get } from "lodash";
 
 const { trace } = getLogger("components:Analytics:");
 const { trace: traceDev } = getLogger("components:Analytics(Inactive):");
@@ -47,9 +48,7 @@ export const sendEventCertificateViewedDetailed = ({
   const id = certificateData?.id ?? "";
   const name = certificateData?.name ?? "";
   const issuedOn = certificateData?.issuedOn ?? "";
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-  // @ts-ignore ignoring because typescript complain the key cant be undefined and there is no match between string type and keyof typeof registry.issuers
-  const registryIssuer = registry.issuers[store];
+  const registryIssuer = get(registry.issuers, store);
 
   if (registryIssuer) {
     issuerName = registryIssuer.name;

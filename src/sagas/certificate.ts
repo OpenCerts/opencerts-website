@@ -87,7 +87,7 @@ export function* triggerAnalyticsErrorV2(value: string) {
   certificate.issuers.forEach((issuer: v2.Issuer) => {
     const store = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? "";
     let issuerName = issuer?.name;
-    const registryIssuer = registry.issuers[store];
+    const registryIssuer = get(registry.issuers, store); // Instead of (a) registry.issuers[store] which causes a type error and (b) using ts-ignore
 
     if (registryIssuer) {
       issuerName = registryIssuer.name;
