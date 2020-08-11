@@ -87,8 +87,6 @@ export function* triggerAnalyticsErrorV2(value: string) {
   certificate.issuers.forEach((issuer: v2.Issuer) => {
     const store = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? "";
     let issuerName = issuer?.name;
-    // eslint-dis able-next-line @typescript-eslint/ban-ts-ignore
-    // @ts-ignore ignoring because typescript complain the key cant be undefined and there is no match between string type and keyof typeof registry.issuers
     const registryIssuer = registry.issuers[store];
 
     if (registryIssuer) {
