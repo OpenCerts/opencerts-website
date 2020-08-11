@@ -1,7 +1,7 @@
 import { v2 } from "@govtechsg/open-attestation";
+import { get } from "lodash";
 import registry from "../../../public/static/registry.json";
 import { getLogger } from "../../utils/logger";
-import { get } from "lodash";
 
 const { trace } = getLogger("components:Analytics:");
 const { trace: traceDev } = getLogger("components:Analytics(Inactive):");
