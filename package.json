@@ -24,7 +24,9 @@
     "serve-static": "http-server out -s -p 3000",
     "integration": "testcafe chrome src/**/*.spec.js",
     "integration:headless": "testcafe chrome:headless src/**/*.spec.js",
-    "integration:watch": "nodemon --exec \"npm run integration\" --watch src"
+    "integration:watch": "nodemon --exec \"npm run integration\" --watch src",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "@govtechsg/decentralized-renderer-react-components": "^3.0.0",
@@ -39,7 +41,7 @@
     "debug": "^4.1.1",
     "downloads-folder": "^2.0.0",
     "isomorphic-fetch": "^2.2.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.16",
     "next": "^9.4.1",
     "next-ga": "^2.3.4",
     "next-redux-wrapper": "^5.0.0",
@@ -52,7 +54,8 @@
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.7",
-    "redux-saga": "^1.1.3"
+    "redux-saga": "^1.1.3",
+    "snyk": "^1.364.2"
   },
   "license": "ISC",
   "devDependencies": {
@@ -220,5 +223,6 @@
   },
   "prettier": {
     "printWidth": 120
-  }
+  },
+  "snyk": true
 }
