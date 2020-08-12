@@ -219,7 +219,6 @@
     ]
   },
   "prettier": {
-    "printWidth": 120,
-    "endOfLine": "auto"
+    "printWidth": 120
   }
 }
