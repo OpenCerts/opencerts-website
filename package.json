@@ -36,7 +36,7 @@
     "@types/react-google-recaptcha": "^1.1.2",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "clipboard-copy": "^3.1.0",
-    "debug": "^4.1.1",
+    "debug": "^4.2.0",
     "downloads-folder": "^2.0.0",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.15",
