@@ -64,8 +64,8 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedD
       if (!isValid(fragments, ["ISSUER_IDENTITY"])) {
         errors.push("ISSUER_IDENTITY");
       }
-
-      if (errors.length) {
+      console.log(certificate);
+      if (errors.length > 0) {
         triggerErrorLogging(certificate, errors);
       }
     }
