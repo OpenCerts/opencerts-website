@@ -1,8 +1,7 @@
-import { v2 } from "@govtechsg/open-attestation";
+import { v2, WrappedDocument, getData } from "@govtechsg/open-attestation";
 import { get } from "lodash";
 import registry from "../../../public/static/registry.json";
 import { getLogger } from "../../utils/logger";
-
 const { trace } = getLogger("components:Analytics:");
 const { trace: traceDev } = getLogger("components:Analytics(Inactive):");
 
@@ -78,3 +77,44 @@ export const sendEventCertificateViewedDetailed = ({
     },
   });
 };
+
+export function triggerErrorLogging(
+  rawCertificate: WrappedDocument<v2.OpenAttestationDocument>,
+  errors: string[]
+): void {
+  const certificate: v2.OpenAttestationDocument = getData(rawCertificate);
+
+  const id = certificate.id;
+  const name = get(certificate, "name") ?? "";
+  const issuedOn = get(certificate, "issuedOn") ?? "";
+  const errorsList = errors.join(",");
+
+  // If there are multiple issuers in a certificate, we send multiple events!
+  certificate.issuers.forEach((issuer: v2.Issuer) => {
+    const store = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? "";
+    let issuerName = issuer.name;
+    const registryIssuer = get(registry.issuers, store);
+
+    if (registryIssuer) {
+      issuerName = registryIssuer.name;
+    } else if (issuer.identityProof) {
+      issuerName = issuer.identityProof.location;
+    }
+
+    analyticsEvent(window, {
+      category: "CERTIFICATE_ERROR",
+      action: `ERROR - ${issuerName}`,
+      label: errorsList,
+      options: {
+        nonInteraction: true,
+        dimension1: store || "(not set)",
+        dimension2: id || "(not set)",
+        dimension3: name || "(not set)",
+        dimension4: issuedOn || "(not set)",
+        dimension5: issuerName || "(not set)",
+        dimension6: registryIssuer?.id || "(not set)",
+        dimension7: errorsList,
+      },
+    });
+  });
+}

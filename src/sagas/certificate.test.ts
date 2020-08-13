@@ -119,7 +119,7 @@ describe("sagas/certificate", () => {
     });
 
     describe("triggerErrorLogging", () => {
-      it("should get cert details (certificateStore), and send it over to Google Analytics with a CSV list of errors", () => {
+      it("should send cert details (certificateStore) and errors to Google Analytics", () => {
         const analyticsGenerator = triggerErrorLogging([
           "CERTIFICATE_HASH", // Document has been tampered, naughty naughty!
           "UNISSUED_CERTIFICATE", // Document isn't issued by the given store
@@ -160,7 +160,7 @@ describe("sagas/certificate", () => {
           }
         );
       });
-      it("should get cert details (documentStore/DNS-TXT), and send it over to Google Analytics with a CSV list of errors", () => {
+      it("should send cert details (documentStore/DNS-TXT) and errors to Google Analytics", () => {
         const analyticsGenerator = triggerErrorLogging([
           "CERTIFICATE_HASH", // Document has been tampered, naughty naughty!
           "UNISSUED_CERTIFICATE", // Document isn't issued by the given store

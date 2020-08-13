@@ -1,13 +1,10 @@
 import { decryptString } from "@govtechsg/oa-encryption";
-import { getData, v2, WrappedDocument } from "@govtechsg/open-attestation";
-import { OpenAttestationDocument } from "@govtechsg/open-attestation/dist/types/__generated__/schemaV2";
+import { v2, WrappedDocument } from "@govtechsg/open-attestation";
 import { isValid, verify } from "@govtechsg/opencerts-verify";
-import { get } from "lodash";
 import Router from "next/router";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import "isomorphic-fetch";
-import registry from "../../public/static/registry.json";
-import { analyticsEvent } from "../components/Analytics";
+import { triggerErrorLogging } from "../components/Analytics";
 import { NETWORK_NAME } from "../config";
 
 import {
@@ -34,59 +31,7 @@ import { certificateNotIssued, getAllButRevokeFragment, getRevokeFragment } from
 import { generateLink } from "../services/link";
 import { getLogger } from "../utils/logger";
 
-const { trace, error } = getLogger("saga:certificate");
-
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function* getCertificateDetails() {
-  try {
-    const rawCertificate: WrappedDocument = yield select(getCertificate);
-    const certificate: OpenAttestationDocument = getData(rawCertificate);
-
-    return certificate;
-  } catch (e) {
-    error(e.message);
-    return {};
-  }
-}
-
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function* triggerErrorLogging(errors: string[]) {
-  const certificate: OpenAttestationDocument = yield call(getCertificateDetails);
-
-  const id = certificate.id;
-  const name = get(certificate, "name") ?? "";
-  const issuedOn = get(certificate, "issuedOn") ?? "";
-  const errorsList = errors.join(",");
-
-  // If there are multiple issuers in a certificate, we send multiple events!
-  certificate.issuers.forEach((issuer: v2.Issuer) => {
-    const store = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? "";
-    let issuerName = issuer?.name;
-    const registryIssuer = get(registry.issuers, store); // Instead of (a) registry.issuers[store] which causes a type error and (b) using ts-ignore
-
-    if (registryIssuer) {
-      issuerName = registryIssuer.name;
-    } else if (issuer.identityProof) {
-      issuerName = issuer.identityProof.location;
-    }
-
-    analyticsEvent(window, {
-      category: "CERTIFICATE_ERROR",
-      action: `ERROR - ${issuerName}`,
-      label: errorsList,
-      options: {
-        nonInteraction: true,
-        dimension1: store || "(not set)",
-        dimension2: id || "(not set)",
-        dimension3: name || "(not set)",
-        dimension4: issuedOn || "(not set)",
-        dimension5: issuerName || "(not set)",
-        dimension6: registryIssuer?.id || "(not set)",
-        dimension7: errorsList,
-      },
-    });
-  });
-}
+const { trace } = getLogger("saga:certificate");
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function* verifyCertificate({ payload: certificate }: { payload: WrappedDocument<v2.OpenAttestationDocument> }) {
@@ -120,8 +65,8 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedD
         errors.push("ISSUER_IDENTITY");
       }
 
-      if (errors) {
-        yield call(triggerErrorLogging, errors);
+      if (errors.length) {
+        triggerErrorLogging(certificate, errors);
       }
     }
   } catch (e) {
