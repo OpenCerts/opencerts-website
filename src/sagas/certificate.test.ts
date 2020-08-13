@@ -1,4 +1,7 @@
-import { OpenAttestationDocument, IdentityProofType } from "@govtechsg/open-attestation/dist/types/__generated__/schemaV2";
+import {
+  OpenAttestationDocument,
+  IdentityProofType,
+} from "@govtechsg/open-attestation/dist/types/__generated__/schemaV2";
 import { call, put, select } from "redux-saga/effects";
 import { getCertificate } from "../reducers/certificate.selectors";
 import { sendCertificate, getCertificateDetails, triggerErrorLogging } from "./certificate";
