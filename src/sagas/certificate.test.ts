@@ -1,7 +1,4 @@
-import {
-  OpenAttestationDocument,
-  IdentityProofType,
-} from "@govtechsg/open-attestation/dist/types/__generated__/schemaV2";
+import { v2 } from "@govtechsg/open-attestation";
 import { call, put, select } from "redux-saga/effects";
 import { getCertificate } from "../reducers/certificate.selectors";
 import { sendCertificate, getCertificateDetails, triggerErrorLogging } from "./certificate";
@@ -132,7 +129,7 @@ describe("sagas/certificate", () => {
         const callGetCertificateDetails = analyticsGenerator.next();
         expect(callGetCertificateDetails.value).toStrictEqual(call(getCertificateDetails));
 
-        const certificate: OpenAttestationDocument = {
+        const certificate: v2.OpenAttestationDocument = {
           id: "MyAwesomeCertID",
           issuers: [
             {
@@ -173,14 +170,14 @@ describe("sagas/certificate", () => {
         const callGetCertificateDetails = analyticsGenerator.next();
         expect(callGetCertificateDetails.value).toStrictEqual(call(getCertificateDetails));
 
-        const certificate: OpenAttestationDocument = {
+        const certificate: v2.OpenAttestationDocument = {
           id: "MyAwesomeCertID",
           issuers: [
             {
               name: "My Awesome Document Store",
               documentStore: "0x8Fc57204c35fb9317D91285eF52D6b892EC08cD3",
               identityProof: {
-                type: IdentityProofType.DNSTxt,
+                type: v2.IdentityProofType.DNSTxt,
                 location: "example.openattestation.com",
               },
             },
