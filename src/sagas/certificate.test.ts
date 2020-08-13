@@ -1,14 +1,7 @@
+import { OpenAttestationDocument, IdentityProofType } from "@govtechsg/open-attestation/dist/types/__generated__/schemaV2";
 import { call, put, select } from "redux-saga/effects";
 import { getCertificate } from "../reducers/certificate.selectors";
-import {
-  analyticsHashFail,
-  analyticsIssuedFail,
-  analyticsIssuerFail,
-  analyticsRevocationFail,
-  getAnalyticsDetails,
-  sendCertificate,
-  triggerAnalytics,
-} from "./certificate";
+import { sendCertificate, getCertificateDetails, triggerErrorLogging } from "./certificate";
 import { MakeCertUtil } from "./testutils";
 
 jest.mock("@govtechsg/open-attestation", () => {
@@ -125,55 +118,93 @@ describe("sagas/certificate", () => {
       window.ga = undefined;
     });
 
-    it("triggerAnalytics should get details and fire the analytics event with correct error code", () => {
-      const analyticsGenerator = triggerAnalytics(1337);
+    describe("triggerErrorLogging", () => {
+      it("should get cert details (certificateStore), and send it over to Google Analytics with a CSV list of errors", () => {
+        const analyticsGenerator = triggerErrorLogging([
+          "CERTIFICATE_HASH", // Document has been tampered, naughty naughty!
+          "UNISSUED_CERTIFICATE", // Document isn't issued by the given store
+          "REVOKED_CERTIFICATE", // Document has been revoked by the given store
+        ]);
 
-      const callGetAnalyticsDetails = analyticsGenerator.next();
-      expect(callGetAnalyticsDetails.value).toStrictEqual(call(getAnalyticsDetails));
-      analyticsGenerator.next({
-        storeAddresses: "storeAdd1,storeAdd2",
-        id: "certificate-id",
+        const callGetCertificateDetails = analyticsGenerator.next();
+        expect(callGetCertificateDetails.value).toStrictEqual(call(getCertificateDetails));
+
+        const certificate: OpenAttestationDocument = {
+          id: "MyAwesomeCertID",
+          issuers: [
+            {
+              name: "SEAB",
+              certificateStore: "0xE4a94Ef9C26904A02Cd6735F7D4De1D840146a0f",
+            },
+          ],
+        };
+        analyticsGenerator.next(certificate);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // @ts-ignore
+        expect(window.ga).toHaveBeenCalledWith(
+          "send",
+          "event",
+          "CERTIFICATE_ERROR",
+          "ERROR - Singapore Examinations and Assessment Board",
+          "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
+          undefined,
+          {
+            dimension1: "0xE4a94Ef9C26904A02Cd6735F7D4De1D840146a0f",
+            dimension2: "MyAwesomeCertID",
+            dimension3: "(not set)",
+            dimension4: "(not set)",
+            dimension5: "Singapore Examinations and Assessment Board",
+            dimension6: "seab-registry",
+            dimension7: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
+            nonInteraction: true,
+          }
+        );
       });
+      it("should get cert details (documentStore/DNS-TXT), and send it over to Google Analytics with a CSV list of errors", () => {
+        const analyticsGenerator = triggerErrorLogging([
+          "CERTIFICATE_HASH", // Document has been tampered, naughty naughty!
+          "UNISSUED_CERTIFICATE", // Document isn't issued by the given store
+          "REVOKED_CERTIFICATE", // Document has been revoked by the given store
+        ]);
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      expect(window.ga).toHaveBeenCalledWith(
-        "send",
-        "event",
-        "CERTIFICATE_ERROR",
-        "storeAdd1,storeAdd2",
-        "certificate-id",
-        1337,
-        undefined
-      );
-    });
+        const callGetCertificateDetails = analyticsGenerator.next();
+        expect(callGetCertificateDetails.value).toStrictEqual(call(getCertificateDetails));
 
-    it("analyticsIssuerFail should report to GA with errorType = 0", () => {
-      const analyticsGenerator = analyticsIssuerFail();
-
-      const callGetAnalyticsDetails = analyticsGenerator.next();
-      expect(callGetAnalyticsDetails.value).toStrictEqual(call(triggerAnalytics, 0));
-    });
-
-    it("analyticsHashFail should report to GA with errorType = 1", () => {
-      const analyticsGenerator = analyticsHashFail();
-
-      const callGetAnalyticsDetails = analyticsGenerator.next();
-      expect(callGetAnalyticsDetails.value).toStrictEqual(call(triggerAnalytics, 1));
-    });
-
-    it("analyticsIssuedFail should report to GA with errorType = 2", () => {
-      const analyticsGenerator = analyticsIssuedFail();
-
-      const callGetAnalyticsDetails = analyticsGenerator.next();
-      expect(callGetAnalyticsDetails.value).toStrictEqual(call(triggerAnalytics, 2));
-    });
-
-    it("analyticsRevocationFail should report to GA with errorType = 3", () => {
-      const analyticsGenerator = analyticsRevocationFail();
-
-      const callGetAnalyticsDetails = analyticsGenerator.next();
-      expect(callGetAnalyticsDetails.value).toStrictEqual(call(triggerAnalytics, 3));
+        const certificate: OpenAttestationDocument = {
+          id: "MyAwesomeCertID",
+          issuers: [
+            {
+              name: "My Awesome Document Store",
+              documentStore: "0x8Fc57204c35fb9317D91285eF52D6b892EC08cD3",
+              identityProof: {
+                type: IdentityProofType.DNSTxt,
+                location: "example.openattestation.com",
+              },
+            },
+          ],
+        };
+        analyticsGenerator.next(certificate);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // @ts-ignore
+        expect(window.ga).toHaveBeenCalledWith(
+          "send",
+          "event",
+          "CERTIFICATE_ERROR",
+          "ERROR - example.openattestation.com",
+          "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
+          undefined,
+          {
+            dimension1: "0x8Fc57204c35fb9317D91285eF52D6b892EC08cD3",
+            dimension2: "MyAwesomeCertID",
+            dimension3: "(not set)",
+            dimension4: "(not set)",
+            dimension5: "example.openattestation.com",
+            dimension6: "(not set)",
+            dimension7: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
+            nonInteraction: true,
+          }
+        );
+      });
     });
   });
 });

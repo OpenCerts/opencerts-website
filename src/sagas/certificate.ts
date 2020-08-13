@@ -1,5 +1,6 @@
 import { decryptString } from "@govtechsg/oa-encryption";
-import { getData, utils, v2, WrappedDocument } from "@govtechsg/open-attestation";
+import { getData, v2, WrappedDocument } from "@govtechsg/open-attestation";
+import { OpenAttestationDocument } from "@govtechsg/open-attestation/dist/types/__generated__/schemaV2";
 import { isValid, verify } from "@govtechsg/opencerts-verify";
 import { get } from "lodash";
 import Router from "next/router";
@@ -35,25 +36,13 @@ import { getLogger } from "../utils/logger";
 
 const { trace, error } = getLogger("saga:certificate");
 
-const ANALYTICS_VERIFICATION_ERROR_CODE = {
-  ISSUER_IDENTITY: 0,
-  CERTIFICATE_HASH: 1,
-  UNISSUED_CERTIFICATE: 2,
-  REVOKED_CERTIFICATE: 3,
-  CERTIFICATE_STORE: 4,
-};
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function* getAnalyticsDetails() {
+export function* getCertificateDetails() {
   try {
-    const rawCertificate = yield select(getCertificate);
-    const certificate = getData(rawCertificate);
+    const rawCertificate: WrappedDocument = yield select(getCertificate);
+    const certificate: OpenAttestationDocument = getData(rawCertificate);
 
-    const storeAddresses = utils.getIssuerAddress(rawCertificate);
-    const id = get(certificate, "id");
-    return {
-      storeAddresses: Array.isArray(storeAddresses) ? storeAddresses.join(",") : storeAddresses,
-      id,
-    };
+    return certificate;
   } catch (e) {
     error(e.message);
     return {};
@@ -61,27 +50,13 @@ export function* getAnalyticsDetails() {
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function* triggerAnalytics(errorCode: number) {
-  const { storeAddresses, id } = yield call(getAnalyticsDetails);
-  if (storeAddresses && id) {
-    analyticsEvent(window, {
-      category: "CERTIFICATE_ERROR",
-      action: storeAddresses,
-      label: id,
-      value: errorCode,
-    });
-  }
-}
+export function* triggerErrorLogging(errors: string[]) {
+  const certificate: OpenAttestationDocument = yield call(getCertificateDetails);
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function* triggerAnalyticsErrorV2(value: string) {
-  const rawCertificate: WrappedDocument = yield select(getCertificate);
-  const certificate = getData(rawCertificate);
-
-  const id = get(certificate, "id") ?? ""; // Use get or certificate?.id?
+  const id = certificate.id;
   const name = get(certificate, "name") ?? "";
   const issuedOn = get(certificate, "issuedOn") ?? "";
-  const errors = value ?? "";
+  const errorsList = errors.join(",");
 
   // If there are multiple issuers in a certificate, we send multiple events!
   certificate.issuers.forEach((issuer: v2.Issuer) => {
@@ -98,7 +73,7 @@ export function* triggerAnalyticsErrorV2(value: string) {
     analyticsEvent(window, {
       category: "CERTIFICATE_ERROR",
       action: `ERROR - ${issuerName}`,
-      label: value,
+      label: errorsList,
       options: {
         nonInteraction: true,
         dimension1: store || "(not set)",
@@ -107,40 +82,10 @@ export function* triggerAnalyticsErrorV2(value: string) {
         dimension4: issuedOn || "(not set)",
         dimension5: issuerName || "(not set)",
         dimension6: registryIssuer?.id || "(not set)",
-        dimension7: errors,
+        dimension7: errorsList,
       },
     });
   });
-}
-
-// to run if any of the issuer is not valid
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function* analyticsIssuerFail() {
-  yield call(triggerAnalytics, ANALYTICS_VERIFICATION_ERROR_CODE.ISSUER_IDENTITY);
-}
-
-// to run if certificate has been tampered
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function* analyticsHashFail() {
-  yield call(triggerAnalytics, ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_HASH);
-}
-
-// to run if certificate has not been issued
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function* analyticsIssuedFail() {
-  yield call(triggerAnalytics, ANALYTICS_VERIFICATION_ERROR_CODE.UNISSUED_CERTIFICATE);
-}
-
-// to run if certificate has been revoked
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function* analyticsRevocationFail() {
-  yield call(triggerAnalytics, ANALYTICS_VERIFICATION_ERROR_CODE.REVOKED_CERTIFICATE);
-}
-
-// to run if store is not valid
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function* analyticsStoreFail() {
-  yield call(triggerAnalytics, ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_STORE);
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -160,28 +105,23 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedD
       const revokeFragment = [getRevokeFragment(fragments)];
       const errors: string[] = [];
       if (!isValid(fragments, ["DOCUMENT_INTEGRITY"])) {
-        yield call(analyticsHashFail);
         errors.push("CERTIFICATE_HASH");
       }
       if (!isValid(fragmentsWithoutRevoke, ["DOCUMENT_STATUS"]) && certificateNotIssued(fragments)) {
-        yield call(analyticsIssuedFail);
         errors.push("UNISSUED_CERTIFICATE");
       }
       if (!isValid(fragments, ["DOCUMENT_STATUS"]) && !certificateNotIssued(fragments)) {
-        yield call(analyticsStoreFail);
-        errors.push("CERTIFICATE_STORE"); // should we have a better name..? doesn't say much. maybe CERTIFICATE_STORE_NOT_FOUND?
+        errors.push("CERTIFICATE_STORE_NOT_FOUND");
       }
       if (!isValid(revokeFragment, ["DOCUMENT_STATUS"])) {
-        yield call(analyticsRevocationFail);
         errors.push("REVOKED_CERTIFICATE");
       }
       if (!isValid(fragments, ["ISSUER_IDENTITY"])) {
-        yield call(analyticsIssuedFail);
         errors.push("ISSUER_IDENTITY");
       }
 
       if (errors) {
-        yield call(triggerAnalyticsErrorV2, errors.join(",")); // CSV list of all the certificate errors
+        yield call(triggerErrorLogging, errors);
       }
     }
   } catch (e) {
