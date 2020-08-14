@@ -78,22 +78,37 @@ export const sendEventCertificateViewedDetailed = ({
   });
 };
 
+interface Registry {
+  [key: string]: {
+    name: string;
+    displayCard?: boolean;
+    website?: string;
+    email?: string;
+    phone?: string;
+    logo?: string;
+    id?: string;
+  };
+}
+
+// const getKeyValue = <T extends object, U extends keyof T>(obj: T) => (key: U) => obj[key];
+
 export function triggerErrorLogging(
   rawCertificate: WrappedDocument<v2.OpenAttestationDocument>,
   errors: string[]
 ): void {
-  const certificate: v2.OpenAttestationDocument = getData(rawCertificate);
+  const certificate: v2.OpenAttestationDocument & { name?: string; issuedOn?: string } = getData(rawCertificate);
 
-  const id = certificate.id;
-  const name = get(certificate, "name") ?? "";
-  const issuedOn = get(certificate, "issuedOn") ?? "";
+  const id = certificate?.id;
+  const name = certificate?.name;
+  const issuedOn = certificate?.issuedOn;
   const errorsList = errors.join(",");
 
   // If there are multiple issuers in a certificate, we send multiple events!
   certificate.issuers.forEach((issuer: v2.Issuer) => {
     const store = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? "";
     let issuerName = issuer.name;
-    const registryIssuer = get(registry.issuers, store);
+    // TODO: https://stackoverflow.com/questions/53519513/in-typescript-how-to-import-json-and-dynamically-lookup-by-key
+    const registryIssuer = get(registry.issuers, store); //getKeyValue(Registry)(store);
 
     if (registryIssuer) {
       issuerName = registryIssuer.name;
