@@ -26,8 +26,7 @@ describe("stringifyEvent", () => {
 describe("validateEvent", () => {
   it("throws if category is missing", () => {
     expect(() =>
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore we expect this error to be thrown
+      // @ts-expect-error we expect this error to be thrown
       validateEvent({
         label: "LABEL",
       })
@@ -36,8 +35,7 @@ describe("validateEvent", () => {
 
   it("throws if action is missing", () => {
     expect(() =>
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore we expect this error to be thrown
+      // @ts-expect-error we expect this error to be thrown
       validateEvent({
         category: "CATEGORY",
       })
@@ -78,8 +76,6 @@ describe("event", () => {
 
   it("sends and log ga event if window.ga is present", () => {
     const win = { ga: jest.fn() };
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-    // @ts-ignore
     analyticsEvent(win, evt);
     expect(win.ga).toHaveBeenCalledWith("send", "event", "TEST_CATEGORY", "TEST_ACTION", "TEST_LABEL", 2, undefined);
   });
@@ -87,8 +83,6 @@ describe("event", () => {
   it("throws if there is a validation error", () => {
     const win = { ga: jest.fn() };
     const errEvt = { ...evt, value: "STRING" };
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-    // @ts-ignore
     expect(() => analyticsEvent(win, errEvt)).toThrow("Value must be a number");
   });
 });
@@ -96,15 +90,13 @@ describe("event", () => {
 describe("analytics*", () => {
   // eslint-disable-next-line jest/no-hooks
   beforeEach(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-    // @ts-ignore
+    // @ts-expect-error
     // eslint-disable-next-line jest/prefer-spy-on
     window.ga = jest.fn();
   });
   // eslint-disable-next-line jest/no-hooks
   afterEach(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-    // @ts-ignore
+    // @ts-expect-error
     // eslint-disable-next-line jest/prefer-spy-on
     window.ga = undefined; // This vs. delete window.ga, mockGA.mockReset()?
   });
@@ -113,8 +105,7 @@ describe("analytics*", () => {
     const mockGA = jest.fn();
     // eslint-disable-next-line jest/no-hooks
     beforeEach(() => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore dont care about ts here
+      // @ts-expect-error dont care about ts here
       window.ga = mockGA;
     });
 

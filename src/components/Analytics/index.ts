@@ -78,19 +78,18 @@ export const sendEventCertificateViewedDetailed = ({
   });
 };
 
-interface Registry {
-  [key: string]: {
-    name: string;
-    displayCard?: boolean;
-    website?: string;
-    email?: string;
-    phone?: string;
-    logo?: string;
-    id?: string;
-  };
+interface RegistryIssuer {
+  name: string;
+  displayCard: boolean;
+  website?: string;
+  email?: string;
+  phone?: string;
+  logo?: string;
+  id?: string;
 }
-
-// const getKeyValue = <T extends object, U extends keyof T>(obj: T) => (key: U) => obj[key];
+function isInRegistry(value: string): value is keyof typeof registry.issuers {
+  return value in registry.issuers;
+}
 
 export function triggerErrorLogging(
   rawCertificate: WrappedDocument<v2.OpenAttestationDocument>,
@@ -107,11 +106,13 @@ export function triggerErrorLogging(
   certificate.issuers.forEach((issuer: v2.Issuer) => {
     const store = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? "";
     let issuerName = issuer.name;
-    // TODO: https://stackoverflow.com/questions/53519513/in-typescript-how-to-import-json-and-dynamically-lookup-by-key
-    const registryIssuer = get(registry.issuers, store); //getKeyValue(Registry)(store);
+    let registryId = null;
+    let registryIssuer: RegistryIssuer | null = null;
 
-    if (registryIssuer) {
+    if (isInRegistry(store)) {
+      registryIssuer = registry.issuers[store];
       issuerName = registryIssuer.name;
+      registryId = registryIssuer.id;
     } else if (issuer.identityProof) {
       issuerName = issuer.identityProof.location;
     }
@@ -127,7 +128,7 @@ export function triggerErrorLogging(
         dimension3: name || "(not set)",
         dimension4: issuedOn || "(not set)",
         dimension5: issuerName || "(not set)",
-        dimension6: registryIssuer?.id || "(not set)",
+        dimension6: registryId || "(not set)",
         dimension7: errorsList,
       },
     });
