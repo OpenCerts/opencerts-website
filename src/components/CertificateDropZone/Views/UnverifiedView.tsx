@@ -2,32 +2,32 @@ import { VerificationFragment } from "@govtechsg/oa-verify";
 import { isValid } from "@govtechsg/opencerts-verify";
 import Link from "next/link";
 import React from "react";
-import { TYPES, MESSAGES } from "../../../constants/VerificationErrorMessages";
-import { addressInvalid, getAllButRevokeFragment, getRevokeFragment } from "../../../services/fragment";
+import { MESSAGES, TYPES } from "../../../constants/VerificationErrorMessages";
+import { addressInvalid, certificateNotIssued, certificateRevoked } from "../../../services/fragment";
 import css from "./viewerStyles.module.scss";
+
 interface DetailedErrorsProps {
   verificationStatus: VerificationFragment[];
 }
 const DetailedErrors: React.FunctionComponent<DetailedErrorsProps> = ({ verificationStatus }) => {
   const errors = [];
-  const fragmentsWithoutRevoke = getAllButRevokeFragment(verificationStatus);
-  const revokeFragment = [getRevokeFragment(verificationStatus)];
   if (!isValid(verificationStatus, ["DOCUMENT_INTEGRITY"])) {
     errors.push(TYPES.HASH);
-  }
-  if (!isValid(fragmentsWithoutRevoke, ["DOCUMENT_STATUS"])) {
-    errors.push(TYPES.ISSUED);
-  }
-  if (!isValid(revokeFragment, ["DOCUMENT_STATUS"])) {
-    errors.push(TYPES.REVOKED);
   }
   if (!isValid(verificationStatus, ["ISSUER_IDENTITY"])) {
     errors.push(TYPES.IDENTITY);
   }
-  // if the error is because the address is invalid, then get rid of all errors and only keep this one
-  if (!isValid(verificationStatus, ["DOCUMENT_STATUS"]) && addressInvalid(verificationStatus)) {
-    errors.splice(0, errors.length);
-    errors.push(TYPES.ADDRESS_INVALID);
+
+  if (!isValid(verificationStatus, ["DOCUMENT_STATUS"])) {
+    if (certificateNotIssued(verificationStatus)) errors.push(TYPES.ISSUED);
+    else if (certificateRevoked(verificationStatus)) errors.push(TYPES.REVOKED);
+    // if the error is because the address is invalid, then get rid of all errors and only keep this one
+    else if (addressInvalid(verificationStatus)) {
+      errors.splice(0, errors.length);
+      errors.push(TYPES.ADDRESS_INVALID);
+    } else {
+      // TODO :)
+    }
   }
   const renderedError = errors.map((errorType, index) => (
     <div key={index}>

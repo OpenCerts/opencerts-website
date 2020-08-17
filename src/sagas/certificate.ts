@@ -27,7 +27,7 @@ import {
 } from "../reducers/certificate.actions";
 import { getCertificate } from "../reducers/certificate.selectors";
 import { sendEmail } from "../services/email";
-import { certificateNotIssued, getAllButRevokeFragment, getRevokeFragment } from "../services/fragment";
+import { certificateNotIssued, certificateRevoked } from "../services/fragment";
 import { generateLink } from "../services/link";
 import { getLogger } from "../utils/logger";
 
@@ -46,21 +46,17 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedD
     if (isValid(fragments)) {
       Router.push("/viewer");
     } else {
-      const fragmentsWithoutRevoke = getAllButRevokeFragment(fragments);
-      const revokeFragment = [getRevokeFragment(fragments)];
       const errors: string[] = [];
       if (!isValid(fragments, ["DOCUMENT_INTEGRITY"])) {
         errors.push("CERTIFICATE_HASH");
       }
-      if (!isValid(fragmentsWithoutRevoke, ["DOCUMENT_STATUS"]) && certificateNotIssued(fragments)) {
-        errors.push("UNISSUED_CERTIFICATE");
+
+      if (!isValid(fragments, ["DOCUMENT_STATUS"])) {
+        if (certificateNotIssued(fragments)) errors.push("UNISSUED_CERTIFICATE");
+        else if (certificateRevoked(fragments)) errors.push("REVOKED_CERTIFICATE");
+        else errors.push("CERTIFICATE_STORE_NOT_FOUND"); // TODO might be sth else :)
       }
-      if (!isValid(fragments, ["DOCUMENT_STATUS"]) && !certificateNotIssued(fragments)) {
-        errors.push("CERTIFICATE_STORE_NOT_FOUND");
-      }
-      if (!isValid(revokeFragment, ["DOCUMENT_STATUS"])) {
-        errors.push("REVOKED_CERTIFICATE");
-      }
+
       if (!isValid(fragments, ["ISSUER_IDENTITY"])) {
         errors.push("ISSUER_IDENTITY");
       }

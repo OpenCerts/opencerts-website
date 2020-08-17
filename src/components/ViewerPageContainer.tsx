@@ -1,5 +1,5 @@
 import { VerificationFragment } from "@govtechsg/oa-verify";
-import { getData, WrappedDocument } from "@govtechsg/open-attestation";
+import { getData, v2, WrappedDocument } from "@govtechsg/open-attestation";
 import copy from "clipboard-copy";
 import Router from "next/router";
 import React, { Component, ReactNode } from "react";
@@ -23,8 +23,8 @@ import {
 import { CertificateViewerContainer } from "./CertificateViewer";
 
 interface ViewerProps {
-  updateCertificate: (certificate: WrappedDocument) => void;
-  document: WrappedDocument | null;
+  updateCertificate: (certificate: WrappedDocument<v2.OpenAttestationDocument>) => void;
+  document: WrappedDocument<v2.OpenAttestationDocument> | null;
   verifying: boolean;
   verificationStatus: VerificationFragment[] | null;
   emailSendingState: string;
@@ -32,7 +32,7 @@ interface ViewerProps {
   sendCertificateReset: () => void;
   generateShareLink: () => void;
   shareLink: { id?: string; key?: string };
-  updateObfuscatedCertificate: (updatedDoc: WrappedDocument) => void;
+  updateObfuscatedCertificate: (updatedDoc: WrappedDocument<v2.OpenAttestationDocument>) => void;
 }
 
 interface ViewerState {
@@ -83,7 +83,7 @@ class Viewer extends Component<ViewerProps, ViewerState> {
     this.setState({ copiedLink: true });
   }
 
-  handleCertificateChange(certificate: WrappedDocument): void {
+  handleCertificateChange(certificate: WrappedDocument<v2.OpenAttestationDocument>): void {
     this.props.updateCertificate(certificate);
   }
 
@@ -125,10 +125,11 @@ export const ViewerContainer = connect(
     verificationStatus: getVerificationStatus(store),
   }),
   (dispatch) => ({
-    updateCertificate: (payload: WrappedDocument) => dispatch(updateCertificate(payload)),
+    updateCertificate: (payload: WrappedDocument<v2.OpenAttestationDocument>) => dispatch(updateCertificate(payload)),
     sendCertificate: (payload: { email: string; captcha: string }) => dispatch(sendCertificate(payload)),
     sendCertificateReset: () => dispatch(sendCertificateReset()),
     generateShareLink: () => dispatch(generateShareLink()),
-    updateObfuscatedCertificate: (updatedDoc: WrappedDocument) => dispatch(updateObfuscatedCertificate(updatedDoc)),
+    updateObfuscatedCertificate: (updatedDoc: WrappedDocument<v2.OpenAttestationDocument>) =>
+      dispatch(updateObfuscatedCertificate(updatedDoc)),
   })
 )(Viewer);
