@@ -1,12 +1,12 @@
 import { decryptString } from "@govtechsg/oa-encryption";
-import { getData, utils, v2, WrappedDocument } from "@govtechsg/open-attestation";
+import { v2, WrappedDocument } from "@govtechsg/open-attestation";
 import { isValid, verify } from "@govtechsg/opencerts-verify";
-import { get } from "lodash";
 import Router from "next/router";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import "isomorphic-fetch";
-import { analyticsEvent } from "../components/Analytics";
+import { triggerErrorLogging } from "../components/Analytics";
 import { NETWORK_NAME } from "../config";
+
 import {
   GENERATE_SHARE_LINK,
   generateShareLinkFailure,
@@ -31,75 +31,7 @@ import { certificateNotIssued, getAllButRevokeFragment, getRevokeFragment } from
 import { generateLink } from "../services/link";
 import { getLogger } from "../utils/logger";
 
-const { trace, error } = getLogger("saga:certificate");
-
-const ANALYTICS_VERIFICATION_ERROR_CODE = {
-  ISSUER_IDENTITY: 0,
-  CERTIFICATE_HASH: 1,
-  UNISSUED_CERTIFICATE: 2,
-  REVOKED_CERTIFICATE: 3,
-  CERTIFICATE_STORE: 4,
-};
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function* getAnalyticsDetails() {
-  try {
-    const rawCertificate = yield select(getCertificate);
-    const certificate = getData(rawCertificate);
-
-    const storeAddresses = utils.getIssuerAddress(rawCertificate);
-    const id = get(certificate, "id");
-    return {
-      storeAddresses: Array.isArray(storeAddresses) ? storeAddresses.join(",") : storeAddresses,
-      id,
-    };
-  } catch (e) {
-    error(e.message);
-    return {};
-  }
-}
-
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function* triggerAnalytics(errorCode: number) {
-  const { storeAddresses, id } = yield call(getAnalyticsDetails);
-  if (storeAddresses && id) {
-    analyticsEvent(window, {
-      category: "CERTIFICATE_ERROR",
-      action: storeAddresses,
-      label: id,
-      value: errorCode,
-    });
-  }
-}
-
-// to run if any of the issuer is not valid
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function* analyticsIssuerFail() {
-  yield call(triggerAnalytics, ANALYTICS_VERIFICATION_ERROR_CODE.ISSUER_IDENTITY);
-}
-
-// to run if certificate has been tampered
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function* analyticsHashFail() {
-  yield call(triggerAnalytics, ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_HASH);
-}
-
-// to run if certificate has not been issued
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function* analyticsIssuedFail() {
-  yield call(triggerAnalytics, ANALYTICS_VERIFICATION_ERROR_CODE.UNISSUED_CERTIFICATE);
-}
-
-// to run if certificate has been revoked
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function* analyticsRevocationFail() {
-  yield call(triggerAnalytics, ANALYTICS_VERIFICATION_ERROR_CODE.REVOKED_CERTIFICATE);
-}
-
-// to run if store is not valid
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function* analyticsStoreFail() {
-  yield call(triggerAnalytics, ANALYTICS_VERIFICATION_ERROR_CODE.CERTIFICATE_STORE);
-}
+const { trace } = getLogger("saga:certificate");
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function* verifyCertificate({ payload: certificate }: { payload: WrappedDocument<v2.OpenAttestationDocument> }) {
@@ -116,21 +48,25 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedD
     } else {
       const fragmentsWithoutRevoke = getAllButRevokeFragment(fragments);
       const revokeFragment = [getRevokeFragment(fragments)];
-
+      const errors: string[] = [];
       if (!isValid(fragments, ["DOCUMENT_INTEGRITY"])) {
-        yield call(analyticsHashFail);
+        errors.push("CERTIFICATE_HASH");
       }
       if (!isValid(fragmentsWithoutRevoke, ["DOCUMENT_STATUS"]) && certificateNotIssued(fragments)) {
-        yield call(analyticsIssuedFail);
+        errors.push("UNISSUED_CERTIFICATE");
       }
       if (!isValid(fragments, ["DOCUMENT_STATUS"]) && !certificateNotIssued(fragments)) {
-        yield call(analyticsStoreFail);
+        errors.push("CERTIFICATE_STORE_NOT_FOUND");
       }
       if (!isValid(revokeFragment, ["DOCUMENT_STATUS"])) {
-        yield call(analyticsRevocationFail);
+        errors.push("REVOKED_CERTIFICATE");
       }
       if (!isValid(fragments, ["ISSUER_IDENTITY"])) {
-        yield call(analyticsIssuedFail);
+        errors.push("ISSUER_IDENTITY");
+      }
+
+      if (errors.length > 0) {
+        triggerErrorLogging(certificate, errors);
       }
     }
   } catch (e) {

@@ -1,14 +1,6 @@
-import { call, put, select } from "redux-saga/effects";
+import { put, select } from "redux-saga/effects";
 import { getCertificate } from "../reducers/certificate.selectors";
-import {
-  analyticsHashFail,
-  analyticsIssuedFail,
-  analyticsIssuerFail,
-  analyticsRevocationFail,
-  getAnalyticsDetails,
-  sendCertificate,
-  triggerAnalytics,
-} from "./certificate";
+import { sendCertificate } from "./certificate";
 import { MakeCertUtil } from "./testutils";
 
 jest.mock("@govtechsg/open-attestation", () => {
@@ -106,74 +98,6 @@ describe("sagas/certificate", () => {
         })
       );
       expect(saga.next().done).toBe(true);
-    });
-  });
-
-  describe("analytics*", () => {
-    // eslint-disable-next-line jest/no-hooks
-    beforeEach(() => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      // eslint-disable-next-line jest/prefer-spy-on
-      window.ga = jest.fn();
-    });
-    // eslint-disable-next-line jest/no-hooks
-    afterEach(() => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      // eslint-disable-next-line jest/prefer-spy-on
-      window.ga = undefined;
-    });
-
-    it("triggerAnalytics should get details and fire the analytics event with correct error code", () => {
-      const analyticsGenerator = triggerAnalytics(1337);
-
-      const callGetAnalyticsDetails = analyticsGenerator.next();
-      expect(callGetAnalyticsDetails.value).toStrictEqual(call(getAnalyticsDetails));
-      analyticsGenerator.next({
-        storeAddresses: "storeAdd1,storeAdd2",
-        id: "certificate-id",
-      });
-
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      expect(window.ga).toHaveBeenCalledWith(
-        "send",
-        "event",
-        "CERTIFICATE_ERROR",
-        "storeAdd1,storeAdd2",
-        "certificate-id",
-        1337,
-        undefined
-      );
-    });
-
-    it("analyticsIssuerFail should report to GA with errorType = 0", () => {
-      const analyticsGenerator = analyticsIssuerFail();
-
-      const callGetAnalyticsDetails = analyticsGenerator.next();
-      expect(callGetAnalyticsDetails.value).toStrictEqual(call(triggerAnalytics, 0));
-    });
-
-    it("analyticsHashFail should report to GA with errorType = 1", () => {
-      const analyticsGenerator = analyticsHashFail();
-
-      const callGetAnalyticsDetails = analyticsGenerator.next();
-      expect(callGetAnalyticsDetails.value).toStrictEqual(call(triggerAnalytics, 1));
-    });
-
-    it("analyticsIssuedFail should report to GA with errorType = 2", () => {
-      const analyticsGenerator = analyticsIssuedFail();
-
-      const callGetAnalyticsDetails = analyticsGenerator.next();
-      expect(callGetAnalyticsDetails.value).toStrictEqual(call(triggerAnalytics, 2));
-    });
-
-    it("analyticsRevocationFail should report to GA with errorType = 3", () => {
-      const analyticsGenerator = analyticsRevocationFail();
-
-      const callGetAnalyticsDetails = analyticsGenerator.next();
-      expect(callGetAnalyticsDetails.value).toStrictEqual(call(triggerAnalytics, 3));
     });
   });
 });
