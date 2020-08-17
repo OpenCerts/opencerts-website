@@ -102,19 +102,6 @@ describe("analytics*", () => {
   });
 
   describe("sendEventCertificateViewedDetailed", () => {
-    const mockGA = jest.fn();
-    // eslint-disable-next-line jest/no-hooks
-    beforeEach(() => {
-      // @ts-expect-error dont care about ts here
-      window.ga = mockGA;
-    });
-
-    // eslint-disable-next-line jest/no-hooks
-    afterEach(() => {
-      delete window.ga;
-      mockGA.mockReset();
-    });
-
     describe("when is in the registry", () => {
       it("should use document store to retrieve registry information", () => {
         const issuer: v2.Issuer = {
@@ -127,23 +114,23 @@ describe("analytics*", () => {
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
         sendEventCertificateViewedDetailed({ issuer, certificateData });
-        expect(mockGA.mock.calls[0][0]).toStrictEqual("send");
-        expect(mockGA.mock.calls[0][1]).toStrictEqual("event");
-        expect(mockGA.mock.calls[0][2]).toStrictEqual("CERTIFICATE_DETAILS");
-        expect(mockGA.mock.calls[0][3]).toStrictEqual("VIEWED - Government Technology Agency of Singapore (GovTech)");
-        expect(mockGA.mock.calls[0][4]).toStrictEqual(
-          '"store":"0x007d40224f6562461633ccfbaffd359ebb2fc9ba";"document_id":"id1";"name":"cert name";"issued_on":"a date";"issuer_name":"Government Technology Agency of Singapore (GovTech)";"issuer_id":"govtech-registry"'
+        expect(window.ga).toHaveBeenCalledWith(
+          "send",
+          "event",
+          "CERTIFICATE_DETAILS",
+          "VIEWED - Government Technology Agency of Singapore (GovTech)",
+          '"store":"0x007d40224f6562461633ccfbaffd359ebb2fc9ba";"document_id":"id1";"name":"cert name";"issued_on":"a date";"issuer_name":"Government Technology Agency of Singapore (GovTech)";"issuer_id":"govtech-registry"',
+          undefined,
+          {
+            dimension1: "0x007d40224f6562461633ccfbaffd359ebb2fc9ba",
+            dimension2: "id1",
+            dimension3: "cert name",
+            dimension4: "a date",
+            dimension5: "Government Technology Agency of Singapore (GovTech)",
+            dimension6: "govtech-registry",
+            nonInteraction: true,
+          }
         );
-        expect(mockGA.mock.calls[0][5]).toBeUndefined();
-        expect(mockGA.mock.calls[0][6]).toStrictEqual({
-          nonInteraction: true,
-          dimension1: "0x007d40224f6562461633ccfbaffd359ebb2fc9ba",
-          dimension2: "id1",
-          dimension3: "cert name",
-          dimension4: "a date",
-          dimension5: "Government Technology Agency of Singapore (GovTech)",
-          dimension6: "govtech-registry",
-        });
       });
       it("should use certificate store to retrieve registry information", () => {
         const issuer: v2.Issuer = {
@@ -156,23 +143,23 @@ describe("analytics*", () => {
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
         sendEventCertificateViewedDetailed({ issuer, certificateData });
-        expect(mockGA.mock.calls[0][0]).toStrictEqual("send");
-        expect(mockGA.mock.calls[0][1]).toStrictEqual("event");
-        expect(mockGA.mock.calls[0][2]).toStrictEqual("CERTIFICATE_DETAILS");
-        expect(mockGA.mock.calls[0][3]).toStrictEqual("VIEWED - Government Technology Agency of Singapore (GovTech)");
-        expect(mockGA.mock.calls[0][4]).toStrictEqual(
-          '"store":"0x007d40224f6562461633ccfbaffd359ebb2fc9ba";"document_id":"id1";"name":"cert name";"issued_on":"a date";"issuer_name":"Government Technology Agency of Singapore (GovTech)";"issuer_id":"govtech-registry"'
+        expect(window.ga).toHaveBeenCalledWith(
+          "send",
+          "event",
+          "CERTIFICATE_DETAILS",
+          "VIEWED - Government Technology Agency of Singapore (GovTech)",
+          '"store":"0x007d40224f6562461633ccfbaffd359ebb2fc9ba";"document_id":"id1";"name":"cert name";"issued_on":"a date";"issuer_name":"Government Technology Agency of Singapore (GovTech)";"issuer_id":"govtech-registry"',
+          undefined,
+          {
+            dimension1: "0x007d40224f6562461633ccfbaffd359ebb2fc9ba",
+            dimension2: "id1",
+            dimension3: "cert name",
+            dimension4: "a date",
+            dimension5: "Government Technology Agency of Singapore (GovTech)",
+            dimension6: "govtech-registry",
+            nonInteraction: true,
+          }
         );
-        expect(mockGA.mock.calls[0][5]).toBeUndefined();
-        expect(mockGA.mock.calls[0][6]).toStrictEqual({
-          nonInteraction: true,
-          dimension1: "0x007d40224f6562461633ccfbaffd359ebb2fc9ba",
-          dimension2: "id1",
-          dimension3: "cert name",
-          dimension4: "a date",
-          dimension5: "Government Technology Agency of Singapore (GovTech)",
-          dimension6: "govtech-registry",
-        });
       });
       it("should use token registry to retrieve registry information", () => {
         const issuer: v2.Issuer = {
@@ -185,23 +172,23 @@ describe("analytics*", () => {
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
         sendEventCertificateViewedDetailed({ issuer, certificateData });
-        expect(mockGA.mock.calls[0][0]).toStrictEqual("send");
-        expect(mockGA.mock.calls[0][1]).toStrictEqual("event");
-        expect(mockGA.mock.calls[0][2]).toStrictEqual("CERTIFICATE_DETAILS");
-        expect(mockGA.mock.calls[0][3]).toStrictEqual("VIEWED - Nanyang Polytechnic");
-        expect(mockGA.mock.calls[0][4]).toStrictEqual(
-          '"store":"0x5CA3b9daC85DA4DE4030e59C1a0248004209e348";"document_id":"id1";"name":"cert name";"issued_on":"a date";"issuer_name":"Nanyang Polytechnic";"issuer_id":"nyp-registry"'
+        expect(window.ga).toHaveBeenCalledWith(
+          "send",
+          "event",
+          "CERTIFICATE_DETAILS",
+          "VIEWED - Nanyang Polytechnic",
+          '"store":"0x5CA3b9daC85DA4DE4030e59C1a0248004209e348";"document_id":"id1";"name":"cert name";"issued_on":"a date";"issuer_name":"Nanyang Polytechnic";"issuer_id":"nyp-registry"',
+          undefined,
+          {
+            dimension1: "0x5CA3b9daC85DA4DE4030e59C1a0248004209e348",
+            dimension2: "id1",
+            dimension3: "cert name",
+            dimension4: "a date",
+            dimension5: "Nanyang Polytechnic",
+            dimension6: "nyp-registry",
+            nonInteraction: true,
+          }
         );
-        expect(mockGA.mock.calls[0][5]).toBeUndefined();
-        expect(mockGA.mock.calls[0][6]).toStrictEqual({
-          nonInteraction: true,
-          dimension1: "0x5CA3b9daC85DA4DE4030e59C1a0248004209e348",
-          dimension2: "id1",
-          dimension3: "cert name",
-          dimension4: "a date",
-          dimension5: "Nanyang Polytechnic",
-          dimension6: "nyp-registry",
-        });
       });
     });
     describe("when is not in the registry", () => {
@@ -216,23 +203,23 @@ describe("analytics*", () => {
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
         sendEventCertificateViewedDetailed({ issuer, certificateData });
-        expect(mockGA.mock.calls[0][0]).toStrictEqual("send");
-        expect(mockGA.mock.calls[0][1]).toStrictEqual("event");
-        expect(mockGA.mock.calls[0][2]).toStrictEqual("CERTIFICATE_DETAILS");
-        expect(mockGA.mock.calls[0][3]).toStrictEqual("VIEWED - aa.com");
-        expect(mockGA.mock.calls[0][4]).toStrictEqual(
-          '"store":"0xabcdef";"document_id":"id1";"name":"cert name";"issued_on":"a date";"issuer_name":"aa.com"'
+        expect(window.ga).toHaveBeenCalledWith(
+          "send",
+          "event",
+          "CERTIFICATE_DETAILS",
+          "VIEWED - aa.com",
+          '"store":"0xabcdef";"document_id":"id1";"name":"cert name";"issued_on":"a date";"issuer_name":"aa.com"',
+          undefined,
+          {
+            dimension1: "0xabcdef",
+            dimension2: "id1",
+            dimension3: "cert name",
+            dimension4: "a date",
+            dimension5: "aa.com",
+            dimension6: "(not set)",
+            nonInteraction: true,
+          }
         );
-        expect(mockGA.mock.calls[0][5]).toBeUndefined();
-        expect(mockGA.mock.calls[0][6]).toStrictEqual({
-          nonInteraction: true,
-          dimension1: "0xabcdef",
-          dimension2: "id1",
-          dimension3: "cert name",
-          dimension4: "a date",
-          dimension5: "aa.com",
-          dimension6: "(not set)",
-        });
       });
     });
   });
@@ -245,11 +232,8 @@ describe("analytics*", () => {
           attainmentDate: "a6474204-94a4-499b-af95-b161ea0f6996:string:2012-12-31T23:59:00+08:00",
           transcript: [
             {
-              level: "215cba59-fc69-4799-906d-13831235d61b:string:ORDINARY",
               grade: "0312dcfb-460d-4b01-b154-676ae307f91c:string:1",
               name: "191170f2-7c47-497f-954f-09b7b4b2fc25:string:ADDITIONAL MATHEMATICS",
-              languageMedium: "02f3c2f4-207d-4106-b950-dbde85457d71:string:ENGLISH",
-              examiningAuthority: "b2511648-d512-44d6-92a2-7e9537bf2169:string:CAMBRIDGE",
             },
           ],
           $template: "87387e89-58ac-41cb-abb8-66af522dd5f5:string:sg/gov/seab/SOR_GCEO",
@@ -257,10 +241,6 @@ describe("analytics*", () => {
             "3185297a-bb47-4853-8f45-9cb60cf98608:string:SINGAPORE-CAMBRIDGE GENERAL CERTIFICATE OF EDUCATION ORDINARY LEVEL",
           recipient: {},
           id: "5dd55da3-8e32-4ee6-b23b-5c17a3395792:string:MyAwesomeCertID",
-          additionalData: {
-            certifierDesignation: "5551636b-8015-4437-8726-183ee0e030da:string:Chief Executive",
-            certifierName: "572bae48-a0e6-4410-b8cc-289791c19ffb:string:Mr Yue Lip Sin",
-          },
           issuers: [
             {
               name: "b6c56876-2a07-4efb-a56f-afdeb7ec91f2:string:SEAB",
@@ -329,14 +309,6 @@ describe("analytics*", () => {
               },
             },
           ],
-          additionalData: {
-            certSignatories: [
-              {
-                name: "b2d4a5fc-7e0a-43ad-a224-97c21c3adb85:string:Professor Demo of all Demos",
-                designation: "5226c4c8-df28-4eed-8d9f-0cf41b09dbdb:string:Dean of Demos",
-              },
-            ],
-          },
           $template: {
             name: "10af685b-06c1-49dd-92bb-af3a52fcf705:string:SMU-A-TIS-2019-4",
             type: "f81508ff-2f40-4bf5-a6ec-7b907d1a9898:string:EMBEDDED_RENDERER",
