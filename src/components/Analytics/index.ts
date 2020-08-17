@@ -1,5 +1,5 @@
 import { v2, WrappedDocument, getData } from "@govtechsg/open-attestation";
-import { get } from "lodash";
+import { RegistryEntry } from "@govtechsg/opencerts-verify";
 import registry from "../../../public/static/registry.json";
 import { getLogger } from "../../utils/logger";
 const { trace } = getLogger("components:Analytics:");
@@ -11,6 +11,13 @@ interface Event {
   value?: string | number;
   label?: string;
   options?: UniversalAnalytics.FieldsObject;
+}
+
+/*
+ * This function checks if an address is in registry.json to provide property access.
+ */
+function isInRegistry(value: string): value is keyof typeof registry.issuers {
+  return value in registry.issuers;
 }
 
 export const validateEvent = ({ category, action, value }: Event): void => {
@@ -41,16 +48,18 @@ export const sendEventCertificateViewedDetailed = ({
 }): void => {
   let label = "";
   let issuerName = "";
+  let registryId = null;
 
   const separator = ";";
   const store = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? "";
   const id = certificateData?.id ?? "";
   const name = certificateData?.name ?? "";
   const issuedOn = certificateData?.issuedOn ?? "";
-  const registryIssuer = get(registry.issuers, store);
 
-  if (registryIssuer) {
-    issuerName = registryIssuer.name;
+  if (isInRegistry(store)) {
+    const registryIssuer: RegistryEntry = registry.issuers[store];
+    registryId = registryIssuer.id;
+    issuerName = registry.issuers[store].name;
     label = `"store":"${store}"${separator}"document_id":"${id}"${separator}"name":"${name}"${separator}"issued_on":"${issuedOn}"${separator}"issuer_name":"${
       issuerName ?? ""
     }"${separator}"issuer_id":"${registryIssuer.id ?? ""}"`;
@@ -73,23 +82,10 @@ export const sendEventCertificateViewedDetailed = ({
       dimension3: name || "(not set)",
       dimension4: issuedOn || "(not set)",
       dimension5: issuerName || "(not set)",
-      dimension6: registryIssuer?.id || "(not set)",
+      dimension6: registryId || "(not set)",
     },
   });
 };
-
-interface RegistryIssuer {
-  name: string;
-  displayCard: boolean;
-  website?: string;
-  email?: string;
-  phone?: string;
-  logo?: string;
-  id?: string;
-}
-function isInRegistry(value: string): value is keyof typeof registry.issuers {
-  return value in registry.issuers;
-}
 
 export function triggerErrorLogging(
   rawCertificate: WrappedDocument<v2.OpenAttestationDocument>,
@@ -107,10 +103,9 @@ export function triggerErrorLogging(
     const store = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? "";
     let issuerName = issuer.name;
     let registryId = null;
-    let registryIssuer: RegistryIssuer | null = null;
 
     if (isInRegistry(store)) {
-      registryIssuer = registry.issuers[store];
+      const registryIssuer: RegistryEntry = registry.issuers[store];
       issuerName = registryIssuer.name;
       registryId = registryIssuer.id;
     } else if (issuer.identityProof) {
