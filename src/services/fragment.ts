@@ -37,3 +37,11 @@ export const certificateRevoked = (fragments: VerificationFragment[]): boolean =
   // 1 is the error code used by oa-verify in case of document / token not issued / minted
   return documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.DOCUMENT_REVOKED;
 };
+
+// this function check if the reason of the error is that we can't connect to Ethereum
+export const badResponse = (fragments: VerificationFragment[]): boolean => {
+  // TODO: add types for Token Store, since the error encompasses everything else
+  const documentStoreIssuedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumDocumentStoreStatus");
+  // 1 is the error code used by oa-verify in case of document / token not issued / minted
+  return documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.BAD_RESPONSE;
+};

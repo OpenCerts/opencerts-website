@@ -3,7 +3,7 @@ import { isValid } from "@govtechsg/opencerts-verify";
 import Link from "next/link";
 import React from "react";
 import { MESSAGES, TYPES } from "../../../constants/VerificationErrorMessages";
-import { addressInvalid, certificateNotIssued, certificateRevoked } from "../../../services/fragment";
+import { addressInvalid, certificateNotIssued, certificateRevoked, badResponse } from "../../../services/fragment";
 import css from "./viewerStyles.module.scss";
 
 interface DetailedErrorsProps {
@@ -25,7 +25,13 @@ const DetailedErrors: React.FunctionComponent<DetailedErrorsProps> = ({ verifica
     else if (addressInvalid(verificationStatus)) {
       errors.splice(0, errors.length);
       errors.push(TYPES.ADDRESS_INVALID);
-    } else {
+    }
+    // if the error is because cannot connect to Ethereum, then get rid of all errors and only keep this one
+    else if (badResponse(verificationStatus)) {
+      errors.splice(0, errors.length);
+      errors.push(TYPES.BAD_RESPONSE);
+    }
+    else {
       // TODO :)
     }
   }

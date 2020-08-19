@@ -4,6 +4,7 @@ export const TYPES = {
   HASH: "HASH",
   IDENTITY: "IDENTITY",
   ADDRESS_INVALID: "ADDRESS_INVALID",
+  BAD_RESPONSE: "BAD_RESPONSE",
 };
 
 export const MESSAGES = {
@@ -33,5 +34,10 @@ export const MESSAGES = {
     failureTitle: "Certificate store address is invalid",
     failureMessage:
       "Please inform the issuer of this certificate that they have misconfigured their certificate store address.",
+  },
+  [TYPES.BAD_RESPONSE]: {
+    failureTitle: "Unable to connect to Ethereum",
+    failureMessage:
+      "We are unable to connect to Ethereum, please try again later. If this issue persists, please contact us using the feeedback link below.",
   },
 };
