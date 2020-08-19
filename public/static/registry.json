@@ -130,6 +130,16 @@
       "id": "smu-registry-academy",
       "group": "smu-registry"
     },
+    "0x38c8d4cbc63a23739abfe9c280a3c533a8dbebf5": {
+      "name": "Singapore Management University School of Accountancy",
+      "displayCard": true,
+      "website": "https://accountancy.smu.edu.sg",
+      "email": "accountancy@smu.edu.sg",
+      "phone": "+65 6828 0632",
+      "logo": "/static/images/SMU_logo.png",
+      "id": "smu-registry-accountancy",
+      "group": "smu-registry"
+    },
     "0x5b3e03ec154629c67ad5d32e34048aac3fb0ddbe": {
       "name": "Singapore Management University Institute of Service Excellence",
       "displayCard": true,
