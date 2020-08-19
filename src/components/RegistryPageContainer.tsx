@@ -25,12 +25,13 @@ export const RegistryPage: React.FunctionComponent = () => {
           <div className={css["section-width"]}>
             <div className={`col-lg-6 col-md-12 my-3 ${css["m-pd-0"]}`}>
               <p>
-                The registry is a list of recognised issuers with their certificate store addresses. Certificates from
-                these issuers can be recognised and verified by our viewer.
-              </p>
-              <p>
-                Certificates with unverified issuer means that the certificate store address is not registered. This
-                could mean that the issuer has not registered with OpenCerts.
+                The registry is maintained by SkillsFuture Singapore. When a certificate is verified, this would mean
+                that the certificate is issued by an institution in the SkillsFuture Singapore registry. To apply for
+                your institute to be listed in the registry, kindly fill in{" "}
+                <a href="https://form.gov.sg/5cd5141c02d207001007e322" target="_blank" rel="noopener noreferrer">
+                  this form
+                </a>
+                .
               </p>
             </div>
           </div>
