@@ -36,8 +36,8 @@ export const MESSAGES = {
       "Please inform the issuer of this certificate that they have misconfigured their certificate store address.",
   },
   [TYPES.BAD_RESPONSE]: {
-    failureTitle: "Unable to connect to Ethereum",
+    failureTitle: "Unable to connect to the Ethereum network",
     failureMessage:
-      "We are unable to connect to Ethereum, please try again later. If this issue persists, please contact us using the feeedback link below.",
+      "We are unable to connect to the Ethereum network, please try again later. If this issue persists, please contact us using the feeedback link below.",
   },
 };

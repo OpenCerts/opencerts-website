@@ -30,8 +30,7 @@ const DetailedErrors: React.FunctionComponent<DetailedErrorsProps> = ({ verifica
     else if (badResponse(verificationStatus)) {
       errors.splice(0, errors.length);
       errors.push(TYPES.BAD_RESPONSE);
-    }
-    else {
+    } else {
       // TODO :)
     }
   }
