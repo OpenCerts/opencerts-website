@@ -26,7 +26,10 @@ test.requestHooks(rateLimitMock)(
 
     await InvalidMessage.with({ visibilityCheck: true })();
 
-    await validateTextContent(t, RenderedCertificate, ["Connection error", "Unable to conect to the Ethereum network"]);
+    await validateTextContent(t, RenderedCertificate, [
+      "Connection error",
+      "Unable to connect to the Ethereum network",
+    ]);
   }
 );
 
@@ -37,6 +40,9 @@ test.requestHooks(badGatewayMock)(
 
     await InvalidMessage.with({ visibilityCheck: true })();
 
-    await validateTextContent(t, RenderedCertificate, ["Connection error", "Unable to conect to the Ethereum network"]);
+    await validateTextContent(t, RenderedCertificate, [
+      "Connection error",
+      "Unable to connect to the Ethereum network",
+    ]);
   }
 );
