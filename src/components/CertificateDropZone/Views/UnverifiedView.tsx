@@ -41,7 +41,7 @@ const DetailedErrors: React.FunctionComponent<DetailedErrorsProps> = ({ verifica
       errors.push(TYPES.ETHERS_UNHANDLED_ERROR);
     } else {
       // TODO :)
-    }    
+    }
   }
   const renderedError = errors.map((errorType, index) => (
     <div key={index}>

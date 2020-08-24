@@ -19,18 +19,24 @@ const InvalidMessage = Selector(".invalid");
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(async (prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());
 
-test.requestHooks(rateLimitMock)("Will show connection error only even if certificate is invalid (HTTP 429)", async (t) => {
-  await t.setFilesToUpload("input[type=file]", [Certificate]);
+test.requestHooks(rateLimitMock)(
+  "Will show connection error only even if certificate is invalid (HTTP 429)",
+  async (t) => {
+    await t.setFilesToUpload("input[type=file]", [Certificate]);
 
-  await InvalidMessage.with({ visibilityCheck: true })();
+    await InvalidMessage.with({ visibilityCheck: true })();
 
-  await validateTextContent(t, RenderedCertificate, ["Connection error", "Unable to conect to the Ethereum network"]);
-});
+    await validateTextContent(t, RenderedCertificate, ["Connection error", "Unable to conect to the Ethereum network"]);
+  }
+);
 
-test.requestHooks(rateLimitMock)("Will show connection error only even if certificate is invalid (HTTP 502)", async (t) => {
-  await t.setFilesToUpload("input[type=file]", [Certificate]);
+test.requestHooks(badGatewayMock)(
+  "Will show connection error only even if certificate is invalid (HTTP 502)",
+  async (t) => {
+    await t.setFilesToUpload("input[type=file]", [Certificate]);
 
-  await InvalidMessage.with({ visibilityCheck: true })();
+    await InvalidMessage.with({ visibilityCheck: true })();
 
-  await validateTextContent(t, RenderedCertificate, ["Connection error", "Unable to conect to the Ethereum network"]);
-});
+    await validateTextContent(t, RenderedCertificate, ["Connection error", "Unable to conect to the Ethereum network"]);
+  }
+);
