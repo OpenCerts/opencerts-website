@@ -7,8 +7,8 @@ import {
   addressInvalid,
   certificateNotIssued,
   certificateRevoked,
-  badResponse,
-  missingResponse,
+  unhandledError,
+  serverError,
 } from "../../../services/fragment";
 import css from "./viewerStyles.module.scss";
 
@@ -33,20 +33,15 @@ const DetailedErrors: React.FunctionComponent<DetailedErrorsProps> = ({ verifica
       errors.push(TYPES.ADDRESS_INVALID);
     }
     // if the error is because cannot connect to Ethereum, then get rid of all errors and only keep this one
-    else if (missingResponse(verificationStatus)) {
+    else if (serverError(verificationStatus)) {
       errors.splice(0, errors.length);
       errors.push(TYPES.MISSING_RESPONSE);
-    } else if (badResponse(verificationStatus)) {
+    } else if (unhandledError(verificationStatus)) {
       errors.splice(0, errors.length);
-      errors.push(TYPES.BAD_RESPONSE);
+      errors.push(TYPES.ETHERS_UNHANDLED_ERROR);
     } else {
       // TODO :)
-    }
-    // Somehow there are other errors that got caught by this... integration-merkle.spec.js's "odd-length" error is considered unhandled
-    // if (unhandledError(verificationStatus)) {
-    //   errors.splice(0, errors.length);
-    //   errors.push(TYPES.ETHERS_UNHANDLED_ERROR);
-    // }
+    }    
   }
   const renderedError = errors.map((errorType, index) => (
     <div key={index}>
@@ -67,8 +62,10 @@ interface UnverifiedViewProps {
 }
 export const UnverifiedView: React.FunctionComponent<UnverifiedViewProps> = ({ resetData, verificationStatus }) => {
   let label = "This certificate is not valid";
-  if (missingResponse(verificationStatus) || badResponse(verificationStatus)) {
+  if (serverError(verificationStatus)) {
     label = "Connection error";
+  } else if (unhandledError(verificationStatus)) {
+    label = "Unhandled error";
   }
 
   return (
