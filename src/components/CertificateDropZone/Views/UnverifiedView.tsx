@@ -8,7 +8,6 @@ import {
   certificateNotIssued,
   certificateRevoked,
   badResponse,
-  unhandledError,
   missingResponse,
 } from "../../../services/fragment";
 import css from "./viewerStyles.module.scss";
@@ -40,12 +39,14 @@ const DetailedErrors: React.FunctionComponent<DetailedErrorsProps> = ({ verifica
     } else if (badResponse(verificationStatus)) {
       errors.splice(0, errors.length);
       errors.push(TYPES.BAD_RESPONSE);
-    } else if (unhandledError(verificationStatus)) {
-      errors.splice(0, errors.length);
-      errors.push(TYPES.ETHERS_UNHANDLED_ERROR);
     } else {
       // TODO :)
     }
+    // Somehow there are other errors that got caught by this... integration-merkle.spec.js's "odd-length" error is considered unhandled
+    // if (unhandledError(verificationStatus)) {
+    //   errors.splice(0, errors.length);
+    //   errors.push(TYPES.ETHERS_UNHANDLED_ERROR);
+    // }
   }
   const renderedError = errors.map((errorType, index) => (
     <div key={index}>
@@ -66,7 +67,7 @@ interface UnverifiedViewProps {
 }
 export const UnverifiedView: React.FunctionComponent<UnverifiedViewProps> = ({ resetData, verificationStatus }) => {
   let label = "This certificate is not valid";
-  if (missingResponse(verificationStatus) || badResponse(verificationStatus) || unhandledError(verificationStatus)) {
+  if (missingResponse(verificationStatus) || badResponse(verificationStatus)) {
     label = "Connection error";
   }
 

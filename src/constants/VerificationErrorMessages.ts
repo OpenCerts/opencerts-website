@@ -48,7 +48,7 @@ export const MESSAGES = {
       "We are unable to connect to the Ethereum network, please try again later. If this issue persists, contact us using the feeedback link below.",
   },
   [TYPES.ETHERS_UNHANDLED_ERROR]: {
-    failureTitle: "Whoops!",
+    failureTitle: "Whoops! It's not you, it's us",
     failureMessage:
       "We encountered an internal error and cannot determine the cause, please try again later. If this issue persists, contact us using the feeedback link below.",
   },
