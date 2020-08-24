@@ -38,10 +38,36 @@ export const certificateRevoked = (fragments: VerificationFragment[]): boolean =
   return documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.DOCUMENT_REVOKED;
 };
 
-// this function check if the reason of the error is that we can't connect to Ethereum
-export const badResponse = (fragments: VerificationFragment[]): boolean => {
-  // TODO: add types for Token Store, since the error encompasses everything else
+// this function check if the reason of the error is that we can't connect to Ethereum (due to rate limit error)
+export const missingResponse = (fragments: VerificationFragment[]): boolean => {
   const documentStoreIssuedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumDocumentStoreStatus");
-  // 1 is the error code used by oa-verify in case of document / token not issued / minted
-  return documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.BAD_RESPONSE;
+  const tokenRegistryMintedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumTokenRegistryStatus");
+  // 429 is the error code used by oa-verify in case of Ethers returning a missing response error
+  return (
+    documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.MISSING_RESPONSE ||
+    tokenRegistryMintedFragment?.reason?.code === OpenAttestationEthereumTokenRegistryStatusCode.MISSING_RESPONSE
+  );
+};
+
+// this function check if the reason of the error is that we can't connect to Ethereum (due to HTTP 5xx errors)
+export const badResponse = (fragments: VerificationFragment[]): boolean => {
+  const documentStoreIssuedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumDocumentStoreStatus");
+  const tokenRegistryMintedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumTokenRegistryStatus");
+  // 502 is the error code used by oa-verify in case of Ethers returning a bad response error
+  return (
+    documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.BAD_RESPONSE ||
+    tokenRegistryMintedFragment?.reason?.code === OpenAttestationEthereumTokenRegistryStatusCode.BAD_RESPONSE
+  );
+};
+
+// this function check if the reason of the error is that we can't connect to Ethereum
+export const unhandledError = (fragments: VerificationFragment[]): boolean => {
+  const documentStoreIssuedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumDocumentStoreStatus");
+  const tokenRegistryMintedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumTokenRegistryStatus");
+  // 3 is the error code used by oa-verify in case of weird errors that we didn't foresee to handle
+  return (
+    documentStoreIssuedFragment?.reason?.code ===
+      OpenAttestationEthereumDocumentStoreStatusCode.ETHERS_UNHANDLED_ERROR ||
+    tokenRegistryMintedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.ETHERS_UNHANDLED_ERROR
+  );
 };

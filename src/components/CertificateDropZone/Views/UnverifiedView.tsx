@@ -3,7 +3,14 @@ import { isValid } from "@govtechsg/opencerts-verify";
 import Link from "next/link";
 import React from "react";
 import { MESSAGES, TYPES } from "../../../constants/VerificationErrorMessages";
-import { addressInvalid, certificateNotIssued, certificateRevoked, badResponse } from "../../../services/fragment";
+import {
+  addressInvalid,
+  certificateNotIssued,
+  certificateRevoked,
+  badResponse,
+  unhandledError,
+  missingResponse,
+} from "../../../services/fragment";
 import css from "./viewerStyles.module.scss";
 
 interface DetailedErrorsProps {
@@ -27,9 +34,15 @@ const DetailedErrors: React.FunctionComponent<DetailedErrorsProps> = ({ verifica
       errors.push(TYPES.ADDRESS_INVALID);
     }
     // if the error is because cannot connect to Ethereum, then get rid of all errors and only keep this one
-    else if (badResponse(verificationStatus)) {
+    else if (missingResponse(verificationStatus)) {
+      errors.splice(0, errors.length);
+      errors.push(TYPES.MISSING_RESPONSE);
+    } else if (badResponse(verificationStatus)) {
       errors.splice(0, errors.length);
       errors.push(TYPES.BAD_RESPONSE);
+    } else if (unhandledError(verificationStatus)) {
+      errors.splice(0, errors.length);
+      errors.push(TYPES.ETHERS_UNHANDLED_ERROR);
     } else {
       // TODO :)
     }
@@ -51,41 +64,48 @@ interface UnverifiedViewProps {
   resetData: () => void;
   verificationStatus: VerificationFragment[];
 }
-export const UnverifiedView: React.FunctionComponent<UnverifiedViewProps> = ({ resetData, verificationStatus }) => (
-  <div
-    className={`${css["viewer-container"]} ${css.invalid}`}
-    style={{
-      backgroundColor: "#fbeae9",
-      borderRadius: 10,
-    }}
-  >
-    <span className={css["message-container"]}>
-      <img src="/static/images/dropzone/invalid.svg" />
-      <span className="invalid m-3" style={{ fontSize: "1.5rem" }}>
-        {"This certificate is not valid"}
+export const UnverifiedView: React.FunctionComponent<UnverifiedViewProps> = ({ resetData, verificationStatus }) => {
+  let label = "This certificate is not valid";
+  if (missingResponse(verificationStatus) || badResponse(verificationStatus) || unhandledError(verificationStatus)) {
+    label = "Connection error";
+  }
+
+  return (
+    <div
+      className={`${css["viewer-container"]} ${css.invalid}`}
+      style={{
+        backgroundColor: "#fbeae9",
+        borderRadius: 10,
+      }}
+    >
+      <span className={css["message-container"]}>
+        <img src="/static/images/dropzone/invalid.svg" />
+        <span className="invalid m-3" style={{ fontSize: "1.5rem" }}>
+          {label}
+        </span>
       </span>
-    </span>
 
-    {<DetailedErrors verificationStatus={verificationStatus} />}
+      {<DetailedErrors verificationStatus={verificationStatus} />}
 
-    <Link href="/faq">
-      <div className={css["unverified-btn"]}>What should I do?</div>
-    </Link>
+      <Link href="/faq">
+        <div className={css["unverified-btn"]}>What should I do?</div>
+      </Link>
 
-    <div className={css["secondary-links"]}>
-      <span>
-        <Link href=" ">
-          <a
-            onClick={(e) => {
-              e.preventDefault();
-              resetData();
-            }}
-            className={css["text-link"]}
-          >
-            Try another
-          </a>
-        </Link>
-      </span>
+      <div className={css["secondary-links"]}>
+        <span>
+          <Link href=" ">
+            <a
+              onClick={(e) => {
+                e.preventDefault();
+                resetData();
+              }}
+              className={css["text-link"]}
+            >
+              Try another
+            </a>
+          </Link>
+        </span>
+      </div>
     </div>
-  </div>
-);
+  );
+};

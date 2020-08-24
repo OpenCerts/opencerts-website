@@ -4,7 +4,9 @@ export const TYPES = {
   HASH: "HASH",
   IDENTITY: "IDENTITY",
   ADDRESS_INVALID: "ADDRESS_INVALID",
+  MISSING_RESPONSE: "MISSING_RESPONSE",
   BAD_RESPONSE: "BAD_RESPONSE",
+  ETHERS_UNHANDLED_ERROR: "ETHERS_UNHANDLED_ERROR",
 };
 
 export const MESSAGES = {
@@ -35,9 +37,19 @@ export const MESSAGES = {
     failureMessage:
       "Please inform the issuer of this certificate that they have misconfigured their certificate store address.",
   },
+  [TYPES.MISSING_RESPONSE]: {
+    failureTitle: "Unable to connect to the Ethereum network",
+    failureMessage:
+      "We are unable to connect to the Ethereum network, please try again later. If this issue persists, contact us using the feeedback link below.",
+  },
   [TYPES.BAD_RESPONSE]: {
     failureTitle: "Unable to connect to the Ethereum network",
     failureMessage:
-      "We are unable to connect to the Ethereum network, please try again later. If this issue persists, please contact us using the feeedback link below.",
+      "We are unable to connect to the Ethereum network, please try again later. If this issue persists, contact us using the feeedback link below.",
+  },
+  [TYPES.ETHERS_UNHANDLED_ERROR]: {
+    failureTitle: "Whoops!",
+    failureMessage:
+      "We encountered an internal error and cannot determine the cause, please try again later. If this issue persists, contact us using the feeedback link below.",
   },
 };
