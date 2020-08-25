@@ -21,6 +21,17 @@ export const addressInvalid = (fragments: VerificationFragment[]): boolean => {
 };
 
 // this function check if the reason of the error is that the document store or token has not been issued
+export const contractNotFound = (fragments: VerificationFragment[]): boolean => {
+  const documentStoreIssuedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumDocumentStoreStatus");
+  const tokenRegistryMintedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumTokenRegistryStatus");
+  // 404 is the error code used by oa-verify in case of contract not found
+  return (
+    documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.CONTRACT_NOT_FOUND ||
+    tokenRegistryMintedFragment?.reason?.code === OpenAttestationEthereumTokenRegistryStatusCode.CONTRACT_NOT_FOUND
+  );
+};
+
+// this function check if the reason of the error is that the document store or token has not been issued
 export const certificateNotIssued = (fragments: VerificationFragment[]): boolean => {
   const documentStoreIssuedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumDocumentStoreStatus");
   const tokenRegistryMintedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumTokenRegistryStatus");

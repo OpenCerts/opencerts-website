@@ -9,6 +9,7 @@ import {
   certificateRevoked,
   unhandledError,
   serverError,
+  contractNotFound,
 } from "../../../services/fragment";
 import css from "./viewerStyles.module.scss";
 
@@ -27,18 +28,26 @@ const DetailedErrors: React.FunctionComponent<DetailedErrorsProps> = ({ verifica
   if (!isValid(verificationStatus, ["DOCUMENT_STATUS"])) {
     if (certificateNotIssued(verificationStatus)) errors.push(TYPES.ISSUED);
     else if (certificateRevoked(verificationStatus)) errors.push(TYPES.REVOKED);
-    // if the error is because the address is invalid, then get rid of all errors and only keep this one
     else if (addressInvalid(verificationStatus)) {
+      // if the error is because the address is invalid, then get rid of all errors and only keep this one
       errors.splice(0, errors.length);
       errors.push(TYPES.ADDRESS_INVALID);
-    }
-    // if the error is because cannot connect to Ethereum, then get rid of all errors and only keep this one
-    else if (serverError(verificationStatus)) {
+      console.log("addressInvalid", errors);
+    } else if (contractNotFound(verificationStatus)) {
+      // if the error is because the contract cannot be found, then get rid of all errors and only keep this one
       errors.splice(0, errors.length);
-      errors.push(TYPES.MISSING_RESPONSE);
+      errors.push(TYPES.CONTRACT_NOT_FOUND);
+      console.log("contractNotFound", errors);
+    } else if (serverError(verificationStatus)) {
+      // if the error is because cannot connect to Ethereum, then get rid of all errors and only keep this one
+      errors.splice(0, errors.length);
+      errors.push(TYPES.SERVER_ERROR);
+      console.log("serverError", errors);
     } else if (unhandledError(verificationStatus)) {
+      // if it's some unhandled error that we didn't foresee, then get rid of all errors and only keep this one
       errors.splice(0, errors.length);
       errors.push(TYPES.ETHERS_UNHANDLED_ERROR);
+      console.log("unhandledError", errors);
     } else {
       // TODO :)
     }

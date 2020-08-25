@@ -4,8 +4,8 @@ export const TYPES = {
   HASH: "HASH",
   IDENTITY: "IDENTITY",
   ADDRESS_INVALID: "ADDRESS_INVALID",
-  MISSING_RESPONSE: "MISSING_RESPONSE",
-  BAD_RESPONSE: "BAD_RESPONSE",
+  CONTRACT_NOT_FOUND: "CONTRACT_NOT_FOUND",
+  SERVER_ERROR: "SERVER_ERROR",
   ETHERS_UNHANDLED_ERROR: "ETHERS_UNHANDLED_ERROR",
 };
 
@@ -37,12 +37,12 @@ export const MESSAGES = {
     failureMessage:
       "Please inform the issuer of this certificate that they have misconfigured their certificate store address.",
   },
-  [TYPES.MISSING_RESPONSE]: {
-    failureTitle: "Unable to connect to the Ethereum network",
+  [TYPES.CONTRACT_NOT_FOUND]: {
+    failureTitle: "Certificate store address cannot be found",
     failureMessage:
-      "We are unable to connect to the Ethereum network, please try again later. If this issue persists, contact us using the feedback link below.",
+      "Please inform the issuer of this certificate that they have misconfigured their certificate store address.",
   },
-  [TYPES.BAD_RESPONSE]: {
+  [TYPES.SERVER_ERROR]: {
     failureTitle: "Unable to connect to the Ethereum network",
     failureMessage:
       "We are unable to connect to the Ethereum network, please try again later. If this issue persists, contact us using the feedback link below.",

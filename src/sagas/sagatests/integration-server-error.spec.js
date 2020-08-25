@@ -1,6 +1,6 @@
 import { RequestMock, Selector } from "testcafe";
 
-fixture("Server error").page`http://localhost:3000`;
+fixture("Ethereum Provider HTTP Server Error").page`http://localhost:3000`;
 
 const rateLimitMock = RequestMock()
   .onRequestTo({ url: "https://ropsten.infura.io/v3/bb46da3f80e040e8ab73c0a9ff365d18", method: "post" })
