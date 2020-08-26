@@ -1,5 +1,5 @@
 import { VerificationFragment } from "@govtechsg/oa-verify";
-import { OpenAttestationDocument, WrappedDocument, v2 } from "@govtechsg/open-attestation";
+import { WrappedDocument, v2 } from "@govtechsg/open-attestation";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import React from "react";
