@@ -4,11 +4,11 @@ fixture("Ethereum Provider HTTP Server Error").page`http://localhost:3000`;
 
 const rateLimitMock = RequestMock()
   .onRequestTo({ url: "https://ropsten.infura.io/v3/bb46da3f80e040e8ab73c0a9ff365d18", method: "post" })
-  .respond({}, 429, { "Access-Control-Allow-Origin": "*" });
+  .respond(null, 429);
 
 const badGatewayMock = RequestMock()
   .onRequestTo({ url: "https://ropsten.infura.io/v3/bb46da3f80e040e8ab73c0a9ff365d18", method: "post" })
-  .respond({}, 502, { "Access-Control-Allow-Origin": "*" });
+  .respond(null, 502);
 
 const Certificate1 = "./unissued.opencert";
 const Certificate2 = "./sample-ropsten.opencert";
