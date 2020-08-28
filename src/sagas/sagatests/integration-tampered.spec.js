@@ -10,7 +10,7 @@ const InvalidMessage = Selector(".invalid");
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(async (prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());
 
-test("Tampered certificate's error message is correct'", async (t) => {
+test("Tampered certificate's error message is correct", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
   await InvalidMessage.with({ visibilityCheck: true })();

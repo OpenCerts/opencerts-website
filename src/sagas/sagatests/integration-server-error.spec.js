@@ -51,7 +51,7 @@ test.requestHooks(badGatewayMock)(
 
 // Certificate2 uses a perfectly valid cert, but we should only show "Connection error" given a HTTP 429 response
 test.requestHooks(rateLimitMock)(
-  "Valid certificate should show connection error only when Ethereum provider returns HTTP 429",
+  "Valid certificate should show only connection error when Ethereum provider returns HTTP 429",
   async (t) => {
     await t.setFilesToUpload("input[type=file]", [Certificate2]);
 
@@ -66,7 +66,7 @@ test.requestHooks(rateLimitMock)(
 
 // Certificate2 uses a perfectly valid cert, but we should only show "Connection error" given a HTTP 502 response
 test.requestHooks(badGatewayMock)(
-  "Valid certificate should show connection error only when Ethereum provider returns HTTP 502",
+  "Valid certificate should show only connection error when Ethereum provider returns HTTP 502",
   async (t) => {
     await t.setFilesToUpload("input[type=file]", [Certificate2]);
 
