@@ -49,6 +49,16 @@ export const certificateRevoked = (fragments: VerificationFragment[]): boolean =
   return documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.DOCUMENT_REVOKED;
 };
 
+// this function check if the error is caused by an invalid merkle root (incorrect length/odd length/invalid characters)
+export const invalidArgument = (fragments: VerificationFragment[]): boolean => {
+  const documentStoreIssuedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumDocumentStoreStatus");
+  const tokenRegistryMintedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumTokenRegistryStatus");
+  return (
+    documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.INVALID_ARGUMENT ||
+    tokenRegistryMintedFragment?.reason?.code === OpenAttestationEthereumTokenRegistryStatusCode.INVALID_ARGUMENT
+  );
+};
+
 // this function check if the reason of the error is that we can't connect to Ethereum (due to any HTTP 4xx or 5xx errors)
 export const serverError = (fragments: VerificationFragment[]): boolean => {
   const documentStoreIssuedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumDocumentStoreStatus");

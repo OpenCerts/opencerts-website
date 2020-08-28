@@ -27,7 +27,13 @@ import {
 } from "../reducers/certificate.actions";
 import { getCertificate } from "../reducers/certificate.selectors";
 import { sendEmail } from "../services/email";
-import { certificateNotIssued, certificateRevoked } from "../services/fragment";
+import {
+  certificateNotIssued,
+  certificateRevoked,
+  serverError,
+  invalidArgument,
+  contractNotFound,
+} from "../services/fragment";
 import { generateLink } from "../services/link";
 import { getLogger } from "../utils/logger";
 
@@ -54,7 +60,10 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedD
       if (!isValid(fragments, ["DOCUMENT_STATUS"])) {
         if (certificateNotIssued(fragments)) errors.push("UNISSUED_CERTIFICATE");
         else if (certificateRevoked(fragments)) errors.push("REVOKED_CERTIFICATE");
-        else errors.push("CERTIFICATE_STORE_NOT_FOUND"); // TODO might be sth else :)
+        else if (serverError(fragments)) errors.push("SERVER_ERROR");
+        else if (invalidArgument(fragments)) errors.push("INVALID_ARGUMENT");
+        else if (contractNotFound(fragments)) errors.push("CERTIFICATE_STORE_NOT_FOUND");
+        else errors.push("ETHERS_UNHANDLED_ERROR");
       }
 
       if (!isValid(fragments, ["ISSUER_IDENTITY"])) {
