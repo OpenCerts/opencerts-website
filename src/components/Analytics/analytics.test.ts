@@ -499,7 +499,7 @@ describe("analytics*", () => {
       };
 
       triggerErrorLogging(certificate, [
-        "SERVER_ERROR", // merkleRoot is odd-length
+        "SERVER_ERROR", // HTTP response error (rate limit, bad gateway, etc.)
       ]);
       expect(window.ga).toHaveBeenCalledWith(
         "send",
