@@ -23,20 +23,18 @@ html {
 
 #__next {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#__next > .main {
+  flex: 1;
 }
 
 .navbar-toggler {
   position: absolute;
   right: 30px;
-}
-
-.main {
-  max-width: 1280px;
-  display: flex;
-  justify-content: flex-start;
-  margin: 0 auto;
-  width: 100%;
-  padding: 2rem;
 }
 
 h1,

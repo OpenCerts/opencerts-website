@@ -1,0 +1,20 @@
+@import "../styles/main.scss";
+
+.search {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  background-color: $white;
+}
+
+.check-empty {
+  &:empty {
+    ~ .no-results {
+      display: block;
+    }
+  }
+}
+
+.no-results {
+  display: none;
+}

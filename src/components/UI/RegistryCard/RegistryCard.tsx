@@ -1,9 +1,11 @@
+// import _ from "lodash";
 import React, { useState } from "react";
 import css from "./RegistryCard.module.scss";
 
 interface RegistryCardProps {
   zIndex: number;
-  info: {
+  search: string;
+  contact: {
     id: string;
     website: string;
     name: string;
@@ -15,20 +17,23 @@ interface RegistryCardProps {
   }[];
 }
 
-export const RegistryCard: React.FunctionComponent<RegistryCardProps> = (props) => {
+export const RegistryCard: React.FunctionComponent<RegistryCardProps> = ({ zIndex, search, contact }) => {
   const [contactInfo, setContactInfo] = useState(false);
 
+  const hasAddress = contact.find((info) => info.address?.includes(search));
+  if (!hasAddress) return null;
+
   return (
-    <div className="col-lg-4 col-md-6 col-sm-12" style={{ zIndex: props.zIndex }}>
+    <div className="col-lg-4 col-md-6 col-sm-12" style={{ zIndex: zIndex }}>
       <div className={`${css.card}`}>
         <div className={`${css.logo}`}>
-          <img className="img-fluid" src={props.info[0].logo} alt="" />
+          <img className="img-fluid" src={contact[0].logo} alt="" />
         </div>
         <div className={`${css.content}`}>
           <div className="container-fluid">
             <div className="row">
               <div className="col-12">
-                <h5>{props.info[0].name}</h5>
+                <h5>{contact[0].name}</h5>
               </div>
             </div>
           </div>
@@ -49,7 +54,7 @@ export const RegistryCard: React.FunctionComponent<RegistryCardProps> = (props) 
                 <div className="container-fluid">
                   <div className="row">
                     <div className="col-12">
-                      {props.info.map((info) => (
+                      {contact.map((info) => (
                         <div key={info.id} className="py-2">
                           {info.name && <h6 className="mb-2">{info.name}</h6>}
                           {info.address && info.website && (

@@ -1,8 +1,10 @@
 import { groupBy } from "lodash";
-import React from "react";
+import React, { useState } from "react";
 import registry from "../../public/static/registry.json";
 import { Hero } from "./UI/Hero";
 import { RegistryCard } from "./UI/RegistryCard";
+import { Search } from "./UI/Search";
+import css from "./registry.module.scss";
 
 const partners = Object.keys(registry.issuers)
   .map((k) => ({
@@ -14,7 +16,9 @@ const partners = Object.keys(registry.issuers)
   .filter((partner) => partner.displayCard);
 
 export const RegistryPage: React.FunctionComponent = () => {
+  const [search, setSearch] = useState("");
   const groups = groupBy(partners, (partner) => partner.group || partner.id);
+
   return (
     <>
       <Hero heading="Registry" subHeading="The registry is maintained by SkillsFuture Singapore.">
@@ -27,12 +31,41 @@ export const RegistryPage: React.FunctionComponent = () => {
           .
         </p>
       </Hero>
-      <section style={{ paddingTop: "110px" }}>
+      <section className={`${css["search"]} py-4`}>
         <div className="container">
           <div className="row">
+            <div className="col-12 col-md-6 ml-auto col-lg-4">
+              <Search
+                search={search}
+                onSearchChanged={(event) => {
+                  setSearch(event.target.value);
+                }}
+                onSearchSubmit={(event) => {
+                  event.preventDefault();
+                  window.scrollTo(0, 0);
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      <section style={{ paddingTop: "80px" }}>
+        <div className="container">
+          <div className={`row ${css["check-empty"]}`}>
             {Object.keys(groups).map((group, index) => (
-              <RegistryCard key={index} info={groups[group]} zIndex={Object.keys(groups).length - index} />
+              <RegistryCard
+                key={index}
+                contact={groups[group]}
+                zIndex={Object.keys(groups).length - index}
+                search={search}
+              />
             ))}
+          </div>
+          <div className={`${css["no-results"]}`}>
+            <div className="col-12">
+              <h3>No results found.</h3>
+              <p>Try another certifiate store address?</p>
+            </div>
           </div>
         </div>
       </section>

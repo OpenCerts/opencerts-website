@@ -1,8 +1,12 @@
 @import "../../../styles/main.scss";
 
 .sec-hero {
-  padding-top: 40px;
+  padding-top: 10px;
   padding-bottom: 40px;
+
+  @media (min-width: $lg) {
+    padding-top: 40px;
+  }
 
   h5 {
     line-height: 1.4;

@@ -1,0 +1,55 @@
+@import "../../../styles/variables";
+
+.search {
+  position: relative;
+  height: 40px;
+
+  input {
+    border: 1px solid $brand-dark;
+    border-right-style: none;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 1px inset rgba($brand-dark, 0.5);
+    }
+
+    &::placeholder {
+      font-style: italic;
+      color: rgba($brand-dark, 0.3);
+    }
+  }
+
+  button {
+    transition: background-color 0.2s ease-out;
+    border: none;
+    border-left-style: none;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: $charcoal-light;
+    color: $white;
+    padding: 8px;
+
+    &:hover {
+      background-color: $brand-dark;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 1px rgba($brand-dark, 0.5)
+    }
+
+    &:active {
+      transition: background-color 0s;
+      background-color: $brand-orange;
+      box-shadow: none;
+    }
+
+    svg {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
