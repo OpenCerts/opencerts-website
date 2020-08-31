@@ -1,0 +1,115 @@
+@import "../../../styles/variables";
+
+$spacing: 76px;
+$button-offset: 40px;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: $charcoal-lighter;
+  color: $brand-dark;
+  margin-bottom: $spacing + 50px;
+  min-height: 210px;
+
+  h5 {
+    font-weight: 700;
+  }
+
+  @media (min-width: $xl) {
+    min-height: 190px;
+  }
+}
+
+.logo {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  margin-top: -60px;
+  margin-left: -90px;
+  background-color: $white;
+  width: 180px;
+  height: 120px;
+  border: solid 1px rgba($black, 0.1);
+  display: flex;
+  align-items: center;
+  padding: 20px;
+
+  img {
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 100%;
+  }
+}
+
+.content {
+  flex: 1;
+  padding-top: $spacing;
+}
+
+.contact {
+  position: relative;
+}
+
+.button {
+  transition: background-color 0.2s ease-out;
+  background-color: $charcoal-light;
+  color: $white;
+  font-weight: 700;
+  height: $button-offset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $brand-dark;
+  }
+
+  &.is-active {
+    transition: background-color 0s;
+    background-color: $brand-orange;
+  }
+}
+
+.contact-info {
+  position: absolute;
+  z-index: 2;
+  top: $button-offset;
+  left: 0;
+  width: 100%;
+  border: solid 1px $charcoal-lighter;
+  background-color: $white;
+  color: $black;
+  box-shadow: 0 10px 20px rgba($black, 0.1);
+
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 10%;
+    background: linear-gradient(transparent, $white);
+    pointer-events: none;
+  }
+
+  h6 {
+    font-weight: 700;
+  }
+
+  a {
+    color: $brand-dark;
+    word-break: break-word;
+  }
+}
+
+.contact-info-content {
+  position: relative;
+  overflow: auto;
+  max-height: 640px;
+}

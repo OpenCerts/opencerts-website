@@ -1,0 +1,27 @@
+@import "../../../styles/main.scss";
+
+.sec-hero {
+  padding-top: 40px;
+  padding-bottom: 40px;
+
+  h5 {
+    line-height: 1.4;
+  }
+
+  a {
+    color: $grey-blue;
+    text-decoration: underline;
+
+    &:hover {
+      color: $white;
+    }
+  }
+}
+
+.hero-content {
+  max-width: 100%;
+
+  @media (min-width: $lg) {
+    max-width: 410px;
+  }
+}
