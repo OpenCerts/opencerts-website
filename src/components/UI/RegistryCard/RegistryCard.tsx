@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import css from "./RegistryCard.module.scss";
 
 interface RegistryCardProps {
+  zIndex: number;
   info: {
     id: string;
     website: string;
@@ -18,7 +19,7 @@ export const RegistryCard: React.FunctionComponent<RegistryCardProps> = (props) 
   const [contactInfo, setContactInfo] = useState(false);
 
   return (
-    <div className="col-lg-4 col-md-6 col-sm-12">
+    <div className="col-lg-4 col-md-6 col-sm-12" style={{ zIndex: props.zIndex }}>
       <div className={`${css.card}`}>
         <div className={`${css.logo}`}>
           <img className="img-fluid" src={props.info[0].logo} alt="" />
@@ -73,7 +74,7 @@ export const RegistryCard: React.FunctionComponent<RegistryCardProps> = (props) 
                             <div className="mt-2">
                               <div className="text-uppercase">Certificate Store:</div>
                               <a
-                                href={`https:etherscan.io/address/${info.address}`}
+                                href={`https://etherscan.io/address/${info.address}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >

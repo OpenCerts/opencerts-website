@@ -31,7 +31,7 @@ export const RegistryPage: React.FunctionComponent = () => {
         <div className="container">
           <div className="row">
             {Object.keys(groups).map((group, index) => (
-              <RegistryCard key={index} info={groups[group]} />
+              <RegistryCard key={index} info={groups[group]} zIndex={Object.keys(groups).length - 1 - index} />
             ))}
           </div>
         </div>
