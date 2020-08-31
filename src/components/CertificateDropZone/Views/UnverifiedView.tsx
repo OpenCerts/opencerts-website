@@ -10,6 +10,7 @@ import {
   unhandledError,
   serverError,
   contractNotFound,
+  invalidArgument,
 } from "../../../services/fragment";
 import css from "./viewerStyles.module.scss";
 
@@ -40,6 +41,9 @@ const DetailedErrors: React.FunctionComponent<DetailedErrorsProps> = ({ verifica
       // if the error is because cannot connect to Ethereum, then get rid of all errors and only keep this one
       errors.splice(0, errors.length);
       errors.push(TYPES.SERVER_ERROR);
+    } else if (invalidArgument(verificationStatus)) {
+      // if the error is because of the merkleRoot, it should already be handled by the DOCUMENT_INTEGRITY fragment
+      // empty here so that it's not caught by ETHERS_UNHANDLED_ERROR
     } else {
       // if it's some unhandled error that we didn't foresee, then get rid of all errors and only keep this one
       errors.splice(0, errors.length);

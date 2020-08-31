@@ -53,6 +53,7 @@ export const certificateRevoked = (fragments: VerificationFragment[]): boolean =
 export const invalidArgument = (fragments: VerificationFragment[]): boolean => {
   const documentStoreIssuedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumDocumentStoreStatus");
   const tokenRegistryMintedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumTokenRegistryStatus");
+  // why INVALID_ARGUMENT is because we follow the error codes returned by Ethers (https://docs.ethers.io/v5/api/utils/logger/#errors)
   return (
     documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.INVALID_ARGUMENT ||
     tokenRegistryMintedFragment?.reason?.code === OpenAttestationEthereumTokenRegistryStatusCode.INVALID_ARGUMENT
