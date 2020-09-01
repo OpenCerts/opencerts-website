@@ -31,7 +31,7 @@ export const RegistryPage: React.FunctionComponent = () => {
           .
         </p>
       </Hero>
-      <section className={`${css["search"]} py-4`}>
+      <nav className={`py-4`}>
         <div className="container">
           <div className="row">
             <div className="col-12 col-md-6 ml-auto col-lg-4">
@@ -42,13 +42,12 @@ export const RegistryPage: React.FunctionComponent = () => {
                 }}
                 onSearchSubmit={(event) => {
                   event.preventDefault();
-                  window.scrollTo(0, 0);
                 }}
               />
             </div>
           </div>
         </div>
-      </section>
+      </nav>
       <section style={{ paddingTop: "80px" }}>
         <div className="container">
           <div className={`row ${css["check-empty"]}`}>

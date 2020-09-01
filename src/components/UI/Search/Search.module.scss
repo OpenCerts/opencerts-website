@@ -42,7 +42,7 @@
 
     &:active {
       transition: background-color 0s;
-      background-color: $brand-orange;
+      background-color: darken($brand-dark, 10%);
       box-shadow: none;
     }
 

@@ -49,6 +49,21 @@ $button-offset: 40px;
 
 .contact {
   position: relative;
+
+  &:focus,
+  &:active {
+    outline: none;
+    box-shadow: 0 0 0 1px rgba($brand-orange, 0.5);
+
+    .button {
+      transition: background-color 0s;
+      background-color: $brand-orange;
+    }
+
+    .contact-info {
+      display: block;
+    }
+  }
 }
 
 .button {
@@ -68,14 +83,10 @@ $button-offset: 40px;
   &:hover {
     background-color: $brand-dark;
   }
-
-  &.is-active {
-    transition: background-color 0s;
-    background-color: $brand-orange;
-  }
 }
 
 .contact-info {
+  display: none;
   position: absolute;
   z-index: 2;
   top: $button-offset;
