@@ -1,4 +1,4 @@
-import { WrappedDocument } from "@govtechsg/open-attestation";
+import { v2, WrappedDocument } from "@govtechsg/open-attestation";
 import React, { Component, ReactNode } from "react";
 import { connect } from "react-redux";
 import { NETWORK_NAME } from "../../config";
@@ -67,7 +67,7 @@ const MobileDemoCertificate: React.FunctionComponent = () => (
 );
 
 interface DropZoneSectionProps {
-  updateCertificate: (certificate: WrappedDocument) => void;
+  updateCertificate: (certificate: WrappedDocument<v2.OpenAttestationDocument>) => void;
 }
 class DropZoneSection extends Component<DropZoneSectionProps> {
   constructor(props: DropZoneSectionProps) {
@@ -140,5 +140,5 @@ class DropZoneSection extends Component<DropZoneSectionProps> {
 }
 
 export const DropZoneSectionContainer = connect(null, (dispatch) => ({
-  updateCertificate: (payload: WrappedDocument) => dispatch(updateCertificate(payload)),
+  updateCertificate: (payload: WrappedDocument<v2.OpenAttestationDocument>) => dispatch(updateCertificate(payload)),
 }))(DropZoneSection);

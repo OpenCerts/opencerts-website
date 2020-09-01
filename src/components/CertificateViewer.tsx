@@ -1,5 +1,5 @@
 import { VerificationFragment } from "@govtechsg/oa-verify";
-import { WrappedDocument } from "@govtechsg/open-attestation";
+import { WrappedDocument, v2 } from "@govtechsg/open-attestation";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import React from "react";
@@ -22,12 +22,15 @@ const DecentralisedRenderer = dynamic(() => import("./DecentralisedTemplateRende
 // eslint-disable-next-line react/display-name
 const ForwardedRefDecentralisedRenderer = React.forwardRef<
   { print: () => void } | undefined,
-  { rawDocument: WrappedDocument; updateObfuscatedCertificate: (updatedDoc: WrappedDocument) => void }
+  {
+    rawDocument: WrappedDocument<v2.OpenAttestationDocument>;
+    updateObfuscatedCertificate: (updatedDoc: WrappedDocument<v2.OpenAttestationDocument>) => void;
+  }
 >((props, ref) => <DecentralisedRenderer {...props} forwardedRef={ref} />);
 
 export interface CertificateViewerProps {
-  document: WrappedDocument;
-  certificate: WrappedDocument & { id: string };
+  document: WrappedDocument<v2.OpenAttestationDocument>;
+  certificate: v2.OpenAttestationDocument;
   verifying: boolean;
   shareLink: { id?: string; key?: string };
   copiedLink: boolean;
@@ -38,7 +41,7 @@ export interface CertificateViewerProps {
   handleSharingToggle: () => void;
   handleSendCertificate: (event: { email: string; captcha: string }) => void;
   handleShareLinkToggle: () => void;
-  updateObfuscatedCertificate: (updatedDoc: WrappedDocument) => void;
+  updateObfuscatedCertificate: (updatedDoc: WrappedDocument<v2.OpenAttestationDocument>) => void;
   handleCopyLink: (certificateLink: string) => void;
 }
 export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> = (props) => {
@@ -153,5 +156,6 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
 };
 
 export const CertificateViewerContainer = connect(null, (dispatch) => ({
-  updateObfuscatedCertificate: (updatedDoc: WrappedDocument) => dispatch(updateObfuscatedCertificateAction(updatedDoc)),
+  updateObfuscatedCertificate: (updatedDoc: WrappedDocument<v2.OpenAttestationDocument>) =>
+    dispatch(updateObfuscatedCertificateAction(updatedDoc)),
 }))(CertificateViewer);

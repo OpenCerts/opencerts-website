@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { SchemaId, WrappedDocument } from "@govtechsg/open-attestation";
+import { SchemaId, v2, WrappedDocument } from "@govtechsg/open-attestation";
 
 export const targetHash = "f7432b3219b2aa4122e289f44901830fa32f224ee9dfce28565677f1d279b2c7";
 export const proof0 = "2bb9dd186994f38084ee68e06be848b9d43077c307684c300d81df343c7858cf";
@@ -23,7 +23,7 @@ export const mockStore = () => {
 };
 
 export class MakeCertUtil {
-  cert: WrappedDocument;
+  cert: WrappedDocument<v2.OpenAttestationDocument>;
   constructor() {
     this.cert = {
       version: SchemaId.v2,
@@ -51,7 +51,8 @@ export class MakeCertUtil {
     return this;
   }
 
-  addDataField(field: string, value: string) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  addDataField(field: keyof v2.OpenAttestationDocument, value: any) {
     this.cert.data[field] = value;
     return this;
   }
@@ -60,8 +61,7 @@ export class MakeCertUtil {
     const newIssuerObj = {
       certificateStore: `71f10d54-d483-489b-b06f-fa2bed75ce16:string:${issuerString}`,
     };
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-    // @ts-ignore
+    // @ts-expect-error missing name
     this.cert.data.issuers.push(newIssuerObj);
     return this;
   }

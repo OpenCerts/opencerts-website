@@ -27,10 +27,10 @@
     "integration:watch": "nodemon --exec \"npm run integration\" --watch src"
   },
   "dependencies": {
-    "@govtechsg/decentralized-renderer-react-components": "^3.0.0",
+    "@govtechsg/decentralized-renderer-react-components": "^3.0.4",
     "@govtechsg/oa-encryption": "^1.3.1",
-    "@govtechsg/open-attestation": "^3.7.0",
-    "@govtechsg/opencerts-verify": "^1.2.0",
+    "@govtechsg/open-attestation": "^3.11.1",
+    "@govtechsg/opencerts-verify": "^2.1.0",
     "@types/enzyme": "^3.10.5",
     "@types/google.analytics": "0.0.40",
     "@types/react-google-recaptcha": "^1.1.2",
@@ -40,7 +40,7 @@
     "downloads-folder": "^2.0.0",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.15",
-    "next": "^9.4.1",
+    "next": "9.4.1",
     "next-ga": "^2.3.4",
     "next-redux-wrapper": "^5.0.0",
     "next-seo": "^4.5.0",
@@ -88,7 +88,7 @@
     "sass": "^1.26.8",
     "stylelint-config-recommended": "^3.0.0",
     "stylelint-config-standard": "^20.0.0",
-    "testcafe": "^1.8.5"
+    "testcafe": "1.8.5"
   },
   "jest": {
     "testResultsProcessor": "jest-sonar-reporter"

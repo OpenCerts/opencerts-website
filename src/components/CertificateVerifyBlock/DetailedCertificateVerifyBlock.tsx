@@ -2,7 +2,7 @@ import { VerificationFragment } from "@govtechsg/oa-verify";
 import { isValid } from "@govtechsg/opencerts-verify";
 import React, { ReactElement } from "react";
 import { MESSAGES, TYPES } from "../../constants/VerificationErrorMessages";
-import { getRevokeFragment } from "../../services/fragment";
+import { certificateRevoked } from "../../services/fragment";
 import css from "./detailedCertificateBlock.module.scss";
 
 interface CheckStatusRowProps {
@@ -23,7 +23,6 @@ interface DetailedCertificateVerifyBlockProps {
 }
 export const DetailedCertificateVerifyBlock: React.FunctionComponent<DetailedCertificateVerifyBlockProps> = (props) => {
   const borderColor = isValid(props.verificationStatus) ? "valid-border-color" : "invalid-border-color";
-  const revokeFragment = [getRevokeFragment(props.verificationStatus)];
   return (
     <div className={`${css["detailed-certificate-block"]} ${css[borderColor]} bg-white p-3`}>
       <div className="mb-3">
@@ -46,12 +45,12 @@ export const DetailedCertificateVerifyBlock: React.FunctionComponent<DetailedCer
         />
         <CheckStatusRow
           message={
-            isValid(revokeFragment, ["DOCUMENT_STATUS"])
+            isValid(props.verificationStatus, ["DOCUMENT_STATUS"]) || !certificateRevoked(props.verificationStatus)
               ? MESSAGES[TYPES.REVOKED].successTitle
               : MESSAGES[TYPES.REVOKED].failureTitle
           }
           icon={
-            isValid(revokeFragment, ["DOCUMENT_STATUS"]) ? (
+            isValid(props.verificationStatus, ["DOCUMENT_STATUS"]) || !certificateRevoked(props.verificationStatus) ? (
               <i className="fas fa-check text-success mr-2" />
             ) : (
               <i className="fas fa-times text-danger mr-2" />

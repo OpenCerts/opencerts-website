@@ -14,8 +14,8 @@ import { MutiTabsContainer } from "../MultiTabs";
 import styles from "./decentralisedRenderer.module.scss";
 
 interface DecentralisedRendererProps {
-  rawDocument: WrappedDocument;
-  updateObfuscatedCertificate: (certificate: WrappedDocument) => void;
+  rawDocument: WrappedDocument<v2.OpenAttestationDocument>;
+  updateObfuscatedCertificate: (certificate: WrappedDocument<v2.OpenAttestationDocument>) => void;
   forwardedRef: Ref<{ print: () => void } | undefined>;
 }
 
@@ -83,7 +83,7 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
     analyticsEvent(window, {
       category: "CERTIFICATE_VIEWED",
       action: Array.isArray(storeAddresses) ? storeAddresses.join(",") : storeAddresses,
-      label: certificateData ? certificateData.id : null,
+      label: certificateData?.id ?? undefined,
     });
 
     certificateData.issuers.forEach((issuer: v2.Issuer) => {
@@ -116,9 +116,7 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
         <FrameConnector
           className={styles["decentralised-renderer"]}
           style={{ height: `${height}px` }}
-          source={`${
-            typeof rawDocument.data.$template === "object" ? document.$template.url : LEGACY_OPENCERTS_RENDERER
-          }`}
+          source={`${typeof document.$template === "object" ? document.$template.url : LEGACY_OPENCERTS_RENDERER}`}
           dispatch={dispatch}
           onConnected={onConnected}
         />

@@ -11,13 +11,18 @@ describe("certificateViewer", () => {
   const sharedProps: CertificateViewerProps = {
     certificate: {
       id: "k;lk;",
-      version: SchemaId.v2,
-      signature: { proof: [], merkleRoot: "a", targetHash: "a", type: "SHA3MerkleProof" },
-      data: {},
+      $template: "$template",
+      issuers: [
+        {
+          certificateStore: "certificateStore",
+          name: "name",
+        },
+      ],
     },
     document: {
       version: SchemaId.v2,
       signature: { proof: [], merkleRoot: "a", targetHash: "a", type: "SHA3MerkleProof" },
+      // @ts-expect-error not valid data
       data: {},
     },
     verifying: false,

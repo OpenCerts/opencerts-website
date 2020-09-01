@@ -13,7 +13,7 @@ describe("detailedCertificateVerifyBlock", () => {
             type: "DOCUMENT_INTEGRITY",
           },
           {
-            name: "OpenAttestationEthereumDocumentStoreRevoked",
+            name: "OpenAttestationEthereumDocumentStoreStatus",
             status: "VALID",
             type: "DOCUMENT_STATUS",
           },
@@ -35,9 +35,39 @@ describe("detailedCertificateVerifyBlock", () => {
             type: "DOCUMENT_INTEGRITY",
           },
           {
-            name: "OpenAttestationEthereumDocumentStoreRevoked",
+            name: "OpenAttestationEthereumDocumentStoreStatus",
             status: "INVALID",
             type: "DOCUMENT_STATUS",
+            data: {
+              issuedOnAll: true,
+              revokedOnAny: true,
+              details: {
+                issuance: [
+                  {
+                    issued: true,
+                    address: "0x8Fc57204c35fb9317D91285eF52D6b892EC08cD3",
+                  },
+                ],
+                revocation: [
+                  {
+                    revoked: true,
+                    address: "0x8Fc57204c35fb9317D91285eF52D6b892EC08cD3",
+                    reason: {
+                      code: 5,
+                      codeString: "DOCUMENT_REVOKED",
+                      message:
+                        "Document 0x3d29524b18c3efe1cbad07e1ba9aa80c496cbf0b6255d6f331ca9b540e17e452 has been revoked under contract 0x8Fc57204c35fb9317D91285eF52D6b892EC08cD3",
+                    },
+                  },
+                ],
+              },
+            },
+            reason: {
+              code: 5,
+              codeString: "DOCUMENT_REVOKED",
+              message:
+                "Document 0x3d29524b18c3efe1cbad07e1ba9aa80c496cbf0b6255d6f331ca9b540e17e452 has been revoked under contract 0x8Fc57204c35fb9317D91285eF52D6b892EC08cD3",
+            },
           },
         ]}
       />
@@ -57,7 +87,7 @@ describe("detailedCertificateVerifyBlock", () => {
             type: "DOCUMENT_INTEGRITY",
           },
           {
-            name: "OpenAttestationEthereumDocumentStoreRevoked",
+            name: "OpenAttestationEthereumDocumentStoreStatus",
             status: "VALID",
             type: "DOCUMENT_STATUS",
           },

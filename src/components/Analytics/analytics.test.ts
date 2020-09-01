@@ -225,7 +225,7 @@ describe("analytics*", () => {
   });
 
   describe("triggerErrorLogging", () => {
-    it("should send cert details (certificateStore) and errors to Google Analytics", () => {
+    it("should send cert details (certificateStore) and errors (tampered/unissued/revoked) to Google Analytics", () => {
       const certificate: WrappedDocument = {
         version: SchemaId.v2,
         data: {
@@ -286,7 +286,7 @@ describe("analytics*", () => {
         }
       );
     });
-    it("should send cert details (documentStore/DNS-TXT) and errors to Google Analytics", () => {
+    it("should send cert details (documentStore/DNS-TXT) and errors (tampered/unissued/revoked) to Google Analytics", () => {
       const certificate: WrappedDocument = {
         version: SchemaId.v2,
         data: {
@@ -346,6 +346,261 @@ describe("analytics*", () => {
           dimension5: "example.openattestation.com",
           dimension6: "(not set)",
           dimension7: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
+          nonInteraction: true,
+        }
+      );
+    });
+    it("should send cert details (documentStore/DNS-TXT) and error (invalid argument) to Google Analytics", () => {
+      const certificate: WrappedDocument = {
+        schema: "opencerts/v2.0",
+        data: {
+          id: "e160ddc1-3e9f-496a-8e96-d3c0873c7561:string:41368",
+          name:
+            "b5fae7b2-ca9a-4ebc-a732-63f1c208263e:string:Practitioner Certificate in Personal Data Protection (Singapore)",
+          recipient: {
+            name: "93c37dd3-8416-49f8-81b7-1716d3aefa5f:string:Goi Jia Jian",
+          },
+          issuedOn: "42286912-67d2-4185-a481-2c7821131283:string:2020-04-14T08:00:00+08:00",
+          issuers: [
+            {
+              name: "90757fa9-c143-45bb-9769-bc1f266058c4:string:SMU Academy",
+              documentStore: "48030765-2463-4d83-878d-79db52b0d877:string:0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404",
+              network: "49d75ef9-d606-4923-9492-9cf4da012a64:string:ETHEREUM",
+              identityProof: {
+                type: "0bd3fb8f-c065-4808-b128-29cc13fb1cc1:string:DNS-TXT",
+                location: "71b2f120-a613-44aa-8cf0-13ae660cdb0b:string:certstore.smu.edu.sg",
+              },
+            },
+          ],
+          additionalData: {
+            certSignatories: [
+              {
+                name: "b2d4a5fc-7e0a-43ad-a224-97c21c3adb85:string:Dr Lim Lai Cheng",
+                designation: "5226c4c8-df28-4eed-8d9f-0cf41b09dbdb:string:Executive Director",
+              },
+            ],
+            extra: {
+              idType: "f4484005-7440-4e50-8b4a-1a44f6976a2f:string:SP",
+            },
+          },
+          $template: {
+            name: "10af685b-06c1-49dd-92bb-af3a52fcf705:string:SMU-A-TIS-2019-4",
+            type: "f81508ff-2f40-4bf5-a6ec-7b907d1a9898:string:EMBEDDED_RENDERER",
+            url: "fe4ef2ba-e773-4ba4-ba14-c9e88bc35abe:string:https://academy.smu.edu.sg/verify",
+          },
+        },
+        privacy: {
+          obfuscatedData: [
+            "4c0ee8a39e52fd2c384bef1213b6784fcfac6a40ef9a3694d33ac315defa5d0f",
+            "a162a4c136ec4a02cb3dd20ec281f55a0507ecf9b3f229a122a340e6786473ac",
+            "a58d1e5760d6de35548e1eed358388d20040c91bf20f5658a6ef21c1f494c5eb",
+            "ba4b4dc43e135ee233299e9b1206e84a7b440e4a0efe919988712643f5a4ce32",
+            "1f0f651588668e132b1136359375eca2970acf7f0d355aad65b3e413dc017e93",
+            "57fe916345aed42dc6308131ded36fccd06a3a924c59bdaeba279940d8d2474b",
+            "da0030b16bfa4dcf9a5c04df5631b92f62146a4654b92b6630ac19aa9584cfa6",
+          ],
+        },
+        signature: {
+          type: "SHA3MerkleProof",
+          targetHash: "64f7b1322fdb86be136a23eb65b93351bdf5128a0e5afb64019e179cb66f078b",
+          proof: [
+            "f5dab77712afd47a8b87b4b3bc685c1c6827843e38357697e52c01593ed7fb22",
+            "516794e14a69074a1437ddb972a063d04b4733ad6076fdd335f2d5bdab52ec05",
+            "74f086ebff10a10158233dbbdc207d4514f7bd8df9cbcadf4a384c1cf0de96f7",
+            "eddfd98891328db274321edc5985d839772e3bc1e481d8f7d6fa972cad7ed68f",
+          ],
+          merkleRoot: "6b5bb39220415b92c321cb981fccf6e8cdc16287d8eb2e56a2ad33f757ccfae", // Removed the '2'
+        },
+      };
+
+      triggerErrorLogging(certificate, [
+        "INVALID_ARGUMENT", // merkleRoot is odd-length
+      ]);
+      expect(window.ga).toHaveBeenCalledWith(
+        "send",
+        "event",
+        "CERTIFICATE_ERROR",
+        "ERROR - Singapore Management University Academy", // this cert issuer is in the registry
+        "INVALID_ARGUMENT",
+        undefined,
+        {
+          dimension1: "0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404",
+          dimension2: "41368",
+          dimension3: "Practitioner Certificate in Personal Data Protection (Singapore)",
+          dimension4: "2020-04-14T08:00:00+08:00",
+          dimension5: "Singapore Management University Academy",
+          dimension6: "smu-registry-academy",
+          dimension7: "INVALID_ARGUMENT",
+          nonInteraction: true,
+        }
+      );
+    });
+    it("should send cert details (documentStore/DNS-TXT) and error (HTTP response error) to Google Analytics", () => {
+      const certificate: WrappedDocument = {
+        schema: "opencerts/v2.0",
+        data: {
+          id: "e160ddc1-3e9f-496a-8e96-d3c0873c7561:string:41368",
+          name:
+            "b5fae7b2-ca9a-4ebc-a732-63f1c208263e:string:Practitioner Certificate in Personal Data Protection (Singapore)",
+          recipient: {
+            name: "93c37dd3-8416-49f8-81b7-1716d3aefa5f:string:Goi Jia Jian",
+          },
+          issuedOn: "42286912-67d2-4185-a481-2c7821131283:string:2020-04-14T08:00:00+08:00",
+          issuers: [
+            {
+              name: "90757fa9-c143-45bb-9769-bc1f266058c4:string:SMU Academy",
+              documentStore: "48030765-2463-4d83-878d-79db52b0d877:string:0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404",
+              network: "49d75ef9-d606-4923-9492-9cf4da012a64:string:ETHEREUM",
+              identityProof: {
+                type: "0bd3fb8f-c065-4808-b128-29cc13fb1cc1:string:DNS-TXT",
+                location: "71b2f120-a613-44aa-8cf0-13ae660cdb0b:string:certstore.smu.edu.sg",
+              },
+            },
+          ],
+          additionalData: {
+            certSignatories: [
+              {
+                name: "b2d4a5fc-7e0a-43ad-a224-97c21c3adb85:string:Dr Lim Lai Cheng",
+                designation: "5226c4c8-df28-4eed-8d9f-0cf41b09dbdb:string:Executive Director",
+              },
+            ],
+            extra: {
+              idType: "f4484005-7440-4e50-8b4a-1a44f6976a2f:string:SP",
+            },
+          },
+          $template: {
+            name: "10af685b-06c1-49dd-92bb-af3a52fcf705:string:SMU-A-TIS-2019-4",
+            type: "f81508ff-2f40-4bf5-a6ec-7b907d1a9898:string:EMBEDDED_RENDERER",
+            url: "fe4ef2ba-e773-4ba4-ba14-c9e88bc35abe:string:https://academy.smu.edu.sg/verify",
+          },
+        },
+        privacy: {
+          obfuscatedData: [
+            "4c0ee8a39e52fd2c384bef1213b6784fcfac6a40ef9a3694d33ac315defa5d0f",
+            "a162a4c136ec4a02cb3dd20ec281f55a0507ecf9b3f229a122a340e6786473ac",
+            "a58d1e5760d6de35548e1eed358388d20040c91bf20f5658a6ef21c1f494c5eb",
+            "ba4b4dc43e135ee233299e9b1206e84a7b440e4a0efe919988712643f5a4ce32",
+            "1f0f651588668e132b1136359375eca2970acf7f0d355aad65b3e413dc017e93",
+            "57fe916345aed42dc6308131ded36fccd06a3a924c59bdaeba279940d8d2474b",
+            "da0030b16bfa4dcf9a5c04df5631b92f62146a4654b92b6630ac19aa9584cfa6",
+          ],
+        },
+        signature: {
+          type: "SHA3MerkleProof",
+          targetHash: "64f7b1322fdb86be136a23eb65b93351bdf5128a0e5afb64019e179cb66f078b",
+          proof: [
+            "f5dab77712afd47a8b87b4b3bc685c1c6827843e38357697e52c01593ed7fb22",
+            "516794e14a69074a1437ddb972a063d04b4733ad6076fdd335f2d5bdab52ec05",
+            "74f086ebff10a10158233dbbdc207d4514f7bd8df9cbcadf4a384c1cf0de96f7",
+            "eddfd98891328db274321edc5985d839772e3bc1e481d8f7d6fa972cad7ed68f",
+          ],
+          merkleRoot: "6b5bb39220415b92c321cb981fccf6e8cdc16287d8eb2e56a2ad33f757ccfae2",
+        },
+      };
+
+      triggerErrorLogging(certificate, [
+        "SERVER_ERROR", // HTTP response error (rate limit, bad gateway, etc.)
+      ]);
+      expect(window.ga).toHaveBeenCalledWith(
+        "send",
+        "event",
+        "CERTIFICATE_ERROR",
+        "ERROR - Singapore Management University Academy",
+        "SERVER_ERROR",
+        undefined,
+        {
+          dimension1: "0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404",
+          dimension2: "41368",
+          dimension3: "Practitioner Certificate in Personal Data Protection (Singapore)",
+          dimension4: "2020-04-14T08:00:00+08:00",
+          dimension5: "Singapore Management University Academy",
+          dimension6: "smu-registry-academy",
+          dimension7: "SERVER_ERROR",
+          nonInteraction: true,
+        }
+      );
+    });
+    it("should send cert details (documentStore/DNS-TXT) and error (Ethers unhandled error) to Google Analytics", () => {
+      const certificate: WrappedDocument = {
+        schema: "opencerts/v2.0",
+        data: {
+          id: "e160ddc1-3e9f-496a-8e96-d3c0873c7561:string:41368",
+          name:
+            "b5fae7b2-ca9a-4ebc-a732-63f1c208263e:string:Practitioner Certificate in Personal Data Protection (Singapore)",
+          recipient: {
+            name: "93c37dd3-8416-49f8-81b7-1716d3aefa5f:string:Goi Jia Jian",
+          },
+          issuedOn: "42286912-67d2-4185-a481-2c7821131283:string:2020-04-14T08:00:00+08:00",
+          issuers: [
+            {
+              name: "90757fa9-c143-45bb-9769-bc1f266058c4:string:SMU Academy",
+              documentStore: "48030765-2463-4d83-878d-79db52b0d877:string:0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404",
+              network: "49d75ef9-d606-4923-9492-9cf4da012a64:string:ETHEREUM",
+              identityProof: {
+                type: "0bd3fb8f-c065-4808-b128-29cc13fb1cc1:string:DNS-TXT",
+                location: "71b2f120-a613-44aa-8cf0-13ae660cdb0b:string:certstore.smu.edu.sg",
+              },
+            },
+          ],
+          additionalData: {
+            certSignatories: [
+              {
+                name: "b2d4a5fc-7e0a-43ad-a224-97c21c3adb85:string:Dr Lim Lai Cheng",
+                designation: "5226c4c8-df28-4eed-8d9f-0cf41b09dbdb:string:Executive Director",
+              },
+            ],
+            extra: {
+              idType: "f4484005-7440-4e50-8b4a-1a44f6976a2f:string:SP",
+            },
+          },
+          $template: {
+            name: "10af685b-06c1-49dd-92bb-af3a52fcf705:string:SMU-A-TIS-2019-4",
+            type: "f81508ff-2f40-4bf5-a6ec-7b907d1a9898:string:EMBEDDED_RENDERER",
+            url: "fe4ef2ba-e773-4ba4-ba14-c9e88bc35abe:string:https://academy.smu.edu.sg/verify",
+          },
+        },
+        privacy: {
+          obfuscatedData: [
+            "4c0ee8a39e52fd2c384bef1213b6784fcfac6a40ef9a3694d33ac315defa5d0f",
+            "a162a4c136ec4a02cb3dd20ec281f55a0507ecf9b3f229a122a340e6786473ac",
+            "a58d1e5760d6de35548e1eed358388d20040c91bf20f5658a6ef21c1f494c5eb",
+            "ba4b4dc43e135ee233299e9b1206e84a7b440e4a0efe919988712643f5a4ce32",
+            "1f0f651588668e132b1136359375eca2970acf7f0d355aad65b3e413dc017e93",
+            "57fe916345aed42dc6308131ded36fccd06a3a924c59bdaeba279940d8d2474b",
+            "da0030b16bfa4dcf9a5c04df5631b92f62146a4654b92b6630ac19aa9584cfa6",
+          ],
+        },
+        signature: {
+          type: "SHA3MerkleProof",
+          targetHash: "64f7b1322fdb86be136a23eb65b93351bdf5128a0e5afb64019e179cb66f078b",
+          proof: [
+            "f5dab77712afd47a8b87b4b3bc685c1c6827843e38357697e52c01593ed7fb22",
+            "516794e14a69074a1437ddb972a063d04b4733ad6076fdd335f2d5bdab52ec05",
+            "74f086ebff10a10158233dbbdc207d4514f7bd8df9cbcadf4a384c1cf0de96f7",
+            "eddfd98891328db274321edc5985d839772e3bc1e481d8f7d6fa972cad7ed68f",
+          ],
+          merkleRoot: "6b5bb39220415b92c321cb981fccf6e8cdc16287d8eb2e56a2ad33f757ccfae2",
+        },
+      };
+
+      triggerErrorLogging(certificate, [
+        "ETHERS_UNHANDLED_ERROR", // some funky error that we didn't catch
+      ]);
+      expect(window.ga).toHaveBeenCalledWith(
+        "send",
+        "event",
+        "CERTIFICATE_ERROR",
+        "ERROR - Singapore Management University Academy",
+        "ETHERS_UNHANDLED_ERROR",
+        undefined,
+        {
+          dimension1: "0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404",
+          dimension2: "41368",
+          dimension3: "Practitioner Certificate in Personal Data Protection (Singapore)",
+          dimension4: "2020-04-14T08:00:00+08:00",
+          dimension5: "Singapore Management University Academy",
+          dimension6: "smu-registry-academy",
+          dimension7: "ETHERS_UNHANDLED_ERROR",
           nonInteraction: true,
         }
       );
