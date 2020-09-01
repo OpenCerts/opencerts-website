@@ -21,6 +21,7 @@ test("Merkle root that is of odd-length should result in correct error message",
   await validateTextContent(t, RenderedCertificate, [
     "This certificate is not valid",
     "Certificate has been tampered with",
+    "Certificate's merkle root is invalid",
   ]);
 });
 
@@ -33,6 +34,7 @@ test("Merkle root that is of incorrect length should result in correct error mes
   await validateTextContent(t, RenderedCertificate, [
     "This certificate is not valid",
     "Certificate has been tampered with",
+    "Certificate's merkle root is invalid",
   ]);
 });
 
@@ -46,5 +48,6 @@ test("Merkle root that contains non-hexadecimal characters should result in corr
   await validateTextContent(t, RenderedCertificate, [
     "This certificate is not valid",
     "Certificate has been tampered with",
+    "Certificate's merkle root is invalid",
   ]);
 });

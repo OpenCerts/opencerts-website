@@ -5,6 +5,7 @@ export const TYPES = {
   IDENTITY: "IDENTITY",
   ADDRESS_INVALID: "ADDRESS_INVALID",
   CONTRACT_NOT_FOUND: "CONTRACT_NOT_FOUND",
+  INVALID_ARGUMENT: "INVALID_ARGUMENT",
   SERVER_ERROR: "SERVER_ERROR",
   ETHERS_UNHANDLED_ERROR: "ETHERS_UNHANDLED_ERROR",
 };
@@ -41,6 +42,11 @@ export const MESSAGES = {
     failureTitle: "Certificate store address cannot be found",
     failureMessage:
       "Please inform the issuer of this certificate that they have misconfigured their certificate store address.",
+  },
+  [TYPES.INVALID_ARGUMENT]: {
+    failureTitle: "Certificate's merkle root is invalid",
+    failureMessage:
+      "Please inform the issuer of this certificate that the merkle root is invalid, or it may have been tampered with.",
   },
   [TYPES.SERVER_ERROR]: {
     failureTitle: "Unable to connect to the Ethereum network",

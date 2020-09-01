@@ -42,8 +42,8 @@ const DetailedErrors: React.FunctionComponent<DetailedErrorsProps> = ({ verifica
       errors.splice(0, errors.length);
       errors.push(TYPES.SERVER_ERROR);
     } else if (invalidArgument(verificationStatus)) {
-      // if the error is because of the merkleRoot, it should already be handled by the DOCUMENT_INTEGRITY fragment
-      // empty here so that it's not caught by ETHERS_UNHANDLED_ERROR
+      // this error is caused when the merkle root is wrong, and should always be shown with the DOCUMENT_INTEGRITY error
+      errors.push(TYPES.INVALID_ARGUMENT);
     } else {
       // if it's some unhandled error that we didn't foresee, then get rid of all errors and only keep this one
       errors.splice(0, errors.length);
