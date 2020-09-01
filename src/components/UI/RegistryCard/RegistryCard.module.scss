@@ -107,6 +107,7 @@ $button-offset: 40px;
     height: 10%;
     background: linear-gradient(rgba($white, 0), $white);
     pointer-events: none;
+    width: calc(100% - 17px); // cater to scrollbar width, varies with browsers
   }
 
   h6 {
