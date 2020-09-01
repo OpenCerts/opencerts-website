@@ -33,18 +33,14 @@ export const RetrievalErrorView: React.FunctionComponent<RetrievalErrorViewProps
     </Link>
 
     <div className={css["secondary-links"]}>
-      <span>
-        <Link href=" ">
-          <a
-            onClick={(e) => {
-              e.preventDefault();
-              resetData();
-            }}
-            className={css["text-link"]}
-          >
-            Try another
-          </a>
-        </Link>
+      <span
+        onClick={() => {
+          resetData();
+        }}
+        className={css["text-link"]}
+        role="button"
+      >
+        Try another
       </span>
     </div>
   </div>
