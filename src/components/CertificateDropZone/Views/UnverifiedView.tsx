@@ -98,10 +98,10 @@ export const UnverifiedView: React.FunctionComponent<UnverifiedViewProps> = ({ r
 
       <div className={css["secondary-links"]}>
         <span>
-          <Link href=" ">
+          <Link href="/">
             <a
               onClick={(e) => {
-                e.preventDefault();
+                e.preventDefault(); // why preventDefault?
                 resetData();
               }}
               className={css["text-link"]}
