@@ -63,7 +63,7 @@ export const RegistryPage: React.FunctionComponent = () => {
           <div className={`${css["no-results"]}`} style={{ marginBottom: "160px" }}>
             <div className="col-12">
               <h3>No results found.</h3>
-              <p>Try another certifiate store address?</p>
+              <p>Try another certificate store address?</p>
             </div>
           </div>
         </div>
