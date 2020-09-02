@@ -20,7 +20,7 @@ export const Search: React.FunctionComponent<SearchProps> = ({
           className="col-9 col-sm-10"
           data-testid="registry-search"
           type="search"
-          placeholder="Certificate store"
+          placeholder="Search certificate store address"
           onChange={onSearchChanged}
           value={search}
         />
