@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@govtechsg/decentralized-renderer-react-components": "^3.0.4",
-    "@govtechsg/oa-encryption": "^1.3.1",
+    "@govtechsg/oa-encryption": "^1.3.2",
     "@govtechsg/open-attestation": "^3.11.1",
     "@govtechsg/opencerts-verify": "^2.1.0",
     "@types/enzyme": "^3.10.5",
