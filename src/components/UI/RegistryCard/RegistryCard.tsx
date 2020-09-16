@@ -25,13 +25,13 @@ export const RegistryCard: React.FunctionComponent<RegistryCardProps> = ({ zInde
     <div className="col-lg-4 col-md-6 col-sm-12" style={{ zIndex: zIndex }}>
       <div className={`${css.card}`} data-testid="registry-card">
         <div className={`${css.logo}`}>
-          <img className="img-fluid" src={contact[0].logo} alt="" />
+          <img className="img-fluid" src={contact[0].logo} alt="" data-testid="institute-logo" />
         </div>
         <div className={`${css.content}`}>
           <div className="container-fluid">
             <div className="row">
               <div className="col-12">
-                <h5>{contact[0].name}</h5>
+                <h5 data-testid="institute-name">{contact[0].name}</h5>
               </div>
             </div>
           </div>
@@ -45,42 +45,44 @@ export const RegistryCard: React.FunctionComponent<RegistryCardProps> = ({ zInde
               <div className="container-fluid">
                 <div className="row">
                   <div className="col-12">
-                    {contact.map((info) => (
-                      <div key={info.id} className="py-2">
-                        {info.name && <h6 className="mb-2">{info.name}</h6>}
-                        {info.address && info.website && (
-                          <div>
-                            <a href={info.website} target="_blank" rel="noopener noreferrer">
-                              {info.website}
-                            </a>
+                    {contact.map(
+                      (info) =>
+                        info.address?.includes(search) && (
+                          <div key={info.id} className="py-2" data-testid="info">
+                            {info.name && <h6 className="mb-2">{info.name}</h6>}
+                            {info.address && info.website && (
+                              <div>
+                                <a href={info.website} target="_blank" rel="noopener noreferrer">
+                                  {info.website}
+                                </a>
+                              </div>
+                            )}
+                            {info.email && (
+                              <div>
+                                <a href={`mailto:${info.email}`}>{info.email}</a>
+                              </div>
+                            )}
+                            {info.phone && (
+                              <div>
+                                <a href={`tel:${info.phone}`}>{info.phone}</a>
+                              </div>
+                            )}
+                            {info.description && <div>{info.description}</div>}
+                            {info.address && (
+                              <div className="mt-2">
+                                <div className="text-uppercase">Certificate Store:</div>
+                                <a
+                                  href={`https://etherscan.io/address/${info.address}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  {info.address}
+                                </a>
+                              </div>
+                            )}
                           </div>
-                        )}
-                        {info.email && (
-                          <div>
-                            <a href={`mailto:${info.email}`}>{info.email}</a>
-                          </div>
-                        )}
-                        {info.phone && (
-                          <div>
-                            <a href={`tel:${info.phone}`}>{info.phone}</a>
-                          </div>
-                        )}
-                        {info.description && <div>{info.description}</div>}
-                        {info.address && (
-                          <div className="mt-2">
-                            <div className="text-uppercase">Certificate Store:</div>
-                            <a
-                              href={`https://etherscan.io/address/${info.address}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {info.address}
-                            </a>
-                          </div>
-                        )}
-                        <br />
-                      </div>
-                    ))}
+                        )
+                    )}
                   </div>
                 </div>
               </div>
