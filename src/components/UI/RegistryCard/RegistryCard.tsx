@@ -1,5 +1,5 @@
 // import _ from "lodash";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import css from "./RegistryCard.module.scss";
 
 interface RegistryCardProps {
@@ -17,9 +17,27 @@ interface RegistryCardProps {
   }[];
 }
 
+const searchThreshold = 2;
+
 export const RegistryCard: React.FunctionComponent<RegistryCardProps> = ({ zIndex, search, contact }) => {
-  const hasAddress = contact.find((info) => info.address?.includes(search));
-  if (!hasAddress) return null;
+  const [expand, setExpand] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    const keydownHandler = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setExpand(false);
+    };
+
+    window.addEventListener("keydown", keydownHandler);
+    return () => {
+      window.removeEventListener("keydown", keydownHandler);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (search.length <= searchThreshold) setExpand(false);
+    if (search.length > searchThreshold) setExpand(true);
+  }, [search]);
 
   return (
     <div className="col-lg-4 col-md-6 col-sm-12" style={{ zIndex: zIndex }}>
@@ -36,7 +54,12 @@ export const RegistryCard: React.FunctionComponent<RegistryCardProps> = ({ zInde
             </div>
           </div>
         </div>
-        <div className={`${css.contact}`} tabIndex={0}>
+        <div
+          className={`${css.contact} ${expand ? css["is-active"] : ""}`}
+          onClick={() => {
+            setExpand(!expand);
+          }}
+        >
           <div className={`${css.button}`} role="button" data-testid="btn-contact">
             Contact Info
           </div>

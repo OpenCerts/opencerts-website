@@ -15,10 +15,6 @@ $button-offset: 40px;
   h5 {
     font-weight: 700;
   }
-
-  @media (min-width: $xl) {
-    min-height: 190px;
-  }
 }
 
 .logo {
@@ -50,8 +46,7 @@ $button-offset: 40px;
 .contact {
   position: relative;
 
-  &:focus,
-  &:active {
+  &.is-active {
     outline: none;
     box-shadow: 0 0 0 1px rgba($brand-orange, 0.5);
 

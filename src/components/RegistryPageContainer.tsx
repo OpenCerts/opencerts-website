@@ -51,14 +51,20 @@ export const RegistryPage: React.FunctionComponent = () => {
       <section style={{ paddingTop: "80px" }}>
         <div className="container">
           <div className={`row ${css["check-empty"]}`}>
-            {Object.keys(groups).map((group, index) => (
-              <RegistryCard
-                key={index}
-                contact={groups[group]}
-                zIndex={Object.keys(groups).length - index}
-                search={search}
-              />
-            ))}
+            {Object.keys(groups).map((group, index) => {
+              const hasAddress = groups[group].find((info) => info.address?.includes(search));
+
+              return (
+                hasAddress && (
+                  <RegistryCard
+                    key={index}
+                    contact={groups[group]}
+                    zIndex={Object.keys(groups).length - index}
+                    search={search}
+                  />
+                )
+              );
+            })}
           </div>
           <div className={`${css["no-results"]}`} style={{ marginBottom: "160px" }}>
             <div className="col-12">
