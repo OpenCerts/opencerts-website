@@ -17,7 +17,7 @@ interface RegistryCardProps {
   }[];
 }
 
-const searchThreshold = 2;
+const searchThreshold = 2; // a typical address starts with `0x`, hence length 2
 
 export const RegistryCard: React.FunctionComponent<RegistryCardProps> = ({ zIndex, search, contact }) => {
   const [expand, setExpand] = useState(false);
