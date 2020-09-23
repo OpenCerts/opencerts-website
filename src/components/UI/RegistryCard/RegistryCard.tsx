@@ -54,13 +54,15 @@ export const RegistryCard: React.FunctionComponent<RegistryCardProps> = ({ zInde
             </div>
           </div>
         </div>
-        <div
-          className={`${css.contact} ${expand ? css["is-active"] : ""}`}
-          onClick={() => {
-            setExpand(!expand);
-          }}
-        >
-          <div className={`${css.button}`} role="button" data-testid="btn-contact">
+        <div className={`${css.contact} ${expand ? css["is-active"] : ""}`}>
+          <div
+            className={`${css.button}`}
+            role="button"
+            data-testid="btn-contact"
+            onClick={() => {
+              setExpand(!expand);
+            }}
+          >
             Contact Info
           </div>
           <div className={`${css["contact-info"]}`} data-testid="contact-info">
