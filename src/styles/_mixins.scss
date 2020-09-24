@@ -2,6 +2,15 @@
 // Mixins
 // =====================================================================
 
+@mixin l-hero-padding-t {
+  padding-top: 10px;
+
+  @media (min-width: $lg) {
+    padding-top: 40px;
+  }
+
+}
+
 @mixin btn(
   $color,
   $hover-bg: $color,

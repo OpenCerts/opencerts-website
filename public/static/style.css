@@ -46,8 +46,8 @@ h6 {
   font-family: "Montserrat";
 }
 
-.bg-light {
-  background-color: #f7fafc !important;
+.bg-blue-light {
+  background-color: #f7fafc;
 }
 
 .exact-print {
@@ -78,7 +78,7 @@ h6 {
 }
 
 .text-orange {
-  color: #ffb152;
+  color: #ff9933;
 }
 
 .text-green {

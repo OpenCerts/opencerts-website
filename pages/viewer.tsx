@@ -7,7 +7,9 @@ import { ViewerContainer } from "../src/components/ViewerPageContainer";
 const ViewerPage: React.FunctionComponent = () => (
   <>
     <NavigationBar />
-    <ViewerContainer />
+    <main className="main">
+      <ViewerContainer />
+    </main>
     <FooterBar />
   </>
 );
