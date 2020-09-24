@@ -2,39 +2,6 @@ import React from "react";
 import { aboutImages } from "./AboutImages";
 import css from "./aboutSection.module.scss";
 
-const HowItWorks: React.FunctionComponent = () => {
-  const sections: { key: keyof typeof aboutImages; text: string }[] = [
-    {
-      key: "onetwo",
-      text:
-        "When an OpenCerts certificate is created, a unique digital code is tagged to it. This code, together with condensed information from the certificate, is stored on the blockchain.",
-    },
-    {
-      key: "three",
-      text:
-        "When you open the .opencert file on this site, its contents will be compared with what was stored on the blockchain.",
-    },
-    {
-      key: "four",
-      text:
-        "We'll check if the contents match and if the certificate comes from a recognised insitution.\n\nThis way, you'll know if the certificate is valid when you try to view it.",
-    },
-  ];
-
-  const section = sections.map((item, i) => (
-    <div key={i} id={css[item.key]}>
-      {aboutImages[item.key]()}
-      <p>{item.text}</p>
-    </div>
-  ));
-
-  return (
-    <div className={css.howitworks}>
-      <div className={css["hiw-container"]}>{section}</div>
-    </div>
-  );
-};
-
 export const AboutSection: React.FunctionComponent = () => {
   const steps: { key: keyof typeof aboutImages; text: string }[] = [
     {
