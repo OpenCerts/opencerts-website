@@ -22,7 +22,9 @@ const RegistryPage: React.FunctionComponent = () => (
   <>
     <NextSeo {...PAGE_SEO} />
     <NavigationBar active="registry" />
-    <RegistryPageContainer />
+    <main className="main">
+      <RegistryPageContainer />
+    </main>
     <FooterBar />
   </>
 );

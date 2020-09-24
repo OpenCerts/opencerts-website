@@ -1,22 +1,11 @@
 @import '../../../styles/main.scss';
 
-.innerbar {
-  max-width: 1280px;
-  display: flex;
-  justify-content: flex-start;
-  margin: 0 auto;
+.nav {
+  padding: 20px 0;
 
   img {
     height: 40px;
   }
-}
-
-.navbar {
-    display: block;
-    justify-content: flex-start;
-    margin: 0 auto;
-    background-color: $brand-dark;
-    padding: 1rem 2rem;
 }
 
 .nav-item {
@@ -48,10 +37,6 @@
 }
 
 @media (max-width: 767px) {
-  .innerbar {
-    display: block;
-  }
-
   .nav-item {
     display: block;
     padding: 0.5rem 0;
