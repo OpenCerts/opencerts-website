@@ -64,7 +64,7 @@ export const sendEventCertificateViewedDetailed = ({
       issuerName ?? ""
     }"${separator}"issuer_id":"${registryIssuer.id ?? ""}"`;
   } else if (issuer.identityProof) {
-    issuerName = issuer.identityProof.location;
+    issuerName = issuer.identityProof.location || "";
     label = `"store":"${store}"${separator}"document_id":"${id}"${separator}"name":"${name}"${separator}"issued_on":"${issuedOn}"${separator}"issuer_name":"${
       issuerName ?? ""
     }"`;
@@ -109,7 +109,7 @@ export function triggerErrorLogging(
       issuerName = registryIssuer.name;
       registryId = registryIssuer.id;
     } else if (issuer.identityProof) {
-      issuerName = issuer.identityProof.location;
+      issuerName = issuer.identityProof.location || "";
     }
 
     analyticsEvent(window, {
