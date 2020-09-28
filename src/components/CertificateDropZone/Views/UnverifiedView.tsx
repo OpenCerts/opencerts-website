@@ -2,6 +2,7 @@ import { VerificationFragment } from "@govtechsg/oa-verify";
 import { isValid } from "@govtechsg/opencerts-verify";
 import Link from "next/link";
 import React from "react";
+import { useDropzone } from "react-dropzone";
 import { MESSAGES, TYPES } from "../../../constants/VerificationErrorMessages";
 import {
   addressInvalid,
@@ -92,9 +93,7 @@ export const UnverifiedView: React.FunctionComponent<UnverifiedViewProps> = ({ r
 
       {<DetailedErrors verificationStatus={verificationStatus} />}
 
-      <Link href="/faq">
-        <div className={css["unverified-btn"]}>What should I do?</div>
-      </Link>
+      <WhatShouldIDo />
 
       <div className={css["secondary-links"]}>
         <span
@@ -108,5 +107,21 @@ export const UnverifiedView: React.FunctionComponent<UnverifiedViewProps> = ({ r
         </span>
       </div>
     </div>
+  );
+};
+const WhatShouldIDo: React.FunctionComponent = () => {
+  // see https://stackoverflow.com/questions/64091060/react-dropzone-prevent-inner-element-from-showing-file-picker
+  const { getRootProps } = useDropzone({ noClick: true }); // doesn't work
+  return (
+    <Link href="/faq">
+      <div
+        {...getRootProps({
+          onClick: (event) => event.stopPropagation(), // this is bad, but we'll use it for now until there's a fix
+        })}
+        className={css["unverified-btn"]}
+      >
+        What should I do?
+      </div>
+    </Link>
   );
 };
