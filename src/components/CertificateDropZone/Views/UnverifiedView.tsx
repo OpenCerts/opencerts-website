@@ -110,12 +110,13 @@ export const UnverifiedView: React.FunctionComponent<UnverifiedViewProps> = ({ r
   );
 };
 const WhatShouldIDo: React.FunctionComponent = () => {
+  // see https://stackoverflow.com/questions/64091060/react-dropzone-prevent-inner-element-from-showing-file-picker
   const { getRootProps } = useDropzone({ noClick: true }); // doesn't work
   return (
     <Link href="/faq">
       <div
         {...getRootProps({
-          onClick: (event) => event.stopPropagation(), // this is bad for many reasons
+          onClick: (event) => event.stopPropagation(), // this is bad, but we'll use it for now until there's a fix
         })}
         className={css["unverified-btn"]}
       >
