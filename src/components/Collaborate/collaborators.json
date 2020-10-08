@@ -42,7 +42,7 @@
   {
     "id": "catalyst",
     "name": "Knowledge Catalyst Pte. Ltd.",
-    "description": "Knowledge Catalyst helps education institutions to issue tampered-proof credentials based on Opencerts framework.",
+    "description": "Knowledge Catalyst offers a Software-as-a-Service to enable Institutions to issue tampered-proof credentials based on Opencerts schema and manage the entire Credential Life-Cycle Management.",
     "website": "https://knowledgecatalyst.io",
     "key": "knowledge catalyst",
     "logo": "/static/images/collaborate/KC_logo.png"
