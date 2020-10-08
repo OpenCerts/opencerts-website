@@ -1,0 +1,13 @@
+@import "../styles/main.scss";
+
+.check-empty {
+  &:empty {
+    ~ .no-results {
+      display: block;
+    }
+  }
+}
+
+.no-results {
+  display: none;
+}

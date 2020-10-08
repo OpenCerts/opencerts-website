@@ -1,0 +1,107 @@
+@import '../../../styles/main.scss';
+
+.viewer-container {
+  text-align: center !important;
+  padding: 1.5rem;
+  height: 100%;
+  justify-content: center !important;
+  flex-direction: column !important;
+  display: flex !important;
+  border-radius: 10px;
+
+  &.default {
+    background-color: $faint-blue;
+    border: 2px dashed $brand-blue;
+    box-shadow: 0 0 0 10px $faint-blue;
+  }
+
+  &.accept {
+    background-color: $faint-green;
+    border: 2px dashed $brand-blue;
+    box-shadow: 0 0 0 10px $faint-green;
+  }
+
+  &.warning {
+    background-color: $warning-background;
+    border: 2px dashed $warning-color;
+    box-shadow: 0 0 0 10px $warning-background;
+    color: $warning-color;
+
+    .unverified-btn {
+      @include btn($warning-color, lighten($warning-color, 5%), #fff);
+    }
+  }
+
+  &.invalid {
+    background-color: $invalid-background;
+    border: 2px dashed $invalid-color;
+    box-shadow: 0 0 0 10px $invalid-background;
+    color: $invalid-color;
+
+    .unverified-btn {
+      @include btn($invalid-color, lighten($invalid-color, 5%), #fff);
+    }
+  }
+}
+
+.unverified-btn {
+  margin: auto;
+}
+
+.image-container {
+  margin-bottom: 1rem;
+
+  img {
+    height: 110px;
+  }
+}
+
+.message-container {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #000;
+
+  span {
+    vertical-align: middle;
+  }
+}
+
+.verifications {
+  margin-bottom: 2rem;
+
+  .messages {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+}
+
+.btn {
+  @include btn($brand-blue);
+  background-color: #fff;
+  margin: 0 auto;
+}
+
+.secondary-links {
+  width: 50%;
+  display: flex;
+  margin: 1rem auto 0 auto;
+
+  span {
+    margin: auto;
+
+    a {
+      font-size: 14px;
+    }
+  }
+}
+
+.text-link {
+  color: #787878 !important;
+  text-decoration: underline !important;
+
+  &:hover {
+    color: #324353 !important;
+    cursor: pointer !important;
+  }
+}

@@ -2,7 +2,7 @@ import { Selector, ClientFunction } from "testcafe";
 
 fixture("Registry Certificate Rendering").page`http://localhost:3000`;
 
-const Document = "../HomePageContent/Ropsten-Demo.json";
+const Document = "./fixture/registry-verified.json";
 const IframeBlock = Selector("#iframe");
 const TranscriptButton = Selector(".nav-item").withText("TRANSCRIPT");
 const MediaButton = Selector(".nav-item").withText("MEDIA");
@@ -11,20 +11,17 @@ const SampleTemplate = Selector("#rendered-certificate");
 const CertificateStatusBanner = Selector("#status-banner-container");
 
 const validateTextContent = async (t, component, texts) =>
-  texts.reduce(
-    async (_prev, curr) => t.expect(component.textContent).contains(curr),
-    Promise.resolve()
-  );
+  texts.reduce(async (_prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());
 
-test("Sample document is rendered correctly when single registry is verified", async t => {
+test("Sample document is rendered correctly when single registry is verified", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 
   await validateTextContent(t, StatusButton, [
-    "Certificate issued by ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"
+    "Certificate issued by ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)",
   ]);
 
   await validateTextContent(t, CertificateStatusBanner, [
-    "Certificate issuer is in the SkillsFuture Singapore registry for Opencerts"
+    "Certificate issuer is in the SkillsFuture Singapore registry for Opencerts",
   ]);
 
   await t.switchToIframe(IframeBlock);
@@ -33,7 +30,7 @@ test("Sample document is rendered correctly when single registry is verified", a
     "OpenCerts Demo",
     "Your Name",
     "has successfully completed the",
-    "John Demo"
+    "John Demo",
   ]);
 
   await t.switchToMainWindow();
@@ -45,7 +42,7 @@ test("Sample document is rendered correctly when single registry is verified", a
     "Your Name",
     "Govtech Demo",
     "Object Oriented Programming in Java",
-    "ECON 3120"
+    "ECON 3120",
   ]);
 
   await t.switchToMainWindow();
@@ -53,7 +50,7 @@ test("Sample document is rendered correctly when single registry is verified", a
   await t.switchToIframe(IframeBlock);
 
   const getTemplateHtml = ClientFunction(() => SampleTemplate().innerHTML, {
-    dependencies: { SampleTemplate }
+    dependencies: { SampleTemplate },
   });
 
   await t.expect(getTemplateHtml()).contains('id="youtube-vid"');

@@ -1,0 +1,139 @@
+@import "../../styles/main.scss";
+
+.verifyBlocksContainer {
+  position: relative;
+  max-width: 485px;
+}
+
+.simple-verify-block {
+  width: 100%;
+  font-weight: bold;
+  min-width: 320px;
+  color: #38761d;
+  height: 100%;
+  box-shadow: 2px 2px 4px 0 $grey-blue;
+
+  div {
+    padding: 2px 0;
+    height: 100%;
+    margin: auto 0;
+    align-items: center;
+  }
+}
+
+@mixin block-color($color) {
+  background-color: $color;
+  border: 1px solid $color;
+
+  &:hover {
+    box-shadow: 2px 2px 6px 0 #a7afb7;
+  }
+
+  &.active {
+    color: $color;
+    background-color: #fff;
+
+    #circle {
+      fill: $color;
+    }
+
+    #check {
+      fill: #fff;
+    }
+
+    svg > polyline {
+      stroke: $color;
+    }
+  }
+}
+
+.arrow {
+  height: 100%;
+  margin: 0 15px 0 15px;
+}
+
+.valid {
+  background-color: white;
+  border: 1px solid $success-color;
+
+  #circle {
+    fill: $success-color;
+    color: white;
+  }
+
+  #check {
+    fill: #fff;
+  }
+
+  &:hover {
+    box-shadow: 2px 2px 6px 0 #a7afb7;
+  }
+
+  svg > polyline {
+    stroke: $success-color;
+  }
+}
+
+.warning {
+  @include block-color($warning-color);
+}
+
+.invalid {
+  @include block-color($invalid-color);
+}
+
+.verification-text {
+  font-size: 1.15rem;
+}
+
+.verified-icon {
+  margin: 0 10px !important;
+}
+
+@media only screen and (max-width: 575px) {
+  .verifyBlocksContainer {
+    position: relative;
+  }
+
+  .d-flex {
+    display: block !important;
+  }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 979px) {
+  .verifyBlocksContainer {
+    display: block !important;
+  }
+
+  .d-flex {
+    display: block !important;
+  }
+}
+
+@media only screen and (min-width: 980px) {
+  .d-flex {
+    display: -ms-flexbox !important;
+    display: flex !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .simple-verify-block {
+    border-radius: 5px;
+  }
+
+  .simple-verify-block.active {
+    border-radius: 5px 5px 0 0;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .simple-verify-block {
+    border-radius: 5px;
+  }
+
+  .simple-verify-block.active {
+    border-radius: 5px 0 0 5px;
+    border-right-color: white;
+  }
+}

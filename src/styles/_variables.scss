@@ -7,9 +7,12 @@ $brand-orange: #ff9933;
 $light-grey: #e5e5e5;
 $grey-blue: #c1c9d1;
 $brand-dark: #324353;
+$charcoal-light: #506C85;
+$charcoal-lighter: #eef2f5;
 $faint-blue: #f5f8fb;
 $faint-green: #f5fbf7;
-$color-white: #ffffff;
+$white: #ffffff;
+$black: #000000;
 
 $header-ui-bg: #f3f8fc;
 $low-translucency-white: rgba(255, 255, 255, 0.7);
@@ -24,3 +27,8 @@ $btn-outline: $brand-dark;
 $round-btn-outline: $brand-dark;
 
 $max-width: 1280px;
+
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
