@@ -1,0 +1,43 @@
+@import "../../styles/main.scss";
+
+.detailed-certificate-block {
+  border-width: 1px;
+  border-style: solid;
+  z-index: 100;
+  width: 320px;
+  box-shadow: 2px 2px 4px 0 $grey-blue;
+  position: absolute;
+}
+
+.detailed-certificate-block :global(.col-10) {
+  padding-left: 0;
+}
+
+.valid-border-color {
+  border-color: $success-color;
+}
+
+.warning-border-color {
+  border-color: $warning-color;
+}
+
+.invalid-border-color {
+  border-color: $invalid-color;
+}
+
+@media only screen and (max-width: 849px) {
+  .detailed-certificate-block {
+    border-radius: 0 0 5px 5px;
+    left: 0;
+    top: calc(100% - 1px); // -1px for the border
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 850px) {
+  .detailed-certificate-block {
+    border-radius: 0 5px 5px 5px;
+    left: calc(100% - 1px);
+    top: 0;
+  }
+}

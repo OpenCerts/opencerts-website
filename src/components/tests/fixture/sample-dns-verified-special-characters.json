@@ -1,0 +1,66 @@
+{
+  "schema": "tradetrust/v1.0",
+  "data": {
+    "id": "309eb6b0-6cf8-4024-8d28-89ee040f1ba5:string:SGCNM21566326",
+    "$template": {
+      "name": "60050eec-8197-4b59-8a97-9ecb89be2dc5:string:CERTIFICATE_OF_NON_MANIPULATION",
+      "type": "cc320a0f-278f-47c8-80d2-65c5ad43af6c:string:EMBEDDED_RENDERER",
+      "url": "5eaa4eb2-db56-4112-9564-98d10b4ac12b:string:https://demo-cnm.openattestation.com"
+    },
+    "issuers": [
+      {
+        "name": "41110dd9-ed3b-4b0d-bbc0-0f80b920340a:string:DEMO STORE",
+        "documentStore": "9360be40-5aab-4925-9954-133479534034:string:0x8Fc57204c35fb9317D91285eF52D6b892EC08cD3",
+        "identityProof": {
+          "type": "b6de3f4c-ffff-4514-8aa7-ad73953247f1:string:DNS-TXT",
+          "location": "cee8ba67-bae8-47ea-89af-0ad1351381a0:string:example.openattestation.com"
+        }
+      }
+    ],
+    "recipient": {
+      "name": "70376470-740f-41b7-baf6-d15e1bb6e08d:string:SG FREIGHT",
+      "address": {
+        "street": "a3a839ed-1c8f-41a8-aa50-419455a6f696:string:101 ORCHARD ROAD",
+        "country": "d79dc412-502a-49d8-aeae-a627389c14c0:string:SINGAPORE"
+      }
+    },
+    "consignment": {
+      "description": "856c4bbd-5f5f-4d39-9223-a510c8436fc7:string:18000 CARTONS OF RED WINE 🍷",
+      "quantity": {
+        "value": "9de3cea7-b59a-4c31-bb8f-09b517539eaa:number:5000",
+        "unit": "8ed03d72-ad97-410b-92f9-a0a6b746db17:string:LITRES"
+      },
+      "countryOfOrigin": "96aa609a-74ee-451a-acd4-ea92d0024ac9:string:AUSTRALIA",
+      "outwardBillNo": "24162a60-9c16-4c61-8dea-27bc21ddf107:string:AQSIQ170923131",
+      "dateOfDischarge": "d5ea23fb-03fc-4f0c-ae29-0444c67ef83d:string:2020-05-26",
+      "dateOfDeparture": "7e2dadf0-064a-4e2c-a596-f78604eeda08:string:2020-05-30",
+      "countryOfFinalDestination": "45597259-e6c1-4767-9919-ff84003720d5:string:CHINA",
+      "outgoingVehicleNo": "2afee32d-3b4d-4296-a913-ccf47ef0fe78:string:COSCO JAPAN 074E/30-JAN",
+      "someRandomTestData": [
+        "7ed101b4-b5c0-4808-90fd-2df531d800cb:string:This text block has some HTML special characters :@+.-$%^&*",
+        "554c8b08-9428-4eae-b988-ee4eb64c5530:string:foo://example.com:8042/over/there?name=ferret#nose",
+        "17a58ce9-f262-43b6-b3fa-af53e938f632:string:urn:example:animal:ferret:nose",
+        "08827440-0386-4cf7-a1f2-9bd400381488:string:区块链"
+      ]
+    },
+    "declaration": {
+      "name": "34d5507d-bc77-45f9-ac15-70ffd6d8115e:string:PETER LEE",
+      "designation": "a92dff45-c87f-4312-85f5-2d76efaa0c20:string:SHIPPING MANAGER",
+      "date": "2018c7dd-b310-45d7-a54f-3ee4b230bcb1:string:2020-05-28"
+    },
+    "certification": {
+      "name": "1ec3bac8-e090-4163-b705-a259350ec086:string:DEMO JOHN TAN",
+      "designation": "078630b0-b44b-4356-ac4d-d15e23f4ee21:string:DEMO",
+      "date": "d9f62c8c-2c23-49b7-be6f-524d70e6c14c:string:2020-05-28"
+    }
+  },
+  "privacy": {
+    "obfuscatedData": []
+  },
+  "signature": {
+    "type": "SHA3MerkleProof",
+    "targetHash": "db18db32ca67785246af5918671b9351bd50681bd238135acbdf4da037a6f429",
+    "proof": [],
+    "merkleRoot": "db18db32ca67785246af5918671b9351bd50681bd238135acbdf4da037a6f429"
+  }
+}

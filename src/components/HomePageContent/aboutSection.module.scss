@@ -1,0 +1,214 @@
+@import '../../styles/main.scss';
+
+.main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 3rem;
+  width: 100%;
+
+  h3 {
+    color: $brand-dark;
+    border-left: 6px solid $brand-orange;
+    padding-left: 2rem;
+  }
+
+  p {
+    font-size: 1.125rem;
+  }
+}
+
+.section {
+  padding-top: 2rem;
+}
+
+#benefits {
+  background-color: $brand-dark !important;
+
+  h3 {
+    color: white;
+  }
+}
+
+.container {
+  display: flex;
+  padding: 4rem 0;
+  margin: auto;
+  max-width: 1080px;
+
+  div {
+    text-align: center;
+  }
+
+  // h4 {
+  //     padding: 1rem 0;
+  // }
+}
+
+.benefits {
+  display: flex;
+
+  img {
+    height: 7rem;
+    padding: 0 1.5rem;
+  }
+
+  svg {
+    height: 7rem;
+    width: auto;
+  }
+
+  .benefit-text {
+    padding-left: 2rem;
+    text-align: left;
+    margin: auto 0;
+
+    .benefit-header {
+      color: $brand-orange;
+      font-weight: 600;
+      padding-bottom: 0;
+    }
+
+    p {
+      color: white;
+    }
+  }
+}
+
+.howitworks {
+  background-color: white;
+  border-radius: 3px;
+  border: none;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  display: block;
+  max-width: 1080px;
+  margin: 3rem auto;
+  padding: 3rem;
+
+  .hiw-container {
+    max-width: 800px;
+    display: block;
+    margin: auto;
+
+    div {
+      display: flex;
+      padding: 3rem 0;
+
+      p {
+        text-align: left;
+        padding-left: 3rem;
+        margin: auto;
+        white-space: pre-wrap;
+      }
+
+      svg {
+        width: auto;
+      }
+
+      &#onetwo {
+        svg {
+          height: 145px;
+        }
+      }
+
+      &#three {
+        svg {
+          height: 105px;
+        }
+      }
+
+      &#four {
+        i {
+          margin-left: 11%;
+
+          svg {
+            height: 120px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .main {
+    padding: 1rem;
+  }
+
+  .container {
+    display: block;
+    padding: 0 !important;
+  }
+
+  .benefits {
+    padding: 2rem 0;
+
+    h4 {
+      padding: 0;
+    }
+
+    p {
+      padding-bottom: 2rem;
+    }
+  }
+
+  .howitworks {
+    padding: 1rem;
+
+    .hiw-container {
+      div {
+        display: block;
+        padding: 1rem 0;
+        text-align: center;
+
+        p {
+          padding: 1rem;
+        }
+
+        i {
+          width: auto;
+          height: 80%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .container {
+    padding: 4rem 2rem;
+    display: block !important;
+  }
+
+  .benefits {
+    padding: 2rem 0;
+
+    h4 {
+      padding: 0;
+    }
+  }
+
+  .howitworks {
+    .hiw-container {
+      div {
+        display: block;
+        padding: 1rem 0;
+        text-align: center;
+
+        p {
+          padding-top: 1rem;
+        }
+
+        i {
+          width: auto;
+          height: 80%;
+        }
+
+        &#four {
+          i {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+}

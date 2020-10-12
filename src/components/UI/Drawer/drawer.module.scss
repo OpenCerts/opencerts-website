@@ -1,0 +1,99 @@
+/* The side navigation menu */
+
+.sidenav {
+  height: 100%;
+  width: 70%;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  right: 0;
+  background-color: #324353;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
+
+  .tabs {
+    border-bottom: 0.1px solid #7a7e81;
+
+    &.active {
+      color: #bcc3c7;
+    }
+  }
+
+  a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s;
+
+    &:hover {
+      color: #bcc3c7;
+    }
+  }
+
+  .closebtn {
+    position: absolute;
+    top: -5px;
+    left: -10px;
+    font-size: 36px;
+    margin-right: 50px;
+  }
+}
+
+.togglebtn {
+  font-size: 35px;
+  display: block;
+  text-align: right;
+  color: #fff;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.gray {
+  background-color: #324353;
+}
+
+/* The navigation menu links */
+
+/* When you mouse over the navigation links, change their color */
+
+/* Position and style the close button (top right corner) */
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+
+#main {
+  transition: margin-left 0.5s;
+  padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+
+    a {
+      font-size: 18px;
+    }
+  }
+}
+
+@media screen and (min-width: 450px) and (max-width: 992px) {
+  .togglebtn {
+    padding-right: 0 !important;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .mb-sidenav {
+    right: 15px;
+    text-align: right;
+    position: absolute;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px !important;
+    top: 12px;
+    z-index: 9;
+  }
+}
