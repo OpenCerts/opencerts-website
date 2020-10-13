@@ -40,10 +40,10 @@
     "logo": "/static/images/collaborate/ACCREDIFY_logo.png"
   },
   {
-    "id": "catalyst",
-    "name": "Knowledge Catalyst Pte. Ltd.",
-    "description": "Knowledge Catalyst offers a Software-as-a-Service to enable Institutions to issue tampered-proof credentials based on Opencerts schema and manage the entire Credential Life-Cycle Management.",
-    "website": "https://knowledgecatalyst.io",
+    "id": "kc",
+    "name": "Knowledge Catalyst",
+    "description": "Knowledge Catalyst offers a secure and user friendly Software-as-a-Service platform to enable institutions to design, issue, set expiry, revoke, and verify tamper-proof digital credentials based on OpenCerts schema.",
+    "website": "https://www.knowledgecatalyst.io",
     "key": "knowledge catalyst",
     "logo": "/static/images/collaborate/KC_logo.png"
   },
