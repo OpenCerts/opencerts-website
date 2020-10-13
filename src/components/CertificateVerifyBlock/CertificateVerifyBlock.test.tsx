@@ -3,7 +3,7 @@ import { getIdentityVerificationText } from "./CertificateVerifyBlock";
 
 describe("certificate verify block getIdentityVerificationText", () => {
   describe("wWhen registry is verified", () => {
-    it("should return appropriate display text when singular registry is verified", () => {
+    it("should return appropriate display identity from registry before identity from dns", () => {
       const fragments: VerificationFragment[] = [
         {
           name: "OpencertsRegistryVerifier",
@@ -28,7 +28,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
           ],
         },
       ];
-      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by GOVTECH");
+      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by GOVTECH, ABC.COM");
     });
 
     it("should return appropriate display text when registry is verified but dns is unverified", () => {
@@ -59,7 +59,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
       expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by DEMO");
     });
 
-    it("should return appropriate display text when multiple registry is verified", () => {
+    it("should return appropriate display identity from registry before identity from dns and it should sort identities within each kind", () => {
       const fragments: VerificationFragment[] = [
         {
           name: "OpencertsRegistryVerifier",
@@ -83,16 +83,18 @@ describe("certificate verify block getIdentityVerificationText", () => {
           data: [
             {
               status: "VALID",
-              location: "abc.com",
+              location: "demo.com",
             },
             {
               status: "VALID",
-              location: "demo.com",
+              location: "abc.com",
             },
           ],
         },
       ];
-      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by GOVTECH");
+      expect(getIdentityVerificationText(fragments)).toStrictEqual(
+        "Certificate issued by DEMO, GOVTECH, ABC.COM, DEMO.COM"
+      );
     });
 
     it("should return appropriate display text when one of each registry and dns verified", () => {
@@ -129,7 +131,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
         },
       ];
 
-      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by DEMO");
+      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by DEMO, ABC.COM");
     });
 
     it("should return Certificate issued by Unknown when registry and dns don't resolve any value", () => {
@@ -224,7 +226,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
           ],
         },
       ];
-      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by DEMO.COM");
+      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by DEMO.COM, XYZ.COM");
     });
   });
 });
