@@ -8,12 +8,12 @@
     "logo": "/static/images/collaborate/CONVERGENCE_logo.png"
   },
   {
-    "id": "clog",
-    "name": "C-LOG",
-    "description": "Provides a trusted universal industry standard for ID and credentials through a blockchain-enabled decentralised identifier.",
-    "website": "https://c-log.io",
-    "key": "clog",
-    "logo": "/static/images/collaborate/CLOG_logo.png"
+    "id": "riverr",
+    "name": "Riverr",
+    "description": "Provides a trusted universal industry standard for identification and credentials. Riverrs platforms conform to different workflows that require tamper-proof, verifiable documentation.",
+    "website": "https://riverr.ai",
+    "key": "riverr",
+    "logo": "/static/images/collaborate/RIVERR_logo.png"
   },
   {
     "id": "nextid",
