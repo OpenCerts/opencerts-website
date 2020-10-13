@@ -5,7 +5,12 @@ import { icons } from "../ViewerPageImages";
 import { DetailedCertificateVerifyBlock } from "./DetailedCertificateVerifyBlock";
 import css from "./certificateVerifyBlock.module.scss";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isString = (str: any): str is string => str;
+
 export const getIdentityVerificationText = (verificationStatus: VerificationFragment[]): string => {
+  const identities: string[] = [];
+
   const registryFragmentName = "OpencertsRegistryVerifier";
   const registryFragment = verificationStatus.find((status) => status.name === registryFragmentName);
   // using concat to handle arrays and single element
@@ -14,10 +19,12 @@ export const getIdentityVerificationText = (verificationStatus: VerificationFrag
       | OpencertsRegistryVerificationFragmentData
       | OpencertsRegistryVerificationFragmentData[] = registryFragment.data;
     const array: OpencertsRegistryVerificationFragmentData[] = []; // create a temporary array otherwise typescript complains on typings
-    const registryIdentity = array.concat(registryFragmentData).find(({ status }) => status === "VALID");
-    if (registryIdentity && registryIdentity.name) {
-      return `Certificate issued by ${registryIdentity.name.toUpperCase()}`;
-    }
+    const registryIdentity = array
+      .concat(registryFragmentData)
+      .filter(({ status }) => status === "VALID")
+      .map((fragment) => fragment.name?.toUpperCase())
+      .filter(isString);
+    identities.push(...registryIdentity.sort());
   }
 
   const dnsFragmentName = "OpenAttestationDnsTxt";
@@ -29,13 +36,14 @@ export const getIdentityVerificationText = (verificationStatus: VerificationFrag
     // TODO we need the typing for this
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const array: any[] = [];
-    const dnsIdentity = array
+    const dnsIdentity: string[] = array
       .concat(dnsFragmentData)
-      .sort((obj1, obj2) => obj1.location.localeCompare(obj2.location))
-      .find(({ status }) => status === "VALID");
-    if (dnsIdentity) {
-      return `Certificate issued by ${dnsIdentity.location.toUpperCase()}`;
-    }
+      .filter(({ status }) => status === "VALID")
+      .map((fragment) => fragment.location?.toUpperCase());
+    identities.push(...dnsIdentity.sort());
+  }
+  if (identities.length > 0) {
+    return `Certificate issued by ${identities.join(", ")}`;
   }
   return "Certificate issued by Unknown";
 };
