@@ -1,0 +1,19 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+:root {
+  --neutral: theme("colors.neutral.default");
+}
+
+a {
+  @apply duration-200;
+  @apply transition-colors;
+  @apply ease-out;
+  @apply text-md;
+  color: var(--neutral);
+}
+
+a:hover {
+  @apply text-white;
+}

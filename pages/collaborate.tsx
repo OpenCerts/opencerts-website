@@ -2,6 +2,7 @@ import { NextSeo } from "next-seo";
 import React from "react";
 import { connect } from "react-redux";
 import { CollaboratePage as CollaboratePageContainer } from "../src/components/Collaborate/CollaboratePageContainer";
+import { Wrapper, Main } from "../src/components/Layout/Body";
 import { FooterBar } from "../src/components/Layout/FooterBar";
 import { NavigationBar } from "../src/components/Layout/NavigationBar";
 import { URL } from "../src/config";
@@ -21,9 +22,13 @@ const PAGE_SEO = {
 const CollaboratePage: React.FunctionComponent = () => (
   <>
     <NextSeo {...PAGE_SEO} />
-    <NavigationBar active="collaborate" />
-    <CollaboratePageContainer />
-    <FooterBar />
+    <Wrapper>
+      <NavigationBar />
+      <Main>
+        <CollaboratePageContainer />
+      </Main>
+      <FooterBar />
+    </Wrapper>
   </>
 );
 

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React from "react";
-import css from "./navBar.module.scss";
 
 const navItems: { id: string; label: string; path: string }[] = [
   {
@@ -19,43 +18,26 @@ const navItems: { id: string; label: string; path: string }[] = [
     path: "/faq",
   },
 ];
-interface NavigationBarProps {
-  active?: string;
-}
 
-// TODO use next-link
-export const NavigationBar: React.FunctionComponent<NavigationBarProps> = ({ active }) => (
-  <header className="bg-brand-dark">
+export const NavigationBar: React.FunctionComponent = () => (
+  <nav className="bg-brand-dark py-6">
     <div className="container">
-      <nav className={`navbar navbar-expand-md navbar-dark ${css.nav}`}>
-        <Link href="/">
-          <a className="navbar-brand">
-            <img src="/static/images/opencertslogo.svg" alt="OpenCerts" />
-          </a>
-        </Link>
-        <button
-          className={`${css["navbar-toggler"]} d-none`}
-          type="button"
-          data-toggle="collapse"
-          data-target="#top-nav"
-          aria-controls="top-nav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className={`${css["toggler-icon"]} ${"navbar-toggler-icon"}`} />
-        </button>
-        <div className="collapse navbar-collapse" id="top-nav">
-          <ul className="navbar-nav ml-auto d-none d-lg-flex d-xl-flex">
-            {navItems.map((n, i) => (
-              <li className={`${css["nav-item"]} ${n.id === active ? css.active : ""}`} key={i}>
-                <Link href={n.path}>
-                  <a>{n.label}</a>
-                </Link>
-              </li>
-            ))}
-          </ul>
+      <div className="flex flex-wrap items-center">
+        <div className="w-1/3 md:w-1/4 lg:w-1/6 mr-auto mb-6 md:mb-0">
+          <Link href="/">
+            <a className="font-montserrat">
+              <img src="/static/images/opencertslogo.svg" alt="OpenCerts" />
+            </a>
+          </Link>
         </div>
-      </nav>
+        {navItems.map((n, i) => (
+          <div className="w-full md:w-auto md:pl-8 mb-2 md:mb-0" key={i}>
+            <Link href={n.path}>
+              <a className="font-montserrat">{n.label}</a>
+            </Link>
+          </div>
+        ))}
+      </div>
     </div>
-  </header>
+  </nav>
 );
