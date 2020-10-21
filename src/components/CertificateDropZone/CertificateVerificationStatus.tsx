@@ -1,6 +1,7 @@
 import { VerificationFragment } from "@govtechsg/oa-verify";
 import { isValid } from "@govtechsg/opencerts-verify";
 import React from "react";
+import { DropzoneViewWrapper } from "../Layout/DropzoneViewWrapper";
 import { DefaultView } from "./Views/DefaultView";
 import { RetrievalErrorView } from "./Views/RetrievalErrorView";
 import { UnverifiedView } from "./Views/UnverifiedView";
@@ -18,24 +19,46 @@ interface CertificateVerificationStatusProps {
 export const CertificateVerificationStatus: React.FunctionComponent<CertificateVerificationStatusProps> = (props) => {
   const { resetData, verifying, fileError, verificationStatus, hover, retrieveCertificateByActionError } = props;
   if (hover) {
-    return <DefaultView hover={true} accept={true} />;
+    return (
+      <DropzoneViewWrapper hover={hover} accept={true}>
+        <DefaultView fileError={fileError} />
+      </DropzoneViewWrapper>
+    );
   }
   if (fileError) {
-    return <DefaultView hover={true} accept={false} />;
+    return (
+      <DropzoneViewWrapper hover={hover} accept={false}>
+        <DefaultView fileError={fileError} />
+      </DropzoneViewWrapper>
+    );
   }
   if (verifying) {
-    return <VerifyingView />;
+    return (
+      <DropzoneViewWrapper hover={hover} accept={true}>
+        <VerifyingView />
+      </DropzoneViewWrapper>
+    );
   }
   if (retrieveCertificateByActionError) {
     return (
-      <RetrievalErrorView
-        resetData={() => resetData()}
-        retrieveCertificateByActionError={retrieveCertificateByActionError}
-      />
+      <DropzoneViewWrapper hover={hover} accept={false}>
+        <RetrievalErrorView
+          resetData={() => resetData()}
+          retrieveCertificateByActionError={retrieveCertificateByActionError}
+        />
+      </DropzoneViewWrapper>
     );
   }
   if (verificationStatus && !isValid(verificationStatus)) {
-    return <UnverifiedView resetData={() => resetData()} verificationStatus={verificationStatus} />;
+    return (
+      <DropzoneViewWrapper hover={hover} accept={false}>
+        <UnverifiedView resetData={() => resetData()} verificationStatus={verificationStatus} />
+      </DropzoneViewWrapper>
+    );
   }
-  return <DefaultView hover={false} accept={true} />;
+  return (
+    <DropzoneViewWrapper hover={hover} accept={true}>
+      <DefaultView fileError={fileError} />
+    </DropzoneViewWrapper>
+  );
 };

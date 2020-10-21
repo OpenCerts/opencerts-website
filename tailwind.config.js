@@ -19,14 +19,41 @@ module.exports = {
       md: ["20px", "28px"],
       lg: ["24px", "30px"],
       xl: ["32px", "40px"],
+      xxl: ["40px", "48px"],
+    },
+    cursor: {
+      pointer: "pointer",
+      grab: "grab",
     },
     extend: {
+      keyframes: {
+        pulsing: {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.1)" },
+        },
+      },
+      animation: {
+        pulsing: "pulsing 3s alternate infinite",
+      },
       colors: {
         white: {
           default: "#fff",
         },
-        neutral: {
+        orange: {
+          default: "#ff9933",
+        },
+        blue: {
+          100: "#f5f8fb",
+          400: "#09c",
           default: "#ccc",
+        },
+        pink: {
+          100: "#fbeae9",
+          default: "#e46767",
+        },
+        green: {
+          100: "#f5fbf7",
+          default: "#28a745",
         },
       },
     },

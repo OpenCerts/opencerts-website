@@ -2,18 +2,41 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-:root {
-  --neutral: theme("colors.neutral.default");
-}
-
 a {
   @apply duration-200;
   @apply transition-colors;
   @apply ease-out;
   @apply text-md;
-  color: var(--neutral);
+  @apply text-gray-400;
 }
 
 a:hover {
   @apply text-white;
+}
+
+h1 {
+  @apply text-xxl;
+}
+
+h2 {
+  @apply text-xl;
+}
+
+h3 {
+  @apply text-lg;
+}
+
+h4 {
+  @apply text-md;
+}
+
+h5 {
+  @apply text-sm;
+}
+
+.button {
+  @apply px-4;
+  @apply py-2;
+  @apply rounded;
+  @apply cursor-pointer;
 }

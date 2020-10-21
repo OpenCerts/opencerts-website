@@ -14,7 +14,7 @@ const Certificate1 = "./unissued.opencert";
 const Certificate2 = "./sample-ropsten.opencert";
 
 const RenderedCertificate = Selector("#certificate-dropzone");
-const InvalidMessage = Selector(".invalid");
+const DropzoneViewWrapper = Selector("[data-testid='dropzone-view-wrapper']");
 
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(async (prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());
@@ -25,7 +25,7 @@ test.requestHooks(rateLimitMock)(
   async (t) => {
     await t.setFilesToUpload("input[type=file]", [Certificate1]);
 
-    await InvalidMessage.with({ visibilityCheck: true })();
+    await DropzoneViewWrapper.with({ visibilityCheck: true })();
 
     await validateTextContent(t, RenderedCertificate, [
       "Connection error",
@@ -40,7 +40,7 @@ test.requestHooks(badGatewayMock)(
   async (t) => {
     await t.setFilesToUpload("input[type=file]", [Certificate1]);
 
-    await InvalidMessage.with({ visibilityCheck: true })();
+    await DropzoneViewWrapper.with({ visibilityCheck: true })();
 
     await validateTextContent(t, RenderedCertificate, [
       "Connection error",
@@ -55,7 +55,7 @@ test.requestHooks(rateLimitMock)(
   async (t) => {
     await t.setFilesToUpload("input[type=file]", [Certificate2]);
 
-    await InvalidMessage.with({ visibilityCheck: true })();
+    await DropzoneViewWrapper.with({ visibilityCheck: true })();
 
     await validateTextContent(t, RenderedCertificate, [
       "Connection error",
@@ -70,7 +70,7 @@ test.requestHooks(badGatewayMock)(
   async (t) => {
     await t.setFilesToUpload("input[type=file]", [Certificate2]);
 
-    await InvalidMessage.with({ visibilityCheck: true })();
+    await DropzoneViewWrapper.with({ visibilityCheck: true })();
 
     await validateTextContent(t, RenderedCertificate, [
       "Connection error",
