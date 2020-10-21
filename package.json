@@ -23,7 +23,7 @@
     "dev-cli": "node -r esm ./scripts/cli.js",
     "serve-static": "http-server out -s -p 3000",
     "integration": "testcafe chrome src/**/*.spec.js",
-    "integration:headless": "testcafe chrome:headless src/**/*.spec.js",
+    "integration:headless": "testcafe -c 4 chrome:headless src/**/*.spec.js",
     "integration:watch": "nodemon --exec \"npm run integration\" --watch src"
   },
   "dependencies": {

@@ -22,7 +22,7 @@ const MultiTabs: React.FunctionComponent<MultiTabsProps> = ({ resetData, templat
                   <a
                     className={`${styles.tab}
                     ${idx === selectedTemplate ? styles.active : ""}`}
-                    id={template.id}
+                    data-testid={template.id}
                     onClick={() => {
                       setSelectedTemplate(idx);
                       onSelectTemplate(template.id);
