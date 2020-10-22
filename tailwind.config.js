@@ -9,6 +9,9 @@ module.exports = {
       center: true,
       padding: theme("spacing.4"),
     }),
+    inset: {
+      "1/2": "50%",
+    },
     fontFamily: {
       "source-sans-pro": ["Source Sans Pro", "sans-serif"],
       montserrat: ["Montserrat", "sans-serif"],
@@ -48,6 +51,8 @@ module.exports = {
           default: "#09c",
         },
         navy: {
+          200: "#eef2f5",
+          300: "#506c85",
           default: "#324353",
         },
         pink: {

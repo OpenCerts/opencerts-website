@@ -47,10 +47,18 @@ h5 {
   @apply text-sm;
 }
 
+p {
+  @apply mb-4;
+}
+
 .button {
   @apply ease-colors;
   @apply px-4;
   @apply py-2;
   @apply rounded;
   @apply cursor-pointer;
+}
+
+.check-empty:empty ~ .hidden {
+  @apply block;
 }
