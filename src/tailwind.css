@@ -2,11 +2,24 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-a {
-  @apply duration-200;
+:root {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  @apply font-source-sans-pro;
+  @apply text-base;
+}
+
+.ease-colors {
   @apply transition-colors;
+  @apply duration-200;
   @apply ease-out;
-  @apply text-md;
+}
+
+a {
+  @apply ease-colors;
   @apply text-gray-400;
 }
 
@@ -35,6 +48,7 @@ h5 {
 }
 
 .button {
+  @apply ease-colors;
   @apply px-4;
   @apply py-2;
   @apply rounded;

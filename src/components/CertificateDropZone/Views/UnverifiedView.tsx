@@ -107,7 +107,7 @@ export const WhatShouldIDo: React.FunctionComponent = () => {
   return (
     <Link href="/faq">
       <div
-        className="button bg-pink w-56 mx-auto mb-8"
+        className="button bg-pink hover:bg-pink-300 w-56 mx-auto mb-8"
         {...getRootProps({
           onClick: (event) => event.stopPropagation(), // this is bad, but we'll use it for now until there's a fix
         })}
@@ -125,7 +125,7 @@ interface TryAnotherProps {
 export const TryAnother: React.FunctionComponent<TryAnotherProps> = ({ resetData }: TryAnotherProps) => {
   return (
     <div
-      className="text-gray-600 underline"
+      className="ease-colors text-gray-600 hover:text-gray-900 underline"
       onClick={() => {
         resetData();
       }}

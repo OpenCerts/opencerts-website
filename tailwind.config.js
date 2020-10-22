@@ -3,7 +3,7 @@ module.exports = {
     // removeDeprecatedGapUtilities: true,
     // purgeLayersByDefault: true,
   },
-  purge: [],
+  purge: ["./src/**/*.ts", "./src/**/*.tsx"],
   theme: {
     container: (theme) => ({
       center: true,
@@ -14,8 +14,9 @@ module.exports = {
       montserrat: ["Montserrat", "sans-serif"],
     },
     fontSize: {
-      sm: ["14px", "20px"],
-      base: ["16px", "24px"],
+      xs: ["14px", "20px"],
+      sm: ["16px", "24px"],
+      base: ["18px", "26px"],
       md: ["20px", "28px"],
       lg: ["24px", "30px"],
       xl: ["32px", "40px"],
@@ -44,15 +45,19 @@ module.exports = {
         },
         blue: {
           100: "#f5f8fb",
-          400: "#09c",
-          default: "#ccc",
+          default: "#09c",
+        },
+        navy: {
+          default: "#324353",
         },
         pink: {
           100: "#fbeae9",
+          300: "#e87d7d",
           default: "#e46767",
         },
         green: {
           100: "#f5fbf7",
+          300: "#46b760",
           default: "#28a745",
         },
       },

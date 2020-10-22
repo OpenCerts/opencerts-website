@@ -20,7 +20,7 @@ const navItems: { id: string; label: string; path: string }[] = [
 ];
 
 export const NavigationBar: React.FunctionComponent = () => (
-  <nav className="bg-brand-dark py-6">
+  <nav className="bg-navy py-6">
     <div className="container">
       <div className="flex flex-wrap items-center">
         <div className="w-1/3 md:w-1/4 lg:w-1/6 mr-auto mb-6 md:mb-0">

@@ -41,7 +41,7 @@ const DraggableDemoCertificate: React.FunctionComponent = () => (
 
 const MobileDemoCertificate: React.FunctionComponent = () => (
   <button
-    className="button bg-green mx-auto my-8 block lg:hidden"
+    className="button bg-green hover:bg-green-300 mx-auto my-8 block lg:hidden"
     role="button"
     draggable="false"
     id="demoClick"
@@ -102,7 +102,7 @@ class DropZoneSection extends Component<DropZoneSectionProps> {
 
   render(): ReactNode {
     return (
-      <section className="py-12 bg-brand-dark text-white">
+      <section className="bg-navy text-white py-12">
         <div className="container">
           <div className="flex flex-wrap">
             <div className="w-full lg:w-1/3 lg:pr-10 text-center lg:text-left">

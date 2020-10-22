@@ -28,7 +28,10 @@ export const DefaultView: React.FunctionComponent<DefaultViewProps> = ({ fileErr
       </div>
     </div>
     <div className="mx-auto">
-      <button type="button" className="button bg-white text-blue-400 border border-solid border-blue-400">
+      <button
+        type="button"
+        className="button bg-white hover:bg-blue text-blue hover:text-white border border-solid border-blue"
+      >
         Select File
       </button>
     </div>
