@@ -29,7 +29,7 @@ export const CollaboratePage: React.FunctionComponent = () => (
     </Hero>
     <section className="py-8">
       <div className="container">
-        <div className="flex flex-wrap w-full">
+        <div className="flex flex-wrap -mx-4">
           {collaborators.map((collaborator, index) => (
             <Card key={index} info={[collaborator]} />
           ))}

@@ -1,5 +1,4 @@
 import React from "react";
-// import css from "./card.module.scss";
 
 interface CardProps {
   info: {
@@ -14,52 +13,44 @@ interface CardProps {
   }[];
 }
 export const Card: React.FunctionComponent<CardProps> = (props) => (
-  <div id={props.info[0].id} className="px-4 pb-8 break-words md:w-1/3 flex flex-col cursor-pointer">
+  <div id={props.info[0].id} className="flex w-full md:w-1/2 lg:w-1/3 px-4 mb-8 break-words cursor-pointer">
     <div
-      className="p-6 rounded-lg px-4 bg-gray-200 flex-1"
+      className="flex-1 p-6 bg-gray-200 rounded-lg"
       key={props.info[0].id}
       onClick={() => window.open(props.info[0].website)}
     >
-      <h3 className="font-montserrat font-bold px-4">{props.info[0].name}</h3>
+      <h3 className="font-montserrat font-bold">{props.info[0].name}</h3>
       <img className="h-12 max-w-10 mx-auto m-6" src={props.info[0].logo} />
       {props.info.map((info, index) => (
-        <div className="p-4" key={info.id}>
-          {info.address ? (
-            <div>
+        <div className="links-blue" key={info.id}>
+          {info.address && (
+            <p>
               {index > 0 && `${info.name} `}
               Certificate Store:{" "}
               <a href={`https://etherscan.io/address/${info.address}`} onClick={(event) => event.stopPropagation()}>
                 {info.address}
               </a>
-            </div>
-          ) : (
-            ""
+            </p>
           )}
-          {info.address && info.website ? (
-            <div>
+          {info.address && info.website && (
+            <p>
               Website:{" "}
               <a href={info.website} target="_blank" rel="noopener noreferrer">
                 {info.website}
               </a>
-            </div>
-          ) : (
-            ""
+            </p>
           )}
-          {info.email ? (
-            <div>
+          {info.email && (
+            <p>
               Email: <a href={`mailto:${info.email}`}>{info.email}</a>
-            </div>
-          ) : (
-            ""
+            </p>
           )}
-          {info.phone ? (
-            <div>
+          {info.phone && (
+            <p>
               Phone: <a href={`tel:${info.phone}`}>{info.phone}</a>
-            </div>
-          ) : (
-            ""
+            </p>
           )}
-          {info.description ? <div>{info.description}</div> : ""}
+          {info.description && <p>{info.description}</p>}
         </div>
       ))}
     </div>

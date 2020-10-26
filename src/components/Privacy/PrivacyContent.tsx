@@ -3,18 +3,18 @@ import React from "react";
 export const PrivacyContent: React.FunctionComponent = () => (
   <section className="mb-20 text-sm text-gray-800">
     <div className="container">
-      <h1 className="font-montserrat py-12 text-center">Privacy Policy</h1>
-      <div className="leading-8 px-48">
+      <div className="xl:px-48">
+        <h1 className="font-montserrat py-12 text-center">Privacy Policy</h1>
         <p>
           This Privacy Policy must be read in conjunction with the Terms of Use that accompany the applicable service
           you are requesting from us (the &#34;Service&#34;). In this Privacy Policy, &#34;Public Sector Entities&#34;
           means the Government (including its ministries, departments and organs of state) and public authorities (such
           as statutory boards).
         </p>
-        <ol className="list-decimal pl-8">
+        <ol className="list-decimal pl-4">
           <li>
             <p> Insofar as the Service consists of or is provided to you through a website, please note that:</p>
-            <ol className="list-decimal pl-8">
+            <ol className="list-decimal pl-4">
               <li>
                 <p>
                   We may use &#34;cookies &#34;, where a small data file is sent to your browser to store and track
@@ -49,10 +49,10 @@ export const PrivacyContent: React.FunctionComponent = () => (
           </li>
           <li>
             <p> If you provide us with personally identifiable data:</p>
-            <ol className="list-decimal pl-8">
+            <ol className="list-decimal pl-4">
               <li>
                 <p> We may use, disclose and process the data for any one or more of the following purposes:</p>
-                <ol className="list-decimal pl-8">
+                <ol className="list-decimal pl-4">
                   <li>
                     <p>to assist, process and facilitate your access or use of the Service;</p>
                   </li>
@@ -129,7 +129,7 @@ export const PrivacyContent: React.FunctionComponent = () => (
           </li>
           <li>
             <p>Please contact Info@tech.gov.sg if you:</p>
-            <ol className="list-decimal pl-8">
+            <ol className="list-decimal pl-4">
               <li>
                 <p>have any enquires or feedback on our data protection policies and procedures; or</p>
               </li>
