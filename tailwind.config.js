@@ -48,6 +48,7 @@ module.exports = {
         },
         blue: {
           100: "#f5f8fb",
+          300: "#53bcdf",
           default: "#09c",
         },
         navy: {
