@@ -12,10 +12,8 @@ export const faqContent: FagElement[] = [
         question: "Who developed OpenCerts?",
         answer: (
           <p>
-            <a className="text-blue hover:text-blue-300" href="https://www.tech.gov.sg/">
-              GovTech Singapore
-            </a>{" "}
-            developed OpenCerts in cooperation with the OpenCerts Consortium.
+            <a href="https://www.tech.gov.sg/">GovTech Singapore</a> developed OpenCerts in cooperation with the
+            OpenCerts Consortium.
           </p>
         ),
       },
@@ -26,18 +24,12 @@ export const faqContent: FagElement[] = [
             <p>OpenCerts is the umbrella trademark under which we have released a few key components:</p>
             <ol className="list-decimal pl-8">
               <li>
-                An{" "}
-                <a className="text-blue hover:text-blue-300" href="https://github.com/OpenCerts/open-certificate">
-                  open source schema
-                </a>{" "}
-                for publishing educational credentials{" "}
+                An <a href="https://github.com/OpenCerts/open-certificate">open source schema</a> for publishing
+                educational credentials{" "}
               </li>
               <li>
-                <a className="text-blue hover:text-blue-300" href="https://github.com/OpenCerts/certificate-cli">
-                  {" "}
-                  A set of tools
-                </a>{" "}
-                for generating cryptographic protections for educational credentials{" "}
+                <a href="https://github.com/OpenCerts/certificate-cli"> A set of tools</a> for generating cryptographic
+                protections for educational credentials{" "}
               </li>
               <li>This online website for verifying the authenticity of OpenCerts files.</li>
             </ol>
@@ -55,17 +47,11 @@ export const faqContent: FagElement[] = [
             </p>
             <p>
               For institutions under the SkillsFuture Singapore (SSG){" "}
-              <a
-                className="text-blue hover:text-blue-300"
-                href="http://www.opencerts.io/registry"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="http://www.opencerts.io/registry" target="_blank" rel="noopener noreferrer">
                 registry
               </a>
               , certificates issued can be viewed on your{" "}
               <a
-                className="text-blue hover:text-blue-300"
                 href="https://www.myskillsfuture.sg/content/portal/en/individual/skills-passport.html"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -74,7 +60,6 @@ export const faqContent: FagElement[] = [
               </a>
               . Please refer to the{" "}
               <a
-                className="text-blue hover:text-blue-300"
                 href="https://www.myskillsfuture.sg/content/portal/en/header/faqs/SkillsPassport.html"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -146,10 +131,7 @@ export const faqContent: FagElement[] = [
             In every properly issued OpenCerts certificate file, there is a hash-based message authentication code which
             cryptographically certifies that the content of the certificate has not been altered. If you would like to
             know more about the technical nitty-gritty of how this works, check out our{" "}
-            <a className="text-blue hover:text-blue-300" href="https://docs.opencerts.io">
-              technical documentation
-            </a>
-            .
+            <a href="https://docs.opencerts.io">technical documentation</a>.
           </p>
         ),
       },
@@ -232,7 +214,6 @@ export const faqContent: FagElement[] = [
           <p>
             Please see our{" "}
             <a
-              className="text-blue hover:text-blue-300"
               href="https://docs.opencerts.io/docs/registry#application-to-skillsfuture-singapore"
               target="_blank"
               rel="noopener noreferrer"

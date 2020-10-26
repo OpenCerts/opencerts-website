@@ -2,7 +2,7 @@ import React from "react";
 import { faqContent } from "./content";
 
 export const FaqContent: React.FunctionComponent = () => (
-  <section className="mb-20 text-sm text-gray-800">
+  <section className="mb-20 text-sm text-gray-800 links-blue">
     <div className="container">
       <h1 className="font-montserrat py-12 text-center">Frequently Asked Questions</h1>
 

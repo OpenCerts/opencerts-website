@@ -18,6 +18,7 @@ html {
   @apply ease-out;
 }
 
+/* default for links that are on navy bg */
 a {
   @apply ease-colors;
   @apply text-gray-400;
@@ -25,6 +26,15 @@ a {
 
 a:hover {
   @apply text-white;
+}
+
+/* helper for links that are on light bg */
+.links-blue a {
+  @apply text-blue;
+}
+
+.links-blue a:hover {
+  @apply text-blue-300;
 }
 
 h1 {
@@ -49,6 +59,10 @@ h5 {
 
 p {
   @apply mb-4;
+}
+
+b {
+  @apply font-bold;
 }
 
 .button {
