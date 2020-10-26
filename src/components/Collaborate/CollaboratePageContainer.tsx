@@ -17,14 +17,19 @@ export const CollaboratePage: React.FunctionComponent = () => (
       <p>
         If you are from a company that can help to issue certificates and would like to be added to this list,
         please&nbsp;
-        <a href="https://form.gov.sg/5d01b2542ce4bb0011a86934" target="_blank" rel="noopener noreferrer">
+        <a
+          className="underline"
+          href="https://form.gov.sg/5d01b2542ce4bb0011a86934"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           fill in this form.
         </a>
       </p>
     </Hero>
-    <section className={`py-5`}>
+    <section className="py-8">
       <div className="container">
-        <div className="row">
+        <div className="flex flex-wrap w-full">
           {collaborators.map((collaborator, index) => (
             <Card key={index} info={[collaborator]} />
           ))}
