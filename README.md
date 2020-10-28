@@ -1,14 +1,13 @@
-# Certificate Web UI 
-  
+# Certificate Web UI
+
 [![CircleCI](https://circleci.com/gh/OpenCerts/opencerts-website.svg?style=svg)](https://circleci.com/gh/OpenCerts/opencerts-website)
 
 See also:
 
-* [opencerts-documentation](https://github.com/OpenCerts/opencerts-documentation)
-* [open-certificate](https://github.com/OpenCerts/open-certificate)
-* [certificate-contract](https://github.com/OpenCerts/certificate-store-contract)
-* [certificate-cli](https://github.com/OpenCerts/certificate-cli)
-
+- [opencerts-documentation](https://github.com/OpenCerts/opencerts-documentation)
+- [open-certificate](https://github.com/OpenCerts/open-certificate)
+- [certificate-contract](https://github.com/OpenCerts/certificate-store-contract)
+- [certificate-cli](https://github.com/OpenCerts/certificate-cli)
 
 ## Development
 
@@ -22,8 +21,8 @@ There is a rudimentary interface for adding a new template for organisations tha
 npm run dev-cli
 ```
 
-
 ### OS X / Linux
+
 ```bash
 npm install
 npm run dev
@@ -43,6 +42,7 @@ npm run dev
 `NET` is used for setting the default network, setting it to `mainnet` uses the public Ethereum network. If it is not set it defaults to Ropsten testnet
 
 E.g:
+
 ```bash
 NET=mainnet npm run dev
 ```
@@ -60,6 +60,7 @@ To enable debug logs in the browser, set `localStorage.debug="*"`
 ###### Module build failed
 
 If you see module build failure message like:
+
 ```
 Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):
 ModuleBuildError: Module build failed (from ./node_modules/sass-loader/lib/loader.js):
@@ -69,3 +70,6 @@ at Object.readdirSync (fs.js:783:3)
 
 Try running `npm rebuild`
 
+###### Testcafe integration tests
+
+To run integration tests locally (`npm run integration`), make sure you run `npm run build:static` to build the static site once first.
