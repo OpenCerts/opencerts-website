@@ -28,7 +28,7 @@ const ForwardedRefDecentralisedRenderer = React.forwardRef<
 >((props, ref) => <DecentralisedRenderer {...props} forwardedRef={ref} />);
 
 interface StatusBannerProps {
-  isInRegistry: boolean | undefined;
+  isInRegistry?: boolean;
 }
 
 const StatusBanner: React.FunctionComponent<StatusBannerProps> = ({ isInRegistry }: StatusBannerProps) => {
