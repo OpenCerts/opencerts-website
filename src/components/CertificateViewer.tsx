@@ -10,7 +10,6 @@ import { CertificateVerifyBlock } from "./CertificateVerifyBlock";
 import { ErrorBoundary } from "./ErrorBoundary";
 import { FeatureFlagContainer } from "./FeatureFlag";
 import { Modal } from "./Modal";
-import styles from "./certificateViewer.module.scss";
 
 const CertificateSharingForm = dynamic(import("./CertificateSharing/CertificateSharingForm"));
 
@@ -27,6 +26,35 @@ const ForwardedRefDecentralisedRenderer = React.forwardRef<
     updateObfuscatedCertificate: (updatedDoc: WrappedDocument<v2.OpenAttestationDocument>) => void;
   }
 >((props, ref) => <DecentralisedRenderer {...props} forwardedRef={ref} />);
+
+interface StatusBannerProps {
+  isInRegistry: boolean | undefined;
+}
+
+const StatusBanner: React.FunctionComponent<StatusBannerProps> = ({ isInRegistry }: StatusBannerProps) => {
+  return (
+    <section
+      id="status-banner-container"
+      className={`${isInRegistry ? "bg-green-200 text-green-400" : "bg-gray-300 text-gray-800"} exact-print`}
+    >
+      <div className="container text-center py-4">
+        {isInRegistry ? (
+          <p className="mb-0">Certificate issuer is in the SkillsFuture Singapore registry for Opencerts</p>
+        ) : (
+          <p className="mb-0">
+            Certificate issuer is <b>not</b> in the SkillsFuture Singapore registry for Opencerts
+            <br />
+            <Link href="/faq#verifications-issuers-not-in-registry-meaning">
+              <a className="underline text-gray-800 hover:text-gray-600">
+                <small>What does this mean ?</small>
+              </a>
+            </Link>
+          </p>
+        )}
+      </div>
+    </section>
+  );
+};
 
 export interface CertificateViewerProps {
   document: WrappedDocument<v2.OpenAttestationDocument>;
@@ -56,71 +84,51 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
   return (
     <ErrorBoundary>
       {
-        <div>
-          {isInRegistry ? (
-            <div
-              id="status-banner-container"
-              className={`${styles["status-banner-container"]} ${styles.valid} exact-print`}
-            >
-              <div className={`${styles["status-banner"]}`}>
-                Certificate issuer is in the SkillsFuture Singapore registry for Opencerts
-              </div>
-            </div>
-          ) : (
-            <div id="status-banner-container" className={`${styles["status-banner-container"]} ${styles.invalid}`}>
-              <div className={`${styles["status-banner"]}`}>
-                Certificate issuer is <b>not</b> in the SkillsFuture Singapore registry for Opencerts
-                <br />
-                <Link href="/faq#verifications-issuers-not-in-registry-meaning">
-                  <a>
-                    <small>What does this mean ?</small>
-                  </a>
-                </Link>
-              </div>
-            </div>
-          )}
-          <div id={styles["top-header-ui"]}>
-            <div className={styles["header-container"]}>
-              <div className={`container-fluid ${styles["pd-0"]} ${styles.container}`}>
-                <div className="row">
-                  <div>
-                    <CertificateVerifyBlock verificationStatus={props.verificationStatus} />
-                  </div>
-                  <div className={`row flex-nowrap`}>
-                    <div className="">
+        <>
+          <StatusBanner isInRegistry={isInRegistry} />
+          <section className="bg-blue-100 py-4">
+            <div className="container">
+              <div className="flex flex-wrap">
+                <div className="w-full lg:w-1/2 xl:w-1/3">
+                  <CertificateVerifyBlock verificationStatus={props.verificationStatus} />
+                </div>
+                <div className="w-full lg:w-1/2 xl:w-2/3">
+                  <div className="flex flex-wrap">
+                    <div className="w-auto lg:ml-auto">
                       <div
+                        className="icon-utility"
                         id="btn-print"
-                        className={styles["print-btn"]}
                         onClick={() => {
                           if (childRef.current) childRef.current.print();
                         }}
                       >
-                        <i className="fas fa-print" style={{ fontSize: "1.5rem" }} />
+                        <i className="fas fa-print text-md" />
                       </div>
                     </div>
                     <FeatureFlagContainer
                       name="SHARE_LINK"
                       render={() => (
-                        <div className="ml-2" onClick={() => props.handleShareLinkToggle()}>
-                          <div id="btn-link" className={styles["send-btn"]}>
-                            <i className="fas fa-link" style={{ fontSize: "1.5rem" }} />
+                        <div className="ml-2 w-auto" onClick={() => props.handleShareLinkToggle()}>
+                          <div className="icon-utility" id="btn-link">
+                            <i className="fas fa-link text-md" />
                           </div>
                         </div>
                       )}
                     />
-                    <div className="ml-2" onClick={() => props.handleSharingToggle()}>
-                      <div id="btn-email" className={styles["send-btn"]}>
-                        <i className="fas fa-envelope" style={{ fontSize: "1.5rem" }} />
+                    <div className="ml-2 w-auto" onClick={() => props.handleSharingToggle()}>
+                      <div className="icon-utility" id="btn-email">
+                        <i className="fas fa-envelope text-md" />
                       </div>
                     </div>
-                    <div className="ml-2">
+                    <div className="ml-2 w-auto">
                       <a
+                        className="icon-utility"
                         download={`${props.certificate.id}.opencert`}
                         target="_black"
                         href={`data:text/json;,${encodeURIComponent(JSON.stringify(props.document, null, 2))}`}
                       >
-                        <button id="btn-download" className={styles["send-btn"]} title="Download">
-                          <i className="fas fa-file-download" style={{ fontSize: "1.5rem" }} />
+                        <button id="btn-download" title="Download">
+                          <i className="fas fa-file-download text-md" />
                         </button>
                       </a>
                     </div>
@@ -128,28 +136,30 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
                 </div>
               </div>
             </div>
-          </div>
-          <ForwardedRefDecentralisedRenderer
-            updateObfuscatedCertificate={props.updateObfuscatedCertificate}
-            rawDocument={document}
-            ref={childRef}
-          />
-          <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
-            <CertificateSharingForm
-              emailSendingState={props.emailSendingState}
-              handleSendCertificate={props.handleSendCertificate}
-              handleSharingToggle={props.handleSharingToggle}
+            <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
+              <CertificateSharingForm
+                emailSendingState={props.emailSendingState}
+                handleSendCertificate={props.handleSendCertificate}
+                handleSharingToggle={props.handleSharingToggle}
+              />
+            </Modal>
+            <Modal show={props.showShareLink} toggle={props.handleShareLinkToggle}>
+              <CertificateShareLinkFormContainer
+                shareLink={props.shareLink}
+                copiedLink={props.copiedLink}
+                handleShareLinkToggle={props.handleShareLinkToggle}
+                handleCopyLink={props.handleCopyLink}
+              />
+            </Modal>
+          </section>
+          <section>
+            <ForwardedRefDecentralisedRenderer
+              updateObfuscatedCertificate={props.updateObfuscatedCertificate}
+              rawDocument={document}
+              ref={childRef}
             />
-          </Modal>
-          <Modal show={props.showShareLink} toggle={props.handleShareLinkToggle}>
-            <CertificateShareLinkFormContainer
-              shareLink={props.shareLink}
-              copiedLink={props.copiedLink}
-              handleShareLinkToggle={props.handleShareLinkToggle}
-              handleCopyLink={props.handleCopyLink}
-            />
-          </Modal>
-        </div>
+          </section>
+        </>
       }{" "}
     </ErrorBoundary>
   );

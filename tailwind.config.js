@@ -10,6 +10,7 @@ module.exports = {
       padding: theme("spacing.4"),
     }),
     inset: {
+      "0": 0,
       "1/2": "50%",
     },
     fontFamily: {
@@ -43,6 +44,9 @@ module.exports = {
         white: {
           default: "#fff",
         },
+        grey: {
+          default: "#ccc",
+        },
         orange: {
           default: "#ff9933",
         },
@@ -63,7 +67,9 @@ module.exports = {
         },
         green: {
           100: "#f5fbf7",
+          200: "#d9ead3",
           300: "#46b760",
+          400: "#38761d",
           default: "#28a745",
         },
       },

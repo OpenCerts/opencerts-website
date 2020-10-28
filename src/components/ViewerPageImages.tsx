@@ -1,6 +1,5 @@
 /* eslint react/display-name: 0 */
 import React from "react";
-import verifyStyle from "./CertificateVerifyBlock/certificateVerifyBlock.module.scss";
 
 export const icons = {
   print: () => (
@@ -106,24 +105,21 @@ export const icons = {
       <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35">
         <title>check-circle</title>
         <path
-          id={verifyStyle.circle}
           d="M29.87,5.13a17.48,17.48,0,0,0-24.74,0,17.48,17.48,0,0,0,0,24.74,17.48,17.48,0,0,0,24.74,0,17.48,17.48,0,0,0,0-24.74Z"
-          fill="#fff"
+          fill="#09a63b"
         />
         <path
-          id={verifyStyle.check}
           d="M25.86,13.34l-9.78,9.77a1,1,0,0,1-1.45,0L9.14,17.62a1,1,0,0,1,1.45-1.45l4.77,4.77,9.05-9.06a1,1,0,0,1,1.45,0A1,1,0,0,1,25.86,13.34Z"
-          fill="#09a63b"
+          fill="#fff"
         />
       </svg>
     </i>
   ),
-
   arrow: () => (
     <i>
       <svg xmlns="http://www.w3.org/2000/svg" width="8.1" height="14.36" viewBox="0 0 8.1 14.36">
         <title>arrow</title>
-        <polyline points="0.74 0.68 6.74 7.13 0.74 13.68" fill="none" stroke="#fff" strokeWidth="2" />
+        <polyline points="0.74 0.68 6.74 7.13 0.74 13.68" fill="none" stroke="#09a63b" strokeWidth="2" />
       </svg>
     </i>
   ),

@@ -3,18 +3,15 @@ import { isValid } from "@govtechsg/opencerts-verify";
 import React, { ReactElement } from "react";
 import { MESSAGES, TYPES } from "../../constants/VerificationErrorMessages";
 import { certificateRevoked } from "../../services/fragment";
-import css from "./detailedCertificateBlock.module.scss";
 
 interface CheckStatusRowProps {
   message?: string;
   icon: ReactElement;
 }
 const CheckStatusRow: React.FunctionComponent<CheckStatusRowProps> = ({ message, icon }) => (
-  <div className="row">
-    <div className="col-2">{icon}</div>
-    <div className="col-10">
-      <div className="row">{message}</div>
-    </div>
+  <div className="flex flex-wrap">
+    <div className="w-auto">{icon}</div>
+    <div className="flex-1">{message}</div>
   </div>
 );
 
@@ -22,9 +19,9 @@ interface DetailedCertificateVerifyBlockProps {
   verificationStatus: VerificationFragment[];
 }
 export const DetailedCertificateVerifyBlock: React.FunctionComponent<DetailedCertificateVerifyBlockProps> = (props) => {
-  const borderColor = isValid(props.verificationStatus) ? "valid-border-color" : "invalid-border-color";
+  const borderColor = isValid(props.verificationStatus) ? "border-green" : "border-red";
   return (
-    <div className={`${css["detailed-certificate-block"]} ${css[borderColor]} bg-white p-3`}>
+    <div className={`verify-block w-full mx-w-20 top-0 bg-white p-3 shadow-md ${borderColor}`} style={{ left: "" }}>
       <div className="mb-3">
         <h5>Details</h5>
       </div>
@@ -37,9 +34,9 @@ export const DetailedCertificateVerifyBlock: React.FunctionComponent<DetailedCer
           }
           icon={
             isValid(props.verificationStatus, ["DOCUMENT_INTEGRITY"]) ? (
-              <i className="fas fa-check text-success mr-2" />
+              <i className="fas fa-check text-green mr-2" />
             ) : (
-              <i className="fas fa-times text-danger mr-2" />
+              <i className="fas fa-times text-red mr-2" />
             )
           }
         />
@@ -51,9 +48,9 @@ export const DetailedCertificateVerifyBlock: React.FunctionComponent<DetailedCer
           }
           icon={
             isValid(props.verificationStatus, ["DOCUMENT_STATUS"]) || !certificateRevoked(props.verificationStatus) ? (
-              <i className="fas fa-check text-success mr-2" />
+              <i className="fas fa-check text-green mr-2" />
             ) : (
-              <i className="fas fa-times text-danger mr-2" />
+              <i className="fas fa-times text-red mr-2" />
             )
           }
         />

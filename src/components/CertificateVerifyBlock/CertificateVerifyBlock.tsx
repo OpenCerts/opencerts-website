@@ -3,7 +3,6 @@ import { OpencertsRegistryVerificationFragmentData } from "@govtechsg/opencerts-
 import React, { useState } from "react";
 import { icons } from "../ViewerPageImages";
 import { DetailedCertificateVerifyBlock } from "./DetailedCertificateVerifyBlock";
-import css from "./certificateVerifyBlock.module.scss";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isString = (str: any): str is string => str;
@@ -57,18 +56,18 @@ const SimpleVerifyBlock: React.FunctionComponent<SimpleVerifyBlockProps> = (prop
   const { verificationStatus } = props;
   return (
     <div
-      className={`p-2 pointer ${css["simple-verify-block"]} ${css.valid} ${
-        props.detailedViewVisible ? css.active : ""
+      className={`p-2 pointer bg-white text-green border border-green rounded cursor-pointer transition-shadow duration-200 ease-out shadow-sm hover:shadow-md ${
+        props.detailedViewVisible ? "rounded-bl-none rounded-br-none xl:rounded-tr-none xl:rounded-bl" : ""
       }`}
       onClick={props.toggleDetailedViewVisible}
       id="certificate-status"
     >
-      <div className="row justify-center" style={{ flexWrap: "inherit" }}>
-        <div className={`d-flex justify-content-center align-items-center ${css["verified-icon"]}`}>
-          {icons.checkCircle()}
+      <div className="flex flex-wrap items-center">
+        <div className="px-2 w-auto">{icons.checkCircle()}</div>
+        <div className="px-2 flex-1 font-bold break-words">{getIdentityVerificationText(verificationStatus)}</div>
+        <div className="px-2 w-auto">
+          <div className="transform rotate-90 xl:rotate-0">{icons.arrow()}</div>
         </div>
-        <div className={css["verification-text"]}>{getIdentityVerificationText(verificationStatus)}</div>
-        <span className={`d-flex justify-content-center align-items-center ${css.arrow}`}>{icons.arrow()}</span>
       </div>
     </div>
   );
@@ -83,10 +82,7 @@ export const CertificateVerifyBlock: React.FunctionComponent<CertificateVerifyBl
 
   const { verificationStatus } = props;
   return (
-    <div
-      id="certificate-verify-block"
-      className={`align-items-start flex-nowrap ${css["d-flex"]} ${css.verifyBlocksContainer} mb-md-0`}
-    >
+    <div id="certificate-verify-block" className="relative mb-8 lg:mb-0">
       <SimpleVerifyBlock
         verificationStatus={verificationStatus}
         toggleDetailedViewVisible={toggleDetailedViewVisible}

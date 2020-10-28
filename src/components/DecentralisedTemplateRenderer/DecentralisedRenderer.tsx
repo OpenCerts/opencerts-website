@@ -11,7 +11,6 @@ import React, { Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRe
 import { LEGACY_OPENCERTS_RENDERER } from "../../config";
 import { analyticsEvent, sendEventCertificateViewedDetailed } from "../Analytics";
 import { MutiTabsContainer } from "../MultiTabs";
-import styles from "./decentralisedRenderer.module.scss";
 
 interface DecentralisedRendererProps {
   rawDocument: WrappedDocument<v2.OpenAttestationDocument>;
@@ -101,26 +100,22 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
           }
         }}
       />
-      <div>
-        <h2 className="print-only exact-print text-center center m-4 mb-3 mt-5 alert alert-warning">
-          If you want to print the certificate, please click on the highlighted button above.
-        </h2>
-        {!toFrame.current && (
-          <div id={styles["renderer-loader"]} className="text-blue">
-            <i className="fas fa-spinner fa-pulse fa-3x" />
-            <div className="m-3" style={{ fontSize: "1.5rem" }}>
-              Loading Renderer...
-            </div>
-          </div>
-        )}
-        <FrameConnector
-          className={styles["decentralised-renderer"]}
-          style={{ height: `${height}px` }}
-          source={`${typeof document.$template === "object" ? document.$template.url : LEGACY_OPENCERTS_RENDERER}`}
-          dispatch={dispatch}
-          onConnected={onConnected}
-        />
-      </div>
+      <h2 className="print-only exact-print text-center py-8">
+        If you want to print the certificate, please click on the highlighted button above.
+      </h2>
+      {!toFrame.current && (
+        <div className="container text-blue text-center py-16">
+          <i className="fas fa-spinner fa-pulse fa-3x" />
+          <div className="my-3">Loading Renderer...</div>
+        </div>
+      )}
+      <FrameConnector
+        className="w-full max-w-full"
+        style={{ height: `${height}px` }}
+        source={`${typeof document.$template === "object" ? document.$template.url : LEGACY_OPENCERTS_RENDERER}`}
+        dispatch={dispatch}
+        onConnected={onConnected}
+      />
     </>
   );
 };
