@@ -70,6 +70,6 @@ at Object.readdirSync (fs.js:783:3)
 
 Try running `npm rebuild`
 
-###### Testcafe integration tests
+### Integration tests
 
-To run integration tests locally (`npm run integration`), make sure you run `npm run build:static` to build the static site once first.
+To run integration tests locally, make sure you run `npm run build:static` once to build the static site first. The e2e tests will then spin up a server based on the `out` folder in project root.
