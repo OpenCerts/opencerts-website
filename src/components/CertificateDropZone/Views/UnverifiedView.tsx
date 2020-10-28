@@ -51,7 +51,7 @@ const DetailedErrors: React.FunctionComponent<DetailedErrorsProps> = ({ verifica
     }
   }
   const renderedError = errors.map((errorType, index) => (
-    <div className="text-pink mt-4 mb-32" key={index}>
+    <div className="text-pink mt-4 mb-8" key={index}>
       <h4 className="font-bold">{MESSAGES[errorType].failureTitle}</h4>
       <p>{MESSAGES[errorType].failureMessage}</p>
     </div>
@@ -90,8 +90,8 @@ interface ErrorHeadingProps {
 
 export const ErrorHeading: React.FunctionComponent<ErrorHeadingProps> = ({ title }: ErrorHeadingProps) => {
   return (
-    <div className="flex flex-wrap items-center justify-center">
-      <div className="w-6 lg:w-8 mr-4">
+    <div className="flex flex-nowrap items-center justify-center">
+      <div className="w-auto mr-4">
         <img src="/static/images/dropzone/invalid.svg" />
       </div>
       <div className="w-auto">

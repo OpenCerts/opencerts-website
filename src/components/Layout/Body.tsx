@@ -1,7 +1,7 @@
 import React from "react";
 
 interface WrapperProps {
-  children?: React.ReactNode;
+  children: React.ReactNode;
 }
 
 export const Wrapper: React.FunctionComponent<WrapperProps> = ({ children }) => (
@@ -9,7 +9,7 @@ export const Wrapper: React.FunctionComponent<WrapperProps> = ({ children }) => 
 );
 
 interface MainProps {
-  children?: React.ReactNode;
+  children: React.ReactNode;
 }
 
 export const Main: React.FunctionComponent<MainProps> = ({ children }) => (

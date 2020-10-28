@@ -56,11 +56,11 @@ const SimpleVerifyBlock: React.FunctionComponent<SimpleVerifyBlockProps> = (prop
   const { verificationStatus } = props;
   return (
     <div
+      id="certificate-status"
       className={`p-2 pointer bg-white text-green border border-green rounded cursor-pointer transition-shadow duration-200 ease-out shadow-sm hover:shadow-md ${
         props.detailedViewVisible ? "rounded-bl-none rounded-br-none xl:rounded-tr-none xl:rounded-bl" : ""
       }`}
       onClick={props.toggleDetailedViewVisible}
-      id="certificate-status"
     >
       <div className="flex flex-wrap items-center">
         <div className="px-2 w-auto">{icons.checkCircle()}</div>
@@ -82,7 +82,7 @@ export const CertificateVerifyBlock: React.FunctionComponent<CertificateVerifyBl
 
   const { verificationStatus } = props;
   return (
-    <div id="certificate-verify-block" className="relative mb-8 lg:mb-0">
+    <div className="relative mb-8 lg:mb-0">
       <SimpleVerifyBlock
         verificationStatus={verificationStatus}
         toggleDetailedViewVisible={toggleDetailedViewVisible}
