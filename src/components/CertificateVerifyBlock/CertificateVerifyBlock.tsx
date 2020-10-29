@@ -8,25 +8,25 @@ import css from "./certificateVerifyBlock.module.scss";
 type DnsFragment = { status: VerificationFragmentStatus; location?: string };
 
 export const getIdentityVerificationText = (verificationStatus: VerificationFragment[]): string => {
-  const registryFragmentName = "OpencertsRegistryVerifier";
-  const registryFragment = verificationStatus.find((status) => status.name === registryFragmentName);
-  const dnsFragmentName = "OpenAttestationDnsTxt";
-  const dnsFragment = verificationStatus.find((status) => status.name === dnsFragmentName);
-  if (!registryFragment || !registryFragment.data || !dnsFragment)
-    throw new Error("Unable to retrieve the issuer identity");
+  const registryFragment = verificationStatus.find((status) => status.name === "OpencertsRegistryVerifier");
+  const dnsFragment = verificationStatus.find((status) => status.name === "OpenAttestationDnsTxt");
 
   // using concat to handle arrays and single element
-  const registryFragmentData: OpencertsRegistryVerificationFragmentData[] = [].concat(registryFragment.data);
-  const dnsFragmentData: (DnsFragment | undefined)[] = [].concat(dnsFragment.data);
+  const registryFragmentData: OpencertsRegistryVerificationFragmentData[] = [].concat(registryFragment?.data || []);
+  const dnsFragmentData: (DnsFragment | undefined)[] = [].concat(dnsFragment?.data || []);
 
   const identities = registryFragmentData
     .map((registryFragment, index) => {
+      // retrieve the issuer identity from the fragment. for each issuer, only one identity must be retrieved
+      // 1. check registry fragment and return the location if the fragment is valid
+      // 2. otherwise check dns fragment and return the location if the fragment is valid
+      // 3. otherwise return default value
       const dnsFragment = dnsFragmentData[index];
-      return registryFragment.status === "VALID" && registryFragment.name
-        ? { location: registryFragment.name.toUpperCase(), from: "registry" }
-        : dnsFragment?.status === "VALID" && dnsFragment?.location
-        ? { location: dnsFragment.location.toUpperCase(), from: "dns" }
-        : { location: "", from: "" };
+      if (registryFragment.status === "VALID" && registryFragment.name)
+        return { location: registryFragment.name.toUpperCase(), from: "registry" };
+      else if (dnsFragment?.status === "VALID" && dnsFragment?.location)
+        return { location: dnsFragment.location.toUpperCase(), from: "dns" };
+      else return { location: "", from: "" };
     })
     .filter((identity) => identity.location)
     // sort by registry first. then by location
