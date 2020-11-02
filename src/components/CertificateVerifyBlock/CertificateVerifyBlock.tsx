@@ -1,46 +1,41 @@
-import { VerificationFragment } from "@govtechsg/oa-verify";
+import { VerificationFragment, VerificationFragmentStatus } from "@govtechsg/oa-verify";
 import { OpencertsRegistryVerificationFragmentData } from "@govtechsg/opencerts-verify";
 import React, { useState } from "react";
 import { icons } from "../ViewerPageImages";
 import { DetailedCertificateVerifyBlock } from "./DetailedCertificateVerifyBlock";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const isString = (str: any): str is string => str;
+type DnsFragment = { status: VerificationFragmentStatus; location?: string };
 
 export const getIdentityVerificationText = (verificationStatus: VerificationFragment[]): string => {
-  const identities: string[] = [];
+  const registryFragment = verificationStatus.find((status) => status.name === "OpencertsRegistryVerifier");
+  const dnsFragment = verificationStatus.find((status) => status.name === "OpenAttestationDnsTxt");
 
-  const registryFragmentName = "OpencertsRegistryVerifier";
-  const registryFragment = verificationStatus.find((status) => status.name === registryFragmentName);
   // using concat to handle arrays and single element
-  if (registryFragment && registryFragment.data) {
-    const registryFragmentData:
-      | OpencertsRegistryVerificationFragmentData
-      | OpencertsRegistryVerificationFragmentData[] = registryFragment.data;
-    const array: OpencertsRegistryVerificationFragmentData[] = []; // create a temporary array otherwise typescript complains on typings
-    const registryIdentity = array
-      .concat(registryFragmentData)
-      .filter(({ status }) => status === "VALID")
-      .map((fragment) => fragment.name?.toUpperCase())
-      .filter(isString);
-    identities.push(...registryIdentity.sort());
-  }
+  const registryFragmentData: OpencertsRegistryVerificationFragmentData[] = [].concat(registryFragment?.data || []);
+  const dnsFragmentData: (DnsFragment | undefined)[] = [].concat(dnsFragment?.data || []);
 
-  const dnsFragmentName = "OpenAttestationDnsTxt";
-  const dnsFragment = verificationStatus.find((status) => status.name === dnsFragmentName);
-  // using concat to handle arrays and single element
-  if (dnsFragment && dnsFragment.data) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const dnsFragmentData: any | any[] = dnsFragment.data;
-    // TODO we need the typing for this
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const array: any[] = [];
-    const dnsIdentity: string[] = array
-      .concat(dnsFragmentData)
-      .filter(({ status }) => status === "VALID")
-      .map((fragment) => fragment.location?.toUpperCase());
-    identities.push(...dnsIdentity.sort());
-  }
+  const identities = registryFragmentData
+    .map((registryFragment, index) => {
+      // retrieve the issuer identity from the fragment. for each issuer, only one identity must be retrieved
+      // 1. check registry fragment and return the location if the fragment is valid
+      // 2. otherwise check dns fragment and return the location if the fragment is valid
+      // 3. otherwise return default value
+      const dnsFragment = dnsFragmentData[index];
+      if (registryFragment.status === "VALID" && registryFragment.name)
+        return { location: registryFragment.name.toUpperCase(), from: "registry" };
+      else if (dnsFragment?.status === "VALID" && dnsFragment?.location)
+        return { location: dnsFragment.location.toUpperCase(), from: "dns" };
+      else return { location: "", from: "" };
+    })
+    .filter((identity) => identity.location)
+    // sort by registry first. then by location
+    .sort((location1, location2) => {
+      if (location1.from === location2.from) return location1.location.localeCompare(location2.location);
+      else if (location1.from === "registry") return -1;
+      else return 1;
+    })
+    .map((identity) => identity.location);
+
   if (identities.length > 0) {
     return `Certificate issued by ${identities.join(", ")}`;
   }

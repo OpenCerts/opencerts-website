@@ -3,7 +3,7 @@ import { getIdentityVerificationText } from "./CertificateVerifyBlock";
 
 describe("certificate verify block getIdentityVerificationText", () => {
   describe("wWhen registry is verified", () => {
-    it("should return appropriate display identity from registry before identity from dns", () => {
+    it("should return appropriate display identity from registry before when dns and registry are valid", () => {
       const fragments: VerificationFragment[] = [
         {
           name: "OpencertsRegistryVerifier",
@@ -28,7 +28,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
           ],
         },
       ];
-      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by GOVTECH, ABC.COM");
+      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by GOVTECH");
     });
 
     it("should return appropriate display text when registry is verified but dns is unverified", () => {
@@ -59,7 +59,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
       expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by DEMO");
     });
 
-    it("should return appropriate display identity from registry before identity from dns and it should sort identities within each kind", () => {
+    it("should return appropriate display identity from registry sort identities", () => {
       const fragments: VerificationFragment[] = [
         {
           name: "OpencertsRegistryVerifier",
@@ -92,12 +92,10 @@ describe("certificate verify block getIdentityVerificationText", () => {
           ],
         },
       ];
-      expect(getIdentityVerificationText(fragments)).toStrictEqual(
-        "Certificate issued by DEMO, GOVTECH, ABC.COM, DEMO.COM"
-      );
+      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by DEMO, GOVTECH");
     });
 
-    it("should return appropriate display text when one of each registry and dns verified", () => {
+    it("should return appropriate display identity from registry or dns when available and sort by giving priority to registry", () => {
       const fragments: VerificationFragment[] = [
         {
           name: "OpencertsRegistryVerifier",
@@ -161,6 +159,39 @@ describe("certificate verify block getIdentityVerificationText", () => {
       ];
 
       expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by Unknown");
+    });
+
+    it("should return registry identity when dns is skipped", () => {
+      const fragments: VerificationFragment[] = [
+        {
+          status: "SKIPPED",
+          type: "ISSUER_IDENTITY",
+          name: "OpenAttestationDnsTxt",
+          reason: {
+            code: 2,
+            codeString: "SKIPPED",
+            message:
+              'Document issuers doesn\'t have "documentStore" / "tokenRegistry" property or doesn\'t use DNS-TXT type',
+          },
+        },
+        {
+          type: "ISSUER_IDENTITY",
+          name: "OpencertsRegistryVerifier",
+          status: "VALID",
+          data: [
+            {
+              status: "VALID",
+              value: "0xdcA6Eea7024151c270b50FcA9E67161119B06BAD",
+              name: "ROPSTEN: Government Technology Agency of Singapore (GovTech)",
+              displayCard: false,
+            },
+          ],
+        },
+      ];
+
+      expect(getIdentityVerificationText(fragments)).toStrictEqual(
+        "Certificate issued by ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"
+      );
     });
   });
 
