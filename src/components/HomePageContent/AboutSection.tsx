@@ -1,44 +1,8 @@
 import React from "react";
 import { aboutImages } from "./AboutImages";
-import css from "./aboutSection.module.scss";
 
-const BenefitsSection: React.FunctionComponent = () => (
-  <div className={css.section}>
-    <h3>What we can help you do</h3>
-    <div className={css.container}>
-      <div className="col-lg-4 col-sm-12">
-        <div className={css.benefits}>
-          {aboutImages.valid()}
-          <div className={css["benefit-text"]}>
-            <h4 className={css["benefit-header"]}>View</h4>
-            <p>Easy way to view your certificate</p>
-          </div>
-        </div>
-      </div>
-      <div className="col-lg-4 col-sm-12">
-        <div className={css.benefits}>
-          {aboutImages.genuine()}
-          <div className={css["benefit-text"]}>
-            <h4 className={css["benefit-header"]}>Check</h4>
-            <p>Make sure it has not been tampered with</p>
-          </div>
-        </div>
-      </div>
-      <div className="col-lg-4 col-sm-12">
-        <div className={css.benefits}>
-          {aboutImages.institution()}
-          <div className={css["benefit-text"]}>
-            <h4 className={css["benefit-header"]}>Verify</h4>
-            <p>Find out if it is from a recognised institution</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-);
-
-const HowItWorks: React.FunctionComponent = () => {
-  const sections: { key: keyof typeof aboutImages; text: string }[] = [
+export const AboutSection: React.FunctionComponent = () => {
+  const howitworks: { key: keyof typeof aboutImages; text: string }[] = [
     {
       key: "onetwo",
       text:
@@ -56,34 +20,57 @@ const HowItWorks: React.FunctionComponent = () => {
     },
   ];
 
-  const section = sections.map((item, i) => (
-    <div key={i} id={css[item.key]}>
-      {aboutImages[item.key]()}
-      <p>{item.text}</p>
-    </div>
-  ));
-
   return (
-    <div className={css.howitworks}>
-      <div className={css["hiw-container"]}>{section}</div>
-    </div>
+    <>
+      <section className="bg-navy text-white py-20">
+        <div className="container">
+          <h2 className="font-montserrat mb-12 pl-8 border-l-4 border-orange">What we can help you do</h2>
+          <div className="flex flex-wrap">
+            <div className="w-full lg:w-1/3 py-6">
+              <div className="flex flex-wrap">
+                <div className="w-auto">{aboutImages.valid()}</div>
+                <div className="w-2/3 px-6">
+                  <h3 className="font-montserrat font-bold text-orange mb-2">View</h3>
+                  <p>Easy way to view your certificate</p>
+                </div>
+              </div>
+            </div>
+            <div className="w-full lg:w-1/3 py-6">
+              <div className="flex flex-wrap">
+                <div className="w-auto">{aboutImages.genuine()}</div>
+                <div className="w-2/3 px-6">
+                  <h3 className="font-montserrat font-bold text-orange mb-2">Check</h3>
+                  <p>Make sure it has not been tampered with</p>
+                </div>
+              </div>
+            </div>
+            <div className="w-full lg:w-1/3 py-6">
+              <div className="flex flex-wrap">
+                <div className="w-auto">{aboutImages.institution()}</div>
+                <div className="w-2/3 px-6">
+                  <h3 className="font-montserrat font-bold text-orange mb-2">Verify</h3>
+                  <p>Find out if it is from a recognised institution</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="bg-blue-100 py-20">
+        <div className="container">
+          <h2 className="font-montserrat mb-12 pl-8 border-l-4 border-orange">How it works</h2>
+          <div className="bg-white rounded shadow-md p-8">
+            {howitworks.map((item, i) => (
+              <div key={i} className="flex flex-wrap items-center justify-center py-8">
+                <div className="w-auto">{aboutImages[item.key]()}</div>
+                <div className="w-full lg:w-2/5 mt-4 lg:ml-8 lg:mt-0">
+                  <p>{item.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
-
-export const AboutSection: React.FunctionComponent = () => (
-  <div>
-    <div className="row bg-light" id={css.benefits}>
-      <div className={css.main}>
-        <BenefitsSection />
-      </div>
-    </div>
-    <div className="row bg-light" id="how-it-works">
-      <div className={css.main}>
-        <div className={css.section}>
-          <h3>How it works</h3>
-          <HowItWorks />
-        </div>
-      </div>
-    </div>
-  </div>
-);

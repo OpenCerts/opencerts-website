@@ -13,6 +13,7 @@ import { DEFAULT_SEO, ENVIRONMENT, GA_ID } from "../src/config";
 import { RootState } from "../src/reducers";
 import { updateFeatureToggles } from "../src/reducers/featureToggle.actions";
 import { initStore } from "../src/store";
+import "../src/tailwind.css";
 
 interface FeatureFlagLoaderProps {
   dispatch: Store<RootState>["dispatch"];

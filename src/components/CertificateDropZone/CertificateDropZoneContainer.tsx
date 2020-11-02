@@ -69,7 +69,7 @@ class CertificateDropZone extends Component<CertificateDropZoneContainerProps, C
         }}
       >
         {({ getRootProps, getInputProps, isDragAccept }) => (
-          <div {...getRootProps()} className="h-100" id="certificate-dropzone">
+          <div {...getRootProps()} id="certificate-dropzone">
             <input {...getInputProps()} />
             <CertificateVerificationStatus
               fileError={this.state.fileError}

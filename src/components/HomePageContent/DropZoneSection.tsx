@@ -5,7 +5,6 @@ import { NETWORK_NAME } from "../../config";
 import { updateCertificate } from "../../reducers/certificate.actions";
 import { analyticsEvent } from "../Analytics";
 import { CertificateDropZoneContainer } from "../CertificateDropZone";
-import css from "./dropZoneSection.module.scss";
 
 const DEMO_CERT = `/static/demo/${NETWORK_NAME}.opencert`;
 
@@ -17,53 +16,39 @@ function demoCount(): void {
 }
 
 const DraggableDemoCertificate: React.FunctionComponent = () => (
-  <div className="d-none d-lg-block">
-    <div className="row">
-      <div className="col">
+  <div className="hidden lg:block">
+    <div className="flex flex-wrap py-12">
+      <div className="w-1/2 lg:pr-8">
         <div
-          className={css.pulse}
+          className="animate-pulsing"
           draggable="true"
           onDragStart={(e) => e.dataTransfer.setData(DEMO_CERT, "true")}
           onDragEnd={demoCount}
         >
-          <a href={DEMO_CERT} download="demo.opencert" rel="noindex nofollow">
-            <img style={{ cursor: "grabbing" }} src="/static/images/dropzone/cert.png" width="100%" />
+          <a href={DEMO_CERT} className="cursor-grab" download="demo.opencert" rel="noindex nofollow">
+            <img src="/static/images/dropzone/cert.png" />
           </a>
         </div>
       </div>
-      <div className="col">
-        <img src="/static/images/dropzone/arrow.png" width="100%" draggable="false" />
-        <span
-          style={{
-            textAlign: "justify",
-            color: "#ff9933",
-          }}
-        >
-          Drag me over here to see a demo certificate and other features
-        </span>
-        <img src="/static/images/opencertslogo.svg" width="100%" draggable="false" />
+      <div className="w-1/2">
+        <img src="/static/images/dropzone/arrow.png" draggable="false" />
+        <p className="text-orange mb-2">Drag me over here to see a demo certificate and other features</p>
+        <img src="/static/images/opencertslogo.svg" draggable="false" />
       </div>
     </div>
   </div>
 );
 
 const MobileDemoCertificate: React.FunctionComponent = () => (
-  <div className="d-block d-lg-none d-xl-none">
-    <a
-      className="btn btn-primary btn-lg"
-      role="button"
-      draggable="false"
-      id="demoClick"
-      style={{
-        background: "#28a745",
-        border: "none",
-        cursor: "pointer",
-      }}
-      onClick={demoCount}
-    >
-      Click me for a demo certificate!
-    </a>
-  </div>
+  <button
+    className="button bg-green hover:bg-green-300 mx-auto my-8 block lg:hidden"
+    role="button"
+    draggable="false"
+    id="demoClick"
+    onClick={demoCount}
+  >
+    Click me for a demo certificate!
+  </button>
 );
 
 interface DropZoneSectionProps {
@@ -117,11 +102,11 @@ class DropZoneSection extends Component<DropZoneSectionProps> {
 
   render(): ReactNode {
     return (
-      <div className="row p-5 bg-brand-dark text-white">
-        <div className={css.main}>
-          <div className="col-lg-5 col-md-12">
-            <div className={css.description}>
-              <h1>An easy way to check and verify your certificates</h1>
+      <section className="bg-navy text-white py-12">
+        <div className="container">
+          <div className="flex flex-wrap">
+            <div className="w-full lg:w-1/3 lg:pr-10 text-center lg:text-left">
+              <h1 className="font-montserrat mb-5">An easy way to check and verify your certificates</h1>
               <p>
                 Whether you&#39;re a student or an employer, OpenCerts lets you verify the certificates you have of
                 anyone from any institution. All in one place.
@@ -129,12 +114,12 @@ class DropZoneSection extends Component<DropZoneSectionProps> {
               <DraggableDemoCertificate />
               <MobileDemoCertificate />
             </div>
-          </div>
-          <div className="col-lg-7 col-md-12 col-sm-12" id="demoDrop">
-            <CertificateDropZoneContainer />
+            <div className="w-full lg:w-2/3 lg:pl-10" id="demoDrop">
+              <CertificateDropZoneContainer />
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     );
   }
 }

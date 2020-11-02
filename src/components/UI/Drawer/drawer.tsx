@@ -1,5 +1,4 @@
 import React, { Component, ReactNode } from "react";
-import css from "./drawer.module.scss";
 
 interface Tab {
   id: string;
@@ -31,9 +30,10 @@ export class Drawer extends Component<DrawerProps, DrawerState> {
   createTabs(tabs: Tab[]): ReactNode {
     const { activeIdx } = this.props;
     return tabs.map((tab, index) => (
-      <a
-        href=""
-        className={`${css.tabs} ${activeIdx === index ? css.active : ""} `}
+      <div
+        className={`cursor-pointer w-full text-white border-b py-4 hover:text-opacity-100 ${
+          activeIdx === index ? "" : "text-opacity-50"
+        }`}
         key={index}
         onClick={(e) => {
           e.preventDefault();
@@ -41,7 +41,7 @@ export class Drawer extends Component<DrawerProps, DrawerState> {
         }}
       >
         {tab.label}
-      </a>
+      </div>
     ));
   }
 
@@ -51,33 +51,31 @@ export class Drawer extends Component<DrawerProps, DrawerState> {
   }
 
   render(): ReactNode {
-    const { tabs, children } = this.props;
+    const { tabs } = this.props;
     const { visible, showAbsHeader } = this.state;
 
     return (
       <>
+        <div
+          className={`cursor-pointer text-lg text-white ${showAbsHeader ? "" : "absolute top-0 right-0 mt-4 mr-4"}`}
+          onClick={() => this.toggleDrawer()}
+        >
+          &#9776;
+        </div>
         {visible ? (
-          <div id="mySidenav" className={css.sidenav}>
-            <a
-              href=""
-              className={css.closebtn}
+          <aside className="bg-navy text-lg fixed top-0 right-0 h-screen p-4">
+            <div
+              className="cursor-pointer text-white"
               onClick={(e) => {
                 e.preventDefault();
                 this.toggleDrawer();
               }}
             >
               &times;
-            </a>
-            {this.createTabs(tabs)}
-          </div>
+            </div>
+            <div className="flex flex-wrap">{this.createTabs(tabs)}</div>
+          </aside>
         ) : null}
-        <div className={`${css.gray} ${showAbsHeader ? "" : css["mb-sidenav"]} container-fluid`}>
-          <div className={css.togglebtn} onClick={() => this.toggleDrawer()}>
-            &#9776;
-          </div>
-        </div>
-
-        <div id="main">{children}</div>
       </>
     );
   }

@@ -1,6 +1,4 @@
-// import _ from "lodash";
 import React, { useEffect, useState } from "react";
-import css from "./RegistryCard.module.scss";
 
 interface RegistryCardProps {
   zIndex: number;
@@ -40,23 +38,34 @@ export const RegistryCard: React.FunctionComponent<RegistryCardProps> = ({ zInde
   }, [search]);
 
   return (
-    <div className="col-lg-4 col-md-6 col-sm-12" style={{ zIndex: zIndex }}>
-      <div className={`${css.card}`} data-testid="registry-card">
-        <div className={`${css.logo}`}>
-          <img className="img-fluid" src={contact[0].logo} alt="" data-testid="institute-logo" />
+    <div className="w-full md:w-1/2 lg:w-1/3 px-4" style={{ zIndex: zIndex }}>
+      <div
+        className="relative flex flex-col bg-navy-200 mb-32"
+        style={{ minHeight: "210px" }}
+        data-testid="registry-card"
+      >
+        <div
+          className="absolute bg-white flex items-center p-4 left-1/2 border border-gray-300"
+          style={{ marginTop: "-60px", marginLeft: "-90px", width: "180px", height: "120px" }}
+        >
+          <img className="max-h-full mx-auto" src={contact[0].logo} alt="" data-testid="institute-logo" />
         </div>
-        <div className={`${css.content}`}>
+        <div className="flex-1 pt-16 px-4">
           <div className="container-fluid">
             <div className="row">
               <div className="col-12">
-                <h5 data-testid="institute-name">{contact[0].name}</h5>
+                <h4 className="font-montserrat font-bold" data-testid="institute-name">
+                  {contact[0].name}
+                </h4>
               </div>
             </div>
           </div>
         </div>
-        <div className={`${css.contact} ${expand ? css["is-active"] : ""}`}>
+        <div className="relative">
           <div
-            className={`${css.button}`}
+            className={`ease-colors text-white uppercase font-bold text-center p-2 ${
+              expand ? "bg-orange" : "bg-navy-300 hover:bg-navy"
+            }`}
             role="button"
             data-testid="btn-contact"
             onClick={() => {
@@ -65,38 +74,51 @@ export const RegistryCard: React.FunctionComponent<RegistryCardProps> = ({ zInde
           >
             Contact Info
           </div>
-          <div className={`${css["contact-info"]}`} data-testid="contact-info">
-            <div className={`${css["contact-info-content"]} py-3`}>
+          <div
+            className={`absolute w-full bg-white shadow-xl left-0 ${expand ? "block" : "hidden"}`}
+            data-testid="contact-info"
+          >
+            <div className="relative overflow-auto py-3" style={{ maxHeight: "360px" }}>
               <div className="container-fluid">
                 <div className="row">
                   <div className="col-12">
                     {contact.map(
                       (info) =>
                         info.address?.includes(search) && (
-                          <div key={info.id} className="py-2" data-testid="info">
-                            {info.name && <h6 className="mb-2">{info.name}</h6>}
+                          <div key={info.id} className="p-4" data-testid="info">
+                            {info.name && <h5 className="font-bold font-montserrat mb-4">{info.name}</h5>}
                             {info.address && info.website && (
-                              <div>
-                                <a href={info.website} target="_blank" rel="noopener noreferrer">
-                                  {info.website}
-                                </a>
-                              </div>
+                              <a
+                                className="block text-gray-700 hover:text-gray-700 hover:underline"
+                                href={info.website}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {info.website}
+                              </a>
                             )}
                             {info.email && (
-                              <div>
-                                <a href={`mailto:${info.email}`}>{info.email}</a>
-                              </div>
+                              <a
+                                className="block text-gray-700 hover:text-gray-700 hover:underline"
+                                href={`mailto:${info.email}`}
+                              >
+                                {info.email}
+                              </a>
                             )}
                             {info.phone && (
-                              <div>
-                                <a href={`tel:${info.phone}`}>{info.phone}</a>
-                              </div>
+                              <a
+                                className="block text-gray-700 hover:text-gray-700 hover:underline"
+                                href={`tel:${info.phone}`}
+                              >
+                                {info.phone}
+                              </a>
                             )}
                             {info.description && <div>{info.description}</div>}
                             {info.address && (
-                              <div className="mt-2">
+                              <div className="mt-4">
                                 <div className="text-uppercase">Certificate Store:</div>
                                 <a
+                                  className="block text-gray-700 hover:text-gray-700 hover:underline break-words"
                                   href={`https://etherscan.io/address/${info.address}`}
                                   target="_blank"
                                   rel="noopener noreferrer"

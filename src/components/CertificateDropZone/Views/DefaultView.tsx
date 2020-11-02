@@ -1,45 +1,39 @@
 import React from "react";
-import css from "./viewerStyles.module.scss";
 
 interface DefaultViewProps {
-  hover: boolean;
-  accept: boolean;
+  fileError: boolean;
 }
 
-export const DefaultView: React.FunctionComponent<DefaultViewProps> = ({ hover, accept }) => (
-  <div
-    className={`${css["viewer-container"]} ${
-      // eslint-disable-next-line no-nested-ternary
-      hover ? (accept ? css.accept : css.invalid) : css.default
-    }`}
-    style={{ borderRadius: 10 }}
-  >
-    <div className={css["image-container"]}>
-      <i>
-        <img alt=".opencert Dropzone" src="/static/images/dropzone/dropzone_illustration.svg" />
-      </i>
+export const DefaultView: React.FunctionComponent<DefaultViewProps> = ({ fileError }) => (
+  <>
+    <div className="mx-auto mb-4" style={{ width: "120px" }}>
+      <img alt=".opencert Dropzone" src="/static/images/dropzone/dropzone_illustration.svg" />
     </div>
-    {accept ? null : <div>File cannot be read. Please check that you have a valid .opencert file</div>}
-    <div className="text-brand-dark" style={{ fontSize: "1.375rem", fontWeight: 500 }}>
-      Drag and drop your opencert file
-    </div>
-    <div className="text-muted">to view its contents</div>
-    <div className="text-muted row">
-      <div className="col-2" />
-      <div className="col-3">
-        <hr />
-      </div>
-      <div className="col-2">or</div>
-      <div className="col-3">
-        <hr />
+    {fileError && (
+      <p className="text-pink mb-2">File cannot be read. Please check that you have a valid .opencert file</p>
+    )}
+    <h4 className="font-source-sans-pro text-gray-900 mb-2">Drag and drop your opencert file</h4>
+    <div className="text-gray-600">
+      <p>to view its contents</p>
+      <div className="flex flex-wrap items-center justify-center my-3">
+        <div className="w-1/3">
+          <hr />
+        </div>
+        <div className="w-auto px-8">
+          <p>or</p>
+        </div>
+        <div className="w-1/3">
+          <hr />
+        </div>
       </div>
     </div>
-    <div className="text-muted row">
-      <div className="mx-auto">
-        <button type="button" className={`pointer ${css.btn}`}>
-          Select File
-        </button>
-      </div>
+    <div className="mx-auto">
+      <button
+        type="button"
+        className="button bg-white hover:bg-blue text-blue hover:text-white border border-solid border-blue"
+      >
+        Select File
+      </button>
     </div>
-  </div>
+  </>
 );

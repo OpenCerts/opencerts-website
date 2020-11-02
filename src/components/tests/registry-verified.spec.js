@@ -4,8 +4,8 @@ fixture("Registry Certificate Rendering").page`http://localhost:3000`;
 
 const Document = "./fixture/registry-verified.json";
 const IframeBlock = Selector("#iframe");
-const TranscriptButton = Selector(".nav-item").withText("TRANSCRIPT");
-const MediaButton = Selector(".nav-item").withText("MEDIA");
+const TranscriptButton = Selector("[data-testid='transcript']");
+const MediaButton = Selector("[data-testid='media']");
 const StatusButton = Selector("#certificate-status");
 const SampleTemplate = Selector("#rendered-certificate");
 const CertificateStatusBanner = Selector("#status-banner-container");

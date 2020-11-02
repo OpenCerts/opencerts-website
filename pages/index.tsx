@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { Wrapper, Main } from "../src/components/Layout/Body";
 import { FooterBar } from "../src/components/Layout/FooterBar";
 import { NavigationBar } from "../src/components/Layout/NavigationBar";
 import { MainPageContainer } from "../src/components/MainPageContainer";
@@ -30,11 +31,13 @@ const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
   }, [props, router]);
 
   return (
-    <>
-      <NavigationBar active="home" />
-      <MainPageContainer />
+    <Wrapper>
+      <NavigationBar />
+      <Main>
+        <MainPageContainer />
+      </Main>
       <FooterBar />
-    </>
+    </Wrapper>
   );
 };
 

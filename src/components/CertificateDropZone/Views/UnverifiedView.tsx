@@ -13,7 +13,6 @@ import {
   contractNotFound,
   invalidArgument,
 } from "../../../services/fragment";
-import css from "./viewerStyles.module.scss";
 
 interface DetailedErrorsProps {
   verificationStatus: VerificationFragment[];
@@ -52,16 +51,12 @@ const DetailedErrors: React.FunctionComponent<DetailedErrorsProps> = ({ verifica
     }
   }
   const renderedError = errors.map((errorType, index) => (
-    <div key={index}>
-      <p className={css.messages}>{MESSAGES[errorType].failureTitle}</p>
+    <div className="text-pink mt-4 mb-8" key={index}>
+      <h4 className="font-bold">{MESSAGES[errorType].failureTitle}</h4>
       <p>{MESSAGES[errorType].failureMessage}</p>
     </div>
   ));
-  return (
-    <div id="error-tab" className={css.verifications}>
-      {renderedError}
-    </div>
-  );
+  return <div id="error-tab">{renderedError}</div>;
 };
 
 interface UnverifiedViewProps {
@@ -77,51 +72,66 @@ export const UnverifiedView: React.FunctionComponent<UnverifiedViewProps> = ({ r
   }
 
   return (
-    <div
-      className={`${css["viewer-container"]} ${css.invalid}`}
-      style={{
-        backgroundColor: "#fbeae9",
-        borderRadius: 10,
-      }}
-    >
-      <span className={css["message-container"]}>
-        <img src="/static/images/dropzone/invalid.svg" />
-        <span className="invalid m-3" style={{ fontSize: "1.5rem" }}>
-          {label}
-        </span>
-      </span>
+    <>
+      <ErrorHeading title={label} />
 
       {<DetailedErrors verificationStatus={verificationStatus} />}
 
       <WhatShouldIDo />
 
-      <div className={css["secondary-links"]}>
-        <span
-          onClick={() => {
-            resetData();
-          }}
-          className={css["text-link"]}
-          role="button"
-        >
-          Try another
-        </span>
+      <TryAnother resetData={resetData} />
+    </>
+  );
+};
+
+interface ErrorHeadingProps {
+  title: string;
+}
+
+export const ErrorHeading: React.FunctionComponent<ErrorHeadingProps> = ({ title }: ErrorHeadingProps) => {
+  return (
+    <div className="flex flex-nowrap items-center justify-center">
+      <div className="w-auto mr-4">
+        <img src="/static/images/dropzone/invalid.svg" />
+      </div>
+      <div className="w-auto">
+        <h3 className="text-black">{title}</h3>
       </div>
     </div>
   );
 };
-const WhatShouldIDo: React.FunctionComponent = () => {
+
+export const WhatShouldIDo: React.FunctionComponent = () => {
   // see https://stackoverflow.com/questions/64091060/react-dropzone-prevent-inner-element-from-showing-file-picker
   const { getRootProps } = useDropzone({ noClick: true }); // doesn't work
   return (
     <Link href="/faq">
       <div
+        className="button bg-pink hover:bg-pink-300 w-56 mx-auto mb-8"
         {...getRootProps({
           onClick: (event) => event.stopPropagation(), // this is bad, but we'll use it for now until there's a fix
         })}
-        className={css["unverified-btn"]}
       >
         What should I do?
       </div>
     </Link>
+  );
+};
+
+interface TryAnotherProps {
+  resetData: () => void;
+}
+
+export const TryAnother: React.FunctionComponent<TryAnotherProps> = ({ resetData }: TryAnotherProps) => {
+  return (
+    <div
+      className="ease-colors text-gray-600 hover:text-gray-900 underline"
+      onClick={() => {
+        resetData();
+      }}
+      role="button"
+    >
+      Try another
+    </div>
   );
 };
