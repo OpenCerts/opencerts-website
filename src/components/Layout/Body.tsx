@@ -5,7 +5,7 @@ interface WrapperProps {
 }
 
 export const Wrapper: React.FunctionComponent<WrapperProps> = ({ children }) => (
-  <div className="flex flex-col min-h-screen wrapper">{children}</div>
+  <div className="flex flex-col h-screen wrapper">{children}</div>
 );
 
 interface MainProps {
