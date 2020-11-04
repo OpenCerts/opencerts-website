@@ -57,9 +57,9 @@ const SimpleVerifyBlock: React.FunctionComponent<SimpleVerifyBlockProps> = (prop
       }`}
       onClick={props.toggleDetailedViewVisible}
     >
-      <div className="flex flex-wrap items-center">
+      <div className="flex flex-row items-center">
         <div className="px-2 w-auto">{icons.checkCircle()}</div>
-        <div className="px-2 flex-1 font-bold break-words">{getIdentityVerificationText(verificationStatus)}</div>
+        <div className="px-2 font-bold break-words">{getIdentityVerificationText(verificationStatus)}</div>
         <div className="px-2 w-auto">
           <div className="transform rotate-90 xl:rotate-0">{icons.arrow()}</div>
         </div>
