@@ -54,5 +54,13 @@
     "website": "https://www.3dcerts.com",
     "key": "3d certs",
     "logo": "/static/images/collaborate/3dcerts_logo.svg"
+  },
+  {
+    "id": "aokpass",
+    "name": "AOKpass",
+    "description": "ICC AOKpass provides you with a digitally authenticated, secure and portable copy of your medical records, approved by a medical professional and accessible only by you.",
+    "website": "https://www.aokpass.com",
+    "key": "aokpass",
+    "logo": "/static/images/collaborate/aokpass_logo.svg"
   }
 ]
