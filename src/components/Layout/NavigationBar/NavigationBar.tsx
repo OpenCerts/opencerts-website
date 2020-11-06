@@ -24,7 +24,7 @@ export const NavigationBar: React.FunctionComponent = () => {
   const router = useRouter();
 
   return (
-    <nav className="bg-navy py-6">
+    <nav className="bg-navy py-6 flex-shrink-0">
       <div className="container">
         <div className="flex flex-wrap items-center">
           <div className="w-1/3 md:w-1/4 lg:w-1/6 mr-auto mb-6 md:mb-0">
