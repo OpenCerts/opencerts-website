@@ -14,7 +14,7 @@ const validateTextContent = async (t, component, texts) =>
 test("Sample document is rendered correctly when dns is verified", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 
-  await validateTextContent(t, StatusButton, ["Certificate issued by EXAMPLE.OPENATTESTATION.COM"]);
+  await validateTextContent(t, StatusButton, ["EXAMPLE.OPENATTESTATION.COM"]);
 
   await validateTextContent(t, CertificateStatusBanner, [
     "Certificate issuer is not in the SkillsFuture Singapore registry for Opencerts",

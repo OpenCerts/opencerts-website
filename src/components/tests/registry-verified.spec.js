@@ -16,9 +16,7 @@ const validateTextContent = async (t, component, texts) =>
 test("Sample document is rendered correctly when single registry is verified", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 
-  await validateTextContent(t, StatusButton, [
-    "Certificate issued by ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)",
-  ]);
+  await validateTextContent(t, StatusButton, ["ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
 
   await validateTextContent(t, CertificateStatusBanner, [
     "Certificate issuer is in the SkillsFuture Singapore registry for Opencerts",

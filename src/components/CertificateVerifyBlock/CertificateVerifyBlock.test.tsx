@@ -28,7 +28,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
           ],
         },
       ];
-      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by GOVTECH");
+      expect(getIdentityVerificationText(fragments)).toStrictEqual("GOVTECH");
     });
 
     it("should return appropriate display text when registry is verified but dns is unverified", () => {
@@ -56,7 +56,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
           ],
         },
       ];
-      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by DEMO");
+      expect(getIdentityVerificationText(fragments)).toStrictEqual("DEMO");
     });
 
     it("should return appropriate display identity from registry sort identities", () => {
@@ -92,7 +92,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
           ],
         },
       ];
-      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by DEMO, GOVTECH");
+      expect(getIdentityVerificationText(fragments)).toStrictEqual("DEMO, GOVTECH");
     });
 
     it("should return appropriate display identity from registry or dns when available and sort by giving priority to registry", () => {
@@ -129,7 +129,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
         },
       ];
 
-      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by DEMO, ABC.COM");
+      expect(getIdentityVerificationText(fragments)).toStrictEqual("DEMO, ABC.COM");
     });
 
     it("should return Certificate issued by Unknown when registry and dns don't resolve any value", () => {
@@ -158,7 +158,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
         },
       ];
 
-      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by Unknown");
+      expect(getIdentityVerificationText(fragments)).toStrictEqual("Unknown");
     });
 
     it("should return registry identity when dns is skipped", () => {
@@ -190,7 +190,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
       ];
 
       expect(getIdentityVerificationText(fragments)).toStrictEqual(
-        "Certificate issued by ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"
+        "ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"
       );
     });
   });
@@ -221,7 +221,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
           ],
         },
       ];
-      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by ABC.COM");
+      expect(getIdentityVerificationText(fragments)).toStrictEqual("ABC.COM");
     });
 
     it("should return appropriate display text when multiple dns is verified", () => {
@@ -257,7 +257,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
           ],
         },
       ];
-      expect(getIdentityVerificationText(fragments)).toStrictEqual("Certificate issued by DEMO.COM, XYZ.COM");
+      expect(getIdentityVerificationText(fragments)).toStrictEqual("DEMO.COM, XYZ.COM");
     });
   });
 });

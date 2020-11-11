@@ -37,9 +37,9 @@ export const getIdentityVerificationText = (verificationStatus: VerificationFrag
     .map((identity) => identity.location);
 
   if (identities.length > 0) {
-    return `Certificate issued by ${identities.join(", ")}`;
+    return `${identities.join(", ")}`;
   }
-  return "Certificate issued by Unknown";
+  return "Unknown";
 };
 
 interface SimpleVerifyBlockProps {
@@ -59,7 +59,10 @@ const SimpleVerifyBlock: React.FunctionComponent<SimpleVerifyBlockProps> = (prop
     >
       <div className="flex flex-row items-center">
         <div className="px-2 w-auto">{icons.checkCircle()}</div>
-        <div className="px-2 font-bold break-words">{getIdentityVerificationText(verificationStatus)}</div>
+        <div className="px-2 w-full font-bold">
+          Certificate issued by
+          <div className="break-all md:break-normal">{getIdentityVerificationText(verificationStatus)}</div>
+        </div>
         <div className="px-2 w-auto">
           <div className="transform rotate-90 xl:rotate-0">{icons.arrow()}</div>
         </div>
