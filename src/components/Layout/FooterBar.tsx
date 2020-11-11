@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 
 export const FooterBar: React.FunctionComponent = () => (
-  <footer className="bg-navy text-white py-2">
+  <footer className="flex-shrink-0 bg-navy text-white py-2">
     <div className="container pt-8 pb-12">
       <div className="flex flex-wrap">
         <div className="w-40 lg:mr-40 mb-4 lg:mb-0">
