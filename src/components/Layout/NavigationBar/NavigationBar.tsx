@@ -27,7 +27,7 @@ export const NavigationBar: React.FunctionComponent = () => {
     <nav className="bg-navy py-6 flex-shrink-0">
       <div className="container">
         <div className="flex flex-wrap items-center">
-          <div className="w-1/3 md:w-1/4 lg:w-1/6 mr-auto mb-6 md:mb-0">
+          <div className="w-2/5 sm:w-1/3 md:w-1/4 lg:w-1/6 mr-auto mb-6 md:mb-0">
             <Link href="/">
               <a className="font-montserrat">
                 <img src="/static/images/opencertslogo.svg" alt="OpenCerts" />
