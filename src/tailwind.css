@@ -105,8 +105,14 @@ b {
   -webkit-print-color-adjust: exact;
 }
 
+/* specific styles */
 .check-empty:empty ~ .hidden {
   @apply block;
+}
+
+.img-partner {
+  max-width: 120px;
+  max-height: 80px;
 }
 
 .verify-block {
@@ -126,6 +132,14 @@ b {
 @media print {
   .print-only {
     display: block;
+  }
+}
+
+/* breakpoint values referenced from tailwind */
+@media (min-width: 768px) {
+  .img-partner {
+    max-width: 150px;
+    max-height: 100px;
   }
 }
 
