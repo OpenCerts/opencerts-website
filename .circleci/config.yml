@@ -8,30 +8,36 @@ workflows:
             branches:
               only:
                 - master
+                - beta
     jobs:
-      build:
-        steps:
-          name: build registry
-          command: npm run build:registry
+      - build_registry
   commit:
     jobs:
-      build:
-        docker:
-          - image: "circleci/node:lts-browsers"
-        steps:
-          - checkout
-          - run:
-              name: install
-              command: npm ci
-          - run:
-              name: lint
-              command: npm run lint
-          - run:
-              name: test
-              command: npm run test
-          - run:
-              name: build
-              command: npm run build
-          - run:
-              name: integration
-              command: ./scripts/integration-headless.sh
+      - build
+jobs:
+  build_registry:
+    docker:
+      - image: "circleci/node:lts-browsers"
+    steps:
+      name: build registry
+      command: npm run build:registry
+  build:
+    docker:
+      - image: "circleci/node:lts-browsers"
+    steps:
+      - checkout
+      - run:
+          name: install
+          command: npm ci
+      - run:
+          name: lint
+          command: npm run lint
+      - run:
+          name: test
+          command: npm run test
+      - run:
+          name: build
+          command: npm run build
+      - run:
+          name: integration
+          command: ./scripts/integration-headless.sh
