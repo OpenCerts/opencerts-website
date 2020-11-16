@@ -10,7 +10,8 @@ nightly:
   jobs:
     build:
       steps:
-        -
+        name: build registry
+        command: npm run build:registry
 jobs:
   build:
     docker:
