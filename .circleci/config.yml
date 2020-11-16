@@ -18,8 +18,9 @@ jobs:
     docker:
       - image: "circleci/node:lts-browsers"
     steps:
-      name: build registry
-      command: npm run build:registry
+      - run:
+          name: build registry
+          command: npm run build:registry
   build:
     docker:
       - image: "circleci/node:lts-browsers"
