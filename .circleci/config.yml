@@ -1,4 +1,16 @@
 version: 2
+nightly:
+  triggers:
+    - schedule:
+        cron: "*/2 * * * *"
+        filters:
+          branches:
+            only:
+              - master
+  jobs:
+    build:
+      steps:
+        -
 jobs:
   build:
     docker:

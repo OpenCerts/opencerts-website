@@ -11,6 +11,7 @@
     "build": "next build",
     "start:local": "npm run build && cross-env LEGACY_RENDERER_URL=\"http://localhost:3000\" next start -p 3001",
     "build:static": "next build && npm run export",
+    "build:registry": "echo yes we did",
     "export": "next export",
     "start": "next build && next start",
     "postexport": "node post-export.js",
