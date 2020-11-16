@@ -1,15 +1,16 @@
 workflows:
   version: 2
-  nightly:
-    triggers:
-      - schedule:
-          cron: "* * * * *"
-          filters:
-            branches:
-              only:
-                - master
-    jobs:
-      - build_registry
+#  uncomment to get build registry
+#  nightly:
+#    triggers:
+#      - schedule:
+#          cron: "0 0 * * *"
+#          filters:
+#            branches:
+#              only:
+#                - master
+#    jobs:
+#      - build_registry
   commit:
     jobs:
       - build
@@ -18,6 +19,7 @@ jobs:
     docker:
       - image: "circleci/node:lts-browsers"
     steps:
+      - checkout
       - run:
           name: build registry
           command: npm run build:registry
