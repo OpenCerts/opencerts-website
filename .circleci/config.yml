@@ -3,12 +3,11 @@ workflows:
   nightly:
     triggers:
       - schedule:
-          cron: "*/2 * * * *"
+          cron: "* * * * *"
           filters:
             branches:
               only:
                 - master
-                - beta
     jobs:
       - build_registry
   commit:
