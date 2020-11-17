@@ -45,6 +45,16 @@ export const FooterBar: React.FunctionComponent = () => (
                 GitHub
               </a>
             </li>
+            <li>
+              <a href="https://docs.opencerts.io/docs/" target="_blank" rel="noopener noreferrer">
+                Documentation
+              </a>
+            </li>
+            <li>
+              <a href="https://docs.opencerts.io/blog/" target="_blank" rel="noopener noreferrer">
+                Blog
+              </a>
+            </li>
           </ul>
         </div>
         <div className="w-full lg:w-40 mb-4 lg:mb-0">
