@@ -14,15 +14,13 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
                 <p>
                   These Terms of Use govern your access to and use of our services, including the application (whether
                   as software or as a website or otherwise), its contents, push notifications and all other accompanying
-                  materials as identified in the Schedule below (collectively, the <b>&#34;Service&#34;</b>).
+                  materials as identified in the Schedule below (collectively, the <b>Service</b>).
                 </p>
               </li>
               <li>
                 <p>
-                  {" "}
-                  This Service is provided to you by the Government Technology Agency (<b>&#34;GovTech&#34;</b>).
-                  GovTech’s office is located at 10 Pasir Panjang Road, #10-01, Mapletree Business City, Singapore
-                  117438.
+                  This Service is provided to you by the Government Technology Agency (<b>GovTech</b>). GovTech’s office
+                  is located at 10 Pasir Panjang Road, #10-01, Mapletree Business City, Singapore 117438.
                 </p>
               </li>
               <li>
@@ -38,7 +36,6 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
               </li>
               <li>
                 <p>
-                  {" "}
                   <b>
                     If you do not agree to these Terms of Use, please do not use this Service or any part of this
                     Service.
@@ -65,7 +62,6 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
             <ol className="list-decimal pl-4">
               <li>
                 <p>
-                  {" "}
                   The Service, including the materials made available on or through the Service, is owned by, licensed
                   to, managed or controlled by GovTech. Please see clause 4 (Third Party Materials) for more
                   information.
@@ -73,7 +69,6 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
               </li>
               <li>
                 <p>
-                  {" "}
                   Subject to these Terms of Use, GovTech grants to you a non-exclusive and non-transferable right to
                   access and use the Service for personal or internal purposes only, and only for such use permitted by
                   the functions of the Service. You shall not, amongst other things, modify, reverse-engineer,
@@ -122,21 +117,21 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
               <li>
                 <p>
                   The Service may require, enable or facilitate access to or use of software or services of a third
-                  party (<b>&#34;Third Party&#34;</b>
+                  party (<b>Third Party</b>
                   ). In such an event, there may be terms of use of the third party software or service (the{" "}
-                  <b>&#34;Third Party Terms&#34;</b>). GovTech may be required under or as a result of the Third Party
-                  Terms to notify you of certain terms that apply to you (either directly as an end user, or as a party
-                  whose acts or omissions could cause GovTech to breach the Third Party Terms) when you use the
-                  Services. An example of Third Party Terms may be open source software terms or standard form terms of
-                  the distribution platform from which you obtain any part of the Service (e.g. Google Play Store or
-                  Apple App Store terms) which bind GovTech as a developer or user of the distribution platform (the{" "}
-                  <b>&#34;Distribution Terms&#34;</b>). Information on the Third Party Terms are embedded in the
-                  Service, already accounted for in these Terms of Use, publicly available (e.g the Distribution Terms)
-                  or otherwise listed in the Schedule herein. For the avoidance of doubt, insofar as this Clause 4
-                  relates to the Distribution Terms, the relevant Distribution Terms are the terms of the specific
-                  platform from which you obtained a copy of the software or application that is part of the Service.
-                  For example, if you obtained the said copy from the Google Play Store, then the relevant terms are
-                  Google’s Distribution Terms.
+                  <b>Third Party Terms</b>). GovTech may be required under or as a result of the Third Party Terms to
+                  notify you of certain terms that apply to you (either directly as an end user, or as a party whose
+                  acts or omissions could cause GovTech to breach the Third Party Terms) when you use the Services. An
+                  example of Third Party Terms may be open source software terms or standard form terms of the
+                  distribution platform from which you obtain any part of the Service (e.g. Google Play Store or Apple
+                  App Store terms) which bind GovTech as a developer or user of the distribution platform (the{" "}
+                  <b>Distribution Terms</b>). Information on the Third Party Terms are embedded in the Service, already
+                  accounted for in these Terms of Use, publicly available (e.g the Distribution Terms) or otherwise
+                  listed in the Schedule herein. For the avoidance of doubt, insofar as this Clause 4 relates to the
+                  Distribution Terms, the relevant Distribution Terms are the terms of the specific platform from which
+                  you obtained a copy of the software or application that is part of the Service. For example, if you
+                  obtained the said copy from the Google Play Store, then the relevant terms are Google’s Distribution
+                  Terms.
                 </p>
               </li>
               <li>
@@ -175,12 +170,11 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
                   If the Third Party Terms expressly or impliedly require GovTech to incorporate certain terms in these
                   Terms of Use (inclusive of terms which impose any minimum or maximum standards herein, and/or terms
                   described in Clause 4.5 below), such terms are deemed to have been so incorporated (the{" "}
-                  <b>&#34;Incorporated Terms&#34;</b>). Examples of Incorporated Terms include provisions which require
-                  GovTech to give you notice of certain rights and liabilities or require GovTech to ensure that you
-                  acknowledge certain matters. Similarly, if the Third Party Terms expressly or impliedly require these
-                  Terms of Use to be altered such that the Third Party Terms are complied with, the parties herein agree
-                  that the Terms of Use shall be deemed to be so altered but only to the extent necessary for
-                  compliance.
+                  <b>Incorporated Terms</b>). Examples of Incorporated Terms include provisions which require GovTech to
+                  give you notice of certain rights and liabilities or require GovTech to ensure that you acknowledge
+                  certain matters. Similarly, if the Third Party Terms expressly or impliedly require these Terms of Use
+                  to be altered such that the Third Party Terms are complied with, the parties herein agree that the
+                  Terms of Use shall be deemed to be so altered but only to the extent necessary for compliance.
                 </p>
               </li>
               <li>
@@ -314,7 +308,6 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
             <ol className="list-decimal pl-4">
               <li>
                 <p>
-                  {" "}
                   Insofar as the Service provides a hyperlink to material not maintained or controlled by GovTech,
                   GovTech shall not be responsible for the content of the hyperlinked material and shall not be liable
                   for any damages or loss arising from access to the hyperlinked material. Use of the hyperlinks and
@@ -412,7 +405,6 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
               </li>
               <li>
                 <p>
-                  {" "}
                   Subject to clause 11.3, any dispute arising out of or in connection with these Terms of Use, including
                   any question regarding its existence, validity or termination, shall be referred to and finally
                   resolved in the Courts of the Republic of Singapore and the parties hereby submit to the exclusive
@@ -421,11 +413,10 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
               </li>
               <li>
                 <p>
-                  {" "}
                   GovTech may, at its sole discretion, refer any dispute referred to in clause 11.2 above to arbitration
-                  administered by the Singapore International Arbitration Centre (<b>&#34;SIAC&#34;</b>) in Singapore in
-                  accordance with the Arbitration Rules of the SIAC (<b>&#34;SIAC Rules&#34;</b>) for the time being in
-                  force, which rules are deemed to be incorporated by reference in this clause. Further:
+                  administered by the Singapore International Arbitration Centre (<b>SIAC</b>) in Singapore in
+                  accordance with the Arbitration Rules of the SIAC (<b>SIAC Rules</b>) for the time being in force,
+                  which rules are deemed to be incorporated by reference in this clause. Further:
                 </p>
                 <ol className="list-decimal pl-4">
                   <li>
@@ -445,7 +436,6 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
                   </li>
                 </ol>
                 <p>
-                  {" "}
                   Where GovTech is the defendant or respondent, it shall be given at least 30 days before the
                   commencement of any legal action against it to elect to exercise the right herein to have the dispute
                   submitted to arbitration. This right to elect shall not prejudice GovTech’s right to a limitation
@@ -477,7 +467,6 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
                 <ol className="list-decimal pl-4">
                   <li>
                     <p>
-                      {" "}
                       To use the Service, you must first install a web browser (such as the Google Chrome web browser)
                       and have the MetaMask electronic wallet or a Ledger hardware wallet. MetaMask and other electronic
                       wallets allow you to purchase, store, and engage in transactions using Ethereum cryptocurrency.
@@ -487,7 +476,6 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
                   </li>
                   <li>
                     <p>
-                      {" "}
                       Transactions that take place on this Service are managed and confirmed via the Ethereum
                       blockchain. You understand that your Ethereum public address will be made publicly visible
                       whenever you engage in a transaction on the Service.
@@ -503,9 +491,16 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
                   herein, and the use of the services of such collaborators are similarly entirely at your risk. We will
                   not be liable for the acts or omissions of any such third parties, nor will we be liable for any
                   damage(s) that you may suffer as a result of your transactions or any other interaction with such
-                  third parties. Separate terms (and not these Terms of Use) govern the relationship between you and
-                  those third parties, including your certificate/document issuer, or any person accessing a copy of the
-                  relevant certificate/document.
+                  third parties.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Separate terms (and not these Terms of Use) govern the relationship between you and the third parties,
+                  and/or the document issuer/verifier/presenter, or any person accessing a copy of the relevant
+                  certificate/document. For the avoidance of doubt, GovTech is not responsible for the contents of the
+                  document or the legal acceptability of the document. GovTech makes no representations or warranties
+                  concerning the powers or authority of the third party and/or document issuer/verifier/presenter.
                 </p>
               </li>
               <li>
@@ -516,22 +511,21 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
               </li>
               <li>
                 <p>
-                  {" "}
                   If you wish to be added as a collaborator, the terms of such collaboration shall be determined as
                   GovTech’s sole and absolute discretion and may be amended by GovTech from time to time. If you are
                   unable to agree to the terms at any time, GovTech shall have the discretion to remove you as a
                   collaborator without liability to you whatsoever. GovTech is not obliged to provide any reasons for
                   any rejection of your application to be a collaborator. The Collaborator Terms and Conditions are
                   found{" "}
+                  <Link href="/collaborators-terms">
+                    <a>here</a>
+                  </Link>
+                  .
                 </p>
-                <Link href="/collaborators-terms">
-                  <a>here</a>
-                </Link>
-                .
               </li>
               <li>
                 <p>
-                  GovTech is <b>NOT</b> responsible for the fulfilment and quality of Ethereum transactions.
+                  GovTech is <b>NOT</b> responsible for the fulfilment and quality of Ethereum transactions.
                 </p>
               </li>
               <li>
