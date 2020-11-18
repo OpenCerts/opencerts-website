@@ -1,0 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  @apply font-source-sans-pro;
+  @apply text-base;
+}
+
+.ease-colors {
+  @apply transition-colors;
+  @apply duration-200;
+  @apply ease-out;
+}
+
+/* default for links that are on navy bg */
+a {
+  @apply cursor-pointer;
+  @apply ease-colors;
+  @apply text-gray-400;
+}
+
+a:hover {
+  @apply text-white;
+}
+
+/* helper for links that are on light bg */
+.links-blue a {
+  @apply text-blue;
+}
+
+.links-blue a:hover {
+  @apply text-blue-300;
+}
+
+h1 {
+  @apply text-xxl;
+}
+
+h2 {
+  @apply text-xl;
+}
+
+h3 {
+  @apply text-lg;
+}
+
+h4 {
+  @apply text-md;
+}
+
+h5 {
+  @apply text-sm;
+}
+
+p {
+  @apply mb-4;
+}
+
+b {
+  @apply font-bold;
+}
+
+.button {
+  @apply ease-colors;
+  @apply px-4;
+  @apply py-2;
+  @apply rounded;
+  @apply cursor-pointer;
+}
+
+.icon-utility {
+  @apply ease-colors;
+  @apply bg-white;
+  @apply w-10;
+  @apply h-10;
+  @apply flex;
+  @apply items-center;
+  @apply justify-center;
+  @apply border;
+  @apply border-black;
+  @apply rounded-full;
+  @apply cursor-pointer;
+}
+
+.icon-utility:hover {
+  @apply bg-navy;
+}
+
+.icon-utility i {
+  @apply ease-colors;
+  @apply text-navy;
+}
+
+.icon-utility:hover i {
+  @apply text-white;
+}
+
+.exact-print {
+  -webkit-print-color-adjust: exact;
+}
+
+/* specific styles */
+.check-empty:empty ~ .hidden {
+  @apply block;
+}
+
+.img-partner {
+  max-width: 120px;
+  max-height: 80px;
+}
+
+.verify-block {
+  top: calc(100% - 1px);
+
+  @apply border-r;
+  @apply border-l;
+  @apply border-b;
+  @apply rounded-bl;
+  @apply rounded-br;
+}
+
+.print-only {
+  display: none;
+}
+
+@media print {
+  .print-only {
+    display: block;
+  }
+}
+
+/* breakpoint values referenced from tailwind */
+@media (min-width: 768px) {
+  .img-partner {
+    max-width: 150px;
+    max-height: 100px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .verify-block {
+    position: absolute;
+    top: 0;
+    left: calc(100% - 1px);
+
+    @apply border-r;
+    @apply border-t;
+    @apply border-b;
+    @apply rounded-tr;
+    @apply rounded-br;
+  }
+}
+
+/* START - ie flex bugs */
+/* make min-height with `flex items-center` to work, by adding this as direct parent */
+.ie-fix-min-height {
+  display: flex;
+  flex-direction: column;
+}
+
+/* image width not inheriting width from parent with flex */
+/* https://stackoverflow.com/questions/36822370/flexbox-on-ie11-image-stretched-for-no-reason */
+.ie-fix-img-width {
+  max-width: 100%;
+  flex-shrink: 0;
+}
+/* END - ie flex bugs */

@@ -1,6 +1,5 @@
-import Link from "next/link";
 import React from "react";
-import css from "./viewerStyles.module.scss";
+import { ErrorHeading, WhatShouldIDo, TryAnother } from "./UnverifiedView";
 
 interface RetrievalErrorViewProps {
   resetData: () => void;
@@ -10,38 +9,16 @@ export const RetrievalErrorView: React.FunctionComponent<RetrievalErrorViewProps
   resetData,
   retrieveCertificateByActionError,
 }) => (
-  <div
-    className={`${css["viewer-container"]} ${css.invalid}`}
-    style={{
-      backgroundColor: "#fbeae9",
-      borderRadius: 10,
-    }}
-  >
-    <span className={css["message-container"]}>
-      <img src="/static/images/dropzone/invalid.svg" />
-      <span className="invalid m-3" style={{ fontSize: "1.5rem" }}>
-        {"The certificate can't be loaded"}
-      </span>
-    </span>
+  <>
+    <ErrorHeading title="The certificate can't be loaded" />
 
-    <div>
-      <p className={css.messages}>Unable to load certificate with the provided parameters</p>
-      <p>{retrieveCertificateByActionError}</p>
+    <div className="text-pink mt-4 mb-4">
+      <h4 className="font-bold">Unable to load certificate with the provided parameters</h4>
+      <p className="break-words">{retrieveCertificateByActionError}</p>
     </div>
-    <Link href="/faq">
-      <div className={css["unverified-btn"]}>What should I do?</div>
-    </Link>
 
-    <div className={css["secondary-links"]}>
-      <span
-        onClick={() => {
-          resetData();
-        }}
-        className={css["text-link"]}
-        role="button"
-      >
-        Try another
-      </span>
-    </div>
-  </div>
+    <WhatShouldIDo />
+
+    <TryAnother resetData={resetData} />
+  </>
 );

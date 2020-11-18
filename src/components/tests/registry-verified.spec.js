@@ -4,8 +4,8 @@ fixture("Registry Certificate Rendering").page`http://localhost:3000`;
 
 const Document = "./fixture/registry-verified.json";
 const IframeBlock = Selector("#iframe");
-const TranscriptButton = Selector(".nav-item").withText("TRANSCRIPT");
-const MediaButton = Selector(".nav-item").withText("MEDIA");
+const TranscriptButton = Selector("[data-testid='transcript']");
+const MediaButton = Selector("[data-testid='media']");
 const StatusButton = Selector("#certificate-status");
 const SampleTemplate = Selector("#rendered-certificate");
 const CertificateStatusBanner = Selector("#status-banner-container");
@@ -16,9 +16,7 @@ const validateTextContent = async (t, component, texts) =>
 test("Sample document is rendered correctly when single registry is verified", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 
-  await validateTextContent(t, StatusButton, [
-    "Certificate issued by ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)",
-  ]);
+  await validateTextContent(t, StatusButton, ["ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
 
   await validateTextContent(t, CertificateStatusBanner, [
     "Certificate issuer is in the SkillsFuture Singapore registry for Opencerts",

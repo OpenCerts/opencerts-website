@@ -4,7 +4,6 @@ import registry from "../../public/static/registry.json";
 import { Hero } from "./UI/Hero";
 import { RegistryCard } from "./UI/RegistryCard";
 import { Search } from "./UI/Search";
-import css from "./registry.module.scss";
 
 const partners = Object.keys(registry.issuers)
   .map((k) => ({
@@ -31,26 +30,22 @@ export const RegistryPage: React.FunctionComponent = () => {
           .
         </p>
       </Hero>
-      <nav className={`py-4`}>
+      <nav className="py-6">
         <div className="container">
-          <div className="row">
-            <div className="col-12 col-md-6 ml-auto col-lg-4">
-              <Search
-                search={search}
-                onSearchChanged={(event) => {
-                  setSearch(event.target.value);
-                }}
-                onSearchSubmit={(event) => {
-                  event.preventDefault();
-                }}
-              />
-            </div>
-          </div>
+          <Search
+            search={search}
+            onSearchChanged={(event) => {
+              setSearch(event.target.value);
+            }}
+            onSearchSubmit={(event) => {
+              event.preventDefault();
+            }}
+          />
         </div>
       </nav>
       <section style={{ paddingTop: "80px" }}>
         <div className="container">
-          <div className={`row ${css["check-empty"]}`}>
+          <div className="flex flex-wrap -mx-4 check-empty">
             {Object.keys(groups).map((group, index) => {
               const hasAddress = groups[group].find((info) => info.address?.includes(search));
 
@@ -66,8 +61,8 @@ export const RegistryPage: React.FunctionComponent = () => {
               );
             })}
           </div>
-          <div className={`${css["no-results"]}`} style={{ marginBottom: "160px" }}>
-            <div className="col-12">
+          <div className="flex flex-wrap hidden" style={{ marginBottom: "160px" }}>
+            <div className="w-full">
               <h3>No results found.</h3>
               <p>Try another certificate store address?</p>
             </div>

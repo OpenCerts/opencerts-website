@@ -1,43 +1,45 @@
-import { VerificationFragment } from "@govtechsg/oa-verify";
+import { VerificationFragment, VerificationFragmentStatus } from "@govtechsg/oa-verify";
 import { OpencertsRegistryVerificationFragmentData } from "@govtechsg/opencerts-verify";
 import React, { useState } from "react";
 import { icons } from "../ViewerPageImages";
 import { DetailedCertificateVerifyBlock } from "./DetailedCertificateVerifyBlock";
-import css from "./certificateVerifyBlock.module.scss";
+
+type DnsFragment = { status: VerificationFragmentStatus; location?: string };
 
 export const getIdentityVerificationText = (verificationStatus: VerificationFragment[]): string => {
-  const registryFragmentName = "OpencertsRegistryVerifier";
-  const registryFragment = verificationStatus.find((status) => status.name === registryFragmentName);
-  // using concat to handle arrays and single element
-  if (registryFragment && registryFragment.data) {
-    const registryFragmentData:
-      | OpencertsRegistryVerificationFragmentData
-      | OpencertsRegistryVerificationFragmentData[] = registryFragment.data;
-    const array: OpencertsRegistryVerificationFragmentData[] = []; // create a temporary array otherwise typescript complains on typings
-    const registryIdentity = array.concat(registryFragmentData).find(({ status }) => status === "VALID");
-    if (registryIdentity && registryIdentity.name) {
-      return `Certificate issued by ${registryIdentity.name.toUpperCase()}`;
-    }
-  }
+  const registryFragment = verificationStatus.find((status) => status.name === "OpencertsRegistryVerifier");
+  const dnsFragment = verificationStatus.find((status) => status.name === "OpenAttestationDnsTxt");
 
-  const dnsFragmentName = "OpenAttestationDnsTxt";
-  const dnsFragment = verificationStatus.find((status) => status.name === dnsFragmentName);
   // using concat to handle arrays and single element
-  if (dnsFragment && dnsFragment.data) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const dnsFragmentData: any | any[] = dnsFragment.data;
-    // TODO we need the typing for this
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const array: any[] = [];
-    const dnsIdentity = array
-      .concat(dnsFragmentData)
-      .sort((obj1, obj2) => obj1.location.localeCompare(obj2.location))
-      .find(({ status }) => status === "VALID");
-    if (dnsIdentity) {
-      return `Certificate issued by ${dnsIdentity.location.toUpperCase()}`;
-    }
+  const registryFragmentData: OpencertsRegistryVerificationFragmentData[] = [].concat(registryFragment?.data || []);
+  const dnsFragmentData: (DnsFragment | undefined)[] = [].concat(dnsFragment?.data || []);
+
+  const identities = registryFragmentData
+    .map((registryFragment, index) => {
+      // retrieve the issuer identity from the fragment. for each issuer, only one identity must be retrieved
+      // 1. check registry fragment and return the location if the fragment is valid
+      // 2. otherwise check dns fragment and return the location if the fragment is valid
+      // 3. otherwise return default value
+      const dnsFragment = dnsFragmentData[index];
+      if (registryFragment.status === "VALID" && registryFragment.name)
+        return { location: registryFragment.name.toUpperCase(), from: "registry" };
+      else if (dnsFragment?.status === "VALID" && dnsFragment?.location)
+        return { location: dnsFragment.location.toUpperCase(), from: "dns" };
+      else return { location: "", from: "" };
+    })
+    .filter((identity) => identity.location)
+    // sort by registry first. then by location
+    .sort((location1, location2) => {
+      if (location1.from === location2.from) return location1.location.localeCompare(location2.location);
+      else if (location1.from === "registry") return -1;
+      else return 1;
+    })
+    .map((identity) => identity.location);
+
+  if (identities.length > 0) {
+    return `${identities.join(", ")}`;
   }
-  return "Certificate issued by Unknown";
+  return "Unknown";
 };
 
 interface SimpleVerifyBlockProps {
@@ -49,18 +51,21 @@ const SimpleVerifyBlock: React.FunctionComponent<SimpleVerifyBlockProps> = (prop
   const { verificationStatus } = props;
   return (
     <div
-      className={`p-2 pointer ${css["simple-verify-block"]} ${css.valid} ${
-        props.detailedViewVisible ? css.active : ""
+      id="certificate-status"
+      className={`p-2 pointer bg-white text-green border border-green rounded cursor-pointer transition-shadow duration-200 ease-out shadow-sm hover:shadow-md ${
+        props.detailedViewVisible ? "rounded-bl-none rounded-br-none xl:rounded-tr-none xl:rounded-bl" : ""
       }`}
       onClick={props.toggleDetailedViewVisible}
-      id="certificate-status"
     >
-      <div className="row justify-center" style={{ flexWrap: "inherit" }}>
-        <div className={`d-flex justify-content-center align-items-center ${css["verified-icon"]}`}>
-          {icons.checkCircle()}
+      <div className="flex flex-row items-center">
+        <div className="px-2 w-auto">{icons.checkCircle()}</div>
+        <div className="px-2 w-full font-bold">
+          Certificate issued by
+          <div className="break-all md:break-normal">{getIdentityVerificationText(verificationStatus)}</div>
         </div>
-        <div className={css["verification-text"]}>{getIdentityVerificationText(verificationStatus)}</div>
-        <span className={`d-flex justify-content-center align-items-center ${css.arrow}`}>{icons.arrow()}</span>
+        <div className="px-2 w-auto">
+          <div className="transform rotate-90 xl:rotate-0">{icons.arrow()}</div>
+        </div>
       </div>
     </div>
   );
@@ -75,10 +80,7 @@ export const CertificateVerifyBlock: React.FunctionComponent<CertificateVerifyBl
 
   const { verificationStatus } = props;
   return (
-    <div
-      id="certificate-verify-block"
-      className={`align-items-start flex-nowrap ${css["d-flex"]} ${css.verifyBlocksContainer} mb-md-0`}
-    >
+    <div className="relative mb-8 lg:mb-0">
       <SimpleVerifyBlock
         verificationStatus={verificationStatus}
         toggleDetailedViewVisible={toggleDetailedViewVisible}

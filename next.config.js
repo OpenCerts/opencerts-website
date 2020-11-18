@@ -24,6 +24,7 @@ module.exports = withBundleAnalyzer({
   },
   env: {
     ETHEREUM_PROVIDER: process.env.ETHEREUM_PROVIDER || "infura",
+    INFURA_API_KEY: process.env.INFURA_API_KEY,
   },
   // Variables passed to both server and client
   publicRuntimeConfig: {

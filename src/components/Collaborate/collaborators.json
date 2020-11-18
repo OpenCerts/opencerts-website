@@ -8,17 +8,17 @@
     "logo": "/static/images/collaborate/CONVERGENCE_logo.png"
   },
   {
-    "id": "clog",
-    "name": "C-LOG",
-    "description": "Provides a trusted universal industry standard for ID and credentials through a blockchain-enabled decentralised identifier.",
-    "website": "https://c-log.io",
-    "key": "clog",
-    "logo": "/static/images/collaborate/CLOG_logo.png"
+    "id": "riverr",
+    "name": "Riverr",
+    "description": "Provides a trusted universal industry standard for identification and health credentials. Riverrs platforms conform to different workflows that require tamper-proof, verifiable documentation.",
+    "website": "https://riverr.ai",
+    "key": "riverr",
+    "logo": "/static/images/collaborate/RIVERR_logo.png"
   },
   {
     "id": "nextid",
     "name": "NextID Pte Ltd",
-    "description": "Our hosted NextCert service produces digitally-signed, tamper-proof academic and professional certificates which support the OpenCerts schema and Verifiable Credentials standards.",
+    "description": "We are leading in implementation of HealthCerts for Covid-19 testing. Our hosted NextCert service produces digitally-signed, tamper-proof certificates which support either OpenCerts or HealthCerts schemas.",
     "website": "https://nextid.com",
     "key": "nextid",
     "logo": "/static/images/collaborate/NEXTID_logo.png"
@@ -42,7 +42,7 @@
   {
     "id": "catalyst",
     "name": "Knowledge Catalyst Pte. Ltd.",
-    "description": "Knowledge Catalyst helps education institutions to issue tampered-proof credentials based on Opencerts framework.",
+    "description": "Knowledge Catalyst offers a Software-as-a-Service to enable Institutions to issue tampered-proof credentials based on Opencerts schema and manage the entire Credential Life-Cycle Management.",
     "website": "https://knowledgecatalyst.io",
     "key": "knowledge catalyst",
     "logo": "/static/images/collaborate/KC_logo.png"
@@ -54,5 +54,13 @@
     "website": "https://www.3dcerts.com",
     "key": "3d certs",
     "logo": "/static/images/collaborate/3dcerts_logo.svg"
+  },
+  {
+    "id": "aokpass",
+    "name": "AOKpass",
+    "description": "ICC AOKpass provides you with a digitally authenticated, secure and portable copy of your medical records, approved by a medical professional and accessible only by you.",
+    "website": "https://www.aokpass.com",
+    "key": "aokpass",
+    "logo": "/static/images/collaborate/aokpass_logo.svg"
   }
 ]

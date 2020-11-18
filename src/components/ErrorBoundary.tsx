@@ -1,5 +1,5 @@
+import Link from "next/link";
 import React, { Component, ReactNode } from "react";
-import css from "./error.module.scss";
 
 interface ErrorBoundaryState {
   hasError: boolean;
@@ -19,15 +19,16 @@ export class ErrorBoundary extends Component<{}, ErrorBoundaryState> {
   render(): ReactNode {
     if (this.state.hasError) {
       return (
-        <div className={`${css.box}`}>
-          <div id="error">
-            <div className={`${css.error}`}>
-              <br />
-              <img src="/static/images/errorpage/error.png" style={{ height: "15vh" }} />
-              <h2>Something went wrong!</h2>
+        <div className="container py-16">
+          <div id="error" className="text-center">
+            <img src="/static/images/errorpage/error.png" className="h-24 mx-auto" />
+            <div className="my-8">
+              <h2 className="font-bold text-orange mb-2">Something went wrong!</h2>
               <p>There is an error with this certificate, please contact your issuing institution.</p>
-              <a href="/">Go Back</a>
             </div>
+            <Link href="/">
+              <a className="button bg-navy">Go Back</a>
+            </Link>
           </div>
         </div>
       );

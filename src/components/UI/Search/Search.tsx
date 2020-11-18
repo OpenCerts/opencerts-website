@@ -1,6 +1,5 @@
 import React from "react";
 import { Search as SearchIcon } from "react-feather";
-import css from "./Search.module.scss";
 
 interface SearchProps {
   search: string;
@@ -14,18 +13,21 @@ export const Search: React.FunctionComponent<SearchProps> = ({
   onSearchSubmit,
 }: SearchProps) => {
   return (
-    <form className={`container-fluid ${css.search}`} onSubmit={onSearchSubmit}>
-      <div className="row h-100">
+    <form className="max-w-full lg:max-w-xs ml-auto" onSubmit={onSearchSubmit}>
+      <div className="flex">
         <input
-          className="col-9 col-sm-10"
+          className="flex-grow border border-navy py-2 px-4 rounded-tl-full rounded-bl-full focus:outline-none focus:shadow-outline"
           data-testid="registry-search"
           type="search"
           placeholder="Search certificate store address"
           onChange={onSearchChanged}
           value={search}
         />
-        <button type="submit" className="col">
-          <SearchIcon size={20} />
+        <button
+          type="submit"
+          className="w-12 bg-navy-300 text-white rounded-tr-full rounded-br-full focus:outline-none focus:shadow-outline"
+        >
+          <SearchIcon className="mx-auto" size={20} />
         </button>
       </div>
     </form>

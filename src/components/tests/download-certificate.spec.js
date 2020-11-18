@@ -33,7 +33,7 @@ const waitForFileDownload = async (t, filePath) => {
 test("Sample document is downloaded correctly", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Document1]);
 
-  await validateTextContent(t, StatusButton, ["Certificate issued by EXAMPLE.OPENATTESTATION.COM"]);
+  await validateTextContent(t, StatusButton, ["EXAMPLE.OPENATTESTATION.COM"]);
 
   // Simulate an OpenCert file download
   const fileName = await DownloadLink.getAttribute("download");
@@ -49,7 +49,7 @@ test("Sample document is downloaded correctly", async (t) => {
 test("Sample document with special characters is downloaded correctly", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Document2]);
 
-  await validateTextContent(t, StatusButton, ["Certificate issued by EXAMPLE.OPENATTESTATION.COM"]);
+  await validateTextContent(t, StatusButton, ["EXAMPLE.OPENATTESTATION.COM"]);
 
   // Simulate an OpenCert file download
   const fileName = await DownloadLink.getAttribute("download");

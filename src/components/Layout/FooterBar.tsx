@@ -1,21 +1,20 @@
 import Link from "next/link";
 import React from "react";
-import css from "./footer.module.scss";
 
 export const FooterBar: React.FunctionComponent = () => (
-  <footer className={css.footer}>
-    <div className={`container ${css.content}`}>
-      <div className="row">
-        <div className="col-12 col-md-4 mb-4 mb-md-0">
+  <footer className="flex-shrink-0 bg-navy text-white py-2">
+    <div className="container pt-8 pb-12">
+      <div className="flex flex-wrap">
+        <div className="w-40 lg:mr-40 mb-4 lg:mb-0">
           <Link href="/">
             <a>
-              <img className={css.logo} src="/static/images/opencertslogo.svg" alt="OpenCerts logo" />
+              <img src="/static/images/opencertslogo.svg" alt="OpenCerts logo" />
             </a>
           </Link>
         </div>
-        <div className="col-12 col-md col-lg-2 mb-4 mb-md-0">
-          <h6>Partners</h6>
-          <ul className="reset-list">
+        <div className="w-full lg:w-40 mb-4 lg:mb-0">
+          <h6 className="font-montserrat font-bold mb-2">Partners</h6>
+          <ul className="text-sm">
             <li>
               <Link href="/registry">
                 <a>Registry</a>
@@ -33,9 +32,9 @@ export const FooterBar: React.FunctionComponent = () => (
             </li>
           </ul>
         </div>
-        <div className="col-12 col-md col-lg-2 mb-4 mb-md-0">
-          <h6>Support</h6>
-          <ul className="reset-list">
+        <div className="w-full lg:w-40 mb-4 lg:mb-0">
+          <h6 className="font-montserrat font-bold mb-2">Support</h6>
+          <ul className="text-sm">
             <li>
               <Link href="/faq">
                 <a>FAQ</a>
@@ -46,11 +45,21 @@ export const FooterBar: React.FunctionComponent = () => (
                 GitHub
               </a>
             </li>
+            <li>
+              <a href="https://docs.opencerts.io/docs/" target="_blank" rel="noopener noreferrer">
+                Documentation
+              </a>
+            </li>
+            <li>
+              <a href="https://docs.opencerts.io/blog/" target="_blank" rel="noopener noreferrer">
+                Blog
+              </a>
+            </li>
           </ul>
         </div>
-        <div className="col-12 col-md col-lg-2 mb-4 mb-md-0">
-          <h6>Legal</h6>
-          <ul className="reset-list">
+        <div className="w-full lg:w-40 mb-4 lg:mb-0">
+          <h6 className="font-montserrat font-bold mb-2">Legal</h6>
+          <ul className="text-sm">
             <li>
               <Link href="/privacy">
                 <a>Privacy Policy</a>
@@ -65,13 +74,9 @@ export const FooterBar: React.FunctionComponent = () => (
         </div>
       </div>
     </div>
-    <div className="container text-center">
-      <div className="row">
-        <div className="col-12">
-          <hr />
-          <p>Copyright © 2020 OpenCerts</p>
-        </div>
-      </div>
+    <div className="container">
+      <div className="border-t border-gray-600" />
+      <p className="text-center text-xs py-4">Copyright © 2020 OpenCerts</p>
     </div>
   </footer>
 );

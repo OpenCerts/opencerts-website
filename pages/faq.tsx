@@ -2,6 +2,7 @@ import { NextSeo } from "next-seo";
 import React from "react";
 import { connect } from "react-redux";
 import { FaqContent } from "../src/components/FAQ/FaqContent";
+import { Wrapper, Main } from "../src/components/Layout/Body";
 import { FooterBar } from "../src/components/Layout/FooterBar";
 import { NavigationBar } from "../src/components/Layout/NavigationBar";
 import { URL } from "../src/config";
@@ -21,9 +22,13 @@ const PAGE_SEO = {
 const FaqPage: React.FunctionComponent = () => (
   <>
     <NextSeo {...PAGE_SEO} />
-    <NavigationBar active="faq" />
-    <FaqContent />
-    <FooterBar />
+    <Wrapper>
+      <NavigationBar />
+      <Main>
+        <FaqContent />
+      </Main>
+      <FooterBar />
+    </Wrapper>
   </>
 );
 

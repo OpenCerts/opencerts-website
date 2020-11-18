@@ -1,7 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import Document, { Head, Main, NextScript } from "next/document";
 import React from "react";
-import { BootstrapCss, BootstrapJs } from "../src/components/Layout/Bootstrap";
 
 export default class MyDocument extends Document {
   render(): JSX.Element {
@@ -12,7 +11,6 @@ export default class MyDocument extends Document {
           <link rel="icon" type="image/png" href="/static/images/favicon/favicon-16x16.png" sizes="16x16" />
           <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
           <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" type="text/css" />
-          <BootstrapCss />
           <link
             rel="stylesheet"
             href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
@@ -24,8 +22,6 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-
-          <BootstrapJs />
         </body>
       </html>
     );

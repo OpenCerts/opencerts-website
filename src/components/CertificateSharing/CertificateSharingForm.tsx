@@ -2,7 +2,6 @@ import React, { ChangeEvent, Component, ReactNode } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { CAPTCHA_CLIENT_KEY } from "../../config";
 import { states } from "../../reducers/shared";
-import css from "./sharing.module.scss";
 interface CertificateSharingFormProps {
   emailSendingState: string;
   handleSendCertificate: (event: { captcha: string; email: string }) => void;
@@ -47,46 +46,27 @@ class CertificateSharingForm extends Component<CertificateSharingFormProps, Cert
   render(): ReactNode {
     const { emailSendingState } = this.props;
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-2" />
-          <div className="col-8">
-            <div className="row d-flex justify-content-center">
-              <h4>Send your certificate</h4>
-            </div>
-            <div className="row text-center">
-              This sends an email with your .opencert attached, and instructions on how to view it.
-            </div>
-            <div className="row my-4 d-flex justify-content-center">
-              <input
-                className="w-100"
-                value={this.state.email}
-                onChange={this.handleEmailChange}
-                placeholder="Enter recipient's email"
-              />
-            </div>
-            <div className="row d-flex justify-content-center m-3">
-              <ReCAPTCHA sitekey={CAPTCHA_CLIENT_KEY} onChange={this.handleCaptchaChange} />
-            </div>
-            {emailSendingState === states.SUCCESS ? (
-              <div className="row my-4 d-flex justify-content-center">Email successfully sent!</div>
-            ) : (
-              ""
-            )}
-            {emailSendingState === states.FAILURE ? (
-              <div className="row my-4 d-flex justify-content-center">
-                An error occured, please check your email and captcha
-              </div>
-            ) : (
-              ""
-            )}
-            <div className="row d-flex justify-content-center m-3">
-              <button type="button" className={`pointer ${css.btn}`} onClick={this.handleSend}>
-                Send
-                {emailSendingState === states.PENDING ? <i className="ml-2 fas fa-spinner fa-pulse" /> : ""}
-              </button>
-            </div>
-          </div>
+      <div className="text-center">
+        <h3 className="mb-2">Send your certificate</h3>
+        <p>This sends an email with your .opencert attached, and instructions on how to view it.</p>
+        <input
+          className="border p-2 w-64"
+          value={this.state.email}
+          onChange={this.handleEmailChange}
+          placeholder="Enter recipient's email"
+        />
+        <div className="flex justify-center w-full my-4">
+          <ReCAPTCHA sitekey={CAPTCHA_CLIENT_KEY} onChange={this.handleCaptchaChange} />
+        </div>
+        {emailSendingState === states.SUCCESS && <div className="my-4">Email successfully sent!</div>}
+        {emailSendingState === states.FAILURE && (
+          <div className="my-4">An error occured, please check your email and captcha</div>
+        )}
+        <div className="mt-4">
+          <button type="button" className="button bg-navy text-white hover:bg-navy-300" onClick={this.handleSend}>
+            Send
+            {emailSendingState === states.PENDING && <i className="ml-2 fas fa-spinner fa-pulse" />}
+          </button>
         </div>
       </div>
     );

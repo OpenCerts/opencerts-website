@@ -1,6 +1,7 @@
 import { NextSeo } from "next-seo";
 import React from "react";
 import { connect } from "react-redux";
+import { Wrapper, Main } from "../src/components/Layout/Body";
 import { FooterBar } from "../src/components/Layout/FooterBar";
 import { NavigationBar } from "../src/components/Layout/NavigationBar";
 import { PrivacyContent } from "../src/components/Privacy";
@@ -21,9 +22,13 @@ const PAGE_SEO = {
 const PrivacyPage: React.FunctionComponent = () => (
   <>
     <NextSeo {...PAGE_SEO} />
-    <NavigationBar active="privacy" />
-    <PrivacyContent />
-    <FooterBar />
+    <Wrapper>
+      <NavigationBar />
+      <Main>
+        <PrivacyContent />
+      </Main>
+      <FooterBar />
+    </Wrapper>
   </>
 );
 
