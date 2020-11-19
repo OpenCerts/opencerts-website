@@ -10,8 +10,10 @@
     "test:watch": "jest --watchAll",
     "test:update": "jest -u",
     "dev": "next",
-    "lint": "eslint . --ext .js,.tsx,.ts --max-warnings 0",
-    "lint:fix": "npm run lint -- --fix",
+    "lint": "eslint . --ext .js,.tsx,.ts --max-warnings 0 && npm run lint:opencert",
+    "lint:fix": "npm run lint:opencert:fix && npm run lint -- --fix",
+    "lint:opencert": "prettier --check \"{src,public}/**/*.opencert\"",
+    "lint:opencert:fix": "prettier --write \"{src,public}/**/*.opencert\"",
     "build": "next build",
     "start:local": "npm run build && cross-env LEGACY_RENDERER_URL=\"http://localhost:3000\" next start -p 3001",
     "build:static": "next build && npm run export",
@@ -225,6 +227,14 @@
     ]
   },
   "prettier": {
-    "printWidth": 120
+    "printWidth": 120,
+    "overrides": [
+      {
+        "files": "*.opencert",
+        "options": {
+          "parser": "json"
+        }
+      }
+    ]
   }
 }
