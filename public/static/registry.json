@@ -110,6 +110,15 @@
       "logo": "/static/images/NTU_logo.png",
       "id": "ntu-registry"
     },
+	"0x61783202d023fd08dcc7d7ca8a196697c46c9d57": {
+      "name": "Nanyang Technological University",
+      "displayCard": true,
+      "website": "https://www.ntu.edu.sg",
+      "email": "deg_verify@ntu.edu.sg",
+      "phone": "+65 6592 2448",
+      "logo": "/static/images/NTU_logo.png",
+      "id": "ntu-registry"
+    },
     "0xCFa2B7Fc3FdD5CA55715581e34420268CCcd3039": {
       "name": "Singapore Management University",
       "displayCard": true,
