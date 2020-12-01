@@ -27,8 +27,7 @@ const DetailedErrors: React.FunctionComponent<DetailedErrorsProps> = ({ verifica
   }
 
   if (!isValid(verificationStatus, ["DOCUMENT_STATUS"])) {
-    if (certificateNotIssued(verificationStatus)) errors.push(TYPES.ISSUED);
-    else if (certificateRevoked(verificationStatus)) errors.push(TYPES.REVOKED);
+    if (certificateRevoked(verificationStatus)) errors.push(TYPES.REVOKED);
     else if (addressInvalid(verificationStatus)) {
       // if the error is because the address is invalid, then get rid of all errors and only keep this one
       errors.splice(0, errors.length);
@@ -44,7 +43,8 @@ const DetailedErrors: React.FunctionComponent<DetailedErrorsProps> = ({ verifica
     } else if (invalidArgument(verificationStatus)) {
       // this error is caused when the merkle root is wrong, and should always be shown with the DOCUMENT_INTEGRITY error
       errors.push(TYPES.INVALID_ARGUMENT);
-    } else {
+    } else if (certificateNotIssued(verificationStatus)) errors.push(TYPES.ISSUED);
+    else {
       // if it's some unhandled error that we didn't foresee, then get rid of all errors and only keep this one
       errors.splice(0, errors.length);
       errors.push(TYPES.ETHERS_UNHANDLED_ERROR);

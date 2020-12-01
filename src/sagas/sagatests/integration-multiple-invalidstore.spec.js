@@ -1,6 +1,9 @@
 import { Selector } from "testcafe";
+import { waitForReact } from "testcafe-react-selectors";
 
-fixture("Multiple Invalid Stores Cert").page`http://localhost:3000`;
+fixture("Multiple Invalid Stores Cert").page`http://localhost:3000`.beforeEach(async () => {
+  await waitForReact();
+});
 
 const Certificate = "./multipleinvalidstores.opencert";
 

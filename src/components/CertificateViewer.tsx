@@ -90,7 +90,7 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
             <div className="container">
               <div className="flex flex-wrap">
                 <div className="w-full lg:w-1/2 xl:w-1/3">
-                  <CertificateVerifyBlock verificationStatus={props.verificationStatus} />
+                  <CertificateVerifyBlock verificationStatus={props.verificationStatus} document={props.document} />
                 </div>
                 <div className="w-full lg:w-1/2 xl:w-2/3">
                   <div className="flex flex-wrap">

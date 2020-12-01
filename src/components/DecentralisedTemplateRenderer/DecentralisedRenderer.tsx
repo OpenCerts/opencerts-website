@@ -78,15 +78,24 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
   // send analytics on which document has been displayed
   useEffect(() => {
     const certificateData = getData(rawDocument);
-    const storeAddresses = utils.getIssuerAddress(rawDocument);
+    let action: string;
+    if (utils.isSignedWrappedV2Document(rawDocument)) {
+      action = certificateData.issuers.map((issuer) => issuer.id).join(",");
+    } else {
+      const storeAddresses = utils.getIssuerAddress(rawDocument);
+      action = Array.isArray(storeAddresses) ? storeAddresses.join(",") : storeAddresses;
+    }
     analyticsEvent(window, {
       category: "CERTIFICATE_VIEWED",
-      action: Array.isArray(storeAddresses) ? storeAddresses.join(",") : storeAddresses,
+      action,
       label: certificateData?.id ?? undefined,
     });
 
     certificateData.issuers.forEach((issuer: v2.Issuer) => {
-      sendEventCertificateViewedDetailed({ issuer, certificateData });
+      sendEventCertificateViewedDetailed({
+        issuer,
+        certificateData,
+      });
     });
   }, [rawDocument]);
 

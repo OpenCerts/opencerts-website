@@ -1,6 +1,9 @@
 import { Selector } from "testcafe";
+import { waitForReact } from "testcafe-react-selectors";
 
-fixture("Contract Not Found").page`http://localhost:3000`;
+fixture("Contract Not Found").page`http://localhost:3000`.beforeEach(async () => {
+  await waitForReact();
+});
 
 const Certificate = "./sample-mainnet.opencert";
 

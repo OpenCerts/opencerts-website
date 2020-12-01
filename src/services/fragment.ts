@@ -13,21 +13,20 @@ export const addressInvalid = (fragments: VerificationFragment[]): boolean => {
   const tokenRegistryMintedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumTokenRegistryStatus");
   // 2 is the error code used by oa-verify in case of invalid address
   return (
-    documentStoreIssuedFragment?.reason?.code ===
-      OpenAttestationEthereumDocumentStoreStatusCode.CONTRACT_ADDRESS_INVALID ||
-    tokenRegistryMintedFragment?.reason?.code ===
-      OpenAttestationEthereumTokenRegistryStatusCode.CONTRACT_ADDRESS_INVALID
+    (documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.DOCUMENT_NOT_ISSUED &&
+      documentStoreIssuedFragment?.reason?.message.toLowerCase() === "Invalid document store address".toLowerCase()) ||
+    (tokenRegistryMintedFragment?.reason?.code === OpenAttestationEthereumTokenRegistryStatusCode.DOCUMENT_NOT_MINTED &&
+      tokenRegistryMintedFragment?.reason?.message.toLowerCase() === "Invalid token registry address".toLowerCase())
   );
 };
 
-// this function check if the reason of the error is that the document store or token has not been issued
+// this function check if the reason of the error is that the document store
 export const contractNotFound = (fragments: VerificationFragment[]): boolean => {
   const documentStoreIssuedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumDocumentStoreStatus");
-  const tokenRegistryMintedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumTokenRegistryStatus");
   // 404 is the error code used by oa-verify in case of contract not found
   return (
-    documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.CONTRACT_NOT_FOUND ||
-    tokenRegistryMintedFragment?.reason?.code === OpenAttestationEthereumTokenRegistryStatusCode.CONTRACT_NOT_FOUND
+    documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.DOCUMENT_NOT_ISSUED &&
+    documentStoreIssuedFragment?.reason?.message.toLowerCase() === "Contract is not found".toLowerCase()
   );
 };
 
@@ -55,8 +54,10 @@ export const invalidArgument = (fragments: VerificationFragment[]): boolean => {
   const tokenRegistryMintedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumTokenRegistryStatus");
   // why INVALID_ARGUMENT is because we follow the error codes returned by Ethers (https://docs.ethers.io/v5/api/utils/logger/#errors)
   return (
-    documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.INVALID_ARGUMENT ||
-    tokenRegistryMintedFragment?.reason?.code === OpenAttestationEthereumTokenRegistryStatusCode.INVALID_ARGUMENT
+    (documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.DOCUMENT_NOT_ISSUED &&
+      documentStoreIssuedFragment?.reason?.message.toLowerCase() === "Invalid call arguments".toLowerCase()) ||
+    (tokenRegistryMintedFragment?.reason?.code === OpenAttestationEthereumTokenRegistryStatusCode.INVALID_ARGUMENT &&
+      tokenRegistryMintedFragment?.reason?.message.toLowerCase() === "Invalid contract arguments".toLowerCase())
   );
 };
 

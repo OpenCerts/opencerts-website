@@ -1,10 +1,11 @@
-import { v2, WrappedDocument, SchemaId } from "@govtechsg/open-attestation";
+import { SchemaId, v2, WrappedDocument } from "@govtechsg/open-attestation";
+import dnsDidSigned from "../tests/fixture/dns-did-signed.json";
 import {
   analyticsEvent,
   sendEventCertificateViewedDetailed,
   stringifyEvent,
-  validateEvent,
   triggerErrorLogging,
+  validateEvent,
 } from "./index";
 
 const evt = {
@@ -76,6 +77,7 @@ describe("event", () => {
 
   it("sends and log ga event if window.ga is present", () => {
     const win = { ga: jest.fn() };
+    // @ts-expect-error
     analyticsEvent(win, evt);
     expect(win.ga).toHaveBeenCalledWith("send", "event", "TEST_CATEGORY", "TEST_ACTION", "TEST_LABEL", 2, undefined);
   });
@@ -83,6 +85,7 @@ describe("event", () => {
   it("throws if there is a validation error", () => {
     const win = { ga: jest.fn() };
     const errEvt = { ...evt, value: "STRING" };
+    // @ts-expect-error
     expect(() => analyticsEvent(win, errEvt)).toThrow("Value must be a number");
   });
 });
@@ -128,6 +131,36 @@ describe("analytics*", () => {
             dimension4: "a date",
             dimension5: "Government Technology Agency of Singapore (GovTech)",
             dimension6: "govtech-registry",
+            nonInteraction: true,
+          }
+        );
+      });
+      it("should use key to retrieve registry information (not available)", () => {
+        const issuer: v2.Issuer = {
+          id: "did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89",
+          name: "aaa",
+          identityProof: {
+            key: "did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89#controller",
+            location: "aa.com",
+            type: v2.IdentityProofType.DNSTxt,
+          },
+        };
+        const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
+        sendEventCertificateViewedDetailed({ issuer, certificateData });
+        expect(window.ga).toHaveBeenCalledWith(
+          "send",
+          "event",
+          "CERTIFICATE_DETAILS",
+          "VIEWED - aa.com",
+          '"store":"did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89";"document_id":"id1";"name":"cert name";"issued_on":"a date";"issuer_name":"aa.com"',
+          undefined,
+          {
+            dimension1: "did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89",
+            dimension2: "id1",
+            dimension3: "cert name",
+            dimension4: "a date",
+            dimension5: "aa.com",
+            dimension6: "(not set)",
             nonInteraction: true,
           }
         );
@@ -225,8 +258,20 @@ describe("analytics*", () => {
   });
 
   describe("triggerErrorLogging", () => {
+    interface Certificate extends v2.OpenAttestationDocument {
+      attainmentDate?: string;
+      description?: string;
+      name?: string;
+      issuedOn?: string;
+      transcript?: {
+        grade: string;
+        name: string;
+      }[];
+      additionalData?: Record<string, object>;
+      issuers: (v2.Issuer & { network?: string })[];
+    }
     it("should send cert details (certificateStore) and errors (tampered/unissued/revoked) to Google Analytics", () => {
-      const certificate: WrappedDocument = {
+      const certificate: WrappedDocument<Certificate> = {
         version: SchemaId.v2,
         data: {
           attainmentDate: "a6474204-94a4-499b-af95-b161ea0f6996:string:2012-12-31T23:59:00+08:00",
@@ -287,7 +332,7 @@ describe("analytics*", () => {
       );
     });
     it("should send cert details (documentStore/DNS-TXT) and errors (tampered/unissued/revoked) to Google Analytics", () => {
-      const certificate: WrappedDocument = {
+      const certificate: WrappedDocument<Certificate> = {
         version: SchemaId.v2,
         data: {
           id: "e160ddc1-3e9f-496a-8e96-d3c0873c7561:string:MyAwesomeCertID",
@@ -351,7 +396,8 @@ describe("analytics*", () => {
       );
     });
     it("should send cert details (documentStore/DNS-TXT) and error (invalid argument) to Google Analytics", () => {
-      const certificate: WrappedDocument = {
+      const certificate: WrappedDocument<Certificate> = {
+        version: SchemaId.v2,
         schema: "opencerts/v2.0",
         data: {
           id: "e160ddc1-3e9f-496a-8e96-d3c0873c7561:string:41368",
@@ -436,7 +482,8 @@ describe("analytics*", () => {
       );
     });
     it("should send cert details (documentStore/DNS-TXT) and error (HTTP response error) to Google Analytics", () => {
-      const certificate: WrappedDocument = {
+      const certificate: WrappedDocument<Certificate> = {
+        version: SchemaId.v2,
         schema: "opencerts/v2.0",
         data: {
           id: "e160ddc1-3e9f-496a-8e96-d3c0873c7561:string:41368",
@@ -521,7 +568,8 @@ describe("analytics*", () => {
       );
     });
     it("should send cert details (documentStore/DNS-TXT) and error (Ethers unhandled error) to Google Analytics", () => {
-      const certificate: WrappedDocument = {
+      const certificate: WrappedDocument<Certificate> = {
+        version: SchemaId.v2,
         schema: "opencerts/v2.0",
         data: {
           id: "e160ddc1-3e9f-496a-8e96-d3c0873c7561:string:41368",
@@ -601,6 +649,33 @@ describe("analytics*", () => {
           dimension5: "Singapore Management University Academy",
           dimension6: "smu-registry-academy",
           dimension7: "ETHERS_UNHANDLED_ERROR",
+          nonInteraction: true,
+        }
+      );
+    });
+
+    it("should send cert details (DID) and errors (tampered/unissued/revoked) to Google Analytics", () => {
+      triggerErrorLogging(dnsDidSigned as WrappedDocument<v2.OpenAttestationDocument>, [
+        "CERTIFICATE_HASH", // Document has been tampered, naughty naughty!
+        "UNISSUED_CERTIFICATE", // Document isn't issued by the given store
+        "REVOKED_CERTIFICATE", // Document has been revoked by the given store
+      ]);
+
+      expect(window.ga).toHaveBeenCalledWith(
+        "send",
+        "event",
+        "CERTIFICATE_ERROR",
+        "ERROR - example.tradetrust.io",
+        "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
+        undefined,
+        {
+          dimension1: "did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89",
+          dimension2: "SGCNM21566325",
+          dimension3: "(not set)",
+          dimension4: "(not set)",
+          dimension5: "example.tradetrust.io",
+          dimension6: "(not set)",
+          dimension7: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
           nonInteraction: true,
         }
       );

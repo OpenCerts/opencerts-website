@@ -1,6 +1,10 @@
 import { Selector } from "testcafe";
+import { waitForReact } from "testcafe-react-selectors";
 
-fixture("Multiple DNS Verified for Certificate Rendering using certificate store").page`http://localhost:3000`;
+fixture("Multiple DNS Verified for Certificate Rendering using certificate store")
+  .page`http://localhost:3000`.beforeEach(async () => {
+  await waitForReact();
+});
 
 const Document = "./fixture/sample-multidns-verified-certificate-store.json";
 const IframeBlock = Selector("#iframe");
