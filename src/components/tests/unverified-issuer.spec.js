@@ -1,6 +1,9 @@
 import { Selector } from "testcafe";
+import { waitForReact } from "testcafe-react-selectors";
 
-fixture("Unverified Certificate Rendering").page`http://localhost:3000`;
+fixture("Unverified Certificate Rendering").page`http://localhost:3000`.beforeEach(async () => {
+  await waitForReact();
+});
 
 const Certificate = "./fixture/unverified-issuer.json";
 

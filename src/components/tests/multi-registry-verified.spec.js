@@ -1,6 +1,9 @@
 import { Selector } from "testcafe";
+import { waitForReact } from "testcafe-react-selectors";
 
-fixture("Multiple Registry Verified for Certificate Rendering").page`http://localhost:3000`;
+fixture("Multiple Registry Verified for Certificate Rendering").page`http://localhost:3000`.beforeEach(async () => {
+  await waitForReact();
+});
 
 const Document = "./fixture/sample-multiregistry-verified.json";
 const IframeBlock = Selector("#iframe");

@@ -43,9 +43,7 @@ const { trace } = getLogger("saga:certificate");
 export function* verifyCertificate({ payload: certificate }: { payload: WrappedDocument<v2.OpenAttestationDocument> }) {
   try {
     yield put(verifyingCertificate());
-    const fragments = yield call(verify, certificate, {
-      network: NETWORK_NAME,
-    });
+    const fragments = yield call(verify({ network: NETWORK_NAME }), certificate);
     trace(`Verification Status: ${JSON.stringify(fragments)}`);
 
     yield put(verifyingCertificateCompleted(fragments));

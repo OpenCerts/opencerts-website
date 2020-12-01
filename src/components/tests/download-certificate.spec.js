@@ -2,14 +2,19 @@ import { existsSync, readFileSync, unlinkSync } from "fs";
 import { join } from "path";
 import downloadsFolder from "downloads-folder";
 import { Selector } from "testcafe";
+import { waitForReact } from "testcafe-react-selectors";
 import TestDocument2 from "./fixture/sample-dns-verified-special-characters.json";
 import TestDocument1 from "./fixture/sample-dns-verified.json";
 
-fixture("Download Certificate").page`http://localhost:3000`.afterEach(async (t) => {
-  // Clean up files after each test
-  const filePath = t.ctx.filePath;
-  await unlinkSync(filePath);
-});
+fixture("Download Certificate").page`http://localhost:3000`
+  .afterEach(async (t) => {
+    // Clean up files after each test
+    const filePath = t.ctx.filePath;
+    await unlinkSync(filePath);
+  })
+  .beforeEach(async () => {
+    await waitForReact();
+  });
 
 const Document1 = "./fixture/sample-dns-verified.json";
 const Document2 = "./fixture/sample-dns-verified-special-characters.json";

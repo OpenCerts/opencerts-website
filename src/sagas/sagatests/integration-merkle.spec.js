@@ -1,6 +1,9 @@
 import { Selector } from "testcafe";
+import { waitForReact } from "testcafe-react-selectors";
 
-fixture("Wrong Merkle Cert").page`http://localhost:3000`;
+fixture("Wrong Merkle Cert").page`http://localhost:3000`.beforeEach(async () => {
+  await waitForReact();
+});
 
 const Certificate1 = "./wrong-merkle-odd-length.opencert";
 const Certificate2 = "./wrong-merkle-incorrect-length.opencert";

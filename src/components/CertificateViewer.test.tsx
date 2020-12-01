@@ -4,26 +4,25 @@ import React from "react";
 import { CertificateViewer, CertificateViewerProps } from "./CertificateViewer";
 
 jest.mock("next/dynamic", () => () => () => "");
-jest.mock("@govtechsg/open-attestation");
 jest.mock("./FeatureFlag");
 
 describe("certificateViewer", () => {
+  const certificate = {
+    id: "k;lk;",
+    $template: "$template",
+    issuers: [
+      {
+        certificateStore: "certificateStore",
+        name: "name",
+      },
+    ],
+  };
   const sharedProps: CertificateViewerProps = {
-    certificate: {
-      id: "k;lk;",
-      $template: "$template",
-      issuers: [
-        {
-          certificateStore: "certificateStore",
-          name: "name",
-        },
-      ],
-    },
+    certificate,
     document: {
       version: SchemaId.v2,
       signature: { proof: [], merkleRoot: "a", targetHash: "a", type: "SHA3MerkleProof" },
-      // @ts-expect-error not valid data
-      data: {},
+      data: certificate,
     },
     verifying: false,
     copiedLink: true,

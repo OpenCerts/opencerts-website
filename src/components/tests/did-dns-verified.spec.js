@@ -1,11 +1,11 @@
 import { Selector } from "testcafe";
 import { waitForReact } from "testcafe-react-selectors";
 
-fixture("DNS Certificate Rendering").page`http://localhost:3000`.beforeEach(async () => {
+fixture("DID-DNS Certificate Rendering").page`http://localhost:3000`.beforeEach(async () => {
   await waitForReact();
 });
 
-const Document = "./fixture/sample-dns-verified.json";
+const Document = "./fixture/dns-did-signed.json";
 const IframeBlock = Selector("#iframe");
 const SampleTemplate = Selector("#root");
 const StatusButton = Selector("#certificate-status");
@@ -17,7 +17,7 @@ const validateTextContent = async (t, component, texts) =>
 test("Sample document is rendered correctly when dns is verified", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 
-  await validateTextContent(t, StatusButton, ["EXAMPLE.OPENATTESTATION.COM"]);
+  await validateTextContent(t, StatusButton, ["EXAMPLE.TRADETRUST.IO"]);
 
   await validateTextContent(t, CertificateStatusBanner, [
     "Certificate issuer is not in the SkillsFuture Singapore registry for Opencerts",
@@ -28,7 +28,7 @@ test("Sample document is rendered correctly when dns is verified", async (t) => 
   await validateTextContent(t, SampleTemplate, [
     "Name & Address of Shipping Agent/Freight Forwarder",
     "CERTIFICATE OF NON-MANIPULATION",
-    "DEMO JOHN TAN",
+    "PETER LEE",
     "Certification by Singapore Customs",
     "AQSIQ170923130",
   ]);
