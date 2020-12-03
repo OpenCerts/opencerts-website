@@ -1,4 +1,4 @@
-import { mount } from "enzyme";
+import { render, screen } from "@testing-library/react";
 import React from "react";
 import { RegistryCard } from "./RegistryCard";
 
@@ -39,11 +39,12 @@ describe("registryCard", () => {
       },
     ];
 
-    const wrapper = mount(<RegistryCard zIndex={0} search={``} contact={contact} />);
-    expect(wrapper.find("[data-testid='institute-logo']").prop("src")).toStrictEqual(logoSrc);
-    expect(wrapper.find("[data-testid='institute-name']").text()).toStrictEqual(name);
-    expect(wrapper.find("[data-testid='info']")).toHaveLength(3);
-    expect(wrapper.text()).toContain("abc");
+    render(<RegistryCard zIndex={0} search={``} contact={contact} />);
+    expect(screen.getByTestId("institute-logo").getAttribute("src")).toStrictEqual(logoSrc);
+    expect(screen.getAllByText(name)).toHaveLength(2);
+    expect(screen.getAllByTestId("info")).toHaveLength(3);
+    expect(screen.getByText("abc")).toBeInTheDocument();
+    expect(screen.getByText("xyz")).toBeInTheDocument();
   });
 
   it("should render search results correctly", () => {
@@ -82,8 +83,9 @@ describe("registryCard", () => {
       },
     ];
 
-    const wrapper = mount(<RegistryCard zIndex={0} search={`0xb`} contact={contact} />);
-    expect(wrapper.find("[data-testid='info']")).toHaveLength(1);
-    expect(wrapper.text()).toContain("xyz");
+    render(<RegistryCard zIndex={0} search={`0xb`} contact={contact} />);
+    expect(screen.getAllByTestId("info")).toHaveLength(1);
+    expect(screen.getByText("xyz")).toBeInTheDocument();
+    expect(screen.queryByText("abc")).not.toBeInTheDocument();
   });
 });

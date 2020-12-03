@@ -2,7 +2,8 @@ import getConfig from "next/config";
 import { getLogger } from "../utils/logger";
 
 const { trace } = getLogger("config");
-const { publicRuntimeConfig } = getConfig();
+// https://github.com/vercel/next.js/issues/7713
+const { publicRuntimeConfig = {} } = getConfig();
 
 export const URL = "https://opencerts.io";
 const API_MAIN_URL = "https://api.opencerts.io";

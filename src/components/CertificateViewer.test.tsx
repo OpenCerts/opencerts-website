@@ -1,10 +1,26 @@
 import { SchemaId } from "@govtechsg/open-attestation";
-import { mount } from "enzyme";
+import { render, screen } from "@testing-library/react";
 import React from "react";
+import { Provider } from "react-redux";
+import { initStore } from "../store";
 import { CertificateViewer, CertificateViewerProps } from "./CertificateViewer";
 
 jest.mock("next/dynamic", () => () => () => "");
-jest.mock("./FeatureFlag");
+
+const ReduxWrapper: React.FunctionComponent = ({ children }) => {
+  return <Provider store={initStore()}>{children}</Provider>;
+};
+
+// you mean https://github.com/testing-library/dom-testing-library/issues/410
+// https://www.polvara.me/posts/five-things-you-didnt-know-about-testing-library/
+const withMarkup = (text: string) => (content: string, node: HTMLElement) => {
+  const hasText = (node: Element): boolean => {
+    return node.textContent === text;
+  };
+  const nodeHasText = hasText(node);
+  const childrenDontHaveText = Array.from(node.children).every((child) => !hasText(child));
+  return nodeHasText && childrenDontHaveText;
+};
 
 describe("certificateViewer", () => {
   const certificate = {
@@ -38,15 +54,17 @@ describe("certificateViewer", () => {
     verificationStatus: [],
   };
   it("should show that the issuer is not in the registry when identities is an empty array", () => {
-    const wrapper = mount(<CertificateViewer {...sharedProps} verificationStatus={[]} />);
-    expect(wrapper.find("#status-banner-container")).toHaveLength(1);
-    expect(wrapper.find("#status-banner-container").text()).toContain(
-      "Certificate issuer is not in the SkillsFuture Singapore registry for Opencerts"
-    );
-    expect(wrapper.find("#status-banner-container").text()).toContain("What does this mean ?");
+    render(<CertificateViewer {...sharedProps} verificationStatus={[]} />, { wrapper: ReduxWrapper });
+    expect(
+      screen.getByText(
+        withMarkup(
+          "Certificate issuer is not in the SkillsFuture Singapore registry for Opencerts.What does this mean ?"
+        )
+      )
+    ).toBeInTheDocument();
   });
   it("should show that the issuer is not in the registry when registry identity is invalid", () => {
-    const wrapper = mount(
+    render(
       <CertificateViewer
         {...sharedProps}
         verificationStatus={[
@@ -56,16 +74,19 @@ describe("certificateViewer", () => {
             type: "ISSUER_IDENTITY",
           },
         ]}
-      />
+      />,
+      { wrapper: ReduxWrapper }
     );
-    expect(wrapper.find("#status-banner-container")).toHaveLength(1);
-    expect(wrapper.find("#status-banner-container").text()).toContain(
-      "Certificate issuer is not in the SkillsFuture Singapore registry for Opencerts"
-    );
-    expect(wrapper.find("#status-banner-container").text()).toContain("What does this mean ?");
+    expect(
+      screen.getByText(
+        withMarkup(
+          "Certificate issuer is not in the SkillsFuture Singapore registry for Opencerts.What does this mean ?"
+        )
+      )
+    ).toBeInTheDocument();
   });
   it("should show that the issuer is in the registry when registry identity is valid", () => {
-    const wrapper = mount(
+    render(
       <CertificateViewer
         {...sharedProps}
         verificationStatus={[
@@ -75,11 +96,11 @@ describe("certificateViewer", () => {
             type: "ISSUER_IDENTITY",
           },
         ]}
-      />
+      />,
+      { wrapper: ReduxWrapper }
     );
-    expect(wrapper.find("#status-banner-container")).toHaveLength(1);
-    expect(wrapper.find("#status-banner-container").text()).toContain(
-      "Certificate issuer is in the SkillsFuture Singapore registry for Opencerts"
-    );
+    expect(
+      screen.getByText(withMarkup("Certificate issuer is in the SkillsFuture Singapore registry for Opencerts."))
+    ).toBeInTheDocument();
   });
 });

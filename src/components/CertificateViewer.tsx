@@ -39,10 +39,10 @@ const StatusBanner: React.FunctionComponent<StatusBannerProps> = ({ isInRegistry
     >
       <div className="container text-center py-4">
         {isInRegistry ? (
-          <p className="mb-0">Certificate issuer is in the SkillsFuture Singapore registry for Opencerts</p>
+          <p className="mb-0">Certificate issuer is in the SkillsFuture Singapore registry for Opencerts.</p>
         ) : (
           <p className="mb-0">
-            Certificate issuer is <b>not</b> in the SkillsFuture Singapore registry for Opencerts
+            Certificate issuer is <b>not</b> in the SkillsFuture Singapore registry for Opencerts.
             <br />
             <Link href="/faq#verifications-issuers-not-in-registry-meaning">
               <a className="underline text-gray-800 hover:text-gray-600">

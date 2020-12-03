@@ -1,4 +1,4 @@
-import { mount } from "enzyme";
+import { render, screen } from "@testing-library/react";
 import React from "react";
 import { FeatureFlag } from "./FeatureFlag";
 
@@ -10,7 +10,7 @@ describe("featureFlag", () => {
     },
   };
   it("should render component when SHARE_LINK feature flag is set to true", () => {
-    const wrapper = mount(
+    render(
       <FeatureFlag
         name="SHARE_LINK"
         render={() => <div>Share link is active</div>}
@@ -18,10 +18,10 @@ describe("featureFlag", () => {
         state={state}
       />
     );
-    expect(wrapper.find("div").text()).toStrictEqual("Share link is active");
+    expect(screen.getByText("Share link is active")).toBeInTheDocument();
   });
   it("should render fallback component when OTHER feature flag is set to false", () => {
-    const wrapper = mount(
+    render(
       <FeatureFlag
         name="jobPost"
         render={() => <div>Other feature is active</div>}
@@ -29,10 +29,10 @@ describe("featureFlag", () => {
         state={state}
       />
     );
-    expect(wrapper.find("div").text()).toStrictEqual("This feature is not available");
+    expect(screen.getByText("This feature is not available")).toBeInTheDocument();
   });
   it("should render fallback component when EXTRA_FEATURE feature flag is not set", () => {
-    const wrapper = mount(
+    render(
       <FeatureFlag
         name="EXTRA_FEATURE"
         render={() => <div>Extra feature is active</div>}
@@ -40,14 +40,14 @@ describe("featureFlag", () => {
         state={state}
       />
     );
-    expect(wrapper.find("div").text()).toStrictEqual("This feature is not available");
+    expect(screen.getByText("This feature is not available")).toBeInTheDocument();
   });
   it("should not render anything when there is no render function and SHARE_LINK feature flag is true", () => {
-    const wrapper = mount(<FeatureFlag name="SHARE_LINK" state={state} />);
-    expect(wrapper.find("div")).toHaveLength(0);
+    const { container } = render(<FeatureFlag name="SHARE_LINK" state={state} />);
+    expect(container.firstChild).toMatchInlineSnapshot(`null`);
   });
   it("should not render anything when there is no fallback function and OTHER feature flag is false", () => {
-    const wrapper = mount(<FeatureFlag name="jobPost" state={state} />);
-    expect(wrapper.find("div")).toHaveLength(0);
+    const { container } = render(<FeatureFlag name="jobPost" state={state} />);
+    expect(container.firstChild).toMatchInlineSnapshot(`null`);
   });
 });

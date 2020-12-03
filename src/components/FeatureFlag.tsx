@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { RootState } from "../reducers";
 
 interface FeatureFlagProps {
   name: string;
@@ -23,6 +24,4 @@ export const FeatureFlag: React.FunctionComponent<FeatureFlagProps> = ({ name, r
   return null;
 };
 
-// TODO fix redux =)
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const FeatureFlagContainer = connect((state: any) => ({ state }))(FeatureFlag);
+export const FeatureFlagContainer = connect((state: RootState) => ({ state }))(FeatureFlag);

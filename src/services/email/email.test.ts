@@ -18,7 +18,7 @@ describe("sagas/certificate", () => {
   it("calls window.fetch with right args", async () => {
     fetchStub.mockResolvedValue({ status: 200 });
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     await sendEmail({ certificate, captcha, email });
 
@@ -38,7 +38,7 @@ describe("sagas/certificate", () => {
 
   it("resolves when 200 is returned", async () => {
     fetchStub.mockResolvedValue({ status: 200 });
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const res = await sendEmail({ certificate, captcha, email });
     expect(res).toBe(true);
@@ -46,7 +46,7 @@ describe("sagas/certificate", () => {
 
   it("rejects when non-200 code is returned", async () => {
     fetchStub.mockResolvedValue({ status: 400 });
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const res = await sendEmail({ certificate, captcha, email });
     expect(res).toBe(false);
