@@ -2,7 +2,7 @@
 import React from "react";
 
 export const icons = {
-  print: () => (
+  print: (): React.ReactElement => (
     <i>
       <svg xmlns="http://www.w3.org/2000/svg" width="56.81" height="50.77" viewBox="0 0 56.81 50.77">
         <defs>
@@ -22,7 +22,7 @@ export const icons = {
       </svg>
     </i>
   ),
-  send: () => (
+  send: (): React.ReactElement => (
     <i>
       <svg xmlns="http://www.w3.org/2000/svg" width="59.6" height="44.2" viewBox="0 0 59.6 44.2">
         <defs>
@@ -88,7 +88,7 @@ export const icons = {
       </svg>
     </i>
   ),
-  check: () => (
+  check: (): React.ReactElement => (
     <i>
       <svg xmlns="http://www.w3.org/2000/svg" width="17.32" height="11.83" viewBox="0 0 17.32 11.83">
         <title>check</title>
@@ -100,7 +100,7 @@ export const icons = {
       </svg>
     </i>
   ),
-  checkCircle: () => (
+  checkCircle: (): React.ReactElement => (
     <i>
       <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35">
         <title>check-circle</title>
@@ -115,7 +115,7 @@ export const icons = {
       </svg>
     </i>
   ),
-  arrow: () => (
+  arrow: (): React.ReactElement => (
     <i>
       <svg xmlns="http://www.w3.org/2000/svg" width="8.1" height="14.36" viewBox="0 0 8.1 14.36">
         <title>arrow</title>

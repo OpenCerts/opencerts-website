@@ -10,6 +10,7 @@ module.exports = {
       padding: theme("spacing.4"),
     }),
     inset: {
+      // eslint-disable-next-line prettier/prettier
       "0": 0,
       "1/2": "50%",
     },

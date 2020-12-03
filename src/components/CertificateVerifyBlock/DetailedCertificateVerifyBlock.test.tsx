@@ -1,10 +1,10 @@
-import { mount } from "enzyme";
+import { render, screen } from "@testing-library/react";
 import React from "react";
 import { DetailedCertificateVerifyBlock } from "./DetailedCertificateVerifyBlock";
 
 describe("detailedCertificateVerifyBlock", () => {
   it("displays that the certificate has been tampered with when hashStatus is false", () => {
-    const wrapper = mount(
+    render(
       <DetailedCertificateVerifyBlock
         verificationStatus={[
           {
@@ -20,13 +20,11 @@ describe("detailedCertificateVerifyBlock", () => {
         ]}
       />
     );
-    expect(wrapper.find(".text-red")).toHaveLength(1);
-    expect(wrapper.text()).toContain("Certificate has been tampered with");
-    expect(wrapper.find(".text-green")).toHaveLength(1);
-    expect(wrapper.text()).toContain("Certificate has not been revoked");
+    expect(screen.getByText("Certificate has been tampered with")).toBeInTheDocument();
+    expect(screen.getByText("Certificate has not been revoked")).toBeInTheDocument();
   });
   it("displays that the certificate has been revoked when notRevokedStatus is false", () => {
-    const wrapper = mount(
+    render(
       <DetailedCertificateVerifyBlock
         verificationStatus={[
           {
@@ -72,13 +70,11 @@ describe("detailedCertificateVerifyBlock", () => {
         ]}
       />
     );
-    expect(wrapper.find(".text-red")).toHaveLength(1);
-    expect(wrapper.text()).toContain("Certificate has been revoked");
-    expect(wrapper.find(".text-green")).toHaveLength(1);
-    expect(wrapper.text()).toContain("Certificate has not been tampered with");
+    expect(screen.getByText("Certificate has been revoked")).toBeInTheDocument();
+    expect(screen.getByText("Certificate has not been tampered with")).toBeInTheDocument();
   });
   it("displays all statuses as success when all status are true", () => {
-    const wrapper = mount(
+    render(
       <DetailedCertificateVerifyBlock
         verificationStatus={[
           {
@@ -94,8 +90,7 @@ describe("detailedCertificateVerifyBlock", () => {
         ]}
       />
     );
-    expect(wrapper.find(".text-green")).toHaveLength(2);
-    expect(wrapper.text()).toContain("Certificate has not been revoked");
-    expect(wrapper.text()).toContain("Certificate has not been tampered with");
+    expect(screen.getByText("Certificate has not been revoked")).toBeInTheDocument();
+    expect(screen.getByText("Certificate has not been tampered with")).toBeInTheDocument();
   });
 });

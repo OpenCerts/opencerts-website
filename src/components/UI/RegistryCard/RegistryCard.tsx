@@ -21,8 +21,7 @@ export const RegistryCard: React.FunctionComponent<RegistryCardProps> = ({ zInde
   const [expand, setExpand] = useState(false);
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    const keydownHandler = (event: KeyboardEvent) => {
+    const keydownHandler = (event: KeyboardEvent): void => {
       if (event.key === "Escape") setExpand(false);
     };
 

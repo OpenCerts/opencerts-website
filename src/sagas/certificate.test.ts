@@ -1,4 +1,5 @@
 import { put, select } from "redux-saga/effects";
+import { sendCertificateFailure, sendCertificateSuccess } from "../reducers/certificate.actions";
 import { getCertificate } from "../reducers/certificate.selectors";
 import { sendCertificate } from "./certificate";
 import { MakeCertUtil } from "./testutils";
@@ -55,11 +56,7 @@ describe("sagas/certificate", () => {
 
       expect(saga.next().value).toStrictEqual(select(getCertificate));
       saga.next(testCert);
-      expect(saga.next(true).value).toStrictEqual(
-        put({
-          type: "SENDING_CERTIFICATE_SUCCESS",
-        })
-      );
+      expect(saga.next(true).value).toStrictEqual(put(sendCertificateSuccess()));
       expect(saga.next().done).toBe(true);
     });
 
@@ -72,12 +69,7 @@ describe("sagas/certificate", () => {
 
       expect(saga.next().value).toStrictEqual(select(getCertificate));
       saga.next(testCert);
-      expect(saga.next(false).value).toStrictEqual(
-        put({
-          type: "SENDING_CERTIFICATE_FAILURE",
-          payload: "Fail to send certificate",
-        })
-      );
+      expect(saga.next(false).value).toStrictEqual(put(sendCertificateFailure("Fail to send certificate")));
       expect(saga.next().done).toBe(true);
     });
 
@@ -91,12 +83,7 @@ describe("sagas/certificate", () => {
 
       expect(saga.next().value).toStrictEqual(select(getCertificate));
       saga.next(testCert);
-      expect(saga.throw(new Error(errorMsg)).value).toStrictEqual(
-        put({
-          type: "SENDING_CERTIFICATE_FAILURE",
-          payload: errorMsg,
-        })
-      );
+      expect(saga.throw(new Error(errorMsg)).value).toStrictEqual(put(sendCertificateFailure(errorMsg)));
       expect(saga.next().done).toBe(true);
     });
   });

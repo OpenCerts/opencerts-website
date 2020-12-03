@@ -77,7 +77,7 @@ describe("event", () => {
 
   it("sends and log ga event if window.ga is present", () => {
     const win = { ga: jest.fn() };
-    // @ts-expect-error
+    // @ts-expect-error the mock does not match the signature
     analyticsEvent(win, evt);
     expect(win.ga).toHaveBeenCalledWith("send", "event", "TEST_CATEGORY", "TEST_ACTION", "TEST_LABEL", 2, undefined);
   });
@@ -85,7 +85,7 @@ describe("event", () => {
   it("throws if there is a validation error", () => {
     const win = { ga: jest.fn() };
     const errEvt = { ...evt, value: "STRING" };
-    // @ts-expect-error
+    // @ts-expect-error the mock does not match the signature
     expect(() => analyticsEvent(win, errEvt)).toThrow("Value must be a number");
   });
 });
@@ -93,13 +93,13 @@ describe("event", () => {
 describe("analytics*", () => {
   // eslint-disable-next-line jest/no-hooks
   beforeEach(() => {
-    // @ts-expect-error
+    // @ts-expect-error mock does not match the signature
     // eslint-disable-next-line jest/prefer-spy-on
     window.ga = jest.fn();
   });
   // eslint-disable-next-line jest/no-hooks
   afterEach(() => {
-    // @ts-expect-error
+    // @ts-expect-error mock does not match the signature
     // eslint-disable-next-line jest/prefer-spy-on
     window.ga = undefined; // This vs. delete window.ga, mockGA.mockReset()?
   });
@@ -267,7 +267,8 @@ describe("analytics*", () => {
         grade: string;
         name: string;
       }[];
-      additionalData?: Record<string, object>;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      additionalData?: Record<string, any>;
       issuers: (v2.Issuer & { network?: string })[];
     }
     it("should send cert details (certificateStore) and errors (tampered/unissued/revoked) to Google Analytics", () => {
