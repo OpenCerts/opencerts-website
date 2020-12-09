@@ -71,6 +71,7 @@ class DropZoneSection extends Component<DropZoneSectionProps, DropZoneSectionSta
     // https://github.com/lancedikson/bowser/blob/master/src/constants.js
     const isValidBrowser = browser.satisfies({
       windows: {
+        chrome: "~87",
         ie: "~11",
         edge: "~84",
       },
