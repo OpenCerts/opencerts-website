@@ -5,6 +5,7 @@ import { NETWORK_NAME } from "../../config";
 import { updateCertificate } from "../../reducers/certificate.actions";
 import { analyticsEvent } from "../Analytics";
 import { CertificateDropZoneContainer } from "../CertificateDropZone";
+import Bowser from "bowser";
 
 const DEMO_CERT = `/static/demo/${NETWORK_NAME}.opencert`;
 
@@ -61,6 +62,15 @@ class DropZoneSection extends Component<DropZoneSectionProps> {
     this.handleClick = this.handleClick.bind(this);
   }
   componentDidMount(): void {
+    const browser = Bowser.getParser(window.navigator.userAgent);
+    const isValidBrowser = browser.satisfies({
+      windows: {
+        "internet explorer": ">10",
+      },
+    });
+    console.log(browser.getBrowser(), "getBrowser");
+    console.log(isValidBrowser, "isValidBrowser");
+
     const elementDrop = document.getElementById("demoDrop");
     if (elementDrop) {
       elementDrop.addEventListener("drop", this.handleDrop);

@@ -11,7 +11,6 @@ import { DEFAULT_SEO, ENVIRONMENT, GA_ID } from "../src/config";
 import { updateFeatureToggles } from "../src/reducers/featureToggle.actions";
 import { wrapper } from "../src/store";
 import "../src/tailwind.css";
-import "../src/polyfills/array-form.js"; // https://github.com/react-dropzone/file-selector/issues/9
 
 const FeatureFlagLoader: React.FunctionComponent = ({ children }) => {
   const dispatch = useDispatch();
