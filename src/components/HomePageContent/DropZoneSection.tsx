@@ -130,18 +130,12 @@ class DropZoneSection extends Component<DropZoneSectionProps, DropZoneSectionSta
                 Whether you&#39;re a student or an employer, OpenCerts lets you verify the certificates you have of
                 anyone from any institution. All in one place.
               </p>
-              {this.state.isIeOrEdge ? (
+              <div className={`${this.state.isIeOrEdge ? "block" : "lg:hidden"}`}>
                 <ButtonDemoCertificate />
-              ) : (
-                <>
-                  <div className="block lg:hidden">
-                    <ButtonDemoCertificate />
-                  </div>
-                  <div className="hidden lg:block">
-                    <DraggableDemoCertificate />
-                  </div>
-                </>
-              )}
+              </div>
+              <div className={`${this.state.isIeOrEdge ? "lg:hidden" : "hidden"} lg:block`}>
+                <DraggableDemoCertificate />
+              </div>
             </div>
             <div className="w-full lg:w-2/3 lg:pl-10" id="demoDrop">
               <CertificateDropZoneContainer />
