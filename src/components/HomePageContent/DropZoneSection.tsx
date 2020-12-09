@@ -1,11 +1,11 @@
 import { v2, WrappedDocument } from "@govtechsg/open-attestation";
+import Bowser from "bowser";
 import React, { Component, ReactNode } from "react";
 import { connect } from "react-redux";
 import { NETWORK_NAME } from "../../config";
 import { updateCertificate } from "../../reducers/certificate.actions";
 import { analyticsEvent } from "../Analytics";
 import { CertificateDropZoneContainer } from "../CertificateDropZone";
-import Bowser from "bowser";
 
 const DEMO_CERT = `/static/demo/${NETWORK_NAME}.opencert`;
 
