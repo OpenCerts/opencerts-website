@@ -17,32 +17,30 @@ function demoCount(): void {
 }
 
 const DraggableDemoCertificate: React.FunctionComponent = () => (
-  <div className="hidden lg:block">
-    <div className="flex flex-wrap py-12">
-      <div className="w-1/2 lg:pr-8">
-        <div
-          className="animate-pulsing"
-          draggable="true"
-          onDragStart={(e) => e.dataTransfer.setData(DEMO_CERT, "true")}
-          onDragEnd={demoCount}
-        >
-          <a href={DEMO_CERT} className="cursor-grab" download="demo.opencert" rel="noindex nofollow">
-            <img src="/static/images/dropzone/cert.png" />
-          </a>
-        </div>
+  <div className="flex flex-wrap py-12">
+    <div className="w-1/2 lg:pr-8">
+      <div
+        className="animate-pulsing"
+        draggable="true"
+        onDragStart={(e) => e.dataTransfer.setData(DEMO_CERT, "true")}
+        onDragEnd={demoCount}
+      >
+        <a href={DEMO_CERT} className="cursor-grab" download="demo.opencert" rel="noindex nofollow">
+          <img src="/static/images/dropzone/cert.png" />
+        </a>
       </div>
-      <div className="w-1/2">
-        <img src="/static/images/dropzone/arrow.png" draggable="false" />
-        <p className="text-orange mb-2">Drag me over here to see a demo certificate and other features</p>
-        <img src="/static/images/opencertslogo.svg" draggable="false" />
-      </div>
+    </div>
+    <div className="w-1/2">
+      <img src="/static/images/dropzone/arrow.png" draggable="false" />
+      <p className="text-orange mb-2">Drag me over here to see a demo certificate and other features</p>
+      <img src="/static/images/opencertslogo.svg" draggable="false" />
     </div>
   </div>
 );
 
-const MobileDemoCertificate: React.FunctionComponent = () => (
+const ButtonDemoCertificate: React.FunctionComponent = () => (
   <button
-    className="button bg-green hover:bg-green-300 mx-auto my-8 block lg:hidden"
+    className="button bg-green hover:bg-green-300 mx-auto my-8"
     role="button"
     draggable="false"
     id="demoClick"
@@ -52,24 +50,34 @@ const MobileDemoCertificate: React.FunctionComponent = () => (
   </button>
 );
 
+type DropZoneSectionState = {
+  isIeOrEdge?: boolean;
+};
+
 interface DropZoneSectionProps {
   updateCertificate: (certificate: WrappedDocument<v2.OpenAttestationDocument>) => void;
 }
-class DropZoneSection extends Component<DropZoneSectionProps> {
+class DropZoneSection extends Component<DropZoneSectionProps, DropZoneSectionState> {
   constructor(props: DropZoneSectionProps) {
     super(props);
     this.handleDrop = this.handleDrop.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      isIeOrEdge: false,
+    };
   }
   componentDidMount(): void {
     const browser = Bowser.getParser(window.navigator.userAgent);
+    // https://github.com/lancedikson/bowser/blob/master/src/constants.js
     const isValidBrowser = browser.satisfies({
       windows: {
-        "internet explorer": ">10",
+        ie: "~11",
+        edge: "~84",
       },
     });
-    console.log(browser.getBrowser(), "getBrowser");
-    console.log(isValidBrowser, "isValidBrowser");
+    this.setState({
+      isIeOrEdge: isValidBrowser,
+    });
 
     const elementDrop = document.getElementById("demoDrop");
     if (elementDrop) {
@@ -121,8 +129,18 @@ class DropZoneSection extends Component<DropZoneSectionProps> {
                 Whether you&#39;re a student or an employer, OpenCerts lets you verify the certificates you have of
                 anyone from any institution. All in one place.
               </p>
-              <DraggableDemoCertificate />
-              <MobileDemoCertificate />
+              {this.state.isIeOrEdge ? (
+                <ButtonDemoCertificate />
+              ) : (
+                <>
+                  <div className="block lg:hidden">
+                    <ButtonDemoCertificate />
+                  </div>
+                  <div className="hidden lg:block">
+                    <DraggableDemoCertificate />
+                  </div>
+                </>
+              )}
             </div>
             <div className="w-full lg:w-2/3 lg:pl-10" id="demoDrop">
               <CertificateDropZoneContainer />
