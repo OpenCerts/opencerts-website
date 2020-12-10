@@ -149,6 +149,46 @@
       "id": "smu-registry-accountancy",
       "group": "smu-registry"
     },
+	"0x6a8899bbe8bb1535e60cf9237fc6806c26066dee": {
+      "name": "Singapore Management University School of Economics",
+      "displayCard": true,
+      "website": "https://economics.smu.edu.sg",
+      "email": "economics_enquiries@smu.edu.sg",
+      "phone": "+65 6808 5108",
+      "logo": "/static/images/SMU_logo.png",
+      "id": "smu-registry-economics",
+      "group": "smu-registry"
+    },
+	"0x94cbba4b50d2c29d247221a7cc2dda356054078b": {
+      "name": "Singapore Management University School of Information Systems",
+      "displayCard": true,
+      "website": "https://sis.smu.edu.sg",
+      "email": "enquiries@sis.smu.edu.sg",
+      "phone": "+65 6808 5108",
+      "logo": "/static/images/SMU_logo.png",
+      "id": "smu-registry-sis",
+      "group": "smu-registry"
+    },
+	"0x5a8027a5fa187d495546c4041966703bf9018a11": {
+      "name": "Singapore Management University Lee Kong Chian School of Business",
+      "displayCard": true,
+      "website": "https://business.smu.edu.sg",
+      "email": "bschool@smu.edu.sg",
+      "phone": "+65 6828 0549",
+      "logo": "/static/images/SMU_logo.png",
+      "id": "smu-registry-business",
+      "group": "smu-registry"
+    },
+	"0x86e7e573a18df76ed840d6ae2af11785c1453911": {
+      "name": "Singapore Management University School of Law",
+      "displayCard": true,
+      "website": "https://law.smu.edu.sg",
+      "email": "law@smu.edu.sg",
+      "phone": "+65 6828 0502",
+      "logo": "/static/images/SMU_logo.png",
+      "id": "smu-registry-law",
+      "group": "smu-registry"
+    },
     "0x5b3e03ec154629c67ad5d32e34048aac3fb0ddbe": {
       "name": "Singapore Management University Institute of Service Excellence",
       "displayCard": true,
