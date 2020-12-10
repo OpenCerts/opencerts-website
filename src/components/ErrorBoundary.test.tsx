@@ -1,4 +1,4 @@
-import { mount } from "enzyme";
+import { render, screen } from "@testing-library/react";
 import React from "react";
 import { ErrorBoundary } from "./ErrorBoundary";
 
@@ -21,12 +21,15 @@ describe("<ErrorBoundary />", () => {
   it("should catch errors with componentDidCatch", () => {
     pauseErrorLogging(() => {
       jest.spyOn(ErrorBoundary.prototype, "componentDidCatch");
-      mount(
+      render(
         <ErrorBoundary>
           <ProblemChild />
         </ErrorBoundary>
       );
-      expect(ErrorBoundary.prototype.componentDidCatch).toHaveBeenCalledTimes(1);
+      expect(screen.getByText("Something went wrong!")).toBeInTheDocument();
+      expect(
+        screen.getByText("There is an error with this certificate, please contact your issuing institution.")
+      ).toBeInTheDocument();
     });
   });
 });

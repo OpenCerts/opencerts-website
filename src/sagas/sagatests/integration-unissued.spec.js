@@ -1,6 +1,9 @@
 import { Selector } from "testcafe";
+import { waitForReact } from "testcafe-react-selectors";
 
-fixture("Unissued Cert").page`http://localhost:3000`;
+fixture("Unissued Cert").page`http://localhost:3000`.beforeEach(async () => {
+  await waitForReact();
+});
 
 const Certificate = "./unissued.opencert";
 

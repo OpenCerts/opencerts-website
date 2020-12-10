@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types,@typescript-eslint/explicit-function-return-type */
 import { decryptString } from "@govtechsg/oa-encryption";
 import { v2, WrappedDocument } from "@govtechsg/open-attestation";
 import { isValid, verify } from "@govtechsg/opencerts-verify";
@@ -39,13 +40,10 @@ import { getLogger } from "../utils/logger";
 
 const { trace } = getLogger("saga:certificate");
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function* verifyCertificate({ payload: certificate }: { payload: WrappedDocument<v2.OpenAttestationDocument> }) {
   try {
     yield put(verifyingCertificate());
-    const fragments = yield call(verify, certificate, {
-      network: NETWORK_NAME,
-    });
+    const fragments = yield call(verify({ network: NETWORK_NAME }), certificate);
     trace(`Verification Status: ${JSON.stringify(fragments)}`);
 
     yield put(verifyingCertificateCompleted(fragments));
@@ -79,7 +77,6 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedD
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function* sendCertificate({ payload }: { payload: { email: string; captcha: string } }) {
   try {
     const certificate = yield select(getCertificate);
@@ -100,7 +97,6 @@ export function* sendCertificate({ payload }: { payload: { email: string; captch
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function* generateShareLink() {
   try {
     yield put(generateShareLinkReset());
@@ -117,7 +113,6 @@ export function* generateShareLink() {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function* retrieveCertificateByAction({ payload: { uri, key } }: { payload: { uri: string; key?: string } }) {
   try {
     yield put(retrieveCertificateByActionPending());
@@ -158,13 +153,13 @@ export function* retrieveCertificateByAction({ payload: { uri, key } }: { payloa
 
 // TODO https://github.com/redux-saga/redux-saga/issues/1883
 export const sagas = [
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   takeEvery(RETRIEVE_CERTIFICATE_BY_ACTION, retrieveCertificateByAction),
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   takeEvery(UPDATE_CERTIFICATE, verifyCertificate),
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   takeEvery(SENDING_CERTIFICATE, sendCertificate),
   takeEvery(GENERATE_SHARE_LINK, generateShareLink),

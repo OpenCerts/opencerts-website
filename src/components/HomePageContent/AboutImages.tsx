@@ -2,7 +2,7 @@
 import React from "react";
 
 export const aboutImages = {
-  valid: () => (
+  valid: (): React.ReactElement => (
     <i aria-hidden="true">
       <svg xmlns="http://www.w3.org/2000/svg" width="73.4" height="83.2" viewBox="0 0 73.4 83.2">
         <title>View</title>
@@ -42,7 +42,7 @@ export const aboutImages = {
       </svg>
     </i>
   ),
-  genuine: () => (
+  genuine: (): React.ReactElement => (
     <i aria-hidden="true">
       <svg xmlns="http://www.w3.org/2000/svg" width="73.41" height="83.2" viewBox="0 0 73.41 83.2">
         <title>Check</title>
@@ -83,7 +83,7 @@ export const aboutImages = {
       </svg>
     </i>
   ),
-  institution: () => (
+  institution: (): React.ReactElement => (
     <i aria-hidden="true">
       <svg xmlns="http://www.w3.org/2000/svg" width="73.4" height="83.15" viewBox="0 0 73.4 83.15">
         <defs>
@@ -135,7 +135,7 @@ export const aboutImages = {
       </svg>
     </i>
   ),
-  one: () => (
+  one: (): React.ReactElement => (
     <i aria-hidden="true">
       <svg xmlns="http://www.w3.org/2000/svg" width="89" height="98.6" viewBox="0 0 89 98.6">
         <defs>
@@ -208,7 +208,7 @@ export const aboutImages = {
       </svg>
     </i>
   ),
-  two: () => (
+  two: (): React.ReactElement => (
     <i aria-hidden="true">
       <svg xmlns="http://www.w3.org/2000/svg" width="129" height="137" viewBox="0 0 129 137">
         <defs>
@@ -285,7 +285,7 @@ export const aboutImages = {
       </svg>
     </i>
   ),
-  three: () => (
+  three: (): React.ReactElement => (
     <i aria-hidden="true">
       <svg xmlns="http://www.w3.org/2000/svg" width="246.6" height="91.6" viewBox="0 0 246.6 91.6">
         <defs>
@@ -602,7 +602,7 @@ export const aboutImages = {
       </svg> */}
     </i>
   ),
-  four: () => (
+  four: (): React.ReactElement => (
     <i aria-hidden="true">
       <svg xmlns="http://www.w3.org/2000/svg" width="89.6" height="109.6" viewBox="0 0 89.6 109.6">
         <title>Validated</title>
@@ -644,7 +644,7 @@ export const aboutImages = {
       </svg>
     </i>
   ),
-  onetwo: () => (
+  onetwo: (): React.ReactElement => (
     <i>
       <svg xmlns="http://www.w3.org/2000/svg" width="224.84" height="115.35" viewBox="0 0 224.84 115.35">
         <defs>

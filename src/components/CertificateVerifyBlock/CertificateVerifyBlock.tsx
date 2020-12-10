@@ -1,30 +1,43 @@
 import { VerificationFragment, VerificationFragmentStatus } from "@govtechsg/oa-verify";
+import { getData, v2, WrappedDocument } from "@govtechsg/open-attestation";
 import { OpencertsRegistryVerificationFragmentData } from "@govtechsg/opencerts-verify";
 import React, { useState } from "react";
 import { icons } from "../ViewerPageImages";
 import { DetailedCertificateVerifyBlock } from "./DetailedCertificateVerifyBlock";
 
-type DnsFragment = { status: VerificationFragmentStatus; location?: string };
+type DnsTxtFragment = { status: VerificationFragmentStatus; location?: string };
+type DnsDidFragment = DnsTxtFragment;
 
-export const getIdentityVerificationText = (verificationStatus: VerificationFragment[]): string => {
+export const getIdentityVerificationText = (
+  verificationStatus: VerificationFragment[],
+  document: WrappedDocument<v2.OpenAttestationDocument>
+): string => {
+  const data = getData(document);
   const registryFragment = verificationStatus.find((status) => status.name === "OpencertsRegistryVerifier");
-  const dnsFragment = verificationStatus.find((status) => status.name === "OpenAttestationDnsTxt");
+  const dnsTxtFragment = verificationStatus.find((status) => status.name === "OpenAttestationDnsTxtIdentityProof");
+  const dnsDidFragment = verificationStatus.find((status) => status.name === "OpenAttestationDnsDidIdentityProof");
 
   // using concat to handle arrays and single element
   const registryFragmentData: OpencertsRegistryVerificationFragmentData[] = [].concat(registryFragment?.data || []);
-  const dnsFragmentData: (DnsFragment | undefined)[] = [].concat(dnsFragment?.data || []);
+  const dnsTxtFragmentData: (DnsTxtFragment | undefined)[] = [].concat(dnsTxtFragment?.data || []);
+  const dnsDidFragmentData: (DnsDidFragment | undefined)[] = [].concat(dnsDidFragment?.data || []);
 
-  const identities = registryFragmentData
-    .map((registryFragment, index) => {
+  const identities = data.issuers
+    .map((_, index) => {
       // retrieve the issuer identity from the fragment. for each issuer, only one identity must be retrieved
       // 1. check registry fragment and return the location if the fragment is valid
       // 2. otherwise check dns fragment and return the location if the fragment is valid
+      // 2. otherwise check did-dns fragment and return the location if the fragment is valid
       // 3. otherwise return default value
-      const dnsFragment = dnsFragmentData[index];
-      if (registryFragment.status === "VALID" && registryFragment.name)
+      const registryFragment = registryFragmentData[index];
+      const dnsTxtFragment = dnsTxtFragmentData[index];
+      const dnsDidFragment = dnsDidFragmentData[index];
+      if (registryFragment?.status === "VALID" && registryFragment?.name)
         return { location: registryFragment.name.toUpperCase(), from: "registry" };
-      else if (dnsFragment?.status === "VALID" && dnsFragment?.location)
-        return { location: dnsFragment.location.toUpperCase(), from: "dns" };
+      else if (dnsTxtFragment?.status === "VALID" && dnsTxtFragment?.location)
+        return { location: dnsTxtFragment.location.toUpperCase(), from: "dns-txt" };
+      else if (dnsDidFragment?.status === "VALID" && dnsDidFragment?.location)
+        return { location: dnsDidFragment.location.toUpperCase(), from: "dns-did" };
       else return { location: "", from: "" };
     })
     .filter((identity) => identity.location)
@@ -46,9 +59,9 @@ interface SimpleVerifyBlockProps {
   detailedViewVisible: boolean;
   verificationStatus: VerificationFragment[];
   toggleDetailedViewVisible: () => void;
+  document: WrappedDocument<v2.OpenAttestationDocument>;
 }
 const SimpleVerifyBlock: React.FunctionComponent<SimpleVerifyBlockProps> = (props) => {
-  const { verificationStatus } = props;
   return (
     <div
       id="certificate-status"
@@ -61,7 +74,9 @@ const SimpleVerifyBlock: React.FunctionComponent<SimpleVerifyBlockProps> = (prop
         <div className="px-2 w-auto">{icons.checkCircle()}</div>
         <div className="px-2 w-full font-bold">
           Certificate issued by
-          <div className="break-all md:break-normal">{getIdentityVerificationText(verificationStatus)}</div>
+          <div className="break-all md:break-normal">
+            {getIdentityVerificationText(props.verificationStatus, props.document)}
+          </div>
         </div>
         <div className="px-2 w-auto">
           <div className="transform rotate-90 xl:rotate-0">{icons.arrow()}</div>
@@ -73,6 +88,7 @@ const SimpleVerifyBlock: React.FunctionComponent<SimpleVerifyBlockProps> = (prop
 
 interface CertificateVerifyBlockProps {
   verificationStatus: VerificationFragment[];
+  document: WrappedDocument<v2.OpenAttestationDocument>;
 }
 export const CertificateVerifyBlock: React.FunctionComponent<CertificateVerifyBlockProps> = (props) => {
   const [detailedViewVisible, setDetailedViewVisible] = useState(false);
@@ -85,6 +101,7 @@ export const CertificateVerifyBlock: React.FunctionComponent<CertificateVerifyBl
         verificationStatus={verificationStatus}
         toggleDetailedViewVisible={toggleDetailedViewVisible}
         detailedViewVisible={detailedViewVisible}
+        document={props.document}
       />
       {detailedViewVisible ? <DetailedCertificateVerifyBlock verificationStatus={verificationStatus} /> : ""}
     </div>

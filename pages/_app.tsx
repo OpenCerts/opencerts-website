@@ -1,24 +1,19 @@
 import { mapValues } from "lodash";
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore repository has been archived, will wait to upgrade to fix
 import withGA from "next-ga";
-import withRedux from "next-redux-wrapper";
 import { DefaultSeo } from "next-seo";
 import App from "next/app";
 import Router from "next/router";
 import React from "react";
-import { Provider } from "react-redux";
-import { Store } from "redux";
+import { useDispatch } from "react-redux";
 import { DEFAULT_SEO, ENVIRONMENT, GA_ID } from "../src/config";
-import { RootState } from "../src/reducers";
 import { updateFeatureToggles } from "../src/reducers/featureToggle.actions";
-import { initStore } from "../src/store";
+import { wrapper } from "../src/store";
 import "../src/tailwind.css";
 
-interface FeatureFlagLoaderProps {
-  dispatch: Store<RootState>["dispatch"];
-}
-const FeatureFlagLoader: React.FunctionComponent<FeatureFlagLoaderProps> = ({ dispatch, children }) => {
+const FeatureFlagLoader: React.FunctionComponent = ({ children }) => {
+  const dispatch = useDispatch();
   React.useEffect(() => {
     const run = async (): Promise<void> => {
       const featureToggle = await window
@@ -33,22 +28,19 @@ const FeatureFlagLoader: React.FunctionComponent<FeatureFlagLoaderProps> = ({ di
   return <>{children}</>;
 };
 
-interface MyAppProps {
-  store: Store<RootState>;
-}
-class MyApp extends App<MyAppProps> {
+class MyApp extends App {
   render(): JSX.Element {
-    const { Component, pageProps, store } = this.props;
+    const { Component, pageProps } = this.props;
     return (
-      <Provider store={store}>
-        <FeatureFlagLoader dispatch={store.dispatch}>
+      <>
+        <FeatureFlagLoader>
           <DefaultSeo {...DEFAULT_SEO} />
           <Component {...pageProps} />
         </FeatureFlagLoader>
-      </Provider>
+      </>
     );
   }
 }
 
 const appWrappedWithGA = withGA(GA_ID, Router)(MyApp);
-export default withRedux(initStore)(appWrappedWithGA);
+export default wrapper.withRedux(appWrappedWithGA);

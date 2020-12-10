@@ -1,5 +1,21 @@
 import { VerificationFragment } from "@govtechsg/oa-verify";
+import { SchemaId, v2, WrappedDocument } from "@govtechsg/open-attestation";
 import { getIdentityVerificationText } from "./CertificateVerifyBlock";
+
+const buildDocumentWithIssuers = (issuers: v2.Issuer[]): WrappedDocument<v2.OpenAttestationDocument> => {
+  return {
+    version: SchemaId.v2,
+    signature: {
+      type: "SHA3MerkleProof" as const,
+      proof: [],
+      targetHash: "",
+      merkleRoot: "",
+    },
+    data: {
+      issuers,
+    },
+  };
+};
 
 describe("certificate verify block getIdentityVerificationText", () => {
   describe("wWhen registry is verified", () => {
@@ -17,7 +33,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
           ],
         },
         {
-          name: "OpenAttestationDnsTxt",
+          name: "OpenAttestationDnsTxtIdentityProof",
           type: "ISSUER_IDENTITY",
           status: "VALID",
           data: [
@@ -28,7 +44,9 @@ describe("certificate verify block getIdentityVerificationText", () => {
           ],
         },
       ];
-      expect(getIdentityVerificationText(fragments)).toStrictEqual("GOVTECH");
+      expect(getIdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
+        "GOVTECH"
+      );
     });
 
     it("should return appropriate display text when registry is verified but dns is unverified", () => {
@@ -45,7 +63,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
           ],
         },
         {
-          name: "OpenAttestationDnsTxt",
+          name: "OpenAttestationDnsTxtIdentityProof",
           type: "ISSUER_IDENTITY",
           status: "VALID",
           data: [
@@ -56,7 +74,9 @@ describe("certificate verify block getIdentityVerificationText", () => {
           ],
         },
       ];
-      expect(getIdentityVerificationText(fragments)).toStrictEqual("DEMO");
+      expect(getIdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
+        "DEMO"
+      );
     });
 
     it("should return appropriate display identity from registry sort identities", () => {
@@ -77,7 +97,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
           ],
         },
         {
-          name: "OpenAttestationDnsTxt",
+          name: "OpenAttestationDnsTxtIdentityProof",
           type: "ISSUER_IDENTITY",
           status: "VALID",
           data: [
@@ -92,7 +112,9 @@ describe("certificate verify block getIdentityVerificationText", () => {
           ],
         },
       ];
-      expect(getIdentityVerificationText(fragments)).toStrictEqual("DEMO, GOVTECH");
+      expect(
+        getIdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }, { name: "Issuer 2" }]))
+      ).toStrictEqual("DEMO, GOVTECH");
     });
 
     it("should return appropriate display identity from registry or dns when available and sort by giving priority to registry", () => {
@@ -113,7 +135,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
           ],
         },
         {
-          name: "OpenAttestationDnsTxt",
+          name: "OpenAttestationDnsTxtIdentityProof",
           type: "ISSUER_IDENTITY",
           status: "VALID",
           data: [
@@ -129,7 +151,9 @@ describe("certificate verify block getIdentityVerificationText", () => {
         },
       ];
 
-      expect(getIdentityVerificationText(fragments)).toStrictEqual("DEMO, ABC.COM");
+      expect(
+        getIdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }, { name: "Issuer 2" }]))
+      ).toStrictEqual("DEMO, ABC.COM");
     });
 
     it("should return Certificate issued by Unknown when registry and dns don't resolve any value", () => {
@@ -146,7 +170,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
           ],
         },
         {
-          name: "OpenAttestationDnsTxt",
+          name: "OpenAttestationDnsTxtIdentityProof",
           type: "ISSUER_IDENTITY",
           status: "INVALID",
           data: [
@@ -158,7 +182,9 @@ describe("certificate verify block getIdentityVerificationText", () => {
         },
       ];
 
-      expect(getIdentityVerificationText(fragments)).toStrictEqual("Unknown");
+      expect(getIdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
+        "Unknown"
+      );
     });
 
     it("should return registry identity when dns is skipped", () => {
@@ -166,7 +192,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
         {
           status: "SKIPPED",
           type: "ISSUER_IDENTITY",
-          name: "OpenAttestationDnsTxt",
+          name: "OpenAttestationDnsTxtIdentityProof",
           reason: {
             code: 2,
             codeString: "SKIPPED",
@@ -189,7 +215,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
         },
       ];
 
-      expect(getIdentityVerificationText(fragments)).toStrictEqual(
+      expect(getIdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
         "ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"
       );
     });
@@ -210,7 +236,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
           ],
         },
         {
-          name: "OpenAttestationDnsTxt",
+          name: "OpenAttestationDnsTxtIdentityProof",
           type: "ISSUER_IDENTITY",
           status: "VALID",
           data: [
@@ -221,7 +247,9 @@ describe("certificate verify block getIdentityVerificationText", () => {
           ],
         },
       ];
-      expect(getIdentityVerificationText(fragments)).toStrictEqual("ABC.COM");
+      expect(getIdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
+        "ABC.COM"
+      );
     });
 
     it("should return appropriate display text when multiple dns is verified", () => {
@@ -242,7 +270,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
           ],
         },
         {
-          name: "OpenAttestationDnsTxt",
+          name: "OpenAttestationDnsTxtIdentityProof",
           type: "ISSUER_IDENTITY",
           status: "VALID",
           data: [
@@ -257,7 +285,9 @@ describe("certificate verify block getIdentityVerificationText", () => {
           ],
         },
       ];
-      expect(getIdentityVerificationText(fragments)).toStrictEqual("DEMO.COM, XYZ.COM");
+      expect(
+        getIdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }, { name: "Issuer 2" }]))
+      ).toStrictEqual("DEMO.COM, XYZ.COM");
     });
   });
 });

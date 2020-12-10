@@ -1,7 +1,10 @@
 import { Selector } from "testcafe";
 import "isomorphic-fetch";
+import { waitForReact } from "testcafe-react-selectors";
 
-fixture("Load action from encrypted certificate").page`http://localhost:3000`;
+fixture("Load action from encrypted certificate").page`http://localhost:3000`.beforeEach(async () => {
+  await waitForReact();
+});
 
 const IframeBlock = Selector("#iframe");
 const SampleTemplate = Selector("#rendered-certificate");

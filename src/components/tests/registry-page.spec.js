@@ -1,6 +1,9 @@
 import { Selector } from "testcafe";
+import { waitForReact } from "testcafe-react-selectors";
 
-fixture("Registry Page").page`http://localhost:3000`;
+fixture("Registry Page").page`http://localhost:3000`.beforeEach(async () => {
+  await waitForReact();
+});
 
 const RegistrySearch = Selector("[data-testid='registry-search']");
 const SMU = Selector("[data-testid='registry-card']").withText("Singapore Management University");

@@ -7,7 +7,7 @@ import { Search } from "./UI/Search";
 
 const partners = Object.keys(registry.issuers)
   .map((k) => ({
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     ...registry.issuers[k],
     address: k,

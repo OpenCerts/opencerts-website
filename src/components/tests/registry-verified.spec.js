@@ -1,6 +1,9 @@
 import { Selector, ClientFunction } from "testcafe";
+import { waitForReact } from "testcafe-react-selectors";
 
-fixture("Registry Certificate Rendering").page`http://localhost:3000`;
+fixture("Registry Certificate Rendering").page`http://localhost:3000`.beforeEach(async () => {
+  await waitForReact();
+});
 
 const Document = "./fixture/registry-verified.json";
 const IframeBlock = Selector("#iframe");

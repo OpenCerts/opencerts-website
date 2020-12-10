@@ -51,7 +51,7 @@ export const sendEventCertificateViewedDetailed = ({
   let registryId = null;
 
   const separator = ";";
-  const store = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? "";
+  const store = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? issuer.id ?? ""; // use id for DID
   const id = certificateData?.id ?? "";
   const name = certificateData?.name ?? "";
   const issuedOn = certificateData?.issuedOn ?? "";
@@ -100,7 +100,7 @@ export function triggerErrorLogging(
 
   // If there are multiple issuers in a certificate, we send multiple events!
   certificate.issuers.forEach((issuer: v2.Issuer) => {
-    const store = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? "";
+    const store = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? issuer.id ?? ""; // use id for DID
     let issuerName = issuer.name;
     let registryId = null;
 
