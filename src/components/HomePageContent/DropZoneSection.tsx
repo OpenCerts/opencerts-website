@@ -80,9 +80,9 @@ class DropZoneSection extends Component<DropZoneSectionProps, DropZoneSectionSta
           return "edge";
         case agent.indexOf("edg/") > -1:
           return "chromium based edge (dev or canary)"; // Match also / to avoid matching for the older Edge
-        case agent.indexOf("opr") > -1 && !!window.opr:
+        case agent.indexOf("opr") > -1:
           return "opera";
-        case agent.indexOf("chrome") > -1 && !!window.chrome:
+        case agent.indexOf("chrome") > -1:
           return "chrome";
         case agent.indexOf("trident") > -1:
           return "ie";
