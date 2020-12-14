@@ -1,7 +1,7 @@
 import { v2, WrappedDocument } from "@govtechsg/open-attestation";
-import Bowser from "bowser";
 import React, { Component, ReactNode } from "react";
 import { connect } from "react-redux";
+import { UAParser } from "ua-parser-js";
 import { NETWORK_NAME } from "../../config";
 import { updateCertificate } from "../../reducers/certificate.actions";
 import { analyticsEvent } from "../Analytics";
@@ -51,7 +51,7 @@ const ButtonDemoCertificate: React.FunctionComponent = () => (
 );
 
 type DropZoneSectionState = {
-  isIeOrEdge?: boolean;
+  isNotdraggable?: boolean;
 };
 
 interface DropZoneSectionProps {
@@ -63,21 +63,15 @@ class DropZoneSection extends Component<DropZoneSectionProps, DropZoneSectionSta
     this.handleDrop = this.handleDrop.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.state = {
-      isIeOrEdge: false,
+      isNotdraggable: false,
     };
   }
   componentDidMount(): void {
-    const browser = Bowser.getParser(window.navigator.userAgent);
-    // https://github.com/lancedikson/bowser/blob/master/src/constants.js
-    const isValidBrowser = browser.satisfies({
-      windows: {
-        chrome: "~87",
-        ie: "~11",
-        edge: "~84",
-      },
-    });
+    const parser = new UAParser();
+    const isUnsupportedBrowsers = parser.getBrowser().name === "IE" || parser.getBrowser().name === "Edge";
+
     this.setState({
-      isIeOrEdge: isValidBrowser,
+      isNotdraggable: isUnsupportedBrowsers,
     });
 
     const elementDrop = document.getElementById("demoDrop");
@@ -130,10 +124,10 @@ class DropZoneSection extends Component<DropZoneSectionProps, DropZoneSectionSta
                 Whether you&#39;re a student or an employer, OpenCerts lets you verify the certificates you have of
                 anyone from any institution. All in one place.
               </p>
-              <div className={`${this.state.isIeOrEdge ? "block" : "lg:hidden"}`}>
+              <div className={`${this.state.isNotdraggable ? "block" : "lg:hidden"}`}>
                 <ButtonDemoCertificate />
               </div>
-              <div className={`${this.state.isIeOrEdge ? "lg:hidden" : "hidden"} lg:block`}>
+              <div className={`${this.state.isNotdraggable ? "lg:hidden" : "hidden"} lg:block`}>
                 <DraggableDemoCertificate />
               </div>
             </div>
