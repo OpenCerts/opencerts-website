@@ -51,10 +51,6 @@ const ButtonDemoCertificate: React.FunctionComponent = () => (
 );
 
 type DropZoneSectionState = {
-  simpleBrowserCheck: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  result: any;
-  browserName?: string;
   isNotdraggable?: boolean;
 };
 
@@ -67,41 +63,14 @@ class DropZoneSection extends Component<DropZoneSectionProps, DropZoneSectionSta
     this.handleDrop = this.handleDrop.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.state = {
-      simpleBrowserCheck: "",
-      result: {},
-      browserName: "",
       isNotdraggable: false,
     };
   }
   componentDidMount(): void {
-    const simpleBrowserCheck = (function (agent) {
-      switch (true) {
-        case agent.indexOf("edge") > -1:
-          return "edge";
-        case agent.indexOf("edg/") > -1:
-          return "chromium based edge (dev or canary)"; // Match also / to avoid matching for the older Edge
-        case agent.indexOf("opr") > -1:
-          return "opera";
-        case agent.indexOf("chrome") > -1:
-          return "chrome";
-        case agent.indexOf("trident") > -1:
-          return "ie";
-        case agent.indexOf("firefox") > -1:
-          return "firefox";
-        case agent.indexOf("safari") > -1:
-          return "safari";
-        default:
-          return "other";
-      }
-    })(window.navigator.userAgent.toLowerCase());
-
     const parser = new UAParser();
     const isUnsupportedBrowsers = parser.getBrowser().name === "IE" || parser.getBrowser().name === "Edge";
 
     this.setState({
-      simpleBrowserCheck: simpleBrowserCheck,
-      result: parser.getResult(),
-      browserName: parser.getBrowser().name,
       isNotdraggable: isUnsupportedBrowsers,
     });
 
@@ -155,11 +124,6 @@ class DropZoneSection extends Component<DropZoneSectionProps, DropZoneSectionSta
                 Whether you&#39;re a student or an employer, OpenCerts lets you verify the certificates you have of
                 anyone from any institution. All in one place.
               </p>
-              <div>what browser name? {this.state.browserName}</div>
-              <code className="break-words">{JSON.stringify(this.state.result)}</code>
-              <br />
-              <br />
-              <div>simpleBrowserCheck: {this.state.simpleBrowserCheck}</div>
               <div className={`${this.state.isNotdraggable ? "block" : "lg:hidden"}`}>
                 <ButtonDemoCertificate />
               </div>
