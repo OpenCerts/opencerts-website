@@ -51,6 +51,8 @@ const ButtonDemoCertificate: React.FunctionComponent = () => (
 );
 
 type DropZoneSectionState = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  result: any;
   browserName?: string;
   isNotdraggable?: boolean;
 };
@@ -64,6 +66,7 @@ class DropZoneSection extends Component<DropZoneSectionProps, DropZoneSectionSta
     this.handleDrop = this.handleDrop.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.state = {
+      result: {},
       browserName: "",
       isNotdraggable: false,
     };
@@ -73,6 +76,7 @@ class DropZoneSection extends Component<DropZoneSectionProps, DropZoneSectionSta
     const isUnsupportedBrowsers = parser.getBrowser().name === "IE" || parser.getBrowser().name === "Edge";
 
     this.setState({
+      result: parser.getResult(),
       browserName: parser.getBrowser().name,
       isNotdraggable: isUnsupportedBrowsers,
     });
@@ -127,7 +131,8 @@ class DropZoneSection extends Component<DropZoneSectionProps, DropZoneSectionSta
                 Whether you&#39;re a student or an employer, OpenCerts lets you verify the certificates you have of
                 anyone from any institution. All in one place.
               </p>
-              <div data-id={this.state.browserName}>this is a test (browserName)</div>
+              <div>what browser name? {this.state.browserName}</div>
+              <code className="break-words">{JSON.stringify(this.state.result)}</code>
               <div className={`${this.state.isNotdraggable ? "block" : "lg:hidden"}`}>
                 <ButtonDemoCertificate />
               </div>
