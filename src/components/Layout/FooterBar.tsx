@@ -80,7 +80,7 @@ export const FooterBar: React.FunctionComponent = () => (
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src="/static/images/common/gdb-logo.svg" alt="Government Digital Services logo" />
+            <img src="/static/images/common/gds-logo.svg" alt="Government Digital Services logo" />
           </a>
         </div>
       </div>
