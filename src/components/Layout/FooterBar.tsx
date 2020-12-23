@@ -72,6 +72,17 @@ export const FooterBar: React.FunctionComponent = () => (
             </li>
           </ul>
         </div>
+        <div className="w-40 mb-4 lg:mb-0 lg:ml-auto">
+          <h6 className="font-montserrat font-bold mb-2">Powered by</h6>
+          <a
+            className="inline-block transition-opacity hover:opacity-75"
+            href="https://hive.tech.gov.sg/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="/static/images/common/gdb-logo.svg" alt="Government Digital Services logo" />
+          </a>
+        </div>
       </div>
     </div>
     <div className="container">
