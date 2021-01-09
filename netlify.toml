@@ -3,11 +3,3 @@
   for = "/static/registry.json"
     [headers.values]
     Access-Control-Allow-Origin = "*"
-[[headers]]
-  for = "/?q*"
-    [headers.values]
-    cache-control = '''
-      max-age=0,
-      no-cache,
-      no-store,
-      must-revalidate'''

@@ -20,14 +20,14 @@ const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
   const router = useRouter();
   useEffect(() => {
     props.resetCertificateState();
-//     if (router.query.q) {
-//       const action = JSON.parse(window.decodeURI(router.query.q as string));
-//       if (action.type === "DOCUMENT") {
-//         props.retrieveCertificateByAction(action.payload);
-//       } else {
-//         props.retrieveCertificateByActionFailure(`The type ${action.type} provided from the action is not supported`);
-//       }
-//     }
+    if (router.query.q) {
+      const action = JSON.parse(window.decodeURI(router.query.q as string));
+      if (action.type === "DOCUMENT") {
+        props.retrieveCertificateByAction(action.payload);
+      } else {
+        props.retrieveCertificateByActionFailure(`The type ${action.type} provided from the action is not supported`);
+      }
+    }
   }, [props, router]);
 
   return (
