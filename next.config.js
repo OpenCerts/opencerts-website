@@ -23,8 +23,8 @@ module.exports = withBundleAnalyzer({
     };
   },
   env: {
-    ETHEREUM_PROVIDER: process.env.ETHEREUM_PROVIDER || "infura",
-    INFURA_API_KEY: process.env.INFURA_API_KEY,
+    INFURA_API_KEY: process.env.INFURA_API_KEY || "01b3ed28c54f4ae49cb4e27df560c5e8", // nebulis personal api key, feel free to change
+    ALCHEMY_API_KEY: process.env.ALCHEMY_API_KEY || "FK1x9CdE8NStKjVt236D_LP7B6MMCFOs", // default key works on ropsten
   },
   // Variables passed to both server and client
   publicRuntimeConfig: {
