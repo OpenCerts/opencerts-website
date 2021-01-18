@@ -14,7 +14,7 @@ test("Registry page's contact tab and search is working correctly", async (t) =>
   // panel should work with 4 contact infos
   await t.click(SMU.find("[data-testid='btn-contact']"));
   await t.expect(SMU.find("[data-testid='contact-info']").visible).ok();
-  await t.expect(SMU.find("[data-testid='info']").count).eql(4);
+  await t.expect(SMU.find("[data-testid='info']").count).eql(8);
 
   // search should return 1 result even though there are 4 contact infos
   await t.typeText(RegistrySearch, "0x3");
@@ -23,7 +23,7 @@ test("Registry page's contact tab and search is working correctly", async (t) =>
   // double check if items are still 4 contact infos
   await t.selectText(RegistrySearch).pressKey("delete");
   await t.click(SMU.find("[data-testid='btn-contact']"));
-  await t.expect(SMU.find("[data-testid='info']").count).eql(4);
+  await t.expect(SMU.find("[data-testid='info']").count).eql(8);
 
   // should return nothing if no match
   await t.typeText(RegistrySearch, "000");
