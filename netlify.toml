@@ -3,3 +3,8 @@
   for = "/static/registry.json"
     [headers.values]
     Access-Control-Allow-Origin = "*"
+
+# Unset the infura key with domain restriction for branch previews (mainnet)
+[context.deploy-preview]
+  [context.deploy-preview.environment]
+    INFURA_API_KEY = "01b3ed28c54f4ae49cb4e27df560c5e8"
