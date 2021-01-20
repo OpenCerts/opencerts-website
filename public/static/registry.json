@@ -208,6 +208,15 @@
       "logo": "/static/images/NUS_logo.svg",
       "id": "nus-registry"
     },
+	"0x66671988ee465b5c23Ef18838B32b1666d0EC8d6": {
+      "name": "National University of Singapore",
+      "displayCard": true,
+      "website": "http://www.nus.edu.sg/",
+      "email": "transcript@nus.edu.sg",
+      "phone": "+65 6516 2304",
+      "logo": "/static/images/NUS_logo.svg",
+      "id": "nus-registry"
+    },
     "0x69Ec8cA1A2A19566128F4157Dca6249d89046F1F": {
       "name": "Singapore Polytechnic",
       "displayCard": true,
