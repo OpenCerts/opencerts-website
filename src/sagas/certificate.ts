@@ -2,6 +2,7 @@
 import { decryptString } from "@govtechsg/oa-encryption";
 import { v2, WrappedDocument } from "@govtechsg/open-attestation";
 import { isValid, verify } from "@govtechsg/opencerts-verify";
+import { ethers } from "ethers";
 import Router from "next/router";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import "isomorphic-fetch";
@@ -39,11 +40,19 @@ import { generateLink } from "../services/link";
 import { getLogger } from "../utils/logger";
 
 const { trace } = getLogger("saga:certificate");
+// lower priority === higher priority, so infura has priority, alchemy is used as fallback
+const provider = new ethers.providers.FallbackProvider(
+  [
+    { priority: 1, provider: new ethers.providers.InfuraProvider(NETWORK_NAME, process.env.INFURA_API_KEY) },
+    { priority: 10, provider: new ethers.providers.AlchemyProvider(NETWORK_NAME, process.env.ALCHEMY_API_KEY) },
+  ],
+  1
+);
 
 export function* verifyCertificate({ payload: certificate }: { payload: WrappedDocument<v2.OpenAttestationDocument> }) {
   try {
     yield put(verifyingCertificate());
-    const fragments = yield call(verify({ network: NETWORK_NAME }), certificate);
+    const fragments = yield call(verify({ provider }), certificate);
     trace(`Verification Status: ${JSON.stringify(fragments)}`);
 
     yield put(verifyingCertificateCompleted(fragments));

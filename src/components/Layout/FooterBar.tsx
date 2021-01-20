@@ -5,14 +5,18 @@ export const FooterBar: React.FunctionComponent = () => (
   <footer className="flex-shrink-0 bg-navy text-white py-2">
     <div className="container pt-8 pb-12">
       <div className="flex flex-wrap">
-        <div className="w-40 lg:mr-40 mb-4 lg:mb-0">
-          <Link href="/">
-            <a>
-              <img src="/static/images/opencertslogo.svg" alt="OpenCerts logo" />
-            </a>
-          </Link>
+        <div className="w-40 lg:mr-40 mb-8 lg:mb-0">
+          <h6 className="font-montserrat font-bold mb-2">Powered by</h6>
+          <a
+            className="inline-block transition-opacity hover:opacity-75"
+            href="https://hive.tech.gov.sg/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="/static/images/common/gds-logo.svg" alt="Government Digital Services logo" />
+          </a>
         </div>
-        <div className="w-full lg:w-40 mb-4 lg:mb-0">
+        <div className="w-full lg:w-40 mb-8 lg:mb-0">
           <h6 className="font-montserrat font-bold mb-2">Partners</h6>
           <ul className="text-sm">
             <li>
@@ -32,7 +36,7 @@ export const FooterBar: React.FunctionComponent = () => (
             </li>
           </ul>
         </div>
-        <div className="w-full lg:w-40 mb-4 lg:mb-0">
+        <div className="w-full lg:w-40 mb-8 lg:mb-0">
           <h6 className="font-montserrat font-bold mb-2">Support</h6>
           <ul className="text-sm">
             <li>
@@ -57,7 +61,7 @@ export const FooterBar: React.FunctionComponent = () => (
             </li>
           </ul>
         </div>
-        <div className="w-full lg:w-40 mb-4 lg:mb-0">
+        <div className="w-full lg:w-40">
           <h6 className="font-montserrat font-bold mb-2">Legal</h6>
           <ul className="text-sm">
             <li>
