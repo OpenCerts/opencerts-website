@@ -53,37 +53,11 @@ describe("certificateViewer", () => {
     showSharing: false,
     verificationStatus: [],
   };
-  it("should show that the issuer is not in the registry when identities is an empty array", () => {
+  it("should not show that the issuer is in the registry when identities is an empty array", () => {
     render(<CertificateViewer {...sharedProps} verificationStatus={[]} />, { wrapper: ReduxWrapper });
     expect(
-      screen.getByText(
-        withMarkup(
-          "Certificate issuer is not in the SkillsFuture Singapore registry for Opencerts.What does this mean ?"
-        )
-      )
-    ).toBeInTheDocument();
-  });
-  it("should show that the issuer is not in the registry when registry identity is invalid", () => {
-    render(
-      <CertificateViewer
-        {...sharedProps}
-        verificationStatus={[
-          {
-            name: "OpencertsRegistryVerifier",
-            status: "INVALID",
-            type: "ISSUER_IDENTITY",
-          },
-        ]}
-      />,
-      { wrapper: ReduxWrapper }
-    );
-    expect(
-      screen.getByText(
-        withMarkup(
-          "Certificate issuer is not in the SkillsFuture Singapore registry for Opencerts.What does this mean ?"
-        )
-      )
-    ).toBeInTheDocument();
+      screen.queryByText(withMarkup("Certificate issuer is in the SkillsFuture Singapore registry for Opencerts."))
+    ).not.toBeInTheDocument();
   });
   it("should show that the issuer is in the registry when registry identity is valid", () => {
     render(
