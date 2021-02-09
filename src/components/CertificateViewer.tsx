@@ -115,11 +115,16 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
                         </div>
                       )}
                     />
-                    <div className="ml-2 w-auto" onClick={() => props.handleSharingToggle()}>
-                      <div className="icon-utility" id="btn-email">
-                        <i className="fas fa-envelope text-md" />
-                      </div>
-                    </div>
+                    <FeatureFlagContainer
+                      name="EMAIL_CERT"
+                      render={() => (
+                        <div className="ml-2 w-auto" onClick={() => props.handleSharingToggle()}>
+                          <div className="icon-utility" id="btn-email">
+                            <i className="fas fa-envelope text-md" />
+                          </div>
+                        </div>
+                      )}
+                    />
                     <div className="ml-2 w-auto">
                       <a
                         className="icon-utility"
