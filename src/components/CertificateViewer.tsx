@@ -1,7 +1,6 @@
 import { VerificationFragment } from "@govtechsg/oa-verify";
-import { WrappedDocument, v2 } from "@govtechsg/open-attestation";
+import { v2, WrappedDocument } from "@govtechsg/open-attestation";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import React from "react";
 import { connect } from "react-redux";
 import { updateObfuscatedCertificate as updateObfuscatedCertificateAction } from "../reducers/certificate.actions";
@@ -40,17 +39,7 @@ const StatusBanner: React.FunctionComponent<StatusBannerProps> = ({ isInRegistry
       <div className="container text-center py-4">
         {isInRegistry ? (
           <p className="mb-0">Certificate issuer is in the SkillsFuture Singapore registry for Opencerts.</p>
-        ) : (
-          <p className="mb-0">
-            Certificate issuer is <b>not</b> in the SkillsFuture Singapore registry for Opencerts.
-            <br />
-            <Link href="/faq#verifications-issuers-not-in-registry-meaning">
-              <a className="underline text-gray-800 hover:text-gray-600">
-                <small>What does this mean ?</small>
-              </a>
-            </Link>
-          </p>
-        )}
+        ) : null}
       </div>
     </section>
   );

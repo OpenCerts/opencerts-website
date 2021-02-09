@@ -183,25 +183,6 @@ export const faqContent: FagElement[] = [
           </p>
         ),
       },
-      {
-        id: "verifications-issuers-not-in-registry-meaning",
-        question: 'What does it mean by "Certificate issuer is not in the SkillsFuture registry for OpenCerts"?',
-        answer: (
-          <ul className="list-disc pl-8">
-            <li>
-              <span className="font-bold">If an institution is in the SkillsFuture registry for OpenCerts</span>, it
-              means that the identity of the institution has been established. This institution is an issuer of academic
-              and skill certificates recognised by SkillsFuture Singapore.
-            </li>
-            <li>
-              <span className="font-bold">If an institution is NOT in the SkillsFuture registry for OpenCerts</span>, we
-              still verify the identity of the institution by domain name. Though the institution has not been verified
-              by SkillsFuture Singapore, it may be possible that this is a legitimate institution. You may check by
-              contacting them directly.
-            </li>
-          </ul>
-        ),
-      },
     ],
   },
 
