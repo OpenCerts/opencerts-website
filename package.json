@@ -42,7 +42,7 @@
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "clipboard-copy": "^4.0.1",
     "debug": "^4.3.1",
-    "ethers": "^5.0.26",
+    "ethers": "^5.0.30",
     "isomorphic-fetch": "^3.0.0",
     "lodash": "^4.17.20",
     "next": "10.0.3",
