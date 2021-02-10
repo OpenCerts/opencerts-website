@@ -1,14 +1,14 @@
-import { VerificationFragment } from "@govtechsg/oa-verify";
-import { v2, WrappedDocument } from "@govtechsg/open-attestation";
+import {VerificationFragment} from "@govtechsg/oa-verify";
+import {v2, WrappedDocument} from "@govtechsg/open-attestation";
 import dynamic from "next/dynamic";
 import React from "react";
-import { connect } from "react-redux";
-import { updateObfuscatedCertificate as updateObfuscatedCertificateAction } from "../reducers/certificate.actions";
-import { CertificateShareLinkFormContainer } from "./CertificateShareLink/CertificateShareLinkForm";
-import { CertificateVerifyBlock } from "./CertificateVerifyBlock";
-import { ErrorBoundary } from "./ErrorBoundary";
-import { FeatureFlagContainer } from "./FeatureFlag";
-import { Modal } from "./Modal";
+import {connect} from "react-redux";
+import {updateObfuscatedCertificate as updateObfuscatedCertificateAction} from "../reducers/certificate.actions";
+import {CertificateShareLinkFormContainer} from "./CertificateShareLink/CertificateShareLinkForm";
+import {CertificateVerifyBlock} from "./CertificateVerifyBlock";
+import {ErrorBoundary} from "./ErrorBoundary";
+import {FeatureFlagContainer} from "./FeatureFlag";
+import {Modal} from "./Modal";
 
 const CertificateSharingForm = dynamic(import("./CertificateSharing/CertificateSharingForm"));
 
@@ -26,20 +26,11 @@ const ForwardedRefDecentralisedRenderer = React.forwardRef<
   }
 >((props, ref) => <DecentralisedRenderer {...props} forwardedRef={ref} />);
 
-interface StatusBannerProps {
-  isInRegistry?: boolean;
-}
-
-const StatusBanner: React.FunctionComponent<StatusBannerProps> = ({ isInRegistry }: StatusBannerProps) => {
+const RegistryBanner: React.FunctionComponent = () => {
   return (
-    <section
-      id="status-banner-container"
-      className={`${isInRegistry ? "bg-green-200 text-green-400" : "bg-gray-300 text-gray-800"} exact-print`}
-    >
+    <section id="status-banner-container" className={`bg-green-200 text-green-400 exact-print`}>
       <div className="container text-center py-4">
-        {isInRegistry ? (
-          <p className="mb-0">Certificate issuer is in the SkillsFuture Singapore registry for Opencerts.</p>
-        ) : null}
+        <p className="mb-0">Certificate issuer is in the SkillsFuture Singapore registry for Opencerts.</p>
       </div>
     </section>
   );
@@ -74,7 +65,7 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
     <ErrorBoundary>
       {
         <>
-          <StatusBanner isInRegistry={isInRegistry} />
+          {isInRegistry ? <RegistryBanner /> : null}
           <section className="bg-blue-100 py-4">
             <div className="container">
               <div className="flex flex-wrap">
