@@ -1,14 +1,14 @@
-import {VerificationFragment} from "@govtechsg/oa-verify";
-import {v2, WrappedDocument} from "@govtechsg/open-attestation";
+import { VerificationFragment } from "@govtechsg/oa-verify";
+import { v2, WrappedDocument } from "@govtechsg/open-attestation";
 import dynamic from "next/dynamic";
 import React from "react";
-import {connect} from "react-redux";
-import {updateObfuscatedCertificate as updateObfuscatedCertificateAction} from "../reducers/certificate.actions";
-import {CertificateShareLinkFormContainer} from "./CertificateShareLink/CertificateShareLinkForm";
-import {CertificateVerifyBlock} from "./CertificateVerifyBlock";
-import {ErrorBoundary} from "./ErrorBoundary";
-import {FeatureFlagContainer} from "./FeatureFlag";
-import {Modal} from "./Modal";
+import { connect } from "react-redux";
+import { updateObfuscatedCertificate as updateObfuscatedCertificateAction } from "../reducers/certificate.actions";
+import { CertificateShareLinkFormContainer } from "./CertificateShareLink/CertificateShareLinkForm";
+import { CertificateVerifyBlock } from "./CertificateVerifyBlock";
+import { ErrorBoundary } from "./ErrorBoundary";
+import { FeatureFlagContainer } from "./FeatureFlag";
+import { Modal } from "./Modal";
 
 const CertificateSharingForm = dynamic(import("./CertificateSharing/CertificateSharingForm"));
 
