@@ -1,11 +1,11 @@
 [
   {
-    "id": "convergence",
-    "name": "Convergence.tech",
-    "description": "Provides a Self-Sovereign Identity (SSI) powered digital credential solution supporting the OpenCerts schema as well as W3C DID and Verifiable Credential standards and the developing DIDComms protocols.",
-    "website": "https://convergence.tech",
-    "key": "convergence",
-    "logo": "/static/images/collaborate/CONVERGENCE_logo.png"
+    "id": "trybeid",
+    "name": "Trybe.ID",
+    "description": "Provides a Self-Sovereign Identity (SSI) powered digital credential solution supporting the OpenCerts schema as well as W3C DID and Verifiable Credential standards.",
+    "website": "https://trybe.id",
+    "key": "trybeid",
+    "logo": "/static/images/collaborate/trybeid.png"
   },
   {
     "id": "riverr",
