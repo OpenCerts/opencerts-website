@@ -6,8 +6,6 @@ fixture("Multiple Registry Verified for Certificate Rendering").page`http://loca
 });
 
 const Document = "./fixture/sample-multiregistry-verified.json";
-const IframeBlock = Selector("#iframe");
-const SampleTemplate = Selector("#rendered-certificate");
 const StatusButton = Selector("#certificate-status");
 const CertificateStatusBanner = Selector("#status-banner-container");
 
@@ -21,15 +19,5 @@ test("Sample document is rendered correctly when multiple registry is verified",
 
   await validateTextContent(t, CertificateStatusBanner, [
     "Certificate issuer is in the SkillsFuture Singapore registry for Opencerts",
-  ]);
-
-  await t.switchToIframe(IframeBlock);
-
-  await validateTextContent(t, SampleTemplate, [
-    "Sample Certificate",
-    "Your Name",
-    "Issuer Info",
-    "Transcript",
-    "CAREER AND PROFESSIONAL PREPARATION II",
   ]);
 });
