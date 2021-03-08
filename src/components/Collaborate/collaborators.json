@@ -62,5 +62,13 @@
     "website": "https://www.aokpass.com",
     "key": "aokpass",
     "logo": "/static/images/collaborate/aokpass_logo.svg"
+  },
+  {
+    "id": "jedtrade",
+    "name": "JEDTrade",
+    "description": "We enable enterprises to issue trusted and tamper-proof digital certificates using OpenCerts Schema. With our workflow engine, we allow enterprises to customize their business workflow.",
+    "website": "https://www.jedtrade.com",
+    "key": "jedtrade",
+    "logo": "/static/images/collaborate/jedtrade_logo.png"
   }
 ]
