@@ -1,5 +1,5 @@
 import { VerificationFragment } from "@govtechsg/oa-verify";
-import { OpenAttestationDocument } from "@govtechsg/open-attestation";
+import { utils, v2, v3, OpenAttestationDocument } from "@govtechsg/open-attestation";
 import dynamic from "next/dynamic";
 import React from "react";
 import { connect } from "react-redux";
@@ -35,6 +35,14 @@ const RegistryBanner: React.FunctionComponent = () => {
       </div>
     </section>
   );
+};
+
+const isObfuscated = (document: v3.WrappedDocument | v2.WrappedDocument) => {
+  try {
+    return utils.isObfuscated(document);
+  } catch (e) {
+    return false;
+  }
 };
 
 export interface CertificateViewerProps {
@@ -116,6 +124,12 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
                   </div>
                 </div>
               </div>
+              {isObfuscated(document) && (
+                <div className="text-md font-bold text-red pt-4" id="obfuscation-note">
+                  The owner of this certificate have chosen not to share certain information in the certificate with
+                  you. Please note that this does not affect the authenticity of the certificate.
+                </div>
+              )}
             </div>
             <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
               <CertificateSharingForm
@@ -141,7 +155,7 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
             />
           </section>
         </>
-      }{" "}
+      }
     </ErrorBoundary>
   );
 };

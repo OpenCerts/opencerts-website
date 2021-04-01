@@ -26,7 +26,7 @@ const MultiTabs: React.FunctionComponent<MultiTabsProps> = ({ resetData, templat
       <div className="hidden md:block">
         <div className="container">
           <div className="flex flex-wrap">
-            <div className="w-full ml-auto mb-16 lg:mb-0 lg:w-auto lg:order-2">
+            <div className="w-full ml-auto mb-8 lg:mb-0 lg:w-auto lg:order-2">
               <Link href="/">
                 <a
                   className="button border border-navy text-navy bg-white hover:bg-navy"

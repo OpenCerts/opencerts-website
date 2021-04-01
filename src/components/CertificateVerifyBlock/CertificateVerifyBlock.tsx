@@ -103,7 +103,7 @@ export const CertificateVerifyBlock: React.FunctionComponent<CertificateVerifyBl
 
   const { verificationStatus } = props;
   return (
-    <div className="relative mb-8 lg:mb-0">
+    <div className="relative mb-4 lg:mb-0">
       <SimpleVerifyBlock
         verificationStatus={verificationStatus}
         toggleDetailedViewVisible={toggleDetailedViewVisible}
