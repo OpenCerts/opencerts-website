@@ -51,6 +51,7 @@ const provider = new ethers.providers.FallbackProvider(
 
 export function* verifyCertificate({ payload: certificate }: { payload: WrappedDocument<v2.OpenAttestationDocument> }) {
   try {
+    console.log({ certificate });
     yield put(verifyingCertificate());
     const fragments = yield call(verify({ provider }), certificate);
     trace(`Verification Status: ${JSON.stringify(fragments)}`);

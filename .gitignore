@@ -9,3 +9,5 @@ yarn.lock
 .scannerwork
 *.iml
 .idea
+**/public/workbox-*.js
+**/public/sw.js
