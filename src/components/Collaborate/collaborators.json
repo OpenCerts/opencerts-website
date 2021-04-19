@@ -70,5 +70,13 @@
     "website": "https://www.jedtrade.com",
     "key": "jedtrade",
     "logo": "/static/images/collaborate/jedtrade_logo.png"
+  },
+  {
+    "id": "ibs",
+    "name": "Institute of Blockchain",
+    "description": "Just another OpenCerts issuer.",
+    "website": "https://www.ibs.edu.sg",
+    "key": "ibs",
+    "logo": "/static/images/collaborate/IBS_Logo.png"
   }
 ]
