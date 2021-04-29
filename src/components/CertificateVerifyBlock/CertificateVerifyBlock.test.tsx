@@ -1,4 +1,4 @@
-import { VerificationFragment } from "@govtechsg/oa-verify";
+import { AllVerificationFragment } from "@govtechsg/oa-verify";
 import { SchemaId, v2, WrappedDocument } from "@govtechsg/open-attestation";
 import { getIdentityVerificationText } from "./CertificateVerifyBlock";
 
@@ -20,7 +20,7 @@ const buildDocumentWithIssuers = (issuers: v2.Issuer[]): WrappedDocument<v2.Open
 describe("certificate verify block getIdentityVerificationText", () => {
   describe("wWhen registry is verified", () => {
     it("should return appropriate display identity from registry before when dns and registry are valid", () => {
-      const fragments: VerificationFragment[] = [
+      const fragments: AllVerificationFragment[] = [
         {
           name: "OpencertsRegistryVerifier",
           type: "ISSUER_IDENTITY",
@@ -50,7 +50,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
     });
 
     it("should return appropriate display text when registry is verified but dns is unverified", () => {
-      const fragments: VerificationFragment[] = [
+      const fragments: AllVerificationFragment[] = [
         {
           name: "OpencertsRegistryVerifier",
           type: "ISSUER_IDENTITY",
@@ -80,7 +80,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
     });
 
     it("should return appropriate display identity from registry sort identities", () => {
-      const fragments: VerificationFragment[] = [
+      const fragments: AllVerificationFragment[] = [
         {
           name: "OpencertsRegistryVerifier",
           type: "ISSUER_IDENTITY",
@@ -118,7 +118,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
     });
 
     it("should return appropriate display identity from registry or dns when available and sort by giving priority to registry", () => {
-      const fragments: VerificationFragment[] = [
+      const fragments: AllVerificationFragment[] = [
         {
           name: "OpencertsRegistryVerifier",
           type: "ISSUER_IDENTITY",
@@ -157,7 +157,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
     });
 
     it("should return Certificate issued by Unknown when registry and dns don't resolve any value", () => {
-      const fragments: VerificationFragment[] = [
+      const fragments: AllVerificationFragment[] = [
         {
           name: "OpencertsRegistryVerifier",
           type: "ISSUER_IDENTITY",
@@ -168,6 +168,11 @@ describe("certificate verify block getIdentityVerificationText", () => {
               status: "INVALID",
             },
           ],
+          reason: {
+            code: 1,
+            codeString: "codeString",
+            message: "",
+          },
         },
         {
           name: "OpenAttestationDnsTxtIdentityProof",
@@ -179,6 +184,11 @@ describe("certificate verify block getIdentityVerificationText", () => {
               location: "abc.com",
             },
           ],
+          reason: {
+            code: 1,
+            codeString: "codeString",
+            message: "",
+          },
         },
       ];
 
@@ -188,7 +198,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
     });
 
     it("should return registry identity when dns is skipped", () => {
-      const fragments: VerificationFragment[] = [
+      const fragments: AllVerificationFragment[] = [
         {
           status: "SKIPPED",
           type: "ISSUER_IDENTITY",
@@ -223,7 +233,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
 
   describe("should return appropriate display text when dns is verified", () => {
     it("when registry is unverified but dns is verified", () => {
-      const fragments: VerificationFragment[] = [
+      const fragments: AllVerificationFragment[] = [
         {
           name: "OpencertsRegistryVerifier",
           type: "ISSUER_IDENTITY",
@@ -234,6 +244,11 @@ describe("certificate verify block getIdentityVerificationText", () => {
               status: "INVALID",
             },
           ],
+          reason: {
+            code: 1,
+            codeString: "codeString",
+            message: "",
+          },
         },
         {
           name: "OpenAttestationDnsTxtIdentityProof",
@@ -253,7 +268,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
     });
 
     it("should return appropriate display text when multiple dns is verified", () => {
-      const fragments: VerificationFragment[] = [
+      const fragments: AllVerificationFragment[] = [
         {
           name: "OpencertsRegistryVerifier",
           type: "ISSUER_IDENTITY",
@@ -268,6 +283,11 @@ describe("certificate verify block getIdentityVerificationText", () => {
               status: "INVALID",
             },
           ],
+          reason: {
+            code: 1,
+            codeString: "codeString",
+            message: "",
+          },
         },
         {
           name: "OpenAttestationDnsTxtIdentityProof",

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types,@typescript-eslint/explicit-function-return-type */
 import { decryptString } from "@govtechsg/oa-encryption";
-import { v2, WrappedDocument } from "@govtechsg/open-attestation";
+import { VerificationFragment } from "@govtechsg/oa-verify";
+import { v2, WrappedDocument, utils } from "@govtechsg/open-attestation";
 import { isValid, verify } from "@govtechsg/opencerts-verify";
 import { ethers } from "ethers";
 import Router from "next/router";
@@ -32,14 +33,14 @@ import { sendEmail } from "../services/email";
 import {
   certificateNotIssued,
   certificateRevoked,
-  serverError,
-  invalidArgument,
   contractNotFound,
+  invalidArgument,
+  serverError,
 } from "../services/fragment";
 import { generateLink } from "../services/link";
 import { getLogger } from "../utils/logger";
 
-const { trace } = getLogger("saga:certificate");
+const { error } = getLogger("saga:certificate");
 // lower priority === higher priority, so infura has priority, alchemy is used as fallback
 const provider = new ethers.providers.FallbackProvider(
   [
@@ -51,9 +52,13 @@ const provider = new ethers.providers.FallbackProvider(
 
 export function* verifyCertificate({ payload: certificate }: { payload: WrappedDocument<v2.OpenAttestationDocument> }) {
   try {
-    yield put(verifyingCertificate());
-    const fragments = yield call(verify({ provider }), certificate);
-    trace(`Verification Status: ${JSON.stringify(fragments)}`);
+    console.log("la");
+    utils.diagnose({ mode: "non-strict", version: "2.0", kind: "signed", document: certificate, debug: true });
+    // https://github.com/redux-saga/redux-saga/issues/884
+    const fragments: VerificationFragment[] = yield call(verify({ provider }), certificate);
+    console.log(fragments);
+    error(`Verification Status: ${JSON.stringify(fragments)}`);
+    console.log("here2");
 
     yield put(verifyingCertificateCompleted(fragments));
     if (isValid(fragments)) {
@@ -77,20 +82,29 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedD
         errors.push("ISSUER_IDENTITY");
       }
 
+      if (!utils.isWrappedV2Document(certificate)) {
+        // if the document is not valid
+        errors.splice(0, errors.length);
+        errors.push("INVALID_DOCUMENT");
+      }
+
       if (errors.length > 0) {
         triggerErrorLogging(certificate, errors);
       }
     }
   } catch (e) {
+    console.log(e);
     yield put(verifyingCertificateErrored(e.message));
   }
 }
 
 export function* sendCertificate({ payload }: { payload: { email: string; captcha: string } }) {
   try {
-    const certificate = yield select(getCertificate);
+    // https://github.com/redux-saga/redux-saga/issues/884
+    const certificate: ReturnType<typeof getCertificate> = yield select(getCertificate);
+    if (!certificate) throw new Error("No certificate");
     const { email, captcha } = payload;
-    const success = yield sendEmail({
+    const success: boolean = yield sendEmail({
       certificate,
       email,
       captcha,
@@ -105,12 +119,17 @@ export function* sendCertificate({ payload }: { payload: { email: string; captch
     yield put(sendCertificateFailure(e.message));
   }
 }
+type Await<T> = T extends PromiseLike<infer U> ? U : T;
 
 export function* generateShareLink() {
   try {
     yield put(generateShareLinkReset());
-    const certificate = yield select(getCertificate);
-    const success = yield generateLink(certificate);
+    // https://github.com/redux-saga/redux-saga/issues/884
+    const certificate: ReturnType<typeof getCertificate> = yield select(getCertificate);
+    if (!certificate) {
+      throw new Error("No certificate");
+    }
+    const success: Await<ReturnType<typeof generateLink>> = yield generateLink(certificate);
 
     if (!success) {
       throw new Error("Fail to generate certificate share link");
@@ -126,8 +145,9 @@ export function* retrieveCertificateByAction({ payload: { uri, key } }: { payloa
   try {
     yield put(retrieveCertificateByActionPending());
 
-    // if a key has been provided, let's assume
-    let certificate = yield window.fetch(uri).then((response) => {
+    // TODO fix the type :)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let certificate: Record<string, any> = yield window.fetch(uri).then((response) => {
       if (response.status >= 400 && response.status < 600) {
         throw new Error(`Unable to load the certificate from ${uri}`);
       }
@@ -153,7 +173,7 @@ export function* retrieveCertificateByAction({ payload: { uri, key } }: { payloa
       throw new Error(`Unable to decrypt certificate with key=${key} and type=${certificate.type}`);
     }
 
-    yield put(updateCertificate(certificate));
+    yield put(updateCertificate(certificate as WrappedDocument<v2.OpenAttestationDocument>));
     yield put(retrieveCertificateByActionSuccess());
   } catch (e) {
     yield put(retrieveCertificateByActionFailure(e.message));

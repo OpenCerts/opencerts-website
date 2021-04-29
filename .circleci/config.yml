@@ -38,6 +38,9 @@ jobs:
           name: test
           command: npm run test
       - run:
+          name: type check
+          command: npm run type-check
+      - run:
           name: build
           command: npm run build
       - run:

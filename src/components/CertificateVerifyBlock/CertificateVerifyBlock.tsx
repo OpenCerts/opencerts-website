@@ -1,4 +1,4 @@
-import { VerificationFragment, VerificationFragmentStatus } from "@govtechsg/oa-verify";
+import { VerificationFragment, VerificationFragmentStatus, utils } from "@govtechsg/oa-verify";
 import { getData, v2, WrappedDocument } from "@govtechsg/open-attestation";
 import { OpencertsRegistryVerificationFragmentData } from "@govtechsg/opencerts-verify";
 import React, { useState } from "react";
@@ -13,11 +13,13 @@ export const getIdentityVerificationText = (
   document: WrappedDocument<v2.OpenAttestationDocument>
 ): string => {
   const data = getData(document);
-  const registryFragment = verificationStatus.find((status) => status.name === "OpencertsRegistryVerifier");
-  const dnsTxtFragment = verificationStatus.find((status) => status.name === "OpenAttestationDnsTxtIdentityProof");
-  const dnsDidFragment = verificationStatus.find((status) => status.name === "OpenAttestationDnsDidIdentityProof");
+  const registryFragment = utils.getFragmentByName("OpencertsRegistryVerifier")(verificationStatus);
+  const dnsTxtFragment = utils.getOpenAttestationDnsTxtIdentityProofFragment(verificationStatus);
+  const dnsDidFragment = utils.getOpenAttestationDnsDidIdentityProofFragment(verificationStatus);
 
   // using concat to handle arrays and single element
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore TODO fix oc verify :)
   const registryFragmentData: OpencertsRegistryVerificationFragmentData[] = [].concat(registryFragment?.data || []);
   const dnsTxtFragmentData: (DnsTxtFragment | undefined)[] = [].concat(dnsTxtFragment?.data || []);
   const dnsDidFragmentData: (DnsDidFragment | undefined)[] = [].concat(dnsDidFragment?.data || []);

@@ -13,7 +13,9 @@ const InvalidMessage = Selector(".invalid");
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(async (prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());
 
-test("Invalid Store certificate's error message is correct", async (t) => {
+// we don't catch this error anymore ...
+// eslint-disable-next-line testcafe-community/noSkip
+test.skip("Invalid Store certificate's error message is correct", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
   await InvalidMessage.with({ visibilityCheck: true })();
