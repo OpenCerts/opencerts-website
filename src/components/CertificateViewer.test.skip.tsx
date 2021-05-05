@@ -23,7 +23,6 @@ const withMarkup = (text: string) => (content: string, node: Nullish<Element>) =
   const childrenDontHaveText = Array.from(node.children).every((child) => !hasText(child));
   return nodeHasText && childrenDontHaveText;
 };
-
 describe("certificateViewer", () => {
   const certificate = {
     id: "k;lk;",

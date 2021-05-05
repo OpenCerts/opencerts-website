@@ -1,5 +1,4 @@
 import { VerificationFragment } from "@govtechsg/oa-verify";
-import { utils } from "@govtechsg/open-attestation";
 import { isValid } from "@govtechsg/opencerts-verify";
 import Link from "next/link";
 import React from "react";
@@ -9,10 +8,10 @@ import {
   addressInvalid,
   certificateNotIssued,
   certificateRevoked,
-  unhandledError,
-  serverError,
   contractNotFound,
   invalidArgument,
+  serverError,
+  unhandledError,
 } from "../../../services/fragment";
 
 interface DetailedErrorsProps {

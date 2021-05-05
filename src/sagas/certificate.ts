@@ -40,7 +40,7 @@ import {
 import { generateLink } from "../services/link";
 import { getLogger } from "../utils/logger";
 
-const { error } = getLogger("saga:certificate");
+const { trace } = getLogger("saga:certificate");
 // lower priority === higher priority, so infura has priority, alchemy is used as fallback
 const provider = new ethers.providers.FallbackProvider(
   [
@@ -52,13 +52,10 @@ const provider = new ethers.providers.FallbackProvider(
 
 export function* verifyCertificate({ payload: certificate }: { payload: WrappedDocument<v2.OpenAttestationDocument> }) {
   try {
-    console.log("la");
-    utils.diagnose({ mode: "non-strict", version: "2.0", kind: "signed", document: certificate, debug: true });
+    yield put(verifyingCertificate());
     // https://github.com/redux-saga/redux-saga/issues/884
     const fragments: VerificationFragment[] = yield call(verify({ provider }), certificate);
-    console.log(fragments);
-    error(`Verification Status: ${JSON.stringify(fragments)}`);
-    console.log("here2");
+    trace(`Verification Status: ${JSON.stringify(fragments)}`);
 
     yield put(verifyingCertificateCompleted(fragments));
     if (isValid(fragments)) {
