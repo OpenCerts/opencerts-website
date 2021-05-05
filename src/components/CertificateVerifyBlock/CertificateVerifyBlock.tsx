@@ -1,28 +1,26 @@
-import { VerificationFragment, VerificationFragmentStatus, utils } from "@govtechsg/oa-verify";
+import {
+  utils,
+  ValidDnsDidVerificationStatus,
+  ValidDnsTxtVerificationStatus,
+  VerificationFragment,
+} from "@govtechsg/oa-verify";
 import { getData, v2, WrappedDocument } from "@govtechsg/open-attestation";
-import { OpencertsRegistryVerificationFragmentData } from "@govtechsg/opencerts-verify";
+import {
+  getOpencertsRegistryVerifierFragment,
+  OpencertsRegistryVerificationValidData,
+} from "@govtechsg/opencerts-verify";
 import React, { useState } from "react";
 import { icons } from "../ViewerPageImages";
 import { DetailedCertificateVerifyBlock } from "./DetailedCertificateVerifyBlock";
-
-type DnsTxtFragment = { status: VerificationFragmentStatus; location?: string };
-type DnsDidFragment = DnsTxtFragment;
 
 export const getIdentityVerificationText = (
   verificationStatus: VerificationFragment[],
   document: WrappedDocument<v2.OpenAttestationDocument>
 ): string => {
   const data = getData(document);
-  const registryFragment = utils.getFragmentByName("OpencertsRegistryVerifier")(verificationStatus);
+  const registryFragment = getOpencertsRegistryVerifierFragment(verificationStatus);
   const dnsTxtFragment = utils.getOpenAttestationDnsTxtIdentityProofFragment(verificationStatus);
   const dnsDidFragment = utils.getOpenAttestationDnsDidIdentityProofFragment(verificationStatus);
-
-  // using concat to handle arrays and single element
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore TODO fix oc verify :)
-  const registryFragmentData: OpencertsRegistryVerificationFragmentData[] = [].concat(registryFragment?.data || []);
-  const dnsTxtFragmentData: (DnsTxtFragment | undefined)[] = [].concat(dnsTxtFragment?.data || []);
-  const dnsDidFragmentData: (DnsDidFragment | undefined)[] = [].concat(dnsDidFragment?.data || []);
 
   const identities = data.issuers
     .map((_, index) => {
@@ -31,15 +29,16 @@ export const getIdentityVerificationText = (
       // 2. otherwise check dns fragment and return the location if the fragment is valid
       // 2. otherwise check did-dns fragment and return the location if the fragment is valid
       // 3. otherwise return default value
-      const registryFragment = registryFragmentData[index];
-      const dnsTxtFragment = dnsTxtFragmentData[index];
-      const dnsDidFragment = dnsDidFragmentData[index];
-      if (registryFragment?.status === "VALID" && registryFragment?.name)
-        return { location: registryFragment.name.toUpperCase(), from: "registry" };
-      else if (dnsTxtFragment?.status === "VALID" && dnsTxtFragment?.location)
-        return { location: dnsTxtFragment.location.toUpperCase(), from: "dns-txt" };
-      else if (dnsDidFragment?.status === "VALID" && dnsDidFragment?.location)
-        return { location: dnsDidFragment.location.toUpperCase(), from: "dns-did" };
+      const indexedRegistryFragment = Array.isArray(registryFragment?.data) ? registryFragment?.data[index] : undefined;
+      const indexedDnsTxtFragment = Array.isArray(dnsTxtFragment?.data) ? dnsTxtFragment?.data[index] : undefined;
+      const indexedDnsDidFragment = Array.isArray(dnsDidFragment?.data) ? dnsDidFragment?.data[index] : undefined;
+
+      if (OpencertsRegistryVerificationValidData.guard(indexedRegistryFragment))
+        return { location: indexedRegistryFragment.name.toUpperCase(), from: "registry" };
+      else if (ValidDnsTxtVerificationStatus.guard(indexedDnsTxtFragment))
+        return { location: indexedDnsTxtFragment.location.toUpperCase(), from: "dns-txt" };
+      else if (ValidDnsDidVerificationStatus.guard(indexedDnsDidFragment))
+        return { location: indexedDnsDidFragment.location.toUpperCase(), from: "dns-did" };
       else return { location: "", from: "" };
     })
     .filter((identity) => identity.location)
