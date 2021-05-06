@@ -1,5 +1,13 @@
-import { AllVerificationFragment } from "@govtechsg/oa-verify";
+import {
+  AllVerificationFragment,
+  OpenAttestationDnsTxtIdentityProofInvalidFragmentV2,
+  OpenAttestationDnsTxtIdentityProofValidFragmentV2,
+} from "@govtechsg/oa-verify";
 import { SchemaId, v2, WrappedDocument } from "@govtechsg/open-attestation";
+import {
+  OpencertsRegistryVerifierInvalidFragmentV2,
+  OpencertsRegistryVerifierValidFragmentV2,
+} from "@govtechsg/opencerts-verify";
 import { getIdentityVerificationText } from "./CertificateVerifyBlock";
 
 const buildDocumentWithIssuers = (issuers: v2.Issuer[]): WrappedDocument<v2.OpenAttestationDocument> => {
@@ -17,33 +25,101 @@ const buildDocumentWithIssuers = (issuers: v2.Issuer[]): WrappedDocument<v2.Open
   };
 };
 
-// eslint-disable-next-line jest/no-disabled-tests
-describe.skip("certificate verify block getIdentityVerificationText", () => {
+const buildOpencertsRegistryVerifierValidFragment = ({
+  name,
+}: {
+  name: string | string[];
+}): OpencertsRegistryVerifierValidFragmentV2 => {
+  const names = ([] as string[]).concat(name);
+  return {
+    name: "OpencertsRegistryVerifier",
+    type: "ISSUER_IDENTITY",
+    status: "VALID",
+    data: names.map((name) => ({
+      name,
+      status: "VALID",
+      value: "value",
+      displayCard: true,
+    })),
+  };
+};
+const buildOpencertsRegistryVerifierInvalidFragment = ({
+  name,
+}: {
+  name: string | string[];
+}): OpencertsRegistryVerifierInvalidFragmentV2 => {
+  const names = ([] as string[]).concat(name);
+  return {
+    name: "OpencertsRegistryVerifier",
+    type: "ISSUER_IDENTITY",
+    status: "INVALID",
+    data: names.map((name) => ({
+      name,
+      status: "INVALID",
+      value: "value",
+      reason: {
+        code: 0,
+        codeString: "INVALID_IDENTITY",
+        message: "Document store 0x8FC57204C35FB9317D91285EF52D6B892EC08CD3 not found in the registry",
+      },
+    })),
+    reason: {
+      code: 0,
+      codeString: "INVALID_IDENTITY",
+      message: "Document store 0x8FC57204C35FB9317D91285EF52D6B892EC08CD3 not found in the registry",
+    },
+  };
+};
+
+const buildDnsTxtValidFragment = ({
+  location,
+}: {
+  location: string | string[];
+}): OpenAttestationDnsTxtIdentityProofValidFragmentV2 => {
+  const locations = ([] as string[]).concat(location);
+  return {
+    name: "OpenAttestationDnsTxtIdentityProof",
+    type: "ISSUER_IDENTITY",
+    status: "VALID",
+    data: locations.map((location) => ({
+      status: "VALID",
+      location,
+      value: "value",
+    })),
+  };
+};
+const buildDnsTxtInvalidFragment = ({
+  location,
+}: {
+  location: string | string[];
+}): OpenAttestationDnsTxtIdentityProofInvalidFragmentV2 => {
+  const fragment = buildDnsTxtValidFragment({ location });
+  return {
+    ...fragment,
+    status: "INVALID",
+    data: fragment.data.map((data) => ({
+      ...data,
+      status: "INVALID",
+      reason: {
+        code: 0,
+        codeString: "INVALID_IDENTITY",
+        message: "error",
+      },
+    })),
+    reason: {
+      codeString: "codeString",
+      message: "message",
+      code: 1,
+    },
+  };
+};
+
+describe("certificate verify block getIdentityVerificationText", () => {
   describe("wWhen registry is verified", () => {
     it("should return appropriate display identity from registry before when dns and registry are valid", () => {
       const fragments: AllVerificationFragment[] = [
-        {
-          name: "OpencertsRegistryVerifier",
-          type: "ISSUER_IDENTITY",
-          status: "VALID",
-          data: [
-            {
-              name: "Govtech",
-              status: "VALID",
-            },
-          ],
-        },
-        {
-          name: "OpenAttestationDnsTxtIdentityProof",
-          type: "ISSUER_IDENTITY",
-          status: "VALID",
-          data: [
-            {
-              status: "VALID",
-              location: "abc.com",
-            },
-          ],
-        },
+        buildOpencertsRegistryVerifierValidFragment({ name: "Govtech" }),
+        buildDnsTxtValidFragment({ location: "abc.com" }),
       ];
       expect(getIdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
         "GOVTECH"
@@ -52,28 +128,8 @@ describe.skip("certificate verify block getIdentityVerificationText", () => {
 
     it("should return appropriate display text when registry is verified but dns is unverified", () => {
       const fragments: AllVerificationFragment[] = [
-        {
-          name: "OpencertsRegistryVerifier",
-          type: "ISSUER_IDENTITY",
-          status: "VALID",
-          data: [
-            {
-              name: "Demo",
-              status: "VALID",
-            },
-          ],
-        },
-        {
-          name: "OpenAttestationDnsTxtIdentityProof",
-          type: "ISSUER_IDENTITY",
-          status: "VALID",
-          data: [
-            {
-              status: "INVALID",
-              location: "abc.com",
-            },
-          ],
-        },
+        buildOpencertsRegistryVerifierValidFragment({ name: "Demo" }),
+        buildDnsTxtInvalidFragment({ location: "abc.com" }),
       ];
       expect(getIdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
         "DEMO"
@@ -82,36 +138,8 @@ describe.skip("certificate verify block getIdentityVerificationText", () => {
 
     it("should return appropriate display identity from registry sort identities", () => {
       const fragments: AllVerificationFragment[] = [
-        {
-          name: "OpencertsRegistryVerifier",
-          type: "ISSUER_IDENTITY",
-          status: "VALID",
-          data: [
-            {
-              name: "Govtech",
-              status: "VALID",
-            },
-            {
-              name: "Demo",
-              status: "VALID",
-            },
-          ],
-        },
-        {
-          name: "OpenAttestationDnsTxtIdentityProof",
-          type: "ISSUER_IDENTITY",
-          status: "VALID",
-          data: [
-            {
-              status: "VALID",
-              location: "demo.com",
-            },
-            {
-              status: "VALID",
-              location: "abc.com",
-            },
-          ],
-        },
+        buildOpencertsRegistryVerifierValidFragment({ name: ["Govtech", "Demo"] }),
+        buildDnsTxtValidFragment({ location: ["demo.com", "abc.com"] }),
       ];
       expect(
         getIdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }, { name: "Issuer 2" }]))
@@ -119,38 +147,19 @@ describe.skip("certificate verify block getIdentityVerificationText", () => {
     });
 
     it("should return appropriate display identity from registry or dns when available and sort by giving priority to registry", () => {
-      const fragments: AllVerificationFragment[] = [
-        {
-          name: "OpencertsRegistryVerifier",
-          type: "ISSUER_IDENTITY",
-          status: "VALID",
-          data: [
-            {
-              name: "Govtech",
-              status: "INVALID",
-            },
-            {
-              name: "Demo",
-              status: "VALID",
-            },
-          ],
+      const ocFragment = buildOpencertsRegistryVerifierValidFragment({ name: ["Govtech", "Demo"] });
+      ocFragment.data[0] = {
+        status: "INVALID",
+        value: "0x8FC57204C35FB9317D91285EF52D6B892EC08CD3",
+        reason: {
+          code: 0,
+          codeString: "INVALID_IDENTITY",
+          message: "Document store 0x8FC57204C35FB9317D91285EF52D6B892EC08CD3 not found in the registry",
         },
-        {
-          name: "OpenAttestationDnsTxtIdentityProof",
-          type: "ISSUER_IDENTITY",
-          status: "VALID",
-          data: [
-            {
-              status: "VALID",
-              location: "abc.com",
-            },
-            {
-              status: "INVALID",
-              location: "demo.com",
-            },
-          ],
-        },
-      ];
+      };
+      const dnsTextFragment = buildDnsTxtInvalidFragment({ location: ["abc.com", "demo.com"] });
+      dnsTextFragment.data[0].status = "VALID";
+      const fragments: AllVerificationFragment[] = [ocFragment, dnsTextFragment];
 
       expect(
         getIdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }, { name: "Issuer 2" }]))
@@ -159,38 +168,8 @@ describe.skip("certificate verify block getIdentityVerificationText", () => {
 
     it("should return Certificate issued by Unknown when registry and dns don't resolve any value", () => {
       const fragments: AllVerificationFragment[] = [
-        {
-          name: "OpencertsRegistryVerifier",
-          type: "ISSUER_IDENTITY",
-          status: "INVALID",
-          data: [
-            {
-              name: "Govtech",
-              status: "INVALID",
-            },
-          ],
-          reason: {
-            code: 1,
-            codeString: "codeString",
-            message: "",
-          },
-        },
-        {
-          name: "OpenAttestationDnsTxtIdentityProof",
-          type: "ISSUER_IDENTITY",
-          status: "INVALID",
-          data: [
-            {
-              status: "INVALID",
-              location: "abc.com",
-            },
-          ],
-          reason: {
-            code: 1,
-            codeString: "codeString",
-            message: "",
-          },
-        },
+        buildOpencertsRegistryVerifierInvalidFragment({ name: "Govtech" }),
+        buildDnsTxtInvalidFragment({ location: "abc.com" }),
       ];
 
       expect(getIdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
@@ -235,33 +214,8 @@ describe.skip("certificate verify block getIdentityVerificationText", () => {
   describe("should return appropriate display text when dns is verified", () => {
     it("when registry is unverified but dns is verified", () => {
       const fragments: AllVerificationFragment[] = [
-        {
-          name: "OpencertsRegistryVerifier",
-          type: "ISSUER_IDENTITY",
-          status: "INVALID",
-          data: [
-            {
-              name: "Govtech",
-              status: "INVALID",
-            },
-          ],
-          reason: {
-            code: 1,
-            codeString: "codeString",
-            message: "",
-          },
-        },
-        {
-          name: "OpenAttestationDnsTxtIdentityProof",
-          type: "ISSUER_IDENTITY",
-          status: "VALID",
-          data: [
-            {
-              status: "VALID",
-              location: "abc.com",
-            },
-          ],
-        },
+        buildOpencertsRegistryVerifierInvalidFragment({ name: "Govtech" }),
+        buildDnsTxtValidFragment({ location: "abc.com" }),
       ];
       expect(getIdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
         "ABC.COM"
@@ -270,41 +224,8 @@ describe.skip("certificate verify block getIdentityVerificationText", () => {
 
     it("should return appropriate display text when multiple dns is verified", () => {
       const fragments: AllVerificationFragment[] = [
-        {
-          name: "OpencertsRegistryVerifier",
-          type: "ISSUER_IDENTITY",
-          status: "INVALID",
-          data: [
-            {
-              name: "Govtech",
-              status: "INVALID",
-            },
-            {
-              name: "Demo",
-              status: "INVALID",
-            },
-          ],
-          reason: {
-            code: 1,
-            codeString: "codeString",
-            message: "",
-          },
-        },
-        {
-          name: "OpenAttestationDnsTxtIdentityProof",
-          type: "ISSUER_IDENTITY",
-          status: "VALID",
-          data: [
-            {
-              status: "VALID",
-              location: "xyz.com",
-            },
-            {
-              status: "VALID",
-              location: "demo.com",
-            },
-          ],
-        },
+        buildOpencertsRegistryVerifierInvalidFragment({ name: ["Govtech", "demo"] }),
+        buildDnsTxtValidFragment({ location: ["xyz.com", "demo.com"] }),
       ];
       expect(
         getIdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }, { name: "Issuer 2" }]))

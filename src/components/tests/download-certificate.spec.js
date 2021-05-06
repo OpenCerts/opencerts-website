@@ -35,7 +35,23 @@ const waitForFileDownload = async (t, filePath) => {
   return existsSync(filePath);
 };
 
+// From https://gist.github.com/AlexKamaev/8c1eb8a5fb638fa366b44447f6d7c5a4
+async function enableDownloadForHeadlessChrome(t) {
+  if (t.browser.alias !== "chrome:headless") return;
+  const browserConnection = t.testRun.browserConnection;
+  const client = browserConnection.provider.plugin.openedBrowsers[browserConnection.id].client;
+  const { Network, Page } = client;
+
+  await Promise.all([Network.enable(), Page.enable()]);
+
+  await Page.setDownloadBehavior({
+    behavior: "allow",
+    downloadPath: downloadsFolder(),
+  });
+}
+
 test("Sample document is downloaded correctly", async (t) => {
+  await enableDownloadForHeadlessChrome(t);
   await t.setFilesToUpload("input[type=file]", [Document1]);
 
   await validateTextContent(t, StatusButton, ["EXAMPLE.OPENATTESTATION.COM"]);
@@ -52,6 +68,7 @@ test("Sample document is downloaded correctly", async (t) => {
 });
 
 test("Sample document with special characters is downloaded correctly", async (t) => {
+  await enableDownloadForHeadlessChrome(t);
   await t.setFilesToUpload("input[type=file]", [Document2]);
 
   await validateTextContent(t, StatusButton, ["EXAMPLE.OPENATTESTATION.COM"]);

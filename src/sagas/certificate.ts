@@ -90,7 +90,6 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedD
       }
     }
   } catch (e) {
-    console.log(e);
     yield put(verifyingCertificateErrored(e.message));
   }
 }

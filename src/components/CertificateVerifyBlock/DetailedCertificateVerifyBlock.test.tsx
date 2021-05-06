@@ -3,8 +3,7 @@ import { render, screen } from "@testing-library/react";
 import React from "react";
 import { DetailedCertificateVerifyBlock } from "./DetailedCertificateVerifyBlock";
 
-// eslint-disable-next-line jest/no-disabled-tests
-describe.skip("detailedCertificateVerifyBlock", () => {
+describe("detailedCertificateVerifyBlock", () => {
   it("displays that the certificate has been tampered with when hashStatus is false", () => {
     render(
       <DetailedCertificateVerifyBlock
