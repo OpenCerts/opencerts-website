@@ -1,5 +1,5 @@
 import "isomorphic-fetch";
-import { WrappedDocument } from "@govtechsg/open-attestation";
+import { v2, WrappedDocument } from "@govtechsg/open-attestation";
 import { EMAIL_API_URL } from "../../config";
 
 export function sendEmail({
@@ -7,7 +7,7 @@ export function sendEmail({
   email,
   captcha,
 }: {
-  certificate: WrappedDocument;
+  certificate: WrappedDocument<v2.OpenAttestationDocument>;
   email: string;
   captcha: string;
 }): Promise<boolean> {
