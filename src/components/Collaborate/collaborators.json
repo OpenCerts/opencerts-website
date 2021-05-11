@@ -70,5 +70,13 @@
     "website": "https://www.jedtrade.com",
     "key": "jedtrade",
     "logo": "/static/images/collaborate/jedtrade_logo.png"
+  },
+  {
+    "id": "fio",
+    "name": "FiO",
+    "description": "FiO is a blockchain SaaS platform. Similar to LEGO blocks, enterprises can easily plug APIs with self-customizations by use minimal programming skills (Low or Non code).",
+    "website": "https://www.fio.one",
+    "key": "fio",
+    "logo": "/static/images/collaborate/FiO_logo.png"
   }
 ]
