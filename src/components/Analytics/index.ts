@@ -1,4 +1,4 @@
-import { v2, WrappedDocument, getData } from "@govtechsg/open-attestation";
+import { v2, WrappedDocument, getData, v3, utils } from "@govtechsg/open-attestation";
 import { RegistryEntry } from "@govtechsg/opencerts-verify";
 import registry from "../../../public/static/registry.json";
 import { getLogger } from "../../utils/logger";
@@ -39,7 +39,7 @@ export const analyticsEvent = (window: Partial<Window> | undefined, event: Event
   traceDev(stringifyEvent(event));
 };
 
-export const sendEventCertificateViewedDetailed = ({
+export const sendV2EventCertificateViewedDetailed = ({
   issuer,
   certificateData,
 }: {
@@ -87,7 +87,37 @@ export const sendEventCertificateViewedDetailed = ({
   });
 };
 
-export function triggerErrorLogging(
+export const sendV3EventCertificateViewedDetailed = ({
+  certificateData,
+}: {
+  certificateData: v3.OpenAttestationDocument;
+}): void => {
+  const separator = ";";
+  const store = utils.getIssuerAddress(certificateData);
+  const id = certificateData?.id ?? "";
+  const name = certificateData?.name ?? "";
+  const issuedOn = certificateData?.issued ?? "";
+  const issuerName = certificateData.openAttestationMetadata.identityProof.identifier || "";
+  const label = `"store":"${store}"${separator}"document_id":"${id}"${separator}"name":"${name}"${separator}"issued_on":"${issuedOn}"${separator}"issuer_name":"${
+    issuerName ?? ""
+  }"`;
+  analyticsEvent(window, {
+    category: "CERTIFICATE_DETAILS",
+    action: `VIEWED - ${issuerName}`,
+    label,
+    options: {
+      nonInteraction: true,
+      dimension1: store || "(not set)",
+      dimension2: id || "(not set)",
+      dimension3: name || "(not set)",
+      dimension4: issuedOn || "(not set)",
+      dimension5: issuerName || "(not set)",
+      dimension6: "(not set)",
+    },
+  });
+};
+
+export function triggerV2ErrorLogging(
   rawCertificate: WrappedDocument<v2.OpenAttestationDocument>,
   errors: string[]
 ): void {
@@ -127,5 +157,35 @@ export function triggerErrorLogging(
         dimension7: errorsList,
       },
     });
+  });
+}
+
+export function triggerV3ErrorLogging(
+  rawCertificate: WrappedDocument<v3.OpenAttestationDocument>,
+  errors: string[]
+): void {
+  const id = rawCertificate?.id;
+  const name = rawCertificate?.name;
+  const issuedOn = rawCertificate?.issued;
+  const errorsList = errors.join(",");
+
+  // If there are multiple issuers in a certificate, we send multiple events!
+  const store = utils.getIssuerAddress(rawCertificate);
+  const issuerName = rawCertificate.openAttestationMetadata.identityProof.identifier;
+
+  analyticsEvent(window, {
+    category: "CERTIFICATE_ERROR",
+    action: `ERROR - ${issuerName}`,
+    label: errorsList,
+    options: {
+      nonInteraction: true,
+      dimension1: store || "(not set)",
+      dimension2: id || "(not set)",
+      dimension3: name || "(not set)",
+      dimension4: issuedOn || "(not set)",
+      dimension5: issuerName || "(not set)",
+      dimension6: "(not set)",
+      dimension7: errorsList,
+    },
   });
 }

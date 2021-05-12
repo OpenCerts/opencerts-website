@@ -1,0 +1,64 @@
+{
+  "version": "https://schema.openattestation.com/3.0/schema.json",
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1",
+    "https://schemata.openattestation.com/com/openattestation/1.0/DrivingLicenceCredential.json",
+    "https://schemata.openattestation.com/com/openattestation/1.0/OpenAttestation.v3.json",
+    "https://schemata.openattestation.com/com/openattestation/1.0/CustomContext.json"
+  ],
+  "reference": "SERIAL_NUMBER_123",
+  "name": "Republic of Singapore Driving Licence",
+  "issuanceDate": "2010-01-01T19:23:24Z",
+  "validFrom": "2010-01-01T19:23:24Z",
+  "issuer": {
+    "id": "https://example.com",
+    "name": "DEMO STORE"
+  },
+  "type": ["VerifiableCredential", "DrivingLicenceCredential"],
+  "credentialSubject": {
+    "id": "did:example:JOHN_DOE_DID",
+    "name": "John Doe",
+    "class": [
+      {
+        "type": "3",
+        "effectiveDate": "2010-01-01T19:23:24Z"
+      },
+      {
+        "type": "3A",
+        "effectiveDate": "2010-01-01T19:23:24Z"
+      }
+    ]
+  },
+  "openAttestationMetadata": {
+    "template": {
+      "name": "DRIVING_LICENSE",
+      "type": "EMBEDDED_RENDERER",
+      "url": "https://tutorial-renderer.openattestation.com"
+    },
+    "proof": {
+      "type": "OpenAttestationProofMethod",
+      "method": "DID",
+      "value": "did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90",
+      "revocation": {
+        "type": "NONE"
+      }
+    },
+    "identityProof": {
+      "type": "DNS-DID",
+      "identifier": "example.openattestation.com"
+    }
+  },
+  "proof": {
+    "type": "OpenAttestationMerkleProofSignature2018",
+    "proofPurpose": "assertionMethod",
+    "targetHash": "cd2cbc94f7bd6d8a834c1491f9922094df21d37705961b2451d63a3d155b780c",
+    "proofs": [],
+    "merkleRoot": "cd2cbc94f7bd6d8a834c1491f9922094df21d37705961b2451d63a3d155b780c",
+    "salts": "W3sidmFsdWUiOiI1YzFmNTJiOWFmYzY4ZmQ1NTRlOTQwNGFiNzg5ZjgxYTA3ZWVhODg1ZGJjNmExYWUwNzllZWJjYjAwYTg0M2FmIiwicGF0aCI6InZlcnNpb24ifSx7InZhbHVlIjoiMjdkNDM3NzQ4NmVhNGYwY2RhYThhZDE1OWE0YmVlY2U0NDBhYWI0ZjdlYjgxYjQyYjUyMThlNWE4M2FhNTZjYSIsInBhdGgiOiJAY29udGV4dFswXSJ9LHsidmFsdWUiOiJjYTgwYzY2YzU1NmIzNzI1MGY4NTRkNDE5YTJiMWRhZWUwMDBhZGFiMWEwN2FkOTA2ZjUyMWFjOTQyZDFlMzljIiwicGF0aCI6IkBjb250ZXh0WzFdIn0seyJ2YWx1ZSI6ImY4ZTA3Zjg3OWIwY2UwZjgzMTU5YTExNDZlMzJmOWM5YWU3ODNiYTZkZjRmNjA0YTEwMWY3ZmQ5NGJmNDMzOWUiLCJwYXRoIjoiQGNvbnRleHRbMl0ifSx7InZhbHVlIjoiZjUzZTVhY2Y4ODkyNDNjOTc5YTgyNDZlYTMxM2M3NmVkMmJmOGI1MmJkOTM5YWIxMTBhZjZmMmUzYWU4ZWE5ZiIsInBhdGgiOiJAY29udGV4dFszXSJ9LHsidmFsdWUiOiI4Yzg2ZTJiMGMwZTQ0Mzc0NzYyMTdlODc3ZGM2NTM5MmM3YzIwNmQ2NzlkOTY3MDY4MGQyYjg0ZmYzZGJiYTgwIiwicGF0aCI6InJlZmVyZW5jZSJ9LHsidmFsdWUiOiI3ZjRlMWVhNDE2ZTk4MzI3OTc0MmEzMDBiZTJlNGNhMThlYmJhNjM4NzBiNGZmZGY4MTJmZDJmZDM5YzBhMDQxIiwicGF0aCI6Im5hbWUifSx7InZhbHVlIjoiNTgzMjU5MjMzMTg1MmRiYTc5ZDNmNTc2MGRiMmFlYTYxOTJiYjhiYjUyY2M0YThkNzBkYWNjNTI4NGI4MmIzMiIsInBhdGgiOiJpc3N1YW5jZURhdGUifSx7InZhbHVlIjoiNDg4MTkzNDkxODExZjlkMjhiN2FiOTFlMzhmZTMzMDE2MzIyOWUzYTNjNzM1YzkzZTI0YWZlZWU1YTE2NjBhOCIsInBhdGgiOiJ2YWxpZEZyb20ifSx7InZhbHVlIjoiMTRiMWM2Nzg3MjhlZDE0ZWZmZTBlMmY2ZjMxYmNmOWQwOTgxNWZlYjY1YjIxYWY3ZmI4MGU0M2JiNDQ2OWEzYyIsInBhdGgiOiJpc3N1ZXIuaWQifSx7InZhbHVlIjoiMDRkMzUyNjJjNDg5MjI2Nzc3YjYwNGI0NTViOWU5NDkxMzhkMjVmYTE4ZDgwODE4ZWY4ZTMwNWUzNGJkZTUwMSIsInBhdGgiOiJpc3N1ZXIubmFtZSJ9LHsidmFsdWUiOiI3NjQxMjBkZDRiMzQzYzU0OWZlY2RiOTdlNzBlOTdkZjdiMDMxZGU5Yjk0OWU4NWRjYzBiYjc5YTI5OWU2MzdmIiwicGF0aCI6InR5cGVbMF0ifSx7InZhbHVlIjoiMjBhMzhhOGE2NzE1YzBlYTM5MzhlMDdjNDY3Y2RiOWMxOWVkNzQxM2EzZmMwYzk0OTk0YmU0YjhkZDZkMmQ1MiIsInBhdGgiOiJ0eXBlWzFdIn0seyJ2YWx1ZSI6IjdkYTExMTcxZmE3NTczYmQzMDJiNjgwNDAwMDJmYTVlM2Q1YTdhY2IwMTJlNmIxMWRiZWE5YTg4MmJhZmVkMGYiLCJwYXRoIjoiY3JlZGVudGlhbFN1YmplY3QuaWQifSx7InZhbHVlIjoiMGI2ODYxYzIyYThlZTI2MWY4NzUxMzhiOTNmYTZlOGQzY2IwOWQ0MmViODU0Njg1Y2U3ZTUyMDJlYzk1N2VjMiIsInBhdGgiOiJjcmVkZW50aWFsU3ViamVjdC5uYW1lIn0seyJ2YWx1ZSI6ImM1NjdjMDlhODNmZjc4ZjVkZTQ0ZjhiZTVhZDQzMTVlZTUzYTUxN2ZjMTdhZThhNWIyNDc4NjkzNjBkYWU0NzYiLCJwYXRoIjoiY3JlZGVudGlhbFN1YmplY3QuY2xhc3NbMF0udHlwZSJ9LHsidmFsdWUiOiI4MmVlNWE4NDQxOTU4MTRkODAwMmNkMWMzZTRhMTA0MTUxMjQ4YjNjYWVhYjZmNzhkMjEzZDU2YzhiZmQwYWNkIiwicGF0aCI6ImNyZWRlbnRpYWxTdWJqZWN0LmNsYXNzWzBdLmVmZmVjdGl2ZURhdGUifSx7InZhbHVlIjoiMzc4Y2U0NGVkZjJmMGIzNzNmNTJkZWVhMWMzODY2YmMyZWIzYmY5YjU2OGRhYzc4NTkwOWNlZjE3Mzg5MjkxMiIsInBhdGgiOiJjcmVkZW50aWFsU3ViamVjdC5jbGFzc1sxXS50eXBlIn0seyJ2YWx1ZSI6IjQ3Yjc5YjI3ODA1MTM0MzcyYzg1NmJkZTA4YTY0Y2JlMDljMjY5NzJkZjcwMGQ2YjM2ZGQzOWZhMjE4ZDA3MWUiLCJwYXRoIjoiY3JlZGVudGlhbFN1YmplY3QuY2xhc3NbMV0uZWZmZWN0aXZlRGF0ZSJ9LHsidmFsdWUiOiIwOTJlNTExNzhiZmU3YjJkZTg5NTRiZmFlMGEwZTVmN2NmZGI1YjQ3MjU1YTM1ZWI1OTlhNzRjODkwYWQwZTRkIiwicGF0aCI6Im9wZW5BdHRlc3RhdGlvbk1ldGFkYXRhLnRlbXBsYXRlLm5hbWUifSx7InZhbHVlIjoiZmQ2NmFkYWZkYTVlMmY3OTUzYzA2NWMyODcxYzIyMTIwYzk3MmU3OWVjYzkzNmNlYmE0ZDdlZWVjOTRhYWE4MiIsInBhdGgiOiJvcGVuQXR0ZXN0YXRpb25NZXRhZGF0YS50ZW1wbGF0ZS50eXBlIn0seyJ2YWx1ZSI6ImE5ZjUwN2YxYTkyNWQ1M2ViZWNkYWY4NmI1ZDA5NWVlOTZhYTg2MmU2MjRmMjMzMzNjMTgxMzJhODU2ZmY0ZmYiLCJwYXRoIjoib3BlbkF0dGVzdGF0aW9uTWV0YWRhdGEudGVtcGxhdGUudXJsIn0seyJ2YWx1ZSI6ImE4MDFlZmQxNGRjZTE5M2Q1OTYzZWZiZTcxNzZhZjY2ZDYxYmUwYzI0NDBiZmZjMjAwODczZDg3Y2VmY2UzYmQiLCJwYXRoIjoib3BlbkF0dGVzdGF0aW9uTWV0YWRhdGEucHJvb2YudHlwZSJ9LHsidmFsdWUiOiJmYjdkOTk1MGFkMTBhMjZkMGY4OGY5OWVmYzIwZWVhMjM3ZDNjNTgyZGVjMzE0OGIzZTY3ZmNkODhlMDlkMzBlIiwicGF0aCI6Im9wZW5BdHRlc3RhdGlvbk1ldGFkYXRhLnByb29mLm1ldGhvZCJ9LHsidmFsdWUiOiIwZjhhYmZmODIwYjVlODUzZWNhZjExODcyNDdhMDEyM2Q3ZGQ4ZWJkMWE1ZWY4NGE4OGFkZDEzNjJiNWFlNDZiIiwicGF0aCI6Im9wZW5BdHRlc3RhdGlvbk1ldGFkYXRhLnByb29mLnZhbHVlIn0seyJ2YWx1ZSI6ImZjMjA1M2U4Y2MwYzU3NWE0MTI4M2MzZDZkYjMxY2M2OTFmYWE4NGMyYjFhOTAyZmQwYjBhZTZiNmQyZTc1NWMiLCJwYXRoIjoib3BlbkF0dGVzdGF0aW9uTWV0YWRhdGEucHJvb2YucmV2b2NhdGlvbi50eXBlIn0seyJ2YWx1ZSI6ImI1MzA0OTY4NjQ3NmZkNTdjYjNkNWI1MzI2NTlmMDU5MjAxYjk1OTdkMDYyMDgyYmQ1NGNmODEwNDhiYjZlY2EiLCJwYXRoIjoib3BlbkF0dGVzdGF0aW9uTWV0YWRhdGEuaWRlbnRpdHlQcm9vZi50eXBlIn0seyJ2YWx1ZSI6IjA5NGU2NGQ5MDljZmM3NDQxZGI1NTI5MWI0NDFlNDVjYTFhMzkwZDU1OTIxMjI3NjQ3ZTNhNjE5NTg4OWMyZjMiLCJwYXRoIjoib3BlbkF0dGVzdGF0aW9uTWV0YWRhdGEuaWRlbnRpdHlQcm9vZi5pZGVudGlmaWVyIn1d",
+    "privacy": {
+      "obfuscated": []
+    },
+    "key": "did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90#controller",
+    "signature": "0x6ddaaf2f0824a1073a045bab547f48a11877a54c3a07f2cfbb9e684fa18e5f57577173b8b393876f1aed6ba00f7edb88a3a40492a6d60c2007e9e452eee3dd6f1b"
+  }
+}

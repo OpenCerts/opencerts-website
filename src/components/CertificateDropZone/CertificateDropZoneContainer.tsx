@@ -1,5 +1,4 @@
 import { VerificationFragment } from "@govtechsg/oa-verify";
-import { v2, WrappedDocument } from "@govtechsg/open-attestation";
 import Router from "next/router";
 import React, { Component, ReactNode } from "react";
 import Dropzone from "react-dropzone";
@@ -7,10 +6,11 @@ import { connect } from "react-redux";
 import { RootState } from "../../reducers";
 import { resetCertificateState, updateCertificate } from "../../reducers/certificate.actions";
 import { getCertificateByActionError, getVerificationStatus, getVerifying } from "../../reducers/certificate.selectors";
+import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { CertificateVerificationStatus } from "./CertificateVerificationStatus";
 
 interface CertificateDropZoneContainerProps {
-  updateCertificate: (certificate: WrappedDocument<v2.OpenAttestationDocument>) => void;
+  updateCertificate: (certificate: WrappedOrSignedOpenCertsDocument) => void;
   resetData: () => void;
   verifying: boolean;
   verificationStatus: VerificationFragment[] | null;
@@ -36,7 +36,7 @@ class CertificateDropZone extends Component<CertificateDropZoneContainerProps, C
     Router.prefetch("/viewer");
   }
 
-  handleCertificateChange(certificate: WrappedDocument<v2.OpenAttestationDocument>): void {
+  handleCertificateChange(certificate: WrappedOrSignedOpenCertsDocument): void {
     this.setState({ fileError: false });
     this.props.updateCertificate(certificate);
   }
@@ -93,7 +93,7 @@ export const CertificateDropZoneContainer = connect(
     verificationStatus: getVerificationStatus(store),
   }),
   (dispatch) => ({
-    updateCertificate: (payload: WrappedDocument<v2.OpenAttestationDocument>) => dispatch(updateCertificate(payload)),
+    updateCertificate: (payload: WrappedOrSignedOpenCertsDocument) => dispatch(updateCertificate(payload)),
     resetData: () => dispatch(resetCertificateState()),
   })
 )(CertificateDropZone);

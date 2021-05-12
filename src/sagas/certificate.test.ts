@@ -29,7 +29,6 @@ declare global {
     }
   }
 }
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function whenThereIsOneEthereumAddressIssuer() {
   const ethereumAddresses = ["0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4F"];
   const testCert = new MakeCertUtil().addIssuer(ethereumAddresses[0]).finish();

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type,@typescript-eslint/explicit-module-boundary-types */
 import { SchemaId, v2, WrappedDocument } from "@govtechsg/open-attestation";
 
 export const targetHash = "f7432b3219b2aa4122e289f44901830fa32f224ee9dfce28565677f1d279b2c7";
