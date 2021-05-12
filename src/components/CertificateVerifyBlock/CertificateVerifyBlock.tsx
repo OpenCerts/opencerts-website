@@ -4,16 +4,17 @@ import {
   ValidDnsTxtVerificationStatus,
   VerificationFragment,
 } from "@govtechsg/oa-verify";
-import { getData, v2, WrappedDocument } from "@govtechsg/open-attestation";
+import { getData, v2, WrappedDocument, utils as oaUtils, v3 } from "@govtechsg/open-attestation";
 import {
   getOpencertsRegistryVerifierFragment,
   OpencertsRegistryVerificationValidData,
 } from "@govtechsg/opencerts-verify";
 import React, { useState } from "react";
+import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { icons } from "../ViewerPageImages";
 import { DetailedCertificateVerifyBlock } from "./DetailedCertificateVerifyBlock";
 
-export const getIdentityVerificationText = (
+export const getV2IdentityVerificationText = (
   verificationStatus: VerificationFragment[],
   document: WrappedDocument<v2.OpenAttestationDocument>
 ): string => {
@@ -55,12 +56,15 @@ export const getIdentityVerificationText = (
   }
   return "Unknown";
 };
+export const getV3IdentityVerificationText = (document: WrappedDocument<v3.OpenAttestationDocument>): string => {
+  return document.openAttestationMetadata.identityProof.identifier.toUpperCase();
+};
 
 interface SimpleVerifyBlockProps {
   detailedViewVisible: boolean;
   verificationStatus: VerificationFragment[];
   toggleDetailedViewVisible: () => void;
-  document: WrappedDocument<v2.OpenAttestationDocument>;
+  document: WrappedOrSignedOpenCertsDocument;
 }
 const SimpleVerifyBlock: React.FunctionComponent<SimpleVerifyBlockProps> = (props) => {
   return (
@@ -76,7 +80,9 @@ const SimpleVerifyBlock: React.FunctionComponent<SimpleVerifyBlockProps> = (prop
         <div className="px-2 w-full font-bold">
           Certificate issued by
           <div className="break-all md:break-normal">
-            {getIdentityVerificationText(props.verificationStatus, props.document)}
+            {oaUtils.isWrappedV2Document(props.document)
+              ? getV2IdentityVerificationText(props.verificationStatus, props.document)
+              : getV3IdentityVerificationText(props.document)}
           </div>
         </div>
         <div className="px-2 w-auto">
@@ -89,7 +95,7 @@ const SimpleVerifyBlock: React.FunctionComponent<SimpleVerifyBlockProps> = (prop
 
 interface CertificateVerifyBlockProps {
   verificationStatus: VerificationFragment[];
-  document: WrappedDocument<v2.OpenAttestationDocument>;
+  document: WrappedOrSignedOpenCertsDocument;
 }
 export const CertificateVerifyBlock: React.FunctionComponent<CertificateVerifyBlockProps> = (props) => {
   const [detailedViewVisible, setDetailedViewVisible] = useState(false);

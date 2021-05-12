@@ -3,12 +3,12 @@ import {
   OpenAttestationDnsTxtIdentityProofInvalidFragmentV2,
   OpenAttestationDnsTxtIdentityProofValidFragmentV2,
 } from "@govtechsg/oa-verify";
-import { SchemaId, v2, WrappedDocument } from "@govtechsg/open-attestation";
+import { SchemaId, v2, v3, WrappedDocument } from "@govtechsg/open-attestation";
 import {
   OpencertsRegistryVerifierInvalidFragmentV2,
   OpencertsRegistryVerifierValidFragmentV2,
 } from "@govtechsg/opencerts-verify";
-import { getIdentityVerificationText } from "./CertificateVerifyBlock";
+import { getV2IdentityVerificationText, getV3IdentityVerificationText } from "./CertificateVerifyBlock";
 
 const buildDocumentWithIssuers = (issuers: v2.Issuer[]): WrappedDocument<v2.OpenAttestationDocument> => {
   return {
@@ -114,14 +114,14 @@ const buildDnsTxtInvalidFragment = ({
   };
 };
 
-describe("certificate verify block getIdentityVerificationText", () => {
+describe("certificate verify block getV2IdentityVerificationText", () => {
   describe("wWhen registry is verified", () => {
     it("should return appropriate display identity from registry before when dns and registry are valid", () => {
       const fragments: AllVerificationFragment[] = [
         buildOpencertsRegistryVerifierValidFragment({ name: "Govtech" }),
         buildDnsTxtValidFragment({ location: "abc.com" }),
       ];
-      expect(getIdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
+      expect(getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
         "GOVTECH"
       );
     });
@@ -131,7 +131,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
         buildOpencertsRegistryVerifierValidFragment({ name: "Demo" }),
         buildDnsTxtInvalidFragment({ location: "abc.com" }),
       ];
-      expect(getIdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
+      expect(getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
         "DEMO"
       );
     });
@@ -142,7 +142,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
         buildDnsTxtValidFragment({ location: ["demo.com", "abc.com"] }),
       ];
       expect(
-        getIdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }, { name: "Issuer 2" }]))
+        getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }, { name: "Issuer 2" }]))
       ).toStrictEqual("DEMO, GOVTECH");
     });
 
@@ -162,7 +162,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
       const fragments: AllVerificationFragment[] = [ocFragment, dnsTextFragment];
 
       expect(
-        getIdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }, { name: "Issuer 2" }]))
+        getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }, { name: "Issuer 2" }]))
       ).toStrictEqual("DEMO, ABC.COM");
     });
 
@@ -172,7 +172,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
         buildDnsTxtInvalidFragment({ location: "abc.com" }),
       ];
 
-      expect(getIdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
+      expect(getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
         "Unknown"
       );
     });
@@ -205,7 +205,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
         },
       ];
 
-      expect(getIdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
+      expect(getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
         "ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"
       );
     });
@@ -217,7 +217,7 @@ describe("certificate verify block getIdentityVerificationText", () => {
         buildOpencertsRegistryVerifierInvalidFragment({ name: "Govtech" }),
         buildDnsTxtValidFragment({ location: "abc.com" }),
       ];
-      expect(getIdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
+      expect(getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
         "ABC.COM"
       );
     });
@@ -228,8 +228,69 @@ describe("certificate verify block getIdentityVerificationText", () => {
         buildDnsTxtValidFragment({ location: ["xyz.com", "demo.com"] }),
       ];
       expect(
-        getIdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }, { name: "Issuer 2" }]))
+        getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }, { name: "Issuer 2" }]))
       ).toStrictEqual("DEMO.COM, XYZ.COM");
     });
+  });
+});
+
+describe("getV3IdentityVerificationText", () => {
+  it("should work", () => {
+    const v3Document: v3.WrappedDocument = {
+      version: SchemaId.v3,
+      "@context": [
+        "https://www.w3.org/2018/credentials/v1",
+        "https://schemata.openattestation.com/com/openattestation/1.0/DrivingLicenceCredential.json",
+        "https://schemata.openattestation.com/com/openattestation/1.0/OpenAttestation.v3.json",
+        "https://schemata.openattestation.com/com/openattestation/1.0/CustomContext.json",
+      ],
+      reference: "SERIAL_NUMBER_123",
+      name: "Republic of Singapore Driving Licence",
+      issuanceDate: "2010-01-01T19:23:24Z",
+      validFrom: "2010-01-01T19:23:24Z",
+      issued: "2010-01-01T19:23:24Z",
+      issuer: { id: "https://example.com", name: "DEMO STORE" },
+      id: "REF_123456",
+      type: ["VerifiableCredential", "DrivingLicenceCredential"],
+      credentialSubject: {
+        id: "did:example:JOHN_DOE_DID",
+        name: "John Doe",
+        class: [
+          { type: "3", effectiveDate: "2010-01-01T19:23:24Z" },
+          { type: "3A", effectiveDate: "2010-01-01T19:23:24Z" },
+        ],
+      },
+      openAttestationMetadata: {
+        template: {
+          name: "DRIVING_LICENSE",
+          type: v3.TemplateType.EmbeddedRenderer,
+          url: "https://tutorial-renderer.openattestation.com",
+        },
+        proof: {
+          type: v3.ProofType.OpenAttestationProofMethod,
+          method: v3.Method.Did,
+          value: "did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90",
+          revocation: {
+            type: v3.RevocationType.None,
+          },
+        },
+        identityProof: {
+          type: v3.IdentityProofType.DNSDid,
+          identifier: "real.example.openattestation.com",
+        },
+      },
+      proof: {
+        merkleRoot: "",
+        proofPurpose: "assertionMethod",
+        proofs: [],
+        targetHash: "",
+        type: "OpenAttestationMerkleProofSignature2018",
+        salts: "",
+        privacy: {
+          obfuscated: [],
+        },
+      },
+    };
+    expect(getV3IdentityVerificationText(v3Document)).toStrictEqual("REAL.EXAMPLE.OPENATTESTATION.COM");
   });
 });

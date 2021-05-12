@@ -1,9 +1,10 @@
 import { VerificationFragment } from "@govtechsg/oa-verify";
-import { v2, WrappedDocument } from "@govtechsg/open-attestation";
+import { OpenAttestationDocument } from "@govtechsg/open-attestation";
 import dynamic from "next/dynamic";
 import React from "react";
 import { connect } from "react-redux";
 import { updateObfuscatedCertificate as updateObfuscatedCertificateAction } from "../reducers/certificate.actions";
+import { WrappedOrSignedOpenCertsDocument } from "../shared";
 import { CertificateShareLinkFormContainer } from "./CertificateShareLink/CertificateShareLinkForm";
 import { CertificateVerifyBlock } from "./CertificateVerifyBlock";
 import { ErrorBoundary } from "./ErrorBoundary";
@@ -21,8 +22,8 @@ const DecentralisedRenderer = dynamic(() => import("./DecentralisedTemplateRende
 const ForwardedRefDecentralisedRenderer = React.forwardRef<
   { print: () => void } | undefined,
   {
-    rawDocument: WrappedDocument<v2.OpenAttestationDocument>;
-    updateObfuscatedCertificate: (updatedDoc: WrappedDocument<v2.OpenAttestationDocument>) => void;
+    rawDocument: WrappedOrSignedOpenCertsDocument;
+    updateObfuscatedCertificate: (updatedDoc: WrappedOrSignedOpenCertsDocument) => void;
   }
 >((props, ref) => <DecentralisedRenderer {...props} forwardedRef={ref} />);
 
@@ -37,8 +38,8 @@ const RegistryBanner: React.FunctionComponent = () => {
 };
 
 export interface CertificateViewerProps {
-  document: WrappedDocument<v2.OpenAttestationDocument>;
-  certificate: v2.OpenAttestationDocument;
+  document: WrappedOrSignedOpenCertsDocument;
+  certificate: OpenAttestationDocument;
   verifying: boolean;
   shareLink: { id?: string; key?: string };
   copiedLink: boolean;
@@ -49,7 +50,7 @@ export interface CertificateViewerProps {
   handleSharingToggle: () => void;
   handleSendCertificate: (event: { email: string; captcha: string }) => void;
   handleShareLinkToggle: () => void;
-  updateObfuscatedCertificate: (updatedDoc: WrappedDocument<v2.OpenAttestationDocument>) => void;
+  updateObfuscatedCertificate: (updatedDoc: WrappedOrSignedOpenCertsDocument) => void;
   handleCopyLink: (certificateLink: string) => void;
 }
 export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> = (props) => {
@@ -146,6 +147,6 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
 };
 
 export const CertificateViewerContainer = connect(null, (dispatch) => ({
-  updateObfuscatedCertificate: (updatedDoc: WrappedDocument<v2.OpenAttestationDocument>) =>
+  updateObfuscatedCertificate: (updatedDoc: WrappedOrSignedOpenCertsDocument) =>
     dispatch(updateObfuscatedCertificateAction(updatedDoc)),
 }))(CertificateViewer);
