@@ -29,25 +29,26 @@
     "analyze": "BUNDLE_ANALYZE=browser npm run start",
     "dev-cli": "node -r esm ./scripts/cli.js",
     "serve-static": "http-server out -s -p 3000",
-    "integration": "testcafe chrome src/**/*.js --ts-config-path ./tsconfig.json",
+    "integration": "testcafe chrome src/**/*.spec.js --ts-config-path ./tsconfig.json",
     "integration:single": "testcafe chrome -L --app \"npm run serve-static\"",
     "integration:headless": "testcafe -c 4 chrome:headless src/**/*.spec.js",
-    "integration:watch": "nodemon --exec \"npm run integration\" --watch src"
+    "integration:watch": "nodemon --exec \"npm run integration\" --watch src",
+    "type-check": "npx tsc --noEmit"
   },
   "dependencies": {
-    "@govtechsg/decentralized-renderer-react-components": "^3.3.0",
-    "@govtechsg/oa-encryption": "^1.3.2",
-    "@govtechsg/open-attestation": "^4.1.1",
-    "@govtechsg/opencerts-verify": "^3.0.0",
-    "@types/google.analytics": "0.0.40",
+    "@govtechsg/decentralized-renderer-react-components": "3.4.4",
+    "@govtechsg/oa-encryption": "^1.3.3",
+    "@govtechsg/open-attestation": "^5.2.3",
+    "@govtechsg/opencerts-verify": "^3.1.0",
+    "@types/google.analytics": "0.0.41",
     "@types/react-google-recaptcha": "^2.1.0",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "clipboard-copy": "^4.0.1",
     "debug": "^4.3.1",
-    "ethers": "^5.0.26",
+    "ethers": "^5.1.4",
     "isomorphic-fetch": "^3.0.0",
     "lodash": "^4.17.20",
-    "next": "10.0.3",
+    "next": "^10.2.0",
     "next-ga": "^2.3.4",
     "next-redux-wrapper": "^6.0.2",
     "next-seo": "^4.17.0",
@@ -56,46 +57,43 @@
     "react-dropzone": "^11.2.4",
     "react-feather": "^2.0.9",
     "react-google-recaptcha": "^2.1.0",
-    "react-qr-svg": "^2.3.0",
-    "react-redux": "^7.2.2",
-    "redux": "^4.0.5",
+    "react-qr-svg": "^2.4.0",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.8",
     "redux-saga": "^1.1.3"
   },
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.14.0",
+    "@babel/preset-env": "^7.14.1",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@types/debug": "^4.1.5",
-    "@types/jest": "^26.0.16",
-    "@types/react": "^17.0.0",
+    "@types/jest": "^26.0.23",
+    "@types/react": "^17.0.5",
     "@types/react-redux": "^7.1.11",
-    "@typescript-eslint/eslint-plugin": "^4.9.0",
-    "@typescript-eslint/parser": "^4.9.0",
+    "@typescript-eslint/eslint-plugin": "^4.22.1",
+    "@typescript-eslint/parser": "^4.22.1",
     "autoprefixer": "^10.0.4",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.3",
-    "babel-plugin-module-resolver": "^4.0.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
     "cross-env": "^7.0.3",
     "downloads-folder": "^3.0.1",
-    "eslint": "^7.14.0",
-    "eslint-config-prettier": "^6.15.0",
+    "eslint": "^7.25.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jest": "^24.1.3",
+    "eslint-plugin-jest": "^24.3.6",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-testcafe-community": "^1.1.0",
-    "eslint-plugin-testing-library": "^3.10.1",
+    "eslint-plugin-testing-library": "^4.2.0",
     "http-server": "^0.12.3",
     "jest": "^26.6.3",
     "jest-sonar-reporter": "^2.0.0",
-    "jest-watch-typeahead": "^0.6.1",
+    "jest-watch-typeahead": "^0.6.3",
     "nodemon": "^2.0.6",
-    "postcss-import": "^13.0.0",
+    "postcss-import": "^14.0.1",
     "prettier": "^2.2.1",
     "tailwindcss": "^1.9.6",
     "testcafe": "1.8.5",
@@ -120,12 +118,8 @@
     "extends": [
       "plugin:@typescript-eslint/recommended",
       "plugin:react/recommended",
-      "plugin:prettier/recommended",
       "plugin:import/typescript",
-      "prettier",
-      "prettier/@typescript-eslint",
-      "prettier/react",
-      "plugin:testing-library/react"
+      "plugin:prettier/recommended"
     ],
     "parserOptions": {
       "project": "./tsconfig.json"
@@ -138,13 +132,8 @@
       "testing-library"
     ],
     "rules": {
-      "@typescript-eslint/explicit-function-return-type": [
-        "warn",
-        {
-          "allowExpressions": true,
-          "allowTypedFunctionExpressions": true
-        }
-      ],
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
       "@typescript-eslint/explicit-member-accessibility": 0,
       "@typescript-eslint/no-use-before-define": 0,
       "array-callback-return": "warn",
@@ -198,7 +187,8 @@
           "*.test.tsx"
         ],
         "extends": [
-          "plugin:jest/all"
+          "plugin:jest/all",
+          "plugin:testing-library/react"
         ],
         "rules": {
           "jest/prefer-expect-assertions": "off"

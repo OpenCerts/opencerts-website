@@ -2,19 +2,24 @@ import {
   FrameActions,
   FrameConnector,
   HostActions,
+  print,
   renderDocument,
   selectTemplate,
-  print,
 } from "@govtechsg/decentralized-renderer-react-components";
-import { getData, obfuscateDocument, utils, v2, WrappedDocument } from "@govtechsg/open-attestation";
+import { getData, obfuscateDocument, utils, v2 } from "@govtechsg/open-attestation";
 import React, { Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
-import { LEGACY_OPENCERTS_RENDERER } from "../../config";
-import { analyticsEvent, sendEventCertificateViewedDetailed } from "../Analytics";
+import { WrappedOrSignedOpenCertsDocument } from "../../shared";
+import { getTemplate, opencertsGetData } from "../../utils/utils";
+import {
+  analyticsEvent,
+  sendV2EventCertificateViewedDetailed,
+  sendV3EventCertificateViewedDetailed,
+} from "../Analytics";
 import { MutiTabsContainer } from "../MultiTabs";
 
 interface DecentralisedRendererProps {
-  rawDocument: WrappedDocument<v2.OpenAttestationDocument>;
-  updateObfuscatedCertificate: (certificate: WrappedDocument<v2.OpenAttestationDocument>) => void;
+  rawDocument: WrappedOrSignedOpenCertsDocument;
+  updateObfuscatedCertificate: (certificate: WrappedOrSignedOpenCertsDocument) => void;
   forwardedRef: Ref<{ print: () => void } | undefined>;
 }
 
@@ -29,7 +34,7 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
 }) => {
   const toFrame = useRef<Dispatch>();
   const documentRef = useRef(rawDocument);
-  const document = useMemo(() => getData(rawDocument), [rawDocument]);
+  const documentData = useMemo(() => opencertsGetData(rawDocument), [rawDocument]);
   const [height, setHeight] = useState(0);
   const [templates, setTemplates] = useState<{ id: string; label: string }[]>([]);
 
@@ -45,10 +50,10 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
     (frame) => {
       toFrame.current = frame;
       if (toFrame.current) {
-        toFrame.current(renderDocument({ document, rawDocument }));
+        toFrame.current(renderDocument({ document: documentData, rawDocument }));
       }
     },
-    [document, rawDocument]
+    [documentData, rawDocument]
   );
 
   const dispatch = (action: FrameActions): void => {
@@ -57,9 +62,12 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
       setHeight(action.payload + SCROLLBAR_WIDTH);
     } else if (action.type === "OBFUSCATE") {
       const field = action.payload;
-      const updatedDocument = obfuscateDocument(documentRef.current, field);
+      // https://github.com/microsoft/TypeScript/issues/14107 overload does not support union :/
+      const updatedDocument = utils.isWrappedV2Document(documentRef.current)
+        ? obfuscateDocument(documentRef.current, field)
+        : obfuscateDocument(documentRef.current, field);
       updateObfuscatedCertificate(updatedDocument);
-      const newDocument = getData(updatedDocument);
+      const newDocument = opencertsGetData(updatedDocument);
 
       if (toFrame.current) {
         toFrame.current(renderDocument({ document: newDocument, rawDocument: documentRef.current }));
@@ -77,26 +85,36 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
 
   // send analytics on which document has been displayed
   useEffect(() => {
-    const certificateData = getData(rawDocument);
-    let action: string;
+    // CERTIFICATE_VIEWED event
     if (utils.isSignedWrappedV2Document(rawDocument)) {
-      action = certificateData.issuers.map((issuer) => issuer.id).join(",");
-    } else {
-      const storeAddresses = utils.getIssuerAddress(rawDocument);
-      action = Array.isArray(storeAddresses) ? storeAddresses.join(",") : storeAddresses;
-    }
-    analyticsEvent(window, {
-      category: "CERTIFICATE_VIEWED",
-      action,
-      label: certificateData?.id ?? undefined,
-    });
-
-    certificateData.issuers.forEach((issuer: v2.Issuer) => {
-      sendEventCertificateViewedDetailed({
-        issuer,
-        certificateData,
+      const certificateData = getData(rawDocument);
+      analyticsEvent(window, {
+        category: "CERTIFICATE_VIEWED",
+        action: certificateData.issuers.map((issuer) => issuer.id).join(","),
+        label: certificateData?.id ?? undefined,
       });
-    });
+    } else {
+      const certificateData = opencertsGetData(rawDocument);
+      const storeAddresses = utils.getIssuerAddress(rawDocument);
+      analyticsEvent(window, {
+        category: "CERTIFICATE_VIEWED",
+        action: Array.isArray(storeAddresses) ? storeAddresses.join(",") : storeAddresses,
+        label: certificateData?.id ?? undefined,
+      });
+    }
+
+    // CERTIFICATE_DETAILS event
+    if (utils.isWrappedV2Document(rawDocument)) {
+      const certificateData = getData(rawDocument);
+      certificateData.issuers.forEach((issuer: v2.Issuer) => {
+        sendV2EventCertificateViewedDetailed({
+          issuer,
+          certificateData,
+        });
+      });
+    } else {
+      sendV3EventCertificateViewedDetailed({ certificateData: rawDocument });
+    }
   }, [rawDocument]);
 
   return (
@@ -121,7 +139,7 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
       <FrameConnector
         className="w-full max-w-full"
         style={{ height: `${height}px` }}
-        source={`${typeof document.$template === "object" ? document.$template.url : LEGACY_OPENCERTS_RENDERER}`}
+        source={`${getTemplate(rawDocument)}`}
         dispatch={dispatch}
         onConnected={onConnected}
       />

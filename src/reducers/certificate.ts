@@ -1,5 +1,5 @@
 import { VerificationFragment } from "@govtechsg/oa-verify";
-import { v2, WrappedDocument } from "@govtechsg/open-attestation";
+import { WrappedOrSignedOpenCertsDocument } from "../shared";
 import {
   CERTIFICATE_OBFUSCATE_UPDATE,
   CertificateActionTypes,
@@ -22,8 +22,8 @@ import {
 import { states } from "./shared";
 
 export interface CertificateState {
-  raw: null | WrappedDocument<v2.OpenAttestationDocument>;
-  rawModified: null | WrappedDocument<v2.OpenAttestationDocument>;
+  raw: null | WrappedOrSignedOpenCertsDocument;
+  rawModified: null | WrappedOrSignedOpenCertsDocument;
 
   verificationPending: boolean;
   verificationStatus: null | VerificationFragment[];
