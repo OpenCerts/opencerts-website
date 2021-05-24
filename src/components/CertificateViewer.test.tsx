@@ -11,7 +11,7 @@ const ReduxWrapper: React.FunctionComponent = ({ children }) => {
   return <Provider store={initStore()}>{children}</Provider>;
 };
 
-// you mean https://github.com/testing-library/dom-testing-library/issues/410
+// https://github.com/testing-library/dom-testing-library/issues/410
 // https://www.polvara.me/posts/five-things-you-didnt-know-about-testing-library/
 const withMarkup = (text: string) => (content: string, node: Nullish<Element>) => {
   if (!node) return false;
