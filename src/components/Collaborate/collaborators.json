@@ -72,9 +72,17 @@
     "logo": "/static/images/collaborate/jedtrade_logo.png"
   },
   {
+    "id": "fio",
+    "name": "FiO SG Pte Ltd",
+    "description": "FiO is a blockchain SaaS platform. Similar to LEGO blocks, enterprises can easily plug APIs with self-customizations by use minimal programming skills (Low or Non code).",
+    "website": "https://www.fio.one",
+    "key": "fio",
+    "logo": "/static/images/collaborate/FiO_logo.png"
+  },
+  {
     "id": "ibs",
     "name": "Institute of Blockchain",
-    "description": "Just another OpenCerts issuer - Institute of Blockchain® is an esteemed blockchain academia based in Singapore, on the mission to advance blockchain education and adoption in Asia-Pacific",
+    "description": "Just another OpenCerts issuer - Institute of Blockchain® is an esteemed blockchain academia based in Singapore, on the mission to advance blockchain education and adoption in Asia-Pacific.",
     "website": "https://www.ibs.edu.sg",
     "key": "ibs",
     "logo": "/static/images/collaborate/IBS_Logo.png"
