@@ -13,7 +13,7 @@ module.exports = withBundleAnalyzer({
   exportPathMap: function exportMap() {
     return {
       "/": { page: "/" },
-      "/registry": { page: "/registry" },
+      "/archive/registry": { page: "/archive/registry" },
       "/collaborate": { page: "/collaborate" },
       "/privacy": { page: "/privacy" },
       "/terms": { page: "/terms" },
