@@ -45,29 +45,6 @@ export const faqContent: FagElement[] = [
               Please contact your education institute’s administrative office for enquiries on whether your certificate
               was issued in the OpenCerts format.{" "}
             </p>
-            <p>
-              For institutions under the SkillsFuture Singapore (SSG){" "}
-              <a href="http://www.opencerts.io/registry" target="_blank" rel="noopener noreferrer">
-                registry
-              </a>
-              , certificates issued can be viewed on your{" "}
-              <a
-                href="https://www.myskillsfuture.sg/content/portal/en/individual/skills-passport.html"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Skills Passport
-              </a>
-              . Please refer to the{" "}
-              <a
-                href="https://www.myskillsfuture.sg/content/portal/en/header/faqs/SkillsPassport.html"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                FAQs
-              </a>{" "}
-              on the current certificates available on Skills Passport.
-            </p>
           </>
         ),
       },
