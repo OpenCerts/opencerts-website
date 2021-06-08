@@ -1,10 +1,12 @@
-import { SchemaId, v2, WrappedDocument } from "@govtechsg/open-attestation";
+import { SchemaId, v2, v3, WrappedDocument } from "@govtechsg/open-attestation";
 import dnsDidSigned from "../tests/fixture/dns-did-signed.json";
 import {
   analyticsEvent,
-  sendEventCertificateViewedDetailed,
+  sendV2EventCertificateViewedDetailed,
+  sendV3EventCertificateViewedDetailed,
   stringifyEvent,
-  triggerErrorLogging,
+  triggerV2ErrorLogging,
+  triggerV3ErrorLogging,
   validateEvent,
 } from "./index";
 
@@ -13,6 +15,61 @@ const evt = {
   action: "TEST_ACTION",
   label: "TEST_LABEL",
   value: 2,
+};
+const v3Document: v3.WrappedDocument = {
+  version: SchemaId.v3,
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1",
+    "https://schemata.openattestation.com/com/openattestation/1.0/DrivingLicenceCredential.json",
+    "https://schemata.openattestation.com/com/openattestation/1.0/OpenAttestation.v3.json",
+    "https://schemata.openattestation.com/com/openattestation/1.0/CustomContext.json",
+  ],
+  reference: "SERIAL_NUMBER_123",
+  name: "Republic of Singapore Driving Licence",
+  issuanceDate: "2010-01-01T19:23:24Z",
+  validFrom: "2010-01-01T19:23:24Z",
+  issued: "2010-01-01T19:23:24Z",
+  issuer: { id: "https://example.com", name: "DEMO STORE" },
+  id: "REF_123456",
+  type: ["VerifiableCredential", "DrivingLicenceCredential"],
+  credentialSubject: {
+    id: "did:example:JOHN_DOE_DID",
+    name: "John Doe",
+    class: [
+      { type: "3", effectiveDate: "2010-01-01T19:23:24Z" },
+      { type: "3A", effectiveDate: "2010-01-01T19:23:24Z" },
+    ],
+  },
+  openAttestationMetadata: {
+    template: {
+      name: "DRIVING_LICENSE",
+      type: v3.TemplateType.EmbeddedRenderer,
+      url: "https://tutorial-renderer.openattestation.com",
+    },
+    proof: {
+      type: v3.ProofType.OpenAttestationProofMethod,
+      method: v3.Method.Did,
+      value: "did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90",
+      revocation: {
+        type: v3.RevocationType.None,
+      },
+    },
+    identityProof: {
+      type: v3.IdentityProofType.DNSDid,
+      identifier: "example.openattestation.com",
+    },
+  },
+  proof: {
+    merkleRoot: "",
+    proofPurpose: "assertionMethod",
+    proofs: [],
+    targetHash: "",
+    type: "OpenAttestationMerkleProofSignature2018",
+    salts: "",
+    privacy: {
+      obfuscated: [],
+    },
+  },
 };
 
 // TODO replace expect(true).toBe(true); by real assertions
@@ -104,7 +161,7 @@ describe("analytics*", () => {
     window.ga = undefined; // This vs. delete window.ga, mockGA.mockReset()?
   });
 
-  describe("sendEventCertificateViewedDetailed", () => {
+  describe("sendV2EventCertificateViewedDetailed", () => {
     describe("when is in the registry", () => {
       it("should use document store to retrieve registry information", () => {
         const issuer: v2.Issuer = {
@@ -116,7 +173,7 @@ describe("analytics*", () => {
           },
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
-        sendEventCertificateViewedDetailed({ issuer, certificateData });
+        sendV2EventCertificateViewedDetailed({ issuer, certificateData });
         expect(window.ga).toHaveBeenCalledWith(
           "send",
           "event",
@@ -146,7 +203,7 @@ describe("analytics*", () => {
           },
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
-        sendEventCertificateViewedDetailed({ issuer, certificateData });
+        sendV2EventCertificateViewedDetailed({ issuer, certificateData });
         expect(window.ga).toHaveBeenCalledWith(
           "send",
           "event",
@@ -175,7 +232,7 @@ describe("analytics*", () => {
           },
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
-        sendEventCertificateViewedDetailed({ issuer, certificateData });
+        sendV2EventCertificateViewedDetailed({ issuer, certificateData });
         expect(window.ga).toHaveBeenCalledWith(
           "send",
           "event",
@@ -204,7 +261,7 @@ describe("analytics*", () => {
           },
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
-        sendEventCertificateViewedDetailed({ issuer, certificateData });
+        sendV2EventCertificateViewedDetailed({ issuer, certificateData });
         expect(window.ga).toHaveBeenCalledWith(
           "send",
           "event",
@@ -235,7 +292,7 @@ describe("analytics*", () => {
           },
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
-        sendEventCertificateViewedDetailed({ issuer, certificateData });
+        sendV2EventCertificateViewedDetailed({ issuer, certificateData });
         expect(window.ga).toHaveBeenCalledWith(
           "send",
           "event",
@@ -257,7 +314,30 @@ describe("analytics*", () => {
     });
   });
 
-  describe("triggerErrorLogging", () => {
+  describe("sendV3EventCertificateViewedDetailed", () => {
+    it("should work", () => {
+      sendV3EventCertificateViewedDetailed({ certificateData: v3Document });
+      expect(window.ga).toHaveBeenCalledWith(
+        "send",
+        "event",
+        "CERTIFICATE_DETAILS",
+        "VIEWED - example.openattestation.com",
+        '"store":"did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90";"document_id":"REF_123456";"name":"Republic of Singapore Driving Licence";"issued_on":"2010-01-01T19:23:24Z";"issuer_name":"example.openattestation.com"',
+        undefined,
+        {
+          dimension1: "did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90",
+          dimension2: "REF_123456",
+          dimension3: "Republic of Singapore Driving Licence",
+          dimension4: "2010-01-01T19:23:24Z",
+          dimension5: "example.openattestation.com",
+          dimension6: "(not set)",
+          nonInteraction: true,
+        }
+      );
+    });
+  });
+
+  describe("triggerV2ErrorLogging", () => {
     interface Certificate extends v2.OpenAttestationDocument {
       attainmentDate?: string;
       description?: string;
@@ -307,7 +387,7 @@ describe("analytics*", () => {
         },
       };
 
-      triggerErrorLogging(certificate, [
+      triggerV2ErrorLogging(certificate, [
         "CERTIFICATE_HASH", // Document has been tampered, naughty naughty!
         "UNISSUED_CERTIFICATE", // Document isn't issued by the given store
         "REVOKED_CERTIFICATE", // Document has been revoked by the given store
@@ -372,7 +452,7 @@ describe("analytics*", () => {
         },
       };
 
-      triggerErrorLogging(certificate, [
+      triggerV2ErrorLogging(certificate, [
         "CERTIFICATE_HASH", // Document has been tampered, naughty naughty!
         "UNISSUED_CERTIFICATE", // Document isn't issued by the given store
         "REVOKED_CERTIFICATE", // Document has been revoked by the given store
@@ -460,7 +540,7 @@ describe("analytics*", () => {
         },
       };
 
-      triggerErrorLogging(certificate, [
+      triggerV2ErrorLogging(certificate, [
         "INVALID_ARGUMENT", // merkleRoot is odd-length
       ]);
       expect(window.ga).toHaveBeenCalledWith(
@@ -546,7 +626,7 @@ describe("analytics*", () => {
         },
       };
 
-      triggerErrorLogging(certificate, [
+      triggerV2ErrorLogging(certificate, [
         "SERVER_ERROR", // HTTP response error (rate limit, bad gateway, etc.)
       ]);
       expect(window.ga).toHaveBeenCalledWith(
@@ -632,7 +712,7 @@ describe("analytics*", () => {
         },
       };
 
-      triggerErrorLogging(certificate, [
+      triggerV2ErrorLogging(certificate, [
         "ETHERS_UNHANDLED_ERROR", // some funky error that we didn't catch
       ]);
       expect(window.ga).toHaveBeenCalledWith(
@@ -656,7 +736,7 @@ describe("analytics*", () => {
     });
 
     it("should send cert details (DID) and errors (tampered/unissued/revoked) to Google Analytics", () => {
-      triggerErrorLogging(dnsDidSigned as WrappedDocument<v2.OpenAttestationDocument>, [
+      triggerV2ErrorLogging(dnsDidSigned as WrappedDocument<v2.OpenAttestationDocument>, [
         "CERTIFICATE_HASH", // Document has been tampered, naughty naughty!
         "UNISSUED_CERTIFICATE", // Document isn't issued by the given store
         "REVOKED_CERTIFICATE", // Document has been revoked by the given store
@@ -675,6 +755,34 @@ describe("analytics*", () => {
           dimension3: "(not set)",
           dimension4: "(not set)",
           dimension5: "example.tradetrust.io",
+          dimension6: "(not set)",
+          dimension7: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
+          nonInteraction: true,
+        }
+      );
+    });
+  });
+  describe("triggerV3ErrorLogging", () => {
+    it("should work", () => {
+      triggerV3ErrorLogging(v3Document, [
+        "CERTIFICATE_HASH", // Document has been tampered, naughty naughty!
+        "UNISSUED_CERTIFICATE", // Document isn't issued by the given store
+        "REVOKED_CERTIFICATE", // Document has been revoked by the given store
+      ]);
+
+      expect(window.ga).toHaveBeenCalledWith(
+        "send",
+        "event",
+        "CERTIFICATE_ERROR",
+        "ERROR - example.openattestation.com",
+        "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
+        undefined,
+        {
+          dimension1: "did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90",
+          dimension2: "REF_123456",
+          dimension3: "Republic of Singapore Driving Licence",
+          dimension4: "2010-01-01T19:23:24Z",
+          dimension5: "example.openattestation.com",
           dimension6: "(not set)",
           dimension7: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
           nonInteraction: true,

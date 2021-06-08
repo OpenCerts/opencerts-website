@@ -44,10 +44,10 @@ describe("featureFlag", () => {
   });
   it("should not render anything when there is no render function and SHARE_LINK feature flag is true", () => {
     const { container } = render(<FeatureFlag name="SHARE_LINK" state={state} />);
-    expect(container.firstChild).toMatchInlineSnapshot(`null`);
+    expect(container).toMatchInlineSnapshot(`<div />`);
   });
   it("should not render anything when there is no fallback function and OTHER feature flag is false", () => {
     const { container } = render(<FeatureFlag name="jobPost" state={state} />);
-    expect(container.firstChild).toMatchInlineSnapshot(`null`);
+    expect(container).toMatchInlineSnapshot(`<div />`);
   });
 });

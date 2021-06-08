@@ -1,9 +1,9 @@
 import { VerificationFragment } from "@govtechsg/oa-verify";
-import { v2, WrappedDocument } from "@govtechsg/open-attestation";
+import { WrappedOrSignedOpenCertsDocument } from "../shared";
 import { states } from "./shared";
 import { RootState } from "./index";
 
-export function getCertificate(store: RootState): WrappedDocument<v2.OpenAttestationDocument> | null {
+export function getCertificate(store: RootState): WrappedOrSignedOpenCertsDocument | null {
   return store.certificate.rawModified;
 }
 

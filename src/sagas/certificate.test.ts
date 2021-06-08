@@ -29,7 +29,6 @@ declare global {
     }
   }
 }
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function whenThereIsOneEthereumAddressIssuer() {
   const ethereumAddresses = ["0xd2536C3cc7eb51447F6dA8d60Ba6344A79590b4F"];
   const testCert = new MakeCertUtil().addIssuer(ethereumAddresses[0]).finish();
@@ -55,7 +54,11 @@ describe("sagas/certificate", () => {
       fetchStub.mockResolvedValue({ status: 200 });
 
       expect(saga.next().value).toStrictEqual(select(getCertificate));
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       saga.next(testCert);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       expect(saga.next(true).value).toStrictEqual(put(sendCertificateSuccess()));
       expect(saga.next().done).toBe(true);
     });
@@ -68,7 +71,11 @@ describe("sagas/certificate", () => {
       fetchStub.mockResolvedValue({ status: 200 });
 
       expect(saga.next().value).toStrictEqual(select(getCertificate));
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       saga.next(testCert);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       expect(saga.next(false).value).toStrictEqual(put(sendCertificateFailure("Fail to send certificate")));
       expect(saga.next().done).toBe(true);
     });
@@ -82,6 +89,8 @@ describe("sagas/certificate", () => {
       fetchStub.mockResolvedValue({ status: 200 });
 
       expect(saga.next().value).toStrictEqual(select(getCertificate));
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       saga.next(testCert);
       expect(saga.throw(new Error(errorMsg)).value).toStrictEqual(put(sendCertificateFailure(errorMsg)));
       expect(saga.next().done).toBe(true);

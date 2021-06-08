@@ -1,5 +1,5 @@
 import { SchemaId } from "@govtechsg/open-attestation";
-import { render, screen } from "@testing-library/react";
+import { Nullish, render, screen } from "@testing-library/react";
 import React from "react";
 import { Provider } from "react-redux";
 import { initStore } from "../store";
@@ -11,17 +11,18 @@ const ReduxWrapper: React.FunctionComponent = ({ children }) => {
   return <Provider store={initStore()}>{children}</Provider>;
 };
 
-// you mean https://github.com/testing-library/dom-testing-library/issues/410
+// https://github.com/testing-library/dom-testing-library/issues/410
 // https://www.polvara.me/posts/five-things-you-didnt-know-about-testing-library/
-const withMarkup = (text: string) => (content: string, node: HTMLElement) => {
+const withMarkup = (text: string) => (content: string, node: Nullish<Element>) => {
+  if (!node) return false;
   const hasText = (node: Element): boolean => {
     return node.textContent === text;
   };
   const nodeHasText = hasText(node);
+  // eslint-disable-next-line testing-library/no-node-access
   const childrenDontHaveText = Array.from(node.children).every((child) => !hasText(child));
   return nodeHasText && childrenDontHaveText;
 };
-
 describe("certificateViewer", () => {
   const certificate = {
     id: "k;lk;",

@@ -8,10 +8,10 @@ import {
   addressInvalid,
   certificateNotIssued,
   certificateRevoked,
-  unhandledError,
-  serverError,
   contractNotFound,
   invalidArgument,
+  serverError,
+  unhandledError,
 } from "../../../services/fragment";
 
 interface DetailedErrorsProps {

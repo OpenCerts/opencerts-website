@@ -1,6 +1,6 @@
 // Action Creators
 import { VerificationFragment } from "@govtechsg/oa-verify";
-import { v2, WrappedDocument } from "@govtechsg/open-attestation";
+import { WrappedOrSignedOpenCertsDocument } from "../shared";
 
 // Actions
 export const RESET_CERTIFICATE = "RESET_CERTIFICATE";
@@ -33,9 +33,9 @@ export function resetCertificateState(): ResetCertificateAction {
 
 interface UpdateCertificateAction {
   type: typeof UPDATE_CERTIFICATE;
-  payload: WrappedDocument<v2.OpenAttestationDocument>;
+  payload: WrappedOrSignedOpenCertsDocument;
 }
-export function updateCertificate(payload: WrappedDocument<v2.OpenAttestationDocument>): UpdateCertificateAction {
+export function updateCertificate(payload: WrappedOrSignedOpenCertsDocument): UpdateCertificateAction {
   return {
     type: UPDATE_CERTIFICATE,
     payload,
@@ -184,11 +184,9 @@ export function retrieveCertificateByActionFailure(payload: string): RetrieveCer
 
 interface UpdateObfuscatedDocumentAction {
   type: typeof CERTIFICATE_OBFUSCATE_UPDATE;
-  payload: WrappedDocument<v2.OpenAttestationDocument>;
+  payload: WrappedOrSignedOpenCertsDocument;
 }
-export function updateObfuscatedCertificate(
-  payload: WrappedDocument<v2.OpenAttestationDocument>
-): UpdateObfuscatedDocumentAction {
+export function updateObfuscatedCertificate(payload: WrappedOrSignedOpenCertsDocument): UpdateObfuscatedDocumentAction {
   return {
     type: CERTIFICATE_OBFUSCATE_UPDATE,
     payload,

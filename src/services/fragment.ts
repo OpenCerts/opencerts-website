@@ -2,15 +2,13 @@ import {
   OpenAttestationEthereumDocumentStoreStatusCode,
   OpenAttestationEthereumTokenRegistryStatusCode,
   VerificationFragment,
+  utils,
 } from "@govtechsg/oa-verify";
-
-const getFragmentsFor = (fragments: VerificationFragment[], name: string): VerificationFragment =>
-  fragments.filter((status) => status.name === name)[0];
 
 // this function check if the reason of the error is that the document store or token registry is invalid
 export const addressInvalid = (fragments: VerificationFragment[]): boolean => {
-  const documentStoreIssuedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumDocumentStoreStatus");
-  const tokenRegistryMintedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumTokenRegistryStatus");
+  const documentStoreIssuedFragment = utils.getOpenAttestationEthereumDocumentStoreStatusFragment(fragments);
+  const tokenRegistryMintedFragment = utils.getOpenAttestationEthereumTokenRegistryStatusFragment(fragments);
   // 2 is the error code used by oa-verify in case of invalid address
   return (
     (documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.DOCUMENT_NOT_ISSUED &&
@@ -22,7 +20,7 @@ export const addressInvalid = (fragments: VerificationFragment[]): boolean => {
 
 // this function check if the reason of the error is that the document store
 export const contractNotFound = (fragments: VerificationFragment[]): boolean => {
-  const documentStoreIssuedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumDocumentStoreStatus");
+  const documentStoreIssuedFragment = utils.getOpenAttestationEthereumDocumentStoreStatusFragment(fragments);
   // 404 is the error code used by oa-verify in case of contract not found
   return (
     documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.DOCUMENT_NOT_ISSUED &&
@@ -32,8 +30,8 @@ export const contractNotFound = (fragments: VerificationFragment[]): boolean => 
 
 // this function check if the reason of the error is that the document store or token has not been issued
 export const certificateNotIssued = (fragments: VerificationFragment[]): boolean => {
-  const documentStoreIssuedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumDocumentStoreStatus");
-  const tokenRegistryMintedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumTokenRegistryStatus");
+  const documentStoreIssuedFragment = utils.getOpenAttestationEthereumDocumentStoreStatusFragment(fragments);
+  const tokenRegistryMintedFragment = utils.getOpenAttestationEthereumTokenRegistryStatusFragment(fragments);
   // 1 is the error code used by oa-verify in case of document / token not issued / minted
   return (
     documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.DOCUMENT_NOT_ISSUED ||
@@ -43,15 +41,15 @@ export const certificateNotIssued = (fragments: VerificationFragment[]): boolean
 
 // this function check if the reason of the error is that the document store or token has not been issued
 export const certificateRevoked = (fragments: VerificationFragment[]): boolean => {
-  const documentStoreIssuedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumDocumentStoreStatus");
+  const documentStoreIssuedFragment = utils.getOpenAttestationEthereumDocumentStoreStatusFragment(fragments);
   // 1 is the error code used by oa-verify in case of document / token not issued / minted
   return documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.DOCUMENT_REVOKED;
 };
 
 // this function check if the error is caused by an invalid merkle root (incorrect length/odd length/invalid characters)
 export const invalidArgument = (fragments: VerificationFragment[]): boolean => {
-  const documentStoreIssuedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumDocumentStoreStatus");
-  const tokenRegistryMintedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumTokenRegistryStatus");
+  const documentStoreIssuedFragment = utils.getOpenAttestationEthereumDocumentStoreStatusFragment(fragments);
+  const tokenRegistryMintedFragment = utils.getOpenAttestationEthereumTokenRegistryStatusFragment(fragments);
   // why INVALID_ARGUMENT is because we follow the error codes returned by Ethers (https://docs.ethers.io/v5/api/utils/logger/#errors)
   return (
     (documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.DOCUMENT_NOT_ISSUED &&
@@ -63,8 +61,8 @@ export const invalidArgument = (fragments: VerificationFragment[]): boolean => {
 
 // this function check if the reason of the error is that we can't connect to Ethereum (due to any HTTP 4xx or 5xx errors)
 export const serverError = (fragments: VerificationFragment[]): boolean => {
-  const documentStoreIssuedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumDocumentStoreStatus");
-  const tokenRegistryMintedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumTokenRegistryStatus");
+  const documentStoreIssuedFragment = utils.getOpenAttestationEthereumDocumentStoreStatusFragment(fragments);
+  const tokenRegistryMintedFragment = utils.getOpenAttestationEthereumTokenRegistryStatusFragment(fragments);
   // 429 is the error code used by oa-verify in case of Ethers returning a missing response error
   return (
     documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.SERVER_ERROR ||
@@ -74,8 +72,8 @@ export const serverError = (fragments: VerificationFragment[]): boolean => {
 
 // this function catches all other unhandled errors
 export const unhandledError = (fragments: VerificationFragment[]): boolean => {
-  const documentStoreIssuedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumDocumentStoreStatus");
-  const tokenRegistryMintedFragment = getFragmentsFor(fragments, "OpenAttestationEthereumTokenRegistryStatus");
+  const documentStoreIssuedFragment = utils.getOpenAttestationEthereumDocumentStoreStatusFragment(fragments);
+  const tokenRegistryMintedFragment = utils.getOpenAttestationEthereumTokenRegistryStatusFragment(fragments);
   // 3 is the error code used by oa-verify in case of weird errors that we didn't foresee to handle
   return (
     documentStoreIssuedFragment?.reason?.code ===

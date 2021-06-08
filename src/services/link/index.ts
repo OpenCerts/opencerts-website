@@ -1,8 +1,8 @@
 import "isomorphic-fetch";
-import { WrappedDocument } from "@govtechsg/open-attestation";
 import { SHARE_LINK_API_URL, SHARE_LINK_TTL } from "../../config";
+import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 
-export function generateLink(certificate: WrappedDocument): Promise<{ id: string; key: string }> {
+export function generateLink(certificate: WrappedOrSignedOpenCertsDocument): Promise<{ id: string; key: string }> {
   return window
     .fetch(`${SHARE_LINK_API_URL}/`, {
       method: "POST",
