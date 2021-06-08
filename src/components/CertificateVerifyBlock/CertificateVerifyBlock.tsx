@@ -1,26 +1,27 @@
-import { VerificationFragment, VerificationFragmentStatus } from "@govtechsg/oa-verify";
-import { getData, v2, WrappedDocument } from "@govtechsg/open-attestation";
-import { OpencertsRegistryVerificationFragmentData } from "@govtechsg/opencerts-verify";
+import {
+  utils,
+  ValidDnsDidVerificationStatus,
+  ValidDnsTxtVerificationStatus,
+  VerificationFragment,
+} from "@govtechsg/oa-verify";
+import { getData, v2, WrappedDocument, utils as oaUtils, v3 } from "@govtechsg/open-attestation";
+import {
+  getOpencertsRegistryVerifierFragment,
+  OpencertsRegistryVerificationValidData,
+} from "@govtechsg/opencerts-verify";
 import React, { useState } from "react";
+import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { icons } from "../ViewerPageImages";
 import { DetailedCertificateVerifyBlock } from "./DetailedCertificateVerifyBlock";
 
-type DnsTxtFragment = { status: VerificationFragmentStatus; location?: string };
-type DnsDidFragment = DnsTxtFragment;
-
-export const getIdentityVerificationText = (
+export const getV2IdentityVerificationText = (
   verificationStatus: VerificationFragment[],
   document: WrappedDocument<v2.OpenAttestationDocument>
 ): string => {
   const data = getData(document);
-  const registryFragment = verificationStatus.find((status) => status.name === "OpencertsRegistryVerifier");
-  const dnsTxtFragment = verificationStatus.find((status) => status.name === "OpenAttestationDnsTxtIdentityProof");
-  const dnsDidFragment = verificationStatus.find((status) => status.name === "OpenAttestationDnsDidIdentityProof");
-
-  // using concat to handle arrays and single element
-  const registryFragmentData: OpencertsRegistryVerificationFragmentData[] = [].concat(registryFragment?.data || []);
-  const dnsTxtFragmentData: (DnsTxtFragment | undefined)[] = [].concat(dnsTxtFragment?.data || []);
-  const dnsDidFragmentData: (DnsDidFragment | undefined)[] = [].concat(dnsDidFragment?.data || []);
+  const registryFragment = getOpencertsRegistryVerifierFragment(verificationStatus);
+  const dnsTxtFragment = utils.getOpenAttestationDnsTxtIdentityProofFragment(verificationStatus);
+  const dnsDidFragment = utils.getOpenAttestationDnsDidIdentityProofFragment(verificationStatus);
 
   const identities = data.issuers
     .map((_, index) => {
@@ -29,15 +30,16 @@ export const getIdentityVerificationText = (
       // 2. otherwise check dns fragment and return the location if the fragment is valid
       // 2. otherwise check did-dns fragment and return the location if the fragment is valid
       // 3. otherwise return default value
-      const registryFragment = registryFragmentData[index];
-      const dnsTxtFragment = dnsTxtFragmentData[index];
-      const dnsDidFragment = dnsDidFragmentData[index];
-      if (registryFragment?.status === "VALID" && registryFragment?.name)
-        return { location: registryFragment.name.toUpperCase(), from: "registry" };
-      else if (dnsTxtFragment?.status === "VALID" && dnsTxtFragment?.location)
-        return { location: dnsTxtFragment.location.toUpperCase(), from: "dns-txt" };
-      else if (dnsDidFragment?.status === "VALID" && dnsDidFragment?.location)
-        return { location: dnsDidFragment.location.toUpperCase(), from: "dns-did" };
+      const indexedRegistryFragment = Array.isArray(registryFragment?.data) ? registryFragment?.data[index] : undefined;
+      const indexedDnsTxtFragment = Array.isArray(dnsTxtFragment?.data) ? dnsTxtFragment?.data[index] : undefined;
+      const indexedDnsDidFragment = Array.isArray(dnsDidFragment?.data) ? dnsDidFragment?.data[index] : undefined;
+
+      if (OpencertsRegistryVerificationValidData.guard(indexedRegistryFragment))
+        return { location: indexedRegistryFragment.name.toUpperCase(), from: "registry" };
+      else if (ValidDnsTxtVerificationStatus.guard(indexedDnsTxtFragment))
+        return { location: indexedDnsTxtFragment.location.toUpperCase(), from: "dns-txt" };
+      else if (ValidDnsDidVerificationStatus.guard(indexedDnsDidFragment))
+        return { location: indexedDnsDidFragment.location.toUpperCase(), from: "dns-did" };
       else return { location: "", from: "" };
     })
     .filter((identity) => identity.location)
@@ -54,12 +56,15 @@ export const getIdentityVerificationText = (
   }
   return "Unknown";
 };
+export const getV3IdentityVerificationText = (document: WrappedDocument<v3.OpenAttestationDocument>): string => {
+  return document.openAttestationMetadata.identityProof.identifier.toUpperCase();
+};
 
 interface SimpleVerifyBlockProps {
   detailedViewVisible: boolean;
   verificationStatus: VerificationFragment[];
   toggleDetailedViewVisible: () => void;
-  document: WrappedDocument<v2.OpenAttestationDocument>;
+  document: WrappedOrSignedOpenCertsDocument;
 }
 const SimpleVerifyBlock: React.FunctionComponent<SimpleVerifyBlockProps> = (props) => {
   return (
@@ -75,7 +80,9 @@ const SimpleVerifyBlock: React.FunctionComponent<SimpleVerifyBlockProps> = (prop
         <div className="px-2 w-full font-bold">
           Certificate issued by
           <div className="break-all md:break-normal">
-            {getIdentityVerificationText(props.verificationStatus, props.document)}
+            {oaUtils.isWrappedV2Document(props.document)
+              ? getV2IdentityVerificationText(props.verificationStatus, props.document)
+              : getV3IdentityVerificationText(props.document)}
           </div>
         </div>
         <div className="px-2 w-auto">
@@ -88,7 +95,7 @@ const SimpleVerifyBlock: React.FunctionComponent<SimpleVerifyBlockProps> = (prop
 
 interface CertificateVerifyBlockProps {
   verificationStatus: VerificationFragment[];
-  document: WrappedDocument<v2.OpenAttestationDocument>;
+  document: WrappedOrSignedOpenCertsDocument;
 }
 export const CertificateVerifyBlock: React.FunctionComponent<CertificateVerifyBlockProps> = (props) => {
   const [detailedViewVisible, setDetailedViewVisible] = useState(false);
@@ -96,7 +103,7 @@ export const CertificateVerifyBlock: React.FunctionComponent<CertificateVerifyBl
 
   const { verificationStatus } = props;
   return (
-    <div className="relative mb-8 lg:mb-0">
+    <div className="relative mb-4 lg:mb-0">
       <SimpleVerifyBlock
         verificationStatus={verificationStatus}
         toggleDetailedViewVisible={toggleDetailedViewVisible}

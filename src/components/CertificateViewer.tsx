@@ -1,9 +1,10 @@
 import { VerificationFragment } from "@govtechsg/oa-verify";
-import { v2, WrappedDocument } from "@govtechsg/open-attestation";
+import { utils, v2, v3, OpenAttestationDocument } from "@govtechsg/open-attestation";
 import dynamic from "next/dynamic";
 import React from "react";
 import { connect } from "react-redux";
 import { updateObfuscatedCertificate as updateObfuscatedCertificateAction } from "../reducers/certificate.actions";
+import { WrappedOrSignedOpenCertsDocument } from "../shared";
 import { CertificateShareLinkFormContainer } from "./CertificateShareLink/CertificateShareLinkForm";
 import { CertificateVerifyBlock } from "./CertificateVerifyBlock";
 import { ErrorBoundary } from "./ErrorBoundary";
@@ -21,8 +22,8 @@ const DecentralisedRenderer = dynamic(() => import("./DecentralisedTemplateRende
 const ForwardedRefDecentralisedRenderer = React.forwardRef<
   { print: () => void } | undefined,
   {
-    rawDocument: WrappedDocument<v2.OpenAttestationDocument>;
-    updateObfuscatedCertificate: (updatedDoc: WrappedDocument<v2.OpenAttestationDocument>) => void;
+    rawDocument: WrappedOrSignedOpenCertsDocument;
+    updateObfuscatedCertificate: (updatedDoc: WrappedOrSignedOpenCertsDocument) => void;
   }
 >((props, ref) => <DecentralisedRenderer {...props} forwardedRef={ref} />);
 
@@ -36,9 +37,17 @@ const RegistryBanner: React.FunctionComponent = () => {
   );
 };
 
+const isObfuscated = (document: v3.WrappedDocument | v2.WrappedDocument) => {
+  try {
+    return utils.isObfuscated(document);
+  } catch (e) {
+    return false;
+  }
+};
+
 export interface CertificateViewerProps {
-  document: WrappedDocument<v2.OpenAttestationDocument>;
-  certificate: v2.OpenAttestationDocument;
+  document: WrappedOrSignedOpenCertsDocument;
+  certificate: OpenAttestationDocument;
   verifying: boolean;
   shareLink: { id?: string; key?: string };
   copiedLink: boolean;
@@ -49,7 +58,7 @@ export interface CertificateViewerProps {
   handleSharingToggle: () => void;
   handleSendCertificate: (event: { email: string; captcha: string }) => void;
   handleShareLinkToggle: () => void;
-  updateObfuscatedCertificate: (updatedDoc: WrappedDocument<v2.OpenAttestationDocument>) => void;
+  updateObfuscatedCertificate: (updatedDoc: WrappedOrSignedOpenCertsDocument) => void;
   handleCopyLink: (certificateLink: string) => void;
 }
 export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> = (props) => {
@@ -115,6 +124,12 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
                   </div>
                 </div>
               </div>
+              {isObfuscated(document) && (
+                <div className="text-md font-bold text-red pt-4" id="obfuscation-note">
+                  The owner of this certificate have chosen not to share certain information in the certificate with
+                  you. Please note that this does not affect the authenticity of the certificate.
+                </div>
+              )}
             </div>
             <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
               <CertificateSharingForm
@@ -140,12 +155,12 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
             />
           </section>
         </>
-      }{" "}
+      }
     </ErrorBoundary>
   );
 };
 
 export const CertificateViewerContainer = connect(null, (dispatch) => ({
-  updateObfuscatedCertificate: (updatedDoc: WrappedDocument<v2.OpenAttestationDocument>) =>
+  updateObfuscatedCertificate: (updatedDoc: WrappedOrSignedOpenCertsDocument) =>
     dispatch(updateObfuscatedCertificateAction(updatedDoc)),
 }))(CertificateViewer);
