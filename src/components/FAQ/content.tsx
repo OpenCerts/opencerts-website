@@ -190,22 +190,6 @@ export const faqContent: FagElement[] = [
     category: "Institutes",
     faq: [
       {
-        question: "How can I add my institute to the list of recognised issuers?",
-        answer: (
-          <p>
-            Please see our{" "}
-            <a
-              href="https://docs.opencerts.io/docs/registry#application-to-skillsfuture-singapore"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation
-            </a>
-            .
-          </p>
-        ),
-      },
-      {
         question: "How can I change the appearance of the certificates I issue?",
         answer: (
           <p>
