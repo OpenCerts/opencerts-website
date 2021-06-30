@@ -147,11 +147,16 @@ export function generateShareLinkFailure(payload: string): GenerateShareLinkFail
 interface RetrieveCertificateAction {
   type: typeof RETRIEVE_CERTIFICATE_BY_ACTION;
   payload: { uri: string; key?: string };
+  anchor: { key?: string };
 }
-export function retrieveCertificateByAction(payload: { uri: string; key?: string }): RetrieveCertificateAction {
+export function retrieveCertificateByAction(
+  payload: { uri: string; key?: string },
+  anchor: { key?: string }
+): RetrieveCertificateAction {
   return {
     type: RETRIEVE_CERTIFICATE_BY_ACTION,
     payload,
+    anchor,
   };
 }
 interface RetrieveCertificatePendingAction {

@@ -13,7 +13,7 @@ import {
 
 interface HomePageProps {
   resetCertificateState: () => void;
-  retrieveCertificateByAction: (payload: { uri: string; key?: string }) => void;
+  retrieveCertificateByAction: (payload: { uri: string; key?: string }, anchor: { key?: string }) => void;
   retrieveCertificateByActionFailure: (message: string) => void;
 }
 const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
@@ -22,8 +22,10 @@ const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
     props.resetCertificateState();
     if (router.query.q) {
       const action = JSON.parse(window.decodeURI(router.query.q as string));
+      const anchorStr = decodeURIComponent(window.location.hash.substr(1));
+      const anchor = anchorStr ? JSON.parse(anchorStr) : {};
       if (action.type === "DOCUMENT") {
-        props.retrieveCertificateByAction(action.payload);
+        props.retrieveCertificateByAction(action.payload, anchor);
       } else {
         props.retrieveCertificateByActionFailure(`The type ${action.type} provided from the action is not supported`);
       }

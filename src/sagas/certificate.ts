@@ -142,7 +142,13 @@ export function* generateShareLink() {
   }
 }
 
-export function* retrieveCertificateByAction({ payload: { uri, key } }: { payload: { uri: string; key?: string } }) {
+export function* retrieveCertificateByAction({
+  payload: { uri, key: payloadKey },
+  anchor: { key: anchorKey },
+}: {
+  payload: { uri: string; key?: string };
+  anchor: { key?: string };
+}) {
   try {
     yield put(retrieveCertificateByActionPending());
 
@@ -160,6 +166,7 @@ export function* retrieveCertificateByAction({ payload: { uri, key } }: { payloa
       throw new Error(`Certificate at address ${uri} is empty`);
     }
     // if there is a key and the type is "OPEN-ATTESTATION-TYPE-1", let's use oa-encryption
+    const key = anchorKey || payloadKey;
     if (key && certificate.type === "OPEN-ATTESTATION-TYPE-1") {
       certificate = JSON.parse(
         decryptString({

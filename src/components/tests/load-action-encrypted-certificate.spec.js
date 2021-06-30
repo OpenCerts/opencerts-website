@@ -17,6 +17,36 @@ const validateTextContent = async (t, component, texts) =>
 
 const key = "d1093e704689bcb3a1287daef7644751498b4cbf008d32373a567fe3a112a26e";
 
+test("Load document from action should work when action is valid (key from anchor)", async (t) => {
+  const anchor = { key };
+  const action = {
+    type: "DOCUMENT",
+    payload: {
+      uri: `https://gist.githubusercontent.com/Nebulis/328b757c7b56aa5a7d537c88cd250f92/raw/2816aad4811846ee8cd554bd19e08706da19ae09/e2e.json`,
+      permittedAction: ["STORE"],
+      redirect: "https://opencerts.io/",
+    },
+  };
+
+  await t.navigateTo(
+    `http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}#${encodeURI(JSON.stringify(anchor))}`
+  );
+  await validateTextContent(t, StatusButton, ["ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
+
+  await validateTextContent(t, CertificateStatusBanner, [
+    "Certificate issuer is in the SkillsFuture Singapore registry for Opencerts",
+  ]);
+
+  await t.switchToIframe(IframeBlock);
+
+  await validateTextContent(t, SampleTemplate, [
+    "OpenCerts Demo",
+    "Your Name",
+    "has successfully completed the",
+    "John Demo",
+  ]);
+});
+
 test("Load document from action should work when action is valid", async (t) => {
   const action = {
     type: "DOCUMENT",
@@ -61,6 +91,27 @@ test("Load document from action should fail when action type is invalid", async 
     "The certificate can't be loaded",
     "Unable to load certificate with the provided parameters",
     "The type DOCUM provided from the action is not supported",
+  ]);
+});
+
+test("Load document from action should fail when key is invalid (key from anchor)", async (t) => {
+  const anchor = { key: "2a237b35cb50544a2c9a4b4a629e7c547bd1ff4a0137489700891532001e83f6" }; // random key, must have correct length
+  const action = {
+    type: "DOCUMENT",
+    payload: {
+      uri: `https://gist.githubusercontent.com/Nebulis/328b757c7b56aa5a7d537c88cd250f92/raw/2816aad4811846ee8cd554bd19e08706da19ae09/e2e.json`,
+      permittedAction: ["STORE"],
+      redirect: "https://opencerts.io/",
+    },
+  };
+
+  await t.navigateTo(
+    `http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}#${encodeURI(JSON.stringify(anchor))}`
+  );
+  await validateTextContent(t, CertificateDropzone, [
+    "The certificate can't be loaded",
+    "Unable to load certificate with the provided parameters",
+    "Error decrypting message",
   ]);
 });
 
