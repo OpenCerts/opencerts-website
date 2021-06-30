@@ -162,8 +162,8 @@
     "0x94cbba4b50d2c29d247221a7cc2dda356054078b": {
       "name": "Singapore Management University School of Information Systems",
       "displayCard": true,
-      "website": "https://sis.smu.edu.sg",
-      "email": "enquiries@sis.smu.edu.sg",
+      "website": "https://scis.smu.edu.sg",
+      "email": "enquiries@scis.smu.edu.sg",
       "phone": "+65 6808 5108",
       "logo": "/static/images/SMU_logo.png",
       "id": "smu-registry-sis",
