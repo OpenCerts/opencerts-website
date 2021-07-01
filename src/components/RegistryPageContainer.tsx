@@ -23,11 +23,7 @@ export const RegistryPage: React.FunctionComponent = () => {
       <Hero heading="Registry" subHeading="The registry is maintained by SkillsFuture Singapore.">
         <p>
           When a certificate is verified, this would mean that the certificate is issued by an institution in the
-          SkillsFuture Singapore registry. To apply for your institute to be listed in the registry, kindly fill in{" "}
-          <a href="https://form.gov.sg/5cd5141c02d207001007e322" target="_blank" rel="noopener noreferrer">
-            this form
-          </a>
-          .
+          SkillsFuture Singapore registry.
         </p>
       </Hero>
       <nav className="py-6">

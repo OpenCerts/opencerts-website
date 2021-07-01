@@ -110,7 +110,7 @@
       "logo": "/static/images/NTU_logo.png",
       "id": "ntu-registry"
     },
-	"0x61783202d023fd08dcc7d7ca8a196697c46c9d57": {
+    "0x61783202d023fd08dcc7d7ca8a196697c46c9d57": {
       "name": "Nanyang Technological University",
       "displayCard": true,
       "website": "https://www.ntu.edu.sg",
@@ -149,7 +149,7 @@
       "id": "smu-registry-accountancy",
       "group": "smu-registry"
     },
-	"0x6a8899bbe8bb1535e60cf9237fc6806c26066dee": {
+    "0x6a8899bbe8bb1535e60cf9237fc6806c26066dee": {
       "name": "Singapore Management University School of Economics",
       "displayCard": true,
       "website": "https://economics.smu.edu.sg",
@@ -159,17 +159,17 @@
       "id": "smu-registry-economics",
       "group": "smu-registry"
     },
-	"0x94cbba4b50d2c29d247221a7cc2dda356054078b": {
+    "0x94cbba4b50d2c29d247221a7cc2dda356054078b": {
       "name": "Singapore Management University School of Information Systems",
       "displayCard": true,
-      "website": "https://sis.smu.edu.sg",
-      "email": "enquiries@sis.smu.edu.sg",
+      "website": "https://scis.smu.edu.sg",
+      "email": "enquiries@scis.smu.edu.sg",
       "phone": "+65 6808 5108",
       "logo": "/static/images/SMU_logo.png",
       "id": "smu-registry-sis",
       "group": "smu-registry"
     },
-	"0x5a8027a5fa187d495546c4041966703bf9018a11": {
+    "0x5a8027a5fa187d495546c4041966703bf9018a11": {
       "name": "Singapore Management University Lee Kong Chian School of Business",
       "displayCard": true,
       "website": "https://business.smu.edu.sg",
@@ -179,7 +179,7 @@
       "id": "smu-registry-business",
       "group": "smu-registry"
     },
-	"0x86e7e573a18df76ed840d6ae2af11785c1453911": {
+    "0x86e7e573a18df76ed840d6ae2af11785c1453911": {
       "name": "Singapore Management University School of Law",
       "displayCard": true,
       "website": "https://law.smu.edu.sg",
@@ -208,7 +208,7 @@
       "logo": "/static/images/NUS_logo.svg",
       "id": "nus-registry"
     },
-	"0x66671988ee465b5c23Ef18838B32b1666d0EC8d6": {
+    "0x66671988ee465b5c23Ef18838B32b1666d0EC8d6": {
       "name": "National University of Singapore",
       "displayCard": true,
       "website": "http://www.nus.edu.sg/",
