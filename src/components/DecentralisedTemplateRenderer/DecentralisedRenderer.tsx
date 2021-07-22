@@ -35,6 +35,7 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
   const toFrame = useRef<Dispatch>();
   const documentRef = useRef(rawDocument);
   const documentData = useMemo(() => opencertsGetData(rawDocument), [rawDocument]);
+  const [rendererTimeout, setRendererTimeout] = useState(false);
   const [height, setHeight] = useState(0);
   const [templates, setTemplates] = useState<{ id: string; label: string }[]>([]);
 
@@ -74,6 +75,8 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
       }
     } else if (action.type === "UPDATE_TEMPLATES") {
       setTemplates(action.payload);
+    } else if (action.type === "TIMEOUT") {
+      setRendererTimeout(true);
     }
   };
 
@@ -130,19 +133,21 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
       <h2 className="print-only exact-print text-center py-8">
         If you want to print the certificate, please click on the highlighted button above.
       </h2>
-      {!toFrame.current && (
+      {!toFrame.current && !rendererTimeout && (
         <div className="container text-blue text-center py-16">
           <i className="fas fa-spinner fa-pulse fa-3x" />
           <div className="my-3">Loading Renderer...</div>
         </div>
       )}
-      <FrameConnector
-        className="w-full max-w-full"
-        style={{ height: `${height}px` }}
-        source={`${getTemplate(rawDocument)}`}
-        dispatch={dispatch}
-        onConnected={onConnected}
-      />
+      <div className={rendererTimeout ? "container text-center py-16" : ""}>
+        <FrameConnector
+          className="w-full max-w-full"
+          style={{ height: `${height}px` }}
+          source={`${getTemplate(rawDocument)}`}
+          dispatch={dispatch}
+          onConnected={onConnected}
+        />
+      </div>
     </>
   );
 };
