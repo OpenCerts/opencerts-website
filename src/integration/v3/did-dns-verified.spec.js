@@ -20,5 +20,5 @@ test("Sample document is rendered correctly when dns is verified", async (t) => 
 
   await t.switchToIframe(IframeBlock);
 
-  await validateTextContent(t, SampleTemplate, ["Republic of Singapore Driving Licence", "Name: John Doe"]);
+  await validateTextContent(t, SampleTemplate, ["Republic of Singapore Driving Licence", "John Doe"]);
 });
