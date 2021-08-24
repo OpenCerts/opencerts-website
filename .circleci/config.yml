@@ -1,5 +1,11 @@
+version: 2.1
+
 workflows:
-  version: 2
+  build-workflow:
+    jobs:
+      - build:
+          context:
+            - NPM Deployment
 #  uncomment to get build registry
 #  nightly:
 #    triggers:
