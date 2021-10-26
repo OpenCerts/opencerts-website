@@ -34,14 +34,12 @@ export const ENVIRONMENT = publicRuntimeConfig.context === "production" ? "produ
 export const DEFAULT_SEO = {
   title: "An easy way to check and verify your certificates",
   titleTemplate: `OpenCerts - %s`,
-  description:
-    "Whether you're a student or an employer, OpenCerts lets you verify the certificates you have of anyone from any institution. All in one place.",
+  description: "Whether you are a student or an employer, verify any OpenCerts certificate here.",
   openGraph: {
     type: "website",
     url: URL,
-    title: "OpenCerts - An easy way to check and verify your certificates",
-    description:
-      "Whether you're a student or an employer, OpenCerts lets you verify the certificates you have of anyone from any institution. All in one place.",
+    title: "OpenCerts - An easy way to check and verify your OpenCerts certificates",
+    description: "Whether you are a student or an employer, verify any OpenCerts certificate here.",
     images: [
       {
         url: `${URL}/static/images/opencerts.png`,

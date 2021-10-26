@@ -106,11 +106,8 @@ class DropZoneSection extends Component<DropZoneSectionProps> {
         <div className="container">
           <div className="flex flex-wrap">
             <div className="w-full lg:w-1/3 lg:pr-10 text-center lg:text-left">
-              <h1 className="font-montserrat mb-5">An easy way to check and verify your certificates</h1>
-              <p>
-                Whether you&#39;re a student or an employer, OpenCerts lets you verify the certificates you have of
-                anyone from any institution. All in one place.
-              </p>
+              <h1 className="font-montserrat mb-5">An easy way to check and verify your OpenCerts certificates</h1>
+              <p>Whether you are a student or an employer, verify any OpenCerts certificate here.</p>
               <DraggableDemoCertificate />
               <MobileDemoCertificate />
             </div>
