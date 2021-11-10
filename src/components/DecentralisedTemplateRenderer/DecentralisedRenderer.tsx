@@ -14,6 +14,8 @@ import {
   analyticsEvent,
   sendV2EventCertificateViewedDetailed,
   sendV3EventCertificateViewedDetailed,
+  triggerV2RendererTimeoutLogging,
+  triggerV3RendererTimeoutLogging,
 } from "../Analytics";
 import { MutiTabsContainer } from "../MultiTabs";
 
@@ -77,6 +79,13 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
       setTemplates(action.payload);
     } else if (action.type === "TIMEOUT") {
       setRendererTimeout(true);
+
+      // CERTIFICATE_RENDERER_TIMEOUT event
+      if (utils.isWrappedV2Document(rawDocument)) {
+        triggerV2RendererTimeoutLogging(rawDocument);
+      } else {
+        triggerV3RendererTimeoutLogging(rawDocument);
+      }
     }
   };
 
