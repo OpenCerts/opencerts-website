@@ -189,3 +189,73 @@ export function triggerV3ErrorLogging(
     },
   });
 }
+
+export function triggerV2RendererTimeoutLogging(rawCertificate: WrappedDocument<v2.OpenAttestationDocument>): void {
+  const certificate: v2.OpenAttestationDocument & { name?: string; issuedOn?: string } = getData(rawCertificate);
+
+  const id = certificate?.id;
+  const name = certificate?.name;
+  const issuedOn = certificate?.issuedOn;
+  const rendererUrl = typeof certificate?.$template === "string" ? certificate?.$template : certificate?.$template?.url;
+  const templateName =
+    typeof certificate?.$template === "string" ? certificate?.$template : certificate?.$template?.name;
+
+  // If there are multiple issuers in a certificate, we send multiple events!
+  certificate.issuers.forEach((issuer: v2.Issuer) => {
+    const store = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? issuer.id ?? ""; // use id for DID
+    let issuerName = issuer.name;
+    let registryId = null;
+
+    if (isInRegistry(store)) {
+      const registryIssuer: RegistryEntry = registry.issuers[store];
+      issuerName = registryIssuer.name;
+      registryId = registryIssuer.id;
+    } else if (issuer.identityProof) {
+      issuerName = issuer.identityProof.location || "";
+    }
+
+    analyticsEvent(window, {
+      category: "CERTIFICATE_RENDERER_TIMEOUT",
+      action: `RENDERER TIMEOUT - ${issuerName}`,
+      options: {
+        nonInteraction: true,
+        dimension1: store || "(not set)",
+        dimension2: id || "(not set)",
+        dimension3: name || "(not set)",
+        dimension4: issuedOn || "(not set)",
+        dimension5: issuerName || "(not set)",
+        dimension6: registryId || "(not set)",
+        dimension8: rendererUrl || "(not set)",
+        dimension9: templateName || "(not set)",
+      },
+    });
+  });
+}
+
+export function triggerV3RendererTimeoutLogging(rawCertificate: WrappedDocument<v3.OpenAttestationDocument>): void {
+  const id = rawCertificate?.id;
+  const name = rawCertificate?.name;
+  const issuedOn = rawCertificate?.issued;
+  const rendererUrl = rawCertificate?.openAttestationMetadata.template?.url;
+  const templateName = rawCertificate?.openAttestationMetadata.template?.name;
+
+  // If there are multiple issuers in a certificate, we send multiple events!
+  const store = utils.getIssuerAddress(rawCertificate);
+  const issuerName = rawCertificate.openAttestationMetadata.identityProof.identifier;
+
+  analyticsEvent(window, {
+    category: "CERTIFICATE_RENDERER_TIMEOUT",
+    action: `RENDERER TIMEOUT - ${issuerName}`,
+    options: {
+      nonInteraction: true,
+      dimension1: store || "(not set)",
+      dimension2: id || "(not set)",
+      dimension3: name || "(not set)",
+      dimension4: issuedOn || "(not set)",
+      dimension5: issuerName || "(not set)",
+      dimension6: "(not set)",
+      dimension8: rendererUrl || "(not set)",
+      dimension9: templateName || "(not set)",
+    },
+  });
+}

@@ -14,6 +14,8 @@ import {
   analyticsEvent,
   sendV2EventCertificateViewedDetailed,
   sendV3EventCertificateViewedDetailed,
+  triggerV2RendererTimeoutLogging,
+  triggerV3RendererTimeoutLogging,
 } from "../Analytics";
 import { MutiTabsContainer } from "../MultiTabs";
 
@@ -57,28 +59,38 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
     [documentData, rawDocument]
   );
 
-  const dispatch = (action: FrameActions): void => {
-    if (action.type === "UPDATE_HEIGHT") {
-      // adding SCROLLBAR_WIDTH in case the frame content overflow horizontally, which will cause scrollbars to appear
-      setHeight(action.payload + SCROLLBAR_WIDTH);
-    } else if (action.type === "OBFUSCATE") {
-      const field = action.payload;
-      // https://github.com/microsoft/TypeScript/issues/14107 overload does not support union :/
-      const updatedDocument = utils.isWrappedV2Document(documentRef.current)
-        ? obfuscateDocument(documentRef.current, field)
-        : obfuscateDocument(documentRef.current, field);
-      updateObfuscatedCertificate(updatedDocument);
-      const newDocument = opencertsGetData(updatedDocument);
+  const dispatch = useCallback(
+    (action: FrameActions): void => {
+      if (action.type === "UPDATE_HEIGHT") {
+        // adding SCROLLBAR_WIDTH in case the frame content overflow horizontally, which will cause scrollbars to appear
+        setHeight(action.payload + SCROLLBAR_WIDTH);
+      } else if (action.type === "OBFUSCATE") {
+        const field = action.payload;
+        // https://github.com/microsoft/TypeScript/issues/14107 overload does not support union :/
+        const updatedDocument = utils.isWrappedV2Document(documentRef.current)
+          ? obfuscateDocument(documentRef.current, field)
+          : obfuscateDocument(documentRef.current, field);
+        updateObfuscatedCertificate(updatedDocument);
+        const newDocument = opencertsGetData(updatedDocument);
 
-      if (toFrame.current) {
-        toFrame.current(renderDocument({ document: newDocument, rawDocument: documentRef.current }));
+        if (toFrame.current) {
+          toFrame.current(renderDocument({ document: newDocument, rawDocument: documentRef.current }));
+        }
+      } else if (action.type === "UPDATE_TEMPLATES") {
+        setTemplates(action.payload);
+      } else if (action.type === "TIMEOUT") {
+        setRendererTimeout(true);
+
+        // CERTIFICATE_RENDERER_TIMEOUT event
+        if (utils.isWrappedV2Document(rawDocument)) {
+          triggerV2RendererTimeoutLogging(rawDocument);
+        } else {
+          triggerV3RendererTimeoutLogging(rawDocument);
+        }
       }
-    } else if (action.type === "UPDATE_TEMPLATES") {
-      setTemplates(action.payload);
-    } else if (action.type === "TIMEOUT") {
-      setRendererTimeout(true);
-    }
-  };
+    },
+    [toFrame, updateObfuscatedCertificate, rawDocument]
+  );
 
   // effects
   // update document after every changes
