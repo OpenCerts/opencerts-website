@@ -89,7 +89,7 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
         }
       }
     },
-    [toFrame, rawDocument]
+    [toFrame, updateObfuscatedCertificate, rawDocument]
   );
 
   // effects
