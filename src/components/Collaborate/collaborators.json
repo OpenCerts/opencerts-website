@@ -86,5 +86,13 @@
     "website": "https://www.ibs.edu.sg",
     "key": "ibs",
     "logo": "/static/images/collaborate/IBS_Logo.png"
+  },
+  {
+    "id": "superink",
+    "name": "Superink Lte Ltd",
+    "description": "Superink Pte Ltd is a blockchain based SaaS entity that builds a security layer on top of existing web3 applications for identity purposes. Our Industry-certified and government approved framework enabled us to create customisable and tamper-proofed APIs that doubled-proof the authenticity of our certs. Allowing users to get creative with their web3 applications.",
+    "website": "https://www.superink.com.sg",
+    "key": "superink",
+    "logo": "/static/images/collaborate/superink_logo.png"
   }
 ]
