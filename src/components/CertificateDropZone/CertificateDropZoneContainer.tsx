@@ -1,13 +1,16 @@
 import { VerificationFragment } from "@govtechsg/oa-verify";
 import Router from "next/router";
 import React, { Component, ReactNode } from "react";
-import Dropzone from "react-dropzone";
+import Dropzone, { DropEvent } from "react-dropzone";
 import { connect } from "react-redux";
+import { NETWORK_NAME } from "../../config";
 import { RootState } from "../../reducers";
 import { resetCertificateState, updateCertificate } from "../../reducers/certificate.actions";
 import { getCertificateByActionError, getVerificationStatus, getVerifying } from "../../reducers/certificate.selectors";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { CertificateVerificationStatus } from "./CertificateVerificationStatus";
+
+const DEMO_CERT = `/static/demo/${NETWORK_NAME}.opencert`;
 
 interface CertificateDropZoneContainerProps {
   updateCertificate: (certificate: WrappedOrSignedOpenCertsDocument) => void;
@@ -50,24 +53,44 @@ class CertificateDropZone extends Component<CertificateDropZoneContainerProps, C
   }
 
   render(): ReactNode {
+    const handleDrop = (acceptedFiles: File[]) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          // TODO enhance this
+          const json = JSON.parse(reader.result as string);
+          this.handleCertificateChange(json);
+        } catch (e) {
+          this.handleFileError();
+        }
+      };
+      if (acceptedFiles && acceptedFiles.length && acceptedFiles.length > 0)
+        acceptedFiles.map((file: File) => reader.readAsText(file));
+    };
+
+    const isDragEvent = (event: DropEvent): event is DragEvent => (event as DragEvent).dataTransfer !== undefined;
+    const isEvent = (event: DropEvent): event is Event => (event as Event).target !== undefined;
+    const myCustomFileGetter = async (event: DropEvent) => {
+      const files: File[] = [];
+      if (isDragEvent(event) && event.dataTransfer && event.dataTransfer.getData(DEMO_CERT)) {
+        const response = await window.fetch(DEMO_CERT);
+        const fileBlob = await response.blob();
+        const file = new File([fileBlob], "demo.opencert");
+        files.push(file);
+      }
+
+      const fileList =
+        isDragEvent(event) && event.dataTransfer
+          ? event.dataTransfer.files
+          : isEvent(event) && (event.target as HTMLInputElement).files;
+      Array.prototype.forEach.call(fileList, function (file: File) {
+        files.push(file);
+      });
+      return files;
+    };
+
     return (
-      <Dropzone
-        onDrop={(acceptedFiles) => {
-          // eslint-disable-next-line no-undef
-          const reader = new FileReader();
-          reader.onload = () => {
-            try {
-              // TODO enhance this
-              const json = JSON.parse(reader.result as string);
-              this.handleCertificateChange(json);
-            } catch (e) {
-              this.handleFileError();
-            }
-          };
-          if (acceptedFiles && acceptedFiles.length && acceptedFiles.length > 0)
-            acceptedFiles.map((f) => reader.readAsText(f));
-        }}
-      >
+      <Dropzone onDrop={handleDrop} getFilesFromEvent={(event) => myCustomFileGetter(event)}>
         {({ getRootProps, getInputProps, isDragAccept }) => (
           <div {...getRootProps()} id="certificate-dropzone">
             <input {...getInputProps()} />
