@@ -21,10 +21,6 @@ test("Sample document is rendered correctly when single registry is verified", a
 
   await validateTextContent(t, StatusButton, ["ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
 
-  await validateTextContent(t, CertificateStatusBanner, [
-    "Certificate issuer is in the SkillsFuture Singapore registry for Opencerts",
-  ]);
-
   await t.switchToIframe(IframeBlock);
 
   await validateTextContent(t, SampleTemplate, [

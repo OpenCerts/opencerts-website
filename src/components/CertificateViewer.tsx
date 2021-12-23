@@ -27,16 +27,6 @@ const ForwardedRefDecentralisedRenderer = React.forwardRef<
   }
 >((props, ref) => <DecentralisedRenderer {...props} forwardedRef={ref} />);
 
-const RegistryBanner: React.FunctionComponent = () => {
-  return (
-    <section id="status-banner-container" className={`bg-green-200 text-green-400 exact-print`}>
-      <div className="container text-center py-4">
-        <p className="mb-0">Certificate issuer is in the SkillsFuture Singapore registry for Opencerts.</p>
-      </div>
-    </section>
-  );
-};
-
 const isObfuscated = (document: v3.WrappedDocument | v2.WrappedDocument) => {
   try {
     return utils.isObfuscated(document);
@@ -66,15 +56,10 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
   const { document } = props;
   const childRef = React.useRef<{ print: () => void }>();
 
-  const registryFragmentName = "OpencertsRegistryVerifier";
-  const registryFragment = props.verificationStatus.find((status) => status.name === registryFragmentName);
-  const isInRegistry = registryFragment && registryFragment.status === "VALID";
-
   return (
     <ErrorBoundary>
       {
         <>
-          {isInRegistry ? <RegistryBanner /> : null}
           <section className="bg-blue-100 py-4">
             <div className="container">
               <div className="flex flex-wrap">

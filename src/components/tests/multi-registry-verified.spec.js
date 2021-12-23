@@ -16,8 +16,4 @@ test("Sample document is rendered correctly when multiple registry is verified",
   await t.setFilesToUpload("input[type=file]", [Document]);
 
   await validateTextContent(t, StatusButton, ["ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
-
-  await validateTextContent(t, CertificateStatusBanner, [
-    "Certificate issuer is in the SkillsFuture Singapore registry for Opencerts",
-  ]);
 });

@@ -61,10 +61,6 @@ test("Load document from action should work when action is valid", async (t) => 
   await t.navigateTo(`http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}`);
   await validateTextContent(t, StatusButton, ["ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
 
-  await validateTextContent(t, CertificateStatusBanner, [
-    "Certificate issuer is in the SkillsFuture Singapore registry for Opencerts",
-  ]);
-
   await t.switchToIframe(IframeBlock);
 
   await validateTextContent(t, SampleTemplate, [

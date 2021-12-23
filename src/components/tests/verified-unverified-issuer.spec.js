@@ -21,10 +21,6 @@ test("Sample doc is rendered correctly when any one of dns or registry is verifi
 
   await validateTextContent(t, StatusButton, ["ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
 
-  await validateTextContent(t, CertificateStatusBanner, [
-    "Certificate issuer is in the SkillsFuture Singapore registry for Opencerts",
-  ]);
-
   await t.switchToIframe(IframeBlock);
 
   await validateTextContent(t, SampleTemplate, ["OpenCerts Demo", "Mr Blockchain", "has successfully completed the"]);
