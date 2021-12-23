@@ -9,7 +9,6 @@ fixture("Load action from encrypted certificate").page`http://localhost:3000`.be
 const IframeBlock = Selector("#iframe");
 const SampleTemplate = Selector("#rendered-certificate");
 const StatusButton = Selector("#certificate-status");
-const CertificateStatusBanner = Selector("#status-banner-container");
 const CertificateDropzone = Selector("#certificate-dropzone");
 
 const validateTextContent = async (t, component, texts) =>
@@ -32,10 +31,6 @@ test("Load document from action should work when action is valid (key from ancho
     `http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}#${encodeURI(JSON.stringify(anchor))}`
   );
   await validateTextContent(t, StatusButton, ["ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
-
-  await validateTextContent(t, CertificateStatusBanner, [
-    "Certificate issuer is in the SkillsFuture Singapore registry for Opencerts",
-  ]);
 
   await t.switchToIframe(IframeBlock);
 
