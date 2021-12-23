@@ -9,7 +9,6 @@ const Document = "./fixture/obfuscated-document.json";
 const IframeBlock = Selector("#iframe");
 const StatusButton = Selector("#certificate-status");
 const SampleTemplate = Selector("#rendered-certificate");
-const CertificateStatusBanner = Selector("#status-banner-container");
 const ObfuscationNote = Selector("#obfuscation-note");
 
 const validateTextContent = async (t, component, texts) =>

@@ -11,7 +11,6 @@ const TranscriptButton = Selector("[data-testid='transcript']");
 const MediaButton = Selector("[data-testid='media']");
 const StatusButton = Selector("#certificate-status");
 const SampleTemplate = Selector("#rendered-certificate");
-const CertificateStatusBanner = Selector("#status-banner-container");
 
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(async (_prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());

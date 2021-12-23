@@ -29,7 +29,6 @@ const DropzoneViewWrapper = Selector("[data-testid='dropzone-view-wrapper']");
 const IframeBlock = Selector("#iframe");
 const SampleTemplate = Selector("#root");
 const StatusButton = Selector("#certificate-status");
-const CertificateStatusBanner = Selector("#status-banner-container");
 
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(async (prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());

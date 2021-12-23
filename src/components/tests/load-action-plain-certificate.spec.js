@@ -9,7 +9,6 @@ fixture("Load action from plain certificate").page`http://localhost:3000`.before
 const IframeBlock = Selector("#iframe");
 const SampleTemplate = Selector("#rendered-certificate");
 const StatusButton = Selector("#certificate-status");
-const CertificateStatusBanner = Selector("#status-banner-container");
 const CertificateDropzone = Selector("#certificate-dropzone");
 
 const validateTextContent = async (t, component, texts) =>
