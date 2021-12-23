@@ -119,17 +119,6 @@ export const faqContent: FagElement[] = [
     category: "Verifications",
     faq: [
       {
-        question: "What does it mean by Unascertained Issuer?",
-        answer: (
-          <p>
-            OpenCerts has to maintain a list of identified issuing institutes in order to detect fraudulent issuing
-            institutes masquerading as legitimate ones. At this point in time, it is not unlikely that a legitimate
-            issuing institute is not on our list of recognised institutions. If you are sure that your certificate is
-            from a legitimate issuer, contact the institute directly.
-          </p>
-        ),
-      },
-      {
         question: "What does it mean by Ethereum Blockchain?",
         answer: (
           <p>
