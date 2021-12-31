@@ -196,7 +196,7 @@
       },
       {
         "files": [
-          "pages/*.tsx"
+          "pages/**/*.tsx"
         ],
         "rules": {
           "import/no-default-export": "off"

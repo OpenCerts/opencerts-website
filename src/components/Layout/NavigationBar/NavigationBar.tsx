@@ -4,11 +4,6 @@ import React from "react";
 
 const navItems: { id: string; label: string; path: string }[] = [
   {
-    id: "registry",
-    label: "Registry",
-    path: "/registry",
-  },
-  {
     id: "collaborate",
     label: "Collaborate",
     path: "/collaborate",

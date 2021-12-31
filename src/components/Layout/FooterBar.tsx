@@ -20,11 +20,6 @@ export const FooterBar: React.FunctionComponent = () => (
           <h6 className="font-montserrat font-bold mb-2">Partners</h6>
           <ul className="text-sm">
             <li>
-              <Link href="/registry">
-                <a>Registry</a>
-              </Link>
-            </li>
-            <li>
               <Link href="/collaborate">
                 <a>Collaborate</a>
               </Link>

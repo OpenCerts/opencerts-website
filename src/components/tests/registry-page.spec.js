@@ -9,7 +9,7 @@ const RegistrySearch = Selector("[data-testid='registry-search']");
 const SMU = Selector("[data-testid='registry-card']").withText("Singapore Management University");
 
 test("Registry page's contact tab and search is working correctly", async (t) => {
-  await t.navigateTo("/registry");
+  await t.navigateTo("/archive/registry");
 
   // panel should work with 4 contact infos
   await t.click(SMU.find("[data-testid='btn-contact']"));
