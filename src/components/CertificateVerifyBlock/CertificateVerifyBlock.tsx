@@ -14,17 +14,19 @@ import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { icons } from "../ViewerPageImages";
 import { DetailedCertificateVerifyBlock } from "./DetailedCertificateVerifyBlock";
 
+const TRUSTED_TLDS = process.env.TRUSTED_TLDS?.split(",");
+
 export const getV2IdentityVerificationText = (
   verificationStatus: VerificationFragment[],
   document: WrappedDocument<v2.OpenAttestationDocument>
-): string => {
+): JSX.Element => {
   const data = getData(document);
   const registryFragment = getOpencertsRegistryVerifierFragment(verificationStatus);
   const dnsTxtFragment = utils.getOpenAttestationDnsTxtIdentityProofFragment(verificationStatus);
   const dnsDidFragment = utils.getOpenAttestationDnsDidIdentityProofFragment(verificationStatus);
 
   const identities = data.issuers
-    .map((_, index) => {
+    .map((issuer, index): { name: string; location: string; from: "registry" | "dns-txt" | "dns-did" | "unknown" } => {
       // retrieve the issuer identity from the fragment. for each issuer, only one identity must be retrieved
       // 1. check registry fragment and return the location if the fragment is valid
       // 2. otherwise check dns fragment and return the location if the fragment is valid
@@ -35,27 +37,62 @@ export const getV2IdentityVerificationText = (
       const indexedDnsDidFragment = Array.isArray(dnsDidFragment?.data) ? dnsDidFragment?.data[index] : undefined;
 
       if (OpencertsRegistryVerificationValidData.guard(indexedRegistryFragment))
-        return { location: indexedRegistryFragment.name.toUpperCase(), from: "registry" };
+        return {
+          name: indexedRegistryFragment.name.toUpperCase(),
+          location: indexedRegistryFragment.value,
+          from: "registry",
+        };
       else if (ValidDnsTxtVerificationStatus.guard(indexedDnsTxtFragment))
-        return { location: indexedDnsTxtFragment.location.toUpperCase(), from: "dns-txt" };
+        return {
+          name: issuer.name.toUpperCase(),
+          location: indexedDnsTxtFragment.location.toUpperCase(),
+          from: "dns-txt",
+        };
       else if (ValidDnsDidVerificationStatus.guard(indexedDnsDidFragment))
-        return { location: indexedDnsDidFragment.location.toUpperCase(), from: "dns-did" };
-      else return { location: "", from: "" };
+        return {
+          name: issuer.name.toUpperCase(),
+          location: indexedDnsDidFragment.location.toUpperCase(),
+          from: "dns-did",
+        };
+      else return { name: "", location: "", from: "unknown" };
     })
-    .filter((identity) => identity.location)
+    .filter((id) => id.from !== "unknown")
     // sort by registry first. then by location
-    .sort((location1, location2) => {
-      if (location1.from === location2.from) return location1.location.localeCompare(location2.location);
-      else if (location1.from === "registry") return -1;
-      else return 1;
-    })
-    .map((identity) => identity.location);
+    .sort((id1, id2) => {
+      if (id1.from === "registry" && id2.from === "registry") return id1.name.localeCompare(id2.name);
+      else if (id1.from === "registry") return -1;
+      else if (id2.from === "registry") return 1;
+      else return id1.location.localeCompare(id2.location);
+    });
 
   if (identities.length > 0) {
-    return `${identities.join(", ")}`;
+    const isTrusted = (location: string): boolean => {
+      return TRUSTED_TLDS ? TRUSTED_TLDS.some((tld) => location.toUpperCase().endsWith(tld.toUpperCase())) : false;
+    };
+
+    return (
+      <ol>
+        {identities.map((id, i) => {
+          const props = { key: i, ...(i !== identities.length - 1 && { className: "my-2" }) };
+
+          if (id.from === "registry") return <li {...props}>{id.name}</li>;
+          else if (isTrusted(id.location))
+            return (
+              <li {...props}>
+                {id.location}
+                <br />
+                {id.name}
+              </li>
+            );
+          else return <li {...props}>{id.location}</li>;
+        })}
+      </ol>
+    );
   }
-  return "Unknown";
+
+  return <>Unknown</>;
 };
+
 export const getV3IdentityVerificationText = (document: WrappedDocument<v3.OpenAttestationDocument>): string => {
   return document.openAttestationMetadata.identityProof.identifier.toUpperCase();
 };
