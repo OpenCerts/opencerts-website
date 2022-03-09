@@ -115,7 +115,7 @@ const buildDnsTxtInvalidFragment = ({
 };
 
 describe("certificate verify block getV2IdentityVerificationText", () => {
-  describe("wWhen registry is verified", () => {
+  describe("when registry is verified", () => {
     it("should return appropriate display identity from registry before when dns and registry are valid", () => {
       const fragments: AllVerificationFragment[] = [
         buildOpencertsRegistryVerifierValidFragment({ name: "Govtech" }),
@@ -245,6 +245,82 @@ describe("certificate verify block getV2IdentityVerificationText", () => {
         <ol>
           <li>
             ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)
+          </li>
+        </ol>
+      `);
+    });
+  });
+
+  describe("when issuer domain is trusted", () => {
+    let originalEnv: NodeJS.ProcessEnv;
+
+    beforeAll(() => {
+      originalEnv = process.env;
+      process.env.TRUSTED_TLDS = "gov.sg,trusted-domain.com";
+    });
+
+    afterAll(() => {
+      process.env = originalEnv;
+    });
+
+    it("should return issuer name if dns is verified and trusted", () => {
+      const fragments: AllVerificationFragment[] = [
+        buildOpencertsRegistryVerifierInvalidFragment({ name: "Trusted Entity" }),
+        buildDnsTxtValidFragment({ location: "some.trusted-domain.com" }),
+      ];
+      expect(
+        getV2IdentityVerificationText(
+          fragments,
+          buildDocumentWithIssuers([
+            {
+              name: "Trusted DNS-DID Issuer",
+              identityProof: { type: v2.IdentityProofType.DNSDid, location: "some.trusted-domain.com" },
+            },
+          ])
+        )
+      ).toMatchInlineSnapshot(`
+        <ol>
+          <li>
+            SOME.TRUSTED-DOMAIN.COM
+            <br />
+            TRUSTED DNS-DID ISSUER
+          </li>
+        </ol>
+      `);
+    });
+
+    it("should return issuer name if multiple dns is verified and trusted", () => {
+      const fragments: AllVerificationFragment[] = [
+        buildOpencertsRegistryVerifierInvalidFragment({ name: ["Trusted Entity", "Demo"] }),
+        buildDnsTxtValidFragment({ location: ["some.trusted-domain.com", "some.gov.sg"] }),
+      ];
+      expect(
+        getV2IdentityVerificationText(
+          fragments,
+          buildDocumentWithIssuers([
+            {
+              name: "Trusted DNS-DID Issuer",
+              identityProof: { type: v2.IdentityProofType.DNSDid, location: "some.trusted-domain.com" },
+            },
+            {
+              name: "Trusted DNS-TXT Issuer",
+              identityProof: { type: v2.IdentityProofType.DNSTxt, location: "some.gov.sg" },
+            },
+          ])
+        )
+      ).toMatchInlineSnapshot(`
+        <ol>
+          <li
+            className="my-2"
+          >
+            SOME.GOV.SG
+            <br />
+            TRUSTED DNS-TXT ISSUER
+          </li>
+          <li>
+            SOME.TRUSTED-DOMAIN.COM
+            <br />
+            TRUSTED DNS-DID ISSUER
           </li>
         </ol>
       `);

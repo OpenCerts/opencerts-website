@@ -14,8 +14,6 @@ import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { icons } from "../ViewerPageImages";
 import { DetailedCertificateVerifyBlock } from "./DetailedCertificateVerifyBlock";
 
-const TRUSTED_TLDS = process.env.TRUSTED_TLDS?.split(",");
-
 export const getV2IdentityVerificationText = (
   verificationStatus: VerificationFragment[],
   document: WrappedDocument<v2.OpenAttestationDocument>
@@ -67,6 +65,7 @@ export const getV2IdentityVerificationText = (
 
   if (identities.length > 0) {
     const isTrusted = (location: string): boolean => {
+      const TRUSTED_TLDS = process.env.TRUSTED_TLDS?.split(",");
       return TRUSTED_TLDS ? TRUSTED_TLDS.some((tld) => location.toUpperCase().endsWith(tld.toUpperCase())) : false;
     };
 
