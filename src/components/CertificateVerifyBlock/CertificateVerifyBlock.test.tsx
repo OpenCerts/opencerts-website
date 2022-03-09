@@ -254,11 +254,13 @@ describe("certificate verify block getV2IdentityVerificationText", () => {
   describe("when issuer domain is trusted", () => {
     let originalEnv: NodeJS.ProcessEnv;
 
+    // eslint-disable-next-line jest/no-hooks
     beforeAll(() => {
       originalEnv = process.env;
       process.env.TRUSTED_TLDS = "gov.sg,trusted-domain.com";
     });
 
+    // eslint-disable-next-line jest/no-hooks
     afterAll(() => {
       process.env = originalEnv;
     });
