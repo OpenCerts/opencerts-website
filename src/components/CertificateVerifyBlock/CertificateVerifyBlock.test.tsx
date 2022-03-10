@@ -115,15 +115,20 @@ const buildDnsTxtInvalidFragment = ({
 };
 
 describe("certificate verify block getV2IdentityVerificationText", () => {
-  describe("wWhen registry is verified", () => {
+  describe("when registry is verified", () => {
     it("should return appropriate display identity from registry before when dns and registry are valid", () => {
       const fragments: AllVerificationFragment[] = [
         buildOpencertsRegistryVerifierValidFragment({ name: "Govtech" }),
         buildDnsTxtValidFragment({ location: "abc.com" }),
       ];
-      expect(getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
-        "GOVTECH"
-      );
+      expect(getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }])))
+        .toMatchInlineSnapshot(`
+        <ol>
+          <li>
+            GOVTECH
+          </li>
+        </ol>
+      `);
     });
 
     it("should return appropriate display text when registry is verified but dns is unverified", () => {
@@ -131,9 +136,14 @@ describe("certificate verify block getV2IdentityVerificationText", () => {
         buildOpencertsRegistryVerifierValidFragment({ name: "Demo" }),
         buildDnsTxtInvalidFragment({ location: "abc.com" }),
       ];
-      expect(getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
-        "DEMO"
-      );
+      expect(getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }])))
+        .toMatchInlineSnapshot(`
+        <ol>
+          <li>
+            DEMO
+          </li>
+        </ol>
+      `);
     });
 
     it("should return appropriate display identity from registry sort identities", () => {
@@ -143,7 +153,18 @@ describe("certificate verify block getV2IdentityVerificationText", () => {
       ];
       expect(
         getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }, { name: "Issuer 2" }]))
-      ).toStrictEqual("DEMO, GOVTECH");
+      ).toMatchInlineSnapshot(`
+        <ol>
+          <li
+            className="my-2"
+          >
+            DEMO
+          </li>
+          <li>
+            GOVTECH
+          </li>
+        </ol>
+      `);
     });
 
     it("should return appropriate display identity from registry or dns when available and sort by giving priority to registry", () => {
@@ -163,7 +184,18 @@ describe("certificate verify block getV2IdentityVerificationText", () => {
 
       expect(
         getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }, { name: "Issuer 2" }]))
-      ).toStrictEqual("DEMO, ABC.COM");
+      ).toMatchInlineSnapshot(`
+        <ol>
+          <li
+            className="my-2"
+          >
+            DEMO
+          </li>
+          <li>
+            ABC.COM
+          </li>
+        </ol>
+      `);
     });
 
     it("should return Certificate issued by Unknown when registry and dns don't resolve any value", () => {
@@ -172,9 +204,12 @@ describe("certificate verify block getV2IdentityVerificationText", () => {
         buildDnsTxtInvalidFragment({ location: "abc.com" }),
       ];
 
-      expect(getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
-        "Unknown"
-      );
+      expect(getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }])))
+        .toMatchInlineSnapshot(`
+        <React.Fragment>
+          Unknown
+        </React.Fragment>
+      `);
     });
 
     it("should return registry identity when dns is skipped", () => {
@@ -205,9 +240,92 @@ describe("certificate verify block getV2IdentityVerificationText", () => {
         },
       ];
 
-      expect(getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
-        "ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"
-      );
+      expect(getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }])))
+        .toMatchInlineSnapshot(`
+        <ol>
+          <li>
+            ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)
+          </li>
+        </ol>
+      `);
+    });
+  });
+
+  describe("when issuer domain is trusted", () => {
+    let originalEnv: NodeJS.ProcessEnv;
+
+    // eslint-disable-next-line jest/no-hooks
+    beforeAll(() => {
+      originalEnv = process.env;
+      process.env.TRUSTED_TLDS = "gov.sg,trusted-domain.com";
+    });
+
+    // eslint-disable-next-line jest/no-hooks
+    afterAll(() => {
+      process.env = originalEnv;
+    });
+
+    it("should return issuer name if dns is verified and trusted", () => {
+      const fragments: AllVerificationFragment[] = [
+        buildOpencertsRegistryVerifierInvalidFragment({ name: "Trusted Entity" }),
+        buildDnsTxtValidFragment({ location: "some.trusted-domain.com" }),
+      ];
+      expect(
+        getV2IdentityVerificationText(
+          fragments,
+          buildDocumentWithIssuers([
+            {
+              name: "Trusted DNS-DID Issuer",
+              identityProof: { type: v2.IdentityProofType.DNSDid, location: "some.trusted-domain.com" },
+            },
+          ])
+        )
+      ).toMatchInlineSnapshot(`
+        <ol>
+          <li>
+            SOME.TRUSTED-DOMAIN.COM
+            <br />
+            TRUSTED DNS-DID ISSUER
+          </li>
+        </ol>
+      `);
+    });
+
+    it("should return issuer name if multiple dns is verified and trusted", () => {
+      const fragments: AllVerificationFragment[] = [
+        buildOpencertsRegistryVerifierInvalidFragment({ name: ["Trusted Entity", "Demo"] }),
+        buildDnsTxtValidFragment({ location: ["some.trusted-domain.com", "some.gov.sg"] }),
+      ];
+      expect(
+        getV2IdentityVerificationText(
+          fragments,
+          buildDocumentWithIssuers([
+            {
+              name: "Trusted DNS-DID Issuer",
+              identityProof: { type: v2.IdentityProofType.DNSDid, location: "some.trusted-domain.com" },
+            },
+            {
+              name: "Trusted DNS-TXT Issuer",
+              identityProof: { type: v2.IdentityProofType.DNSTxt, location: "some.gov.sg" },
+            },
+          ])
+        )
+      ).toMatchInlineSnapshot(`
+        <ol>
+          <li
+            className="my-2"
+          >
+            SOME.GOV.SG
+            <br />
+            TRUSTED DNS-TXT ISSUER
+          </li>
+          <li>
+            SOME.TRUSTED-DOMAIN.COM
+            <br />
+            TRUSTED DNS-DID ISSUER
+          </li>
+        </ol>
+      `);
     });
   });
 
@@ -217,9 +335,14 @@ describe("certificate verify block getV2IdentityVerificationText", () => {
         buildOpencertsRegistryVerifierInvalidFragment({ name: "Govtech" }),
         buildDnsTxtValidFragment({ location: "abc.com" }),
       ];
-      expect(getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }]))).toStrictEqual(
-        "ABC.COM"
-      );
+      expect(getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }])))
+        .toMatchInlineSnapshot(`
+        <ol>
+          <li>
+            ABC.COM
+          </li>
+        </ol>
+      `);
     });
 
     it("should return appropriate display text when multiple dns is verified", () => {
@@ -229,7 +352,18 @@ describe("certificate verify block getV2IdentityVerificationText", () => {
       ];
       expect(
         getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }, { name: "Issuer 2" }]))
-      ).toStrictEqual("DEMO.COM, XYZ.COM");
+      ).toMatchInlineSnapshot(`
+        <ol>
+          <li
+            className="my-2"
+          >
+            DEMO.COM
+          </li>
+          <li>
+            XYZ.COM
+          </li>
+        </ol>
+      `);
     });
   });
 });
