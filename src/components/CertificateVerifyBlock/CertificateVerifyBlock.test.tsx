@@ -116,59 +116,85 @@ const buildDnsTxtInvalidFragment = ({
 
 describe("certificate verify block getV2IdentityVerificationText", () => {
   describe("when registry is verified", () => {
-    it("should return appropriate display identity from registry before when dns and registry are valid", () => {
+    it("should display issuer domain and name when dns and registry fragments are valid", () => {
       const fragments: AllVerificationFragment[] = [
         buildOpencertsRegistryVerifierValidFragment({ name: "Govtech" }),
         buildDnsTxtValidFragment({ location: "abc.com" }),
       ];
-      expect(getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }])))
-        .toMatchInlineSnapshot(`
+      expect(
+        getV2IdentityVerificationText(
+          fragments,
+          buildDocumentWithIssuers([
+            { name: "Issuer 1", identityProof: { type: v2.IdentityProofType.DNSTxt, location: "abc.com" } },
+          ])
+        )
+      ).toMatchInlineSnapshot(`
         <ol>
           <li>
+            ABC.COM
+            <br />
             GOVTECH
           </li>
         </ol>
       `);
     });
 
-    it("should return appropriate display text when registry is verified but dns is unverified", () => {
+    it("should display issuer domain and name when registry fragment is valid but dns fragment is invalid", () => {
       const fragments: AllVerificationFragment[] = [
         buildOpencertsRegistryVerifierValidFragment({ name: "Demo" }),
         buildDnsTxtInvalidFragment({ location: "abc.com" }),
       ];
-      expect(getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }])))
-        .toMatchInlineSnapshot(`
+      expect(
+        getV2IdentityVerificationText(
+          fragments,
+          buildDocumentWithIssuers([
+            { name: "Issuer 1", identityProof: { type: v2.IdentityProofType.DNSTxt, location: "abc.com" } },
+          ])
+        )
+      ).toMatchInlineSnapshot(`
         <ol>
           <li>
+            ABC.COM
+            <br />
             DEMO
           </li>
         </ol>
       `);
     });
 
-    it("should return appropriate display identity from registry sort identities", () => {
+    it("when document has multiple issuers, should display issuer domain and name sorted by name", () => {
       const fragments: AllVerificationFragment[] = [
-        buildOpencertsRegistryVerifierValidFragment({ name: ["Govtech", "Demo"] }),
-        buildDnsTxtValidFragment({ location: ["demo.com", "abc.com"] }),
+        buildOpencertsRegistryVerifierValidFragment({ name: ["GovTech", "Demo"] }),
+        buildDnsTxtValidFragment({ location: ["tech.gov.sg", "demo.com"] }),
       ];
       expect(
-        getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }, { name: "Issuer 2" }]))
+        getV2IdentityVerificationText(
+          fragments,
+          buildDocumentWithIssuers([
+            { name: "Issuer 1", identityProof: { type: v2.IdentityProofType.DNSTxt, location: "tech.gov.sg" } },
+            { name: "Issuer 2", identityProof: { type: v2.IdentityProofType.DNSTxt, location: "demo.com" } },
+          ])
+        )
       ).toMatchInlineSnapshot(`
         <ol>
           <li
             className="my-2"
           >
+            DEMO.COM
+            <br />
             DEMO
           </li>
           <li>
+            TECH.GOV.SG
+            <br />
             GOVTECH
           </li>
         </ol>
       `);
     });
 
-    it("should return appropriate display identity from registry or dns when available and sort by giving priority to registry", () => {
-      const ocFragment = buildOpencertsRegistryVerifierValidFragment({ name: ["Govtech", "Demo"] });
+    it("when document has multiple issuers, should display issuer domain and name only for the issuer with a valid registry fragment", () => {
+      const ocFragment = buildOpencertsRegistryVerifierValidFragment({ name: ["GovTech", "Demo"] });
       ocFragment.data[0] = {
         status: "INVALID",
         value: "0x8FC57204C35FB9317D91285EF52D6B892EC08CD3",
@@ -178,30 +204,38 @@ describe("certificate verify block getV2IdentityVerificationText", () => {
           message: "Document store 0x8FC57204C35FB9317D91285EF52D6B892EC08CD3 not found in the registry",
         },
       };
-      const dnsTextFragment = buildDnsTxtInvalidFragment({ location: ["abc.com", "demo.com"] });
+      const dnsTextFragment = buildDnsTxtInvalidFragment({ location: ["tech.gov.sg", "demo.com"] });
       dnsTextFragment.data[0].status = "VALID";
       const fragments: AllVerificationFragment[] = [ocFragment, dnsTextFragment];
 
       expect(
-        getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }, { name: "Issuer 2" }]))
+        getV2IdentityVerificationText(
+          fragments,
+          buildDocumentWithIssuers([
+            { name: "Issuer 1", identityProof: { type: v2.IdentityProofType.DNSTxt, location: "tech.gov.sg" } },
+            { name: "Issuer 2", identityProof: { type: v2.IdentityProofType.DNSTxt, location: "demo.com" } },
+          ])
+        )
       ).toMatchInlineSnapshot(`
         <ol>
           <li
             className="my-2"
           >
+            DEMO.COM
+            <br />
             DEMO
           </li>
           <li>
-            ABC.COM
+            TECH.GOV.SG
           </li>
         </ol>
       `);
     });
 
-    it("should return Certificate issued by Unknown when registry and dns don't resolve any value", () => {
+    it("should display unknown when registry and dns is invalid", () => {
       const fragments: AllVerificationFragment[] = [
-        buildOpencertsRegistryVerifierInvalidFragment({ name: "Govtech" }),
-        buildDnsTxtInvalidFragment({ location: "abc.com" }),
+        buildOpencertsRegistryVerifierInvalidFragment({ name: "GovTech" }),
+        buildDnsTxtInvalidFragment({ location: "tech.gov.sg" }),
       ];
 
       expect(getV2IdentityVerificationText(fragments, buildDocumentWithIssuers([{ name: "Issuer 1" }])))
@@ -212,7 +246,7 @@ describe("certificate verify block getV2IdentityVerificationText", () => {
       `);
     });
 
-    it("should return registry identity when dns is skipped", () => {
+    it("should display only issuer name when registry fragment is valid but dns fragment is skipped", () => {
       const fragments: AllVerificationFragment[] = [
         {
           status: "SKIPPED",
