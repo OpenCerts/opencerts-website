@@ -37,7 +37,7 @@ export const getV2IdentityVerificationText = (
       if (OpencertsRegistryVerificationValidData.guard(indexedRegistryFragment))
         return {
           name: indexedRegistryFragment.name.toUpperCase(),
-          location: indexedRegistryFragment.value,
+          location: issuer.identityProof?.location?.toUpperCase() || "",
           from: "registry",
         };
       else if (ValidDnsTxtVerificationStatus.guard(indexedDnsTxtFragment))
@@ -74,8 +74,7 @@ export const getV2IdentityVerificationText = (
         {identities.map((id, i) => {
           const props = { key: i, ...(i !== identities.length - 1 && { className: "my-2" }) };
 
-          if (id.from === "registry") return <li {...props}>{id.name}</li>;
-          else if (isTrusted(id.location))
+          if (id.location && (id.from === "registry" || isTrusted(id.location)))
             return (
               <li {...props}>
                 {id.location}
@@ -83,6 +82,7 @@ export const getV2IdentityVerificationText = (
                 {id.name}
               </li>
             );
+          else if (id.from === "registry") return <li {...props}>{id.name}</li>;
           else return <li {...props}>{id.location}</li>;
         })}
       </ol>
