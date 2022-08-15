@@ -11,7 +11,7 @@ module.exports = {
     }),
     inset: {
       // eslint-disable-next-line prettier/prettier
-      "0": 0,
+      0: 0,
       "1/2": "50%",
     },
     fontFamily: {
@@ -57,7 +57,7 @@ module.exports = {
         blue: {
           100: "#f5f8fb",
           300: "#53bcdf",
-          default: "#09c",
+          default: "#007EA8",
         },
         navy: {
           200: "#eef2f5",
