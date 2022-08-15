@@ -39,7 +39,7 @@ const DraggableDemoCertificate: React.FunctionComponent = () => (
       <div className="w-1/2">
         <img src="/static/images/dropzone/arrow.png" draggable="false" alt="instructional arrow" />
         <p className="text-orange mb-2">Drag me over here to see a demo certificate and other features</p>
-        <img src="/static/images/opencertslogo.svg" draggable="false" alt="opencerts logo"/>
+        <img src="/static/images/opencertslogo.svg" draggable="false" alt="opencerts logo" />
       </div>
     </div>
   </div>
