@@ -1,12 +1,14 @@
 import Link from "next/link";
 import React from "react";
 
+const copyrightYear = new Date().getFullYear();
+
 export const FooterBar: React.FunctionComponent = () => (
   <footer className="flex-shrink-0 bg-navy text-white py-2">
     <div className="container pt-8 pb-12">
       <div className="flex flex-wrap">
         <div className="w-40 lg:mr-40 mb-8 lg:mb-0">
-          <h6 className="font-montserrat font-bold mb-2">Powered by</h6>
+          <p className="font-montserrat font-bold mb-2">Powered by</p>
           <a
             className="inline-block transition-opacity hover:opacity-75"
             href="https://hive.tech.gov.sg/"
@@ -17,7 +19,7 @@ export const FooterBar: React.FunctionComponent = () => (
           </a>
         </div>
         <div className="w-full lg:w-40 mb-8 lg:mb-0">
-          <h6 className="font-montserrat font-bold mb-2">Partners</h6>
+          <p className="font-montserrat font-bold mb-2">Partners</p>
           <ul className="text-sm">
             <li>
               <Link href="/collaborate">
@@ -32,7 +34,7 @@ export const FooterBar: React.FunctionComponent = () => (
           </ul>
         </div>
         <div className="w-full lg:w-40 mb-8 lg:mb-0">
-          <h6 className="font-montserrat font-bold mb-2">Support</h6>
+          <p className="font-montserrat font-bold mb-2">Support</p>
           <ul className="text-sm">
             <li>
               <Link href="/faq">
@@ -57,7 +59,7 @@ export const FooterBar: React.FunctionComponent = () => (
           </ul>
         </div>
         <div className="w-full lg:w-40">
-          <h6 className="font-montserrat font-bold mb-2">Legal</h6>
+          <p className="font-montserrat font-bold mb-2">Legal</p>
           <ul className="text-sm">
             <li>
               <Link href="/privacy">
@@ -75,7 +77,7 @@ export const FooterBar: React.FunctionComponent = () => (
     </div>
     <div className="container">
       <div className="border-t border-gray-600" />
-      <p className="text-center text-xs py-4">Copyright © 2020 OpenCerts</p>
+      <p className="text-center text-xs py-4">Copyright © {copyrightYear} OpenCerts</p>
     </div>
   </footer>
 );

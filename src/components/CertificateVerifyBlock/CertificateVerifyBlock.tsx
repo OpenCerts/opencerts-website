@@ -113,14 +113,14 @@ const SimpleVerifyBlock: React.FunctionComponent<SimpleVerifyBlockProps> = (prop
     >
       <div className="flex flex-row items-center">
         <div className="px-2 w-auto">{icons.checkCircle()}</div>
-        <div className="px-2 w-full font-bold">
+        <h1 className="px-2 w-full font-bold text-base">
           Certificate issued by
           <div className="break-all md:break-normal">
             {oaUtils.isWrappedV2Document(props.document)
               ? getV2IdentityVerificationText(props.verificationStatus, props.document)
               : getV3IdentityVerificationText(props.document)}
           </div>
-        </div>
+        </h1>
         <div className="px-2 w-auto">
           <div className="transform rotate-90 xl:rotate-0">{icons.arrow()}</div>
         </div>

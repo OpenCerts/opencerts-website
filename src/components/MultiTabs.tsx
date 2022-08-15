@@ -12,7 +12,7 @@ interface MultiTabsProps {
 const MultiTabs: React.FunctionComponent<MultiTabsProps> = ({ resetData, templates, onSelectTemplate }) => {
   const [selectedTemplate, setSelectedTemplate] = useState(0);
   return (
-    <nav className="bg-blue-100 py-4 border-b-4 mb-4">
+    <div className="bg-blue-100 py-4 border-b-4 mb-4">
       <div className="block md:hidden">
         <Drawer
           tabs={templates}
@@ -44,7 +44,7 @@ const MultiTabs: React.FunctionComponent<MultiTabsProps> = ({ resetData, templat
                       <li key={idx} className="w-auto mr-2">
                         <a
                           className={`p-4 border-b-4 uppercase text-black hover:text-black hover:text-opacity-75 hover:border-black ${
-                            idx === selectedTemplate ? "font-semi border-black" : "border-grey text-opacity-50"
+                            idx === selectedTemplate ? "font-semi border-black" : "border-neutral-400 text-neutral-500"
                           }`}
                           data-testid={template.id}
                           onClick={() => {
@@ -62,7 +62,7 @@ const MultiTabs: React.FunctionComponent<MultiTabsProps> = ({ resetData, templat
           </div>
         </div>
       </div>
-    </nav>
+    </div>
   );
 };
 

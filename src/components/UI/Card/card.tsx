@@ -19,8 +19,8 @@ export const Card: React.FunctionComponent<CardProps> = (props) => (
       key={props.info[0].id}
       onClick={() => window.open(props.info[0].website)}
     >
-      <h3 className="font-montserrat font-bold">{props.info[0].name}</h3>
-      <img className="h-12 max-w-10 mx-auto m-6" src={props.info[0].logo} />
+      <h2 className="font-montserrat font-bold text-lg">{props.info[0].name}</h2>
+      <img className="h-12 max-w-10 mx-auto m-6" src={props.info[0].logo} alt={props.info[0].name} />
       {props.info.map((info, index) => (
         <div className="links-blue" key={info.id}>
           {info.address && (

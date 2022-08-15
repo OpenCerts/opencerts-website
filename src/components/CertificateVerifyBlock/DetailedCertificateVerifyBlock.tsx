@@ -23,7 +23,7 @@ export const DetailedCertificateVerifyBlock: React.FunctionComponent<DetailedCer
   return (
     <div className={`verify-block w-full mx-w-20 top-0 bg-white p-3 shadow-md ${borderColor}`} style={{ left: "" }}>
       <div className="mb-3">
-        <h5>Details</h5>
+        <p className="text-sm mb-0">Details</p>
       </div>
       <div id="detailed-error">
         <CheckStatusRow

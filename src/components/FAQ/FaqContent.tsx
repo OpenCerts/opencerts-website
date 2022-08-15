@@ -9,10 +9,10 @@ export const FaqContent: React.FunctionComponent = () => (
       {faqContent.map(({ category, faq }, index) => (
         <div className="flex flex-wrap justify-center mb-12" key={index}>
           <div className="w-full lg:w-2/3">
-            <h3 className="text-orange font-montserrat font-bold">{category}</h3>
+            <h2 className="text-orange-600 font-montserrat font-bold text-lg">{category}</h2>
             {faq.map(({ question, answer, ...extraProps }, faqIndex) => (
               <div className="py-4" key={faqIndex} {...extraProps}>
-                <h4 className="font-montserrat font-bold text-gray-700 mb-2">{question}</h4>
+                <h3 className="font-montserrat font-bold text-gray-700 mb-2 text-md">{question}</h3>
                 {answer}
               </div>
             ))}
