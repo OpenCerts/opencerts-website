@@ -52,7 +52,7 @@ const DetailedErrors: React.FunctionComponent<DetailedErrorsProps> = ({ verifica
   }
   const renderedError = errors.map((errorType, index) => (
     <div className="text-pink mt-4 mb-8" key={index}>
-      <h4 className="font-bold">{MESSAGES[errorType].failureTitle}</h4>
+      <p className="text-md font-bold">{MESSAGES[errorType].failureTitle}</p>
       <p>{MESSAGES[errorType].failureMessage}</p>
     </div>
   ));
@@ -92,10 +92,10 @@ export const ErrorHeading: React.FunctionComponent<ErrorHeadingProps> = ({ title
   return (
     <div className="flex flex-nowrap items-center justify-center">
       <div className="w-auto mr-4">
-        <img src="/static/images/dropzone/invalid.svg" />
+        <img src="/static/images/dropzone/invalid.svg" alt="error" />
       </div>
       <div className="w-auto">
-        <h3 className="text-black">{title}</h3>
+        <h2 className="text-black text-lg">{title}</h2>
       </div>
     </div>
   );
@@ -107,7 +107,7 @@ export const WhatShouldIDo: React.FunctionComponent = () => {
   return (
     <Link href="/faq">
       <div
-        className="button bg-pink hover:bg-pink-300 w-56 mx-auto mb-8"
+        className="button bg-pink hover:bg-pink-600 w-56 mx-auto mb-8"
         {...getRootProps({
           onClick: (event) => event.stopPropagation(), // this is bad, but we'll use it for now until there's a fix
         })}
@@ -125,7 +125,7 @@ interface TryAnotherProps {
 export const TryAnother: React.FunctionComponent<TryAnotherProps> = ({ resetData }: TryAnotherProps) => {
   return (
     <div
-      className="ease-colors text-gray-600 hover:text-gray-900 underline"
+      className="ease-colors text-gray-700 hover:text-gray-900 underline"
       onClick={() => {
         resetData();
       }}

@@ -5,7 +5,7 @@ import React from "react";
 export default class MyDocument extends Document {
   render(): JSX.Element {
     return (
-      <Html>
+      <Html lang="en">
         <Head>
           <link rel="icon" type="image/png" href="/static/images/favicon/favicon-32x32.png" sizes="32x32" />
           <link rel="icon" type="image/png" href="/static/images/favicon/favicon-16x16.png" sizes="16x16" />

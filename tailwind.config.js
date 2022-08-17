@@ -11,7 +11,7 @@ module.exports = {
     }),
     inset: {
       // eslint-disable-next-line prettier/prettier
-      "0": 0,
+      0: 0,
       "1/2": "50%",
     },
     fontFamily: {
@@ -48,7 +48,13 @@ module.exports = {
         grey: {
           default: "#ccc",
         },
+        neutral: {
+          400: "#808080",
+          500: "#6e6e6e",
+          default: "#ccc",
+        },
         orange: {
+          600: "#ea580c",
           default: "#ff9933",
         },
         red: {
@@ -57,7 +63,7 @@ module.exports = {
         blue: {
           100: "#f5f8fb",
           300: "#53bcdf",
-          default: "#09c",
+          default: "#007EA8",
         },
         navy: {
           200: "#eef2f5",
@@ -67,14 +73,15 @@ module.exports = {
         pink: {
           100: "#fbeae9",
           300: "#e87d7d",
-          default: "#e46767",
+          600: "#e11d48",
+          default: "#be123c",
         },
         green: {
           100: "#f5fbf7",
           200: "#d9ead3",
           300: "#46b760",
           400: "#38761d",
-          default: "#28a745",
+          default: "#218838",
         },
       },
     },
