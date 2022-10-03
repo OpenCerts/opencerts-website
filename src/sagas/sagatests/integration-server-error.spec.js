@@ -22,7 +22,7 @@ const badGatewayMockInfuraOnly = RequestMock()
   .respond(null, 502);
 
 const Certificate1 = "./unissued.opencert";
-const Certificate2 = "./sample-ropsten.opencert";
+const Certificate2 = "./sample-goerli.opencert";
 
 const RenderedCertificate = Selector("#certificate-dropzone");
 const DropzoneViewWrapper = Selector("[data-testid='dropzone-view-wrapper']");
