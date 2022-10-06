@@ -18,7 +18,7 @@ const validateTextContent = async (t, component, texts) =>
 test("Sample doc is rendered correctly when any one of dns or registry is verified and doc store mismatch in domain", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 
-  await validateTextContent(t, StatusButton, ["ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
+  await validateTextContent(t, StatusButton, ["DEMO-OPENCERTS.OPENATTESTATION.COM"]);
 
   await t.switchToIframe(IframeBlock);
 
