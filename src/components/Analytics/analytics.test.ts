@@ -363,8 +363,7 @@ describe("analytics*", () => {
             },
           ],
           $template: "87387e89-58ac-41cb-abb8-66af522dd5f5:string:sg/gov/seab/SOR_GCEO",
-          name:
-            "3185297a-bb47-4853-8f45-9cb60cf98608:string:SINGAPORE-CAMBRIDGE GENERAL CERTIFICATE OF EDUCATION ORDINARY LEVEL",
+          name: "3185297a-bb47-4853-8f45-9cb60cf98608:string:SINGAPORE-CAMBRIDGE GENERAL CERTIFICATE OF EDUCATION ORDINARY LEVEL",
           recipient: {},
           id: "5dd55da3-8e32-4ee6-b23b-5c17a3395792:string:MyAwesomeCertID",
           issuers: [
@@ -418,8 +417,7 @@ describe("analytics*", () => {
         data: {
           id: "e160ddc1-3e9f-496a-8e96-d3c0873c7561:string:MyAwesomeCertID",
           description: "d24c312f-86b0-4446-a03d-38fb9957aefc:string:The course...",
-          name:
-            "b5fae7b2-ca9a-4ebc-a732-63f1c208263e:string:Practitioner Certificate in Personal Data Protection (Singapore)",
+          name: "b5fae7b2-ca9a-4ebc-a732-63f1c208263e:string:Practitioner Certificate in Personal Data Protection (Singapore)",
           recipient: {
             name: "93c37dd3-8416-49f8-81b7-1716d3aefa5f:string:Goi Jia Jian",
           },
@@ -482,8 +480,7 @@ describe("analytics*", () => {
         schema: "opencerts/v2.0",
         data: {
           id: "e160ddc1-3e9f-496a-8e96-d3c0873c7561:string:41368",
-          name:
-            "b5fae7b2-ca9a-4ebc-a732-63f1c208263e:string:Practitioner Certificate in Personal Data Protection (Singapore)",
+          name: "b5fae7b2-ca9a-4ebc-a732-63f1c208263e:string:Practitioner Certificate in Personal Data Protection (Singapore)",
           recipient: {
             name: "93c37dd3-8416-49f8-81b7-1716d3aefa5f:string:Goi Jia Jian",
           },
@@ -568,8 +565,7 @@ describe("analytics*", () => {
         schema: "opencerts/v2.0",
         data: {
           id: "e160ddc1-3e9f-496a-8e96-d3c0873c7561:string:41368",
-          name:
-            "b5fae7b2-ca9a-4ebc-a732-63f1c208263e:string:Practitioner Certificate in Personal Data Protection (Singapore)",
+          name: "b5fae7b2-ca9a-4ebc-a732-63f1c208263e:string:Practitioner Certificate in Personal Data Protection (Singapore)",
           recipient: {
             name: "93c37dd3-8416-49f8-81b7-1716d3aefa5f:string:Goi Jia Jian",
           },
@@ -654,8 +650,7 @@ describe("analytics*", () => {
         schema: "opencerts/v2.0",
         data: {
           id: "e160ddc1-3e9f-496a-8e96-d3c0873c7561:string:41368",
-          name:
-            "b5fae7b2-ca9a-4ebc-a732-63f1c208263e:string:Practitioner Certificate in Personal Data Protection (Singapore)",
+          name: "b5fae7b2-ca9a-4ebc-a732-63f1c208263e:string:Practitioner Certificate in Personal Data Protection (Singapore)",
           recipient: {
             name: "93c37dd3-8416-49f8-81b7-1716d3aefa5f:string:Goi Jia Jian",
           },
