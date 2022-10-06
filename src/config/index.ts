@@ -7,14 +7,14 @@ const { publicRuntimeConfig = {} } = getConfig();
 
 export const URL = "https://opencerts.io";
 const API_MAIN_URL = "https://api.opencerts.io";
-const API_ROPSTEN_URL = "https://api-ropsten.opencerts.io";
+const API_GOERLI_URL = "https://api-goerli.opencerts.io";
 const API_RINKEBY_URL = "https://api-rinkeby.opencerts.io";
 
 const GA_PRODUCTION_ID = "UA-130492260-1";
 const GA_DEVELOPMENT_ID = "UA-130492260-2";
 
 export const IS_MAINNET = publicRuntimeConfig.network === "mainnet";
-export const NETWORK_NAME = (IS_MAINNET ? "homestead" : publicRuntimeConfig.network) ?? "ropsten"; // expected by ethers
+export const NETWORK_NAME = (IS_MAINNET ? "homestead" : publicRuntimeConfig.network) ?? "goerli"; // expected by ethers
 
 export const GA_ID = IS_MAINNET ? GA_PRODUCTION_ID : GA_DEVELOPMENT_ID;
 export const CAPTCHA_CLIENT_KEY = "6LfiL3EUAAAAAHrfLvl2KhRAcXpanNXDqu6M0CCS";
@@ -22,7 +22,7 @@ export const CAPTCHA_CLIENT_KEY = "6LfiL3EUAAAAAHrfLvl2KhRAcXpanNXDqu6M0CCS";
 const getApiUrl = (networkName: string): string => {
   if (networkName === "homestead") return API_MAIN_URL;
   else if (networkName === "rinkeby") return API_RINKEBY_URL;
-  return API_ROPSTEN_URL;
+  return API_GOERLI_URL;
 };
 export const EMAIL_API_URL = `${getApiUrl(NETWORK_NAME)}/email`;
 export const SHARE_LINK_API_URL = `${getApiUrl(NETWORK_NAME)}/storage`;

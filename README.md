@@ -39,7 +39,7 @@ npm run dev
 
 ### Environmental Variables
 
-`NET` is used for setting the default network, setting it to `mainnet` uses the public Ethereum network. If it is not set it defaults to Ropsten testnet
+`NET` is used for setting the default network, setting it to `mainnet` uses the public Ethereum network. If it is not set it defaults to Goerli testnet
 
 E.g:
 

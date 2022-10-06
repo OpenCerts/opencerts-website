@@ -6,19 +6,19 @@ fixture("Ethereum Provider HTTP Server Error").page`http://localhost:3000`.befor
 });
 
 const rateLimitMock = RequestMock()
-  .onRequestTo({ url: "https://ropsten.infura.io/v3/01b3ed28c54f4ae49cb4e27df560c5e8", method: "post" })
+  .onRequestTo({ url: "https://goerli.infura.io/v3/01b3ed28c54f4ae49cb4e27df560c5e8", method: "post" })
   .respond(null, 429)
-  .onRequestTo({ url: "https://eth-ropsten.alchemyapi.io/v2/FK1x9CdE8NStKjVt236D_LP7B6MMCFOs", method: "post" })
+  .onRequestTo({ url: "https://eth-goerli.alchemyapi.io/v2/FK1x9CdE8NStKjVt236D_LP7B6MMCFOs", method: "post" })
   .respond(null, 429);
 
 const badGatewayMock = RequestMock()
-  .onRequestTo({ url: "https://ropsten.infura.io/v3/01b3ed28c54f4ae49cb4e27df560c5e8", method: "post" })
+  .onRequestTo({ url: "https://goerli.infura.io/v3/01b3ed28c54f4ae49cb4e27df560c5e8", method: "post" })
   .respond(null, 502)
-  .onRequestTo({ url: "https://eth-ropsten.alchemyapi.io/v2/FK1x9CdE8NStKjVt236D_LP7B6MMCFOs", method: "post" })
+  .onRequestTo({ url: "https://eth-goerli.alchemyapi.io/v2/FK1x9CdE8NStKjVt236D_LP7B6MMCFOs", method: "post" })
   .respond(null, 502);
 
 const badGatewayMockInfuraOnly = RequestMock()
-  .onRequestTo({ url: "https://ropsten.infura.io/v3/01b3ed28c54f4ae49cb4e27df560c5e8", method: "post" })
+  .onRequestTo({ url: "https://goerli.infura.io/v3/01b3ed28c54f4ae49cb4e27df560c5e8", method: "post" })
   .respond(null, 502);
 
 const Certificate1 = "./unissued.opencert";
@@ -38,7 +38,7 @@ test.requestHooks(badGatewayMockInfuraOnly)(
   async (t) => {
     await t.setFilesToUpload("input[type=file]", [Certificate2]);
 
-    await validateTextContent(t, StatusButton, ["ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
+    await validateTextContent(t, StatusButton, ["goerli: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
 
     await t.switchToIframe(IframeBlock);
 
