@@ -2,14 +2,14 @@ import { Selector, RequestMock } from "testcafe";
 import { waitForReact } from "testcafe-react-selectors";
 
 const googleDnsDown = RequestMock()
-  .onRequestTo({ url: "https://dns.google/resolve?name=example.openattestation.com&type=TXT" })
+  .onRequestTo({ url: "https://dns.google/resolve?name=demo-opencerts.openattestation.com&type=TXT" })
   .respond(null, 500, { "access-control-allow-origin": "*" });
 
 const allDnsResolverDown = RequestMock()
-  .onRequestTo({ url: "https://dns.google/resolve?name=example.openattestation.com&type=TXT" })
+  .onRequestTo({ url: "https://dns.google/resolve?name=demo-opencerts.openattestation.com&type=TXT" })
   .respond(null, 500, { "access-control-allow-origin": "*" })
   .onRequestTo({
-    url: "https://cloudflare-dns.com/dns-query?name=example.openattestation.com&type=TXT",
+    url: "https://cloudflare-dns.com/dns-query?name=demo-opencerts.openattestation.com&type=TXT",
   })
   .respond(null, 500, { "access-control-allow-origin": "*" });
 
@@ -30,7 +30,7 @@ const validateTextContent = async (t, component, texts) =>
 test("Sample document is rendered correctly when dns is verified", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 
-  await validateTextContent(t, StatusButton, ["EXAMPLE.OPENATTESTATION.COM"]);
+  await validateTextContent(t, StatusButton, ["DEMO-OPENCERTS.OPENATTESTATION.COM"]);
 
   await t.switchToIframe(IframeBlock);
 
@@ -46,7 +46,7 @@ test("Sample document is rendered correctly when dns is verified", async (t) => 
 test.requestHooks(googleDnsDown)("Sample document is rendered correctly when google dns is down", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 
-  await validateTextContent(t, StatusButton, ["EXAMPLE.OPENATTESTATION.COM"]);
+  await validateTextContent(t, StatusButton, ["DEMO-OPENCERTS.OPENATTESTATION.COM"]);
 
   await t.switchToIframe(IframeBlock);
 
