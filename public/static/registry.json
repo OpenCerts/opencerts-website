@@ -341,6 +341,10 @@
     "0x7Ee2B9a0043Bda975398477695ba5c2361acC50C": {
       "name": "RINKEBY: Government Technology Agency of Singapore (GovTech)",
       "displayCard": false
+    },
+    "0xb3db78c0cc3622e078622C8395095a7B95415Acf": {
+      "name": "GOERLI: Government Technology Agency of Singapore (GovTech)",
+      "displayCard": false
     }
   }
 }
