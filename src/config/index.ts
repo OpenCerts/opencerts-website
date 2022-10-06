@@ -24,6 +24,7 @@ const getApiUrl = (networkName: string): string => {
   else if (networkName === "rinkeby") return API_RINKEBY_URL;
   return API_ROPSTEN_URL;
 };
+
 export const EMAIL_API_URL = `${getApiUrl(NETWORK_NAME)}/email`;
 export const SHARE_LINK_API_URL = `${getApiUrl(NETWORK_NAME)}/storage`;
 export const SHARE_LINK_TTL = 1209600;
