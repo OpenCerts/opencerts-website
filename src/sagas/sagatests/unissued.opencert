@@ -1,55 +1,52 @@
 {
-  "version": "open-attestation/2.0",
+  "version": "https://schema.openattestation.com/2.0/schema.json",
   "data": {
-    "id": "829a801a-9a0b-4696-897b-cc0bb13b1b5e:string:SGCNM21566325",
+    "id": "ff9e81bd-213d-40bb-aeda-d981a231694e:string:SGCNM21566325",
     "$template": {
-      "name": "c7b6eb34-b6fa-47ea-ae62-90fc6fffbd80:string:CERTIFICATE_OF_NON_MANIPULATION",
-      "type": "462c4d68-8d44-4a7a-90c0-690b2e605a3a:string:EMBEDDED_RENDERER",
-      "url": "e8e7a107-e781-4688-9f3b-d99e666d024f:string:https://demo-cnm.openattestation.com"
+      "name": "486a7975-dc39-43d8-a872-e81bbab62fef:string:CERTIFICATE_OF_NON_MANIPULATION",
+      "type": "17f2a763-74a7-415f-a219-16b281efca02:string:EMBEDDED_RENDERER",
+      "url": "9ed75c83-80b1-4e5c-bb0d-235b3e595a52:string:https://demo-cnm.openattestation.com"
     },
     "issuers": [
       {
-        "name": "0c5d2726-7078-45f6-9435-127b4307b569:string:DEMO STORE",
-        "documentStore": "6cf0a58e-2f88-4c76-bf4c-d8a87e85f7ff:string:0x8Fc57204c35fb9317D91285eF52D6b892EC08cD3",
+        "name": "b78fa47f-7562-4527-ad53-55e70ec94269:string:DEMO STORE",
+        "documentStore": "f1f830fc-f095-409e-8cb1-6234212efb8a:string:0xb3db78c0cc3622e078622C8395095a7B95415Acf",
         "identityProof": {
-          "type": "cea7e111-91cb-476c-a580-8653d04e6311:string:DNS-TXT",
-          "location": "5b4d8beb-239e-4a63-881c-7dd535d27e31:string:example.openattestation.com"
+          "type": "8740c352-d0e1-48f6-9125-36ffdd6d5dcb:string:DNS-TXT",
+          "location": "c7a29aec-564c-4efd-b636-9984af05e277:string:demo-opencerts.openattestation.com"
         }
       }
     ],
     "recipient": {
-      "name": "086a516c-d8db-43eb-92cf-f2478358e522:string:SG FREIGHT",
+      "name": "33f28f92-6732-4987-8142-e347f010ee1c:string:SG FREIGHT",
       "address": {
-        "street": "6a0f97d9-a9b8-467b-b7b5-679530b49c88:string:101 ORCHARD ROAD",
-        "country": "528af280-20f2-45d9-b451-d62e7881be76:string:SINGAPORE"
+        "street": "66e242a9-b8ce-4f0a-8942-31a94bfa9b87:string:101 ORCHARD ROAD",
+        "country": "1f3277e1-9fee-4d92-a7a9-d8bd25f939a1:string:SINGAPORE"
       }
     },
     "consignment": {
-      "description": "6e039c78-9de4-429f-9e6b-2768b331ba7a:string:16667 CARTONS OF RED WINE",
+      "description": "62674178-058f-4fed-bfce-529f1c155b77:string:16667 CARTONS OF RED WINE",
       "quantity": {
-        "value": "7212deea-60e0-4ff5-aa28-012e10a13eeb:number:5000",
-        "unit": "91e11443-dc97-468d-867b-7697fa53658d:string:LITRES"
+        "value": "e3552975-ea2b-47ba-b521-cbe8ef8b249e:number:5000",
+        "unit": "b12b6799-a56e-46af-929b-5cc06fed882e:string:LITRES"
       },
-      "countryOfOrigin": "c5db1a10-3011-4503-978a-cb8db313831c:string:AUSTRALIA",
-      "outwardBillNo": "79257012-f73a-43d7-b161-d12a238f9f2c:string:AQSIQ170923130",
-      "dateOfDischarge": "764ef01c-cad8-45ff-9749-fc21a0dd3079:string:2018-01-26",
-      "dateOfDeparture": "8ea7b317-1fce-45be-a2b8-17c838d8fd8e:string:2018-01-30",
-      "countryOfFinalDestination": "2b1c75fb-95f4-4083-b40e-c761d36d66bb:string:CHINA",
-      "outgoingVehicleNo": "47a051cd-aafb-424e-8fac-845393e5e943:string:COSCO JAPAN 074E/30-JAN"
+      "countryOfOrigin": "ce41e04d-e0e5-4a55-ae5f-40b2c8f5f35b:string:AUSTRALIA",
+      "outwardBillNo": "f0ffb024-31fd-4fbd-b77a-60a52b4e567f:string:AQSIQ170923130",
+      "dateOfDischarge": "71a24ff9-d2cf-4956-98af-d5d08f5ae8a3:string:2018-01-26",
+      "dateOfDeparture": "3509e404-16fe-44d0-a23c-8df95af7d1e6:string:2018-01-30",
+      "countryOfFinalDestination": "565f0520-3e1c-4ddf-a384-9f9faba16645:string:CHINA",
+      "outgoingVehicleNo": "5c3bee8a-508e-4b57-be21-e37aabe8777f:string:COSCO JAPAN 074E/30-JAN"
     },
     "declaration": {
-      "name": "847d8830-e8e4-44d5-b8d9-987fd4ff8d45:string:PETER LEE",
-      "designation": "0f275b46-220f-41f5-b193-76f8b8de53bb:string:SHIPPING MANAGER",
-      "date": "709658f5-0c6b-40ec-a179-1b30ae3eac99:string:2018-01-28"
+      "name": "1f36050d-64ad-4802-8c18-00b7956d6ce2:string:PETER LEE",
+      "designation": "f9f9b2fa-b083-4040-bb6d-9993f0aec066:string:SHIPPING MANAGER",
+      "date": "661683a2-7622-4880-b40f-4eedccb50e94:string:2018-01-28"
     }
-  },
-  "privacy": {
-    "obfuscatedData": []
   },
   "signature": {
     "type": "SHA3MerkleProof",
-    "targetHash": "8c0d1f47a990ba8f423674b385f452fbe5b3ec27f1e27c1ca5076f1c5b501aa8",
+    "targetHash": "d6008df0ed3d3ff3854574f40c6f938466ad0f35a2da627f70e4ddefdf4b1b64",
     "proof": [],
-    "merkleRoot": "8c0d1f47a990ba8f423674b385f452fbe5b3ec27f1e27c1ca5076f1c5b501aa8"
+    "merkleRoot": "d6008df0ed3d3ff3854574f40c6f938466ad0f35a2da627f70e4ddefdf4b1b64"
   }
 }
