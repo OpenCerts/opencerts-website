@@ -54,7 +54,7 @@ test("Sample document is downloaded correctly", async (t) => {
   await enableDownloadForHeadlessChrome(t);
   await t.setFilesToUpload("input[type=file]", [Document1]);
 
-  await validateTextContent(t, StatusButton, ["EXAMPLE.OPENATTESTATION.COM"]);
+  await validateTextContent(t, StatusButton, ["DEMO-OPENCERTS.OPENATTESTATION.COM"]);
 
   // Simulate an OpenCert file download
   const fileName = await DownloadLink.getAttribute("download");
@@ -63,15 +63,16 @@ test("Sample document is downloaded correctly", async (t) => {
   t.ctx.filePath = filePath; // For use in cleanup
   await t.expect(await waitForFileDownload(t, filePath)).eql(true);
 
+  const downloadedFile = await JSON.parse(readFileSync(filePath, "utf8"));
   // We expect the contents of the input to match the downloaded file
-  await t.expect(JSON.parse(readFileSync(filePath, "utf8"))).eql(TestDocument1);
+  await t.expect(downloadedFile).eql(TestDocument1);
 });
 
 test("Sample document with special characters is downloaded correctly", async (t) => {
   await enableDownloadForHeadlessChrome(t);
   await t.setFilesToUpload("input[type=file]", [Document2]);
 
-  await validateTextContent(t, StatusButton, ["EXAMPLE.OPENATTESTATION.COM"]);
+  await validateTextContent(t, StatusButton, ["DEMO-OPENCERTS.OPENATTESTATION.COM"]);
 
   // Simulate an OpenCert file download
   const fileName = await DownloadLink.getAttribute("download");
@@ -80,6 +81,7 @@ test("Sample document with special characters is downloaded correctly", async (t
   t.ctx.filePath = filePath; // For use in cleanup
   await t.expect(await waitForFileDownload(t, filePath)).eql(true);
 
+  const downloadedFile = await JSON.parse(readFileSync(filePath, "utf8"));
   // We expect the contents of the input to match the downloaded file
-  await t.expect(JSON.parse(readFileSync(filePath, "utf8"))).eql(TestDocument2);
+  await t.expect(downloadedFile).eql(TestDocument2);
 });

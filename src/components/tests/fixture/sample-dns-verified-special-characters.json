@@ -1,66 +1,63 @@
 {
-  "schema": "tradetrust/v1.0",
+  "version": "https://schema.openattestation.com/2.0/schema.json",
   "data": {
-    "id": "309eb6b0-6cf8-4024-8d28-89ee040f1ba5:string:SGCNM21566326",
+    "id": "8f433c31-4cf4-42fb-bbd5-5a13333647ae:string:SGCNM21566326",
     "$template": {
-      "name": "60050eec-8197-4b59-8a97-9ecb89be2dc5:string:CERTIFICATE_OF_NON_MANIPULATION",
-      "type": "cc320a0f-278f-47c8-80d2-65c5ad43af6c:string:EMBEDDED_RENDERER",
-      "url": "5eaa4eb2-db56-4112-9564-98d10b4ac12b:string:https://demo-cnm.openattestation.com"
+      "name": "be216e12-e700-402c-bfe9-3521164cc6ee:string:CERTIFICATE_OF_NON_MANIPULATION",
+      "type": "bb0bdf7f-eec4-4a68-bbd6-b9279a1ceede:string:EMBEDDED_RENDERER",
+      "url": "d97b24b0-76e2-4ade-b976-521410c41987:string:https://demo-cnm.openattestation.com"
     },
     "issuers": [
       {
-        "name": "41110dd9-ed3b-4b0d-bbc0-0f80b920340a:string:DEMO STORE",
-        "documentStore": "9360be40-5aab-4925-9954-133479534034:string:0x8Fc57204c35fb9317D91285eF52D6b892EC08cD3",
+        "name": "d8af4b45-a2ad-4813-a32b-792db2d347dd:string:DEMO STORE",
+        "documentStore": "6831737d-7454-41ee-b26f-ccaab82e20b9:string:0xb3db78c0cc3622e078622C8395095a7B95415Acf",
         "identityProof": {
-          "type": "b6de3f4c-ffff-4514-8aa7-ad73953247f1:string:DNS-TXT",
-          "location": "cee8ba67-bae8-47ea-89af-0ad1351381a0:string:example.openattestation.com"
+          "type": "a738f9f3-4d24-4c22-a75b-7162845e6b3e:string:DNS-TXT",
+          "location": "d736fbc3-99ad-4c9d-a48c-851ff4a7d32d:string:demo-opencerts.openattestation.com"
         }
       }
     ],
     "recipient": {
-      "name": "70376470-740f-41b7-baf6-d15e1bb6e08d:string:SG FREIGHT",
+      "name": "75627698-6493-488e-8bf4-3b4b0fda9854:string:SG FREIGHT",
       "address": {
-        "street": "a3a839ed-1c8f-41a8-aa50-419455a6f696:string:101 ORCHARD ROAD",
-        "country": "d79dc412-502a-49d8-aeae-a627389c14c0:string:SINGAPORE"
+        "street": "7825fede-55cb-45c8-b935-60a5d3b926e3:string:101 ORCHARD ROAD",
+        "country": "7bdf9e1d-0dd1-47fd-a3f2-123b41dce7aa:string:SINGAPORE"
       }
     },
     "consignment": {
-      "description": "856c4bbd-5f5f-4d39-9223-a510c8436fc7:string:18000 CARTONS OF RED WINE 🍷",
+      "description": "7ed4db76-fa64-47a4-b103-526fef9396b5:string:18000 CARTONS OF RED WINE 🍷",
       "quantity": {
-        "value": "9de3cea7-b59a-4c31-bb8f-09b517539eaa:number:5000",
-        "unit": "8ed03d72-ad97-410b-92f9-a0a6b746db17:string:LITRES"
+        "value": "28423990-0d05-47c0-b460-14b0d0252224:number:5000",
+        "unit": "8505eb97-337b-4eca-a93a-00951cabbece:string:LITRES"
       },
-      "countryOfOrigin": "96aa609a-74ee-451a-acd4-ea92d0024ac9:string:AUSTRALIA",
-      "outwardBillNo": "24162a60-9c16-4c61-8dea-27bc21ddf107:string:AQSIQ170923131",
-      "dateOfDischarge": "d5ea23fb-03fc-4f0c-ae29-0444c67ef83d:string:2020-05-26",
-      "dateOfDeparture": "7e2dadf0-064a-4e2c-a596-f78604eeda08:string:2020-05-30",
-      "countryOfFinalDestination": "45597259-e6c1-4767-9919-ff84003720d5:string:CHINA",
-      "outgoingVehicleNo": "2afee32d-3b4d-4296-a913-ccf47ef0fe78:string:COSCO JAPAN 074E/30-JAN",
+      "countryOfOrigin": "340f42ec-28d2-4698-bc75-ff9045cbb632:string:AUSTRALIA",
+      "outwardBillNo": "dd2b31b0-da06-4c19-9351-ae0c7f0a4c44:string:AQSIQ170923131",
+      "dateOfDischarge": "f21e4cae-cde0-4adc-b53f-4e6c48633b7b:string:2020-05-26",
+      "dateOfDeparture": "342e8ab5-401c-431c-973c-372692489217:string:2020-05-30",
+      "countryOfFinalDestination": "a58e69df-c84a-4036-a168-f07a4a31b338:string:CHINA",
+      "outgoingVehicleNo": "5845dda6-1845-4893-919a-779d4c4c2e72:string:COSCO JAPAN 074E/30-JAN",
       "someRandomTestData": [
-        "7ed101b4-b5c0-4808-90fd-2df531d800cb:string:This text block has some HTML special characters :@+.-$%^&*",
-        "554c8b08-9428-4eae-b988-ee4eb64c5530:string:foo://example.com:8042/over/there?name=ferret#nose",
-        "17a58ce9-f262-43b6-b3fa-af53e938f632:string:urn:example:animal:ferret:nose",
-        "08827440-0386-4cf7-a1f2-9bd400381488:string:区块链"
+        "c7e8bc29-9531-4624-8e62-482609ab7cf7:string:This text block has some HTML special characters :@+.-$%^&*",
+        "8b656818-1707-43aa-ac62-01862bf2e2a5:string:foo://example.com:8042/over/there?name=ferret#nose",
+        "7c2bfa50-304f-4326-a56e-9d5b703416fb:string:urn:example:animal:ferret:nose",
+        "cde1784e-e082-47c1-bd20-dec568a50a6d:string:区块链"
       ]
     },
     "declaration": {
-      "name": "34d5507d-bc77-45f9-ac15-70ffd6d8115e:string:PETER LEE",
-      "designation": "a92dff45-c87f-4312-85f5-2d76efaa0c20:string:SHIPPING MANAGER",
-      "date": "2018c7dd-b310-45d7-a54f-3ee4b230bcb1:string:2020-05-28"
+      "name": "a666d6df-f4bc-41dd-9945-780813b5ea2b:string:PETER LEE",
+      "designation": "aefd26c4-17ff-42ac-a882-055229ddeae3:string:SHIPPING MANAGER",
+      "date": "37315eda-ae3e-49a4-b58b-1f828b76295e:string:2020-05-28"
     },
     "certification": {
-      "name": "1ec3bac8-e090-4163-b705-a259350ec086:string:DEMO JOHN TAN",
-      "designation": "078630b0-b44b-4356-ac4d-d15e23f4ee21:string:DEMO",
-      "date": "d9f62c8c-2c23-49b7-be6f-524d70e6c14c:string:2020-05-28"
+      "name": "fddcc7ef-a1c7-4100-998d-7963c6637850:string:DEMO JOHN TAN",
+      "designation": "224c4333-7d4d-4d64-9480-805c63581041:string:DEMO",
+      "date": "7986aaa7-2acd-4715-8235-f8213a27ed1f:string:2020-05-28"
     }
-  },
-  "privacy": {
-    "obfuscatedData": []
   },
   "signature": {
     "type": "SHA3MerkleProof",
-    "targetHash": "db18db32ca67785246af5918671b9351bd50681bd238135acbdf4da037a6f429",
+    "targetHash": "465d5cbe2ea4cca11531d3369d01c60652ed616f4d8dcc1b951ac9698b0c3294",
     "proof": [],
-    "merkleRoot": "db18db32ca67785246af5918671b9351bd50681bd238135acbdf4da037a6f429"
+    "merkleRoot": "465d5cbe2ea4cca11531d3369d01c60652ed616f4d8dcc1b951ac9698b0c3294"
   }
 }
