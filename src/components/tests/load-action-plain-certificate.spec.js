@@ -18,13 +18,15 @@ test("Load document from action should work when url is valid", async (t) => {
   const action = {
     type: "DOCUMENT",
     payload: {
-      uri: `https://gist.githubusercontent.com/Nebulis/dc32c107fc5112ecf863b1dfa25995a9/raw/9aed3bfbbddaaa23d453cfbb9ee42d9efffaf2b8/opencerts-ropsten-demo.json`,
+      uri: `https://gist.githubusercontent.com/john-dot-oa/fc91eb8f98cd47224dd7339145d98561/raw/af909c7fd2f77a80bb856dae7172797d6a0853a7/opencerts-goerli-demo.json`,
       redirect: "https://opencerts.io/",
     },
   };
 
-  await t.navigateTo(`http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}`);
-  await validateTextContent(t, StatusButton, ["ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
+  await t.navigateTo(
+    `https://deploy-preview-686--opencerts-development.netlify.app/?q=${encodeURI(JSON.stringify(action))}`
+  );
+  await validateTextContent(t, StatusButton, ["DEMO-OPENCERTS.OPENATTESTATION.COM"]);
 
   await t.switchToIframe(IframeBlock);
 
@@ -39,15 +41,17 @@ test("Load document from action should fail when url is invalid", async (t) => {
   const action = {
     type: "DOCUMENT",
     payload: {
-      uri: `https://gist.githubusercontent.com/Nebulis/dc32c107fc5112ecf863b1dfa25995a9/raw/9aed3bfbbdd2b8/opencerts-ropsten-demo.json`,
+      uri: `https://gist.githubusercontent.com/john-dot-oa/fc91eb8f98cd47224dd7339145d98561/raw/af909c7fd2f77a80bb856dae7172797d6a0853a7123/no-such-cert.json`,
       redirect: "https://opencerts.io/",
     },
   };
 
-  await t.navigateTo(`http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}`);
+  await t.navigateTo(
+    `https://deploy-preview-686--opencerts-development.netlify.app/?q=${encodeURI(JSON.stringify(action))}`
+  );
   await validateTextContent(t, CertificateDropzone, [
     "The certificate can't be loaded",
     "Unable to load certificate with the provided parameters",
-    "Unable to load the certificate from https://gist.githubusercontent.com/Nebulis/dc32c107fc5112ecf863b1dfa25995a9/raw/9aed3bfbbdd2b8/opencerts-ropsten-demo.json",
+    "Unable to load the certificate from https://gist.githubusercontent.com/john-dot-oa/fc91eb8f98cd47224dd7339145d98561/raw/af909c7fd2f77a80bb856dae7172797d6a0853a7123/no-such-cert.json",
   ]);
 });
