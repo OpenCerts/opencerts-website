@@ -21,7 +21,7 @@ test("Load document from action should work when action is valid (key from ancho
   const action = {
     type: "DOCUMENT",
     payload: {
-      uri: `https://gist.githubusercontent.com/john-dot-oa/0dfa4b0decedc120ef19cd4d6643e315/raw/17323a853941ee29c9f305e70d64f5c11a68a2c1/e2e.json`,
+      uri: `https://gist.githubusercontent.com/john-dot-oa/0dfa4b0decedc120ef19cd4d6643e315/raw/a0da74ad4568826dc90e9e865dac1ec00f68b124/opencerts-website-e2e.json`,
       permittedAction: ["STORE"],
       redirect: "https://opencerts.io/",
     },
@@ -46,7 +46,7 @@ test("Load document from action should work when action is valid", async (t) => 
   const action = {
     type: "DOCUMENT",
     payload: {
-      uri: `https://gist.githubusercontent.com/john-dot-oa/0dfa4b0decedc120ef19cd4d6643e315/raw/17323a853941ee29c9f305e70d64f5c11a68a2c1/e2e.json`,
+      uri: `https://gist.githubusercontent.com/john-dot-oa/0dfa4b0decedc120ef19cd4d6643e315/raw/a0da74ad4568826dc90e9e865dac1ec00f68b124/opencerts-website-e2e.json`,
       key,
       permittedAction: ["STORE"],
       redirect: "https://opencerts.io/",
@@ -70,7 +70,7 @@ test("Load document from action should fail when action type is invalid", async 
   const action = {
     type: "DOCUM",
     payload: {
-      uri: `https://gist.githubusercontent.com/john-dot-oa/0dfa4b0decedc120ef19cd4d6643e315/raw/17323a853941ee29c9f305e70d64f5c11a68a2c1/e2e.json`,
+      uri: `https://gist.githubusercontent.com/john-dot-oa/0dfa4b0decedc120ef19cd4d6643e315/raw/a0da74ad4568826dc90e9e865dac1ec00f68b124/opencerts-website-e2e.json`,
       key,
       permittedAction: ["STORE"],
       redirect: "https://opencerts.io/",
@@ -90,7 +90,7 @@ test("Load document from action should fail when key is invalid (key from anchor
   const action = {
     type: "DOCUMENT",
     payload: {
-      uri: `https://gist.githubusercontent.com/john-dot-oa/0dfa4b0decedc120ef19cd4d6643e315/raw/17323a853941ee29c9f305e70d64f5c11a68a2c1/e2e.json`,
+      uri: `https://gist.githubusercontent.com/john-dot-oa/0dfa4b0decedc120ef19cd4d6643e315/raw/a0da74ad4568826dc90e9e865dac1ec00f68b124/opencerts-website-e2e.json`,
       permittedAction: ["STORE"],
       redirect: "https://opencerts.io/",
     },
@@ -110,7 +110,7 @@ test("Load document from action should fail when key is invalid", async (t) => {
   const action = {
     type: "DOCUMENT",
     payload: {
-      uri: `https://gist.githubusercontent.com/john-dot-oa/0dfa4b0decedc120ef19cd4d6643e315/raw/17323a853941ee29c9f305e70d64f5c11a68a2c1/e2e.json`,
+      uri: `https://gist.githubusercontent.com/john-dot-oa/0dfa4b0decedc120ef19cd4d6643e315/raw/a0da74ad4568826dc90e9e865dac1ec00f68b124/opencerts-website-e2e.json`,
       permittedAction: ["STORE"],
       redirect: "https://opencerts.io/",
       key: "2a237b35cb50544a2c9a4b4a629e7c547bd1ff4a0137489700891532001e83f6", // random key, must have correct length
@@ -129,7 +129,7 @@ test("Load document from action should fail when the required key is not provide
   const action = {
     type: "DOCUMENT",
     payload: {
-      uri: `https://gist.githubusercontent.com/john-dot-oa/0dfa4b0decedc120ef19cd4d6643e315/raw/17323a853941ee29c9f305e70d64f5c11a68a2c1/e2e.json`,
+      uri: `https://gist.githubusercontent.com/john-dot-oa/0dfa4b0decedc120ef19cd4d6643e315/raw/a0da74ad4568826dc90e9e865dac1ec00f68b124/opencerts-website-e2e.json`,
       permittedAction: ["STORE"],
       redirect: "https://opencerts.io/",
     },
@@ -147,7 +147,7 @@ test("Load document from action should fail when url is invalid", async (t) => {
   const action = {
     type: "DOCUMENT",
     payload: {
-      uri: `https://gist.githubusercontent.com/john-dot-oa/0dfa4b0decedc120ef19cd4d6643e315/raw/17323a853941ee29c9f305e70d64f5c11a68a2c1/e2e.jsondasdasd`,
+      uri: `https://gist.githubusercontent.com/john-dot-oa/0dfa4b0decedc120ef19cd4d6643e315/raw/a0da74ad4568826dc90e9e865dac1ec00f68b124/opencerts-website-e2e.jsondasdasd`,
       permittedAction: ["STORE"],
       redirect: "https://opencerts.io/",
       key,
@@ -158,6 +158,6 @@ test("Load document from action should fail when url is invalid", async (t) => {
   await validateTextContent(t, CertificateDropzone, [
     "The certificate can't be loaded",
     "Unable to load certificate with the provided parameters",
-    "Unable to load the certificate from https://gist.githubusercontent.com/john-dot-oa/0dfa4b0decedc120ef19cd4d6643e315/raw/17323a853941ee29c9f305e70d64f5c11a68a2c1/e2e.jsondasdasd",
+    "Unable to load the certificate from https://gist.githubusercontent.com/john-dot-oa/0dfa4b0decedc120ef19cd4d6643e315/raw/a0da74ad4568826dc90e9e865dac1ec00f68b124/opencerts-website-e2e.jsondasdasd",
   ]);
 });
