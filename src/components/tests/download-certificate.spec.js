@@ -35,11 +35,12 @@ const waitForFileDownload = async (t, filePath) => {
   return existsSync(filePath);
 };
 
-// From https://gist.github.com/AlexKamaev/8c1eb8a5fb638fa366b44447f6d7c5a4
+// From https://gist.github.com/AlexKamaev/8c1eb8a5fb638fa366b44447f6d7c5a4?permalink_comment_id=3616449#gistcomment-3616449
 async function enableDownloadForHeadlessChrome(t) {
   if (t.browser.alias !== "chrome:headless") return;
   const browserConnection = t.testRun.browserConnection;
-  const client = browserConnection.provider.plugin.openedBrowsers[browserConnection.id].client;
+  const browser = browserConnection.provider.plugin.openedBrowsers[browserConnection.id];
+  const client = await browser.browserClient.getActiveClient();
   const { Network, Page } = client;
 
   await Promise.all([Network.enable(), Page.enable()]);
