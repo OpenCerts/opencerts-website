@@ -2,15 +2,13 @@ import { Selector, RequestMock } from "testcafe";
 import { waitForReact } from "testcafe-react-selectors";
 
 const googleDnsDown = RequestMock()
-  .onRequestTo({ url: "https://dns.google/resolve?name=demo-opencerts.openattestation.com&type=TXT" })
+  .onRequestTo({ url: "https://dns.google/resolve?name=example.openattestation.com&type=TXT" })
   .respond(null, 500, { "access-control-allow-origin": "*" });
 
 const allDnsResolverDown = RequestMock()
-  .onRequestTo({ url: "https://dns.google/resolve?name=demo-opencerts.openattestation.com&type=TXT" })
+  .onRequestTo({ url: "https://dns.google/resolve?name=example.openattestation.com&type=TXT" })
   .respond(null, 500, { "access-control-allow-origin": "*" })
-  .onRequestTo({
-    url: "https://cloudflare-dns.com/dns-query?name=demo-opencerts.openattestation.com&type=TXT",
-  })
+  .onRequestTo({ url: "https://cloudflare-dns.com/dns-query?name=example.openattestation.com&type=TXT" })
   .respond(null, 500, { "access-control-allow-origin": "*" });
 
 fixture("DNS Certificate Rendering").page`http://localhost:3000`.beforeEach(async () => {
@@ -30,7 +28,7 @@ const validateTextContent = async (t, component, texts) =>
 test("Sample document is rendered correctly when dns is verified", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 
-  await validateTextContent(t, StatusButton, ["GOERLI: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
+  await validateTextContent(t, StatusButton, ["EXAMPLE.OPENATTESTATION.COM"]);
 
   await t.switchToIframe(IframeBlock);
 
@@ -46,7 +44,7 @@ test("Sample document is rendered correctly when dns is verified", async (t) => 
 test.requestHooks(googleDnsDown)("Sample document is rendered correctly when google dns is down", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 
-  await validateTextContent(t, StatusButton, ["GOERLI: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
+  await validateTextContent(t, StatusButton, ["EXAMPLE.OPENATTESTATION.COM"]);
 
   await t.switchToIframe(IframeBlock);
 
@@ -60,7 +58,7 @@ test.requestHooks(googleDnsDown)("Sample document is rendered correctly when goo
 });
 
 test.requestHooks(allDnsResolverDown)("Sample document is not rendered when all dns resolver are down", async (t) => {
-  await t.setFilesToUpload("input[type=file]", [Document]);
+  await t.setFilesToUpload("input[type=file]", [Document]); // Ensure that document uses example.openattestation.com as it uses cloudflare as secondary dns
 
   await InvalidMessage.with({ visibilityCheck: true })();
 
