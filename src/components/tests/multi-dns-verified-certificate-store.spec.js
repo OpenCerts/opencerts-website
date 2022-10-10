@@ -17,7 +17,7 @@ const validateTextContent = async (t, component, texts) =>
 test("Sample document is rendered correctly when multiple dns is verified", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 
-  await validateTextContent(t, StatusButton, ["DEMO-OPENCERTS.OPENATTESTATION.COM"]);
+  await validateTextContent(t, StatusButton, ["GOERLI: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
 
   await t.switchToIframe(IframeBlock);
 

@@ -38,7 +38,7 @@ test.requestHooks(badGatewayMockInfuraOnly)(
   async (t) => {
     await t.setFilesToUpload("input[type=file]", [Certificate2]);
 
-    await validateTextContent(t, StatusButton, ["DEMO-OPENCERTS.OPENATTESTATION.COM"]);
+    await validateTextContent(t, StatusButton, ["GOERLI: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
 
     await t.switchToIframe(IframeBlock);
 

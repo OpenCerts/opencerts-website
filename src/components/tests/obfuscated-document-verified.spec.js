@@ -17,7 +17,7 @@ const validateTextContent = async (t, component, texts) =>
 test("Sample document is rendered correctly when single registry is verified", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 
-  await validateTextContent(t, StatusButton, ["DEMO-OPENCERTS.OPENATTESTATION.COM"]);
+  await validateTextContent(t, StatusButton, ["GOERLI: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
 
   await validateTextContent(t, ObfuscationNote, [
     "The owner of this certificate have chosen not to share certain information in the certificate with you. Please note that this does not affect the authenticity of the certificate.",

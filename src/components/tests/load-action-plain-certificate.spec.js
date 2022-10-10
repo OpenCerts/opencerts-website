@@ -26,7 +26,7 @@ test("Load document from action should work when url is valid", async (t) => {
   await t.navigateTo(
     `https://deploy-preview-686--opencerts-development.netlify.app/?q=${encodeURI(JSON.stringify(action))}`
   );
-  await validateTextContent(t, StatusButton, ["DEMO-OPENCERTS.OPENATTESTATION.COM"]);
+  await validateTextContent(t, StatusButton, ["GOERLI: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
 
   await t.switchToIframe(IframeBlock);
 

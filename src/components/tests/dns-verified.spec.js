@@ -30,7 +30,7 @@ const validateTextContent = async (t, component, texts) =>
 test("Sample document is rendered correctly when dns is verified", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 
-  await validateTextContent(t, StatusButton, ["DEMO-OPENCERTS.OPENATTESTATION.COM"]);
+  await validateTextContent(t, StatusButton, ["GOERLI: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
 
   await t.switchToIframe(IframeBlock);
 
@@ -46,7 +46,7 @@ test("Sample document is rendered correctly when dns is verified", async (t) => 
 test.requestHooks(googleDnsDown)("Sample document is rendered correctly when google dns is down", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 
-  await validateTextContent(t, StatusButton, ["DEMO-OPENCERTS.OPENATTESTATION.COM"]);
+  await validateTextContent(t, StatusButton, ["GOERLI: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
 
   await t.switchToIframe(IframeBlock);
 

@@ -1,11 +1,10 @@
 import { Selector } from "testcafe";
 import { waitForReact } from "testcafe-react-selectors";
 
-fixture("Any one of DNS or Registry Verified for Certificate Rendering").page`http://localhost:3000`.beforeEach(
-  async () => {
-    await waitForReact();
-  }
-);
+fixture("Any one of DNS or Registry Verified for Certificate Rendering")
+  .page`https://deploy-preview-686--opencerts-development.netlify.app/viewer`.beforeEach(async () => {
+  await waitForReact();
+});
 
 const Document = "./fixture/verified-unverified-issuer.json";
 const IframeBlock = Selector("#iframe");
@@ -18,7 +17,7 @@ const validateTextContent = async (t, component, texts) =>
 test("Sample doc is rendered correctly when any one of dns or registry is verified and doc store mismatch in domain", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 
-  await validateTextContent(t, StatusButton, ["DEMO-OPENCERTS.OPENATTESTATION.COM"]);
+  await validateTextContent(t, StatusButton, ["GOERLI: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
 
   await t.switchToIframe(IframeBlock);
 

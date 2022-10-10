@@ -30,7 +30,7 @@ test("Load document from action should work when action is valid (key from ancho
   await t.navigateTo(
     `http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}#${encodeURI(JSON.stringify(anchor))}`
   );
-  await validateTextContent(t, StatusButton, ["DEMO-OPENCERTS.OPENATTESTATION.COM"]);
+  await validateTextContent(t, StatusButton, ["GOERLI: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
 
   await t.switchToIframe(IframeBlock);
 
@@ -54,7 +54,7 @@ test("Load document from action should work when action is valid", async (t) => 
   };
 
   await t.navigateTo(`http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}`);
-  await validateTextContent(t, StatusButton, ["DEMO-OPENCERTS.OPENATTESTATION.COM"]);
+  await validateTextContent(t, StatusButton, ["GOERLI: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
 
   await t.switchToIframe(IframeBlock);
 
