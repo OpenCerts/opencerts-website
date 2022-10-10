@@ -24,7 +24,7 @@ test("Load document from action should work when url is valid", async (t) => {
   };
 
   await t.navigateTo(
-    `https://deploy-preview-686--opencerts-development.netlify.app/?q=${encodeURI(JSON.stringify(action))}`
+    `http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}`
   );
   await validateTextContent(t, StatusButton, ["GOERLI: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
 
@@ -47,7 +47,7 @@ test("Load document from action should fail when url is invalid", async (t) => {
   };
 
   await t.navigateTo(
-    `https://deploy-preview-686--opencerts-development.netlify.app/?q=${encodeURI(JSON.stringify(action))}`
+    `http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}`
   );
   await validateTextContent(t, CertificateDropzone, [
     "The certificate can't be loaded",

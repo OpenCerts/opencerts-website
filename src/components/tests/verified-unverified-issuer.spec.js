@@ -1,10 +1,11 @@
 import { Selector } from "testcafe";
 import { waitForReact } from "testcafe-react-selectors";
 
-fixture("Any one of DNS or Registry Verified for Certificate Rendering")
-  .page`https://deploy-preview-686--opencerts-development.netlify.app/viewer`.beforeEach(async () => {
-  await waitForReact();
-});
+fixture("Any one of DNS or Registry Verified for Certificate Rendering").page`http://localhost:3000/viewer`.beforeEach(
+  async () => {
+    await waitForReact();
+  }
+);
 
 const Document = "./fixture/verified-unverified-issuer.json";
 const IframeBlock = Selector("#iframe");
