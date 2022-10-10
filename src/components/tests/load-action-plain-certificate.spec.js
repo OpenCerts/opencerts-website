@@ -23,9 +23,7 @@ test("Load document from action should work when url is valid", async (t) => {
     },
   };
 
-  await t.navigateTo(
-    `http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}`
-  );
+  await t.navigateTo(`http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}`);
   await validateTextContent(t, StatusButton, ["GOERLI: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
 
   await t.switchToIframe(IframeBlock);
@@ -46,9 +44,7 @@ test("Load document from action should fail when url is invalid", async (t) => {
     },
   };
 
-  await t.navigateTo(
-    `http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}`
-  );
+  await t.navigateTo(`http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}`);
   await validateTextContent(t, CertificateDropzone, [
     "The certificate can't be loaded",
     "Unable to load certificate with the provided parameters",
