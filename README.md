@@ -2,6 +2,27 @@
 
 [![CircleCI](https://circleci.com/gh/OpenCerts/opencerts-website.svg?style=svg)](https://circleci.com/gh/OpenCerts/opencerts-website)
 
+# Notice
+
+As of 31 December 2019, we have migrated from OpenCerts v1 to v2.
+As part of the migration, do note that `certificateStore` has been renamed to `documentStore`, please refer to the `public/static/demo/goerli.opencert` for the latest implementation or refer to the snippet below for more information about the "issuers" section of the document.
+
+```json
+ "issuers": [
+      {
+        "name": <name>,
+        "url": <url>,
+        "documentStore": <documentStore Address>,
+        "identityProof": {
+          "type": "DNS-TXT",
+          "location": <domain name>
+        }
+      }
+    ],
+```
+
+> Visit https://docs.opencerts.io/docs/migrations/v1_to_v2#schema-change for more information about the migration and schema changes in v2.
+
 See also:
 
 - [opencerts-documentation](https://github.com/OpenCerts/opencerts-documentation)
