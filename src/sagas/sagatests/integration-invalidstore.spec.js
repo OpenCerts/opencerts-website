@@ -1,7 +1,7 @@
 import { Selector } from "testcafe";
 import { waitForReact } from "testcafe-react-selectors";
 
-fixture("Invalid Store Cert").page`http://localhost:3000/`.beforeEach(async () => {
+fixture("Invalid Store Cert").page`http://localhost:3000`.beforeEach(async () => {
   await waitForReact();
 });
 
