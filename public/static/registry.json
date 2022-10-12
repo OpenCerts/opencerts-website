@@ -286,6 +286,10 @@
       "name": "ROPSTEN: Ngee Ann Polytechnic",
       "displayCard": false
     },
+    "0x5414FEfD05e9C18EcB5440299A26021eDbAd2950": {
+      "name": "GOERLI: Ngee Ann Polytechnic",
+      "displayCard": false
+    },
     "0xeDe1B6Fc03f1a9C6905C93a2fceb06E19624a55E": {
       "name": "ROPSTEN: Singapore Examinations and Assessment Board",
       "displayCard": false
@@ -304,6 +308,10 @@
     },
     "0xe825e69383a57eB686Fc7b8c455Dd982bB9680f6": {
       "name": "ROPSTEN: Temasek Polytechnic",
+      "displayCard": false
+    },
+    "0x2668F220D6AfaFaFFDC3130d821695231EeE18f4": {
+      "name": "GOERLI: Temasek Polytechnic",
       "displayCard": false
     },
     "0xE5c693015460868F817799CAFb363EEDb4F9E446": {

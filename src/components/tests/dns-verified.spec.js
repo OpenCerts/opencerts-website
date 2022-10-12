@@ -8,9 +8,7 @@ const googleDnsDown = RequestMock()
 const allDnsResolverDown = RequestMock()
   .onRequestTo({ url: "https://dns.google/resolve?name=example.openattestation.com&type=TXT" })
   .respond(null, 500, { "access-control-allow-origin": "*" })
-  .onRequestTo({
-    url: "https://cloudflare-dns.com/dns-query?name=example.openattestation.com&type=TXT",
-  })
+  .onRequestTo({ url: "https://cloudflare-dns.com/dns-query?name=example.openattestation.com&type=TXT" })
   .respond(null, 500, { "access-control-allow-origin": "*" });
 
 fixture("DNS Certificate Rendering").page`http://localhost:3000`.beforeEach(async () => {
@@ -60,7 +58,7 @@ test.requestHooks(googleDnsDown)("Sample document is rendered correctly when goo
 });
 
 test.requestHooks(allDnsResolverDown)("Sample document is not rendered when all dns resolver are down", async (t) => {
-  await t.setFilesToUpload("input[type=file]", [Document]);
+  await t.setFilesToUpload("input[type=file]", [Document]); // Ensure that document uses example.openattestation.com as it uses cloudflare as secondary dns
 
   await InvalidMessage.with({ visibilityCheck: true })();
 

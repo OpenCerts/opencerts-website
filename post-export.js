@@ -4,7 +4,7 @@ const { generateSitemap } = require("./generate-sitemap");
 const URL =
   process.env.NET === "mainnet"
     ? "https://opencerts.io"
-    : process.env.NET === "ropsten"
+    : process.env.NET === "goerli"
     ? "https://dev.opencerts.io"
     : "https://rinkeby.opencerts.io";
 generateSitemap(URL, "./out/static/");

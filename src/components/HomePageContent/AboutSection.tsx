@@ -5,18 +5,15 @@ export const AboutSection: React.FunctionComponent = () => {
   const howitworks: { key: keyof typeof aboutImages; text: string }[] = [
     {
       key: "onetwo",
-      text:
-        "When an OpenCerts certificate is created, a unique digital code is tagged to it. This code, together with condensed information from the certificate, is stored on the blockchain.",
+      text: "When an OpenCerts certificate is created, a unique digital code is tagged to it. This code, together with condensed information from the certificate, is stored on the blockchain.",
     },
     {
       key: "three",
-      text:
-        "When you open the .opencert file on this site, its contents will be compared with what was stored on the blockchain.",
+      text: "When you open the .opencert file on this site, its contents will be compared with what was stored on the blockchain.",
     },
     {
       key: "four",
-      text:
-        "We'll check if the contents match and if the certificate comes from a recognised insitution.\n\nThis way, you'll know if the certificate is valid when you try to view it.",
+      text: "We'll check if the contents match and if the certificate comes from a recognised insitution.\n\nThis way, you'll know if the certificate is valid when you try to view it.",
     },
   ];
 

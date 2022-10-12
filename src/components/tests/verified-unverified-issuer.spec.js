@@ -1,7 +1,7 @@
 import { Selector } from "testcafe";
 import { waitForReact } from "testcafe-react-selectors";
 
-fixture("Any one of DNS or Registry Verified for Certificate Rendering").page`http://localhost:3000`.beforeEach(
+fixture("Any one of DNS or Registry Verified for Certificate Rendering").page`http://localhost:3000/viewer`.beforeEach(
   async () => {
     await waitForReact();
   }
@@ -18,7 +18,7 @@ const validateTextContent = async (t, component, texts) =>
 test("Sample doc is rendered correctly when any one of dns or registry is verified and doc store mismatch in domain", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 
-  await validateTextContent(t, StatusButton, ["ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
+  await validateTextContent(t, StatusButton, ["GOERLI: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
 
   await t.switchToIframe(IframeBlock);
 

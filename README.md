@@ -2,6 +2,28 @@
 
 [![CircleCI](https://circleci.com/gh/OpenCerts/opencerts-website.svg?style=svg)](https://circleci.com/gh/OpenCerts/opencerts-website)
 
+## Notice
+
+As of 31 December 2019, we have migrated from OpenCerts `v1` to `v2`.
+
+As part of the migration, do note that `certificateStore` has been renamed to `documentStore`, please refer to the [`public/static/demo/goerli.opencert`](https://github.com/OpenCerts/opencerts-website/blob/master/public/static/demo/goerli.opencert) for the latest implementation or refer to the snippet below for more information about the "issuers" section of the document.
+
+```
+ "issuers": [
+      {
+        "name": <name>,
+        "url": <url>,
+        "documentStore": <documentStore Address>,
+        "identityProof": {
+          "type": "DNS-TXT",
+          "location": <domain name>
+        }
+      }
+    ],
+```
+
+> Visit https://docs.opencerts.io/docs/migrations/v1_to_v2#schema-change for more information about the migration and schema changes in v2.
+
 See also:
 
 - [opencerts-documentation](https://github.com/OpenCerts/opencerts-documentation)
@@ -39,7 +61,7 @@ npm run dev
 
 ### Environmental Variables
 
-`NET` is used for setting the default network, setting it to `mainnet` uses the public Ethereum network. If it is not set it defaults to Ropsten testnet
+`NET` is used for setting the default network, setting it to `mainnet` uses the public Ethereum network. If it is not set it defaults to Goerli testnet
 
 E.g:
 

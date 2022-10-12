@@ -35,11 +35,12 @@ const waitForFileDownload = async (t, filePath) => {
   return existsSync(filePath);
 };
 
-// From https://gist.github.com/AlexKamaev/8c1eb8a5fb638fa366b44447f6d7c5a4
+// From https://gist.github.com/AlexKamaev/8c1eb8a5fb638fa366b44447f6d7c5a4?permalink_comment_id=3616449#gistcomment-3616449
 async function enableDownloadForHeadlessChrome(t) {
   if (t.browser.alias !== "chrome:headless") return;
   const browserConnection = t.testRun.browserConnection;
-  const client = browserConnection.provider.plugin.openedBrowsers[browserConnection.id].client;
+  const browser = browserConnection.provider.plugin.openedBrowsers[browserConnection.id];
+  const client = await browser.browserClient.getActiveClient();
   const { Network, Page } = client;
 
   await Promise.all([Network.enable(), Page.enable()]);
@@ -63,15 +64,19 @@ test("Sample document is downloaded correctly", async (t) => {
   t.ctx.filePath = filePath; // For use in cleanup
   await t.expect(await waitForFileDownload(t, filePath)).eql(true);
 
+  const downloadedFile = await JSON.parse(readFileSync(filePath, "utf8"));
   // We expect the contents of the input to match the downloaded file
-  await t.expect(JSON.parse(readFileSync(filePath, "utf8"))).eql(TestDocument1);
+  await t.expect(downloadedFile).eql(TestDocument1);
 });
 
 test("Sample document with special characters is downloaded correctly", async (t) => {
   await enableDownloadForHeadlessChrome(t);
   await t.setFilesToUpload("input[type=file]", [Document2]);
 
-  await validateTextContent(t, StatusButton, ["EXAMPLE.OPENATTESTATION.COM"]);
+  await validateTextContent(t, StatusButton, [
+    "DEMO-OPENCERTS.OPENATTESTATION.COM",
+    "GOERLI: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)",
+  ]);
 
   // Simulate an OpenCert file download
   const fileName = await DownloadLink.getAttribute("download");
@@ -80,6 +85,7 @@ test("Sample document with special characters is downloaded correctly", async (t
   t.ctx.filePath = filePath; // For use in cleanup
   await t.expect(await waitForFileDownload(t, filePath)).eql(true);
 
+  const downloadedFile = await JSON.parse(readFileSync(filePath, "utf8"));
   // We expect the contents of the input to match the downloaded file
-  await t.expect(JSON.parse(readFileSync(filePath, "utf8"))).eql(TestDocument2);
+  await t.expect(downloadedFile).eql(TestDocument2);
 });
