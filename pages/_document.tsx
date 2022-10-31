@@ -9,8 +9,12 @@ export default class MyDocument extends Document {
         <Head>
           <link rel="icon" type="image/png" href="/static/images/favicon/favicon-32x32.png" sizes="32x32" />
           <link rel="icon" type="image/png" href="/static/images/favicon/favicon-16x16.png" sizes="16x16" />
-          <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
-          <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" type="text/css" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat&family=Source+Sans+Pro&display=swap"
+            rel="stylesheet"
+          />
           <link
             rel="stylesheet"
             href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
