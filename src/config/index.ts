@@ -11,7 +11,7 @@ const API_ROPSTEN_URL = "https://api-ropsten.opencerts.io";
 const API_RINKEBY_URL = "https://api-rinkeby.opencerts.io";
 
 const GA_PRODUCTION_ID = "UA-130492260-1";
-const GA_DEVELOPMENT_ID = "UA-130492260-2";
+const GA_DEVELOPMENT_ID = "G-TFGD0997WX";
 
 export const IS_MAINNET = publicRuntimeConfig.network === "mainnet";
 export const NETWORK_NAME = (IS_MAINNET ? "homestead" : publicRuntimeConfig.network) ?? "goerli"; // expected by ethers

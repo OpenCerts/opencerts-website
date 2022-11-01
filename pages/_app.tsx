@@ -1,16 +1,15 @@
 import { mapValues } from "lodash";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore repository has been archived, will wait to upgrade to fix
-import withGA from "next-ga";
 import { DefaultSeo } from "next-seo";
 import App from "next/app";
-import Router from "next/router";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { DEFAULT_SEO, ENVIRONMENT, GA_ID } from "../src/config";
 import { updateFeatureToggles } from "../src/reducers/featureToggle.actions";
 import { wrapper } from "../src/store";
 import "../src/tailwind.css";
+import ReactGA from "react-ga4";
 
 const FeatureFlagLoader: React.FunctionComponent = ({ children }) => {
   const dispatch = useDispatch();
@@ -29,6 +28,13 @@ const FeatureFlagLoader: React.FunctionComponent = ({ children }) => {
 };
 
 class MyApp extends App {
+  setGA = () => {
+    ReactGA.initialize(GA_ID);
+    ReactGA.send("pageview");
+  };
+  componentDidMount() {
+    this.setGA();
+  }
   render(): JSX.Element {
     const { Component, pageProps } = this.props;
     return (
@@ -42,5 +48,4 @@ class MyApp extends App {
   }
 }
 
-const appWrappedWithGA = withGA(GA_ID, Router)(MyApp);
-export default wrapper.withRedux(appWrappedWithGA);
+export default wrapper.withRedux(MyApp);
