@@ -9,7 +9,7 @@ import ReactGA from "react-ga4";
 interface Event {
   category: string;
   action: string;
-  value?: number;
+  value?: number | string;
   nonInteraction?: boolean;
   options?: any;
 }
@@ -32,9 +32,9 @@ export const stringifyEvent = ({ category, action, value }: Event): string =>
 
 export const analyticsEvent = (window: Partial<Window> | undefined, event: Event): void => {
   validateEvent(event);
-  const { category, action, value, options = undefined } = event;
+  const { category, action, value, nonInteraction, options = undefined } = event;
   trace(stringifyEvent(event));
-  ReactGA.event(category, { action, value, ...options });
+  ReactGA.event(category, { action, value, nonInteraction, ...options });
   traceDev(stringifyEvent(event));
   return;
 };
