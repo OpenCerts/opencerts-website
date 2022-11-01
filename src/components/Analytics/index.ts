@@ -30,7 +30,7 @@ export const validateEvent = ({ category, action, value }: Event): void => {
 export const stringifyEvent = ({ category, action, value }: Event): string =>
   `Category*: ${category}, Action*: ${action}, Value: ${value}`;
 
-export const analyticsEvent = (window: Partial<Window> | undefined, event: Event): void => {
+export const analyticsEvent = (event: Event): void => {
   validateEvent(event);
   const { category, action, value, nonInteraction, options = undefined } = event;
   trace(stringifyEvent(event));
@@ -62,7 +62,7 @@ export const sendV2EventCertificateViewedDetailed = ({
   } else if (issuer.identityProof) {
     issuerName = issuer.identityProof.location || "";
   }
-  analyticsEvent(window, {
+  analyticsEvent({
     category: "CERTIFICATE_DETAILS",
     action: `VIEWED - ${issuerName}`,
     nonInteraction: true,
@@ -88,7 +88,7 @@ export const sendV3EventCertificateViewedDetailed = ({
   const documentName = certificateData?.name ?? "";
   const issuedOn = certificateData?.issued ?? "";
   const issuerName = certificateData.openAttestationMetadata.identityProof.identifier || "";
-  analyticsEvent(window, {
+  analyticsEvent({
     category: "CERTIFICATE_DETAILS",
     action: `VIEWED - ${issuerName}`,
     nonInteraction: true,
@@ -127,7 +127,7 @@ export function triggerV2ErrorLogging(
       issuerName = issuer.identityProof.location || "";
     }
 
-    analyticsEvent(window, {
+    analyticsEvent({
       category: "CERTIFICATE_ERROR",
       action: `ERROR - ${issuerName}`,
       nonInteraction: true,
@@ -157,7 +157,7 @@ export function triggerV3ErrorLogging(
   const documentStore = utils.getIssuerAddress(rawCertificate);
   const issuerName = rawCertificate.openAttestationMetadata.identityProof.identifier;
 
-  analyticsEvent(window, {
+  analyticsEvent({
     category: "CERTIFICATE_ERROR",
     action: `ERROR - ${issuerName}`,
     nonInteraction: true,
@@ -196,7 +196,7 @@ export function triggerV2RendererTimeoutLogging(rawCertificate: WrappedDocument<
       issuerName = issuer.identityProof.location || "";
     }
 
-    analyticsEvent(window, {
+    analyticsEvent({
       category: "CERTIFICATE_RENDERER_TIMEOUT",
       action: `RENDERER TIMEOUT - ${issuerName}`,
       nonInteraction: true,
@@ -225,7 +225,7 @@ export function triggerV3RendererTimeoutLogging(rawCertificate: WrappedDocument<
   const documentStore = utils.getIssuerAddress(rawCertificate);
   const issuerName = rawCertificate.openAttestationMetadata.identityProof.identifier;
 
-  analyticsEvent(window, {
+  analyticsEvent({
     category: "CERTIFICATE_RENDERER_TIMEOUT",
     action: `RENDERER TIMEOUT - ${issuerName}`,
     nonInteraction: true,
