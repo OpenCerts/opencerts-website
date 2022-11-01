@@ -10,7 +10,6 @@ interface Event {
   category: string;
   action: string;
   value?: number;
-  label?: string;
   nonInteraction?: boolean;
   options?: any;
 }
@@ -28,16 +27,16 @@ export const validateEvent = ({ category, action, value }: Event): void => {
   if (value && typeof value !== "number") throw new Error("Value must be a number");
 };
 
-export const stringifyEvent = ({ category, action, label, value }: Event): string =>
-  `Category*: ${category}, Action*: ${action}, Label: ${label}, Value: ${value}`;
+export const stringifyEvent = ({ category, action, value }: Event): string =>
+  `Category*: ${category}, Action*: ${action}, Value: ${value}`;
 
 export const analyticsEvent = (window: Partial<Window> | undefined, event: Event): void => {
   validateEvent(event);
-  const { category, action, label, value, options = undefined } = event;
+  const { category, action, value, options = undefined } = event;
   trace(stringifyEvent(event));
-  ReactGA.event(category, { action, label, value, ...options });
+  ReactGA.event(category, { action, value, ...options });
   traceDev(stringifyEvent(event));
-  console.log("analyticsEvent OK", category, { action, label, value, ...options });
+  console.log("analyticsEvent OK", category, { action, value, ...options });
   return;
 };
 
@@ -49,7 +48,6 @@ export const sendV2EventCertificateViewedDetailed = ({
   certificateData: { id?: string; name?: string; issuedOn?: string };
 }): void => {
   console.log("sendV2EventCertificateViewedDetailed");
-  let label = "";
   let issuerName = "";
   let issuerId = null;
 
@@ -63,21 +61,12 @@ export const sendV2EventCertificateViewedDetailed = ({
     const registryIssuer: RegistryEntry = registry.issuers[documentStore];
     issuerId = registryIssuer.id;
     issuerName = registry.issuers[documentStore].name;
-    label = `"document_store":"${documentStore}"${separator}"document_id":"${documentId}"${separator}"document_name":"${documentName}"${separator}"issued_on":"${issuedOn}"${separator}"issuer_name":"${
-      issuerName ?? ""
-    }"${separator}"issuer_id":"${registryIssuer.id ?? ""}"`;
   } else if (issuer.identityProof) {
     issuerName = issuer.identityProof.location || "";
-    label = `"document_store":"${documentStore}"${separator}"document_id":"${documentId}"${separator}"document_name":"${documentName}"${separator}"issued_on":"${issuedOn}"${separator}"issuer_name":"${
-      issuerName ?? ""
-    }"`;
-  } else {
-    label = "Something went wrong, please check the analytics code of sendV2EventCertificateViewedDetailed";
   }
   analyticsEvent(window, {
     category: "CERTIFICATE_DETAILS",
     action: `VIEWED - ${issuerName}`,
-    label,
     nonInteraction: true,
     options: {
       documentStore: documentStore || "(not set)",
@@ -102,13 +91,9 @@ export const sendV3EventCertificateViewedDetailed = ({
   const documentName = certificateData?.name ?? "";
   const issuedOn = certificateData?.issued ?? "";
   const issuerName = certificateData.openAttestationMetadata.identityProof.identifier || "";
-  const label = `"document_store":"${documentStore}"${separator}"document_id":"${documentId}"${separator}"document_name":"${documentName}"${separator}"issued_on":"${issuedOn}"${separator}"issuer_name":"${
-    issuerName ?? ""
-  }"`;
   analyticsEvent(window, {
     category: "CERTIFICATE_DETAILS",
     action: `VIEWED - ${issuerName}`,
-    label,
     nonInteraction: true,
     options: {
       documentStore: documentStore || "(not set)",
@@ -149,7 +134,6 @@ export function triggerV2ErrorLogging(
     analyticsEvent(window, {
       category: "CERTIFICATE_ERROR",
       action: `ERROR - ${issuerName}`,
-      label: errorsList,
       nonInteraction: true,
       options: {
         documentStore: documentStore || "(not set)",
@@ -181,7 +165,6 @@ export function triggerV3ErrorLogging(
   analyticsEvent(window, {
     category: "CERTIFICATE_ERROR",
     action: `ERROR - ${issuerName}`,
-    label: errorsList,
     nonInteraction: true,
     options: {
       documentStore: documentStore || "(not set)",
