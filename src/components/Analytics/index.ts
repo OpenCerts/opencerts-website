@@ -36,7 +36,6 @@ export const analyticsEvent = (window: Partial<Window> | undefined, event: Event
   trace(stringifyEvent(event));
   ReactGA.event(category, { action, value, ...options });
   traceDev(stringifyEvent(event));
-  console.log("analyticsEvent OK", category, { action, value, ...options });
   return;
 };
 
@@ -47,7 +46,6 @@ export const sendV2EventCertificateViewedDetailed = ({
   issuer: v2.Issuer;
   certificateData: { id?: string; name?: string; issuedOn?: string };
 }): void => {
-  console.log("sendV2EventCertificateViewedDetailed");
   let issuerName = "";
   let issuerId = null;
 
@@ -84,7 +82,6 @@ export const sendV3EventCertificateViewedDetailed = ({
 }: {
   certificateData: v3.OpenAttestationDocument;
 }): void => {
-  console.log("sendV3EventCertificateViewedDetailed");
   const separator = ";";
   const documentStore = utils.getIssuerAddress(certificateData);
   const documentId = certificateData?.id ?? "";
@@ -109,7 +106,6 @@ export function triggerV2ErrorLogging(
   rawCertificate: WrappedDocument<v2.OpenAttestationDocument>,
   errors: string[]
 ): void {
-  console.log("triggerV2ErrorLogging");
   const certificate: v2.OpenAttestationDocument & { name?: string; issuedOn?: string } = getData(rawCertificate);
 
   const documentId = certificate?.id;
@@ -152,7 +148,6 @@ export function triggerV3ErrorLogging(
   rawCertificate: WrappedDocument<v3.OpenAttestationDocument>,
   errors: string[]
 ): void {
-  console.log("triggerV3ErrorLogging");
   const documentId = rawCertificate?.id;
   const documentName = rawCertificate?.name;
   const issuedOn = rawCertificate?.issued;
@@ -178,7 +173,6 @@ export function triggerV3ErrorLogging(
 }
 
 export function triggerV2RendererTimeoutLogging(rawCertificate: WrappedDocument<v2.OpenAttestationDocument>): void {
-  console.log("triggerV2RendererTimeoutLogging");
   const certificate: v2.OpenAttestationDocument & { name?: string; issuedOn?: string } = getData(rawCertificate);
 
   const documentId = certificate?.id;
@@ -221,7 +215,6 @@ export function triggerV2RendererTimeoutLogging(rawCertificate: WrappedDocument<
 }
 
 export function triggerV3RendererTimeoutLogging(rawCertificate: WrappedDocument<v3.OpenAttestationDocument>): void {
-  console.log("triggerV3RendererTimeoutLogging");
   const documentId = rawCertificate?.id;
   const documentName = rawCertificate?.name;
   const issuedOn = rawCertificate?.issued;
