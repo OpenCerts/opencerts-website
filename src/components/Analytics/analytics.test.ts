@@ -1,4 +1,5 @@
 import { SchemaId, v2, v3, WrappedDocument } from "@govtechsg/open-attestation";
+import ReactGA from "react-ga4";
 import dnsDidSigned from "../tests/fixture/dns-did-signed.json";
 import {
   analyticsEvent,
@@ -9,8 +10,6 @@ import {
   triggerV3ErrorLogging,
   validateEvent,
 } from "./index";
-import * as analytics from "./index";
-import ReactGA from "react-ga4";
 
 jest.mock("react-ga4");
 
@@ -76,8 +75,6 @@ const v3Document: v3.WrappedDocument = {
   },
 };
 
-// TODO replace expect(true).toBe(true); by real assertions
-
 describe("stringifyEvent", () => {
   it("prints the event", () => {
     const evtString = stringifyEvent(evt);
@@ -115,7 +112,7 @@ describe("validateEvent", () => {
         action: "ACTION",
         value: undefined,
       })
-    ).not.toThrowError();
+    ).not.toThrow();
   });
 
   it("passes for all values", () => {
@@ -125,7 +122,7 @@ describe("validateEvent", () => {
         action: "ACTION",
         value: 2,
       })
-    ).not.toThrowError();
+    ).not.toThrow();
   });
 });
 
@@ -148,7 +145,7 @@ describe("event", () => {
 describe("analytics*", () => {
   // eslint-disable-next-line jest/no-hooks
   beforeEach(() => {
-    ReactGA.event = jest.fn();
+    jest.spyOn(ReactGA, "event").mockImplementation();
   });
 
   describe("sendV2EventCertificateViewedDetailed", () => {

@@ -1,17 +1,27 @@
 import { v2, WrappedDocument, getData, v3, utils } from "@govtechsg/open-attestation";
 import { RegistryEntry } from "@govtechsg/opencerts-verify";
+import ReactGA from "react-ga4";
 import registry from "../../../public/static/registry.json";
 import { getLogger } from "../../utils/logger";
 const { trace } = getLogger("components:Analytics:");
 const { trace: traceDev } = getLogger("components:Analytics(Inactive):");
-import ReactGA from "react-ga4";
 
 interface Event {
   category: string;
   action: string;
   value?: number | string;
   nonInteraction?: boolean;
-  options?: any;
+  options?: {
+    documentStore?: string;
+    documentId?: string;
+    documentName?: string;
+    issuedOn?: string;
+    issuerName?: string;
+    issuerId?: string;
+    rendererUrl?: string;
+    templateName?: string;
+    errors?: string;
+  };
 }
 
 /*
@@ -34,9 +44,8 @@ export const analyticsEvent = (event: Event): void => {
   validateEvent(event);
   const { category, action, value, nonInteraction, options = undefined } = event;
   trace(stringifyEvent(event));
-  ReactGA.event(category, { action, value, nonInteraction, ...options });
   traceDev(stringifyEvent(event));
-  return;
+  return ReactGA.event(category, { action, value, nonInteraction, ...options });
 };
 
 export const sendV2EventCertificateViewedDetailed = ({
@@ -49,7 +58,6 @@ export const sendV2EventCertificateViewedDetailed = ({
   let issuerName = "";
   let issuerId = null;
 
-  const separator = ";";
   const documentStore = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? issuer.id ?? ""; // use id for DID
   const documentId = certificateData?.id ?? "";
   const documentName = certificateData?.name ?? "";
@@ -82,7 +90,6 @@ export const sendV3EventCertificateViewedDetailed = ({
 }: {
   certificateData: v3.OpenAttestationDocument;
 }): void => {
-  const separator = ";";
   const documentStore = utils.getIssuerAddress(certificateData);
   const documentId = certificateData?.id ?? "";
   const documentName = certificateData?.name ?? "";

@@ -4,12 +4,12 @@ import { mapValues } from "lodash";
 import { DefaultSeo } from "next-seo";
 import App from "next/app";
 import React from "react";
+import ReactGA from "react-ga4";
 import { useDispatch } from "react-redux";
 import { DEFAULT_SEO, ENVIRONMENT, GA_ID } from "../src/config";
 import { updateFeatureToggles } from "../src/reducers/featureToggle.actions";
 import { wrapper } from "../src/store";
 import "../src/tailwind.css";
-import ReactGA from "react-ga4";
 
 const FeatureFlagLoader: React.FunctionComponent = ({ children }) => {
   const dispatch = useDispatch();
