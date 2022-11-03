@@ -17,7 +17,7 @@ interface Event {
     documentName?: string;
     issuedOn?: string;
     issuerName?: string;
-    issuerId?: string;
+    registryId?: string;
     rendererUrl?: string;
     templateName?: string;
     errors?: string;
@@ -45,7 +45,21 @@ export const analyticsEvent = (event: Event): void => {
   const { category, action, value, nonInteraction, options = undefined } = event;
   trace(stringifyEvent(event));
   traceDev(stringifyEvent(event));
-  return ReactGA.event(category, { action, value, nonInteraction, ...options });
+  // Use snake_case for event custom dimensions
+  return ReactGA.event(category, {
+    action,
+    value,
+    nonInteraction,
+    document_store: options?.documentStore || "(not set)",
+    document_id: options?.documentId || "(not set)",
+    document_name: options?.documentName || "(not set)",
+    issued_on: options?.issuedOn || "(not set)",
+    issuer_name: options?.issuerName || "(not set)",
+    registry_id: options?.registryId || "(not set)",
+    renderer_url: options?.rendererUrl || "(not set)",
+    template_name: options?.templateName || "(not set)",
+    errors: options?.errors || "(not set)",
+  });
 };
 
 export const sendV2EventCertificateViewedDetailed = ({
@@ -56,7 +70,7 @@ export const sendV2EventCertificateViewedDetailed = ({
   certificateData: { id?: string; name?: string; issuedOn?: string };
 }): void => {
   let issuerName = "";
-  let issuerId = null;
+  let registryId = null;
 
   const documentStore = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? issuer.id ?? ""; // use id for DID
   const documentId = certificateData?.id ?? "";
@@ -65,7 +79,7 @@ export const sendV2EventCertificateViewedDetailed = ({
 
   if (isInRegistry(documentStore)) {
     const registryIssuer: RegistryEntry = registry.issuers[documentStore];
-    issuerId = registryIssuer.id;
+    registryId = registryIssuer.id;
     issuerName = registry.issuers[documentStore].name;
   } else if (issuer.identityProof) {
     issuerName = issuer.identityProof.location || "";
@@ -80,7 +94,7 @@ export const sendV2EventCertificateViewedDetailed = ({
       documentName: documentName || "(not set)",
       issuedOn: issuedOn || "(not set)",
       issuerName: issuerName || "(not set)",
-      issuerId: issuerId || "(not set)",
+      registryId: registryId || "(not set)",
     },
   });
 };
@@ -124,12 +138,12 @@ export function triggerV2ErrorLogging(
   certificate.issuers.forEach((issuer: v2.Issuer) => {
     const documentStore = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? issuer.id ?? ""; // use id for DID
     let issuerName = issuer.name;
-    let issuerId = null;
+    let registryId = null;
 
     if (isInRegistry(documentStore)) {
       const registryIssuer: RegistryEntry = registry.issuers[documentStore];
       issuerName = registryIssuer.name;
-      issuerId = registryIssuer.id;
+      registryId = registryIssuer.id;
     } else if (issuer.identityProof) {
       issuerName = issuer.identityProof.location || "";
     }
@@ -144,7 +158,7 @@ export function triggerV2ErrorLogging(
         documentName: documentName || "(not set)",
         issuedOn: issuedOn || "(not set)",
         issuerName: issuerName || "(not set)",
-        issuerId: issuerId || "(not set)",
+        registryId: registryId || "(not set)",
         errors: errorsList,
       },
     });
@@ -193,12 +207,12 @@ export function triggerV2RendererTimeoutLogging(rawCertificate: WrappedDocument<
   certificate.issuers.forEach((issuer: v2.Issuer) => {
     const documentStore = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? issuer.id ?? ""; // use id for DID
     let issuerName = issuer.name;
-    let issuerId = null;
+    let registryId = null;
 
     if (isInRegistry(documentStore)) {
       const registryIssuer: RegistryEntry = registry.issuers[documentStore];
       issuerName = registryIssuer.name;
-      issuerId = registryIssuer.id;
+      registryId = registryIssuer.id;
     } else if (issuer.identityProof) {
       issuerName = issuer.identityProof.location || "";
     }
@@ -213,7 +227,7 @@ export function triggerV2RendererTimeoutLogging(rawCertificate: WrappedDocument<
         documentName: documentName || "(not set)",
         issuedOn: issuedOn || "(not set)",
         issuerName: issuerName || "(not set)",
-        issuerId: issuerId || "(not set)",
+        registryId: registryId || "(not set)",
         rendererUrl: rendererUrl || "(not set)",
         templateName: templateName || "(not set)",
       },

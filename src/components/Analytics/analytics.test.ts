@@ -133,6 +133,15 @@ describe("event", () => {
       action: "TEST_ACTION",
       nonInteraction: undefined,
       value: 2,
+      document_id: "(not set)",
+      document_name: "(not set)",
+      document_store: "(not set)",
+      errors: "(not set)",
+      issued_on: "(not set)",
+      issuer_name: "(not set)",
+      registry_id: "(not set)",
+      renderer_url: "(not set)",
+      template_name: "(not set)",
     });
   });
 
@@ -163,14 +172,17 @@ describe("analytics*", () => {
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
         expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
           action: "VIEWED - Government Technology Agency of Singapore (GovTech)",
-          documentId: "id1",
-          documentName: "cert name",
-          documentStore: "0x007d40224f6562461633ccfbaffd359ebb2fc9ba",
-          issuedOn: "a date",
-          issuerId: "govtech-registry",
-          issuerName: "Government Technology Agency of Singapore (GovTech)",
+          document_id: "id1",
+          document_name: "cert name",
+          document_store: "0x007d40224f6562461633ccfbaffd359ebb2fc9ba",
+          issued_on: "a date",
+          registry_id: "govtech-registry",
+          issuer_name: "Government Technology Agency of Singapore (GovTech)",
           nonInteraction: true,
           value: undefined,
+          renderer_url: "(not set)",
+          template_name: "(not set)",
+          errors: "(not set)",
         });
       });
       it("should use key to retrieve registry information (not available)", () => {
@@ -187,14 +199,17 @@ describe("analytics*", () => {
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
         expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
           action: "VIEWED - aa.com",
-          documentId: "id1",
-          documentName: "cert name",
-          documentStore: "did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89",
-          issuedOn: "a date",
-          issuerId: "(not set)",
-          issuerName: "aa.com",
+          document_id: "id1",
+          document_name: "cert name",
+          document_store: "did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89",
+          issued_on: "a date",
+          registry_id: "(not set)",
+          issuer_name: "aa.com",
           nonInteraction: true,
           value: undefined,
+          renderer_url: "(not set)",
+          template_name: "(not set)",
+          errors: "(not set)",
         });
       });
       it("should use certificate store to retrieve registry information", () => {
@@ -210,14 +225,17 @@ describe("analytics*", () => {
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
         expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
           action: "VIEWED - Government Technology Agency of Singapore (GovTech)",
-          documentId: "id1",
-          documentName: "cert name",
-          documentStore: "0x007d40224f6562461633ccfbaffd359ebb2fc9ba",
-          issuedOn: "a date",
-          issuerId: "govtech-registry",
-          issuerName: "Government Technology Agency of Singapore (GovTech)",
+          document_id: "id1",
+          document_name: "cert name",
+          document_store: "0x007d40224f6562461633ccfbaffd359ebb2fc9ba",
+          issued_on: "a date",
+          registry_id: "govtech-registry",
+          issuer_name: "Government Technology Agency of Singapore (GovTech)",
           nonInteraction: true,
           value: undefined,
+          renderer_url: "(not set)",
+          template_name: "(not set)",
+          errors: "(not set)",
         });
       });
       it("should use token registry to retrieve registry information", () => {
@@ -233,14 +251,17 @@ describe("analytics*", () => {
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
         expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
           action: "VIEWED - Nanyang Polytechnic",
-          documentId: "id1",
-          documentName: "cert name",
-          documentStore: "0x5CA3b9daC85DA4DE4030e59C1a0248004209e348",
-          issuedOn: "a date",
-          issuerId: "nyp-registry",
-          issuerName: "Nanyang Polytechnic",
+          document_id: "id1",
+          document_name: "cert name",
+          document_store: "0x5CA3b9daC85DA4DE4030e59C1a0248004209e348",
+          issued_on: "a date",
+          registry_id: "nyp-registry",
+          issuer_name: "Nanyang Polytechnic",
           nonInteraction: true,
           value: undefined,
+          renderer_url: "(not set)",
+          template_name: "(not set)",
+          errors: "(not set)",
         });
       });
     });
@@ -258,14 +279,17 @@ describe("analytics*", () => {
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
         expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
           action: "VIEWED - aa.com",
-          documentId: "id1",
-          documentName: "cert name",
-          documentStore: "0xabcdef",
-          issuedOn: "a date",
-          issuerId: "(not set)",
-          issuerName: "aa.com",
+          document_id: "id1",
+          document_name: "cert name",
+          document_store: "0xabcdef",
+          issued_on: "a date",
+          registry_id: "(not set)",
+          issuer_name: "aa.com",
           nonInteraction: true,
           value: undefined,
+          renderer_url: "(not set)",
+          template_name: "(not set)",
+          errors: "(not set)",
         });
       });
     });
@@ -276,13 +300,17 @@ describe("analytics*", () => {
       sendV3EventCertificateViewedDetailed({ certificateData: v3Document });
       expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
         action: "VIEWED - example.openattestation.com",
-        documentId: "REF_123456",
-        documentName: "Republic of Singapore Driving Licence",
-        documentStore: "did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90",
-        issuedOn: "2010-01-01T19:23:24Z",
-        issuerName: "example.openattestation.com",
+        document_id: "REF_123456",
+        document_name: "Republic of Singapore Driving Licence",
+        document_store: "did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90",
+        issued_on: "2010-01-01T19:23:24Z",
+        issuer_name: "example.openattestation.com",
         nonInteraction: true,
         value: undefined,
+        registry_id: "(not set)",
+        renderer_url: "(not set)",
+        template_name: "(not set)",
+        errors: "(not set)",
       });
     });
   });
@@ -344,18 +372,20 @@ describe("analytics*", () => {
 
       expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
         action: "ERROR - Singapore Examinations and Assessment Board",
-        documentId: "MyAwesomeCertID",
-        documentName: "SINGAPORE-CAMBRIDGE GENERAL CERTIFICATE OF EDUCATION ORDINARY LEVEL",
-        documentStore: "0xE4a94Ef9C26904A02Cd6735F7D4De1D840146a0f",
+        document_id: "MyAwesomeCertID",
+        document_name: "SINGAPORE-CAMBRIDGE GENERAL CERTIFICATE OF EDUCATION ORDINARY LEVEL",
+        document_store: "0xE4a94Ef9C26904A02Cd6735F7D4De1D840146a0f",
         errors: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
-        issuedOn: "2019-09-02T18:51:14+08:00",
-        issuerId: "seab-registry",
-        issuerName: "Singapore Examinations and Assessment Board",
+        issued_on: "2019-09-02T18:51:14+08:00",
+        registry_id: "seab-registry",
+        issuer_name: "Singapore Examinations and Assessment Board",
         nonInteraction: true,
         value: undefined,
+        renderer_url: "(not set)",
+        template_name: "(not set)",
       });
     });
-    it("should send cert details (documentStore/DNS-TXT) and errors (tampered/unissued/revoked) to Google Analytics", () => {
+    it("should send cert details (document_store/DNS-TXT) and errors (tampered/unissued/revoked) to Google Analytics", () => {
       const certificate: WrappedDocument<Certificate> = {
         version: SchemaId.v2,
         data: {
@@ -401,18 +431,20 @@ describe("analytics*", () => {
       ]);
       expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
         action: "ERROR - example.openattestation.com",
-        documentId: "MyAwesomeCertID",
-        documentName: "Practitioner Certificate in Personal Data Protection (Singapore)",
-        documentStore: "0x8Fc57204c35fb9317D91285eF52D6b892EC08cD3",
+        document_id: "MyAwesomeCertID",
+        document_name: "Practitioner Certificate in Personal Data Protection (Singapore)",
+        document_store: "0x8Fc57204c35fb9317D91285eF52D6b892EC08cD3",
         errors: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
-        issuedOn: "2020-04-14T08:00:00+08:00",
-        issuerId: "(not set)",
-        issuerName: "example.openattestation.com",
+        issued_on: "2020-04-14T08:00:00+08:00",
+        registry_id: "(not set)",
+        issuer_name: "example.openattestation.com",
         nonInteraction: true,
         value: undefined,
+        renderer_url: "(not set)",
+        template_name: "(not set)",
       });
     });
-    it("should send cert details (documentStore/DNS-TXT) and error (invalid argument) to Google Analytics", () => {
+    it("should send cert details (document_store/DNS-TXT) and error (invalid argument) to Google Analytics", () => {
       const certificate: WrappedDocument<Certificate> = {
         version: SchemaId.v2,
         schema: "opencerts/v2.0",
@@ -480,18 +512,20 @@ describe("analytics*", () => {
       ]);
       expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
         action: "ERROR - Singapore Management University Academy",
-        documentId: "41368",
-        documentName: "Practitioner Certificate in Personal Data Protection (Singapore)",
-        documentStore: "0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404",
+        document_id: "41368",
+        document_name: "Practitioner Certificate in Personal Data Protection (Singapore)",
+        document_store: "0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404",
         errors: "INVALID_ARGUMENT",
-        issuedOn: "2020-04-14T08:00:00+08:00",
-        issuerId: "smu-registry-academy",
-        issuerName: "Singapore Management University Academy",
+        issued_on: "2020-04-14T08:00:00+08:00",
+        registry_id: "smu-registry-academy",
+        issuer_name: "Singapore Management University Academy",
         nonInteraction: true,
         value: undefined,
+        renderer_url: "(not set)",
+        template_name: "(not set)",
       });
     });
-    it("should send cert details (documentStore/DNS-TXT) and error (HTTP response error) to Google Analytics", () => {
+    it("should send cert details (document_store/DNS-TXT) and error (HTTP response error) to Google Analytics", () => {
       const certificate: WrappedDocument<Certificate> = {
         version: SchemaId.v2,
         schema: "opencerts/v2.0",
@@ -559,18 +593,20 @@ describe("analytics*", () => {
       ]);
       expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
         action: "ERROR - Singapore Management University Academy",
-        documentId: "41368",
-        documentName: "Practitioner Certificate in Personal Data Protection (Singapore)",
-        documentStore: "0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404",
+        document_id: "41368",
+        document_name: "Practitioner Certificate in Personal Data Protection (Singapore)",
+        document_store: "0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404",
         errors: "SERVER_ERROR",
-        issuedOn: "2020-04-14T08:00:00+08:00",
-        issuerId: "smu-registry-academy",
-        issuerName: "Singapore Management University Academy",
+        issued_on: "2020-04-14T08:00:00+08:00",
+        registry_id: "smu-registry-academy",
+        issuer_name: "Singapore Management University Academy",
         nonInteraction: true,
         value: undefined,
+        renderer_url: "(not set)",
+        template_name: "(not set)",
       });
     });
-    it("should send cert details (documentStore/DNS-TXT) and error (Ethers unhandled error) to Google Analytics", () => {
+    it("should send cert details (document_store/DNS-TXT) and error (Ethers unhandled error) to Google Analytics", () => {
       const certificate: WrappedDocument<Certificate> = {
         version: SchemaId.v2,
         schema: "opencerts/v2.0",
@@ -638,15 +674,17 @@ describe("analytics*", () => {
       ]);
       expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
         action: "ERROR - Singapore Management University Academy",
-        documentId: "41368",
-        documentName: "Practitioner Certificate in Personal Data Protection (Singapore)",
-        documentStore: "0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404",
+        document_id: "41368",
+        document_name: "Practitioner Certificate in Personal Data Protection (Singapore)",
+        document_store: "0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404",
         errors: "ETHERS_UNHANDLED_ERROR",
-        issuedOn: "2020-04-14T08:00:00+08:00",
-        issuerId: "smu-registry-academy",
-        issuerName: "Singapore Management University Academy",
+        issued_on: "2020-04-14T08:00:00+08:00",
+        registry_id: "smu-registry-academy",
+        issuer_name: "Singapore Management University Academy",
         nonInteraction: true,
         value: undefined,
+        renderer_url: "(not set)",
+        template_name: "(not set)",
       });
     });
 
@@ -659,13 +697,15 @@ describe("analytics*", () => {
 
       expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
         action: "ERROR - example.tradetrust.io",
-        documentId: "SGCNM21566325",
-        documentName: "(not set)",
-        documentStore: "did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89",
+        document_id: "SGCNM21566325",
+        document_name: "(not set)",
+        document_store: "did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89",
         errors: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
-        issuedOn: "(not set)",
-        issuerId: "(not set)",
-        issuerName: "example.tradetrust.io",
+        issued_on: "(not set)",
+        registry_id: "(not set)",
+        renderer_url: "(not set)",
+        template_name: "(not set)",
+        issuer_name: "example.tradetrust.io",
         nonInteraction: true,
         value: undefined,
       });
@@ -681,14 +721,17 @@ describe("analytics*", () => {
 
       expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
         action: "ERROR - example.openattestation.com",
-        documentId: "REF_123456",
-        documentName: "Republic of Singapore Driving Licence",
-        documentStore: "did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90",
+        document_id: "REF_123456",
+        document_name: "Republic of Singapore Driving Licence",
+        document_store: "did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90",
         errors: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
-        issuedOn: "2010-01-01T19:23:24Z",
-        issuerName: "example.openattestation.com",
+        issued_on: "2010-01-01T19:23:24Z",
+        issuer_name: "example.openattestation.com",
         nonInteraction: true,
         value: undefined,
+        registry_id: "(not set)",
+        renderer_url: "(not set)",
+        template_name: "(not set)",
       });
     });
   });
