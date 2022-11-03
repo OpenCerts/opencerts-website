@@ -133,15 +133,6 @@ describe("event", () => {
       action: "TEST_ACTION",
       nonInteraction: undefined,
       value: 2,
-      document_id: "(not set)",
-      document_name: "(not set)",
-      document_store: "(not set)",
-      errors: "(not set)",
-      issued_on: "(not set)",
-      issuer_name: "(not set)",
-      registry_id: "(not set)",
-      renderer_url: "(not set)",
-      template_name: "(not set)",
     });
   });
 
@@ -180,9 +171,6 @@ describe("analytics*", () => {
           issuer_name: "Government Technology Agency of Singapore (GovTech)",
           nonInteraction: true,
           value: undefined,
-          renderer_url: "(not set)",
-          template_name: "(not set)",
-          errors: "(not set)",
         });
       });
       it("should use key to retrieve registry information (not available)", () => {
@@ -203,13 +191,9 @@ describe("analytics*", () => {
           document_name: "cert name",
           document_store: "did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89",
           issued_on: "a date",
-          registry_id: "(not set)",
           issuer_name: "aa.com",
           nonInteraction: true,
           value: undefined,
-          renderer_url: "(not set)",
-          template_name: "(not set)",
-          errors: "(not set)",
         });
       });
       it("should use certificate store to retrieve registry information", () => {
@@ -233,9 +217,6 @@ describe("analytics*", () => {
           issuer_name: "Government Technology Agency of Singapore (GovTech)",
           nonInteraction: true,
           value: undefined,
-          renderer_url: "(not set)",
-          template_name: "(not set)",
-          errors: "(not set)",
         });
       });
       it("should use token registry to retrieve registry information", () => {
@@ -259,9 +240,6 @@ describe("analytics*", () => {
           issuer_name: "Nanyang Polytechnic",
           nonInteraction: true,
           value: undefined,
-          renderer_url: "(not set)",
-          template_name: "(not set)",
-          errors: "(not set)",
         });
       });
     });
@@ -283,13 +261,9 @@ describe("analytics*", () => {
           document_name: "cert name",
           document_store: "0xabcdef",
           issued_on: "a date",
-          registry_id: "(not set)",
           issuer_name: "aa.com",
           nonInteraction: true,
           value: undefined,
-          renderer_url: "(not set)",
-          template_name: "(not set)",
-          errors: "(not set)",
         });
       });
     });
@@ -307,10 +281,6 @@ describe("analytics*", () => {
         issuer_name: "example.openattestation.com",
         nonInteraction: true,
         value: undefined,
-        registry_id: "(not set)",
-        renderer_url: "(not set)",
-        template_name: "(not set)",
-        errors: "(not set)",
       });
     });
   });
@@ -381,8 +351,6 @@ describe("analytics*", () => {
         issuer_name: "Singapore Examinations and Assessment Board",
         nonInteraction: true,
         value: undefined,
-        renderer_url: "(not set)",
-        template_name: "(not set)",
       });
     });
     it("should send cert details (document_store/DNS-TXT) and errors (tampered/unissued/revoked) to Google Analytics", () => {
@@ -436,12 +404,9 @@ describe("analytics*", () => {
         document_store: "0x8Fc57204c35fb9317D91285eF52D6b892EC08cD3",
         errors: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
         issued_on: "2020-04-14T08:00:00+08:00",
-        registry_id: "(not set)",
         issuer_name: "example.openattestation.com",
         nonInteraction: true,
         value: undefined,
-        renderer_url: "(not set)",
-        template_name: "(not set)",
       });
     });
     it("should send cert details (document_store/DNS-TXT) and error (invalid argument) to Google Analytics", () => {
@@ -521,8 +486,6 @@ describe("analytics*", () => {
         issuer_name: "Singapore Management University Academy",
         nonInteraction: true,
         value: undefined,
-        renderer_url: "(not set)",
-        template_name: "(not set)",
       });
     });
     it("should send cert details (document_store/DNS-TXT) and error (HTTP response error) to Google Analytics", () => {
@@ -602,8 +565,6 @@ describe("analytics*", () => {
         issuer_name: "Singapore Management University Academy",
         nonInteraction: true,
         value: undefined,
-        renderer_url: "(not set)",
-        template_name: "(not set)",
       });
     });
     it("should send cert details (document_store/DNS-TXT) and error (Ethers unhandled error) to Google Analytics", () => {
@@ -683,8 +644,6 @@ describe("analytics*", () => {
         issuer_name: "Singapore Management University Academy",
         nonInteraction: true,
         value: undefined,
-        renderer_url: "(not set)",
-        template_name: "(not set)",
       });
     });
 
@@ -698,13 +657,8 @@ describe("analytics*", () => {
       expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
         action: "ERROR - example.tradetrust.io",
         document_id: "SGCNM21566325",
-        document_name: "(not set)",
         document_store: "did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89",
         errors: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
-        issued_on: "(not set)",
-        registry_id: "(not set)",
-        renderer_url: "(not set)",
-        template_name: "(not set)",
         issuer_name: "example.tradetrust.io",
         nonInteraction: true,
         value: undefined,
@@ -729,9 +683,6 @@ describe("analytics*", () => {
         issuer_name: "example.openattestation.com",
         nonInteraction: true,
         value: undefined,
-        registry_id: "(not set)",
-        renderer_url: "(not set)",
-        template_name: "(not set)",
       });
     });
   });

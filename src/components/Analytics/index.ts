@@ -1,27 +1,29 @@
 import { v2, WrappedDocument, getData, v3, utils } from "@govtechsg/open-attestation";
 import { RegistryEntry } from "@govtechsg/opencerts-verify";
+import _ from "lodash";
 import ReactGA from "react-ga4";
 import registry from "../../../public/static/registry.json";
 import { getLogger } from "../../utils/logger";
 const { trace } = getLogger("components:Analytics:");
 const { trace: traceDev } = getLogger("components:Analytics(Inactive):");
 
+interface Options {
+  documentStore?: string;
+  documentId?: string;
+  documentName?: string;
+  issuedOn?: string;
+  issuerName?: string;
+  registryId?: string | null;
+  rendererUrl?: string;
+  templateName?: string;
+  errors?: string;
+}
 interface Event {
   category: string;
   action: string;
   value?: number | string;
   nonInteraction?: boolean;
-  options?: {
-    documentStore?: string;
-    documentId?: string;
-    documentName?: string;
-    issuedOn?: string;
-    issuerName?: string;
-    registryId?: string;
-    rendererUrl?: string;
-    templateName?: string;
-    errors?: string;
-  };
+  options?: Options;
 }
 
 /*
@@ -46,19 +48,25 @@ export const analyticsEvent = (event: Event): void => {
   trace(stringifyEvent(event));
   traceDev(stringifyEvent(event));
   // Use snake_case for event custom dimensions
+  const customDimension = {
+    document_store: options?.documentStore,
+    document_id: options?.documentId,
+    document_name: options?.documentName,
+    issued_on: options?.issuedOn,
+    issuer_name: options?.issuerName,
+    registry_id: options?.registryId,
+    renderer_url: options?.rendererUrl,
+    template_name: options?.templateName,
+    errors: options?.errors,
+  };
+  let cleanedCustomDimensions = {};
+  cleanedCustomDimensions = _.omitBy(customDimension, _.isNil); // removes null and undefined parameters
+
   return ReactGA.event(category, {
     action,
     value,
     nonInteraction,
-    document_store: options?.documentStore || "(not set)",
-    document_id: options?.documentId || "(not set)",
-    document_name: options?.documentName || "(not set)",
-    issued_on: options?.issuedOn || "(not set)",
-    issuer_name: options?.issuerName || "(not set)",
-    registry_id: options?.registryId || "(not set)",
-    renderer_url: options?.rendererUrl || "(not set)",
-    template_name: options?.templateName || "(not set)",
-    errors: options?.errors || "(not set)",
+    ...cleanedCustomDimensions,
   });
 };
 
@@ -89,12 +97,12 @@ export const sendV2EventCertificateViewedDetailed = ({
     action: `VIEWED - ${issuerName}`,
     nonInteraction: true,
     options: {
-      documentStore: documentStore || "(not set)",
-      documentId: documentId || "(not set)",
-      documentName: documentName || "(not set)",
-      issuedOn: issuedOn || "(not set)",
-      issuerName: issuerName || "(not set)",
-      registryId: registryId || "(not set)",
+      documentStore: documentStore,
+      documentId: documentId,
+      documentName: documentName,
+      issuedOn: issuedOn,
+      issuerName: issuerName,
+      registryId: registryId,
     },
   });
 };
@@ -114,11 +122,11 @@ export const sendV3EventCertificateViewedDetailed = ({
     action: `VIEWED - ${issuerName}`,
     nonInteraction: true,
     options: {
-      documentStore: documentStore || "(not set)",
-      documentId: documentId || "(not set)",
-      documentName: documentName || "(not set)",
-      issuedOn: issuedOn || "(not set)",
-      issuerName: issuerName || "(not set)",
+      documentStore: documentStore,
+      documentId: documentId,
+      documentName: documentName,
+      issuedOn: issuedOn,
+      issuerName: issuerName,
     },
   });
 };
@@ -153,12 +161,12 @@ export function triggerV2ErrorLogging(
       action: `ERROR - ${issuerName}`,
       nonInteraction: true,
       options: {
-        documentStore: documentStore || "(not set)",
-        documentId: documentId || "(not set)",
-        documentName: documentName || "(not set)",
-        issuedOn: issuedOn || "(not set)",
-        issuerName: issuerName || "(not set)",
-        registryId: registryId || "(not set)",
+        documentStore: documentStore,
+        documentId: documentId,
+        documentName: documentName,
+        issuedOn: issuedOn,
+        issuerName: issuerName,
+        registryId: registryId,
         errors: errorsList,
       },
     });
@@ -183,11 +191,11 @@ export function triggerV3ErrorLogging(
     action: `ERROR - ${issuerName}`,
     nonInteraction: true,
     options: {
-      documentStore: documentStore || "(not set)",
-      documentId: documentId || "(not set)",
-      documentName: documentName || "(not set)",
-      issuedOn: issuedOn || "(not set)",
-      issuerName: issuerName || "(not set)",
+      documentStore: documentStore,
+      documentId: documentId,
+      documentName: documentName,
+      issuedOn: issuedOn,
+      issuerName: issuerName,
       errors: errorsList,
     },
   });
@@ -222,14 +230,14 @@ export function triggerV2RendererTimeoutLogging(rawCertificate: WrappedDocument<
       action: `RENDERER TIMEOUT - ${issuerName}`,
       nonInteraction: true,
       options: {
-        documentStore: documentStore || "(not set)",
-        documentId: documentId || "(not set)",
-        documentName: documentName || "(not set)",
-        issuedOn: issuedOn || "(not set)",
-        issuerName: issuerName || "(not set)",
-        registryId: registryId || "(not set)",
-        rendererUrl: rendererUrl || "(not set)",
-        templateName: templateName || "(not set)",
+        documentStore: documentStore,
+        documentId: documentId,
+        documentName: documentName,
+        issuedOn: issuedOn,
+        issuerName: issuerName,
+        registryId: registryId,
+        rendererUrl: rendererUrl,
+        templateName: templateName,
       },
     });
   });
@@ -251,13 +259,13 @@ export function triggerV3RendererTimeoutLogging(rawCertificate: WrappedDocument<
     action: `RENDERER TIMEOUT - ${issuerName}`,
     nonInteraction: true,
     options: {
-      documentStore: documentStore || "(not set)",
-      documentId: documentId || "(not set)",
-      documentName: documentName || "(not set)",
-      issuedOn: issuedOn || "(not set)",
-      issuerName: issuerName || "(not set)",
-      rendererUrl: rendererUrl || "(not set)",
-      templateName: templateName || "(not set)",
+      documentStore: documentStore,
+      documentId: documentId,
+      documentName: documentName,
+      issuedOn: issuedOn,
+      issuerName: issuerName,
+      rendererUrl: rendererUrl,
+      templateName: templateName,
     },
   });
 }
