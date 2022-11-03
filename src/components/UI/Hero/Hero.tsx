@@ -11,10 +11,10 @@ export const Hero: React.FunctionComponent<HeroProps> = ({ heading, subHeading, 
     <div className="container">
       <div className="flex flex-wrap">
         <div className="w-full lg:w-auto lg:mr-20">
-          <h1 className="font-montserrat">{heading}</h1>
+          <h1 className="font-poppins">{heading}</h1>
         </div>
         <div className="w-full" style={{ maxWidth: "410px" }}>
-          {subHeading && <h3 className="font-montserrat mb-6">{subHeading}</h3>}
+          {subHeading && <h3 className="font-poppins mb-6">{subHeading}</h3>}
           <div className="text-sm">{children}</div>
         </div>
       </div>
