@@ -16,7 +16,7 @@ module.exports = {
     },
     fontFamily: {
       "source-sans-pro": ["Source Sans Pro", "sans-serif"],
-      montserrat: ["Montserrat", "sans-serif"],
+      poppins: ["Poppins", "sans-serif"],
     },
     fontSize: {
       xs: ["14px", "20px"],

@@ -8,7 +8,7 @@ export const FooterBar: React.FunctionComponent = () => (
     <div className="container pt-8 pb-12">
       <div className="flex flex-wrap">
         <div className="w-40 lg:mr-40 mb-8 lg:mb-0">
-          <p className="font-montserrat font-bold mb-2">Powered by</p>
+          <p className="font-poppins font-bold mb-2">Powered by</p>
           <a
             className="inline-block transition-opacity hover:opacity-75"
             href="https://hive.tech.gov.sg/"
@@ -19,7 +19,7 @@ export const FooterBar: React.FunctionComponent = () => (
           </a>
         </div>
         <div className="w-full lg:w-40 mb-8 lg:mb-0">
-          <p className="font-montserrat font-bold mb-2">Partners</p>
+          <p className="font-poppins font-bold mb-2">Partners</p>
           <ul className="text-sm">
             <li>
               <Link href="/collaborate">
@@ -34,7 +34,7 @@ export const FooterBar: React.FunctionComponent = () => (
           </ul>
         </div>
         <div className="w-full lg:w-40 mb-8 lg:mb-0">
-          <p className="font-montserrat font-bold mb-2">Support</p>
+          <p className="font-poppins font-bold mb-2">Support</p>
           <ul className="text-sm">
             <li>
               <Link href="/faq">
@@ -59,7 +59,7 @@ export const FooterBar: React.FunctionComponent = () => (
           </ul>
         </div>
         <div className="w-full lg:w-40">
-          <p className="font-montserrat font-bold mb-2">Legal</p>
+          <p className="font-poppins font-bold mb-2">Legal</p>
           <ul className="text-sm">
             <li>
               <Link href="/privacy">

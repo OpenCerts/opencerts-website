@@ -56,7 +56,7 @@ export const RegistryCard: React.FunctionComponent<RegistryCardProps> = ({ zInde
             />
           </div>
           <div className="flex-1 pt-16 px-4">
-            <h4 className="font-montserrat font-bold" data-testid="institute-name">
+            <h4 className="font-poppins font-bold" data-testid="institute-name">
               {contact[0].name}
             </h4>
           </div>
@@ -82,7 +82,7 @@ export const RegistryCard: React.FunctionComponent<RegistryCardProps> = ({ zInde
                   (info) =>
                     info.address?.includes(search) && (
                       <div key={info.id} className="p-4" data-testid="info">
-                        {info.name && <h5 className="font-bold font-montserrat mb-4">{info.name}</h5>}
+                        {info.name && <h5 className="font-bold font-poppins mb-4">{info.name}</h5>}
                         {info.address && info.website && (
                           <a
                             className="block text-gray-700 hover:text-gray-700 hover:underline"

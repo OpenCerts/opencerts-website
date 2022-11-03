@@ -4,7 +4,7 @@ export const PrivacyContent: React.FunctionComponent = () => (
   <section className="mb-20 text-sm text-gray-800">
     <div className="container">
       <div className="xl:px-48">
-        <h1 className="font-montserrat py-12 text-center">Privacy Policy</h1>
+        <h1 className="font-poppins py-12 text-center">Privacy Policy</h1>
         <p>
           This Privacy Policy must be read in conjunction with the Terms of Use that accompany the applicable service
           you are requesting from us (the &#34;Service&#34;). In this Privacy Policy, &#34;Public Sector Entities&#34;

@@ -5,7 +5,7 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
   <section className="mb-20 text-sm text-gray-800 links-blue">
     <div className="container">
       <div className="xl:px-48">
-        <h1 className="font-montserrat py-12 text-center">Terms of Use</h1>
+        <h1 className="font-poppins py-12 text-center">Terms of Use</h1>
         <ol className="list-decimal pl-4">
           <li>
             <b>General</b>
@@ -447,7 +447,7 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
           </li>
         </ol>
         <p>This version of the Terms of Use is dated 20 August 2018.</p>
-        <h1 className="font-montserrat py-12 text-center">Schedule</h1>
+        <h1 className="font-poppins py-12 text-center">Schedule</h1>
         <ol className="list-decimal pl-4">
           <li>
             <p>
