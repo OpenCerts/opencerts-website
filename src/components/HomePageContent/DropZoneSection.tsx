@@ -9,7 +9,7 @@ import { CertificateDropZoneContainer } from "../CertificateDropZone";
 const DEMO_CERT = `/static/demo/${NETWORK_NAME}.opencert`;
 
 function demoCount(): void {
-  analyticsEvent(window, {
+  analyticsEvent({
     category: "USER_INTERACTION",
     action: "DEMO_CERTIFICATE_VIEWED",
   });
