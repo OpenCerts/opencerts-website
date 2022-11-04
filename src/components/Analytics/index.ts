@@ -49,7 +49,8 @@ export const analyticsEvent = (event: Event): void => {
   traceDev(stringifyEvent(event));
   // Use snake_case for event custom dimensions
   const customDimension = {
-    document_store: options?.documentStore,
+    // wrap with quotes if documentStore has a value; to prevent GA4 converting hexadecimal to decimal
+    document_store: _.isNil(options?.documentStore) ? options?.documentStore : `"${options?.documentStore}"`,
     document_id: options?.documentId,
     document_name: options?.documentName,
     issued_on: options?.issuedOn,
