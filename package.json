@@ -48,7 +48,7 @@
     "ethers": "^5.1.4",
     "isomorphic-fetch": "^3.0.0",
     "lodash": "^4.17.20",
-    "next": "^11.1.4",
+    "next": "^13.1.1",
     "next-ga": "^2.3.4",
     "next-redux-wrapper": "^6.0.2",
     "next-seo": "^4.17.0",
@@ -96,7 +96,7 @@
     "postcss-import": "^14.0.1",
     "prettier": "^2.2.1",
     "tailwindcss": "^1.9.6",
-    "testcafe": "^2.0.1",
+    "testcafe": "^15.1.317922",
     "testcafe-react-selectors": "^4.1.1",
     "typescript": "^4.1.2"
   },
