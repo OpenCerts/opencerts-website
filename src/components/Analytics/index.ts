@@ -88,8 +88,8 @@ export const sendV2EventCertificateViewedDetailed = ({
 
   if (isInRegistry(documentStore)) {
     const registryIssuer: RegistryEntry = registry.issuers[documentStore];
+    issuerName = registryIssuer.name;
     registryId = registryIssuer.id;
-    issuerName = registry.issuers[documentStore].name;
   } else if (issuer.identityProof) {
     issuerName = issuer.identityProof.location || "";
   }
