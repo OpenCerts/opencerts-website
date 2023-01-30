@@ -53,6 +53,7 @@ export const analyticsEvent = (event: Event): void => {
     document_name: options?.documentName,
     issued_on: options?.issuedOn,
     issuer_name: options?.issuerName,
+    issuer_id: options?.issuerId,
     registry_id: options?.registryId,
     renderer_url: options?.rendererUrl,
     template_name: options?.templateName,
