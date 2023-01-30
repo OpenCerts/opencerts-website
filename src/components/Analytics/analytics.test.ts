@@ -172,7 +172,7 @@ describe("analytics*", () => {
         expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
           document_id: "id1",
           document_name: "cert name",
-          document_store: `"did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89"`,
+          issuer_id: "did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89",
           issued_on: "a date",
           issuer_name: "aa.com",
           nonInteraction: true,
