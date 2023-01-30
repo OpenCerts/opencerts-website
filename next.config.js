@@ -26,7 +26,7 @@ module.exports = withBundleAnalyzer({
     INFURA_API_KEY: process.env.INFURA_API_KEY || "01b3ed28c54f4ae49cb4e27df560c5e8", // nebulis personal api key, feel free to change
     ALCHEMY_API_KEY: process.env.ALCHEMY_API_KEY || "FK1x9CdE8NStKjVt236D_LP7B6MMCFOs", // default key works on ropsten
     TRUSTED_TLDS: process.env.TRUSTED_TLDS || "gov.sg,edu.sg",
-    GTAG_ID: process.env.GTAG_ID,
+    GA4_TAG_ID: process.env.GA4_TAG_ID,
   },
   // Variables passed to both server and client
   publicRuntimeConfig: {

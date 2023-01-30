@@ -6,7 +6,7 @@ import App from "next/app";
 import React from "react";
 import ReactGA from "react-ga4";
 import { useDispatch } from "react-redux";
-import { DEFAULT_SEO, ENVIRONMENT, GTAG_ID } from "../src/config";
+import { DEFAULT_SEO, ENVIRONMENT, GA4_TAG_ID } from "../src/config";
 import { updateFeatureToggles } from "../src/reducers/featureToggle.actions";
 import { wrapper } from "../src/store";
 import "../src/tailwind.css";
@@ -29,8 +29,8 @@ const FeatureFlagLoader: React.FunctionComponent = ({ children }) => {
 
 class MyApp extends App {
   setGA = () => {
-    if (GTAG_ID) {
-      ReactGA.initialize(GTAG_ID);
+    if (GA4_TAG_ID) {
+      ReactGA.initialize(GA4_TAG_ID);
       ReactGA.send("pageview");
     }
   };

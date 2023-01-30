@@ -13,7 +13,7 @@ const API_RINKEBY_URL = "https://api-rinkeby.opencerts.io";
 export const IS_MAINNET = publicRuntimeConfig.network === "mainnet";
 export const NETWORK_NAME = (IS_MAINNET ? "homestead" : publicRuntimeConfig.network) ?? "goerli"; // expected by ethers
 
-export const GTAG_ID = process.env.GTAG_ID;
+export const GA4_TAG_ID = process.env.GA4_TAG_ID;
 export const CAPTCHA_CLIENT_KEY = "6LfiL3EUAAAAAHrfLvl2KhRAcXpanNXDqu6M0CCS";
 
 const getApiUrl = (networkName: string): string => {
