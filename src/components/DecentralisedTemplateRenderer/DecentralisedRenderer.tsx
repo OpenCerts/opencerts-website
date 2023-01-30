@@ -107,7 +107,7 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
         category: "CERTIFICATE_VIEWED",
         options: {
           documentId: certificateData?.id ?? undefined,
-          issuerId: `"${certificateData.issuers.map((issuer) => issuer.id).join(",")}"`,
+          issuerId: `${certificateData.issuers.map((issuer) => issuer.id).join(",")}`,
         },
       });
     } else {
@@ -117,7 +117,7 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
         category: "CERTIFICATE_VIEWED",
         options: {
           documentId: certificateData?.id ?? undefined,
-          documentStore: `"${Array.isArray(storeAddresses) ? storeAddresses.join(",") : storeAddresses}"`,
+          documentStore: `${Array.isArray(storeAddresses) ? storeAddresses.join(",") : storeAddresses}`,
         },
       });
     }

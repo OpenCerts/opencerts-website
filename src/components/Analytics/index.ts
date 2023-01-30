@@ -1,6 +1,6 @@
 import { v2, WrappedDocument, getData, v3, utils } from "@govtechsg/open-attestation";
 import { RegistryEntry } from "@govtechsg/opencerts-verify";
-import { isNil, omitBy } from "lodash";
+import { isEmpty, omitBy } from "lodash";
 import ReactGA from "react-ga4";
 import registry from "../../../public/static/registry.json";
 import { getLogger } from "../../utils/logger";
@@ -59,9 +59,7 @@ export const analyticsEvent = (event: Event): void => {
     template_name: options?.templateName,
     errors: options?.errors,
   };
-  let cleanedCustomDimensions = {};
-  cleanedCustomDimensions = omitBy(customDimension, isNil); // removes null and undefined parameters
-
+  const cleanedCustomDimensions = omitBy(customDimension, isEmpty); // removes empty string, null and undefined parameters
   return ReactGA.event(category, {
     value,
     nonInteraction,
@@ -79,7 +77,10 @@ export const sendV2EventCertificateViewedDetailed = ({
   let issuerName = "";
   let registryId = null;
 
-  const documentStore = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? issuer.id ?? ""; // use id for DID
+  // We track either document store or issuer ID, where both are mutually exclusive
+  // meaning documents will unlikely have both document store ID and issuer ID/ DID
+  const documentStore = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? "";
+  const issuerId = issuer.id ?? "";
   const documentId = certificateData?.id ?? "";
   const documentName = certificateData?.name ?? "";
   const issuedOn = certificateData?.issuedOn ?? "";
@@ -100,6 +101,7 @@ export const sendV2EventCertificateViewedDetailed = ({
       documentName: documentName,
       issuedOn: issuedOn,
       issuerName: issuerName,
+      issuerId: issuerId,
       registryId: registryId,
     },
   });
