@@ -15,7 +15,6 @@ jest.mock("react-ga4");
 
 const evt = {
   category: "TEST_CATEGORY",
-  action: "TEST_ACTION",
   label: "TEST_LABEL",
   value: 2,
 };
@@ -78,7 +77,7 @@ const v3Document: v3.WrappedDocument = {
 describe("stringifyEvent", () => {
   it("prints the event", () => {
     const evtString = stringifyEvent(evt);
-    expect(evtString).toBe("Category*: TEST_CATEGORY, Action*: TEST_ACTION, Value: 2");
+    expect(evtString).toBe("Category*: TEST_CATEGORY, Value: 2");
   });
 });
 
@@ -90,26 +89,14 @@ describe("validateEvent", () => {
     ).toThrow("Category is required");
   });
 
-  it("throws if action is missing", () => {
-    expect(() =>
-      // @ts-expect-error we expect this error to be thrown
-      validateEvent({
-        category: "CATEGORY",
-      })
-    ).toThrow("Action is required");
-  });
-
   it("throws if value is not number", () => {
-    expect(() => validateEvent({ category: "CATEGORY", action: "ACTION", value: "STRING" })).toThrow(
-      "Value must be a number"
-    );
+    expect(() => validateEvent({ category: "CATEGORY", value: "STRING" })).toThrow("Value must be a number");
   });
 
   it("passes for minimum values", () => {
     expect(() =>
       validateEvent({
         category: "CATEGORY",
-        action: "ACTION",
         value: undefined,
       })
     ).not.toThrow();
@@ -119,7 +106,6 @@ describe("validateEvent", () => {
     expect(() =>
       validateEvent({
         category: "CATEGORY",
-        action: "ACTION",
         value: 2,
       })
     ).not.toThrow();
@@ -130,7 +116,6 @@ describe("event", () => {
   it("sends and log ga event", () => {
     analyticsEvent(evt);
     expect(ReactGA.event).toHaveBeenCalledWith("TEST_CATEGORY", {
-      action: "TEST_ACTION",
       nonInteraction: undefined,
       value: 2,
     });
@@ -162,7 +147,6 @@ describe("analytics*", () => {
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
         expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
-          action: "VIEWED - Government Technology Agency of Singapore (GovTech)",
           document_id: "id1",
           document_name: "cert name",
           document_store: `"0x007d40224f6562461633ccfbaffd359ebb2fc9ba"`,
@@ -186,7 +170,6 @@ describe("analytics*", () => {
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
         expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
-          action: "VIEWED - aa.com",
           document_id: "id1",
           document_name: "cert name",
           document_store: `"did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89"`,
@@ -208,7 +191,6 @@ describe("analytics*", () => {
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
         expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
-          action: "VIEWED - Government Technology Agency of Singapore (GovTech)",
           document_id: "id1",
           document_name: "cert name",
           document_store: `"0x007d40224f6562461633ccfbaffd359ebb2fc9ba"`,
@@ -231,7 +213,6 @@ describe("analytics*", () => {
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
         expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
-          action: "VIEWED - Nanyang Polytechnic",
           document_id: "id1",
           document_name: "cert name",
           document_store: `"0x5CA3b9daC85DA4DE4030e59C1a0248004209e348"`,
@@ -256,7 +237,6 @@ describe("analytics*", () => {
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
         expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
-          action: "VIEWED - aa.com",
           document_id: "id1",
           document_name: "cert name",
           document_store: `"0xabcdef"`,
@@ -273,7 +253,6 @@ describe("analytics*", () => {
     it("should work", () => {
       sendV3EventCertificateViewedDetailed({ certificateData: v3Document });
       expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
-        action: "VIEWED - example.openattestation.com",
         document_id: "REF_123456",
         document_name: "Republic of Singapore Driving Licence",
         document_store: `"did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90"`,
@@ -341,7 +320,6 @@ describe("analytics*", () => {
       ]);
 
       expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
-        action: "ERROR - Singapore Examinations and Assessment Board",
         document_id: "MyAwesomeCertID",
         document_name: "SINGAPORE-CAMBRIDGE GENERAL CERTIFICATE OF EDUCATION ORDINARY LEVEL",
         document_store: `"0xE4a94Ef9C26904A02Cd6735F7D4De1D840146a0f"`,
@@ -398,7 +376,6 @@ describe("analytics*", () => {
         "REVOKED_CERTIFICATE", // Document has been revoked by the given store
       ]);
       expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
-        action: "ERROR - example.openattestation.com",
         document_id: "MyAwesomeCertID",
         document_name: "Practitioner Certificate in Personal Data Protection (Singapore)",
         document_store: `"0x8Fc57204c35fb9317D91285eF52D6b892EC08cD3"`,
@@ -476,7 +453,6 @@ describe("analytics*", () => {
         "INVALID_ARGUMENT", // merkleRoot is odd-length
       ]);
       expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
-        action: "ERROR - Singapore Management University Academy",
         document_id: "41368",
         document_name: "Practitioner Certificate in Personal Data Protection (Singapore)",
         document_store: `"0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404"`,
@@ -555,7 +531,6 @@ describe("analytics*", () => {
         "SERVER_ERROR", // HTTP response error (rate limit, bad gateway, etc.)
       ]);
       expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
-        action: "ERROR - Singapore Management University Academy",
         document_id: "41368",
         document_name: "Practitioner Certificate in Personal Data Protection (Singapore)",
         document_store: `"0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404"`,
@@ -634,7 +609,6 @@ describe("analytics*", () => {
         "ETHERS_UNHANDLED_ERROR", // some funky error that we didn't catch
       ]);
       expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
-        action: "ERROR - Singapore Management University Academy",
         document_id: "41368",
         document_name: "Practitioner Certificate in Personal Data Protection (Singapore)",
         document_store: `"0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404"`,
@@ -655,7 +629,6 @@ describe("analytics*", () => {
       ]);
 
       expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
-        action: "ERROR - example.tradetrust.io",
         document_id: "SGCNM21566325",
         document_store: `"did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89"`,
         errors: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
@@ -674,7 +647,6 @@ describe("analytics*", () => {
       ]);
 
       expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
-        action: "ERROR - example.openattestation.com",
         document_id: "REF_123456",
         document_name: "Republic of Singapore Driving Licence",
         document_store: `"did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90"`,
