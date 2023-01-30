@@ -105,9 +105,9 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
       const certificateData = getData(rawDocument);
       analyticsEvent({
         category: "CERTIFICATE_VIEWED",
-        action: `"${certificateData.issuers.map((issuer) => issuer.id).join(",")}"`,
         options: {
           documentId: certificateData?.id ?? undefined,
+          issuerId: `"${certificateData.issuers.map((issuer) => issuer.id).join(",")}"`,
         },
       });
     } else {
@@ -115,9 +115,9 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
       const storeAddresses = utils.getIssuerAddress(rawDocument);
       analyticsEvent({
         category: "CERTIFICATE_VIEWED",
-        action: `"${Array.isArray(storeAddresses) ? storeAddresses.join(",") : storeAddresses}"`,
         options: {
           documentId: certificateData?.id ?? undefined,
+          documentStore: `"${Array.isArray(storeAddresses) ? storeAddresses.join(",") : storeAddresses}"`,
         },
       });
     }

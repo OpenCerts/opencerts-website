@@ -1,6 +1,6 @@
 import { v2, WrappedDocument, getData, v3, utils } from "@govtechsg/open-attestation";
 import { RegistryEntry } from "@govtechsg/opencerts-verify";
-import _ from "lodash";
+import { isNil, omitBy } from "lodash";
 import ReactGA from "react-ga4";
 import registry from "../../../public/static/registry.json";
 import { getLogger } from "../../utils/logger";
@@ -13,6 +13,7 @@ interface Options {
   documentName?: string;
   issuedOn?: string;
   issuerName?: string;
+  issuerId?: string;
   registryId?: string | null;
   rendererUrl?: string;
   templateName?: string;
@@ -20,7 +21,6 @@ interface Options {
 }
 interface Event {
   category: string;
-  action: string;
   value?: number | string;
   nonInteraction?: boolean;
   options?: Options;
@@ -33,24 +33,22 @@ function isInRegistry(value: string): value is keyof typeof registry.issuers {
   return value in registry.issuers;
 }
 
-export const validateEvent = ({ category, action, value }: Event): void => {
+export const validateEvent = ({ category, value }: Event): void => {
   if (!category) throw new Error("Category is required");
-  if (!action) throw new Error("Action is required");
   if (value && typeof value !== "number") throw new Error("Value must be a number");
 };
 
-export const stringifyEvent = ({ category, action, value }: Event): string =>
-  `Category*: ${category}, Action*: ${action}, Value: ${value}`;
+export const stringifyEvent = ({ category, value }: Event): string => `Category*: ${category}, Value: ${value}`;
 
 export const analyticsEvent = (event: Event): void => {
   validateEvent(event);
-  const { category, action, value, nonInteraction, options = undefined } = event;
+  const { category, value, nonInteraction, options = undefined } = event;
   trace(stringifyEvent(event));
   traceDev(stringifyEvent(event));
   // Use snake_case for event custom dimensions
   const customDimension = {
     // wrap with quotes if documentStore has a value; to prevent GA4 converting hexadecimal to decimal
-    document_store: _.isNil(options?.documentStore) ? options?.documentStore : `"${options?.documentStore}"`,
+    document_store: options?.documentStore ? `"${options?.documentStore}"` : undefined,
     document_id: options?.documentId,
     document_name: options?.documentName,
     issued_on: options?.issuedOn,
@@ -61,10 +59,9 @@ export const analyticsEvent = (event: Event): void => {
     errors: options?.errors,
   };
   let cleanedCustomDimensions = {};
-  cleanedCustomDimensions = _.omitBy(customDimension, _.isNil); // removes null and undefined parameters
+  cleanedCustomDimensions = omitBy(customDimension, isNil); // removes null and undefined parameters
 
   return ReactGA.event(category, {
-    action,
     value,
     nonInteraction,
     ...cleanedCustomDimensions,
@@ -95,7 +92,6 @@ export const sendV2EventCertificateViewedDetailed = ({
   }
   analyticsEvent({
     category: "CERTIFICATE_DETAILS",
-    action: `VIEWED - ${issuerName}`,
     nonInteraction: true,
     options: {
       documentStore: documentStore,
@@ -120,7 +116,6 @@ export const sendV3EventCertificateViewedDetailed = ({
   const issuerName = certificateData.openAttestationMetadata.identityProof.identifier || "";
   analyticsEvent({
     category: "CERTIFICATE_DETAILS",
-    action: `VIEWED - ${issuerName}`,
     nonInteraction: true,
     options: {
       documentStore: documentStore,
@@ -159,7 +154,6 @@ export function triggerV2ErrorLogging(
 
     analyticsEvent({
       category: "CERTIFICATE_ERROR",
-      action: `ERROR - ${issuerName}`,
       nonInteraction: true,
       options: {
         documentStore: documentStore,
@@ -189,7 +183,6 @@ export function triggerV3ErrorLogging(
 
   analyticsEvent({
     category: "CERTIFICATE_ERROR",
-    action: `ERROR - ${issuerName}`,
     nonInteraction: true,
     options: {
       documentStore: documentStore,
@@ -228,7 +221,6 @@ export function triggerV2RendererTimeoutLogging(rawCertificate: WrappedDocument<
 
     analyticsEvent({
       category: "CERTIFICATE_RENDERER_TIMEOUT",
-      action: `RENDERER TIMEOUT - ${issuerName}`,
       nonInteraction: true,
       options: {
         documentStore: documentStore,
@@ -257,7 +249,6 @@ export function triggerV3RendererTimeoutLogging(rawCertificate: WrappedDocument<
 
   analyticsEvent({
     category: "CERTIFICATE_RENDERER_TIMEOUT",
-    action: `RENDERER TIMEOUT - ${issuerName}`,
     nonInteraction: true,
     options: {
       documentStore: documentStore,
