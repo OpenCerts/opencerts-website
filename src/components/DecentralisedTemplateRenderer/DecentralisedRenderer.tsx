@@ -103,18 +103,22 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
     // CERTIFICATE_VIEWED event
     if (utils.isSignedWrappedV2Document(rawDocument)) {
       const certificateData = getData(rawDocument);
-      analyticsEvent(window, {
+      analyticsEvent({
         category: "CERTIFICATE_VIEWED",
-        action: certificateData.issuers.map((issuer) => issuer.id).join(","),
-        label: certificateData?.id ?? undefined,
+        options: {
+          documentId: certificateData?.id ?? undefined,
+          issuerId: `${certificateData.issuers.map((issuer) => issuer.id).join(",")}`,
+        },
       });
     } else {
       const certificateData = opencertsGetData(rawDocument);
       const storeAddresses = utils.getIssuerAddress(rawDocument);
-      analyticsEvent(window, {
+      analyticsEvent({
         category: "CERTIFICATE_VIEWED",
-        action: Array.isArray(storeAddresses) ? storeAddresses.join(",") : storeAddresses,
-        label: certificateData?.id ?? undefined,
+        options: {
+          documentId: certificateData?.id ?? undefined,
+          documentStore: `${Array.isArray(storeAddresses) ? storeAddresses.join(",") : storeAddresses}`,
+        },
       });
     }
 

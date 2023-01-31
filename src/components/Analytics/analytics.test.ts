@@ -1,4 +1,5 @@
 import { SchemaId, v2, v3, WrappedDocument } from "@govtechsg/open-attestation";
+import ReactGA from "react-ga4";
 import dnsDidSigned from "../tests/fixture/dns-did-signed.json";
 import {
   analyticsEvent,
@@ -10,9 +11,10 @@ import {
   validateEvent,
 } from "./index";
 
+jest.mock("react-ga4");
+
 const evt = {
   category: "TEST_CATEGORY",
-  action: "TEST_ACTION",
   label: "TEST_LABEL",
   value: 2,
 };
@@ -72,12 +74,10 @@ const v3Document: v3.WrappedDocument = {
   },
 };
 
-// TODO replace expect(true).toBe(true); by real assertions
-
 describe("stringifyEvent", () => {
   it("prints the event", () => {
     const evtString = stringifyEvent(evt);
-    expect(evtString).toBe("Category*: TEST_CATEGORY, Action*: TEST_ACTION, Label: TEST_LABEL, Value: 2");
+    expect(evtString).toBe("Category*: TEST_CATEGORY, Value: 2");
   });
 });
 
@@ -85,80 +85,52 @@ describe("validateEvent", () => {
   it("throws if category is missing", () => {
     expect(() =>
       // @ts-expect-error we expect this error to be thrown
-      validateEvent({
-        label: "LABEL",
-      })
+      validateEvent({})
     ).toThrow("Category is required");
   });
 
-  it("throws if action is missing", () => {
-    expect(() =>
-      // @ts-expect-error we expect this error to be thrown
-      validateEvent({
-        category: "CATEGORY",
-      })
-    ).toThrow("Action is required");
-  });
-
   it("throws if value is not number", () => {
-    expect(() => validateEvent({ category: "CATEGORY", action: "ACTION", value: "STRING" })).toThrow(
-      "Value must be a number"
-    );
+    expect(() => validateEvent({ category: "CATEGORY", value: "STRING" })).toThrow("Value must be a number");
   });
 
   it("passes for minimum values", () => {
-    validateEvent({
-      category: "CATEGORY",
-      action: "ACTION",
-      value: undefined,
-    });
-    expect(true).toBe(true);
+    expect(() =>
+      validateEvent({
+        category: "CATEGORY",
+        value: undefined,
+      })
+    ).not.toThrow();
   });
 
   it("passes for all values", () => {
-    validateEvent({
-      category: "CATEGORY",
-      action: "ACTION",
-      value: 2,
-    });
-    expect(true).toBe(true);
+    expect(() =>
+      validateEvent({
+        category: "CATEGORY",
+        value: 2,
+      })
+    ).not.toThrow();
   });
 });
 
 describe("event", () => {
-  it("does not fail if ga is not present", () => {
-    analyticsEvent(undefined, evt);
-    analyticsEvent({}, evt);
-    expect(true).toBe(true);
-  });
-
-  it("sends and log ga event if window.ga is present", () => {
-    const win = { ga: jest.fn() };
-    // @ts-expect-error the mock does not match the signature
-    analyticsEvent(win, evt);
-    expect(win.ga).toHaveBeenCalledWith("send", "event", "TEST_CATEGORY", "TEST_ACTION", "TEST_LABEL", 2, undefined);
+  it("sends and log ga event", () => {
+    analyticsEvent(evt);
+    expect(ReactGA.event).toHaveBeenCalledWith("TEST_CATEGORY", {
+      nonInteraction: undefined,
+      value: 2,
+    });
   });
 
   it("throws if there is a validation error", () => {
-    const win = { ga: jest.fn() };
     const errEvt = { ...evt, value: "STRING" };
-    // @ts-expect-error the mock does not match the signature
-    expect(() => analyticsEvent(win, errEvt)).toThrow("Value must be a number");
+    expect(() => analyticsEvent(errEvt)).toThrow("Value must be a number");
   });
 });
 
 describe("analytics*", () => {
   // eslint-disable-next-line jest/no-hooks
   beforeEach(() => {
-    // @ts-expect-error mock does not match the signature
-    // eslint-disable-next-line jest/prefer-spy-on
-    window.ga = jest.fn();
-  });
-  // eslint-disable-next-line jest/no-hooks
-  afterEach(() => {
-    // @ts-expect-error mock does not match the signature
-    // eslint-disable-next-line jest/prefer-spy-on
-    window.ga = undefined; // This vs. delete window.ga, mockGA.mockReset()?
+    jest.spyOn(ReactGA, "event").mockImplementation();
   });
 
   describe("sendV2EventCertificateViewedDetailed", () => {
@@ -174,23 +146,16 @@ describe("analytics*", () => {
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
-        expect(window.ga).toHaveBeenCalledWith(
-          "send",
-          "event",
-          "CERTIFICATE_DETAILS",
-          "VIEWED - Government Technology Agency of Singapore (GovTech)",
-          '"store":"0x007d40224f6562461633ccfbaffd359ebb2fc9ba";"document_id":"id1";"name":"cert name";"issued_on":"a date";"issuer_name":"Government Technology Agency of Singapore (GovTech)";"issuer_id":"govtech-registry"',
-          undefined,
-          {
-            dimension1: "0x007d40224f6562461633ccfbaffd359ebb2fc9ba",
-            dimension2: "id1",
-            dimension3: "cert name",
-            dimension4: "a date",
-            dimension5: "Government Technology Agency of Singapore (GovTech)",
-            dimension6: "govtech-registry",
-            nonInteraction: true,
-          }
-        );
+        expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
+          document_id: "id1",
+          document_name: "cert name",
+          document_store: `"0x007d40224f6562461633ccfbaffd359ebb2fc9ba"`,
+          issued_on: "a date",
+          registry_id: "govtech-registry",
+          issuer_name: "Government Technology Agency of Singapore (GovTech)",
+          nonInteraction: true,
+          value: undefined,
+        });
       });
       it("should use key to retrieve registry information (not available)", () => {
         const issuer: v2.Issuer = {
@@ -204,23 +169,15 @@ describe("analytics*", () => {
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
-        expect(window.ga).toHaveBeenCalledWith(
-          "send",
-          "event",
-          "CERTIFICATE_DETAILS",
-          "VIEWED - aa.com",
-          '"store":"did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89";"document_id":"id1";"name":"cert name";"issued_on":"a date";"issuer_name":"aa.com"',
-          undefined,
-          {
-            dimension1: "did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89",
-            dimension2: "id1",
-            dimension3: "cert name",
-            dimension4: "a date",
-            dimension5: "aa.com",
-            dimension6: "(not set)",
-            nonInteraction: true,
-          }
-        );
+        expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
+          document_id: "id1",
+          document_name: "cert name",
+          issuer_id: "did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89",
+          issued_on: "a date",
+          issuer_name: "aa.com",
+          nonInteraction: true,
+          value: undefined,
+        });
       });
       it("should use certificate store to retrieve registry information", () => {
         const issuer: v2.Issuer = {
@@ -233,23 +190,16 @@ describe("analytics*", () => {
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
-        expect(window.ga).toHaveBeenCalledWith(
-          "send",
-          "event",
-          "CERTIFICATE_DETAILS",
-          "VIEWED - Government Technology Agency of Singapore (GovTech)",
-          '"store":"0x007d40224f6562461633ccfbaffd359ebb2fc9ba";"document_id":"id1";"name":"cert name";"issued_on":"a date";"issuer_name":"Government Technology Agency of Singapore (GovTech)";"issuer_id":"govtech-registry"',
-          undefined,
-          {
-            dimension1: "0x007d40224f6562461633ccfbaffd359ebb2fc9ba",
-            dimension2: "id1",
-            dimension3: "cert name",
-            dimension4: "a date",
-            dimension5: "Government Technology Agency of Singapore (GovTech)",
-            dimension6: "govtech-registry",
-            nonInteraction: true,
-          }
-        );
+        expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
+          document_id: "id1",
+          document_name: "cert name",
+          document_store: `"0x007d40224f6562461633ccfbaffd359ebb2fc9ba"`,
+          issued_on: "a date",
+          registry_id: "govtech-registry",
+          issuer_name: "Government Technology Agency of Singapore (GovTech)",
+          nonInteraction: true,
+          value: undefined,
+        });
       });
       it("should use token registry to retrieve registry information", () => {
         const issuer: v2.Issuer = {
@@ -262,23 +212,16 @@ describe("analytics*", () => {
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
-        expect(window.ga).toHaveBeenCalledWith(
-          "send",
-          "event",
-          "CERTIFICATE_DETAILS",
-          "VIEWED - Nanyang Polytechnic",
-          '"store":"0x5CA3b9daC85DA4DE4030e59C1a0248004209e348";"document_id":"id1";"name":"cert name";"issued_on":"a date";"issuer_name":"Nanyang Polytechnic";"issuer_id":"nyp-registry"',
-          undefined,
-          {
-            dimension1: "0x5CA3b9daC85DA4DE4030e59C1a0248004209e348",
-            dimension2: "id1",
-            dimension3: "cert name",
-            dimension4: "a date",
-            dimension5: "Nanyang Polytechnic",
-            dimension6: "nyp-registry",
-            nonInteraction: true,
-          }
-        );
+        expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
+          document_id: "id1",
+          document_name: "cert name",
+          document_store: `"0x5CA3b9daC85DA4DE4030e59C1a0248004209e348"`,
+          issued_on: "a date",
+          registry_id: "nyp-registry",
+          issuer_name: "Nanyang Polytechnic",
+          nonInteraction: true,
+          value: undefined,
+        });
       });
     });
     describe("when is not in the registry", () => {
@@ -293,23 +236,15 @@ describe("analytics*", () => {
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
-        expect(window.ga).toHaveBeenCalledWith(
-          "send",
-          "event",
-          "CERTIFICATE_DETAILS",
-          "VIEWED - aa.com",
-          '"store":"0xabcdef";"document_id":"id1";"name":"cert name";"issued_on":"a date";"issuer_name":"aa.com"',
-          undefined,
-          {
-            dimension1: "0xabcdef",
-            dimension2: "id1",
-            dimension3: "cert name",
-            dimension4: "a date",
-            dimension5: "aa.com",
-            dimension6: "(not set)",
-            nonInteraction: true,
-          }
-        );
+        expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
+          document_id: "id1",
+          document_name: "cert name",
+          document_store: `"0xabcdef"`,
+          issued_on: "a date",
+          issuer_name: "aa.com",
+          nonInteraction: true,
+          value: undefined,
+        });
       });
     });
   });
@@ -317,23 +252,15 @@ describe("analytics*", () => {
   describe("sendV3EventCertificateViewedDetailed", () => {
     it("should work", () => {
       sendV3EventCertificateViewedDetailed({ certificateData: v3Document });
-      expect(window.ga).toHaveBeenCalledWith(
-        "send",
-        "event",
-        "CERTIFICATE_DETAILS",
-        "VIEWED - example.openattestation.com",
-        '"store":"did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90";"document_id":"REF_123456";"name":"Republic of Singapore Driving Licence";"issued_on":"2010-01-01T19:23:24Z";"issuer_name":"example.openattestation.com"',
-        undefined,
-        {
-          dimension1: "did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90",
-          dimension2: "REF_123456",
-          dimension3: "Republic of Singapore Driving Licence",
-          dimension4: "2010-01-01T19:23:24Z",
-          dimension5: "example.openattestation.com",
-          dimension6: "(not set)",
-          nonInteraction: true,
-        }
-      );
+      expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
+        document_id: "REF_123456",
+        document_name: "Republic of Singapore Driving Licence",
+        document_store: `"did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90"`,
+        issued_on: "2010-01-01T19:23:24Z",
+        issuer_name: "example.openattestation.com",
+        nonInteraction: true,
+        value: undefined,
+      });
     });
   });
 
@@ -392,26 +319,19 @@ describe("analytics*", () => {
         "REVOKED_CERTIFICATE", // Document has been revoked by the given store
       ]);
 
-      expect(window.ga).toHaveBeenCalledWith(
-        "send",
-        "event",
-        "CERTIFICATE_ERROR",
-        "ERROR - Singapore Examinations and Assessment Board",
-        "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
-        undefined,
-        {
-          dimension1: "0xE4a94Ef9C26904A02Cd6735F7D4De1D840146a0f",
-          dimension2: "MyAwesomeCertID",
-          dimension3: "SINGAPORE-CAMBRIDGE GENERAL CERTIFICATE OF EDUCATION ORDINARY LEVEL",
-          dimension4: "2019-09-02T18:51:14+08:00",
-          dimension5: "Singapore Examinations and Assessment Board",
-          dimension6: "seab-registry",
-          dimension7: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
-          nonInteraction: true,
-        }
-      );
+      expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
+        document_id: "MyAwesomeCertID",
+        document_name: "SINGAPORE-CAMBRIDGE GENERAL CERTIFICATE OF EDUCATION ORDINARY LEVEL",
+        document_store: `"0xE4a94Ef9C26904A02Cd6735F7D4De1D840146a0f"`,
+        errors: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
+        issued_on: "2019-09-02T18:51:14+08:00",
+        registry_id: "seab-registry",
+        issuer_name: "Singapore Examinations and Assessment Board",
+        nonInteraction: true,
+        value: undefined,
+      });
     });
-    it("should send cert details (documentStore/DNS-TXT) and errors (tampered/unissued/revoked) to Google Analytics", () => {
+    it("should send cert details (document_store/DNS-TXT) and errors (tampered/unissued/revoked) to Google Analytics", () => {
       const certificate: WrappedDocument<Certificate> = {
         version: SchemaId.v2,
         data: {
@@ -455,26 +375,18 @@ describe("analytics*", () => {
         "UNISSUED_CERTIFICATE", // Document isn't issued by the given store
         "REVOKED_CERTIFICATE", // Document has been revoked by the given store
       ]);
-      expect(window.ga).toHaveBeenCalledWith(
-        "send",
-        "event",
-        "CERTIFICATE_ERROR",
-        "ERROR - example.openattestation.com",
-        "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
-        undefined,
-        {
-          dimension1: "0x8Fc57204c35fb9317D91285eF52D6b892EC08cD3",
-          dimension2: "MyAwesomeCertID",
-          dimension3: "Practitioner Certificate in Personal Data Protection (Singapore)",
-          dimension4: "2020-04-14T08:00:00+08:00",
-          dimension5: "example.openattestation.com",
-          dimension6: "(not set)",
-          dimension7: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
-          nonInteraction: true,
-        }
-      );
+      expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
+        document_id: "MyAwesomeCertID",
+        document_name: "Practitioner Certificate in Personal Data Protection (Singapore)",
+        document_store: `"0x8Fc57204c35fb9317D91285eF52D6b892EC08cD3"`,
+        errors: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
+        issued_on: "2020-04-14T08:00:00+08:00",
+        issuer_name: "example.openattestation.com",
+        nonInteraction: true,
+        value: undefined,
+      });
     });
-    it("should send cert details (documentStore/DNS-TXT) and error (invalid argument) to Google Analytics", () => {
+    it("should send cert details (document_store/DNS-TXT) and error (invalid argument) to Google Analytics", () => {
       const certificate: WrappedDocument<Certificate> = {
         version: SchemaId.v2,
         schema: "opencerts/v2.0",
@@ -540,26 +452,19 @@ describe("analytics*", () => {
       triggerV2ErrorLogging(certificate, [
         "INVALID_ARGUMENT", // merkleRoot is odd-length
       ]);
-      expect(window.ga).toHaveBeenCalledWith(
-        "send",
-        "event",
-        "CERTIFICATE_ERROR",
-        "ERROR - Singapore Management University Academy", // this cert issuer is in the registry
-        "INVALID_ARGUMENT",
-        undefined,
-        {
-          dimension1: "0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404",
-          dimension2: "41368",
-          dimension3: "Practitioner Certificate in Personal Data Protection (Singapore)",
-          dimension4: "2020-04-14T08:00:00+08:00",
-          dimension5: "Singapore Management University Academy",
-          dimension6: "smu-registry-academy",
-          dimension7: "INVALID_ARGUMENT",
-          nonInteraction: true,
-        }
-      );
+      expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
+        document_id: "41368",
+        document_name: "Practitioner Certificate in Personal Data Protection (Singapore)",
+        document_store: `"0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404"`,
+        errors: "INVALID_ARGUMENT",
+        issued_on: "2020-04-14T08:00:00+08:00",
+        registry_id: "smu-registry-academy",
+        issuer_name: "Singapore Management University Academy",
+        nonInteraction: true,
+        value: undefined,
+      });
     });
-    it("should send cert details (documentStore/DNS-TXT) and error (HTTP response error) to Google Analytics", () => {
+    it("should send cert details (document_store/DNS-TXT) and error (HTTP response error) to Google Analytics", () => {
       const certificate: WrappedDocument<Certificate> = {
         version: SchemaId.v2,
         schema: "opencerts/v2.0",
@@ -625,26 +530,19 @@ describe("analytics*", () => {
       triggerV2ErrorLogging(certificate, [
         "SERVER_ERROR", // HTTP response error (rate limit, bad gateway, etc.)
       ]);
-      expect(window.ga).toHaveBeenCalledWith(
-        "send",
-        "event",
-        "CERTIFICATE_ERROR",
-        "ERROR - Singapore Management University Academy",
-        "SERVER_ERROR",
-        undefined,
-        {
-          dimension1: "0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404",
-          dimension2: "41368",
-          dimension3: "Practitioner Certificate in Personal Data Protection (Singapore)",
-          dimension4: "2020-04-14T08:00:00+08:00",
-          dimension5: "Singapore Management University Academy",
-          dimension6: "smu-registry-academy",
-          dimension7: "SERVER_ERROR",
-          nonInteraction: true,
-        }
-      );
+      expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
+        document_id: "41368",
+        document_name: "Practitioner Certificate in Personal Data Protection (Singapore)",
+        document_store: `"0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404"`,
+        errors: "SERVER_ERROR",
+        issued_on: "2020-04-14T08:00:00+08:00",
+        registry_id: "smu-registry-academy",
+        issuer_name: "Singapore Management University Academy",
+        nonInteraction: true,
+        value: undefined,
+      });
     });
-    it("should send cert details (documentStore/DNS-TXT) and error (Ethers unhandled error) to Google Analytics", () => {
+    it("should send cert details (document_store/DNS-TXT) and error (Ethers unhandled error) to Google Analytics", () => {
       const certificate: WrappedDocument<Certificate> = {
         version: SchemaId.v2,
         schema: "opencerts/v2.0",
@@ -710,24 +608,17 @@ describe("analytics*", () => {
       triggerV2ErrorLogging(certificate, [
         "ETHERS_UNHANDLED_ERROR", // some funky error that we didn't catch
       ]);
-      expect(window.ga).toHaveBeenCalledWith(
-        "send",
-        "event",
-        "CERTIFICATE_ERROR",
-        "ERROR - Singapore Management University Academy",
-        "ETHERS_UNHANDLED_ERROR",
-        undefined,
-        {
-          dimension1: "0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404",
-          dimension2: "41368",
-          dimension3: "Practitioner Certificate in Personal Data Protection (Singapore)",
-          dimension4: "2020-04-14T08:00:00+08:00",
-          dimension5: "Singapore Management University Academy",
-          dimension6: "smu-registry-academy",
-          dimension7: "ETHERS_UNHANDLED_ERROR",
-          nonInteraction: true,
-        }
-      );
+      expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
+        document_id: "41368",
+        document_name: "Practitioner Certificate in Personal Data Protection (Singapore)",
+        document_store: `"0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404"`,
+        errors: "ETHERS_UNHANDLED_ERROR",
+        issued_on: "2020-04-14T08:00:00+08:00",
+        registry_id: "smu-registry-academy",
+        issuer_name: "Singapore Management University Academy",
+        nonInteraction: true,
+        value: undefined,
+      });
     });
 
     it("should send cert details (DID) and errors (tampered/unissued/revoked) to Google Analytics", () => {
@@ -737,24 +628,14 @@ describe("analytics*", () => {
         "REVOKED_CERTIFICATE", // Document has been revoked by the given store
       ]);
 
-      expect(window.ga).toHaveBeenCalledWith(
-        "send",
-        "event",
-        "CERTIFICATE_ERROR",
-        "ERROR - example.tradetrust.io",
-        "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
-        undefined,
-        {
-          dimension1: "did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89",
-          dimension2: "SGCNM21566325",
-          dimension3: "(not set)",
-          dimension4: "(not set)",
-          dimension5: "example.tradetrust.io",
-          dimension6: "(not set)",
-          dimension7: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
-          nonInteraction: true,
-        }
-      );
+      expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
+        document_id: "SGCNM21566325",
+        document_store: `"did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89"`,
+        errors: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
+        issuer_name: "example.tradetrust.io",
+        nonInteraction: true,
+        value: undefined,
+      });
     });
   });
   describe("triggerV3ErrorLogging", () => {
@@ -765,24 +646,16 @@ describe("analytics*", () => {
         "REVOKED_CERTIFICATE", // Document has been revoked by the given store
       ]);
 
-      expect(window.ga).toHaveBeenCalledWith(
-        "send",
-        "event",
-        "CERTIFICATE_ERROR",
-        "ERROR - example.openattestation.com",
-        "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
-        undefined,
-        {
-          dimension1: "did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90",
-          dimension2: "REF_123456",
-          dimension3: "Republic of Singapore Driving Licence",
-          dimension4: "2010-01-01T19:23:24Z",
-          dimension5: "example.openattestation.com",
-          dimension6: "(not set)",
-          dimension7: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
-          nonInteraction: true,
-        }
-      );
+      expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
+        document_id: "REF_123456",
+        document_name: "Republic of Singapore Driving Licence",
+        document_store: `"did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90"`,
+        errors: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
+        issued_on: "2010-01-01T19:23:24Z",
+        issuer_name: "example.openattestation.com",
+        nonInteraction: true,
+        value: undefined,
+      });
     });
   });
 });

@@ -1,3 +1,4 @@
+import { getData } from "@govtechsg/open-attestation";
 import React, { Component, ReactNode } from "react";
 import { connect } from "react-redux";
 import { NETWORK_NAME } from "../../config";
@@ -9,9 +10,12 @@ import { CertificateDropZoneContainer } from "../CertificateDropZone";
 const DEMO_CERT = `/static/demo/${NETWORK_NAME}.opencert`;
 
 function demoCount(): void {
-  analyticsEvent(window, {
-    category: "USER_INTERACTION",
-    action: "DEMO_CERTIFICATE_VIEWED",
+  const certificateData = getData(JSON.parse(DEMO_CERT));
+  analyticsEvent({
+    category: "DEMO_CERTIFICATE_VIEWED",
+    options: {
+      documentId: certificateData.id ?? undefined,
+    },
   });
 }
 

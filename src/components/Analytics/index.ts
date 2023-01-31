@@ -1,16 +1,29 @@
 import { v2, WrappedDocument, getData, v3, utils } from "@govtechsg/open-attestation";
 import { RegistryEntry } from "@govtechsg/opencerts-verify";
+import { isEmpty, omitBy } from "lodash";
+import ReactGA from "react-ga4";
 import registry from "../../../public/static/registry.json";
 import { getLogger } from "../../utils/logger";
 const { trace } = getLogger("components:Analytics:");
 const { trace: traceDev } = getLogger("components:Analytics(Inactive):");
 
+interface Options {
+  documentStore?: string;
+  documentId?: string;
+  documentName?: string;
+  issuedOn?: string;
+  issuerName?: string;
+  issuerId?: string;
+  registryId?: string | null;
+  rendererUrl?: string;
+  templateName?: string;
+  errors?: string;
+}
 interface Event {
   category: string;
-  action: string;
-  value?: string | number;
-  label?: string;
-  options?: UniversalAnalytics.FieldsObject;
+  value?: number | string;
+  nonInteraction?: boolean;
+  options?: Options;
 }
 
 /*
@@ -20,23 +33,38 @@ function isInRegistry(value: string): value is keyof typeof registry.issuers {
   return value in registry.issuers;
 }
 
-export const validateEvent = ({ category, action, value }: Event): void => {
+export const validateEvent = ({ category, value }: Event): void => {
   if (!category) throw new Error("Category is required");
-  if (!action) throw new Error("Action is required");
   if (value && typeof value !== "number") throw new Error("Value must be a number");
 };
 
-export const stringifyEvent = ({ category, action, label, value }: Event): string =>
-  `Category*: ${category}, Action*: ${action}, Label: ${label}, Value: ${value}`;
+export const stringifyEvent = ({ category, value }: Event): string => `Category*: ${category}, Value: ${value}`;
 
-export const analyticsEvent = (window: Partial<Window> | undefined, event: Event): void => {
+export const analyticsEvent = (event: Event): void => {
   validateEvent(event);
-  if (typeof window !== "undefined" && typeof window.ga !== "undefined") {
-    const { category, action, label, value, options = undefined } = event;
-    trace(stringifyEvent(event));
-    return window.ga("send", "event", category, action, label, value, options);
-  }
+  const { category, value, nonInteraction, options = undefined } = event;
+  trace(stringifyEvent(event));
   traceDev(stringifyEvent(event));
+  // Use snake_case for event custom dimensions
+  const customDimension = {
+    // wrap with quotes if documentStore has a value; to prevent GA4 converting hexadecimal to decimal
+    document_store: options?.documentStore ? `"${options?.documentStore}"` : undefined,
+    document_id: options?.documentId,
+    document_name: options?.documentName,
+    issued_on: options?.issuedOn,
+    issuer_name: options?.issuerName,
+    issuer_id: options?.issuerId,
+    registry_id: options?.registryId,
+    renderer_url: options?.rendererUrl,
+    template_name: options?.templateName,
+    errors: options?.errors,
+  };
+  const cleanedCustomDimensions = omitBy(customDimension, isEmpty); // removes empty string, null and undefined parameters
+  return ReactGA.event(category, {
+    value,
+    nonInteraction,
+    ...cleanedCustomDimensions,
+  });
 };
 
 export const sendV2EventCertificateViewedDetailed = ({
@@ -46,43 +74,35 @@ export const sendV2EventCertificateViewedDetailed = ({
   issuer: v2.Issuer;
   certificateData: { id?: string; name?: string; issuedOn?: string };
 }): void => {
-  let label = "";
   let issuerName = "";
   let registryId = null;
 
-  const separator = ";";
-  const store = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? issuer.id ?? ""; // use id for DID
-  const id = certificateData?.id ?? "";
-  const name = certificateData?.name ?? "";
+  // We track either document store or issuer ID, where both are mutually exclusive
+  // meaning documents will unlikely have both document store ID and issuer ID/ DID
+  const documentStore = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? "";
+  const issuerId = issuer.id ?? "";
+  const documentId = certificateData?.id ?? "";
+  const documentName = certificateData?.name ?? "";
   const issuedOn = certificateData?.issuedOn ?? "";
 
-  if (isInRegistry(store)) {
-    const registryIssuer: RegistryEntry = registry.issuers[store];
+  if (isInRegistry(documentStore)) {
+    const registryIssuer: RegistryEntry = registry.issuers[documentStore];
+    issuerName = registryIssuer.name;
     registryId = registryIssuer.id;
-    issuerName = registry.issuers[store].name;
-    label = `"store":"${store}"${separator}"document_id":"${id}"${separator}"name":"${name}"${separator}"issued_on":"${issuedOn}"${separator}"issuer_name":"${
-      issuerName ?? ""
-    }"${separator}"issuer_id":"${registryIssuer.id ?? ""}"`;
   } else if (issuer.identityProof) {
     issuerName = issuer.identityProof.location || "";
-    label = `"store":"${store}"${separator}"document_id":"${id}"${separator}"name":"${name}"${separator}"issued_on":"${issuedOn}"${separator}"issuer_name":"${
-      issuerName ?? ""
-    }"`;
-  } else {
-    label = "Something went wrong, please check the analytics code of sendEventCertificateViewedDetailed";
   }
-  analyticsEvent(window, {
+  analyticsEvent({
     category: "CERTIFICATE_DETAILS",
-    action: `VIEWED - ${issuerName}`,
-    label,
+    nonInteraction: true,
     options: {
-      nonInteraction: true,
-      dimension1: store || "(not set)",
-      dimension2: id || "(not set)",
-      dimension3: name || "(not set)",
-      dimension4: issuedOn || "(not set)",
-      dimension5: issuerName || "(not set)",
-      dimension6: registryId || "(not set)",
+      documentStore: documentStore,
+      documentId: documentId,
+      documentName: documentName,
+      issuedOn: issuedOn,
+      issuerName: issuerName,
+      issuerId: issuerId,
+      registryId: registryId,
     },
   });
 };
@@ -92,27 +112,20 @@ export const sendV3EventCertificateViewedDetailed = ({
 }: {
   certificateData: v3.OpenAttestationDocument;
 }): void => {
-  const separator = ";";
-  const store = utils.getIssuerAddress(certificateData);
-  const id = certificateData?.id ?? "";
-  const name = certificateData?.name ?? "";
+  const documentStore = utils.getIssuerAddress(certificateData);
+  const documentId = certificateData?.id ?? "";
+  const documentName = certificateData?.name ?? "";
   const issuedOn = certificateData?.issued ?? "";
   const issuerName = certificateData.openAttestationMetadata.identityProof.identifier || "";
-  const label = `"store":"${store}"${separator}"document_id":"${id}"${separator}"name":"${name}"${separator}"issued_on":"${issuedOn}"${separator}"issuer_name":"${
-    issuerName ?? ""
-  }"`;
-  analyticsEvent(window, {
+  analyticsEvent({
     category: "CERTIFICATE_DETAILS",
-    action: `VIEWED - ${issuerName}`,
-    label,
+    nonInteraction: true,
     options: {
-      nonInteraction: true,
-      dimension1: store || "(not set)",
-      dimension2: id || "(not set)",
-      dimension3: name || "(not set)",
-      dimension4: issuedOn || "(not set)",
-      dimension5: issuerName || "(not set)",
-      dimension6: "(not set)",
+      documentStore: documentStore,
+      documentId: documentId,
+      documentName: documentName,
+      issuedOn: issuedOn,
+      issuerName: issuerName,
     },
   });
 };
@@ -123,38 +136,36 @@ export function triggerV2ErrorLogging(
 ): void {
   const certificate: v2.OpenAttestationDocument & { name?: string; issuedOn?: string } = getData(rawCertificate);
 
-  const id = certificate?.id;
-  const name = certificate?.name;
+  const documentId = certificate?.id;
+  const documentName = certificate?.name;
   const issuedOn = certificate?.issuedOn;
   const errorsList = errors.join(",");
 
   // If there are multiple issuers in a certificate, we send multiple events!
   certificate.issuers.forEach((issuer: v2.Issuer) => {
-    const store = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? issuer.id ?? ""; // use id for DID
+    const documentStore = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? issuer.id ?? ""; // use id for DID
     let issuerName = issuer.name;
     let registryId = null;
 
-    if (isInRegistry(store)) {
-      const registryIssuer: RegistryEntry = registry.issuers[store];
+    if (isInRegistry(documentStore)) {
+      const registryIssuer: RegistryEntry = registry.issuers[documentStore];
       issuerName = registryIssuer.name;
       registryId = registryIssuer.id;
     } else if (issuer.identityProof) {
       issuerName = issuer.identityProof.location || "";
     }
 
-    analyticsEvent(window, {
+    analyticsEvent({
       category: "CERTIFICATE_ERROR",
-      action: `ERROR - ${issuerName}`,
-      label: errorsList,
+      nonInteraction: true,
       options: {
-        nonInteraction: true,
-        dimension1: store || "(not set)",
-        dimension2: id || "(not set)",
-        dimension3: name || "(not set)",
-        dimension4: issuedOn || "(not set)",
-        dimension5: issuerName || "(not set)",
-        dimension6: registryId || "(not set)",
-        dimension7: errorsList,
+        documentStore: documentStore,
+        documentId: documentId,
+        documentName: documentName,
+        issuedOn: issuedOn,
+        issuerName: issuerName,
+        registryId: registryId,
+        errors: errorsList,
       },
     });
   });
@@ -164,28 +175,25 @@ export function triggerV3ErrorLogging(
   rawCertificate: WrappedDocument<v3.OpenAttestationDocument>,
   errors: string[]
 ): void {
-  const id = rawCertificate?.id;
-  const name = rawCertificate?.name;
+  const documentId = rawCertificate?.id;
+  const documentName = rawCertificate?.name;
   const issuedOn = rawCertificate?.issued;
   const errorsList = errors.join(",");
 
   // If there are multiple issuers in a certificate, we send multiple events!
-  const store = utils.getIssuerAddress(rawCertificate);
+  const documentStore = utils.getIssuerAddress(rawCertificate);
   const issuerName = rawCertificate.openAttestationMetadata.identityProof.identifier;
 
-  analyticsEvent(window, {
+  analyticsEvent({
     category: "CERTIFICATE_ERROR",
-    action: `ERROR - ${issuerName}`,
-    label: errorsList,
+    nonInteraction: true,
     options: {
-      nonInteraction: true,
-      dimension1: store || "(not set)",
-      dimension2: id || "(not set)",
-      dimension3: name || "(not set)",
-      dimension4: issuedOn || "(not set)",
-      dimension5: issuerName || "(not set)",
-      dimension6: "(not set)",
-      dimension7: errorsList,
+      documentStore: documentStore,
+      documentId: documentId,
+      documentName: documentName,
+      issuedOn: issuedOn,
+      issuerName: issuerName,
+      errors: errorsList,
     },
   });
 }
@@ -193,8 +201,8 @@ export function triggerV3ErrorLogging(
 export function triggerV2RendererTimeoutLogging(rawCertificate: WrappedDocument<v2.OpenAttestationDocument>): void {
   const certificate: v2.OpenAttestationDocument & { name?: string; issuedOn?: string } = getData(rawCertificate);
 
-  const id = certificate?.id;
-  const name = certificate?.name;
+  const documentId = certificate?.id;
+  const documentName = certificate?.name;
   const issuedOn = certificate?.issuedOn;
   const rendererUrl = typeof certificate?.$template === "string" ? certificate?.$template : certificate?.$template?.url;
   const templateName =
@@ -202,60 +210,57 @@ export function triggerV2RendererTimeoutLogging(rawCertificate: WrappedDocument<
 
   // If there are multiple issuers in a certificate, we send multiple events!
   certificate.issuers.forEach((issuer: v2.Issuer) => {
-    const store = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? issuer.id ?? ""; // use id for DID
+    const documentStore = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? issuer.id ?? ""; // use id for DID
     let issuerName = issuer.name;
     let registryId = null;
 
-    if (isInRegistry(store)) {
-      const registryIssuer: RegistryEntry = registry.issuers[store];
+    if (isInRegistry(documentStore)) {
+      const registryIssuer: RegistryEntry = registry.issuers[documentStore];
       issuerName = registryIssuer.name;
       registryId = registryIssuer.id;
     } else if (issuer.identityProof) {
       issuerName = issuer.identityProof.location || "";
     }
 
-    analyticsEvent(window, {
+    analyticsEvent({
       category: "CERTIFICATE_RENDERER_TIMEOUT",
-      action: `RENDERER TIMEOUT - ${issuerName}`,
+      nonInteraction: true,
       options: {
-        nonInteraction: true,
-        dimension1: store || "(not set)",
-        dimension2: id || "(not set)",
-        dimension3: name || "(not set)",
-        dimension4: issuedOn || "(not set)",
-        dimension5: issuerName || "(not set)",
-        dimension6: registryId || "(not set)",
-        dimension8: rendererUrl || "(not set)",
-        dimension9: templateName || "(not set)",
+        documentStore: documentStore,
+        documentId: documentId,
+        documentName: documentName,
+        issuedOn: issuedOn,
+        issuerName: issuerName,
+        registryId: registryId,
+        rendererUrl: rendererUrl,
+        templateName: templateName,
       },
     });
   });
 }
 
 export function triggerV3RendererTimeoutLogging(rawCertificate: WrappedDocument<v3.OpenAttestationDocument>): void {
-  const id = rawCertificate?.id;
-  const name = rawCertificate?.name;
+  const documentId = rawCertificate?.id;
+  const documentName = rawCertificate?.name;
   const issuedOn = rawCertificate?.issued;
   const rendererUrl = rawCertificate?.openAttestationMetadata.template?.url;
   const templateName = rawCertificate?.openAttestationMetadata.template?.name;
 
   // If there are multiple issuers in a certificate, we send multiple events!
-  const store = utils.getIssuerAddress(rawCertificate);
+  const documentStore = utils.getIssuerAddress(rawCertificate);
   const issuerName = rawCertificate.openAttestationMetadata.identityProof.identifier;
 
-  analyticsEvent(window, {
+  analyticsEvent({
     category: "CERTIFICATE_RENDERER_TIMEOUT",
-    action: `RENDERER TIMEOUT - ${issuerName}`,
+    nonInteraction: true,
     options: {
-      nonInteraction: true,
-      dimension1: store || "(not set)",
-      dimension2: id || "(not set)",
-      dimension3: name || "(not set)",
-      dimension4: issuedOn || "(not set)",
-      dimension5: issuerName || "(not set)",
-      dimension6: "(not set)",
-      dimension8: rendererUrl || "(not set)",
-      dimension9: templateName || "(not set)",
+      documentStore: documentStore,
+      documentId: documentId,
+      documentName: documentName,
+      issuedOn: issuedOn,
+      issuerName: issuerName,
+      rendererUrl: rendererUrl,
+      templateName: templateName,
     },
   });
 }
