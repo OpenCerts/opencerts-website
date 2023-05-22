@@ -47,14 +47,8 @@ const { trace } = getLogger("saga:certificate");
 const getProvider = (networkName: string) =>
   new ethers.providers.FallbackProvider(
     [
-      {
-        priority: 1,
-        provider: new ethers.providers.InfuraProvider(networkName, process.env.INFURA_API_KEY),
-      },
-      {
-        priority: 10,
-        provider: new ethers.providers.AlchemyProvider(networkName, process.env.ALCHEMY_API_KEY),
-      },
+      { priority: 1, provider: new ethers.providers.InfuraProvider(networkName, process.env.INFURA_API_KEY) },
+      { priority: 10, provider: new ethers.providers.AlchemyProvider(networkName, process.env.ALCHEMY_API_KEY) },
     ],
     1
   );
@@ -73,6 +67,7 @@ const getNetworkName = (certificate: WrappedOrSignedOpenCertsDocument) => {
         return "maticmum";
     }
   }
+  console.log("USING NETWORK NAME", NETWORK_NAME);
   return NETWORK_NAME;
 };
 
