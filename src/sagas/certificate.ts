@@ -61,7 +61,7 @@ const getAltNetworkProvider = (networkName: string) =>
     1
   );
 
-const getAlternateNetwork = (certificate: any) => {
+const getAlternateNetwork = (certificate: WrappedOrSignedOpenCertsDocument) => {
   const data = opencertsGetData(certificate);
   if (!data.network) return undefined;
   switch (data.network?.chainId) {
