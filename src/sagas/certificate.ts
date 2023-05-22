@@ -8,7 +8,7 @@ import Router from "next/router";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import "isomorphic-fetch";
 import { triggerV2ErrorLogging, triggerV3ErrorLogging } from "../components/Analytics";
-import { NETWORK_NAME } from "../config";
+import { NETWORK_NAME, IS_MAINNET } from "../config";
 
 import {
   GENERATE_SHARE_LINK,
@@ -44,41 +44,43 @@ import { opencertsGetData } from "../utils/utils";
 
 const { trace } = getLogger("saga:certificate");
 // lower priority === higher priority, so infura has priority, alchemy is used as fallback
-const ethereumProvider = new ethers.providers.FallbackProvider(
-  [
-    { priority: 1, provider: new ethers.providers.InfuraProvider(NETWORK_NAME, process.env.INFURA_API_KEY) },
-    { priority: 10, provider: new ethers.providers.AlchemyProvider(NETWORK_NAME, process.env.ALCHEMY_API_KEY) },
-  ],
-  1
-);
-
-const getAltNetworkProvider = (networkName: string) =>
-  new ethers.providers.FallbackProvider( // provider for polygon certs
+const getProvider = (networkName: string) =>
+  new ethers.providers.FallbackProvider(
     [
-      { priority: 1, provider: new ethers.providers.InfuraProvider(networkName, process.env.INFURA_API_KEY) },
-      { priority: 10, provider: new ethers.providers.AlchemyProvider(networkName, process.env.ALCHEMY_API_KEY) },
+      {
+        priority: 1,
+        provider: new ethers.providers.InfuraProvider(networkName, process.env.INFURA_API_KEY),
+      },
+      {
+        priority: 10,
+        provider: new ethers.providers.AlchemyProvider(networkName, process.env.ALCHEMY_API_KEY),
+      },
     ],
     1
   );
 
-const getAlternateNetwork = (certificate: WrappedOrSignedOpenCertsDocument) => {
+const getNetworkName = (certificate: WrappedOrSignedOpenCertsDocument) => {
   const data = opencertsGetData(certificate);
-  if (!data.network) return undefined;
-  switch (data.network?.chainId) {
-    case "137":
-      return "matic";
-    case "80001":
-      return "maticmum";
-    default:
-      return undefined;
+
+  if (IS_MAINNET) {
+    switch (data.network?.chainId) {
+      case "137":
+        return "matic";
+    }
+  } else {
+    switch (data.network?.chainId) {
+      case "80001":
+        return "maticmum";
+    }
   }
+  return NETWORK_NAME;
 };
 
 export function* verifyCertificate({ payload: certificate }: { payload: WrappedOrSignedOpenCertsDocument }) {
   try {
     yield put(verifyingCertificate());
-    const alternateNetworkName = getAlternateNetwork(certificate);
-    const provider = alternateNetworkName ? getAltNetworkProvider(alternateNetworkName) : ethereumProvider;
+    const networkName = getNetworkName(certificate);
+    const provider = getProvider(networkName);
     // https://github.com/redux-saga/redux-saga/issues/884
     const fragments: VerificationFragment[] = yield call(verify({ provider }), certificate);
     trace(`Verification Status: ${JSON.stringify(fragments)}`);

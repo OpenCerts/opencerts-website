@@ -11,7 +11,8 @@ const API_ROPSTEN_URL = "https://api-ropsten.opencerts.io";
 const API_RINKEBY_URL = "https://api-rinkeby.opencerts.io";
 
 export const IS_MAINNET = publicRuntimeConfig.network === "mainnet";
-export const NETWORK_NAME = (IS_MAINNET ? "homestead" : publicRuntimeConfig.network) ?? "goerli"; // expected by ethers
+export const SUPPORTED_NETWORK = IS_MAINNET ? ["homestead", "matic"] : ["goerli", "maticmum"];
+export const NETWORK_NAME = SUPPORTED_NETWORK[0]; // expected by ethers
 
 export const GA4_TAG_ID = process.env.GA4_TAG_ID;
 export const CAPTCHA_CLIENT_KEY = "6LfiL3EUAAAAAHrfLvl2KhRAcXpanNXDqu6M0CCS";
