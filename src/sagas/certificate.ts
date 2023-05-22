@@ -67,7 +67,6 @@ const getNetworkName = (certificate: WrappedOrSignedOpenCertsDocument) => {
         return "maticmum";
     }
   }
-  console.log("USING NETWORK NAME", NETWORK_NAME);
   return NETWORK_NAME;
 };
 
