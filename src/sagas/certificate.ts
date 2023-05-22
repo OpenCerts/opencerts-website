@@ -40,10 +40,11 @@ import {
 import { generateLink } from "../services/link";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
 import { getLogger } from "../utils/logger";
+import { opencertsGetData } from "../utils/utils";
 
 const { trace } = getLogger("saga:certificate");
 // lower priority === higher priority, so infura has priority, alchemy is used as fallback
-const provider = new ethers.providers.FallbackProvider(
+const ethereumProvider = new ethers.providers.FallbackProvider(
   [
     { priority: 1, provider: new ethers.providers.InfuraProvider(NETWORK_NAME, process.env.INFURA_API_KEY) },
     { priority: 10, provider: new ethers.providers.AlchemyProvider(NETWORK_NAME, process.env.ALCHEMY_API_KEY) },
@@ -51,9 +52,34 @@ const provider = new ethers.providers.FallbackProvider(
   1
 );
 
+const getAltNetworkProvider = (networkName: string) =>
+  new ethers.providers.FallbackProvider( // provider for polygon certs
+    [
+      { priority: 1, provider: new ethers.providers.InfuraProvider(networkName, process.env.INFURA_API_KEY) },
+      { priority: 10, provider: new ethers.providers.AlchemyProvider(networkName, process.env.ALCHEMY_API_KEY) },
+    ],
+    1
+  );
+
+const getAlternateNetwork = (certificate: any) => {
+  const data = opencertsGetData(certificate);
+  if (!data.network) return undefined;
+  switch (data.network?.chainId) {
+    case "137":
+      return "matic";
+    case "80001":
+      return "maticmum";
+    default:
+      return undefined;
+  }
+};
+
 export function* verifyCertificate({ payload: certificate }: { payload: WrappedOrSignedOpenCertsDocument }) {
   try {
     yield put(verifyingCertificate());
+    const alternateNetworkName = getAlternateNetwork(certificate);
+    console.log("test test", alternateNetworkName);
+    const provider = alternateNetworkName ? getAltNetworkProvider(alternateNetworkName) : ethereumProvider;
     // https://github.com/redux-saga/redux-saga/issues/884
     const fragments: VerificationFragment[] = yield call(verify({ provider }), certificate);
     trace(`Verification Status: ${JSON.stringify(fragments)}`);
