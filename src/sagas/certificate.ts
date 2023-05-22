@@ -78,7 +78,6 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedO
   try {
     yield put(verifyingCertificate());
     const alternateNetworkName = getAlternateNetwork(certificate);
-    console.log("test test", alternateNetworkName);
     const provider = alternateNetworkName ? getAltNetworkProvider(alternateNetworkName) : ethereumProvider;
     // https://github.com/redux-saga/redux-saga/issues/884
     const fragments: VerificationFragment[] = yield call(verify({ provider }), certificate);
