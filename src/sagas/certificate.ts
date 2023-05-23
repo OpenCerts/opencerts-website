@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { decryptString } from "@govtechsg/oa-encryption";
-import { VerificationFragment } from "@govtechsg/oa-verify";
+import { VerificationFragment, utils as oaVerifyUtils, ErrorVerificationFragment } from "@govtechsg/oa-verify";
 import { utils } from "@govtechsg/open-attestation";
 import { isValid, verify } from "@govtechsg/opencerts-verify";
 import { ethers } from "ethers";
@@ -43,15 +43,12 @@ import { getLogger } from "../utils/logger";
 import { opencertsGetData } from "../utils/utils";
 
 const { trace } = getLogger("saga:certificate");
-// lower priority === higher priority, so infura has priority, alchemy is used as fallback
-const getProvider = (networkName: string) =>
-  new ethers.providers.FallbackProvider(
-    [
-      { priority: 1, provider: new ethers.providers.InfuraProvider(networkName, process.env.INFURA_API_KEY) },
-      { priority: 10, provider: new ethers.providers.AlchemyProvider(networkName, process.env.ALCHEMY_API_KEY) },
-    ],
-    1
-  );
+const getProvider = (networkName: string, providerName: "infura" | "alchemy") => {
+  if (providerName === "alchemy") {
+    return new ethers.providers.AlchemyProvider(networkName, process.env.ALCHEMY_API_KEY);
+  }
+  return new ethers.providers.InfuraProvider(networkName, process.env.INFURA_API_KEY);
+};
 
 const getNetworkName = (certificate: WrappedOrSignedOpenCertsDocument) => {
   const data = opencertsGetData(certificate);
@@ -70,13 +67,32 @@ const getNetworkName = (certificate: WrappedOrSignedOpenCertsDocument) => {
   return NETWORK_NAME;
 };
 
+const fragmentsHaveCallException = (fragments: VerificationFragment[]) => {
+  let result = false;
+  fragments.forEach((fragment) => {
+    if (oaVerifyUtils.isErrorFragment(fragment)) {
+      const errFragment = fragment as ErrorVerificationFragment<{ code: string }>;
+      if (errFragment.data?.code === "CALL_EXCEPTION") {
+        result = true;
+      }
+    }
+  });
+  return result;
+};
+
 export function* verifyCertificate({ payload: certificate }: { payload: WrappedOrSignedOpenCertsDocument }) {
   try {
     yield put(verifyingCertificate());
     const networkName = getNetworkName(certificate);
-    const provider = getProvider(networkName);
+    const infuraProvider = getProvider(networkName, "infura");
     // https://github.com/redux-saga/redux-saga/issues/884
-    const fragments: VerificationFragment[] = yield call(verify({ provider }), certificate);
+    let fragments: VerificationFragment[] = yield call(verify({ provider: infuraProvider }), certificate);
+    // manually call alchemy provider as backup if infura provider returns error fragment
+    // https://docs.ethers.org/v5/api/providers/other/#FallbackProvider
+    if (fragmentsHaveCallException(fragments)) {
+      const alchemyProvider = getProvider(networkName, "alchemy");
+      fragments = yield call(verify({ provider: alchemyProvider }), certificate);
+    }
     trace(`Verification Status: ${JSON.stringify(fragments)}`);
 
     yield put(verifyingCertificateCompleted(fragments));
