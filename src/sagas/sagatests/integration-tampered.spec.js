@@ -16,7 +16,7 @@ const validateTextContent = async (t, component, texts) =>
 test("Tampered certificate's error message is correct", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
-  await InvalidMessage.with({ timeout: 10000, visibilityCheck: true })();
+  await InvalidMessage.with({ visibilityCheck: true })();
 
   await validateTextContent(t, RenderedCertificate, [
     "This certificate is not valid",
