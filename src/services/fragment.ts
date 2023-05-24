@@ -66,7 +66,7 @@ export const serverError = (fragments: VerificationFragment[]): boolean => {
   // 429 is the error code used by oa-verify in case of Ethers returning a missing response error
   const serverErrValue = OpenAttestationEthereumDocumentStoreStatusCode.SERVER_ERROR;
   return (
-    documentStoreIssuedFragment?.data?.error.code === OpenAttestationEthereumDocumentStoreStatusCode[serverErrValue] ||
+    documentStoreIssuedFragment?.data?.error?.code === OpenAttestationEthereumDocumentStoreStatusCode[serverErrValue] ||
     documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.SERVER_ERROR ||
     tokenRegistryMintedFragment?.reason?.code === OpenAttestationEthereumTokenRegistryStatusCode.SERVER_ERROR
   );
