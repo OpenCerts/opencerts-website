@@ -377,6 +377,10 @@
     "0x49b2969bF0E4aa822023a9eA2293b24E4518C1DD": {
       "name": "GOERLI: Government Technology Agency of Singapore (GovTech)",
       "displayCard": false
+    },
+    "0x80732bF5CA47A85e599f3ac9572F602c249C8A28": {
+      "name": "MUMBAI: Government Technology Agency of Singapore (GovTech)",
+      "displayCard": false
     }
   }
 }
