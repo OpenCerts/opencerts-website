@@ -8,13 +8,13 @@ fixture("Ethereum Provider HTTP Server Error").page`http://localhost:3000`.befor
 const rateLimitMock = RequestMock()
   .onRequestTo({ url: "https://goerli.infura.io/v3/01b3ed28c54f4ae49cb4e27df560c5e8", method: "post" })
   .respond(null, 429)
-  .onRequestTo({ url: "https://eth-goerli.alchemyapi.io/v2/FK1x9CdE8NStKjVt236D_LP7B6MMCFOs", method: "post" })
+  .onRequestTo({ url: "https://eth-goerli.g.alchemy.com/v2/FK1x9CdE8NStKjVt236D_LP7B6MMCFOs", method: "post" })
   .respond(null, 429);
 
 const badGatewayMock = RequestMock()
   .onRequestTo({ url: "https://goerli.infura.io/v3/01b3ed28c54f4ae49cb4e27df560c5e8", method: "post" })
   .respond(null, 502)
-  .onRequestTo({ url: "https://eth-goerli.alchemyapi.io/v2/FK1x9CdE8NStKjVt236D_LP7B6MMCFOs", method: "post" })
+  .onRequestTo({ url: "https://eth-goerli.g.alchemy.com/v2/FK1x9CdE8NStKjVt236D_LP7B6MMCFOs", method: "post" })
   .respond(null, 502);
 
 const badGatewayMockInfuraOnly = RequestMock()
