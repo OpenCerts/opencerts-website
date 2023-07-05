@@ -381,6 +381,10 @@
     "0x80732bF5CA47A85e599f3ac9572F602c249C8A28": {
       "name": "MUMBAI: Government Technology Agency of Singapore (GovTech)",
       "displayCard": false
+    },
+    "0x80ca96D2Aab5E1E23876a4D8140Ee1292327a4cd": {
+      "name": "SEPOLIA: Government Technology Agency of Singapore (GovTech)",
+      "displayCard": false
     }
   }
 }
