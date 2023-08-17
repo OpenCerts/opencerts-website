@@ -8,6 +8,7 @@ fixture("Unverified Certificate Rendering").page`http://localhost:3000`.beforeEa
 const Certificate = "./fixture/unverified-issuer.json";
 
 const RenderedCertificate = Selector("#certificate-dropzone");
+
 const InvalidMessage = Selector(".invalid");
 
 const validateTextContent = async (t, component, texts) =>
