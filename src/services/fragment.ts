@@ -41,9 +41,13 @@ export const certificateNotIssued = (fragments: VerificationFragment[]): boolean
 
 // this function check if the reason of the error is that the document store or token has not been issued
 export const certificateRevoked = (fragments: VerificationFragment[]): boolean => {
+  const didSignedFragment = utils.getOpenAttestationDidSignedDocumentStatusFragment(fragments);
   const documentStoreIssuedFragment = utils.getOpenAttestationEthereumDocumentStoreStatusFragment(fragments);
   // 1 is the error code used by oa-verify in case of document / token not issued / minted
-  return documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.DOCUMENT_REVOKED;
+  return (
+    didSignedFragment?.data?.revokedOnAny === true ||
+    documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.DOCUMENT_REVOKED
+  );
 };
 
 // this function check if the error is caused by an invalid merkle root (incorrect length/odd length/invalid characters)
