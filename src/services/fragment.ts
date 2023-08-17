@@ -1,5 +1,4 @@
 import {
-  OpenAttestationDidSignedDocumentStatusVerificationFragment,
   OpenAttestationEthereumDocumentStoreStatusCode,
   OpenAttestationEthereumTokenRegistryStatusCode,
   VerificationFragment,
