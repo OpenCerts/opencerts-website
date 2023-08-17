@@ -45,7 +45,7 @@ export const certificateRevoked = (fragments: VerificationFragment[]): boolean =
   const documentStoreIssuedFragment = utils.getOpenAttestationEthereumDocumentStoreStatusFragment(fragments);
   // 1 is the error code used by oa-verify in case of document / token not issued / minted
   return (
-    didSignedFragment?.data.revokedOnAny === true ||
+    didSignedFragment?.data?.revokedOnAny === true ||
     documentStoreIssuedFragment?.reason?.code === OpenAttestationEthereumDocumentStoreStatusCode.DOCUMENT_REVOKED
   );
 };
