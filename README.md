@@ -6,7 +6,7 @@
 
 As of 31 December 2019, we have migrated from OpenCerts `v1` to `v2`.
 
-As part of the migration, do note that `certificateStore` has been renamed to `documentStore`, please refer to the [`public/static/demo/goerli.opencert`](https://github.com/OpenCerts/opencerts-website/blob/master/public/static/demo/goerli.opencert) for the latest implementation or refer to the snippet below for more information about the "issuers" section of the document.
+As part of the migration, do note that `certificateStore` has been renamed to `documentStore`, please refer to the [`public/static/demo/sepolia.opencert`](https://github.com/OpenCerts/opencerts-website/blob/master/public/static/demo/sepolia.opencert) for the latest implementation or refer to the snippet below for more information about the "issuers" section of the document.
 
 ```
  "issuers": [
@@ -61,7 +61,7 @@ npm run dev
 
 ### Environmental Variables
 
-`NET` is used for setting the default network, setting it to `mainnet` uses the public Ethereum network. If it is not set it defaults to Goerli testnet
+`NET` is used for setting the default network, setting it to `mainnet` uses the public Ethereum network. If it is not set it defaults to Sepolia testnet
 
 E.g:
 
