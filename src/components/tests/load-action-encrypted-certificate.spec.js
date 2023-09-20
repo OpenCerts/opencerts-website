@@ -14,14 +14,14 @@ const CertificateDropzone = Selector("#certificate-dropzone");
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(async (_prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());
 
-const key = "d1093e704689bcb3a1287daef7644751498b4cbf008d32373a567fe3a112a26e";
+const key = "894c5b45a61d79fe46835e2c2b363875f0a1240db447bb3db77c2cf79568e279";
 
 test("Load document from action should work when action is valid (key from anchor)", async (t) => {
   const anchor = { key };
   const action = {
     type: "DOCUMENT",
     payload: {
-      uri: `https://gist.githubusercontent.com/john-dot-oa/0dfa4b0decedc120ef19cd4d6643e315/raw/a0da74ad4568826dc90e9e865dac1ec00f68b124/opencerts-website-e2e.json`,
+      uri: `https://gist.githubusercontent.com/john-dot-oa/584088ea5180b52fb48e5d7d3d782693/raw/ac5ce368981f8f31dae9d289f4acdfd985d19c68/opencerts-website-sepolia-e2e.json`,
       permittedAction: ["STORE"],
       redirect: "https://opencerts.io/",
     },
@@ -30,7 +30,7 @@ test("Load document from action should work when action is valid (key from ancho
   await t.navigateTo(
     `http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}#${encodeURI(JSON.stringify(anchor))}`
   );
-  await validateTextContent(t, StatusButton, ["GOERLI: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
+  await validateTextContent(t, StatusButton, ["SEPOLIA: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
 
   await t.switchToIframe(IframeBlock);
 
@@ -46,7 +46,7 @@ test("Load document from action should work when action is valid", async (t) => 
   const action = {
     type: "DOCUMENT",
     payload: {
-      uri: `https://gist.githubusercontent.com/john-dot-oa/0dfa4b0decedc120ef19cd4d6643e315/raw/a0da74ad4568826dc90e9e865dac1ec00f68b124/opencerts-website-e2e.json`,
+      uri: `https://gist.githubusercontent.com/john-dot-oa/584088ea5180b52fb48e5d7d3d782693/raw/ac5ce368981f8f31dae9d289f4acdfd985d19c68/opencerts-website-sepolia-e2e.json`,
       key,
       permittedAction: ["STORE"],
       redirect: "https://opencerts.io/",
@@ -54,7 +54,7 @@ test("Load document from action should work when action is valid", async (t) => 
   };
 
   await t.navigateTo(`http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}`);
-  await validateTextContent(t, StatusButton, ["GOERLI: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
+  await validateTextContent(t, StatusButton, ["SEPOLIA: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
 
   await t.switchToIframe(IframeBlock);
 
