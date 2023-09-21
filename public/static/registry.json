@@ -302,6 +302,10 @@
       "name": "GOERLI: Singapore Examinations and Assessment Board",
       "displayCard": false
     },
+    "0x5d848a49fB43a6207c5beD5A34388f3013832860": {
+      "name": "SEPOLIA: Singapore Examinations and Assessment Board",
+      "displayCard": false
+    },
     "0x897E224a6a8b72535D67940B3B8CE53f9B596800": {
       "name": "ROPSTEN: Singapore Institute of Technology",
       "displayCard": false
@@ -380,6 +384,10 @@
     },
     "0x80732bF5CA47A85e599f3ac9572F602c249C8A28": {
       "name": "MUMBAI: Government Technology Agency of Singapore (GovTech)",
+      "displayCard": false
+    },
+    "0x71D28767662cB233F887aD2Bb65d048d760bA694": {
+      "name": "SEPOLIA: Government Technology Agency of Singapore (GovTech)",
       "displayCard": false
     },
     "0x80ca96D2Aab5E1E23876a4D8140Ee1292327a4cd": {
