@@ -40,11 +40,22 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
   const [rendererTimeout, setRendererTimeout] = useState(false);
   const [height, setHeight] = useState(0);
   const [templates, setTemplates] = useState<{ id: string; label: string }[]>([]);
+  const [lastSelected, setLastSelected] = useState<string>("");
 
   useImperativeHandle(forwardedRef, () => ({
     print() {
       if (toFrame.current) {
-        toFrame.current(print());
+        const hasPrintTab = templates.filter((template) => template.id === "print").length > 0;
+        if (!hasPrintTab) {
+          toFrame.current(print());
+        } else {
+          // To support print all function
+          toFrame.current(selectTemplate("print"));
+          new Promise((resolve) => setTimeout(resolve, 500)).then(() => {
+            toFrame.current?.(print());
+            toFrame.current?.(selectTemplate(lastSelected));
+          });
+        }
       }
     },
   }));
@@ -136,13 +147,15 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
     }
   }, [rawDocument]);
 
+  const visibleTemplates = templates.filter((template) => template.id !== "print");
   return (
     <>
       <MutiTabsContainer
-        templates={templates}
+        templates={visibleTemplates}
         onSelectTemplate={(label) => {
           if (toFrame.current) {
             toFrame.current(selectTemplate(label));
+            setLastSelected(label);
           }
         }}
       />
