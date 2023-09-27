@@ -45,7 +45,17 @@ import { opencertsGetData } from "../utils/utils";
 const { trace } = getLogger("saga:certificate");
 const getProvider = (networkName: string, providerName: "infura" | "alchemy") => {
   if (providerName === "alchemy") {
-    return new ethers.providers.AlchemyProvider(networkName, process.env.ALCHEMY_API_KEY);
+    switch (networkName) {
+      case "sepolia":
+        // Handling sepolia network differently because ethers v5 AlchemyProvider doesn't support Sepolia
+        // TODO: use ethers v6 AlchemyProvider once ethers version is able to be bumped
+        return new ethers.providers.StaticJsonRpcProvider(
+          `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`,
+          networkName
+        );
+      default:
+        return new ethers.providers.AlchemyProvider(networkName, process.env.ALCHEMY_API_KEY);
+    }
   }
   return new ethers.providers.InfuraProvider(networkName, process.env.INFURA_API_KEY);
 };
