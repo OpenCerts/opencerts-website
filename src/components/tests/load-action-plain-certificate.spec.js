@@ -18,7 +18,7 @@ test("Load document from action should work when url is valid", async (t) => {
   const action = {
     type: "DOCUMENT",
     payload: {
-      uri: `https://gist.githubusercontent.com/john-dot-oa/682f89e077c95effff13bb836310f43f/raw/3ba12b193d394bce058dfa91e50004a67b9c4cf1/opencerts-website-sepolia-demo.json`,
+      uri: `https://gist.githubusercontent.com/john-dot-oa/3069a02fe96445bc71ff7eb15a7f93c0/raw/98488d7e478ac7072d9210d8615aed8bb37506e4/opencerts-website-sepolia-demo.json`,
       redirect: "https://opencerts.io/",
     },
   };

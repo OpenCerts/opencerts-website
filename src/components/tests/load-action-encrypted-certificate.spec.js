@@ -21,7 +21,7 @@ test("Load document from action should work when action is valid (key from ancho
   const action = {
     type: "DOCUMENT",
     payload: {
-      uri: `https://gist.githubusercontent.com/john-dot-oa/584088ea5180b52fb48e5d7d3d782693/raw/ac5ce368981f8f31dae9d289f4acdfd985d19c68/opencerts-website-sepolia-e2e.json`,
+      uri: `https://gist.githubusercontent.com/john-dot-oa/3069a02fe96445bc71ff7eb15a7f93c0/raw/98488d7e478ac7072d9210d8615aed8bb37506e4/opencerts-website-sepolia-e2e.json`,
       permittedAction: ["STORE"],
       redirect: "https://opencerts.io/",
     },
@@ -46,7 +46,7 @@ test("Load document from action should work when action is valid", async (t) => 
   const action = {
     type: "DOCUMENT",
     payload: {
-      uri: `https://gist.githubusercontent.com/john-dot-oa/584088ea5180b52fb48e5d7d3d782693/raw/ac5ce368981f8f31dae9d289f4acdfd985d19c68/opencerts-website-sepolia-e2e.json`,
+      uri: `https://gist.githubusercontent.com/john-dot-oa/3069a02fe96445bc71ff7eb15a7f93c0/raw/98488d7e478ac7072d9210d8615aed8bb37506e4/opencerts-website-sepolia-e2e.json`,
       key,
       permittedAction: ["STORE"],
       redirect: "https://opencerts.io/",
