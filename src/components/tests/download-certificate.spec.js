@@ -75,7 +75,7 @@ test("Sample document with special characters is downloaded correctly", async (t
 
   await validateTextContent(t, StatusButton, [
     "DEMO-OPENCERTS.OPENATTESTATION.COM",
-    "GOERLI: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)",
+    "SEPOLIA: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)",
   ]);
 
   // Simulate an OpenCert file download

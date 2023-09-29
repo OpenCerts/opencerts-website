@@ -18,13 +18,13 @@ test("Load document from action should work when url is valid", async (t) => {
   const action = {
     type: "DOCUMENT",
     payload: {
-      uri: `https://gist.githubusercontent.com/john-dot-oa/fc91eb8f98cd47224dd7339145d98561/raw/c2b61b28d1f754b25b03e6721eba70c1a7c67887/opencerts-website-goerli-demo.json`,
+      uri: `https://gist.githubusercontent.com/john-dot-oa/3069a02fe96445bc71ff7eb15a7f93c0/raw/98488d7e478ac7072d9210d8615aed8bb37506e4/opencerts-website-sepolia-demo.json`,
       redirect: "https://opencerts.io/",
     },
   };
 
   await t.navigateTo(`http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}`);
-  await validateTextContent(t, StatusButton, ["GOERLI: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
+  await validateTextContent(t, StatusButton, ["SEPOLIA: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
 
   await t.switchToIframe(IframeBlock);
 
