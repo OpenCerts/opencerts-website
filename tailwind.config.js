@@ -42,9 +42,6 @@ module.exports = {
         pulsing: "pulsing 3s alternate infinite",
       },
       colors: {
-        white: {
-          default: "#fff",
-        },
         grey: {
           default: "#ccc",
         },
@@ -62,10 +59,12 @@ module.exports = {
         },
         blue: {
           100: "#f5f8fb",
+          200: "#007EA8",
           300: "#53bcdf",
           default: "#007EA8",
         },
         navy: {
+          100: "#324353",
           200: "#eef2f5",
           300: "#506c85",
           default: "#324353",

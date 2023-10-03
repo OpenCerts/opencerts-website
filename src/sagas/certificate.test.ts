@@ -4,6 +4,7 @@ import { getCertificate } from "../reducers/certificate.selectors";
 import { sendCertificate } from "./certificate";
 import { MakeCertUtil } from "./testutils";
 
+// eslint-disable-next-line jest/no-untyped-mock-factory
 jest.mock("@govtechsg/open-attestation", () => {
   // Require the original module to not be mocked...
   const originalModule = jest.requireActual("@govtechsg/open-attestation");

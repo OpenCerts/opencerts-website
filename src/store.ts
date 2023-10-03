@@ -13,4 +13,4 @@ export const initStore = (): Store<RootState> => {
   return store;
 };
 
-export const wrapper = createWrapper<RootState>(initStore);
+export const wrapper = createWrapper(initStore);

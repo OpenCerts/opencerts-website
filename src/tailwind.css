@@ -31,7 +31,7 @@ a:hover {
 
 /* helper for links that are on light bg */
 .links-blue a {
-  @apply text-blue;
+  @apply text-blue-200;
 }
 
 .links-blue a:hover {
@@ -89,12 +89,12 @@ b {
 }
 
 .icon-utility:hover {
-  @apply bg-navy;
+  @apply bg-navy-100;
 }
 
 .icon-utility i {
   @apply ease-colors;
-  @apply text-navy;
+  @apply text-navy-100;
 }
 
 .icon-utility:hover i {
