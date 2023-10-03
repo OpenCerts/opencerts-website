@@ -1,23 +1,23 @@
 workflows:
   version: 2
-#  uncomment to get build registry
-#  nightly:
-#    triggers:
-#      - schedule:
-#          cron: "0 0 * * *"
-#          filters:
-#            branches:
-#              only:
-#                - master
-#    jobs:
-#      - build_registry
+  #  uncomment to get build registry
+  #  nightly:
+  #    triggers:
+  #      - schedule:
+  #          cron: "0 0 * * *"
+  #          filters:
+  #            branches:
+  #              only:
+  #                - master
+  #    jobs:
+  #      - build_registry
   commit:
     jobs:
       - build
 jobs:
   build_registry:
     docker:
-      - image: "cimg/node:lts-browsers"
+      - image: "cimg/node:18.18.0-browsers"
     steps:
       - checkout
       - run:
@@ -25,7 +25,7 @@ jobs:
           command: npm run build:registry
   build:
     docker:
-      - image: "cimg/node:lts-browsers"
+      - image: "cimg/node:18.18.0-browsers"
     steps:
       - checkout
       - run:
