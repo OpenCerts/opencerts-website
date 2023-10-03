@@ -51,7 +51,7 @@
     "next": "^12.3.4",
     "next-redux-wrapper": "^8.1.0",
     "next-seo": "^6.1.0",
-    "react": "^18.2.0",
+    "react": "^17.0.2",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-feather": "^2.0.10",
