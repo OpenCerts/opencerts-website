@@ -17,7 +17,7 @@ workflows:
 jobs:
   build_registry:
     docker:
-      - image: "circleci/node:lts-browsers"
+      - image: "cimg/node:lts-browsers"
     steps:
       - checkout
       - run:
@@ -25,7 +25,7 @@ jobs:
           command: npm run build:registry
   build:
     docker:
-      - image: "circleci/node:lts-browsers"
+      - image: "cimg/node:lts-browsers"
     steps:
       - checkout
       - run:
