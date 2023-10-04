@@ -22,7 +22,7 @@ html {
 a {
   @apply cursor-pointer;
   @apply ease-colors;
-  @apply text-gray-400;
+  @apply text-grey-400;
 }
 
 a:hover {

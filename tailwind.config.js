@@ -43,6 +43,8 @@ module.exports = {
       },
       colors: {
         grey: {
+          400: "#CBD5E0",
+          600: "#718096",
           DEFAULT: "#ccc",
         },
         neutral: {

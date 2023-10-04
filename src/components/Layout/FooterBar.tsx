@@ -76,7 +76,7 @@ export const FooterBar: React.FunctionComponent = () => (
       </div>
     </div>
     <div className="container">
-      <div className="border-t border-gray-600" />
+      <div className="border-t border-grey-600" />
       <p className="text-center text-xs py-4">Copyright © {copyrightYear} OpenCerts</p>
     </div>
   </footer>
