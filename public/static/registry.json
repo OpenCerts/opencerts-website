@@ -342,12 +342,12 @@
       "name": "ROPSTEN: Government Technology Agency of Singapore (GovTech)",
       "displayCard": false
     },
-    "0x061aFcFF60b90E0F633F8ef157e01BaB9b2FfDD3": {
-      "name": "ROPSTEN: Republic Polytechnic",
-      "displayCard": false
-    },
     "0x5AA6bF8F748cD2D8f1949eD328B2bEa61CE2B6d7": {
       "name": "GOERLI: Republic Polytechnic",
+      "displayCard": false
+    },
+    "0x061aFcFF60b90E0F633F8ef157e01BaB9b2FfDD3": {
+      "name": "SEPOLIA: Republic Polytechnic",
       "displayCard": false
     },
     "0x8b1ee9507681fea227d78ef9377d0f054856b774": {
