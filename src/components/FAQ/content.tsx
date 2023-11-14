@@ -151,20 +151,4 @@ export const faqContent: FagElement[] = [
       },
     ],
   },
-
-  {
-    category: "Institutes",
-    faq: [
-      {
-        question: "How can I change the appearance of the certificates I issue?",
-        answer: (
-          <p>
-            Each certificate can have a 'template' field. This field identifies the template to be used for that
-            certificate. Once you are a recognised issuer, you may submit a pull request at our GitHub repository to add
-            your certificate template to the verification site.
-          </p>
-        ),
-      },
-    ],
-  },
 ];
