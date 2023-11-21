@@ -1,8 +1,8 @@
 import { mapValues } from "lodash";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore repository has been archived, will wait to upgrade to fix
-import { DefaultSeo } from "next-seo";
 import App from "next/app";
+import { DefaultSeo } from "next-seo";
 import React from "react";
 import ReactGA from "react-ga4";
 import { useDispatch } from "react-redux";
@@ -11,7 +11,11 @@ import { updateFeatureToggles } from "../src/reducers/featureToggle.actions";
 import { wrapper } from "../src/store";
 import "../src/tailwind.css";
 
-const FeatureFlagLoader: React.FunctionComponent = ({ children }) => {
+type FeatureFlagLoaderProps = {
+  children: React.ReactNode;
+};
+
+const FeatureFlagLoader: React.FunctionComponent<FeatureFlagLoaderProps> = ({ children }) => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     const run = async (): Promise<void> => {

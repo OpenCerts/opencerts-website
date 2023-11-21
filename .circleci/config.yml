@@ -1,23 +1,25 @@
-workflows:
-  version: 2
-#  uncomment to get build registry
-#  nightly:
-#    triggers:
-#      - schedule:
-#          cron: "0 0 * * *"
-#          filters:
-#            branches:
-#              only:
-#                - master
-#    jobs:
-#      - build_registry
-  commit:
-    jobs:
-      - build
+version:
+  2.1
+  #  uncomment to get build registry
+  #  nightly:
+  #    triggers:
+  #      - schedule:
+  #          cron: "0 0 * * *"
+  #          filters:
+  #            branches:
+  #              only:
+  #                - master
+  #    jobs:
+  #      - build_registry
+orbs:
+  browser-tools: circleci/browser-tools@1.4.6
+commit:
+  jobs:
+    - build
 jobs:
   build_registry:
     docker:
-      - image: "circleci/node:lts-browsers"
+      - image: "cimg/node:18.18.0-browsers"
     steps:
       - checkout
       - run:
@@ -25,9 +27,10 @@ jobs:
           command: npm run build:registry
   build:
     docker:
-      - image: "circleci/node:lts-browsers"
+      - image: "cimg/node:18.18.0-browsers"
     steps:
       - checkout
+      - browser-tools/install-browser-tools
       - run:
           name: install
           command: npm ci

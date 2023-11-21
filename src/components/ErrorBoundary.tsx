@@ -1,11 +1,16 @@
 import Link from "next/link";
 import React, { Component, ReactNode } from "react";
 
+interface ErrorBoundaryProps {
+  children: ReactNode;
+}
+
 interface ErrorBoundaryState {
   hasError: boolean;
 }
-export class ErrorBoundary extends Component<unknown, ErrorBoundaryState> {
-  constructor(props: unknown) {
+
+export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
   }

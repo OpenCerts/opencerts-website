@@ -61,7 +61,7 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
   }));
 
   const onConnected = useCallback(
-    (frame) => {
+    (frame: Dispatch | undefined) => {
       toFrame.current = frame;
       if (toFrame.current) {
         toFrame.current(renderDocument({ document: documentData, rawDocument }));

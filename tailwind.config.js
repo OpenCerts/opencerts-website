@@ -42,46 +42,50 @@ module.exports = {
         pulsing: "pulsing 3s alternate infinite",
       },
       colors: {
-        white: {
-          default: "#fff",
-        },
-        grey: {
-          default: "#ccc",
+        gray: {
+          200: "#edf2f7",
+          300: "#e2e8f0",
+          400: "#cbd5e0",
+          600: "#718096",
+          700: "4a5568",
+          800: "2d3748",
+          900: "1a202c",
+          DEFAULT: "#ccc",
         },
         neutral: {
           400: "#808080",
           500: "#6e6e6e",
-          default: "#ccc",
+          DEFAULT: "#ccc",
         },
         orange: {
           600: "#ea580c",
-          default: "#ff9933",
+          DEFAULT: "#ff9933",
         },
         red: {
-          default: "#ff5268",
+          DEFAULT: "#ff5268",
         },
         blue: {
           100: "#f5f8fb",
           300: "#53bcdf",
-          default: "#007EA8",
+          DEFAULT: "#007EA8",
         },
         navy: {
           200: "#eef2f5",
           300: "#506c85",
-          default: "#324353",
+          DEFAULT: "#324353",
         },
         pink: {
           100: "#fbeae9",
           300: "#e87d7d",
           600: "#e11d48",
-          default: "#be123c",
+          DEFAULT: "#be123c",
         },
         green: {
           100: "#f5fbf7",
           200: "#d9ead3",
           300: "#46b760",
           400: "#38761d",
-          default: "#218838",
+          DEFAULT: "#218838",
         },
       },
     },
