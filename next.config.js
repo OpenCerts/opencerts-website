@@ -9,7 +9,9 @@ module.exports = withBundleAnalyzer({
     },
   },
 
+  trailingSlash: true,
   cssModules: true,
+  output: 'export',
   exportPathMap: function exportMap() {
     return {
       "/": { page: "/" },
