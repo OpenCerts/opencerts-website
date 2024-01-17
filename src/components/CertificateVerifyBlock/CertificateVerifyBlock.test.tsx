@@ -204,12 +204,10 @@ describe("certificate verify block getV2IdentityVerificationText", () => {
           message: "Document store 0x8FC57204C35FB9317D91285EF52D6B892EC08CD3 not found in the registry",
         },
       };
-      console.log("ocFragment", ocFragment);
       const dnsTextFragment = buildDnsTxtInvalidFragment({ location: ["tech.gov.sg", "demo.com"] });
       dnsTextFragment.data[0].status = "VALID";
       const fragments: AllVerificationFragment[] = [ocFragment, dnsTextFragment];
 
-      console.log("fragments", JSON.stringify(fragments));
       expect(
         getV2IdentityVerificationText(
           fragments,
