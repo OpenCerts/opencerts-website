@@ -194,6 +194,7 @@ describe("certificate verify block getV2IdentityVerificationText", () => {
     });
 
     it("when document has multiple issuers, should display issuer domain and name only for the issuer with a valid registry fragment", () => {
+      process.env.TRUSTED_TLDS = undefined;
       const ocFragment = buildOpencertsRegistryVerifierValidFragment({ name: ["GovTech", "Demo"] });
       ocFragment.data[0] = {
         status: "INVALID",
