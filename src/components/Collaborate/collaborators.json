@@ -94,5 +94,13 @@
     "website": "https://www.superink.com.sg",
     "key": "superink",
     "logo": "/static/images/collaborate/superink_logo.png"
+  },
+  {
+    "id": "filpass",
+    "name": "FilPass Tamperproof Tech Inc",
+    "description": "FilPass is a tamperproof Digital Identity that allows Filipinos to transact with agencies online securely.",
+    "website": "https://filpass.ph",
+    "key": "filpass",
+    "logo": "/static/images/collaborate/filpass_logo.png"
   }
 ]
