@@ -68,6 +68,7 @@ export const getV2IdentityVerificationText = (
       const TRUSTED_TLDS = process.env.TRUSTED_TLDS?.split(",");
       return TRUSTED_TLDS ? TRUSTED_TLDS.some((tld) => location.toUpperCase().endsWith(tld.toUpperCase())) : false;
     };
+    console.log("identities", identities);
 
     return (
       <ol>
