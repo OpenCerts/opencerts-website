@@ -9,7 +9,3 @@ setConfig({ publicRuntimeConfig });
 if (process.env.DEBUG) {
   debug.log = console.log.bind(console);
 }
-
-module.exports = {
-  setupFiles: ["<rootDir>/.jest/setEnvVars.js"],
-};
