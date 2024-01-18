@@ -65,6 +65,7 @@ export const getV2IdentityVerificationText = (
 
   if (identities.length > 0) {
     const isTrusted = (location: string): boolean => {
+      console.log("process.env.TRUSTED_TLDS", process.env.TRUSTED_TLDS);
       const TRUSTED_TLDS = process.env.TRUSTED_TLDS?.split(",");
       return TRUSTED_TLDS ? TRUSTED_TLDS.some((tld) => location.toUpperCase().endsWith(tld.toUpperCase())) : false;
     };
