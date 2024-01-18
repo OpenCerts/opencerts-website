@@ -103,7 +103,7 @@
   "jest": {
     "testResultsProcessor": "jest-sonar-reporter",
     "setupFiles": [
-      "<rootDir>/jest/setEnvVars.js"
+      "<rootDir>/setEnvVars.js"
     ]
   },
   "jestSonar": {
