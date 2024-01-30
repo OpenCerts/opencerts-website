@@ -116,6 +116,19 @@ const buildDnsTxtInvalidFragment = ({
 
 describe("certificate verify block getV2IdentityVerificationText", () => {
   describe("when registry is verified", () => {
+    let originalEnv: NodeJS.ProcessEnv;
+
+    // eslint-disable-next-line jest/no-hooks
+    beforeAll(() => {
+      originalEnv = process.env;
+      process.env.TRUSTED_TLDS = undefined;
+    });
+
+    // eslint-disable-next-line jest/no-hooks
+    afterAll(() => {
+      process.env = originalEnv;
+    });
+
     it("should display issuer domain and name when dns and registry fragments are valid", () => {
       const fragments: AllVerificationFragment[] = [
         buildOpencertsRegistryVerifierValidFragment({ name: "Govtech" }),

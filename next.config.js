@@ -11,7 +11,7 @@ module.exports = withBundleAnalyzer({
 
   trailingSlash: true,
   cssModules: true,
-  output: 'export',
+  output: "export",
   exportPathMap: function exportMap() {
     return {
       "/": { page: "/" },
