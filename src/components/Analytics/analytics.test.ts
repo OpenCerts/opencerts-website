@@ -260,6 +260,8 @@ describe("analytics*", () => {
         issuer_name: "example.openattestation.com",
         nonInteraction: true,
         value: undefined,
+        renderer_url: "https://tutorial-renderer.openattestation.com",
+        template_name: "DRIVING_LICENSE",
       });
     });
   });
@@ -329,6 +331,8 @@ describe("analytics*", () => {
         issuer_name: "Singapore Examinations and Assessment Board",
         nonInteraction: true,
         value: undefined,
+        renderer_url: "sg/gov/seab/SOR_GCEO",
+        template_name: "sg/gov/seab/SOR_GCEO",
       });
     });
     it("should send cert details (document_store/DNS-TXT) and errors (tampered/unissued/revoked) to Google Analytics", () => {
@@ -384,6 +388,8 @@ describe("analytics*", () => {
         issuer_name: "example.openattestation.com",
         nonInteraction: true,
         value: undefined,
+        renderer_url: "https://demo-cnm.openattestation.com",
+        template_name: "SMU-A-TIS-2019-4",
       });
     });
     it("should send cert details (document_store/DNS-TXT) and error (invalid argument) to Google Analytics", () => {
@@ -462,6 +468,8 @@ describe("analytics*", () => {
         issuer_name: "Singapore Management University Academy",
         nonInteraction: true,
         value: undefined,
+        renderer_url: "https://academy.smu.edu.sg/verify",
+        template_name: "SMU-A-TIS-2019-4",
       });
     });
     it("should send cert details (document_store/DNS-TXT) and error (HTTP response error) to Google Analytics", () => {
@@ -540,6 +548,8 @@ describe("analytics*", () => {
         issuer_name: "Singapore Management University Academy",
         nonInteraction: true,
         value: undefined,
+        renderer_url: "https://academy.smu.edu.sg/verify",
+        template_name: "SMU-A-TIS-2019-4",
       });
     });
     it("should send cert details (document_store/DNS-TXT) and error (Ethers unhandled error) to Google Analytics", () => {
@@ -618,6 +628,8 @@ describe("analytics*", () => {
         issuer_name: "Singapore Management University Academy",
         nonInteraction: true,
         value: undefined,
+        renderer_url: "https://academy.smu.edu.sg/verify",
+        template_name: "SMU-A-TIS-2019-4",
       });
     });
 
@@ -635,9 +647,12 @@ describe("analytics*", () => {
         issuer_name: "example.tradetrust.io",
         nonInteraction: true,
         value: undefined,
+        renderer_url: "https://demo-cnm.openattestation.com",
+        template_name: "CERTIFICATE_OF_NON_MANIPULATION",
       });
     });
   });
+
   describe("triggerV3ErrorLogging", () => {
     it("should work", () => {
       triggerV3ErrorLogging(v3Document, [
@@ -655,6 +670,8 @@ describe("analytics*", () => {
         issuer_name: "example.openattestation.com",
         nonInteraction: true,
         value: undefined,
+        renderer_url: "https://tutorial-renderer.openattestation.com",
+        template_name: "DRIVING_LICENSE",
       });
     });
   });

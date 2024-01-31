@@ -72,7 +72,12 @@ export const sendV2EventCertificateViewedDetailed = ({
   certificateData,
 }: {
   issuer: v2.Issuer;
-  certificateData: { id?: string; name?: string; issuedOn?: string };
+  certificateData: {
+    id?: string;
+    name?: string;
+    issuedOn?: string;
+    $template?: string | { name?: string; url?: string };
+  };
 }): void => {
   let issuerName = "";
   let registryId = null;
@@ -84,6 +89,10 @@ export const sendV2EventCertificateViewedDetailed = ({
   const documentId = certificateData?.id ?? "";
   const documentName = certificateData?.name ?? "";
   const issuedOn = certificateData?.issuedOn ?? "";
+  const rendererUrl =
+    typeof certificateData.$template === "string" ? certificateData.$template : certificateData.$template?.url || "";
+  const templateName =
+    typeof certificateData.$template === "string" ? certificateData.$template : certificateData.$template?.name || "";
 
   if (isInRegistry(documentStore)) {
     const registryIssuer: RegistryEntry = registry.issuers[documentStore];
@@ -103,6 +112,8 @@ export const sendV2EventCertificateViewedDetailed = ({
       issuerName: issuerName,
       issuerId: issuerId,
       registryId: registryId,
+      rendererUrl: rendererUrl,
+      templateName: templateName,
     },
   });
 };
@@ -117,6 +128,8 @@ export const sendV3EventCertificateViewedDetailed = ({
   const documentName = certificateData?.name ?? "";
   const issuedOn = certificateData?.issued ?? "";
   const issuerName = certificateData.openAttestationMetadata.identityProof.identifier || "";
+  const rendererUrl = certificateData.openAttestationMetadata.template?.url || "";
+  const templateName = certificateData.openAttestationMetadata.template?.name || "";
   analyticsEvent({
     category: "CERTIFICATE_DETAILS",
     nonInteraction: true,
@@ -126,6 +139,8 @@ export const sendV3EventCertificateViewedDetailed = ({
       documentName: documentName,
       issuedOn: issuedOn,
       issuerName: issuerName,
+      rendererUrl: rendererUrl,
+      templateName: templateName,
     },
   });
 };
@@ -140,6 +155,10 @@ export function triggerV2ErrorLogging(
   const documentName = certificate?.name;
   const issuedOn = certificate?.issuedOn;
   const errorsList = errors.join(",");
+  const templateName =
+    typeof certificate.$template === "string" ? certificate.$template : certificate.$template?.name || "";
+  const rendererUrl =
+    typeof certificate.$template === "string" ? certificate.$template : certificate.$template?.url || "";
 
   // If there are multiple issuers in a certificate, we send multiple events!
   certificate.issuers.forEach((issuer: v2.Issuer) => {
@@ -166,6 +185,8 @@ export function triggerV2ErrorLogging(
         issuerName: issuerName,
         registryId: registryId,
         errors: errorsList,
+        rendererUrl: rendererUrl,
+        templateName: templateName,
       },
     });
   });
@@ -179,6 +200,8 @@ export function triggerV3ErrorLogging(
   const documentName = rawCertificate?.name;
   const issuedOn = rawCertificate?.issued;
   const errorsList = errors.join(",");
+  const rendererUrl = rawCertificate.openAttestationMetadata.template?.url || "";
+  const templateName = rawCertificate.openAttestationMetadata.template?.name || "";
 
   // If there are multiple issuers in a certificate, we send multiple events!
   const documentStore = utils.getIssuerAddress(rawCertificate);
@@ -194,6 +217,8 @@ export function triggerV3ErrorLogging(
       issuedOn: issuedOn,
       issuerName: issuerName,
       errors: errorsList,
+      rendererUrl: rendererUrl,
+      templateName: templateName,
     },
   });
 }
