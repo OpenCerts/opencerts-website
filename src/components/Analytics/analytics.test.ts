@@ -652,6 +652,7 @@ describe("analytics*", () => {
       });
     });
   });
+
   describe("triggerV3ErrorLogging", () => {
     it("should work", () => {
       triggerV3ErrorLogging(v3Document, [
