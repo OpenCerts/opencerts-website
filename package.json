@@ -39,7 +39,7 @@
     "@govtechsg/decentralized-renderer-react-components": "^3.8.0",
     "@govtechsg/oa-encryption": "^1.3.3",
     "@govtechsg/open-attestation": "^6.5.1",
-    "@govtechsg/opencerts-verify": "^3.1.2",
+    "@govtechsg/opencerts-verify": "^3.1.3",
     "@types/google.analytics": "0.0.41",
     "@types/react-google-recaptcha": "^2.1.0",
     "@zeit/next-bundle-analyzer": "^0.1.2",
