@@ -8,7 +8,6 @@ import { WrappedOrSignedOpenCertsDocument } from "../shared";
 import { CertificateShareLinkFormContainer } from "./CertificateShareLink/CertificateShareLinkForm";
 import { CertificateVerifyBlock } from "./CertificateVerifyBlock";
 import { ErrorBoundary } from "./ErrorBoundary";
-import { FeatureFlagContainer } from "./FeatureFlag";
 import { Modal } from "./Modal";
 
 const CertificateSharingForm = dynamic(import("./CertificateSharing/CertificateSharingForm"));
