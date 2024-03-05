@@ -1,8 +1,5 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-  },
   purge: ["./src/**/*.ts", "./src/**/*.tsx"],
   theme: {
     container: (theme) => ({
@@ -41,49 +38,43 @@ module.exports = {
       animation: {
         pulsing: "pulsing 3s alternate infinite",
       },
-      colors: {
-        white: {
-          default: "#fff",
-        },
-        grey: {
-          default: "#ccc",
-        },
+      colors: ({ colors }) => ({
+        white: "#fff",
+        grey: "#ccc",
         neutral: {
           400: "#808080",
           500: "#6e6e6e",
-          default: "#ccc",
+          DEFAULT: "#ccc",
         },
         orange: {
           600: "#ea580c",
-          default: "#ff9933",
+          DEFAULT: "#ff9933",
         },
-        red: {
-          default: "#ff5268",
-        },
+        red: "#ff5268",
         blue: {
+          DEFAULT: "#007EA8",
           100: "#f5f8fb",
           300: "#53bcdf",
-          default: "#007EA8",
         },
         navy: {
           200: "#eef2f5",
           300: "#506c85",
-          default: "#324353",
+          DEFAULT: "#324353",
         },
         pink: {
           100: "#fbeae9",
           300: "#e87d7d",
           600: "#e11d48",
-          default: "#be123c",
+          DEFAULT: "#be123c",
         },
         green: {
           100: "#f5fbf7",
           200: "#d9ead3",
           300: "#46b760",
           400: "#38761d",
-          default: "#218838",
+          DEFAULT: "#218838",
         },
-      },
+      }),
     },
   },
   variants: {},
