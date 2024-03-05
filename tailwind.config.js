@@ -38,9 +38,13 @@ module.exports = {
       animation: {
         pulsing: "pulsing 3s alternate infinite",
       },
-      colors: ({ colors }) => ({
-        white: "#fff",
-        grey: "#ccc",
+      colors: {
+        white: {
+          DEFAULT: "#fff",
+        },
+        grey: {
+          DEFAULT: "#ccc",
+        },
         neutral: {
           400: "#808080",
           500: "#6e6e6e",
@@ -74,7 +78,7 @@ module.exports = {
           400: "#38761d",
           DEFAULT: "#218838",
         },
-      }),
+      },
     },
   },
   variants: {},
