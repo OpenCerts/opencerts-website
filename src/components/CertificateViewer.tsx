@@ -85,7 +85,7 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
                         <span>Email</span>
                       </div>
                     </div>
-                    <div className="mr-2 w-auto ">
+                    <div className="w-auto">
                       <a
                         className="icon-utility"
                         download={`${props.certificate.id}.opencert`}
