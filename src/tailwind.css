@@ -77,8 +77,9 @@ b {
 .icon-utility {
   @apply ease-colors;
   @apply bg-white;
-  @apply w-10;
-  @apply h-10;
+  @apply px-4 py-2;
+  @apply w-max;
+  @apply gap-x-2;
   @apply flex;
   @apply items-center;
   @apply justify-center;
@@ -86,6 +87,8 @@ b {
   @apply border-black;
   @apply rounded-full;
   @apply cursor-pointer;
+  @apply hover:text-white;
+  @apply text-black;
 }
 
 .icon-utility:hover {

@@ -8,7 +8,6 @@ import { WrappedOrSignedOpenCertsDocument } from "../shared";
 import { CertificateShareLinkFormContainer } from "./CertificateShareLink/CertificateShareLinkForm";
 import { CertificateVerifyBlock } from "./CertificateVerifyBlock";
 import { ErrorBoundary } from "./ErrorBoundary";
-import { FeatureFlagContainer } from "./FeatureFlag";
 import { Modal } from "./Modal";
 
 const CertificateSharingForm = dynamic(import("./CertificateSharing/CertificateSharingForm"));
@@ -67,8 +66,8 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
                   <CertificateVerifyBlock verificationStatus={props.verificationStatus} document={props.document} />
                 </div>
                 <div className="w-full lg:w-1/2 xl:w-2/3">
-                  <div className="flex flex-wrap">
-                    <div className="w-auto lg:ml-auto">
+                  <div className="flex flex-wrap gap-y-2">
+                    <div className="w-auto lg:ml-auto mr-2">
                       <div
                         className="icon-utility"
                         id="btn-print"
@@ -77,33 +76,27 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
                         }}
                       >
                         <i className="fas fa-print text-md" />
+                        <span>Print</span>
                       </div>
                     </div>
-                    <FeatureFlagContainer
-                      name="SHARE_LINK"
-                      render={() => (
-                        <div className="ml-2 w-auto" onClick={() => props.handleShareLinkToggle()}>
-                          <div className="icon-utility" id="btn-link">
-                            <i className="fas fa-link text-md" />
-                          </div>
-                        </div>
-                      )}
-                    />
-                    <div className="ml-2 w-auto" onClick={() => props.handleSharingToggle()}>
+                    <div className="mr-2 w-auto" onClick={() => props.handleSharingToggle()}>
                       <div className="icon-utility" id="btn-email">
                         <i className="fas fa-envelope text-md" />
+                        <span>Email</span>
                       </div>
                     </div>
-                    <div className="ml-2 w-auto">
+                    <div className="w-auto">
                       <a
                         className="icon-utility"
                         download={`${props.certificate.id}.opencert`}
-                        target="_black"
+                        target="_blank"
                         href={`data:text/json;,${encodeURIComponent(JSON.stringify(props.document, null, 2))}`}
+                        rel="noreferrer"
                       >
                         <button id="btn-download" title="Download">
                           <i className="fas fa-file-download text-md" />
                         </button>
+                        <span>Download OpenCert</span>
                       </a>
                     </div>
                   </div>
