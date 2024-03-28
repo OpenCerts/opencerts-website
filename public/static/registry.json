@@ -330,6 +330,10 @@
       "name": "GOERLI: Temasek Polytechnic",
       "displayCard": false
     },
+    "0x4345280a485B8436603d08fcBe6336A4C62C9C98": {
+      "name": "SEPOLIA: Temasek Polytechnic",
+      "displayCard": false
+    },
     "0xE5c693015460868F817799CAFb363EEDb4F9E446": {
       "name": "ROPSTEN: Institute of Technical Education",
       "displayCard": false
