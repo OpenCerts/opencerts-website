@@ -12,7 +12,12 @@ export const PartnerSection: React.FunctionComponent = () => (
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img className="mx-auto img-partner" src={item.value} title={item.name} alt={item.name} />
+            <img
+              className={`mx-auto img-partner ${item.portrait ? "portrait" : ""}`}
+              src={item.value}
+              title={item.name}
+              alt={item.name}
+            />
           </a>
         </div>
       ))}
