@@ -114,7 +114,11 @@ b {
 }
 
 .img-partner {
-  max-width: 120px;
+  width: 160px;
+  max-height: 50px;
+  object-fit: contain;
+}
+.img-partner.portrait {
   max-height: 80px;
 }
 
@@ -141,8 +145,13 @@ b {
 /* breakpoint values referenced from tailwind */
 @media (min-width: 768px) {
   .img-partner {
-    max-width: 150px;
-    max-height: 100px;
+    width: auto;
+    max-width: 200px;
+    max-height: 65px;
+  }
+
+  .img-partner.portrait {
+    max-height: 120px;
   }
 }
 

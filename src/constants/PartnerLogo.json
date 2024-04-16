@@ -3,108 +3,126 @@
     "key": "NP",
     "name": "Ngee Ann Polytechnic",
     "value": "/static/images/NP_logo.svg",
-    "link": "https://www.np.edu.sg/Pages/default.aspx"
+    "link": "https://www.np.edu.sg/Pages/default.aspx",
+    "portrait": false
   },
   {
     "key": "NYP",
     "name": "Nanyang Polytechnic",
     "value": "/static/images/NYP_logo.png",
-    "link": "https://www.nyp.edu.sg/"
+    "link": "https://www.nyp.edu.sg/",
+    "portrait": false
   },
   {
     "key": "RP",
     "name": "Republic Polytechnic",
     "value": "/static/images/RP_logo.svg",
-    "link": "https://www.rp.edu.sg/"
+    "link": "https://www.rp.edu.sg/",
+    "portrait": false
   },
   {
     "key": "SP",
     "name": "Singapore Polytechnic",
     "value": "/static/images/SP_logo.svg",
-    "link": "https://www.sp.edu.sg/"
+    "link": "https://www.sp.edu.sg/",
+    "portrait": false
   },
   {
     "key": "TP",
     "name": "Temasek Polytechnic",
     "value": "/static/images/TP_logo.svg",
-    "link": "https://www.tp.edu.sg/"
+    "link": "https://www.tp.edu.sg/",
+    "portrait": false
   },
   {
     "key": "SEAB",
     "name": "Singapore Examinations and Assessment Board",
     "value": "/static/images/SEAB_logo.png",
-    "link": "https://www.seab.gov.sg/"
+    "link": "https://www.seab.gov.sg/",
+    "portrait": true
   },
   {
     "key": "ITE",
     "name": "Institute of Technical Education",
     "value": "/static/images/ITE_logo.png",
-    "link": "https://www.ite.edu.sg/"
+    "link": "https://www.ite.edu.sg/",
+    "portrait": false
   },
   {
     "key": "NIEC",
     "name": "National Institute of Early Childhood Development",
     "value": "/static/images/NIEC_logo.png",
-    "link": "https://www.niec.edu.sg/"
+    "link": "https://www.niec.edu.sg/",
+    "portrait": false
   },
   {
     "key": "NTU",
     "name": "Nanyang Technological University",
     "value": "/static/images/NTU_logo.png",
-    "link": "https://www.ntu.edu.sg/"
+    "link": "https://www.ntu.edu.sg/",
+    "portrait": false
   },
   {
     "key": "NUS",
     "name": "National University of Singapore",
     "value": "/static/images/NUS_logo.svg",
-    "link": "http://nus.edu.sg/"
+    "link": "http://nus.edu.sg/",
+    "portrait": false
   },
   {
     "key": "SIT",
     "name": "Singapore Institute of Technology",
     "value": "/static/images/SIT_logo.png",
-    "link": "https://www.singaporetech.edu.sg/"
+    "link": "https://www.singaporetech.edu.sg/",
+    "portrait": false
   },
   {
     "key": "SMU",
     "name": "Singapore Management University",
     "value": "/static/images/SMU_logo.png",
-    "link": "https://www.smu.edu.sg/"
+    "link": "https://www.smu.edu.sg/",
+    "portrait": false
   },
   {
     "key": "SUSS",
     "name": "Singapore University of Social Sciences",
     "value": "/static/images/SUSS_logo.png",
-    "link": "https://www.suss.edu.sg/"
+    "link": "https://www.suss.edu.sg/",
+    "portrait": false
   },
   {
     "key": "SUTD",
     "name": "Singapore University of Technology and Design",
     "value": "/static/images/SUTD_logo.png",
-    "link": "https://sutd.edu.sg/"
+    "link": "https://sutd.edu.sg/",
+    "portrait": false
   },
   {
     "key": "NAFA",
     "name": "Nanyang Academy of Fine Arts",
     "value": "/static/images/NAFA_logo.png",
-    "link": "https://www.nafa.edu.sg/"
+    "link": "https://www.nafa.edu.sg/",
+    "portrait": false
   },
   {
     "key": "LASALLE",
     "name": "LASALLE College of the Arts",
     "value": "/static/images/LASALLE_logo.png",
-    "link": "https://www.lasalle.edu.sg/"
+    "link": "https://www.lasalle.edu.sg/",
+    "portrait": false
   },
   {
     "key": "SSG",
     "name": "SkillsFuture Singapore Agency",
     "value": "/static/images/SSG_logo.png",
-    "link": "https://www.ssg-wsg.gov.sg/"
+    "link": "https://www.ssg-wsg.gov.sg/",
+    "portrait": false
   },
   {
     "key": "govtech",
     "name": "Government Technology Agency",
     "value": "/static/images/GOVTECH_logo.png",
-    "link": "https://www.tech.gov.sg/"
+    "link": "https://www.tech.gov.sg/",
+    "portrait": false
   }
 ]
