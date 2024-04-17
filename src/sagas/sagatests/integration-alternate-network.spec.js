@@ -5,7 +5,7 @@ fixture("Alternate Network Cert").page`http://localhost:3000`.beforeEach(async (
   await waitForReact();
 });
 
-const Certificate = "./sample-mumbai.opencert";
+const Certificate = "./sample-amoy.opencert";
 
 const IframeBlock = Selector("#iframe");
 const SampleTemplate = Selector("#root");
@@ -14,7 +14,7 @@ const StatusButton = Selector("#certificate-status");
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(async (prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());
 
-test("Sample mumbai document is rendered correctly", async (t) => {
+test("Sample amoy document is rendered correctly", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Certificate]);
 
   await validateTextContent(t, StatusButton, ["DEMO-OPENCERTS.OPENATTESTATION.COM"]);
