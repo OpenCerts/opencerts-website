@@ -6,19 +6,19 @@ fixture("Ethereum Provider HTTP Server Error").page`http://localhost:3000`.befor
 });
 
 const rateLimitMock = RequestMock()
-  .onRequestTo({ url: "https://sepolia.infura.io/v3/01b3ed28c54f4ae49cb4e27df560c5e8", method: "post" })
+  .onRequestTo({ url: "https://sepolia.infura.io/v3/84842078b09946638c03157f83405213", method: "post" })
   .respond(null, 429)
   .onRequestTo({ url: "https://eth-sepolia.g.alchemy.com/v2/FK1x9CdE8NStKjVt236D_LP7B6MMCFOs", method: "post" })
   .respond(null, 429);
 
 const badGatewayMock = RequestMock()
-  .onRequestTo({ url: "https://sepolia.infura.io/v3/01b3ed28c54f4ae49cb4e27df560c5e8", method: "post" })
+  .onRequestTo({ url: "https://sepolia.infura.io/v3/84842078b09946638c03157f83405213", method: "post" })
   .respond(null, 502)
   .onRequestTo({ url: "https://eth-sepolia.g.alchemy.com/v2/FK1x9CdE8NStKjVt236D_LP7B6MMCFOs", method: "post" })
   .respond(null, 502);
 
 const badGatewayMockInfuraOnly = RequestMock()
-  .onRequestTo({ url: "https://sepolia.infura.io/v3/01b3ed28c54f4ae49cb4e27df560c5e8", method: "post" })
+  .onRequestTo({ url: "https://sepolia.infura.io/v3/84842078b09946638c03157f83405213", method: "post" })
   .respond(null, 502);
 
 const Certificate1 = "./unissued.opencert";

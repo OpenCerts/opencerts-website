@@ -53,11 +53,22 @@ const getProvider = (networkName: string, providerName: "infura" | "alchemy") =>
           `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`,
           networkName
         );
+      case "amoy":
+        return new ethers.providers.StaticJsonRpcProvider(
+          `https://polygon-amoy.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`
+        );
       default:
         return new ethers.providers.AlchemyProvider(networkName, process.env.ALCHEMY_API_KEY);
     }
   }
-  return new ethers.providers.InfuraProvider(networkName, process.env.INFURA_API_KEY);
+  switch (networkName) {
+    case "amoy":
+      return new ethers.providers.StaticJsonRpcProvider(
+        `https://polygon-amoy.infura.io/v3/${process.env.INFURA_API_KEY}`
+      );
+    default:
+      return new ethers.providers.InfuraProvider(networkName, process.env.INFURA_API_KEY);
+  }
 };
 
 const getNetworkName = (certificate: WrappedOrSignedOpenCertsDocument) => {
@@ -70,8 +81,8 @@ const getNetworkName = (certificate: WrappedOrSignedOpenCertsDocument) => {
     }
   } else {
     switch (data.network?.chainId) {
-      case "80001":
-        return "maticmum";
+      case "80002":
+        return "amoy";
     }
   }
   return NETWORK_NAME;
