@@ -7,16 +7,11 @@ export const FooterBar: React.FunctionComponent = () => (
   <footer className="flex-shrink-0 bg-navy text-white py-2">
     <div className="container pt-8 pb-12">
       <div className="flex flex-wrap">
-        <div className="w-40 lg:mr-40 mb-8 lg:mb-0">
-          <p className="font-poppins font-bold mb-2">Powered by</p>
-          <a
-            className="inline-block transition-opacity hover:opacity-75"
-            href="https://hive.tech.gov.sg/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src="/static/images/common/gds-logo.svg" alt="Government Digital Services logo" />
-          </a>
+        <div className="w-44 mr-10 mb-8 lg:mb-0">
+          <img src="/static/images/common/PBGT-logo.png" alt="Powered by Govtech" />
+        </div>
+        <div className="w-40 lg:mr-40 mb-8 lg:mb-0 mt-4">
+          <img src="/static/images/common/gds-logo.svg" alt="Government Digital Services logo" />
         </div>
         <div className="w-full lg:w-40 mb-8 lg:mb-0">
           <p className="font-poppins font-bold mb-2">Partners</p>
