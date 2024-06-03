@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { decryptString } from "@govtechsg/oa-encryption";
-import { VerificationFragment, utils as oaVerifyUtils, ErrorVerificationFragment } from "@govtechsg/oa-verify";
 import { utils } from "@govtechsg/open-attestation";
 import { isValid, verify } from "@govtechsg/opencerts-verify";
 import { ethers } from "ethers";
@@ -41,6 +40,9 @@ import { generateLink } from "../services/link";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
 import { getLogger } from "../utils/logger";
 import { opencertsGetData } from "../utils/utils";
+import type { ErrorVerificationFragment, VerificationFragment } from "@govtechsg/oa-verify/dist/types/types/core";
+
+const { utils: oaVerifyUtils } = require("@govtechsg/oa-verify");
 
 const { trace } = getLogger("saga:certificate");
 const getProvider = (networkName: string, providerName: "infura" | "alchemy") => {

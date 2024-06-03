@@ -1,9 +1,3 @@
-import {
-  utils,
-  ValidDnsDidVerificationStatus,
-  ValidDnsTxtVerificationStatus,
-  VerificationFragment,
-} from "@govtechsg/oa-verify";
 import { getData, v2, WrappedDocument, utils as oaUtils, v3 } from "@govtechsg/open-attestation";
 import {
   getOpencertsRegistryVerifierFragment,
@@ -13,6 +7,8 @@ import React, { useState } from "react";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { icons } from "../ViewerPageImages";
 import { DetailedCertificateVerifyBlock } from "./DetailedCertificateVerifyBlock";
+import type { VerificationFragment } from "@govtechsg/oa-verify/dist/types/types/core";
+const { utils, ValidDnsTxtVerificationStatus, ValidDnsDidVerificationStatus } = require("@govtechsg/oa-verify");
 
 export const getV2IdentityVerificationText = (
   verificationStatus: VerificationFragment[],
