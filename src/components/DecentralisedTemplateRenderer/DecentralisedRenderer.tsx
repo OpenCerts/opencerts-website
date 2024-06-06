@@ -121,6 +121,14 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
           issuerId: `${certificateData.issuers.map((issuer) => issuer.id).join(",")}`,
         },
       });
+    } else if (utils.isSignedWrappedV4Document(rawDocument)) {
+      analyticsEvent({
+        category: "CERTIFICATE_VIEWED",
+        options: {
+          documentId: (rawDocument?.credentialSubject.id as string) ?? undefined,
+          issuerId: rawDocument.issuer.id,
+        },
+      });
     } else {
       const certificateData = opencertsGetData(rawDocument);
       const storeAddresses = utils.getIssuerAddress(rawDocument);
@@ -142,8 +150,11 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
           certificateData,
         });
       });
-    } else {
+    } else if (utils.isWrappedV3Document(rawDocument)) {
       sendV3EventCertificateViewedDetailed({ certificateData: rawDocument });
+    } else {
+      // TODO: Add V4 analytics events
+      // sendV4EventCertificateViewedDetailed();
     }
   }, [rawDocument]);
 

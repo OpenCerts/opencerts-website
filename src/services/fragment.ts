@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 import type { VerificationFragment } from "@govtechsg/oa-verify/dist/types";
 const {
   utils,

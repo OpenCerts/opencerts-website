@@ -1,4 +1,5 @@
-import { getData, v2, WrappedDocument, utils as oaUtils, v3 } from "@govtechsg/open-attestation";
+import type { VerificationFragment } from "@govtechsg/oa-verify/dist/types/types/core";
+import { getData, v2, WrappedDocument, utils as oaUtils, v3, v4 } from "@govtechsg/open-attestation";
 import {
   getOpencertsRegistryVerifierFragment,
   OpencertsRegistryVerificationValidData,
@@ -7,7 +8,7 @@ import React, { useState } from "react";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { icons } from "../ViewerPageImages";
 import { DetailedCertificateVerifyBlock } from "./DetailedCertificateVerifyBlock";
-import type { VerificationFragment } from "@govtechsg/oa-verify/dist/types/types/core";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { utils, ValidDnsTxtVerificationStatus, ValidDnsDidVerificationStatus } = require("@govtechsg/oa-verify");
 
 export const getV2IdentityVerificationText = (
@@ -92,6 +93,14 @@ export const getV3IdentityVerificationText = (document: WrappedDocument<v3.OpenA
   return document.openAttestationMetadata.identityProof.identifier.toUpperCase();
 };
 
+export const getV4IdentityVerificationText = (
+  verificationStatus: VerificationFragment[],
+  document: v4.WrappedDocument
+): string => {
+  // TODO: Update to return jsx?
+  return document.issuer.identityProof.identifier.toUpperCase();
+};
+
 interface SimpleVerifyBlockProps {
   detailedViewVisible: boolean;
   verificationStatus: VerificationFragment[];
@@ -114,7 +123,9 @@ const SimpleVerifyBlock: React.FunctionComponent<SimpleVerifyBlockProps> = (prop
           <div className="break-all md:break-normal">
             {oaUtils.isWrappedV2Document(props.document)
               ? getV2IdentityVerificationText(props.verificationStatus, props.document)
-              : getV3IdentityVerificationText(props.document)}
+              : oaUtils.isWrappedV3Document(props.document)
+              ? getV3IdentityVerificationText(props.document)
+              : getV4IdentityVerificationText(props.verificationStatus, props.document)}
           </div>
         </h1>
         <div className="px-2 w-auto">
