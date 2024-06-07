@@ -12,7 +12,7 @@ import { ethers } from "ethers";
 import Router from "next/router";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import "isomorphic-fetch";
-import { triggerV2ErrorLogging, triggerV3ErrorLogging } from "../components/Analytics";
+import { triggerV2ErrorLogging, triggerV3ErrorLogging, triggerV4ErrorLogging } from "../components/Analytics";
 import { NETWORK_NAME, IS_MAINNET } from "../config";
 
 import {
@@ -156,8 +156,10 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedO
       if (errors.length > 0) {
         if (utils.isWrappedV2Document(certificate)) {
           triggerV2ErrorLogging(certificate, errors);
-        } else {
+        } else if (utils.isWrappedV3Document(certificate)) {
           triggerV3ErrorLogging(certificate, errors);
+        } else {
+          triggerV4ErrorLogging(certificate, errors);
         }
       }
     }

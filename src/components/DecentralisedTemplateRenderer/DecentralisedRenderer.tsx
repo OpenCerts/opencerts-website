@@ -14,8 +14,10 @@ import {
   analyticsEvent,
   sendV2EventCertificateViewedDetailed,
   sendV3EventCertificateViewedDetailed,
+  sendV4EventCertificateViewedDetailed,
   triggerV2RendererTimeoutLogging,
   triggerV3RendererTimeoutLogging,
+  triggerV4RendererTimeoutLogging,
 } from "../Analytics";
 import { MutiTabsContainer } from "../MultiTabs";
 
@@ -95,8 +97,10 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
         // CERTIFICATE_RENDERER_TIMEOUT event
         if (utils.isWrappedV2Document(rawDocument)) {
           triggerV2RendererTimeoutLogging(rawDocument);
-        } else {
+        } else if (utils.isWrappedV3Document(rawDocument)) {
           triggerV3RendererTimeoutLogging(rawDocument);
+        } else {
+          triggerV4RendererTimeoutLogging(rawDocument);
         }
       }
     },
@@ -153,8 +157,7 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
     } else if (utils.isWrappedV3Document(rawDocument)) {
       sendV3EventCertificateViewedDetailed({ certificateData: rawDocument });
     } else {
-      // TODO: Add V4 analytics events
-      // sendV4EventCertificateViewedDetailed();
+      sendV4EventCertificateViewedDetailed({ certificateData: rawDocument });
     }
   }, [rawDocument]);
 
