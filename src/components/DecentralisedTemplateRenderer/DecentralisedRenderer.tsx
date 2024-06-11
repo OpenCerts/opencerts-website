@@ -31,14 +31,13 @@ interface DecentralisedRendererProps {
 type Dispatch = (action: HostActions) => void;
 // giving scrollbar a default width as there are no perfect ways to get it
 const SCROLLBAR_WIDTH = 20;
+const CREDENTIAL_SUBJECT_PREFIX = "credentialSubject.";
 
 const isSvgRenderMethod = (document: WrappedOrSignedOpenCertsDocument) => {
   if (!utils.isWrappedV4Document(document)) {
-    console.log("Not v4");
     return false;
   } else {
     const docAsV4 = document as v4.OpenAttestationDocument;
-    console.log(docAsV4.renderMethod);
     return docAsV4.renderMethod?.find((method) => method.type === "SvgRenderingTemplate2023") !== undefined;
   }
 };
@@ -93,7 +92,9 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
         // adding SCROLLBAR_WIDTH in case the frame content overflow horizontally, which will cause scrollbars to appear
         setHeight(action.payload + SCROLLBAR_WIDTH);
       } else if (action.type === "OBFUSCATE") {
-        const field = action.payload;
+        const field = utils.isWrappedV4Document(documentRef.current)
+          ? CREDENTIAL_SUBJECT_PREFIX + action.payload
+          : action.payload;
         // https://github.com/microsoft/TypeScript/issues/14107 overload does not support union :/
         const updatedDocument = utils.isWrappedV2Document(documentRef.current)
           ? obfuscateDocument(documentRef.current, field)
