@@ -32,13 +32,14 @@ type Dispatch = (action: HostActions) => void;
 // giving scrollbar a default width as there are no perfect ways to get it
 const SCROLLBAR_WIDTH = 20;
 const CREDENTIAL_SUBJECT_PREFIX = "credentialSubject.";
+const SVG_RENDERER_TYPE = "SvgRenderingTemplate2023";
 
 const isSvgRenderMethod = (document: WrappedOrSignedOpenCertsDocument) => {
   if (!utils.isWrappedV4Document(document)) {
     return false;
   } else {
     const docAsV4 = document as v4.OpenAttestationDocument;
-    return docAsV4.renderMethod?.find((method) => method.type === "SvgRenderingTemplate2023") !== undefined;
+    return docAsV4.renderMethod?.find((method) => method.type === SVG_RENDERER_TYPE) !== undefined;
   }
 };
 

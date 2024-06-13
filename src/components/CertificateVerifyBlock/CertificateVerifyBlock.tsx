@@ -97,7 +97,6 @@ export const getV4IdentityVerificationText = (
   verificationStatus: VerificationFragment[],
   document: v4.WrappedDocument
 ): string => {
-  // TODO: Update to return jsx?
   return document.issuer.identityProof.identifier.toUpperCase();
 };
 

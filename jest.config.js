@@ -10,6 +10,7 @@ module.exports = {
       "<rootDir>/_mocks_/fileMock.js",
     "\\.(css|sass|scss)$": "<rootDir>/_mocks_/styleMock.js",
     axios: "axios/dist/node/axios.cjs",
+    "node:process": "<rootDir>/_mocks_/node-process-stub",
   },
   testResultsProcessor: "jest-sonar-reporter",
   watchPlugins: ["jest-watch-typeahead/filename", "jest-watch-typeahead/testname"],
