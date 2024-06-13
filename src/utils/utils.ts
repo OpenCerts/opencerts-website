@@ -6,7 +6,9 @@ export const opencertsGetData = (rawDocument: WrappedOrSignedOpenCertsDocument) 
   if (utils.isWrappedV2Document(rawDocument)) {
     return getData(rawDocument);
   } else if (utils.isWrappedV4Document(rawDocument)) {
-    return rawDocument.credentialSubject;
+    // Flattens the credentialSubject field so that the renderer can directly call document.ABC
+    const flattenedV4 = { ...rawDocument.credentialSubject, ...rawDocument };
+    return flattenedV4;
   } else {
     return rawDocument;
   }

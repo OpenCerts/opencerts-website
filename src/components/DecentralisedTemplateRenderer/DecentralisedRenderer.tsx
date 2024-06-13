@@ -7,7 +7,7 @@ import {
   renderDocument,
   selectTemplate,
 } from "@govtechsg/decentralized-renderer-react-components";
-import { getData, obfuscateDocument, utils, v2, v4 } from "@govtechsg/open-attestation";
+import { getData, obfuscateDocument, utils, v2, v3, v4 } from "@govtechsg/open-attestation";
 import React, { Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { getTemplate, opencertsGetData } from "../../utils/utils";
@@ -142,22 +142,23 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
           issuerId: `${certificateData.issuers.map((issuer) => issuer.id).join(",")}`,
         },
       });
-    } else if (utils.isSignedWrappedV4Document(rawDocument)) {
-      analyticsEvent({
-        category: "CERTIFICATE_VIEWED",
-        options: {
-          documentId: (rawDocument?.credentialSubject.id as string) ?? undefined,
-          issuerId: rawDocument.issuer.id,
-        },
-      });
-    } else {
-      const certificateData = opencertsGetData(rawDocument);
+    } else if (utils.isSignedWrappedV3Document(rawDocument)) {
+      const certificateData = opencertsGetData(rawDocument) as v3.OpenAttestationDocument;
       const storeAddresses = utils.getIssuerAddress(rawDocument);
       analyticsEvent({
         category: "CERTIFICATE_VIEWED",
         options: {
           documentId: certificateData?.id ?? undefined,
           documentStore: `${Array.isArray(storeAddresses) ? storeAddresses.join(",") : storeAddresses}`,
+        },
+      });
+    } else {
+      const rawDocumentAsv4 = rawDocument as v4.OpenAttestationDocument;
+      analyticsEvent({
+        category: "CERTIFICATE_VIEWED",
+        options: {
+          documentId: (rawDocumentAsv4?.credentialSubject.id as string) ?? undefined,
+          issuerId: rawDocumentAsv4.issuer.id,
         },
       });
     }

@@ -1,5 +1,5 @@
 import { VerificationFragment } from "@govtechsg/oa-verify";
-import { utils, v2, v3, OpenAttestationDocument } from "@govtechsg/open-attestation";
+import { utils, v2, v3, v4, OpenAttestationDocument } from "@govtechsg/open-attestation";
 import dynamic from "next/dynamic";
 import React from "react";
 import { connect } from "react-redux";
@@ -26,7 +26,7 @@ const ForwardedRefDecentralisedRenderer = React.forwardRef<
   }
 >((props, ref) => <DecentralisedRenderer {...props} forwardedRef={ref} />);
 
-const isObfuscated = (document: v3.WrappedDocument | v2.WrappedDocument) => {
+const isObfuscated = (document: v3.WrappedDocument | v2.WrappedDocument | v4.WrappedDocument) => {
   try {
     return utils.isObfuscated(document);
   } catch (e) {

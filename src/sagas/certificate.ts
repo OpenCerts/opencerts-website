@@ -6,7 +6,7 @@ import type {
   VerificationBuilderOptions,
   VerificationFragment,
 } from "@govtechsg/oa-verify/dist/types/types/core";
-import { utils } from "@govtechsg/open-attestation";
+import { utils, v2, v3 } from "@govtechsg/open-attestation";
 import { isValid, registryVerifier } from "@govtechsg/opencerts-verify";
 import { ethers } from "ethers";
 import Router from "next/router";
@@ -78,8 +78,10 @@ const getProvider = (networkName: string, providerName: "infura" | "alchemy") =>
   }
 };
 
+// TODO: Need to update if we ever want to support v4 document store issuance
 const getNetworkName = (certificate: WrappedOrSignedOpenCertsDocument) => {
-  const data = opencertsGetData(certificate);
+  if (utils.isWrappedV4Document(certificate)) return "";
+  const data = opencertsGetData(certificate) as v2.OpenAttestationDocument | v3.WrappedDocument;
 
   if (IS_MAINNET) {
     switch (data.network?.chainId) {
@@ -111,7 +113,10 @@ const fragmentsHaveCallException = (fragments: VerificationFragment[]) => {
 export function* verifyCertificate({ payload: certificate }: { payload: WrappedOrSignedOpenCertsDocument }) {
   try {
     yield put(verifyingCertificate());
-    const networkName = getNetworkName(certificate);
+    let networkName = "";
+    if (!utils.isWrappedV4Document(certificate)) {
+      networkName = getNetworkName(certificate);
+    }
     const infuraProvider = getProvider(networkName, "infura");
     const verify = (builderOptions: VerificationBuilderOptions) =>
       verificationBuilder([...openAttestationVerifiers, registryVerifier], builderOptions);
