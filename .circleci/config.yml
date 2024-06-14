@@ -24,6 +24,7 @@ jobs:
           name: build registry
           command: npm run build:registry
   build:
+    resource_class: large
     docker:
       - image: "circleci/node:14.18.2-browsers"
     steps:
