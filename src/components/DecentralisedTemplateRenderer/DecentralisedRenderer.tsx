@@ -133,7 +133,7 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
   // send analytics on which document has been displayed
   useEffect(() => {
     // CERTIFICATE_VIEWED event
-    if (utils.isSignedWrappedV2Document(rawDocument)) {
+    if (utils.isWrappedV2Document(rawDocument)) {
       const certificateData = getData(rawDocument);
       analyticsEvent({
         category: "CERTIFICATE_VIEWED",
@@ -142,7 +142,7 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
           issuerId: `${certificateData.issuers.map((issuer) => issuer.id).join(",")}`,
         },
       });
-    } else if (utils.isSignedWrappedV3Document(rawDocument)) {
+    } else if (utils.isWrappedV3Document(rawDocument)) {
       const certificateData = opencertsGetData(rawDocument) as v3.OpenAttestationDocument;
       const storeAddresses = utils.getIssuerAddress(rawDocument);
       analyticsEvent({
