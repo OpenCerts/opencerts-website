@@ -1,5 +1,5 @@
+version: 2.1
 workflows:
-  version: 2
   #  uncomment to get build registry
   #  nightly:
   #    triggers:
@@ -14,6 +14,8 @@ workflows:
   commit:
     jobs:
       - build
+orbs:
+  browser-tools: circleci/browser-tools@1.4.8
 jobs:
   build_registry:
     docker:
