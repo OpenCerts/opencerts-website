@@ -1,23 +1,23 @@
 workflows:
   version: 2
-#  uncomment to get build registry
-#  nightly:
-#    triggers:
-#      - schedule:
-#          cron: "0 0 * * *"
-#          filters:
-#            branches:
-#              only:
-#                - master
-#    jobs:
-#      - build_registry
+  #  uncomment to get build registry
+  #  nightly:
+  #    triggers:
+  #      - schedule:
+  #          cron: "0 0 * * *"
+  #          filters:
+  #            branches:
+  #              only:
+  #                - master
+  #    jobs:
+  #      - build_registry
   commit:
     jobs:
       - build
 jobs:
   build_registry:
     docker:
-      - image: "circleci/node:14.18.2-browsers"
+      - image: "cimg/node:14.21.3-browsers"
     steps:
       - checkout
       - run:
@@ -26,7 +26,7 @@ jobs:
   build:
     resource_class: large
     docker:
-      - image: "circleci/node:14.18.2-browsers"
+      - image: "cimg/node:14.21.3-browsers"
     steps:
       - checkout
       - run:
