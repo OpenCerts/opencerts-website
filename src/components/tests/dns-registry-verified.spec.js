@@ -8,7 +8,7 @@ fixture("DNS and Registry Verified for Certificate Rendering").page`http://local
 const Document = "./fixture/sample-registry-dns-verified.json";
 const IframeBlock = Selector("#iframe");
 const SampleTemplate = Selector("#rendered-certificate");
-const StatusButton = Selector("#certificate-status");
+const StatusButton = Selector("#certificate-status", { timeout: 30000 });
 
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(async (_prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());

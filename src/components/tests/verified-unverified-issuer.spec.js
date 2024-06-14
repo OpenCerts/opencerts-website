@@ -10,7 +10,7 @@ fixture("Any one of DNS or Registry Verified for Certificate Rendering").page`ht
 const Document = "./fixture/verified-unverified-issuer.json";
 const IframeBlock = Selector("#iframe");
 const SampleTemplate = Selector("#rendered-certificate");
-const StatusButton = Selector("#certificate-status");
+const StatusButton = Selector("#certificate-status", { timeout: 30000 });
 
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(async (_prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());

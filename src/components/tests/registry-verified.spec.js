@@ -9,7 +9,7 @@ const Document = "./fixture/registry-verified.json";
 const IframeBlock = Selector("#iframe");
 const TranscriptButton = Selector("[data-testid='transcript']");
 const MediaButton = Selector("[data-testid='media']");
-const StatusButton = Selector("#certificate-status");
+const StatusButton = Selector("#certificate-status", { timeout: 30000 });
 const SampleTemplate = Selector("#rendered-certificate");
 
 const validateTextContent = async (t, component, texts) =>

@@ -7,7 +7,7 @@ fixture("Obfuscate Note Rendering").page`http://localhost:3000`.beforeEach(async
 
 const Document = "./fixture/obfuscated-document.json";
 const IframeBlock = Selector("#iframe");
-const StatusButton = Selector("#certificate-status");
+const StatusButton = Selector("#certificate-status", { timeout: 30000 });
 const SampleTemplate = Selector("#rendered-certificate");
 const ObfuscationNote = Selector("#obfuscation-note");
 

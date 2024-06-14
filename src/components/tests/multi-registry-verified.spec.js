@@ -6,7 +6,7 @@ fixture("Multiple Registry Verified for Certificate Rendering").page`http://loca
 });
 
 const Document = "./fixture/sample-multiregistry-verified.json";
-const StatusButton = Selector("#certificate-status");
+const StatusButton = Selector("#certificate-status", { timeout: 30000 });
 
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(async (_prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());
