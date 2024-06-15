@@ -113,7 +113,7 @@ const fragmentsHaveCallException = (fragments: VerificationFragment[]) => {
 export function* verifyCertificate({ payload: certificate }: { payload: WrappedOrSignedOpenCertsDocument }) {
   try {
     yield put(verifyingCertificate());
-    let networkName = "";
+    let networkName = NETWORK_NAME;
     if (!utils.isWrappedV4Document(certificate)) {
       networkName = getNetworkName(certificate);
     }
@@ -169,6 +169,7 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedO
       }
     }
   } catch (e) {
+    console.log("ERRR", e);
     yield put(verifyingCertificateErrored(e.message));
   }
 }
