@@ -8,7 +8,7 @@ fixture("Tampered Cert").page`http://localhost:3000`.beforeEach(async () => {
 const Certificate = "./tampered.opencert";
 
 const RenderedCertificate = Selector("#certificate-dropzone");
-const InvalidMessage = Selector(".invalid", { timeout: 30000 });
+const InvalidMessage = Selector(".invalid");
 
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(async (prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());

@@ -9,7 +9,7 @@ const Certificate = "./sample-amoy.opencert";
 
 const IframeBlock = Selector("#iframe");
 const SampleTemplate = Selector("#root");
-const StatusButton = Selector("#certificate-status", { timeout: 30000 });
+const StatusButton = Selector("#certificate-status");
 
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(async (prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());

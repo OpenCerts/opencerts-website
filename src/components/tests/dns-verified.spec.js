@@ -18,8 +18,8 @@ fixture("DNS Certificate Rendering").page`http://localhost:3000`.beforeEach(asyn
 const Document = "./fixture/sample-dns-verified.json";
 const IframeBlock = Selector("#iframe");
 const SampleTemplate = Selector("#root");
-const StatusButton = Selector("#certificate-status", { timeout: 30000 });
-const InvalidMessage = Selector(".invalid", { timeout: 30000 });
+const StatusButton = Selector("#certificate-status");
+const InvalidMessage = Selector(".invalid");
 const RenderedCertificate = Selector("#certificate-dropzone");
 
 const validateTextContent = async (t, component, texts) =>

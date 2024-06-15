@@ -18,7 +18,7 @@ fixture("Download Certificate").page`http://localhost:3000`
 
 const Document1 = "./fixture/sample-dns-verified.json";
 const Document2 = "./fixture/sample-dns-verified-special-characters.json";
-const StatusButton = Selector("#certificate-status", { timeout: 30000 });
+const StatusButton = Selector("#certificate-status");
 const DownloadLink = Selector("a").withAttribute("download");
 const DownloadButton = Selector("#btn-download");
 

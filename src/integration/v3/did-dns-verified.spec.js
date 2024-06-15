@@ -8,7 +8,7 @@ fixture("DID-DNS Certificate Rendering").page`http://localhost:3000`.beforeEach(
 const Document = "./fixture/dns-did-signed.json";
 const IframeBlock = Selector("#iframe");
 const SampleTemplate = Selector("#root");
-const StatusButton = Selector("#certificate-status", { timeout: 30000 });
+const StatusButton = Selector("#certificate-status");
 
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(async (_prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());
