@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
 import { decryptString } from "@govtechsg/oa-encryption";
+import { utils as oaVerifyUtils, openAttestationVerifiers, verificationBuilder } from "@govtechsg/oa-verify";
 import type {
   ErrorVerificationFragment,
   VerificationBuilderOptions,
   VerificationFragment,
+  Verifier,
 } from "@govtechsg/oa-verify/dist/types/types/core";
 import { utils, v2, v3 } from "@govtechsg/open-attestation";
 import { isValid, registryVerifier } from "@govtechsg/opencerts-verify";
@@ -46,8 +48,6 @@ import { generateLink } from "../services/link";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
 import { getLogger } from "../utils/logger";
 import { opencertsGetData } from "../utils/utils";
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { utils: oaVerifyUtils, verificationBuilder, openAttestationVerifiers } = require("@govtechsg/oa-verify");
 
 const { trace } = getLogger("saga:certificate");
 const getProvider = (networkName: string, providerName: "infura" | "alchemy") => {
@@ -118,8 +118,10 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedO
       networkName = getNetworkName(certificate);
     }
     const infuraProvider = getProvider(networkName, "infura");
-    const verify = (builderOptions: VerificationBuilderOptions) =>
-      verificationBuilder([...openAttestationVerifiers, registryVerifier], builderOptions);
+    const verify = (builderOptions: VerificationBuilderOptions) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return verificationBuilder([...openAttestationVerifiers, registryVerifier] as Verifier<any>[], builderOptions);
+    };
     // https://github.com/redux-saga/redux-saga/issues/884
     let fragments: VerificationFragment[] = yield call(verify({ provider: infuraProvider }), certificate);
     // manually call alchemy provider as backup if infura provider returns error fragment

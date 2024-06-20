@@ -1,3 +1,4 @@
+import { utils, ValidDnsTxtVerificationStatus, ValidDnsDidVerificationStatus } from "@govtechsg/oa-verify";
 import type { VerificationFragment } from "@govtechsg/oa-verify/dist/types/types/core";
 import { getData, v2, WrappedDocument, utils as oaUtils, v3, v4 } from "@govtechsg/open-attestation";
 import {
@@ -8,8 +9,6 @@ import React, { useState } from "react";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { icons } from "../ViewerPageImages";
 import { DetailedCertificateVerifyBlock } from "./DetailedCertificateVerifyBlock";
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { utils, ValidDnsTxtVerificationStatus, ValidDnsDidVerificationStatus } = require("@govtechsg/oa-verify");
 
 export const getV2IdentityVerificationText = (
   verificationStatus: VerificationFragment[],

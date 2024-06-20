@@ -1,11 +1,9 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-
-import type { VerificationFragment } from "@govtechsg/oa-verify/dist/types";
-const {
+import {
   utils,
   OpenAttestationEthereumDocumentStoreStatusCode,
   OpenAttestationEthereumTokenRegistryStatusCode,
-} = require("@govtechsg/oa-verify");
+} from "@govtechsg/oa-verify";
+import type { VerificationFragment } from "@govtechsg/oa-verify/dist/types";
 
 // this function check if the reason of the error is that the document store or token registry is invalid
 export const addressInvalid = (fragments: VerificationFragment[]): boolean => {
