@@ -171,7 +171,6 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedO
       }
     }
   } catch (e) {
-    console.log("ERRR", e);
     yield put(verifyingCertificateErrored(e.message));
   }
 }
