@@ -1,5 +1,9 @@
-import { utils, ValidDnsTxtVerificationStatus, ValidDnsDidVerificationStatus } from "@govtechsg/oa-verify";
-import type { VerificationFragment } from "@govtechsg/oa-verify/dist/types/types/core";
+import {
+  utils,
+  ValidDnsTxtVerificationStatus,
+  ValidDnsDidVerificationStatus,
+  VerificationFragment,
+} from "@govtechsg/oa-verify";
 import { getData, v2, WrappedDocument, utils as oaUtils, v3, v4 } from "@govtechsg/open-attestation";
 import {
   getOpencertsRegistryVerifierFragment,
