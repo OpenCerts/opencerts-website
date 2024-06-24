@@ -1,7 +1,7 @@
 import {
   utils,
-  ValidDnsTxtVerificationStatus,
   ValidDnsDidVerificationStatus,
+  ValidDnsTxtVerificationStatus,
   VerificationFragment,
 } from "@govtechsg/oa-verify";
 import { getData, v2, WrappedDocument, utils as oaUtils, v3, v4 } from "@govtechsg/open-attestation";

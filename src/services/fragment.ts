@@ -1,8 +1,8 @@
 import {
-  utils,
   OpenAttestationEthereumDocumentStoreStatusCode,
   OpenAttestationEthereumTokenRegistryStatusCode,
   VerificationFragment,
+  utils,
 } from "@govtechsg/oa-verify";
 
 // this function check if the reason of the error is that the document store or token registry is invalid
