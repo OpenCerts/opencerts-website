@@ -1,13 +1,20 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+
 import { decryptString } from "@govtechsg/oa-encryption";
-import { VerificationFragment, utils as oaVerifyUtils, ErrorVerificationFragment } from "@govtechsg/oa-verify";
-import { utils } from "@govtechsg/open-attestation";
-import { isValid, verify } from "@govtechsg/opencerts-verify";
+import { utils as oaVerifyUtils, openAttestationVerifiers, verificationBuilder } from "@govtechsg/oa-verify";
+import type {
+  ErrorVerificationFragment,
+  VerificationBuilderOptions,
+  VerificationFragment,
+  Verifier,
+} from "@govtechsg/oa-verify/dist/types/types/core";
+import { utils, v2, v3 } from "@govtechsg/open-attestation";
+import { isValid, registryVerifier } from "@govtechsg/opencerts-verify";
 import { ethers } from "ethers";
 import Router from "next/router";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import "isomorphic-fetch";
-import { triggerV2ErrorLogging, triggerV3ErrorLogging } from "../components/Analytics";
+import { triggerV2ErrorLogging, triggerV3ErrorLogging, triggerV4ErrorLogging } from "../components/Analytics";
 import { NETWORK_NAME, IS_MAINNET } from "../config";
 
 import {
@@ -71,8 +78,10 @@ const getProvider = (networkName: string, providerName: "infura" | "alchemy") =>
   }
 };
 
+// TODO: Need to update if we ever want to support v4 document store issuance
 const getNetworkName = (certificate: WrappedOrSignedOpenCertsDocument) => {
-  const data = opencertsGetData(certificate);
+  if (utils.isWrappedV4Document(certificate)) return "";
+  const data = opencertsGetData(certificate) as v2.OpenAttestationDocument | v3.WrappedDocument;
 
   if (IS_MAINNET) {
     switch (data.network?.chainId) {
@@ -104,8 +113,15 @@ const fragmentsHaveCallException = (fragments: VerificationFragment[]) => {
 export function* verifyCertificate({ payload: certificate }: { payload: WrappedOrSignedOpenCertsDocument }) {
   try {
     yield put(verifyingCertificate());
-    const networkName = getNetworkName(certificate);
+    let networkName = NETWORK_NAME;
+    if (!utils.isWrappedV4Document(certificate)) {
+      networkName = getNetworkName(certificate);
+    }
     const infuraProvider = getProvider(networkName, "infura");
+    const verify = (builderOptions: VerificationBuilderOptions) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return verificationBuilder([...openAttestationVerifiers, registryVerifier] as Verifier<any>[], builderOptions);
+    };
     // https://github.com/redux-saga/redux-saga/issues/884
     let fragments: VerificationFragment[] = yield call(verify({ provider: infuraProvider }), certificate);
     // manually call alchemy provider as backup if infura provider returns error fragment
@@ -147,8 +163,10 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedO
       if (errors.length > 0) {
         if (utils.isWrappedV2Document(certificate)) {
           triggerV2ErrorLogging(certificate, errors);
-        } else {
+        } else if (utils.isWrappedV3Document(certificate)) {
           triggerV3ErrorLogging(certificate, errors);
+        } else {
+          triggerV4ErrorLogging(certificate, errors);
         }
       }
     }

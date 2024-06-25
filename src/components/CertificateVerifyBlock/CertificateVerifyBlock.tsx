@@ -4,7 +4,7 @@ import {
   ValidDnsTxtVerificationStatus,
   VerificationFragment,
 } from "@govtechsg/oa-verify";
-import { getData, v2, WrappedDocument, utils as oaUtils, v3 } from "@govtechsg/open-attestation";
+import { getData, v2, WrappedDocument, utils as oaUtils, v3, v4 } from "@govtechsg/open-attestation";
 import {
   getOpencertsRegistryVerifierFragment,
   OpencertsRegistryVerificationValidData,
@@ -96,6 +96,13 @@ export const getV3IdentityVerificationText = (document: WrappedDocument<v3.OpenA
   return document.openAttestationMetadata.identityProof.identifier.toUpperCase();
 };
 
+export const getV4IdentityVerificationText = (
+  verificationStatus: VerificationFragment[],
+  document: v4.WrappedDocument
+): string => {
+  return document.issuer.identityProof.identifier.toUpperCase();
+};
+
 interface SimpleVerifyBlockProps {
   detailedViewVisible: boolean;
   verificationStatus: VerificationFragment[];
@@ -118,7 +125,9 @@ const SimpleVerifyBlock: React.FunctionComponent<SimpleVerifyBlockProps> = (prop
           <div className="break-all md:break-normal">
             {oaUtils.isWrappedV2Document(props.document)
               ? getV2IdentityVerificationText(props.verificationStatus, props.document)
-              : getV3IdentityVerificationText(props.document)}
+              : oaUtils.isWrappedV3Document(props.document)
+              ? getV3IdentityVerificationText(props.document)
+              : getV4IdentityVerificationText(props.verificationStatus, props.document)}
           </div>
         </h1>
         <div className="px-2 w-auto">

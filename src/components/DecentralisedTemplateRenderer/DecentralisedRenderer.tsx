@@ -2,11 +2,12 @@ import {
   FrameActions,
   FrameConnector,
   HostActions,
+  SvgRenderer,
   print,
   renderDocument,
   selectTemplate,
 } from "@govtechsg/decentralized-renderer-react-components";
-import { getData, obfuscateDocument, utils, v2 } from "@govtechsg/open-attestation";
+import { getData, obfuscateDocument, utils, v2, v3, v4 } from "@govtechsg/open-attestation";
 import React, { Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { getTemplate, opencertsGetData } from "../../utils/utils";
@@ -14,8 +15,10 @@ import {
   analyticsEvent,
   sendV2EventCertificateViewedDetailed,
   sendV3EventCertificateViewedDetailed,
+  sendV4EventCertificateViewedDetailed,
   triggerV2RendererTimeoutLogging,
   triggerV3RendererTimeoutLogging,
+  triggerV4RendererTimeoutLogging,
 } from "../Analytics";
 import { MutiTabsContainer } from "../MultiTabs";
 
@@ -28,6 +31,17 @@ interface DecentralisedRendererProps {
 type Dispatch = (action: HostActions) => void;
 // giving scrollbar a default width as there are no perfect ways to get it
 const SCROLLBAR_WIDTH = 20;
+const CREDENTIAL_SUBJECT_PREFIX = "credentialSubject.";
+const SVG_RENDERER_TYPE = "SvgRenderingTemplate2023";
+
+const isSvgRenderMethod = (document: WrappedOrSignedOpenCertsDocument) => {
+  if (!utils.isWrappedV4Document(document)) {
+    return false;
+  } else {
+    const docAsV4 = document as v4.OpenAttestationDocument;
+    return docAsV4.renderMethod?.find((method) => method.type === SVG_RENDERER_TYPE) !== undefined;
+  }
+};
 
 const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps> = ({
   rawDocument,
@@ -41,6 +55,9 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
   const [height, setHeight] = useState(0);
   const [templates, setTemplates] = useState<{ id: string; label: string }[]>([]);
   const [lastSelected, setLastSelected] = useState<string>("");
+
+  const isSvg = isSvgRenderMethod(rawDocument);
+  const svgRef = useRef<HTMLImageElement>(null);
 
   useImperativeHandle(forwardedRef, () => ({
     print() {
@@ -76,7 +93,9 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
         // adding SCROLLBAR_WIDTH in case the frame content overflow horizontally, which will cause scrollbars to appear
         setHeight(action.payload + SCROLLBAR_WIDTH);
       } else if (action.type === "OBFUSCATE") {
-        const field = action.payload;
+        const field = utils.isWrappedV4Document(documentRef.current)
+          ? CREDENTIAL_SUBJECT_PREFIX + action.payload
+          : action.payload;
         // https://github.com/microsoft/TypeScript/issues/14107 overload does not support union :/
         const updatedDocument = utils.isWrappedV2Document(documentRef.current)
           ? obfuscateDocument(documentRef.current, field)
@@ -95,8 +114,10 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
         // CERTIFICATE_RENDERER_TIMEOUT event
         if (utils.isWrappedV2Document(rawDocument)) {
           triggerV2RendererTimeoutLogging(rawDocument);
-        } else {
+        } else if (utils.isWrappedV3Document(rawDocument)) {
           triggerV3RendererTimeoutLogging(rawDocument);
+        } else {
+          triggerV4RendererTimeoutLogging(rawDocument);
         }
       }
     },
@@ -112,7 +133,7 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
   // send analytics on which document has been displayed
   useEffect(() => {
     // CERTIFICATE_VIEWED event
-    if (utils.isSignedWrappedV2Document(rawDocument)) {
+    if (utils.isWrappedV2Document(rawDocument)) {
       const certificateData = getData(rawDocument);
       analyticsEvent({
         category: "CERTIFICATE_VIEWED",
@@ -121,14 +142,23 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
           issuerId: `${certificateData.issuers.map((issuer) => issuer.id).join(",")}`,
         },
       });
-    } else {
-      const certificateData = opencertsGetData(rawDocument);
+    } else if (utils.isWrappedV3Document(rawDocument)) {
+      const certificateData = opencertsGetData(rawDocument) as v3.OpenAttestationDocument;
       const storeAddresses = utils.getIssuerAddress(rawDocument);
       analyticsEvent({
         category: "CERTIFICATE_VIEWED",
         options: {
           documentId: certificateData?.id ?? undefined,
           documentStore: `${Array.isArray(storeAddresses) ? storeAddresses.join(",") : storeAddresses}`,
+        },
+      });
+    } else {
+      const rawDocumentAsv4 = rawDocument as v4.OpenAttestationDocument;
+      analyticsEvent({
+        category: "CERTIFICATE_VIEWED",
+        options: {
+          documentId: (rawDocumentAsv4?.credentialSubject.id as string) ?? undefined,
+          issuerId: rawDocumentAsv4.issuer.id,
         },
       });
     }
@@ -142,8 +172,10 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
           certificateData,
         });
       });
-    } else {
+    } else if (utils.isWrappedV3Document(rawDocument)) {
       sendV3EventCertificateViewedDetailed({ certificateData: rawDocument });
+    } else {
+      sendV4EventCertificateViewedDetailed({ certificateData: rawDocument });
     }
   }, [rawDocument]);
 
@@ -162,20 +194,28 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
       <h2 className="print-only exact-print text-center py-8">
         If you want to print the certificate, please click on the highlighted button above.
       </h2>
-      {!toFrame.current && !rendererTimeout && (
+      {!toFrame.current && !rendererTimeout && !isSvg && (
         <div className="container text-blue text-center py-16">
           <i className="fas fa-spinner fa-pulse fa-3x" />
           <div className="my-3">Loading Renderer...</div>
         </div>
       )}
       <div className={rendererTimeout ? "container text-center py-16" : ""}>
-        <FrameConnector
-          className="w-full max-w-full"
-          style={{ height: `${height}px` }}
-          source={`${getTemplate(rawDocument)}`}
-          dispatch={dispatch}
-          onConnected={onConnected}
-        />
+        {isSvg ? (
+          <SvgRenderer
+            className="mx-auto w-[70%] border border-black"
+            document={rawDocument as v4.OpenAttestationDocument}
+            ref={svgRef}
+          />
+        ) : (
+          <FrameConnector
+            className="w-full max-w-full"
+            style={{ height: `${height}px` }}
+            source={`${getTemplate(rawDocument)}`}
+            dispatch={dispatch}
+            onConnected={onConnected}
+          />
+        )}
       </div>
     </>
   );

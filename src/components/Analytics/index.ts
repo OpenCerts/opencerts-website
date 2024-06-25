@@ -1,4 +1,4 @@
-import { v2, WrappedDocument, getData, v3, utils } from "@govtechsg/open-attestation";
+import { v2, WrappedDocument, getData, v3, utils, v4 } from "@govtechsg/open-attestation";
 import { RegistryEntry } from "@govtechsg/opencerts-verify";
 import { isEmpty, omitBy } from "lodash";
 import ReactGA from "react-ga4";
@@ -145,6 +145,29 @@ export const sendV3EventCertificateViewedDetailed = ({
   });
 };
 
+export const sendV4EventCertificateViewedDetailed = ({
+  certificateData,
+}: {
+  certificateData: v4.OpenAttestationDocument;
+}): void => {
+  const renderMethod = certificateData.renderMethod?.[0]; // Take first render method
+
+  analyticsEvent({
+    category: "CERTIFICATE_DETAILS",
+    nonInteraction: true,
+    options: {
+      documentId: certificateData.id ?? "",
+      documentName: certificateData.name ?? "",
+      issuedOn: (certificateData.credentialSubject.issuedOn as string) ?? "",
+      issuerName: certificateData.issuer.identityProof.identifier,
+      issuerId: certificateData.issuer.id ?? "",
+      rendererUrl: renderMethod?.id ?? "",
+      templateName:
+        renderMethod?.type === "OpenAttestationEmbeddedRenderer" ? renderMethod.templateName : renderMethod?.name ?? "",
+    },
+  });
+};
+
 export function triggerV2ErrorLogging(
   rawCertificate: WrappedDocument<v2.OpenAttestationDocument>,
   errors: string[]
@@ -223,6 +246,26 @@ export function triggerV3ErrorLogging(
   });
 }
 
+export function triggerV4ErrorLogging(rawCertificate: v4.OpenAttestationDocument, errors: string[]): void {
+  const renderMethod = rawCertificate.renderMethod?.[0]; // Take first render method
+  const errorsList = errors.join(",");
+
+  analyticsEvent({
+    category: "CERTIFICATE_ERROR",
+    nonInteraction: true,
+    options: {
+      documentId: rawCertificate.id ?? "",
+      documentName: rawCertificate.name ?? "",
+      issuedOn: (rawCertificate.credentialSubject.issuedOn as string) ?? "",
+      issuerName: rawCertificate.issuer.identityProof.identifier,
+      errors: errorsList,
+      rendererUrl: renderMethod?.id ?? "",
+      templateName:
+        renderMethod?.type === "OpenAttestationEmbeddedRenderer" ? renderMethod.templateName : renderMethod?.name ?? "",
+    },
+  });
+}
+
 export function triggerV2RendererTimeoutLogging(rawCertificate: WrappedDocument<v2.OpenAttestationDocument>): void {
   const certificate: v2.OpenAttestationDocument & { name?: string; issuedOn?: string } = getData(rawCertificate);
 
@@ -286,6 +329,24 @@ export function triggerV3RendererTimeoutLogging(rawCertificate: WrappedDocument<
       issuerName: issuerName,
       rendererUrl: rendererUrl,
       templateName: templateName,
+    },
+  });
+}
+
+export function triggerV4RendererTimeoutLogging(rawCertificate: v4.OpenAttestationDocument): void {
+  const renderMethod = rawCertificate.renderMethod?.[0]; // Take first render method
+
+  analyticsEvent({
+    category: "CERTIFICATE_RENDERER_TIMEOUT",
+    nonInteraction: true,
+    options: {
+      documentId: rawCertificate.id ?? "",
+      documentName: rawCertificate.name ?? "",
+      issuedOn: (rawCertificate.credentialSubject.issuedOn as string) ?? "",
+      issuerName: rawCertificate.issuer.identityProof.identifier,
+      rendererUrl: renderMethod?.id ?? "",
+      templateName:
+        renderMethod?.type === "OpenAttestationEmbeddedRenderer" ? renderMethod.templateName : renderMethod?.name ?? "",
     },
   });
 }
