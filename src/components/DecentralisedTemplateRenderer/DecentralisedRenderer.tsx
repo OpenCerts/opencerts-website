@@ -20,7 +20,7 @@ import {
   triggerV3RendererTimeoutLogging,
   triggerV4RendererTimeoutLogging,
 } from "../Analytics";
-import { useWogaa } from "../Analytics/wogaa";
+import { startTransactionalService, completeTransactionalService } from "../Analytics/wogaa";
 import { MutiTabsContainer } from "../MultiTabs";
 
 interface DecentralisedRendererProps {
@@ -56,7 +56,7 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
   const [height, setHeight] = useState(0);
   const [templates, setTemplates] = useState<{ id: string; label: string }[]>([]);
   const [lastSelected, setLastSelected] = useState<string>("");
-  const { startTransactionalService, completeTransactionalService } = useWogaa();
+
   const isSvg = isSvgRenderMethod(rawDocument);
   const svgRef = useRef<HTMLImageElement>(null);
 

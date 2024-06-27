@@ -16,24 +16,20 @@ declare global {
   }
 }
 
-export const useWogaa = () => {
-  const startTransactionalService: typeof window.wogaaCustom.startTransactionalService = (...args) => {
-    if (typeof window !== undefined && window.wogaaCustom) {
-      window.wogaaCustom.startTransactionalService(...args);
-    } else {
-      console.warn("window.wogaaCustom is not defined", "Ensure Wogaa script is properly installed/imported");
-    }
-  };
+export const startTransactionalService: typeof window.wogaaCustom.startTransactionalService = (...args) => {
+  if (typeof window !== undefined && window.wogaaCustom) {
+    window.wogaaCustom.startTransactionalService(...args);
+  } else {
+    console.warn("window.wogaaCustom is not defined", "Ensure Wogaa script is properly installed/imported");
+  }
+};
 
-  const completeTransactionalService: typeof window.wogaaCustom.completeTransactionalService = (...args) => {
-    if (typeof window !== undefined && window.wogaaCustom) {
-      window.wogaaCustom.completeTransactionalService(...args);
-    } else {
-      console.warn("window.wogaaCustom is not defined", "Ensure Wogaa script is properly installed/imported");
-    }
-  };
-
-  return { startTransactionalService, completeTransactionalService };
+export const completeTransactionalService: typeof window.wogaaCustom.completeTransactionalService = (...args) => {
+  if (typeof window !== undefined && window.wogaaCustom) {
+    window.wogaaCustom.completeTransactionalService(...args);
+  } else {
+    console.warn("window.wogaaCustom is not defined", "Ensure Wogaa script is properly installed/imported");
+  }
 };
 
 export const Wogaa = () => (
