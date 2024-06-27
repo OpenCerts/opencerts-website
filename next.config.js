@@ -29,6 +29,7 @@ module.exports = withBundleAnalyzer({
     ALCHEMY_API_KEY: process.env.ALCHEMY_API_KEY || "FK1x9CdE8NStKjVt236D_LP7B6MMCFOs", // default key works on ropsten
     TRUSTED_TLDS: process.env.TRUSTED_TLDS || "gov.sg,edu.sg",
     GA4_TAG_ID: process.env.GA4_TAG_ID || "G-JP12T2F01V",
+    WOGAA_ENV: process.env.WOGAA_ENV || "production",
   },
   // Variables passed to both server and client
   publicRuntimeConfig: {
