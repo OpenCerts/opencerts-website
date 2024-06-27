@@ -20,6 +20,7 @@ import {
   triggerV3RendererTimeoutLogging,
   triggerV4RendererTimeoutLogging,
 } from "../Analytics";
+import { useWogaa } from "../Analytics/wogaa";
 import { MutiTabsContainer } from "../MultiTabs";
 
 interface DecentralisedRendererProps {
@@ -55,7 +56,7 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
   const [height, setHeight] = useState(0);
   const [templates, setTemplates] = useState<{ id: string; label: string }[]>([]);
   const [lastSelected, setLastSelected] = useState<string>("");
-
+  const { startTransactionalService, completeTransactionalService } = useWogaa();
   const isSvg = isSvgRenderMethod(rawDocument);
   const svgRef = useRef<HTMLImageElement>(null);
 
@@ -177,6 +178,11 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
     } else {
       sendV4EventCertificateViewedDetailed({ certificateData: rawDocument });
     }
+
+    // Wogaa Transaction Service: Successful Verification on OpenCerts
+    // TODO: Separate transaction service according to document version? (e.g. 2.0, 3.0, 4.0)
+    startTransactionalService("opencertsio-5538");
+    completeTransactionalService("opencertsio-5538");
   }, [rawDocument]);
 
   const visibleTemplates = templates.filter((template) => template.id !== "print");
