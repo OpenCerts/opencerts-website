@@ -7,7 +7,7 @@ import type {
   VerificationBuilderOptions,
   VerificationFragment,
   Verifier,
-} from "@govtechsg/oa-verify/dist/types/types/core";
+} from "@govtechsg/oa-verify";
 import { utils, v2, v3 } from "@govtechsg/open-attestation";
 import { isValid, registryVerifier } from "@govtechsg/opencerts-verify";
 import { ethers } from "ethers";
