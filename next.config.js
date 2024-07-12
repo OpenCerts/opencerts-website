@@ -33,7 +33,7 @@ module.exports = withBundleAnalyzer({
   },
   // Variables passed to both server and client
   publicRuntimeConfig: {
-    network: process.env.NET || "mainnet",
+    network: process.env.NET,
     legacyRendererUrl: process.env.LEGACY_RENDERER_URL,
     context: process.env.CONTEXT, // https://www.netlify.com/docs/continuous-deployment/?_ga=2.254249672.1986722564.1569467860-817711885.1562657089#build-environment-variables
   },
