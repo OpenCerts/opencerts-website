@@ -16,23 +16,6 @@ import { providers, utils } from "ethers";
 export class OAFailoverProvider extends providers.StaticJsonRpcProvider {
   failoverProviders: providers.StaticJsonRpcProvider[];
 
-  static readonly DEFAULT_NETWORK_URLS = {
-    mainnet: [
-      "https://mainnet.infura.io/v3/84842078b09946638c03157f83405213", // Default API key from Ethers
-      "https://eth-mainnet.alchemyapi.io/v2/_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC", // Default API key from Ethers
-      "https://cloudflare-eth.com/",
-      "https://ethereum-rpc.publicnode.com/",
-    ],
-    sepolia: [
-      "https://sepolia.infura.io/v3/84842078b09946638c03157f83405213", // Default API key from Ethers
-      "https://eth-sepolia.g.alchemy.com/v2/_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC", // Default API key from Ethers
-      "https://ethereum-sepolia-rpc.publicnode.com/", // The free Cloudflare endpoint does not support Sepolia (use Public Node instead)
-    ],
-    amoy: [
-      "https://polygon-amoy.infura.io/v3/84842078b09946638c03157f83405213", // Default API key from Ethers
-      "https://polygon-amoy.g.alchemy.com/v2/_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC", // Default API key from Ethers
-    ],
-  } as const;
   static readonly DEAFULT_CONNECTION_INFO: Partial<utils.ConnectionInfo> = {
     allowGzip: true,
     timeout: 4 * 1000, // 4 seconds timeout [Default - 2 mins]: https://github.com/ethers-io/ethers.js/blob/v5.7.2/packages/web/src.ts/index.ts#L122
@@ -45,19 +28,7 @@ export class OAFailoverProvider extends providers.StaticJsonRpcProvider {
    * @param network E.g. "mainnet", "sepolia", "amoy"
    * @param options By default `options.shuffle = true` will randomise the order of providers to spread the load
    */
-  constructor(urls?: utils.ConnectionInfo[], network = "mainnet", options: { shuffle: boolean } = { shuffle: true }) {
-    // Assign defaults if not specified
-    if (!urls) {
-      // If unrecognised network, default to "mainnet"
-      if (!Object.keys(OAFailoverProvider.DEFAULT_NETWORK_URLS).includes(network)) {
-        network = "mainnet";
-      }
-
-      urls = OAFailoverProvider.DEFAULT_NETWORK_URLS[
-        network as keyof typeof OAFailoverProvider.DEFAULT_NETWORK_URLS
-      ].map((url: string) => ({ url, ...OAFailoverProvider.DEAFULT_CONNECTION_INFO }));
-    }
-
+  constructor(urls: utils.ConnectionInfo[], network: string, options: { shuffle: boolean } = { shuffle: true }) {
     // Call parent constructor with first provider
     super(urls[0], network);
 
@@ -89,3 +60,22 @@ export class OAFailoverProvider extends providers.StaticJsonRpcProvider {
     }
   }
 }
+
+// Temporarily retained for any future reference
+// const DEFAULT_NETWORK_URLS = {
+//   mainnet: [
+//     "https://mainnet.infura.io/v3/84842078b09946638c03157f83405213", // Default API key from Ethers
+//     "https://eth-mainnet.alchemyapi.io/v2/_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC", // Default API key from Ethers
+//     "https://cloudflare-eth.com/",
+//     "https://ethereum-rpc.publicnode.com/",
+//   ],
+//   sepolia: [
+//     "https://sepolia.infura.io/v3/84842078b09946638c03157f83405213", // Default API key from Ethers
+//     "https://eth-sepolia.g.alchemy.com/v2/_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC", // Default API key from Ethers
+//     "https://ethereum-sepolia-rpc.publicnode.com/", // The free Cloudflare endpoint does not support Sepolia (use Public Node instead)
+//   ],
+//   amoy: [
+//     "https://polygon-amoy.infura.io/v3/84842078b09946638c03157f83405213", // Default API key from Ethers
+//     "https://polygon-amoy.g.alchemy.com/v2/_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC", // Default API key from Ethers
+//   ],
+// } as const;

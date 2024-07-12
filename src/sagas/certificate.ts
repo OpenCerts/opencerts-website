@@ -49,46 +49,75 @@ import { opencertsGetData } from "../utils/utils";
 const { trace } = getLogger("saga:certificate");
 
 const getUrls = (network: string): ConstructorParameters<typeof OAFailoverProvider>[0] => {
-  switch (network) {
-    case "mainnet":
-      return [
-        { url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}` },
-        { url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}` },
-        { url: `https://cloudflare-eth.com/` },
-        { url: `https://ethereum-rpc.publicnode.com/` },
-      ];
-    case "sepolia":
-      return [
-        { url: `https://sepolia.infura.io/v3/${process.env.INFURA_API_KEY}` },
-        { url: `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
-        { url: `https://ethereum-sepolia-rpc.publicnode.com/` },
-      ];
-    case "amoy":
-      return [
-        { url: `https://polygon-amoy.infura.io/v3/${process.env.INFURA_API_KEY}` },
-        { url: `https://polygon-amoy.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
-      ];
-    default:
-      return undefined;
+  if (IS_MAINNET) {
+    /* Production Network Whitelist */
+    switch (network) {
+      // Ethereum mainnet/homestead
+      case "mainnet":
+      case "homestead":
+        return [
+          { url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}` },
+          { url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}` },
+          { url: `https://cloudflare-eth.com/` },
+          { url: `https://ethereum-rpc.publicnode.com/` },
+        ];
+      // Polygon mainnet
+      case "matic":
+        return [
+          { url: `https://polygon-mainnet.infura.io/v3/${process.env.INFURA_API_KEY}` },
+          { url: `https://polygon-mainnet.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
+        ];
+      default:
+        console.error(`Unrecognised network: ${network}`);
+        throw new Error(`Unrecognised network: ${network}`);
+    }
+  } else {
+    /* Non-production Network Whitelist */
+    switch (network) {
+      // Ethereum testnet
+      case "sepolia":
+        return [
+          { url: `https://sepolia.infura.io/v3/${process.env.INFURA_API_KEY}` },
+          { url: `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
+          { url: `https://ethereum-sepolia-rpc.publicnode.com/` },
+        ];
+      // Polygon testnet
+      case "amoy":
+        return [
+          { url: `https://polygon-amoy.infura.io/v3/${process.env.INFURA_API_KEY}` },
+          { url: `https://polygon-amoy.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
+        ];
+      default:
+        console.error(`Unrecognised network: ${network}`);
+        throw new Error(`Unrecognised network: ${network}`);
+    }
   }
 };
 
-// TODO: Need to update if we ever want to auto-detect network on an ETH-issued OA v4 document
 const getNetworkName = (certificate: WrappedOrSignedOpenCertsDocument) => {
-  if (utils.isWrappedV4Document(certificate)) return "";
+  if (utils.isWrappedV4Document(certificate)) return NETWORK_NAME; // TODO: Need to update if we ever want to auto-detect network on an ETH-issued OA v4 document
+
   const data = opencertsGetData(certificate) as v2.OpenAttestationDocument | v3.WrappedDocument;
 
   if (IS_MAINNET) {
+    /* Production Network Whitelist */
     switch (data.network?.chainId) {
       case "137":
         return "matic";
     }
   } else {
+    /* Non-production Network Whitelist */
     switch (data.network?.chainId) {
       case "80002":
         return "amoy";
     }
   }
+
+  // A network is specified in the certificate but not in the above whitelist
+  if (data.network) {
+    console.log(`"${JSON.stringify(data.network)}" is not a whitelisted network. Reverting back to "${NETWORK_NAME}".`);
+  }
+
   return NETWORK_NAME;
 };
 
@@ -96,12 +125,10 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedO
   try {
     yield put(verifyingCertificate());
 
-    let network = NETWORK_NAME;
-    if (!utils.isWrappedV4Document(certificate)) {
-      network = getNetworkName(certificate);
-    }
+    const network = getNetworkName(certificate);
+    const urls = getUrls(network);
 
-    const providerWithFailover = new OAFailoverProvider(getUrls(network), network);
+    const providerWithFailover = new OAFailoverProvider(urls, network);
     const resolverWithFailover = new Resolver(getResolver({ name: network, provider: providerWithFailover }));
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
