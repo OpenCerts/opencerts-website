@@ -48,8 +48,13 @@ import { opencertsGetData } from "../utils/utils";
 
 const { trace } = getLogger("saga:certificate");
 
-const getUrls = (network: string): ConstructorParameters<typeof OAFailoverProvider>[0] => {
-  if (IS_MAINNET) {
+const getUrls = (options: {
+  network: string;
+  isProduction: boolean;
+}): ConstructorParameters<typeof OAFailoverProvider>[0] => {
+  const { network, isProduction } = options;
+
+  if (isProduction) {
     /* Production Network Whitelist */
     switch (network) {
       // Ethereum mainnet/homestead
@@ -126,10 +131,22 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedO
     yield put(verifyingCertificate());
 
     const network = getNetworkName(certificate);
-    const urls = getUrls(network);
+    const urls = getUrls({ network, isProduction: IS_MAINNET });
 
     const providerWithFailover = new OAFailoverProvider(urls, network);
-    const resolverWithFailover = new Resolver(getResolver({ name: network, provider: providerWithFailover }));
+    const resolverWithFailover = new Resolver(
+      /**
+       * Regardless of mainnet or testnet, OA only uses mainnet DIDs
+       * As such, resolver should always resolve against a mainnet provider
+       * Specifying a static provider for resolver will also prevent unnecessary "eth_chainId" calls to providers
+       * ✅ did:ethr:0x1245e5b64d785b25057f7438f715f4aa5d965733
+       * ❌ did:ethr:sepolia:0x1245e5b64d785b25057f7438f715f4aa5d965733
+       */
+      getResolver({
+        name: "mainnet",
+        provider: new OAFailoverProvider(getUrls({ network: "mainnet", isProduction: true }), "mainnet"),
+      })
+    );
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const verify = verificationBuilder([...openAttestationVerifiers, registryVerifier] as Verifier<any>[], {
