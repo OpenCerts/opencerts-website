@@ -1,22 +1,18 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
 import { decryptString } from "@govtechsg/oa-encryption";
-import { utils as oaVerifyUtils, openAttestationVerifiers, verificationBuilder } from "@govtechsg/oa-verify";
-import type {
-  ErrorVerificationFragment,
-  VerificationBuilderOptions,
-  VerificationFragment,
-  Verifier,
-} from "@govtechsg/oa-verify";
+import { openAttestationVerifiers, verificationBuilder } from "@govtechsg/oa-verify";
+import type { VerificationFragment, Verifier } from "@govtechsg/oa-verify";
 import { utils, v2, v3 } from "@govtechsg/open-attestation";
 import { isValid, registryVerifier } from "@govtechsg/opencerts-verify";
-import { ethers } from "ethers";
 import Router from "next/router";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import "isomorphic-fetch";
+import { Resolver } from "did-resolver";
+import { getResolver } from "ethr-did-resolver";
+
 import { triggerV2ErrorLogging, triggerV3ErrorLogging, triggerV4ErrorLogging } from "../components/Analytics";
 import { NETWORK_NAME, IS_MAINNET } from "../config";
-
 import {
   GENERATE_SHARE_LINK,
   generateShareLinkFailure,
@@ -36,6 +32,7 @@ import {
   verifyingCertificateErrored,
 } from "../reducers/certificate.actions";
 import { getCertificate } from "../reducers/certificate.selectors";
+import { OAFailoverProvider } from "../services/failover-provider";
 import { sendEmail } from "../services/email";
 import {
   certificateNotIssued,
@@ -50,35 +47,33 @@ import { getLogger } from "../utils/logger";
 import { opencertsGetData } from "../utils/utils";
 
 const { trace } = getLogger("saga:certificate");
-const getProvider = (networkName: string, providerName: "infura" | "alchemy") => {
-  if (providerName === "alchemy") {
-    switch (networkName) {
-      case "sepolia":
-        // Handling sepolia network differently because ethers v5 AlchemyProvider doesn't support Sepolia
-        // TODO: use ethers v6 AlchemyProvider once ethers version is able to be bumped
-        return new ethers.providers.StaticJsonRpcProvider(
-          `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`,
-          networkName
-        );
-      case "amoy":
-        return new ethers.providers.StaticJsonRpcProvider(
-          `https://polygon-amoy.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`
-        );
-      default:
-        return new ethers.providers.AlchemyProvider(networkName, process.env.ALCHEMY_API_KEY);
-    }
-  }
-  switch (networkName) {
+
+const getUrls = (network: string): ConstructorParameters<typeof OAFailoverProvider>[0] => {
+  switch (network) {
+    case "mainnet":
+      return [
+        { url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}` },
+        { url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}` },
+        { url: `https://cloudflare-eth.com/` },
+        { url: `https://ethereum-rpc.publicnode.com/` },
+      ];
+    case "sepolia":
+      return [
+        { url: `https://sepolia.infura.io/v3/${process.env.INFURA_API_KEY}` },
+        { url: `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
+        { url: `https://ethereum-sepolia-rpc.publicnode.com/` },
+      ];
     case "amoy":
-      return new ethers.providers.StaticJsonRpcProvider(
-        `https://polygon-amoy.infura.io/v3/${process.env.INFURA_API_KEY}`
-      );
+      return [
+        { url: `https://polygon-amoy.infura.io/v3/${process.env.INFURA_API_KEY}` },
+        { url: `https://polygon-amoy.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
+      ];
     default:
-      return new ethers.providers.InfuraProvider(networkName, process.env.INFURA_API_KEY);
+      return undefined;
   }
 };
 
-// TODO: Need to update if we ever want to support v4 document store issuance
+// TODO: Need to update if we ever want to auto-detect network on an ETH-issued OA v4 document
 const getNetworkName = (certificate: WrappedOrSignedOpenCertsDocument) => {
   if (utils.isWrappedV4Document(certificate)) return "";
   const data = opencertsGetData(certificate) as v2.OpenAttestationDocument | v3.WrappedDocument;
@@ -97,42 +92,28 @@ const getNetworkName = (certificate: WrappedOrSignedOpenCertsDocument) => {
   return NETWORK_NAME;
 };
 
-const fragmentsHaveCallException = (fragments: VerificationFragment[]) => {
-  let result = false;
-  fragments.forEach((fragment) => {
-    if (oaVerifyUtils.isErrorFragment(fragment)) {
-      const errFragment = fragment as ErrorVerificationFragment<{ code: string }>;
-      if (errFragment.data?.code === "CALL_EXCEPTION") {
-        result = true;
-      }
-    }
-  });
-  return result;
-};
-
 export function* verifyCertificate({ payload: certificate }: { payload: WrappedOrSignedOpenCertsDocument }) {
   try {
     yield put(verifyingCertificate());
-    let networkName = NETWORK_NAME;
-    if (!utils.isWrappedV4Document(certificate)) {
-      networkName = getNetworkName(certificate);
-    }
-    const infuraProvider = getProvider(networkName, "infura");
-    const verify = (builderOptions: VerificationBuilderOptions) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return verificationBuilder([...openAttestationVerifiers, registryVerifier] as Verifier<any>[], builderOptions);
-    };
-    // https://github.com/redux-saga/redux-saga/issues/884
-    let fragments: VerificationFragment[] = yield call(verify({ provider: infuraProvider }), certificate);
-    // manually call alchemy provider as backup if infura provider returns error fragment
-    // https://docs.ethers.org/v5/api/providers/other/#FallbackProvider
-    if (fragmentsHaveCallException(fragments)) {
-      const alchemyProvider = getProvider(networkName, "alchemy");
-      fragments = yield call(verify({ provider: alchemyProvider }), certificate);
-    }
-    trace(`Verification Status: ${JSON.stringify(fragments)}`);
 
+    let network = NETWORK_NAME;
+    if (!utils.isWrappedV4Document(certificate)) {
+      network = getNetworkName(certificate);
+    }
+
+    const providerWithFailover = new OAFailoverProvider(getUrls(network), network);
+    const resolverWithFailover = new Resolver(getResolver({ name: network, provider: providerWithFailover }));
+
+    const verify = verificationBuilder([...openAttestationVerifiers, registryVerifier] as Verifier<any>[], {
+      provider: providerWithFailover,
+      resolver: resolverWithFailover,
+    });
+
+    // https://github.com/redux-saga/redux-saga/issues/884
+    let fragments: VerificationFragment[] = yield call(verify, certificate);
+    trace(`Verification Status: ${JSON.stringify(fragments)}`);
     yield put(verifyingCertificateCompleted(fragments));
+
     if (isValid(fragments)) {
       Router.push("/viewer");
     } else {
