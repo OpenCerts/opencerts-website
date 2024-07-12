@@ -153,7 +153,8 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedO
       }
     }
   } catch (e) {
-    yield put(verifyingCertificateErrored(e.message));
+    if (e instanceof Error) yield put(verifyingCertificateErrored(e.message));
+    else yield put(verifyingCertificateErrored(JSON.stringify(e)));
   }
 }
 
@@ -175,7 +176,8 @@ export function* sendCertificate({ payload }: { payload: { email: string; captch
 
     yield put(sendCertificateSuccess());
   } catch (e) {
-    yield put(sendCertificateFailure(e.message));
+    if (e instanceof Error) yield put(sendCertificateFailure(e.message));
+    else yield put(sendCertificateFailure(JSON.stringify(e)));
   }
 }
 type Await<T> = T extends PromiseLike<infer U> ? U : T;
@@ -196,7 +198,8 @@ export function* generateShareLink() {
 
     yield put(generateShareLinkSuccess(success));
   } catch (e) {
-    yield put(generateShareLinkFailure(e.message));
+    if (e instanceof Error) yield put(generateShareLinkFailure(e.message));
+    else yield put(generateShareLinkFailure(JSON.stringify(e)));
   }
 }
 
@@ -242,7 +245,8 @@ export function* retrieveCertificateByAction({
     yield put(updateCertificate(certificate as WrappedOrSignedOpenCertsDocument));
     yield put(retrieveCertificateByActionSuccess());
   } catch (e) {
-    yield put(retrieveCertificateByActionFailure(e.message));
+    if (e instanceof Error) yield put(retrieveCertificateByActionFailure(e.message));
+    else yield put(retrieveCertificateByActionFailure(JSON.stringify(e)));
   }
 }
 
