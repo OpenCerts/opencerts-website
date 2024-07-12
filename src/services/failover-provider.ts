@@ -70,6 +70,7 @@ export class OAFailoverProvider extends providers.StaticJsonRpcProvider {
       );
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async perform(method: string, params: any): Promise<any> {
     // Cycle through all specified providers
     for (let i = 0; i < this.failoverProviders.length; i++) {

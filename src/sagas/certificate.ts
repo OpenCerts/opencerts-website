@@ -5,11 +5,11 @@ import { openAttestationVerifiers, verificationBuilder } from "@govtechsg/oa-ver
 import type { VerificationFragment, Verifier } from "@govtechsg/oa-verify";
 import { utils, v2, v3 } from "@govtechsg/open-attestation";
 import { isValid, registryVerifier } from "@govtechsg/opencerts-verify";
+import { Resolver } from "did-resolver";
+import { getResolver } from "ethr-did-resolver";
 import Router from "next/router";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import "isomorphic-fetch";
-import { Resolver } from "did-resolver";
-import { getResolver } from "ethr-did-resolver";
 
 import { triggerV2ErrorLogging, triggerV3ErrorLogging, triggerV4ErrorLogging } from "../components/Analytics";
 import { NETWORK_NAME, IS_MAINNET } from "../config";
@@ -32,8 +32,8 @@ import {
   verifyingCertificateErrored,
 } from "../reducers/certificate.actions";
 import { getCertificate } from "../reducers/certificate.selectors";
-import { OAFailoverProvider } from "../services/failover-provider";
 import { sendEmail } from "../services/email";
+import { OAFailoverProvider } from "../services/failover-provider";
 import {
   certificateNotIssued,
   certificateRevoked,
@@ -104,13 +104,14 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedO
     const providerWithFailover = new OAFailoverProvider(getUrls(network), network);
     const resolverWithFailover = new Resolver(getResolver({ name: network, provider: providerWithFailover }));
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const verify = verificationBuilder([...openAttestationVerifiers, registryVerifier] as Verifier<any>[], {
       provider: providerWithFailover,
       resolver: resolverWithFailover,
     });
 
     // https://github.com/redux-saga/redux-saga/issues/884
-    let fragments: VerificationFragment[] = yield call(verify, certificate);
+    const fragments: VerificationFragment[] = yield call(verify, certificate);
     trace(`Verification Status: ${JSON.stringify(fragments)}`);
     yield put(verifyingCertificateCompleted(fragments));
 
