@@ -213,7 +213,10 @@
         "plugins": [
           "testcafe-community"
         ],
-        "extends": "plugin:testcafe-community/recommended"
+        "extends": "plugin:testcafe-community/recommended",
+        "rules": {
+          "testcafe-community/missing-expect": "off"
+        }
       }
     ]
   },
