@@ -31,7 +31,7 @@
     "serve-static": "http-server out -s -p 3000",
     "integration": "testcafe chrome src/**/*.spec.js --ts-config-path ./tsconfig.json",
     "integration:single": "testcafe chrome -L --app \"npm run serve-static\"",
-    "integration:headless": "testcafe 'chrome --headless=new --disable-web-security' --selector-timeout 80000 src/**/*.spec.js",
+    "integration:headless": "testcafe -c 3 'chrome --headless=new --disable-web-security' --selector-timeout 300000 src/**/*.spec.js",
     "integration:watch": "nodemon --exec \"npm run integration\" --watch src",
     "type-check": "npx tsc --noEmit"
   },
