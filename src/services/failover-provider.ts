@@ -28,7 +28,11 @@ export class OAFailoverProvider extends providers.StaticJsonRpcProvider {
    * @param network E.g. "mainnet", "sepolia", "amoy"
    * @param options By default `options.shuffle = true` will randomise the order of providers to spread the load
    */
-  constructor(urls: utils.ConnectionInfo[], network: string, options: { shuffle: boolean } = { shuffle: true }) {
+  constructor(
+    urls: utils.ConnectionInfo[],
+    network: providers.Networkish,
+    options: { shuffle: boolean } = { shuffle: true }
+  ) {
     // Call parent constructor with first provider
     super(urls[0], network);
 

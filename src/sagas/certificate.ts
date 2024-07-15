@@ -49,14 +49,16 @@ import { opencertsGetData } from "../utils/utils";
 const { trace } = getLogger("saga:certificate");
 
 const getUrls = (options: {
-  network: string;
+  network: ConstructorParameters<typeof OAFailoverProvider>[1];
   isProduction: boolean;
 }): ConstructorParameters<typeof OAFailoverProvider>[0] => {
   const { network, isProduction } = options;
+  const networkString =
+    typeof network === "string" ? network : typeof network === "number" ? network.toString() : network.name;
 
   if (isProduction) {
     /* Production Network Whitelist */
-    switch (network) {
+    switch (networkString) {
       // Ethereum mainnet/homestead
       case "mainnet":
       case "homestead":
@@ -68,6 +70,7 @@ const getUrls = (options: {
         ];
       // Polygon mainnet
       case "matic":
+      case "137":
         return [
           { url: `https://polygon-mainnet.infura.io/v3/${process.env.INFURA_API_KEY}` },
           { url: `https://polygon-mainnet.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
@@ -78,7 +81,7 @@ const getUrls = (options: {
     }
   } else {
     /* Non-production Network Whitelist */
-    switch (network) {
+    switch (networkString) {
       // Ethereum testnet
       case "sepolia":
         return [
@@ -88,6 +91,7 @@ const getUrls = (options: {
         ];
       // Polygon testnet
       case "amoy":
+      case "80002":
         return [
           { url: `https://polygon-amoy.infura.io/v3/${process.env.INFURA_API_KEY}` },
           { url: `https://polygon-amoy.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
@@ -99,7 +103,9 @@ const getUrls = (options: {
   }
 };
 
-const getNetworkName = (certificate: WrappedOrSignedOpenCertsDocument) => {
+const getNetworkName = (
+  certificate: WrappedOrSignedOpenCertsDocument
+): ConstructorParameters<typeof OAFailoverProvider>[1] => {
   if (utils.isWrappedV4Document(certificate)) return NETWORK_NAME; // TODO: Need to update if we ever want to auto-detect network on an ETH-issued OA v4 document
 
   const data = opencertsGetData(certificate) as v2.OpenAttestationDocument | v3.WrappedDocument;
@@ -114,7 +120,7 @@ const getNetworkName = (certificate: WrappedOrSignedOpenCertsDocument) => {
     /* Non-production Network Whitelist */
     switch (data.network?.chainId) {
       case "80002":
-        return "amoy";
+        return { chainId: 80002, name: "amoy" };
     }
   }
 
