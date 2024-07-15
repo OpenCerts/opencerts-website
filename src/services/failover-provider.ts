@@ -75,11 +75,11 @@ export class OAFailoverProvider extends providers.StaticJsonRpcProvider {
 //   ],
 //   sepolia: [
 //     "https://sepolia.infura.io/v3/84842078b09946638c03157f83405213", // Default API key from Ethers
-//     "https://eth-sepolia.g.alchemy.com/v2/_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC", // Default API key from Ethers
+//     "https://eth-sepolia.g.alchemy.com/v2/FK1x9CdE8NStKjVt236D_LP7B6MMCFOs",
 //     "https://ethereum-sepolia-rpc.publicnode.com/", // The free Cloudflare endpoint does not support Sepolia (use Public Node instead)
 //   ],
 //   amoy: [
 //     "https://polygon-amoy.infura.io/v3/84842078b09946638c03157f83405213", // Default API key from Ethers
-//     "https://polygon-amoy.g.alchemy.com/v2/_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC", // Default API key from Ethers
+//     "https://polygon-amoy.g.alchemy.com/v2/FK1x9CdE8NStKjVt236D_LP7B6MMCFOs",
 //   ],
 // } as const;
