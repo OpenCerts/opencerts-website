@@ -1,22 +1,18 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
 import { decryptString } from "@govtechsg/oa-encryption";
-import { utils as oaVerifyUtils, openAttestationVerifiers, verificationBuilder } from "@govtechsg/oa-verify";
-import type {
-  ErrorVerificationFragment,
-  VerificationBuilderOptions,
-  VerificationFragment,
-  Verifier,
-} from "@govtechsg/oa-verify/dist/types/types/core";
+import { openAttestationVerifiers, verificationBuilder } from "@govtechsg/oa-verify";
+import type { VerificationFragment, Verifier } from "@govtechsg/oa-verify";
 import { utils, v2, v3 } from "@govtechsg/open-attestation";
 import { isValid, registryVerifier } from "@govtechsg/opencerts-verify";
-import { ethers } from "ethers";
+import { Resolver } from "did-resolver";
+import { getResolver } from "ethr-did-resolver";
 import Router from "next/router";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import "isomorphic-fetch";
+
 import { triggerV2ErrorLogging, triggerV3ErrorLogging, triggerV4ErrorLogging } from "../components/Analytics";
 import { NETWORK_NAME, IS_MAINNET } from "../config";
-
 import {
   GENERATE_SHARE_LINK,
   generateShareLinkFailure,
@@ -37,6 +33,7 @@ import {
 } from "../reducers/certificate.actions";
 import { getCertificate } from "../reducers/certificate.selectors";
 import { sendEmail } from "../services/email";
+import { OAFailoverProvider } from "../services/failover-provider";
 import {
   certificateNotIssued,
   certificateRevoked,
@@ -50,89 +47,124 @@ import { getLogger } from "../utils/logger";
 import { opencertsGetData } from "../utils/utils";
 
 const { trace } = getLogger("saga:certificate");
-const getProvider = (networkName: string, providerName: "infura" | "alchemy") => {
-  if (providerName === "alchemy") {
-    switch (networkName) {
-      case "sepolia":
-        // Handling sepolia network differently because ethers v5 AlchemyProvider doesn't support Sepolia
-        // TODO: use ethers v6 AlchemyProvider once ethers version is able to be bumped
-        return new ethers.providers.StaticJsonRpcProvider(
-          `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`,
-          networkName
-        );
-      case "amoy":
-        return new ethers.providers.StaticJsonRpcProvider(
-          `https://polygon-amoy.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`
-        );
+
+const getUrls = (options: {
+  network: ConstructorParameters<typeof OAFailoverProvider>[1];
+  isProduction: boolean;
+}): ConstructorParameters<typeof OAFailoverProvider>[0] => {
+  const { network, isProduction } = options;
+  const networkString =
+    typeof network === "string" ? network : typeof network === "number" ? network.toString() : network.name;
+
+  if (isProduction) {
+    /* Production Network Whitelist */
+    switch (networkString) {
+      // Ethereum mainnet/homestead
+      case "mainnet":
+      case "homestead":
+        return [
+          { url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}` },
+          { url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}` },
+          { url: `https://cloudflare-eth.com/` },
+          { url: `https://ethereum-rpc.publicnode.com/` },
+        ];
+      // Polygon mainnet
+      case "matic":
+      case "137":
+        return [
+          { url: `https://polygon-mainnet.infura.io/v3/${process.env.INFURA_API_KEY}` },
+          { url: `https://polygon-mainnet.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
+        ];
       default:
-        return new ethers.providers.AlchemyProvider(networkName, process.env.ALCHEMY_API_KEY);
+        console.error(`Unrecognised network: ${network}`);
+        throw new Error(`Unrecognised network: ${network}`);
     }
-  }
-  switch (networkName) {
-    case "amoy":
-      return new ethers.providers.StaticJsonRpcProvider(
-        `https://polygon-amoy.infura.io/v3/${process.env.INFURA_API_KEY}`
-      );
-    default:
-      return new ethers.providers.InfuraProvider(networkName, process.env.INFURA_API_KEY);
+  } else {
+    /* Non-production Network Whitelist */
+    switch (networkString) {
+      // Ethereum testnet
+      case "sepolia":
+        return [
+          { url: `https://sepolia.infura.io/v3/${process.env.INFURA_API_KEY}` },
+          { url: `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
+          { url: `https://ethereum-sepolia-rpc.publicnode.com/` },
+        ];
+      // Polygon testnet
+      case "amoy":
+      case "80002":
+        return [
+          { url: `https://polygon-amoy.infura.io/v3/${process.env.INFURA_API_KEY}` },
+          { url: `https://polygon-amoy.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
+        ];
+      default:
+        console.error(`Unrecognised network: ${network}`);
+        throw new Error(`Unrecognised network: ${network}`);
+    }
   }
 };
 
-// TODO: Need to update if we ever want to support v4 document store issuance
-const getNetworkName = (certificate: WrappedOrSignedOpenCertsDocument) => {
-  if (utils.isWrappedV4Document(certificate)) return "";
+const getNetworkName = (
+  certificate: WrappedOrSignedOpenCertsDocument
+): ConstructorParameters<typeof OAFailoverProvider>[1] => {
+  if (utils.isWrappedV4Document(certificate)) return NETWORK_NAME; // TODO: Need to update if we ever want to auto-detect network on an ETH-issued OA v4 document
+
   const data = opencertsGetData(certificate) as v2.OpenAttestationDocument | v3.WrappedDocument;
 
   if (IS_MAINNET) {
+    /* Production Network Whitelist */
     switch (data.network?.chainId) {
       case "137":
         return "matic";
     }
   } else {
+    /* Non-production Network Whitelist */
     switch (data.network?.chainId) {
       case "80002":
-        return "amoy";
+        return { chainId: 80002, name: "amoy" };
     }
   }
-  return NETWORK_NAME;
-};
 
-const fragmentsHaveCallException = (fragments: VerificationFragment[]) => {
-  let result = false;
-  fragments.forEach((fragment) => {
-    if (oaVerifyUtils.isErrorFragment(fragment)) {
-      const errFragment = fragment as ErrorVerificationFragment<{ code: string }>;
-      if (errFragment.data?.code === "CALL_EXCEPTION") {
-        result = true;
-      }
-    }
-  });
-  return result;
+  // A network is specified in the certificate but not in the above whitelist
+  if (data.network) {
+    console.log(`"${JSON.stringify(data.network)}" is not a whitelisted network. Reverting back to "${NETWORK_NAME}".`);
+  }
+
+  return NETWORK_NAME;
 };
 
 export function* verifyCertificate({ payload: certificate }: { payload: WrappedOrSignedOpenCertsDocument }) {
   try {
     yield put(verifyingCertificate());
-    let networkName = NETWORK_NAME;
-    if (!utils.isWrappedV4Document(certificate)) {
-      networkName = getNetworkName(certificate);
-    }
-    const infuraProvider = getProvider(networkName, "infura");
-    const verify = (builderOptions: VerificationBuilderOptions) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return verificationBuilder([...openAttestationVerifiers, registryVerifier] as Verifier<any>[], builderOptions);
-    };
-    // https://github.com/redux-saga/redux-saga/issues/884
-    let fragments: VerificationFragment[] = yield call(verify({ provider: infuraProvider }), certificate);
-    // manually call alchemy provider as backup if infura provider returns error fragment
-    // https://docs.ethers.org/v5/api/providers/other/#FallbackProvider
-    if (fragmentsHaveCallException(fragments)) {
-      const alchemyProvider = getProvider(networkName, "alchemy");
-      fragments = yield call(verify({ provider: alchemyProvider }), certificate);
-    }
-    trace(`Verification Status: ${JSON.stringify(fragments)}`);
 
+    const network = getNetworkName(certificate);
+    const urls = getUrls({ network, isProduction: IS_MAINNET });
+
+    const providerWithFailover = new OAFailoverProvider(urls, network);
+    const resolverWithFailover = new Resolver(
+      /**
+       * Regardless of mainnet or testnet, OA only uses mainnet DIDs
+       * As such, resolver should always resolve against a mainnet provider
+       * Specifying a static provider for resolver will also prevent unnecessary "eth_chainId" calls to providers
+       * ✅ did:ethr:0x1245e5b64d785b25057f7438f715f4aa5d965733
+       * ❌ did:ethr:sepolia:0x1245e5b64d785b25057f7438f715f4aa5d965733
+       */
+      getResolver({
+        name: "mainnet",
+        provider: new OAFailoverProvider(getUrls({ network: "mainnet", isProduction: true }), "mainnet"),
+      })
+    );
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const verify = verificationBuilder([...openAttestationVerifiers, registryVerifier] as Verifier<any>[], {
+      provider: providerWithFailover,
+      resolver: resolverWithFailover,
+    });
+
+    // https://github.com/redux-saga/redux-saga/issues/884
+    const fragments: VerificationFragment[] = yield call(verify, certificate);
+    trace(`Verification Status: ${JSON.stringify(fragments)}`);
     yield put(verifyingCertificateCompleted(fragments));
+
     if (isValid(fragments)) {
       Router.push("/viewer");
     } else {
@@ -171,7 +203,8 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedO
       }
     }
   } catch (e) {
-    yield put(verifyingCertificateErrored(e.message));
+    if (e instanceof Error) yield put(verifyingCertificateErrored(e.message));
+    else yield put(verifyingCertificateErrored(JSON.stringify(e)));
   }
 }
 
@@ -193,7 +226,8 @@ export function* sendCertificate({ payload }: { payload: { email: string; captch
 
     yield put(sendCertificateSuccess());
   } catch (e) {
-    yield put(sendCertificateFailure(e.message));
+    if (e instanceof Error) yield put(sendCertificateFailure(e.message));
+    else yield put(sendCertificateFailure(JSON.stringify(e)));
   }
 }
 type Await<T> = T extends PromiseLike<infer U> ? U : T;
@@ -214,7 +248,8 @@ export function* generateShareLink() {
 
     yield put(generateShareLinkSuccess(success));
   } catch (e) {
-    yield put(generateShareLinkFailure(e.message));
+    if (e instanceof Error) yield put(generateShareLinkFailure(e.message));
+    else yield put(generateShareLinkFailure(JSON.stringify(e)));
   }
 }
 
@@ -260,7 +295,8 @@ export function* retrieveCertificateByAction({
     yield put(updateCertificate(certificate as WrappedOrSignedOpenCertsDocument));
     yield put(retrieveCertificateByActionSuccess());
   } catch (e) {
-    yield put(retrieveCertificateByActionFailure(e.message));
+    if (e instanceof Error) yield put(retrieveCertificateByActionFailure(e.message));
+    else yield put(retrieveCertificateByActionFailure(JSON.stringify(e)));
   }
 }
 
