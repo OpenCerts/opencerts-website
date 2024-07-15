@@ -9,12 +9,16 @@ const rateLimitMock = RequestMock()
   .onRequestTo({ url: "https://sepolia.infura.io/v3/84842078b09946638c03157f83405213", method: "post" })
   .respond(null, 429)
   .onRequestTo({ url: "https://eth-sepolia.g.alchemy.com/v2/_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC", method: "post" })
+  .respond(null, 429)
+  .onRequestTo({ url: "https://ethereum-sepolia-rpc.publicnode.com/", method: "post" })
   .respond(null, 429);
 
 const badGatewayMock = RequestMock()
   .onRequestTo({ url: "https://sepolia.infura.io/v3/84842078b09946638c03157f83405213", method: "post" })
   .respond(null, 502)
   .onRequestTo({ url: "https://eth-sepolia.g.alchemy.com/v2/_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC", method: "post" })
+  .respond(null, 502)
+  .onRequestTo({ url: "https://ethereum-sepolia-rpc.publicnode.com/", method: "post" })
   .respond(null, 502);
 
 const badGatewayMockInfuraOnly = RequestMock()
