@@ -1,8 +1,8 @@
 import { mapValues } from "lodash";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore repository has been archived, will wait to upgrade to fix
-import { DefaultSeo } from "next-seo";
 import App from "next/app";
+import { DefaultSeo } from "next-seo";
 import React from "react";
 import ReactGA from "react-ga4";
 import { useDispatch } from "react-redux";
