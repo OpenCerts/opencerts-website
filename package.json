@@ -48,7 +48,7 @@
     "debug": "^4.3.1",
     "did-resolver": "^4.1.0",
     "ethers": "^5.7.2",
-    "ethr-did-resolver": "^8.1.2",
+    "ethr-did-resolver": "^9.0.0",
     "isomorphic-fetch": "^3.0.0",
     "lodash": "^4.17.20",
     "next": "^11.1.4",
