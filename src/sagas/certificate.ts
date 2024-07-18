@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
+import { defaultDnsResolvers, aliDnsResolver } from "@govtechsg/dnsprove";
 import { decryptString } from "@govtechsg/oa-encryption";
 import { openAttestationVerifiers, verificationBuilder } from "@govtechsg/oa-verify";
 import type { VerificationFragment, Verifier } from "@govtechsg/oa-verify";
@@ -158,6 +159,7 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedO
     const verify = verificationBuilder([...openAttestationVerifiers, registryVerifier] as Verifier<any>[], {
       provider: providerWithFailover,
       resolver: resolverWithFailover,
+      dnsResolvers: [...defaultDnsResolvers, aliDnsResolver],
     });
 
     // https://github.com/redux-saga/redux-saga/issues/884
