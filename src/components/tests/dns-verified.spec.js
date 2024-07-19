@@ -9,6 +9,8 @@ const allDnsResolverDown = RequestMock()
   .onRequestTo({ url: "https://dns.google/resolve?name=example.openattestation.com&type=TXT" })
   .respond(null, 500, { "access-control-allow-origin": "*" })
   .onRequestTo({ url: "https://cloudflare-dns.com/dns-query?name=example.openattestation.com&type=TXT" })
+  .respond(null, 500, { "access-control-allow-origin": "*" })
+  .onRequestTo({ url: "https://dns.alidns.com/resolve?name=example.openattestation.com&type=16" })
   .respond(null, 500, { "access-control-allow-origin": "*" });
 
 fixture("DNS Certificate Rendering").page`http://localhost:3000`.beforeEach(async () => {
