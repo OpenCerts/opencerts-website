@@ -10,7 +10,7 @@ const Certificate2 = "./wrong-merkle-incorrect-length.opencert";
 const Certificate3 = "./wrong-merkle-arrayify-value.opencert";
 
 const RenderedCertificate = Selector("#certificate-dropzone");
-const InvalidMessage = Selector(".invalid");
+const InvalidMessage = Selector('[data-testid="invalid-message"]');
 
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(async (prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());

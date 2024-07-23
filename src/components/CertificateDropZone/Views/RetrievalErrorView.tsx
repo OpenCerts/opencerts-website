@@ -12,7 +12,7 @@ export const RetrievalErrorView: React.FunctionComponent<RetrievalErrorViewProps
   <>
     <ErrorHeading title="The certificate can't be loaded" />
 
-    <div className="text-pink mt-4 mb-4">
+    <div data-testid="invalid-message" className="text-pink mt-4 mb-4">
       <h4 className="font-bold">Unable to load certificate with the provided parameters</h4>
       <p className="break-words">{retrieveCertificateByActionError}</p>
     </div>

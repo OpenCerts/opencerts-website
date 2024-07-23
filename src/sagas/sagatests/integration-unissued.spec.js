@@ -8,7 +8,7 @@ fixture("Unissued Cert").page`http://localhost:3000`.beforeEach(async () => {
 const Certificate = "./unissued.opencert";
 
 const RenderedCertificate = Selector("#certificate-dropzone");
-const InvalidMessage = Selector(".invalid");
+const InvalidMessage = Selector('[data-testid="invalid-message"]');
 
 const validateTextContent = async (t, component, texts) =>
   texts.reduce(async (prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());

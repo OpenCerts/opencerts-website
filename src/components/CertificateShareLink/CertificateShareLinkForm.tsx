@@ -62,7 +62,7 @@ class CertificateShareLinkForm extends Component<CertificateShareLinkFormProps> 
                 </div>
               </>
             ) : (
-              <div id="error-message" className="row justify-content-center my-5 text-red">
+              <div id="invalid-message" className="row justify-content-center my-5 text-red">
                 <i id="verify-invalid" className="fas fa-times-circle fa-2x" />{" "}
                 <p className="align-middle ml-2 mt-1">Could not generate sharing link.</p>
               </div>

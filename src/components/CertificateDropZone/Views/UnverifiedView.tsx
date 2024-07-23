@@ -51,7 +51,7 @@ const DetailedErrors: React.FunctionComponent<DetailedErrorsProps> = ({ verifica
     }
   }
   const renderedError = errors.map((errorType, index) => (
-    <div className="text-pink mt-4 mb-8" key={index}>
+    <div data-testid="invalid-message" className="text-pink mt-4 mb-8" key={index}>
       <p className="text-md font-bold">{MESSAGES[errorType].failureTitle}</p>
       <p>{MESSAGES[errorType].failureMessage}</p>
     </div>
