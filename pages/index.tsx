@@ -25,6 +25,8 @@ const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
   useEffect(() => {
     if (urlParams === undefined) return;
 
+    console.log(urlParams);
+
     props.resetCertificateState();
     if (urlParams.query.q) {
       const action = JSON.parse(window.decodeURI(urlParams.query.q as string));
@@ -86,7 +88,9 @@ const useUrlParamsThenScrubUrl = ({ enabled }: UseUrlParamsThenScrubUrlParam): U
         }
 
         const savedFragment = window.location.hash.substring(1);
-        const savedQueryParam = { ...router.query };
+        // router.query does not work when next is built in static mode
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        const savedQueryParam = Object.fromEntries(urlSearchParams.entries());
 
         // scrubbbb itttttt
         window.location.hash = "";
