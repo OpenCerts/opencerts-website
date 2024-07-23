@@ -25,8 +25,6 @@ const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
   useEffect(() => {
     if (urlParams === undefined) return;
 
-    console.log(urlParams);
-
     props.resetCertificateState();
     if (urlParams.query.q) {
       const action = JSON.parse(window.decodeURI(urlParams.query.q as string));
