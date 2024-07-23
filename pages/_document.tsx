@@ -1,6 +1,5 @@
 import { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
-import { Wogaa } from "../src/components/Analytics/wogaa";
 
 export default function Document() {
   return (
@@ -21,7 +20,6 @@ export default function Document() {
           crossOrigin="anonymous"
         />
         <link rel="stylesheet" href="/static/style.css" />
-        <Wogaa />
       </Head>
       <body>
         <Main />

@@ -33,7 +33,7 @@ const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
   }, [props, router]);
 
   return (
-    <Wrapper>
+    <Wrapper isScrubUrlBeforeLoadingWogaa>
       <NavigationBar />
       <Main>
         <MainPageContainer />
