@@ -1,3 +1,4 @@
+import Script from "next/script";
 import React from "react";
 import { WOGAA_TRANSACTIONAL_SERVICE } from "../../config";
 
@@ -33,7 +34,7 @@ export const completeTransactionalService: typeof window.wogaaCustom.completeTra
 };
 
 export const Wogaa = () => (
-  <script
+  <Script
     src={
       process.env.WOGAA_ENV === "production"
         ? "https://assets.wogaa.sg/scripts/wogaa.js"

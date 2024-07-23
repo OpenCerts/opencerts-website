@@ -59,7 +59,6 @@ interface WrapperProps {
 export const Wrapper: React.FunctionComponent<WrapperProps> = ({ children, isScrubUrlBeforeLoadingWogaa = false }) => {
   // urlParams being defined means the url has been extracted and scrubbed
   const urlParams = useUrlParamsThenScrubUrl({ enabled: isScrubUrlBeforeLoadingWogaa });
-
   return (
     <>
       {!isScrubUrlBeforeLoadingWogaa && <Wogaa />}
