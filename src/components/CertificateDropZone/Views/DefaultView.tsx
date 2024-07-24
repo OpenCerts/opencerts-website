@@ -10,7 +10,9 @@ export const DefaultView: React.FunctionComponent<DefaultViewProps> = ({ fileErr
       <img alt=".opencert Dropzone" src="/static/images/dropzone/dropzone_illustration.svg" />
     </div>
     {fileError && (
-      <p className="text-pink mb-2">File cannot be read. Please check that you have a valid .opencert file</p>
+      <p data-testid="invalid-message" className="text-pink mb-2">
+        File cannot be read. Please check that you have a valid .opencert file
+      </p>
     )}
     <h2 className="font-source-sans-pro text-gray-900 mb-2 text-md">Drag and drop your opencert file</h2>
     <div className="text-gray-700">

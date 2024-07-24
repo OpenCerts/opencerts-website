@@ -21,7 +21,7 @@ const Document = "./fixture/sample-dns-verified.json";
 const IframeBlock = Selector("#iframe");
 const SampleTemplate = Selector("#root");
 const StatusButton = Selector("#certificate-status");
-const InvalidMessage = Selector(".invalid");
+const InvalidMessage = Selector('[data-testid="invalid-message"]');
 const RenderedCertificate = Selector("#certificate-dropzone");
 
 const validateTextContent = async (t, component, texts) =>
