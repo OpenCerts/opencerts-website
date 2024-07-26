@@ -3,6 +3,7 @@ import { RegistryEntry } from "@govtechsg/opencerts-verify";
 import { isEmpty, omitBy } from "lodash";
 import ReactGA from "react-ga4";
 import registry from "../../../public/static/registry.json";
+import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { getLogger } from "../../utils/logger";
 const { trace } = getLogger("components:Analytics:");
 const { trace: traceDev } = getLogger("components:Analytics(Inactive):");
@@ -70,6 +71,7 @@ export const analyticsEvent = (event: Event): void => {
 export const sendV2EventCertificateViewedDetailed = ({
   issuer,
   certificateData,
+  category,
 }: {
   issuer: v2.Issuer;
   certificateData: {
@@ -78,6 +80,7 @@ export const sendV2EventCertificateViewedDetailed = ({
     issuedOn?: string;
     $template?: string | { name?: string; url?: string };
   };
+  category?: string;
 }): void => {
   let issuerName = "";
   let registryId = null;
@@ -102,7 +105,7 @@ export const sendV2EventCertificateViewedDetailed = ({
     issuerName = issuer.identityProof.location || "";
   }
   analyticsEvent({
-    category: "CERTIFICATE_DETAILS",
+    category: category ?? "CERTIFICATE_DETAILS",
     nonInteraction: true,
     options: {
       documentStore: documentStore,
@@ -120,8 +123,10 @@ export const sendV2EventCertificateViewedDetailed = ({
 
 export const sendV3EventCertificateViewedDetailed = ({
   certificateData,
+  category,
 }: {
   certificateData: v3.OpenAttestationDocument;
+  category?: string;
 }): void => {
   const documentStore = utils.getIssuerAddress(certificateData);
   const documentId = certificateData?.id ?? "";
@@ -131,7 +136,7 @@ export const sendV3EventCertificateViewedDetailed = ({
   const rendererUrl = certificateData.openAttestationMetadata.template?.url || "";
   const templateName = certificateData.openAttestationMetadata.template?.name || "";
   analyticsEvent({
-    category: "CERTIFICATE_DETAILS",
+    category: category ?? "CERTIFICATE_DETAILS",
     nonInteraction: true,
     options: {
       documentStore: documentStore,
@@ -147,13 +152,15 @@ export const sendV3EventCertificateViewedDetailed = ({
 
 export const sendV4EventCertificateViewedDetailed = ({
   certificateData,
+  category,
 }: {
   certificateData: v4.OpenAttestationDocument;
+  category?: string;
 }): void => {
   const renderMethod = certificateData.renderMethod?.[0]; // Take first render method
 
   analyticsEvent({
-    category: "CERTIFICATE_DETAILS",
+    category: category ?? "CERTIFICATE_DETAILS",
     nonInteraction: true,
     options: {
       documentId: certificateData.id ?? "",
@@ -166,6 +173,23 @@ export const sendV4EventCertificateViewedDetailed = ({
         renderMethod?.type === "OpenAttestationEmbeddedRenderer" ? renderMethod.templateName : renderMethod?.name ?? "",
     },
   });
+};
+
+export const sendEventCertificateDetails = (category: string, document: WrappedOrSignedOpenCertsDocument) => {
+  if (utils.isWrappedV2Document(document)) {
+    const certificateData = getData(document);
+    certificateData.issuers.forEach((issuer: v2.Issuer) => {
+      sendV2EventCertificateViewedDetailed({
+        issuer,
+        certificateData,
+        category,
+      });
+    });
+  } else if (utils.isWrappedV3Document(document)) {
+    sendV3EventCertificateViewedDetailed({ certificateData: document, category });
+  } else {
+    sendV4EventCertificateViewedDetailed({ certificateData: document, category });
+  }
 };
 
 export function triggerV2ErrorLogging(

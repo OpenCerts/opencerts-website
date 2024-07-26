@@ -7,15 +7,13 @@ import {
   renderDocument,
   selectTemplate,
 } from "@govtechsg/decentralized-renderer-react-components";
-import { getData, obfuscateDocument, utils, v2, v3, v4 } from "@govtechsg/open-attestation";
+import { getData, obfuscateDocument, utils, v3, v4 } from "@govtechsg/open-attestation";
 import React, { Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { getTemplate, opencertsGetData } from "../../utils/utils";
 import {
   analyticsEvent,
-  sendV2EventCertificateViewedDetailed,
-  sendV3EventCertificateViewedDetailed,
-  sendV4EventCertificateViewedDetailed,
+  sendEventCertificateDetails,
   triggerV2RendererTimeoutLogging,
   triggerV3RendererTimeoutLogging,
   triggerV4RendererTimeoutLogging,
@@ -165,19 +163,7 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
     }
 
     // CERTIFICATE_DETAILS event
-    if (utils.isWrappedV2Document(rawDocument)) {
-      const certificateData = getData(rawDocument);
-      certificateData.issuers.forEach((issuer: v2.Issuer) => {
-        sendV2EventCertificateViewedDetailed({
-          issuer,
-          certificateData,
-        });
-      });
-    } else if (utils.isWrappedV3Document(rawDocument)) {
-      sendV3EventCertificateViewedDetailed({ certificateData: rawDocument });
-    } else {
-      sendV4EventCertificateViewedDetailed({ certificateData: rawDocument });
-    }
+    sendEventCertificateDetails("CERTIFICATE_DETAILS", rawDocument);
 
     // Wogaa Transaction Service: Successful Verification on OpenCerts
     // TODO: Separate transaction service according to document version? (e.g. 2.0, 3.0, 4.0)

@@ -5,7 +5,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { updateObfuscatedCertificate as updateObfuscatedCertificateAction } from "../reducers/certificate.actions";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
-import { analyticsEvent } from "./Analytics";
+import { sendEventCertificateDetails } from "./Analytics";
 import { CertificateShareLinkFormContainer } from "./CertificateShareLink/CertificateShareLinkForm";
 import { CertificateVerifyBlock } from "./CertificateVerifyBlock";
 import { ErrorBoundary } from "./ErrorBoundary";
@@ -74,12 +74,7 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
                         id="btn-print"
                         onClick={() => {
                           if (childRef.current) {
-                            analyticsEvent({
-                              category: "CERTIFICATE_PRINTED",
-                              options: {
-                                documentId: props.certificate.id ?? undefined,
-                              },
-                            });
+                            sendEventCertificateDetails("CERTIFICATE_PRINT", document);
                             childRef.current.print();
                           }
                         }}
