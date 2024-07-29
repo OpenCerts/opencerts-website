@@ -223,11 +223,10 @@ describe("analytics*", () => {
           value: undefined,
         });
       });
-    });
-    describe("when is not in the registry", () => {
-      it("should use identity proof to display issuer information", () => {
+
+      it("should send using the specified category", async () => {
         const issuer: v2.Issuer = {
-          documentStore: "0xabcdef",
+          tokenRegistry: "0x5CA3b9daC85DA4DE4030e59C1a0248004209e348",
           name: "aaa",
           identityProof: {
             location: "aa.com",
@@ -235,6 +234,28 @@ describe("analytics*", () => {
           },
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
+
+        const category = "CERTIFICATE_PRINT";
+        sendV2EventCertificateViewedDetailed({ issuer, certificateData, category });
+
+        const reactGaEventMock = (ReactGA.event as jest.Mock).mock;
+        const gaEventCall = reactGaEventMock.calls[reactGaEventMock.calls.length - 1];
+
+        expect(gaEventCall[0]).toBe(category);
+      });
+    });
+    describe("when is not in the registry", () => {
+      const issuer: v2.Issuer = {
+        documentStore: "0xabcdef",
+        name: "aaa",
+        identityProof: {
+          location: "aa.com",
+          type: v2.IdentityProofType.DNSTxt,
+        },
+      };
+      const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
+
+      it("should use identity proof to display issuer information", () => {
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
         expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
           document_id: "id1",
@@ -245,6 +266,16 @@ describe("analytics*", () => {
           nonInteraction: true,
           value: undefined,
         });
+      });
+
+      it("should send using the specified category", async () => {
+        const category = "CERTIFICATE_PRINT";
+        sendV2EventCertificateViewedDetailed({ issuer, certificateData, category });
+
+        const reactGaEventMock = (ReactGA.event as jest.Mock).mock;
+        const gaEventCall = reactGaEventMock.calls[reactGaEventMock.calls.length - 1];
+
+        expect(gaEventCall[0]).toBe(category);
       });
     });
   });
@@ -263,6 +294,17 @@ describe("analytics*", () => {
         renderer_url: "https://tutorial-renderer.openattestation.com",
         template_name: "DRIVING_LICENSE",
       });
+    });
+
+    it("should send using the specified category", async () => {
+      const category = "CERTIFICATE_PRINT";
+
+      sendV3EventCertificateViewedDetailed({ certificateData: v3Document, category });
+
+      const reactGaEventMock = (ReactGA.event as jest.Mock).mock;
+      const gaEventCall = reactGaEventMock.calls[reactGaEventMock.calls.length - 1];
+
+      expect(gaEventCall[0]).toBe(category);
     });
   });
 

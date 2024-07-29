@@ -5,6 +5,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { updateObfuscatedCertificate as updateObfuscatedCertificateAction } from "../reducers/certificate.actions";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
+import { sendEventCertificateDetails } from "./Analytics";
 import { CertificateShareLinkFormContainer } from "./CertificateShareLink/CertificateShareLinkForm";
 import { CertificateVerifyBlock } from "./CertificateVerifyBlock";
 import { ErrorBoundary } from "./ErrorBoundary";
@@ -72,7 +73,10 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
                         className="icon-utility"
                         id="btn-print"
                         onClick={() => {
-                          if (childRef.current) childRef.current.print();
+                          if (childRef.current) {
+                            sendEventCertificateDetails("CERTIFICATE_PRINT", document);
+                            childRef.current.print();
+                          }
                         }}
                       >
                         <i className="fas fa-print text-md" />
