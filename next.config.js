@@ -15,7 +15,6 @@ module.exports = withBundleAnalyzer({
   exportPathMap: function exportMap() {
     return {
       "/": { page: "/" },
-      "/archive/registry": { page: "/archive/registry" },
       "/collaborate": { page: "/collaborate" },
       "/privacy": { page: "/privacy" },
       "/terms": { page: "/terms" },
