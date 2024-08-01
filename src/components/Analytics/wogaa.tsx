@@ -6,11 +6,11 @@ declare global {
   interface Window {
     wogaaCustom: {
       startTransactionalService: (
-        trackingId: typeof WOGAA_TRANSACTIONAL_SERVICE[keyof typeof WOGAA_TRANSACTIONAL_SERVICE],
+        trackingId: (typeof WOGAA_TRANSACTIONAL_SERVICE)[keyof typeof WOGAA_TRANSACTIONAL_SERVICE],
         uniqueTransactionId?: string
       ) => void;
       completeTransactionalService: (
-        trackingId: typeof WOGAA_TRANSACTIONAL_SERVICE[keyof typeof WOGAA_TRANSACTIONAL_SERVICE],
+        trackingId: (typeof WOGAA_TRANSACTIONAL_SERVICE)[keyof typeof WOGAA_TRANSACTIONAL_SERVICE],
         uniqueTransactionId?: string
       ) => void;
     };

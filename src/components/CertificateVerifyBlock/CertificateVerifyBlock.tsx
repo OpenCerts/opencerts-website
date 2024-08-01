@@ -72,18 +72,28 @@ export const getV2IdentityVerificationText = (
     return (
       <ol>
         {identities.map((id, i) => {
-          const props = { key: i, ...(i !== identities.length - 1 && { className: "my-2" }) };
+          const props = { ...(i !== identities.length - 1 && { className: "my-2" }) };
 
           if (id.location && (id.from === "registry" || isTrusted(id.location)))
             return (
-              <li {...props}>
+              <li key={i} {...props}>
                 {id.location}
                 <br />
                 {id.name}
               </li>
             );
-          else if (id.from === "registry") return <li {...props}>{id.name}</li>;
-          else return <li {...props}>{id.location}</li>;
+          else if (id.from === "registry")
+            return (
+              <li key={i} {...props}>
+                {id.name}
+              </li>
+            );
+          else
+            return (
+              <li key={i} {...props}>
+                {id.location}
+              </li>
+            );
         })}
       </ol>
     );
