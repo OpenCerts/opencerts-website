@@ -2,8 +2,8 @@
   "name": "opencerts-website",
   "version": "2.0.0",
   "engines": {
-    "node": "14",
-    "npm": "6"
+    "node": "18",
+    "npm": "10"
   },
   "scripts": {
     "test": "jest",
