@@ -149,7 +149,6 @@ export const retrieveCertificateByAction = createAction<{
   key?: string;
   anchorKey?: string;
 }>("certificate/retrieveCertificateByAction");
-export const verifyCertificate = createAction<WrappedOrSignedOpenCertsDocument>("certificate/verifyCertificate");
 export const generateShareLink = createAction("certificate/generateShareLink");
 
 export const certificateReducer = certificateSlice.reducer;

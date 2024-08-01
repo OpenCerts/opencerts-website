@@ -10,11 +10,11 @@ import { CertificateDropZoneContainer } from "../CertificateDropZone";
 const DEMO_CERT = `/static/demo/${NETWORK_NAME}.opencert`;
 
 function demoCount(): void {
-  const certificateData = getData(JSON.parse(DEMO_CERT));
+  // const certificateData = getData(JSON.parse(DEMO_CERT));
   analyticsEvent({
     category: "DEMO_CERTIFICATE_VIEWED",
     options: {
-      documentId: certificateData.id ?? undefined,
+      // documentId: certificateData.id ?? undefined,
     },
   });
 }

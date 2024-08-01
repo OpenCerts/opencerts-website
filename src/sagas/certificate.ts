@@ -28,7 +28,6 @@ import {
   sendingCertificateFailure,
   sendingCertificateSuccess,
   updateCertificate,
-  verifyCertificate,
   verifyingCertificate,
   verifyingCertificateCompleted,
   verifyingCertificateErrored,
@@ -302,7 +301,7 @@ export function* retrieveCertificateByActionSaga({
 
 export const sagas = [
   takeEvery(retrieveCertificateByAction, retrieveCertificateByActionSaga),
-  takeEvery(verifyCertificate, verifyCertificateSaga),
+  takeEvery(updateCertificate, verifyCertificateSaga),
   takeEvery(sendCertificate, sendCertificateSaga),
   takeEvery(generateShareLink, generateShareLinkSaga),
 ];
