@@ -1,42 +1,40 @@
 import { ParsedUrlQuery } from "querystring";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Wogaa } from "../src/components/Analytics/wogaa";
 import { Wrapper, Main } from "../src/components/Layout/Body";
 import { FooterBar } from "../src/components/Layout/FooterBar";
 import { NavigationBar } from "../src/components/Layout/NavigationBar";
 import { MainPageContainer } from "../src/components/MainPageContainer";
-
 import {
   resetCertificateState,
-  retrieveCertificateByActionFailure,
+  retreiveCertifcateByActionFailure,
   retrieveCertificateByAction,
-} from "../src/reducers/certificate.actions";
+} from "../src/reducers/certificate.slice";
 
-interface HomePageProps {
-  resetCertificateState: () => void;
-  retrieveCertificateByAction: (payload: { uri: string; key?: string }, anchor: { key?: string }) => void;
-  retrieveCertificateByActionFailure: (message: string) => void;
-}
-const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
+const HomePage: React.FunctionComponent = (props) => {
   const urlParams = useUrlParamsThenScrubUrl({ enabled: true });
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (urlParams === undefined) return;
 
-    props.resetCertificateState();
+    dispatch(resetCertificateState());
     if (urlParams.query.q) {
       const action = JSON.parse(window.decodeURI(urlParams.query.q as string));
       const anchorStr = decodeURIComponent(urlParams.uriFragment);
       const anchor = anchorStr ? JSON.parse(anchorStr) : {};
       if (action.type === "DOCUMENT") {
-        props.retrieveCertificateByAction(action.payload, anchor);
+        dispatch(retrieveCertificateByAction({ ...action.payload, anchorKey: anchor?.key }));
       } else {
-        props.retrieveCertificateByActionFailure(`The type ${action.type} provided from the action is not supported`);
+        dispatch(
+          retreiveCertifcateByActionFailure(`The type ${action.type} provided from the action is not supported`)
+        );
       }
     }
-  }, [props, urlParams]);
+  }, [props, urlParams, dispatch]);
 
   return (
     <Wrapper isLoadWogaa={false}>
@@ -50,11 +48,7 @@ const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
   );
 };
 
-export default connect(null, {
-  resetCertificateState,
-  retrieveCertificateByAction,
-  retrieveCertificateByActionFailure,
-})(HomePage);
+export default HomePage;
 
 type UseUrlParamsThenScrubUrlParam = {
   /** extraction and scrubbing will only happen if this is true */

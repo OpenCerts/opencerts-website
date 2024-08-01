@@ -14,25 +14,25 @@ import "isomorphic-fetch";
 
 import { triggerV2ErrorLogging, triggerV3ErrorLogging, triggerV4ErrorLogging } from "../components/Analytics";
 import { NETWORK_NAME, IS_MAINNET } from "../config";
+import { getCertificate } from "../reducers/certificate.selectors";
 import {
-  GENERATE_SHARE_LINK,
+  generateShareLink,
   generateShareLinkFailure,
-  generateShareLinkReset,
-  generateShareLinkSuccess,
-  RETRIEVE_CERTIFICATE_BY_ACTION,
-  retrieveCertificateByActionFailure,
-  retrieveCertificateByActionPending,
-  retrieveCertificateByActionSuccess,
-  sendCertificateFailure,
-  sendCertificateSuccess,
-  SENDING_CERTIFICATE,
-  UPDATE_CERTIFICATE,
+  generateShareLinkSucess,
+  resetGenerateShareLink,
+  retreiveCertifcateByActionFailure,
+  retreiveCertifcateByActionPending,
+  retreiveCertifcateByActionSuccess,
+  retrieveCertificateByAction,
+  sendCertificate,
+  sendingCertificateFailure,
+  sendingCertificateSuccess,
   updateCertificate,
+  verifyCertificate,
   verifyingCertificate,
   verifyingCertificateCompleted,
   verifyingCertificateErrored,
-} from "../reducers/certificate.actions";
-import { getCertificate } from "../reducers/certificate.selectors";
+} from "../reducers/certificate.slice";
 import { sendEmail } from "../services/email";
 import { OAFailoverProvider } from "../services/failover-provider";
 import {
@@ -133,7 +133,7 @@ const getNetworkName = (
   return NETWORK_NAME;
 };
 
-export function* verifyCertificate({ payload: certificate }: { payload: WrappedOrSignedOpenCertsDocument }) {
+export function* verifyCertificateSaga({ payload: certificate }: { payload: WrappedOrSignedOpenCertsDocument }) {
   try {
     yield put(verifyingCertificate());
 
@@ -163,7 +163,7 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedO
     });
 
     // https://github.com/redux-saga/redux-saga/issues/884
-    const fragments: VerificationFragment[] = yield call(verify, certificate);
+    const fragments: VerificationFragment[] = yield call(verify as any, certificate);
     trace(`Verification Status: ${JSON.stringify(fragments)}`);
     yield put(verifyingCertificateCompleted(fragments));
 
@@ -210,7 +210,7 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedO
   }
 }
 
-export function* sendCertificate({ payload }: { payload: { email: string; captcha: string } }) {
+export function* sendCertificateSaga({ payload }: { payload: { email: string; captcha: string } }) {
   try {
     // https://github.com/redux-saga/redux-saga/issues/884
     const certificate: ReturnType<typeof getCertificate> = yield select(getCertificate);
@@ -226,17 +226,17 @@ export function* sendCertificate({ payload }: { payload: { email: string; captch
       throw new Error("Fail to send certificate");
     }
 
-    yield put(sendCertificateSuccess());
+    yield put(sendingCertificateSuccess());
   } catch (e) {
-    if (e instanceof Error) yield put(sendCertificateFailure(e.message));
-    else yield put(sendCertificateFailure(JSON.stringify(e)));
+    if (e instanceof Error) yield put(sendingCertificateFailure(e.message));
+    else yield put(sendingCertificateFailure(JSON.stringify(e)));
   }
 }
 type Await<T> = T extends PromiseLike<infer U> ? U : T;
 
-export function* generateShareLink() {
+export function* generateShareLinkSaga() {
   try {
-    yield put(generateShareLinkReset());
+    yield put(resetGenerateShareLink());
     // https://github.com/redux-saga/redux-saga/issues/884
     const certificate: ReturnType<typeof getCertificate> = yield select(getCertificate);
     if (!certificate) {
@@ -248,22 +248,20 @@ export function* generateShareLink() {
       throw new Error("Fail to generate certificate share link");
     }
 
-    yield put(generateShareLinkSuccess(success));
+    yield put(generateShareLinkSucess(success));
   } catch (e) {
-    if (e instanceof Error) yield put(generateShareLinkFailure(e.message));
-    else yield put(generateShareLinkFailure(JSON.stringify(e)));
+    if (e instanceof Error) yield put(generateShareLinkFailure());
+    else yield put(generateShareLinkFailure());
   }
 }
 
-export function* retrieveCertificateByAction({
-  payload: { uri, key: payloadKey },
-  anchor: { key: anchorKey },
+export function* retrieveCertificateByActionSaga({
+  payload: { uri, key: payloadKey, anchorKey },
 }: {
-  payload: { uri: string; key?: string };
-  anchor: { key?: string };
+  payload: { uri: string; key?: string; anchorKey?: string };
 }) {
   try {
-    yield put(retrieveCertificateByActionPending());
+    yield put(retreiveCertifcateByActionPending());
 
     // TODO fix the type :)
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -295,23 +293,16 @@ export function* retrieveCertificateByAction({
     }
 
     yield put(updateCertificate(certificate as WrappedOrSignedOpenCertsDocument));
-    yield put(retrieveCertificateByActionSuccess());
+    yield put(retreiveCertifcateByActionSuccess());
   } catch (e) {
-    if (e instanceof Error) yield put(retrieveCertificateByActionFailure(e.message));
-    else yield put(retrieveCertificateByActionFailure(JSON.stringify(e)));
+    if (e instanceof Error) yield put(retreiveCertifcateByActionFailure(e.message));
+    else yield put(retreiveCertifcateByActionFailure(JSON.stringify(e)));
   }
 }
 
-// TODO https://github.com/redux-saga/redux-saga/issues/1883
 export const sagas = [
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  takeEvery(RETRIEVE_CERTIFICATE_BY_ACTION, retrieveCertificateByAction),
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  takeEvery(UPDATE_CERTIFICATE, verifyCertificate),
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  takeEvery(SENDING_CERTIFICATE, sendCertificate),
-  takeEvery(GENERATE_SHARE_LINK, generateShareLink),
+  takeEvery(retrieveCertificateByAction, retrieveCertificateByActionSaga),
+  takeEvery(verifyCertificate, verifyCertificateSaga),
+  takeEvery(sendCertificate, sendCertificateSaga),
+  takeEvery(generateShareLink, generateShareLinkSaga),
 ];

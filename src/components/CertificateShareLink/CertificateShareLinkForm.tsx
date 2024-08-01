@@ -1,8 +1,8 @@
+import { QRCodeSVG } from "qrcode.react";
 import React, { Component, FunctionComponent, ReactNode } from "react";
-import { QRCode } from "react-qr-svg";
 import { connect } from "react-redux";
-import { RootState } from "../../reducers";
 import { getShareLinkState } from "../../reducers/certificate.selectors";
+import { RootState } from "../../store";
 
 interface CertificateShareLinkFormProps {
   copiedLink: boolean;
@@ -58,7 +58,7 @@ class CertificateShareLinkForm extends Component<CertificateShareLinkFormProps> 
                   </p>
                 )}
                 <div className="w-full my-4">
-                  <QRCode level="H" className="w-40 mx-auto" value={certificateLink} />
+                  <QRCodeSVG level="H" className="w-40 mx-auto" value={certificateLink} />
                 </div>
               </>
             ) : (

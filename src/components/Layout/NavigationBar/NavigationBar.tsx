@@ -23,7 +23,7 @@ export const NavigationBar: React.FunctionComponent = () => {
       <div className="container">
         <div className="flex flex-wrap items-center">
           <div className="w-2/5 sm:w-1/3 md:w-1/4 lg:w-1/6 mr-auto mb-6 md:mb-0">
-            <Link href="/">
+            <Link legacyBehavior href="/">
               <a className="font-poppins">
                 <img src="/static/images/opencertslogo.svg" alt="OpenCerts" />
               </a>
@@ -31,7 +31,7 @@ export const NavigationBar: React.FunctionComponent = () => {
           </div>
           {navItems.map((n, i) => (
             <div className="w-full md:w-auto md:pl-8 mb-2 md:mb-0" key={i}>
-              <Link href={n.path}>
+              <Link legacyBehavior href={n.path}>
                 <a className={`font-poppins ${router.pathname === n.path ? "text-white" : ""}`}>{n.label}</a>
               </Link>
             </div>

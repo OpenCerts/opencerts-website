@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { RootState } from "../reducers";
+import { RootState } from "../store";
 
 interface FeatureFlagProps {
   name: string;

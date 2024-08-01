@@ -516,11 +516,7 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
                   unable to agree to the terms at any time, GovTech shall have the discretion to remove you as a
                   collaborator without liability to you whatsoever. GovTech is not obliged to provide any reasons for
                   any rejection of your application to be a collaborator. The Collaborator Terms and Conditions are
-                  found{" "}
-                  <Link href="/collaborators-terms">
-                    <a>here</a>
-                  </Link>
-                  .
+                  found <Link href="/collaborators-terms">here</Link>.
                 </p>
               </li>
               <li>

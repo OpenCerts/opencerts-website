@@ -4,10 +4,10 @@ import React, { Component, ReactNode } from "react";
 import Dropzone, { DropEvent } from "react-dropzone";
 import { connect } from "react-redux";
 import { NETWORK_NAME } from "../../config";
-import { RootState } from "../../reducers";
-import { resetCertificateState, updateCertificate } from "../../reducers/certificate.actions";
 import { getCertificateByActionError, getVerificationStatus, getVerifying } from "../../reducers/certificate.selectors";
+import { resetCertificateState, updateCertificate } from "../../reducers/certificate.slice";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
+import { RootState } from "../../store";
 import { CertificateVerificationStatus } from "./CertificateVerificationStatus";
 
 const DEMO_CERT = `/static/demo/${NETWORK_NAME}.opencert`;

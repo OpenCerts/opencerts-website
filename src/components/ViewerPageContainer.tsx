@@ -4,14 +4,6 @@ import copy from "clipboard-copy";
 import Router from "next/router";
 import React, { Component, ReactNode } from "react";
 import { connect } from "react-redux";
-import { RootState } from "../reducers";
-import {
-  generateShareLink,
-  sendCertificate,
-  sendCertificateReset,
-  updateCertificate,
-  updateObfuscatedCertificate,
-} from "../reducers/certificate.actions";
 import {
   getCertificate,
   getEmailSendingState,
@@ -20,7 +12,15 @@ import {
   getVerificationStatus,
   getVerifying,
 } from "../reducers/certificate.selectors";
+import {
+  generateShareLink,
+  resetSendingCertificate,
+  sendCertificate,
+  updateCertificate,
+  updateObfuscatedCertificate,
+} from "../reducers/certificate.slice";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
+import { RootState } from "../store";
 import { opencertsGetData } from "../utils/utils";
 import { CertificateViewerContainer } from "./CertificateViewer";
 
@@ -129,7 +129,7 @@ export const ViewerContainer = connect(
   (dispatch) => ({
     updateCertificate: (payload: WrappedOrSignedOpenCertsDocument) => dispatch(updateCertificate(payload)),
     sendCertificate: (payload: { email: string; captcha: string }) => dispatch(sendCertificate(payload)),
-    sendCertificateReset: () => dispatch(sendCertificateReset()),
+    sendCertificateReset: () => dispatch(resetSendingCertificate()),
     generateShareLink: () => dispatch(generateShareLink()),
     updateObfuscatedCertificate: (updatedDoc: WrappedOrSignedOpenCertsDocument) =>
       dispatch(updateObfuscatedCertificate(updatedDoc)),

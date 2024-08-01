@@ -2,7 +2,7 @@ import { getData } from "@govtechsg/open-attestation";
 import React, { Component, ReactNode } from "react";
 import { connect } from "react-redux";
 import { NETWORK_NAME } from "../../config";
-import { updateCertificate } from "../../reducers/certificate.actions";
+import { updateCertificate } from "../../reducers/certificate.slice";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { analyticsEvent } from "../Analytics";
 import { CertificateDropZoneContainer } from "../CertificateDropZone";

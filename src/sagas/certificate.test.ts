@@ -1,7 +1,7 @@
 import { put, select } from "redux-saga/effects";
-import { sendCertificateFailure, sendCertificateSuccess } from "../reducers/certificate.actions";
 import { getCertificate } from "../reducers/certificate.selectors";
-import { sendCertificate } from "./certificate";
+import { sendingCertificateFailure } from "../reducers/certificate.slice";
+import { sendCertificateSaga } from "./certificate";
 import { MakeCertUtil } from "./testutils";
 
 jest.mock("@govtechsg/open-attestation", () => {
@@ -50,7 +50,7 @@ describe("sagas/certificate", () => {
       const { testCert } = whenThereIsOneEthereumAddressIssuer();
       const email = "admin@opencerts.io";
       const captcha = "ABCD";
-      const saga = sendCertificate({ payload: { email, captcha } });
+      const saga = sendCertificateSaga({ payload: { email, captcha } });
       fetchStub.mockResolvedValue({ status: 200 });
 
       expect(saga.next().value).toStrictEqual(select(getCertificate));
@@ -67,7 +67,7 @@ describe("sagas/certificate", () => {
       const { testCert } = whenThereIsOneEthereumAddressIssuer();
       const email = "admin@opencerts.io";
       const captcha = "ABCD";
-      const saga = sendCertificate({ payload: { email, captcha } });
+      const saga = sendCertificateSaga({ payload: { email, captcha } });
       fetchStub.mockResolvedValue({ status: 200 });
 
       expect(saga.next().value).toStrictEqual(select(getCertificate));
@@ -85,14 +85,14 @@ describe("sagas/certificate", () => {
       const email = "admin@opencerts.io";
       const captcha = "ABCD";
       const errorMsg = "Some unknown error has occured";
-      const saga = sendCertificate({ payload: { email, captcha } });
+      const saga = sendCertificateSaga({ payload: { email, captcha } });
       fetchStub.mockResolvedValue({ status: 200 });
 
       expect(saga.next().value).toStrictEqual(select(getCertificate));
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       saga.next(testCert);
-      expect(saga.throw(new Error(errorMsg)).value).toStrictEqual(put(sendCertificateFailure(errorMsg)));
+      expect(saga.throw(new Error(errorMsg)).value).toStrictEqual(put(sendingCertificateFailure(errorMsg)));
       expect(saga.next().done).toBe(true);
     });
   });

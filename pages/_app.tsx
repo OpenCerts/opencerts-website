@@ -7,11 +7,13 @@ import React from "react";
 import ReactGA from "react-ga4";
 import { useDispatch } from "react-redux";
 import { DEFAULT_SEO, ENVIRONMENT, GA4_TAG_ID } from "../src/config";
-import { updateFeatureToggles } from "../src/reducers/featureToggle.actions";
+import { updateFeatureToggles } from "../src/reducers/featureToggle.slice";
 import { wrapper } from "../src/store";
 import "../src/tailwind.css";
 
-const FeatureFlagLoader: React.FunctionComponent = ({ children }) => {
+const FeatureFlagLoader: React.FunctionComponent<{
+  children: React.ReactNode;
+}> = ({ children }) => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     const run = async (): Promise<void> => {

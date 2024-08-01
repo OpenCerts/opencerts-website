@@ -17,9 +17,7 @@ export const FooterBar: React.FunctionComponent = () => (
           <p className="font-poppins font-bold mb-2">Partners</p>
           <ul className="text-sm">
             <li>
-              <Link href="/collaborate">
-                <a>Collaborate</a>
-              </Link>
+              <Link href="/collaborate">Collaborate</Link>
             </li>
             <li>
               <a href="https://go.gov.sg/opencerts-feedback" target="_blank" rel="noopener noreferrer">
@@ -32,9 +30,7 @@ export const FooterBar: React.FunctionComponent = () => (
           <p className="font-poppins font-bold mb-2">Support</p>
           <ul className="text-sm">
             <li>
-              <Link href="/faq">
-                <a>FAQ</a>
-              </Link>
+              <Link href="/faq">FAQ</Link>
             </li>
             <li>
               <a href="https://github.com/OpenCerts" target="_blank" rel="noopener noreferrer">
@@ -57,14 +53,10 @@ export const FooterBar: React.FunctionComponent = () => (
           <p className="font-poppins font-bold mb-2">Legal</p>
           <ul className="text-sm">
             <li>
-              <Link href="/privacy">
-                <a>Privacy Policy</a>
-              </Link>
+              <Link href="/privacy">Privacy Policy</Link>
             </li>
             <li>
-              <Link href="/terms">
-                <a>Terms of Use</a>
-              </Link>
+              <Link href="/terms">Terms of Use</Link>
             </li>
           </ul>
         </div>
