@@ -1,23 +1,11 @@
-import { getData } from "@govtechsg/open-attestation";
 import React, { Component, ReactNode } from "react";
 import { connect } from "react-redux";
 import { NETWORK_NAME } from "../../config";
-import { updateCertificate } from "../../reducers/certificate.actions";
+import { updateCertificate } from "../../reducers/certificate.slice";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
-import { analyticsEvent } from "../Analytics";
 import { CertificateDropZoneContainer } from "../CertificateDropZone";
 
 const DEMO_CERT = `/static/demo/${NETWORK_NAME}.opencert`;
-
-function demoCount(): void {
-  const certificateData = getData(JSON.parse(DEMO_CERT));
-  analyticsEvent({
-    category: "DEMO_CERTIFICATE_VIEWED",
-    options: {
-      documentId: certificateData.id ?? undefined,
-    },
-  });
-}
 
 const DraggableDemoCertificate: React.FunctionComponent = () => (
   <div className="hidden lg:block">
@@ -27,7 +15,6 @@ const DraggableDemoCertificate: React.FunctionComponent = () => (
           className="animate-pulsing"
           draggable="true"
           onDragStart={(e) => e.dataTransfer.setData(DEMO_CERT, "true")}
-          onDragEnd={demoCount}
         >
           <a
             href={DEMO_CERT}
@@ -55,7 +42,6 @@ const MobileDemoCertificate: React.FunctionComponent = () => (
     role="button"
     draggable="false"
     id="demoClick"
-    onClick={demoCount}
   >
     Click me for a demo certificate!
   </button>

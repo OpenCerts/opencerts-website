@@ -17,7 +17,7 @@ export const FooterBar: React.FunctionComponent = () => (
           <p className="font-poppins font-bold mb-2">Partners</p>
           <ul className="text-sm">
             <li>
-              <Link href="/collaborate">
+              <Link legacyBehavior href="/collaborate">
                 <a>Collaborate</a>
               </Link>
             </li>
@@ -32,7 +32,7 @@ export const FooterBar: React.FunctionComponent = () => (
           <p className="font-poppins font-bold mb-2">Support</p>
           <ul className="text-sm">
             <li>
-              <Link href="/faq">
+              <Link legacyBehavior href="/faq">
                 <a>FAQ</a>
               </Link>
             </li>
@@ -57,12 +57,12 @@ export const FooterBar: React.FunctionComponent = () => (
           <p className="font-poppins font-bold mb-2">Legal</p>
           <ul className="text-sm">
             <li>
-              <Link href="/privacy">
+              <Link legacyBehavior href="/privacy">
                 <a>Privacy Policy</a>
               </Link>
             </li>
             <li>
-              <Link href="/terms">
+              <Link legacyBehavior href="/terms">
                 <a>Terms of Use</a>
               </Link>
             </li>

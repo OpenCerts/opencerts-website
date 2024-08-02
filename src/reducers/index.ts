@@ -1,10 +1,13 @@
-import { combineReducers } from "redux";
+import { certificateReducer } from "./certificate.slice";
+import { featureToggleReducer } from "./featureToggle.slice";
 
-import { reducer as certificate } from "./certificate";
-import { reducer as featureToggle } from "./featureToggle";
+export const rootReducer = {
+  featureToggle: featureToggleReducer,
+  certificate: certificateReducer,
+};
 
-export const rootReducer = combineReducers({
-  certificate,
-  featureToggle,
-});
-export type RootState = ReturnType<typeof rootReducer>;
+type RootReducer = typeof rootReducer;
+
+export type RootState = {
+  [K in keyof RootReducer]: ReturnType<RootReducer[K]>;
+};

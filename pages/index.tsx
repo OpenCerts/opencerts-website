@@ -7,16 +7,15 @@ import { Wrapper, Main } from "../src/components/Layout/Body";
 import { FooterBar } from "../src/components/Layout/FooterBar";
 import { NavigationBar } from "../src/components/Layout/NavigationBar";
 import { MainPageContainer } from "../src/components/MainPageContainer";
-
 import {
   resetCertificateState,
-  retrieveCertificateByActionFailure,
   retrieveCertificateByAction,
-} from "../src/reducers/certificate.actions";
+  retrieveCertificateByActionFailure,
+} from "../src/reducers/certificate.slice";
 
 interface HomePageProps {
   resetCertificateState: () => void;
-  retrieveCertificateByAction: (payload: { uri: string; key?: string }, anchor: { key?: string }) => void;
+  retrieveCertificateByAction: (payload: { uri: string; key?: string; anchorKey?: string }) => void;
   retrieveCertificateByActionFailure: (message: string) => void;
 }
 const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
@@ -31,7 +30,7 @@ const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
       const anchorStr = decodeURIComponent(urlParams.uriFragment);
       const anchor = anchorStr ? JSON.parse(anchorStr) : {};
       if (action.type === "DOCUMENT") {
-        props.retrieveCertificateByAction(action.payload, anchor);
+        props.retrieveCertificateByAction({ ...action.payload, anchorKey: anchor?.key });
       } else {
         props.retrieveCertificateByActionFailure(`The type ${action.type} provided from the action is not supported`);
       }

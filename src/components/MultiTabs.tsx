@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { resetCertificateState } from "../reducers/certificate.actions";
+import { resetCertificateState } from "../reducers/certificate.slice";
 import { Drawer } from "./UI/Drawer";
 
 interface MultiTabsProps {
@@ -27,7 +27,7 @@ const MultiTabs: React.FunctionComponent<MultiTabsProps> = ({ resetData, templat
         <div className="container">
           <div className="flex flex-wrap">
             <div className="w-full ml-auto mb-8 lg:mb-0 lg:w-auto lg:order-2">
-              <Link href="/">
+              <Link legacyBehavior href="/">
                 <a
                   className="button border border-navy text-navy bg-white hover:bg-navy"
                   id="btn-view-another"

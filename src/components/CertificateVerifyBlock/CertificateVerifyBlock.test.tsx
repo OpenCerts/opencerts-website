@@ -472,6 +472,6 @@ describe("getV3IdentityVerificationText", () => {
         },
       },
     };
-    expect(getV3IdentityVerificationText(v3Document)).toStrictEqual("REAL.EXAMPLE.OPENATTESTATION.COM");
+    expect(getV3IdentityVerificationText(v3Document)).toBe("REAL.EXAMPLE.OPENATTESTATION.COM");
   });
 });

@@ -3,7 +3,7 @@ import { utils, v2, v3, v4, OpenAttestationDocument } from "@govtechsg/open-atte
 import dynamic from "next/dynamic";
 import React from "react";
 import { connect } from "react-redux";
-import { updateObfuscatedCertificate as updateObfuscatedCertificateAction } from "../reducers/certificate.actions";
+import { updateObfuscatedCertificate as updateObfuscatedCertificateAction } from "../reducers/certificate.slice";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
 import { sendEventCertificateDetails } from "./Analytics";
 import { CertificateShareLinkFormContainer } from "./CertificateShareLink/CertificateShareLinkForm";

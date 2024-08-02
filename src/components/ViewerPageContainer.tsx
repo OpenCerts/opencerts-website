@@ -6,13 +6,6 @@ import React, { Component, ReactNode } from "react";
 import { connect } from "react-redux";
 import { RootState } from "../reducers";
 import {
-  generateShareLink,
-  sendCertificate,
-  sendCertificateReset,
-  updateCertificate,
-  updateObfuscatedCertificate,
-} from "../reducers/certificate.actions";
-import {
   getCertificate,
   getEmailSendingState,
   getShareLink,
@@ -20,6 +13,13 @@ import {
   getVerificationStatus,
   getVerifying,
 } from "../reducers/certificate.selectors";
+import {
+  generateShareLink,
+  sendCertificate,
+  sendCertificateReset,
+  updateCertificate,
+  updateObfuscatedCertificate,
+} from "../reducers/certificate.slice";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
 import { opencertsGetData } from "../utils/utils";
 import { CertificateViewerContainer } from "./CertificateViewer";
