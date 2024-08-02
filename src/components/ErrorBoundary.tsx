@@ -26,7 +26,7 @@ export class ErrorBoundary extends Component<{ children: ReactNode }, ErrorBound
               <h2 className="font-bold text-orange mb-2">Something went wrong!</h2>
               <p>There is an error with this certificate, please contact your issuing institution.</p>
             </div>
-            <Link href="/">
+            <Link legacyBehavior href="/">
               <a className="button bg-navy">Go Back</a>
             </Link>
           </div>

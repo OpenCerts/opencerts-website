@@ -517,7 +517,7 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
                   collaborator without liability to you whatsoever. GovTech is not obliged to provide any reasons for
                   any rejection of your application to be a collaborator. The Collaborator Terms and Conditions are
                   found{" "}
-                  <Link href="/collaborators-terms">
+                  <Link legacyBehavior href="/collaborators-terms">
                     <a>here</a>
                   </Link>
                   .
