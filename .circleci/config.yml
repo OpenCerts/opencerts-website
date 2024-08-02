@@ -12,7 +12,7 @@ jobs:
       - image: "cimg/node:18.20.3-browsers"
     steps:
       - checkout
-      - browser-tools/install-browser-tools
+      - browser-tools/install-chrome
       - run:
           name: install
           command: npm ci
