@@ -1,7 +1,9 @@
 import { Selector } from "testcafe";
 import { waitForReact } from "testcafe-react-selectors";
+import { validateTextContent } from "../../components/tests/utils";
 
-fixture("Tampered Cert").page`http://localhost:3000`.beforeEach(async () => {
+fixture("Tampered Cert").page`http://localhost:3000`.beforeEach(async (t) => {
+  await t.wait(1000);
   await waitForReact();
 });
 
@@ -9,9 +11,6 @@ const Certificate = "./tampered.opencert";
 
 const RenderedCertificate = Selector("#certificate-dropzone");
 const InvalidMessage = Selector('[data-testid="invalid-message"]');
-
-const validateTextContent = async (t, component, texts) =>
-  texts.reduce(async (prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());
 
 test("Tampered certificate's error message is correct", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Certificate]);

@@ -1,7 +1,8 @@
 import { RequestMock, Selector } from "testcafe";
 import { waitForReact } from "testcafe-react-selectors";
 
-fixture("Ethereum Provider HTTP Server Error").page`http://localhost:3000`.beforeEach(async () => {
+fixture("Ethereum Provider HTTP Server Error").page`http://localhost:3000`.beforeEach(async (t) => {
+  await t.wait(1000);
   await waitForReact();
 });
 
@@ -33,9 +34,6 @@ const DropzoneViewWrapper = Selector("[data-testid='dropzone-view-wrapper']");
 const IframeBlock = Selector("#iframe");
 const SampleTemplate = Selector("#root");
 const StatusButton = Selector("#certificate-status");
-
-const validateTextContent = async (t, component, texts) =>
-  texts.reduce(async (prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());
 
 test.requestHooks(badGatewayMockInfuraOnly)(
   "Sample document is rendered correctly when only infura is down",

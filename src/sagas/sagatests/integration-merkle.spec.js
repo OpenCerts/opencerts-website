@@ -1,7 +1,9 @@
 import { Selector } from "testcafe";
 import { waitForReact } from "testcafe-react-selectors";
+import { validateTextContent } from "../../components/tests/utils";
 
-fixture("Wrong Merkle Cert").page`http://localhost:3000`.beforeEach(async () => {
+fixture("Wrong Merkle Cert").page`http://localhost:3000`.beforeEach(async (t) => {
+  await t.wait(1000);
   await waitForReact();
 });
 
@@ -11,9 +13,6 @@ const Certificate3 = "./wrong-merkle-arrayify-value.opencert";
 
 const RenderedCertificate = Selector("#certificate-dropzone");
 const InvalidMessage = Selector('[data-testid="invalid-message"]');
-
-const validateTextContent = async (t, component, texts) =>
-  texts.reduce(async (prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());
 
 test("Merkle root that is of odd-length should result in correct error message", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Certificate1]);
