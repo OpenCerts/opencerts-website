@@ -1,5 +1,6 @@
 import { Selector, RequestMock } from "testcafe";
 import { waitForReact } from "testcafe-react-selectors";
+import { validateTextContent } from "./utils";
 
 const googleDnsDown = RequestMock()
   .onRequestTo({ url: "https://dns.google/resolve?name=example.openattestation.com&type=TXT" })
@@ -23,9 +24,6 @@ const SampleTemplate = Selector("#root");
 const StatusButton = Selector("#certificate-status");
 const InvalidMessage = Selector('[data-testid="invalid-message"]');
 const RenderedCertificate = Selector("#certificate-dropzone");
-
-const validateTextContent = async (t, component, texts) =>
-  texts.reduce(async (_prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());
 
 test("Sample document is rendered correctly when dns is verified", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Document]);

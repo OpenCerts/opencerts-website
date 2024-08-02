@@ -6,6 +6,8 @@ import { waitForReact } from "testcafe-react-selectors";
 import TestDocument2 from "./fixture/sample-dns-verified-special-characters.json";
 import TestDocument1 from "./fixture/sample-dns-verified.json";
 
+import { validateTextContent } from "./utils";
+
 fixture("Download Certificate").page`http://localhost:3000`
   .afterEach(async (t) => {
     // Clean up files after each test
@@ -21,9 +23,6 @@ const Document2 = "./fixture/sample-dns-verified-special-characters.json";
 const StatusButton = Selector("#certificate-status");
 const DownloadLink = Selector("a").withAttribute("download");
 const DownloadButton = Selector("#btn-download");
-
-const validateTextContent = async (t, component, texts) =>
-  texts.reduce(async (_prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());
 
 // From https://stackoverflow.com/a/57624660/950462
 const waitForFileDownload = async (t, filePath) => {

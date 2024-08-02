@@ -1,5 +1,6 @@
 import { Selector, ClientFunction } from "testcafe";
 import { waitForReact } from "testcafe-react-selectors";
+import { validateTextContent } from "./utils";
 
 fixture("Registry Certificate Rendering").page`http://localhost:3000`.beforeEach(async () => {
   await waitForReact();
@@ -11,9 +12,6 @@ const TranscriptButton = Selector("[data-testid='transcript']");
 const MediaButton = Selector("[data-testid='media']");
 const StatusButton = Selector("#certificate-status");
 const SampleTemplate = Selector("#rendered-certificate");
-
-const validateTextContent = async (t, component, texts) =>
-  texts.reduce(async (_prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());
 
 test("Sample document is rendered correctly when single registry is verified", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Document]);

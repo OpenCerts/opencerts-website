@@ -1,6 +1,7 @@
 import { Selector } from "testcafe";
 import "isomorphic-fetch";
 import { waitForReact } from "testcafe-react-selectors";
+import { validateTextContent } from "./utils";
 
 fixture("Load action from plain certificate").page`http://localhost:3000`.beforeEach(async () => {
   await waitForReact();
@@ -10,9 +11,6 @@ const IframeBlock = Selector("#iframe");
 const SampleTemplate = Selector("#rendered-certificate");
 const StatusButton = Selector("#certificate-status");
 const CertificateDropzone = Selector("#certificate-dropzone");
-
-const validateTextContent = async (t, component, texts) =>
-  texts.reduce(async (_prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());
 
 test("Load document from action should work when url is valid", async (t) => {
   const action = {

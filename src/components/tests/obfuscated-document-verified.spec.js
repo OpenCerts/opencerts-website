@@ -1,5 +1,6 @@
 import { Selector } from "testcafe";
 import { waitForReact } from "testcafe-react-selectors";
+import { validateTextContent } from "./utils";
 
 fixture("Obfuscate Note Rendering").page`http://localhost:3000`.beforeEach(async () => {
   await waitForReact();
@@ -10,9 +11,6 @@ const IframeBlock = Selector("#iframe");
 const StatusButton = Selector("#certificate-status");
 const SampleTemplate = Selector("#rendered-certificate");
 const ObfuscationNote = Selector("#obfuscation-note");
-
-const validateTextContent = async (t, component, texts) =>
-  texts.reduce(async (_prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());
 
 test("Sample document is rendered correctly when single registry is verified", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Document]);

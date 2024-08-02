@@ -1,6 +1,7 @@
 import { Selector } from "testcafe";
 import "isomorphic-fetch";
 import { waitForReact } from "testcafe-react-selectors";
+import { validateTextContent } from "./utils";
 
 fixture("Load action from encrypted certificate").page`http://localhost:3000`.beforeEach(async () => {
   await waitForReact();
@@ -10,9 +11,6 @@ const IframeBlock = Selector("#iframe");
 const SampleTemplate = Selector("#rendered-certificate");
 const StatusButton = Selector("#certificate-status");
 const CertificateDropzone = Selector("#certificate-dropzone");
-
-const validateTextContent = async (t, component, texts) =>
-  texts.reduce(async (_prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());
 
 const key = "894c5b45a61d79fe46835e2c2b363875f0a1240db447bb3db77c2cf79568e279";
 
