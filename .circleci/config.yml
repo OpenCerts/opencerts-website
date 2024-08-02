@@ -19,7 +19,7 @@ orbs:
 jobs:
   build_registry:
     docker:
-      - image: "cimg/node:14.21.3-browsers"
+      - image: "cimg/node:18.20.3-browsers"
     steps:
       - checkout
       - run:
@@ -28,7 +28,7 @@ jobs:
   build:
     resource_class: large
     docker:
-      - image: "cimg/node:14.21.3-browsers"
+      - image: "cimg/node:18.20.3-browsers"
     steps:
       - checkout
       - browser-tools/install-browser-tools
