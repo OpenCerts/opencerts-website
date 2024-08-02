@@ -1,7 +1,10 @@
 import { Selector } from "testcafe";
 import { waitForReact } from "testcafe-react-selectors";
 
-fixture("Contract Not Found").page`http://localhost:3000`.beforeEach(async () => {
+import { validateTextContent } from "../../components/tests/utils";
+
+fixture("Contract Not Found").page`http://localhost:3000`.beforeEach(async (t) => {
+  await t.wait(1000);
   await waitForReact();
 });
 
@@ -9,9 +12,6 @@ const Certificate = "./sample-mainnet.opencert";
 
 const RenderedCertificate = Selector("#certificate-dropzone");
 const InvalidMessage = Selector('[data-testid="invalid-message"]');
-
-const validateTextContent = async (t, component, texts) =>
-  texts.reduce(async (prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());
 
 // Contract not found means that the contract address is perfectly valid, but it does not exist on the network
 test("Mainnet certificate should result in contract not found error message on goerli", async (t) => {

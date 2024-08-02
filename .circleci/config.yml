@@ -5,6 +5,7 @@ workflows:
       - build
 orbs:
   browser-tools: circleci/browser-tools@1.4.8
+
 jobs:
   build:
     resource_class: large
@@ -12,10 +13,19 @@ jobs:
       - image: "cimg/node:18.20.3-browsers"
     steps:
       - checkout
-      - browser-tools/install-browser-tools
+      - browser-tools/install-chrome
+      - restore_cache:
+          keys:
+            - npm-cache-{{ checksum "package-lock.json" }}
+            # fallback to a previous cache if package-lock.json hasn't changed
+            - npm-cache-
       - run:
           name: install
           command: npm ci
+      - save_cache:
+          paths:
+            - ~/.npm
+          key: npm-cache-{{ checksum "package-lock.json" }}
       - run:
           name: lint
           command: npm run lint
