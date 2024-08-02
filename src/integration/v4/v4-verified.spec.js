@@ -1,5 +1,6 @@
 import { Selector } from "testcafe";
 import { waitForReact } from "testcafe-react-selectors";
+import { validateTextContent } from "../../components/tests/utils";
 
 fixture("OA v4 DID-DNS Certificate Rendering").page`http://localhost:3000`.beforeEach(async () => {
   await waitForReact();
@@ -9,9 +10,6 @@ const EmbeddedRendererDoc = "./fixtures/v4_embedded_renderer.json";
 const IframeBlock = Selector("#iframe");
 const SampleTemplate = Selector("#root");
 const StatusButton = Selector("#certificate-status");
-
-const validateTextContent = async (t, component, texts) =>
-  texts.reduce(async (_prev, curr) => t.expect(component.textContent).contains(curr), Promise.resolve());
 
 test("Sample v4 document using embedded renderer is rendered correctly when dns is verified", async (t) => {
   await t.setFilesToUpload("input[type=file]", [EmbeddedRendererDoc]);
