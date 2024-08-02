@@ -26,8 +26,5 @@ jobs:
           name: type check
           command: npm run type-check
       - run:
-          name: build
-          command: npm run build
-      - run:
-          name: integration
+          name: build and run integration
           command: ./scripts/integration-headless.sh
