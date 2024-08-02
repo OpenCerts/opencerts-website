@@ -30,6 +30,11 @@ const nextConfig = {
     legacyRendererUrl: process.env.LEGACY_RENDERER_URL,
     context: process.env.CONTEXT, // https://www.netlify.com/docs/continuous-deployment/?_ga=2.254249672.1986722564.1569467860-817711885.1562657089#build-environment-variables
   },
+  experimental: {
+    // workaround to for next to play nice with oa-verify's new version
+    // might be related to https://github.com/vercel/next.js/issues/39375#issuecomment-1380266233
+    esmExternals: false,
+  },
 };
 
 module.exports = withBundleAnalyzer(nextConfig);
