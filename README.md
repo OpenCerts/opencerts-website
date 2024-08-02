@@ -94,4 +94,4 @@ Try running `npm rebuild`
 
 ### Integration tests
 
-To run integration tests locally, make sure you run `npm run build:static` once to build the static site first. The e2e tests will then spin up a server based on the `out` folder in project root.
+To run integration tests locally, make sure you run `npm run build` once to build the static site first. The e2e tests will then spin up a server based on the `out` folder in project root.
