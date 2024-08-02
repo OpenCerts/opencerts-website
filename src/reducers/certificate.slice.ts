@@ -1,5 +1,5 @@
 import { VerificationFragment } from "@govtechsg/oa-verify";
-import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
 
 import { states } from "./shared";
