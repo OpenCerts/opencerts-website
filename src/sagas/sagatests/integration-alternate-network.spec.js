@@ -3,7 +3,7 @@ import { waitForReact } from "testcafe-react-selectors";
 import { validateTextContent } from "../../components/tests/utils";
 
 fixture("Alternate Network Cert").page`http://localhost:3000`.beforeEach(async (t) => {
-  await t.wait();
+  await t.wait(1000);
   await waitForReact();
 });
 
