@@ -14,25 +14,24 @@ import "isomorphic-fetch";
 
 import { triggerV2ErrorLogging, triggerV3ErrorLogging, triggerV4ErrorLogging } from "../components/Analytics";
 import { NETWORK_NAME, IS_MAINNET } from "../config";
+import { getCertificate } from "../reducers/certificate.selectors";
 import {
-  GENERATE_SHARE_LINK,
+  generateShareLink,
   generateShareLinkFailure,
   generateShareLinkReset,
   generateShareLinkSuccess,
-  RETRIEVE_CERTIFICATE_BY_ACTION,
+  retrieveCertificateByAction,
   retrieveCertificateByActionFailure,
   retrieveCertificateByActionPending,
   retrieveCertificateByActionSuccess,
+  sendCertificate,
   sendCertificateFailure,
   sendCertificateSuccess,
-  SENDING_CERTIFICATE,
-  UPDATE_CERTIFICATE,
   updateCertificate,
   verifyingCertificate,
   verifyingCertificateCompleted,
   verifyingCertificateErrored,
-} from "../reducers/certificate.actions";
-import { getCertificate } from "../reducers/certificate.selectors";
+} from "../reducers/certificate.slice";
 import { sendEmail } from "../services/email";
 import { OAFailoverProvider } from "../services/failover-provider";
 import {
@@ -133,7 +132,7 @@ const getNetworkName = (
   return NETWORK_NAME;
 };
 
-export function* verifyCertificate({ payload: certificate }: { payload: WrappedOrSignedOpenCertsDocument }) {
+export function* verifyCertificateSaga({ payload: certificate }: { payload: WrappedOrSignedOpenCertsDocument }) {
   try {
     yield put(verifyingCertificate());
 
@@ -210,7 +209,7 @@ export function* verifyCertificate({ payload: certificate }: { payload: WrappedO
   }
 }
 
-export function* sendCertificate({ payload }: { payload: { email: string; captcha: string } }) {
+export function* sendCertificateSaga({ payload }: { payload: { email: string; captcha: string } }) {
   try {
     // https://github.com/redux-saga/redux-saga/issues/884
     const certificate: ReturnType<typeof getCertificate> = yield select(getCertificate);
@@ -234,7 +233,7 @@ export function* sendCertificate({ payload }: { payload: { email: string; captch
 }
 type Await<T> = T extends PromiseLike<infer U> ? U : T;
 
-export function* generateShareLink() {
+export function* generateShareLinkSaga() {
   try {
     yield put(generateShareLinkReset());
     // https://github.com/redux-saga/redux-saga/issues/884
@@ -255,12 +254,10 @@ export function* generateShareLink() {
   }
 }
 
-export function* retrieveCertificateByAction({
-  payload: { uri, key: payloadKey },
-  anchor: { key: anchorKey },
+export function* retrieveCertificateByActionSaga({
+  payload: { uri, key: payloadKey, anchorKey },
 }: {
-  payload: { uri: string; key?: string };
-  anchor: { key?: string };
+  payload: { uri: string; key?: string; anchorKey?: string };
 }) {
   try {
     yield put(retrieveCertificateByActionPending());
@@ -302,16 +299,9 @@ export function* retrieveCertificateByAction({
   }
 }
 
-// TODO https://github.com/redux-saga/redux-saga/issues/1883
 export const sagas = [
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  takeEvery(RETRIEVE_CERTIFICATE_BY_ACTION, retrieveCertificateByAction),
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  takeEvery(UPDATE_CERTIFICATE, verifyCertificate),
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  takeEvery(SENDING_CERTIFICATE, sendCertificate),
-  takeEvery(GENERATE_SHARE_LINK, generateShareLink),
+  takeEvery(retrieveCertificateByAction, retrieveCertificateByActionSaga),
+  takeEvery(updateCertificate, verifyCertificateSaga),
+  takeEvery(sendCertificate, sendCertificateSaga),
+  takeEvery(generateShareLink, generateShareLinkSaga),
 ];

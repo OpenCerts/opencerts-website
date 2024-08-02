@@ -7,12 +7,11 @@ import { Wrapper, Main } from "../src/components/Layout/Body";
 import { FooterBar } from "../src/components/Layout/FooterBar";
 import { NavigationBar } from "../src/components/Layout/NavigationBar";
 import { MainPageContainer } from "../src/components/MainPageContainer";
-
 import {
   resetCertificateState,
-  retrieveCertificateByActionFailure,
   retrieveCertificateByAction,
-} from "../src/reducers/certificate.actions";
+  retrieveCertificateByActionFailure,
+} from "../src/reducers/certificate.slice";
 
 interface HomePageProps {
   resetCertificateState: () => void;

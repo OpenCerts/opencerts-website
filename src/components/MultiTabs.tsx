@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { resetCertificateState } from "../reducers/certificate.actions";
+import { resetCertificateState } from "../reducers/certificate.slice";
 import { Drawer } from "./UI/Drawer";
 
 interface MultiTabsProps {
