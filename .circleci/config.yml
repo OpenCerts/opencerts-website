@@ -1,30 +1,11 @@
 version: 2.1
 workflows:
-  #  uncomment to get build registry
-  #  nightly:
-  #    triggers:
-  #      - schedule:
-  #          cron: "0 0 * * *"
-  #          filters:
-  #            branches:
-  #              only:
-  #                - master
-  #    jobs:
-  #      - build_registry
   commit:
     jobs:
       - build
 orbs:
   browser-tools: circleci/browser-tools@1.4.8
 jobs:
-  build_registry:
-    docker:
-      - image: "cimg/node:18.20.3-browsers"
-    steps:
-      - checkout
-      - run:
-          name: build registry
-          command: npm run build:registry
   build:
     resource_class: large
     docker:

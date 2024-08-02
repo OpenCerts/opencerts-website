@@ -18,7 +18,6 @@
     "lint:opencert:fix": "prettier --write \"{src,public}/**/*.opencert\"",
     "build": "next build",
     "start:local": "npm run build && cross-env LEGACY_RENDERER_URL=\"http://localhost:3000\" next start -p 3001",
-    "build:registry": "echo yes we did",
     "start": "next build && next start",
     "postexport": "node post-export.js",
     "start:watch": "nodemon --exec \"npm run start\"",
