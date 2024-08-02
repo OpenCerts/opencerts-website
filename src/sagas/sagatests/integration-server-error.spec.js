@@ -1,5 +1,6 @@
 import { RequestMock, Selector } from "testcafe";
 import { waitForReact } from "testcafe-react-selectors";
+import { validateTextContent } from "../../components/tests/utils";
 
 fixture("Ethereum Provider HTTP Server Error").page`http://localhost:3000`.beforeEach(async (t) => {
   await t.wait(1000);
