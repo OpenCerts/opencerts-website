@@ -1,16 +1,10 @@
-const withBundleAnalyzer = require("@zeit/next-bundle-analyzer");
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.BUNDLE_ANALYZE === "true",
+});
 
-module.exports = withBundleAnalyzer({
-  analyzeBrowser: ["browser"].includes(process.env.BUNDLE_ANALYZE),
-  bundleAnalyzerConfig: {
-    browser: {
-      analyzerMode: "static",
-      reportFilename: "../bundles/client.html",
-    },
-  },
-
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   trailingSlash: true,
-  cssModules: true,
   output: "export",
   exportPathMap: function exportMap() {
     return {
@@ -36,4 +30,6 @@ module.exports = withBundleAnalyzer({
     legacyRendererUrl: process.env.LEGACY_RENDERER_URL,
     context: process.env.CONTEXT, // https://www.netlify.com/docs/continuous-deployment/?_ga=2.254249672.1986722564.1569467860-817711885.1562657089#build-environment-variables
   },
-});
+};
+
+module.exports = withBundleAnalyzer(nextConfig);
