@@ -4,8 +4,8 @@ import React, { Component, ReactNode } from "react";
 interface ErrorBoundaryState {
   hasError: boolean;
 }
-export class ErrorBoundary extends Component<unknown, ErrorBoundaryState> {
-  constructor(props: unknown) {
+export class ErrorBoundary extends Component<{ children: ReactNode }, ErrorBoundaryState> {
+  constructor(props: { children: ReactNode }) {
     super(props);
     this.state = { hasError: false };
   }
