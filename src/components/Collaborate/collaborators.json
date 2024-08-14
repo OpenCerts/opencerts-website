@@ -48,14 +48,6 @@
     "logo": "/static/images/collaborate/KC_logo.png"
   },
   {
-    "id": "3dcerts",
-    "name": "R3D Singapore Pte Ltd",
-    "description": "3DCerts protocol is designed to create an added level of protection for certificate issuers (institutions or corporations), owners (students or users) and employers.",
-    "website": "https://www.3dcerts.com",
-    "key": "3d certs",
-    "logo": "/static/images/collaborate/3dcerts_logo.svg"
-  },
-  {
     "id": "aokpass",
     "name": "AOKpass",
     "description": "ICC AOKpass provides you with a digitally authenticated, secure and portable copy of your medical records, approved by a medical professional and accessible only by you.",
