@@ -137,7 +137,7 @@ test("Load document from action should fail when the required key is not provide
   await validateTextContent(t, CertificateDropzone, [
     "The certificate can't be loaded",
     "Unable to load certificate with the provided parameters",
-    "Unable to decrypt certificate with key=undefined and type=OPEN-ATTESTATION-TYPE-1",
+    "Key is required to decrypt certificate but received key=undefined and type=OPEN-ATTESTATION-TYPE-1",
   ]);
 });
 

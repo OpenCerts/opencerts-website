@@ -296,7 +296,7 @@ export function* retrieveCertificateByActionSaga({
           })
         );
       } catch (e) {
-        throw new Error(`Unable to decrypt certificate with key=${key} and type=${certificate.type}`);
+        throw new Error(`Error decrypting message with key=${key} and type=${certificate.type}`);
       }
     }
 
