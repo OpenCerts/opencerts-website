@@ -42,7 +42,7 @@ import {
   serverError,
 } from "../services/fragment";
 import { generateLink } from "../services/link";
-import { WrappedOrSignedOpenCertsDocument } from "../shared";
+import { WrappedOrSignedOpenCertsDocument, isEncrypted } from "../shared";
 import { getLogger } from "../utils/logger";
 import { opencertsGetData } from "../utils/utils";
 
@@ -275,20 +275,29 @@ export function* retrieveCertificateByActionSaga({
     if (!certificate) {
       throw new Error(`Certificate at address ${uri} is empty`);
     }
-    // if there is a key and the type is "OPEN-ATTESTATION-TYPE-1", let's use oa-encryption
+
     const key = anchorKey || payloadKey;
-    if (key && certificate.type === "OPEN-ATTESTATION-TYPE-1") {
-      certificate = JSON.parse(
-        decryptString({
-          tag: certificate.tag,
-          cipherText: certificate.cipherText,
-          iv: certificate.iv,
-          key,
-          type: certificate.type,
-        })
-      );
-    } else if (key || certificate.type) {
-      throw new Error(`Unable to decrypt certificate with key=${key} and type=${certificate.type}`);
+
+    if (isEncrypted(certificate)) {
+      if (!key) {
+        // key is missing, throw error
+        throw new Error(`Key is required to decrypt certificate but received key=${key} and type=${certificate.type}`);
+      }
+
+      // Key is provided, decrypt document
+      try {
+        certificate = JSON.parse(
+          decryptString({
+            tag: certificate.tag,
+            cipherText: certificate.cipherText,
+            iv: certificate.iv,
+            key,
+            type: certificate.type,
+          })
+        );
+      } catch (e) {
+        throw new Error(`Unable to decrypt certificate with key=${key} and type=${certificate.type}`);
+      }
     }
 
     yield put(updateCertificate(certificate as WrappedOrSignedOpenCertsDocument));
