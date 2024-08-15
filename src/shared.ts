@@ -1,5 +1,5 @@
-import { v2, v3, v4 } from "@govtechsg/open-attestation";
 import { IEncryptionResults } from "@govtechsg/oa-encryption";
+import { v2, v3, v4 } from "@govtechsg/open-attestation";
 import { z } from "zod";
 
 // for the moment we don't need to use specifically signer types and it raises an error in some methods that don't really expect signed document, so keeping it like this
