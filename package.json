@@ -26,7 +26,7 @@
     "analyze": "BUNDLE_ANALYZE=browser npm run start",
     "dev-cli": "node -r esm ./scripts/cli.js",
     "serve-static": "http-server out -s -p 3000",
-    "integration": "testcafe chrome src/**/*.spec.js --ts-config-path ./tsconfig.json",
+    "integration": "testcafe chrome src/**/*.spec.js --selector-timeout 10000 --ts-config-path ./tsconfig.json",
     "integration:single": "testcafe chrome -L --app \"npm run serve-static\"",
     "integration:headless": "testcafe -c 1 'chrome --headless=new --disable-web-security' --selector-timeout 300000 src/**/*.spec.js",
     "integration:watch": "nodemon --exec \"npm run integration\" --watch src",
@@ -58,7 +58,8 @@
     "react-ga4": "^1.4.1",
     "react-google-recaptcha": "^2.1.0",
     "react-redux": "^9.1.2",
-    "redux-saga": "^1.3.0"
+    "redux-saga": "^1.3.0",
+    "zod": "^3.23.8"
   },
   "license": "ISC",
   "devDependencies": {
@@ -133,7 +134,7 @@
       "@typescript-eslint/explicit-member-accessibility": 0,
       "@typescript-eslint/no-use-before-define": 0,
       "@typescript-eslint/no-unused-vars": [
-        "warn", 
+        "warn",
         {
           "argsIgnorePattern": "^_",
           "varsIgnorePattern": "^_",
