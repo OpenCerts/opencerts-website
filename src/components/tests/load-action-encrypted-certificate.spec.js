@@ -14,7 +14,7 @@ const CertificateDropzone = Selector("#certificate-dropzone");
 
 const key = "894c5b45a61d79fe46835e2c2b363875f0a1240db447bb3db77c2cf79568e279";
 
-test("Load document from action should work when action is valid (key from anchor)", async (t) => {
+test("Load OA v2.0 document from action should work when action is valid (key from anchor)", async (t) => {
   const anchor = { key };
   const action = {
     type: "DOCUMENT",
@@ -40,7 +40,34 @@ test("Load document from action should work when action is valid (key from ancho
   ]);
 });
 
-test("Load document from action should work when action is valid", async (t) => {
+test("Load OA v4.0 document from action should work when action is valid (key from anchor)", async (t) => {
+  const anchor = { key };
+  const action = {
+    type: "DOCUMENT",
+    payload: {
+      uri: `https://gist.githubusercontent.com/john-dot-oa/320778f9e9d93c80e03fe18040b399d0/raw/19d099d51fde74234b72bf4f555c65f6954b956c/opencerts-website-did-demo-encrypted-v4.json`,
+      permittedAction: ["STORE"],
+      redirect: "https://opencerts.io/",
+    },
+  };
+
+  await t.navigateTo(
+    `http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}#${encodeURI(JSON.stringify(anchor))}`
+  );
+  await validateTextContent(t, StatusButton, ["EXAMPLE.OPENATTESTATION.COM"]);
+
+  await t.switchToIframe(IframeBlock);
+
+  await validateTextContent(t, SampleTemplate, [
+    "OpenCerts Demo",
+    "Your Name",
+    "has successfully completed the",
+    "John Demo",
+  ]);
+});
+
+// Note: This is a deprecated way of including the key. The key should be part of the anchor (#): https://github.com/Open-Attestation/adr/blob/master/universal_actions.md#proposed-solution
+test("Load document from action should work when action is valid (key from query param to maintain backwards compatibility)", async (t) => {
   const action = {
     type: "DOCUMENT",
     payload: {
