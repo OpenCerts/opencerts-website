@@ -1,4 +1,6 @@
+import type { CustomDnsResolver } from "@govtechsg/dnsprove";
 import { getData, utils } from "@govtechsg/open-attestation";
+import axios from "axios";
 import { LEGACY_OPENCERTS_RENDERER } from "../config";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
 
@@ -23,4 +25,12 @@ export const getTemplate = (rawDocument: WrappedOrSignedOpenCertsDocument) => {
   } else {
     return rawDocument.renderMethod?.find((method) => method.type === "OpenAttestationEmbeddedRenderer")?.id;
   }
+};
+
+export const ocDnsResolver: CustomDnsResolver = async (domain) => {
+  const { data } = await axios({
+    method: "GET",
+    url: `https://dns.opencerts.io/resolve?name=${domain}`,
+  });
+  return data;
 };

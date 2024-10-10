@@ -44,7 +44,7 @@ import {
 import { generateLink } from "../services/link";
 import { WrappedOrSignedOpenCertsDocument, isEncrypted } from "../shared";
 import { getLogger } from "../utils/logger";
-import { opencertsGetData } from "../utils/utils";
+import { ocDnsResolver, opencertsGetData } from "../utils/utils";
 
 const { trace } = getLogger("saga:certificate");
 
@@ -158,7 +158,7 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
     const verify = verificationBuilder([...openAttestationVerifiers, registryVerifier] as Verifier<any>[], {
       provider: providerWithFailover,
       resolver: resolverWithFailover,
-      dnsResolvers: [...defaultDnsResolvers, aliDnsResolver],
+      dnsResolvers: [ocDnsResolver, ...defaultDnsResolvers, aliDnsResolver],
     });
 
     // https://github.com/redux-saga/redux-saga/issues/884
