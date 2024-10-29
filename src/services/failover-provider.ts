@@ -52,6 +52,11 @@ export class OAFailoverProvider extends providers.StaticJsonRpcProvider {
       try {
         return await this.failoverProviders[i].perform(method, params);
       } catch (error) {
+        // Don't retry if it's just a revert from an ERC165 check
+        if (this.isErc165Check(method, params, error)) {
+          return false;
+        }
+
         // If last provider
         if (i === this.failoverProviders.length - 1) {
           throw error;
@@ -62,6 +67,17 @@ export class OAFailoverProvider extends providers.StaticJsonRpcProvider {
         }
       }
     }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private isErc165Check(method: string, params: any, ethersError: any): boolean {
+    // See https://eips.ethereum.org/EIPS/eip-165
+    const erc165SupportsInterfaceSelector = "0x01ffc9a7";
+    return (
+      method === "call" &&
+      params?.transaction?.data?.startsWith(erc165SupportsInterfaceSelector) &&
+      ethersError.code === "CALL_EXCEPTION"
+    );
   }
 }
 
