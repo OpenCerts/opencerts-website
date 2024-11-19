@@ -56,6 +56,13 @@ export class OAFailoverProvider extends providers.StaticJsonRpcProvider {
         if (i === this.failoverProviders.length - 1) {
           throw error;
         }
+        // Avoid retries if the function selector inside calldata is "supportsInterface(bytes4)"
+        // isBatchableDocumentStore: https://github.com/Open-Attestation/oa-verify/blob/0492679f4f24df164d93e699a5845b30d39ab14d/src/common/utils.ts#L237-L244
+        // Decoded: https://calldata.swiss-knife.xyz/decoder?calldata=0x01ffc9a7dcfd074500000000000000000000000000000000000000000000000000000000
+        // Keccak256("supportsInterface(bytes4)") = 0x01ffc9a7
+        if (/^0x01ffc9a7.*$/.test(params?.transaction?.data)) {
+          throw error;
+        }
         // Attempt the next provider
         else {
           continue;
