@@ -51,9 +51,11 @@ export class OAFailoverProvider extends providers.StaticJsonRpcProvider {
     for (let i = 0; i < this.failoverProviders.length; i++) {
       try {
         return await this.failoverProviders[i].perform(method, params);
-      } catch (error) {
-        // Don't retry if it's just a revert from an ERC165 check
-        if (this.isErc165Check(method, params, error)) {
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
+        // Don't retry if it's a call exception. We only retry on network errors.
+        if (error?.code === "CALL_EXCEPTION") {
           return false;
         }
 
@@ -67,17 +69,6 @@ export class OAFailoverProvider extends providers.StaticJsonRpcProvider {
         }
       }
     }
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private isErc165Check(method: string, params: any, ethersError: any): boolean {
-    // See https://eips.ethereum.org/EIPS/eip-165
-    const erc165SupportsInterfaceSelector = "0x01ffc9a7";
-    return (
-      method === "call" &&
-      params?.transaction?.data?.startsWith(erc165SupportsInterfaceSelector) &&
-      ethersError.code === "CALL_EXCEPTION"
-    );
   }
 }
 
