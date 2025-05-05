@@ -56,6 +56,15 @@
       "logo": "/static/images/SIT_logo.png",
       "id": "sit-registry"
     },
+    "0xdBE2537e576dC362E9749108d0f8abC48Ed4C375": {
+      "name": "Singapore Institute of Technology",
+      "displayCard": true,
+      "website": "https://www.singaporetech.edu.sg/",
+      "email": "",
+      "phone": "+65 6592 1136",
+      "logo": "/static/images/SIT_logo.png",
+      "id": "sit-registry"
+    },    
     "0x78CE67fcb40D9D9552A313670A2e0eef11043995": {
       "name": "SkillsFuture Singapore",
       "displayCard": true,
