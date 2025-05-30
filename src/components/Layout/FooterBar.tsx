@@ -21,11 +21,6 @@ export const FooterBar: React.FunctionComponent = () => (
                 <a>Collaborate</a>
               </Link>
             </li>
-            <li>
-              <a href="https://go.gov.sg/opencerts-feedback" target="_blank" rel="noopener noreferrer">
-                Technical Query
-              </a>
-            </li>
           </ul>
         </div>
         <div className="w-full lg:w-40 mb-8 lg:mb-0">
