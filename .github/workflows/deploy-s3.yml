@@ -15,7 +15,7 @@ env:
 
 jobs:
   build-dev:
-    name: Build and Test
+    name: Build and Test (Dev)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -52,14 +52,14 @@ jobs:
           WOGAA_ENV: ${{ secrets.WOGAA_ENV }}
           TRUSTED_TLDS: ${{ secrets.TRUSTED_TLDS }}
 
-      - name: Upload build artifact
+      - name: Upload build artifact (Dev)
         uses: actions/upload-artifact@v4
         with:
-          name: static-site
+          name: static-site-dev
           path: ${{ env.BUILD_DIR }}
 
   deploy-dev:
-    name: Deploy to S3 dev
+    name: Deploy to S3 (Dev) 
     needs: build-dev
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
@@ -67,7 +67,7 @@ jobs:
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
-          name: static-site
+          name: static-site-dev
           path: ${{ env.BUILD_DIR }}
 
       - name: Configure AWS Credentials
@@ -111,7 +111,7 @@ jobs:
             --paths "/*"
 
   build-prod:
-    name: Build and Test
+    name: Build and Test (Prod)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -151,11 +151,11 @@ jobs:
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: static-site
+          name: static-site-prod
           path: ${{ env.BUILD_DIR }}
 
   deploy-prod:
-    name: Deploy to S3 prod
+    name: Deploy to S3 (Prod)
     needs: build-prod
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
@@ -163,7 +163,7 @@ jobs:
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
-          name: static-site
+          name: static-site-prod
           path: ${{ env.BUILD_DIR }}
 
       - name: Configure AWS Credentials
