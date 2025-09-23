@@ -60,7 +60,7 @@ jobs:
 
   deploy-dev:
     name: Deploy to S3 dev
-    needs: build
+    needs: build-dev
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
@@ -156,7 +156,7 @@ jobs:
 
   deploy-prod:
     name: Deploy to S3 prod
-    needs: build
+    needs: build-prod
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
