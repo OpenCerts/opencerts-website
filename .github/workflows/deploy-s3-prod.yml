@@ -45,7 +45,7 @@ jobs:
           npm run postexport
         env:
           # Build-time envs used in next.config.js
-          NET: 'sepolia'
+          NET: 'mainnet'
           INFURA_API_KEY: ${{ secrets.INFURA_API_KEY }}
           ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
           GA4_TAG_ID: ${{ secrets.GA4_TAG_ID }}
@@ -59,7 +59,7 @@ jobs:
           path: ${{ env.BUILD_DIR }}
 
   deploy:
-    name: Deploy to S3 dev
+    name: Deploy to S3 prod
     needs: build
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
@@ -80,9 +80,9 @@ jobs:
       - name: Select target bucket
         id: bucket
         run: |
-            echo "bucket=${S3_BUCKET_DEV}" >> $GITHUB_OUTPUT
+            echo "bucket=${S3_BUCKET_PROD}" >> $GITHUB_OUTPUT
         env:
-          S3_BUCKET_DEV: ${{ secrets.S3_BUCKET_DEV }}
+          S3_BUCKET_PROD: ${{ secrets.S3_BUCKET_PROD }}
 
       - name: Sync static assets with long cache
         run: |
@@ -102,8 +102,8 @@ jobs:
             --cache-control "no-cache, no-store, must-revalidate"
 
       - name: Invalidate CloudFront
-      if: secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV != ''
+        if: secrets.CLOUDFRONT_DISTRIBUTION_ID_PROD != ''
         run: |
           aws cloudfront create-invalidation \
-            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }} \
+            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_PROD }} \
             --paths "/*"
