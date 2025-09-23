@@ -1,4 +1,4 @@
-name: CI and Deploy to S3
+name: CI and Deploy to S3 dev
 
 on:
   push:
