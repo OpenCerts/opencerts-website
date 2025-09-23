@@ -102,7 +102,7 @@ jobs:
             --cache-control "no-cache, no-store, must-revalidate"
 
       - name: Invalidate CloudFront
-        if: secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV != ''
+        if: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }} != ''
         run: |
           aws cloudfront create-invalidation \
             --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }} \
