@@ -45,7 +45,7 @@ jobs:
           npm run postexport
         env:
           # Build-time envs used in next.config.js
-          NET: ${{ startsWith(github.ref, 'refs/heads/main') && 'mainnet' || 'sepolia' }}
+          NET: 'sepolia'
           INFURA_API_KEY: ${{ secrets.INFURA_API_KEY }}
           ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
           GA4_TAG_ID: ${{ secrets.GA4_TAG_ID }}
@@ -59,7 +59,7 @@ jobs:
           path: ${{ env.BUILD_DIR }}
 
   deploy:
-    name: Deploy to S3
+    name: Deploy to S3 dev
     needs: build
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
@@ -80,13 +80,8 @@ jobs:
       - name: Select target bucket
         id: bucket
         run: |
-          if [ "${GITHUB_REF}" = "refs/heads/main" ]; then
-            echo "bucket=${S3_BUCKET_MAIN}" >> $GITHUB_OUTPUT
-          else
             echo "bucket=${S3_BUCKET_DEV}" >> $GITHUB_OUTPUT
-          fi
         env:
-          S3_BUCKET_MAIN: ${{ secrets.S3_BUCKET_MAIN }}
           S3_BUCKET_DEV: ${{ secrets.S3_BUCKET_DEV }}
 
       - name: Sync static assets with long cache
@@ -109,5 +104,5 @@ jobs:
       - name: Invalidate CloudFront
         run: |
           aws cloudfront create-invalidation \
-            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }} \
             --paths "/*"
