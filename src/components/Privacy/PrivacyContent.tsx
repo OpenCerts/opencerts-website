@@ -127,17 +127,6 @@ export const PrivacyContent: React.FunctionComponent = () => (
               encourage you to consult the privacy notices of those sites.
             </p>
           </li>
-          <li>
-            <p>Please contact Info@tech.gov.sg if you:</p>
-            <ol className="list-decimal pl-4">
-              <li>
-                <p>have any enquires or feedback on our data protection policies and procedures; or</p>
-              </li>
-              <li>
-                <p>need more information on or access to data which you have provided to us in the past.</p>
-              </li>
-            </ol>
-          </li>
         </ol>
         <p>This version of the Privacy Policy is dated 26 April 2018.</p>
       </div>
