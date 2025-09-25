@@ -9,15 +9,6 @@ export const faqContent: FagElement[] = [
     category: "General",
     faq: [
       {
-        question: "Who developed OpenCerts?",
-        answer: (
-          <p>
-            <a href="https://www.tech.gov.sg/">GovTech Singapore</a> developed OpenCerts in cooperation with the
-            OpenCerts Consortium.
-          </p>
-        ),
-      },
-      {
         question: "What is OpenCerts?",
         answer: (
           <>
