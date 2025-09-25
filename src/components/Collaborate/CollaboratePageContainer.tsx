@@ -12,7 +12,7 @@ export const CollaboratePage: React.FunctionComponent = () => (
       </p>
       <p>
         Do note that being on this list implies that these companies have demonstrated knowledge of implementing
-        OpenCerts, but does not imply endorsement by GovTech.
+        OpenCerts, but does not imply endorsement.
       </p>
     </Hero>
     <section className="py-8">
