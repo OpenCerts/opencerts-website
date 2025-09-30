@@ -4,6 +4,15 @@
 
 ## Notice
 
+#### 🚧 Scheduled Maintenance Notice 🚧
+
+OpenCerts services will be undergoing scheduled maintenance from **30 September to 1 October**.  
+During this period, the platform may be unavailable or experience interruptions.
+
+We appreciate your patience and understanding as we work to improve our services.
+
+---
+
 As of 31 December 2019, we have migrated from OpenCerts `v1` to `v2`.
 
 As part of the migration, do note that `certificateStore` has been renamed to `documentStore`, please refer to the [`public/static/demo/sepolia.opencert`](https://github.com/OpenCerts/opencerts-website/blob/master/public/static/demo/sepolia.opencert) for the latest implementation or refer to the snippet below for more information about the "issuers" section of the document.
