@@ -1,5 +1,5 @@
 import { v2, WrappedDocument, getData, v3, utils, v4 } from "@govtechsg/open-attestation";
-import { RegistryEntry } from "@govtechsg/opencerts-verify";
+import { RegistryEntry } from "@trustvc/opencerts-verify";
 import { isEmpty, omitBy } from "lodash";
 import ReactGA from "react-ga4";
 import registry from "../../../public/static/registry.json";

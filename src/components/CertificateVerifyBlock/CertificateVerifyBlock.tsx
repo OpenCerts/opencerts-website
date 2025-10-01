@@ -8,7 +8,7 @@ import { getData, v2, WrappedDocument, utils as oaUtils, v3, v4 } from "@govtech
 import {
   getOpencertsRegistryVerifierFragment,
   OpencertsRegistryVerificationValidData,
-} from "@govtechsg/opencerts-verify";
+} from "@trustvc/opencerts-verify";
 import React, { useState } from "react";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { icons } from "../ViewerPageImages";

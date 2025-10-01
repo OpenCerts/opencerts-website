@@ -1,5 +1,5 @@
 import { VerificationFragment } from "@govtechsg/oa-verify";
-import { isValid } from "@govtechsg/opencerts-verify";
+import { isValid } from "@trustvc/opencerts-verify";
 import React, { ReactElement } from "react";
 import { MESSAGES, TYPES } from "../../constants/VerificationErrorMessages";
 import { certificateRevoked } from "../../services/fragment";
