@@ -5,7 +5,7 @@ import { decryptString } from "@govtechsg/oa-encryption";
 import { openAttestationVerifiers, verificationBuilder } from "@govtechsg/oa-verify";
 import type { VerificationFragment, Verifier } from "@govtechsg/oa-verify";
 import { utils, v2, v3 } from "@govtechsg/open-attestation";
-import { isValid, registryVerifier } from "@govtechsg/opencerts-verify";
+import { isValid, registryVerifier } from "@trustvc/opencerts-verify";
 import { Resolver } from "did-resolver";
 import { getResolver } from "ethr-did-resolver";
 import Router from "next/router";
