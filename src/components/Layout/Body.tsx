@@ -10,7 +10,7 @@ export const Wrapper: React.FunctionComponent<WrapperProps> = ({ children, isLoa
   return (
     <>
       {isLoadWogaa ? <Wogaa /> : null}
-      <div
+      {/* <div
         className="bg-yellow-100 border-b border-yellow-300 text-yellow-900 px-4 py-3 text-center text-sm sm:text-base"
         role="alert"
       >
@@ -22,7 +22,7 @@ export const Wrapper: React.FunctionComponent<WrapperProps> = ({ children, isLoa
           <p className="mt-1">During this period, the platform may be unavailable or experience interruptions.</p>
           <p className="mt-1">We appreciate your patience and understanding as we work to improve our services.</p>
         </div>
-      </div>
+      </div> */}
       <div className="flex flex-col h-screen wrapper">{children}</div>
     </>
   );
