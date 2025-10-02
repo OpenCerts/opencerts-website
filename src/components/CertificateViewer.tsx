@@ -83,12 +83,12 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
                         <span>Print</span>
                       </div>
                     </div>
-                    <div className="mr-2 w-auto" onClick={() => props.handleSharingToggle()}>
+                    {/* <div className="mr-2 w-auto" onClick={() => props.handleSharingToggle()}>
                       <div className="icon-utility" id="btn-email">
                         <i className="fas fa-envelope text-md" />
                         <span>Email</span>
                       </div>
-                    </div>
+                    </div> */}
                     <div className="w-auto">
                       <a
                         className="icon-utility"
