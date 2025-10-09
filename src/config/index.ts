@@ -7,8 +7,7 @@ const { publicRuntimeConfig = {} } = getConfig();
 
 export const URL = "https://opencerts.io";
 const API_MAIN_URL = "https://api.opencerts.io";
-const API_ROPSTEN_URL = "https://api-ropsten.opencerts.io";
-const API_RINKEBY_URL = "https://api-rinkeby.opencerts.io";
+const API_DEV_URL = "https://dev-api.opencerts.io";
 
 export const IS_MAINNET = publicRuntimeConfig.network === "mainnet";
 export const SUPPORTED_NETWORK = IS_MAINNET ? ["homestead", "matic"] : ["sepolia", "amoy"];
@@ -26,8 +25,7 @@ export const WOGAA_TRANSACTIONAL_SERVICE = {
 
 const getApiUrl = (networkName: string): string => {
   if (networkName === "homestead") return API_MAIN_URL;
-  else if (networkName === "rinkeby") return API_RINKEBY_URL;
-  return API_ROPSTEN_URL;
+  return API_DEV_URL;
 };
 export const EMAIL_API_URL = `${getApiUrl(NETWORK_NAME)}/email`;
 export const SHARE_LINK_API_URL = `${getApiUrl(NETWORK_NAME)}/storage`;
