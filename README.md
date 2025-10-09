@@ -1,6 +1,7 @@
 # Certificate Web UI
 
-[![Deploy Dev](https://github.com/OpenCerts/opencerts-website/actions/workflows/deploy-dev.yml/badge.svg)](https://github.com/OpenCerts/opencerts-website/actions/workflows/deploy-dev.yml)
+[![CI](https://github.com/OpenCerts/opencerts-website/actions/workflows/ci.yml/badge.svg)](https://github.com/OpenCerts/opencerts-website/actions/workflows/ci.yml)
+[![Deploy Dev](https://github.com/OpenCerts/opencerts-website/actions/workflows/deploy-dev.yml/badge.svg)](https://github.com/OpenCerts/opencerts-website/actions/workflows/deploy-dev.yml) 
 [![Deploy Prod](https://github.com/OpenCerts/opencerts-website/actions/workflows/deploy-prod.yml/badge.svg)](https://github.com/OpenCerts/opencerts-website/actions/workflows/deploy-prod.yml)
 
 ## Notice
@@ -104,4 +105,5 @@ To run integration tests locally, make sure you run `npm run build` once to buil
 ### Deployment
 
 develop branch is deployed to https://dev.opencerts.io -> for development and testing purposes only.
+
 master branch is deployed to https://opencerts.io -> for production use.

@@ -1,9 +1,10 @@
 name: Deploy to Dev Environment
 
 on:
-  push:
-    branches: [develop]
-  pull_request:
+  workflow_run:
+    workflows: ["CI - Lint and Test"]
+    types:
+      - completed
     branches: [develop]
 
 concurrency:
@@ -16,8 +17,9 @@ env:
 
 jobs:
   build-dev:
-    name: Build and Test (Dev)
+    name: Build (Dev)
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,15 +32,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Type check
-        run: npm run type-check --if-present
-
-      - name: Lint
-        run: npm run lint
-
-      - name: Unit tests
-        run: npm test -- --ci
 
       - name: Build static site
         run: |
@@ -62,7 +55,6 @@ jobs:
   deploy-dev:
     name: Deploy to S3 (Dev) 
     needs: build-dev
-    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - name: Download build artifact
