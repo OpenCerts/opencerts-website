@@ -1,10 +1,7 @@
 name: Deploy to Production Environment
 
 on:
-  workflow_run:
-    workflows: ["CI - Lint and Test"]
-    types:
-      - completed
+  push:
     branches: [master]
 
 concurrency:
@@ -16,10 +13,21 @@ env:
   BUILD_DIR: "out"
 
 jobs:
+  wait-for-ci:
+    name: Wait for CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for CI workflow
+        uses: lewagon/wait-on-check-action@v1.3.4
+        with:
+          ref: ${{ github.ref }}
+          check-name: 'Lint & Test'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
   build-prod:
     name: Build (Prod)
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    needs: wait-for-ci
     steps:
       - name: Checkout
         uses: actions/checkout@v4
