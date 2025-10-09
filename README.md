@@ -1,6 +1,7 @@
 # Certificate Web UI
 
-[![CircleCI](https://circleci.com/gh/OpenCerts/opencerts-website.svg?style=svg)](https://circleci.com/gh/OpenCerts/opencerts-website)
+[![Deploy Dev](https://github.com/OpenCerts/opencerts-website/actions/workflows/deploy-dev.yml/badge.svg)](https://github.com/OpenCerts/opencerts-website/actions/workflows/deploy-dev.yml)
+[![Deploy Prod](https://github.com/OpenCerts/opencerts-website/actions/workflows/deploy-prod.yml/badge.svg)](https://github.com/OpenCerts/opencerts-website/actions/workflows/deploy-prod.yml)
 
 ## Notice
 
