@@ -51,7 +51,6 @@ jobs:
           INFURA_API_KEY: ${{ secrets.INFURA_API_KEY }}
           ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
           GA4_TAG_ID: ${{ secrets.GA4_TAG_ID }}
-          WOGAA_ENV: ${{ secrets.WOGAA_ENV }}
           TRUSTED_TLDS: ${{ secrets.TRUSTED_TLDS }}
 
       - name: Upload build artifact

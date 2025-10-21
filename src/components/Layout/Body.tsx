@@ -1,18 +1,11 @@
 import React from "react";
-import { Wogaa } from "../Analytics/wogaa";
 
 interface WrapperProps {
   children: React.ReactNode;
-  isLoadWogaa?: boolean;
 }
 
-export const Wrapper: React.FunctionComponent<WrapperProps> = ({ children, isLoadWogaa = true }) => {
-  return (
-    <>
-      {isLoadWogaa ? <Wogaa /> : null}
-      <div className="flex flex-col h-screen wrapper">{children}</div>
-    </>
-  );
+export const Wrapper: React.FunctionComponent<WrapperProps> = ({ children }) => {
+  return <div className="flex flex-col h-screen wrapper">{children}</div>;
 };
 
 interface MainProps {
