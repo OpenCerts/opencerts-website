@@ -2,7 +2,6 @@ import { ParsedUrlQuery } from "querystring";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Wogaa } from "../src/components/Analytics/wogaa";
 import { Wrapper, Main } from "../src/components/Layout/Body";
 import { FooterBar } from "../src/components/Layout/FooterBar";
 import { NavigationBar } from "../src/components/Layout/NavigationBar";
@@ -38,8 +37,7 @@ const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
   }, [props, urlParams]);
 
   return (
-    <Wrapper isLoadWogaa={false}>
-      {urlParams ? <Wogaa /> : null}
+    <Wrapper>
       <NavigationBar />
       <Main>
         <MainPageContainer />
