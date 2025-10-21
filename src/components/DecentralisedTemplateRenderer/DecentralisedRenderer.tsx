@@ -18,7 +18,6 @@ import {
   triggerV3RendererTimeoutLogging,
   triggerV4RendererTimeoutLogging,
 } from "../Analytics";
-import { startTransactionalService, completeTransactionalService } from "../Analytics/wogaa";
 import { MutiTabsContainer } from "../MultiTabs";
 
 interface DecentralisedRendererProps {
@@ -164,11 +163,6 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
 
     // CERTIFICATE_DETAILS event
     sendEventCertificateDetails("CERTIFICATE_DETAILS", rawDocument);
-
-    // Wogaa Transaction Service: Successful Verification on OpenCerts
-    // TODO: Separate transaction service according to document version? (e.g. 2.0, 3.0, 4.0)
-    startTransactionalService("opencertsio-5538");
-    completeTransactionalService("opencertsio-5538");
   }, [rawDocument]);
 
   const visibleTemplates = templates.filter((template) => template.id !== "print");

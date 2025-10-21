@@ -16,13 +16,6 @@ export const NETWORK_NAME = SUPPORTED_NETWORK[0]; // expected by ethers
 export const GA4_TAG_ID = process.env.GA4_TAG_ID;
 export const CAPTCHA_CLIENT_KEY = "6LfVb9UrAAAAAGH_L1N5U6plJ0uhgB_KnDUFaooh";
 
-/**
- * Tracking ID(s) for Wogaa Transactional Service
- */
-export const WOGAA_TRANSACTIONAL_SERVICE = {
-  successfulVerification: "opencertsio-5538",
-} as const;
-
 const getApiUrl = (networkName: string): string => {
   if (networkName === "homestead") return API_MAIN_URL;
   return API_DEV_URL;
