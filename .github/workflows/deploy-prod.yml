@@ -1,8 +1,7 @@
 name: Deploy to Production Environment
 
 on:
-  push:
-    branches: [master]
+  workflow_dispatch:
 
 concurrency:
   group: deploy-prod-${{ github.ref }}
