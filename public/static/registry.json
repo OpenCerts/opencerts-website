@@ -1,7 +1,7 @@
 {
   "issuers": {
     "0x007d40224f6562461633ccfbaffd359ebb2fc9ba": {
-      "name": "Government Technology Agency of Singapore (GovTech)",
+      "name": "ROPSTEN: OpenCerts",
       "displayCard": true,
       "website": "https://www.tech.gov.sg",
       "email": "info@tech.gov.sg",
@@ -64,7 +64,7 @@
       "phone": "+65 6592 1136",
       "logo": "/static/images/SIT_logo.png",
       "id": "sit-registry"
-    },    
+    },
     "0x78CE67fcb40D9D9552A313670A2e0eef11043995": {
       "name": "SkillsFuture Singapore",
       "displayCard": true,
@@ -356,11 +356,11 @@
       "displayCard": false
     },
     "0xdcA6Eea7024151c270b50FcA9E67161119B06BAD": {
-      "name": "ROPSTEN: Government Technology Agency of Singapore (GovTech)",
+      "name": "ROPSTEN: OpenCerts",
       "displayCard": false
     },
     "0x532C9Ff853CA54370D7492cD84040F9f8099f11B": {
-      "name": "ROPSTEN: Government Technology Agency of Singapore (GovTech)",
+      "name": "ROPSTEN: OpenCerts",
       "displayCard": false
     },
     "0x5AA6bF8F748cD2D8f1949eD328B2bEa61CE2B6d7": {
@@ -400,27 +400,27 @@
       "displayCard": false
     },
     "0x7Ee2B9a0043Bda975398477695ba5c2361acC50C": {
-      "name": "RINKEBY: Government Technology Agency of Singapore (GovTech)",
+      "name": "RINKEBY: OpenCerts",
       "displayCard": false
     },
     "0xb3db78c0cc3622e078622C8395095a7B95415Acf": {
-      "name": "GOERLI: Government Technology Agency of Singapore (GovTech)",
+      "name": "GOERLI: OpenCerts",
       "displayCard": false
     },
     "0x49b2969bF0E4aa822023a9eA2293b24E4518C1DD": {
-      "name": "GOERLI: Government Technology Agency of Singapore (GovTech)",
+      "name": "GOERLI: OpenCerts",
       "displayCard": false
     },
     "0x80732bF5CA47A85e599f3ac9572F602c249C8A28": {
-      "name": "AMOY: Government Technology Agency of Singapore (GovTech)",
+      "name": "AMOY: OpenCerts",
       "displayCard": false
     },
     "0x71D28767662cB233F887aD2Bb65d048d760bA694": {
-      "name": "SEPOLIA: Government Technology Agency of Singapore (GovTech)",
+      "name": "SEPOLIA: OpenCerts",
       "displayCard": false
     },
     "0x80ca96D2Aab5E1E23876a4D8140Ee1292327a4cd": {
-      "name": "SEPOLIA: Government Technology Agency of Singapore (GovTech)",
+      "name": "SEPOLIA: OpenCerts",
       "displayCard": false
     }
   }

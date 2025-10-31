@@ -22,7 +22,7 @@ test("Load document from action should work when url is valid (OA v2.0)", async 
   };
 
   await t.navigateTo(`http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}`);
-  await validateTextContent(t, StatusButton, ["SEPOLIA: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
+  await validateTextContent(t, StatusButton, ["SEPOLIA: OpenCerts"]);
 
   await t.switchToIframe(IframeBlock);
 
