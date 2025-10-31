@@ -5,7 +5,7 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
   <section className="mb-20 text-sm text-gray-800 links-blue">
     <div className="container">
       <div className="xl:px-48">
-        <h1 className="font-poppins py-12 text-center">Terms of Use</h1>
+        <h1 className="font-poppins py-12 text-center">Terms of Use — OpenCerts</h1>
         <ol className="list-decimal pl-4">
           <li>
             <b>General</b>
@@ -18,25 +18,24 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
                 </p>
               </li>
               <li>
-                <p>This Service is provided to you by the Infocomm Media Development Authority (IMDA).</p>
+                <p>
+                  The Service is provided to you by the Infocomm Media Development Authority of Singapore
+                  (&#34;IMDA&#34;). IMDA's office is located at 10 Pasir Panjang Road #03-01, Mapletree Business City,
+                  Singapore 117438.
+                </p>
               </li>
               <li>
                 <p>
                   By accessing or using any part of this Service, you unconditionally agree and accept to be legally
                   bound by these Terms of Use and any amendments thereto from time to time. IMDA reserves the right to
-                  change these Terms of Use at its sole discretion and at any time.{" "}
-                  <b>
-                    You should read the Terms of Use carefully each time you access or use any part of this Service as
-                    such access or use will constitute your agreement to the Terms of Use and any amendments to it.
-                  </b>
+                  change these Terms of Use at its sole discretion and at any time. You should read the Terms of Use
+                  carefully each time you access or use any part of this Service as such access or use will constitute
+                  your agreement to the Terms of Use and any amendments to it.
                 </p>
               </li>
               <li>
                 <p>
-                  <b>
-                    If you do not agree to these Terms of Use, please do not use this Service or any part of this
-                    Service.
-                  </b>
+                  If you do not agree to these Terms of Use, please do not use this Service or any part of this Service.
                 </p>
               </li>
             </ol>
@@ -45,7 +44,6 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
             <p>
               <b>Nature of this Service</b>
             </p>
-
             <ol className="list-decimal pl-4">
               <li>
                 <p>Please see the Schedule for more information and terms concerning this Service.</p>
@@ -99,7 +97,7 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
               <li>
                 <p>
                   You will not interfere or attempt to interfere with the proper working of the Service or otherwise do
-                  anything that imposes an unreasonable or disproportionately large load on IMDA’s servers.
+                  anything that imposes an unreasonable or disproportionately large load on IMDA's servers.
                 </p>
               </li>
             </ol>
@@ -112,20 +110,19 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
               <li>
                 <p>
                   The Service may require, enable or facilitate access to or use of software or services of a third
-                  party (<b>Third Party</b>
-                  ). In such an event, there may be terms of use of the third party software or service (the{" "}
-                  <b>Third Party Terms</b>). IMDA may be required under or as a result of the Third Party Terms to
-                  notify you of certain terms that apply to you (either directly as an end user, or as a party whose
-                  acts or omissions could cause IMDA to breach the Third Party Terms) when you use the Services. An
-                  example of Third Party Terms may be open source software terms or standard form terms of the
-                  distribution platform from which you obtain any part of the Service (e.g. Google Play Store or Apple
-                  App Store terms) which bind IMDA as a developer or user of the distribution platform (the{" "}
+                  party (the <b>Third Party</b>). In such an event, there may be terms of use of the third party
+                  software or service (the <b>Third Party Terms</b>). IMDA may be required under or as a result of the
+                  Third Party Terms to notify you of certain terms that apply to you (either directly as an end user, or
+                  as a party whose acts or omissions could cause IMDA to breach the Third Party Terms) when you use the
+                  Services. An example of Third Party Terms may be open source software terms or standard form terms of
+                  the distribution platform from which you obtain any part of the Service (e.g. Google Play Store or
+                  Apple App Store terms) which bind IMDA as a developer or user of the distribution platform (the{" "}
                   <b>Distribution Terms</b>). Information on the Third Party Terms are embedded in the Service, already
-                  accounted for in these Terms of Use, publicly available (e.g the Distribution Terms) or otherwise
+                  accounted for in these Terms of Use, publicly available (e.g. the Distribution Terms) or otherwise
                   listed in the Schedule herein. For the avoidance of doubt, insofar as this Clause 4 relates to the
                   Distribution Terms, the relevant Distribution Terms are the terms of the specific platform from which
                   you obtained a copy of the software or application that is part of the Service. For example, if you
-                  obtained the said copy from the Google Play Store, then the relevant terms are Google’s Distribution
+                  obtained the said copy from the Google Play Store, then the relevant terms are Google's Distribution
                   Terms.
                 </p>
               </li>
@@ -245,10 +242,10 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
                 </p>
                 <ol className="list-decimal pl-4">
                   <li>
-                    <p>your access to or use of this Service, or any part thereof;</p>
+                    <p>your access to or use of the Service, or any part thereof;</p>
                   </li>
                   <li>
-                    <p>any loss of access to our use of this Service or any part of this Service, howsoever caused;</p>
+                    <p>any loss of access to our use of the Service or any part of the Service, howsoever caused;</p>
                   </li>
                   <li>
                     <p>
@@ -427,14 +424,16 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
                       be confidential.
                     </p>
                   </li>
+                  <li>
+                    <p>
+                      Where IMDA is the defendant or respondent, it shall be given at least 30 days before the
+                      commencement of any legal action against it to elect to exercise the right herein to have the
+                      dispute submitted to arbitration. This right to elect shall not prejudice IMDA's right to a
+                      limitation defence and the period to exercise the right shall not be abridged by reason of any
+                      accrual of a limitation defence in favour of IMDA during the said period.
+                    </p>
+                  </li>
                 </ol>
-                <p>
-                  Where IMDA is the defendant or respondent, it shall be given at least 30 days before the commencement
-                  of any legal action against it to elect to exercise the right herein to have the dispute submitted to
-                  arbitration. This right to elect shall not prejudice IMDA’s right to a limitation defence and the
-                  period to exercise the right shall not be abridged by reason of any accrual of a limitation defence in
-                  favour of IMDA during the said period.
-                </p>
               </li>
             </ol>
           </li>
