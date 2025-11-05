@@ -1,0 +1,14 @@
+{
+  "selectorTimeout": 300000,
+  "assertionTimeout": 30000,
+  "pageLoadTimeout": 30000,
+  "speed": 0.1,
+  "browsers": ["chrome:headless --disable-web-security --no-sandbox --disable-dev-shm-usage"],
+  "concurrency": 1,
+  "src": ["src/**/*.spec.js"],
+  "compilerOptions": {
+    "typescript": {
+      "configPath": "./tsconfig.json"
+    }
+  }
+}
