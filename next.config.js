@@ -11,7 +11,6 @@ const nextConfig = {
       "/": { page: "/" },
       "/privacy": { page: "/privacy" },
       "/terms": { page: "/terms" },
-      "/collaborators-terms": { page: "/collaborators-terms" },
       "/viewer": { page: "/viewer" },
       "/faq": { page: "/faq" },
     };

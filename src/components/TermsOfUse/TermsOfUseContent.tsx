@@ -508,9 +508,9 @@ export const TermsOfUseContent: React.FunctionComponent = () => (
                   agree to the terms at any time, IMDA shall have the discretion to remove you as a collaborator without
                   liability to you whatsoever. IMDA is not obliged to provide any reasons for any rejection of your
                   application to be a collaborator. The Collaborator Terms and Conditions are found{" "}
-                  <Link legacyBehavior href="/collaborators-terms">
+                  {/* <Link legacyBehavior href="/collaborators-terms">
                     <a>here</a>
-                  </Link>
+                  </Link> */}
                   .
                 </p>
               </li>
