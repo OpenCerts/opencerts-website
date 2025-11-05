@@ -22,7 +22,6 @@ const nextConfig = {
     ALCHEMY_API_KEY: process.env.ALCHEMY_API_KEY, // The default/free key should not be used in production as they are rate-limited by the service provider
     TRUSTED_TLDS: process.env.TRUSTED_TLDS || "gov.sg,edu.sg",
     GA4_TAG_ID: process.env.GA4_TAG_ID || "G-JP12T2F01V",
-    WOGAA_ENV: process.env.WOGAA_ENV || "production",
   },
   // Variables passed to both server and client
   publicRuntimeConfig: {

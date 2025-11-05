@@ -7,7 +7,7 @@ import { SchemaId, v2, v3, WrappedDocument } from "@govtechsg/open-attestation";
 import {
   OpencertsRegistryVerifierInvalidFragmentV2,
   OpencertsRegistryVerifierValidFragmentV2,
-} from "@govtechsg/opencerts-verify";
+} from "@trustvc/opencerts-verify";
 import { getV2IdentityVerificationText, getV3IdentityVerificationText } from "./CertificateVerifyBlock";
 
 const buildDocumentWithIssuers = (issuers: v2.Issuer[]): WrappedDocument<v2.OpenAttestationDocument> => {

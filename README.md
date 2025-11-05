@@ -1,15 +1,12 @@
 # Certificate Web UI
 
-[![CircleCI](https://circleci.com/gh/OpenCerts/opencerts-website.svg?style=svg)](https://circleci.com/gh/OpenCerts/opencerts-website)
+[![CI](https://github.com/OpenCerts/opencerts-website/actions/workflows/ci.yml/badge.svg)](https://github.com/OpenCerts/opencerts-website/actions/workflows/ci.yml)
+[![Deploy Dev](https://github.com/OpenCerts/opencerts-website/actions/workflows/deploy-dev.yml/badge.svg)](https://github.com/OpenCerts/opencerts-website/actions/workflows/deploy-dev.yml) 
+[![Deploy Prod](https://github.com/OpenCerts/opencerts-website/actions/workflows/deploy-prod.yml/badge.svg)](https://github.com/OpenCerts/opencerts-website/actions/workflows/deploy-prod.yml)
 
 ## Notice
 
-#### 🚧 Scheduled Maintenance Notice 🚧
-
-OpenCerts services will be undergoing scheduled maintenance from **30 September to 1 October**.  
-During this period, the platform may be unavailable or experience interruptions.
-
-We appreciate your patience and understanding as we work to improve our services.
+From 1 Oct 2025, the Infocomm Media Development Authority (IMDA) will take over the maintenance of OpenCerts. For enquiries, reach out to https://trustvc.io
 
 ---
 
@@ -104,3 +101,9 @@ Try running `npm rebuild`
 ### Integration tests
 
 To run integration tests locally, make sure you run `npm run build` once to build the static site first. The e2e tests will then spin up a server based on the `out` folder in project root.
+
+### Deployment
+
+develop branch is deployed to https://dev.opencerts.io -> for development and testing purposes only.
+
+master branch is deployed to https://opencerts.io -> for production use.
