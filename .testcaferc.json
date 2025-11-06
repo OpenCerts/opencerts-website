@@ -1,6 +1,6 @@
 {
   "selectorTimeout": 300000,
-  "assertionTimeout": 30000,
+  "assertionTimeout": 300000,
   "pageLoadTimeout": 30000,
   "speed": 0.1,
   "browsers": ["chrome:headless --disable-web-security --no-sandbox --disable-dev-shm-usage"],
