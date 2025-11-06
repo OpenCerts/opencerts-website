@@ -4,10 +4,7 @@
     "https://schemata.openattestation.com/com/openattestation/4.0/context.json"
   ],
   "name": "Govtech Demo Certificate V4",
-  "type": [
-    "VerifiableCredential",
-    "OpenAttestationCredential"
-  ],
+  "type": ["VerifiableCredential", "OpenAttestationCredential"],
   "issuer": {
     "id": "did:ethr:0x1245e5b64d785b25057f7438f715f4aa5d965733",
     "type": "OpenAttestationIssuer",

@@ -3,11 +3,11 @@ import { useRouter } from "next/router";
 import React from "react";
 
 const navItems: { id: string; label: string; path: string }[] = [
-  {
-    id: "collaborate",
-    label: "Collaborate",
-    path: "/collaborate",
-  },
+  // {
+  //   id: "collaborate",
+  //   label: "Collaborate",
+  //   path: "/collaborate",
+  // },
   {
     id: "faq",
     label: "FAQ",

@@ -95,6 +95,8 @@ const getUrls = (options: {
         return [
           { url: `https://polygon-amoy.infura.io/v3/${process.env.INFURA_API_KEY}` },
           { url: `https://polygon-amoy.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
+          { url: `https://rpc-amoy.polygon.technology/` },
+          { url: `https://polygon-amoy-bor-rpc.publicnode.com/` },
         ];
       default:
         console.error(`Unrecognised network: ${network}`);

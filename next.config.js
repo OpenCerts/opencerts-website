@@ -9,10 +9,8 @@ const nextConfig = {
   exportPathMap: function exportMap() {
     return {
       "/": { page: "/" },
-      "/collaborate": { page: "/collaborate" },
       "/privacy": { page: "/privacy" },
       "/terms": { page: "/terms" },
-      "/collaborators-terms": { page: "/collaborators-terms" },
       "/viewer": { page: "/viewer" },
       "/faq": { page: "/faq" },
     };

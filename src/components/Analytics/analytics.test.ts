@@ -152,7 +152,7 @@ describe("analytics*", () => {
           document_store: `"0x007d40224f6562461633ccfbaffd359ebb2fc9ba"`,
           issued_on: "a date",
           registry_id: "govtech-registry",
-          issuer_name: "Government Technology Agency of Singapore (GovTech)",
+          issuer_name: "ROPSTEN: OpenCerts",
           nonInteraction: true,
           value: undefined,
         });
@@ -196,7 +196,7 @@ describe("analytics*", () => {
           document_store: `"0x007d40224f6562461633ccfbaffd359ebb2fc9ba"`,
           issued_on: "a date",
           registry_id: "govtech-registry",
-          issuer_name: "Government Technology Agency of Singapore (GovTech)",
+          issuer_name: "ROPSTEN: OpenCerts",
           nonInteraction: true,
           value: undefined,
         });
