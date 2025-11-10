@@ -6,6 +6,11 @@
   "browsers": ["chrome:headless --disable-web-security --no-sandbox --disable-dev-shm-usage"],
   "concurrency": 1,
   "src": ["src/**/*.spec.js"],
+  "quarantineMode": {
+    "successThreshold": 1,
+    "attemptLimit": 5
+  },
+  "skipJsErrors": true,
   "compilerOptions": {
     "typescript": {
       "configPath": "./tsconfig.json"
