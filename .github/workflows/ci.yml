@@ -37,3 +37,6 @@ jobs:
 
       - name: Unit tests
         run: npm test -- --ci
+
+      - name: Build and run integration
+        run: ./scripts/integration-headless.sh

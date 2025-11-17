@@ -5,7 +5,7 @@ import { RegistryCard } from "./RegistryCard";
 describe("registryCard", () => {
   it("should render with first contact info as main institute + number of contact infos correctly", () => {
     const logoSrc = "/static/images/GOVTECH_logo.png";
-    const name = "Government Technology Agency of Singapore (GovTech)";
+    const name = "ROPSTEN: OpenCerts";
     const contact = [
       {
         id: "govtech-registry",
@@ -49,7 +49,7 @@ describe("registryCard", () => {
 
   it("should render search results correctly", () => {
     const logoSrc = "/static/images/GOVTECH_logo.png";
-    const name = "Government Technology Agency of Singapore (GovTech)";
+    const name = "ROPSTEN: OpenCerts";
     const contact = [
       {
         id: "govtech-registry",
