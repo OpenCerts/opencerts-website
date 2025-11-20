@@ -8,16 +8,6 @@ export const FooterBar: React.FunctionComponent = () => (
     <div className="container pt-8 pb-12">
       <div className="flex flex-wrap justify-center">
         <div className="w-full lg:w-40 mb-8 lg:mb-0">
-          <p className="font-poppins font-bold mb-2">Partners</p>
-          <ul className="text-sm">
-            <li>
-              <Link legacyBehavior href="/collaborate">
-                <a>Collaborate</a>
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div className="w-full lg:w-40 mb-8 lg:mb-0">
           <p className="font-poppins font-bold mb-2">Support</p>
           <ul className="text-sm">
             <li>
@@ -33,11 +23,6 @@ export const FooterBar: React.FunctionComponent = () => (
             <li>
               <a href="https://docs.opencerts.io/docs/" target="_blank" rel="noopener noreferrer">
                 Documentation
-              </a>
-            </li>
-            <li>
-              <a href="https://docs.opencerts.io/blog/" target="_blank" rel="noopener noreferrer">
-                Blog
               </a>
             </li>
           </ul>

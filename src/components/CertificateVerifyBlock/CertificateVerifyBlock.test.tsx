@@ -280,7 +280,7 @@ describe("certificate verify block getV2IdentityVerificationText", () => {
             {
               status: "VALID",
               value: "0xdcA6Eea7024151c270b50FcA9E67161119B06BAD",
-              name: "ROPSTEN: Government Technology Agency of Singapore (GovTech)",
+              name: "ROPSTEN: OpenCerts",
               displayCard: false,
             },
           ],
@@ -291,7 +291,7 @@ describe("certificate verify block getV2IdentityVerificationText", () => {
         .toMatchInlineSnapshot(`
         <ol>
           <li>
-            ROPSTEN: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)
+            ROPSTEN: OPENCERTS
           </li>
         </ol>
       `);

@@ -117,12 +117,5 @@
     "value": "/static/images/SSG_logo.png",
     "link": "https://www.ssg-wsg.gov.sg/",
     "portrait": false
-  },
-  {
-    "key": "govtech",
-    "name": "Government Technology Agency",
-    "value": "/static/images/GOVTECH_logo.png",
-    "link": "https://www.tech.gov.sg/",
-    "portrait": false
   }
 ]

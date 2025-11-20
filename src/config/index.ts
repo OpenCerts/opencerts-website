@@ -7,7 +7,7 @@ const { publicRuntimeConfig = {} } = getConfig();
 
 export const URL = "https://opencerts.io";
 const API_MAIN_URL = "https://api.opencerts.io";
-const API_DEV_URL = "https://dev-api.opencerts.io";
+const API_DEV_URL = "https://api.dev.opencerts.io";
 
 export const IS_MAINNET = publicRuntimeConfig.network === "mainnet";
 export const SUPPORTED_NETWORK = IS_MAINNET ? ["homestead", "matic"] : ["sepolia", "amoy"];
