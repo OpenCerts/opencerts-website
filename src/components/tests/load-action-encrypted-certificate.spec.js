@@ -28,7 +28,7 @@ test("Load OA v2.0 document from action should work when action is valid (key fr
   await t.navigateTo(
     `http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}#${encodeURI(JSON.stringify(anchor))}`
   );
-  await validateTextContent(t, StatusButton, ["SEPOLIA: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
+  await validateTextContent(t, StatusButton, ["SEPOLIA: OPENCERTS"]);
 
   await t.switchToIframe(IframeBlock);
 
@@ -79,7 +79,7 @@ test("Load document from action should work when action is valid (key from query
   };
 
   await t.navigateTo(`http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}`);
-  await validateTextContent(t, StatusButton, ["SEPOLIA: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
+  await validateTextContent(t, StatusButton, ["SEPOLIA: OPENCERTS"]);
 
   await t.switchToIframe(IframeBlock);
 
