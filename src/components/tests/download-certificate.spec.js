@@ -72,10 +72,7 @@ test("Sample document with special characters is downloaded correctly", async (t
   await enableDownloadForHeadlessChrome(t);
   await t.setFilesToUpload("input[type=file]", [Document2]);
 
-  await validateTextContent(t, StatusButton, [
-    "DEMO-OPENCERTS.OPENATTESTATION.COM",
-    "SEPOLIA: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)",
-  ]);
+  await validateTextContent(t, StatusButton, ["DEMO-OPENCERTS.OPENATTESTATION.COM", "SEPOLIA: OPENCERTS"]);
 
   // Simulate an OpenCert file download
   const fileName = await DownloadLink.getAttribute("download");
