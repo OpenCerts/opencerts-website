@@ -14,7 +14,7 @@ const StatusButton = Selector("#certificate-status");
 test("Sample document is rendered correctly when dns and registry is verified", async (t) => {
   await t.setFilesToUpload("input[type=file]", [Document]);
 
-  await validateTextContent(t, StatusButton, ["SEPOLIA: GOVERNMENT TECHNOLOGY AGENCY OF SINGAPORE (GOVTECH)"]);
+  await validateTextContent(t, StatusButton, ["SEPOLIA: OPENCERTS"]);
 
   await t.switchToIframe(IframeBlock);
 
