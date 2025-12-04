@@ -3,7 +3,6 @@ name: CI - Lint and Test
 on:
   push:
     branches: [develop, master]
-  pull_request:
 
 concurrency:
   group: ci-${{ github.ref }}
