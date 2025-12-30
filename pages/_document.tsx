@@ -20,6 +20,16 @@ export default function Document() {
           crossOrigin="anonymous"
         />
         <link rel="stylesheet" href="/static/style.css" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Redirect from opencerts.io to www.opencerts.io while preserving hash
+              if (window.location.hostname === 'opencerts.io') {
+                window.location.replace('https://www.opencerts.io' + window.location.pathname + window.location.search + window.location.hash);
+              }
+            `,
+          }}
+        />
       </Head>
       <body>
         <Main />
