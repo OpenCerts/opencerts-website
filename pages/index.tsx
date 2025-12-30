@@ -76,14 +76,6 @@ const useUrlParamsThenScrubUrl = ({ enabled }: UseUrlParamsThenScrubUrlParam): U
 
   useEffect(() => {
     if (enabled) {
-      // Fix for non-www redirect losing hash fragment
-      // If we're on opencerts.io (without www), redirect to www.opencerts.io with hash preserved
-      if (typeof window !== "undefined" && window.location.hostname === "opencerts.io") {
-        const newUrl = `https://www.opencerts.io${window.location.pathname}${window.location.search}${window.location.hash}`;
-        window.location.replace(newUrl);
-        return;
-      }
-
       setUrlParams((currUrlParams) => {
         // once the fragment is set, we never update it again
         if (currUrlParams !== undefined) {
