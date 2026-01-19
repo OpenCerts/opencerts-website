@@ -64,7 +64,7 @@ const getUrls = (options: {
       case "homestead":
         return [
           { url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}` },
-          { url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}` },
+          { url: `https://eth-mainnet.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
           { url: `https://cloudflare-eth.com/` },
           { url: `https://ethereum-rpc.publicnode.com/` },
         ];
