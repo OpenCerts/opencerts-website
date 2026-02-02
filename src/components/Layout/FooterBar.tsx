@@ -40,6 +40,11 @@ export const FooterBar: React.FunctionComponent = () => (
                 <a>Terms of Use</a>
               </Link>
             </li>
+            <li>
+              <Link legacyBehavior href="/collaborator">
+                <a className="sm:whitespace-nowrap">Collaborators Terms and Condition</a>
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

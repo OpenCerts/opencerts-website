@@ -13,6 +13,7 @@ const nextConfig = {
       "/terms": { page: "/terms" },
       "/viewer": { page: "/viewer" },
       "/faq": { page: "/faq" },
+      "/collaborator": { page: "/collaborator" },
     };
   },
   env: {

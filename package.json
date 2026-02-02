@@ -13,7 +13,7 @@
     "lint": "npm run eslint && npm run lint:opencert",
     "lint:fix": "npm run eslint:fix && npm run lint:opencert:fix",
     "eslint": "eslint . --ext .js,.tsx,.ts --max-warnings 0",
-    "eslint:fix": "npm run lint -- --fix",
+    "eslint:fix": "eslint . --ext .js,.tsx,.ts --max-warnings 0 --fix",
     "lint:opencert": "prettier --check \"{src,public}/**/*.opencert\"",
     "lint:opencert:fix": "prettier --write \"{src,public}/**/*.opencert\"",
     "build": "next build",
