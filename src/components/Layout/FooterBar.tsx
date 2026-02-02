@@ -42,7 +42,7 @@ export const FooterBar: React.FunctionComponent = () => (
             </li>
             <li>
               <Link legacyBehavior href="/collaborator">
-                <a className="sm:whitespace-nowrap">Collaborators Terms and Condition</a>
+                <a className="sm:whitespace-nowrap">Collaborator Terms and Conditions</a>
               </Link>
             </li>
           </ul>
