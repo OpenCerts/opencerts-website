@@ -1,5 +1,4 @@
-import { VerificationFragment } from "@govtechsg/oa-verify";
-import { v2, WrappedDocument } from "@govtechsg/open-attestation";
+import { v2, VerificationFragment, WrappedDocument } from "@trustvc/trustvc";
 import copy from "clipboard-copy";
 import Router from "next/router";
 import React, { Component, ReactNode } from "react";

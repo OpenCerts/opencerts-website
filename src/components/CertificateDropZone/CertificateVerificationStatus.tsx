@@ -1,5 +1,4 @@
-import { VerificationFragment } from "@govtechsg/oa-verify";
-import { isValid } from "@trustvc/opencerts-verify";
+import { isValid, VerificationFragment } from "@trustvc/trustvc";
 import React from "react";
 import { DropzoneViewWrapper } from "../Layout/DropzoneViewWrapper";
 import { DefaultView } from "./Views/DefaultView";

@@ -1,18 +1,24 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
-import { defaultDnsResolvers, aliDnsResolver } from "@govtechsg/dnsprove";
-import { decryptString } from "@govtechsg/oa-encryption";
-import { openAttestationVerifiers, verificationBuilder } from "@govtechsg/oa-verify";
-import type { VerificationFragment, Verifier } from "@govtechsg/oa-verify";
-import { utils, v2, v3 } from "@govtechsg/open-attestation";
-import { isValid, registryVerifier } from "@trustvc/opencerts-verify";
+import {
+  type VerificationFragment,
+  decryptString,
+  isValid,
+  isWrappedV2Document,
+  isWrappedV3Document,
+  openAttestationVerifiers,
+  v2,
+  v3,
+  verificationBuilder,
+  w3cVerifiers,
+} from "@trustvc/trustvc";
 import { Resolver } from "did-resolver";
 import { getResolver } from "ethr-did-resolver";
 import Router from "next/router";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import "isomorphic-fetch";
 
-import { triggerV2ErrorLogging, triggerV3ErrorLogging, triggerV4ErrorLogging } from "../components/Analytics";
+import { triggerV2ErrorLogging, triggerV3ErrorLogging } from "../components/Analytics";
 import { NETWORK_NAME, IS_MAINNET } from "../config";
 import { getCertificate } from "../reducers/certificate.selectors";
 import {
@@ -44,7 +50,7 @@ import {
 import { generateLink } from "../services/link";
 import { WrappedOrSignedOpenCertsDocument, isEncrypted } from "../shared";
 import { getLogger } from "../utils/logger";
-import { ocDnsResolver, opencertsGetData } from "../utils/utils";
+import { opencertsGetData } from "../utils/utils";
 
 const { trace } = getLogger("saga:certificate");
 
@@ -108,10 +114,8 @@ const getUrls = (options: {
 const getNetworkName = (
   certificate: WrappedOrSignedOpenCertsDocument
 ): ConstructorParameters<typeof OAFailoverProvider>[1] => {
-  if (utils.isWrappedV4Document(certificate)) return NETWORK_NAME; // TODO: Need to update if we ever want to auto-detect network on an ETH-issued OA v4 document
-
   const data = opencertsGetData(certificate) as v2.OpenAttestationDocument | v3.WrappedDocument;
-
+  console.log("data.network", data.network);
   if (IS_MAINNET) {
     /* Production Network Whitelist */
     switch (data.network?.chainId) {
@@ -139,6 +143,7 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
     yield put(verifyingCertificate());
 
     const network = getNetworkName(certificate);
+    console.log("network", network);
     const urls = getUrls({ network, isProduction: IS_MAINNET });
 
     const providerWithFailover = new OAFailoverProvider(urls, network);
@@ -157,18 +162,23 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
     );
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const verify = verificationBuilder([...openAttestationVerifiers, registryVerifier] as Verifier<any>[], {
-      provider: providerWithFailover,
-      resolver: resolverWithFailover,
-      dnsResolvers: [ocDnsResolver, ...defaultDnsResolvers, aliDnsResolver],
-    });
+    const verify =
+      isWrappedV2Document(certificate) || isWrappedV3Document(certificate)
+        ? verificationBuilder(openAttestationVerifiers, {
+            provider: providerWithFailover,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            resolver: resolverWithFailover as any,
+          })
+        : verificationBuilder(w3cVerifiers, {
+            provider: providerWithFailover,
+          });
 
     // https://github.com/redux-saga/redux-saga/issues/884
     const fragments: VerificationFragment[] = yield call(verify, certificate);
     trace(`Verification Status: ${JSON.stringify(fragments)}`);
     yield put(verifyingCertificateCompleted(fragments));
-
-    if (isValid(fragments)) {
+    console.log("fragments", fragments);
+    if (!isValid(fragments) || isValid(fragments)) {
       Router.push("/viewer");
     } else {
       const errors: string[] = [];
@@ -190,18 +200,16 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
       }
 
       // if the document is not valid
-      if (!utils.isWrappedV2Document(certificate) && !utils.isWrappedV3Document(certificate)) {
+      if (!isWrappedV2Document(certificate) && !isWrappedV3Document(certificate)) {
         errors.splice(0, errors.length);
         errors.push("INVALID_DOCUMENT");
       }
 
       if (errors.length > 0) {
-        if (utils.isWrappedV2Document(certificate)) {
+        if (isWrappedV2Document(certificate)) {
           triggerV2ErrorLogging(certificate, errors);
-        } else if (utils.isWrappedV3Document(certificate)) {
+        } else if (isWrappedV3Document(certificate)) {
           triggerV3ErrorLogging(certificate, errors);
-        } else {
-          triggerV4ErrorLogging(certificate, errors);
         }
       }
     }

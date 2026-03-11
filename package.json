@@ -2,7 +2,7 @@
   "name": "opencerts-website",
   "version": "2.0.0",
   "engines": {
-    "node": "18",
+    "node": "22",
     "npm": "10"
   },
   "scripts": {
@@ -33,11 +33,8 @@
     "type-check": "npx tsc --noEmit"
   },
   "dependencies": {
-    "@govtechsg/decentralized-renderer-react-components": "^3.17.0-beta.2",
-    "@govtechsg/oa-encryption": "^1.3.5",
-    "@govtechsg/oa-verify": "^9.3.0-beta.4",
-    "@govtechsg/open-attestation": "^6.10.0-beta.6",
-    "@trustvc/opencerts-verify": "^3.1.4",
+    "@trustvc/decentralized-renderer-react-components": "^1.0.3",
+    "@trustvc/trustvc": "^2.11.1",
     "@next/bundle-analyzer": "^14.2.5",
     "@reduxjs/toolkit": "^2.2.7",
     "@types/google.analytics": "0.0.41",

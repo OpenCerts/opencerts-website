@@ -4,9 +4,9 @@ import { sendCertificateFailure, sendCertificateSuccess } from "../reducers/cert
 import { sendCertificateSaga } from "./certificate";
 import { MakeCertUtil } from "./testutils";
 
-jest.mock("@govtechsg/open-attestation", () => {
+jest.mock("@trustvc/trustvc", () => {
   // Require the original module to not be mocked...
-  const originalModule = jest.requireActual("@govtechsg/open-attestation");
+  const originalModule = jest.requireActual("@trustvc/trustvc");
 
   return {
     __esModule: true,

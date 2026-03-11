@@ -1,4 +1,5 @@
 {
+  "plugins": ["@babel/plugin-transform-class-static-block"],
   "env": {
     "development": {
       "presets": ["next/babel"]

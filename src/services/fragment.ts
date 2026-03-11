@@ -1,9 +1,8 @@
 import {
   OpenAttestationEthereumDocumentStoreStatusCode,
   OpenAttestationEthereumTokenRegistryStatusCode,
-  VerificationFragment,
-  utils,
-} from "@govtechsg/oa-verify";
+} from "@tradetrust-tt/tt-verify";
+import { VerificationFragment, utils } from "@trustvc/trustvc";
 
 // this function check if the reason of the error is that the document store or token registry is invalid
 export const addressInvalid = (fragments: VerificationFragment[]): boolean => {

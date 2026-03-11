@@ -1,3 +1,4 @@
+const path = require("path");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.BUNDLE_ANALYZE === "true",
 });
@@ -6,6 +7,15 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 const nextConfig = {
   trailingSlash: true,
   output: "export",
+  transpilePackages: [
+    "react-pdf",
+    "pdfjs-dist",
+    "@trustvc/trustvc",
+    "@trustvc/w3c-vc",
+    "@trustvc/w3c-issuer",
+    "@trustvc/w3c-context",
+    "@trustvc/w3c-credential-status",
+  ],
   exportPathMap: function exportMap() {
     return {
       "/": { page: "/" },
@@ -32,6 +42,20 @@ const nextConfig = {
     // workaround to for next to play nice with oa-verify's new version
     // might be related to https://github.com/vercel/next.js/issues/39375#issuecomment-1380266233
     esmExternals: false,
+  },
+  webpack: (config) => {
+    // @trustvc/trustvc imports dotenv/config at the top level in its ESM build,
+    // which is Node.js-only and cannot be resolved in a browser bundle.
+    config.resolve.alias["dotenv/config"] = false;
+    // @digitalbazaar/bbs-signatures uses `node:crypto` for webcrypto.
+    // In the browser, the Web Crypto API is available as globalThis.crypto.
+    // We provide a browser shim that re-exports webcrypto from the global.
+    config.resolve.alias["@digitalbazaar/bbs-signatures/lib/crypto.js"] = path.resolve("./src/shims/bbs-crypto.js");
+    // Force all packages to use the same React instance to prevent hook errors
+    // when using local packages that have their own node_modules/react.
+    config.resolve.alias["react"] = path.resolve("./node_modules/react");
+    config.resolve.alias["react-dom"] = path.resolve("./node_modules/react-dom");
+    return config;
   },
 };
 

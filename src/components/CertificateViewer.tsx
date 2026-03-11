@@ -1,7 +1,6 @@
-import { VerificationFragment } from "@govtechsg/oa-verify";
-import { utils, v2, v3, v4, OpenAttestationDocument } from "@govtechsg/open-attestation";
+import { isObfuscated as isOAObfuscated, OpenAttestationDocument, VerificationFragment } from "@trustvc/trustvc";
 import dynamic from "next/dynamic";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { updateObfuscatedCertificate as updateObfuscatedCertificateAction } from "../reducers/certificate.slice";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
@@ -27,14 +26,6 @@ const ForwardedRefDecentralisedRenderer = React.forwardRef<
   }
 >((props, ref) => <DecentralisedRenderer {...props} forwardedRef={ref} />);
 
-const isObfuscated = (document: v3.WrappedDocument | v2.WrappedDocument | v4.WrappedDocument) => {
-  try {
-    return utils.isObfuscated(document);
-  } catch (e) {
-    return false;
-  }
-};
-
 export interface CertificateViewerProps {
   document: WrappedOrSignedOpenCertsDocument;
   certificate: OpenAttestationDocument;
@@ -55,6 +46,12 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
   if (!props.verificationStatus) throw new Error("Verification status can't be null");
   const { document } = props;
   const childRef = React.useRef<{ print: () => void }>();
+  const [isDocObfuscated, setIsDocObfuscated] = useState(false);
+  useEffect(() => {
+    isOAObfuscated(document)
+      .then(setIsDocObfuscated)
+      .catch(() => setIsDocObfuscated(false));
+  }, [document]);
 
   return (
     <ErrorBoundary>
@@ -106,7 +103,7 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
                   </div>
                 </div>
               </div>
-              {isObfuscated(document) && (
+              {isDocObfuscated && (
                 <div className="text-md font-bold text-red pt-4" id="obfuscation-note">
                   The owner of this certificate have chosen not to share certain information in the certificate with
                   you. Please note that this does not affect the authenticity of the certificate.
