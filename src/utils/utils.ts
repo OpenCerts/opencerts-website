@@ -1,33 +1,38 @@
-import type { CustomDnsResolver } from "@govtechsg/dnsprove";
-import { getData, utils } from "@govtechsg/open-attestation";
+import {
+  type CustomDnsResolver,
+  getDataV2,
+  isWrappedV2Document,
+  isWrappedV3Document,
+  SignedVerifiableCredential,
+  vc,
+} from "@trustvc/trustvc";
 import axios from "axios";
 import { LEGACY_OPENCERTS_RENDERER } from "../config";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
 
 export const opencertsGetData = (rawDocument: WrappedOrSignedOpenCertsDocument) => {
-  if (utils.isWrappedV2Document(rawDocument)) {
-    return getData(rawDocument);
-  } else if (utils.isWrappedV4Document(rawDocument)) {
-    // Flattens the credentialSubject field so that the renderer can directly call document.ABC
-    const flattenedV4 = { ...rawDocument.credentialSubject, ...rawDocument };
-    return flattenedV4;
+  if (isWrappedV2Document(rawDocument)) {
+    return getDataV2(rawDocument);
   } else {
     return rawDocument;
   }
 };
 
 export const getTemplate = (rawDocument: WrappedOrSignedOpenCertsDocument) => {
-  if (utils.isWrappedV2Document(rawDocument)) {
-    const documentData = getData(rawDocument);
+  if (vc.isSignedDocument(rawDocument) || vc.isRawDocument(rawDocument)) {
+    return [(rawDocument as unknown as SignedVerifiableCredential).renderMethod]?.flat()?.[0]?.id;
+  } else if (isWrappedV2Document(rawDocument)) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const documentData = getDataV2(rawDocument as any);
     return typeof documentData.$template === "object" ? documentData.$template.url : LEGACY_OPENCERTS_RENDERER;
-  } else if (utils.isWrappedV3Document(rawDocument)) {
+  } else if (isWrappedV3Document(rawDocument)) {
     return rawDocument.openAttestationMetadata.template?.url;
   } else {
-    return rawDocument.renderMethod?.find((method) => method.type === "OpenAttestationEmbeddedRenderer")?.id;
+    return undefined;
   }
 };
 
-export const ocDnsResolver: CustomDnsResolver = async (domain) => {
+export const ocDnsResolver: CustomDnsResolver = async (domain: string) => {
   const { data } = await axios({
     method: "GET",
     url: `https://dns.opencerts.io/resolve?name=${domain}`,

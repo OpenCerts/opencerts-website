@@ -1,5 +1,4 @@
-import { VerificationFragment } from "@govtechsg/oa-verify";
-import { isValid } from "@trustvc/opencerts-verify";
+import { isValid, VerificationFragment } from "@trustvc/trustvc";
 import Link from "next/link";
 import React from "react";
 import { useDropzone } from "react-dropzone";

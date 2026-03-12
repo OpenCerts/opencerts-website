@@ -1,5 +1,5 @@
-import { AllVerificationFragment } from "@govtechsg/oa-verify";
 import { render, screen } from "@testing-library/react";
+import { AllVerificationFragment } from "@tradetrust-tt/tt-verify";
 import React from "react";
 import { DetailedCertificateVerifyBlock } from "./DetailedCertificateVerifyBlock";
 

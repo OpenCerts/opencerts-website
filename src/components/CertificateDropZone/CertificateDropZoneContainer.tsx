@@ -1,4 +1,4 @@
-import { VerificationFragment } from "@govtechsg/oa-verify";
+import { VerificationFragment } from "@trustvc/trustvc";
 import Router from "next/router";
 import React, { Component, ReactNode } from "react";
 import Dropzone, { DropEvent } from "react-dropzone";

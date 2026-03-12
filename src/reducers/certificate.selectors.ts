@@ -1,4 +1,4 @@
-import { VerificationFragment } from "@govtechsg/oa-verify";
+import { VerificationFragment } from "@trustvc/trustvc";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
 import { states } from "./shared";
 import { RootState } from "./index";

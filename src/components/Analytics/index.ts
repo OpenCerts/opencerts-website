@@ -1,5 +1,13 @@
-import { v2, WrappedDocument, getData, v3, utils, v4 } from "@govtechsg/open-attestation";
-import { RegistryEntry } from "@trustvc/opencerts-verify";
+import {
+  v2,
+  WrappedDocument,
+  getDataV2,
+  v3,
+  getIssuerAddress,
+  isWrappedV2Document,
+  isWrappedV3Document,
+  RegistryEntry,
+} from "@trustvc/trustvc";
 import { isEmpty, omitBy } from "lodash";
 import ReactGA from "react-ga4";
 import registry from "../../../public/static/registry.json";
@@ -128,7 +136,7 @@ export const sendV3EventCertificateViewedDetailed = ({
   certificateData: v3.OpenAttestationDocument;
   category?: string;
 }): void => {
-  const documentStore = utils.getIssuerAddress(certificateData);
+  const documentStore = getIssuerAddress(certificateData);
   const documentId = certificateData?.id ?? "";
   const documentName = certificateData?.name ?? "";
   const issuedOn = certificateData?.issued ?? "";
@@ -150,34 +158,9 @@ export const sendV3EventCertificateViewedDetailed = ({
   });
 };
 
-export const sendV4EventCertificateViewedDetailed = ({
-  certificateData,
-  category,
-}: {
-  certificateData: v4.OpenAttestationDocument;
-  category?: string;
-}): void => {
-  const renderMethod = certificateData.renderMethod?.[0]; // Take first render method
-
-  analyticsEvent({
-    category: category ?? "CERTIFICATE_DETAILS",
-    nonInteraction: true,
-    options: {
-      documentId: certificateData.id ?? "",
-      documentName: certificateData.name ?? "",
-      issuedOn: (certificateData.credentialSubject.issuedOn as string) ?? "",
-      issuerName: certificateData.issuer.identityProof.identifier,
-      issuerId: certificateData.issuer.id ?? "",
-      rendererUrl: renderMethod?.id ?? "",
-      templateName:
-        renderMethod?.type === "OpenAttestationEmbeddedRenderer" ? renderMethod.templateName : renderMethod?.name ?? "",
-    },
-  });
-};
-
 export const sendEventCertificateDetails = (category: string, document: WrappedOrSignedOpenCertsDocument) => {
-  if (utils.isWrappedV2Document(document)) {
-    const certificateData = getData(document);
+  if (isWrappedV2Document(document)) {
+    const certificateData = getDataV2(document);
     certificateData.issuers.forEach((issuer: v2.Issuer) => {
       sendV2EventCertificateViewedDetailed({
         issuer,
@@ -185,10 +168,8 @@ export const sendEventCertificateDetails = (category: string, document: WrappedO
         category,
       });
     });
-  } else if (utils.isWrappedV3Document(document)) {
+  } else if (isWrappedV3Document(document)) {
     sendV3EventCertificateViewedDetailed({ certificateData: document, category });
-  } else {
-    sendV4EventCertificateViewedDetailed({ certificateData: document, category });
   }
 };
 
@@ -196,7 +177,7 @@ export function triggerV2ErrorLogging(
   rawCertificate: WrappedDocument<v2.OpenAttestationDocument>,
   errors: string[]
 ): void {
-  const certificate: v2.OpenAttestationDocument & { name?: string; issuedOn?: string } = getData(rawCertificate);
+  const certificate: v2.OpenAttestationDocument & { name?: string; issuedOn?: string } = getDataV2(rawCertificate);
 
   const documentId = certificate?.id;
   const documentName = certificate?.name;
@@ -251,7 +232,7 @@ export function triggerV3ErrorLogging(
   const templateName = rawCertificate.openAttestationMetadata.template?.name || "";
 
   // If there are multiple issuers in a certificate, we send multiple events!
-  const documentStore = utils.getIssuerAddress(rawCertificate);
+  const documentStore = getIssuerAddress(rawCertificate);
   const issuerName = rawCertificate.openAttestationMetadata.identityProof.identifier;
 
   analyticsEvent({
@@ -270,28 +251,8 @@ export function triggerV3ErrorLogging(
   });
 }
 
-export function triggerV4ErrorLogging(rawCertificate: v4.OpenAttestationDocument, errors: string[]): void {
-  const renderMethod = rawCertificate.renderMethod?.[0]; // Take first render method
-  const errorsList = errors.join(",");
-
-  analyticsEvent({
-    category: "CERTIFICATE_ERROR",
-    nonInteraction: true,
-    options: {
-      documentId: rawCertificate.id ?? "",
-      documentName: rawCertificate.name ?? "",
-      issuedOn: (rawCertificate.credentialSubject.issuedOn as string) ?? "",
-      issuerName: rawCertificate.issuer.identityProof.identifier,
-      errors: errorsList,
-      rendererUrl: renderMethod?.id ?? "",
-      templateName:
-        renderMethod?.type === "OpenAttestationEmbeddedRenderer" ? renderMethod.templateName : renderMethod?.name ?? "",
-    },
-  });
-}
-
 export function triggerV2RendererTimeoutLogging(rawCertificate: WrappedDocument<v2.OpenAttestationDocument>): void {
-  const certificate: v2.OpenAttestationDocument & { name?: string; issuedOn?: string } = getData(rawCertificate);
+  const certificate: v2.OpenAttestationDocument & { name?: string; issuedOn?: string } = getDataV2(rawCertificate);
 
   const documentId = certificate?.id;
   const documentName = certificate?.name;
@@ -339,7 +300,7 @@ export function triggerV3RendererTimeoutLogging(rawCertificate: WrappedDocument<
   const templateName = rawCertificate?.openAttestationMetadata.template?.name;
 
   // If there are multiple issuers in a certificate, we send multiple events!
-  const documentStore = utils.getIssuerAddress(rawCertificate);
+  const documentStore = getIssuerAddress(rawCertificate);
   const issuerName = rawCertificate.openAttestationMetadata.identityProof.identifier;
 
   analyticsEvent({
@@ -353,24 +314,6 @@ export function triggerV3RendererTimeoutLogging(rawCertificate: WrappedDocument<
       issuerName: issuerName,
       rendererUrl: rendererUrl,
       templateName: templateName,
-    },
-  });
-}
-
-export function triggerV4RendererTimeoutLogging(rawCertificate: v4.OpenAttestationDocument): void {
-  const renderMethod = rawCertificate.renderMethod?.[0]; // Take first render method
-
-  analyticsEvent({
-    category: "CERTIFICATE_RENDERER_TIMEOUT",
-    nonInteraction: true,
-    options: {
-      documentId: rawCertificate.id ?? "",
-      documentName: rawCertificate.name ?? "",
-      issuedOn: (rawCertificate.credentialSubject.issuedOn as string) ?? "",
-      issuerName: rawCertificate.issuer.identityProof.identifier,
-      rendererUrl: renderMethod?.id ?? "",
-      templateName:
-        renderMethod?.type === "OpenAttestationEmbeddedRenderer" ? renderMethod.templateName : renderMethod?.name ?? "",
     },
   });
 }

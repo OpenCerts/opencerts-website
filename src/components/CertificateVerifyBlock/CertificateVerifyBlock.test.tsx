@@ -2,12 +2,15 @@ import {
   AllVerificationFragment,
   OpenAttestationDnsTxtIdentityProofInvalidFragmentV2,
   OpenAttestationDnsTxtIdentityProofValidFragmentV2,
-} from "@govtechsg/oa-verify";
-import { SchemaId, v2, v3, WrappedDocument } from "@govtechsg/open-attestation";
+} from "@tradetrust-tt/tt-verify";
 import {
   OpencertsRegistryVerifierInvalidFragmentV2,
   OpencertsRegistryVerifierValidFragmentV2,
-} from "@trustvc/opencerts-verify";
+  SchemaId,
+  v2,
+  v3,
+  WrappedDocument,
+} from "@trustvc/trustvc";
 import { getV2IdentityVerificationText, getV3IdentityVerificationText } from "./CertificateVerifyBlock";
 
 const buildDocumentWithIssuers = (issuers: v2.Issuer[]): WrappedDocument<v2.OpenAttestationDocument> => {
@@ -49,6 +52,7 @@ const buildOpencertsRegistryVerifierInvalidFragment = ({
   name: string | string[];
 }): OpencertsRegistryVerifierInvalidFragmentV2 => {
   const names = ([] as string[]).concat(name);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return {
     name: "OpencertsRegistryVerifier",
     type: "ISSUER_IDENTITY",
@@ -68,7 +72,8 @@ const buildOpencertsRegistryVerifierInvalidFragment = ({
       codeString: "INVALID_IDENTITY",
       message: "Document store 0x8FC57204C35FB9317D91285EF52D6B892EC08CD3 not found in the registry",
     },
-  };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any;
 };
 
 const buildDnsTxtValidFragment = ({
@@ -208,7 +213,8 @@ describe("certificate verify block getV2IdentityVerificationText", () => {
 
     it("when document has multiple issuers, should display issuer domain and name only for the issuer with a valid registry fragment", () => {
       const ocFragment = buildOpencertsRegistryVerifierValidFragment({ name: ["GovTech", "Demo"] });
-      ocFragment.data[0] = {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (ocFragment.data as any)[0] = {
         status: "INVALID",
         value: "0x8FC57204C35FB9317D91285EF52D6B892EC08CD3",
         reason: {

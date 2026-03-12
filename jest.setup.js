@@ -3,6 +3,11 @@ import { setConfig } from "next/config";
 import { publicRuntimeConfig } from "./next.config";
 import "@testing-library/jest-dom";
 
+// Jest 26 (jsdom environment) does not include TextEncoder/TextDecoder
+const { TextEncoder, TextDecoder } = require("util");
+global.TextEncoder = TextEncoder;
+global.TextDecoder = TextDecoder;
+
 setConfig({ publicRuntimeConfig });
 
 // Jest swallows stderr from debug, so if process is called with DEBUG then redirect debug to console.log
