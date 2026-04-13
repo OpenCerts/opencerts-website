@@ -3,7 +3,7 @@
 import {
   type VerificationFragment,
   decryptString,
-  isValid,
+  isValidOpenCert,
   isWrappedV2Document,
   isWrappedV3Document,
   openAttestationVerifiers,
@@ -175,15 +175,15 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
     trace(`Verification Status: ${JSON.stringify(fragments)}`);
     yield put(verifyingCertificateCompleted(fragments));
 
-    if (isValid(fragments)) {
+    if (isValidOpenCert(fragments)) {
       Router.push("/viewer");
     } else {
       const errors: string[] = [];
-      if (!isValid(fragments, ["DOCUMENT_INTEGRITY"])) {
+      if (!isValidOpenCert(fragments, ["DOCUMENT_INTEGRITY"])) {
         errors.push("CERTIFICATE_HASH");
       }
 
-      if (!isValid(fragments, ["DOCUMENT_STATUS"])) {
+      if (!isValidOpenCert(fragments, ["DOCUMENT_STATUS"])) {
         if (certificateNotIssued(fragments)) errors.push("UNISSUED_CERTIFICATE");
         else if (certificateRevoked(fragments)) errors.push("REVOKED_CERTIFICATE");
         else if (serverError(fragments)) errors.push("SERVER_ERROR");
@@ -192,7 +192,7 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
         else errors.push("ETHERS_UNHANDLED_ERROR");
       }
 
-      if (!isValid(fragments, ["ISSUER_IDENTITY"])) {
+      if (!isValidOpenCert(fragments, ["ISSUER_IDENTITY"])) {
         errors.push("ISSUER_IDENTITY");
       }
 

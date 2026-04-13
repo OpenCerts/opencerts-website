@@ -16,7 +16,8 @@ const allDnsResolverDown = RequestMock()
   .onRequestTo({ url: "https://dns.alidns.com/resolve?name=example.openattestation.com&type=16" })
   .respond(null, 500, { "access-control-allow-origin": "*" });
 
-fixture("DNS Certificate Rendering").page`http://localhost:3000`.beforeEach(async () => {
+// Skipped: DNS-TXT records for example.openattestation.com no longer exist, renderer at demo-cnm.openattestation.com is down
+fixture.skip("DNS Certificate Rendering").page`http://localhost:3000`.beforeEach(async () => {
   await waitForReact();
 });
 
