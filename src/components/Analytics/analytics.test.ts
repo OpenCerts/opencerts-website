@@ -1,4 +1,4 @@
-import { SchemaId, v2, v3, WrappedDocument } from "@govtechsg/open-attestation";
+import { SchemaId, v2, v3, WrappedDocument } from "@trustvc/trustvc";
 import ReactGA from "react-ga4";
 import dnsDidSigned from "../tests/fixture/dns-did-signed.json";
 import {

@@ -1,5 +1,4 @@
-import { VerificationFragment } from "@govtechsg/oa-verify";
-import { isValid } from "@trustvc/opencerts-verify";
+import { isValidOpenCert, VerificationFragment } from "@trustvc/trustvc";
 import React from "react";
 import { DropzoneViewWrapper } from "../Layout/DropzoneViewWrapper";
 import { DefaultView } from "./Views/DefaultView";
@@ -49,7 +48,7 @@ export const CertificateVerificationStatus: React.FunctionComponent<CertificateV
       </DropzoneViewWrapper>
     );
   }
-  if (verificationStatus && !isValid(verificationStatus)) {
+  if (verificationStatus && !isValidOpenCert(verificationStatus)) {
     return (
       <DropzoneViewWrapper hover={hover} accept={false}>
         <UnverifiedView resetData={() => resetData()} verificationStatus={verificationStatus} />

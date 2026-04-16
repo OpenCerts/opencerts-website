@@ -1,5 +1,4 @@
-import { VerificationFragment } from "@govtechsg/oa-verify";
-import { isValid } from "@trustvc/opencerts-verify";
+import { isValidOpenCert, VerificationFragment } from "@trustvc/trustvc";
 import Link from "next/link";
 import React from "react";
 import { useDropzone } from "react-dropzone";
@@ -19,14 +18,14 @@ interface DetailedErrorsProps {
 }
 const DetailedErrors: React.FunctionComponent<DetailedErrorsProps> = ({ verificationStatus }) => {
   const errors = [];
-  if (!isValid(verificationStatus, ["DOCUMENT_INTEGRITY"])) {
+  if (!isValidOpenCert(verificationStatus, ["DOCUMENT_INTEGRITY"])) {
     errors.push(TYPES.HASH);
   }
-  if (!isValid(verificationStatus, ["ISSUER_IDENTITY"])) {
+  if (!isValidOpenCert(verificationStatus, ["ISSUER_IDENTITY"])) {
     errors.push(TYPES.IDENTITY);
   }
 
-  if (!isValid(verificationStatus, ["DOCUMENT_STATUS"])) {
+  if (!isValidOpenCert(verificationStatus, ["DOCUMENT_STATUS"])) {
     if (certificateRevoked(verificationStatus)) errors.push(TYPES.REVOKED);
     else if (addressInvalid(verificationStatus)) {
       // if the error is because the address is invalid, then get rid of all errors and only keep this one

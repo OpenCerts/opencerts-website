@@ -8,7 +8,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  NODE_VERSION: "18"
+  NODE_VERSION: "22"
   BUILD_DIR: "out"
 
 jobs:

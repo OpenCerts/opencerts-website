@@ -34,28 +34,6 @@ test("Load document from action should work when url is valid (OA v2.0)", async 
   ]);
 });
 
-test("Load document from action should work when url is valid (OA v4.0)", async (t) => {
-  const action = {
-    type: "DOCUMENT",
-    payload: {
-      uri: `https://gist.githubusercontent.com/john-dot-oa/320778f9e9d93c80e03fe18040b399d0/raw/19d099d51fde74234b72bf4f555c65f6954b956c/opencerts-website-did-demo-v4.json`,
-      redirect: "https://opencerts.io/",
-    },
-  };
-
-  await t.navigateTo(`http://localhost:3000/?q=${encodeURI(JSON.stringify(action))}`);
-  await validateTextContent(t, StatusButton, ["EXAMPLE.OPENATTESTATION.COM"]);
-
-  await t.switchToIframe(IframeBlock);
-
-  await validateTextContent(t, SampleTemplate, [
-    "OpenCerts Demo",
-    "Your Name",
-    "has successfully completed the",
-    "John Demo",
-  ]);
-});
-
 test("Load document from action should fail when url is invalid", async (t) => {
   const action = {
     type: "DOCUMENT",

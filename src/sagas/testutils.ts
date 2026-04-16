@@ -1,4 +1,4 @@
-import { SchemaId, v2, WrappedDocument } from "@govtechsg/open-attestation";
+import { SchemaId, v2, WrappedDocument } from "@trustvc/trustvc";
 
 export const targetHash = "f7432b3219b2aa4122e289f44901830fa32f224ee9dfce28565677f1d279b2c7";
 export const proof0 = "2bb9dd186994f38084ee68e06be848b9d43077c307684c300d81df343c7858cf";

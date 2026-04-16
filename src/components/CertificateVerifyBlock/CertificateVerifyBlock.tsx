@@ -1,14 +1,18 @@
+import { ValidDnsDidVerificationStatus, ValidDnsTxtVerificationStatus } from "@tradetrust-tt/tt-verify";
 import {
+  getDataV2,
+  isWrappedV2Document,
+  isWrappedV3Document,
+  SignedVerifiableCredential,
   utils,
-  ValidDnsDidVerificationStatus,
-  ValidDnsTxtVerificationStatus,
+  v2,
+  v3,
   VerificationFragment,
-} from "@govtechsg/oa-verify";
-import { getData, v2, WrappedDocument, utils as oaUtils, v3, v4 } from "@govtechsg/open-attestation";
-import {
+  WrappedDocument,
   getOpencertsRegistryVerifierFragment,
   OpencertsRegistryVerificationValidData,
-} from "@trustvc/opencerts-verify";
+  vc,
+} from "@trustvc/trustvc";
 import React, { useState } from "react";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { icons } from "../ViewerPageImages";
@@ -18,7 +22,7 @@ export const getV2IdentityVerificationText = (
   verificationStatus: VerificationFragment[],
   document: WrappedDocument<v2.OpenAttestationDocument>
 ): JSX.Element => {
-  const data = getData(document);
+  const data = getDataV2(document);
   const registryFragment = getOpencertsRegistryVerifierFragment(verificationStatus);
   const dnsTxtFragment = utils.getOpenAttestationDnsTxtIdentityProofFragment(verificationStatus);
   const dnsDidFragment = utils.getOpenAttestationDnsDidIdentityProofFragment(verificationStatus);
@@ -106,11 +110,8 @@ export const getV3IdentityVerificationText = (document: WrappedDocument<v3.OpenA
   return document.openAttestationMetadata.identityProof.identifier.toUpperCase();
 };
 
-export const getV4IdentityVerificationText = (
-  verificationStatus: VerificationFragment[],
-  document: v4.WrappedDocument
-): string => {
-  return document.issuer.identityProof.identifier.toUpperCase();
+export const getW3CIdentityVerificationText = (document: SignedVerifiableCredential): string => {
+  return (typeof document?.issuer === "string" ? document?.issuer : document?.issuer?.id)?.toUpperCase();
 };
 
 interface SimpleVerifyBlockProps {
@@ -133,11 +134,13 @@ const SimpleVerifyBlock: React.FunctionComponent<SimpleVerifyBlockProps> = (prop
         <h1 className="px-2 w-full font-bold text-base">
           Certificate issued by
           <div className="break-all md:break-normal">
-            {oaUtils.isWrappedV2Document(props.document)
+            {isWrappedV2Document(props.document)
               ? getV2IdentityVerificationText(props.verificationStatus, props.document)
-              : oaUtils.isWrappedV3Document(props.document)
+              : isWrappedV3Document(props.document)
               ? getV3IdentityVerificationText(props.document)
-              : getV4IdentityVerificationText(props.verificationStatus, props.document)}
+              : vc.isSignedDocument(props.document)
+              ? getW3CIdentityVerificationText(props.document as unknown as SignedVerifiableCredential)
+              : "Unknown"}
           </div>
         </h1>
         <div className="px-2 w-auto">

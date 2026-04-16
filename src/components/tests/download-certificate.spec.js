@@ -8,7 +8,9 @@ import TestDocument1 from "./fixture/sample-dns-verified.json";
 
 import { validateTextContent } from "./utils";
 
-fixture("Download Certificate").page`http://localhost:3000`
+// Skipped: Test 1 - DNS-TXT records for example.openattestation.com no longer exist
+// Skipped: Test 2 - renderer at demo-cnm.openattestation.com is down
+fixture.skip("Download Certificate").page`http://localhost:3000`
   .afterEach(async (t) => {
     // Clean up files after each test
     const filePath = t.ctx.filePath;
