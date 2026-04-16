@@ -12,7 +12,7 @@ Sentry.init({
   tracesSampleRate: process.env.NODE_ENV === "production" ? 0.1 : 1,
 
   // Enable logs to be sent to Sentry
-  enableLogs: process.env.NODE_ENV === 'development',
+  enableLogs: process.env.NODE_ENV === "development",
 
   // Enable sending user PII (Personally Identifiable Information)
   // https://docs.sentry.io/platforms/javascript/guides/nextjs/configuration/options/#sendDefaultPii

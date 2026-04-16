@@ -12,7 +12,7 @@ Sentry.init({
   tracesSampleRate: process.env.NODE_ENV === "production" ? 0.1 : 1,
 
   // Enable logs to be sent to Sentry
-  enableLogs: process.env.NODE_ENV !== 'production',
+  enableLogs: process.env.NODE_ENV !== "production",
 
   // https://docs.sentry.io/platforms/javascript/guides/nextjs/configuration/options/#sendDefaultPii
   sendDefaultPii: true,

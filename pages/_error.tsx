@@ -15,7 +15,7 @@ CustomErrorComponent.getInitialProps = async (contextData: NextPageContext): Pro
     await Sentry.captureUnderscoreErrorException(contextData);
   } catch (error) {
     // Silently fail - error page must render even if Sentry fails
-    console.error('Failed to capture error in Sentry:', error);
+    console.error("Failed to capture error in Sentry:", error);
   }
 
   // This will contain the status code of the response
