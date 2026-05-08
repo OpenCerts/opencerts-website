@@ -1,17 +1,18 @@
 module.exports = {
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
+  testEnvironment: "jsdom",
   testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/"],
   collectCoverage: false,
   coverageDirectory: "<rootDir>/.coverage/",
   collectCoverageFrom: ["src/**/*.{js,jsx}", "scripts/**/*.{js,jsx}"],
   testMatch: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)test.[jt]s?(x)"],
   // Transform ESM-only packages using Babel (these have no CJS main and use ESM exports)
-  transformIgnorePatterns: ["/node_modules/(?!(@digitalbazaar|base58-universal|base64url-universal|cborg)/)"],
+  transformIgnorePatterns: ["/node_modules/(?!(@digitalbazaar|base58-universal|base64url-universal|cborg|multiformats)/)"],
   moduleNameMapper: {
     "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
       "<rootDir>/_mocks_/fileMock.js",
     "\\.(css|sass|scss)$": "<rootDir>/_mocks_/styleMock.js",
-    axios: "axios/dist/node/axios.cjs",
+    axios: "<rootDir>/node_modules/axios/dist/node/axios.cjs",
     // we are using our own document loaders, jest does not tree shake these out and causing problem
     "node:process": "<rootDir>/_mocks_/jsonLdMiscsStub",
     "node:crypto": "<rootDir>/_mocks_/node-crypto.js",
@@ -40,9 +41,9 @@ module.exports = {
     "@digitalbazaar/bbs-2023-cryptosuite": "<rootDir>/node_modules/@digitalbazaar/bbs-2023-cryptosuite/lib/index.js",
     "@digitalbazaar/di-sd-primitives": "<rootDir>/node_modules/@digitalbazaar/di-sd-primitives/lib/index.js",
     // ESM-only dependencies of @digitalbazaar packages
+    cborg: "<rootDir>/node_modules/cborg/cborg.js",
     "base58-universal": "<rootDir>/node_modules/base58-universal/lib/index.js",
     "base64url-universal": "<rootDir>/node_modules/base64url-universal/lib/index.js",
   },
-  testResultsProcessor: "jest-sonar-reporter",
   watchPlugins: ["jest-watch-typeahead/filename", "jest-watch-typeahead/testname"],
 };
