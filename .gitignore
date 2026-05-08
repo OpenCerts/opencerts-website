@@ -10,3 +10,6 @@ yarn.lock
 *.iml
 .idea
 *.tsbuildinfo
+
+# Sentry Config File
+.env
