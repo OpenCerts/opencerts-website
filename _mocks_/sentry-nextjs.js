@@ -1,4 +1,4 @@
-const noop = () => {};
+const noop = () => undefined;
 
 const Sentry = {
   init: noop,
