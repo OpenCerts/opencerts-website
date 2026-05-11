@@ -24,8 +24,5 @@ export function sendEmail({
         captcha,
       }),
     })
-    .then((res) => {
-      if (res.status !== 200) throw new Error(`Email API responded with ${res.status}`);
-      return true;
-    });
+    .then((res) => res.status === 200);
 }
