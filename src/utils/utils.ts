@@ -1,3 +1,4 @@
+import { captureException } from "@sentry/nextjs";
 import {
   type CustomDnsResolver,
   getDataV2,
@@ -6,7 +7,6 @@ import {
   SignedVerifiableCredential,
   vc,
 } from "@trustvc/trustvc";
-import { captureException } from "@sentry/nextjs";
 import axios from "axios";
 import { LEGACY_OPENCERTS_RENDERER } from "../config";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
