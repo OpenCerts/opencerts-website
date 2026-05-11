@@ -6,6 +6,7 @@ import {
   SignedVerifiableCredential,
   vc,
 } from "@trustvc/trustvc";
+import { captureException } from "@sentry/nextjs";
 import axios from "axios";
 import { LEGACY_OPENCERTS_RENDERER } from "../config";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
@@ -33,9 +34,14 @@ export const getTemplate = (rawDocument: WrappedOrSignedOpenCertsDocument) => {
 };
 
 export const ocDnsResolver: CustomDnsResolver = async (domain: string) => {
-  const { data } = await axios({
-    method: "GET",
-    url: `https://dns.opencerts.io/resolve?name=${domain}`,
-  });
-  return data;
+  try {
+    const { data } = await axios({
+      method: "GET",
+      url: `https://dns.opencerts.io/resolve?name=${domain}`,
+    });
+    return data;
+  } catch (e) {
+    captureException(e, { tags: { area: "dnsResolver" }, extra: { domain } });
+    throw e;
+  }
 };

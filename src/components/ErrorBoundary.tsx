@@ -1,3 +1,4 @@
+import { captureException } from "@sentry/nextjs";
 import Link from "next/link";
 import React, { Component, ReactNode } from "react";
 
@@ -10,10 +11,9 @@ export class ErrorBoundary extends Component<{ children: ReactNode }, ErrorBound
     this.state = { hasError: false };
   }
 
-  componentDidCatch(): void {
-    this.setState({
-      hasError: true,
-    });
+  componentDidCatch(error: Error): void {
+    captureException(error);
+    this.setState({ hasError: true });
   }
 
   render(): ReactNode {

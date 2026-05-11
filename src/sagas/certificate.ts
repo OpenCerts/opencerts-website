@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
+import { captureException } from "@sentry/nextjs";
 import {
   type VerificationFragment,
   decryptString,
@@ -211,6 +212,7 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
       }
     }
   } catch (e) {
+    captureException(e, { tags: { saga: "verifyCertificate" } });
     if (e instanceof Error) yield put(verifyingCertificateErrored(e.message));
     else yield put(verifyingCertificateErrored(JSON.stringify(e)));
   }
@@ -234,6 +236,7 @@ export function* sendCertificateSaga({ payload }: { payload: { email: string; ca
 
     yield put(sendCertificateSuccess());
   } catch (e) {
+    captureException(e, { tags: { saga: "sendCertificate" } });
     if (e instanceof Error) yield put(sendCertificateFailure(e.message));
     else yield put(sendCertificateFailure(JSON.stringify(e)));
   }
@@ -256,6 +259,7 @@ export function* generateShareLinkSaga() {
 
     yield put(generateShareLinkSuccess(success));
   } catch (e) {
+    captureException(e, { tags: { saga: "generateShareLink" } });
     if (e instanceof Error) yield put(generateShareLinkFailure(e.message));
     else yield put(generateShareLinkFailure(JSON.stringify(e)));
   }
@@ -310,6 +314,7 @@ export function* retrieveCertificateByActionSaga({
     yield put(updateCertificate(certificate as WrappedOrSignedOpenCertsDocument));
     yield put(retrieveCertificateByActionSuccess());
   } catch (e) {
+    captureException(e, { tags: { saga: "retrieveCertificateByAction" } });
     if (e instanceof Error) yield put(retrieveCertificateByActionFailure(e.message));
     else yield put(retrieveCertificateByActionFailure(JSON.stringify(e)));
   }
