@@ -53,6 +53,8 @@ jobs:
           TRUSTED_TLDS: ${{ secrets.TRUSTED_TLDS }}
           # Required for Sentry source map upload during `next build`
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+          NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           SENTRY_ENVIRONMENT: "production"
           SENTRY_RELEASE: ${{ github.sha }}
 
