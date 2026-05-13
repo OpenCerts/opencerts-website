@@ -27,7 +27,8 @@ const nextConfig = {
     };
   },
   env: {
-    INFURA_API_KEY: process.env.INFURA_API_KEY, // The default/free key should not be used in production as they are rate-limited by the service provider
+    INFURA_API_KEY_PROVIDER: process.env.INFURA_API_KEY_PROVIDER, // Used by the verification provider
+    INFURA_API_KEY_RESOLVER: process.env.INFURA_API_KEY_RESOLVER, // Used by the mainnet did:ethr resolver
     ALCHEMY_API_KEY: process.env.ALCHEMY_API_KEY, // The default/free key should not be used in production as they are rate-limited by the service provider
     TRUSTED_TLDS: process.env.TRUSTED_TLDS || "gov.sg,edu.sg",
     GA4_TAG_ID: process.env.GA4_TAG_ID || "G-JP12T2F01V",

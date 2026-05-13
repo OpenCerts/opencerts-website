@@ -48,7 +48,8 @@ jobs:
         env:
           # Build-time envs used in next.config.js
           NET: 'sepolia'
-          INFURA_API_KEY: ${{ secrets.DEV_INFURA_API_KEY }}
+          INFURA_API_KEY_PROVIDER: ${{ secrets.DEV_INFURA_API_KEY_PROVIDER }}
+          INFURA_API_KEY_RESOLVER: ${{ secrets.DEV_INFURA_API_KEY_RESOLVER }}
           ALCHEMY_API_KEY: ${{ secrets.DEV_ALCHEMY_API_KEY }}
           GA4_TAG_ID: ${{ secrets.GA4_TAG_ID }}
           TRUSTED_TLDS: ${{ secrets.TRUSTED_TLDS }}
