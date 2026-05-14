@@ -1,3 +1,4 @@
+import { captureException } from "@sentry/nextjs";
 import { mapValues } from "lodash";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore repository has been archived, will wait to upgrade to fix
@@ -24,7 +25,7 @@ const FeatureFlagLoader: React.FunctionComponent<{
         .then((response) => response.json());
       dispatch(updateFeatureToggles(mapValues(featureToggle, ENVIRONMENT)));
     };
-    run();
+    run().catch((e) => captureException(e, { tags: { area: "featureFlags" } }));
   }, [dispatch]);
   return <>{children}</>;
 };

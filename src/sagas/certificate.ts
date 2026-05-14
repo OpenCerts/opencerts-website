@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
+import { captureException } from "@sentry/nextjs";
+import { Resolver } from "@tradetrust-tt/tt-verify/node_modules/did-resolver";
+import { getResolver } from "@tradetrust-tt/tt-verify/node_modules/ethr-did-resolver";
 import {
   type VerificationFragment,
   decryptString,
@@ -12,8 +15,6 @@ import {
   verificationBuilder,
   w3cVerifiers,
 } from "@trustvc/trustvc";
-import { Resolver } from "did-resolver";
-import { getResolver } from "ethr-did-resolver";
 import Router from "next/router";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import "isomorphic-fetch";
@@ -69,7 +70,7 @@ const getUrls = (options: {
       case "mainnet":
       case "homestead":
         return [
-          { url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}` },
+          { url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY_PROVIDER}` },
           { url: `https://eth-mainnet.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
           { url: `https://cloudflare-eth.com/` },
           { url: `https://ethereum-rpc.publicnode.com/` },
@@ -78,7 +79,7 @@ const getUrls = (options: {
       case "matic":
       case "137":
         return [
-          { url: `https://polygon-mainnet.infura.io/v3/${process.env.INFURA_API_KEY}` },
+          { url: `https://polygon-mainnet.infura.io/v3/${process.env.INFURA_API_KEY_PROVIDER}` },
           { url: `https://polygon-mainnet.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
         ];
       default:
@@ -91,7 +92,7 @@ const getUrls = (options: {
       // Ethereum testnet
       case "sepolia":
         return [
-          { url: `https://sepolia.infura.io/v3/${process.env.INFURA_API_KEY}` },
+          { url: `https://sepolia.infura.io/v3/${process.env.INFURA_API_KEY_PROVIDER}` },
           { url: `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
           { url: `https://ethereum-sepolia-rpc.publicnode.com/` },
         ];
@@ -99,7 +100,7 @@ const getUrls = (options: {
       case "amoy":
       case "80002":
         return [
-          { url: `https://polygon-amoy.infura.io/v3/${process.env.INFURA_API_KEY}` },
+          { url: `https://polygon-amoy.infura.io/v3/${process.env.INFURA_API_KEY_PROVIDER}` },
           { url: `https://polygon-amoy.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
           { url: `https://rpc-amoy.polygon.technology/` },
           { url: `https://polygon-amoy-bor-rpc.publicnode.com/` },
@@ -145,8 +146,8 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
     const network = getNetworkName(certificate);
     const urls = getUrls({ network, isProduction: IS_MAINNET });
 
-    const providerWithFailover = new OAFailoverProvider(urls, network);
-    const _resolverWithFailover = new Resolver(
+    const providerWithFailover = new OAFailoverProvider(urls, network, { shuffle: false });
+    const resolverWithFailover = new Resolver(
       /**
        * Regardless of mainnet or testnet, OA only uses mainnet DIDs
        * As such, resolver should always resolve against a mainnet provider
@@ -156,7 +157,14 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
        */
       getResolver({
         name: "mainnet",
-        provider: new OAFailoverProvider(getUrls({ network: "mainnet", isProduction: true }), "mainnet"),
+        provider: new OAFailoverProvider(
+          [
+            { url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY_RESOLVER}` },
+            { url: `https://eth-mainnet.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
+          ],
+          "mainnet",
+          { shuffle: false }
+        ),
       })
     );
 
@@ -165,9 +173,11 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
       isWrappedV2Document(certificate) || isWrappedV3Document(certificate)
         ? verificationBuilder(openAttestationVerifiers, {
             provider: providerWithFailover,
+            resolver: resolverWithFailover,
           })
         : verificationBuilder(w3cVerifiers, {
             provider: providerWithFailover,
+            resolver: resolverWithFailover,
           });
 
     // https://github.com/redux-saga/redux-saga/issues/884
@@ -211,6 +221,7 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
       }
     }
   } catch (e) {
+    captureException(e, { tags: { saga: "verifyCertificate" } });
     if (e instanceof Error) yield put(verifyingCertificateErrored(e.message));
     else yield put(verifyingCertificateErrored(JSON.stringify(e)));
   }
@@ -234,6 +245,7 @@ export function* sendCertificateSaga({ payload }: { payload: { email: string; ca
 
     yield put(sendCertificateSuccess());
   } catch (e) {
+    captureException(e, { tags: { saga: "sendCertificate" } });
     if (e instanceof Error) yield put(sendCertificateFailure(e.message));
     else yield put(sendCertificateFailure(JSON.stringify(e)));
   }
@@ -256,6 +268,7 @@ export function* generateShareLinkSaga() {
 
     yield put(generateShareLinkSuccess(success));
   } catch (e) {
+    captureException(e, { tags: { saga: "generateShareLink" } });
     if (e instanceof Error) yield put(generateShareLinkFailure(e.message));
     else yield put(generateShareLinkFailure(JSON.stringify(e)));
   }
@@ -310,6 +323,7 @@ export function* retrieveCertificateByActionSaga({
     yield put(updateCertificate(certificate as WrappedOrSignedOpenCertsDocument));
     yield put(retrieveCertificateByActionSuccess());
   } catch (e) {
+    captureException(e, { tags: { saga: "retrieveCertificateByAction" } });
     if (e instanceof Error) yield put(retrieveCertificateByActionFailure(e.message));
     else yield put(retrieveCertificateByActionFailure(JSON.stringify(e)));
   }
