@@ -52,6 +52,12 @@ jobs:
           ALCHEMY_API_KEY: ${{ secrets.DEV_ALCHEMY_API_KEY }}
           GA4_TAG_ID: ${{ secrets.GA4_TAG_ID }}
           TRUSTED_TLDS: ${{ secrets.TRUSTED_TLDS }}
+          # Required for Sentry source map upload during `next build`
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+          NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+          SENTRY_ENVIRONMENT: "development"
+          SENTRY_RELEASE: ${{ github.sha }}
 
       - name: Upload build artifact (Dev)
         uses: actions/upload-artifact@v4
