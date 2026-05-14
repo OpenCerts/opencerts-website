@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
-import { captureException } from "@sentry/nextjs";
+import { captureException, captureMessage } from "@sentry/nextjs";
 import { Resolver } from "@tradetrust-tt/tt-verify/node_modules/did-resolver";
 import { getResolver } from "@tradetrust-tt/tt-verify/node_modules/ethr-did-resolver";
 import {
@@ -213,6 +213,16 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
       }
 
       if (errors.length > 0) {
+        captureMessage("Certificate verification failed", {
+          level: "error",
+          tags: {
+            saga: "verifyCertificate",
+            outcome: "invalid_certificate",
+            priority: "low",
+          },
+          extra: { reasons: errors },
+          fingerprint: ["opencerts-verification-failed", ...[...errors].sort()],
+        });
         if (isWrappedV2Document(certificate)) {
           triggerV2ErrorLogging(certificate, errors);
         } else if (isWrappedV3Document(certificate)) {
