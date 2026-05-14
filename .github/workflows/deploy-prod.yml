@@ -55,7 +55,9 @@ jobs:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
-          SENTRY_ENVIRONMENT: "production"
+          # Must be NEXT_PUBLIC_* so environment/release are compiled into the static export bundle.
+          NEXT_PUBLIC_SENTRY_ENVIRONMENT: "production"
+          NEXT_PUBLIC_SENTRY_RELEASE: ${{ github.sha }}
           SENTRY_RELEASE: ${{ github.sha }}
 
       - name: Upload build artifact
