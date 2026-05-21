@@ -45,6 +45,7 @@ jobs:
           npm run build
           npm run postexport
         env:
+          NODE_ENV: production
           # Build-time envs used in next.config.js
           NET: "mainnet"
           INFURA_API_KEY_PROVIDER: ${{ secrets.INFURA_API_KEY_PROVIDER }}
