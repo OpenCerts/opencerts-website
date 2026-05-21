@@ -10,3 +10,6 @@ yarn.lock
 *.iml
 .idea
 *.tsbuildinfo
+
+# Environment variables
+.env

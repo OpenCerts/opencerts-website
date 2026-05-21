@@ -15,5 +15,8 @@ export function generateLink(certificate: WrappedOrSignedOpenCertsDocument): Pro
         document: certificate,
       }),
     })
-    .then((res) => res.json());
+    .then((res) => {
+      if (!res.ok) throw new Error(`Share link API responded with ${res.status}`);
+      return res.json();
+    });
 }

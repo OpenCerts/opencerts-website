@@ -3,6 +3,7 @@
  * In future, failover provider should be provided by oa-verify library.
  */
 
+import { captureException } from "@sentry/nextjs";
 import { providers, utils } from "ethers";
 
 /**
@@ -54,6 +55,14 @@ export class OAFailoverProvider extends providers.StaticJsonRpcProvider {
       } catch (error) {
         // If last provider
         if (i === this.failoverProviders.length - 1) {
+          captureException(error instanceof Error ? error : new Error(String(error)), {
+            tags: { component: "OAFailoverProvider" },
+            extra: {
+              rpcMethod: method,
+              providerIndex: i + 1,
+              providerCount: this.failoverProviders.length,
+            },
+          });
           throw error;
         }
         // Avoid retries if the function selector inside calldata is "supportsInterface(bytes4)"

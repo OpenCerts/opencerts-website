@@ -39,4 +39,8 @@ jobs:
         run: npm test -- --ci
 
       - name: Build and run integration
+        env:
+          # Public default Infura keys used for CI.
+          INFURA_API_KEY_PROVIDER: "84842078b09946638c03157f83405213"
+          INFURA_API_KEY_RESOLVER: "84842078b09946638c03157f83405213"
         run: ./scripts/integration-headless.sh

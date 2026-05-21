@@ -1,3 +1,4 @@
+import { captureException } from "@sentry/nextjs";
 import React, { Component, ReactNode } from "react";
 import { connect } from "react-redux";
 import { NETWORK_NAME } from "../../config";
@@ -73,7 +74,8 @@ class DropZoneSection extends Component<DropZoneSectionProps> {
         .then((res) => res.json())
         .then((res) => {
           this.props.updateCertificate(res);
-        });
+        })
+        .catch((e) => captureException(e, { tags: { area: "demoCert" } }));
     }
   }
   handleClick(): void {
@@ -82,7 +84,8 @@ class DropZoneSection extends Component<DropZoneSectionProps> {
       .then((res) => res.json())
       .then((res) => {
         this.props.updateCertificate(res);
-      });
+      })
+      .catch((e) => captureException(e, { tags: { area: "demoCert" } }));
   }
 
   componentWillUnmount(): void {

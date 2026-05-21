@@ -27,10 +27,14 @@ const nextConfig = {
     };
   },
   env: {
-    INFURA_API_KEY: process.env.INFURA_API_KEY, // The default/free key should not be used in production as they are rate-limited by the service provider
+    INFURA_API_KEY_PROVIDER: process.env.INFURA_API_KEY_PROVIDER, // Used by the verification provider
+    INFURA_API_KEY_RESOLVER: process.env.INFURA_API_KEY_RESOLVER, // Used by the mainnet did:ethr resolver
     ALCHEMY_API_KEY: process.env.ALCHEMY_API_KEY, // The default/free key should not be used in production as they are rate-limited by the service provider
     TRUSTED_TLDS: process.env.TRUSTED_TLDS || "gov.sg,edu.sg",
     GA4_TAG_ID: process.env.GA4_TAG_ID || "G-JP12T2F01V",
+    // Static export: these must be NEXT_PUBLIC_* at build time (set in deploy workflows).
+    NEXT_PUBLIC_SENTRY_ENVIRONMENT: process.env.NEXT_PUBLIC_SENTRY_ENVIRONMENT || process.env.SENTRY_ENVIRONMENT || "",
+    NEXT_PUBLIC_SENTRY_RELEASE: process.env.NEXT_PUBLIC_SENTRY_RELEASE || process.env.SENTRY_RELEASE || "",
   },
   // Variables passed to both server and client
   publicRuntimeConfig: {
@@ -63,3 +67,55 @@ const nextConfig = {
 };
 
 module.exports = withBundleAnalyzer(nextConfig);
+
+// Injected content via Sentry wizard below
+
+const { withSentryConfig } = require("@sentry/nextjs");
+
+const hasSentryAuthToken = Boolean(String(process.env.SENTRY_AUTH_TOKEN || "").trim());
+const uploadExplicitlyDisabled = process.env.SENTRY_UPLOAD_SOURCE_MAPS === "false";
+const uploadExplicitlyEnabled = process.env.SENTRY_UPLOAD_SOURCE_MAPS === "true";
+const skipSentryBuildUploadOnGithubActions = process.env.GITHUB_ACTIONS === "true" && !uploadExplicitlyEnabled;
+const skipSentryBuildUpload = uploadExplicitlyDisabled || !hasSentryAuthToken || skipSentryBuildUploadOnGithubActions;
+
+module.exports = withSentryConfig(module.exports, {
+  // For all available options, see:
+  // https://www.npmjs.com/package/@sentry/webpack-plugin#options
+
+  org: "opencerts",
+  project: "opencerts-website",
+
+  ...(skipSentryBuildUpload
+    ? {
+        sourcemaps: { disable: true },
+        release: { create: false, finalize: false },
+      }
+    : {}),
+
+  telemetry: false,
+
+  // Only print logs for uploading source maps in CI
+  silent: !process.env.CI,
+
+  // For all available options, see:
+  // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
+
+  // Upload a larger set of source maps for prettier stack traces (increases build time)
+  widenClientFileUpload: true,
+
+  // Uncomment to route browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers.
+  // This can increase your server load as well as your hosting bill.
+  // Note: Check that the configured route will not match with your Next.js middleware, otherwise reporting of client-
+  // side errors will fail.
+  // tunnelRoute: "/monitoring",
+
+  webpack: {
+    automaticVercelMonitors: false,
+
+    // Tree-shaking options for reducing bundle size
+    treeshake: {
+      // Automatically tree-shake Sentry logger statements to reduce bundle size
+      removeDebugLogging: true,
+    },
+  },
+});
