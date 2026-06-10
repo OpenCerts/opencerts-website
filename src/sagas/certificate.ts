@@ -76,6 +76,7 @@ const getUrls = (options: {
           { url: `https://ethereum-rpc.publicnode.com/` },
         ];
       // Polygon mainnet
+      case "pol":
       case "matic":
       case "137":
         return [
@@ -116,6 +117,9 @@ const getNetworkName = (
   certificate: WrappedOrSignedOpenCertsDocument
 ): ConstructorParameters<typeof OAFailoverProvider>[1] => {
   const data = opencertsGetData(certificate) as v2.OpenAttestationDocument | v3.WrappedDocument;
+  // W3C credentials store network in credentialStatus.tokenNetwork.chainId (not data.network.chainId like OA docs)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const w3cChainId = (certificate as any).credentialStatus?.tokenNetwork?.chainId?.toString();
 
   if (IS_MAINNET) {
     /* Production Network Whitelist */
@@ -123,11 +127,17 @@ const getNetworkName = (
       case "137":
         return "matic";
     }
+    if (w3cChainId === "137") {
+      return "pol";
+    }
   } else {
     /* Non-production Network Whitelist */
     switch (data.network?.chainId) {
       case "80002":
         return { chainId: 80002, name: "amoy" };
+    }
+    if (w3cChainId === "80002") {
+      return { chainId: 80002, name: "amoy" };
     }
   }
 
