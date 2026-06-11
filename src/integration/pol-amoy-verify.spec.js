@@ -100,7 +100,7 @@ async function assertValid(t, issuerText) {
   await t.expect(IssuedBy.textContent).contains(issuerText);
 }
 
-async function assertInvalid(t) {
+async function assertInvalid(_t) {
   await InvalidBanner.with({ visibilityCheck: true })();
 }
 
