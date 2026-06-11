@@ -1,0 +1,33 @@
+{
+  "version": "https://schema.openattestation.com/2.0/schema.json",
+  "data": {
+    "$template": {
+      "name": "d08b56ed-9f91-44d8-8748-4ef17c10084e:string:GOVTECH_DEMO",
+      "type": "17fbeec8-9712-4e3a-bf17-dd74ba348644:string:EMBEDDED_RENDERER",
+      "url": "a1061e20-318c-4bde-89d5-1ec42ef1eea9:string:https://demo-renderer.opencerts.io"
+    },
+    "issuers": [
+      {
+        "name": "7c8c3632-df92-492d-84fa-bb59363c9cf0:string:TrustVC POL Issuer",
+        "tokenRegistry": "0a0be8f4-c4af-4ec2-8bd8-ef787f72ea0a:string:0x0961d9C2dA9a7105fDFC9DC4ec45951C024F88B0",
+        "identityProof": {
+          "type": "21a24a77-34fc-4d8a-9cd4-7678304ce11d:string:DNS-TXT",
+          "location": "e201feac-f6cc-466c-98ae-3cc35dd03891:string:example.tradetrust.io"
+        }
+      }
+    ],
+    "recipient": {
+      "name": "9847a1cf-8151-42d7-b240-607d7a0f2fb7:string:TrustVC POL Test"
+    },
+    "network": {
+      "chain": "da056415-f675-49d8-942b-6c4c76bf664e:string:POL",
+      "chainId": "39922aa7-aaa1-49b8-a77c-d230eae018fb:string:137"
+    }
+  },
+  "signature": {
+    "type": "SHA3MerkleProof",
+    "targetHash": "5382d7c3c19d4b5730537a234b01b2084fdd71c3196dd0f5df00b23d9756d8d0",
+    "proof": [],
+    "merkleRoot": "5382d7c3c19d4b5730537a234b01b2084fdd71c3196dd0f5df00b23d9756d8d0"
+  }
+}

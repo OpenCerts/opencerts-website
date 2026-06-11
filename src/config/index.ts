@@ -10,7 +10,7 @@ const API_MAIN_URL = "https://api.opencerts.io";
 const API_DEV_URL = "https://api.dev.opencerts.io";
 
 export const IS_MAINNET = publicRuntimeConfig.network === "mainnet";
-export const SUPPORTED_NETWORK = IS_MAINNET ? ["homestead", "matic"] : ["sepolia", "amoy"];
+export const SUPPORTED_NETWORK = IS_MAINNET ? ["homestead", "pol"] : ["sepolia", "amoy"];
 export const NETWORK_NAME = SUPPORTED_NETWORK[0]; // expected by ethers
 
 export const GA4_TAG_ID = process.env.GA4_TAG_ID;

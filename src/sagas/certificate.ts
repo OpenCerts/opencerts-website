@@ -113,7 +113,7 @@ const getUrls = (options: {
   }
 };
 
-const getNetworkName = (
+export const getNetworkName = (
   certificate: WrappedOrSignedOpenCertsDocument
 ): ConstructorParameters<typeof OAFailoverProvider>[1] => {
   const data = opencertsGetData(certificate) as v2.OpenAttestationDocument | v3.WrappedDocument;
@@ -125,7 +125,7 @@ const getNetworkName = (
     /* Production Network Whitelist */
     switch (data.network?.chainId) {
       case "137":
-        return "matic";
+        return "pol";
     }
     if (w3cChainId === "137") {
       return "pol";
