@@ -106,9 +106,9 @@ async function assertInvalid() {
 
 fixture("OpenCerts – Amoy OA v2 verification").page("http://localhost:3000");
 
-test("[Amoy OA] valid minted document – integrity and status VALID (identity INVALID: DNS not configured)", async (t) => {
+test("[Amoy OA] valid minted document – all checks pass", async (t) => {
   await uploadDoc(t, OA_AMOY_MINTED);
-  await assertInvalid();
+  await assertValid(t, "example.tradetrust.io");
 });
 
 test("[Amoy OA] tampered document (targetHash mutated) – integrity INVALID", async (t) => {
@@ -148,9 +148,9 @@ test("[Amoy W3C] not-minted document (tokenId replaced) – document status INVA
 
 fixture("OpenCerts – POL mainnet OA v2 verification").page("http://localhost:3000");
 
-test("[POL OA] valid minted document – integrity and status VALID (identity INVALID: DNS not configured)", async (t) => {
+test("[POL OA] valid minted document – all checks pass", async (t) => {
   await uploadDoc(t, OA_POL_MINTED);
-  await assertInvalid();
+  await assertValid(t, "example.tradetrust.io");
 });
 
 test("[POL OA] tampered document (targetHash mutated) – integrity INVALID", async (t) => {
