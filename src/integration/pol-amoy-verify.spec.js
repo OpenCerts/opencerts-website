@@ -100,11 +100,16 @@ async function assertInvalid() {
   await ErrorTab.with({ visibilityCheck: true })();
 }
 
+const BLOCKCHAIN_TIMEOUTS = { selectorTimeout: 90000, assertionTimeout: 90000 };
+
 // ══════════════════════════════════════════════════════════════════════════
 // Polygon Amoy testnet (chainId 80002)  –  OA v2
 // ══════════════════════════════════════════════════════════════════════════
 
-fixture("OpenCerts – Amoy OA v2 verification").page("http://localhost:3000");
+fixture("OpenCerts – Amoy OA v2 verification")
+  .page("http://localhost:3000")
+  .speed(1)
+  .timeouts(BLOCKCHAIN_TIMEOUTS);
 
 test("[Amoy OA] valid minted document – all checks pass", async (t) => {
   await uploadDoc(t, OA_AMOY_MINTED);
@@ -125,7 +130,10 @@ test("[Amoy OA] not-minted document (merkleRoot replaced) – document status IN
 // Polygon Amoy testnet  –  W3C VC
 // ──────────────────────────────────────────────────────────────────────────
 
-fixture("OpenCerts – Amoy W3C VC verification").page("http://localhost:3000");
+fixture("OpenCerts – Amoy W3C VC verification")
+  .page("http://localhost:3000")
+  .speed(1)
+  .timeouts(BLOCKCHAIN_TIMEOUTS);
 
 test("[Amoy W3C] valid minted document – all checks pass", async (t) => {
   await uploadDoc(t, W3C_AMOY_MINTED);
@@ -146,7 +154,10 @@ test("[Amoy W3C] not-minted document (tokenId replaced) – document status INVA
 // Polygon POL mainnet (chainId 137)  –  OA v2
 // ══════════════════════════════════════════════════════════════════════════
 
-fixture("OpenCerts – POL mainnet OA v2 verification").page("http://localhost:3000");
+fixture("OpenCerts – POL mainnet OA v2 verification")
+  .page("http://localhost:3000")
+  .speed(1)
+  .timeouts(BLOCKCHAIN_TIMEOUTS);
 
 test("[POL OA] valid minted document – all checks pass", async (t) => {
   await uploadDoc(t, OA_POL_MINTED);
@@ -167,7 +178,10 @@ test("[POL OA] not-minted document (merkleRoot replaced) – document status INV
 // Polygon POL mainnet  –  W3C VC
 // ──────────────────────────────────────────────────────────────────────────
 
-fixture("OpenCerts – POL mainnet W3C VC verification").page("http://localhost:3000");
+fixture("OpenCerts – POL mainnet W3C VC verification")
+  .page("http://localhost:3000")
+  .speed(1)
+  .timeouts(BLOCKCHAIN_TIMEOUTS);
 
 test("[POL W3C] valid minted document – all checks pass", async (t) => {
   await uploadDoc(t, W3C_POL_MINTED);
