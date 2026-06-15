@@ -106,10 +106,7 @@ const BLOCKCHAIN_TIMEOUTS = { selectorTimeout: 90000, assertionTimeout: 90000 };
 // Polygon Amoy testnet (chainId 80002)  –  OA v2
 // ══════════════════════════════════════════════════════════════════════════
 
-fixture("OpenCerts – Amoy OA v2 verification")
-  .page("http://localhost:3000")
-  .speed(1)
-  .timeouts(BLOCKCHAIN_TIMEOUTS);
+fixture("OpenCerts – Amoy OA v2 verification").page("http://localhost:3000").speed(1).timeouts(BLOCKCHAIN_TIMEOUTS);
 
 test("[Amoy OA] valid minted document – all checks pass", async (t) => {
   await uploadDoc(t, OA_AMOY_MINTED);
@@ -130,10 +127,7 @@ test("[Amoy OA] not-minted document (merkleRoot replaced) – document status IN
 // Polygon Amoy testnet  –  W3C VC
 // ──────────────────────────────────────────────────────────────────────────
 
-fixture("OpenCerts – Amoy W3C VC verification")
-  .page("http://localhost:3000")
-  .speed(1)
-  .timeouts(BLOCKCHAIN_TIMEOUTS);
+fixture("OpenCerts – Amoy W3C VC verification").page("http://localhost:3000").speed(1).timeouts(BLOCKCHAIN_TIMEOUTS);
 
 test("[Amoy W3C] valid minted document – all checks pass", async (t) => {
   await uploadDoc(t, W3C_AMOY_MINTED);
