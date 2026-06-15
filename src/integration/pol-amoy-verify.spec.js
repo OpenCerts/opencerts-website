@@ -108,7 +108,7 @@ fixture("OpenCerts – Amoy OA v2 verification").page("http://localhost:3000");
 
 test("[Amoy OA] valid minted document – all checks pass", async (t) => {
   await uploadDoc(t, OA_AMOY_MINTED);
-  await assertValid(t, "example.tradetrust.io");
+  await assertValid(t, "EXAMPLE.TRADETRUST.IO");
 });
 
 test("[Amoy OA] tampered document (targetHash mutated) – integrity INVALID", async (t) => {
@@ -150,7 +150,7 @@ fixture("OpenCerts – POL mainnet OA v2 verification").page("http://localhost:3
 
 test("[POL OA] valid minted document – all checks pass", async (t) => {
   await uploadDoc(t, OA_POL_MINTED);
-  await assertValid(t, "example.tradetrust.io");
+  await assertValid(t, "EXAMPLE.TRADETRUST.IO");
 });
 
 test("[POL OA] tampered document (targetHash mutated) – integrity INVALID", async (t) => {
