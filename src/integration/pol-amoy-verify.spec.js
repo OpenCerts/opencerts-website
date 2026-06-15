@@ -146,8 +146,7 @@ test("[Amoy W3C] not-minted document (tokenId replaced) – document status INVA
 // Polygon POL mainnet (chainId 137)  –  OA v2
 // ══════════════════════════════════════════════════════════════════════════
 
-fixture("OpenCerts – POL mainnet OA v2 verification")
-  .page("http://localhost:3000");
+fixture("OpenCerts – POL mainnet OA v2 verification").page("http://localhost:3000");
 
 test("[POL OA] valid minted document – all checks pass", async (t) => {
   await uploadDoc(t, OA_POL_MINTED);
@@ -168,8 +167,7 @@ test("[POL OA] not-minted document (merkleRoot replaced) – document status INV
 // Polygon POL mainnet  –  W3C VC
 // ──────────────────────────────────────────────────────────────────────────
 
-fixture("OpenCerts – POL mainnet W3C VC verification")
-  .page("http://localhost:3000");
+fixture("OpenCerts – POL mainnet W3C VC verification").page("http://localhost:3000");
 
 test("[POL W3C] valid minted document – all checks pass", async (t) => {
   await uploadDoc(t, W3C_POL_MINTED);
