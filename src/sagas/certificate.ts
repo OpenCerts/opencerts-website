@@ -117,16 +117,19 @@ export const getNetworkName = (
   certificate: WrappedOrSignedOpenCertsDocument
 ): ConstructorParameters<typeof OAFailoverProvider>[1] => {
   const data = opencertsGetData(certificate) as v2.OpenAttestationDocument | v3.WrappedDocument;
+  // W3C credentials store chainId in credentialStatus.tokenNetwork.chainId; OA v2 uses data.network.chainId
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const chainId = data.network?.chainId ?? (certificate as any).credentialStatus?.tokenNetwork?.chainId?.toString();
 
   if (IS_MAINNET) {
     /* Production Network Whitelist */
-    switch (data.network?.chainId) {
+    switch (chainId) {
       case "137":
         return "matic";
     }
   } else {
     /* Non-production Network Whitelist */
-    switch (data.network?.chainId) {
+    switch (chainId) {
       case "80002":
         return { chainId: 80002, name: "amoy" };
     }

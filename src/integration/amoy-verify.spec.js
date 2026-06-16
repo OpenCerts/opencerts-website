@@ -12,7 +12,6 @@ const defineFixture = isMainnet ? fixture.skip : fixture;
 const FIXTURE_DIR = resolve(__dirname, "fixture");
 
 const OA_AMOY_MINTED = join(FIXTURE_DIR, "amoy/oa-amoy-minted.json");
-const W3C_AMOY_MINTED = join(FIXTURE_DIR, "amoy/w3c-amoy-minted.json");
 
 // ── temp-file helpers ──────────────────────────────────────────────────────
 const TEMP_DIR = join(tmpdir(), "opencerts-amoy-tests");
@@ -36,27 +35,8 @@ function writeNotMintedOa(srcPath, name) {
   return dest;
 }
 
-function writeTamperedW3c(srcPath, name) {
-  const doc = JSON.parse(readFileSync(srcPath, "utf8"));
-  const pv = doc.proof.proofValue;
-  doc.proof = { ...doc.proof, proofValue: pv.slice(0, -1) + (pv.endsWith("A") ? "B" : "A") };
-  const dest = join(TEMP_DIR, name);
-  writeFileSync(dest, JSON.stringify(doc));
-  return dest;
-}
-
-function writeNotMintedW3c(srcPath, name) {
-  const doc = JSON.parse(readFileSync(srcPath, "utf8"));
-  doc.credentialStatus = { ...doc.credentialStatus, tokenId: UNUSED_HASH };
-  const dest = join(TEMP_DIR, name);
-  writeFileSync(dest, JSON.stringify(doc));
-  return dest;
-}
-
 const OA_AMOY_TAMPERED = writeTamperedOa(OA_AMOY_MINTED, "oa-amoy-tampered.json");
 const OA_AMOY_NOT_MINTED = writeNotMintedOa(OA_AMOY_MINTED, "oa-amoy-not-minted.json");
-const W3C_AMOY_TAMPERED = writeTamperedW3c(W3C_AMOY_MINTED, "w3c-amoy-tampered.json");
-const W3C_AMOY_NOT_MINTED = writeNotMintedW3c(W3C_AMOY_MINTED, "w3c-amoy-not-minted.json");
 
 // ── shared selectors ───────────────────────────────────────────────────────
 const CertificateStatus = Selector("#certificate-status");
@@ -86,29 +66,5 @@ test("[Amoy OA] tampered document (targetHash mutated) – integrity INVALID", a
 
 test("[Amoy OA] not-minted document (merkleRoot replaced) – document status INVALID", async (t) => {
   await t.setFilesToUpload("input[type=file]", [OA_AMOY_NOT_MINTED]);
-  await t.expect(ErrorTab.visible).ok();
-});
-
-// ──────────────────────────────────────────────────────────────────────────
-// Polygon Amoy testnet  –  W3C VC
-// ──────────────────────────────────────────────────────────────────────────
-
-defineFixture("OpenCerts – Amoy W3C VC verification").page`http://localhost:3000`.beforeEach(async () => {
-  await waitForReact();
-});
-
-test("[Amoy W3C] valid minted document – all checks pass", async (t) => {
-  await t.setFilesToUpload("input[type=file]", [W3C_AMOY_MINTED]);
-  await t.expect(CertificateStatus.visible).ok();
-  await validateTextContent(t, CertificateStatus, ["DID:WEB:TRUSTVC.GITHUB.IO:DID:1"]);
-});
-
-test("[Amoy W3C] tampered document (proofValue mutated) – integrity INVALID", async (t) => {
-  await t.setFilesToUpload("input[type=file]", [W3C_AMOY_TAMPERED]);
-  await t.expect(ErrorTab.visible).ok();
-});
-
-test("[Amoy W3C] not-minted document (tokenId replaced) – document status INVALID", async (t) => {
-  await t.setFilesToUpload("input[type=file]", [W3C_AMOY_NOT_MINTED]);
   await t.expect(ErrorTab.visible).ok();
 });

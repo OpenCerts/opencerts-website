@@ -1,5 +1,5 @@
 import { WrappedDocument, v2 } from "@trustvc/trustvc";
-import polOaV2Fixture from "../components/tests/fixture/oa-v2-pol-mainnet.json";
+import polOaV2Fixture from "../integration/fixture/pol/oa-pol-minted.json";
 import { getNetworkName } from "./certificate";
 
 jest.mock("../config", () => ({
