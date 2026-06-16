@@ -122,7 +122,7 @@ export const getNetworkName = (
     /* Production Network Whitelist */
     switch (data.network?.chainId) {
       case "137":
-        return "pol";
+        return "matic";
     }
   } else {
     /* Non-production Network Whitelist */
