@@ -6,7 +6,7 @@ module.exports = {
   collectCoverageFrom: ["src/**/*.{js,jsx}", "scripts/**/*.{js,jsx}"],
   testMatch: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)test.[jt]s?(x)"],
   // Transform ESM-only packages using Babel (these have no CJS main and use ESM exports)
-  transformIgnorePatterns: ["/node_modules/(?!(@digitalbazaar|base58-universal|base64url-universal|cborg)/)"],
+  transformIgnorePatterns: ["/node_modules/(?!(@digitalbazaar|@noble|base58-universal|base64url-universal|cborg)/)"],
   moduleNameMapper: {
     "@sentry/nextjs": "<rootDir>/_mocks_/sentry-nextjs.js",
     "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
