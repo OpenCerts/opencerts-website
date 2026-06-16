@@ -75,6 +75,7 @@ defineFixture("OpenCerts – POL mainnet OA v2 verification").page`http://localh
 
 test("[POL OA] valid minted document – all checks pass", async (t) => {
   await t.setFilesToUpload("input[type=file]", [OA_POL_MINTED]);
+  await t.expect(CertificateStatus.visible).ok();
   await validateTextContent(t, CertificateStatus, ["EXAMPLE.TRADETRUST.IO"]);
 });
 
@@ -98,6 +99,7 @@ defineFixture("OpenCerts – POL mainnet W3C VC verification").page`http://local
 
 test("[POL W3C] valid minted document – all checks pass", async (t) => {
   await t.setFilesToUpload("input[type=file]", [W3C_POL_MINTED]);
+  await t.expect(CertificateStatus.visible).ok();
   await validateTextContent(t, CertificateStatus, ["DID:WEB:TRUSTVC.GITHUB.IO:DID:1"]);
 });
 

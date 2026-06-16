@@ -75,6 +75,7 @@ defineFixture("OpenCerts – Amoy OA v2 verification").page`http://localhost:300
 
 test("[Amoy OA] valid minted document – all checks pass", async (t) => {
   await t.setFilesToUpload("input[type=file]", [OA_AMOY_MINTED]);
+  await t.expect(CertificateStatus.visible).ok();
   await validateTextContent(t, CertificateStatus, ["EXAMPLE.TRADETRUST.IO"]);
 });
 
@@ -98,6 +99,7 @@ defineFixture("OpenCerts – Amoy W3C VC verification").page`http://localhost:30
 
 test("[Amoy W3C] valid minted document – all checks pass", async (t) => {
   await t.setFilesToUpload("input[type=file]", [W3C_AMOY_MINTED]);
+  await t.expect(CertificateStatus.visible).ok();
   await validateTextContent(t, CertificateStatus, ["DID:WEB:TRUSTVC.GITHUB.IO:DID:1"]);
 });
 
