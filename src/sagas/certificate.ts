@@ -117,16 +117,19 @@ export const getNetworkName = (
   certificate: WrappedOrSignedOpenCertsDocument
 ): ConstructorParameters<typeof OAFailoverProvider>[1] => {
   const data = opencertsGetData(certificate) as v2.OpenAttestationDocument | v3.WrappedDocument;
-  // OA v2: chainId lives in data.network.chainId
-  // W3C credentials: chainId lives in credentialStatus.tokenNetwork.chainId
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const chainId = data.network?.chainId ?? (certificate as any).credentialStatus?.tokenNetwork?.chainId?.toString();
 
-  switch (chainId) {
-    case "137":
-      return "pol";
-    case "80002":
-      return { chainId: 80002, name: "amoy" };
+  if (IS_MAINNET) {
+    /* Production Network Whitelist */
+    switch (data.network?.chainId) {
+      case "137":
+        return "pol";
+    }
+  } else {
+    /* Non-production Network Whitelist */
+    switch (data.network?.chainId) {
+      case "80002":
+        return { chainId: 80002, name: "amoy" };
+    }
   }
 
   // A network is specified in the certificate but not in the above whitelist
