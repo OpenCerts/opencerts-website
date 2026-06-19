@@ -1,4 +1,11 @@
-import { SchemaId, VerificationFragment, InvalidVerificationFragment, SkippedVerificationFragment, v2, v3 } from "@trustvc/trustvc";
+import {
+  SchemaId,
+  VerificationFragment,
+  InvalidVerificationFragment,
+  SkippedVerificationFragment,
+  v2,
+  v3,
+} from "@trustvc/trustvc";
 import dnsDidV2Signed from "../components/tests/fixture/dns-did-signed.json";
 import dnsDidV3Signed from "../integration/v3/fixture/dns-did-signed.json";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
@@ -176,13 +183,15 @@ const makeValidFragment = (type: VerificationFragment["type"], name: string): Ve
   status: "VALID",
 });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const makeInvalidFragment = (type: VerificationFragment["type"], name: string, reason = {}): InvalidVerificationFragment<any> => ({
+const makeInvalidFragment = (
+  type: VerificationFragment["type"],
+  name: string,
+  reason: { code: number; codeString: string; message: string } = { code: 0, codeString: "UNKNOWN", message: "" }
+): InvalidVerificationFragment<unknown> => ({
   name,
   type,
   status: "INVALID",
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  reason: reason as any,
+  reason,
   data: undefined,
 });
 
