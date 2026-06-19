@@ -1,4 +1,4 @@
-import { SchemaId, VerificationFragment, v2, v3 } from "@trustvc/trustvc";
+import { SchemaId, VerificationFragment, InvalidVerificationFragment, SkippedVerificationFragment, v2, v3 } from "@trustvc/trustvc";
 import dnsDidV2Signed from "../components/tests/fixture/dns-did-signed.json";
 import dnsDidV3Signed from "../integration/v3/fixture/dns-did-signed.json";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
@@ -176,20 +176,21 @@ const makeValidFragment = (type: VerificationFragment["type"], name: string): Ve
   status: "VALID",
 });
 
-const makeInvalidFragment = (type: VerificationFragment["type"], name: string, reason = {}): VerificationFragment => ({
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const makeInvalidFragment = (type: VerificationFragment["type"], name: string, reason = {}): InvalidVerificationFragment<any> => ({
   name,
   type,
   status: "INVALID",
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   reason: reason as any,
+  data: undefined,
 });
 
-const makeSkippedFragment = (type: VerificationFragment["type"], name: string): VerificationFragment => ({
+const makeSkippedFragment = (type: VerificationFragment["type"], name: string): SkippedVerificationFragment => ({
   name,
   type,
   status: "SKIPPED",
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  reason: { code: 0, codeString: "SKIPPED", message: "skipped" } as any,
+  reason: { code: 0, codeString: "SKIPPED", message: "skipped" },
 });
 
 /** Fragments representing a fully valid OA document */
