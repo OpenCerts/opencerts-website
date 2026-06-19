@@ -15,6 +15,7 @@ import {
   v3,
 } from "@trustvc/trustvc";
 import React, { Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
+import { ANALYTICS_EVENTS } from "../../constants/analyticsEvents";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { getTemplate, opencertsGetData } from "../../utils/utils";
 import {
@@ -121,7 +122,7 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
     if (isWrappedV2Document(rawDocument)) {
       const certificateData = getDataV2(rawDocument);
       analyticsEvent({
-        category: "CERTIFICATE_VIEWED",
+        category: ANALYTICS_EVENTS.CERTIFICATE_VIEWED,
         options: {
           documentId: certificateData?.id ?? undefined,
           issuerId: `${certificateData.issuers.map((issuer) => issuer.id).join(",")}`,
@@ -131,7 +132,7 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
       const certificateData = opencertsGetData(rawDocument) as v3.OpenAttestationDocument;
       const storeAddresses = getIssuerAddress(rawDocument);
       analyticsEvent({
-        category: "CERTIFICATE_VIEWED",
+        category: ANALYTICS_EVENTS.CERTIFICATE_VIEWED,
         options: {
           documentId: certificateData?.id ?? undefined,
           documentStore: `${Array.isArray(storeAddresses) ? storeAddresses.join(",") : storeAddresses}`,
@@ -140,7 +141,7 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
     }
 
     // CERTIFICATE_DETAILS event
-    sendEventCertificateDetails("CERTIFICATE_DETAILS", rawDocument);
+    sendEventCertificateDetails(ANALYTICS_EVENTS.CERTIFICATE_DETAILS, rawDocument);
   }, [rawDocument]);
 
   const visibleTemplates = templates.filter((template) => template.id !== "print");

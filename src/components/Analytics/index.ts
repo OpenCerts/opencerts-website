@@ -11,6 +11,7 @@ import {
 import { isEmpty, omitBy } from "lodash";
 import ReactGA from "react-ga4";
 import registry from "../../../public/static/registry.json";
+import { ANALYTICS_EVENTS } from "../../constants/analyticsEvents";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { getLogger } from "../../utils/logger";
 const { trace } = getLogger("components:Analytics:");
@@ -113,7 +114,7 @@ export const sendV2EventCertificateViewedDetailed = ({
     issuerName = issuer.identityProof.location || "";
   }
   analyticsEvent({
-    category: category ?? "CERTIFICATE_DETAILS",
+    category: category ?? ANALYTICS_EVENTS.CERTIFICATE_DETAILS,
     nonInteraction: true,
     options: {
       documentStore: documentStore,
@@ -144,7 +145,7 @@ export const sendV3EventCertificateViewedDetailed = ({
   const rendererUrl = certificateData.openAttestationMetadata.template?.url || "";
   const templateName = certificateData.openAttestationMetadata.template?.name || "";
   analyticsEvent({
-    category: category ?? "CERTIFICATE_DETAILS",
+    category: category ?? ANALYTICS_EVENTS.CERTIFICATE_DETAILS,
     nonInteraction: true,
     options: {
       documentStore: documentStore,
@@ -203,7 +204,7 @@ export function triggerV2ErrorLogging(
     }
 
     analyticsEvent({
-      category: "CERTIFICATE_ERROR",
+      category: ANALYTICS_EVENTS.CERTIFICATE_ERROR,
       nonInteraction: true,
       options: {
         documentStore: documentStore,
@@ -236,7 +237,7 @@ export function triggerV3ErrorLogging(
   const issuerName = rawCertificate.openAttestationMetadata.identityProof.identifier;
 
   analyticsEvent({
-    category: "CERTIFICATE_ERROR",
+    category: ANALYTICS_EVENTS.CERTIFICATE_ERROR,
     nonInteraction: true,
     options: {
       documentStore: documentStore,
@@ -276,7 +277,7 @@ export function triggerV2RendererTimeoutLogging(rawCertificate: WrappedDocument<
     }
 
     analyticsEvent({
-      category: "CERTIFICATE_RENDERER_TIMEOUT",
+      category: ANALYTICS_EVENTS.CERTIFICATE_RENDERER_TIMEOUT,
       nonInteraction: true,
       options: {
         documentStore: documentStore,
@@ -304,7 +305,7 @@ export function triggerV3RendererTimeoutLogging(rawCertificate: WrappedDocument<
   const issuerName = rawCertificate.openAttestationMetadata.identityProof.identifier;
 
   analyticsEvent({
-    category: "CERTIFICATE_RENDERER_TIMEOUT",
+    category: ANALYTICS_EVENTS.CERTIFICATE_RENDERER_TIMEOUT,
     nonInteraction: true,
     options: {
       documentStore: documentStore,

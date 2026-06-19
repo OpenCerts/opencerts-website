@@ -49,6 +49,7 @@ import {
   serverError,
 } from "../services/fragment";
 import { generateLink } from "../services/link";
+import { pushVerificationEvent } from "../services/verificationAnalytics";
 import { WrappedOrSignedOpenCertsDocument, isEncrypted } from "../shared";
 import { getLogger } from "../utils/logger";
 import { opencertsGetData } from "../utils/utils";
@@ -234,6 +235,7 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
         }
       }
     }
+    pushVerificationEvent(certificate, fragments);
   } catch (e) {
     captureException(e, { tags: { saga: "verifyCertificate" } });
     if (e instanceof Error) yield put(verifyingCertificateErrored(e.message));

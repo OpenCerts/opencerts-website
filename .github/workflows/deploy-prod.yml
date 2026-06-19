@@ -52,6 +52,7 @@ jobs:
           INFURA_API_KEY_RESOLVER: ${{ secrets.INFURA_API_KEY_RESOLVER }}
           ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
           GA4_TAG_ID: ${{ secrets.GA4_TAG_ID }}
+          GTM_CONTAINER_ID: ${{ secrets.GTM_CONTAINER_ID }}
           TRUSTED_TLDS: ${{ secrets.TRUSTED_TLDS }}
           # Required for Sentry source map upload during `next build`
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
@@ -59,6 +60,7 @@ jobs:
           NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           # Must be NEXT_PUBLIC_* so environment/release are compiled into the static export bundle.
           NEXT_PUBLIC_SENTRY_ENVIRONMENT: "production"
+          NEXT_PUBLIC_DEPLOY_ENV: "production"
           NEXT_PUBLIC_SENTRY_RELEASE: ${{ github.sha }}
           SENTRY_RELEASE: ${{ github.sha }}
 
