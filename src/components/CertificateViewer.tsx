@@ -37,6 +37,7 @@ export interface CertificateViewerProps {
   showSharing: boolean;
   showShareLink: boolean;
   emailSendingState: string;
+  emailSendingError: string | null;
   handleSharingToggle: () => void;
   handleSendCertificate: (event: { email: string; captcha: string }) => void;
   handleShareLinkToggle: () => void;
@@ -114,6 +115,7 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
             <Modal show={props.showSharing} toggle={props.handleSharingToggle}>
               <CertificateSharingForm
                 emailSendingState={props.emailSendingState}
+                emailSendingError={props.emailSendingError}
                 handleSendCertificate={props.handleSendCertificate}
                 handleSharingToggle={props.handleSharingToggle}
               />
