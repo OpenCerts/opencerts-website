@@ -6,11 +6,11 @@ import {
   v2,
   v3,
 } from "@trustvc/trustvc";
+import ReactGA from "react-ga4";
 import dnsDidV2Signed from "../components/tests/fixture/dns-did-signed.json";
 import { ANALYTICS_EVENTS } from "../constants/analyticsEvents";
 import dnsDidV3Signed from "../integration/v3/fixture/dns-did-signed.json";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
-import { pushGTMEvent } from "./gtm";
 import {
   DocumentVerificationEvent,
   buildVerificationEvent,
@@ -27,7 +27,7 @@ import {
 // Mocks
 // ---------------------------------------------------------------------------
 
-jest.mock("./gtm", () => ({ pushGTMEvent: jest.fn() }));
+jest.mock("react-ga4", () => ({ __esModule: true, default: { event: jest.fn() } }));
 
 // ---------------------------------------------------------------------------
 // Shared test fixtures
@@ -507,7 +507,6 @@ describe("buildVerificationEvent", () => {
   it("builds a correct event for a valid OA v2 document", () => {
     const event: DocumentVerificationEvent = buildVerificationEvent(v2DnsTxtDoc, allValidFragments);
 
-    expect(event.event).toBe(ANALYTICS_EVENTS.DOCUMENT_VERIFICATION_COMPLETED);
     expect(event.environment).toBe("local");
     expect(event.document_schema).toBe("OA v2");
     expect(event.issuer_method).toBe("DNS-TXT");
@@ -583,14 +582,14 @@ describe("buildVerificationEvent", () => {
 // ---------------------------------------------------------------------------
 
 describe("pushVerificationEvent", () => {
-  it("pushes a GTM event for a valid v2 document", () => {
+  it("sends a GA4 event for a valid v2 document", () => {
     jest.clearAllMocks();
     pushVerificationEvent(v2DnsTxtDoc, allValidFragments);
 
-    expect(pushGTMEvent).toHaveBeenCalledTimes(1);
-    expect(pushGTMEvent).toHaveBeenCalledWith(
+    expect(ReactGA.event).toHaveBeenCalledTimes(1);
+    expect(ReactGA.event).toHaveBeenCalledWith(
+      ANALYTICS_EVENTS.DOCUMENT_VERIFICATION_COMPLETED,
       expect.objectContaining({
-        event: ANALYTICS_EVENTS.DOCUMENT_VERIFICATION_COMPLETED,
         environment: "local",
         document_schema: "OA v2",
         verification_result: "valid",
@@ -598,11 +597,12 @@ describe("pushVerificationEvent", () => {
     );
   });
 
-  it("pushes a GTM event with error_code for an invalid v2 document", () => {
+  it("sends a GA4 event with error_code for an invalid v2 document", () => {
     jest.clearAllMocks();
     pushVerificationEvent(v2DnsTxtDoc, tamperedHashFragments);
 
-    expect(pushGTMEvent).toHaveBeenCalledWith(
+    expect(ReactGA.event).toHaveBeenCalledWith(
+      ANALYTICS_EVENTS.DOCUMENT_VERIFICATION_COMPLETED,
       expect.objectContaining({
         verification_result: "error",
         error_code: "CERTIFICATE_HASH",
@@ -610,12 +610,12 @@ describe("pushVerificationEvent", () => {
     );
   });
 
-  it("pushes exactly one GTM event per call", () => {
+  it("sends exactly one GA4 event per call", () => {
     jest.clearAllMocks();
     pushVerificationEvent(v2DnsTxtDoc, allValidFragments);
     pushVerificationEvent(v2DnsTxtDoc, allValidFragments);
 
-    expect(pushGTMEvent).toHaveBeenCalledTimes(2);
+    expect(ReactGA.event).toHaveBeenCalledTimes(2);
   });
 
   it("does not throw when buildVerificationEvent throws internally", () => {
@@ -624,19 +624,20 @@ describe("pushVerificationEvent", () => {
     expect(() => pushVerificationEvent(null as any, allValidFragments)).not.toThrow();
   });
 
-  it("does not call pushGTMEvent when an internal error occurs", () => {
+  it("does not call ReactGA.event when an internal error occurs", () => {
     jest.clearAllMocks();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     pushVerificationEvent(null as any, allValidFragments);
-    expect(pushGTMEvent).not.toHaveBeenCalled();
+    expect(ReactGA.event).not.toHaveBeenCalled();
   });
 
-  it("pushes GTM event for a W3C VC document", () => {
+  it("sends a GA4 event for a W3C VC document", () => {
+    jest.clearAllMocks();
     pushVerificationEvent(w3cDocWithDidWeb, bbsFragments);
 
-    expect(pushGTMEvent).toHaveBeenCalledWith(
+    expect(ReactGA.event).toHaveBeenCalledWith(
+      ANALYTICS_EVENTS.DOCUMENT_VERIFICATION_COMPLETED,
       expect.objectContaining({
-        event: ANALYTICS_EVENTS.DOCUMENT_VERIFICATION_COMPLETED,
         document_schema: "W3C VC",
         issuer_method: "DID:WEB",
         signing_algorithm: "BBS2023",
@@ -644,12 +645,13 @@ describe("pushVerificationEvent", () => {
     );
   });
 
-  it("pushes GTM event for a v3 document", () => {
+  it("sends a GA4 event for a v3 document", () => {
+    jest.clearAllMocks();
     pushVerificationEvent(v3Document as unknown as WrappedOrSignedOpenCertsDocument, allValidFragments);
 
-    expect(pushGTMEvent).toHaveBeenCalledWith(
+    expect(ReactGA.event).toHaveBeenCalledWith(
+      ANALYTICS_EVENTS.DOCUMENT_VERIFICATION_COMPLETED,
       expect.objectContaining({
-        event: ANALYTICS_EVENTS.DOCUMENT_VERIFICATION_COMPLETED,
         document_schema: "OA v3",
         signing_algorithm: "merkleroot2018",
       })
