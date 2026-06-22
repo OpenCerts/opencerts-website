@@ -8,6 +8,7 @@ import {
 } from "@trustvc/trustvc";
 import dnsDidV2Signed from "../components/tests/fixture/dns-did-signed.json";
 import dnsDidV3Signed from "../integration/v3/fixture/dns-did-signed.json";
+import { ANALYTICS_EVENTS } from "../constants/analyticsEvents";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
 import { pushGTMEvent } from "./gtm";
 import {
@@ -491,7 +492,7 @@ describe("buildVerificationEvent", () => {
   it("builds a correct event for a valid OA v2 document", () => {
     const event: DocumentVerificationEvent = buildVerificationEvent(v2DnsTxtDoc, allValidFragments);
 
-    expect(event.event).toBe("document_verification_completed");
+    expect(event.event).toBe(ANALYTICS_EVENTS.DOCUMENT_VERIFICATION_COMPLETED);
     expect(event.environment).toBe("local");
     expect(event.document_schema).toBe("OA v2");
     expect(event.issuer_method).toBe("DNS-TXT");
@@ -573,7 +574,7 @@ describe("pushVerificationEvent", () => {
     expect(pushGTMEvent).toHaveBeenCalledTimes(1);
     expect(pushGTMEvent).toHaveBeenCalledWith(
       expect.objectContaining({
-        event: "document_verification_completed",
+        event: ANALYTICS_EVENTS.DOCUMENT_VERIFICATION_COMPLETED,
         environment: "local",
         document_schema: "OA v2",
         verification_result: "valid",
@@ -619,7 +620,7 @@ describe("pushVerificationEvent", () => {
 
     expect(pushGTMEvent).toHaveBeenCalledWith(
       expect.objectContaining({
-        event: "document_verification_completed",
+        event: ANALYTICS_EVENTS.DOCUMENT_VERIFICATION_COMPLETED,
         document_schema: "W3C VC",
         issuer_method: "DID:WEB",
         signing_algorithm: "BBS2023",
@@ -632,7 +633,7 @@ describe("pushVerificationEvent", () => {
 
     expect(pushGTMEvent).toHaveBeenCalledWith(
       expect.objectContaining({
-        event: "document_verification_completed",
+        event: ANALYTICS_EVENTS.DOCUMENT_VERIFICATION_COMPLETED,
         document_schema: "OA v3",
         signing_algorithm: "merkleroot2018",
       })
