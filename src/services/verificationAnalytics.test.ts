@@ -7,8 +7,8 @@ import {
   v3,
 } from "@trustvc/trustvc";
 import dnsDidV2Signed from "../components/tests/fixture/dns-did-signed.json";
-import dnsDidV3Signed from "../integration/v3/fixture/dns-did-signed.json";
 import { ANALYTICS_EVENTS } from "../constants/analyticsEvents";
+import dnsDidV3Signed from "../integration/v3/fixture/dns-did-signed.json";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
 import { pushGTMEvent } from "./gtm";
 import {
