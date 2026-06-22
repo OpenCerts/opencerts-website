@@ -190,7 +190,8 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
     trace(`Verification Status: ${JSON.stringify(fragments)}`);
     yield put(verifyingCertificateCompleted(fragments));
 
-    if (isValidOpenCert(fragments)) {
+    const isValid = isValidOpenCert(fragments);
+    if (isValid) {
       Router.push("/viewer");
     } else {
       const errors: string[] = [];
@@ -237,7 +238,7 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
         }
       }
     }
-    pushVerificationEvent(certificate, fragments);
+    pushVerificationEvent(certificate, fragments, isValid);
   } catch (e) {
     captureException(e, { tags: { saga: "verifyCertificate" } });
     if (e instanceof Error) yield put(verifyingCertificateErrored(e.message));

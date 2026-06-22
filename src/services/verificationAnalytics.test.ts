@@ -19,6 +19,7 @@ import {
   getIssuerIdentity,
   getIssuerMethod,
   getSigningAlgorithm,
+  getVerificationResult,
   pushVerificationEvent,
 } from "./verificationAnalytics";
 
@@ -485,6 +486,20 @@ describe("getErrorCode", () => {
 });
 
 // ---------------------------------------------------------------------------
+// Tests: getVerificationResult
+// ---------------------------------------------------------------------------
+
+describe("getVerificationResult", () => {
+  it("returns 'valid' when all verification fragments pass", () => {
+    expect(getVerificationResult(v2DnsTxtDoc, allValidFragments)).toBe("valid");
+  });
+
+  it("returns 'error' when verification fragments fail", () => {
+    expect(getVerificationResult(v2DnsTxtDoc, tamperedHashFragments)).toBe("error");
+  });
+});
+
+// ---------------------------------------------------------------------------
 // Tests: buildVerificationEvent
 // ---------------------------------------------------------------------------
 
@@ -505,7 +520,7 @@ describe("buildVerificationEvent", () => {
   it("builds a correct event for an invalid OA v2 document", () => {
     const event: DocumentVerificationEvent = buildVerificationEvent(v2DnsTxtDoc, tamperedHashFragments);
 
-    expect(event.verification_result).toBe("invalid");
+    expect(event.verification_result).toBe("error");
     expect(event.error_code).toBe("CERTIFICATE_HASH");
   });
 
@@ -537,7 +552,7 @@ describe("buildVerificationEvent", () => {
 
     expect(event.document_schema).toBe("W3C VC");
     expect(event.signing_algorithm).toBe("BBS2023");
-    expect(event.verification_result).toBe("invalid");
+    expect(event.verification_result).toBe("error");
     expect(event.error_code).toBe("INVALID_DOCUMENT");
   });
 
@@ -588,7 +603,7 @@ describe("pushVerificationEvent", () => {
 
     expect(pushGTMEvent).toHaveBeenCalledWith(
       expect.objectContaining({
-        verification_result: "invalid",
+        verification_result: "error",
         error_code: "CERTIFICATE_HASH",
       })
     );

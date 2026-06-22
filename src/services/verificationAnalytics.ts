@@ -17,7 +17,7 @@ import { GTMEvent, pushGTMEvent } from "./gtm";
 export type DocumentSchema = "OA v2" | "OA v3" | "W3C VC";
 export type IssuerMethod = "DNS-TXT" | "DNS-DID" | "DID:WEB" | "unknown";
 export type SigningAlgorithm = "merkleroot2018" | "BBS2023" | "ECDSA2023" | "unknown";
-export type VerificationResult = "valid" | "invalid";
+export type VerificationResult = "valid" | "error";
 
 export interface DocumentVerificationEvent extends GTMEvent {
   event: typeof ANALYTICS_EVENTS.DOCUMENT_VERIFICATION_COMPLETED;
@@ -103,9 +103,10 @@ export const getSigningAlgorithm = (
 
 export const getErrorCode = (
   certificate: WrappedOrSignedOpenCertsDocument,
-  fragments: VerificationFragment[]
+  fragments: VerificationFragment[],
+  isValid: boolean = isValidOpenCert(fragments)
 ): string | undefined => {
-  if (isValidOpenCert(fragments)) return undefined;
+  if (isValid) return undefined;
 
   // W3C VC failures map to a single catch-all code, matching existing saga behaviour
   if (!isWrappedV2Document(certificate) && !isWrappedV3Document(certificate)) return "INVALID_DOCUMENT";
@@ -127,11 +128,18 @@ export const getErrorCode = (
   return errors.length > 0 ? errors.join(",") : undefined;
 };
 
-export const buildVerificationEvent = (
+export const getVerificationResult = (
   certificate: WrappedOrSignedOpenCertsDocument,
   fragments: VerificationFragment[]
+): VerificationResult => (isValidOpenCert(fragments) ? "valid" : "error");
+
+export const buildVerificationEvent = (
+  certificate: WrappedOrSignedOpenCertsDocument,
+  fragments: VerificationFragment[],
+  isValid: boolean = isValidOpenCert(fragments)
 ): DocumentVerificationEvent => {
-  const isValid = isValidOpenCert(fragments);
+  const verificationResult: VerificationResult = isValid ? "valid" : "error";
+  const errorCode = isValid ? undefined : getErrorCode(certificate, fragments, false);
   const payload: DocumentVerificationEvent = {
     event: ANALYTICS_EVENTS.DOCUMENT_VERIFICATION_COMPLETED,
     environment: DEPLOY_ENV,
@@ -139,12 +147,9 @@ export const buildVerificationEvent = (
     issuer_method: getIssuerMethod(certificate),
     issuer_identity: getIssuerIdentity(certificate),
     signing_algorithm: getSigningAlgorithm(certificate, fragments),
-    verification_result: isValid ? "valid" : "invalid",
+    verification_result: verificationResult,
   };
-  if (!isValid) {
-    const errorCode = getErrorCode(certificate, fragments);
-    if (errorCode) payload.error_code = errorCode;
-  }
+  if (errorCode) payload.error_code = errorCode;
   return payload;
 };
 
@@ -154,10 +159,11 @@ export const buildVerificationEvent = (
  */
 export const pushVerificationEvent = (
   certificate: WrappedOrSignedOpenCertsDocument,
-  fragments: VerificationFragment[]
+  fragments: VerificationFragment[],
+  isValid?: boolean
 ): void => {
   try {
-    pushGTMEvent(buildVerificationEvent(certificate, fragments));
+    pushGTMEvent(buildVerificationEvent(certificate, fragments, isValid ?? isValidOpenCert(fragments)));
   } catch {
     // Analytics failures must never affect the application
   }
