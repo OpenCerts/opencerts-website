@@ -52,6 +52,7 @@ jobs:
           INFURA_API_KEY_RESOLVER: ${{ secrets.INFURA_API_KEY_RESOLVER }}
           ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
           GA4_TAG_ID: ${{ secrets.GA4_TAG_ID }}
+          GTM_CONTAINER_ID: ${{ secrets.GTM_CONTAINER_ID }}
           TRUSTED_TLDS: ${{ secrets.TRUSTED_TLDS }}
           # Required for Sentry source map upload during `next build`
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}

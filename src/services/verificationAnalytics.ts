@@ -7,19 +7,20 @@ import {
   v2,
   v3,
 } from "@trustvc/trustvc";
-import ReactGA from "react-ga4";
 import registry from "../../public/static/registry.json";
 import { DEPLOY_ENV } from "../config";
 import { ANALYTICS_EVENTS } from "../constants/analyticsEvents";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
 import { certificateNotIssued, certificateRevoked, contractNotFound, invalidArgument, serverError } from "./fragment";
+import { GTMEvent, pushGTMEvent } from "./gtm";
 
 export type DocumentSchema = "OA v2" | "OA v3" | "W3C VC";
 export type IssuerMethod = "DNS-TXT" | "DNS-DID" | "DID:WEB" | "unknown";
 export type SigningAlgorithm = "merkleroot2018" | "BBS2023" | "ECDSA2023" | "unknown";
 export type VerificationResult = "valid" | "error";
 
-export interface DocumentVerificationEvent {
+export interface DocumentVerificationEvent extends GTMEvent {
+  event: typeof ANALYTICS_EVENTS.DOCUMENT_VERIFICATION_COMPLETED;
   environment: string;
   document_schema: DocumentSchema;
   issuer_method: IssuerMethod;
@@ -140,6 +141,7 @@ export const buildVerificationEvent = (
   const verificationResult: VerificationResult = isValid ? "valid" : "error";
   const errorCode = isValid ? undefined : getErrorCode(certificate, fragments, false);
   const payload: DocumentVerificationEvent = {
+    event: ANALYTICS_EVENTS.DOCUMENT_VERIFICATION_COMPLETED,
     environment: DEPLOY_ENV,
     document_schema: getDocumentSchema(certificate),
     issuer_method: getIssuerMethod(certificate),
@@ -151,14 +153,17 @@ export const buildVerificationEvent = (
   return payload;
 };
 
+/**
+ * Builds and pushes a GTM event for a completed verification attempt.
+ * Wraps everything in try/catch — analytics failures must never affect the application.
+ */
 export const pushVerificationEvent = (
   certificate: WrappedOrSignedOpenCertsDocument,
   fragments: VerificationFragment[],
   isValid?: boolean
 ): void => {
   try {
-    const payload = buildVerificationEvent(certificate, fragments, isValid ?? isValidOpenCert(fragments));
-    ReactGA.event(ANALYTICS_EVENTS.DOCUMENT_VERIFICATION_COMPLETED, payload);
+    pushGTMEvent(buildVerificationEvent(certificate, fragments, isValid ?? isValidOpenCert(fragments)));
   } catch {
     // Analytics failures must never affect the application
   }
