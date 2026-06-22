@@ -23,6 +23,7 @@ import {
   sendEventCertificateDetails,
   triggerV2RendererTimeoutLogging,
   triggerV3RendererTimeoutLogging,
+  triggerW3CRendererTimeoutLogging,
 } from "../Analytics";
 import { MutiTabsContainer } from "../MultiTabs";
 
@@ -104,6 +105,8 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
           triggerV2RendererTimeoutLogging(rawDocument);
         } else if (isWrappedV3Document(rawDocument)) {
           triggerV3RendererTimeoutLogging(rawDocument);
+        } else {
+          triggerW3CRendererTimeoutLogging(rawDocument);
         }
       }
     },
@@ -126,6 +129,7 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
         options: {
           documentId: certificateData?.id ?? undefined,
           issuerId: `${certificateData.issuers.map((issuer) => issuer.id).join(",")}`,
+          documentSchema: "OA v2",
         },
       });
     } else if (isWrappedV3Document(rawDocument)) {
@@ -136,6 +140,20 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
         options: {
           documentId: certificateData?.id ?? undefined,
           documentStore: `${Array.isArray(storeAddresses) ? storeAddresses.join(",") : storeAddresses}`,
+          documentSchema: "OA v3",
+        },
+      });
+    } else {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const vc = rawDocument as any;
+      const rawIssuer = vc.issuer;
+      const issuerId = typeof rawIssuer === "string" ? rawIssuer : rawIssuer?.id ?? "";
+      analyticsEvent({
+        category: ANALYTICS_EVENTS.CERTIFICATE_VIEWED,
+        options: {
+          documentId: vc.id ?? undefined,
+          issuerId,
+          documentSchema: "W3C VC",
         },
       });
     }

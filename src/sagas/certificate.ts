@@ -19,7 +19,7 @@ import Router from "next/router";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import "isomorphic-fetch";
 
-import { triggerV2ErrorLogging, triggerV3ErrorLogging } from "../components/Analytics";
+import { triggerV2ErrorLogging, triggerV3ErrorLogging, triggerW3CErrorLogging } from "../components/Analytics";
 import { NETWORK_NAME, IS_MAINNET } from "../config";
 import { getCertificate } from "../reducers/certificate.selectors";
 import {
@@ -232,6 +232,8 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
           triggerV2ErrorLogging(certificate, errors);
         } else if (isWrappedV3Document(certificate)) {
           triggerV3ErrorLogging(certificate, errors);
+        } else {
+          triggerW3CErrorLogging(certificate, errors);
         }
       }
     }
