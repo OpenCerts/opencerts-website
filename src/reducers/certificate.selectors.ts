@@ -19,6 +19,10 @@ export function getEmailSendingState(store: RootState): states {
   return store.certificate.emailState;
 }
 
+export function getEmailSendingError(store: RootState): string | null {
+  return store.certificate.emailError;
+}
+
 export function getShareLink(store: RootState): { id?: string; key?: string } {
   return store.certificate.shareLink;
 }
