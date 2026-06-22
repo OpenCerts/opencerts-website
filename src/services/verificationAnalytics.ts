@@ -149,7 +149,7 @@ export const buildVerificationEvent = (
     signing_algorithm: getSigningAlgorithm(certificate, fragments),
     verification_result: verificationResult,
   };
-  if (errorCode) payload.error_code = errorCode;
+  payload.error_code = errorCode;
   return payload;
 };
 

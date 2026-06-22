@@ -191,6 +191,10 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
     yield put(verifyingCertificateCompleted(fragments));
 
     const isValid = isValidOpenCert(fragments);
+    // Push DOCUMENT_VERIFICATION_COMPLETED first so the GTM model reflects the current
+    // verification result before any legacy analytics events (CERTIFICATE_ERROR) fire.
+    pushVerificationEvent(certificate, fragments, isValid);
+
     if (isValid) {
       Router.push("/viewer");
     } else {
@@ -238,7 +242,6 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
         }
       }
     }
-    pushVerificationEvent(certificate, fragments, isValid);
   } catch (e) {
     captureException(e, { tags: { saga: "verifyCertificate" } });
     if (e instanceof Error) yield put(verifyingCertificateErrored(e.message));

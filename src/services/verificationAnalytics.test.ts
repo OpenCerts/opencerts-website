@@ -556,9 +556,10 @@ describe("buildVerificationEvent", () => {
     expect(event.error_code).toBe("INVALID_DOCUMENT");
   });
 
-  it("omits error_code entirely for valid documents (no undefined key pollution)", () => {
+  it("sets error_code to undefined for valid documents so GTM clears any prior stale value", () => {
     const event = buildVerificationEvent(v2DnsTxtDoc, allValidFragments);
-    expect(Object.prototype.hasOwnProperty.call(event, "error_code")).toBe(false);
+    expect(Object.prototype.hasOwnProperty.call(event, "error_code")).toBe(true);
+    expect(event.error_code).toBeUndefined();
   });
 
   it("includes error_code for invalid documents", () => {
