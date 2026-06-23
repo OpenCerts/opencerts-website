@@ -2,6 +2,7 @@ import { isObfuscated as isOAObfuscated, OpenAttestationDocument, VerificationFr
 import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { ANALYTICS_EVENTS } from "../constants/analyticsEvents";
 import { updateObfuscatedCertificate as updateObfuscatedCertificateAction } from "../reducers/certificate.slice";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
 import { sendEventCertificateDetails } from "./Analytics";
@@ -72,7 +73,7 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
                         id="btn-print"
                         onClick={() => {
                           if (childRef.current) {
-                            sendEventCertificateDetails("CERTIFICATE_PRINT", document);
+                            sendEventCertificateDetails(ANALYTICS_EVENTS.CERTIFICATE_PRINT, document);
                             childRef.current.print();
                           }
                         }}

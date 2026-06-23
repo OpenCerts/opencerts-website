@@ -19,7 +19,7 @@ import Router from "next/router";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import "isomorphic-fetch";
 
-import { triggerV2ErrorLogging, triggerV3ErrorLogging } from "../components/Analytics";
+import { triggerV2ErrorLogging, triggerV3ErrorLogging, triggerW3CErrorLogging } from "../components/Analytics";
 import { NETWORK_NAME, IS_MAINNET } from "../config";
 import { getCertificate } from "../reducers/certificate.selectors";
 import {
@@ -49,6 +49,7 @@ import {
   serverError,
 } from "../services/fragment";
 import { generateLink } from "../services/link";
+import { pushVerificationEvent } from "../services/verificationAnalytics";
 import { WrappedOrSignedOpenCertsDocument, isEncrypted } from "../shared";
 import { getLogger } from "../utils/logger";
 import { opencertsGetData } from "../utils/utils";
@@ -189,7 +190,12 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
     trace(`Verification Status: ${JSON.stringify(fragments)}`);
     yield put(verifyingCertificateCompleted(fragments));
 
-    if (isValidOpenCert(fragments)) {
+    const isValid = isValidOpenCert(fragments);
+    // Push DOCUMENT_VERIFICATION_COMPLETED first so the GTM model reflects the current
+    // verification result before any legacy analytics events (CERTIFICATE_ERROR) fire.
+    pushVerificationEvent(certificate, fragments, isValid);
+
+    if (isValid) {
       Router.push("/viewer");
     } else {
       const errors: string[] = [];
@@ -231,6 +237,8 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
           triggerV2ErrorLogging(certificate, errors);
         } else if (isWrappedV3Document(certificate)) {
           triggerV3ErrorLogging(certificate, errors);
+        } else {
+          triggerW3CErrorLogging(certificate, errors);
         }
       }
     }

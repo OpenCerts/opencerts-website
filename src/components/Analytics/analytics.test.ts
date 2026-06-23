@@ -1,13 +1,18 @@
 import { SchemaId, v2, v3, WrappedDocument } from "@trustvc/trustvc";
 import ReactGA from "react-ga4";
+import { ANALYTICS_EVENTS } from "../../constants/analyticsEvents";
+import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import dnsDidSigned from "../tests/fixture/dns-did-signed.json";
 import {
   analyticsEvent,
   sendV2EventCertificateViewedDetailed,
   sendV3EventCertificateViewedDetailed,
+  sendW3CEventCertificateViewedDetailed,
   stringifyEvent,
   triggerV2ErrorLogging,
   triggerV3ErrorLogging,
+  triggerW3CErrorLogging,
+  triggerW3CRendererTimeoutLogging,
   validateEvent,
 } from "./index";
 
@@ -128,11 +133,6 @@ describe("event", () => {
 });
 
 describe("analytics*", () => {
-  // eslint-disable-next-line jest/no-hooks
-  beforeEach(() => {
-    jest.spyOn(ReactGA, "event").mockImplementation();
-  });
-
   describe("sendV2EventCertificateViewedDetailed", () => {
     describe("when is in the registry", () => {
       it("should use document store to retrieve registry information", () => {
@@ -146,13 +146,14 @@ describe("analytics*", () => {
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
-        expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
+        expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_DETAILS, {
           document_id: "id1",
           document_name: "cert name",
           document_store: `"0x007d40224f6562461633ccfbaffd359ebb2fc9ba"`,
           issued_on: "a date",
           registry_id: "govtech-registry",
           issuer_name: "ROPSTEN: OpenCerts",
+          document_schema: "OA v2",
           nonInteraction: true,
           value: undefined,
         });
@@ -169,12 +170,13 @@ describe("analytics*", () => {
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
-        expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
+        expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_DETAILS, {
           document_id: "id1",
           document_name: "cert name",
           issuer_id: "did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89",
           issued_on: "a date",
           issuer_name: "aa.com",
+          document_schema: "OA v2",
           nonInteraction: true,
           value: undefined,
         });
@@ -190,13 +192,14 @@ describe("analytics*", () => {
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
-        expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
+        expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_DETAILS, {
           document_id: "id1",
           document_name: "cert name",
           document_store: `"0x007d40224f6562461633ccfbaffd359ebb2fc9ba"`,
           issued_on: "a date",
           registry_id: "govtech-registry",
           issuer_name: "ROPSTEN: OpenCerts",
+          document_schema: "OA v2",
           nonInteraction: true,
           value: undefined,
         });
@@ -212,13 +215,14 @@ describe("analytics*", () => {
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
-        expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
+        expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_DETAILS, {
           document_id: "id1",
           document_name: "cert name",
           document_store: `"0x5CA3b9daC85DA4DE4030e59C1a0248004209e348"`,
           issued_on: "a date",
           registry_id: "nyp-registry",
           issuer_name: "Nanyang Polytechnic",
+          document_schema: "OA v2",
           nonInteraction: true,
           value: undefined,
         });
@@ -235,7 +239,7 @@ describe("analytics*", () => {
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
 
-        const category = "CERTIFICATE_PRINT";
+        const category = ANALYTICS_EVENTS.CERTIFICATE_PRINT;
         sendV2EventCertificateViewedDetailed({ issuer, certificateData, category });
 
         const reactGaEventMock = (ReactGA.event as jest.Mock).mock;
@@ -257,19 +261,20 @@ describe("analytics*", () => {
 
       it("should use identity proof to display issuer information", () => {
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
-        expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
+        expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_DETAILS, {
           document_id: "id1",
           document_name: "cert name",
           document_store: `"0xabcdef"`,
           issued_on: "a date",
           issuer_name: "aa.com",
+          document_schema: "OA v2",
           nonInteraction: true,
           value: undefined,
         });
       });
 
       it("should send using the specified category", async () => {
-        const category = "CERTIFICATE_PRINT";
+        const category = ANALYTICS_EVENTS.CERTIFICATE_PRINT;
         sendV2EventCertificateViewedDetailed({ issuer, certificateData, category });
 
         const reactGaEventMock = (ReactGA.event as jest.Mock).mock;
@@ -283,12 +288,13 @@ describe("analytics*", () => {
   describe("sendV3EventCertificateViewedDetailed", () => {
     it("should work", () => {
       sendV3EventCertificateViewedDetailed({ certificateData: v3Document });
-      expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_DETAILS", {
+      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_DETAILS, {
         document_id: "REF_123456",
         document_name: "Republic of Singapore Driving Licence",
         document_store: `"did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90"`,
         issued_on: "2010-01-01T19:23:24Z",
         issuer_name: "example.openattestation.com",
+        document_schema: "OA v3",
         nonInteraction: true,
         value: undefined,
         renderer_url: "https://tutorial-renderer.openattestation.com",
@@ -363,7 +369,7 @@ describe("analytics*", () => {
         "REVOKED_CERTIFICATE", // Document has been revoked by the given store
       ]);
 
-      expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
+      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_ERROR, {
         document_id: "MyAwesomeCertID",
         document_name: "SINGAPORE-CAMBRIDGE GENERAL CERTIFICATE OF EDUCATION ORDINARY LEVEL",
         document_store: `"0xE4a94Ef9C26904A02Cd6735F7D4De1D840146a0f"`,
@@ -371,6 +377,7 @@ describe("analytics*", () => {
         issued_on: "2019-09-02T18:51:14+08:00",
         registry_id: "seab-registry",
         issuer_name: "Singapore Examinations and Assessment Board",
+        document_schema: "OA v2",
         nonInteraction: true,
         value: undefined,
         renderer_url: "sg/gov/seab/SOR_GCEO",
@@ -421,13 +428,14 @@ describe("analytics*", () => {
         "UNISSUED_CERTIFICATE", // Document isn't issued by the given store
         "REVOKED_CERTIFICATE", // Document has been revoked by the given store
       ]);
-      expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
+      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_ERROR, {
         document_id: "MyAwesomeCertID",
         document_name: "Practitioner Certificate in Personal Data Protection (Singapore)",
         document_store: `"0x8Fc57204c35fb9317D91285eF52D6b892EC08cD3"`,
         errors: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
         issued_on: "2020-04-14T08:00:00+08:00",
         issuer_name: "example.openattestation.com",
+        document_schema: "OA v2",
         nonInteraction: true,
         value: undefined,
         renderer_url: "https://demo-cnm.openattestation.com",
@@ -500,7 +508,7 @@ describe("analytics*", () => {
       triggerV2ErrorLogging(certificate, [
         "INVALID_ARGUMENT", // merkleRoot is odd-length
       ]);
-      expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
+      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_ERROR, {
         document_id: "41368",
         document_name: "Practitioner Certificate in Personal Data Protection (Singapore)",
         document_store: `"0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404"`,
@@ -508,6 +516,7 @@ describe("analytics*", () => {
         issued_on: "2020-04-14T08:00:00+08:00",
         registry_id: "smu-registry-academy",
         issuer_name: "Singapore Management University Academy",
+        document_schema: "OA v2",
         nonInteraction: true,
         value: undefined,
         renderer_url: "https://academy.smu.edu.sg/verify",
@@ -580,7 +589,7 @@ describe("analytics*", () => {
       triggerV2ErrorLogging(certificate, [
         "SERVER_ERROR", // HTTP response error (rate limit, bad gateway, etc.)
       ]);
-      expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
+      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_ERROR, {
         document_id: "41368",
         document_name: "Practitioner Certificate in Personal Data Protection (Singapore)",
         document_store: `"0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404"`,
@@ -588,6 +597,7 @@ describe("analytics*", () => {
         issued_on: "2020-04-14T08:00:00+08:00",
         registry_id: "smu-registry-academy",
         issuer_name: "Singapore Management University Academy",
+        document_schema: "OA v2",
         nonInteraction: true,
         value: undefined,
         renderer_url: "https://academy.smu.edu.sg/verify",
@@ -660,7 +670,7 @@ describe("analytics*", () => {
       triggerV2ErrorLogging(certificate, [
         "ETHERS_UNHANDLED_ERROR", // some funky error that we didn't catch
       ]);
-      expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
+      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_ERROR, {
         document_id: "41368",
         document_name: "Practitioner Certificate in Personal Data Protection (Singapore)",
         document_store: `"0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404"`,
@@ -668,6 +678,7 @@ describe("analytics*", () => {
         issued_on: "2020-04-14T08:00:00+08:00",
         registry_id: "smu-registry-academy",
         issuer_name: "Singapore Management University Academy",
+        document_schema: "OA v2",
         nonInteraction: true,
         value: undefined,
         renderer_url: "https://academy.smu.edu.sg/verify",
@@ -682,11 +693,12 @@ describe("analytics*", () => {
         "REVOKED_CERTIFICATE", // Document has been revoked by the given store
       ]);
 
-      expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
+      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_ERROR, {
         document_id: "SGCNM21566325",
         document_store: `"did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89"`,
         errors: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
         issuer_name: "example.tradetrust.io",
+        document_schema: "OA v2",
         nonInteraction: true,
         value: undefined,
         renderer_url: "https://demo-cnm.openattestation.com",
@@ -703,17 +715,190 @@ describe("analytics*", () => {
         "REVOKED_CERTIFICATE", // Document has been revoked by the given store
       ]);
 
-      expect(ReactGA.event).toHaveBeenCalledWith("CERTIFICATE_ERROR", {
+      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_ERROR, {
         document_id: "REF_123456",
         document_name: "Republic of Singapore Driving Licence",
         document_store: `"did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90"`,
         errors: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
         issued_on: "2010-01-01T19:23:24Z",
         issuer_name: "example.openattestation.com",
+        document_schema: "OA v3",
         nonInteraction: true,
         value: undefined,
         renderer_url: "https://tutorial-renderer.openattestation.com",
         template_name: "DRIVING_LICENSE",
+      });
+    });
+  });
+
+  describe("sendW3CEventCertificateViewedDetailed", () => {
+    const baseW3C = {
+      id: "urn:uuid:w3c-cert-001",
+      name: "W3C Test Certificate",
+      issuanceDate: "2024-01-15T00:00:00Z",
+    } as unknown as WrappedOrSignedOpenCertsDocument;
+
+    it("should send event with string DID issuer", () => {
+      const doc = { ...baseW3C, issuer: "did:web:example.com" } as unknown as WrappedOrSignedOpenCertsDocument;
+      sendW3CEventCertificateViewedDetailed(doc);
+      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_DETAILS, {
+        document_id: "urn:uuid:w3c-cert-001",
+        document_name: "W3C Test Certificate",
+        issued_on: "2024-01-15T00:00:00Z",
+        issuer_id: "did:web:example.com",
+        issuer_name: "did:web:example.com",
+        document_schema: "W3C VC",
+        nonInteraction: true,
+        value: undefined,
+      });
+    });
+
+    it("should send event with object issuer (id + name)", () => {
+      const doc = {
+        ...baseW3C,
+        issuer: { id: "did:web:example.com", name: "Example Org" },
+      } as unknown as WrappedOrSignedOpenCertsDocument;
+      sendW3CEventCertificateViewedDetailed(doc);
+      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_DETAILS, {
+        document_id: "urn:uuid:w3c-cert-001",
+        document_name: "W3C Test Certificate",
+        issued_on: "2024-01-15T00:00:00Z",
+        issuer_id: "did:web:example.com",
+        issuer_name: "Example Org",
+        document_schema: "W3C VC",
+        nonInteraction: true,
+        value: undefined,
+      });
+    });
+
+    it("should fall back to issuer id as name when object issuer has no name", () => {
+      const doc = {
+        ...baseW3C,
+        issuer: { id: "did:web:example.com" },
+      } as unknown as WrappedOrSignedOpenCertsDocument;
+      sendW3CEventCertificateViewedDetailed(doc);
+      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_DETAILS, {
+        document_id: "urn:uuid:w3c-cert-001",
+        document_name: "W3C Test Certificate",
+        issued_on: "2024-01-15T00:00:00Z",
+        issuer_id: "did:web:example.com",
+        issuer_name: "did:web:example.com",
+        document_schema: "W3C VC",
+        nonInteraction: true,
+        value: undefined,
+      });
+    });
+
+    it("should use validFrom when issuanceDate is absent", () => {
+      const doc = {
+        id: "urn:uuid:w3c-cert-002",
+        name: "VF Certificate",
+        validFrom: "2024-06-01T00:00:00Z",
+        issuer: "did:web:issuer.example",
+      } as unknown as WrappedOrSignedOpenCertsDocument;
+      sendW3CEventCertificateViewedDetailed(doc);
+      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_DETAILS, {
+        document_id: "urn:uuid:w3c-cert-002",
+        document_name: "VF Certificate",
+        issued_on: "2024-06-01T00:00:00Z",
+        issuer_id: "did:web:issuer.example",
+        issuer_name: "did:web:issuer.example",
+        document_schema: "W3C VC",
+        nonInteraction: true,
+        value: undefined,
+      });
+    });
+
+    it("should send using the specified category", () => {
+      const doc = { ...baseW3C, issuer: "did:web:example.com" } as unknown as WrappedOrSignedOpenCertsDocument;
+      sendW3CEventCertificateViewedDetailed(doc, ANALYTICS_EVENTS.CERTIFICATE_PRINT);
+      const lastCall = (ReactGA.event as jest.Mock).mock.calls.at(-1);
+      expect(lastCall[0]).toBe(ANALYTICS_EVENTS.CERTIFICATE_PRINT);
+    });
+  });
+
+  describe("triggerW3CErrorLogging", () => {
+    it("should send error event with string DID issuer", () => {
+      const doc = {
+        id: "urn:uuid:w3c-err-001",
+        name: "W3C Error Cert",
+        issuanceDate: "2024-01-15T00:00:00Z",
+        issuer: "did:web:example.com",
+      } as unknown as WrappedOrSignedOpenCertsDocument;
+      triggerW3CErrorLogging(doc, ["CERTIFICATE_HASH", "UNISSUED_CERTIFICATE"]);
+      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_ERROR, {
+        document_id: "urn:uuid:w3c-err-001",
+        document_name: "W3C Error Cert",
+        issued_on: "2024-01-15T00:00:00Z",
+        issuer_id: "did:web:example.com",
+        issuer_name: "did:web:example.com",
+        errors: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE",
+        document_schema: "W3C VC",
+        nonInteraction: true,
+        value: undefined,
+      });
+    });
+
+    it("should send error event with object issuer", () => {
+      const doc = {
+        id: "urn:uuid:w3c-err-002",
+        name: "W3C Error Cert 2",
+        issuanceDate: "2024-03-01T00:00:00Z",
+        issuer: { id: "did:web:issuer.example", name: "Issuer Org" },
+      } as unknown as WrappedOrSignedOpenCertsDocument;
+      triggerW3CErrorLogging(doc, ["INVALID_DOCUMENT"]);
+      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_ERROR, {
+        document_id: "urn:uuid:w3c-err-002",
+        document_name: "W3C Error Cert 2",
+        issued_on: "2024-03-01T00:00:00Z",
+        issuer_id: "did:web:issuer.example",
+        issuer_name: "Issuer Org",
+        errors: "INVALID_DOCUMENT",
+        document_schema: "W3C VC",
+        nonInteraction: true,
+        value: undefined,
+      });
+    });
+  });
+
+  describe("triggerW3CRendererTimeoutLogging", () => {
+    it("should send timeout event with string DID issuer", () => {
+      const doc = {
+        id: "urn:uuid:w3c-timeout-001",
+        name: "W3C Timeout Cert",
+        issuanceDate: "2024-01-15T00:00:00Z",
+        issuer: "did:web:example.com",
+      } as unknown as WrappedOrSignedOpenCertsDocument;
+      triggerW3CRendererTimeoutLogging(doc);
+      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_RENDERER_TIMEOUT, {
+        document_id: "urn:uuid:w3c-timeout-001",
+        document_name: "W3C Timeout Cert",
+        issued_on: "2024-01-15T00:00:00Z",
+        issuer_id: "did:web:example.com",
+        issuer_name: "did:web:example.com",
+        document_schema: "W3C VC",
+        nonInteraction: true,
+        value: undefined,
+      });
+    });
+
+    it("should send timeout event with object issuer", () => {
+      const doc = {
+        id: "urn:uuid:w3c-timeout-002",
+        name: "W3C Timeout Cert 2",
+        issuanceDate: "2024-05-10T00:00:00Z",
+        issuer: { id: "did:web:issuer.example", name: "Issuer Org" },
+      } as unknown as WrappedOrSignedOpenCertsDocument;
+      triggerW3CRendererTimeoutLogging(doc);
+      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_RENDERER_TIMEOUT, {
+        document_id: "urn:uuid:w3c-timeout-002",
+        document_name: "W3C Timeout Cert 2",
+        issued_on: "2024-05-10T00:00:00Z",
+        issuer_id: "did:web:issuer.example",
+        issuer_name: "Issuer Org",
+        document_schema: "W3C VC",
+        nonInteraction: true,
+        value: undefined,
       });
     });
   });
