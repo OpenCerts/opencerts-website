@@ -11,6 +11,7 @@ import {
 import { isEmpty, omitBy } from "lodash";
 import ReactGA from "react-ga4";
 import registry from "../../../public/static/registry.json";
+import { ANALYTICS_EVENTS } from "../../constants/analyticsEvents";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { getLogger } from "../../utils/logger";
 const { trace } = getLogger("components:Analytics:");
@@ -27,6 +28,7 @@ interface Options {
   rendererUrl?: string;
   templateName?: string;
   errors?: string;
+  documentSchema?: string; // OA v2 or OA v3 or W3C VC
 }
 interface Event {
   category: string;
@@ -67,6 +69,7 @@ export const analyticsEvent = (event: Event): void => {
     renderer_url: options?.rendererUrl,
     template_name: options?.templateName,
     errors: options?.errors,
+    document_schema: options?.documentSchema,
   };
   const cleanedCustomDimensions = omitBy(customDimension, isEmpty); // removes empty string, null and undefined parameters
   return ReactGA.event(category, {
@@ -113,7 +116,7 @@ export const sendV2EventCertificateViewedDetailed = ({
     issuerName = issuer.identityProof.location || "";
   }
   analyticsEvent({
-    category: category ?? "CERTIFICATE_DETAILS",
+    category: category ?? ANALYTICS_EVENTS.CERTIFICATE_DETAILS,
     nonInteraction: true,
     options: {
       documentStore: documentStore,
@@ -125,6 +128,7 @@ export const sendV2EventCertificateViewedDetailed = ({
       registryId: registryId,
       rendererUrl: rendererUrl,
       templateName: templateName,
+      documentSchema: "OA v2",
     },
   });
 };
@@ -144,7 +148,7 @@ export const sendV3EventCertificateViewedDetailed = ({
   const rendererUrl = certificateData.openAttestationMetadata.template?.url || "";
   const templateName = certificateData.openAttestationMetadata.template?.name || "";
   analyticsEvent({
-    category: category ?? "CERTIFICATE_DETAILS",
+    category: category ?? ANALYTICS_EVENTS.CERTIFICATE_DETAILS,
     nonInteraction: true,
     options: {
       documentStore: documentStore,
@@ -154,6 +158,34 @@ export const sendV3EventCertificateViewedDetailed = ({
       issuerName: issuerName,
       rendererUrl: rendererUrl,
       templateName: templateName,
+      documentSchema: "OA v3",
+    },
+  });
+};
+
+export const sendW3CEventCertificateViewedDetailed = (
+  document: WrappedOrSignedOpenCertsDocument,
+  category?: string
+): void => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const vc = document as any;
+  const documentId = vc.id ?? "";
+  const documentName = vc.name ?? "";
+  const issuedOn = vc.issuanceDate ?? vc.validFrom ?? "";
+  const rawIssuer = vc.issuer;
+  const issuerId = typeof rawIssuer === "string" ? rawIssuer : rawIssuer?.id ?? "";
+  const issuerName = typeof rawIssuer === "object" ? rawIssuer?.name ?? issuerId : issuerId;
+
+  analyticsEvent({
+    category: category ?? ANALYTICS_EVENTS.CERTIFICATE_DETAILS,
+    nonInteraction: true,
+    options: {
+      documentId,
+      documentName,
+      issuedOn,
+      issuerId,
+      issuerName,
+      documentSchema: "W3C VC",
     },
   });
 };
@@ -170,6 +202,8 @@ export const sendEventCertificateDetails = (category: string, document: WrappedO
     });
   } else if (isWrappedV3Document(document)) {
     sendV3EventCertificateViewedDetailed({ certificateData: document, category });
+  } else {
+    sendW3CEventCertificateViewedDetailed(document, category);
   }
 };
 
@@ -203,7 +237,7 @@ export function triggerV2ErrorLogging(
     }
 
     analyticsEvent({
-      category: "CERTIFICATE_ERROR",
+      category: ANALYTICS_EVENTS.CERTIFICATE_ERROR,
       nonInteraction: true,
       options: {
         documentStore: documentStore,
@@ -215,6 +249,7 @@ export function triggerV2ErrorLogging(
         errors: errorsList,
         rendererUrl: rendererUrl,
         templateName: templateName,
+        documentSchema: "OA v2",
       },
     });
   });
@@ -236,7 +271,7 @@ export function triggerV3ErrorLogging(
   const issuerName = rawCertificate.openAttestationMetadata.identityProof.identifier;
 
   analyticsEvent({
-    category: "CERTIFICATE_ERROR",
+    category: ANALYTICS_EVENTS.CERTIFICATE_ERROR,
     nonInteraction: true,
     options: {
       documentStore: documentStore,
@@ -247,6 +282,32 @@ export function triggerV3ErrorLogging(
       errors: errorsList,
       rendererUrl: rendererUrl,
       templateName: templateName,
+      documentSchema: "OA v3",
+    },
+  });
+}
+
+export function triggerW3CErrorLogging(certificate: WrappedOrSignedOpenCertsDocument, errors: string[]): void {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const vc = certificate as any;
+  const documentId = vc.id ?? "";
+  const documentName = vc.name ?? "";
+  const issuedOn = vc.issuanceDate ?? vc.validFrom ?? "";
+  const rawIssuer = vc.issuer;
+  const issuerId = typeof rawIssuer === "string" ? rawIssuer : rawIssuer?.id ?? "";
+  const issuerName = typeof rawIssuer === "object" ? rawIssuer?.name ?? issuerId : issuerId;
+
+  analyticsEvent({
+    category: ANALYTICS_EVENTS.CERTIFICATE_ERROR,
+    nonInteraction: true,
+    options: {
+      documentId,
+      documentName,
+      issuedOn,
+      issuerId,
+      issuerName,
+      errors: errors.join(","),
+      documentSchema: "W3C VC",
     },
   });
 }
@@ -276,7 +337,7 @@ export function triggerV2RendererTimeoutLogging(rawCertificate: WrappedDocument<
     }
 
     analyticsEvent({
-      category: "CERTIFICATE_RENDERER_TIMEOUT",
+      category: ANALYTICS_EVENTS.CERTIFICATE_RENDERER_TIMEOUT,
       nonInteraction: true,
       options: {
         documentStore: documentStore,
@@ -287,6 +348,7 @@ export function triggerV2RendererTimeoutLogging(rawCertificate: WrappedDocument<
         registryId: registryId,
         rendererUrl: rendererUrl,
         templateName: templateName,
+        documentSchema: "OA v2",
       },
     });
   });
@@ -304,7 +366,7 @@ export function triggerV3RendererTimeoutLogging(rawCertificate: WrappedDocument<
   const issuerName = rawCertificate.openAttestationMetadata.identityProof.identifier;
 
   analyticsEvent({
-    category: "CERTIFICATE_RENDERER_TIMEOUT",
+    category: ANALYTICS_EVENTS.CERTIFICATE_RENDERER_TIMEOUT,
     nonInteraction: true,
     options: {
       documentStore: documentStore,
@@ -314,6 +376,31 @@ export function triggerV3RendererTimeoutLogging(rawCertificate: WrappedDocument<
       issuerName: issuerName,
       rendererUrl: rendererUrl,
       templateName: templateName,
+      documentSchema: "OA v3",
+    },
+  });
+}
+
+export function triggerW3CRendererTimeoutLogging(certificate: WrappedOrSignedOpenCertsDocument): void {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const vc = certificate as any;
+  const documentId = vc.id ?? "";
+  const documentName = vc.name ?? "";
+  const issuedOn = vc.issuanceDate ?? vc.validFrom ?? "";
+  const rawIssuer = vc.issuer;
+  const issuerId = typeof rawIssuer === "string" ? rawIssuer : rawIssuer?.id ?? "";
+  const issuerName = typeof rawIssuer === "object" ? rawIssuer?.name ?? issuerId : issuerId;
+
+  analyticsEvent({
+    category: ANALYTICS_EVENTS.CERTIFICATE_RENDERER_TIMEOUT,
+    nonInteraction: true,
+    options: {
+      documentId,
+      documentName,
+      issuedOn,
+      issuerId,
+      issuerName,
+      documentSchema: "W3C VC",
     },
   });
 }

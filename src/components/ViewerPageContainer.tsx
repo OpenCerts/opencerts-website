@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { RootState } from "../reducers";
 import {
   getCertificate,
+  getEmailSendingError,
   getEmailSendingState,
   getShareLink,
   getShareLinkState,
@@ -29,6 +30,7 @@ interface ViewerProps {
   verifying: boolean;
   verificationStatus: VerificationFragment[] | null;
   emailSendingState: string;
+  emailSendingError: string | null;
   sendCertificate: (event: { email: string; captcha: string }) => void;
   sendCertificateReset: () => void;
   generateShareLink: () => void;
@@ -108,6 +110,7 @@ class Viewer extends Component<ViewerProps, ViewerState> {
         handleCopyLink={this.handleCopyLink}
         copiedLink={this.state.copiedLink}
         emailSendingState={this.props.emailSendingState}
+        emailSendingError={this.props.emailSendingError}
         verificationStatus={this.props.verificationStatus}
       />
     );
@@ -120,6 +123,7 @@ export const ViewerContainer = connect(
 
     // Verification statuses used in verifier block
     emailSendingState: getEmailSendingState(store),
+    emailSendingError: getEmailSendingError(store),
     shareLink: getShareLink(store),
     shareLinkState: getShareLinkState(store),
     verifying: getVerifying(store),

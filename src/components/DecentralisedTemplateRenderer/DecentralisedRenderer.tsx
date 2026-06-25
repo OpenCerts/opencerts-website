@@ -15,6 +15,7 @@ import {
   v3,
 } from "@trustvc/trustvc";
 import React, { Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
+import { ANALYTICS_EVENTS } from "../../constants/analyticsEvents";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { getTemplate, opencertsGetData } from "../../utils/utils";
 import {
@@ -22,6 +23,7 @@ import {
   sendEventCertificateDetails,
   triggerV2RendererTimeoutLogging,
   triggerV3RendererTimeoutLogging,
+  triggerW3CRendererTimeoutLogging,
 } from "../Analytics";
 import { MutiTabsContainer } from "../MultiTabs";
 
@@ -103,6 +105,8 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
           triggerV2RendererTimeoutLogging(rawDocument);
         } else if (isWrappedV3Document(rawDocument)) {
           triggerV3RendererTimeoutLogging(rawDocument);
+        } else {
+          triggerW3CRendererTimeoutLogging(rawDocument);
         }
       }
     },
@@ -121,26 +125,41 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
     if (isWrappedV2Document(rawDocument)) {
       const certificateData = getDataV2(rawDocument);
       analyticsEvent({
-        category: "CERTIFICATE_VIEWED",
+        category: ANALYTICS_EVENTS.CERTIFICATE_VIEWED,
         options: {
           documentId: certificateData?.id ?? undefined,
           issuerId: `${certificateData.issuers.map((issuer) => issuer.id).join(",")}`,
+          documentSchema: "OA v2",
         },
       });
     } else if (isWrappedV3Document(rawDocument)) {
       const certificateData = opencertsGetData(rawDocument) as v3.OpenAttestationDocument;
       const storeAddresses = getIssuerAddress(rawDocument);
       analyticsEvent({
-        category: "CERTIFICATE_VIEWED",
+        category: ANALYTICS_EVENTS.CERTIFICATE_VIEWED,
         options: {
           documentId: certificateData?.id ?? undefined,
           documentStore: `${Array.isArray(storeAddresses) ? storeAddresses.join(",") : storeAddresses}`,
+          documentSchema: "OA v3",
+        },
+      });
+    } else {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const vc = rawDocument as any;
+      const rawIssuer = vc.issuer;
+      const issuerId = typeof rawIssuer === "string" ? rawIssuer : rawIssuer?.id ?? "";
+      analyticsEvent({
+        category: ANALYTICS_EVENTS.CERTIFICATE_VIEWED,
+        options: {
+          documentId: vc.id ?? undefined,
+          issuerId,
+          documentSchema: "W3C VC",
         },
       });
     }
 
     // CERTIFICATE_DETAILS event
-    sendEventCertificateDetails("CERTIFICATE_DETAILS", rawDocument);
+    sendEventCertificateDetails(ANALYTICS_EVENTS.CERTIFICATE_DETAILS, rawDocument);
   }, [rawDocument]);
 
   const visibleTemplates = templates.filter((template) => template.id !== "print");
