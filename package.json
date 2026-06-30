@@ -61,7 +61,7 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.28.6",
+    "@babel/core": "^7.29.6",
     "@babel/plugin-transform-class-properties": "^7.28.6",
     "@babel/plugin-transform-private-methods": "^7.28.6",
     "@babel/plugin-transform-private-property-in-object": "^7.28.6",
