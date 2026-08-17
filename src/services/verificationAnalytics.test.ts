@@ -175,6 +175,54 @@ const v2RegistryDoc: WrappedOrSignedOpenCertsDocument = {
   },
 } as unknown as WrappedOrSignedOpenCertsDocument;
 
+/** Legacy V2 document: bare DID identity proof (no DNS record), document store IS in registry */
+const v2RegistryDidDoc: WrappedOrSignedOpenCertsDocument = {
+  version: SchemaId.v2,
+  data: {
+    id: "legacy-registry-id",
+    name: "Legacy Registry Cert",
+    issuedOn: "2024-01-01",
+    issuers: [
+      {
+        name: "Some Issuer Name",
+        // 0x007d40224f6562461633ccfbaffd359ebb2fc9ba → "ROPSTEN: OpenCerts" in registry
+        documentStore: "0x007d40224f6562461633ccfbaffd359ebb2fc9ba",
+        identityProof: {
+          type: v2.IdentityProofType.Did,
+          key: "did:ethr:0x1245e5B64D785b25057f7438F715f4aA5D965733#controller",
+        },
+      },
+    ],
+    $template: { name: "TEMPLATE", type: "EMBEDDED_RENDERER", url: "https://renderer.example.com" },
+    recipient: {},
+  },
+  privacy: { obfuscatedData: [] },
+  signature: {
+    type: "SHA3MerkleProof",
+    targetHash: "abc123",
+    proof: [],
+    merkleRoot: "abc123",
+  },
+} as unknown as WrappedOrSignedOpenCertsDocument;
+
+/** V2 document with bare DID identity proof, document store NOT in registry */
+const v2DidNotInRegistryDoc: WrappedOrSignedOpenCertsDocument = {
+  ...v2RegistryDidDoc,
+  data: {
+    ...(v2RegistryDidDoc as unknown as { data: Record<string, unknown> }).data,
+    issuers: [
+      {
+        name: "Some Issuer Name",
+        documentStore: "0xNOTINREGISTRY",
+        identityProof: {
+          type: v2.IdentityProofType.Did,
+          key: "did:ethr:0xNOTINREGISTRY#controller",
+        },
+      },
+    ],
+  },
+} as unknown as WrappedOrSignedOpenCertsDocument;
+
 // ---------------------------------------------------------------------------
 // Fragment factories
 // ---------------------------------------------------------------------------
@@ -312,7 +360,7 @@ describe("getIssuerMethod", () => {
     expect(getIssuerMethod(w3cDocWithEthrIssuer)).toBe("unknown");
   });
 
-  it("returns 'unknown' for v2 document with no identity proof", () => {
+  it("returns 'unknown' for v2 document with no identity proof and store not in registry", () => {
     const noProofDoc = {
       ...v2DnsTxtDoc,
       data: {
@@ -321,6 +369,18 @@ describe("getIssuerMethod", () => {
       },
     } as unknown as WrappedOrSignedOpenCertsDocument;
     expect(getIssuerMethod(noProofDoc)).toBe("unknown");
+  });
+
+  it("returns 'Registry' for legacy v2 documents with a bare DID identity proof and store in registry", () => {
+    expect(getIssuerMethod(v2RegistryDidDoc)).toBe("Registry");
+  });
+
+  it("returns 'unknown' for v2 documents with a bare DID identity proof and store not in registry", () => {
+    expect(getIssuerMethod(v2DidNotInRegistryDoc)).toBe("unknown");
+  });
+
+  it("returns 'DNS-TXT' (not 'Registry') for v2 documents with DNS-TXT identity proof even when store is in registry", () => {
+    expect(getIssuerMethod(v2RegistryDoc)).toBe("DNS-TXT");
   });
 
   it("returns 'unknown' for v3 document without DNS-DID identity proof type", () => {
@@ -515,6 +575,14 @@ describe("buildVerificationEvent", () => {
     expect(event.signing_algorithm).toBe("merkleroot2018");
     expect(event.verification_result).toBe("valid");
     expect(event.error_code).toBeUndefined();
+  });
+
+  it("builds a correct event for a legacy registry-issued OA v2 document", () => {
+    const event: DocumentVerificationEvent = buildVerificationEvent(v2RegistryDidDoc, allValidFragments);
+
+    expect(event.document_schema).toBe("OA v2");
+    expect(event.issuer_method).toBe("Registry");
+    expect(event.issuer_identity).toBe("ROPSTEN: OpenCerts");
   });
 
   it("builds a correct event for an invalid OA v2 document", () => {

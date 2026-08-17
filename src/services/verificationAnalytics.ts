@@ -15,7 +15,7 @@ import { certificateNotIssued, certificateRevoked, contractNotFound, invalidArgu
 import { GTMEvent, pushGTMEvent } from "./gtm";
 
 export type DocumentSchema = "OA v2" | "OA v3" | "W3C VC";
-export type IssuerMethod = "DNS-TXT" | "DNS-DID" | "DID:WEB" | "unknown";
+export type IssuerMethod = "Registry" | "DNS-TXT" | "DNS-DID" | "DID:WEB" | "unknown";
 export type SigningAlgorithm = "merkleroot2018" | "BBS2023" | "ECDSA2023" | "unknown";
 export type VerificationResult = "valid" | "error";
 
@@ -50,9 +50,16 @@ export const getDocumentSchema = (certificate: WrappedOrSignedOpenCertsDocument)
 
 export const getIssuerMethod = (certificate: WrappedOrSignedOpenCertsDocument): IssuerMethod => {
   if (isWrappedV2Document(certificate)) {
-    const type = getDataV2(certificate).issuers[0]?.identityProof?.type;
+    const issuer = getDataV2(certificate).issuers[0];
+    const type = issuer?.identityProof?.type;
     if (type === v2.IdentityProofType.DNSTxt) return "DNS-TXT";
     if (type === v2.IdentityProofType.DNSDid) return "DNS-DID";
+    if (type === v2.IdentityProofType.Did) {
+      // Legacy OpenCerts issuers use a bare DID identity proof (no DNS record) and are
+      // trusted instead by having their document/certificate store on the gated OpenCerts registry.
+      const documentStore = issuer?.certificateStore ?? issuer?.documentStore ?? issuer?.tokenRegistry ?? "";
+      if (documentStore && isInRegistry(documentStore)) return "Registry";
+    }
     return "unknown";
   }
   if (isWrappedV3Document(certificate)) {
