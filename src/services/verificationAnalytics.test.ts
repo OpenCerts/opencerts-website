@@ -223,6 +223,49 @@ const v2DidNotInRegistryDoc: WrappedOrSignedOpenCertsDocument = {
   },
 } as unknown as WrappedOrSignedOpenCertsDocument;
 
+/**
+ * Legacy V2 document with a non-standard/unrecognized identityProof.type (not "DID",
+ * "DNS-DID", or "DNS-TXT"), document store IS in registry.
+ * Real-world legacy issuers sometimes shipped a malformed/unexpected type string here —
+ * this was the actual root cause of documents falling through to "unknown" in production.
+ */
+const v2RegistryUnrecognizedProofTypeDoc: WrappedOrSignedOpenCertsDocument = {
+  ...v2RegistryDidDoc,
+  data: {
+    ...(v2RegistryDidDoc as unknown as { data: Record<string, unknown> }).data,
+    issuers: [
+      {
+        name: "Some Issuer Name",
+        // 0x007d40224f6562461633ccfbaffd359ebb2fc9ba → "ROPSTEN: OpenCerts" in registry
+        documentStore: "0x007d40224f6562461633ccfbaffd359ebb2fc9ba",
+        identityProof: {
+          type: "SOME_LEGACY_TYPE",
+          key: "did:ethr:0x1245e5B64D785b25057f7438F715f4aA5D965733#controller",
+        },
+      },
+    ],
+  },
+} as unknown as WrappedOrSignedOpenCertsDocument;
+
+/** Legacy V2 document trusted via certificateStore (not documentStore) in registry */
+const v2RegistryCertificateStoreDoc: WrappedOrSignedOpenCertsDocument = {
+  ...v2RegistryDidDoc,
+  data: {
+    ...(v2RegistryDidDoc as unknown as { data: Record<string, unknown> }).data,
+    issuers: [
+      {
+        name: "Some Issuer Name",
+        // 0x007d40224f6562461633ccfbaffd359ebb2fc9ba → "ROPSTEN: OpenCerts" in registry
+        certificateStore: "0x007d40224f6562461633ccfbaffd359ebb2fc9ba",
+        identityProof: {
+          type: v2.IdentityProofType.Did,
+          key: "did:ethr:0x1245e5B64D785b25057f7438F715f4aA5D965733#controller",
+        },
+      },
+    ],
+  },
+} as unknown as WrappedOrSignedOpenCertsDocument;
+
 // ---------------------------------------------------------------------------
 // Fragment factories
 // ---------------------------------------------------------------------------
@@ -381,6 +424,14 @@ describe("getIssuerMethod", () => {
 
   it("returns 'DNS-TXT' (not 'Registry') for v2 documents with DNS-TXT identity proof even when store is in registry", () => {
     expect(getIssuerMethod(v2RegistryDoc)).toBe("DNS-TXT");
+  });
+
+  it("returns 'Registry' for v2 documents with a non-standard identityProof.type when the store is in registry", () => {
+    expect(getIssuerMethod(v2RegistryUnrecognizedProofTypeDoc)).toBe("Registry");
+  });
+
+  it("returns 'Registry' for v2 documents trusted via certificateStore (not documentStore) in registry", () => {
+    expect(getIssuerMethod(v2RegistryCertificateStoreDoc)).toBe("Registry");
   });
 
   it("returns 'unknown' for v3 document without DNS-DID identity proof type", () => {
