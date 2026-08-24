@@ -54,11 +54,13 @@ export const getIssuerMethod = (certificate: WrappedOrSignedOpenCertsDocument): 
     const type = issuer?.identityProof?.type;
     if (type === v2.IdentityProofType.DNSTxt) return "DNS-TXT";
     if (type === v2.IdentityProofType.DNSDid) return "DNS-DID";
-    if (type === v2.IdentityProofType.Did) {
+    if (issuer && (issuer.certificateStore || issuer.documentStore)) {
       // Legacy OpenCerts issuers use a bare DID identity proof (no DNS record) and are
       // trusted instead by having their document/certificate store on the gated OpenCerts registry.
-      const documentStore = issuer?.certificateStore ?? issuer?.documentStore ?? issuer?.tokenRegistry ?? "";
-      if (documentStore && isInRegistry(documentStore)) return "Registry";
+      const documentStore = issuer.certificateStore ?? issuer.documentStore ?? "";
+      if (documentStore && isInRegistry(documentStore)) {
+        return "Registry";
+      }
     }
     return "unknown";
   }
