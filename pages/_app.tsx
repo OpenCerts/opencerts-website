@@ -5,9 +5,8 @@ import { mapValues } from "lodash";
 import App from "next/app";
 import { DefaultSeo } from "next-seo";
 import React from "react";
-import ReactGA from "react-ga4";
 import { useDispatch } from "react-redux";
-import { DEFAULT_SEO, ENVIRONMENT, GA4_TAG_ID } from "../src/config";
+import { DEFAULT_SEO, ENVIRONMENT } from "../src/config";
 import { updateFeatureToggles } from "../src/reducers/featureToggle.slice";
 import { wrapper } from "../src/store";
 import "../src/tailwind.css";
@@ -31,15 +30,6 @@ const FeatureFlagLoader: React.FunctionComponent<{
 };
 
 class MyApp extends App {
-  setGA = () => {
-    if (GA4_TAG_ID) {
-      ReactGA.initialize(GA4_TAG_ID);
-      ReactGA.send("pageview");
-    }
-  };
-  componentDidMount() {
-    this.setGA();
-  }
   render(): JSX.Element {
     const { Component, pageProps } = this.props;
     return (

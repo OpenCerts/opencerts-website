@@ -6,10 +6,6 @@ declare module "*.scss" {
   export = classNames;
 }
 
-interface Window {
-  ga: UniversalAnalytics.ga;
-}
-
 declare global {
   namespace NodeJS {
     interface Global {

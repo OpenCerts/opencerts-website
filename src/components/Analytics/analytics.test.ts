@@ -1,6 +1,6 @@
 import { SchemaId, v2, v3, WrappedDocument } from "@trustvc/trustvc";
-import ReactGA from "react-ga4";
 import { ANALYTICS_EVENTS } from "../../constants/analyticsEvents";
+import { pushGTMEvent } from "../../services/gtm";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import dnsDidSigned from "../tests/fixture/dns-did-signed.json";
 import {
@@ -16,7 +16,7 @@ import {
   validateEvent,
 } from "./index";
 
-jest.mock("react-ga4");
+jest.mock("../../services/gtm");
 
 const evt = {
   category: "TEST_CATEGORY",
@@ -120,7 +120,8 @@ describe("validateEvent", () => {
 describe("event", () => {
   it("sends and log ga event", () => {
     analyticsEvent(evt);
-    expect(ReactGA.event).toHaveBeenCalledWith("TEST_CATEGORY", {
+    expect(pushGTMEvent).toHaveBeenCalledWith({
+      event: "TEST_CATEGORY",
       nonInteraction: undefined,
       value: 2,
     });
@@ -146,7 +147,8 @@ describe("analytics*", () => {
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
-        expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_DETAILS, {
+        expect(pushGTMEvent).toHaveBeenCalledWith({
+          event: ANALYTICS_EVENTS.CERTIFICATE_DETAILS,
           document_id: "id1",
           document_name: "cert name",
           document_store: `"0x007d40224f6562461633ccfbaffd359ebb2fc9ba"`,
@@ -170,7 +172,8 @@ describe("analytics*", () => {
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
-        expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_DETAILS, {
+        expect(pushGTMEvent).toHaveBeenCalledWith({
+          event: ANALYTICS_EVENTS.CERTIFICATE_DETAILS,
           document_id: "id1",
           document_name: "cert name",
           issuer_id: "did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89",
@@ -192,7 +195,8 @@ describe("analytics*", () => {
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
-        expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_DETAILS, {
+        expect(pushGTMEvent).toHaveBeenCalledWith({
+          event: ANALYTICS_EVENTS.CERTIFICATE_DETAILS,
           document_id: "id1",
           document_name: "cert name",
           document_store: `"0x007d40224f6562461633ccfbaffd359ebb2fc9ba"`,
@@ -215,7 +219,8 @@ describe("analytics*", () => {
         };
         const certificateData = { id: "id1", name: "cert name", issuedOn: "a date" };
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
-        expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_DETAILS, {
+        expect(pushGTMEvent).toHaveBeenCalledWith({
+          event: ANALYTICS_EVENTS.CERTIFICATE_DETAILS,
           document_id: "id1",
           document_name: "cert name",
           document_store: `"0x5CA3b9daC85DA4DE4030e59C1a0248004209e348"`,
@@ -242,10 +247,10 @@ describe("analytics*", () => {
         const category = ANALYTICS_EVENTS.CERTIFICATE_PRINT;
         sendV2EventCertificateViewedDetailed({ issuer, certificateData, category });
 
-        const reactGaEventMock = (ReactGA.event as jest.Mock).mock;
-        const gaEventCall = reactGaEventMock.calls[reactGaEventMock.calls.length - 1];
+        const pushGTMEventMock = (pushGTMEvent as jest.Mock).mock;
+        const gaEventCall = pushGTMEventMock.calls[pushGTMEventMock.calls.length - 1];
 
-        expect(gaEventCall[0]).toBe(category);
+        expect(gaEventCall[0].event).toBe(category);
       });
     });
     describe("when is not in the registry", () => {
@@ -261,7 +266,8 @@ describe("analytics*", () => {
 
       it("should use identity proof to display issuer information", () => {
         sendV2EventCertificateViewedDetailed({ issuer, certificateData });
-        expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_DETAILS, {
+        expect(pushGTMEvent).toHaveBeenCalledWith({
+          event: ANALYTICS_EVENTS.CERTIFICATE_DETAILS,
           document_id: "id1",
           document_name: "cert name",
           document_store: `"0xabcdef"`,
@@ -277,10 +283,10 @@ describe("analytics*", () => {
         const category = ANALYTICS_EVENTS.CERTIFICATE_PRINT;
         sendV2EventCertificateViewedDetailed({ issuer, certificateData, category });
 
-        const reactGaEventMock = (ReactGA.event as jest.Mock).mock;
-        const gaEventCall = reactGaEventMock.calls[reactGaEventMock.calls.length - 1];
+        const pushGTMEventMock = (pushGTMEvent as jest.Mock).mock;
+        const gaEventCall = pushGTMEventMock.calls[pushGTMEventMock.calls.length - 1];
 
-        expect(gaEventCall[0]).toBe(category);
+        expect(gaEventCall[0].event).toBe(category);
       });
     });
   });
@@ -288,7 +294,8 @@ describe("analytics*", () => {
   describe("sendV3EventCertificateViewedDetailed", () => {
     it("should work", () => {
       sendV3EventCertificateViewedDetailed({ certificateData: v3Document });
-      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_DETAILS, {
+      expect(pushGTMEvent).toHaveBeenCalledWith({
+        event: ANALYTICS_EVENTS.CERTIFICATE_DETAILS,
         document_id: "REF_123456",
         document_name: "Republic of Singapore Driving Licence",
         document_store: `"did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90"`,
@@ -307,10 +314,10 @@ describe("analytics*", () => {
 
       sendV3EventCertificateViewedDetailed({ certificateData: v3Document, category });
 
-      const reactGaEventMock = (ReactGA.event as jest.Mock).mock;
-      const gaEventCall = reactGaEventMock.calls[reactGaEventMock.calls.length - 1];
+      const pushGTMEventMock = (pushGTMEvent as jest.Mock).mock;
+      const gaEventCall = pushGTMEventMock.calls[pushGTMEventMock.calls.length - 1];
 
-      expect(gaEventCall[0]).toBe(category);
+      expect(gaEventCall[0].event).toBe(category);
     });
   });
 
@@ -369,7 +376,8 @@ describe("analytics*", () => {
         "REVOKED_CERTIFICATE", // Document has been revoked by the given store
       ]);
 
-      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_ERROR, {
+      expect(pushGTMEvent).toHaveBeenCalledWith({
+        event: ANALYTICS_EVENTS.CERTIFICATE_ERROR,
         document_id: "MyAwesomeCertID",
         document_name: "SINGAPORE-CAMBRIDGE GENERAL CERTIFICATE OF EDUCATION ORDINARY LEVEL",
         document_store: `"0xE4a94Ef9C26904A02Cd6735F7D4De1D840146a0f"`,
@@ -428,7 +436,8 @@ describe("analytics*", () => {
         "UNISSUED_CERTIFICATE", // Document isn't issued by the given store
         "REVOKED_CERTIFICATE", // Document has been revoked by the given store
       ]);
-      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_ERROR, {
+      expect(pushGTMEvent).toHaveBeenCalledWith({
+        event: ANALYTICS_EVENTS.CERTIFICATE_ERROR,
         document_id: "MyAwesomeCertID",
         document_name: "Practitioner Certificate in Personal Data Protection (Singapore)",
         document_store: `"0x8Fc57204c35fb9317D91285eF52D6b892EC08cD3"`,
@@ -508,7 +517,8 @@ describe("analytics*", () => {
       triggerV2ErrorLogging(certificate, [
         "INVALID_ARGUMENT", // merkleRoot is odd-length
       ]);
-      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_ERROR, {
+      expect(pushGTMEvent).toHaveBeenCalledWith({
+        event: ANALYTICS_EVENTS.CERTIFICATE_ERROR,
         document_id: "41368",
         document_name: "Practitioner Certificate in Personal Data Protection (Singapore)",
         document_store: `"0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404"`,
@@ -589,7 +599,8 @@ describe("analytics*", () => {
       triggerV2ErrorLogging(certificate, [
         "SERVER_ERROR", // HTTP response error (rate limit, bad gateway, etc.)
       ]);
-      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_ERROR, {
+      expect(pushGTMEvent).toHaveBeenCalledWith({
+        event: ANALYTICS_EVENTS.CERTIFICATE_ERROR,
         document_id: "41368",
         document_name: "Practitioner Certificate in Personal Data Protection (Singapore)",
         document_store: `"0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404"`,
@@ -670,7 +681,8 @@ describe("analytics*", () => {
       triggerV2ErrorLogging(certificate, [
         "ETHERS_UNHANDLED_ERROR", // some funky error that we didn't catch
       ]);
-      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_ERROR, {
+      expect(pushGTMEvent).toHaveBeenCalledWith({
+        event: ANALYTICS_EVENTS.CERTIFICATE_ERROR,
         document_id: "41368",
         document_name: "Practitioner Certificate in Personal Data Protection (Singapore)",
         document_store: `"0x6c806e3E0Ea393eC7E8b7E7fa62eF92Fcd039404"`,
@@ -693,7 +705,8 @@ describe("analytics*", () => {
         "REVOKED_CERTIFICATE", // Document has been revoked by the given store
       ]);
 
-      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_ERROR, {
+      expect(pushGTMEvent).toHaveBeenCalledWith({
+        event: ANALYTICS_EVENTS.CERTIFICATE_ERROR,
         document_id: "SGCNM21566325",
         document_store: `"did:ethr:0xE712878f6E8d5d4F9e87E10DA604F9cB564C9a89"`,
         errors: "CERTIFICATE_HASH,UNISSUED_CERTIFICATE,REVOKED_CERTIFICATE",
@@ -715,7 +728,8 @@ describe("analytics*", () => {
         "REVOKED_CERTIFICATE", // Document has been revoked by the given store
       ]);
 
-      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_ERROR, {
+      expect(pushGTMEvent).toHaveBeenCalledWith({
+        event: ANALYTICS_EVENTS.CERTIFICATE_ERROR,
         document_id: "REF_123456",
         document_name: "Republic of Singapore Driving Licence",
         document_store: `"did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90"`,
@@ -741,7 +755,8 @@ describe("analytics*", () => {
     it("should send event with string DID issuer", () => {
       const doc = { ...baseW3C, issuer: "did:web:example.com" } as unknown as WrappedOrSignedOpenCertsDocument;
       sendW3CEventCertificateViewedDetailed(doc);
-      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_DETAILS, {
+      expect(pushGTMEvent).toHaveBeenCalledWith({
+        event: ANALYTICS_EVENTS.CERTIFICATE_DETAILS,
         document_id: "urn:uuid:w3c-cert-001",
         document_name: "W3C Test Certificate",
         issued_on: "2024-01-15T00:00:00Z",
@@ -759,7 +774,8 @@ describe("analytics*", () => {
         issuer: { id: "did:web:example.com", name: "Example Org" },
       } as unknown as WrappedOrSignedOpenCertsDocument;
       sendW3CEventCertificateViewedDetailed(doc);
-      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_DETAILS, {
+      expect(pushGTMEvent).toHaveBeenCalledWith({
+        event: ANALYTICS_EVENTS.CERTIFICATE_DETAILS,
         document_id: "urn:uuid:w3c-cert-001",
         document_name: "W3C Test Certificate",
         issued_on: "2024-01-15T00:00:00Z",
@@ -777,7 +793,8 @@ describe("analytics*", () => {
         issuer: { id: "did:web:example.com" },
       } as unknown as WrappedOrSignedOpenCertsDocument;
       sendW3CEventCertificateViewedDetailed(doc);
-      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_DETAILS, {
+      expect(pushGTMEvent).toHaveBeenCalledWith({
+        event: ANALYTICS_EVENTS.CERTIFICATE_DETAILS,
         document_id: "urn:uuid:w3c-cert-001",
         document_name: "W3C Test Certificate",
         issued_on: "2024-01-15T00:00:00Z",
@@ -797,7 +814,8 @@ describe("analytics*", () => {
         issuer: "did:web:issuer.example",
       } as unknown as WrappedOrSignedOpenCertsDocument;
       sendW3CEventCertificateViewedDetailed(doc);
-      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_DETAILS, {
+      expect(pushGTMEvent).toHaveBeenCalledWith({
+        event: ANALYTICS_EVENTS.CERTIFICATE_DETAILS,
         document_id: "urn:uuid:w3c-cert-002",
         document_name: "VF Certificate",
         issued_on: "2024-06-01T00:00:00Z",
@@ -812,8 +830,8 @@ describe("analytics*", () => {
     it("should send using the specified category", () => {
       const doc = { ...baseW3C, issuer: "did:web:example.com" } as unknown as WrappedOrSignedOpenCertsDocument;
       sendW3CEventCertificateViewedDetailed(doc, ANALYTICS_EVENTS.CERTIFICATE_PRINT);
-      const lastCall = (ReactGA.event as jest.Mock).mock.calls.at(-1);
-      expect(lastCall[0]).toBe(ANALYTICS_EVENTS.CERTIFICATE_PRINT);
+      const lastCall = (pushGTMEvent as jest.Mock).mock.calls.at(-1);
+      expect(lastCall[0].event).toBe(ANALYTICS_EVENTS.CERTIFICATE_PRINT);
     });
   });
 
@@ -826,7 +844,8 @@ describe("analytics*", () => {
         issuer: "did:web:example.com",
       } as unknown as WrappedOrSignedOpenCertsDocument;
       triggerW3CErrorLogging(doc, ["CERTIFICATE_HASH", "UNISSUED_CERTIFICATE"]);
-      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_ERROR, {
+      expect(pushGTMEvent).toHaveBeenCalledWith({
+        event: ANALYTICS_EVENTS.CERTIFICATE_ERROR,
         document_id: "urn:uuid:w3c-err-001",
         document_name: "W3C Error Cert",
         issued_on: "2024-01-15T00:00:00Z",
@@ -847,7 +866,8 @@ describe("analytics*", () => {
         issuer: { id: "did:web:issuer.example", name: "Issuer Org" },
       } as unknown as WrappedOrSignedOpenCertsDocument;
       triggerW3CErrorLogging(doc, ["INVALID_DOCUMENT"]);
-      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_ERROR, {
+      expect(pushGTMEvent).toHaveBeenCalledWith({
+        event: ANALYTICS_EVENTS.CERTIFICATE_ERROR,
         document_id: "urn:uuid:w3c-err-002",
         document_name: "W3C Error Cert 2",
         issued_on: "2024-03-01T00:00:00Z",
@@ -870,7 +890,8 @@ describe("analytics*", () => {
         issuer: "did:web:example.com",
       } as unknown as WrappedOrSignedOpenCertsDocument;
       triggerW3CRendererTimeoutLogging(doc);
-      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_RENDERER_TIMEOUT, {
+      expect(pushGTMEvent).toHaveBeenCalledWith({
+        event: ANALYTICS_EVENTS.CERTIFICATE_RENDERER_TIMEOUT,
         document_id: "urn:uuid:w3c-timeout-001",
         document_name: "W3C Timeout Cert",
         issued_on: "2024-01-15T00:00:00Z",
@@ -890,7 +911,8 @@ describe("analytics*", () => {
         issuer: { id: "did:web:issuer.example", name: "Issuer Org" },
       } as unknown as WrappedOrSignedOpenCertsDocument;
       triggerW3CRendererTimeoutLogging(doc);
-      expect(ReactGA.event).toHaveBeenCalledWith(ANALYTICS_EVENTS.CERTIFICATE_RENDERER_TIMEOUT, {
+      expect(pushGTMEvent).toHaveBeenCalledWith({
+        event: ANALYTICS_EVENTS.CERTIFICATE_RENDERER_TIMEOUT,
         document_id: "urn:uuid:w3c-timeout-002",
         document_name: "W3C Timeout Cert 2",
         issued_on: "2024-05-10T00:00:00Z",

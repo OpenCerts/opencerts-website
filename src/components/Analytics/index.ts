@@ -9,9 +9,9 @@ import {
   RegistryEntry,
 } from "@trustvc/trustvc";
 import { isEmpty, omitBy } from "lodash";
-import ReactGA from "react-ga4";
 import registry from "../../../public/static/registry.json";
 import { ANALYTICS_EVENTS } from "../../constants/analyticsEvents";
+import { pushGTMEvent } from "../../services/gtm";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { getLogger } from "../../utils/logger";
 const { trace } = getLogger("components:Analytics:");
@@ -72,7 +72,8 @@ export const analyticsEvent = (event: Event): void => {
     document_schema: options?.documentSchema,
   };
   const cleanedCustomDimensions = omitBy(customDimension, isEmpty); // removes empty string, null and undefined parameters
-  return ReactGA.event(category, {
+  pushGTMEvent({
+    event: category,
     value,
     nonInteraction,
     ...cleanedCustomDimensions,
