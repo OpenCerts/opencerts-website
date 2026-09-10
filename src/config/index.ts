@@ -13,7 +13,6 @@ export const IS_MAINNET = publicRuntimeConfig.network === "mainnet";
 export const SUPPORTED_NETWORK = IS_MAINNET ? ["homestead", "matic"] : ["sepolia", "amoy"];
 export const NETWORK_NAME = SUPPORTED_NETWORK[0]; // expected by ethers
 
-export const GA4_TAG_ID = process.env.GA4_TAG_ID;
 export const DEPLOY_ENV = process.env.NEXT_PUBLIC_DEPLOY_ENV ?? "local";
 export const CAPTCHA_CLIENT_KEY = "6LfVb9UrAAAAAGH_L1N5U6plJ0uhgB_KnDUFaooh";
 
