@@ -217,7 +217,7 @@ export const faqContent: FagElement[] = [
         question: "I'm an educational institution — where do I find migration resources?",
         answer: (
           <p>
-            Institutions should migrate to TrustVC by 30 June 2027. Visit{" "}
+            Institutions should migrate to TrustVC by 27 March 2027. Visit{" "}
             <a href="https://trustvc.io/contact" target="_blank" rel="noopener noreferrer">
               trustvc.io/contact
             </a>{" "}
