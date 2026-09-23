@@ -1,18 +1,26 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
 import { captureException, captureMessage } from "@sentry/nextjs";
+import { Resolver } from "@tradetrust-tt/tt-verify/node_modules/did-resolver";
+import { getResolver } from "@tradetrust-tt/tt-verify/node_modules/ethr-did-resolver";
 import {
   type VerificationFragment,
   decryptString,
   isValidOpenCert,
   isWrappedV2Document,
   isWrappedV3Document,
+  openAttestationVerifiers,
+  v2,
+  v3,
+  verificationBuilder,
+  w3cVerifiers,
 } from "@trustvc/trustvc";
 import Router from "next/router";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import "isomorphic-fetch";
 
 import { triggerV2ErrorLogging, triggerV3ErrorLogging, triggerW3CErrorLogging } from "../components/Analytics";
+import { NETWORK_NAME, IS_MAINNET } from "../config";
 import { getCertificate } from "../reducers/certificate.selectors";
 import {
   generateShareLink,
@@ -32,6 +40,7 @@ import {
   verifyingCertificateErrored,
 } from "../reducers/certificate.slice";
 import { sendEmail } from "../services/email";
+import { OAFailoverProvider } from "../services/failover-provider";
 import {
   certificateNotIssued,
   certificateRevoked,
@@ -42,21 +51,141 @@ import {
 import { generateLink } from "../services/link";
 import { matchPresentationFailure } from "../services/presentationFragment";
 import { pushVerificationEvent } from "../services/verificationAnalytics";
-import { createDocumentVerifier, getNetworkName } from "../services/verifier";
 import { WrappedOrSignedOpenCertsDocument, isEncrypted } from "../shared";
 import { getLogger } from "../utils/logger";
 import { isVerifiablePresentation } from "../utils/presentation";
+import { opencertsGetData } from "../utils/utils";
 
 const { trace } = getLogger("saga:certificate");
 
-// Re-exported: the network resolution lives with the verifier it configures.
-export { getNetworkName };
+const getUrls = (options: {
+  network: ConstructorParameters<typeof OAFailoverProvider>[1];
+  isProduction: boolean;
+}): ConstructorParameters<typeof OAFailoverProvider>[0] => {
+  const { network, isProduction } = options;
+  const networkString =
+    typeof network === "string" ? network : typeof network === "number" ? network.toString() : network.name;
+
+  if (isProduction) {
+    /* Production Network Whitelist */
+    switch (networkString) {
+      // Ethereum mainnet/homestead
+      case "mainnet":
+      case "homestead":
+        return [
+          { url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY_PROVIDER}` },
+          { url: `https://eth-mainnet.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
+          { url: `https://cloudflare-eth.com/` },
+          { url: `https://ethereum-rpc.publicnode.com/` },
+        ];
+      // Polygon mainnet
+      case "pol":
+      case "matic":
+      case "137":
+        return [
+          { url: `https://polygon-mainnet.infura.io/v3/${process.env.INFURA_API_KEY_PROVIDER}` },
+          { url: `https://polygon-mainnet.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
+        ];
+      default:
+        console.error(`Unrecognised network: ${network}`);
+        throw new Error(`Unrecognised network: ${network}`);
+    }
+  } else {
+    /* Non-production Network Whitelist */
+    switch (networkString) {
+      // Ethereum testnet
+      case "sepolia":
+        return [
+          { url: `https://sepolia.infura.io/v3/${process.env.INFURA_API_KEY_PROVIDER}` },
+          { url: `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
+          { url: `https://ethereum-sepolia-rpc.publicnode.com/` },
+        ];
+      // Polygon testnet
+      case "amoy":
+      case "80002":
+        return [
+          { url: `https://polygon-amoy.infura.io/v3/${process.env.INFURA_API_KEY_PROVIDER}` },
+          { url: `https://polygon-amoy.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
+          { url: `https://rpc-amoy.polygon.technology/` },
+          { url: `https://polygon-amoy-bor-rpc.publicnode.com/` },
+        ];
+      default:
+        console.error(`Unrecognised network: ${network}`);
+        throw new Error(`Unrecognised network: ${network}`);
+    }
+  }
+};
+
+export const getNetworkName = (
+  certificate: WrappedOrSignedOpenCertsDocument
+): ConstructorParameters<typeof OAFailoverProvider>[1] => {
+  const data = opencertsGetData(certificate) as v2.OpenAttestationDocument | v3.WrappedDocument;
+  // W3C credentials store chainId in credentialStatus.tokenNetwork.chainId; OA v2 uses data.network.chainId
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const chainId = data.network?.chainId ?? (certificate as any).credentialStatus?.tokenNetwork?.chainId?.toString();
+
+  if (IS_MAINNET) {
+    /* Production Network Whitelist */
+    switch (chainId) {
+      case "137":
+        return "matic";
+    }
+  } else {
+    /* Non-production Network Whitelist */
+    switch (chainId) {
+      case "80002":
+        return { chainId: 80002, name: "amoy" };
+    }
+  }
+
+  // A network is specified in the certificate but not in the above whitelist
+  if (data.network) {
+    console.log(`"${JSON.stringify(data.network)}" is not a whitelisted network. Reverting back to "${NETWORK_NAME}".`);
+  }
+
+  return NETWORK_NAME;
+};
 
 export function* verifyCertificateSaga({ payload: certificate }: { payload: WrappedOrSignedOpenCertsDocument }) {
   try {
     yield put(verifyingCertificate());
 
-    const verify = createDocumentVerifier(certificate);
+    const network = getNetworkName(certificate);
+    const urls = getUrls({ network, isProduction: IS_MAINNET });
+
+    const providerWithFailover = new OAFailoverProvider(urls, network, { shuffle: false });
+    const resolverWithFailover = new Resolver(
+      /**
+       * Regardless of mainnet or testnet, OA only uses mainnet DIDs
+       * As such, resolver should always resolve against a mainnet provider
+       * Specifying a static provider for resolver will also prevent unnecessary "eth_chainId" calls to providers
+       * ✅ did:ethr:0x1245e5b64d785b25057f7438f715f4aa5d965733
+       * ❌ did:ethr:sepolia:0x1245e5b64d785b25057f7438f715f4aa5d965733
+       */
+      getResolver({
+        name: "mainnet",
+        provider: new OAFailoverProvider(
+          [
+            { url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY_RESOLVER}` },
+            { url: `https://eth-mainnet.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}` },
+          ],
+          "mainnet",
+          { shuffle: false }
+        ),
+      })
+    );
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const verify =
+      isWrappedV2Document(certificate) || isWrappedV3Document(certificate)
+        ? verificationBuilder(openAttestationVerifiers, {
+            provider: providerWithFailover,
+            resolver: resolverWithFailover,
+          })
+        : verificationBuilder(w3cVerifiers, {
+            provider: providerWithFailover,
+            resolver: resolverWithFailover,
+          });
 
     // https://github.com/redux-saga/redux-saga/issues/884
     const fragments: VerificationFragment[] = yield call(verify, certificate);

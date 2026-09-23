@@ -8,9 +8,10 @@ interface ViewAnotherButtonProps {
 }
 
 /**
- * Extracted from MultiTabs so the tab strip of a presentation can carry the same button in the
- * same place a single certificate's tab strip does. Only one may be rendered at a time — the id
- * is what the integration specs click.
+ * Extracted from MultiTabs so a presentation's tab strip can carry the same button, in the same
+ * place, as the template strip below it — rather than two copies of this markup drifting apart.
+ * Both strips can render it, but never at once: MultiTabs is told to omit it inside a
+ * presentation, because the id has to stay unique.
  */
 const ViewAnotherButton: React.FunctionComponent<ViewAnotherButtonProps> = ({ resetData }) => (
   <Link legacyBehavior href="/">
