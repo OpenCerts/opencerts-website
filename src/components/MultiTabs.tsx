@@ -1,15 +1,21 @@
-import Link from "next/link";
 import React, { useState } from "react";
-import { connect } from "react-redux";
-import { resetCertificateState } from "../reducers/certificate.slice";
 import { Drawer } from "./UI/Drawer";
+import { ViewAnotherButtonContainer } from "./ViewAnotherButton";
 
 interface MultiTabsProps {
-  resetData: () => void;
   templates: { id: string; label: string }[];
   onSelectTemplate: (label: string) => void;
+  /**
+   * A presentation's own tab strip carries the button already, one strip above this one —
+   * rendering it again here would duplicate both the action and its id.
+   */
+  showViewAnother?: boolean;
 }
-const MultiTabs: React.FunctionComponent<MultiTabsProps> = ({ resetData, templates, onSelectTemplate }) => {
+const MultiTabs: React.FunctionComponent<MultiTabsProps> = ({
+  templates,
+  onSelectTemplate,
+  showViewAnother = true,
+}) => {
   const [selectedTemplate, setSelectedTemplate] = useState(0);
   return (
     <div className={`bg-blue-100 pt-4 border-b-4 mb-4${!templates || templates.length === 0 ? " pb-4" : ""}`}>
@@ -26,17 +32,11 @@ const MultiTabs: React.FunctionComponent<MultiTabsProps> = ({ resetData, templat
       <div className="hidden md:block">
         <div className="container">
           <div className="flex flex-wrap">
-            <div className="w-full ml-auto mb-8 lg:mb-0 lg:w-auto lg:order-2">
-              <Link legacyBehavior href="/">
-                <a
-                  className="button border border-navy text-navy bg-white hover:bg-navy"
-                  id="btn-view-another"
-                  onClick={() => resetData()}
-                >
-                  View another
-                </a>
-              </Link>
-            </div>
+            {showViewAnother && (
+              <div className="w-full ml-auto mb-8 lg:mb-0 lg:w-auto lg:order-2">
+                <ViewAnotherButtonContainer />
+              </div>
+            )}
             <div className="w-full lg:flex-1 lg:order-1">
               <ul id="template-tabs-list" className="flex flex-wrap -mx-4">
                 {templates && templates.length > 0
@@ -66,6 +66,6 @@ const MultiTabs: React.FunctionComponent<MultiTabsProps> = ({ resetData, templat
   );
 };
 
-export const MutiTabsContainer = connect(null, (dispatch) => ({
-  resetData: () => dispatch(resetCertificateState()),
-}))(MultiTabs);
+// Exported under the name the renderer imports. The strip no longer needs the store: the
+// button connects itself.
+export const MutiTabsContainer = MultiTabs;

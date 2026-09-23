@@ -1,0 +1,71 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    "https://w3id.org/security/data-integrity/v2",
+    {
+      "validFrom": {
+        "@id": "https://www.w3.org/2018/credentials#validFrom",
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+      },
+      "validUntil": {
+        "@id": "https://www.w3.org/2018/credentials#validUntil",
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+      },
+      "issuanceDate": {
+        "@id": "https://www.w3.org/2018/credentials#issuanceDate",
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+      },
+      "expirationDate": {
+        "@id": "https://www.w3.org/2018/credentials#expirationDate",
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+      }
+    }
+  ],
+  "type": ["VerifiablePresentation"],
+  "verifiableCredential": [
+    {
+      "@context": [
+        "https://www.w3.org/ns/credentials/v2",
+        "https://w3id.org/security/data-integrity/v2",
+        "https://trustvc.io/context/render-method-context-v2.json",
+        "https://trustvc.io/context/coo.json",
+        "https://trustvc.io/context/attachments-context.json",
+        "https://trustvc.io/context/qrcode-context.json"
+      ],
+      "id": "urn:uuid:019ff40c-5863-777e-a182-06c35732e51f",
+      "type": ["VerifiableCredential"],
+      "issuer": "did:key:zDnaedbEeTFNbJWHSdQ7iYnZFDxoUD7cSCozjeDttkjE7Asnx",
+      "validFrom": "2024-04-01T12:19:52Z",
+      "credentialSubject": {
+        "id": "did:key:zDnaedbEeTFNbJWHSdQ7iYnZFDxoUD7cSCozjeDttkjE7Asnx",
+        "type": ["Coo"]
+      },
+      "renderMethod": [
+        {
+          "type": "EMBEDDED_RENDERER",
+          "templateName": "CHAFTA_COO",
+          "id": "https://generic-templates.tradetrust.io"
+        }
+      ],
+      "proof": {
+        "type": "DataIntegrityProof",
+        "created": "2026-08-12T03:37:57Z",
+        "verificationMethod": "did:key:zDnaedbEeTFNbJWHSdQ7iYnZFDxoUD7cSCozjeDttkjE7Asnx#zDnaedbEeTFNbJWHSdQ7iYnZFDxoUD7cSCozjeDttkjE7Asnx",
+        "cryptosuite": "ecdsa-sd-2023",
+        "proofPurpose": "assertionMethod",
+        "proofValue": "u2V0BhVhAXJgEanIhgG8jTpd-t4WWu3fN79X5olSyQX2dWMsRttendG-G4qqsvn7QTsxsVTHS_m8WCd-6CQEhfbavCqsBn1gjgCQCF-uTN8mqKy00JjrPHlqU9Keznvj_f9U45A2kO4b2Y4CFWED7O_EZdXWaCerd3anXkQygi1FEnP56rhMe_LABrK8lJe2-mGGhA4H3usiw9cWmAae3rGmjO7t-H7H1W9ih6ICCWECf-wro54nhE-ci5o02RXq2CJ7k2V5AP_eUKqQYd_nCRQN40SHSUje3HkYWMr1cKZ1eW1SdNHEibLTosV7iUy54WEDbWgvck08zB8t3yTjNzq4FlCu6PWod3-nOHoA0K0b0jRMV_9g1gcAJEBT8cMwufVgnWU3qeLZEZcjMaHtpseO2WEDF_gbj6eTvnco45PmUsKrmYz7DOE_tzSujxEyX1gYVcaPgmRK5wJXeMA8ZMlwPyKPgfaA-2Fl0-4CNEHmABisjWEB4iU8Pw-E8ZQK0lt_51zE6pfRT3kX9xAOLTyw4W_AF4BrAstt_Bwv71uK9UYuB_KYHqrLlN-YrUVijBy4ZXMBVoIMDBQc"
+      }
+    }
+  ],
+  "holder": "did:key:zDnaedbEeTFNbJWHSdQ7iYnZFDxoUD7cSCozjeDttkjE7Asnx",
+  "validFrom": "2020-01-01T00:00:00Z",
+  "validUntil": "2021-01-01T00:00:00Z",
+  "proof": {
+    "type": "DataIntegrityProof",
+    "created": "2026-08-12T03:37:57Z",
+    "verificationMethod": "did:key:zDnaedbEeTFNbJWHSdQ7iYnZFDxoUD7cSCozjeDttkjE7Asnx#zDnaedbEeTFNbJWHSdQ7iYnZFDxoUD7cSCozjeDttkjE7Asnx",
+    "cryptosuite": "ecdsa-rdfc-2019",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "z5oVc1678TLW6crrR52eyt2LGtoRKNBq6sSjwukqu9c8WEXVqRUPPvgTNxZa6RxHkta824v963nLqMn3myyFYG79x"
+  }
+}

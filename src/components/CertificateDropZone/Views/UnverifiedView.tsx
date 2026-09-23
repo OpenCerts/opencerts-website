@@ -12,6 +12,9 @@ import {
   serverError,
   unhandledError,
 } from "../../../services/fragment";
+import { getPresentationFailureMessage } from "../../../services/presentationFragment";
+import { WrappedOrSignedOpenCertsDocument } from "../../../shared";
+import { isVerifiablePresentation } from "../../../utils/presentation";
 
 interface DetailedErrorsProps {
   verificationStatus: VerificationFragment[];
@@ -58,12 +61,40 @@ const DetailedErrors: React.FunctionComponent<DetailedErrorsProps> = ({ verifica
   return <div id="error-tab">{renderedError}</div>;
 };
 
+/**
+ * A presentation's fragments land on the same three types a credential's do, so DetailedErrors
+ * would report a revoked credential as "Certificate not issued" and an unresolvable issuer as
+ * tampering. The presentation rules match on the verifier's own reason instead.
+ */
+interface PresentationErrorProps {
+  verificationStatus: VerificationFragment[];
+  document: unknown;
+}
+const PresentationError: React.FunctionComponent<PresentationErrorProps> = ({ verificationStatus, document }) => {
+  const failure = getPresentationFailureMessage(verificationStatus, document);
+  if (!failure) return null;
+  return (
+    <div id="error-tab">
+      <div data-testid="invalid-message" className="text-pink mt-4 mb-8">
+        <p className="text-md font-bold">{failure.failureTitle}</p>
+        <p>{failure.failureMessage}</p>
+      </div>
+    </div>
+  );
+};
+
 interface UnverifiedViewProps {
   resetData: () => void;
   verificationStatus: VerificationFragment[];
+  document?: WrappedOrSignedOpenCertsDocument | null;
 }
-export const UnverifiedView: React.FunctionComponent<UnverifiedViewProps> = ({ resetData, verificationStatus }) => {
-  let label = "This certificate is not valid";
+export const UnverifiedView: React.FunctionComponent<UnverifiedViewProps> = ({
+  resetData,
+  verificationStatus,
+  document,
+}) => {
+  const isPresentation = isVerifiablePresentation(document);
+  let label = isPresentation ? "This presentation is not valid" : "This certificate is not valid";
   if (serverError(verificationStatus)) {
     label = "Connection error";
   } else if (unhandledError(verificationStatus)) {
@@ -74,7 +105,11 @@ export const UnverifiedView: React.FunctionComponent<UnverifiedViewProps> = ({ r
     <>
       <ErrorHeading title={label} />
 
-      {<DetailedErrors verificationStatus={verificationStatus} />}
+      {isPresentation ? (
+        <PresentationError verificationStatus={verificationStatus} document={document} />
+      ) : (
+        <DetailedErrors verificationStatus={verificationStatus} />
+      )}
 
       <WhatShouldIDo />
 

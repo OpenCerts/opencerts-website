@@ -15,6 +15,7 @@ import {
 } from "@trustvc/trustvc";
 import React, { useState } from "react";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
+import { getPresentationHolder, isVerifiablePresentation } from "../../utils/presentation";
 import { icons } from "../ViewerPageImages";
 import { DetailedCertificateVerifyBlock } from "./DetailedCertificateVerifyBlock";
 
@@ -132,9 +133,17 @@ const SimpleVerifyBlock: React.FunctionComponent<SimpleVerifyBlockProps> = (prop
       <div className="flex flex-row items-center">
         <div className="px-2 w-auto">{icons.checkCircle()}</div>
         <h1 className="px-2 w-full font-bold text-base">
-          Certificate issued by
-          <div className="break-all md:break-normal">
-            {isWrappedV2Document(props.document)
+          {/* A presentation has no issuer of its own: the HOLDER asserts it, and each embedded
+              credential names its own issuer on its tab. */}
+          {isVerifiablePresentation(props.document) ? "Certificates presented by" : "Certificate issued by"}
+          {/* break-words, not break-normal, from md up: #577 only fixed mobile, so on desktop a
+              single unbroken identity — every did: issuer or holder — overflowed the frame and
+              ran under the arrow. break-words leaves a domain name intact and breaks only what
+              cannot fit on a line of its own. */}
+          <div className="break-all md:break-words">
+            {isVerifiablePresentation(props.document)
+              ? getPresentationHolder(props.document)
+              : isWrappedV2Document(props.document)
               ? getV2IdentityVerificationText(props.verificationStatus, props.document)
               : isWrappedV3Document(props.document)
               ? getV3IdentityVerificationText(props.document)
@@ -168,7 +177,11 @@ export const CertificateVerifyBlock: React.FunctionComponent<CertificateVerifyBl
         detailedViewVisible={detailedViewVisible}
         document={props.document}
       />
-      {detailedViewVisible ? <DetailedCertificateVerifyBlock verificationStatus={verificationStatus} /> : ""}
+      {detailedViewVisible ? (
+        <DetailedCertificateVerifyBlock verificationStatus={verificationStatus} document={props.document} />
+      ) : (
+        ""
+      )}
     </div>
   );
 };

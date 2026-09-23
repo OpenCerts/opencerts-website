@@ -1,0 +1,1 @@
+export { CredentialTabs } from "./CredentialTabs";
