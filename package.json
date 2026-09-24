@@ -37,7 +37,7 @@
     "@reduxjs/toolkit": "^2.2.7",
     "@sentry/nextjs": "^10.52.0",
     "@trustvc/decentralized-renderer-react-components": "^1.0.3",
-    "@trustvc/trustvc": "^2.14.1",
+    "@trustvc/trustvc": "^2.15.4",
     "@types/react-google-recaptcha": "^2.1.0",
     "clipboard-copy": "^4.0.1",
     "debug": "^4.3.1",

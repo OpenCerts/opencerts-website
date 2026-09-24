@@ -11,10 +11,12 @@ import registry from "../../public/static/registry.json";
 import { DEPLOY_ENV } from "../config";
 import { ANALYTICS_EVENTS } from "../constants/analyticsEvents";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
+import { getPresentationHolder, isVerifiablePresentation } from "../utils/presentation";
 import { certificateNotIssued, certificateRevoked, contractNotFound, invalidArgument, serverError } from "./fragment";
 import { GTMEvent, pushGTMEvent } from "./gtm";
+import { matchPresentationFailure } from "./presentationFragment";
 
-export type DocumentSchema = "OA v2" | "OA v3" | "W3C VC";
+export type DocumentSchema = "OA v2" | "OA v3" | "W3C VC" | "W3C VP";
 export type IssuerMethod = "Registry" | "DNS-TXT" | "DNS-DID" | "DID:WEB" | "unknown";
 export type SigningAlgorithm = "merkleroot2018" | "BBS2023" | "ECDSA2023" | "unknown";
 export type VerificationResult = "valid" | "error";
@@ -45,6 +47,7 @@ function isInRegistry(value: string): value is keyof typeof registry.issuers {
 export const getDocumentSchema = (certificate: WrappedOrSignedOpenCertsDocument): DocumentSchema => {
   if (isWrappedV2Document(certificate)) return "OA v2";
   if (isWrappedV3Document(certificate)) return "OA v3";
+  if (isVerifiablePresentation(certificate)) return "W3C VP";
   return "W3C VC";
 };
 
@@ -69,6 +72,12 @@ export const getIssuerMethod = (certificate: WrappedOrSignedOpenCertsDocument): 
       ? "DNS-DID"
       : "unknown";
   }
+  // A presentation is asserted by its holder, not an issuer; the embedded credentials carry
+  // issuers of their own and are reported per credential in the viewer.
+  if (isVerifiablePresentation(certificate)) {
+    return getPresentationHolder(certificate).toLowerCase().startsWith("did:web:") ? "DID:WEB" : "unknown";
+  }
+
   // W3C VC: derive from the DID method in the issuer field
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const issuer = (certificate as any).issuer;
@@ -89,6 +98,9 @@ export const getIssuerIdentity = (certificate: WrappedOrSignedOpenCertsDocument)
   }
   if (isWrappedV3Document(certificate)) {
     return certificate.openAttestationMetadata.identityProof.identifier;
+  }
+  if (isVerifiablePresentation(certificate)) {
+    return getPresentationHolder(certificate);
   }
   // W3C VC
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -117,8 +129,13 @@ export const getErrorCode = (
 ): string | undefined => {
   if (isValid) return undefined;
 
-  // W3C VC failures map to a single catch-all code, matching existing saga behaviour
-  if (!isWrappedV2Document(certificate) && !isWrappedV3Document(certificate)) return "INVALID_DOCUMENT";
+  // W3C VC failures map to a single catch-all code, matching existing saga behaviour.
+  // A presentation reports which of its own failures occurred, since the credential-shaped
+  // checks below would mislabel it.
+  if (!isWrappedV2Document(certificate) && !isWrappedV3Document(certificate)) {
+    const presentationFailure = isVerifiablePresentation(certificate) ? matchPresentationFailure(fragments) : undefined;
+    return presentationFailure ? `PRESENTATION_${presentationFailure.type}` : "INVALID_DOCUMENT";
+  }
 
   const errors: string[] = [];
   if (!isValidOpenCert(fragments, ["DOCUMENT_INTEGRITY"])) errors.push("CERTIFICATE_HASH");

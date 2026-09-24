@@ -5,7 +5,12 @@ import Dropzone, { DropEvent } from "react-dropzone";
 import { connect } from "react-redux";
 import { NETWORK_NAME } from "../../config";
 import { RootState } from "../../reducers";
-import { getCertificateByActionError, getVerificationStatus, getVerifying } from "../../reducers/certificate.selectors";
+import {
+  getCertificate,
+  getCertificateByActionError,
+  getVerificationStatus,
+  getVerifying,
+} from "../../reducers/certificate.selectors";
 import { resetCertificateState, updateCertificate } from "../../reducers/certificate.slice";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { CertificateVerificationStatus } from "./CertificateVerificationStatus";
@@ -18,6 +23,7 @@ interface CertificateDropZoneContainerProps {
   verifying: boolean;
   verificationStatus: VerificationFragment[] | null;
   retrieveCertificateByActionError: string | null;
+  document: WrappedOrSignedOpenCertsDocument | null;
 }
 interface CertificateDropZoneContainerState {
   fileError: boolean;
@@ -98,6 +104,7 @@ class CertificateDropZone extends Component<CertificateDropZoneContainerProps, C
               fileError={this.state.fileError}
               verifying={this.props.verifying}
               verificationStatus={this.props.verificationStatus}
+              document={this.props.document}
               retrieveCertificateByActionError={this.props.retrieveCertificateByActionError}
               resetData={this.resetData.bind(this)}
               hover={isDragAccept}
@@ -114,6 +121,7 @@ export const CertificateDropZoneContainer = connect(
     retrieveCertificateByActionError: getCertificateByActionError(store),
     verifying: getVerifying(store),
     verificationStatus: getVerificationStatus(store),
+    document: getCertificate(store),
   }),
   (dispatch) => ({
     updateCertificate: (payload: WrappedOrSignedOpenCertsDocument) => dispatch(updateCertificate(payload)),

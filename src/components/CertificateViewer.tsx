@@ -5,9 +5,11 @@ import { connect } from "react-redux";
 import { ANALYTICS_EVENTS } from "../constants/analyticsEvents";
 import { updateObfuscatedCertificate as updateObfuscatedCertificateAction } from "../reducers/certificate.slice";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
+import { getPresentationFileName, isVerifiablePresentation } from "../utils/presentation";
 import { sendEventCertificateDetails } from "./Analytics";
 import { CertificateShareLinkFormContainer } from "./CertificateShareLink/CertificateShareLinkForm";
 import { CertificateVerifyBlock } from "./CertificateVerifyBlock";
+import { CredentialTabs } from "./CredentialTabs";
 import { ErrorBoundary } from "./ErrorBoundary";
 import { Modal } from "./Modal";
 
@@ -48,12 +50,19 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
   if (!props.verificationStatus) throw new Error("Verification status can't be null");
   const { document } = props;
   const childRef = React.useRef<{ print: () => void }>();
+  const isPresentation = isVerifiablePresentation(document);
   const [isDocObfuscated, setIsDocObfuscated] = useState(false);
   useEffect(() => {
-    isOAObfuscated(document)
+    // Obfuscation is an OpenAttestation feature: a presentation has no OA data to read, and
+    // each embedded credential is reported on its own tab.
+    if (isPresentation) {
+      setIsDocObfuscated(false);
+      return;
+    }
+    Promise.resolve(isOAObfuscated(document))
       .then(setIsDocObfuscated)
       .catch(() => setIsDocObfuscated(false));
-  }, [document]);
+  }, [document, isPresentation]);
 
   return (
     <ErrorBoundary>
@@ -91,7 +100,9 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
                     <div className="w-auto">
                       <a
                         className="icon-utility"
-                        download={`${props.certificate.id}.opencert`}
+                        download={`${
+                          isPresentation ? getPresentationFileName(document) : props.certificate.id
+                        }.opencert`}
                         target="_blank"
                         href={`data:text/json;,${encodeURIComponent(JSON.stringify(props.document, null, 2))}`}
                         rel="noreferrer"
@@ -130,11 +141,21 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
             </Modal>
           </section>
           <section>
-            <ForwardedRefDecentralisedRenderer
-              updateObfuscatedCertificate={props.updateObfuscatedCertificate}
-              rawDocument={document}
-              ref={childRef}
-            />
+            {/* A presentation is a bundle with no single certificate to render, so each
+                embedded credential gets its own tab. */}
+            {isPresentation ? (
+              <CredentialTabs
+                presentation={document}
+                verificationStatus={props.verificationStatus}
+                forwardedRef={childRef}
+              />
+            ) : (
+              <ForwardedRefDecentralisedRenderer
+                updateObfuscatedCertificate={props.updateObfuscatedCertificate}
+                rawDocument={document}
+                ref={childRef}
+              />
+            )}
           </section>
         </>
       }

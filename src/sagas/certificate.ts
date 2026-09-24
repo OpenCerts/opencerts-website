@@ -49,9 +49,11 @@ import {
   serverError,
 } from "../services/fragment";
 import { generateLink } from "../services/link";
+import { matchPresentationFailure } from "../services/presentationFragment";
 import { pushVerificationEvent } from "../services/verificationAnalytics";
 import { WrappedOrSignedOpenCertsDocument, isEncrypted } from "../shared";
 import { getLogger } from "../utils/logger";
+import { isVerifiablePresentation } from "../utils/presentation";
 import { opencertsGetData } from "../utils/utils";
 
 const { trace } = getLogger("saga:certificate");
@@ -219,7 +221,13 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
       // if the document is not valid
       if (!isWrappedV2Document(certificate) && !isWrappedV3Document(certificate)) {
         errors.splice(0, errors.length);
-        errors.push("INVALID_DOCUMENT");
+        // A presentation's fragments land on the same three types as a credential's, so the
+        // checks above would report a revoked credential as an unissued certificate. Report
+        // the failure the presentation verifier actually found instead.
+        const presentationFailure = isVerifiablePresentation(certificate)
+          ? matchPresentationFailure(fragments)
+          : undefined;
+        errors.push(presentationFailure ? `PRESENTATION_${presentationFailure.type}` : "INVALID_DOCUMENT");
       }
 
       if (errors.length > 0) {

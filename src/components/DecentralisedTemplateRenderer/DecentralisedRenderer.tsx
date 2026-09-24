@@ -31,6 +31,8 @@ interface DecentralisedRendererProps {
   rawDocument: WrappedOrSignedOpenCertsDocument;
   updateObfuscatedCertificate: (certificate: WrappedOrSignedOpenCertsDocument) => void;
   forwardedRef: Ref<{ print: () => void } | undefined>;
+  /** False inside a presentation, whose own tab strip carries the button one row above. */
+  showViewAnother?: boolean;
 }
 
 type Dispatch = (action: HostActions) => void;
@@ -41,6 +43,7 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
   rawDocument,
   updateObfuscatedCertificate,
   forwardedRef,
+  showViewAnother = true,
 }) => {
   const toFrame = useRef<Dispatch>();
   const documentRef = useRef(rawDocument);
@@ -166,6 +169,7 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
   return (
     <>
       <MutiTabsContainer
+        showViewAnother={showViewAnother}
         templates={visibleTemplates}
         onSelectTemplate={(label) => {
           if (toFrame.current) {

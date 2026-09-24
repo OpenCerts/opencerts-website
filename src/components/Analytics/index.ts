@@ -14,6 +14,7 @@ import { ANALYTICS_EVENTS } from "../../constants/analyticsEvents";
 import { pushGTMEvent } from "../../services/gtm";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { getLogger } from "../../utils/logger";
+import { getPresentationCredentials, getPresentationHolder, isVerifiablePresentation } from "../../utils/presentation";
 const { trace } = getLogger("components:Analytics:");
 const { trace: traceDev } = getLogger("components:Analytics(Inactive):");
 
@@ -164,10 +165,36 @@ export const sendV3EventCertificateViewedDetailed = ({
   });
 };
 
+/**
+ * A presentation has no issuer and no issuance date of its own: the holder asserts it, and the
+ * embedded credentials carry their own issuers. Reporting `issuer: undefined` would file every
+ * presentation under a blank issuer, so the holder is reported instead.
+ */
+const presentationAnalyticsOptions = (document: WrappedOrSignedOpenCertsDocument) => {
+  const holder = getPresentationHolder(document);
+  return {
+    documentId: (document as { id?: string }).id ?? "",
+    documentName: `${getPresentationCredentials(document).length} credential(s)`,
+    issuedOn: "",
+    issuerId: holder,
+    issuerName: holder,
+    documentSchema: "W3C VP",
+  };
+};
+
 export const sendW3CEventCertificateViewedDetailed = (
   document: WrappedOrSignedOpenCertsDocument,
   category?: string
 ): void => {
+  if (isVerifiablePresentation(document)) {
+    analyticsEvent({
+      category: category ?? ANALYTICS_EVENTS.CERTIFICATE_DETAILS,
+      nonInteraction: true,
+      options: presentationAnalyticsOptions(document),
+    });
+    return;
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const vc = document as any;
   const documentId = vc.id ?? "";
@@ -289,6 +316,15 @@ export function triggerV3ErrorLogging(
 }
 
 export function triggerW3CErrorLogging(certificate: WrappedOrSignedOpenCertsDocument, errors: string[]): void {
+  if (isVerifiablePresentation(certificate)) {
+    analyticsEvent({
+      category: ANALYTICS_EVENTS.CERTIFICATE_ERROR,
+      nonInteraction: true,
+      options: { ...presentationAnalyticsOptions(certificate), errors: errors.join(",") },
+    });
+    return;
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const vc = certificate as any;
   const documentId = vc.id ?? "";
@@ -383,6 +419,15 @@ export function triggerV3RendererTimeoutLogging(rawCertificate: WrappedDocument<
 }
 
 export function triggerW3CRendererTimeoutLogging(certificate: WrappedOrSignedOpenCertsDocument): void {
+  if (isVerifiablePresentation(certificate)) {
+    analyticsEvent({
+      category: ANALYTICS_EVENTS.CERTIFICATE_RENDERER_TIMEOUT,
+      nonInteraction: true,
+      options: presentationAnalyticsOptions(certificate),
+    });
+    return;
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const vc = certificate as any;
   const documentId = vc.id ?? "";

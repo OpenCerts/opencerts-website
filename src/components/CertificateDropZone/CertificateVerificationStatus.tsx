@@ -1,5 +1,6 @@
 import { isValidOpenCert, VerificationFragment } from "@trustvc/trustvc";
 import React from "react";
+import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { DropzoneViewWrapper } from "../Layout/DropzoneViewWrapper";
 import { DefaultView } from "./Views/DefaultView";
 import { RetrievalErrorView } from "./Views/RetrievalErrorView";
@@ -13,10 +14,13 @@ interface CertificateVerificationStatusProps {
   hover: boolean;
   verificationStatus: VerificationFragment[] | null;
   retrieveCertificateByActionError: string | null;
+  /** The document being verified — a presentation is reported differently from a certificate. */
+  document: WrappedOrSignedOpenCertsDocument | null;
 }
 
 export const CertificateVerificationStatus: React.FunctionComponent<CertificateVerificationStatusProps> = (props) => {
-  const { resetData, verifying, fileError, verificationStatus, hover, retrieveCertificateByActionError } = props;
+  const { resetData, verifying, fileError, verificationStatus, hover, retrieveCertificateByActionError, document } =
+    props;
   if (hover) {
     return (
       <DropzoneViewWrapper hover={hover} accept={true}>
@@ -51,7 +55,7 @@ export const CertificateVerificationStatus: React.FunctionComponent<CertificateV
   if (verificationStatus && !isValidOpenCert(verificationStatus)) {
     return (
       <DropzoneViewWrapper hover={hover} accept={false}>
-        <UnverifiedView resetData={() => resetData()} verificationStatus={verificationStatus} />
+        <UnverifiedView resetData={() => resetData()} verificationStatus={verificationStatus} document={document} />
       </DropzoneViewWrapper>
     );
   }
