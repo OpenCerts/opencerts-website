@@ -1,0 +1,11 @@
+# Browsers that support BigInt.
+#
+# Without this constraint the default target includes Opera Mini and KaiOS 2.5, so Babel
+# downlevels `2n ** 256n` — in viem, pulled into the client bundle by @trustvc/trustvc's
+# root barrel — into `Math.pow`, which cannot take a BigInt. The page then dies at module
+# load with "Cannot convert a BigInt value to a number", before any app code runs.
+#
+# Those two targets are the ONLY ones this drops (0.04% of users), and neither can execute
+# BigInt at all: they were already failing on this page, not working. Nothing that worked
+# stops working.
+defaults and fully supports bigint

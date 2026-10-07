@@ -1,0 +1,60 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    "https://w3id.org/security/data-integrity/v2",
+    {
+      "validFrom": {
+        "@id": "https://www.w3.org/2018/credentials#validFrom",
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+      },
+      "validUntil": {
+        "@id": "https://www.w3.org/2018/credentials#validUntil",
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+      }
+    }
+  ],
+  "type": ["VerifiablePresentation"],
+  "holder": "did:key:zDnaemDNwi4G5eTzGfRooFFu5Kns3be6yfyVNtiaMhWkZbwtc",
+  "validFrom": "2024-01-01T00:00:00Z",
+  "validUntil": "2999-01-01T00:00:00Z",
+  "verifiableCredential": [
+    {
+      "@context": [
+        "https://www.w3.org/ns/credentials/v2",
+        "https://w3id.org/security/data-integrity/v2",
+        "https://trustvc.io/context/render-method-context-v2.json"
+      ],
+      "id": "urn:uuid:01a1141c-855d-7dd7-a973-08fd4fdc5ca8",
+      "type": ["VerifiableCredential"],
+      "issuer": "did:key:zDnaemDNwi4G5eTzGfRooFFu5Kns3be6yfyVNtiaMhWkZbwtc",
+      "validFrom": "2024-01-01T00:00:00Z",
+      "credentialSubject": {
+        "id": "did:key:zDnaemDNwi4G5eTzGfRooFFu5Kns3be6yfyVNtiaMhWkZbwtc",
+        "name": "Cargo"
+      },
+      "renderMethod": [
+        {
+          "id": "https://generic-templates.tradetrust.io",
+          "type": "EMBEDDED_RENDERER",
+          "templateName": "BILL_OF_LADING"
+        }
+      ],
+      "proof": {
+        "type": "DataIntegrityProof",
+        "created": "2026-10-07T02:06:15Z",
+        "verificationMethod": "did:key:zDnaemDNwi4G5eTzGfRooFFu5Kns3be6yfyVNtiaMhWkZbwtc#zDnaemDNwi4G5eTzGfRooFFu5Kns3be6yfyVNtiaMhWkZbwtc",
+        "cryptosuite": "ecdsa-sd-2023",
+        "proofPurpose": "assertionMethod",
+        "proofValue": "u2V0BhVhAE-nCztJkLche3ODFxWJHLcfXMMgAO_H27XlSRK2vFXn2WhgkF-_5OqEl9nMLyGZNl6ElW8ECwltKtwwIjh43AFgjgCQDKXlHhPENnbVgiUPvqkj6MKuV2pGK-gzURdrxGY5-efKFWEAKVTFO1VMAsRBBCpEYb9MetqFIk7nVrDKQ4JPNbf5A95N4C8s8z41FjKy5igad3U8LPtwz5Sc7W62a5DXmbzJFWEDfKX3qHuaAI0481Hp8PHmAxkhHX0dwet-zwD-T2O3goY5Si_qC_8gZM3CUG5k87TLw8SgPO_Cw5IWObGFlvo8NWEDEHwrXiqOeSZC-RqfWkBC6ZRwt9-3Uz3-XCf_TWVCugCkzTv_11PA--McVoTgEIlRffiVzVS9aa6DFHNQ5IWXCWEAjjSZfAEbZ4EliptIGB5KfSmFH64C1LB6EbVJqXzONq2YXJlPH9zL236xTi8KP8WB_qzr79dQIbd2f8-z1PTIrWEAypsVJS-8HDptD1GLa0dTBJs090reaBpWU-38rzIKZfroGKGqnoZgbBPw5xY2sbMg-6I-9bxsLM9RinhnHRojhoIMDBQc"
+      }
+    }
+  ],
+  "proof": {
+    "type": "DataIntegrityProof",
+    "created": "2026-10-07T02:06:15Z",
+    "cryptosuite": "ecdsa-rdfc-2019",
+    "proofPurpose": "authentication",
+    "challenge": "incomplete",
+    "proofValue": "z3w3pF2VRwrPFBuEAgGMRFbL6qBEnPSP3QeEoLes6tMBqepyFTEvnbKzGLzkaMPZJuf9w65BxQahLt4VRCoRCgHWf"
+  }
+}

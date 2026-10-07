@@ -1,0 +1,21 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    "https://w3id.org/security/data-integrity/v2",
+    {
+      "validFrom": {
+        "@id": "https://www.w3.org/2018/credentials#validFrom",
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+      },
+      "validUntil": {
+        "@id": "https://www.w3.org/2018/credentials#validUntil",
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+      }
+    }
+  ],
+  "type": ["VerifiablePresentation"],
+  "holder": "did:key:zDnaemDNwi4G5eTzGfRooFFu5Kns3be6yfyVNtiaMhWkZbwtc",
+  "validFrom": "2024-01-01T00:00:00Z",
+  "validUntil": "2999-01-01T00:00:00Z",
+  "verifiableCredential": []
+}

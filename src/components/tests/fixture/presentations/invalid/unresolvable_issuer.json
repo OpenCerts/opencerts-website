@@ -10,52 +10,82 @@
       "validUntil": {
         "@id": "https://www.w3.org/2018/credentials#validUntil",
         "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
-      },
-      "issuanceDate": {
-        "@id": "https://www.w3.org/2018/credentials#issuanceDate",
-        "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
-      },
-      "expirationDate": {
-        "@id": "https://www.w3.org/2018/credentials#expirationDate",
-        "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
       }
     }
   ],
   "type": ["VerifiablePresentation"],
+  "holder": "did:key:zDnaemDNwi4G5eTzGfRooFFu5Kns3be6yfyVNtiaMhWkZbwtc",
+  "validFrom": "2024-01-01T00:00:00Z",
+  "validUntil": "2999-01-01T00:00:00Z",
   "verifiableCredential": [
     {
       "@context": [
         "https://www.w3.org/ns/credentials/v2",
-        "https://trustvc.io/context/bill-of-lading.json"
+        "https://w3id.org/security/data-integrity/v2",
+        "https://trustvc.io/context/render-method-context-v2.json"
       ],
-      "id": "urn:uuid:01a00dce-9940-7008-b486-cd8723af519e",
+      "id": "urn:uuid:01a11425-4eee-711b-928f-3a5a3d3936e2",
       "type": ["VerifiableCredential"],
-      "issuer": "did:web:nope.invalid",
-      "validFrom": "2024-04-01T12:19:52Z",
+      "issuer": "did:key:zDnaemDNwi4G5eTzGfRooFFu5Kns3be6yfyVNtiaMhWkZbwtc",
+      "validFrom": "2024-01-01T00:00:00Z",
       "credentialSubject": {
-        "id": "did:key:zDnaeTxqNRyC14uDE5hAt6EHYCg2HtPDnoausRuZp4QohXX2P",
-        "type": ["BillOfLading"],
-        "blNumber": "BL-GHOST"
+        "id": "did:key:zDnaemDNwi4G5eTzGfRooFFu5Kns3be6yfyVNtiaMhWkZbwtc",
+        "name": "Cargo"
       },
+      "renderMethod": [
+        {
+          "id": "https://generic-templates.tradetrust.io",
+          "type": "EMBEDDED_RENDERER",
+          "templateName": "PACKING_LIST"
+        }
+      ],
       "proof": {
         "type": "DataIntegrityProof",
-        "created": "2026-08-17T03:40:38Z",
+        "created": "2026-10-07T02:15:51Z",
+        "verificationMethod": "did:key:zDnaemDNwi4G5eTzGfRooFFu5Kns3be6yfyVNtiaMhWkZbwtc#zDnaemDNwi4G5eTzGfRooFFu5Kns3be6yfyVNtiaMhWkZbwtc",
+        "cryptosuite": "ecdsa-sd-2023",
+        "proofPurpose": "assertionMethod",
+        "proofValue": "u2V0BhVhASGua6EQs-_p8LwFEqfB9sNW8Vr_w7O6AVqRurVb1EkyaiBdNdtYLL3ipHTgNsorvY5OydSoX4d-EMjr9ULL9q1gjgCQDzkfT7CGcpU9YhaOsdNWXw2mI16zvtaHfVonDpzIufqmFWEBwjxX6TVf8Fhm35cux_OOiSRm1QBH-ssdyDjuYFf49m2ETH8BUXTi-ks9zKelO4VL8AZ55sHHVOO6SPY9a0bMRWEDdUmsFZ9aR-_P784tAaAn2w-kSwSUNzyhRBazah3nq8j9J8QxW_76wOxElnf3mU66ac7icRNx2H_IEs4Mh5vS-WEBKGGWkptKqql0utZOXBNCRf_qGqRfrjhHdAoLq7Q-jS54TQ8TgQW41Ff9Q0HARY9zqas1TCgloe3MSgIVJTqWtWECvw_D28bRvffdFCgItUi8rHRf_8NW4hVM4O0kOySWm5W3RfiF4DxBBzjmhrcXRt2EywJ2cB-2P2aITlV-dpqGhWEB5Vmjx-3fQ4xks1-3Mh-jwik53AIFwXNLXGvaWqH9mRX8WV1OP6FcQ8X1hyMzPaxKRGTrMEe8-QZZai_h0ZFWnoIMDBQc"
+      }
+    },
+    {
+      "@context": [
+        "https://www.w3.org/ns/credentials/v2",
+        "https://w3id.org/security/data-integrity/v2",
+        "https://trustvc.io/context/render-method-context-v2.json"
+      ],
+      "id": "urn:uuid:01a11425-4ee6-711b-928f-33f6fa6f0989",
+      "type": ["VerifiableCredential"],
+      "issuer": "did:web:nope.invalid",
+      "validFrom": "2024-01-01T00:00:00Z",
+      "credentialSubject": {
+        "id": "did:key:zDnaemDNwi4G5eTzGfRooFFu5Kns3be6yfyVNtiaMhWkZbwtc",
+        "name": "Cargo"
+      },
+      "renderMethod": [
+        {
+          "id": "https://generic-templates.tradetrust.io",
+          "type": "EMBEDDED_RENDERER",
+          "templateName": "BILL_OF_LADING"
+        }
+      ],
+      "proof": {
+        "type": "DataIntegrityProof",
+        "created": "2026-10-07T02:15:51Z",
         "verificationMethod": "did:web:nope.invalid#keys-1",
         "cryptosuite": "ecdsa-sd-2023",
         "proofPurpose": "assertionMethod",
-        "proofValue": "u2V0BhVhA4QIQlmxfTxir3OyzH5HGhFIyEjW13wRw9TYF0HRfX8qdaZVLDiNnruYXbOc2WeBcN5CyUvt9VaB3vQf5c3tNPFgjgCQDO1uA08MwGEfrMmcjAvyKiOLjAmJE7NKQ-HhtTynpUo2DWEA7O_efLwu7nqnQ5t4i8vGB8nqBwHknZvXQ85mMW77Oi8zOHgSpwULKPdVY3pfsCvaLkQlKMkgQdHuKaQDd8LXMWECUeAJ2e_8PvLTndAmZsXu0BPv9bd8xCsgroq1hA1tKBW7dBYLvH_JGzblWGaEUW_LLEju4ka6hVZ2mZiy2cnEbWECp6zrY1EoiNjsu4_Bpa9Q0FTDVPZ35L86lD33BxfZr6ViV6_POv8YrvO9EIuakO5DHqZCZJh55S-rW8OgnkYcLoIMCBAU"
+        "proofValue": "u2V0BhVhAQIkXngxBy__iJysCfp6GKnitMh7tsnMyHKhPUtG6iQO8dGi055QGIuGaAE8f4Ki3m7mQRT3i_YVWY2QPEaD4kVgjgCQDauAbA8B2z0UhIni5gdaorATr3DPGp-sApHpYeoBAAmKFWEDE73l3LbQN3bQ4Dt4S1G9BDT7tPOlg0LEQgl9hMgpN15Ls8mOGNIfLg45ZFd1KXqNmf3d826TFUHc49xiZ0i07WEDe8qGLpJfXKS2b6ziW0CZkivQN-S3razOe-30YO6ZkpEDT5pGHdN0euPdPoM-aJoI2akBHSpPVqslhri7Mslk2WEAnL77FZmx-i4w_M7AG9gO86CwEa3roICGuZwBKovsqKQX2nkgD3JKPnBxCx9HHt-xRB3ZgmdcqmEEpEkyOfD2-WEAbwKt5n-DNU7x9dhumXRAihr5gktZV5YwqMYnJL-kMN3Uh6ZdiS4E3xkzf8fdWOc-Mwnl2PTgQJcDZTuENLtWcWEB2bAlMGyqoGPNE3mBbQQOKLTs9bQc8127zW_XCDyFSZBYUq9mfQ3j0bXwIMm0KkO05oqRXXFbTCmVzy5Knw5AfoIMDBQc"
       }
     }
   ],
-  "holder": "did:key:zDnaeTxqNRyC14uDE5hAt6EHYCg2HtPDnoausRuZp4QohXX2P",
-  "validFrom": "2026-08-17T03:40:39.151Z",
-  "validUntil": "2999-01-01T00:00:00Z",
   "proof": {
     "type": "DataIntegrityProof",
-    "created": "2026-08-17T03:40:39Z",
-    "verificationMethod": "did:key:zDnaeTxqNRyC14uDE5hAt6EHYCg2HtPDnoausRuZp4QohXX2P#zDnaeTxqNRyC14uDE5hAt6EHYCg2HtPDnoausRuZp4QohXX2P",
+    "created": "2026-10-07T02:15:51Z",
+    "verificationMethod": "did:key:zDnaemDNwi4G5eTzGfRooFFu5Kns3be6yfyVNtiaMhWkZbwtc#zDnaemDNwi4G5eTzGfRooFFu5Kns3be6yfyVNtiaMhWkZbwtc",
     "cryptosuite": "ecdsa-rdfc-2019",
-    "proofPurpose": "assertionMethod",
-    "proofValue": "z4MMooHFop8rPbhNMUQzLMsofWfv8E78r62an3iUqqB8jhTDanAbsooqu2nfLvAQcC4aAgZXVahWcxE78YJNsEomE"
+    "proofPurpose": "authentication",
+    "challenge": "unresolvable",
+    "proofValue": "ztTTh1LFzvKpAJRy3yN4UoavcbgDbPAh8xZMARPuqRtbsXeb7WvNXdKRf37jpQAqsnDLYUf4opa5MU9qnFrvqi44"
   }
 }

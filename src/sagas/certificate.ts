@@ -227,7 +227,9 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
         const presentationFailure = isVerifiablePresentation(certificate)
           ? matchPresentationFailure(fragments)
           : undefined;
-        errors.push(presentationFailure ? `PRESENTATION_${presentationFailure.type}` : "INVALID_DOCUMENT");
+        // trustvc's own type keys already carry their subject — PRESENTATION_UNSIGNED,
+        // CREDENTIAL_REVOKED — so prefixing again would report PRESENTATION_PRESENTATION_UNSIGNED.
+        errors.push(presentationFailure ? presentationFailure.type : "INVALID_DOCUMENT");
       }
 
       if (errors.length > 0) {

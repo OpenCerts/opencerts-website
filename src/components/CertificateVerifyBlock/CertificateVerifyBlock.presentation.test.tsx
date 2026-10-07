@@ -31,7 +31,7 @@ describe("certificateVerifyBlock for a presentation", () => {
     fireEvent.click(screen.getByText("Certificates presented by"));
 
     expect(screen.getByText("Presentation has not been tampered with")).toBeInTheDocument();
-    expect(screen.getByText("Presenter's identity has been verified")).toBeInTheDocument();
+    expect(screen.getByText("Presenter has been identified")).toBeInTheDocument();
     expect(screen.queryByText(/has been issued/)).not.toBeInTheDocument();
   });
 });

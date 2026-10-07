@@ -134,7 +134,9 @@ export const getErrorCode = (
   // checks below would mislabel it.
   if (!isWrappedV2Document(certificate) && !isWrappedV3Document(certificate)) {
     const presentationFailure = isVerifiablePresentation(certificate) ? matchPresentationFailure(fragments) : undefined;
-    return presentationFailure ? `PRESENTATION_${presentationFailure.type}` : "INVALID_DOCUMENT";
+    // trustvc's own type keys already carry their subject — PRESENTATION_UNSIGNED,
+    // CREDENTIAL_REVOKED — so prefixing again would report PRESENTATION_PRESENTATION_UNSIGNED.
+    return presentationFailure ? presentationFailure.type : "INVALID_DOCUMENT";
   }
 
   const errors: string[] = [];

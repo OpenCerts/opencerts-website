@@ -1,12 +1,20 @@
 import { render, screen } from "@testing-library/react";
-import { VerificationFragment } from "@trustvc/trustvc";
+import { fragments as trustvcFragments, VerificationFragment } from "@trustvc/trustvc";
+
+const { W3CVpCode } = trustvcFragments as unknown as { W3CVpCode: Record<string, number> };
 import React from "react";
 import { MESSAGES, TYPES } from "../../../constants/VerificationErrorMessages";
 import singleCredential from "../../tests/fixture/presentations/valid/single_credential.json";
 import { UnverifiedView } from "./UnverifiedView";
 
-const invalid = (name: string, type: string, message: string): VerificationFragment =>
-  ({ name, type, status: "INVALID", reason: { code: 0, codeString: "INVALID", message } } as VerificationFragment);
+const invalid = (name: string, type: string, message: string, code = 0, credentialIndices: number[] = []) =>
+  ({
+    name,
+    type,
+    status: "INVALID",
+    reason: { code, codeString: String(code), message },
+    data: { credentialIndices },
+  } as unknown as VerificationFragment);
 
 const valid = (name: string, type: string): VerificationFragment =>
   ({ name, type, status: "VALID", data: true } as VerificationFragment);
@@ -33,11 +41,9 @@ describe("unverifiedView", () => {
   it("blames the embedded credential, and its issuer, for a revoked credential", () => {
     const fragments = [
       valid("W3CVpSignatureIntegrity", "DOCUMENT_INTEGRITY"),
-      invalid(
-        "W3CVpCredentialStatus",
-        "DOCUMENT_STATUS",
-        'Embedded credential at index 0 has been revoked (status purpose "revocation").'
-      ),
+      invalid("W3CVpCredentialStatus", "DOCUMENT_STATUS", "verifier prose, never shown", W3CVpCode.CREDENTIAL_REVOKED, [
+        0,
+      ]),
       valid("W3CVpIssuerIdentity", "ISSUER_IDENTITY"),
     ];
 
@@ -45,9 +51,10 @@ describe("unverifiedView", () => {
       <UnverifiedView resetData={jest.fn()} verificationStatus={fragments} document={singleCredential as never} />
     );
 
-    expect(screen.getByText("This presentation is not valid")).toBeInTheDocument();
+    expect(screen.getByText("Credential revoked")).toBeInTheDocument();
     expect(screen.getByText(/Credential 1/)).toBeInTheDocument();
-    expect(screen.getByText(/issuing institution/)).toBeInTheDocument();
+    expect(screen.getByText(/issuing authority/)).toBeInTheDocument();
+    // The credential-shaped copy must not appear alongside it.
     expect(screen.queryByText("Certificate not issued")).not.toBeInTheDocument();
   });
 
@@ -56,7 +63,8 @@ describe("unverifiedView", () => {
       invalid(
         "W3CVpCredentialStatus",
         "DOCUMENT_STATUS",
-        "Presentation has expired (validUntil 2021-01-01T00:00:00Z)."
+        "verifier prose, never shown",
+        W3CVpCode.PRESENTATION_EXPIRED
       ),
     ];
 
@@ -64,7 +72,7 @@ describe("unverifiedView", () => {
       <UnverifiedView resetData={jest.fn()} verificationStatus={fragments} document={singleCredential as never} />
     );
 
-    expect(screen.getByText("Presentation has expired")).toBeInTheDocument();
+    expect(screen.getByText("Presentation expired")).toBeInTheDocument();
     expect(screen.getByText(/ask the holder to present the credentials again/)).toBeInTheDocument();
   });
 });
