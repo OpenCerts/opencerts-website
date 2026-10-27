@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { render, screen, waitFor } from "@testing-library/react";
-import { renderInlineTemplate } from "@trustvc/trustvc";
+import { renderInlineHtmlTemplate } from "@trustvc/trustvc";
 import React from "react";
 import { Provider } from "react-redux";
 import { rootReducer } from "../../reducers";
@@ -9,7 +9,7 @@ import { hasInlineTemplateRenderMethod, InlineTemplateRenderer } from "./InlineT
 // Wrapped so a single test can make the SDK report a render failure; every other test runs the real one.
 jest.mock("@trustvc/trustvc", () => {
   const actual = jest.requireActual("@trustvc/trustvc");
-  return { ...actual, renderInlineTemplate: jest.fn(actual.renderInlineTemplate) };
+  return { ...actual, renderInlineHtmlTemplate: jest.fn(actual.renderInlineHtmlTemplate) };
 });
 
 const html = `
@@ -122,7 +122,7 @@ describe("inlineTemplateRenderer fallback", () => {
   it("calls onFailure when the template can't be rendered", async () => {
     const onFailure = jest.fn();
     jest.spyOn(console, "error").mockImplementation(() => undefined);
-    (renderInlineTemplate as jest.Mock).mockReturnValueOnce(false);
+    (renderInlineHtmlTemplate as jest.Mock).mockReturnValueOnce(false);
     renderInline({ onFailure });
 
     await waitFor(() => expect(onFailure).toHaveBeenCalledTimes(1));
