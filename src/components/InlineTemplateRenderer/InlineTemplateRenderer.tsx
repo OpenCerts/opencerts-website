@@ -1,8 +1,8 @@
 import {
-  decompressInlineTemplate,
+  decompressInlineHtmlTemplate,
   getRenderMethods,
-  printInlineTemplate,
-  renderInlineTemplate,
+  printInlineHtmlTemplate,
+  renderInlineHtmlTemplate,
 } from "@trustvc/trustvc";
 import React, { Ref, useEffect, useImperativeHandle, useRef } from "react";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
@@ -10,7 +10,7 @@ import { MutiTabsContainer } from "../MultiTabs";
 
 /** True when the document carries its own `INLINE_HTML_TEMPLATE` renderMethod entry, compressed or not. */
 export const hasInlineTemplateRenderMethod = (document: unknown): boolean =>
-  !!getRenderMethods(document).inlineTemplate;
+  !!getRenderMethods(document).inlineHtmlTemplate;
 
 interface InlineTemplateRendererProps {
   rawDocument: WrappedOrSignedOpenCertsDocument;
@@ -41,17 +41,17 @@ export const InlineTemplateRenderer: React.FunctionComponent<InlineTemplateRende
 
   useImperativeHandle(forwardedRef, () => ({
     print() {
-      if (hostRef.current) printInlineTemplate(hostRef.current);
+      if (hostRef.current) printInlineHtmlTemplate(hostRef.current);
     },
   }));
 
   useEffect(() => {
     let cancelled = false;
     // A string `template` is gzipped (it was signed in that form), so inflate it before rendering.
-    decompressInlineTemplate(rawDocument)
+    decompressInlineHtmlTemplate(rawDocument)
       .then((decompressed) => {
         if (cancelled || !hostRef.current) return;
-        if (!renderInlineTemplate(decompressed, hostRef.current)) {
+        if (!renderInlineHtmlTemplate(decompressed, hostRef.current)) {
           throw new Error("No renderable INLINE_HTML_TEMPLATE entry");
         }
       })
