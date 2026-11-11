@@ -209,12 +209,12 @@ export const buildVerificationEvent = (
     environment: DEPLOY_ENV,
     document_schema: getDocumentSchema(certificate),
     issuer_method: getIssuerMethod(certificate),
+    issuer_name: omitBlank(getIssuerName(certificate)) ?? ISSUER_NAME_NOT_PRESENT,
     signing_algorithm: getSigningAlgorithm(certificate, fragments),
     verification_result: verificationResult,
   };
   const issuerIdentity = omitBlank(getIssuerIdentity(certificate));
   if (issuerIdentity) payload.issuer_identity = issuerIdentity;
-  payload.issuer_name = omitBlank(getIssuerName(certificate)) ?? ISSUER_NAME_NOT_PRESENT;
   payload.error_code = errorCode;
   return payload;
 };

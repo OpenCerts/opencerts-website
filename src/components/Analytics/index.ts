@@ -45,6 +45,12 @@ function isInRegistry(value: string): value is keyof typeof registry.issuers {
   return value in registry.issuers;
 }
 
+function registryIdFor(documentStore: string): string | null {
+  if (!isInRegistry(documentStore)) return null;
+  const entry = registry.issuers[documentStore];
+  return "id" in entry ? entry.id : null;
+}
+
 export const validateEvent = ({ category, value }: Event): void => {
   if (!category) throw new Error("Category is required");
   if (value && typeof value !== "number") throw new Error("Value must be a number");
@@ -95,8 +101,6 @@ export const sendV2EventCertificateViewedDetailed = ({
   };
   category?: string;
 }): void => {
-  let registryId = null;
-
   // We track either document store or issuer ID, where both are mutually exclusive
   // meaning documents will unlikely have both document store ID and issuer ID/ DID
   const documentStore = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? "";
@@ -110,9 +114,7 @@ export const sendV2EventCertificateViewedDetailed = ({
   const templateName =
     typeof certificateData.$template === "string" ? certificateData.$template : certificateData.$template?.name || "";
 
-  if (isInRegistry(documentStore)) {
-    registryId = registry.issuers[documentStore].id;
-  }
+  const registryId = registryIdFor(documentStore);
   analyticsEvent({
     category: category ?? ANALYTICS_EVENTS.CERTIFICATE_DETAILS,
     nonInteraction: true,
@@ -249,7 +251,7 @@ export function triggerV2ErrorLogging(
   certificate.issuers.forEach((issuer: v2.Issuer) => {
     const documentStore = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? issuer.id ?? ""; // use id for DID
     const issuerName = issuerNameForReport(issuer);
-    const registryId = isInRegistry(documentStore) ? registry.issuers[documentStore].id : null;
+    const registryId = registryIdFor(documentStore);
 
     analyticsEvent({
       category: ANALYTICS_EVENTS.CERTIFICATE_ERROR,
@@ -350,7 +352,7 @@ export function triggerV2RendererTimeoutLogging(rawCertificate: WrappedDocument<
   certificate.issuers.forEach((issuer: v2.Issuer) => {
     const documentStore = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? issuer.id ?? ""; // use id for DID
     const issuerName = issuerNameForReport(issuer);
-    const registryId = isInRegistry(documentStore) ? registry.issuers[documentStore].id : null;
+    const registryId = registryIdFor(documentStore);
 
     analyticsEvent({
       category: ANALYTICS_EVENTS.CERTIFICATE_RENDERER_TIMEOUT,
