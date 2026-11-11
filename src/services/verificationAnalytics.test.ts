@@ -18,6 +18,7 @@ import {
   getErrorCode,
   getIssuerIdentity,
   getIssuerMethod,
+  getIssuerName,
   getSigningAlgorithm,
   getVerificationResult,
   pushVerificationEvent,
@@ -495,6 +496,57 @@ describe("getIssuerIdentity", () => {
 });
 
 // ---------------------------------------------------------------------------
+// Tests: getIssuerName
+// ---------------------------------------------------------------------------
+
+describe("getIssuerName", () => {
+  it("returns the unwrapped issuer name for a wrapped v2 document", () => {
+    expect(getIssuerName(dnsDidV2Signed as unknown as WrappedOrSignedOpenCertsDocument)).toBe("DEMO STORE");
+  });
+
+  it("returns the v2 issuer name from the document, not the identity proof", () => {
+    expect(getIssuerName(v2DnsTxtDoc)).toBe("Test Issuer");
+    expect(getIssuerName(v2RegistryDoc)).toBe("Some Issuer Name");
+  });
+
+  it("returns an empty string when a v2 issuer has no name", () => {
+    const unnamed = {
+      ...v2DnsTxtDoc,
+      data: {
+        ...(v2DnsTxtDoc as unknown as { data: Record<string, unknown> }).data,
+        issuers: [
+          {
+            documentStore: "0xNOTINREGISTRY",
+            identityProof: { type: v2.IdentityProofType.DNSTxt, location: "test.example.com" },
+          },
+        ],
+      },
+    } as unknown as WrappedOrSignedOpenCertsDocument;
+    expect(getIssuerName(unnamed)).toBe("");
+  });
+
+  it("returns issuer.name for a v3 document", () => {
+    expect(getIssuerName(v3Document as unknown as WrappedOrSignedOpenCertsDocument)).toBe("DEMO STORE");
+  });
+
+  it("returns an empty string for a W3C VC whose issuer is only a DID", () => {
+    expect(getIssuerName(w3cDocWithDidWeb)).toBe("");
+  });
+
+  it("returns issuer.name for a W3C VC with an object issuer", () => {
+    expect(getIssuerName(w3cDocWithObjectIssuer)).toBe("Test University");
+  });
+
+  it("returns an empty string when a W3C object issuer has no name", () => {
+    const noName = {
+      ...w3cDocWithObjectIssuer,
+      issuer: { id: "did:web:university.edu" },
+    } as unknown as WrappedOrSignedOpenCertsDocument;
+    expect(getIssuerName(noName)).toBe("");
+  });
+});
+
+// ---------------------------------------------------------------------------
 // Tests: getSigningAlgorithm
 // ---------------------------------------------------------------------------
 
@@ -623,9 +675,19 @@ describe("buildVerificationEvent", () => {
     expect(event.document_schema).toBe("OA v2");
     expect(event.issuer_method).toBe("DNS-TXT");
     expect(event.issuer_identity).toBe("test.example.com");
+    expect(event.issuer_name).toBe("Test Issuer");
     expect(event.signing_algorithm).toBe("merkleroot2018");
     expect(event.verification_result).toBe("valid");
     expect(event.error_code).toBeUndefined();
+  });
+
+  it("sends the unwrapped v2 issuer name separately from the identity", () => {
+    const event = buildVerificationEvent(
+      dnsDidV2Signed as unknown as WrappedOrSignedOpenCertsDocument,
+      allValidFragments
+    );
+    expect(event.issuer_name).toBe("DEMO STORE");
+    expect(event.issuer_identity).toBe("example.tradetrust.io");
   });
 
   it("builds a correct event for a legacy registry-issued OA v2 document", () => {
@@ -634,6 +696,7 @@ describe("buildVerificationEvent", () => {
     expect(event.document_schema).toBe("OA v2");
     expect(event.issuer_method).toBe("Registry");
     expect(event.issuer_identity).toBe("ROPSTEN: OpenCerts");
+    expect(event.issuer_name).toBe("Some Issuer Name");
   });
 
   it("builds a correct event for an invalid OA v2 document", () => {
@@ -649,6 +712,7 @@ describe("buildVerificationEvent", () => {
     expect(event.document_schema).toBe("OA v3");
     expect(event.issuer_method).toBe("DNS-DID");
     expect(event.issuer_identity).toBe("example.openattestation.com");
+    expect(event.issuer_name).toBe("DEMO STORE");
     expect(event.signing_algorithm).toBe("merkleroot2018");
     expect(event.verification_result).toBe("valid");
     expect(event.error_code).toBeUndefined();
@@ -661,6 +725,7 @@ describe("buildVerificationEvent", () => {
     expect(event.document_schema).toBe("W3C VC");
     expect(event.issuer_method).toBe("DID:WEB");
     expect(event.issuer_identity).toBe("did:web:example.com");
+    expect(event.issuer_name).toBe("not present in document");
     expect(event.signing_algorithm).toBe("BBS2023");
     expect(event.verification_result).toBe("valid");
     expect(event.error_code).toBeUndefined();
@@ -673,6 +738,27 @@ describe("buildVerificationEvent", () => {
     expect(event.signing_algorithm).toBe("BBS2023");
     expect(event.verification_result).toBe("error");
     expect(event.error_code).toBe("INVALID_DOCUMENT");
+  });
+
+  it("reports a missing issuer name as not present in the document", () => {
+    const unnamed = {
+      ...v2DnsTxtDoc,
+      data: {
+        ...(v2DnsTxtDoc as unknown as { data: Record<string, unknown> }).data,
+        issuers: [{ name: "   ", documentStore: "0xNOTINREGISTRY" }],
+      },
+    } as unknown as WrappedOrSignedOpenCertsDocument;
+    const event = buildVerificationEvent(unnamed, allValidFragments);
+
+    expect(event.issuer_identity).toBeUndefined();
+    expect(event.issuer_name).toBe("not present in document");
+    expect(Object.prototype.hasOwnProperty.call(event, "issuer_identity")).toBe(false);
+  });
+
+  it("sends the W3C object issuer name separately from its DID", () => {
+    const event = buildVerificationEvent(w3cDocWithObjectIssuer, bbsFragments);
+    expect(event.issuer_identity).toBe("did:web:university.edu");
+    expect(event.issuer_name).toBe("Test University");
   });
 
   it("sets error_code to undefined for valid documents so GTM clears any prior stale value", () => {
