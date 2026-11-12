@@ -6,12 +6,12 @@ import {
   getIssuerAddress,
   isWrappedV2Document,
   isWrappedV3Document,
-  RegistryEntry,
 } from "@trustvc/trustvc";
 import { isEmpty, omitBy } from "lodash";
 import registry from "../../../public/static/registry.json";
 import { ANALYTICS_EVENTS } from "../../constants/analyticsEvents";
 import { pushGTMEvent } from "../../services/gtm";
+import { ISSUER_NAME_NOT_PRESENT, issuerNameForReport } from "../../services/verificationAnalytics";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { getLogger } from "../../utils/logger";
 import { getPresentationCredentials, getPresentationHolder, isVerifiablePresentation } from "../../utils/presentation";
@@ -43,6 +43,12 @@ interface Event {
  */
 function isInRegistry(value: string): value is keyof typeof registry.issuers {
   return value in registry.issuers;
+}
+
+function registryIdFor(documentStore: string): string | null {
+  if (!isInRegistry(documentStore)) return null;
+  const entry = registry.issuers[documentStore];
+  return "id" in entry ? entry.id : null;
 }
 
 export const validateEvent = ({ category, value }: Event): void => {
@@ -95,13 +101,11 @@ export const sendV2EventCertificateViewedDetailed = ({
   };
   category?: string;
 }): void => {
-  let issuerName = "";
-  let registryId = null;
-
   // We track either document store or issuer ID, where both are mutually exclusive
   // meaning documents will unlikely have both document store ID and issuer ID/ DID
   const documentStore = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? "";
   const issuerId = issuer.id ?? "";
+  const issuerName = issuerNameForReport(issuer);
   const documentId = certificateData?.id ?? "";
   const documentName = certificateData?.name ?? "";
   const issuedOn = certificateData?.issuedOn ?? "";
@@ -110,13 +114,7 @@ export const sendV2EventCertificateViewedDetailed = ({
   const templateName =
     typeof certificateData.$template === "string" ? certificateData.$template : certificateData.$template?.name || "";
 
-  if (isInRegistry(documentStore)) {
-    const registryIssuer: RegistryEntry = registry.issuers[documentStore];
-    issuerName = registryIssuer.name;
-    registryId = registryIssuer.id;
-  } else if (issuer.identityProof) {
-    issuerName = issuer.identityProof.location || "";
-  }
+  const registryId = registryIdFor(documentStore);
   analyticsEvent({
     category: category ?? ANALYTICS_EVENTS.CERTIFICATE_DETAILS,
     nonInteraction: true,
@@ -146,7 +144,7 @@ export const sendV3EventCertificateViewedDetailed = ({
   const documentId = certificateData?.id ?? "";
   const documentName = certificateData?.name ?? "";
   const issuedOn = certificateData?.issued ?? "";
-  const issuerName = certificateData.openAttestationMetadata.identityProof.identifier || "";
+  const issuerName = issuerNameForReport(certificateData.issuer);
   const rendererUrl = certificateData.openAttestationMetadata.template?.url || "";
   const templateName = certificateData.openAttestationMetadata.template?.name || "";
   analyticsEvent({
@@ -166,9 +164,8 @@ export const sendV3EventCertificateViewedDetailed = ({
 };
 
 /**
- * A presentation has no issuer and no issuance date of its own: the holder asserts it, and the
- * embedded credentials carry their own issuers. Reporting `issuer: undefined` would file every
- * presentation under a blank issuer, so the holder is reported instead.
+ * A presentation has no issuer name of its own: the holder asserts it. The holder DID is sent
+ * as issuer id, and the issuer name is reported as not present in the document.
  */
 const presentationAnalyticsOptions = (document: WrappedOrSignedOpenCertsDocument) => {
   const holder = getPresentationHolder(document);
@@ -177,7 +174,7 @@ const presentationAnalyticsOptions = (document: WrappedOrSignedOpenCertsDocument
     documentName: `${getPresentationCredentials(document).length} credential(s)`,
     issuedOn: "",
     issuerId: holder,
-    issuerName: holder,
+    issuerName: ISSUER_NAME_NOT_PRESENT,
     documentSchema: "W3C VP",
   };
 };
@@ -202,7 +199,7 @@ export const sendW3CEventCertificateViewedDetailed = (
   const issuedOn = vc.issuanceDate ?? vc.validFrom ?? "";
   const rawIssuer = vc.issuer;
   const issuerId = typeof rawIssuer === "string" ? rawIssuer : rawIssuer?.id ?? "";
-  const issuerName = typeof rawIssuer === "object" ? rawIssuer?.name ?? issuerId : issuerId;
+  const issuerName = issuerNameForReport(rawIssuer);
 
   analyticsEvent({
     category: category ?? ANALYTICS_EVENTS.CERTIFICATE_DETAILS,
@@ -253,16 +250,8 @@ export function triggerV2ErrorLogging(
   // If there are multiple issuers in a certificate, we send multiple events!
   certificate.issuers.forEach((issuer: v2.Issuer) => {
     const documentStore = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? issuer.id ?? ""; // use id for DID
-    let issuerName = issuer.name;
-    let registryId = null;
-
-    if (isInRegistry(documentStore)) {
-      const registryIssuer: RegistryEntry = registry.issuers[documentStore];
-      issuerName = registryIssuer.name;
-      registryId = registryIssuer.id;
-    } else if (issuer.identityProof) {
-      issuerName = issuer.identityProof.location || "";
-    }
+    const issuerName = issuerNameForReport(issuer);
+    const registryId = registryIdFor(documentStore);
 
     analyticsEvent({
       category: ANALYTICS_EVENTS.CERTIFICATE_ERROR,
@@ -296,7 +285,7 @@ export function triggerV3ErrorLogging(
 
   // If there are multiple issuers in a certificate, we send multiple events!
   const documentStore = getIssuerAddress(rawCertificate);
-  const issuerName = rawCertificate.openAttestationMetadata.identityProof.identifier;
+  const issuerName = issuerNameForReport(rawCertificate.issuer);
 
   analyticsEvent({
     category: ANALYTICS_EVENTS.CERTIFICATE_ERROR,
@@ -332,7 +321,7 @@ export function triggerW3CErrorLogging(certificate: WrappedOrSignedOpenCertsDocu
   const issuedOn = vc.issuanceDate ?? vc.validFrom ?? "";
   const rawIssuer = vc.issuer;
   const issuerId = typeof rawIssuer === "string" ? rawIssuer : rawIssuer?.id ?? "";
-  const issuerName = typeof rawIssuer === "object" ? rawIssuer?.name ?? issuerId : issuerId;
+  const issuerName = issuerNameForReport(rawIssuer);
 
   analyticsEvent({
     category: ANALYTICS_EVENTS.CERTIFICATE_ERROR,
@@ -362,16 +351,8 @@ export function triggerV2RendererTimeoutLogging(rawCertificate: WrappedDocument<
   // If there are multiple issuers in a certificate, we send multiple events!
   certificate.issuers.forEach((issuer: v2.Issuer) => {
     const documentStore = issuer.certificateStore ?? issuer.documentStore ?? issuer.tokenRegistry ?? issuer.id ?? ""; // use id for DID
-    let issuerName = issuer.name;
-    let registryId = null;
-
-    if (isInRegistry(documentStore)) {
-      const registryIssuer: RegistryEntry = registry.issuers[documentStore];
-      issuerName = registryIssuer.name;
-      registryId = registryIssuer.id;
-    } else if (issuer.identityProof) {
-      issuerName = issuer.identityProof.location || "";
-    }
+    const issuerName = issuerNameForReport(issuer);
+    const registryId = registryIdFor(documentStore);
 
     analyticsEvent({
       category: ANALYTICS_EVENTS.CERTIFICATE_RENDERER_TIMEOUT,
@@ -400,7 +381,7 @@ export function triggerV3RendererTimeoutLogging(rawCertificate: WrappedDocument<
 
   // If there are multiple issuers in a certificate, we send multiple events!
   const documentStore = getIssuerAddress(rawCertificate);
-  const issuerName = rawCertificate.openAttestationMetadata.identityProof.identifier;
+  const issuerName = issuerNameForReport(rawCertificate.issuer);
 
   analyticsEvent({
     category: ANALYTICS_EVENTS.CERTIFICATE_RENDERER_TIMEOUT,
@@ -435,7 +416,7 @@ export function triggerW3CRendererTimeoutLogging(certificate: WrappedOrSignedOpe
   const issuedOn = vc.issuanceDate ?? vc.validFrom ?? "";
   const rawIssuer = vc.issuer;
   const issuerId = typeof rawIssuer === "string" ? rawIssuer : rawIssuer?.id ?? "";
-  const issuerName = typeof rawIssuer === "object" ? rawIssuer?.name ?? issuerId : issuerId;
+  const issuerName = issuerNameForReport(rawIssuer);
 
   analyticsEvent({
     category: ANALYTICS_EVENTS.CERTIFICATE_RENDERER_TIMEOUT,
