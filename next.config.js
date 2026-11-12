@@ -1,4 +1,21 @@
 const path = require("path");
+
+// Dependencies @trustvc/trustvc 2.16 installs nested under its own node_modules (viem and its
+// BigInt-based crypto stack). `transpilePackages` matches by path, so Babel would compile them too
+// and rewrite `2n ** 256n` into Math.pow, which throws on BigInt. Leave them to webpack as it would
+// if they were hoisted. js-sha3 and node-forge, nested since 2.15, are left as they were.
+const NESTED_TRUSTVC_DEPS =
+  /[\\/]node_modules[\\/]@trustvc[\\/]trustvc[\\/]node_modules[\\/](viem|ox|abitype|permissionless|@noble|@adraffy|eventemitter3|ws)[\\/]/;
+const BABEL_LOADER = /[\\/]babel[\\/]loader[\\/]/;
+const excludeNestedTrustvcDepsFromBabel = (rules) =>
+  rules.forEach((rule) => {
+    if (!rule || typeof rule !== "object") return;
+    if (Array.isArray(rule.oneOf)) excludeNestedTrustvcDepsFromBabel(rule.oneOf);
+    const loaders = [rule.use, rule.loader].flat().filter(Boolean);
+    if (loaders.some((use) => BABEL_LOADER.test(typeof use === "string" ? use : use.loader || ""))) {
+      rule.exclude = rule.exclude ? [rule.exclude, NESTED_TRUSTVC_DEPS] : NESTED_TRUSTVC_DEPS;
+    }
+  });
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.BUNDLE_ANALYZE === "true",
 });
@@ -62,6 +79,7 @@ const nextConfig = {
     // when using local packages that have their own node_modules/react.
     config.resolve.alias["react"] = path.resolve("./node_modules/react");
     config.resolve.alias["react-dom"] = path.resolve("./node_modules/react-dom");
+    excludeNestedTrustvcDepsFromBabel(config.module.rules);
     return config;
   },
 };

@@ -1,6 +1,6 @@
 import { isObfuscated as isOAObfuscated, OpenAttestationDocument, VerificationFragment } from "@trustvc/trustvc";
 import dynamic from "next/dynamic";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { ANALYTICS_EVENTS } from "../constants/analyticsEvents";
 import { updateObfuscatedCertificate as updateObfuscatedCertificateAction } from "../reducers/certificate.slice";
@@ -11,6 +11,7 @@ import { CertificateShareLinkFormContainer } from "./CertificateShareLink/Certif
 import { CertificateVerifyBlock } from "./CertificateVerifyBlock";
 import { CredentialTabs } from "./CredentialTabs";
 import { ErrorBoundary } from "./ErrorBoundary";
+import { hasInlineTemplateRenderMethod, InlineTemplateRenderer } from "./InlineTemplateRenderer";
 import { Modal } from "./Modal";
 
 const CertificateSharingForm = dynamic(import("./CertificateSharing/CertificateSharingForm"));
@@ -52,6 +53,15 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
   const childRef = React.useRef<{ print: () => void }>();
   const isPresentation = isVerifiablePresentation(document);
   const [isDocObfuscated, setIsDocObfuscated] = useState(false);
+  /**
+   * The document whose INLINE_HTML_TEMPLATE entry failed to render; it then falls back to its
+   * URL-based renderMethod entry through the decentralised renderer. Stamped with the document,
+   * like CredentialTabs' selection, so a newly loaded document never inherits the previous one's
+   * failure.
+   */
+  const [inlineTemplateFailedFor, setInlineTemplateFailedFor] = useState<unknown>();
+  const showInlineTemplate = hasInlineTemplateRenderMethod(document) && inlineTemplateFailedFor !== document;
+  const onInlineTemplateFailure = useCallback(() => setInlineTemplateFailedFor(document), [document]);
   useEffect(() => {
     // Obfuscation is an OpenAttestation feature: a presentation has no OA data to read, and
     // each embedded credential is reported on its own tab.
@@ -147,6 +157,12 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
               <CredentialTabs
                 presentation={document}
                 verificationStatus={props.verificationStatus}
+                forwardedRef={childRef}
+              />
+            ) : showInlineTemplate ? (
+              <InlineTemplateRenderer
+                rawDocument={document}
+                onFailure={onInlineTemplateFailure}
                 forwardedRef={childRef}
               />
             ) : (
