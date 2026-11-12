@@ -26,7 +26,8 @@ export interface DocumentVerificationEvent extends GTMEvent {
   environment: string;
   document_schema: DocumentSchema;
   issuer_method: IssuerMethod;
-  issuer_identity: string;
+  issuer_identity?: string;
+  issuer_name: string;
   signing_algorithm: SigningAlgorithm;
   verification_result: VerificationResult;
   error_code?: string;
@@ -108,6 +109,43 @@ export const getIssuerIdentity = (certificate: WrappedOrSignedOpenCertsDocument)
   return typeof issuer === "string" ? issuer : issuer?.id ?? "";
 };
 
+/** Sent as issuer_name when the document has no display name. */
+export const ISSUER_NAME_NOT_PRESENT = "not present in document";
+
+/** Display name on an issuer object. A DID string, or a missing name, returns "". */
+export const issuerDisplayName = (issuer: unknown): string => {
+  if (!issuer || typeof issuer !== "object") return "";
+  const name = (issuer as { name?: unknown }).name;
+  return typeof name === "string" ? name.trim() : "";
+};
+
+/** Name to report. A missing name is labeled instead of being left blank. */
+export const issuerNameForReport = (issuer: unknown): string => issuerDisplayName(issuer) || ISSUER_NAME_NOT_PRESENT;
+
+/**
+ * Display name written on the document. Identity stays the registry name or the
+ * DNS/DID proof; this is issuers[0].name (v2) or issuer.name (v3 / W3C).
+ */
+export const getIssuerName = (certificate: WrappedOrSignedOpenCertsDocument): string => {
+  if (isWrappedV2Document(certificate)) {
+    return issuerDisplayName(getDataV2(certificate).issuers[0]);
+  }
+  if (isWrappedV3Document(certificate)) {
+    return issuerDisplayName(certificate.issuer);
+  }
+  // A presentation is asserted by its holder and has no issuer name of its own.
+  if (isVerifiablePresentation(certificate)) return "";
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return issuerDisplayName((certificate as any).issuer);
+};
+
+/** Blank values are omitted so GTM does not record an empty issuer name. */
+const omitBlank = (value: string | undefined | null): string | undefined => {
+  const trimmed = value?.trim();
+  return trimmed ? trimmed : undefined;
+};
+
 export const getSigningAlgorithm = (
   certificate: WrappedOrSignedOpenCertsDocument,
   fragments: VerificationFragment[]
@@ -171,10 +209,12 @@ export const buildVerificationEvent = (
     environment: DEPLOY_ENV,
     document_schema: getDocumentSchema(certificate),
     issuer_method: getIssuerMethod(certificate),
-    issuer_identity: getIssuerIdentity(certificate),
+    issuer_name: omitBlank(getIssuerName(certificate)) ?? ISSUER_NAME_NOT_PRESENT,
     signing_algorithm: getSigningAlgorithm(certificate, fragments),
     verification_result: verificationResult,
   };
+  const issuerIdentity = omitBlank(getIssuerIdentity(certificate));
+  if (issuerIdentity) payload.issuer_identity = issuerIdentity;
   payload.error_code = errorCode;
   return payload;
 };
