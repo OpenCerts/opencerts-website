@@ -68,15 +68,18 @@ class DropZoneSection extends Component<DropZoneSectionProps> {
     }
   }
   handleDrop(event: DragEvent): void {
-    if (event.dataTransfer && event.dataTransfer.getData(DEMO_CERT)) {
-      window
-        .fetch(DEMO_CERT)
-        .then((res) => res.json())
-        .then((res) => {
-          this.props.updateCertificate(res);
-        })
-        .catch((e) => captureException(e, { tags: { area: "demoCert" } }));
-    }
+    if (!(event.dataTransfer && event.dataTransfer.getData(DEMO_CERT))) return;
+    // This listener runs before React's delegated drop handler. Stop the event so the
+    // drop zone does not fetch and verify the same demo certificate a second time.
+    event.preventDefault();
+    event.stopPropagation();
+    window
+      .fetch(DEMO_CERT)
+      .then((res) => res.json())
+      .then((res) => {
+        this.props.updateCertificate(res);
+      })
+      .catch((e) => captureException(e, { tags: { area: "demoCert" } }));
   }
   handleClick(): void {
     window
@@ -110,7 +113,7 @@ class DropZoneSection extends Component<DropZoneSectionProps> {
               <DraggableDemoCertificate />
               <MobileDemoCertificate />
             </div>
-            <div className="w-full lg:w-2/3 lg:pl-10" id="demoDrop">
+            <div className="w-full lg:w-2/3 lg:pl-10" id="demoDrop" data-testid="demo-drop">
               <CertificateDropZoneContainer />
             </div>
           </div>

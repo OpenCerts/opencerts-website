@@ -15,6 +15,10 @@ export function getVerificationStatus(store: RootState): VerificationFragment[] 
   return store.certificate.verificationStatus;
 }
 
+export function getVerificationError(store: RootState): string | null {
+  return store.certificate.verificationError;
+}
+
 export function getEmailSendingState(store: RootState): states {
   return store.certificate.emailState;
 }

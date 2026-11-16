@@ -1,5 +1,6 @@
 import { v2, VerificationFragment, WrappedDocument } from "@trustvc/trustvc";
 import copy from "clipboard-copy";
+import Link from "next/link";
 import Router from "next/router";
 import React, { Component, ReactNode } from "react";
 import { connect } from "react-redux";
@@ -10,6 +11,7 @@ import {
   getEmailSendingState,
   getShareLink,
   getShareLinkState,
+  getVerificationError,
   getVerificationStatus,
   getVerifying,
 } from "../reducers/certificate.selectors";
@@ -29,6 +31,7 @@ interface ViewerProps {
   document: WrappedOrSignedOpenCertsDocument | null;
   verifying: boolean;
   verificationStatus: VerificationFragment[] | null;
+  verificationError: string | null;
   emailSendingState: string;
   emailSendingError: string | null;
   sendCertificate: (event: { email: string; captcha: string }) => void;
@@ -95,12 +98,34 @@ class Viewer extends Component<ViewerProps, ViewerState> {
   }
 
   render(): ReactNode {
-    if (!this.props.document) return null;
+    const { document, verificationStatus, verificationError, verifying } = this.props;
+    if (!document) return null;
+    // verificationStatus stays null until the saga finishes, and a newer drop clears it
+    // again. Rendering the viewer in that gap used to throw and hit the Next.js error page.
+    if (!verificationStatus) {
+      if (verificationError && !verifying) {
+        return (
+          <div className="container py-16 text-center" data-testid="verification-failed">
+            <h2 className="font-bold text-orange mb-2">This certificate could not be verified</h2>
+            <p className="mb-8 break-words">{verificationError}</p>
+            <Link legacyBehavior href="/">
+              <a className="button bg-navy">Go Back</a>
+            </Link>
+          </div>
+        );
+      }
+      return (
+        <div className="container text-blue text-center py-16" data-testid="verifying-certificate">
+          <i className="fas fa-spinner fa-pulse fa-3x" />
+          <div className="my-3">Verifying Certificate...</div>
+        </div>
+      );
+    }
     return (
       <CertificateViewerContainer
-        document={this.props.document}
-        certificate={opencertsGetData(this.props.document)}
-        verifying={this.props.verifying}
+        document={document}
+        certificate={opencertsGetData(document)}
+        verifying={verifying}
         showSharing={this.state.showSharing}
         showShareLink={this.state.showShareLink}
         shareLink={this.props.shareLink}
@@ -111,7 +136,7 @@ class Viewer extends Component<ViewerProps, ViewerState> {
         copiedLink={this.state.copiedLink}
         emailSendingState={this.props.emailSendingState}
         emailSendingError={this.props.emailSendingError}
-        verificationStatus={this.props.verificationStatus}
+        verificationStatus={verificationStatus}
       />
     );
   }
@@ -128,6 +153,7 @@ export const ViewerContainer = connect(
     shareLinkState: getShareLinkState(store),
     verifying: getVerifying(store),
     verificationStatus: getVerificationStatus(store),
+    verificationError: getVerificationError(store),
   }),
   (dispatch) => ({
     updateCertificate: (payload: WrappedOrSignedOpenCertsDocument) => dispatch(updateCertificate(payload)),

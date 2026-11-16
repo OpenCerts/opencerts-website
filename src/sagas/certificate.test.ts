@@ -1,7 +1,7 @@
-import { put, select } from "redux-saga/effects";
+import { put, select, takeLatest } from "redux-saga/effects";
 import { getCertificate } from "../reducers/certificate.selectors";
-import { sendCertificateFailure, sendCertificateSuccess } from "../reducers/certificate.slice";
-import { sendCertificateSaga } from "./certificate";
+import { sendCertificateFailure, sendCertificateSuccess, updateCertificate } from "../reducers/certificate.slice";
+import { sagas, sendCertificateSaga, verifyCertificateSaga } from "./certificate";
 import { MakeCertUtil } from "./testutils";
 
 jest.mock("@trustvc/trustvc", () => {
@@ -22,6 +22,10 @@ function whenThereIsOneEthereumAddressIssuer() {
 }
 
 describe("sagas/certificate", () => {
+  it("cancels an in-flight verification when another certificate is dropped", () => {
+    expect(sagas).toContainEqual(takeLatest(updateCertificate, verifyCertificateSaga));
+  });
+
   describe("sendCertificate", () => {
     let fetchStub: jest.SpyInstance;
     // eslint-disable-next-line jest/no-hooks

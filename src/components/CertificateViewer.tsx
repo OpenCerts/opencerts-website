@@ -35,7 +35,7 @@ export interface CertificateViewerProps {
   verifying: boolean;
   shareLink: { id?: string; key?: string };
   copiedLink: boolean;
-  verificationStatus: VerificationFragment[] | null;
+  verificationStatus: VerificationFragment[];
   showSharing: boolean;
   showShareLink: boolean;
   emailSendingState: string;
@@ -47,7 +47,6 @@ export interface CertificateViewerProps {
   handleCopyLink: (certificateLink: string) => void;
 }
 export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> = (props) => {
-  if (!props.verificationStatus) throw new Error("Verification status can't be null");
   const { document } = props;
   const childRef = React.useRef<{ print: () => void }>();
   const isPresentation = isVerifiablePresentation(document);

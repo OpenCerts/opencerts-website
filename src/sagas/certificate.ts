@@ -16,7 +16,7 @@ import {
   w3cVerifiers,
 } from "@trustvc/trustvc";
 import Router from "next/router";
-import { call, put, select, takeEvery } from "redux-saga/effects";
+import { call, put, select, takeEvery, takeLatest } from "redux-saga/effects";
 import "isomorphic-fetch";
 
 import { triggerV2ErrorLogging, triggerV3ErrorLogging, triggerW3CErrorLogging } from "../components/Analytics";
@@ -361,7 +361,9 @@ export function* retrieveCertificateByActionSaga({
 
 export const sagas = [
   takeEvery(retrieveCertificateByAction, retrieveCertificateByActionSaga),
-  takeEvery(updateCertificate, verifyCertificateSaga),
+  // A second drop used to keep the first verification running. That older run navigated to
+  // /viewer and the newer run then cleared verificationStatus, which crashed the viewer.
+  takeLatest(updateCertificate, verifyCertificateSaga),
   takeEvery(sendCertificate, sendCertificateSaga),
   takeEvery(generateShareLink, generateShareLinkSaga),
 ];

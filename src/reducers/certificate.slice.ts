@@ -58,6 +58,7 @@ export const certificateSlice = createSlice({
       ...state,
       verificationPending: true,
       verificationStatus: null,
+      verificationError: null,
     }),
     verifyingCertificateCompleted: (state, { payload }: PayloadAction<VerificationFragment[]>) => ({
       ...state,

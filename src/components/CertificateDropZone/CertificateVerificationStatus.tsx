@@ -4,7 +4,7 @@ import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { DropzoneViewWrapper } from "../Layout/DropzoneViewWrapper";
 import { DefaultView } from "./Views/DefaultView";
 import { RetrievalErrorView } from "./Views/RetrievalErrorView";
-import { UnverifiedView } from "./Views/UnverifiedView";
+import { ErrorHeading, TryAnother, UnverifiedView, WhatShouldIDo } from "./Views/UnverifiedView";
 import { VerifyingView } from "./Views/VerifyingView";
 
 interface CertificateVerificationStatusProps {
@@ -13,14 +13,24 @@ interface CertificateVerificationStatusProps {
   verifying: boolean;
   hover: boolean;
   verificationStatus: VerificationFragment[] | null;
+  /** Set when verification throws, for example when every provider request fails. */
+  verificationError: string | null;
   retrieveCertificateByActionError: string | null;
   /** The document being verified — a presentation is reported differently from a certificate. */
   document: WrappedOrSignedOpenCertsDocument | null;
 }
 
 export const CertificateVerificationStatus: React.FunctionComponent<CertificateVerificationStatusProps> = (props) => {
-  const { resetData, verifying, fileError, verificationStatus, hover, retrieveCertificateByActionError, document } =
-    props;
+  const {
+    resetData,
+    verifying,
+    fileError,
+    verificationStatus,
+    verificationError,
+    hover,
+    retrieveCertificateByActionError,
+    document,
+  } = props;
   if (hover) {
     return (
       <DropzoneViewWrapper hover={hover} accept={true}>
@@ -56,6 +66,18 @@ export const CertificateVerificationStatus: React.FunctionComponent<CertificateV
     return (
       <DropzoneViewWrapper hover={hover} accept={false}>
         <UnverifiedView resetData={() => resetData()} verificationStatus={verificationStatus} document={document} />
+      </DropzoneViewWrapper>
+    );
+  }
+  if (verificationError) {
+    return (
+      <DropzoneViewWrapper hover={hover} accept={false}>
+        <ErrorHeading title="The certificate could not be verified" />
+        <div data-testid="verification-error" className="text-pink mt-4 mb-4">
+          <p className="break-words">{verificationError}</p>
+        </div>
+        <WhatShouldIDo />
+        <TryAnother resetData={() => resetData()} />
       </DropzoneViewWrapper>
     );
   }
