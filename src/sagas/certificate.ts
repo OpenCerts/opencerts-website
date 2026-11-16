@@ -35,6 +35,7 @@ import {
   sendCertificateFailure,
   sendCertificateSuccess,
   updateCertificate,
+  finishVerifying,
   verifyingCertificate,
   verifyingCertificateCompleted,
   verifyingCertificateErrored,
@@ -198,7 +199,8 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
     pushVerificationEvent(certificate, fragments, isValid);
 
     if (isValid) {
-      Router.push("/viewer");
+      // Keep the drop-zone loader up until the viewer route has rendered.
+      yield call([Router, Router.push], "/viewer");
     } else {
       const errors: string[] = [];
       if (!isValidOpenCert(fragments, ["DOCUMENT_INTEGRITY"])) {
@@ -250,6 +252,7 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
         }
       }
     }
+    yield put(finishVerifying());
   } catch (e) {
     captureException(e, { tags: { saga: "verifyCertificate" } });
     if (e instanceof Error) yield put(verifyingCertificateErrored(e.message));

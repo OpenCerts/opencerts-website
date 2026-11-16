@@ -1,6 +1,8 @@
+import { configureStore } from "@reduxjs/toolkit";
 import Router from "next/router";
 import { runSaga, stdChannel } from "redux-saga";
 import { all, put, select } from "redux-saga/effects";
+import { rootReducer } from "../reducers";
 import { getCertificate } from "../reducers/certificate.selectors";
 import {
   sendCertificateFailure,
@@ -89,6 +91,50 @@ describe("sagas/certificate", () => {
     expect(Router.push).toHaveBeenCalledTimes(1);
     expect(Router.push).toHaveBeenCalledWith("/viewer");
     task.cancel();
+  });
+
+  it("keeps the drop-zone loader up until the viewer route finishes", async () => {
+    pendingVerifications.length = 0;
+    let finishNavigation: (value: boolean) => void = () => undefined;
+    const push = Router.push as unknown as jest.Mock;
+    push.mockImplementation(
+      () =>
+        new Promise((resolve) => {
+          finishNavigation = resolve;
+        })
+    );
+    const store = configureStore({ reducer: rootReducer });
+    const channel = stdChannel();
+    const dispatch = (action: Parameters<typeof store.dispatch>[0]) => store.dispatch(action);
+    const task = runSaga(
+      {
+        channel,
+        dispatch,
+        getState: () => store.getState(),
+      },
+      function* watchVerifications() {
+        yield all(sagas);
+      }
+    );
+
+    try {
+      channel.put(updateCertificate(new MakeCertUtil().addIssuer("0xaaa").finish()));
+      await Promise.resolve();
+      pendingVerifications[0](validFragments);
+      await Promise.resolve();
+
+      expect(push).toHaveBeenCalledWith("/viewer");
+      expect(store.getState().certificate.verificationPending).toBe(true);
+      expect(store.getState().certificate.verificationStatus).toStrictEqual(validFragments);
+
+      finishNavigation(true);
+      await Promise.resolve();
+
+      expect(store.getState().certificate.verificationPending).toBe(false);
+    } finally {
+      push.mockReset();
+      task.cancel();
+    }
   });
 
   describe("sendCertificate", () => {

@@ -65,8 +65,14 @@ export const certificateSlice = createSlice({
     }),
     verifyingCertificateCompleted: (state, { payload }: PayloadAction<VerificationFragment[]>) => ({
       ...state,
-      verificationPending: false,
+      // Stay pending until finishVerifying. Clearing this before Router.push paints
+      // the empty drop zone in the gap before /viewer mounts.
+      verificationPending: true,
       verificationStatus: payload,
+    }),
+    finishVerifying: (state) => ({
+      ...state,
+      verificationPending: false,
     }),
     verifyingCertificateErrored: (state, { payload }: PayloadAction<string>) => ({
       ...state,
@@ -148,6 +154,7 @@ export const {
   updateCertificate,
   verifyingCertificate,
   verifyingCertificateCompleted,
+  finishVerifying,
   verifyingCertificateErrored,
   setIgnoredCertificateFile,
   sendCertificate,
