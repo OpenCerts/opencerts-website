@@ -2,10 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import { render, screen } from "@testing-library/react";
 import { VerificationFragment } from "@trustvc/trustvc";
 import Router from "next/router";
-import React from "react";
+import React, { act } from "react";
 import { Provider } from "react-redux";
+import {
+  CERTIFICATE_VERIFICATION_FAILED_HEADING,
+  CERTIFICATE_VERIFICATION_FAILED_MESSAGE,
+} from "../constants/verificationMessages";
 import { rootReducer } from "../reducers";
-import { CertificateState, initialState } from "../reducers/certificate.slice";
+import { CertificateState, initialState, updateCertificate } from "../reducers/certificate.slice";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
 import { ViewerContainer } from "./ViewerPageContainer";
 
@@ -55,7 +59,36 @@ describe("viewerPageContainer", () => {
       verificationStatus: null,
     });
 
-    expect(screen.getByTestId("verifying-certificate")).toBeInTheDocument();
+    expect(screen.getByRole("status")).toHaveTextContent("Verifying Certificate...");
+    expect(screen.queryByText("Certificate viewer")).not.toBeInTheDocument();
+  });
+
+  it("shows the spinner instead of throwing when another certificate replaces a verified one", () => {
+    const store = configureStore({
+      reducer: rootReducer,
+      preloadedState: {
+        featureToggle: {},
+        certificate: {
+          ...initialState,
+          raw: documentFixture,
+          rawModified: documentFixture,
+          verificationStatus: validStatus,
+        },
+      },
+    });
+
+    render(
+      <Provider store={store}>
+        <ViewerContainer />
+      </Provider>
+    );
+    expect(screen.getByText("Certificate viewer")).toBeInTheDocument();
+
+    act(() => {
+      store.dispatch(updateCertificate({ id: "next-certificate" } as WrappedOrSignedOpenCertsDocument));
+    });
+
+    expect(screen.getByRole("status")).toHaveTextContent("Verifying Certificate...");
     expect(screen.queryByText("Certificate viewer")).not.toBeInTheDocument();
   });
 
@@ -65,10 +98,13 @@ describe("viewerPageContainer", () => {
       rawModified: documentFixture,
       verificationPending: false,
       verificationStatus: null,
-      verificationError: "Failed to fetch",
+      verificationError: "missing response (url=https://mainnet.infura.io/v3/secret)",
     });
 
-    expect(screen.getByTestId("verification-failed")).toHaveTextContent("Failed to fetch");
+    const failure = screen.getByRole("alert");
+    expect(failure).toHaveTextContent(CERTIFICATE_VERIFICATION_FAILED_HEADING);
+    expect(failure).toHaveTextContent(CERTIFICATE_VERIFICATION_FAILED_MESSAGE);
+    expect(failure).not.toHaveTextContent("infura");
     expect(screen.getByText("Go Back")).toBeInTheDocument();
     expect(screen.queryByText("Certificate viewer")).not.toBeInTheDocument();
   });

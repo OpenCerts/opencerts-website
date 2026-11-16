@@ -2,6 +2,8 @@ import { captureException } from "@sentry/nextjs";
 import React, { Component, ReactNode } from "react";
 import { connect } from "react-redux";
 import { NETWORK_NAME } from "../../config";
+import { RootState } from "../../reducers";
+import { getVerifying } from "../../reducers/certificate.selectors";
 import { updateCertificate } from "../../reducers/certificate.slice";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { CertificateDropZoneContainer } from "../CertificateDropZone";
@@ -37,12 +39,17 @@ const DraggableDemoCertificate: React.FunctionComponent = () => (
   </div>
 );
 
-const MobileDemoCertificate: React.FunctionComponent = () => (
+const MobileDemoCertificate: React.FunctionComponent<{ disabled: boolean; onClick: () => void }> = ({
+  disabled,
+  onClick,
+}) => (
   <button
     className="button bg-green hover:bg-green-300 mx-auto my-8 block lg:hidden"
     role="button"
     draggable="false"
     id="demoClick"
+    disabled={disabled}
+    onClick={onClick}
   >
     Click me for a demo certificate!
   </button>
@@ -50,56 +57,23 @@ const MobileDemoCertificate: React.FunctionComponent = () => (
 
 interface DropZoneSectionProps {
   updateCertificate: (certificate: WrappedOrSignedOpenCertsDocument) => void;
+  verifying: boolean;
 }
 class DropZoneSection extends Component<DropZoneSectionProps> {
   constructor(props: DropZoneSectionProps) {
     super(props);
-    this.handleDrop = this.handleDrop.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
-  componentDidMount(): void {
-    const elementDrop = document.getElementById("demoDrop");
-    if (elementDrop) {
-      elementDrop.addEventListener("drop", this.handleDrop);
-    }
-    const elementClick = document.getElementById("demoClick");
-    if (elementClick) {
-      elementClick.addEventListener("click", this.handleClick);
-    }
-  }
-  handleDrop(event: DragEvent): void {
-    if (!(event.dataTransfer && event.dataTransfer.getData(DEMO_CERT))) return;
-    // This listener runs before React's delegated drop handler. Stop the event so the
-    // drop zone does not fetch and verify the same demo certificate a second time.
-    event.preventDefault();
-    event.stopPropagation();
-    window
-      .fetch(DEMO_CERT)
-      .then((res) => res.json())
-      .then((res) => {
-        this.props.updateCertificate(res);
-      })
-      .catch((e) => captureException(e, { tags: { area: "demoCert" } }));
-  }
-  handleClick(): void {
-    window
-      .fetch(DEMO_CERT)
-      .then((res) => res.json())
-      .then((res) => {
-        this.props.updateCertificate(res);
-      })
-      .catch((e) => captureException(e, { tags: { area: "demoCert" } }));
-  }
 
-  componentWillUnmount(): void {
-    const elementDrop = document.getElementById("demoDrop");
-    if (elementDrop) {
-      elementDrop.removeEventListener("drop", this.handleDrop);
-    }
-    const elementClick = document.getElementById("demoClick");
-    if (elementClick) {
-      elementClick.removeEventListener("click", this.handleClick);
-    }
+  handleClick(): void {
+    if (this.props.verifying) return;
+    window
+      .fetch(DEMO_CERT)
+      .then((res) => res.json())
+      .then((res) => {
+        this.props.updateCertificate(res);
+      })
+      .catch((e) => captureException(e, { tags: { area: "demoCert" } }));
   }
 
   render(): ReactNode {
@@ -111,7 +85,7 @@ class DropZoneSection extends Component<DropZoneSectionProps> {
               <h1 className="font-poppins mb-5">An easy way to check and verify your OpenCerts certificates</h1>
               <p>Whether you are a student or an employer, verify any OpenCerts certificate here.</p>
               <DraggableDemoCertificate />
-              <MobileDemoCertificate />
+              <MobileDemoCertificate disabled={this.props.verifying} onClick={this.handleClick} />
             </div>
             <div className="w-full lg:w-2/3 lg:pl-10" id="demoDrop" data-testid="demo-drop">
               <CertificateDropZoneContainer />
@@ -123,6 +97,11 @@ class DropZoneSection extends Component<DropZoneSectionProps> {
   }
 }
 
-export const DropZoneSectionContainer = connect(null, (dispatch) => ({
-  updateCertificate: (payload: WrappedOrSignedOpenCertsDocument) => dispatch(updateCertificate(payload)),
-}))(DropZoneSection);
+export const DropZoneSectionContainer = connect(
+  (store: RootState) => ({
+    verifying: getVerifying(store),
+  }),
+  (dispatch) => ({
+    updateCertificate: (payload: WrappedOrSignedOpenCertsDocument) => dispatch(updateCertificate(payload)),
+  })
+)(DropZoneSection);

@@ -1,8 +1,28 @@
+import Router from "next/router";
+import { runSaga, stdChannel } from "redux-saga";
 import { put, select, takeLatest } from "redux-saga/effects";
+import { CERTIFICATE_VERIFICATION_FAILED_MESSAGE } from "../constants/verificationMessages";
 import { getCertificate } from "../reducers/certificate.selectors";
-import { sendCertificateFailure, sendCertificateSuccess, updateCertificate } from "../reducers/certificate.slice";
-import { sagas, sendCertificateSaga, verifyCertificateSaga } from "./certificate";
+import {
+  sendCertificateFailure,
+  sendCertificateSuccess,
+  updateCertificate,
+  verifyingCertificateCompleted,
+  verifyingCertificateErrored,
+} from "../reducers/certificate.slice";
+import { sendCertificateSaga, verifyCertificateSaga } from "./certificate";
 import { MakeCertUtil } from "./testutils";
+
+jest.mock("next/router", () => ({
+  __esModule: true,
+  default: {
+    prefetch: jest.fn(),
+    push: jest.fn(),
+    replace: jest.fn(),
+  },
+}));
+
+const pendingVerifications: Array<(fragments: unknown) => void> = [];
 
 jest.mock("@trustvc/trustvc", () => {
   // Require the original module to not be mocked...
@@ -12,6 +32,12 @@ jest.mock("@trustvc/trustvc", () => {
     __esModule: true,
     ...originalModule,
     verifySignature: jest.fn(),
+    verificationBuilder: jest.fn(
+      () => () =>
+        new Promise((resolve) => {
+          pendingVerifications.push(resolve);
+        })
+    ),
   };
 });
 
@@ -21,9 +47,61 @@ function whenThereIsOneEthereumAddressIssuer() {
   return { testCert, ethereumAddresses };
 }
 
+const validFragments = [
+  { name: "OpenAttestationHash", type: "DOCUMENT_INTEGRITY", status: "VALID" },
+  { name: "OpenAttestationEthereumDocumentStoreStatus", type: "DOCUMENT_STATUS", status: "VALID" },
+  { name: "OpenAttestationDnsTxtIdentityProof", type: "ISSUER_IDENTITY", status: "VALID" },
+];
+
 describe("sagas/certificate", () => {
-  it("cancels an in-flight verification when another certificate is dropped", () => {
-    expect(sagas).toContainEqual(takeLatest(updateCertificate, verifyCertificateSaga));
+  it("cancels an older verification so only the latest certificate opens the viewer", async () => {
+    pendingVerifications.length = 0;
+    const channel = stdChannel();
+    const dispatched: { type: string }[] = [];
+    const task = runSaga(
+      {
+        channel,
+        dispatch: (action) => {
+          dispatched.push(action as { type: string });
+        },
+        getState: () => ({}),
+      },
+      function* watchVerifications() {
+        yield takeLatest(updateCertificate, verifyCertificateSaga);
+      }
+    );
+
+    const first = new MakeCertUtil().addIssuer("0xaaa").addDataField("id", "certificate-a").finish();
+    const second = new MakeCertUtil().addIssuer("0xbbb").addDataField("id", "certificate-b").finish();
+    channel.put(updateCertificate(first));
+    await Promise.resolve();
+    channel.put(updateCertificate(second));
+    await Promise.resolve();
+
+    pendingVerifications[0](validFragments);
+    await Promise.resolve();
+
+    expect(dispatched.filter((action) => action.type === verifyingCertificateCompleted.type)).toHaveLength(0);
+    expect(Router.push).not.toHaveBeenCalled();
+
+    pendingVerifications[1](validFragments);
+    await Promise.resolve();
+
+    expect(dispatched.filter((action) => action.type === verifyingCertificateCompleted.type)).toHaveLength(1);
+    expect(Router.push).toHaveBeenCalledTimes(1);
+    expect(Router.push).toHaveBeenCalledWith("/viewer");
+    task.cancel();
+  });
+
+  it("stores friendly failure copy and leaves the provider error out of the action", () => {
+    const saga = verifyCertificateSaga({
+      payload: new MakeCertUtil().addIssuer("0xaaa").finish(),
+    });
+    saga.next();
+
+    expect(saga.throw(new Error("missing response (url=https://mainnet.infura.io/v3/secret)")).value).toStrictEqual(
+      put(verifyingCertificateErrored(CERTIFICATE_VERIFICATION_FAILED_MESSAGE))
+    );
   });
 
   describe("sendCertificate", () => {

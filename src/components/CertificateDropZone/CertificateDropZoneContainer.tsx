@@ -15,7 +15,7 @@ import {
 import { resetCertificateState, updateCertificate } from "../../reducers/certificate.slice";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { CertificateVerificationStatus } from "./CertificateVerificationStatus";
-import { collectCertificateFiles, readFirstCertificateText } from "./collectCertificateFiles";
+import { collectCertificateFiles, readFirstFileText, selectCertificateFile } from "./collectCertificateFiles";
 
 const DEMO_CERT = `/static/demo/${NETWORK_NAME}.opencert`;
 
@@ -30,6 +30,7 @@ interface CertificateDropZoneContainerProps {
 }
 interface CertificateDropZoneContainerState {
   fileError: boolean;
+  ignoredFileName: string | null;
 }
 
 class CertificateDropZone extends Component<CertificateDropZoneContainerProps, CertificateDropZoneContainerState> {
@@ -38,6 +39,7 @@ class CertificateDropZone extends Component<CertificateDropZoneContainerProps, C
 
     this.state = {
       fileError: false,
+      ignoredFileName: null,
     };
     this.handleCertificateChange = this.handleCertificateChange.bind(this);
     this.handleFileError = this.handleFileError.bind(this);
@@ -58,13 +60,16 @@ class CertificateDropZone extends Component<CertificateDropZoneContainerProps, C
   }
 
   resetData(): void {
+    this.setState({ fileError: false, ignoredFileName: null });
     this.props.resetData();
   }
 
   render(): ReactNode {
     const handleDrop = (acceptedFiles: File[]) => {
-      if (acceptedFiles.length === 0) return;
-      readFirstCertificateText(acceptedFiles)
+      const chosen = selectCertificateFile(acceptedFiles);
+      if (!chosen) return;
+      this.setState({ ignoredFileName: acceptedFiles.length > 1 ? chosen.name : null });
+      readFirstFileText(acceptedFiles)
         .then((text) => {
           try {
             const json = JSON.parse(text);
@@ -83,10 +88,11 @@ class CertificateDropZone extends Component<CertificateDropZoneContainerProps, C
     return (
       <Dropzone onDrop={handleDrop} getFilesFromEvent={(event) => myCustomFileGetter(event)}>
         {({ getRootProps, getInputProps, isDragAccept }) => (
-          <div {...getRootProps()} id="certificate-dropzone">
+          <div {...getRootProps()} id="certificate-dropzone" data-testid="certificate-dropzone">
             <input {...getInputProps()} />
             <CertificateVerificationStatus
               fileError={this.state.fileError}
+              ignoredFileName={this.state.ignoredFileName}
               verifying={this.props.verifying}
               verificationStatus={this.props.verificationStatus}
               verificationError={this.props.verificationError}

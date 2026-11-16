@@ -4,6 +4,10 @@ import Link from "next/link";
 import Router from "next/router";
 import React, { Component, ReactNode } from "react";
 import { connect } from "react-redux";
+import {
+  CERTIFICATE_VERIFICATION_FAILED_HEADING,
+  CERTIFICATE_VERIFICATION_FAILED_MESSAGE,
+} from "../constants/verificationMessages";
 import { RootState } from "../reducers";
 import {
   getCertificate,
@@ -100,14 +104,14 @@ class Viewer extends Component<ViewerProps, ViewerState> {
   render(): ReactNode {
     const { document, verificationStatus, verificationError, verifying } = this.props;
     if (!document) return null;
-    // verificationStatus stays null until the saga finishes, and a newer drop clears it
-    // again. Rendering the viewer in that gap used to throw and hit the Next.js error page.
+    // A second demo tap or a second file, just as the page opens /viewer, clears
+    // verificationStatus. Rendering the certificate in that gap used to throw.
     if (!verificationStatus) {
       if (verificationError && !verifying) {
         return (
-          <div className="container py-16 text-center" data-testid="verification-failed">
-            <h2 className="font-bold text-orange mb-2">This certificate could not be verified</h2>
-            <p className="mb-8 break-words">{verificationError}</p>
+          <div className="container py-16 text-center" data-testid="verification-failed" role="alert">
+            <h2 className="font-bold text-black text-lg mb-2">{CERTIFICATE_VERIFICATION_FAILED_HEADING}</h2>
+            <p className="text-pink mb-8">{CERTIFICATE_VERIFICATION_FAILED_MESSAGE}</p>
             <Link legacyBehavior href="/">
               <a className="button bg-navy">Go Back</a>
             </Link>
@@ -115,8 +119,8 @@ class Viewer extends Component<ViewerProps, ViewerState> {
         );
       }
       return (
-        <div className="container text-blue text-center py-16" data-testid="verifying-certificate">
-          <i className="fas fa-spinner fa-pulse fa-3x" />
+        <div className="container text-blue text-center py-16" data-testid="verifying-certificate" role="status">
+          <i className="fas fa-spinner fa-pulse fa-3x" aria-hidden="true" />
           <div className="my-3">Verifying Certificate...</div>
         </div>
       );

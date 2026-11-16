@@ -1,14 +1,15 @@
 import { DropEvent } from "react-dropzone";
 
+const CERTIFICATE_EXTENSION = /\.(opencert|json)$/i;
+
 const isDragEvent = (event: DropEvent): event is DragEvent => (event as DragEvent).dataTransfer !== undefined;
 
 const isInputEvent = (event: DropEvent): event is Event => (event as Event).target !== undefined;
 
 /**
  * Files from a drop or file picker.
- * A demo drag also carries the dragged image. Returning that image together with the
- * certificate makes one FileReader start a second read and throw InvalidStateError.
- * The demo certificate is the only file that drop should verify.
+ * The homepage demo drag is handled only here: it also carries the dragged image, and
+ * returning that image with the certificate used to start a second FileReader read.
  */
 export async function collectCertificateFiles(event: DropEvent, demoPath: string): Promise<File[]> {
   if (isDragEvent(event) && event.dataTransfer && event.dataTransfer.getData(demoPath)) {
@@ -33,12 +34,17 @@ export async function collectCertificateFiles(event: DropEvent, demoPath: string
   return files;
 }
 
+/** Prefer a certificate file. Pickers and drops do not guarantee that file is first. */
+export function selectCertificateFile(files: readonly File[]): File | undefined {
+  return files.find((file) => CERTIFICATE_EXTENSION.test(file.name)) ?? files[0];
+}
+
 /**
- * Read one certificate. FileReader rejects a second readAsText while the first is
- * still running, so a drop of several files must not share one reader.
+ * Read one file. FileReader rejects a second readAsText while the first is still
+ * running, so a drop of several files must not share one reader.
  */
-export function readFirstCertificateText(files: readonly File[]): Promise<string> {
-  const file = files[0];
+export function readFirstFileText(files: readonly File[]): Promise<string> {
+  const file = selectCertificateFile(files);
   if (!file) {
     return Promise.reject(new Error("No certificate file was provided"));
   }

@@ -1,5 +1,5 @@
 import { DropEvent } from "react-dropzone";
-import { collectCertificateFiles, readFirstCertificateText } from "./collectCertificateFiles";
+import { collectCertificateFiles, readFirstFileText } from "./collectCertificateFiles";
 
 const DEMO_PATH = "/static/demo/sepolia.opencert";
 
@@ -41,23 +41,26 @@ describe("collectCertificateFiles", () => {
   });
 });
 
-describe("readFirstCertificateText", () => {
-  it("reads the first file and does not start a second read", async () => {
-    const readAsText = jest
-      .spyOn(FileReader.prototype, "readAsText")
-      .mockImplementation(function (this: FileReader, file: Blob) {
-        Object.defineProperty(this, "result", {
-          configurable: true,
-          value: `read:${(file as File).name}`,
-        });
-        this.onload?.(new ProgressEvent("load") as ProgressEvent<FileReader>);
+describe("readFirstFileText", () => {
+  const readAs = (name: string) => `read:${name}`;
+
+  const mockReader = () =>
+    jest.spyOn(FileReader.prototype, "readAsText").mockImplementation(function (this: FileReader, file: Blob) {
+      Object.defineProperty(this, "result", {
+        configurable: true,
+        value: readAs((file as File).name),
       });
+      this.onload?.(new ProgressEvent("load") as ProgressEvent<FileReader>);
+    });
+
+  it("reads the first file and does not start a second read", async () => {
+    const readAsText = mockReader();
 
     try {
       const first = new File(["one"], "first.opencert", { type: "application/json" });
       const second = new File(["two"], "second.opencert", { type: "application/json" });
 
-      await expect(readFirstCertificateText([first, second])).resolves.toBe("read:first.opencert");
+      await expect(readFirstFileText([first, second])).resolves.toBe(readAs("first.opencert"));
       expect(readAsText).toHaveBeenCalledTimes(1);
       expect(readAsText).toHaveBeenCalledWith(first);
     } finally {
@@ -65,7 +68,36 @@ describe("readFirstCertificateText", () => {
     }
   });
 
+  it("skips a leading PDF and reads the certificate behind it", async () => {
+    const readAsText = mockReader();
+
+    try {
+      const pdf = new File(["%PDF"], "notes.pdf", { type: "application/pdf" });
+      const certificate = new File(["{}"], "degree.opencert", { type: "application/json" });
+
+      await expect(readFirstFileText([pdf, certificate])).resolves.toBe(readAs("degree.opencert"));
+      expect(readAsText).toHaveBeenCalledTimes(1);
+      expect(readAsText).toHaveBeenCalledWith(certificate);
+    } finally {
+      readAsText.mockRestore();
+    }
+  });
+
+  it("falls back to the first file when none is a certificate", async () => {
+    const readAsText = mockReader();
+
+    try {
+      const pdf = new File(["%PDF"], "notes.pdf", { type: "application/pdf" });
+      const image = new File(["img"], "photo.png", { type: "image/png" });
+
+      await expect(readFirstFileText([pdf, image])).resolves.toBe(readAs("notes.pdf"));
+      expect(readAsText).toHaveBeenCalledWith(pdf);
+    } finally {
+      readAsText.mockRestore();
+    }
+  });
+
   it("rejects when no file was dropped", async () => {
-    await expect(readFirstCertificateText([])).rejects.toThrow("No certificate file was provided");
+    await expect(readFirstFileText([])).rejects.toThrow("No certificate file was provided");
   });
 });
