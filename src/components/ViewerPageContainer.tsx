@@ -4,11 +4,7 @@ import Link from "next/link";
 import Router from "next/router";
 import React, { Component, ReactNode } from "react";
 import { connect } from "react-redux";
-import {
-  CERTIFICATE_VERIFICATION_FAILED_HEADING,
-  displayedVerificationMessage,
-  ignoredFilesMessage,
-} from "../constants/verificationMessages";
+import { CERTIFICATE_VERIFICATION_FAILED_HEADING, ignoredFilesMessage } from "../constants/verificationMessages";
 import { RootState } from "../reducers";
 import {
   getCertificate,
@@ -121,7 +117,7 @@ class Viewer extends Component<ViewerProps, ViewerState> {
             {ignoredNote}
             <div className="container py-16 text-center" data-testid="verification-failed" role="alert">
               <h2 className="font-bold text-black text-lg mb-2">{CERTIFICATE_VERIFICATION_FAILED_HEADING}</h2>
-              <p className="text-pink mb-8">{displayedVerificationMessage(verificationError)}</p>
+              <p className="text-pink mb-8 break-words">{verificationError}</p>
               <Link legacyBehavior href="/">
                 <a className="button bg-navy">Go Back</a>
               </Link>

@@ -1,19 +1,14 @@
 import Router from "next/router";
 import { runSaga, stdChannel } from "redux-saga";
 import { all, put, select } from "redux-saga/effects";
-import {
-  CERTIFICATE_VERIFICATION_GENERIC_MESSAGE,
-  CERTIFICATE_VERIFICATION_NETWORK_MESSAGE,
-} from "../constants/verificationMessages";
 import { getCertificate } from "../reducers/certificate.selectors";
 import {
   sendCertificateFailure,
   sendCertificateSuccess,
   updateCertificate,
   verifyingCertificateCompleted,
-  verifyingCertificateErrored,
 } from "../reducers/certificate.slice";
-import { sagas, sendCertificateSaga, verifyCertificateSaga } from "./certificate";
+import { sagas, sendCertificateSaga } from "./certificate";
 import { MakeCertUtil } from "./testutils";
 
 jest.mock("next/router", () => ({
@@ -94,28 +89,6 @@ describe("sagas/certificate", () => {
     expect(Router.push).toHaveBeenCalledTimes(1);
     expect(Router.push).toHaveBeenCalledWith("/viewer");
     task.cancel();
-  });
-
-  it("stores the network message for a provider failure and leaves the raw error out", () => {
-    const saga = verifyCertificateSaga({
-      payload: new MakeCertUtil().addIssuer("0xaaa").finish(),
-    });
-    saga.next();
-
-    expect(saga.throw(new Error("missing response (url=https://mainnet.infura.io/v3/secret)")).value).toStrictEqual(
-      put(verifyingCertificateErrored(CERTIFICATE_VERIFICATION_NETWORK_MESSAGE))
-    );
-  });
-
-  it("stores a generic message when verification fails for a non-network reason", () => {
-    const saga = verifyCertificateSaga({
-      payload: new MakeCertUtil().addIssuer("0xaaa").finish(),
-    });
-    saga.next();
-
-    expect(saga.throw(new Error("Cannot read properties of undefined (reading 'proof')")).value).toStrictEqual(
-      put(verifyingCertificateErrored(CERTIFICATE_VERIFICATION_GENERIC_MESSAGE))
-    );
   });
 
   describe("sendCertificate", () => {

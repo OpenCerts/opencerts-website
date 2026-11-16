@@ -3,7 +3,6 @@ import React, { ReactNode } from "react";
 import {
   CERTIFICATE_VERIFICATION_FAILED_HEADING,
   DEMO_CERTIFICATE_LOAD_MESSAGE,
-  displayedVerificationMessage,
   ignoredFilesMessage,
 } from "../../constants/verificationMessages";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
@@ -92,7 +91,7 @@ export const CertificateVerificationStatus: React.FunctionComponent<CertificateV
       <div role="alert">
         <ErrorHeading title={CERTIFICATE_VERIFICATION_FAILED_HEADING} />
         <div data-testid="verification-error" className="text-pink mt-4 mb-4">
-          <p>{displayedVerificationMessage(verificationError)}</p>
+          <p className="break-words">{verificationError}</p>
         </div>
         <WhatShouldIDo />
         <TryAnother resetData={() => resetData()} />

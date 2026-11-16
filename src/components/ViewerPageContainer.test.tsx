@@ -4,12 +4,7 @@ import { VerificationFragment } from "@trustvc/trustvc";
 import Router from "next/router";
 import React, { act } from "react";
 import { Provider } from "react-redux";
-import {
-  CERTIFICATE_VERIFICATION_FAILED_HEADING,
-  CERTIFICATE_VERIFICATION_GENERIC_MESSAGE,
-  CERTIFICATE_VERIFICATION_NETWORK_MESSAGE,
-  ignoredFilesMessage,
-} from "../constants/verificationMessages";
+import { CERTIFICATE_VERIFICATION_FAILED_HEADING, ignoredFilesMessage } from "../constants/verificationMessages";
 import { rootReducer } from "../reducers";
 import { CertificateState, initialState, updateCertificate } from "../reducers/certificate.slice";
 import { WrappedOrSignedOpenCertsDocument } from "../shared";
@@ -105,9 +100,7 @@ describe("viewerPageContainer", () => {
 
     const failure = screen.getByRole("alert");
     expect(failure).toHaveTextContent(CERTIFICATE_VERIFICATION_FAILED_HEADING);
-    expect(failure).toHaveTextContent(CERTIFICATE_VERIFICATION_GENERIC_MESSAGE);
-    expect(failure).not.toHaveTextContent("infura");
-    expect(failure).not.toHaveTextContent(CERTIFICATE_VERIFICATION_NETWORK_MESSAGE);
+    expect(failure).toHaveTextContent("missing response (url=https://mainnet.infura.io/v3/secret)");
     expect(screen.getByText("Go Back")).toBeInTheDocument();
     expect(screen.queryByText("Certificate viewer")).not.toBeInTheDocument();
   });

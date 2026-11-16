@@ -21,7 +21,6 @@ import "isomorphic-fetch";
 
 import { triggerV2ErrorLogging, triggerV3ErrorLogging, triggerW3CErrorLogging } from "../components/Analytics";
 import { NETWORK_NAME, IS_MAINNET } from "../config";
-import { verificationFailureMessage } from "../constants/verificationMessages";
 import { getCertificate } from "../reducers/certificate.selectors";
 import {
   generateShareLink,
@@ -253,7 +252,8 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
     }
   } catch (e) {
     captureException(e, { tags: { saga: "verifyCertificate" } });
-    yield put(verifyingCertificateErrored(verificationFailureMessage(e)));
+    if (e instanceof Error) yield put(verifyingCertificateErrored(e.message));
+    else yield put(verifyingCertificateErrored(JSON.stringify(e)));
   }
 }
 
