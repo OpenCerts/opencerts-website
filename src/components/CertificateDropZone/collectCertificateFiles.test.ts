@@ -14,6 +14,7 @@ describe("collectCertificateFiles", () => {
 
     try {
       const event = {
+        type: "drop",
         dataTransfer: {
           getData: (format: string) => (format === DEMO_PATH ? "true" : ""),
           files: [new File(["img"], "cert.png", { type: "image/png" })],
@@ -29,6 +30,21 @@ describe("collectCertificateFiles", () => {
     } finally {
       window.fetch = originalFetch;
     }
+  });
+
+  it("returns the dropped files when getData is blocked", async () => {
+    const certificate = new File(["{}"], "degree.opencert", { type: "application/json" });
+    const event = {
+      type: "drop",
+      dataTransfer: {
+        files: [certificate],
+        getData: (): string => {
+          throw new DOMException("No valid data", "InvalidStateError");
+        },
+      },
+    } as unknown as DropEvent;
+
+    await expect(collectCertificateFiles(event, DEMO_PATH)).resolves.toStrictEqual([certificate]);
   });
 
   it("keeps every file from an ordinary drop", async () => {

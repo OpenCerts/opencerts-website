@@ -75,6 +75,38 @@ describe("certificateDropZoneContainer", () => {
     expect(screen.queryByTestId("ignored-files-note")).not.toBeInTheDocument();
   });
 
+  it("loads a demo drag that does not advertise any files", async () => {
+    const originalFetch = window.fetch;
+    window.fetch = jest.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ id: "demo-from-drag" }),
+    }) as typeof fetch;
+    const reachedDocument = jest.fn();
+    document.addEventListener("drop", reachedDocument);
+
+    try {
+      const store = mountDropZone();
+      fireEvent.drop(screen.getByTestId("certificate-dropzone"), {
+        dataTransfer: {
+          types: [DEMO_CERT],
+          files: [],
+          getData: (format: string) => (format === DEMO_CERT ? "true" : ""),
+        },
+      });
+
+      await waitFor(() => {
+        expect(store.getState().certificate.raw).toStrictEqual({ id: "demo-from-drag" });
+      });
+      expect(window.fetch).toHaveBeenCalledWith(DEMO_CERT);
+      expect(reachedDocument).toHaveBeenCalledWith(expect.any(Event));
+      expect(screen.queryByTestId("demo-load-error")).not.toBeInTheDocument();
+      expect(screen.getByTestId("dropzone-view-wrapper")).toHaveClass("bg-blue-100");
+    } finally {
+      document.removeEventListener("drop", reachedDocument);
+      window.fetch = originalFetch;
+    }
+  });
+
   it("reports a failed demo certificate fetch and shows an error", async () => {
     const originalFetch = window.fetch;
     window.fetch = jest.fn().mockRejectedValue(new Error("Failed to fetch")) as typeof fetch;

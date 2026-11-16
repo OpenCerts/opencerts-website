@@ -20,6 +20,7 @@ import { CertificateVerificationStatus } from "./CertificateVerificationStatus";
 import {
   collectCertificateFiles,
   DemoCertificateLoadError,
+  dragCarriesFiles,
   readFirstFileText,
   selectCertificateFile,
 } from "./collectCertificateFiles";
@@ -52,11 +53,52 @@ class CertificateDropZone extends Component<CertificateDropZoneContainerProps, C
     };
     this.handleCertificateChange = this.handleCertificateChange.bind(this);
     this.handleFileError = this.handleFileError.bind(this);
+    this.handleNativeDemoDrop = this.handleNativeDemoDrop.bind(this);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   componentDidMount(): void {
     Router.prefetch("/viewer");
+    document.getElementById("certificate-dropzone")?.addEventListener("drop", this.handleNativeDemoDrop);
+  }
+
+  componentWillUnmount(): void {
+    document.getElementById("certificate-dropzone")?.removeEventListener("drop", this.handleNativeDemoDrop);
+  }
+
+  /**
+   * react-dropzone ignores a drop whose dataTransfer.types does not include "Files".
+   * Dragging the demo certificate is like that in some browsers: only the custom token
+   * is set, so onDrop never runs and nothing is logged. Don't stop the event, or the
+   * drop zone cannot reset its hover state when the drag did carry files.
+   */
+  handleNativeDemoDrop(event: Event): void {
+    const dragEvent = event as DragEvent;
+    const dataTransfer = dragEvent.dataTransfer;
+    if (!dataTransfer || dragCarriesFiles(dataTransfer)) return;
+    let token = "";
+    try {
+      token = dataTransfer.getData(DEMO_CERT);
+    } catch {
+      return;
+    }
+    if (!token) return;
+    dragEvent.preventDefault();
+    window
+      .fetch(DEMO_CERT)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Demo certificate request failed (${response.status})`);
+        }
+        return response.json();
+      })
+      .then((certificate) => {
+        this.handleCertificateChange(certificate, null);
+      })
+      .catch((error) => {
+        captureException(error, { tags: { area: "demoCert" } });
+        this.setState({ demoLoadError: true, fileError: false });
+        this.props.setIgnoredCertificateFile(null);
+      });
   }
 
   handleCertificateChange(certificate: WrappedOrSignedOpenCertsDocument, ignoredFileName: string | null): void {
@@ -96,7 +138,11 @@ class CertificateDropZone extends Component<CertificateDropZoneContainerProps, C
 
     const myCustomFileGetter = (event: DropEvent): Promise<File[]> =>
       collectCertificateFiles(event, DEMO_CERT).catch((error: unknown) => {
-        const cause = error instanceof DemoCertificateLoadError ? error.cause : error;
+        if (!(error instanceof DemoCertificateLoadError)) {
+          this.handleFileError();
+          return [];
+        }
+        const cause = error.cause;
         captureException(cause instanceof Error ? cause : error, { tags: { area: "demoCert" } });
         this.setState({ demoLoadError: true, fileError: false });
         this.props.setIgnoredCertificateFile(null);

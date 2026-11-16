@@ -14,6 +14,24 @@ const CERTIFICATE_EXTENSION = /\.(opencert|json)$/i;
 
 const isDragEvent = (event: DropEvent): event is DragEvent => (event as DragEvent).dataTransfer !== undefined;
 
+/** react-dropzone only reads a drop when the drag advertises a file. Some demo drags do not. */
+export const dragCarriesFiles = (dataTransfer: DataTransfer | null | undefined): boolean => {
+  if (!dataTransfer?.types) return false;
+  return Array.prototype.some.call(
+    dataTransfer.types,
+    (type: string) => type === "Files" || type === "application/x-moz-file"
+  );
+};
+
+const readDragData = (dataTransfer: DataTransfer, type: string): string => {
+  try {
+    return dataTransfer.getData(type);
+  } catch {
+    // Chrome and Safari block getData outside the drop event, and throw for some types.
+    return "";
+  }
+};
+
 const isInputEvent = (event: DropEvent): event is Event => (event as Event).target !== undefined;
 
 /**
@@ -22,7 +40,7 @@ const isInputEvent = (event: DropEvent): event is Event => (event as Event).targ
  * returning that image with the certificate used to start a second FileReader read.
  */
 export async function collectCertificateFiles(event: DropEvent, demoPath: string): Promise<File[]> {
-  if (isDragEvent(event) && event.dataTransfer && event.dataTransfer.getData(demoPath)) {
+  if (isDragEvent(event) && event.type === "drop" && event.dataTransfer && readDragData(event.dataTransfer, demoPath)) {
     try {
       const response = await window.fetch(demoPath);
       if (!response.ok) {
