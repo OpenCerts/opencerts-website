@@ -6,7 +6,9 @@ import React, { act } from "react";
 import { Provider } from "react-redux";
 import {
   CERTIFICATE_VERIFICATION_FAILED_HEADING,
-  CERTIFICATE_VERIFICATION_FAILED_MESSAGE,
+  CERTIFICATE_VERIFICATION_GENERIC_MESSAGE,
+  CERTIFICATE_VERIFICATION_NETWORK_MESSAGE,
+  ignoredFilesMessage,
 } from "../constants/verificationMessages";
 import { rootReducer } from "../reducers";
 import { CertificateState, initialState, updateCertificate } from "../reducers/certificate.slice";
@@ -103,10 +105,23 @@ describe("viewerPageContainer", () => {
 
     const failure = screen.getByRole("alert");
     expect(failure).toHaveTextContent(CERTIFICATE_VERIFICATION_FAILED_HEADING);
-    expect(failure).toHaveTextContent(CERTIFICATE_VERIFICATION_FAILED_MESSAGE);
+    expect(failure).toHaveTextContent(CERTIFICATE_VERIFICATION_GENERIC_MESSAGE);
     expect(failure).not.toHaveTextContent("infura");
+    expect(failure).not.toHaveTextContent(CERTIFICATE_VERIFICATION_NETWORK_MESSAGE);
     expect(screen.getByText("Go Back")).toBeInTheDocument();
     expect(screen.queryByText("Certificate viewer")).not.toBeInTheDocument();
+  });
+
+  it("keeps the ignored-file note with the opened certificate", () => {
+    renderViewer({
+      raw: documentFixture,
+      rawModified: documentFixture,
+      verificationStatus: validStatus,
+      ignoredFileName: "degree.opencert",
+    });
+
+    expect(screen.getByTestId("ignored-files-note")).toHaveTextContent(ignoredFilesMessage("degree.opencert"));
+    expect(screen.getByText("Certificate viewer")).toBeInTheDocument();
   });
 
   it("renders the certificate once verification has finished", () => {

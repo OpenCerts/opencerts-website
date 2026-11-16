@@ -19,6 +19,10 @@ export function getVerificationError(store: RootState): string | null {
   return store.certificate.verificationError;
 }
 
+export function getIgnoredFileName(store: RootState): string | null {
+  return store.certificate.ignoredFileName;
+}
+
 export function getEmailSendingState(store: RootState): states {
   return store.certificate.emailState;
 }

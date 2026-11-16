@@ -1,3 +1,4 @@
+import { captureException } from "@sentry/nextjs";
 import { VerificationFragment } from "@trustvc/trustvc";
 import Router from "next/router";
 import React, { Component, ReactNode } from "react";
@@ -8,14 +9,20 @@ import { RootState } from "../../reducers";
 import {
   getCertificate,
   getCertificateByActionError,
+  getIgnoredFileName,
   getVerificationError,
   getVerificationStatus,
   getVerifying,
 } from "../../reducers/certificate.selectors";
-import { resetCertificateState, updateCertificate } from "../../reducers/certificate.slice";
+import { resetCertificateState, setIgnoredCertificateFile, updateCertificate } from "../../reducers/certificate.slice";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { CertificateVerificationStatus } from "./CertificateVerificationStatus";
-import { collectCertificateFiles, readFirstFileText, selectCertificateFile } from "./collectCertificateFiles";
+import {
+  collectCertificateFiles,
+  DemoCertificateLoadError,
+  readFirstFileText,
+  selectCertificateFile,
+} from "./collectCertificateFiles";
 
 const DEMO_CERT = `/static/demo/${NETWORK_NAME}.opencert`;
 
@@ -27,10 +34,12 @@ interface CertificateDropZoneContainerProps {
   verificationError: string | null;
   retrieveCertificateByActionError: string | null;
   document: WrappedOrSignedOpenCertsDocument | null;
+  ignoredFileName: string | null;
+  setIgnoredCertificateFile: (fileName: string | null) => void;
 }
 interface CertificateDropZoneContainerState {
   fileError: boolean;
-  ignoredFileName: string | null;
+  demoLoadError: boolean;
 }
 
 class CertificateDropZone extends Component<CertificateDropZoneContainerProps, CertificateDropZoneContainerState> {
@@ -39,7 +48,7 @@ class CertificateDropZone extends Component<CertificateDropZoneContainerProps, C
 
     this.state = {
       fileError: false,
-      ignoredFileName: null,
+      demoLoadError: false,
     };
     this.handleCertificateChange = this.handleCertificateChange.bind(this);
     this.handleFileError = this.handleFileError.bind(this);
@@ -50,17 +59,19 @@ class CertificateDropZone extends Component<CertificateDropZoneContainerProps, C
     Router.prefetch("/viewer");
   }
 
-  handleCertificateChange(certificate: WrappedOrSignedOpenCertsDocument): void {
-    this.setState({ fileError: false });
+  handleCertificateChange(certificate: WrappedOrSignedOpenCertsDocument, ignoredFileName: string | null): void {
+    this.setState({ fileError: false, demoLoadError: false });
     this.props.updateCertificate(certificate);
+    this.props.setIgnoredCertificateFile(ignoredFileName);
   }
 
   handleFileError(): void {
-    this.setState({ fileError: true });
+    this.setState({ fileError: true, demoLoadError: false });
+    this.props.setIgnoredCertificateFile(null);
   }
 
   resetData(): void {
-    this.setState({ fileError: false, ignoredFileName: null });
+    this.setState({ fileError: false, demoLoadError: false });
     this.props.resetData();
   }
 
@@ -68,12 +79,12 @@ class CertificateDropZone extends Component<CertificateDropZoneContainerProps, C
     const handleDrop = (acceptedFiles: File[]) => {
       const chosen = selectCertificateFile(acceptedFiles);
       if (!chosen) return;
-      this.setState({ ignoredFileName: acceptedFiles.length > 1 ? chosen.name : null });
+      const ignoredFileName = acceptedFiles.length > 1 ? chosen.name : null;
       readFirstFileText(acceptedFiles)
         .then((text) => {
           try {
             const json = JSON.parse(text);
-            this.handleCertificateChange(json);
+            this.handleCertificateChange(json, ignoredFileName);
           } catch (_error) {
             this.handleFileError();
           }
@@ -83,7 +94,14 @@ class CertificateDropZone extends Component<CertificateDropZoneContainerProps, C
         });
     };
 
-    const myCustomFileGetter = (event: DropEvent): Promise<File[]> => collectCertificateFiles(event, DEMO_CERT);
+    const myCustomFileGetter = (event: DropEvent): Promise<File[]> =>
+      collectCertificateFiles(event, DEMO_CERT).catch((error: unknown) => {
+        const cause = error instanceof DemoCertificateLoadError ? error.cause : error;
+        captureException(cause instanceof Error ? cause : error, { tags: { area: "demoCert" } });
+        this.setState({ demoLoadError: true, fileError: false });
+        this.props.setIgnoredCertificateFile(null);
+        return [];
+      });
 
     return (
       <Dropzone onDrop={handleDrop} getFilesFromEvent={(event) => myCustomFileGetter(event)}>
@@ -92,7 +110,8 @@ class CertificateDropZone extends Component<CertificateDropZoneContainerProps, C
             <input {...getInputProps()} />
             <CertificateVerificationStatus
               fileError={this.state.fileError}
-              ignoredFileName={this.state.ignoredFileName}
+              demoLoadError={this.state.demoLoadError}
+              ignoredFileName={this.props.ignoredFileName}
               verifying={this.props.verifying}
               verificationStatus={this.props.verificationStatus}
               verificationError={this.props.verificationError}
@@ -115,9 +134,11 @@ export const CertificateDropZoneContainer = connect(
     verificationStatus: getVerificationStatus(store),
     verificationError: getVerificationError(store),
     document: getCertificate(store),
+    ignoredFileName: getIgnoredFileName(store),
   }),
   (dispatch) => ({
     updateCertificate: (payload: WrappedOrSignedOpenCertsDocument) => dispatch(updateCertificate(payload)),
+    setIgnoredCertificateFile: (fileName: string | null) => dispatch(setIgnoredCertificateFile(fileName)),
     resetData: () => dispatch(resetCertificateState()),
   })
 )(CertificateDropZone);

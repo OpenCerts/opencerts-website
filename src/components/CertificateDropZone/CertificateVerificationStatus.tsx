@@ -2,7 +2,8 @@ import { isValidOpenCert, VerificationFragment } from "@trustvc/trustvc";
 import React, { ReactNode } from "react";
 import {
   CERTIFICATE_VERIFICATION_FAILED_HEADING,
-  CERTIFICATE_VERIFICATION_FAILED_MESSAGE,
+  DEMO_CERTIFICATE_LOAD_MESSAGE,
+  displayedVerificationMessage,
   ignoredFilesMessage,
 } from "../../constants/verificationMessages";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
@@ -15,6 +16,7 @@ import { VerifyingView } from "./Views/VerifyingView";
 interface CertificateVerificationStatusProps {
   resetData: () => void;
   fileError: boolean;
+  demoLoadError: boolean;
   /** Set when the drop contained more than one file. */
   ignoredFileName: string | null;
   verifying: boolean;
@@ -32,6 +34,7 @@ export const CertificateVerificationStatus: React.FunctionComponent<CertificateV
     resetData,
     verifying,
     fileError,
+    demoLoadError,
     ignoredFileName,
     verificationStatus,
     verificationError,
@@ -53,6 +56,14 @@ export const CertificateVerificationStatus: React.FunctionComponent<CertificateV
 
   if (hover) {
     return frame(true, <DefaultView fileError={fileError} />);
+  }
+  if (demoLoadError) {
+    return frame(
+      false,
+      <div role="alert" data-testid="demo-load-error">
+        <p className="text-pink">{DEMO_CERTIFICATE_LOAD_MESSAGE}</p>
+      </div>
+    );
   }
   if (fileError) {
     return frame(false, <DefaultView fileError={fileError} />);
@@ -81,7 +92,7 @@ export const CertificateVerificationStatus: React.FunctionComponent<CertificateV
       <div role="alert">
         <ErrorHeading title={CERTIFICATE_VERIFICATION_FAILED_HEADING} />
         <div data-testid="verification-error" className="text-pink mt-4 mb-4">
-          <p>{CERTIFICATE_VERIFICATION_FAILED_MESSAGE}</p>
+          <p>{displayedVerificationMessage(verificationError)}</p>
         </div>
         <WhatShouldIDo />
         <TryAnother resetData={() => resetData()} />

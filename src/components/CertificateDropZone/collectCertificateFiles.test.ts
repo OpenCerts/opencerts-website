@@ -6,6 +6,7 @@ const DEMO_PATH = "/static/demo/sepolia.opencert";
 describe("collectCertificateFiles", () => {
   it("returns only the demo certificate when the drag also contains the dragged image", async () => {
     const fetchMock = jest.fn().mockResolvedValue({
+      ok: true,
       blob: () => Promise.resolve(new Blob(["{}"], { type: "application/json" })),
     });
     const originalFetch = window.fetch;

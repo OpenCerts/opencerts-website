@@ -1,5 +1,15 @@
 import { DropEvent } from "react-dropzone";
 
+export class DemoCertificateLoadError extends Error {
+  readonly cause: unknown;
+
+  constructor(cause: unknown) {
+    super("The demo certificate could not be loaded");
+    this.name = "DemoCertificateLoadError";
+    this.cause = cause;
+  }
+}
+
 const CERTIFICATE_EXTENSION = /\.(opencert|json)$/i;
 
 const isDragEvent = (event: DropEvent): event is DragEvent => (event as DragEvent).dataTransfer !== undefined;
@@ -13,9 +23,16 @@ const isInputEvent = (event: DropEvent): event is Event => (event as Event).targ
  */
 export async function collectCertificateFiles(event: DropEvent, demoPath: string): Promise<File[]> {
   if (isDragEvent(event) && event.dataTransfer && event.dataTransfer.getData(demoPath)) {
-    const response = await window.fetch(demoPath);
-    const fileBlob = await response.blob();
-    return [new File([fileBlob], "demo.opencert")];
+    try {
+      const response = await window.fetch(demoPath);
+      if (!response.ok) {
+        throw new Error(`Demo certificate request failed (${response.status})`);
+      }
+      const fileBlob = await response.blob();
+      return [new File([fileBlob], "demo.opencert")];
+    } catch (error) {
+      throw new DemoCertificateLoadError(error);
+    }
   }
 
   const fileList =

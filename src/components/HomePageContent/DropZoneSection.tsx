@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { NETWORK_NAME } from "../../config";
 import { RootState } from "../../reducers";
 import { getVerifying } from "../../reducers/certificate.selectors";
-import { updateCertificate } from "../../reducers/certificate.slice";
+import { setIgnoredCertificateFile, updateCertificate } from "../../reducers/certificate.slice";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { CertificateDropZoneContainer } from "../CertificateDropZone";
 
@@ -57,6 +57,7 @@ const MobileDemoCertificate: React.FunctionComponent<{ disabled: boolean; onClic
 
 interface DropZoneSectionProps {
   updateCertificate: (certificate: WrappedOrSignedOpenCertsDocument) => void;
+  clearIgnoredCertificateFile: () => void;
   verifying: boolean;
 }
 class DropZoneSection extends Component<DropZoneSectionProps> {
@@ -67,6 +68,7 @@ class DropZoneSection extends Component<DropZoneSectionProps> {
 
   handleClick(): void {
     if (this.props.verifying) return;
+    this.props.clearIgnoredCertificateFile();
     window
       .fetch(DEMO_CERT)
       .then((res) => res.json())
@@ -103,5 +105,6 @@ export const DropZoneSectionContainer = connect(
   }),
   (dispatch) => ({
     updateCertificate: (payload: WrappedOrSignedOpenCertsDocument) => dispatch(updateCertificate(payload)),
+    clearIgnoredCertificateFile: () => dispatch(setIgnoredCertificateFile(null)),
   })
 )(DropZoneSection);

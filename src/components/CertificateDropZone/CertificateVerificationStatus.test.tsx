@@ -2,7 +2,8 @@ import { render, screen } from "@testing-library/react";
 import React from "react";
 import {
   CERTIFICATE_VERIFICATION_FAILED_HEADING,
-  CERTIFICATE_VERIFICATION_FAILED_MESSAGE,
+  CERTIFICATE_VERIFICATION_GENERIC_MESSAGE,
+  CERTIFICATE_VERIFICATION_NETWORK_MESSAGE,
   ignoredFilesMessage,
 } from "../../constants/verificationMessages";
 import { CertificateVerificationStatus } from "./CertificateVerificationStatus";
@@ -12,6 +13,7 @@ const renderStatus = (overrides: Partial<React.ComponentProps<typeof Certificate
     <CertificateVerificationStatus
       resetData={jest.fn()}
       fileError={false}
+      demoLoadError={false}
       ignoredFileName={null}
       verifying={false}
       hover={false}
@@ -25,12 +27,19 @@ const renderStatus = (overrides: Partial<React.ComponentProps<typeof Certificate
 };
 
 describe("certificateVerificationStatus", () => {
-  it("shows fixed failure copy and hides the provider error", () => {
-    renderStatus({ verificationError: "missing response (url=https://mainnet.infura.io/v3/secret)" });
+  it("shows the network message only when that is the stored failure", () => {
+    renderStatus({ verificationError: CERTIFICATE_VERIFICATION_NETWORK_MESSAGE });
 
     expect(screen.getByRole("alert")).toHaveTextContent(CERTIFICATE_VERIFICATION_FAILED_HEADING);
-    expect(screen.getByTestId("verification-error")).toHaveTextContent(CERTIFICATE_VERIFICATION_FAILED_MESSAGE);
+    expect(screen.getByTestId("verification-error")).toHaveTextContent(CERTIFICATE_VERIFICATION_NETWORK_MESSAGE);
+  });
+
+  it("hides a raw provider error behind the generic failure message", () => {
+    renderStatus({ verificationError: "missing response (url=https://mainnet.infura.io/v3/secret)" });
+
+    expect(screen.getByTestId("verification-error")).toHaveTextContent(CERTIFICATE_VERIFICATION_GENERIC_MESSAGE);
     expect(screen.queryByText(/infura/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(CERTIFICATE_VERIFICATION_NETWORK_MESSAGE)).not.toBeInTheDocument();
   });
 
   it("keeps the spinner up while a retry is in progress", () => {

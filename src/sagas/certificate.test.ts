@@ -1,7 +1,10 @@
 import Router from "next/router";
 import { runSaga, stdChannel } from "redux-saga";
-import { put, select, takeLatest } from "redux-saga/effects";
-import { CERTIFICATE_VERIFICATION_FAILED_MESSAGE } from "../constants/verificationMessages";
+import { all, put, select } from "redux-saga/effects";
+import {
+  CERTIFICATE_VERIFICATION_GENERIC_MESSAGE,
+  CERTIFICATE_VERIFICATION_NETWORK_MESSAGE,
+} from "../constants/verificationMessages";
 import { getCertificate } from "../reducers/certificate.selectors";
 import {
   sendCertificateFailure,
@@ -10,7 +13,7 @@ import {
   verifyingCertificateCompleted,
   verifyingCertificateErrored,
 } from "../reducers/certificate.slice";
-import { sendCertificateSaga, verifyCertificateSaga } from "./certificate";
+import { sagas, sendCertificateSaga, verifyCertificateSaga } from "./certificate";
 import { MakeCertUtil } from "./testutils";
 
 jest.mock("next/router", () => ({
@@ -67,7 +70,7 @@ describe("sagas/certificate", () => {
         getState: () => ({}),
       },
       function* watchVerifications() {
-        yield takeLatest(updateCertificate, verifyCertificateSaga);
+        yield all(sagas);
       }
     );
 
@@ -93,14 +96,25 @@ describe("sagas/certificate", () => {
     task.cancel();
   });
 
-  it("stores friendly failure copy and leaves the provider error out of the action", () => {
+  it("stores the network message for a provider failure and leaves the raw error out", () => {
     const saga = verifyCertificateSaga({
       payload: new MakeCertUtil().addIssuer("0xaaa").finish(),
     });
     saga.next();
 
     expect(saga.throw(new Error("missing response (url=https://mainnet.infura.io/v3/secret)")).value).toStrictEqual(
-      put(verifyingCertificateErrored(CERTIFICATE_VERIFICATION_FAILED_MESSAGE))
+      put(verifyingCertificateErrored(CERTIFICATE_VERIFICATION_NETWORK_MESSAGE))
+    );
+  });
+
+  it("stores a generic message when verification fails for a non-network reason", () => {
+    const saga = verifyCertificateSaga({
+      payload: new MakeCertUtil().addIssuer("0xaaa").finish(),
+    });
+    saga.next();
+
+    expect(saga.throw(new Error("Cannot read properties of undefined (reading 'proof')")).value).toStrictEqual(
+      put(verifyingCertificateErrored(CERTIFICATE_VERIFICATION_GENERIC_MESSAGE))
     );
   });
 

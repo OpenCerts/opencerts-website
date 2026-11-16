@@ -3,6 +3,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import React from "react";
 import { Provider } from "react-redux";
 import { NETWORK_NAME } from "../../config";
+import { ignoredFilesMessage } from "../../constants/verificationMessages";
 import { rootReducer } from "../../reducers";
 import { initialState, updateCertificate } from "../../reducers/certificate.slice";
 import { DropZoneSectionContainer } from "./DropZoneSection";
@@ -28,6 +29,7 @@ const demoTransfer = () => ({
 describe("dropZoneSection", () => {
   it("lets the drop zone verify a demo drag once and clear the hover state", async () => {
     const fetchMock = jest.fn().mockResolvedValue({
+      ok: true,
       json: () => Promise.resolve({ id: "demo" }),
       blob: () => Promise.resolve(new Blob(['{"id":"demo"}'], { type: "application/json" })),
     });
@@ -104,6 +106,39 @@ describe("dropZoneSection", () => {
       fireEvent.click(button);
 
       expect(fetchMock).not.toHaveBeenCalled();
+    } finally {
+      window.fetch = originalFetch;
+    }
+  });
+
+  it("clears an earlier ignored-file note when the demo button is tapped", () => {
+    const fetchMock = jest.fn().mockResolvedValue({
+      json: () => Promise.resolve({ id: "demo" }),
+    });
+    const originalFetch = window.fetch;
+    window.fetch = fetchMock as typeof fetch;
+
+    const store = configureStore({
+      reducer: rootReducer,
+      preloadedState: {
+        featureToggle: {},
+        certificate: {
+          ...initialState,
+          ignoredFileName: "degree.opencert",
+        },
+      },
+    });
+
+    try {
+      render(
+        <Provider store={store}>
+          <DropZoneSectionContainer />
+        </Provider>
+      );
+
+      expect(screen.getByTestId("ignored-files-note")).toHaveTextContent(ignoredFilesMessage("degree.opencert"));
+      fireEvent.click(screen.getByRole("button", { name: "Click me for a demo certificate!" }));
+      expect(screen.queryByTestId("ignored-files-note")).not.toBeInTheDocument();
     } finally {
       window.fetch = originalFetch;
     }
