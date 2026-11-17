@@ -4,7 +4,14 @@ module.exports = {
   clearMocks: true,
   collectCoverage: false,
   coverageDirectory: "<rootDir>/.coverage/",
-  collectCoverageFrom: ["src/**/*.{js,jsx}", "scripts/**/*.{js,jsx}"],
+  collectCoverageFrom: [
+    "src/**/*.{js,jsx,ts,tsx}",
+    "scripts/**/*.{js,jsx}",
+    "!src/**/*.d.ts",
+    "!src/**/*.{test,spec}.{js,jsx,ts,tsx}",
+    "!src/**/__tests__/**",
+    "!src/**/fixture/**",
+  ],
   testMatch: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)test.[jt]s?(x)"],
   // Transform ESM-only packages using Babel (these have no CJS main and use ESM exports)
   transformIgnorePatterns: ["/node_modules/(?!(@digitalbazaar|@noble|base58-universal|base64url-universal|cborg)/)"],
