@@ -36,7 +36,19 @@ jobs:
         run: npm run lint
 
       - name: Unit tests
-        run: npm test -- --ci
+        run: npm test -- --ci --coverage --coverageReporters=lcov
+
+      - name: Upload coverage for Sonar
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: |
+            .coverage/lcov.info
+            .coverage/sonar-report.xml
+          include-hidden-files: true # .coverage is a dot-directory
+          retention-days: 1
+          if-no-files-found: warn
 
       - name: Build and run integration
         env:
@@ -44,3 +56,26 @@ jobs:
           INFURA_API_KEY_PROVIDER: "84842078b09946638c03157f83405213"
           INFURA_API_KEY_RESOLVER: "84842078b09946638c03157f83405213"
         run: ./scripts/integration-headless.sh
+
+  sonar:
+    name: SonarCloud Scan
+    needs: lint-and-test
+    if: ${{ !cancelled() }} # still report to Sonar when a test fails
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history, needed for Sonar's new-code analysis
+
+      - name: Download coverage
+        uses: actions/download-artifact@v4
+        continue-on-error: true # scan without coverage rather than not at all
+        with:
+          name: coverage
+          path: .coverage
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarqube-scan-action@689fb39b34b9aa95ebc5f8f119343ddd51542402 # v4.2.2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
