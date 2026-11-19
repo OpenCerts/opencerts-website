@@ -48,8 +48,8 @@ export interface CertificateViewerProps {
   handleCopyLink: (certificateLink: string) => void;
 }
 export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> = (props) => {
-  if (!props.verificationStatus) throw new Error("Verification status can't be null");
-  const { document } = props;
+  const { document, verificationStatus } = props;
+  if (!verificationStatus) throw new Error("Verification status can't be null");
   const childRef = React.useRef<{ print: () => void }>();
   const isPresentation = isVerifiablePresentation(document);
   const [isDocObfuscated, setIsDocObfuscated] = useState(false);
@@ -74,6 +74,24 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
       .catch(() => setIsDocObfuscated(false));
   }, [document, isPresentation]);
 
+  const renderCertificate = () => {
+    if (isPresentation) {
+      return <CredentialTabs presentation={document} verificationStatus={verificationStatus} forwardedRef={childRef} />;
+    }
+    if (showInlineTemplate) {
+      return (
+        <InlineTemplateRenderer rawDocument={document} onFailure={onInlineTemplateFailure} forwardedRef={childRef} />
+      );
+    }
+    return (
+      <ForwardedRefDecentralisedRenderer
+        updateObfuscatedCertificate={props.updateObfuscatedCertificate}
+        rawDocument={document}
+        ref={childRef}
+      />
+    );
+  };
+
   return (
     <ErrorBoundary>
       {
@@ -82,7 +100,7 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
             <div className="container">
               <div className="flex flex-wrap">
                 <div className="w-full lg:w-1/2 xl:w-1/3">
-                  <CertificateVerifyBlock verificationStatus={props.verificationStatus} document={props.document} />
+                  <CertificateVerifyBlock verificationStatus={verificationStatus} document={props.document} />
                 </div>
                 <div className="w-full lg:w-1/2 xl:w-2/3">
                   <div className="flex flex-wrap gap-y-2">
@@ -153,25 +171,7 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
           <section>
             {/* A presentation is a bundle with no single certificate to render, so each
                 embedded credential gets its own tab. */}
-            {isPresentation ? (
-              <CredentialTabs
-                presentation={document}
-                verificationStatus={props.verificationStatus}
-                forwardedRef={childRef}
-              />
-            ) : showInlineTemplate ? (
-              <InlineTemplateRenderer
-                rawDocument={document}
-                onFailure={onInlineTemplateFailure}
-                forwardedRef={childRef}
-              />
-            ) : (
-              <ForwardedRefDecentralisedRenderer
-                updateObfuscatedCertificate={props.updateObfuscatedCertificate}
-                rawDocument={document}
-                ref={childRef}
-              />
-            )}
+            {renderCertificate()}
           </section>
         </>
       }
