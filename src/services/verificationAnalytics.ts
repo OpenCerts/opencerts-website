@@ -143,7 +143,7 @@ export const getIssuerName = (certificate: WrappedOrSignedOpenCertsDocument): st
 /** Blank values are omitted so GTM does not record an empty issuer name. */
 const omitBlank = (value: string | undefined | null): string | undefined => {
   const trimmed = value?.trim();
-  return trimmed ? trimmed : undefined;
+  return trimmed || undefined;
 };
 
 export const getSigningAlgorithm = (
