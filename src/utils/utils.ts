@@ -21,7 +21,11 @@ export const opencertsGetData = (rawDocument: WrappedOrSignedOpenCertsDocument) 
 
 export const getTemplate = (rawDocument: WrappedOrSignedOpenCertsDocument) => {
   if (vc.isSignedDocument(rawDocument) || vc.isRawDocument(rawDocument)) {
-    return [(rawDocument as unknown as SignedVerifiableCredential).renderMethod]?.flat()?.[0]?.id;
+    // Skip an INLINE_HTML_TEMPLATE entry, which has no renderer URL: the URL-based entry after it is
+    // the fallback. Without an inline entry this is still the first entry, as before.
+    return [(rawDocument as unknown as SignedVerifiableCredential).renderMethod]
+      ?.flat()
+      ?.find((method) => method?.type !== "INLINE_HTML_TEMPLATE")?.id;
   } else if (isWrappedV2Document(rawDocument)) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const documentData = getDataV2(rawDocument as any);
