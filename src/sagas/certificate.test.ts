@@ -1,8 +1,28 @@
-import { put, select } from "redux-saga/effects";
+import { configureStore } from "@reduxjs/toolkit";
+import Router from "next/router";
+import { runSaga, stdChannel } from "redux-saga";
+import { all, put, select } from "redux-saga/effects";
+import { rootReducer } from "../reducers";
 import { getCertificate } from "../reducers/certificate.selectors";
-import { sendCertificateFailure, sendCertificateSuccess } from "../reducers/certificate.slice";
-import { sendCertificateSaga } from "./certificate";
+import {
+  sendCertificateFailure,
+  sendCertificateSuccess,
+  updateCertificate,
+  verifyingCertificateCompleted,
+} from "../reducers/certificate.slice";
+import { sagas, sendCertificateSaga } from "./certificate";
 import { MakeCertUtil } from "./testutils";
+
+jest.mock("next/router", () => ({
+  __esModule: true,
+  default: {
+    prefetch: jest.fn(),
+    push: jest.fn(),
+    replace: jest.fn(),
+  },
+}));
+
+const pendingVerifications: Array<(fragments: unknown) => void> = [];
 
 jest.mock("@trustvc/trustvc", () => {
   // Require the original module to not be mocked...
@@ -12,6 +32,12 @@ jest.mock("@trustvc/trustvc", () => {
     __esModule: true,
     ...originalModule,
     verifySignature: jest.fn(),
+    verificationBuilder: jest.fn(
+      () => () =>
+        new Promise((resolve) => {
+          pendingVerifications.push(resolve);
+        })
+    ),
   };
 });
 
@@ -21,7 +47,96 @@ function whenThereIsOneEthereumAddressIssuer() {
   return { testCert, ethereumAddresses };
 }
 
+const validFragments = [
+  { name: "OpenAttestationHash", type: "DOCUMENT_INTEGRITY", status: "VALID" },
+  { name: "OpenAttestationEthereumDocumentStoreStatus", type: "DOCUMENT_STATUS", status: "VALID" },
+  { name: "OpenAttestationDnsTxtIdentityProof", type: "ISSUER_IDENTITY", status: "VALID" },
+];
+
 describe("sagas/certificate", () => {
+  it("cancels an older verification so only the latest certificate opens the viewer", async () => {
+    pendingVerifications.length = 0;
+    const channel = stdChannel();
+    const dispatched: { type: string }[] = [];
+    const task = runSaga(
+      {
+        channel,
+        dispatch: (action) => {
+          dispatched.push(action as { type: string });
+        },
+        getState: () => ({}),
+      },
+      function* watchVerifications() {
+        yield all(sagas);
+      }
+    );
+
+    const first = new MakeCertUtil().addIssuer("0xaaa").addDataField("id", "certificate-a").finish();
+    const second = new MakeCertUtil().addIssuer("0xbbb").addDataField("id", "certificate-b").finish();
+    channel.put(updateCertificate(first));
+    await Promise.resolve();
+    channel.put(updateCertificate(second));
+    await Promise.resolve();
+
+    pendingVerifications[0](validFragments);
+    await Promise.resolve();
+
+    expect(dispatched.filter((action) => action.type === verifyingCertificateCompleted.type)).toHaveLength(0);
+    expect(Router.push).not.toHaveBeenCalled();
+
+    pendingVerifications[1](validFragments);
+    await Promise.resolve();
+
+    expect(dispatched.filter((action) => action.type === verifyingCertificateCompleted.type)).toHaveLength(1);
+    expect(Router.push).toHaveBeenCalledTimes(1);
+    expect(Router.push).toHaveBeenCalledWith("/viewer");
+    task.cancel();
+  });
+
+  it("keeps the drop-zone loader up until the viewer route finishes", async () => {
+    pendingVerifications.length = 0;
+    let finishNavigation: (value: boolean) => void = () => undefined;
+    const push = Router.push as unknown as jest.Mock;
+    push.mockImplementation(
+      () =>
+        new Promise((resolve) => {
+          finishNavigation = resolve;
+        })
+    );
+    const store = configureStore({ reducer: rootReducer });
+    const channel = stdChannel();
+    const dispatch = (action: Parameters<typeof store.dispatch>[0]) => store.dispatch(action);
+    const task = runSaga(
+      {
+        channel,
+        dispatch,
+        getState: () => store.getState(),
+      },
+      function* watchVerifications() {
+        yield all(sagas);
+      }
+    );
+
+    try {
+      channel.put(updateCertificate(new MakeCertUtil().addIssuer("0xaaa").finish()));
+      await Promise.resolve();
+      pendingVerifications[0](validFragments);
+      await Promise.resolve();
+
+      expect(push).toHaveBeenCalledWith("/viewer");
+      expect(store.getState().certificate.verificationPending).toBe(true);
+      expect(store.getState().certificate.verificationStatus).toStrictEqual(validFragments);
+
+      finishNavigation(true);
+      await Promise.resolve();
+
+      expect(store.getState().certificate.verificationPending).toBe(false);
+    } finally {
+      push.mockReset();
+      task.cancel();
+    }
+  });
+
   describe("sendCertificate", () => {
     let fetchStub: jest.SpyInstance;
     // eslint-disable-next-line jest/no-hooks

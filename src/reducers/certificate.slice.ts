@@ -11,6 +11,8 @@ export interface CertificateState {
   verificationPending: boolean;
   verificationStatus: null | VerificationFragment[];
   verificationError: null | string;
+  /** Set when a drop contained extra files and one certificate was checked. */
+  ignoredFileName: null | string;
 
   emailState: states;
   emailError: null | string;
@@ -30,6 +32,7 @@ export const initialState: CertificateState = {
   verificationPending: false,
   verificationStatus: null,
   verificationError: null,
+  ignoredFileName: null,
 
   emailState: states.INITIAL,
   emailError: null,
@@ -58,16 +61,27 @@ export const certificateSlice = createSlice({
       ...state,
       verificationPending: true,
       verificationStatus: null,
+      verificationError: null,
     }),
     verifyingCertificateCompleted: (state, { payload }: PayloadAction<VerificationFragment[]>) => ({
       ...state,
-      verificationPending: false,
+      // Stay pending until finishVerifying. Clearing this before Router.push paints
+      // the empty drop zone in the gap before /viewer mounts.
+      verificationPending: true,
       verificationStatus: payload,
+    }),
+    finishVerifying: (state) => ({
+      ...state,
+      verificationPending: false,
     }),
     verifyingCertificateErrored: (state, { payload }: PayloadAction<string>) => ({
       ...state,
       verificationPending: false,
       verificationError: payload,
+    }),
+    setIgnoredCertificateFile: (state, { payload }: PayloadAction<string | null>) => ({
+      ...state,
+      ignoredFileName: payload,
     }),
     sendCertificate: (state, _: PayloadAction<{ email: string; captcha: string }>) => ({
       ...state,
@@ -140,7 +154,9 @@ export const {
   updateCertificate,
   verifyingCertificate,
   verifyingCertificateCompleted,
+  finishVerifying,
   verifyingCertificateErrored,
+  setIgnoredCertificateFile,
   sendCertificate,
   sendCertificateReset,
   sendCertificateSuccess,

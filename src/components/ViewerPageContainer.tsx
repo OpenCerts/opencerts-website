@@ -1,15 +1,19 @@
 import { v2, VerificationFragment, WrappedDocument } from "@trustvc/trustvc";
 import copy from "clipboard-copy";
+import Link from "next/link";
 import Router from "next/router";
 import React, { Component, ReactNode } from "react";
 import { connect } from "react-redux";
+import { CERTIFICATE_VERIFICATION_FAILED_HEADING, ignoredFilesMessage } from "../constants/verificationMessages";
 import { RootState } from "../reducers";
 import {
   getCertificate,
   getEmailSendingError,
   getEmailSendingState,
+  getIgnoredFileName,
   getShareLink,
   getShareLinkState,
+  getVerificationError,
   getVerificationStatus,
   getVerifying,
 } from "../reducers/certificate.selectors";
@@ -29,6 +33,8 @@ interface ViewerProps {
   document: WrappedOrSignedOpenCertsDocument | null;
   verifying: boolean;
   verificationStatus: VerificationFragment[] | null;
+  verificationError: string | null;
+  ignoredFileName: string | null;
   emailSendingState: string;
   emailSendingError: string | null;
   sendCertificate: (event: { email: string; captcha: string }) => void;
@@ -95,24 +101,60 @@ class Viewer extends Component<ViewerProps, ViewerState> {
   }
 
   render(): ReactNode {
-    if (!this.props.document) return null;
+    const { document, verificationStatus, verificationError, verifying, ignoredFileName } = this.props;
+    if (!document) return null;
+    const ignoredNote = ignoredFileName ? (
+      <p className="container text-center text-gray-700 pt-4" data-testid="ignored-files-note" role="status">
+        {ignoredFilesMessage(ignoredFileName)}
+      </p>
+    ) : null;
+    // A second demo tap or a second file, just as the page opens /viewer, clears
+    // verificationStatus. Rendering the certificate in that gap used to throw.
+    if (!verificationStatus) {
+      if (verificationError && !verifying) {
+        return (
+          <>
+            {ignoredNote}
+            <div className="container py-16 text-center" data-testid="verification-failed" role="alert">
+              <h2 className="font-bold text-black text-lg mb-2">{CERTIFICATE_VERIFICATION_FAILED_HEADING}</h2>
+              <p className="text-pink mb-8 break-words">{verificationError}</p>
+              <Link legacyBehavior href="/">
+                <a className="button bg-navy">Go Back</a>
+              </Link>
+            </div>
+          </>
+        );
+      }
+      return (
+        <>
+          {ignoredNote}
+          <div className="container text-blue text-center py-16" data-testid="verifying-certificate" role="status">
+            <i className="fas fa-spinner fa-pulse fa-3x" aria-hidden="true" />
+            <div className="my-3">Verifying Certificate...</div>
+          </div>
+        </>
+      );
+    }
     return (
-      <CertificateViewerContainer
-        document={this.props.document}
-        certificate={opencertsGetData(this.props.document)}
-        verifying={this.props.verifying}
-        showSharing={this.state.showSharing}
-        showShareLink={this.state.showShareLink}
-        shareLink={this.props.shareLink}
-        handleSendCertificate={this.handleSendCertificate}
-        handleSharingToggle={this.handleSharingToggle}
-        handleShareLinkToggle={this.handleShareLinkToggle}
-        handleCopyLink={this.handleCopyLink}
-        copiedLink={this.state.copiedLink}
-        emailSendingState={this.props.emailSendingState}
-        emailSendingError={this.props.emailSendingError}
-        verificationStatus={this.props.verificationStatus}
-      />
+      <>
+        {ignoredNote}
+        <CertificateViewerContainer
+          document={document}
+          certificate={opencertsGetData(document)}
+          verifying={verifying}
+          showSharing={this.state.showSharing}
+          showShareLink={this.state.showShareLink}
+          shareLink={this.props.shareLink}
+          handleSendCertificate={this.handleSendCertificate}
+          handleSharingToggle={this.handleSharingToggle}
+          handleShareLinkToggle={this.handleShareLinkToggle}
+          handleCopyLink={this.handleCopyLink}
+          copiedLink={this.state.copiedLink}
+          emailSendingState={this.props.emailSendingState}
+          emailSendingError={this.props.emailSendingError}
+          verificationStatus={verificationStatus}
+        />
+      </>
     );
   }
 }
@@ -128,6 +170,8 @@ export const ViewerContainer = connect(
     shareLinkState: getShareLinkState(store),
     verifying: getVerifying(store),
     verificationStatus: getVerificationStatus(store),
+    verificationError: getVerificationError(store),
+    ignoredFileName: getIgnoredFileName(store),
   }),
   (dispatch) => ({
     updateCertificate: (payload: WrappedOrSignedOpenCertsDocument) => dispatch(updateCertificate(payload)),
