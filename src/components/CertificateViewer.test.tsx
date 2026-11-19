@@ -4,7 +4,8 @@ import { VerificationFragment } from "@trustvc/trustvc";
 import React from "react";
 import { Provider } from "react-redux";
 import { rootReducer } from "../reducers";
-import { CertificateViewer } from "./CertificateViewer";
+import { updateObfuscatedCertificate } from "../reducers/certificate.slice";
+import { CertificateViewer, mapDispatchToProps } from "./CertificateViewer";
 import twoCredentials from "./tests/fixture/presentations/valid/two_credentials.json";
 
 const mockDecentralisedPrint = jest.fn();
@@ -110,6 +111,12 @@ describe("certificateViewer renderer selection", () => {
 
     expect(frame.srcdoc).toContain("Certificate of origin");
   });
+  it("renders a presentation as one tab per credential, without an obfuscation note", async () => {
+    render(viewer(twoCredentials));
+
+    await expect(screen.findAllByRole("tab")).resolves.toHaveLength(2);
+    expect(screen.queryByText(/chosen not to share certain information/)).not.toBeInTheDocument();
+  });
 });
 
 describe("certificateViewer print", () => {
@@ -130,5 +137,15 @@ describe("certificateViewer print", () => {
     fireEvent.click(screen.getByText("Print"));
 
     expect(mockDecentralisedPrint).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("certificateViewerContainer", () => {
+  it("dispatches the obfuscated document to the store", () => {
+    const dispatch = jest.fn();
+    const updatedDoc = legacyDocument as never;
+    mapDispatchToProps(dispatch).updateObfuscatedCertificate(updatedDoc);
+
+    expect(dispatch).toHaveBeenCalledWith(updateObfuscatedCertificate(updatedDoc));
   });
 });
