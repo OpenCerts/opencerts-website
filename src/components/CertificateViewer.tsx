@@ -1,3 +1,4 @@
+import { Dispatch } from "@reduxjs/toolkit";
 import { isObfuscated as isOAObfuscated, OpenAttestationDocument, VerificationFragment } from "@trustvc/trustvc";
 import dynamic from "next/dynamic";
 import React, { useCallback, useEffect, useState } from "react";
@@ -179,7 +180,9 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
   );
 };
 
-export const CertificateViewerContainer = connect(null, (dispatch) => ({
+export const mapDispatchToProps = (dispatch: Dispatch) => ({
   updateObfuscatedCertificate: (updatedDoc: WrappedOrSignedOpenCertsDocument) =>
     dispatch(updateObfuscatedCertificateAction(updatedDoc)),
-}))(CertificateViewer);
+});
+
+export const CertificateViewerContainer = connect(null, mapDispatchToProps)(CertificateViewer);
