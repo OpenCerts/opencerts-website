@@ -2,10 +2,8 @@ import React, { ChangeEvent, Component, ReactNode } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { CAPTCHA_CLIENT_KEY } from "../../config";
 import { states } from "../../reducers/shared";
-
-// Simple, permissive email format check: something@something.tld
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const isValidEmail = (email: string): boolean => EMAIL_REGEX.test(email);
+// Same rule as the email API, so the form never sends an address the backend will reject.
+import { isValidRecipient } from "../../utils/email";
 
 interface CertificateSharingFormProps {
   emailSendingState: string;
@@ -18,6 +16,8 @@ interface CertificateSharingFormState {
   email: string;
 }
 class CertificateSharingForm extends Component<CertificateSharingFormProps, CertificateSharingFormState> {
+  private readonly recaptchaRef = React.createRef<ReCAPTCHA>();
+
   constructor(props: CertificateSharingFormProps) {
     super(props);
 
@@ -29,6 +29,16 @@ class CertificateSharingForm extends Component<CertificateSharingFormProps, Cert
     this.handleCaptchaChange = this.handleCaptchaChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handleSend = this.handleSend.bind(this);
+  }
+
+  componentDidUpdate(prevProps: CertificateSharingFormProps): void {
+    // A reCAPTCHA token is single-use and the backend has already spent this one, so a
+    // failed send needs a freshly solved challenge before the user can try again.
+    // Only act on the transition into FAILURE, so a later re-render doesn't wipe a new solve.
+    if (prevProps.emailSendingState !== states.FAILURE && this.props.emailSendingState === states.FAILURE) {
+      this.recaptchaRef.current?.reset();
+      this.setState({ captcha: "" });
+    }
   }
 
   handleCaptchaChange(value: string | null): void {
@@ -51,16 +61,17 @@ class CertificateSharingForm extends Component<CertificateSharingFormProps, Cert
   }
 
   canSend(emailSendingState: string): boolean {
-    return emailSendingState !== states.PENDING && isValidEmail(this.state.email) && this.state.captcha !== "";
+    return emailSendingState !== states.PENDING && isValidRecipient(this.state.email) && this.state.captcha !== "";
   }
 
   render(): ReactNode {
     const { emailSendingState, emailSendingError } = this.props;
     const { email } = this.state;
 
-    // Once the request resolves, the Send button is replaced by the outcome message.
-    const isResolved = emailSendingState === states.SUCCESS || emailSendingState === states.FAILURE;
-    const showEmailError = email.length > 0 && !isValidEmail(email);
+    // A successful send replaces the Send button with the success message. After a failure the
+    // button stays, disabled until the address is valid and a new captcha has been solved.
+    const showSendButton = emailSendingState !== states.SUCCESS;
+    const showEmailError = email.length > 0 && !isValidRecipient(email);
 
     return (
       <div className="text-center">
@@ -74,7 +85,7 @@ class CertificateSharingForm extends Component<CertificateSharingFormProps, Cert
         />
         {showEmailError && <div className="my-2 text-red">Please enter a valid email address</div>}
         <div className="flex justify-center w-full my-4">
-          <ReCAPTCHA sitekey={CAPTCHA_CLIENT_KEY} onChange={this.handleCaptchaChange} />
+          <ReCAPTCHA ref={this.recaptchaRef} sitekey={CAPTCHA_CLIENT_KEY} onChange={this.handleCaptchaChange} />
         </div>
         {emailSendingState === states.SUCCESS && <div className="my-4 text-green">Email successfully sent!</div>}
         {emailSendingState === states.FAILURE && (
@@ -82,7 +93,7 @@ class CertificateSharingForm extends Component<CertificateSharingFormProps, Cert
             {emailSendingError || "An error occured, please check your email and captcha"}
           </div>
         )}
-        {!isResolved && (
+        {showSendButton && (
           <div className="mt-4">
             <button
               type="button"
