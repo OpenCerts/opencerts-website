@@ -2,9 +2,10 @@ import { EMAIL_API_URL } from "../../config";
 import { WrappedOrSignedOpenCertsDocument } from "../../shared";
 import { sendEmail } from "./index";
 
-// A fetch Response stand-in: just the status and a body read through text(), which is all sendEmail uses.
+// A fetch Response stand-in: just ok, the status and a body read through text(), which is all sendEmail uses.
 // A string body is sent as-is (non-JSON pages, empty bodies); anything else is serialised.
 const response = (status: number, body: unknown = "") => ({
+  ok: status >= 200 && status < 300,
   status,
   text: async () => (typeof body === "string" ? body : JSON.stringify(body)),
 });
@@ -43,8 +44,9 @@ describe("services/email", () => {
     });
   });
 
-  it("resolves ok when 200 is returned", async () => {
-    fetchStub.mockResolvedValue(response(200, { success: true }));
+  // 201 and 204 count too: the email has gone, so the user must not be told it failed.
+  it.each([200, 201, 204])("resolves ok when %i is returned", async (status) => {
+    fetchStub.mockResolvedValue(response(status, { success: true }));
     await expect(send()).resolves.toStrictEqual({ ok: true });
   });
 
@@ -52,18 +54,33 @@ describe("services/email", () => {
     ["Recipient must be a single valid email address", "invalid_recipient"],
     ["Invalid captcha or missing API key", "invalid_captcha"],
     ["Invalid certificate", "invalid_certificate"],
+    ["Invalid document", "verification_unavailable"],
+    ["Missing document", "missing_document"],
     ["Invalid request body", "invalid_request"],
     ["Invalid API key", "invalid_request"],
     ["Something the client has never heard of", "invalid_request"],
   ])("maps a 400 with %j to %s", async (error, reason) => {
     fetchStub.mockResolvedValue(response(400, { error, requestId: "req-123" }));
-    await expect(send()).resolves.toStrictEqual({ ok: false, status: 400, reason, apiMessage: error });
+    await expect(send()).resolves.toStrictEqual({ ok: false, status: 400, reason });
   });
+
+  // A plain-object lookup would find these on Object.prototype and hand back a function or object as the reason.
+  it.each(["constructor", "toString", "__proto__", "hasOwnProperty", "valueOf"])(
+    "maps a 400 whose error is the Object.prototype name %j to invalid_request",
+    async (error) => {
+      fetchStub.mockResolvedValue(response(400, { error, requestId: "req-123" }));
+      await expect(send()).resolves.toStrictEqual({ ok: false, status: 400, reason: "invalid_request" });
+    }
+  );
 
   it.each([
     ["a non-JSON body", "<html>Bad Request</html>"],
     ["an empty body", ""],
     ["JSON without an error string", { error: { nested: true } }],
+    ["a numeric error", { error: 123 }],
+    // would be coerced to the "Invalid certificate" key by a plain-object lookup
+    ["an array error holding a known message", { error: ["Invalid certificate"] }],
+    ["a null error", { error: null }],
     ["a JSON null body", "null"],
   ])("maps a 400 with %s to invalid_request without throwing", async (_label, body) => {
     fetchStub.mockResolvedValue(response(400, body));
@@ -90,12 +107,7 @@ describe("services/email", () => {
 
   it("maps 500 to server_error", async () => {
     fetchStub.mockResolvedValue(response(500, { error: "An unexpected error occurred", requestId: "req-123" }));
-    await expect(send()).resolves.toStrictEqual({
-      ok: false,
-      status: 500,
-      reason: "server_error",
-      apiMessage: "An unexpected error occurred",
-    });
+    await expect(send()).resolves.toStrictEqual({ ok: false, status: 500, reason: "server_error" });
   });
 
   it.each([502, 503, 504])("maps %i to server_error", async (status) => {
@@ -103,7 +115,7 @@ describe("services/email", () => {
     await expect(send()).resolves.toStrictEqual({ ok: false, status, reason: "server_error" });
   });
 
-  it("maps a non-200 success-range or redirect status to unknown", async () => {
+  it("maps a redirect status to unknown", async () => {
     fetchStub.mockResolvedValue(response(302));
     await expect(send()).resolves.toStrictEqual({ ok: false, status: 302, reason: "unknown" });
   });
@@ -113,10 +125,17 @@ describe("services/email", () => {
     await expect(send()).resolves.toStrictEqual({ ok: false, status: null, reason: "network_error" });
   });
 
-  it("drops an API message that echoes the recipient, so the result never carries the address", async () => {
-    fetchStub.mockResolvedValue(response(400, { error: `Cannot send to ${email.toUpperCase()}` }));
-    const result = await send();
-    expect(result).toStrictEqual({ ok: false, status: 400, reason: "invalid_request" });
-    expect(JSON.stringify(result).toLowerCase()).not.toContain(email);
-  });
+  // The second address is the fuzz run's F2 case: its upper-cased echo doesn't lower-case back to it.
+  it.each([email, "fuzz-pii-927ς@example.com"])(
+    "never hands back the API's message, so an echo of %j can't reach the result",
+    async (to) => {
+      fetchStub.mockResolvedValue(response(400, { error: `Cannot send to ${to.toUpperCase()}` }));
+      // exactly these keys: no message, so nothing that could carry the address
+      await expect(sendEmail({ certificate, captcha, email: to })).resolves.toStrictEqual({
+        ok: false,
+        status: 400,
+        reason: "invalid_request",
+      });
+    }
+  );
 });

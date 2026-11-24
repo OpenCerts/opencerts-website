@@ -3,7 +3,7 @@ import { runSaga } from "redux-saga";
 import { call, put, select } from "redux-saga/effects";
 import { getCertificate } from "../reducers/certificate.selectors";
 import { sendCertificateFailure, sendCertificateSuccess } from "../reducers/certificate.slice";
-import { sendEmail } from "../services/email";
+import { type EmailFailureReason, sendEmail } from "../services/email";
 import { EMAIL_RETRY_LATER_MESSAGE, sendCertificateSaga } from "./certificate";
 import { MakeCertUtil } from "./testutils";
 
@@ -40,11 +40,30 @@ function whenThereIsOneEthereumAddressIssuer() {
   return { testCert, ethereumAddresses };
 }
 
-// A fetch Response stand-in: just the status and a body read through text(), which is all sendEmail uses.
+// A fetch Response stand-in: just ok, the status and a body read through text(), which is all sendEmail uses.
 const response = (status: number, body: unknown = "") =>
-  Promise.resolve({ status, text: async () => (typeof body === "string" ? body : JSON.stringify(body)) });
+  Promise.resolve({
+    ok: status >= 200 && status < 300,
+    status,
+    text: async () => (typeof body === "string" ? body : JSON.stringify(body)),
+  });
 
-const runSendCertificate = async ({ email, certificate }: { email: string; certificate: unknown }) => {
+// The API rejecting with its usual { error, requestId } body.
+const apiError = (status: number, error: unknown) => () => response(status, { error, requestId: "r" });
+
+// How a send ends: how fetch answers (the real sendEmail then classifies it), or, for a result sendEmail
+// itself can't produce, what the saga is handed in its place.
+type Answer = (() => Promise<unknown>) | { sendEmailResult: unknown };
+
+const runSendCertificate = async ({
+  email,
+  certificate,
+  sendEmailResult,
+}: {
+  email: string;
+  certificate: unknown;
+  sendEmailResult?: unknown;
+}) => {
   const dispatched: unknown[] = [];
   await runSaga(
     {
@@ -52,6 +71,10 @@ const runSendCertificate = async ({ email, certificate }: { email: string; certi
         dispatched.push(action);
       },
       getState: () => ({ certificate: { rawModified: certificate } }),
+      // With sendEmailResult, the call to sendEmail resolves to it instead of running.
+      effectMiddlewares: [
+        (next) => (effect) => next(sendEmailResult && effect?.payload?.fn === sendEmail ? sendEmailResult : effect),
+      ],
     },
     sendCertificateSaga,
     { payload: { email, captcha: "ABCD" } }
@@ -59,105 +82,66 @@ const runSendCertificate = async ({ email, certificate }: { email: string; certi
   return dispatched;
 };
 
-interface FailureCase {
-  respond: () => Promise<unknown>;
-  status: string;
-  reason: string;
-  level: "warning" | "error";
-  message: string;
-}
+// The page has just shown the certificate as verified, so these must not suggest it isn't.
+const DOWNLOAD_INSTEAD = "We couldn't email this certificate right now. You can still download it.";
 
-const FAILURES: [string, FailureCase][] = [
-  [
-    "400 invalid recipient",
-    {
-      respond: () => response(400, { error: "Recipient must be a single valid email address", requestId: "r" }),
-      status: "400",
-      reason: "invalid_recipient",
-      level: "warning",
-      message: "Please enter a single valid email address.",
-    },
-  ],
-  [
-    "400 invalid captcha",
-    {
-      respond: () => response(400, { error: "Invalid captcha or missing API key", requestId: "r" }),
-      status: "400",
-      reason: "invalid_captcha",
-      level: "warning",
-      message: "The captcha check failed or expired. Please complete the captcha again and retry.",
-    },
-  ],
-  [
-    "400 invalid certificate",
-    {
-      respond: () => response(400, { error: "Invalid certificate", requestId: "r" }),
-      status: "400",
-      reason: "invalid_certificate",
-      level: "warning",
-      message: "This certificate could not be verified, so it can't be emailed.",
-    },
-  ],
-  [
-    "400 invalid request body",
-    {
-      respond: () => response(400, { error: "Invalid request body", requestId: "r" }),
-      status: "400",
-      reason: "invalid_request",
-      level: "warning",
-      message: EMAIL_RETRY_LATER_MESSAGE,
-    },
-  ],
-  [
-    "403 WAF rate limit",
-    {
-      respond: () => response(403, "<html>Forbidden</html>"),
-      status: "403",
-      reason: "rate_limited",
-      level: "warning",
-      message: "Too many emails have been sent from your network. Please wait a few minutes and try again.",
-    },
-  ],
-  [
-    "429 gateway throttle",
-    {
-      respond: () => response(429, { message: "Too Many Requests" }),
-      status: "429",
-      reason: "rate_limited",
-      level: "warning",
-      message: "Too many emails have been sent from your network. Please wait a few minutes and try again.",
-    },
-  ],
-  [
-    "500 server error",
-    {
-      respond: () => response(500, { error: "An unexpected error occurred", requestId: "r" }),
-      status: "500",
-      reason: "server_error",
-      level: "error",
-      message: EMAIL_RETRY_LATER_MESSAGE,
-    },
-  ],
-  [
-    "network error",
-    {
-      respond: () => Promise.reject(new TypeError("Failed to fetch")),
-      status: "null",
-      reason: "network_error",
-      level: "error",
-      message: EMAIL_RETRY_LATER_MESSAGE,
-    },
-  ],
-  [
-    "unexpected status",
-    {
-      respond: () => response(302),
-      status: "302",
-      reason: "unknown",
-      level: "error",
-      message: EMAIL_RETRY_LATER_MESSAGE,
-    },
-  ],
+// The Sentry level and the message shown to the user, for each failure reason.
+const EXPECTED_BY_REASON: Record<EmailFailureReason, { level: "warning" | "error"; message: string }> = {
+  invalid_recipient: { level: "warning", message: "Please enter a single valid email address." },
+  invalid_captcha: {
+    level: "warning",
+    message: "The captcha check failed or expired. Please complete the captcha again and retry.",
+  },
+  invalid_certificate: { level: "error", message: DOWNLOAD_INSTEAD },
+  verification_unavailable: { level: "error", message: DOWNLOAD_INSTEAD },
+  missing_document: { level: "error", message: DOWNLOAD_INSTEAD },
+  rate_limited: {
+    level: "warning",
+    message: "Too many emails have been sent from your network. Please wait a few minutes and try again.",
+  },
+  invalid_request: { level: "warning", message: EMAIL_RETRY_LATER_MESSAGE },
+  server_error: { level: "error", message: EMAIL_RETRY_LATER_MESSAGE },
+  network_error: { level: "error", message: EMAIL_RETRY_LATER_MESSAGE },
+  unknown: { level: "error", message: EMAIL_RETRY_LATER_MESSAGE },
+};
+
+// The `error` in a 400's body and the reason it is reported as. Object.prototype names and non-strings
+// aren't messages the API sends, so they are just an invalid request.
+const API_400_ERRORS: [unknown, EmailFailureReason][] = [
+  ["Recipient must be a single valid email address", "invalid_recipient"],
+  ["Invalid captcha or missing API key", "invalid_captcha"],
+  ["Invalid certificate", "invalid_certificate"],
+  ["Invalid document", "verification_unavailable"],
+  ["Missing document", "missing_document"],
+  ["Invalid request body", "invalid_request"],
+  ["constructor", "invalid_request"],
+  ["toString", "invalid_request"],
+  ["__proto__", "invalid_request"],
+  ["hasOwnProperty", "invalid_request"],
+  [123, "invalid_request"],
+];
+
+// [label, how the send ends, expected email_status tag, expected email_reason tag]
+type FailureCase = [string, Answer, string, EmailFailureReason];
+const FAILURES: FailureCase[] = [
+  ...API_400_ERRORS.map(
+    ([error, reason]): FailureCase => [`400 with error ${JSON.stringify(error)}`, apiError(400, error), "400", reason]
+  ),
+  ["403 WAF rate limit", () => response(403, "<html>Forbidden</html>"), "403", "rate_limited"],
+  ["429 gateway throttle", () => response(429, { message: "Too Many Requests" }), "429", "rate_limited"],
+  ["500 server error", apiError(500, "An unexpected error occurred"), "500", "server_error"],
+  ["network error", () => Promise.reject(new TypeError("Failed to fetch")), "null", "network_error"],
+  ["unexpected status", () => response(302), "302", "unknown"],
+  // sendEmail can't return these, but the saga must not trust that: a reason it doesn't know (such as an
+  // Object.prototype name) is reported and shown as unknown instead of being thrown on.
+  ...["constructor", "toString", "__proto__", "hasOwnProperty", 42].map(
+    (reason): FailureCase => [
+      `sendEmail result with reason ${JSON.stringify(reason)}`,
+      { sendEmailResult: { ok: false, status: 400, reason } },
+      "400",
+      "unknown",
+    ]
+  ),
 ];
 
 describe("sagas/certificate", () => {
@@ -165,6 +149,8 @@ describe("sagas/certificate", () => {
     const { testCert } = whenThereIsOneEthereumAddressIssuer();
     const email = "admin@opencerts.io";
     const captcha = "ABCD";
+    const circular: Record<string, unknown> = { ...testCert };
+    circular.self = circular; // cannot be serialised into the request body
     let fetchStub: jest.SpyInstance;
     // eslint-disable-next-line jest/no-hooks
     beforeEach(() => {
@@ -174,6 +160,19 @@ describe("sagas/certificate", () => {
     afterEach(() => {
       fetchStub.mockRestore();
     });
+
+    type SendOptions = { answer?: Answer; certificate?: unknown; to?: string };
+    // Runs the saga for `to` with `certificate` in the store, the send ending as `answer` says, and
+    // returns the actions it put.
+    const send = ({ answer, certificate = testCert, to = email }: SendOptions) => {
+      if (typeof answer === "function") fetchStub.mockImplementation(answer);
+      const sendEmailResult = typeof answer === "object" ? answer.sendEmailResult : undefined;
+      return runSendCertificate({ email: to, certificate, sendEmailResult });
+    };
+
+    // Runs the saga and expects it to put exactly `action`.
+    const expectSagaToPut = (options: SendOptions, action: unknown) =>
+      expect(send(options)).resolves.toStrictEqual([action]);
 
     it("sends the selected certificate with the email and captcha, then puts success", () => {
       const saga = sendCertificateSaga({ payload: { email, captcha } });
@@ -188,24 +187,18 @@ describe("sagas/certificate", () => {
       expect(saga.next().done).toBe(true);
     });
 
-    it("puts success and reports nothing to Sentry when the API returns 200", async () => {
-      fetchStub.mockImplementation(() => response(200, { success: true }));
-
-      await expect(runSendCertificate({ email, certificate: testCert })).resolves.toStrictEqual([
-        sendCertificateSuccess(),
-      ]);
+    it.each([200, 204])("puts success and reports nothing to Sentry when the API returns %i", async (status) => {
+      await expectSagaToPut({ answer: () => response(status, { success: true }) }, sendCertificateSuccess());
       expect(mockCaptureMessage).not.toHaveBeenCalled();
       expect(mockCaptureException).not.toHaveBeenCalled();
     });
 
     it.each(FAILURES)(
       "on %s puts its user message and reports status and reason only",
-      async (_label, { respond, status, reason, level, message }) => {
-        fetchStub.mockImplementation(respond);
+      async (_label, answer, status, reason) => {
+        const { level, message } = EXPECTED_BY_REASON[reason];
 
-        await expect(runSendCertificate({ email, certificate: testCert })).resolves.toStrictEqual([
-          sendCertificateFailure(message),
-        ]);
+        await expectSagaToPut({ answer }, sendCertificateFailure(message));
         expect(mockCaptureMessage).toHaveBeenCalledTimes(1);
         expect(mockCaptureMessage).toHaveBeenCalledWith("Email certificate failed", {
           level,
@@ -217,36 +210,33 @@ describe("sagas/certificate", () => {
     );
 
     it("gives each actionable failure its own message, distinct from the generic one", () => {
-      const messages = ["invalid_recipient", "invalid_captcha", "invalid_certificate", "rate_limited"].map(
-        (reason) => FAILURES.find(([, failure]) => failure.reason === reason)?.[1].message
-      );
+      const actionable = ["invalid_recipient", "invalid_captcha", "invalid_certificate", "rate_limited"] as const;
+      const messages = actionable.map((reason) => EXPECTED_BY_REASON[reason].message);
       expect(new Set([...messages, EMAIL_RETRY_LATER_MESSAGE]).size).toBe(5);
     });
 
-    it("captures an exception without any payload and shows the generic message when there is no certificate", async () => {
-      await expect(runSendCertificate({ email, certificate: null })).resolves.toStrictEqual([
-        sendCertificateFailure(EMAIL_RETRY_LATER_MESSAGE),
-      ]);
-      expect(fetchStub).not.toHaveBeenCalled();
-      expect(mockCaptureException).toHaveBeenCalledTimes(1);
-      expect(mockCaptureException).toHaveBeenCalledWith(new Error("No certificate"), {
-        tags: { saga: "sendCertificate" },
-      });
-      expect(mockCaptureMessage).not.toHaveBeenCalled();
+    it("has a failure case for every reason", () => {
+      expect(new Set(FAILURES.map(([, , , reason]) => reason))).toStrictEqual(new Set(Object.keys(EXPECTED_BY_REASON)));
     });
 
-    it("captures an unexpected exception without any payload and shows the generic message", async () => {
-      const certificate: Record<string, unknown> = { ...testCert };
-      certificate.self = certificate; // cannot be serialised into the request body
-
-      await expect(runSendCertificate({ email, certificate })).resolves.toStrictEqual([
-        sendCertificateFailure(EMAIL_RETRY_LATER_MESSAGE),
-      ]);
-      expect(fetchStub).not.toHaveBeenCalled();
-      expect(mockCaptureException).toHaveBeenCalledTimes(1);
-      expect(mockCaptureException).toHaveBeenCalledWith(expect.any(TypeError), { tags: { saga: "sendCertificate" } });
-      expect(mockCaptureMessage).not.toHaveBeenCalled();
+    it("never tells the user the certificate failed verification", () => {
+      expect(Object.values(EXPECTED_BY_REASON).filter(({ message }) => /verif/i.test(message))).toStrictEqual([]);
     });
+
+    // [when, certificate in the store, exception expected in Sentry]
+    it.each<[string, unknown, unknown]>([
+      ["when there is no certificate", null, new Error("No certificate")],
+      ["when the certificate cannot be serialised (unexpected exception)", circular, expect.any(TypeError)],
+    ])(
+      "captures an exception without any payload and shows the generic message %s",
+      async (_when, certificate, exception) => {
+        await expectSagaToPut({ certificate }, sendCertificateFailure(EMAIL_RETRY_LATER_MESSAGE));
+        expect(fetchStub).not.toHaveBeenCalled();
+        expect(mockCaptureException).toHaveBeenCalledTimes(1);
+        expect(mockCaptureException).toHaveBeenCalledWith(exception, { tags: { saga: "sendCertificate" } });
+        expect(mockCaptureMessage).not.toHaveBeenCalled();
+      }
+    );
 
     describe("never leaks the recipient address", () => {
       const LEAK_EMAIL = "leak-check-isa5@example.com";
@@ -276,34 +266,19 @@ describe("sagas/certificate", () => {
           console: consoleSpies.map((spy) => spy.mock.calls),
         });
 
-      const circular: Record<string, unknown> = { ...testCert };
-      circular.self = circular;
-
-      // [label, fetch behaviour, certificate in the store, Sentry reports expected]
-      type LeakPath = [string, () => Promise<unknown>, unknown, number];
+      // [label, how the send ends, certificate in the store, Sentry reports expected]
+      type LeakPath = [string, Answer, unknown, number];
       const PATHS: LeakPath[] = [
-        ...FAILURES.map(([label, { respond }]): LeakPath => [label, respond, testCert, 1]),
-        [
-          "400 whose API message echoes the recipient",
-          () => response(400, { error: `Recipient ${LEAK_EMAIL} rejected`, requestId: "r" }),
-          testCert,
-          1,
-        ],
-        [
-          "500 whose API message echoes the recipient",
-          () => response(500, { error: `Failed for ${LEAK_EMAIL}`, requestId: "r" }),
-          testCert,
-          1,
-        ],
+        ...FAILURES.map(([label, answer]): LeakPath => [label, answer, testCert, 1]),
+        ["400 whose API message echoes the recipient", apiError(400, `Recipient ${LEAK_EMAIL} rejected`), testCert, 1],
+        ["500 whose API message echoes the recipient", apiError(500, `Failed for ${LEAK_EMAIL}`), testCert, 1],
         ["no certificate", () => response(200), null, 1],
         ["unexpected exception", () => response(200), circular, 1],
         ["success", () => response(200, { success: true }), testCert, 0],
       ];
 
-      it.each(PATHS)("on %s", async (_label, respond, certificate, reports) => {
-        fetchStub.mockImplementation(respond);
-
-        const dispatched = await runSendCertificate({ email: LEAK_EMAIL, certificate });
+      it.each(PATHS)("on %s", async (_label, answer, certificate, reports) => {
+        const dispatched = await send({ answer, certificate, to: LEAK_EMAIL });
 
         // every failure path did report to Sentry, so the check below is not vacuous
         expect(mockCaptureMessage.mock.calls.length + mockCaptureException.mock.calls.length).toBe(reports);

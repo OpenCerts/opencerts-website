@@ -258,6 +258,9 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
 }
 
 export const EMAIL_RETRY_LATER_MESSAGE = "We couldn't send the email right now. Please try again later.";
+// The page has already shown the certificate as verified, so never suggest otherwise: the email service
+// refusing or failing to check it is a fault on our side, and downloading it still works.
+const EMAIL_DOWNLOAD_INSTEAD_MESSAGE = "We couldn't email this certificate right now. You can still download it.";
 
 // What the user is told, and how loudly Sentry hears about it, for each way sending can fail.
 // Rejections the user can act on (4xx, rate limiting) are warnings; our side failing is an error.
@@ -267,7 +270,12 @@ const EMAIL_FAILURES: Record<EmailFailureReason, { message: string; level: "warn
     message: "The captcha check failed or expired. Please complete the captcha again and retry.",
     level: "warning",
   },
-  invalid_certificate: { message: "This certificate could not be verified, so it can't be emailed.", level: "warning" },
+  // The API's verifier rejected a certificate this site verified: a mismatch between the two.
+  invalid_certificate: { message: EMAIL_DOWNLOAD_INSTEAD_MESSAGE, level: "error" },
+  // The API's verifier failed to run.
+  verification_unavailable: { message: EMAIL_DOWNLOAD_INSTEAD_MESSAGE, level: "error" },
+  // The API saw no certificate in our request.
+  missing_document: { message: EMAIL_DOWNLOAD_INSTEAD_MESSAGE, level: "error" },
   rate_limited: {
     message: "Too many emails have been sent from your network. Please wait a few minutes and try again.",
     level: "warning",
@@ -291,7 +299,10 @@ export function* sendCertificateSaga({ payload }: { payload: { email: string; ca
     });
 
     if (!result.ok) {
-      const { status, reason } = result;
+      const { status } = result;
+      // sendEmail only returns known reasons, but anything else (e.g. "constructor", which a plain
+      // lookup would find on Object.prototype) is reported and shown as unknown rather than thrown on.
+      const reason = Object.prototype.hasOwnProperty.call(EMAIL_FAILURES, result.reason) ? result.reason : "unknown";
       const { message, level } = EMAIL_FAILURES[reason];
       // Status and reason code only: the recipient, the API's message, the certificate and the
       // captcha token must never reach Sentry.

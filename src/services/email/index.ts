@@ -6,6 +6,8 @@ export type EmailFailureReason =
   | "invalid_recipient"
   | "invalid_captcha"
   | "invalid_certificate"
+  | "verification_unavailable"
+  | "missing_document"
   | "rate_limited"
   | "invalid_request"
   | "server_error"
@@ -15,17 +17,23 @@ export type EmailFailureReason =
 export type SendEmailResult =
   | { ok: true }
   // status is null when no response was received (network error / blocked request)
-  | { ok: false; status: number | null; reason: EmailFailureReason; apiMessage?: string };
+  | { ok: false; status: number | null; reason: EmailFailureReason };
 
-// ClientError messages from opencerts-functions (src/email, src/shared/errors.js), returned with a 400.
+// ClientError messages that opencerts-functions returns with a 400, from its email handler (src/email)
+// and its shared verifier (src/shared/verify.js: "Invalid document" when verifying the certificate
+// fails on its side, "Missing document" when the request carries none).
 // "Invalid API key" is not listed: the website never sends an API key, so seeing it means the request
 // itself is wrong, and it falls through to invalid_request like any other unrecognised 400.
-const CLIENT_ERROR_REASONS: Record<string, EmailFailureReason> = {
-  "Recipient must be a single valid email address": "invalid_recipient",
-  "Invalid captcha or missing API key": "invalid_captcha",
-  "Invalid certificate": "invalid_certificate",
-  "Invalid request body": "invalid_request",
-};
+// A Map rather than a plain object, so a message such as "constructor" or "__proto__" can't match an
+// Object.prototype member.
+const CLIENT_ERROR_REASONS = new Map<string, EmailFailureReason>([
+  ["Recipient must be a single valid email address", "invalid_recipient"],
+  ["Invalid captcha or missing API key", "invalid_captcha"],
+  ["Invalid certificate", "invalid_certificate"],
+  ["Invalid document", "verification_unavailable"],
+  ["Missing document", "missing_document"],
+  ["Invalid request body", "invalid_request"],
+]);
 
 // Reads the API's `{ error }` message without ever throwing: the body may be empty, not JSON
 // (e.g. a WAF or gateway page), or unreadable.
@@ -44,7 +52,7 @@ const readApiMessage = async (res: Response): Promise<string | undefined> => {
 const reasonFor = (status: number, apiMessage: string | undefined): EmailFailureReason => {
   // AWS WAF rate-based rules block with 403; API Gateway throttling answers 429.
   if (status === 403 || status === 429) return "rate_limited";
-  if (status === 400) return (apiMessage && CLIENT_ERROR_REASONS[apiMessage]) || "invalid_request";
+  if (status === 400) return (apiMessage && CLIENT_ERROR_REASONS.get(apiMessage)) || "invalid_request";
   if (status >= 400 && status < 500) return "invalid_request";
   if (status >= 500 && status < 600) return "server_error";
   return "unknown";
@@ -79,15 +87,8 @@ export async function sendEmail({
     return { ok: false, status: null, reason: "network_error" };
   }
 
-  if (res.status === 200) return { ok: true };
+  if (res.ok) return { ok: true };
 
-  const message = await readApiMessage(res);
-  // The backend's messages are fixed strings, but never hand back one that echoes the recipient.
-  const apiMessage = message && !message.toLowerCase().includes(email.toLowerCase()) ? message : undefined;
-  return {
-    ok: false,
-    status: res.status,
-    reason: reasonFor(res.status, message),
-    ...(apiMessage ? { apiMessage } : {}),
-  };
+  // Only the status and our own reason code go back: the API's message is never passed on.
+  return { ok: false, status: res.status, reason: reasonFor(res.status, await readApiMessage(res)) };
 }

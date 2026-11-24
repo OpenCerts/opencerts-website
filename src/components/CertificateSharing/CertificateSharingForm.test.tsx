@@ -52,8 +52,9 @@ const showForm = (handleSendCertificate: jest.Mock = jest.fn()) => {
     rerender(formWith(handleSendCertificate, emailSendingState, emailSendingError));
 };
 
-const typeEmail = (value: string) =>
-  fireEvent.change(screen.getByPlaceholderText("Enter recipient's email"), { target: { value } });
+// Found by its accessible name, so every test also checks the input is labelled.
+const emailInput = () => screen.getByRole("textbox", { name: "Recipient's email" });
+const typeEmail = (value: string) => fireEvent.change(emailInput(), { target: { value } });
 const solveCaptcha = () => fireEvent.click(screen.getByRole("button", { name: "Solve captcha" }));
 const sendButton = () => screen.getByRole("button", { name: "Send" });
 
@@ -78,6 +79,8 @@ describe("certificateSharingForm email validation", () => {
     solveCaptcha();
 
     expect(screen.getByText(EMAIL_HINT)).toBeInTheDocument();
+    expect(emailInput()).toHaveAttribute("aria-invalid", "true");
+    expect(emailInput()).toHaveAccessibleDescription(EMAIL_HINT);
     expect(sendButton()).toBeDisabled();
     fireEvent.click(sendButton());
     expect(handleSendCertificate).not.toHaveBeenCalled();
@@ -93,11 +96,19 @@ describe("certificateSharingForm email validation", () => {
       solveCaptcha();
 
       expect(screen.queryByText(EMAIL_HINT)).not.toBeInTheDocument();
+      expect(emailInput()).toHaveAttribute("aria-invalid", "false");
+      expect(emailInput()).not.toHaveAttribute("aria-describedby");
       expect(sendButton()).toBeEnabled();
       fireEvent.click(sendButton());
       expect(handleSendCertificate).toHaveBeenCalledWith({ email: value, captcha: "captcha-token-1" });
     }
   );
+
+  it("asks for an email address, so browsers offer the email keyboard", () => {
+    showForm();
+
+    expect(emailInput()).toHaveAttribute("type", "email");
+  });
 
   it("still requires the captcha for a valid address", () => {
     showForm();
@@ -122,6 +133,9 @@ describe("certificateSharingForm after a send resolves", () => {
     return setEmailState;
   };
 
+  // The failure message is announced as an alert; the region stays mounted and empty in between.
+  const sendError = () => screen.getByRole("alert");
+
   it("resets the captcha on failure and requires a new one before sending again", () => {
     const handleSendCertificate = jest.fn();
     const setEmailState = sendOnce(handleSendCertificate);
@@ -134,8 +148,8 @@ describe("certificateSharingForm after a send resolves", () => {
 
     setEmailState(states.FAILURE, SEND_ERROR);
 
-    // error stays, widget is reset, and the spent token is gone: Send is back but disabled
-    expect(screen.getByText(SEND_ERROR)).toBeInTheDocument();
+    // error shows, widget is reset, and the spent token is gone: Send is back but disabled
+    expect(sendError()).toHaveTextContent(SEND_ERROR);
     expect(mockReset).toHaveBeenCalledTimes(1);
     expect(sendButton()).toBeDisabled();
     fireEvent.click(sendButton());
@@ -180,8 +194,39 @@ describe("certificateSharingForm after a send resolves", () => {
 
     setEmailState(states.SUCCESS);
 
-    expect(screen.getByText("Email successfully sent!")).toBeInTheDocument();
+    expect(screen.getByRole("status")).toHaveTextContent("Email successfully sent!");
+    expect(sendError()).toBeEmptyDOMElement();
     expect(screen.queryByRole("button", { name: "Send" })).not.toBeInTheDocument();
     expect(mockReset).not.toHaveBeenCalled();
+  });
+
+  it("hides the spinner from screen readers while sending", () => {
+    sendOnce(jest.fn());
+
+    expect(sendButton()).toContainHTML('<i class="ml-2 fas fa-spinner fa-pulse" aria-hidden="true"></i>');
+  });
+
+  it("falls back to a generic message when the failure has none", () => {
+    sendOnce(jest.fn())(states.FAILURE, null);
+
+    expect(sendError()).toHaveTextContent("An error occurred, please check your email and captcha");
+  });
+
+  it.each([
+    ["edits the address", () => typeEmail("someone.else@example.com")],
+    ["solves a new captcha", solveCaptcha],
+  ])("clears the error once the user %s, and shows the next failure again", (_action, act) => {
+    const setEmailState = sendOnce(jest.fn());
+    setEmailState(states.FAILURE, SEND_ERROR);
+    expect(sendError()).toHaveTextContent(SEND_ERROR);
+
+    act();
+    expect(sendError()).toBeEmptyDOMElement();
+    setEmailState(states.FAILURE, SEND_ERROR); // a re-render without a new send keeps it hidden
+    expect(sendError()).toBeEmptyDOMElement();
+
+    setEmailState(states.PENDING);
+    setEmailState(states.FAILURE, "Another failure");
+    expect(sendError()).toHaveTextContent("Another failure");
   });
 });
