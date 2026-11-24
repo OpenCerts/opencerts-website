@@ -39,7 +39,7 @@ import {
   verifyingCertificateCompleted,
   verifyingCertificateErrored,
 } from "../reducers/certificate.slice";
-import { sendEmail } from "../services/email";
+import { EmailFailureReason, SendEmailResult, sendEmail } from "../services/email";
 import { OAFailoverProvider } from "../services/failover-provider";
 import {
   certificateNotIssued,
@@ -257,27 +257,68 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
   }
 }
 
+export const EMAIL_RETRY_LATER_MESSAGE = "We couldn't send the email right now. Please try again later.";
+// The page has already shown the certificate as verified, so never suggest otherwise: the email service
+// refusing or failing to check it is a fault on our side, and downloading it still works.
+const EMAIL_DOWNLOAD_INSTEAD_MESSAGE = "We couldn't email this certificate right now. You can still download it.";
+
+// What the user is told, and how loudly Sentry hears about it, for each way sending can fail.
+// Rejections the user can act on (4xx, rate limiting) are warnings; our side failing is an error.
+const EMAIL_FAILURES: Record<EmailFailureReason, { message: string; level: "warning" | "error" }> = {
+  invalid_recipient: { message: "Please enter a single valid email address.", level: "warning" },
+  invalid_captcha: {
+    message: "The captcha check failed or expired. Please complete the captcha again and retry.",
+    level: "warning",
+  },
+  // The API's verifier rejected a certificate this site verified: a mismatch between the two.
+  invalid_certificate: { message: EMAIL_DOWNLOAD_INSTEAD_MESSAGE, level: "error" },
+  // The API's verifier failed to run.
+  verification_unavailable: { message: EMAIL_DOWNLOAD_INSTEAD_MESSAGE, level: "error" },
+  // The API saw no certificate in our request.
+  missing_document: { message: EMAIL_DOWNLOAD_INSTEAD_MESSAGE, level: "error" },
+  rate_limited: {
+    message: "Too many emails have been sent from your network. Please wait a few minutes and try again.",
+    level: "warning",
+  },
+  invalid_request: { message: EMAIL_RETRY_LATER_MESSAGE, level: "warning" },
+  server_error: { message: EMAIL_RETRY_LATER_MESSAGE, level: "error" },
+  network_error: { message: EMAIL_RETRY_LATER_MESSAGE, level: "error" },
+  unknown: { message: EMAIL_RETRY_LATER_MESSAGE, level: "error" },
+};
+
 export function* sendCertificateSaga({ payload }: { payload: { email: string; captcha: string } }) {
   try {
     // https://github.com/redux-saga/redux-saga/issues/884
     const certificate: ReturnType<typeof getCertificate> = yield select(getCertificate);
     if (!certificate) throw new Error("No certificate");
     const { email, captcha } = payload;
-    const success: boolean = yield sendEmail({
+    const result: SendEmailResult = yield call(sendEmail, {
       certificate,
       email,
       captcha,
     });
 
-    if (!success) {
-      throw new Error("Fail to send certificate");
+    if (!result.ok) {
+      const { status } = result;
+      // sendEmail only returns known reasons, but anything else (e.g. "constructor", which a plain
+      // lookup would find on Object.prototype) is reported and shown as unknown rather than thrown on.
+      const reason = Object.prototype.hasOwnProperty.call(EMAIL_FAILURES, result.reason) ? result.reason : "unknown";
+      const { message, level } = EMAIL_FAILURES[reason];
+      // Status and reason code only: the recipient, the API's message, the certificate and the
+      // captcha token must never reach Sentry.
+      captureMessage("Email certificate failed", {
+        level,
+        tags: { saga: "sendCertificate", email_status: String(status), email_reason: reason },
+        fingerprint: ["opencerts-email-failed", reason],
+      });
+      yield put(sendCertificateFailure(message));
+      return;
     }
 
     yield put(sendCertificateSuccess());
   } catch (e) {
     captureException(e, { tags: { saga: "sendCertificate" } });
-    if (e instanceof Error) yield put(sendCertificateFailure(e.message));
-    else yield put(sendCertificateFailure(JSON.stringify(e)));
+    yield put(sendCertificateFailure(EMAIL_RETRY_LATER_MESSAGE));
   }
 }
 type Await<T> = T extends PromiseLike<infer U> ? U : T;

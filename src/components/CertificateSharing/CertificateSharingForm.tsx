@@ -2,10 +2,8 @@ import React, { ChangeEvent, Component, ReactNode } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { CAPTCHA_CLIENT_KEY } from "../../config";
 import { states } from "../../reducers/shared";
-
-// Simple, permissive email format check: something@something.tld
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const isValidEmail = (email: string): boolean => EMAIL_REGEX.test(email);
+// Same rule as the email API, so the form never sends an address the backend will reject.
+import { isValidRecipient } from "../../utils/email";
 
 interface CertificateSharingFormProps {
   emailSendingState: string;
@@ -16,14 +14,23 @@ interface CertificateSharingFormProps {
 interface CertificateSharingFormState {
   captcha: string;
   email: string;
+  // Set once the user edits the address or solves a new captcha after a failed send: the error was
+  // about the previous attempt, so it is hidden until the next send fails.
+  hideSendError: boolean;
 }
+
+const EMAIL_HINT_ID = "certificate-sharing-email-hint";
+
 class CertificateSharingForm extends Component<CertificateSharingFormProps, CertificateSharingFormState> {
+  private readonly recaptchaRef = React.createRef<ReCAPTCHA>();
+
   constructor(props: CertificateSharingFormProps) {
     super(props);
 
     this.state = {
       captcha: "",
       email: "",
+      hideSendError: false,
     };
 
     this.handleCaptchaChange = this.handleCaptchaChange.bind(this);
@@ -31,14 +38,25 @@ class CertificateSharingForm extends Component<CertificateSharingFormProps, Cert
     this.handleSend = this.handleSend.bind(this);
   }
 
+  componentDidUpdate(prevProps: CertificateSharingFormProps): void {
+    // A reCAPTCHA token is single-use and the backend has already spent this one, so a
+    // failed send needs a freshly solved challenge before the user can try again.
+    // Only act on the transition into FAILURE, so a later re-render doesn't wipe a new solve.
+    if (prevProps.emailSendingState !== states.FAILURE && this.props.emailSendingState === states.FAILURE) {
+      this.recaptchaRef.current?.reset();
+      this.setState({ captcha: "", hideSendError: false });
+    }
+  }
+
   handleCaptchaChange(value: string | null): void {
     // value is null when the captcha expires or is reset; clearing it keeps the
-    // Send button disabled until the user solves a fresh challenge.
-    this.setState({ captcha: value ?? "" });
+    // Send button disabled until the user solves a fresh challenge. Solving one starts a new attempt.
+    if (value) this.setState({ captcha: value, hideSendError: true });
+    else this.setState({ captcha: "" });
   }
 
   handleEmailChange(event: ChangeEvent<HTMLInputElement>): void {
-    this.setState({ email: event.target.value });
+    this.setState({ email: event.target.value, hideSendError: true });
   }
 
   handleSend(): void {
@@ -51,38 +69,54 @@ class CertificateSharingForm extends Component<CertificateSharingFormProps, Cert
   }
 
   canSend(emailSendingState: string): boolean {
-    return emailSendingState !== states.PENDING && isValidEmail(this.state.email) && this.state.captcha !== "";
+    return emailSendingState !== states.PENDING && isValidRecipient(this.state.email) && this.state.captcha !== "";
   }
 
   render(): ReactNode {
     const { emailSendingState, emailSendingError } = this.props;
-    const { email } = this.state;
+    const { email, hideSendError } = this.state;
 
-    // Once the request resolves, the Send button is replaced by the outcome message.
-    const isResolved = emailSendingState === states.SUCCESS || emailSendingState === states.FAILURE;
-    const showEmailError = email.length > 0 && !isValidEmail(email);
+    // A successful send replaces the Send button with the success message. After a failure the
+    // button stays, disabled until the address is valid and a new captcha has been solved.
+    const showSendButton = emailSendingState !== states.SUCCESS;
+    const showEmailError = email.length > 0 && !isValidRecipient(email);
+    const showSendError = emailSendingState === states.FAILURE && !hideSendError;
 
     return (
       <div className="text-center">
         <h3 className="mb-2">Send your certificate</h3>
         <p>This sends an email with your .opencert attached, and instructions on how to view it.</p>
         <input
+          type="email"
           className="border p-2 w-64"
           value={email}
           onChange={this.handleEmailChange}
           placeholder="Enter recipient's email"
+          aria-label="Recipient's email"
+          aria-invalid={showEmailError}
+          aria-describedby={showEmailError ? EMAIL_HINT_ID : undefined}
         />
-        {showEmailError && <div className="my-2 text-red">Please enter a valid email address</div>}
-        <div className="flex justify-center w-full my-4">
-          <ReCAPTCHA sitekey={CAPTCHA_CLIENT_KEY} onChange={this.handleCaptchaChange} />
-        </div>
-        {emailSendingState === states.SUCCESS && <div className="my-4 text-green">Email successfully sent!</div>}
-        {emailSendingState === states.FAILURE && (
-          <div className="my-4 text-red">
-            {emailSendingError || "An error occured, please check your email and captcha"}
+        {showEmailError && (
+          <div id={EMAIL_HINT_ID} className="my-2 text-red">
+            Please enter a valid email address
           </div>
         )}
-        {!isResolved && (
+        <div className="flex justify-center w-full my-4">
+          <ReCAPTCHA ref={this.recaptchaRef} sitekey={CAPTCHA_CLIENT_KEY} onChange={this.handleCaptchaChange} />
+        </div>
+        {/* The live regions stay mounted and only their content changes, so screen readers announce
+            each outcome as it arrives. */}
+        <div role="status">
+          {emailSendingState === states.SUCCESS && <div className="my-4 text-green">Email successfully sent!</div>}
+        </div>
+        <div role="alert">
+          {showSendError && (
+            <div className="my-4 text-red">
+              {emailSendingError || "An error occurred, please check your email and captcha"}
+            </div>
+          )}
+        </div>
+        {showSendButton && (
           <div className="mt-4">
             <button
               type="button"
@@ -91,7 +125,9 @@ class CertificateSharingForm extends Component<CertificateSharingFormProps, Cert
               disabled={!this.canSend(emailSendingState)}
             >
               Send
-              {emailSendingState === states.PENDING && <i className="ml-2 fas fa-spinner fa-pulse" />}
+              {emailSendingState === states.PENDING && (
+                <i className="ml-2 fas fa-spinner fa-pulse" aria-hidden="true" />
+              )}
             </button>
           </div>
         )}
