@@ -1,10 +1,13 @@
 // post-export.js
 const { generateSitemap } = require("./generate-sitemap");
 // Generate the sitemap and define the target folder
-const URL =
-  process.env.NET === "mainnet"
-    ? "https://opencerts.io"
-    : process.env.NET === "sepolia"
-    ? "https://dev.opencerts.io"
-    : "https://rinkeby.opencerts.io";
-generateSitemap(URL, "./out/static/");
+const SITE_URLS = {
+  mainnet: "https://opencerts.io",
+  sepolia: "https://dev.opencerts.io",
+};
+const URL = SITE_URLS[process.env.NET] ?? "https://rinkeby.opencerts.io";
+
+generateSitemap(URL, "./out/static/").catch((error) => {
+  console.error("Failed to generate sitemap:", error);
+  process.exitCode = 1;
+});

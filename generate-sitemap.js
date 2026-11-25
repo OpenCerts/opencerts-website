@@ -64,7 +64,5 @@ exports.generateSitemap = async (domain, targetFolder) => {
 `)
   )}`;
 
-  fs.writeFile(`${writeLocation}`, sitemap, (err) => {
-    if (err) throw err;
-  });
+  await fs.promises.writeFile(writeLocation, sitemap);
 };

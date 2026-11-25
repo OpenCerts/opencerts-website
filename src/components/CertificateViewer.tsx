@@ -77,7 +77,8 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
                 <div className="w-full lg:w-1/2 xl:w-2/3">
                   <div className="flex flex-wrap gap-y-2">
                     <div className="w-auto lg:ml-auto mr-2">
-                      <div
+                      <button
+                        type="button"
                         className="icon-utility"
                         id="btn-print"
                         onClick={() => {
@@ -89,13 +90,18 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
                       >
                         <i className="fas fa-print text-md" />
                         <span>Print</span>
-                      </div>
+                      </button>
                     </div>
-                    <div className="mr-2 w-auto" onClick={() => props.handleSharingToggle()}>
-                      <div className="icon-utility" id="btn-email">
+                    <div className="mr-2 w-auto">
+                      <button
+                        type="button"
+                        className="icon-utility"
+                        id="btn-email"
+                        onClick={() => props.handleSharingToggle()}
+                      >
                         <i className="fas fa-envelope text-md" />
                         <span>Email</span>
-                      </div>
+                      </button>
                     </div>
                     <div className="w-auto">
                       <a

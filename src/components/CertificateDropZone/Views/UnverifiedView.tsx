@@ -158,14 +158,14 @@ interface TryAnotherProps {
 
 export const TryAnother: React.FunctionComponent<TryAnotherProps> = ({ resetData }: TryAnotherProps) => {
   return (
-    <div
-      className="ease-colors text-gray-700 hover:text-gray-900 underline"
+    <button
+      type="button"
+      className="ease-colors text-gray-700 hover:text-gray-900 underline block mx-auto"
       onClick={() => {
         resetData();
       }}
-      role="button"
     >
       Try another
-    </div>
+    </button>
   );
 };

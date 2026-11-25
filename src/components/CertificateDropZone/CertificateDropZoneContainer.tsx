@@ -70,8 +70,10 @@ class CertificateDropZone extends Component<CertificateDropZoneContainerProps, C
           this.handleFileError();
         }
       };
-      if (acceptedFiles && acceptedFiles.length && acceptedFiles.length > 0)
-        acceptedFiles.map((file: File) => reader.readAsText(file));
+      // Only one certificate can be viewed at a time, and a FileReader can't read
+      // several files at once (a second readAsText throws InvalidStateError).
+      const [file] = acceptedFiles ?? [];
+      if (file) reader.readAsText(file);
     };
 
     const isDragEvent = (event: DropEvent): event is DragEvent => (event as DragEvent).dataTransfer !== undefined;

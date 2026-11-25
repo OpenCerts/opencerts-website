@@ -30,18 +30,17 @@ export class Drawer extends Component<DrawerProps, DrawerState> {
   createTabs(tabs: Tab[]): ReactNode {
     const { activeIdx } = this.props;
     return tabs.map((tab, index) => (
-      <div
-        className={`cursor-pointer w-full text-white border-b py-4 hover:text-opacity-100 ${
+      <button
+        type="button"
+        className={`cursor-pointer w-full text-left text-white border-b py-4 hover:text-opacity-100 ${
           activeIdx === index ? "" : "text-opacity-50"
         }`}
         key={index}
-        onClick={(e) => {
-          e.preventDefault();
-          this.renderContent(index, tab.id);
-        }}
+        aria-current={activeIdx === index ? "true" : undefined}
+        onClick={() => this.renderContent(index, tab.id)}
       >
         {tab.label}
-      </div>
+      </button>
     ));
   }
 
@@ -56,23 +55,25 @@ export class Drawer extends Component<DrawerProps, DrawerState> {
 
     return (
       <>
-        <div
+        <button
+          type="button"
           className={`cursor-pointer text-lg text-white ${showAbsHeader ? "" : "absolute top-0 right-0 mt-4 mr-4"}`}
+          aria-label="Open certificate views menu"
+          aria-expanded={visible}
           onClick={() => this.toggleDrawer()}
         >
-          &#9776;
-        </div>
+          <span aria-hidden="true">&#9776;</span>
+        </button>
         {visible ? (
           <aside className="bg-navy text-lg fixed top-0 right-0 h-screen p-4">
-            <div
+            <button
+              type="button"
               className="cursor-pointer text-white"
-              onClick={(e) => {
-                e.preventDefault();
-                this.toggleDrawer();
-              }}
+              aria-label="Close menu"
+              onClick={() => this.toggleDrawer()}
             >
-              &times;
-            </div>
+              <span aria-hidden="true">&times;</span>
+            </button>
             <div className="flex flex-wrap">{this.createTabs(tabs)}</div>
           </aside>
         ) : null}

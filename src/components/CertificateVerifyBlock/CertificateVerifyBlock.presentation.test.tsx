@@ -34,4 +34,21 @@ describe("certificateVerifyBlock for a presentation", () => {
     expect(screen.getByText("Presenter's identity has been verified")).toBeInTheDocument();
     expect(screen.queryByText(/has been issued/)).not.toBeInTheDocument();
   });
+
+  it("is a focusable button that toggles the detailed view from the keyboard", () => {
+    render(<CertificateVerifyBlock verificationStatus={VALID_ENVELOPE} document={singleCredential as never} />);
+    const toggle = screen.getByRole("button", { expanded: false });
+    expect(toggle).toHaveAttribute("tabindex", "0");
+
+    fireEvent.keyDown(toggle, { key: "Enter" });
+    expect(toggle).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByText("Presentation has not been tampered with")).toBeInTheDocument();
+
+    fireEvent.keyDown(toggle, { key: " " });
+    expect(toggle).toHaveAttribute("aria-expanded", "false");
+    expect(screen.queryByText("Presentation has not been tampered with")).not.toBeInTheDocument();
+
+    fireEvent.keyDown(toggle, { key: "a" });
+    expect(toggle).toHaveAttribute("aria-expanded", "false");
+  });
 });

@@ -12,6 +12,7 @@ import {
   isWrappedV2Document,
   isWrappedV3Document,
   obfuscateDocument,
+  v2,
   v3,
 } from "@trustvc/trustvc";
 import React, { Ref, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
@@ -62,10 +63,11 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
         } else {
           // To support print all function
           toFrame.current(selectTemplate("print"));
-          new Promise((resolve) => setTimeout(resolve, 500)).then(() => {
+          // Give the frame time to render the print tab before printing, then restore the tab
+          setTimeout(() => {
             toFrame.current?.(print());
             toFrame.current?.(selectTemplate(lastSelected));
-          });
+          }, 500);
         }
       }
     },
@@ -88,10 +90,11 @@ const DecentralisedRenderer: React.FunctionComponent<DecentralisedRendererProps>
         setHeight(action.payload + SCROLLBAR_WIDTH);
       } else if (action.type === "OBFUSCATE") {
         const field = action.payload;
-        // https://github.com/microsoft/TypeScript/issues/14107 overload does not support union :/
+        // obfuscateDocument has separate v2/v3 overloads and TypeScript can't call an overload with a
+        // union (https://github.com/microsoft/TypeScript/issues/14107), so narrow and pick one explicitly.
         const updatedDocument = isWrappedV2Document(documentRef.current)
-          ? obfuscateDocument(documentRef.current, field)
-          : obfuscateDocument(documentRef.current, field);
+          ? obfuscateDocument<v2.OpenAttestationDocument>(documentRef.current, field)
+          : obfuscateDocument<v3.OpenAttestationDocument>(documentRef.current, field);
         updateObfuscatedCertificate(updatedDocument);
         const newDocument = opencertsGetData(updatedDocument);
 

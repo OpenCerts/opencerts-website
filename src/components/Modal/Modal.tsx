@@ -1,12 +1,24 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 
 interface ModalProps {
   show: boolean;
   toggle: () => void;
   children: ReactNode;
 }
-export const Modal: React.FunctionComponent<ModalProps> = ({ show, toggle, children }) =>
-  show ? (
+export const Modal: React.FunctionComponent<ModalProps> = ({ show, toggle, children }) => {
+  // Escape closes the modal: the keyboard equivalent of clicking the backdrop
+  useEffect(() => {
+    if (!show) return;
+    const onKeyDown = (event: KeyboardEvent): void => {
+      if (event.key === "Escape") toggle();
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [show, toggle]);
+
+  if (!show) return null;
+
+  return (
     <>
       <div className="fixed z-10 top-0 left-0 w-full h-full bg-black bg-opacity-75" />
       <div
@@ -14,10 +26,19 @@ export const Modal: React.FunctionComponent<ModalProps> = ({ show, toggle, child
         style={{ maxWidth: "500px", width: "calc(100% - 20px)" }}
       >
         <div className="absolute top-0 right-0">
-          <i className="fa fa-times p-4 ml-auto cursor-pointer" onClick={() => toggle()} />
+          <button type="button" className="p-4 ml-auto cursor-pointer" aria-label="Close" onClick={() => toggle()}>
+            <i className="fa fa-times" aria-hidden="true" />
+          </button>
         </div>
         {children}
       </div>
-      <div style={{ position: "fixed", zIndex: 10 }} className="modal-backdrop fade show" onClick={() => toggle()} />
+      {/* Mouse-only shortcut for closing; keyboard users have Escape and the close button */}
+      <div
+        style={{ position: "fixed", zIndex: 10 }}
+        className="modal-backdrop fade show"
+        role="presentation"
+        onClick={() => toggle()}
+      />
     </>
-  ) : null;
+  );
+};

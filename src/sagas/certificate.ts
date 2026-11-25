@@ -239,7 +239,7 @@ export function* verifyCertificateSaga({ payload: certificate }: { payload: Wrap
             priority: "low",
           },
           extra: { reasons: errors },
-          fingerprint: ["opencerts-verification-failed", ...[...errors].sort()],
+          fingerprint: ["opencerts-verification-failed", ...[...errors].sort((a, b) => a.localeCompare(b, "en"))],
         });
         if (isWrappedV2Document(certificate)) {
           triggerV2ErrorLogging(certificate, errors);

@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Wait for CI workflow
-        uses: lewagon/wait-on-check-action@v1.3.4
+        uses: lewagon/wait-on-check-action@ccfb013c15c8afb7bf2b7c028fb74dc5a068cccc # v1.3.4
         with:
           ref: ${{ github.ref }}
           check-name: "Lint & Test"
@@ -38,7 +38,7 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Build static site
         run: |
@@ -81,7 +81,7 @@ jobs:
           path: ${{ env.BUILD_DIR }}
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4.3.1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -95,8 +95,10 @@ jobs:
           S3_BUCKET_PROD: ${{ secrets.S3_BUCKET_PROD }}
 
       - name: Sync static assets with long cache
+        env:
+          S3_BUCKET: ${{ steps.bucket.outputs.bucket }}
         run: |
-          aws s3 sync $BUILD_DIR s3://${{ steps.bucket.outputs.bucket }} \
+          aws s3 sync "$BUILD_DIR" "s3://$S3_BUCKET" \
             --delete \
             --exclude "*" \
             --include "_next/*" \
@@ -104,8 +106,10 @@ jobs:
             --cache-control "public, max-age=31536000, immutable"
 
       - name: Sync HTML and other assets with no-cache
+        env:
+          S3_BUCKET: ${{ steps.bucket.outputs.bucket }}
         run: |
-          aws s3 sync $BUILD_DIR s3://${{ steps.bucket.outputs.bucket }} \
+          aws s3 sync "$BUILD_DIR" "s3://$S3_BUCKET" \
             --delete \
             --exclude "_next/*" \
             --exclude "static/*" \
@@ -114,8 +118,11 @@ jobs:
       - name: Invalidate CloudFront
         env:
           CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
-        if: ${{ env.CLOUDFRONT_DISTRIBUTION_ID != '' }}
         run: |
+          if [ -z "$CLOUDFRONT_DISTRIBUTION_ID" ]; then
+            echo "No CloudFront distribution configured, skipping invalidation"
+            exit 0
+          fi
           aws cloudfront create-invalidation \
-            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --distribution-id "$CLOUDFRONT_DISTRIBUTION_ID" \
             --paths "/*"
