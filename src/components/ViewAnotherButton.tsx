@@ -14,14 +14,13 @@ interface ViewAnotherButtonProps {
  * presentation, because the id has to stay unique.
  */
 const ViewAnotherButton: React.FunctionComponent<ViewAnotherButtonProps> = ({ resetData }) => (
-  <Link legacyBehavior href="/">
-    <a
-      className="button border border-navy text-navy bg-white hover:bg-navy"
-      id="btn-view-another"
-      onClick={() => resetData()}
-    >
-      View another
-    </a>
+  <Link
+    href="/"
+    className="button border border-navy text-navy bg-white hover:bg-navy"
+    id="btn-view-another"
+    onClick={() => resetData()}
+  >
+    View another
   </Link>
 );
 

@@ -122,13 +122,26 @@ interface SimpleVerifyBlockProps {
   document: WrappedOrSignedOpenCertsDocument;
 }
 const SimpleVerifyBlock: React.FunctionComponent<SimpleVerifyBlockProps> = (props) => {
+  // Not a native <button>: it wraps block content (a heading and, for v2, an issuer list),
+  // which a <button> may not contain. So it gets the button role and keyboard support instead.
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>): void => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault(); // stop Space from scrolling the page
+      props.toggleDetailedViewVisible();
+    }
+  };
+
   return (
     <div
       id="certificate-status"
+      role="button"
+      tabIndex={0}
+      aria-expanded={props.detailedViewVisible}
       className={`p-2 pointer bg-white text-green border border-green rounded cursor-pointer transition-shadow duration-200 ease-out shadow-sm hover:shadow-md ${
         props.detailedViewVisible ? "rounded-bl-none rounded-br-none xl:rounded-tr-none xl:rounded-bl" : ""
       }`}
       onClick={props.toggleDetailedViewVisible}
+      onKeyDown={handleKeyDown}
     >
       <div className="flex flex-row items-center">
         <div className="px-2 w-auto">{icons.checkCircle()}</div>

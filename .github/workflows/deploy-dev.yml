@@ -39,7 +39,7 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Build static site
         run: |
@@ -95,8 +95,10 @@ jobs:
           S3_BUCKET_DEV: ${{ secrets.S3_BUCKET_DEV }}
 
       - name: Sync static assets with long cache
+        env:
+          S3_BUCKET: ${{ steps.bucket.outputs.bucket }}
         run: |
-          aws s3 sync $BUILD_DIR s3://${{ steps.bucket.outputs.bucket }} \
+          aws s3 sync "$BUILD_DIR" "s3://$S3_BUCKET" \
             --delete \
             --exclude "*" \
             --include "_next/*" \
@@ -104,8 +106,10 @@ jobs:
             --cache-control "public, max-age=31536000, immutable"
 
       - name: Sync HTML and other assets with no-cache
+        env:
+          S3_BUCKET: ${{ steps.bucket.outputs.bucket }}
         run: |
-          aws s3 sync $BUILD_DIR s3://${{ steps.bucket.outputs.bucket }} \
+          aws s3 sync "$BUILD_DIR" "s3://$S3_BUCKET" \
             --delete \
             --exclude "_next/*" \
             --exclude "static/*" \
@@ -113,9 +117,12 @@ jobs:
 
       - name: Invalidate CloudFront
         env:
-          CLOUDFRONT_DISTRIBUTION_ID_DEV: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }}
-        if: ${{ env.CLOUDFRONT_DISTRIBUTION_ID_DEV != '' }}
+          CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }}
         run: |
+          if [ -z "$CLOUDFRONT_DISTRIBUTION_ID" ]; then
+            echo "No CloudFront distribution configured, skipping invalidation"
+            exit 0
+          fi
           aws cloudfront create-invalidation \
-            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }} \
+            --distribution-id "$CLOUDFRONT_DISTRIBUTION_ID" \
             --paths "/*"

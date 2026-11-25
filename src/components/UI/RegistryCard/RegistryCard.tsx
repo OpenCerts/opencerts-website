@@ -61,18 +61,19 @@ export const RegistryCard: React.FunctionComponent<RegistryCardProps> = ({ zInde
             </h4>
           </div>
           <div className="relative">
-            <div
-              className={`ease-colors text-white uppercase font-bold text-center p-2 ${
+            <button
+              type="button"
+              className={`ease-colors text-white uppercase font-bold text-center p-2 block w-full ${
                 expand ? "bg-orange" : "bg-navy-300 hover:bg-navy"
               }`}
-              role="button"
               data-testid="btn-contact"
+              aria-expanded={expand}
               onClick={() => {
                 setExpand(!expand);
               }}
             >
               Contact Info
-            </div>
+            </button>
             <div
               className={`absolute w-full bg-white shadow-xl left-0 ${expand ? "block" : "hidden"}`}
               data-testid="contact-info"

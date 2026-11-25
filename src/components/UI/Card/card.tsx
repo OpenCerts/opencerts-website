@@ -14,12 +14,19 @@ interface CardProps {
 }
 export const Card: React.FunctionComponent<CardProps> = (props) => (
   <div id={props.info[0].id} className="flex w-full md:w-1/2 lg:w-1/3 px-4 mb-8 break-words cursor-pointer">
-    <div
-      className="flex-1 p-6 bg-gray-200 rounded-lg"
-      key={props.info[0].id}
-      onClick={() => window.open(props.info[0].website)}
-    >
-      <h2 className="font-poppins font-bold text-lg">{props.info[0].name}</h2>
+    {/* The whole card opens the website: the name is the real link, and its ::after stretches
+        over the card. The links inside sit above it (relative z-10) so they stay clickable. */}
+    <div className="relative flex-1 p-6 bg-gray-200 rounded-lg" key={props.info[0].id}>
+      <h2 className="font-poppins font-bold text-lg">
+        <a
+          href={props.info[0].website}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-inherit hover:text-inherit after:content-[''] after:absolute after:inset-0"
+        >
+          {props.info[0].name}
+        </a>
+      </h2>
       <img className="h-12 mx-auto m-6" src={props.info[0].logo} alt={props.info[0].name} />
       {props.info.map((info, index) => (
         <div className="links-blue" key={info.id}>
@@ -27,7 +34,7 @@ export const Card: React.FunctionComponent<CardProps> = (props) => (
             <p>
               {index > 0 && `${info.name} `}
               Certificate Store:{" "}
-              <a href={`https://etherscan.io/address/${info.address}`} onClick={(event) => event.stopPropagation()}>
+              <a className="relative z-10" href={`https://etherscan.io/address/${info.address}`}>
                 {info.address}
               </a>
             </p>
@@ -35,19 +42,25 @@ export const Card: React.FunctionComponent<CardProps> = (props) => (
           {info.address && info.website && (
             <p>
               Website:{" "}
-              <a href={info.website} target="_blank" rel="noopener noreferrer">
+              <a className="relative z-10" href={info.website} target="_blank" rel="noopener noreferrer">
                 {info.website}
               </a>
             </p>
           )}
           {info.email && (
             <p>
-              Email: <a href={`mailto:${info.email}`}>{info.email}</a>
+              Email:{" "}
+              <a className="relative z-10" href={`mailto:${info.email}`}>
+                {info.email}
+              </a>
             </p>
           )}
           {info.phone && (
             <p>
-              Phone: <a href={`tel:${info.phone}`}>{info.phone}</a>
+              Phone:{" "}
+              <a className="relative z-10" href={`tel:${info.phone}`}>
+                {info.phone}
+              </a>
             </p>
           )}
           {info.description && <p>{info.description}</p>}

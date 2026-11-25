@@ -32,14 +32,14 @@ export class OAFailoverProvider extends providers.StaticJsonRpcProvider {
   constructor(
     urls: utils.ConnectionInfo[],
     network: providers.Networkish,
-    options: { shuffle: boolean } = { shuffle: true }
+    { shuffle = true }: { shuffle?: boolean } = {}
   ) {
     // Call parent constructor with first provider
     super(urls[0], network);
 
     // Initialise failover providers
     this.failoverProviders = urls
-      .sort(() => (options.shuffle ? Math.random() - 0.5 : 0)) // Randomise order of providers to spread the load
+      .sort(() => (shuffle ? Math.random() - 0.5 : 0)) // Randomise order of providers to spread the load
       .map(
         (url) =>
           new providers.StaticJsonRpcProvider({ url: url.url, ...OAFailoverProvider.DEAFULT_CONNECTION_INFO }, network)

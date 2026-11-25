@@ -4,7 +4,8 @@ import { CAPTCHA_CLIENT_KEY } from "../../config";
 import { states } from "../../reducers/shared";
 
 // Simple, permissive email format check: something@something.tld
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Domain labels exclude "." so each dot has one unambiguous match (linear time, no backtracking)
+const EMAIL_REGEX = /^[^\s@]+@[^\s@.]+(?:\.[^\s@.]+)+$/;
 const isValidEmail = (email: string): boolean => EMAIL_REGEX.test(email);
 
 interface CertificateSharingFormProps {

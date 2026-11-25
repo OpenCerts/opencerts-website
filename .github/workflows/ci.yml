@@ -27,7 +27,12 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm ci
+        # --ignore-scripts: don't run third-party lifecycle scripts (supply-chain hardening).
+        # canvas is an optional native dep of pdfjs-dist; without its install script the
+        # binary is never built and jsdom crashes loading it, so drop it (jsdom works without it).
+        run: |
+          npm ci --ignore-scripts
+          rm -rf node_modules/canvas
 
       - name: Type check
         run: npm run type-check --if-present
