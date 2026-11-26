@@ -1,6 +1,7 @@
+import { Dispatch } from "@reduxjs/toolkit";
 import { isObfuscated as isOAObfuscated, OpenAttestationDocument, VerificationFragment } from "@trustvc/trustvc";
 import dynamic from "next/dynamic";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { ANALYTICS_EVENTS } from "../constants/analyticsEvents";
 import { updateObfuscatedCertificate as updateObfuscatedCertificateAction } from "../reducers/certificate.slice";
@@ -11,6 +12,7 @@ import { CertificateShareLinkFormContainer } from "./CertificateShareLink/Certif
 import { CertificateVerifyBlock } from "./CertificateVerifyBlock";
 import { CredentialTabs } from "./CredentialTabs";
 import { ErrorBoundary } from "./ErrorBoundary";
+import { hasInlineTemplateRenderMethod, InlineTemplateRenderer } from "./InlineTemplateRenderer";
 import { Modal } from "./Modal";
 
 const CertificateSharingForm = dynamic(import("./CertificateSharing/CertificateSharingForm"));
@@ -47,11 +49,20 @@ export interface CertificateViewerProps {
   handleCopyLink: (certificateLink: string) => void;
 }
 export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> = (props) => {
-  if (!props.verificationStatus) throw new Error("Verification status can't be null");
-  const { document } = props;
+  const { document, verificationStatus } = props;
+  if (!verificationStatus) throw new Error("Verification status can't be null");
   const childRef = React.useRef<{ print: () => void }>();
   const isPresentation = isVerifiablePresentation(document);
   const [isDocObfuscated, setIsDocObfuscated] = useState(false);
+  /**
+   * The document whose INLINE_HTML_TEMPLATE entry failed to render; it then falls back to its
+   * URL-based renderMethod entry through the decentralised renderer. Stamped with the document,
+   * like CredentialTabs' selection, so a newly loaded document never inherits the previous one's
+   * failure.
+   */
+  const [inlineTemplateFailedFor, setInlineTemplateFailedFor] = useState<unknown>();
+  const showInlineTemplate = hasInlineTemplateRenderMethod(document) && inlineTemplateFailedFor !== document;
+  const onInlineTemplateFailure = useCallback(() => setInlineTemplateFailedFor(document), [document]);
   useEffect(() => {
     // Obfuscation is an OpenAttestation feature: a presentation has no OA data to read, and
     // each embedded credential is reported on its own tab.
@@ -64,6 +75,24 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
       .catch(() => setIsDocObfuscated(false));
   }, [document, isPresentation]);
 
+  const renderCertificate = () => {
+    if (isPresentation) {
+      return <CredentialTabs presentation={document} verificationStatus={verificationStatus} forwardedRef={childRef} />;
+    }
+    if (showInlineTemplate) {
+      return (
+        <InlineTemplateRenderer rawDocument={document} onFailure={onInlineTemplateFailure} forwardedRef={childRef} />
+      );
+    }
+    return (
+      <ForwardedRefDecentralisedRenderer
+        updateObfuscatedCertificate={props.updateObfuscatedCertificate}
+        rawDocument={document}
+        ref={childRef}
+      />
+    );
+  };
+
   return (
     <ErrorBoundary>
       {
@@ -72,7 +101,7 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
             <div className="container">
               <div className="flex flex-wrap">
                 <div className="w-full lg:w-1/2 xl:w-1/3">
-                  <CertificateVerifyBlock verificationStatus={props.verificationStatus} document={props.document} />
+                  <CertificateVerifyBlock verificationStatus={verificationStatus} document={props.document} />
                 </div>
                 <div className="w-full lg:w-1/2 xl:w-2/3">
                   <div className="flex flex-wrap gap-y-2">
@@ -143,19 +172,7 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
           <section>
             {/* A presentation is a bundle with no single certificate to render, so each
                 embedded credential gets its own tab. */}
-            {isPresentation ? (
-              <CredentialTabs
-                presentation={document}
-                verificationStatus={props.verificationStatus}
-                forwardedRef={childRef}
-              />
-            ) : (
-              <ForwardedRefDecentralisedRenderer
-                updateObfuscatedCertificate={props.updateObfuscatedCertificate}
-                rawDocument={document}
-                ref={childRef}
-              />
-            )}
+            {renderCertificate()}
           </section>
         </>
       }
@@ -163,7 +180,9 @@ export const CertificateViewer: React.FunctionComponent<CertificateViewerProps> 
   );
 };
 
-export const CertificateViewerContainer = connect(null, (dispatch) => ({
+export const mapDispatchToProps = (dispatch: Dispatch) => ({
   updateObfuscatedCertificate: (updatedDoc: WrappedOrSignedOpenCertsDocument) =>
     dispatch(updateObfuscatedCertificateAction(updatedDoc)),
-}))(CertificateViewer);
+});
+
+export const CertificateViewerContainer = connect(null, mapDispatchToProps)(CertificateViewer);

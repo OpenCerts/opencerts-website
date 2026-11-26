@@ -17,8 +17,9 @@ describe("pushGTMEvent", () => {
     pushGTMEvent(event);
 
     expect(window.dataLayer).toBeDefined();
-    expect(window.dataLayer).toHaveLength(1);
-    expect(window.dataLayer[0]).toStrictEqual(event);
+    expect(window.dataLayer).toHaveLength(2);
+    expect(typeof window.dataLayer[0]).toBe("function");
+    expect(window.dataLayer[1]).toStrictEqual(event);
 
     deleteDataLayer();
   });
@@ -29,8 +30,8 @@ describe("pushGTMEvent", () => {
 
     pushGTMEvent(event);
 
-    expect(window.dataLayer).toHaveLength(2);
-    expect(window.dataLayer[1]).toStrictEqual(event);
+    expect(window.dataLayer).toHaveLength(3);
+    expect(window.dataLayer[2]).toStrictEqual(event);
 
     deleteDataLayer();
   });
@@ -41,8 +42,8 @@ describe("pushGTMEvent", () => {
     pushGTMEvent({ event: "first" });
     pushGTMEvent({ event: "second" });
 
-    expect(window.dataLayer[0].event).toBe("first");
-    expect(window.dataLayer[1].event).toBe("second");
+    expect((window.dataLayer[1] as GTMEvent).event).toBe("first");
+    expect((window.dataLayer[3] as GTMEvent).event).toBe("second");
 
     deleteDataLayer();
   });
@@ -54,11 +55,35 @@ describe("pushGTMEvent", () => {
       document_schema: "OA v2",
       verification_result: "valid",
       issuer_identity: "NUS",
+      issuer_name: "National University of Singapore",
     };
 
     pushGTMEvent(event);
 
+    expect(window.dataLayer).toHaveLength(1);
     expect(window.dataLayer[0]).toStrictEqual(event);
+
+    deleteDataLayer();
+  });
+
+  it("does not send a blank issuer name and clears it on the data layer", () => {
+    deleteDataLayer();
+    const set = jest.fn();
+
+    pushGTMEvent({
+      event: "document_verification_completed",
+      issuer_identity: "nus.edu.sg",
+      issuer_name: "   ",
+    });
+
+    expect(window.dataLayer).toHaveLength(2);
+    const reset = window.dataLayer[0] as unknown as (this: { set: typeof set }) => void;
+    reset.call({ set });
+    expect(set).toHaveBeenCalledWith("issuer_name", undefined);
+    expect(window.dataLayer[1]).toStrictEqual({
+      event: "document_verification_completed",
+      issuer_identity: "nus.edu.sg",
+    });
 
     deleteDataLayer();
   });
